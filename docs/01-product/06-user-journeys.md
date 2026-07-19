@@ -28,7 +28,7 @@ a Mermaid flow or sequence diagram. Out of scope: screen-level UI (design docs),
 
 ## 0. Conventions
 
-- **Services** are named exactly as in the [service map](../_meta/authoring-brief.md#5): *Identity &
+- **Services** are named exactly as in the [service map](../_meta/authoring-brief.md): *Identity &
   Access, Enrolment & School Ops, Curriculum, Lesson Delivery, AI Teacher, Assessment, Grading &
   Reporting, Engagement & Notifications, Trust & Safety, Media, Search, Analytics, Payments &
   Sponsorship, Platform/Admin*.

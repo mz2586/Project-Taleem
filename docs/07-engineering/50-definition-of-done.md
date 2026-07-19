@@ -35,11 +35,13 @@ gates; it does not redefine them.
 A change ships only when **all applicable** items are ✅:
 
 ### Correctness & tests
+
 - [ ] Implements the referenced FR(s); acceptance criteria met ([03](../01-product/03-functional-requirements.md)).
 - [ ] Unit/integration/contract tests added; domain coverage ≥ target ([40](./40-testing-strategy.md), [04 NFR MNT-02](../01-product/04-non-functional-requirements.md)).
 - [ ] All CI checks green ([37](./37-cicd-pipeline.md)).
 
 ### Child safety (SAC — [15 §11](../03-security-privacy/15-child-safety-framework.md))
+
 - [ ] No path exposes a child to unmoderated AI output or user content (SAC-1).
 - [ ] Any AI interaction passes input+output guardrails; transcript logged (SAC-3).
 - [ ] Distress/safeguarding signals escalate to a human within SLA (SAC-4).
@@ -48,30 +50,37 @@ A change ships only when **all applicable** items are ✅:
 - [ ] AI safety **red-team eval green** (release-blocking) ([40 §3](./40-testing-strategy.md)).
 
 ### Reach (bottom of the curve — [04 NFR](../01-product/04-non-functional-requirements.md))
+
 - [ ] Works offline/lite on the reference baseline where user-facing (OFFL/COMPAT).
 - [ ] Within payload/data budgets; bundle budget met (DATA-01/02).
 - [ ] Performance budgets met on 3G (PERF-02/03).
 
 ### Accessibility ([16](../04-design/16-accessibility-standards.md))
+
 - [ ] WCAG 2.2 AA (axe + manual); RTL-complete; Urdu-first; ≥44px; keyboard + screen-reader.
 
 ### Privacy & security ([14](../03-security-privacy/14-privacy-model.md), [13](../03-security-privacy/13-security-model.md))
+
 - [ ] Data minimisation; correct data-class handling; no child PII/secrets in logs.
 - [ ] Consent enforced where child data is processed; least-privilege authz; every route has a policy binding.
 - [ ] Security scans clean of criticals; secrets not committed.
 
 ### Honesty & integrity ([01 Vision §7](../00-overview/01-vision.md))
+
 - [ ] No fabricated grades/progress; figures derive from immutable sources ([23](../05-education/23-assessment-engine.md)).
 
 ### Scale & operability ([04 NFR](../01-product/04-non-functional-requirements.md))
+
 - [ ] No decision caps growth < 1M; idempotent/retry-safe critical writes; observability + runbook for new alerts.
 
 ### Docs
+
 - [ ] Owning spec/docs updated; cross-refs valid ([42](./42-documentation-standards.md)).
 
 ## 3. Definition of Done — documentation (Phase 1)
 
 For blueprint docs (current phase):
+
 - [ ] Metadata block, Purpose/Scope, Open Questions, Change log present ([42 §2](./42-documentation-standards.md)).
 - [ ] Consistent with the [Authoring Brief](../_meta/authoring-brief.md); no silent divergence (ADR if needed).
 - [ ] Canonical cross-references; **markdownlint + link-check + mermaid green** ([37](./37-cicd-pipeline.md)).

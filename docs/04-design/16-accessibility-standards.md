@@ -334,6 +334,7 @@ Copy this into the PR/feature DoD. A surface is **not done** until every box tha
 This checklist is referenced by [50 Definition of Done](../07-engineering/50-definition-of-done.md).
 
 **Perceivable**
+
 - [ ] All images/icons have correct text alternatives; decorative ones are hidden.
 - [ ] No information conveyed by color alone (icon + text accompany every state).
 - [ ] All text/UI meets contrast (§3) via approved tokens; no ad-hoc colors.
@@ -341,6 +342,7 @@ This checklist is referenced by [50 Definition of Done](../07-engineering/50-def
 - [ ] Video has Urdu captions; audio-only has a transcript; both offline-available.
 
 **Operable**
+
 - [ ] Fully keyboard-operable; logical, RTL-aware tab order; no traps; skip link present.
 - [ ] All touch targets ≥ 44×44 px with ≥ 8 px spacing; primary CTA reachable one-handed at 360px.
 - [ ] Visible ≥ 2 px focus indicator (≥ 3:1) on every focusable element.
@@ -348,6 +350,7 @@ This checklist is referenced by [50 Definition of Done](../07-engineering/50-def
 - [ ] Focus is managed on route/modal/toast; never obscured.
 
 **Understandable**
+
 - [ ] `lang` + `dir` correct; inline language changes marked.
 - [ ] RTL verified with **real Urdu** content; bidi isolation on mixed runs; icons flip/preserve correctly.
 - [ ] Consistent icon = meaning across app; no unexpected context change on focus/input.
@@ -355,17 +358,20 @@ This checklist is referenced by [50 Definition of Done](../07-engineering/50-def
 - [ ] One primary action per screen; no dark patterns; errors are kind and instructive.
 
 **Robust**
+
 - [ ] Valid markup, no duplicate IDs; custom widgets expose name/role/value/state.
 - [ ] Status messages announced via live regions without stealing focus.
 - [ ] Core content + navigation work with client JS disabled.
 
 **Taleem extensions (E1–E5)**
+
 - [ ] Every action has icon **and** text; every instruction has read-aloud audio.
 - [ ] Low-literacy walkthrough passed (completed using icons + audio only).
 - [ ] Reduced-motion honoured; degrades gracefully in lite-mode / low-end / slow link.
 - [ ] Accessible authentication (PIN/picture-password) — no cognitive test to log in.
 
 **Verification evidence attached**
+
 - [ ] `jest-axe` passing; Lighthouse a11y budget met; token contrast validator green.
 - [ ] TalkBack pass on a low-end Android recorded/noted.
 

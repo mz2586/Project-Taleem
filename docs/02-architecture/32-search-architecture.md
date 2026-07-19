@@ -113,6 +113,7 @@ graph TB
 ```
 
 Design rules:
+
 - **Never store secrets or full child PII** beyond what a permitted searcher may already see in the UI.
   Student index stores display name + enrolment ID + cohort, not medical/consent data.
 - **Flatten for search, link for detail.** The index holds enough to rank and preview; the app fetches
@@ -136,6 +137,7 @@ Meilisearch ranks by an ordered chain of **ranking rules**. Our tuned chain per 
 | 7 | `popularity:desc` (custom) | Tie-break by engagement signal (§6). |
 
 **Typo tolerance** is tuned *up* from defaults because our users are children spelling phonetically:
+
 - `minWordSizeForTypos`: `{ oneTypo: 4, twoTypos: 7 }` (Meilisearch default 5/9) — allows one typo on
   4-letter words like "math"/"maths"/"matg".
 - Numerals, standards codes (e.g. `SNC-MATH-5-3`), and enrolment IDs are added to `disableOnWords` /
@@ -225,6 +227,7 @@ flowchart TB
 ```
 
 Enforcement pattern:
+
 - The Search API **derives the filter server-side from the verified session** (never from client input).
   Example for a Mentor searching students:
   `acl_visibility = cohort AND acl_cohort_ids IN [<mentor's cohorts>]`.

@@ -37,7 +37,7 @@ here, not redefined.
    curriculum is versioned, never mutated in place.
 5. **Designed for 1M from day one.** Every high-growth table has a documented indexing and
    partitioning plan ([04 NFR SCAL-04](../01-product/04-non-functional-requirements.md)).
-6. **Classification drives storage.** Each field's data class ([14 §4](14-privacy-model.md)) determines
+6. **Classification drives storage.** Each field's data class ([14 §4](../03-security-privacy/14-privacy-model.md)) determines
    encryption, access, and retention.
 
 ## 2. Physical topology (Phase 1)

@@ -230,7 +230,7 @@ privilege ([11 §12](11-authentication-strategy.md)). It:
 
 - **Transcript visibility policy:** exactly which of a child's AI transcripts a Guardian vs. Mentor may
   read, balancing oversight against the child's dignity and safeguarding. Owner: [15](15-child-safety-framework.md)
-  + Privacy.
+  - Privacy.
 - **PDP technology:** policy-as-code engine choice (e.g. OPA/Cedar-style) is an ADR — pending
   ([02-architecture/adr](../02-architecture/adr/)).
 - **Cross-tenant analytics:** how Platform Admins get aggregate insight without cross-tenant PII access

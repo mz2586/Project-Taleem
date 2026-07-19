@@ -46,6 +46,7 @@ Start here:
 ## The 50 foundation documents
 
 ### 00 · Overview & Product
+
 | # | Document | Location |
 |---|---|---|
 | 01 | Vision Document | [docs/00-overview/01-vision.md](docs/00-overview/01-vision.md) |
@@ -57,6 +58,7 @@ Start here:
 | 07 | Information Architecture | [docs/01-product/07-information-architecture.md](docs/01-product/07-information-architecture.md) |
 
 ### 02 · Architecture & Data
+
 | # | Document | Location |
 |---|---|---|
 | 08 | System Architecture | [docs/02-architecture/08-system-architecture.md](docs/02-architecture/08-system-architecture.md) |
@@ -70,6 +72,7 @@ Start here:
 | — | Architecture Decision Records | [docs/02-architecture/adr/](docs/02-architecture/adr/) |
 
 ### 03 · Security, Privacy & Safety
+
 | # | Document | Location |
 |---|---|---|
 | 11 | Authentication Strategy | [docs/03-security-privacy/11-authentication-strategy.md](docs/03-security-privacy/11-authentication-strategy.md) |
@@ -79,6 +82,7 @@ Start here:
 | 15 | Child Safety Framework | [docs/03-security-privacy/15-child-safety-framework.md](docs/03-security-privacy/15-child-safety-framework.md) |
 
 ### 04 · Design & Experience
+
 | # | Document | Location |
 |---|---|---|
 | 16 | Accessibility Standards | [docs/04-design/16-accessibility-standards.md](docs/04-design/16-accessibility-standards.md) |
@@ -88,6 +92,7 @@ Start here:
 | 20 | Navigation Structure | [docs/04-design/20-navigation-structure.md](docs/04-design/20-navigation-structure.md) |
 
 ### 05 · Educational Engines
+
 | # | Document | Location |
 |---|---|---|
 | 21 | Curriculum Engine Specification | [docs/05-education/21-curriculum-engine.md](docs/05-education/21-curriculum-engine.md) |
@@ -96,6 +101,7 @@ Start here:
 | 24 | AI Teacher Specification | [docs/05-education/24-ai-teacher-specification.md](docs/05-education/24-ai-teacher-specification.md) |
 
 ### 06 · Portals & Platform Services
+
 | # | Document | Location |
 |---|---|---|
 | 25 | Parent Portal Specification | [docs/06-portals/25-parent-portal.md](docs/06-portals/25-parent-portal.md) |
@@ -107,6 +113,7 @@ Start here:
 | 31 | Analytics Platform | [docs/06-portals/31-analytics-platform.md](docs/06-portals/31-analytics-platform.md) |
 
 ### 07 · Engineering Practice
+
 | # | Document | Location |
 |---|---|---|
 | 37 | CI/CD Pipeline | [docs/07-engineering/37-cicd-pipeline.md](docs/07-engineering/37-cicd-pipeline.md) |
@@ -121,6 +128,7 @@ Start here:
 | 50 | Definition of Done | [docs/07-engineering/50-definition-of-done.md](docs/07-engineering/50-definition-of-done.md) |
 
 ### 08 · Delivery & Governance
+
 | # | Document | Location |
 |---|---|---|
 | 43 | Risk Register | [docs/08-delivery/43-risk-register.md](docs/08-delivery/43-risk-register.md) |
@@ -144,7 +152,7 @@ See [Authoring Brief](docs/_meta/authoring-brief.md) §4 for the authoritative, 
 
 ## Repository layout
 
-```
+```text
 taleem/
 ├── README.md                     ← you are here
 ├── docs/

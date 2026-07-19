@@ -408,6 +408,7 @@ sequenceDiagram
 ```
 
 Design points:
+
 - **Stateless gateway, state in Redis.** Presence and channel subscriptions live in Redis; any
   gateway pod can serve any connection. No sticky sessions required beyond the single TCP connection.
 - **Redis Pub/Sub (and Streams for durable fan-out)** is the backplane so N gateway pods share one
@@ -428,17 +429,20 @@ The target is architected in, per Vision §7.7. The learning-path SLOs (99.9% av
 [35](./35-deployment-architecture.md)).
 
 ### 9.1 Statelessness & horizontal scale
+
 Core API, AI orchestrator, realtime gateway, and workers are **stateless** (12-Factor VI); scaling
 is `replicas++` behind the ingress. Autoscaling on CPU + in-flight-requests (core), connection count
 (realtime), and queue depth (workers).
 
 ### 9.2 Read/write splitting & replicas
+
 Learning traffic is **read-heavy** (browse curriculum, resume lessons). Reads go to **Postgres read
 replicas**; writes to the primary. Query routing is per-context in the persistence adapter, so
 read-after-write consistency needs are handled explicitly (sticky-to-primary for a short window after
 a write). See [09 §Read/Write splitting](./09-database-design.md).
 
 ### 9.3 Caching strategy (Redis)
+
 Multi-layer, cache-aside by default; the cache never becomes a source of truth.
 
 | Layer | What | TTL / invalidation |
@@ -454,6 +458,7 @@ Rule: **cache the derived, own the truth in Postgres.** Every cached key has a d
 invalidation trigger — no orphan caches.
 
 ### 9.4 Queue-based load leveling & failure isolation
+
 Spiky and heavy work — notification fan-out, media transcode, analytics ingest, projection rebuilds,
 report-card generation — is **queued** and processed by autoscaling workers. A national event
 (e.g. exam day) is absorbed as queue depth, not as request-timeout errors. **Bulkheads**: separate
@@ -462,6 +467,7 @@ delivery. **Circuit breakers** around the LLM gateway and external SMS/push prov
 retries with jitter** everywhere; **dead-letter queues** for poison messages.
 
 ### 9.5 Extraction path (modulith → services)
+
 Extract a module to its own service when a concrete trigger fires — never speculatively.
 
 | Module | Extraction trigger |
@@ -476,6 +482,7 @@ Because each already owns its schema and communicates via events/contracts, extr
 containerise-and-deploy, not re-architect (Principle 6).
 
 ### 9.6 Multi-region & data residency
+
 Primary region close to Pakistan for latency and residency posture; read replicas and CDN edges
 regionally; the design keeps write-locality per student cohort so a future active-active or
 region-pinned model is possible. Owned by [36](./36-infrastructure-architecture.md).
@@ -513,6 +520,7 @@ flowchart TB
 ```
 
 Boundary guarantees:
+
 - **Provider abstraction (SOLID DIP):** the gateway exposes a stable `LLMPort`; providers/models are
   swappable adapters. Model *tiering* (Haiku for routine feedback, Sonnet for standard tutoring, Opus
   for hard explanations) is a routing policy, not scattered call sites.

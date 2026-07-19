@@ -70,11 +70,13 @@ sizing, and recruitment/segmentation strategy (business track).
 | **Context** | Helps with siblings and housework; the phone is negotiated, not owned; a nearby cousin left school when the girls' school closed |
 
 **Goals**
+
 - Learn to read and do maths well enough that dropping her from school was clearly a mistake.
 - Not fall further behind her age group; feel she is *in a grade*, not "doing apps".
 - Study in short bursts, in Urdu, without burning the family's data.
 
 **Frustrations**
+
 - Apps assume fast Wi-Fi and a personal phone; videos buffer and eat the whole month's data.
 - English-first interfaces lock her out on the first screen.
 - Losing her place when the phone is taken back or the power cuts.
@@ -85,6 +87,7 @@ matters more than any badge.
 > "If it finishes my Baba's data, he takes the phone back. I want to learn, but quietly and cheaply."
 
 **Design implications**
+
 - **Offline-first is her baseline, not a mode.** Download a day/week over any window of connectivity;
   learn and be assessed fully offline; sync opportunistically. See [06 §Offline day](06-user-journeys.md).
 - **Every screen shows a data cost**; "lite mode" (text/audio, no autoplay video) is the default on
@@ -109,11 +112,13 @@ matters more than any badge.
 | **Context** | Works part-time; embarrassed by the gap between his age and his level; motivated by not looking foolish |
 
 **Goals**
+
 - Close the gap **without being publicly labelled "behind"**.
 - Get to a real Matric pathway; sees education as an exit from informal work.
 - Quick wins that rebuild confidence.
 
 **Frustrations**
+
 - Being placed by age into content he can't do, or by test into "baby" content that shames him.
 - Rote, joyless drills; no sense of momentum.
 - Feeling watched/compared with peers.
@@ -124,6 +129,7 @@ they never expose his gap to others.
 > "Just don't make me look stupid in front of everyone. Show me where I actually am and let me climb."
 
 **Design implications**
+
 - **Diagnostic placement decoupled from age**, framed privately and encouragingly; mastery-based
   progression lets him accelerate through what he knows and slow where he doesn't (Vision §4.2).
 - **Private-by-default progress:** no public leaderboards that expose a struggling learner; cohort
@@ -156,6 +162,7 @@ loud.
 > *(spoken by her mother)* "She can't read yet — she needs to hear it and touch it. If she has to read a menu, she's stuck."
 
 **Design implications**
+
 - **Audio-first, icon-first navigation** with minimal text; every actionable element has a voice
   label and a picture (see [20 Navigation §Low-literacy patterns](../04-design/20-navigation-structure.md)).
 - **Guardian-supervised session mode** and strict age-appropriate safety rails on all AI output
@@ -181,11 +188,13 @@ loud.
 | **Role in system** | **Legal consent-holder**; monitors attendance and receives report cards |
 
 **Goals**
+
 - Give her daughter the schooling she herself never had — and have *proof* of it.
 - Understand, in language she can follow, whether Ayesha is safe, attending, and improving.
 - Consent confidently without being tricked into something she can't read.
 
 **Frustrations**
+
 - Dense consent text and forms she cannot read create fear, not trust.
 - Not knowing if the phone time is "real school" or wasted.
 - Report cards full of jargon or English.
@@ -196,6 +205,7 @@ despite limited print literacy.
 > "I can't read the long paragraphs. Tell me in a voice message: is she safe, is she going, is she learning?"
 
 **Design implications**
+
 - **Consent must be intelligible without fluent reading:** Urdu voice narration, plain-language
   summaries, icons, and possibly assisted consent via a mentor/community touchpoint; every consent
   event is logged and revocable (see [06 §Consent & enrolment](06-user-journeys.md), [14 Privacy](../03-security-privacy/14-privacy-model.md)).
@@ -222,12 +232,14 @@ despite limited print literacy.
 | **Role in system** | Supervises a cohort, handles escalations the AI cannot, grades subjective work, provides human warmth and accountability |
 
 **Goals**
+
 - Catch the child who has quietly stopped — before they drop out.
 - Spend her limited human hours where they matter most (struggling, at-risk, or flagged learners),
   letting the AI Teacher handle routine tutoring.
 - Grade fairly and give feedback that actually helps.
 
 **Frustrations**
+
 - Drowning in noise: 150 students, no signal about *who needs me today*.
 - Context-switching between tools; slow, unclear escalation queues.
 - Being asked to rubber-stamp AI decisions she can't see the reasoning for.
@@ -238,6 +250,7 @@ replacement.
 > "Don't give me 150 green ticks. Give me the five students who are slipping, with the context to help them today."
 
 **Design implications**
+
 - **Triage-first mentor console:** prioritised worklist (at-risk, flagged, awaiting-human-grade) over
   a flat roster; the system surfaces *signal*, not a wall of dashboards.
 - **Escalation with context:** when the AI Teacher hands off (safety, repeated failure, out-of-scope,
@@ -263,11 +276,13 @@ replacement.
 | **Role in system** | Enrolment drives, cohort formation, timetables, mentor assignment/load balancing, local attendance follow-up |
 
 **Goals**
+
 - Enrol out-of-school children in his region and keep them enrolled.
 - Keep mentor caseloads sane and cohorts coherent (grade/region/language).
 - See where the funnel leaks: enrolled-but-not-started, started-but-dropping.
 
 **Frustrations**
+
 - Enrolment flows that assume literate, connected, individually-devised guardians.
 - No line of sight into cohort health until a child has already gone.
 - Manual, spreadsheet-driven mentor allocation.
@@ -278,6 +293,7 @@ school, not logins.
 > "My job is to get children in and keep them in. Show me the leaks in the funnel while I can still fix them."
 
 **Design implications**
+
 - **Bulk/assisted enrolment** for community drives, including low-literacy-guardian consent paths and
   offline-collected enrolments that sync later.
 - **Cohort-health dashboards** keyed to retention and activation, not vanity metrics (aligned to the
@@ -299,11 +315,13 @@ school, not logins.
 | **Device** | Secure workstation; MFA; least-privilege access |
 
 **Goals**
+
 - Detect and act on any child-safety signal **fast**, with full context and a clean audit trail.
 - Zero tolerance, zero missed escalations — safety wins over every other goal (Vision §7.1).
 - Maintain evidence that the platform is safe for regulators, partners, and guardians.
 
 **Frustrations**
+
 - Slow, context-poor moderation queues; not being able to reconstruct what an AI said and why.
 - Alert fatigue from low-quality flags burying the real one.
 - Any tooling that lets a reviewer see more child data than the task requires.
@@ -314,6 +332,7 @@ accountability.
 > "I need the whole context in one place, an immutable trail, and to act in seconds — and I must never see more than the case needs."
 
 **Design implications**
+
 - **Every AI interaction is logged, moderatable, and reconstructable** (transcript + safety-classifier
   verdicts + model/version); [Trust & Safety] is a first-class context (Brief §5).
 - **Prioritised, high-signal triage queue** with severity, SLA timers, and one-click safe actions
@@ -336,6 +355,7 @@ accountability.
 | **Device** | Laptop; authoring web tools; good connectivity |
 
 **Goals**
+
 - Represent the **Single National Curriculum (KG–10)** faithfully as *data* — subjects → grades →
   units → lessons → learning objectives — adaptable across provinces and boards (Brief §3).
 - Tie every lesson to objectives and every assessment item to an objective + blueprint, so mastery is
@@ -343,6 +363,7 @@ accountability.
 - Version curriculum safely without breaking live cohorts.
 
 **Frustrations**
+
 - Rigid content models that hardcode one board and can't express provincial variation.
 - No traceability from objective → lesson → assessment item → report-card line.
 - Publishing changes that silently alter what enrolled students are mid-way through.
@@ -353,6 +374,7 @@ objectives as anyone's.
 > "Curriculum is data, not decoration. Give me objective-level traceability and safe versioning, and the whole system stays honest."
 
 **Design implications**
+
 - **Curriculum-as-data model** (subject → grade → unit → lesson → objective) with standards mapping
   and semantic versioning; no board hardcoded (see [07 §Content hierarchy](07-information-architecture.md),
   [21 Curriculum Engine](../05-education/21-curriculum-engine.md)).
