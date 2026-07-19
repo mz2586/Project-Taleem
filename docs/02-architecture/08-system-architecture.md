@@ -6,7 +6,7 @@
 | **Owner** | Principal Software Architect |
 | **Status** | Draft (Phase 1) |
 | **Last updated** | 2026-07-19 |
-| **Related** | [09 Database Design](./09-database-design.md) · [10 API Design](./10-api-design.md) · [ADR-0001 Architecture Style](./adr/ADR-0001-architecture-style.md) · [ADR-0002 Database-per-Context](./adr/ADR-0002-database-per-context.md) · [11 Authentication](../03-security-privacy/11-authentication.md) · [12 Authorization](../03-security-privacy/12-authorization.md) · [14 Privacy](../03-security-privacy/14-privacy-model.md) · [15 Child Safety](../03-security-privacy/15-child-safety-framework.md) · [24 AI Teacher](../05-education/24-ai-teacher-specification.md) · [35 Infrastructure](../07-engineering/35-infrastructure.md) · [36 Scaling & Resilience](../07-engineering/36-scaling-resilience.md) |
+| **Related** | [09 Database Design](./09-database-design.md) · [10 API Design](./10-api-design.md) · [ADR-0001 Architecture Style](./adr/ADR-0001-architecture-style.md) · [ADR-0002 Database-per-Context](./adr/ADR-0002-database-per-context.md) · [11 Authentication](../03-security-privacy/11-authentication-strategy.md) · [12 Authorization](../03-security-privacy/12-authorization-model.md) · [14 Privacy](../03-security-privacy/14-privacy-model.md) · [15 Child Safety](../03-security-privacy/15-child-safety-framework.md) · [24 AI Teacher](../05-education/24-ai-teacher-specification.md) · [36 Infrastructure](./36-infrastructure-architecture.md) · [35 Deployment Architecture](./35-deployment-architecture.md) |
 
 ## Purpose
 
@@ -23,7 +23,7 @@ In scope: the macro-architecture — style, bounded contexts, inter-context cont
 topology, cross-cutting technical concerns (realtime, caching, AI gateway, scale, resilience,
 offline). Out of scope: the physical data model (owned by [09](./09-database-design.md)), the wire
 contracts (owned by [10](./10-api-design.md)), deployment/infra mechanics (owned by
-[35](../07-engineering/35-infrastructure.md)/[36](../07-engineering/36-scaling-resilience.md)), and
+[36](./36-infrastructure-architecture.md)/[35](./35-deployment-architecture.md)), and
 per-service internal design (owned by each service's spec).
 
 ---
@@ -412,7 +412,7 @@ Design points:
   gateway pod can serve any connection. No sticky sessions required beyond the single TCP connection.
 - **Redis Pub/Sub (and Streams for durable fan-out)** is the backplane so N gateway pods share one
   logical channel space and scale horizontally on connection count.
-- **Auth on connect and per-channel** (short-lived JWT; see [11](../03-security-privacy/11-authentication.md)).
+- **Auth on connect and per-channel** (short-lived JWT; see [11](../03-security-privacy/11-authentication-strategy.md)).
 - **Graceful degradation:** on a dropped socket the PWA falls back to REST **long-poll** for
   notifications and to **non-streamed** AI responses. Realtime is an enhancement, never a hard
   dependency of the core learning path (Vision §8).
@@ -425,7 +425,7 @@ Design points:
 
 The target is architected in, per Vision §7.7. The learning-path SLOs (99.9% availability, p95 API
 < 300 ms) are the yardstick ([Brief §6](../_meta/authoring-brief.md); full detail in
-[36](../07-engineering/36-scaling-resilience.md)).
+[35](./35-deployment-architecture.md)).
 
 ### 9.1 Statelessness & horizontal scale
 Core API, AI orchestrator, realtime gateway, and workers are **stateless** (12-Factor VI); scaling
@@ -478,7 +478,7 @@ containerise-and-deploy, not re-architect (Principle 6).
 ### 9.6 Multi-region & data residency
 Primary region close to Pakistan for latency and residency posture; read replicas and CDN edges
 regionally; the design keeps write-locality per student cohort so a future active-active or
-region-pinned model is possible. Owned by [35](../07-engineering/35-infrastructure.md).
+region-pinned model is possible. Owned by [36](./36-infrastructure-architecture.md).
 
 ---
 
@@ -562,12 +562,12 @@ sequenceDiagram
 
 | Concern | Approach | Owner doc |
 |---|---|---|
-| AuthN | Short-lived JWT access + rotating refresh; OTP for low-literacy flows | [11](../03-security-privacy/11-authentication.md) |
-| AuthZ | RBAC + ABAC (cohort/guardian scoping), decision at the edge & in-module | [12](../03-security-privacy/12-authorization.md) |
+| AuthN | Short-lived JWT access + rotating refresh; OTP for low-literacy flows | [11](../03-security-privacy/11-authentication-strategy.md) |
+| AuthZ | RBAC + ABAC (cohort/guardian scoping), decision at the edge & in-module | [12](../03-security-privacy/12-authorization-model.md) |
 | Privacy | Data minimisation, PII concentration in Identity, erasure workflow | [14](../03-security-privacy/14-privacy-model.md) |
 | Child safety | Inline AI/media moderation, safeguarding escalation | [15](../03-security-privacy/15-child-safety-framework.md) |
-| Observability | Structured logs, RED/USE metrics, distributed tracing across the outbox | [36](../07-engineering/36-scaling-resilience.md) |
-| Config/secrets | 12-Factor env config; secrets in a vault; feature flags in Platform/Admin | [35](../07-engineering/35-infrastructure.md) |
+| Observability | Structured logs, RED/USE metrics, distributed tracing across the outbox | [35](./35-deployment-architecture.md) |
+| Config/secrets | 12-Factor env config; secrets in a vault; feature flags in Platform/Admin | [36](./36-infrastructure-architecture.md) |
 
 ---
 
