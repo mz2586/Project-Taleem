@@ -145,7 +145,14 @@ erDiagram
 - The **safeguarding data class (C4)** lives in the `trust_safety` schema with field-level encryption
   and the strictest grants ([14 §4](../03-security-privacy/14-privacy-model.md), [15](../03-security-privacy/15-child-safety-framework.md)).
 
-## 7. Indexing & partitioning for 1M students
+## 7. Indexing, partitioning & sharding for 1M students
+
+> **Sharding (audit AR-C-11):** partitioning alone does not raise a single primary's **write** ceiling.
+> The high-volume per-student contexts (Lesson progress, Assessment attempts, AI transcripts, delivery
+> logs, event/outbox) are **horizontally sharded by `hash(student_ref)`** so a child's records co-locate
+> and writes spread across N shards; low-volume contexts stay unsharded. The shard key, count, resharding
+> runbook, cross-shard policy, and CDC-based outbox relay are specified in
+> [54 Capacity & Scale Model](./54-capacity-and-scale-model.md).
 
 High-growth tables get an explicit plan; the rest use standard b-tree indexes on access paths.
 

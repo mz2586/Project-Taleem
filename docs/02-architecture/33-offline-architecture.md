@@ -110,16 +110,22 @@ sequenceDiagram
     SW->>SW: clear applied, store cursor, surface conflicts
 ```
 
+> **Clock-skew fix (audit AR-H-28):** shared low-end phones have no reliable NTP and lose power, so a
+> skewed device clock must never decide a merge. Ordering uses **server-incremented version counters +
+> a hybrid logical clock (HLC)/Lamport sequence**, with **server-receive time as the tiebreaker — never
+> raw client wall-clock.**
+
 | Data type | Conflict rule |
 |---|---|
-| **Progress / resume** | Last-writer-wins (most recent client timestamp), monotonic — never regress a completed block. |
+| **Progress / resume** | Monotonic max-progress merge (never regress a completed block); ties broken by server version counter, not client clock. |
 | **Lesson completion** | Idempotent set; once completed, stays completed. |
-| **Assessment attempt** | **Append-only** — an attempt is sealed and never overwritten; a second submission is a new attempt or rejected as duplicate. |
-| **Preferences** | Last-writer-wins with server as tiebreaker. |
+| **Assessment attempt** | **Append-only, merge by union** — an attempt is sealed and never overwritten; a second submission is a new attempt or rejected as duplicate (no attempt is ever lost to LWW). |
+| **Preferences** | Server version counter wins; server-receive time as tiebreaker. |
 
 - **Idempotency** via `clientEventId`/`Idempotency-Key`; replaying the same queue twice yields
   identical server state ([04 NFR OFFL-02](../01-product/04-non-functional-requirements.md)).
-- **Ordering:** deltas carry client timestamps + sequence; the server applies deterministically.
+- **Ordering:** deltas carry an HLC/Lamport sequence; the server applies deterministically by version,
+  not by client wall-clock.
 - **No silent loss:** unresolvable conflicts surface to the user/Mentor rather than being dropped.
 
 ## 7. Offline authentication
@@ -133,11 +139,12 @@ sequenceDiagram
 
 ## 8. Offline safety
 
-- Offline AI interactions are limited to **pre-moderated, cached** hints/FAQ; **no un-moderated
-  generative AI runs offline** ([15 §3](../03-security-privacy/15-child-safety-framework.md)).
+- **No generative AI offline, ever** (audit AR-C-06) — offline serves only static, pre-moderated,
+  input-independent content; no dynamically generated text is shown offline ([15 §3](../03-security-privacy/15-child-safety-framework.md)).
 - Packaged content is already moderated at publish/packaging time ([15 §4](../03-security-privacy/15-child-safety-framework.md)).
-- Safety help content is cached so a child can always reach reporting guidance
-  ([07 IA §10](../01-product/07-information-architecture.md)).
+- **Offline crisis affordance** — safety help + a "reach a human" action are cached and available
+  offline; using it **queues a safety flag that fires on reconnect** so a child in distress offline is
+  not lost ([15 §3/§5](../03-security-privacy/15-child-safety-framework.md), [52 Crisis Protocol](../03-security-privacy/52-safeguarding-crisis-protocol.md), [07 IA §10](../01-product/07-information-architecture.md)).
 
 ## 9. Degraded-mode UX
 

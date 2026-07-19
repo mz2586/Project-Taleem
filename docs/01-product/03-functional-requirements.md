@@ -63,7 +63,8 @@ graph LR
 | FR-IDN-004 | The system MUST assign every principal exactly one canonical role from [Authoring Brief §2](../_meta/authoring-brief.md) and enforce it via the authorization model. | MVP | Access decisions resolve through [12 Authorization](../03-security-privacy/12-authorization-model.md); no principal acts outside its role in an audit sample. |
 | FR-IDN-005 | The system MUST allow a Guardian to view, export, and revoke consent and to request erasure of their child's data. | MVP | Guardian self-service consent screen exists; export and erasure requests are logged and fulfilled within the SLA in [14 Privacy](../03-security-privacy/14-privacy-model.md). |
 | FR-IDN-006 | The system MUST expire and rotate sessions and support remote sign-out of a lost/shared device. | MVP | Sessions expire per [11 Authentication](../03-security-privacy/11-authentication-strategy.md); a Guardian can revoke a device and its sessions end immediately. |
-| FR-IDN-007 | The system SHOULD support account recovery without email (e.g. Mentor-assisted or Guardian-phone recovery) resistant to social-engineering. | v1 | A Student who lost their PIN recovers access via a recorded, rate-limited flow that never exposes another child's data. |
+| FR-IDN-007 | The system **MUST** support account/PIN recovery without email (Guardian-phone or Mentor-assisted), resistant to social-engineering. *(Promoted SHOULD/v1 → MUST/MVP per audit AR-H-07 — the primary persona has no email and shared-device sibling PINs; a day-one lockout has no recourse otherwise.)* | **MVP** | A Student who lost their PIN recovers access via a recorded, rate-limited, independently-verified flow that never exposes another child's data. |
+| FR-IDN-008 | The system **MUST** provide an unaccompanied-minor / no-available-guardian enrolment pathway (institutional/NGO guardianship + independent attestation + heightened safety envelope). *(New — audit AR-C-01; DECISION REQUIRED: legal sufficiency.)* | MVP | A guardian-less child (orphan/displaced) can enrol via the pathway with two-person institutional control ([11 §3.2](../03-security-privacy/11-authentication-strategy.md); pathway design tracked in [RISK_REMEDIATION_PLAN.md](../../RISK_REMEDIATION_PLAN.md) AR-C-01). |
 
 ## 3. Enrolment & School Ops — `FR-ENR`
 
@@ -109,7 +110,8 @@ graph LR
 | FR-AIT-004 | The AI Teacher MUST prefer honest uncertainty ("I don't know / let's ask your Mentor") over fabricating an answer. | MVP | On an unanswerable/unsafe query, the AI Teacher declines or escalates rather than hallucinating, verified by eval set. |
 | FR-AIT-005 | The system MUST call LLM providers only through the internal `AITeacher` gateway with tiered model routing; product code MUST NOT call a provider SDK directly. | MVP | Static analysis finds no direct provider SDK import outside the gateway ([08 Architecture](../02-architecture/08-system-architecture.md)). |
 | FR-AIT-006 | The AI Teacher MUST never imply it is human and MUST be labelled "AI Teacher" in student-facing copy. | MVP | All AI surfaces show the AI-Teacher label; copy review finds no human impersonation. |
-| FR-AIT-007 | The AI Teacher SHOULD escalate a Student to a human Mentor when it detects distress, safeguarding signals, or repeated failure. | v1 | A configured trigger creates a Mentor escalation ([28 Mentor](../06-portals/28-mentor-portal.md)) with the transcript attached. |
+| FR-AIT-007 | The AI Teacher **MUST** escalate a Student to a live human within a tiered numeric SLA on distress/safeguarding signals, serving a deterministic clinician-reviewed holding response. *(Promoted SHOULD/v1 → MUST/MVP per audit AR-C-04.)* | **MVP** | Escalation reaches a human within the [52 Crisis Protocol](../03-security-privacy/52-safeguarding-crisis-protocol.md) SLA (T0 ≤ 5 min, 24/7); the holding response is template-served outside the LLM path; MVP has a responder surface ([28 Mentor](../06-portals/28-mentor-portal.md) / Safety console). |
+| FR-AIT-008 | All **Mentor↔Student communication MUST** be in-platform, logged, moderated through the safety pipeline, rate-limited, and must never permit off-platform contact-info exchange. *(New — audit AR-H-01.)* | MVP | No Mentor↔child channel exists outside the moderated pipeline in a red-team test ([15 §7](../03-security-privacy/15-child-safety-framework.md)). |
 
 ## 7. Assessment — `FR-ASM`
 
@@ -216,11 +218,11 @@ These are **acceptance criteria on all requirements above**, not separate featur
 
 | Context | Prefix | Count | MVP MUSTs |
 |---|---|---|---|
-| Identity & Access | FR-IDN | 7 | 6 |
+| Identity & Access | FR-IDN | 9 | 8 |
 | Enrolment & School Ops | FR-ENR | 6 | 4 |
 | Curriculum | FR-CUR | 6 | 5 |
 | Lesson Delivery | FR-LSN | 7 | 6 |
-| AI Teacher | FR-AIT | 7 | 6 |
+| AI Teacher | FR-AIT | 8 | 8 |
 | Assessment | FR-ASM | 7 | 5 |
 | Grading & Reporting | FR-GRD | 5 | 3 |
 | Engagement & Notifications | FR-ENG | 5 | 2 |
@@ -230,7 +232,12 @@ These are **acceptance criteria on all requirements above**, not separate featur
 | Analytics & Insights | FR-ANL | 3 | 2 |
 | Payments & Sponsorship | FR-PAY | 3 | 1 |
 | Platform / Admin | FR-ADM | 4 | 3 |
-| **Total** | — | **74** | **52** |
+| **Total** | — | **77** | **56** |
+
+> **Post-audit (2026-07-19):** the review ([ARCHITECTURE_REVIEW.md](../../ARCHITECTURE_REVIEW.md))
+> promoted FR-AIT-007 (distress escalation) and FR-IDN-007 (recovery) from v1/SHOULD to **MVP/MUST**, and
+> added FR-AIT-008 (moderated Mentor↔child comms) and FR-IDN-008 (unaccompanied-minor pathway). A
+> curriculum-content-review requirement is now enforced via [15 §4](../03-security-privacy/15-child-safety-framework.md).
 
 Every MVP MUST maps to at least one [02 PRD §9.1](./02-prd.md) release blocker and will map to at
 least one test in [40 Testing Strategy](../07-engineering/40-testing-strategy.md) and one story in

@@ -43,8 +43,13 @@ Levels: `ERROR` (actionable failure), `WARN` (degraded), `INFO` (key events), `D
 
 ## 3. The no-PII / no-secrets rule
 
-- **Redaction at the logging boundary** — known PII/secret fields are dropped/hashed before write.
-- **CI log-scanning gate** asserts no PII/secret patterns in log statements ([37 CI/CD](./37-cicd-pipeline.md)).
+- **Runtime allow-list serialization** (audit AR-C-21 — static CI scanning alone cannot catch PII that
+  arrives at runtime inside an object, an exception, an ORM query echo, or a library log): only explicitly
+  **declared, allow-listed fields are emitted**; everything else is dropped by default. Centralized
+  redaction middleware covers exceptions and framework/third-party logs; the redaction library is chosen,
+  not left open.
+- **CI log-scanning gate** *plus* a **staging dynamic scan against a PII-canary corpus** — the static
+  gate on log statements is necessary but not sufficient ([37 CI/CD](./37-cicd-pipeline.md)).
 - Errors carry a **`traceId`, never PII or stack traces to clients** ([10 §4](../02-architecture/10-api-design.md), [13 §4](../03-security-privacy/13-security-model.md)).
 
 ## 4. Audit log (immutable)
@@ -52,6 +57,11 @@ Levels: `ERROR` (actionable failure), `WARN` (degraded), `INFO` (key events), `D
 - **Append-only, tamper-evident** record of authentication events, authorization decisions on sensitive
   resources, **grade overrides, consent changes, safety actions, and privileged admin actions**
   ([13 §9](../03-security-privacy/13-security-model.md), [FR-TNS-004](../01-product/03-functional-requirements.md), [FR-ADM-003](../01-product/03-functional-requirements.md)).
+- **Immutability mechanism** (audit AR-C-21 — "tamper-evident" is no longer just asserted): a **write-once
+  / object-lock (WORM) store** with **no update/delete grant**, **per-record hash-chaining** (each entry
+  binds the prior), and **periodic externally-anchored digests**; a **verification job** detects any chain
+  break and alerts. These records are challenged in safeguarding disputes and legal proceedings, so an
+  insider (or attacker with DB access) must not be able to alter history undetected.
 - Stored separately from application logs, with the strictest access controls (safeguarding audit in the
   C4 zone, [15](../03-security-privacy/15-child-safety-framework.md)).
 

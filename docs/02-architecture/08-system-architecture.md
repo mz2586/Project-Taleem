@@ -411,7 +411,12 @@ Design points:
 
 - **Stateless gateway, state in Redis.** Presence and channel subscriptions live in Redis; any
   gateway pod can serve any connection. No sticky sessions required beyond the single TCP connection.
-- **Redis Pub/Sub (and Streams for durable fan-out)** is the backplane so N gateway pods share one
+- **Backplane (audit AR-H-25):** the review found Redis Pub/Sub is non-durable and O(pods) fan-out and
+  would drop safeguarding/guardian notification frames on any pod hiccup. The realtime backplane is
+  therefore a **durable, partitioned log** (broker keyed per connection/topic) so each pod consumes only
+  its partition, with per-connection Redis Streams + consumer groups + resync tokens for durable delivery;
+  connection/pod sizing is in [54 Capacity §3](./54-capacity-and-scale-model.md). *(Original text retained
+  below for context; superseded by this decision.)* **Redis Pub/Sub (and Streams for durable fan-out)** was the backplane so N gateway pods share one
   logical channel space and scale horizontally on connection count.
 - **Auth on connect and per-channel** (short-lived JWT; see [11](../03-security-privacy/11-authentication-strategy.md)).
 - **Graceful degradation:** on a dropped socket the PWA falls back to REST **long-poll** for

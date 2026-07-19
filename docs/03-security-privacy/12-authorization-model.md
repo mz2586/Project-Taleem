@@ -152,8 +152,9 @@ Even with the right role and relationship, a decision can be denied by context:
   authenticated identity from [11](11-authentication-strategy.md). Authorization is not optional
   middleware a route can forget: the default route posture is deny, and access requires an explicit
   policy binding.
-- **Fail closed.** If the PDP is unreachable, the decision is **deny** for sensitive resources
-  (availability of authorization must never become a bypass).
+- **Fail closed — universally** (audit AR-M): if the PDP is unreachable, the decision is **deny**. Any
+  read-only degraded mode is defined explicitly and narrowly, never as a default-open fallback — a
+  resource mislabeled "non-sensitive" must not become readable during an outage.
 - **Decision caching** is short-lived and invalidated on consent change, safety hold, role change, or
   relationship change — so revocation is fast.
 
@@ -192,6 +193,15 @@ Certain actions carry child-impact and require more than role+relationship:
 | Cross-tenant platform action | Just-in-time elevation, reason-logged, time-boxed. |
 | Apply/lift safety hold | Safety Officer; every change audited. |
 
+### 7.1 Transcript confidentiality (resolved — audit AR-C-03)
+
+The former open question "which transcripts a Guardian/Mentor may read" is **resolved in favour of the
+child**: **transcript confidentiality is the default.** Any turn touched by the distress/safeguarding
+classifier ([15 §3](15-child-safety-framework.md)) is **invisible to Guardian and Mentor** and reachable
+only via the C4 Safety-Officer path (dual-control). This closes the path that would otherwise route a
+child's abuse disclosure to the guardian they are disclosing about ([51 Threat Model](51-threat-model.md)).
+Guardian data access/export is likewise **safeguarding-checked** ([14](14-privacy-model.md)).
+
 ## 8. Authorization for the AI Teacher
 
 The AI Teacher runs **as a scoped delegate of the authenticated Student session**, never with ambient
@@ -228,9 +238,9 @@ privilege ([11 §12](11-authentication-strategy.md)). It:
 
 ## Open questions
 
-- **Transcript visibility policy:** exactly which of a child's AI transcripts a Guardian vs. Mentor may
-  read, balancing oversight against the child's dignity and safeguarding. Owner: [15](15-child-safety-framework.md)
-  - Privacy.
+- **Transcript visibility policy** — **resolved** in §7.1 (confidentiality by default + safeguarding
+  carve-out). Remaining detail: the exact benign-oversight visibility a Guardian gets for
+  non-safeguarding turns (default: none without an explicit, logged reason).
 - **PDP technology:** policy-as-code engine choice (e.g. OPA/Cedar-style) is an ADR — pending
   ([02-architecture/adr](../02-architecture/adr/)).
 - **Cross-tenant analytics:** how Platform Admins get aggregate insight without cross-tenant PII access

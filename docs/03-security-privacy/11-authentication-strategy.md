@@ -324,18 +324,26 @@ No child, and many guardians, will have email. Recovery is therefore **relations
 |---|---|---|
 | **Child forgot picture-PIN** | Guardian-OTP flow re-authenticates and lets the child (with guardian help) set a new PIN. | On managed device, a **Mentor/School Admin** can trigger a supervised PIN reset that still notifies the guardian. |
 | **Child on a new/replacement device** | Enrolment QR/class-code + guardian-OTP re-binds. | Institutional guardian (School Admin) re-issues sign-in card. |
-| **Guardian lost phone (new number)** | Identity-verification via School Admin (assisted) OR secondary guardian confirmation OR knowledge of enrolment details + child's cohort; number change is a **sensitive, audited** event with a cool-down. | Institutional path: School Admin re-verifies against enrolment record. |
+| **Guardian lost phone (new number)** | **Mandatory independent in-person/assisted re-verification** by a School Admin/Mentor who is *not* the requester, against the enrolment record, **plus** a safeguarding review; number change is a **sensitive, audited** event with a cool-down. *(Removed in [51 Threat Model](51-threat-model.md)/audit AR-C-09: the former "knowledge of enrolment details + child's cohort" alternative — a pure knowledge factor and a grooming/account-takeover vector — is deleted.)* | Institutional path: School Admin re-verifies against enrolment record with dual-control. |
 | **Guardian lost phone (same number, new SIM)** | Standard OTP to the same number. | — |
 | **Mentor/Staff** | Standard enterprise recovery: verified identity + admin-issued MFA re-enrolment; **never** self-serve email reset. | Break-glass via Platform Admin with dual-control (two-person) approval, fully audited. |
 
 **Decisions:**
 
 - **Guardian phone-number change is the single most sensitive recovery event** (it can hand a child's
-  account to a new person). It requires either assisted verification or multi-signal confirmation, a
-  **cool-down window** during which both old and new numbers are notified, and an immutable audit entry.
-  This is a deliberate anti-account-takeover / anti-grooming control (see [15](15-child-safety-framework.md)).
-- **No knowledge-only recovery** (no "mother's maiden name"). Recovery is always tied to a possession
-  factor or an in-person/attested assisted flow.
+  account to a new person — the grooming vector in [51 Threat Model §1](51-threat-model.md)). It requires
+  **mandatory independent human re-verification** (not mere notification — the audit found the
+  "notify-old-number" cool-down is void when the phone is lost/stolen, and knowledge factors are
+  socially discoverable), **plus a safeguarding review**, with transcript/oversight access **frozen until
+  re-verified**, and an immutable audit entry.
+- **No knowledge-only recovery** — and, per the audit, **no knowledge factor as even an alternative**.
+  Recovery is always tied to a possession factor or an independent in-person/attested assisted flow.
+- **Institutional guardianship uses two-person control** ([15 §6](15-child-safety-framework.md)): the
+  role that attests consent is separate from the role holding day-to-day account/device authority, so no
+  single insider holds total power over a parentless child's account.
+- **Per-profile cache keys are high-entropy and hardware-backed where available — never derived from the
+  child's picture-PIN** (audit AR-H-14): a low-entropy PIN must not gate at-rest decryption of a stolen
+  device's cache.
 
 ---
 

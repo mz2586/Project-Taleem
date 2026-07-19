@@ -55,7 +55,7 @@ graph TD
 
 | Entity | Meaning |
 |---|---|
-| **Subject** | Urdu, English, Maths, Science, Islamiat, Social/Pakistan Studies ([Authoring Brief §3](../_meta/authoring-brief.md)) |
+| **Subject** | Urdu, English, Maths, Science, **Religious Education (Islamiat ↔ Ethics/Akhlaqiat, student-attribute-driven track — audit AR-C-20)**, Social/Pakistan Studies ([Authoring Brief §3](../_meta/authoring-brief.md)) |
 | **Grade band** | KG–Grade 10 |
 | **Unit** | A themed group of lessons within subject+grade |
 | **Learning Objective** | The atomic "thing to master"; the north-star unit of value |
@@ -147,7 +147,12 @@ Curriculum is **read-only to consumers**; it is the sole writer of curriculum da
 - **SNC mapping source** — canonical machine-readable standard codes and provincial variance data.
 - **Objective granularity** — how fine to slice objectives so the north-star is meaningful but not
   gameable.
-- **Prerequisite graph** — modelling objective prerequisites for adaptive pacing ([22](./22-lesson-engine.md)).
+- **Prerequisite graph** — **resolved** (audit AR-C-15): promoted from a future open question to a **v1
+  core entity** (objective DAG with `prerequisite_of` edges); the model, gating, and remediation routing
+  are specified in [58 Mastery & Assessment Validity](./58-mastery-and-assessment-validity.md). Without it,
+  "mastery-based progression" degrades to linear seat-order.
+- **Religious-education track** — Islamiat ↔ Ethics/Akhlaqiat is captured at enrolment and reflected on
+  the report card; content-review adds a minority-representation check (audit AR-C-20).
 
 ## Change log
 

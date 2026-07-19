@@ -121,8 +121,11 @@ violated per-screen. Every semantic foreground/background pairing ships with a v
    at ~4.8:1 on Paper, so it is allowed for ≥ normal text, but the token file is the authority.
 4. Do not place text over photographic imagery without a scrim that restores ≥ 4.5:1.
 
-> **Enforcement:** the token contrast table in [18](18-design-tokens.md) is validated in CI. A new
-> color pairing that fails its target ratio fails the build.
+> **Enforcement:** the **computed** contrast matrix now exists in [59 Design Token Values](59-design-token-values.md)
+> (audit AR-C-18 — it was previously asserted but absent). Every primary semantic pair has a verified
+> WCAG ratio there; the CI validator fails the build on any regression. **Note the derived constraint:
+> Sun `#F59E0B` is 2.05:1 on Paper and MUST NOT carry text/essential UI** — it is a fill with Ink text
+> (8.27:1) only.
 
 ---
 
@@ -201,7 +204,7 @@ The defining Taleem extension (E1). Many students are early readers and many gua
 | Mechanism | Requirement |
 |---|---|
 | **Icon + text pairing** | Every actionable control shows a recognizable icon **and** a short text label. Icons never stand alone for actions. |
-| **Audio-first / read-aloud** | Every instruction, question, and key screen has a "🔊 read aloud" control. Pre-recorded audio where available; TTS fallback. Audio is cached for offline. |
+| **Audio-first / read-aloud** | Every instruction, question, and key screen has a "🔊 read aloud" control. **Professionally pre-recorded Urdu audio is MANDATORY for all core-path text** (audit AR-C-19 — a quality Urdu TTS voice is often absent/undownloadable on Android Go, so audio-first cannot rest on TTS); a vetted on-device TTS is a controlled fallback only. A dedicated `ReadAloud` component (with playing/paused/loading/unavailable/offline states) is required; audio is packaged offline. **Validate on a real Android Go handset before audio-first is treated as delivered.** |
 | **Picture-password / PIN option** | Young students authenticate with a **picture password** or numeric PIN, not typed credentials (see [19](19-component-library.md) PIN/PicturePassword). |
 | **Progressive disclosure** | One idea per screen; long text chunked; "show more" rather than walls of text. |
 | **Consistent visual vocabulary** | Same concept always uses the same icon + color + word (U2). A mini "how to read this screen" is available. |

@@ -6,7 +6,8 @@
 | **Owner** | Head of Trust & Safety / Chief Safeguarding Officer |
 | **Status** | Approved (Phase 1) |
 | **Last updated** | 2026-07-19 |
-| **Related** | [01 Vision](../00-overview/01-vision.md) · [11 Authentication](11-authentication-strategy.md) · [12 Authorization](12-authorization-model.md) · [13 Security](13-security-model.md) · [14 Privacy](14-privacy-model.md) · [24 AI Teacher](../05-education/24-ai-teacher-specification.md) · [28 Mentor Portal](../06-portals/28-mentor-portal.md) · [30 Notifications](../06-portals/30-notification-system.md) · [34 Media](../02-architecture/34-media-architecture.md) · [50 Definition of Done](../07-engineering/50-definition-of-done.md) |
+| **Related** | [01 Vision](../00-overview/01-vision.md) · [11 Authentication](11-authentication-strategy.md) · [12 Authorization](12-authorization-model.md) · [13 Security](13-security-model.md) · [14 Privacy](14-privacy-model.md) · [24 AI Teacher](../05-education/24-ai-teacher-specification.md) · [28 Mentor Portal](../06-portals/28-mentor-portal.md) · [30 Notifications](../06-portals/30-notification-system.md) · [34 Media](../02-architecture/34-media-architecture.md) · [50 Definition of Done](../07-engineering/50-definition-of-done.md) · **[51 Threat Model](51-threat-model.md)** · **[52 Crisis Protocol](52-safeguarding-crisis-protocol.md)** · **[53 Incident Response](../07-engineering/53-incident-response-plan.md)** · **[57 Retention](57-data-retention-schedule.md)** |
+| **Post-audit** | Remediated per [ARCHITECTURE_REVIEW.md](../../ARCHITECTURE_REVIEW.md) (2026-07-19). |
 
 ## Purpose
 
@@ -56,6 +57,7 @@ document.**
 | **Exploitation / fraud targeting children** | Scams, data misuse | Privacy stance ([14](14-privacy-model.md)), no monetisation of children. |
 | **Psychological harm from AI** | Manipulation, false authority, unsafe advice | AI honesty + guardrails + "escalate to human" (§3). |
 | **Data-driven harm** | Leak of a vulnerable child's identity/location | Security ([13](13-security-model.md)) + privacy ([14](14-privacy-model.md)). |
+| **Harm from within the household** (audit AR-C-02) | Abusive guardian/household member controls the device, is the consent-holder, receives all data, can shoulder-surf the PIN | Household-as-adversary [51 Threat Model](51-threat-model.md); transcript confidentiality carve-out ([12 §7.1](12-authorization-model.md)); discreet safety exit; guardian-implicated cases exclude the guardian ([52](52-safeguarding-crisis-protocol.md)). |
 
 ## 3. AI Teacher safety guardrails (the core novel risk)
 
@@ -105,10 +107,20 @@ sequenceDiagram
 - **Honesty over hallucination** — the AI says "I don't know / let's ask your Mentor" rather than
   fabricate ([FR-AIT-004](../01-product/03-functional-requirements.md)).
 - **Never human** — always labelled "AI Teacher"; never claims to be a person ([FR-AIT-006](../01-product/03-functional-requirements.md)).
-- **Distress → human** — a detected distress or safeguarding signal escalates to a human within SLA and
-  gives the child a caring, safe holding response, never a clinical dead end (§5).
-- **Full transcript logging** — moderatable, retention-limited ([14 §9](14-privacy-model.md)).
-- **Red-team tested** — a standing adversarial eval set gates AI releases ([40 Testing](../07-engineering/40-testing-strategy.md)).
+- **Distress → human — at MVP, not v1** (audit AR-C-04): a detected distress/safeguarding signal
+  escalates to a live human within a **tiered numeric SLA** (T0 imminent-harm ≤ 5 min, 24/7) per the
+  [52 Safeguarding & Crisis-Response Protocol](52-safeguarding-crisis-protocol.md). The child receives a
+  **deterministic, clinician-reviewed holding response served outside the LLM path** — never
+  model-generated — so a degraded or jailbroken model cannot alter the crisis message.
+- **No generative AI offline** (audit AR-C-06) — offline, only static, pre-moderated, input-independent
+  content is shown; **no dynamically generated text is ever served offline**; an always-available offline
+  crisis affordance queues a safety flag that fires on reconnect ([33 Offline](../02-architecture/33-offline-architecture.md)).
+- **Transcript confidentiality with a safeguarding carve-out** (audit AR-C-03) — distress-classified
+  turns are confidential to Guardian/Mentor and reachable only via the C4 path ([12 §7.1](12-authorization-model.md)).
+- **Full transcript logging** — moderatable, retention-limited ([14 §9](14-privacy-model.md), [57 Retention](57-data-retention-schedule.md)).
+- **Red-team tested** — a standing, versioned adversarial eval set with a **numeric zero-criticals bar
+  and explicit Urdu/Roman-Urdu coverage** gates AI releases and runs **continuously against live
+  provider endpoints** ([40 Testing](../07-engineering/40-testing-strategy.md), [24 §10](../05-education/24-ai-teacher-specification.md)).
 
 ## 4. Content & upload moderation
 
@@ -117,8 +129,12 @@ sequenceDiagram
 - **Uploads** (child work photos/audio) are scanned (safety classification, known-bad hashing) in the
   Media pipeline ([34 Media](../02-architecture/34-media-architecture.md)) before delivery; nothing
   unmoderated is ever shown to another child.
-- **Curriculum content** is reviewed before publish ([FR-ADM-002](../01-product/03-functional-requirements.md));
-  publishing is gated and reversible.
+- **Curriculum content itself is safety-reviewed before publish** (audit finding — the original pipeline
+  moderated AI output + uploads but not authored curriculum, the content every child sees most). Publishing
+  is gated behind a **content-QA sign-off**: subject-expert + pedagogy + child-safety review against an
+  explicit **age-appropriateness and religion/gender-neutrality rubric**, with an audit trail and mandatory
+  human review of any AI-generated item/lesson ([FR-ADM-002](../01-product/03-functional-requirements.md),
+  [58 Assessment Validity](../05-education/58-mastery-and-assessment-validity.md)).
 - **Layered moderation** — automated classifiers as the first pass, human review for edge/ high-severity
   cases; the automated layer never has the final word on a high-severity child-safety decision.
 

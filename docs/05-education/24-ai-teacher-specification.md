@@ -95,24 +95,40 @@ flowchart TB
 | Deep | Hard explanations, complex reasoning | Claude Opus 4.8 |
 
 - Tiering is a **routing policy**, not scattered call sites; it is the primary AI cost lever
-  ([04 NFR COST-02](../01-product/04-non-functional-requirements.md)).
-- **Resilience:** retries, timeouts, circuit breaker; an LLM outage degrades AI to cached hints and
-  **never takes down the learning path** ([08 §9.4](../02-architecture/08-system-architecture.md), [35 §6](../02-architecture/35-deployment-architecture.md)).
+  ([04 NFR COST-02](../01-product/04-non-functional-requirements.md), [55 Cost Model](../08-delivery/55-cost-model.md)).
+- **Safety never yields to cost** (audit AR-H-16): **every serving tier must pass the identical safety-eval
+  bar**, and any **distress-adjacent or safety-relevant turn routes to the strongest tier regardless of
+  cost.** Cost-tiering may not degrade safety.
+- **Resilience:** retries, timeouts, circuit breaker; an LLM outage degrades AI to **static pre-moderated**
+  cached hints (never generative) and **never takes down the learning path** ([08 §9.4](../02-architecture/08-system-architecture.md), [35 §6](../02-architecture/35-deployment-architecture.md)).
 
 ## 6. Safety integration
 
 - **Two-sided, inline, non-bypassable** input and output guardrails ([15 §3](../03-security-privacy/15-child-safety-framework.md));
   a verdict can **block, rewrite, or escalate** ([FR-AIT-002](../01-product/03-functional-requirements.md)).
-- **Prompt-injection defence** on input (curriculum/user content cannot hijack the system prompt).
+- **Prompt-injection defence** on input, with a concrete mechanism (audit AR-H-15): **structural
+  separation** of system instructions from retrieved/user content, **signed + reviewed RAG corpus**, and
+  an **output guard independent of the (potentially poisoned) generation prompt**.
 - Unsafe outputs are blocked/replaced and raise `AISafetyFlagRaised` to Trust & Safety ([08 §5](../02-architecture/08-system-architecture.md)).
-- **Red-team eval set gates every AI release** ([40 Testing](../07-engineering/40-testing-strategy.md), §10).
+- **Red-team gates every release AND runs continuously (canary) against live provider endpoints** (audit
+  AR-H-17) — a provider-side silent model change fails the canary and the system fails safe to cached
+  content; model versions are pinned where the provider allows.
+- **Explicit Urdu / Roman-Urdu / code-switch safety-eval** with measured recall on distress/grooming/
+  self-harm classes gates launch (audit AR-H-18) — classifiers are weaker in low-resource/transliterated
+  text, so the majority written language cannot be an untested blind spot.
+- **No generative AI offline** (audit AR-C-06) — offline serves only static, pre-moderated content.
 
 ## 7. Honesty & escalation
 
 - The system prompt enforces **honest uncertainty** — decline or defer to a Mentor rather than fabricate
   (B3).
-- **Distress / safeguarding signals** trigger a human escalation within SLA and a **caring, safe holding
-  response** — never a clinical dead end ([15 §5](../03-security-privacy/15-child-safety-framework.md), [FR-AIT-007](../01-product/03-functional-requirements.md)).
+- **Distress / safeguarding signals** trigger a **live human escalation within a tiered numeric SLA
+  (T0 ≤ 5 min, 24/7)** and a **deterministic, clinician-reviewed holding response served OUTSIDE the LLM
+  path** — never model-generated (audit AR-C-04), so a degraded/jailbroken model cannot alter the crisis
+  message. Escalation is **MVP, not v1** ([52 Crisis Protocol](../03-security-privacy/52-safeguarding-crisis-protocol.md), [15 §3](../03-security-privacy/15-child-safety-framework.md), [FR-AIT-007](../01-product/03-functional-requirements.md)).
+- **In-region classification for potentially-C4 utterances** (audit AR-C-07) — distress/safeguarding
+  classification and the holding response run in-region; text pre-classified as potentially C4 is **never
+  forwarded to an out-of-region model** (DECISION REQUIRED: residency, [14 O-3](../03-security-privacy/14-privacy-model.md)).
 - **Repeated failure** on an objective can escalate to a Mentor for human help ([28 Mentor](../06-portals/28-mentor-portal.md)).
 
 ## 8. Transcripts & privacy

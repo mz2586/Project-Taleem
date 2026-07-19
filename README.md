@@ -136,6 +136,27 @@ Start here:
 | 45 | Milestone Plan | [docs/08-delivery/45-milestone-plan.md](docs/08-delivery/45-milestone-plan.md) |
 | 46 | Project Backlog | [docs/08-delivery/46-project-backlog.md](docs/08-delivery/46-project-backlog.md) |
 
+### Phase 1.5 · Remediation artifacts (added by the 2026-07-19 architecture review)
+
+| # | Document | Location |
+|---|---|---|
+| 51 | Threat Model | [docs/03-security-privacy/51-threat-model.md](docs/03-security-privacy/51-threat-model.md) |
+| 52 | Safeguarding & Crisis-Response Protocol | [docs/03-security-privacy/52-safeguarding-crisis-protocol.md](docs/03-security-privacy/52-safeguarding-crisis-protocol.md) |
+| 53 | Incident Response Plan | [docs/07-engineering/53-incident-response-plan.md](docs/07-engineering/53-incident-response-plan.md) |
+| 54 | Capacity & Scale Model | [docs/02-architecture/54-capacity-and-scale-model.md](docs/02-architecture/54-capacity-and-scale-model.md) |
+| 55 | Cost Model & FinOps | [docs/08-delivery/55-cost-model.md](docs/08-delivery/55-cost-model.md) |
+| 56 | Business-Continuity & DR Plan | [docs/02-architecture/56-bcdr-plan.md](docs/02-architecture/56-bcdr-plan.md) |
+| 57 | Data-Retention & Deletion Schedule | [docs/03-security-privacy/57-data-retention-schedule.md](docs/03-security-privacy/57-data-retention-schedule.md) |
+| 58 | Mastery Definition, Prerequisite Graph & Assessment Validity | [docs/05-education/58-mastery-and-assessment-validity.md](docs/05-education/58-mastery-and-assessment-validity.md) |
+| 59 | Design Token Values & Contrast Matrix | [docs/04-design/59-design-token-values.md](docs/04-design/59-design-token-values.md) |
+
+### Review deliverables (external architecture review, 2026-07-19)
+
+- [ARCHITECTURE_REVIEW.md](ARCHITECTURE_REVIEW.md) — 97 findings across 20 dimensions
+- [BLUEPRINT_GAP_ANALYSIS.md](BLUEPRINT_GAP_ANALYSIS.md) — 35 missing artifacts + blocking decisions
+- [RISK_REMEDIATION_PLAN.md](RISK_REMEDIATION_PLAN.md) — Phase-1.5 remediation + Phase-2 exit gate
+- [FINAL_RECOMMENDATIONS.md](FINAL_RECOMMENDATIONS.md) — Production Readiness Score + go/no-go
+
 ---
 
 ## Technology at a glance

@@ -105,6 +105,12 @@ Overrides require step-up auth and leave an immutable trail ([FR-GRD-003](../01-
 - Attempts can be taken offline and **sealed at submission time**; the sealed attempt is immutable and
   syncs idempotently ([04 NFR OFFL-05](../01-product/04-non-functional-requirements.md), [33 §6](../02-architecture/33-offline-architecture.md)).
 - Answers cannot be tampered with after submission (cryptographic seal, [13 §5](../03-security-privacy/13-security-model.md)).
+- **Server-side scoring — answer keys are NEVER shipped in the offline day-pack** (audit AR-C-17):
+  offline attempts capture responses only and are **scored on the server at sync**, so keys cannot be
+  extracted from a device.
+- **Summative identity assurance** — promotion-bearing assessment requires Mentor-supervised or
+  synchronous identity checks and human-corroborated items; **offline summative cannot be identity-assured
+  and is not credential-bearing** ([58 Mastery & Validity §5](./58-mastery-and-assessment-validity.md)).
 
 ## 7. Proctoring-lite (v1, ethical)
 
