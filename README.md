@@ -6,7 +6,7 @@
 
 *A complete digital school — not an LMS, not a course platform, not a chatbot.*
 
-`Status: Phase 1 — Foundation Blueprint` · `Last updated: 2026-07-19`
+`Status: Phase 1 — Foundation Blueprint (50/50 documents + ADRs drafted; pending approval)` · `Last updated: 2026-07-19`
 
 </div>
 
