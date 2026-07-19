@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+.yarn/
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Build output
+.next/
+out/
+dist/
+build/
+*.egg-info/
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# Test & coverage
+coverage/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+playwright-report/
+test-results/
+
+# Terraform
+*.tfstate
+*.tfstate.*
+.terraform/
+*.tfvars
+!example.tfvars
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+
+# Logs
+*.log
+logs/
+
+# Docs tooling
+node_modules/
+.docs-cache/

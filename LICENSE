@@ -1,0 +1,13 @@
+Copyright (c) 2026 Project Taleem
+
+All rights reserved (placeholder).
+
+This repository contains the foundation blueprint for Project Taleem, a digital school for
+children. A final open-source or source-available license (e.g. AGPL-3.0 for the platform with a
+separate license for curriculum content) is an OPEN DECISION to be ratified by the founding team
+before Phase 1 (implementation) begins. See docs/02-architecture/adr/ for the licensing ADR (to be
+authored).
+
+Until a license is ratified, no rights are granted to copy, modify, or distribute this material
+except to authorized contributors under signed agreement. Children's data and safety obligations
+described herein are binding regardless of the eventual code license.

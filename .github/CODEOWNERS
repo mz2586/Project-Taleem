@@ -1,0 +1,32 @@
+# CODEOWNERS — required reviewers by area (Phase 1 placeholder teams)
+# Syntax: <path>  <owner-team>
+
+# Everything requires a base review
+*                                   @taleem/maintainers
+
+# Vision & governance
+/docs/00-overview/                  @taleem/leadership
+/docs/08-delivery/                  @taleem/leadership @taleem/program
+
+# Product
+/docs/01-product/                   @taleem/product
+
+# Architecture & data
+/docs/02-architecture/              @taleem/architecture
+/docs/02-architecture/adr/          @taleem/architecture @taleem/leadership
+
+# Security, privacy & child safety — Trust & Safety MUST review
+/docs/03-security-privacy/          @taleem/security @taleem/trust-and-safety
+
+# Design & accessibility
+/docs/04-design/                    @taleem/design @taleem/accessibility
+
+# Education engines & AI Teacher — safety co-review required for AI Teacher
+/docs/05-education/                 @taleem/learning
+/docs/05-education/24-ai-teacher-specification.md  @taleem/learning @taleem/ai @taleem/trust-and-safety
+
+# Portals & platform services
+/docs/06-portals/                   @taleem/product @taleem/frontend
+
+# Engineering practice
+/docs/07-engineering/               @taleem/architecture @taleem/devex

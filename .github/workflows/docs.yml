@@ -1,0 +1,67 @@
+name: Docs CI
+
+# Phase 1: the deliverable is documentation. This workflow keeps the blueprint
+# consistent, lint-clean, and free of broken cross-references.
+# See docs/07-engineering/37-cicd-pipeline.md for the full pipeline design.
+
+on:
+  push:
+    branches: [main]
+    paths: ["docs/**", "**/*.md", ".github/workflows/docs.yml"]
+  pull_request:
+    paths: ["docs/**", "**/*.md"]
+
+permissions:
+  contents: read
+
+jobs:
+  markdownlint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint markdown
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        with:
+          globs: |
+            **/*.md
+            !**/node_modules/**
+
+  link-check:
+    name: Cross-reference link check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check relative links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --offline
+            --include-fragments
+            --verbose
+            --no-progress
+            './**/*.md'
+          fail: true
+
+  mermaid-validate:
+    name: Validate Mermaid diagrams
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install mermaid CLI
+        run: npm install -g @mermaid-js/mermaid-cli
+      - name: Extract and validate mermaid blocks
+        run: |
+          set -e
+          fail=0
+          while IFS= read -r -d '' file; do
+            awk '/^```mermaid$/{flag=1;n++;out=FILENAME"."n".mmd";next}/^```$/{if(flag){flag=0}next}flag{print > out}' "$file"
+          done < <(find docs -name '*.md' -print0)
+          for mmd in docs/*.mmd docs/**/*.mmd; do
+            [ -e "$mmd" ] || continue
+            mmdc -i "$mmd" -o "${mmd%.mmd}.svg" || fail=1
+          done
+          exit $fail
