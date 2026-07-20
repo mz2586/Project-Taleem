@@ -7,7 +7,8 @@
     "MD024": { "siblings_only": true }, // allow repeated headings (Change Log / Open Questions) across docs
     "MD041": false,        // first line need not be H1 (metadata blocks / HTML banners)
     "MD046": false,        // allow both fenced and indented code
-    "MD036": false         // allow bold "Label:" intro lines (a deliberate, TOC-friendly style)
+    "MD036": false,        // allow bold "Label:" intro lines (a deliberate, TOC-friendly style)
+    "MD004": { "style": "dash" }  // unordered lists use "-" project-wide (consistent standard)
   },
   "globs": ["**/*.md"],
   // Exclude dependency/build/vendored dirs (not part of our authored docs; absent in CI).

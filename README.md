@@ -171,6 +171,15 @@ Start here:
 - [FINAL_ROADMAP.md](FINAL_ROADMAP.md) — 10-phase roadmap (Phase 1.5 → National Scale)
 - [FINAL_MILESTONE_PLAN.md](FINAL_MILESTONE_PLAN.md) — binary-exit milestones + quality gates
 
+### Curriculum resource discovery (2026-07-20)
+
+- [curriculum-research/01_CURRICULUM_RESOURCE_INVENTORY.md](curriculum-research/01_CURRICULUM_RESOURCE_INVENTORY.md) — official Pakistani curriculum sources + per-resource licensing
+- [curriculum-research/02_MASTER_CURRICULUM_MATRIX.md](curriculum-research/02_MASTER_CURRICULUM_MATRIX.md) — KG–10 subject roster + SLO schema (NCP-aligned)
+- [curriculum-research/03_CONTENT_GAP_ANALYSIS.md](curriculum-research/03_CONTENT_GAP_ANALYSIS.md) — public standards (~100%) vs. content to author
+- [curriculum-research/04_CURRICULUM_INGESTION_PIPELINE.md](curriculum-research/04_CURRICULUM_INGESTION_PIPELINE.md) — licensing-gated PDF→…→AI-KB→version-control pipeline
+
+> **Finding:** the National Curriculum of Pakistan standards (SLOs, Scheme of Studies, assessment frameworks) are **public and free to align to** — **no commercial publisher partnership is required**; an NCC/MoFEPT MoU is a desirable accelerator for verbatim reuse.
+
 ---
 
 ## Technology at a glance
