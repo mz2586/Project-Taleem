@@ -32,7 +32,9 @@ class TestConfig(unittest.TestCase):
 
 class TestLoggingRedaction(unittest.TestCase):
     def test_allowlist_drops_undeclared_keys(self) -> None:
-        out = redact({"event": "x", "child_name": "Ayesha", "guardian_phone": "+92300"}, DEFAULT_ALLOW)
+        out = redact(
+            {"event": "x", "child_name": "Ayesha", "guardian_phone": "+92300"}, DEFAULT_ALLOW
+        )
         self.assertIn("event", out)
         self.assertNotIn("child_name", out)  # dropped by allow-list
         self.assertNotIn("guardian_phone", out)
@@ -88,7 +90,9 @@ class TestIds(unittest.TestCase):
     def test_uuid7_shape_and_uniqueness(self) -> None:
         a = uuid7()
         b = uuid7()
-        self.assertRegex(a, r"^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$")
+        self.assertRegex(
+            a, r"^[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$"
+        )
         self.assertNotEqual(a, b)
 
     def test_time_ordering_prefix(self) -> None:

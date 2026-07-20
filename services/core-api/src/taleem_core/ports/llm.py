@@ -12,11 +12,11 @@ children (production AI is a Phase-2 item gated on FOUNDER_DECISIONS FD-03).
 from __future__ import annotations
 
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 from typing import Protocol, runtime_checkable
 
 
-class Tier(str, Enum):
+class Tier(StrEnum):
     LIGHT = "light"  # e.g. Haiku — routine
     STANDARD = "standard"  # e.g. Sonnet — normal tutoring
     DEEP = "deep"  # e.g. Opus — hard explanations

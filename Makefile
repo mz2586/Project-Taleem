@@ -10,12 +10,12 @@ help: ## List targets
 	 awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: test
-test: ## Run the pure-stdlib core test suite (no third-party installs needed)
-	cd $(CORE) && PYTHONPATH=src python3 -m unittest discover -s tests
+test: ## Run the full test suite with coverage (pytest, in the venv)
+	cd $(CORE) && . .venv/bin/activate && pytest --cov=taleem_core --cov-report=term-missing --cov-fail-under=85
 
-.PHONY: test-verbose
-test-verbose: ## Run the core test suite (verbose)
-	cd $(CORE) && PYTHONPATH=src python3 -m unittest discover -s tests -v
+.PHONY: test-core
+test-core: ## Smoke-run the framework/domain tests with stdlib only (no installs; excludes integration)
+	cd $(CORE) && PYTHONPATH=src python3 -m unittest discover -s tests -p 'test_[!i]*.py'
 
 .PHONY: install
 install: ## Install backend runtime + dev deps into a venv (requires network)

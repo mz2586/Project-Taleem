@@ -12,7 +12,7 @@ from dataclasses import dataclass, field
 # Eastern-Arabic (Urdu) digits ۰-۹
 _EASTERN = "۰۱۲۳۴۵۶۷۸۹"
 _WESTERN = "0123456789"
-_TO_EASTERN = {w: e for w, e in zip(_WESTERN, _EASTERN)}
+_TO_EASTERN = dict(zip(_WESTERN, _EASTERN, strict=True))
 
 
 class NumeralSystem:

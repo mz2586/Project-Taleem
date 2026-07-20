@@ -7,19 +7,26 @@ info:
     no enrolment, child accounts, payments, production AI, or safeguarding workflows.
   license:
     name: MIT
+    identifier: MIT
 servers:
-  - url: http://localhost:8000
-    description: Local
+  - url: https://api.taleem.dev
+    description: Reference environment (placeholder; concrete host per FOUNDER_DECISIONS FD-02)
 tags:
   - name: health
+    description: Liveness and readiness probes.
   - name: observability
+    description: Metrics exposition for monitoring.
   - name: sync
+    description: Offline sync engine prototype operating on synthetic data.
   - name: skeleton
+    description: Authentication and authorization seam demonstration.
 paths:
   /health:
     get:
       tags: [health]
+      operationId: getLiveness
       summary: Liveness
+      security: []
       responses:
         "200":
           description: Service is live
@@ -30,31 +37,71 @@ paths:
                 properties:
                   status: { type: string, example: ok }
                   version: { type: string }
+        "429":
+          description: Rate limited
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Unexpected error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
   /health/ready:
     get:
       tags: [health]
+      operationId: getReadiness
       summary: Readiness (dependency probes)
+      security: []
       responses:
         "200": { description: Ready }
-        "503": { description: Degraded }
+        "503":
+          description: Degraded
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Readiness" }
+        "429":
+          description: Rate limited
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Unexpected error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
   /metrics:
     get:
       tags: [observability]
+      operationId: getMetrics
       summary: Prometheus metrics exposition
+      security: []
       responses:
         "200":
           description: Metrics
           content:
             text/plain:
               schema: { type: string }
+        "429":
+          description: Rate limited
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Unexpected error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
   /v1/sync/batch:
     post:
       tags: [sync]
+      operationId: postSyncBatch
       summary: Offline sync batch (idempotent, synthetic data only)
       description: >-
         Applies client-generated deltas with the remediated conflict policy (docs/33 §6): idempotent
         on clientEventId, append-only by union, monotonic progress, server-version ordering (no
         client wall-clock).
+      security: []
       requestBody:
         required: true
         content:
@@ -73,9 +120,15 @@ paths:
           content:
             application/problem+json:
               schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Unexpected error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
   /v1/skeleton/protected:
     get:
       tags: [skeleton]
+      operationId: getProtected
       summary: AuthN(JWT) + AuthZ(PDP deny-by-default) seam demo
       security:
         - bearerAuth: []
@@ -91,6 +144,11 @@ paths:
           content:
             application/problem+json:
               schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Unexpected error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
 components:
   securitySchemes:
     bearerAuth:
@@ -98,6 +156,14 @@ components:
       scheme: bearer
       bearerFormat: JWT
   schemas:
+    Readiness:
+      type: object
+      properties:
+        status: { type: string, example: degraded }
+        version: { type: string }
+        checks:
+          type: object
+          additionalProperties: { type: boolean }
     DeltaIn:
       type: object
       required: [clientEventId, type, entityKey]

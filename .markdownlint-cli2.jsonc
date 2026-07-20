@@ -10,5 +10,13 @@
     "MD036": false         // allow bold "Label:" intro lines (a deliberate, TOC-friendly style)
   },
   "globs": ["**/*.md"],
-  "ignores": ["**/node_modules/**"]
+  // Exclude dependency/build/vendored dirs (not part of our authored docs; absent in CI).
+  "ignores": [
+    "**/node_modules/**",
+    "**/.venv/**",
+    "**/venv/**",
+    "**/site-packages/**",
+    "**/.next/**",
+    "**/dist/**"
+  ]
 }

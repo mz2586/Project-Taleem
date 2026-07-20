@@ -29,8 +29,12 @@ class Span:
 
 @contextlib.contextmanager
 def span(name: str, **attributes: str) -> Iterator[Span]:
-    s = Span(name=name, start=time.perf_counter(), attributes=dict(attributes),
-             trace_id=get_correlation_id())
+    s = Span(
+        name=name,
+        start=time.perf_counter(),
+        attributes=dict(attributes),
+        trace_id=get_correlation_id(),
+    )
     try:
         yield s
     finally:

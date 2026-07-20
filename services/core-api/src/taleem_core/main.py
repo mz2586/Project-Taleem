@@ -14,12 +14,13 @@ Endpoints (M1 walking skeleton — governance-safe):
 
 from __future__ import annotations
 
+import contextlib
 import time
 from typing import Any
 
 from fastapi import Depends, FastAPI, Header, Request
 from fastapi.responses import JSONResponse, PlainTextResponse
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 from . import __version__
 from .auth import pdp
@@ -33,6 +34,23 @@ from .platform.logging import StructuredLogger
 from .platform.metrics import registry
 from .platform.plugins import Module
 from .platform.plugins import registry as module_registry
+
+
+# Request models live at MODULE scope: with `from __future__ import annotations`, FastAPI resolves
+# endpoint body types via the module globals, so locally-nested models would not be recognized.
+class DeltaIn(BaseModel):
+    # snake_case Python fields with camelCase wire aliases (keeps the JSON contract stable).
+    model_config = ConfigDict(populate_by_name=True)
+    client_event_id: str = Field(alias="clientEventId", min_length=1, max_length=128)
+    type: str
+    entity_key: str = Field(alias="entityKey", min_length=1, max_length=256)
+    payload: dict[str, Any] = Field(default_factory=dict)
+    client_seq: int = Field(default=0, alias="clientSeq")
+
+
+class BatchIn(BaseModel):
+    cursor: int = 0
+    deltas: list[DeltaIn] = Field(default_factory=list, max_length=200)
 
 
 def create_app(settings: Settings | None = None) -> FastAPI:
@@ -64,10 +82,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         Module("health", "/health", lambda: True),
         Module("sync", "/v1/sync", lambda: True, events_published=("ProgressSynced",)),
     ):
-        try:
+        # Idempotent across reloads/tests: re-registering the same module is a no-op.
+        with contextlib.suppress(ValueError):
             reg.register(module)
-        except ValueError:
-            pass  # idempotent across reloads/tests
 
     @app.middleware("http")
     async def observability(request: Request, call_next: Any) -> Any:
@@ -112,28 +129,17 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return registry().render()
 
     # ---- sync engine prototype ----
-    class DeltaIn(BaseModel):
-        clientEventId: str = Field(min_length=1, max_length=128)
-        type: str
-        entityKey: str = Field(min_length=1, max_length=256)
-        payload: dict[str, Any] = Field(default_factory=dict)
-        clientSeq: int = 0
-
-    class BatchIn(BaseModel):
-        cursor: int = 0
-        deltas: list[DeltaIn] = Field(default_factory=list, max_length=200)
-
     @app.post("/v1/sync/batch", tags=["sync"])
     def sync_batch(batch: BatchIn) -> dict[str, Any]:
         engine = SyncEngine(sync_store)
         try:
             deltas = [
                 SyncDelta(
-                    client_event_id=d.clientEventId,
+                    client_event_id=d.client_event_id,
                     type=DeltaType(d.type),
-                    entity_key=d.entityKey,
+                    entity_key=d.entity_key,
                     payload=d.payload,
-                    client_seq=d.clientSeq,
+                    client_seq=d.client_seq,
                 )
                 for d in batch.deltas
             ]
@@ -143,7 +149,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         return {
             "cursor": cursor,
             "results": [
-                {"clientEventId": r.client_event_id, "status": r.status.value, "version": r.server_version}
+                {
+                    "clientEventId": r.client_event_id,
+                    "status": r.status.value,
+                    "version": r.server_version,
+                }
                 for r in results
             ],
         }

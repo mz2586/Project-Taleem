@@ -50,6 +50,13 @@ select = ["E", "F", "I", "N", "UP", "B", "S", "C4", "SIM", "RET"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["S101"]
+# RFC 9457 names its error type "Problem" by convention; we align to the spec rather than the
+# generic *Error suffix. Documented, intentional deviation (not a suppression of a real defect).
+"src/taleem_core/platform/errors.py" = ["N818"]
+
+[tool.ruff.lint.flake8-bugbear]
+# FastAPI's dependency-injection markers are the framework's intended call-in-default idiom.
+extend-immutable-calls = ["fastapi.Depends", "fastapi.Header", "fastapi.Query", "fastapi.Path"]
 
 [tool.black]
 line-length = 100

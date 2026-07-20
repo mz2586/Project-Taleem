@@ -9,7 +9,7 @@ events it publishes. This registry is the composition root's single source of tr
 from __future__ import annotations
 
 from collections.abc import Callable
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
@@ -30,7 +30,9 @@ class ModuleRegistry:
         # Enforce a boundary invariant: no two modules may claim the same mount.
         for existing in self._modules.values():
             if existing.mount == module.mount:
-                raise ValueError(f"mount conflict: {module.mount} ({existing.name} vs {module.name})")
+                raise ValueError(
+                    f"mount conflict: {module.mount} ({existing.name} vs {module.name})"
+                )
         self._modules[module.name] = module
 
     def all(self) -> tuple[Module, ...]:

@@ -28,19 +28,19 @@ src/taleem_core/
 third-party package**, so the full test suite runs with zero installs. FastAPI/pydantic appear only in
 `main.py` (the edge adapter).
 
-## Run the tests (no installs needed)
+## Tests
+
+**57 tests total** — 46 framework/domain unit tests (framework-free, run on stdlib alone) + 11
+integration tests (boot the FastAPI app via `TestClient`). Coverage **96%** (gate ≥ 85%).
 
 ```bash
-cd services/core-api
-PYTHONPATH=src python3 -m unittest discover -s tests -v
-# or, from the repo root:
-make test
-```
+# Full suite + coverage (in the venv — the canonical path):
+make install       # uv venv (Python 3.12) + runtime + dev deps
+make test          # pytest --cov (57 tests, ≥85% gate)
 
-## Run the full quality gate (needs dev deps + network)
+# Zero-install smoke of the framework/domain layers (no venv, no deps):
+make test-core     # 46 tests via stdlib unittest
 
-```bash
-make install       # creates .venv, installs runtime + dev deps
 make lint          # ruff + black --check + mypy (strict)
 make run           # uvicorn taleem_core.main:app --reload
 ```

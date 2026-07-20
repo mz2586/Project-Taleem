@@ -9,10 +9,10 @@ from __future__ import annotations
 
 import os
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 
 
-class Environment(str, Enum):
+class Environment(StrEnum):
     LOCAL = "local"
     CI = "ci"
     STAGING = "staging"
@@ -55,9 +55,13 @@ class Settings:
     metrics_enabled: bool = field(default_factory=lambda: _get_bool("TALEEM_METRICS_ENABLED", True))
     tracing_enabled: bool = field(default_factory=lambda: _get_bool("TALEEM_TRACING_ENABLED", True))
     # Auth: JWT verification secret is a *placeholder* for the walking skeleton only.
-    # Production uses asymmetric JWKS + KMS (see docs/11 + FOUNDER_DECISIONS FD-14). Never a real secret.
-    jwt_dev_secret: str = field(default_factory=lambda: _get("TALEEM_JWT_DEV_SECRET", "dev-only-not-secret"))
-    request_timeout_ms: int = field(default_factory=lambda: _get_int("TALEEM_REQUEST_TIMEOUT_MS", 30000))
+    # Production uses asymmetric JWKS + KMS (docs/11 + FD-14). Never a real secret.
+    jwt_dev_secret: str = field(
+        default_factory=lambda: _get("TALEEM_JWT_DEV_SECRET", "dev-only-not-secret")
+    )
+    request_timeout_ms: int = field(
+        default_factory=lambda: _get_int("TALEEM_REQUEST_TIMEOUT_MS", 30000)
+    )
 
     @property
     def is_production(self) -> bool:

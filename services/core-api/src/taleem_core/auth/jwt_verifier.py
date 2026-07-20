@@ -9,6 +9,7 @@ docs/12). Production replaces HS256+shared-secret with asymmetric JWKS + rotatin
 from __future__ import annotations
 
 import base64
+import binascii
 import hashlib
 import hmac
 import json
@@ -56,7 +57,7 @@ def verify_hs256(token: str, secret: str, *, now: int | None = None) -> Claims:
     expected = hmac.new(secret.encode(), signing_input, hashlib.sha256).digest()
     try:
         provided = _b64url_decode(s)
-    except (ValueError, base64.binascii.Error):  # type: ignore[attr-defined]
+    except (ValueError, binascii.Error):
         raise unauthorized("Malformed signature") from None
     if not hmac.compare_digest(expected, provided):  # constant-time
         raise unauthorized("Bad signature")

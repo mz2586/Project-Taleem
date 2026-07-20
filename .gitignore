@@ -26,6 +26,9 @@ secrets/
 
 # Test & coverage
 coverage/
+.coverage
+*.tsbuildinfo
+next-env.d.ts
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/

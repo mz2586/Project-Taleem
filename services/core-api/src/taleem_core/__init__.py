@@ -6,9 +6,9 @@ This package deliberately implements *only* work with zero dependency on unresol
 governance decisions (see FOUNDER_DECISIONS.md). It does NOT implement student enrolment,
 child accounts, live student data, payments, production AI, or safeguarding workflows.
 
-Architecture: Clean/Hexagonal + DDD (see docs/08-system-architecture.md, docs/47-folder-structure.md).
-The `domain` and `platform` layers are pure-stdlib and framework-free; framework adapters
-(FastAPI, providers) live at the edges.
+Architecture: Clean/Hexagonal + DDD (see docs/08-system-architecture.md and
+docs/47-folder-structure.md). The `domain` and `platform` layers are pure-stdlib and
+framework-free; framework adapters (FastAPI, providers) live at the edges.
 """
 
 __version__ = "0.1.0"

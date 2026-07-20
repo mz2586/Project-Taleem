@@ -27,4 +27,8 @@ class HealthService:
     def ready(self) -> tuple[bool, dict[str, object]]:
         results = {c.name: bool(c.probe()) for c in self._checks}
         ok = all(results.values()) if results else True
-        return ok, {"status": "ok" if ok else "degraded", "checks": results, "version": self._version}
+        return ok, {
+            "status": "ok" if ok else "degraded",
+            "checks": results,
+            "version": self._version,
+        }

@@ -1,4 +1,4 @@
-"""Tests for the offline sync engine — the remediated conflict policy (audit AR-H-28, OFFL-02/03)."""
+"""Tests for the offline sync engine — remediated conflict policy (audit AR-H-28, OFFL-02/03)."""
 
 from __future__ import annotations
 

@@ -31,11 +31,15 @@ taleem/
 ## Quickstart
 
 ```bash
-make test          # run the pure-stdlib core test suite (no installs) — 38 tests, green
-make help          # list all targets
-make install lint  # full quality gate (needs network for deps)
+make install       # uv venv (Python 3.12) + deps
+make test          # pytest + coverage — 57 tests, 96% coverage (≥85% gate)
+make test-core     # zero-install smoke of framework/domain layers — 46 stdlib tests
+make lint          # ruff + black --check + mypy (strict)
 make up            # local stack (Postgres + Redis + core-api) via Docker
+make help          # list all targets
 ```
+
+Verified end-to-end on 2026-07-20 — see [BUILD_VERIFICATION_REPORT.md](./BUILD_VERIFICATION_REPORT.md).
 
 ## Engineering principles (enforced)
 

@@ -1,6 +1,8 @@
+"use client";
 // ReadAloud — the mandated low-literacy primitive (docs/16 §7, audit AR-C-19/AR-H-11).
 // Every instructional text pairs with this. States: idle | playing | loading | unavailable | offline.
 // Prefers pre-recorded Urdu audio (mandatory for core-path text); TTS is a controlled fallback only.
+// Client Component: owns interactive playback state.
 import { useState } from "react";
 
 type State = "idle" | "playing" | "loading" | "unavailable" | "offline";

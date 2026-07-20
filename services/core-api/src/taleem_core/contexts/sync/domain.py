@@ -1,7 +1,8 @@
 """Offline sync domain (pure, framework-free).
 
 Conflict policy (docs/33 §6, remediated per audit AR-H-28):
-  - Ordering uses a SERVER-incremented version counter + client Lamport seq — never client wall-clock.
+  - Ordering uses a SERVER-incremented version counter + client Lamport seq
+    (never the client wall-clock).
   - progress: monotonic max (never regress a completed block).
   - lesson completion: idempotent set (once completed, stays completed).
   - assessment attempt: append-only, merge by UNION (no attempt is ever overwritten/lost).
@@ -13,17 +14,17 @@ yields identical server state (04-NFR OFFL-02).
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
 
 
-class DeltaType(str, Enum):
+class DeltaType(StrEnum):
     PROGRESS = "progress.updated"
     LESSON_COMPLETED = "lesson.completed"
     ATTEMPT_SUBMITTED = "attempt.submitted"
     PREFERENCE = "preference.set"
 
 
-class Status(str, Enum):
+class Status(StrEnum):
     APPLIED = "applied"
     DUPLICATE = "duplicate"
     IGNORED = "ignored"  # e.g. a stale progress value that would regress — safely dropped
@@ -99,7 +100,9 @@ class SyncEngine:
 
     def _merge(self, d: SyncDelta, ent: _EntityState) -> Status:
         if d.type is DeltaType.PROGRESS:
-            block = int(d.payload.get("block", -1))  # type: ignore[arg-type]
+            raw = d.payload.get("block", -1)
+            # Type-safe coercion: a non-integer 'block' is treated as no progress (never advances).
+            block = raw if isinstance(raw, int) else -1
             if block <= ent.progress_block:
                 return Status.IGNORED  # never regress; stale progress is safely dropped
             ent.progress_block = block

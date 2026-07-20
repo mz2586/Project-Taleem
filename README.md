@@ -162,6 +162,7 @@ Start here:
 - **Track A** — [FOUNDER_DECISIONS.md](FOUNDER_DECISIONS.md) — 17 decisions needing human approval
 - **Track B** — [EXTERNAL_VALIDATION_CHECKLIST.md](EXTERNAL_VALIDATION_CHECKLIST.md) — 9 independent reviews
 - **Track C** — [ENGINEERING.md](ENGINEERING.md) + [ENGINEERING_READINESS_SCORE.md](ENGINEERING_READINESS_SCORE.md) — M1 walking skeleton (`services/`, `apps/`, `packages/`, `infra/`)
+- **Verification** — [BUILD_VERIFICATION_REPORT.md](BUILD_VERIFICATION_REPORT.md) — full engineering verification (17/17 checks green, 57 tests, 96% coverage)
 
 ---
 
