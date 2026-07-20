@@ -164,6 +164,13 @@ Start here:
 - **Track C** — [ENGINEERING.md](ENGINEERING.md) + [ENGINEERING_READINESS_SCORE.md](ENGINEERING_READINESS_SCORE.md) — M1 walking skeleton (`services/`, `apps/`, `packages/`, `infra/`)
 - **Verification** — [BUILD_VERIFICATION_REPORT.md](BUILD_VERIFICATION_REPORT.md) — full engineering verification (17/17 checks green, 57 tests, 96% coverage)
 
+### Executive review (independent CTO/CPO/CISO/Architect/EdTech panel, 2026-07-20)
+
+- [EXECUTIVE_REVIEW.md](EXECUTIVE_REVIEW.md) — 25-category scorecard (overall 70/100) + verdict
+- [WORLD_CLASS_GAP_ANALYSIS.md](WORLD_CLASS_GAP_ANALYSIS.md) — gap register + 4 redesign recommendations
+- [FINAL_ROADMAP.md](FINAL_ROADMAP.md) — 10-phase roadmap (Phase 1.5 → National Scale)
+- [FINAL_MILESTONE_PLAN.md](FINAL_MILESTONE_PLAN.md) — binary-exit milestones + quality gates
+
 ---
 
 ## Technology at a glance
