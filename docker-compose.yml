@@ -1,0 +1,47 @@
+# Project Taleem — local development stack (M1).
+# Backing services are pinned to open engines (docs/36-infrastructure-architecture.md); the concrete
+# cloud/managed choice is a Phase-1.5 decision (FOUNDER_DECISIONS FD-02). Local only — no live data.
+
+services:
+  core-api:
+    build: ./services/core-api
+    environment:
+      TALEEM_ENV: local
+      TALEEM_LOG_LEVEL: INFO
+      TALEEM_DEFAULT_LOCALE: ur
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: taleem
+      POSTGRES_PASSWORD: local-dev-only
+      POSTGRES_DB: taleem
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U taleem"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+volumes:
+  pgdata:

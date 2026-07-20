@@ -1,0 +1,86 @@
+name: Code CI
+
+# M1 walking-skeleton pipeline (docs/37-cicd-pipeline.md). Runs alongside the docs CI.
+# The core test suite is pure-stdlib and runs with zero installs; lint/type/build steps install deps.
+
+on:
+  push:
+    branches: [main]
+    paths: ["services/**", "apps/**", "packages/**", ".github/workflows/ci.yml"]
+  pull_request:
+    paths: ["services/**", "apps/**", "packages/**"]
+
+permissions:
+  contents: read
+
+jobs:
+  core-tests:
+    name: Core tests (stdlib)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/core-api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit tests (no third-party deps)
+        run: PYTHONPATH=src python -m unittest discover -s tests -v
+
+  core-quality:
+    name: Lint · type · coverage
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: services/core-api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dev deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - name: Ruff (lint)
+        run: ruff check src tests
+      - name: Black (format check)
+        run: black --check src tests
+      - name: Mypy (types, strict)
+        run: mypy
+      - name: Pytest + coverage gate
+        run: pytest --cov=taleem_core --cov-report=term-missing --cov-fail-under=85
+
+  openapi-lint:
+    name: OpenAPI contract lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate OpenAPI spec
+        run: npx --yes @redocly/cli@latest lint packages/contracts/openapi.yaml
+
+  docker-build:
+    name: Container build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build core-api image
+        run: docker build -t taleem/core-api:ci services/core-api
+
+  web-build:
+    name: Web build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install + typecheck + build
+        run: |
+          npm ci || npm install
+          npm run typecheck
+          npm run build

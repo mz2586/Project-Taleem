@@ -1,0 +1,12 @@
+{
+  "name": "Taleem",
+  "short_name": "Taleem",
+  "description": "A real school for every child.",
+  "lang": "ur",
+  "dir": "rtl",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FAFAF7",
+  "theme_color": "#0E7C5A",
+  "icons": []
+}

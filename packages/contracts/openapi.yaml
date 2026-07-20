@@ -1,0 +1,144 @@
+openapi: 3.1.0
+info:
+  title: Project Taleem — Core API
+  version: 0.1.0
+  description: >-
+    M1 walking skeleton. Contract-first (docs/10-api-design.md). Governance-safe endpoints only —
+    no enrolment, child accounts, payments, production AI, or safeguarding workflows.
+  license:
+    name: MIT
+servers:
+  - url: http://localhost:8000
+    description: Local
+tags:
+  - name: health
+  - name: observability
+  - name: sync
+  - name: skeleton
+paths:
+  /health:
+    get:
+      tags: [health]
+      summary: Liveness
+      responses:
+        "200":
+          description: Service is live
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status: { type: string, example: ok }
+                  version: { type: string }
+  /health/ready:
+    get:
+      tags: [health]
+      summary: Readiness (dependency probes)
+      responses:
+        "200": { description: Ready }
+        "503": { description: Degraded }
+  /metrics:
+    get:
+      tags: [observability]
+      summary: Prometheus metrics exposition
+      responses:
+        "200":
+          description: Metrics
+          content:
+            text/plain:
+              schema: { type: string }
+  /v1/sync/batch:
+    post:
+      tags: [sync]
+      summary: Offline sync batch (idempotent, synthetic data only)
+      description: >-
+        Applies client-generated deltas with the remediated conflict policy (docs/33 §6): idempotent
+        on clientEventId, append-only by union, monotonic progress, server-version ordering (no
+        client wall-clock).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BatchIn"
+      responses:
+        "200":
+          description: Applied
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BatchResult"
+        "422":
+          description: Validation / unknown delta type
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/skeleton/protected:
+    get:
+      tags: [skeleton]
+      summary: AuthN(JWT) + AuthZ(PDP deny-by-default) seam demo
+      security:
+        - bearerAuth: []
+      responses:
+        "200": { description: Allowed }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (deny-by-default)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    DeltaIn:
+      type: object
+      required: [clientEventId, type, entityKey]
+      properties:
+        clientEventId: { type: string, maxLength: 128 }
+        type:
+          type: string
+          enum: [progress.updated, lesson.completed, attempt.submitted, preference.set]
+        entityKey: { type: string, maxLength: 256 }
+        payload: { type: object, additionalProperties: true }
+        clientSeq: { type: integer, default: 0 }
+    BatchIn:
+      type: object
+      properties:
+        cursor: { type: integer, default: 0 }
+        deltas:
+          type: array
+          maxItems: 200
+          items: { $ref: "#/components/schemas/DeltaIn" }
+    BatchResult:
+      type: object
+      properties:
+        cursor: { type: integer }
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              clientEventId: { type: string }
+              status:
+                type: string
+                enum: [applied, duplicate, ignored, conflict]
+              version: { type: integer }
+    Problem:
+      type: object
+      description: RFC 9457 Problem Details
+      properties:
+        type: { type: string }
+        title: { type: string }
+        status: { type: integer }
+        code: { type: string }
+        detail: { type: string }
+        instance: { type: string }
+        traceId: { type: string }

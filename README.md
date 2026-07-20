@@ -157,6 +157,12 @@ Start here:
 - [RISK_REMEDIATION_PLAN.md](RISK_REMEDIATION_PLAN.md) — Phase-1.5 remediation + Phase-2 exit gate
 - [FINAL_RECOMMENDATIONS.md](FINAL_RECOMMENDATIONS.md) — Production Readiness Score + go/no-go
 
+### Phase 1.5 parallel tracks (NO-GO accepted; three tracks run concurrently)
+
+- **Track A** — [FOUNDER_DECISIONS.md](FOUNDER_DECISIONS.md) — 17 decisions needing human approval
+- **Track B** — [EXTERNAL_VALIDATION_CHECKLIST.md](EXTERNAL_VALIDATION_CHECKLIST.md) — 9 independent reviews
+- **Track C** — [ENGINEERING.md](ENGINEERING.md) + [ENGINEERING_READINESS_SCORE.md](ENGINEERING_READINESS_SCORE.md) — M1 walking skeleton (`services/`, `apps/`, `packages/`, `infra/`)
+
 ---
 
 ## Technology at a glance

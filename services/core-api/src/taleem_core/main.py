@@ -1,0 +1,168 @@
+"""FastAPI application (ASGI adapter / composition root).
+
+This is the *edge* adapter. All business logic lives in the pure `contexts`/`platform` layers,
+which are unit-tested without FastAPI. Running this module requires the runtime deps in
+pyproject.toml (installed by CI / Docker).
+
+Endpoints (M1 walking skeleton — governance-safe):
+  GET  /health          liveness
+  GET  /health/ready    readiness (dependency probes)
+  GET  /metrics         Prometheus exposition
+  POST /v1/sync/batch   offline sync engine prototype (synthetic data only)
+  GET  /v1/skeleton/protected   demo of AuthN(JWT) + AuthZ(PDP) seams
+"""
+
+from __future__ import annotations
+
+import time
+from typing import Any
+
+from fastapi import Depends, FastAPI, Header, Request
+from fastapi.responses import JSONResponse, PlainTextResponse
+from pydantic import BaseModel, Field
+
+from . import __version__
+from .auth import pdp
+from .auth.jwt_verifier import Claims, verify_hs256
+from .contexts.health.service import Check, HealthService
+from .contexts.sync.domain import DeltaType, SyncDelta, SyncEngine, SyncStore
+from .platform import correlation
+from .platform.config import Settings, load_settings
+from .platform.errors import Problem, forbidden, unauthorized
+from .platform.logging import StructuredLogger
+from .platform.metrics import registry
+from .platform.plugins import Module
+from .platform.plugins import registry as module_registry
+
+
+def create_app(settings: Settings | None = None) -> FastAPI:
+    settings = settings or load_settings()
+    log = StructuredLogger(settings.service_name, settings.log_level)
+
+    app = FastAPI(
+        title="Project Taleem — Core API",
+        version=__version__,
+        description="M1 walking skeleton. Governance-safe scaffolding only — no child data.",
+        openapi_tags=[
+            {"name": "health", "description": "Liveness & readiness"},
+            {"name": "observability", "description": "Metrics"},
+            {"name": "sync", "description": "Offline sync engine prototype (synthetic data)"},
+            {"name": "skeleton", "description": "AuthN/AuthZ seam demo"},
+        ],
+    )
+
+    # Shared, process-local state for the walking skeleton (synthetic only).
+    sync_store = SyncStore()
+    health = HealthService(
+        __version__,
+        checks=[Check("self", lambda: True)],  # real dep probes added as contexts land
+    )
+
+    # Register the modules this deployable composes (plugin architecture).
+    reg = module_registry()
+    for module in (
+        Module("health", "/health", lambda: True),
+        Module("sync", "/v1/sync", lambda: True, events_published=("ProgressSynced",)),
+    ):
+        try:
+            reg.register(module)
+        except ValueError:
+            pass  # idempotent across reloads/tests
+
+    @app.middleware("http")
+    async def observability(request: Request, call_next: Any) -> Any:
+        cid = correlation.ensure_correlation_id(request.headers.get("x-correlation-id"))
+        start = time.perf_counter()
+        registry().inc("taleem_requests_total", method=request.method, path=request.url.path)
+        try:
+            response = await call_next(request)
+        except Problem as problem:  # domain errors -> RFC9457
+            response = JSONResponse(
+                status_code=problem.status, content=problem.to_dict(str(request.url.path))
+            )
+        duration_ms = (time.perf_counter() - start) * 1000.0
+        registry().observe("taleem_request_duration_ms", duration_ms, path=request.url.path)
+        response.headers["x-correlation-id"] = cid
+        log.info(
+            "request",
+            method=request.method,
+            path=request.url.path,
+            status=response.status_code,
+            duration_ms=round(duration_ms, 2),
+        )
+        return response
+
+    @app.exception_handler(Problem)
+    async def problem_handler(request: Request, exc: Problem) -> JSONResponse:
+        return JSONResponse(status_code=exc.status, content=exc.to_dict(str(request.url.path)))
+
+    # ---- health ----
+    @app.get("/health", tags=["health"])
+    def liveness() -> dict[str, object]:
+        return health.live()
+
+    @app.get("/health/ready", tags=["health"])
+    def readiness() -> JSONResponse:
+        ok, body = health.ready()
+        return JSONResponse(status_code=200 if ok else 503, content=body)
+
+    # ---- observability ----
+    @app.get("/metrics", tags=["observability"], response_class=PlainTextResponse)
+    def metrics() -> str:
+        return registry().render()
+
+    # ---- sync engine prototype ----
+    class DeltaIn(BaseModel):
+        clientEventId: str = Field(min_length=1, max_length=128)
+        type: str
+        entityKey: str = Field(min_length=1, max_length=256)
+        payload: dict[str, Any] = Field(default_factory=dict)
+        clientSeq: int = 0
+
+    class BatchIn(BaseModel):
+        cursor: int = 0
+        deltas: list[DeltaIn] = Field(default_factory=list, max_length=200)
+
+    @app.post("/v1/sync/batch", tags=["sync"])
+    def sync_batch(batch: BatchIn) -> dict[str, Any]:
+        engine = SyncEngine(sync_store)
+        try:
+            deltas = [
+                SyncDelta(
+                    client_event_id=d.clientEventId,
+                    type=DeltaType(d.type),
+                    entity_key=d.entityKey,
+                    payload=d.payload,
+                    client_seq=d.clientSeq,
+                )
+                for d in batch.deltas
+            ]
+        except ValueError as exc:
+            raise Problem(422, "UNKNOWN_DELTA_TYPE", "Unknown delta type", str(exc)) from exc
+        results, cursor = engine.apply_batch(deltas)
+        return {
+            "cursor": cursor,
+            "results": [
+                {"clientEventId": r.client_event_id, "status": r.status.value, "version": r.server_version}
+                for r in results
+            ],
+        }
+
+    # ---- AuthN/AuthZ seam demo ----
+    def require_claims(authorization: str = Header(default="")) -> Claims:
+        if not authorization.lower().startswith("bearer "):
+            raise unauthorized("Missing bearer token")
+        token = authorization.split(" ", 1)[1]
+        return verify_hs256(token, settings.jwt_dev_secret)
+
+    @app.get("/v1/skeleton/protected", tags=["skeleton"])
+    def protected(claims: Claims = Depends(require_claims)) -> dict[str, Any]:
+        decision = pdp.authorize(claims.role, "read", "skeleton.protected")
+        if not decision.allow:
+            raise forbidden("Not permitted")
+        return {"ok": True, "role": claims.role, "policy": decision.reason}
+
+    return app
+
+
+app = create_app()

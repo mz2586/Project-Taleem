@@ -1,0 +1,76 @@
+/*
+ * Project Taleem — design tokens (CSS custom properties).
+ * Values from docs/04-design/59-design-token-values.md (computed & WCAG-verified).
+ * Two tiers: primitives -> semantic aliases. Components use SEMANTIC tokens only.
+ * Light + high-contrast direction; RTL-aware via logical properties.
+ */
+
+:root {
+  /* --- primitive colours (seed / 600 anchors) --- */
+  --color-green-600: #0E7C5A; /* Ilm Green */
+  --color-ink-900: #111827;
+  --color-paper-50: #FAFAF7;
+  --color-sky-600: #2563EB;
+  --color-sun-500: #F59E0B;
+  --color-alert-600: #DC2626;
+  --color-white: #FFFFFF;
+
+  /* --- semantic aliases (verified WCAG ratios in doc 59 §1) --- */
+  --color-bg-canvas: var(--color-paper-50);
+  --color-text-primary: var(--color-ink-900);      /* 16.98:1 on canvas — AAA */
+  --color-action-primary: var(--color-sky-600);    /* 4.94:1 on canvas — AA   */
+  --color-on-action: var(--color-white);           /* 5.17:1 on sky — AA      */
+  --color-brand: var(--color-green-600);           /* 4.96:1 on canvas — AA   */
+  --color-on-brand: var(--color-white);            /* 5.19:1 on green — AA    */
+  --color-danger: var(--color-alert-600);          /* 4.62:1 on canvas — AA   */
+  --color-on-danger: var(--color-white);           /* 4.83:1 on alert — AA    */
+  --color-focus-ring: var(--color-sky-600);        /* 4.94:1 — >=3:1 non-text */
+
+  /* Reward: Sun is 2.05:1 on paper -> NEVER text/essential UI on paper.
+     Use only as a fill with INK text (8.27:1). Enforced by the doc-59 CI validator. */
+  --color-reward-fill: var(--color-sun-500);
+  --color-on-reward: var(--color-ink-900);
+
+  /* --- typography (Urdu-first; 18px Urdu floor, doc 59 §3) --- */
+  --font-urdu: "Noto Nastaliq Urdu", "Noto Sans Arabic", serif;
+  --font-latin: "Inter", system-ui, sans-serif;
+  --font-size-body-min: 16px;
+  --font-size-body-min-urdu: 18px;
+
+  /* --- spacing (4px base), radius, target size --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --radius-md: 10px;
+  --size-touch-min: 44px;
+
+  /* --- motion (respects reduced-motion) --- */
+  --motion-fast: 120ms;
+  --motion-base: 200ms;
+}
+
+/* High-contrast direction (doc 59 §4): mid-tones darken toward >=7:1. */
+@media (prefers-contrast: more) {
+  :root {
+    --color-action-primary: #1E40AF;
+    --color-brand: #065F46;
+    --color-danger: #991B1B;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-base: 0ms;
+  }
+}
+
+/* RTL is the default direction (Urdu-first); logical properties do the mirroring. */
+html[dir="rtl"] {
+  --font-body: var(--font-urdu);
+}
+html[dir="ltr"] {
+  --font-body: var(--font-latin);
+}
