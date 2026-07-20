@@ -180,6 +180,15 @@ Start here:
 
 > **Finding:** the National Curriculum of Pakistan standards (SLOs, Scheme of Studies, assessment frameworks) are **public and free to align to** — **no commercial publisher partnership is required**; an NCC/MoFEPT MoU is a desirable accelerator for verbatim reuse.
 
+### Curriculum Studio (Phase 3 — authoring platform)
+
+The AI-native curriculum authoring/review/versioning/publishing platform (governance-safe: no child data,
+no production content). **12 standards** in [docs/10-curriculum-studio/](docs/10-curriculum-studio/)
+(architecture, data model, lesson/assessment/AI-teaching/QA/accessibility/translation standards, style
+guide, authoring guide + workflow, roadmap). Implementation: `services/core-api` context
+`curriculum_studio` (pure-stdlib domain + FastAPI adapter, provenance gate enforcing *original content
+only*) + authoring UI at `apps/web/app/studio/` + [OpenAPI contract](packages/contracts/curriculum-studio.openapi.yaml).
+
 ---
 
 ## Technology at a glance

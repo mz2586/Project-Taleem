@@ -1,0 +1,237 @@
+openapi: 3.1.0
+info:
+  title: Project Taleem — Curriculum Studio API
+  version: 0.1.0
+  description: >-
+    Curriculum Studio authoring platform (Phase 3). Governance-safe: internal authoring/review/
+    versioning/publishing of original, NCP-aligned curriculum. No child data, no production content.
+  license:
+    name: MIT
+    identifier: MIT
+servers:
+  - url: https://api.taleem.dev
+    description: Reference environment (placeholder; concrete host per FOUNDER_DECISIONS FD-02)
+tags:
+  - name: curriculum-studio
+    description: Lesson authoring lifecycle (draft → review → publish → version).
+paths:
+  /v1/studio/hierarchy:
+    get:
+      tags: [curriculum-studio]
+      operationId: getHierarchy
+      summary: NCP education-system hierarchy (grades × subjects)
+      security: []
+      responses:
+        "200": { description: Hierarchy }
+        "429": { description: Rate limited, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/studio/lessons:
+    get:
+      tags: [curriculum-studio]
+      operationId: listLessons
+      summary: List lessons
+      security: []
+      responses:
+        "200": { description: Lessons }
+        "429": { description: Rate limited, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+    post:
+      tags: [curriculum-studio]
+      operationId: createLesson
+      summary: Create a draft lesson
+      security: []
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/LessonDraftIn" } } }
+      responses:
+        "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } } }
+        "422": { description: Rule violation, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/studio/lessons/{lessonId}:
+    get:
+      tags: [curriculum-studio]
+      operationId: getLesson
+      summary: Read a lesson
+      security: []
+      parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Lesson, content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/studio/lessons/{lessonId}:validate:
+    post:
+      tags: [curriculum-studio]
+      operationId: validateLesson
+      summary: Run structural + provenance + automated quality-gate pre-checks
+      security: []
+      parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Validation result, content: { application/json: { schema: { $ref: "#/components/schemas/ValidationResult" } } } }
+        "422": { description: Rule violation, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/studio/lessons/{lessonId}:submit:
+    post:
+      tags: [curriculum-studio]
+      operationId: submitLesson
+      summary: Submit for review (requires automated validation to pass)
+      security: []
+      parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/ActorIn" } } } }
+      responses:
+        "200": { description: Submitted, content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } } }
+        "422": { description: Rule violation, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/studio/lessons/{lessonId}:review:
+    post:
+      tags: [curriculum-studio]
+      operationId: reviewLesson
+      summary: Record a review decision (approve / request_changes) — no self-approval
+      security: []
+      parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/ReviewIn" } } } }
+      responses:
+        "200": { description: Reviewed, content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } } }
+        "422": { description: Rule violation, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/studio/lessons/{lessonId}:publish:
+    post:
+      tags: [curriculum-studio]
+      operationId: publishLesson
+      summary: Publish (approved + all 9 gates green) → new immutable version
+      security: []
+      parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/PublishIn" } } } }
+      responses:
+        "200": { description: Published, content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } } }
+        "422": { description: Rule violation, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/studio/lessons/{lessonId}:rollback:
+    post:
+      tags: [curriculum-studio]
+      operationId: rollbackLesson
+      summary: Roll back to a prior version
+      security: []
+      parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/RollbackIn" } } } }
+      responses:
+        "200": { description: Rolled back, content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } } }
+        "422": { description: Rule violation, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/studio/lessons/{lessonId}/versions:
+    get:
+      tags: [curriculum-studio]
+      operationId: getVersions
+      summary: Version history + content hashes
+      security: []
+      parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Versions }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+components:
+  schemas:
+    LessonView:
+      type: object
+      properties:
+        lesson_id: { type: string }
+        title: { type: object, additionalProperties: { type: string } }
+        grade: { type: string }
+        subject: { type: string }
+        state: { type: string, enum: [draft, in_review, subject_expert, educational_qa, accessibility, language, ai_safety, approved, published, archived] }
+        version: { type: integer }
+        learning_outcomes: { type: array, items: { type: string } }
+        gates:
+          type: array
+          items:
+            type: object
+            properties:
+              gate: { type: string }
+              passed: { type: boolean }
+              mode: { type: string, enum: [auto, human] }
+    ProvenanceIn:
+      type: object
+      properties:
+        derivation: { type: string, enum: [authored-original, ingested], default: authored-original }
+        source: { type: string, default: authored }
+        license: { type: string, default: authored-original }
+        aligned_slo_codes: { type: array, items: { type: string } }
+        permission_ref: { type: ["string", "null"] }
+    AITeachingIn:
+      type: object
+      properties:
+        learning_goals: { type: array, items: { type: string } }
+        teaching_strategy: { type: string }
+        questioning_strategy: { type: string }
+        hint_policy: { type: string }
+        escalation_rules: { type: array, items: { type: string } }
+        forbidden_behaviours: { type: array, items: { type: string } }
+        misconception_detectors: { type: array, items: { type: string } }
+    LessonDraftIn:
+      type: object
+      required: [lesson_id, title_ur, title_en, grade, subject]
+      properties:
+        lesson_id: { type: string, maxLength: 128 }
+        title_ur: { type: string }
+        title_en: { type: string }
+        grade: { type: string }
+        subject: { type: string }
+        learning_outcomes: { type: array, items: { type: string } }
+        provenance: { $ref: "#/components/schemas/ProvenanceIn" }
+        ai_teaching: { $ref: "#/components/schemas/AITeachingIn" }
+    ActorIn:
+      type: object
+      required: [actor_role]
+      properties:
+        actor_role: { type: string }
+        note: { type: string }
+    ReviewIn:
+      type: object
+      required: [action, actor_role]
+      properties:
+        action: { type: string, enum: [approve, request_changes] }
+        actor_role: { type: string }
+        note: { type: string }
+    PublishIn:
+      type: object
+      required: [actor_role]
+      properties:
+        actor_role: { type: string }
+        change_summary: { type: string }
+    RollbackIn:
+      type: object
+      required: [target_version, actor_role]
+      properties:
+        target_version: { type: integer }
+        actor_role: { type: string }
+        note: { type: string }
+    ValidationResult:
+      type: object
+      properties:
+        ok: { type: boolean }
+        structural:
+          type: array
+          items:
+            type: object
+            properties:
+              severity: { type: string, enum: [blocker, major, minor] }
+              message: { type: string }
+              field: { type: string }
+        gates:
+          type: array
+          items:
+            type: object
+            properties:
+              gate: { type: string }
+              passed: { type: boolean }
+              findings: { type: array, items: { type: string } }
+    Problem:
+      type: object
+      description: RFC 9457 Problem Details
+      properties:
+        type: { type: string }
+        title: { type: string }
+        status: { type: integer }
+        code: { type: string }
+        detail: { type: string }
+        instance: { type: string }
+        traceId: { type: string }

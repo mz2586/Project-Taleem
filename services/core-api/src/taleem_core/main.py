@@ -25,6 +25,12 @@ from pydantic import BaseModel, ConfigDict, Field
 from . import __version__
 from .auth import pdp
 from .auth.jwt_verifier import Claims, verify_hs256
+from .contexts.curriculum_studio.adapters.api import build_studio_router
+from .contexts.curriculum_studio.application.repository import (
+    InMemoryLessonRepository,
+    RecordingPublishPort,
+)
+from .contexts.curriculum_studio.application.service import CurriculumStudioService
 from .contexts.health.service import Check, HealthService
 from .contexts.sync.domain import DeltaType, SyncDelta, SyncEngine, SyncStore
 from .platform import correlation
@@ -66,6 +72,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             {"name": "observability", "description": "Metrics"},
             {"name": "sync", "description": "Offline sync engine prototype (synthetic data)"},
             {"name": "skeleton", "description": "AuthN/AuthZ seam demo"},
+            {
+                "name": "curriculum-studio",
+                "description": "Curriculum authoring platform (no child data)",
+            },
         ],
     )
 
@@ -76,11 +86,19 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         checks=[Check("self", lambda: True)],  # real dep probes added as contexts land
     )
 
+    # Curriculum Studio context (governance-safe; in-memory repo — no production content).
+    studio_service = CurriculumStudioService(InMemoryLessonRepository(), RecordingPublishPort())
+    app.state.studio_service = studio_service
+    app.include_router(build_studio_router(studio_service))
+
     # Register the modules this deployable composes (plugin architecture).
     reg = module_registry()
     for module in (
         Module("health", "/health", lambda: True),
         Module("sync", "/v1/sync", lambda: True, events_published=("ProgressSynced",)),
+        Module(
+            "curriculum_studio", "/v1/studio", lambda: True, events_published=("LessonPublished",)
+        ),
     ):
         # Idempotent across reloads/tests: re-registering the same module is a no-op.
         with contextlib.suppress(ValueError):
