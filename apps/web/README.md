@@ -4,11 +4,23 @@ Project Taleem's frontend, **M1 scaffold**. Urdu-first, RTL, offline-capable PWA
 Governance-safe: demonstrates the design system + component contract + offline shell only. No child data,
 no product features.
 
+## Student Portal (Phase 5 — governance-safe scaffold)
+
+`app/student/*` implements the core learner journey (Today → Session → Profile/Progress) over the real
+`/v1/learning` API, per `docs/12-student-experience/`. **Governance-safe:** a synthetic pseudonymous
+learner + a dev-stub bearer token (`NEXT_PUBLIC_DEV_STUDENT_TOKEN`); **no real child identity, no PII,
+no production deployment.** Child-safe production auth, safeguarding integration, and the secondary
+screens (which need new backend APIs) are **blocked by the Phase-1.5 governance gate**. Set
+`NEXT_PUBLIC_API_URL` + `NEXT_PUBLIC_DEV_STUDENT_TOKEN` for local dev against a running core-api.
+
 ## What's here
 
 ```text
 apps/web/
 ├── app/                    Next.js App Router (layout.tsx, page.tsx) — RTL/Urdu-first
+│   └── student/            student portal (today, session, profile, progress, subjects, homework)
+├── components/student/     student UI (AppShell, BottomNav, ReadAloud, ui primitives)
+├── lib/student/            learning API client + types + dev auth config
 ├── design-system/
 │   ├── tokens.css          verified tokens from docs/59 (computed WCAG ratios; Sun constraint; 18px Urdu floor)
 │   ├── Button.tsx          token-only primitive; ≥44px; icon+text
