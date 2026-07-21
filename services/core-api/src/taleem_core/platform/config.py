@@ -59,6 +59,9 @@ class Settings:
     jwt_dev_secret: str = field(
         default_factory=lambda: _get("TALEEM_JWT_DEV_SECRET", "dev-only-not-secret")
     )
+    # Database URL for the SQL persistence adapters. Empty => in-memory SQLite (governance-safe
+    # local/dev default). Production MUST set a real PostgreSQL URL (enforced in load_settings).
+    database_url: str = field(default_factory=lambda: _get("TALEEM_DATABASE_URL", ""))
     request_timeout_ms: int = field(
         default_factory=lambda: _get_int("TALEEM_REQUEST_TIMEOUT_MS", 30000)
     )
@@ -71,6 +74,32 @@ class Settings:
         return frozenset(f.strip() for f in self.enabled_flags_csv.split(",") if f.strip())
 
 
+DEFAULT_JWT_DEV_SECRET = "dev-only-not-secret"  # noqa: S105 (sentinel default, rejected in prod)
+
+
+class InsecureConfigurationError(RuntimeError):
+    """Raised when production would boot with an insecure default (fail closed)."""
+
+
+def _assert_production_safe(settings: Settings) -> None:
+    """Fail closed on insecure production defaults (CTO H8)."""
+    if not settings.is_production:
+        return
+    problems: list[str] = []
+    if settings.jwt_dev_secret == DEFAULT_JWT_DEV_SECRET or not settings.jwt_dev_secret.strip():
+        problems.append("TALEEM_JWT_DEV_SECRET is the built-in default (forgeable tokens)")
+    if not settings.database_url.strip():
+        problems.append(
+            "TALEEM_DATABASE_URL is unset (production must use PostgreSQL, not in-memory)"
+        )
+    if problems:
+        raise InsecureConfigurationError(
+            "refusing to start in production with insecure defaults: " + "; ".join(problems)
+        )
+
+
 def load_settings() -> Settings:
-    """Build settings from the current environment."""
-    return Settings()
+    """Build settings from the environment (fails closed on insecure production defaults)."""
+    settings = Settings()
+    _assert_production_safe(settings)
+    return settings

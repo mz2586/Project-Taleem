@@ -15,6 +15,7 @@ from ...curriculum_studio.adapters.persistence import unit_of_work as cs_unit_of
 from ...curriculum_studio.domain.content import Locale
 from ...curriculum_studio.domain.lesson import Lesson
 from ..domain.curriculum_view import ItemView, LessonView
+from ..domain.decision import CurriculumGraph, ObjectiveInfo
 
 
 def _text(localized: object, prefer: str = "en") -> str:
@@ -51,6 +52,23 @@ class CurriculumStudioReadModel:
                 ):
                     return self._project(lesson, objective_code)
         return None
+
+    def published_graph(self) -> CurriculumGraph:
+        """Build the decision-engine curriculum graph from currently-published lessons.
+
+        Read fresh each call so the mounted learning API reflects newly published content (live
+        prerequisite-DAG import is a Phase-5 item; for now objectives are ordered, prereq-free).
+        """
+        infos: list[ObjectiveInfo] = []
+        seen: set[str] = set()
+        with cs_unit_of_work(self._sf) as uow:
+            lessons = [x for x in uow.lessons.all() if x.workflow.state.value == "published"]
+        for seq, lesson in enumerate(lessons):
+            for code in lesson.learning_outcomes:
+                if code not in seen:
+                    seen.add(code)
+                    infos.append(ObjectiveInfo(code, lesson.lesson_id, (), seq))
+        return CurriculumGraph(objectives=tuple(infos))
 
     def _project(self, lesson: Lesson, objective_code: str) -> LessonView:
         steps: list[str] = []

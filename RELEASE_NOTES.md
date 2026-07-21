@@ -6,6 +6,39 @@ this repository has no remote and the local Git history is authoritative.
 
 ---
 
+## 0.4.2 — Phase 4.2: Wire & Harden (2026-07-21)
+
+Tag: `phase-4.2`
+
+Remediation of the CTO readiness review — the foundation is now production-shaped, not just
+green-in-isolation.
+
+### Highlights
+
+- **Security closed.** Every Curriculum Studio and Learning route now requires a verified bearer
+  token; the actor's role comes from the token, not the request body. Learner data is IDOR-guarded,
+  and production refuses to boot with the default JWT secret or no database.
+- **Actually wired.** The Learning API is mounted in the running app, and the app persists to
+  SQLAlchemy (with a per-request Unit of Work) instead of the old in-memory store.
+- **Migrations & CI.** A learning-schema migration was added, both schemas are verified reversible on
+  PostgreSQL, and CI now runs migrations + PostgreSQL-gated tests, lints every OpenAPI contract, and
+  guards ORM↔migration schema parity.
+- **Defects fixed.** The `RECURRED` misconception dead-state, the audit-immutability trigger on the
+  wrong partition, and the dormant learning optimistic lock are all fixed. Baseline runtime
+  observability (domain metrics + correlation) was added to the contexts.
+
+### Quality
+
+- 140 tests (SQLite + PostgreSQL-gated); 97% coverage; ruff/black/mypy(strict), redocly, migrations
+  all green. See `PHASE_4_2_REPORT.md` and `CTO_REVIEW.md`.
+
+### Scope
+
+No new product features, no portal work, no architecture redesign. MEDIUM/LOW review items not
+required by a BLOCKER/HIGH fix remain tracked for a later pass.
+
+---
+
 ## 0.4.1 — Phase 4.1: First end-to-end Learning vertical slice (2026-07-21)
 
 Tag: `phase-4.1`

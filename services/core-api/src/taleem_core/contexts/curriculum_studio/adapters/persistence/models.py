@@ -15,6 +15,8 @@ from datetime import datetime
 from typing import Any
 
 from sqlalchemy import (
+    ARRAY,
+    JSON,
     BigInteger,
     Boolean,
     CheckConstraint,
@@ -196,6 +198,11 @@ class LessonRow(Base):
     content_hash: Mapped[str] = mapped_column(Text, nullable=False, default="")
     current_version_no: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     lock_version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    # `tags` mirrors the migration's `text[]` (ARRAY on PostgreSQL, JSON on SQLite) so the ORM and
+    # the migration agree (CTO H10) and the FTS weight-'B' tag signal is actually populated.
+    tags: Mapped[list[str]] = mapped_column(
+        ARRAY(Text()).with_variant(JSON(), "sqlite"), nullable=False, default=list
+    )
     body: Mapped[dict[str, Any]] = mapped_column(_JSON, nullable=False)
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()

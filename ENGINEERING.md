@@ -31,9 +31,9 @@ taleem/
 ## Quickstart
 
 ```bash
-make install       # uv venv (Python 3.12) + deps
-make test          # pytest + coverage — 57 tests, 96% coverage (≥85% gate)
-make test-core     # zero-install smoke of framework/domain layers — 46 stdlib tests
+make install       # venv (Python 3.12) + deps
+make test          # pytest + coverage — 140 tests, ~96% coverage (≥85% gate)
+make test-pg       # migration reversibility + PostgreSQL-gated tests (needs CS_DATABASE_URL)
 make lint          # ruff + black --check + mypy (strict)
 make up            # local stack (Postgres + Redis + core-api) via Docker
 make help          # list all targets

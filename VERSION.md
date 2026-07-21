@@ -1,7 +1,7 @@
 # Version
 
-Current version: **0.4.1**
-Milestone: **phase-4.1** (First end-to-end Learning vertical slice)
+Current version: **0.4.2**
+Milestone: **phase-4.2** (Wire & Harden)
 Status: **pre-production / development** — governance-gated; no real child data.
 Date: 2026-07-21
 
@@ -23,6 +23,7 @@ version and is bumped independently of this project milestone version.
 
 | Version | Tag | Date | Milestone |
 | --- | --- | --- | --- |
+| 0.4.2 | `phase-4.2` | 2026-07-21 | Wire & Harden — CTO-review remediation (auth, wiring, migration, CI, defects) |
 | 0.4.1 | `phase-4.1` | 2026-07-21 | Learning persistence + Learning Intelligence design + end-to-end vertical slice |
 | 0.3.0 | — | 2026-07-20 | Phase 3 — Curriculum Studio authoring platform |
 | 0.2.0 | — | 2026-07-20 | Phase 1.5/2 — governance tracks + M1 walking skeleton + verification |

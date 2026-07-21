@@ -364,9 +364,11 @@ UPGRADE_STATEMENTS: tuple[str, ...] = (
     "CREATE TRIGGER trg_transition_immutable BEFORE UPDATE OR DELETE "
     "ON curriculum_studio.workflow_transition FOR EACH ROW "
     "EXECUTE FUNCTION curriculum_studio.cs_forbid_mutation()",
-    # audit_log is partitioned; attach the immutability trigger to the partition that receives rows.
+    # audit_log is partitioned; attach the immutability trigger to the PARTITIONED PARENT (PG13+),
+    # so it propagates to every current and future partition (CTO H11 — a leaf-only trigger left
+    # future monthly partitions mutable, defeating tamper-evidence).
     "CREATE TRIGGER trg_audit_immutable BEFORE UPDATE OR DELETE "
-    "ON curriculum_studio.audit_log_default FOR EACH ROW "
+    "ON curriculum_studio.audit_log FOR EACH ROW "
     "EXECUTE FUNCTION curriculum_studio.cs_forbid_mutation()",
     # ---------------------------------------------------------------- RLS (defence in depth, doc 09)
     "ALTER TABLE curriculum_studio.lesson ENABLE ROW LEVEL SECURITY",

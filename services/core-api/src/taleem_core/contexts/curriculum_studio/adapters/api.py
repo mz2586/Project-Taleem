@@ -6,11 +6,14 @@ resolve body types via module globals). Governance-safe: no child data.
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from typing import Any
 
 from fastapi import APIRouter, Depends
 from pydantic import BaseModel, Field
 
+from ....auth.dependencies import authorize
+from ....auth.jwt_verifier import Claims
 from ....platform.errors import Problem, not_found
 from ..application.service import CurriculumStudioService, StudioError
 from ..domain.ai_teaching import AITeachingObject
@@ -52,32 +55,28 @@ class LessonDraftIn(BaseModel):
 
 
 class SubmitIn(BaseModel):
-    actor_role: str
     note: str = ""
 
 
 class ReviewIn(BaseModel):
     action: str  # approve | request_changes
-    actor_role: str
     note: str = ""
 
 
 class PublishIn(BaseModel):
-    actor_role: str
     change_summary: str = ""
 
 
 class RollbackIn(BaseModel):
     target_version: int
-    actor_role: str
     note: str = ""
 
 
-def _draft_to_lesson(d: LessonDraftIn) -> Lesson:
+def _draft_to_lesson(d: LessonDraftIn, author_role: str) -> Lesson:
     return Lesson(
         lesson_id=d.lesson_id,
         title=LocalizedText(text={Locale.UR: d.title_ur, Locale.EN: d.title_en}),
-        metadata=Metadata(grade_key=d.grade, subject_key=d.subject),
+        metadata=Metadata(grade_key=d.grade, subject_key=d.subject, author_role=author_role),
         provenance=Provenance(
             derivation=Derivation(d.provenance.derivation),
             source=d.provenance.source,
@@ -115,11 +114,20 @@ def _lesson_view(lesson: Lesson) -> dict[str, Any]:
     }
 
 
-def build_studio_router(service: CurriculumStudioService) -> APIRouter:
-    router = APIRouter(prefix="/v1/studio", tags=["curriculum-studio"])
+RESOURCE = "curriculum.lesson"
 
-    def svc() -> CurriculumStudioService:
-        return service
+
+def build_studio_router(
+    service_provider: Callable[..., Any],  # FastAPI dependency (may be a generator) → service
+    claims_dependency: Callable[..., Claims],
+) -> APIRouter:
+    """Build the Curriculum Studio router.
+
+    ``service_provider`` is a FastAPI dependency yielding a request-scoped service (the composition
+    root binds it to a Unit of Work over the SQL persistence). ``claims_dependency`` verifies the
+    bearer token; the actor's role comes from the token (CTO B1), never the request body.
+    """
+    router = APIRouter(prefix="/v1/studio", tags=["curriculum-studio"])
 
     def _guard(fn: Any) -> Any:
         try:
@@ -130,7 +138,8 @@ def build_studio_router(service: CurriculumStudioService) -> APIRouter:
             ) from exc
 
     @router.get("/hierarchy")
-    def hierarchy() -> dict[str, Any]:
+    def hierarchy(claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
+        authorize(claims, "read", RESOURCE)
         return {
             "system": "PK-NCP",
             "grades": GRADE_KEYS,
@@ -138,22 +147,41 @@ def build_studio_router(service: CurriculumStudioService) -> APIRouter:
         }
 
     @router.get("/lessons")
-    def list_lessons(s: CurriculumStudioService = Depends(svc)) -> dict[str, Any]:
+    def list_lessons(
+        claims: Claims = Depends(claims_dependency),
+        s: CurriculumStudioService = Depends(service_provider),
+    ) -> dict[str, Any]:
+        authorize(claims, "read", RESOURCE)
         return {"lessons": [_lesson_view(x) for x in s.list()]}
 
     @router.post("/lessons", status_code=201)
-    def create(body: LessonDraftIn, s: CurriculumStudioService = Depends(svc)) -> dict[str, Any]:
-        return _lesson_view(_guard(lambda: s.create(_draft_to_lesson(body))))
+    def create(
+        body: LessonDraftIn,
+        claims: Claims = Depends(claims_dependency),
+        s: CurriculumStudioService = Depends(service_provider),
+    ) -> dict[str, Any]:
+        authorize(claims, "author", RESOURCE)
+        return _lesson_view(_guard(lambda: s.create(_draft_to_lesson(body, claims.role))))
 
     @router.get("/lessons/{lesson_id}")
-    def get(lesson_id: str, s: CurriculumStudioService = Depends(svc)) -> dict[str, Any]:
+    def get(
+        lesson_id: str,
+        claims: Claims = Depends(claims_dependency),
+        s: CurriculumStudioService = Depends(service_provider),
+    ) -> dict[str, Any]:
+        authorize(claims, "read", RESOURCE)
         lesson = s.find(lesson_id)
         if lesson is None:
             raise not_found(f"lesson {lesson_id}")
         return _lesson_view(lesson)
 
     @router.post("/lessons/{lesson_id}:validate")
-    def validate(lesson_id: str, s: CurriculumStudioService = Depends(svc)) -> dict[str, Any]:
+    def validate(
+        lesson_id: str,
+        claims: Claims = Depends(claims_dependency),
+        s: CurriculumStudioService = Depends(service_provider),
+    ) -> dict[str, Any]:
+        authorize(claims, "read", RESOURCE)
         result = _guard(lambda: s.validate(lesson_id))
         return {
             "ok": result.ok,
@@ -173,38 +201,57 @@ def build_studio_router(service: CurriculumStudioService) -> APIRouter:
 
     @router.post("/lessons/{lesson_id}:submit")
     def submit(
-        lesson_id: str, body: SubmitIn, s: CurriculumStudioService = Depends(svc)
+        lesson_id: str,
+        body: SubmitIn,
+        claims: Claims = Depends(claims_dependency),
+        s: CurriculumStudioService = Depends(service_provider),
     ) -> dict[str, Any]:
-        return _lesson_view(_guard(lambda: s.submit(lesson_id, body.actor_role, body.note)))
+        authorize(claims, "author", RESOURCE)
+        return _lesson_view(_guard(lambda: s.submit(lesson_id, claims.role, body.note)))
 
     @router.post("/lessons/{lesson_id}:review")
     def review(
-        lesson_id: str, body: ReviewIn, s: CurriculumStudioService = Depends(svc)
+        lesson_id: str,
+        body: ReviewIn,
+        claims: Claims = Depends(claims_dependency),
+        s: CurriculumStudioService = Depends(service_provider),
     ) -> dict[str, Any]:
+        authorize(claims, "review", RESOURCE)
         try:
             action = ReviewAction(body.action)
         except ValueError as exc:
             raise Problem(422, "BAD_ACTION", "Unknown review action", str(exc)) from exc
-        return _lesson_view(_guard(lambda: s.review(lesson_id, action, body.actor_role, body.note)))
+        return _lesson_view(_guard(lambda: s.review(lesson_id, action, claims.role, body.note)))
 
     @router.post("/lessons/{lesson_id}:publish")
     def publish(
-        lesson_id: str, body: PublishIn, s: CurriculumStudioService = Depends(svc)
+        lesson_id: str,
+        body: PublishIn,
+        claims: Claims = Depends(claims_dependency),
+        s: CurriculumStudioService = Depends(service_provider),
     ) -> dict[str, Any]:
-        return _lesson_view(
-            _guard(lambda: s.publish(lesson_id, body.actor_role, body.change_summary))
-        )
+        authorize(claims, "publish", RESOURCE)
+        return _lesson_view(_guard(lambda: s.publish(lesson_id, claims.role, body.change_summary)))
 
     @router.post("/lessons/{lesson_id}:rollback")
     def rollback(
-        lesson_id: str, body: RollbackIn, s: CurriculumStudioService = Depends(svc)
+        lesson_id: str,
+        body: RollbackIn,
+        claims: Claims = Depends(claims_dependency),
+        s: CurriculumStudioService = Depends(service_provider),
     ) -> dict[str, Any]:
+        authorize(claims, "rollback", RESOURCE)
         return _lesson_view(
-            _guard(lambda: s.rollback(lesson_id, body.target_version, body.actor_role, body.note))
+            _guard(lambda: s.rollback(lesson_id, body.target_version, claims.role, body.note))
         )
 
     @router.get("/lessons/{lesson_id}/versions")
-    def versions(lesson_id: str, s: CurriculumStudioService = Depends(svc)) -> dict[str, Any]:
+    def versions(
+        lesson_id: str,
+        claims: Claims = Depends(claims_dependency),
+        s: CurriculumStudioService = Depends(service_provider),
+    ) -> dict[str, Any]:
+        authorize(claims, "read", RESOURCE)
         lesson = s.find(lesson_id)
         if lesson is None:
             raise not_found(f"lesson {lesson_id}")

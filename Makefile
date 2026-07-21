@@ -13,9 +13,14 @@ help: ## List targets
 test: ## Run the full test suite with coverage (pytest, in the venv)
 	cd $(CORE) && . .venv/bin/activate && pytest --cov=taleem_core --cov-report=term-missing --cov-fail-under=85
 
-.PHONY: test-core
-test-core: ## Smoke-run the framework/domain tests with stdlib only (no installs; excludes integration)
-	cd $(CORE) && PYTHONPATH=src python3 -m unittest discover -s tests -p 'test_[!i]*.py'
+.PHONY: test-pg
+test-pg: ## Run migrations + PostgreSQL-gated tests (requires a Postgres at CS_DATABASE_URL)
+	cd $(CORE) && . .venv/bin/activate && alembic upgrade head && \
+	 alembic downgrade base && alembic upgrade head && pytest -q
+
+.PHONY: migrate
+migrate: ## Apply Alembic migrations (both context schemas) to CS_DATABASE_URL
+	cd $(CORE) && . .venv/bin/activate && alembic upgrade head
 
 .PHONY: install
 install: ## Install backend runtime + dev deps into a venv (requires network)

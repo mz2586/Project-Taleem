@@ -101,6 +101,81 @@ def test_events_persist_to_outbox(factory: sessionmaker[Session]) -> None:
     assert rows[0].payload["objective_code"] == OBJ
 
 
+def test_root_dirtied_on_save_so_lock_version_bumps(factory: sessionmaker[Session]) -> None:
+    # CTO H6: a save mutates only child rows, so without dirtying the root the versioned root
+    # would never be UPDATEd. Verify the fix: every save bumps the root's lock_version.
+    from taleem_core.contexts.learning.adapters.persistence.models import StudentKnowledgeRow
+
+    k = StudentKnowledge("stu-x")
+    k.ensure_objective(OBJ, initial=EST.initial())
+    with LearningUnitOfWork(factory) as uow:
+        uow.knowledge.save(k)
+        uow.commit()
+    with LearningUnitOfWork(factory) as uow:
+        before = uow.session.execute(select(StudentKnowledgeRow.lock_version)).scalar()
+    reloaded = None
+    with LearningUnitOfWork(factory) as uow:
+        reloaded = uow.knowledge.get("stu-x")
+        reloaded.apply_attempt(  # type: ignore[union-attr]
+            evidence_id="ev-touch",
+            objective_code=OBJ,
+            item_ref="i",
+            session_id="s",
+            correct=True,
+            misconception_hits=(),
+            hints_used=0,
+            response_time_ms=0,
+            context=InteractionContext.PRACTICE,
+            self_confidence=0.9,
+            estimator=EST,
+            forgetting=FOG,
+            now=9.0,
+        )
+        uow.knowledge.save(reloaded)  # type: ignore[arg-type]
+        uow.commit()
+    with LearningUnitOfWork(factory) as uow:
+        after = uow.session.execute(select(StudentKnowledgeRow.lock_version)).scalar()
+    assert (
+        after is not None and before is not None and after > before
+    )  # root participated in UPDATE
+
+
+def test_optimistic_lock_rejects_stale_root_write(tmp_path: object) -> None:
+    # CTO H6: two sessions loading the same root, both saving, must collide (StaleDataError).
+    from pathlib import Path
+
+    from sqlalchemy.orm.attributes import flag_modified
+    from sqlalchemy.orm.exc import StaleDataError
+
+    from taleem_core.contexts.learning.adapters.persistence.models import StudentKnowledgeRow
+
+    db = Path(str(tmp_path)) / "k.db"
+    engine = create_learning_engine(f"sqlite:///{db}")
+    LearningBase.metadata.create_all(engine)
+    sf = create_learning_session_factory(engine)
+    with LearningUnitOfWork(sf) as uow:
+        uow.knowledge.save(StudentKnowledge("stu-x"))
+        uow.commit()
+
+    sa = sf()
+    sb = sf()
+    try:
+        row_a = sa.execute(
+            select(StudentKnowledgeRow).where(StudentKnowledgeRow.student_ref == "stu-x")
+        ).scalar_one()
+        row_b = sb.execute(
+            select(StudentKnowledgeRow).where(StudentKnowledgeRow.student_ref == "stu-x")
+        ).scalar_one()
+        flag_modified(row_a, "updated_at")  # the same touch the repository applies
+        sa.commit()
+        flag_modified(row_b, "updated_at")
+        with pytest.raises(StaleDataError):
+            sb.commit()
+    finally:
+        sa.close()
+        sb.close()
+
+
 def test_no_child_pii_columns() -> None:
     # The learning store keys on a pseudonymous student_ref only — never a name/identity.
     forbidden = ("name", "email", "phone", "address", "dob", "birth")

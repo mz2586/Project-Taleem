@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session, selectinload
+from sqlalchemy.orm.attributes import flag_modified
 
 from .....platform.ids import uuid7
 from ...domain.knowledge import StudentKnowledge
@@ -75,3 +76,8 @@ class SqlAlchemyStudentKnowledgeRepository:
         for ev in knowledge.evidence:
             if ev.evidence_id not in stored_ids:
                 self._session.add(AssessmentEvidenceRow(**mapper.evidence_column_values(ev)))
+
+        # Optimistic locking (CTO H6): a save mutates only child rows, so the versioned root would
+        # never be UPDATEd and `version_id_col` would stay dormant. Force the root into the UPDATE
+        # so `lock_version` bumps and concurrent writers to one learner collide (StaleDataError).
+        flag_modified(root, "updated_at")

@@ -9,6 +9,7 @@ from __future__ import annotations
 import time
 from collections.abc import Callable
 
+from ....platform import observability
 from ..domain import validation
 from ..domain.lesson import Lesson
 from ..domain.quality import (
@@ -151,6 +152,10 @@ class CurriculumStudioService:
         self._transition(lesson, ReviewAction.PUBLISH, actor_role, change_summary)
         self._repo.save(lesson)
         self._publisher.publish(lesson, version)
+        observability.record_event("taleem_lessons_published_total")
+        observability.log_event(
+            "lesson_published", lesson_id=lesson.lesson_id, version=version.version
+        )
         return lesson
 
     def rollback(

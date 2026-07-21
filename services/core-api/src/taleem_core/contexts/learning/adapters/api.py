@@ -1,24 +1,31 @@
 """FastAPI adapter for the learning context (LEARNING_DOMAIN_MODEL §8).
 
-Contract-first-ish session + knowledge endpoints. In production every endpoint is authenticated,
-authorized (deny-by-default PDP), audited, and gated on Phase-1.5 governance; here it exposes the
-real services for the vertical slice and its API tests. Request models are at module scope (FastAPI
-+ ``from __future__ import annotations`` requires it, or bodies parse as query params).
+Session + knowledge endpoints. Every endpoint is authenticated (bearer JWT) and authorized
+(deny-by-default PDP); a learner may only reach their own data (IDOR guard). Governance-gated: real
+child-facing use awaits the Phase-1.5 decisions. Request models are module-scope (FastAPI + future
+annotations).
 """
 
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
+from ....auth.dependencies import authorize, require_owner_or
+from ....auth.jwt_verifier import Claims
 from ..application.analytics import LearningAnalytics
 from ..application.knowledge_service import KnowledgeService
 from ..application.ports import CurriculumReadModel
 from ..application.session_service import SessionService
-from ..domain.decision import DecisionKind
+from ..domain.decision import Decision, DecisionKind
+from ..domain.session import Session, SessionState
+
+_STUDENT_ONLY: tuple[str, ...] = ()  # learners only; no privileged override for operating a session
+_MENTOR = ("mentor",)
 
 
 class StartSessionIn(BaseModel):
@@ -45,23 +52,34 @@ class LearningApiDeps:
     curriculum: CurriculumReadModel
 
 
-def build_learning_router(deps: LearningApiDeps) -> APIRouter:
+def build_learning_router(
+    deps: LearningApiDeps, claims_dependency: Callable[..., Claims]
+) -> APIRouter:
     router = APIRouter(prefix="/v1/learning", tags=["learning"])
 
-    def _session_or_404(session_id: str) -> Any:
-        session = deps.session_service._sessions.get(session_id)  # noqa: SLF001 (adapter access)
+    def _session_or_404(session_id: str, claims: Claims) -> Session:
+        session = deps.session_service.get_session(session_id)
         if session is None:
             raise HTTPException(status_code=404, detail=f"session not found: {session_id}")
+        # IDOR: a learner may only act on their own session.
+        require_owner_or(claims, session.student_ref, privileged_roles=_STUDENT_ONLY)
         return session
 
     @router.post("/sessions", status_code=201)
-    def start_session(body: StartSessionIn) -> dict[str, Any]:
-        session = deps.session_service.start(body.student_ref)
+    def start_session(
+        body: StartSessionIn, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "operate", "learning.session")
+        require_owner_or(claims, body.student_ref, privileged_roles=_STUDENT_ONLY)
+        session = deps.session_service.start(body.student_ref, correlation_id="")
         return {"session_id": session.session_id, "state": session.state.value}
 
     @router.post("/sessions/{session_id}:next")
-    def next_decision(session_id: str) -> dict[str, Any]:
-        session = _session_or_404(session_id)
+    def next_decision(
+        session_id: str, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "operate", "learning.session")
+        session = _session_or_404(session_id, claims)
         decision = deps.session_service.plan_next(session)
         return {
             "decision": decision.kind.value,
@@ -70,10 +88,11 @@ def build_learning_router(deps: LearningApiDeps) -> APIRouter:
         }
 
     @router.post("/sessions/{session_id}:teach")
-    def teach(session_id: str, body: TeachIn) -> dict[str, Any]:
-        session = _session_or_404(session_id)
-        from ..domain.decision import Decision
-
+    def teach(
+        session_id: str, body: TeachIn, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "operate", "learning.session")
+        session = _session_or_404(session_id, claims)
         decision = Decision(kind=DecisionKind.TEACH, objective_code=body.objective_code)
         utterances, lesson = deps.session_service.teach(session, decision)
         return {
@@ -85,8 +104,11 @@ def build_learning_router(deps: LearningApiDeps) -> APIRouter:
         }
 
     @router.post("/sessions/{session_id}:answer")
-    def answer(session_id: str, body: AnswerIn) -> dict[str, Any]:
-        session = _session_or_404(session_id)
+    def answer(
+        session_id: str, body: AnswerIn, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "operate", "learning.session")
+        session = _session_or_404(session_id, claims)
         lesson = deps.curriculum.lesson_for(body.objective_code)
         if lesson is None:
             raise HTTPException(status_code=404, detail="lesson not found")
@@ -113,15 +135,26 @@ def build_learning_router(deps: LearningApiDeps) -> APIRouter:
         }
 
     @router.post("/sessions/{session_id}:end")
-    def end_session(session_id: str) -> dict[str, Any]:
-        session = _session_or_404(session_id)
-        if session.state.value in ("teaching", "interacting"):
+    def end_session(session_id: str, claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
+        authorize(claims, "operate", "learning.session")
+        session = _session_or_404(session_id, claims)
+        # Already-terminal / escalated sessions are not re-ended (CTO M1/M2: never mask an
+        # escalation as a normal completion, never raise on an out-of-order end).
+        if session.state in (
+            SessionState.ENDED,
+            SessionState.ENDED_SAFELY,
+            SessionState.ESCALATED,
+        ):
+            return {"state": session.state.value, "interactions": len(session.interactions)}
+        if session.state is SessionState.INTERACTING:
             deps.session_service.complete_objective(session)
         ended = deps.session_service.end(session)
         return {"state": ended.state.value, "interactions": len(ended.interactions)}
 
     @router.get("/students/{student_ref}/knowledge")
-    def knowledge(student_ref: str) -> dict[str, Any]:
+    def knowledge(student_ref: str, claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
+        authorize(claims, "read", "learning.knowledge")
+        require_owner_or(claims, student_ref, privileged_roles=_MENTOR)
         snap = deps.knowledge_service.snapshot(student_ref)
         if snap is None:
             raise HTTPException(status_code=404, detail="student not found")
@@ -138,7 +171,9 @@ def build_learning_router(deps: LearningApiDeps) -> APIRouter:
         }
 
     @router.get("/students/{student_ref}/progress")
-    def progress(student_ref: str) -> dict[str, Any]:
+    def progress(student_ref: str, claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
+        authorize(claims, "read", "learning.knowledge")
+        require_owner_or(claims, student_ref, privileged_roles=_MENTOR)
         return deps.analytics.progress_summary(student_ref).to_dict()
 
     return router

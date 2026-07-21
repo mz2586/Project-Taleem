@@ -20,7 +20,7 @@ paths:
       tags: [curriculum-studio]
       operationId: getHierarchy
       summary: NCP education-system hierarchy (grades × subjects)
-      security: []
+      security: [{ bearerAuth: [] }]
       responses:
         "200": { description: Hierarchy }
         "429": { description: Rate limited, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
@@ -30,7 +30,7 @@ paths:
       tags: [curriculum-studio]
       operationId: listLessons
       summary: List lessons
-      security: []
+      security: [{ bearerAuth: [] }]
       responses:
         "200": { description: Lessons }
         "429": { description: Rate limited, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
@@ -39,7 +39,7 @@ paths:
       tags: [curriculum-studio]
       operationId: createLesson
       summary: Create a draft lesson
-      security: []
+      security: [{ bearerAuth: [] }]
       requestBody:
         required: true
         content: { application/json: { schema: { $ref: "#/components/schemas/LessonDraftIn" } } }
@@ -52,7 +52,7 @@ paths:
       tags: [curriculum-studio]
       operationId: getLesson
       summary: Read a lesson
-      security: []
+      security: [{ bearerAuth: [] }]
       parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
       responses:
         "200": { description: Lesson, content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } } }
@@ -63,7 +63,7 @@ paths:
       tags: [curriculum-studio]
       operationId: validateLesson
       summary: Run structural + provenance + automated quality-gate pre-checks
-      security: []
+      security: [{ bearerAuth: [] }]
       parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
       responses:
         "200": { description: Validation result, content: { application/json: { schema: { $ref: "#/components/schemas/ValidationResult" } } } }
@@ -74,7 +74,7 @@ paths:
       tags: [curriculum-studio]
       operationId: submitLesson
       summary: Submit for review (requires automated validation to pass)
-      security: []
+      security: [{ bearerAuth: [] }]
       parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
       requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/ActorIn" } } } }
       responses:
@@ -86,7 +86,7 @@ paths:
       tags: [curriculum-studio]
       operationId: reviewLesson
       summary: Record a review decision (approve / request_changes) — no self-approval
-      security: []
+      security: [{ bearerAuth: [] }]
       parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
       requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/ReviewIn" } } } }
       responses:
@@ -98,7 +98,7 @@ paths:
       tags: [curriculum-studio]
       operationId: publishLesson
       summary: Publish (approved + all 9 gates green) → new immutable version
-      security: []
+      security: [{ bearerAuth: [] }]
       parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
       requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/PublishIn" } } } }
       responses:
@@ -110,7 +110,7 @@ paths:
       tags: [curriculum-studio]
       operationId: rollbackLesson
       summary: Roll back to a prior version
-      security: []
+      security: [{ bearerAuth: [] }]
       parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
       requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/RollbackIn" } } } }
       responses:
@@ -122,13 +122,19 @@ paths:
       tags: [curriculum-studio]
       operationId: getVersions
       summary: Version history + content hashes
-      security: []
+      security: [{ bearerAuth: [] }]
       parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
       responses:
         "200": { description: Versions }
         "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Verified bearer JWT. The actor's role is taken from the token claims.
   schemas:
     LessonView:
       type: object
@@ -180,29 +186,24 @@ components:
         ai_teaching: { $ref: "#/components/schemas/AITeachingIn" }
     ActorIn:
       type: object
-      required: [actor_role]
+      description: Actor role is derived from the bearer token, not this body.
       properties:
-        actor_role: { type: string }
         note: { type: string }
     ReviewIn:
       type: object
-      required: [action, actor_role]
+      required: [action]
       properties:
         action: { type: string, enum: [approve, request_changes] }
-        actor_role: { type: string }
         note: { type: string }
     PublishIn:
       type: object
-      required: [actor_role]
       properties:
-        actor_role: { type: string }
         change_summary: { type: string }
     RollbackIn:
       type: object
-      required: [target_version, actor_role]
+      required: [target_version]
       properties:
         target_version: { type: integer }
-        actor_role: { type: string }
         note: { type: string }
     ValidationResult:
       type: object

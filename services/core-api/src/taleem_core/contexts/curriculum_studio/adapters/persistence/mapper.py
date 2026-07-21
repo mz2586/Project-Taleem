@@ -52,6 +52,7 @@ def column_values(lesson: Lesson) -> dict[str, Any]:
         "license": lesson.provenance.license,
         "content_hash": lesson.content_hash(),
         "current_version_no": lesson.version,
+        "tags": list(lesson.metadata.tags),
         "body": to_body(lesson),
     }
 

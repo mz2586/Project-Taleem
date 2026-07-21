@@ -351,3 +351,25 @@ def _apply_conf(obj: ObjectiveMastery) -> None:
 def test_decision_carries_rationale() -> None:
     d = Decision(kind=DecisionKind.TEACH, rationale=())
     assert d.kind is DecisionKind.TEACH
+
+
+def test_misconception_recurrence_stays_active_and_counted() -> None:
+    # CTO H7: a cleared-then-re-hit misconception must become RECURRED, stay active, block mastery,
+    # and be surfaced (not silently dropped).
+    from taleem_core.contexts.learning.domain.values import MisconceptionState
+
+    k = StudentKnowledge("s1")
+    k.ensure_objective(OBJ, initial=EST.initial())
+    _apply(k, correct=False, hits=("m1",))  # suspected
+    _apply(k, correct=False, hits=("m1",))  # confirmed
+    _apply(k, correct=True)  # cleared (m1 not hit)
+    assert not k.get(OBJ).has_confirmed_misconception()  # type: ignore[union-attr]
+
+    result = _apply(k, correct=False, hits=("m1",))  # re-hit -> RECURRED
+    obj = k.get(OBJ)
+    assert obj is not None
+    record = obj.misconceptions[0]
+    assert record.state is MisconceptionState.RECURRED
+    assert record.is_active  # no longer a dead state
+    assert obj.has_confirmed_misconception()  # blocks mastery again
+    assert "m1" in result.confirmed_misconceptions  # surfaced for remediation + events

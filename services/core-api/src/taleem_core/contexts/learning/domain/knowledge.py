@@ -59,10 +59,14 @@ class MisconceptionRecord:
 
     @property
     def is_active(self) -> bool:
+        # RECURRED must count as active (CTO H7): a misconception that reappears after clearance
+        # is the strongest "remediation failed" signal — it must remain visible to the engine,
+        # be re-remediable, and be counted. Excluding it silently dropped recurrence.
         return self.state in (
             MisconceptionState.SUSPECTED,
             MisconceptionState.CONFIRMED,
             MisconceptionState.BEING_REMEDIATED,
+            MisconceptionState.RECURRED,
         )
 
 
@@ -83,8 +87,10 @@ class ObjectiveMastery:
     misconceptions: list[MisconceptionRecord] = field(default_factory=list)
 
     def has_confirmed_misconception(self) -> bool:
+        # CONFIRMED or RECURRED both block mastery and require remediation (CTO H7).
         return any(
-            m.state is MisconceptionState.CONFIRMED and m.is_active for m in self.misconceptions
+            m.state in (MisconceptionState.CONFIRMED, MisconceptionState.RECURRED) and m.is_active
+            for m in self.misconceptions
         )
 
     def active_misconceptions(self) -> list[MisconceptionRecord]:
@@ -261,7 +267,12 @@ class StudentKnowledge:
                         if record.state is MisconceptionState.SUSPECTED
                         else MisconceptionState.RECURRED
                     )
-                    if record.state is MisconceptionState.CONFIRMED:
+                    # Both CONFIRMED and RECURRED need remediation + a detection signal (CTO H7):
+                    # a recurrence was previously set silently and never surfaced.
+                    if record.state in (
+                        MisconceptionState.CONFIRMED,
+                        MisconceptionState.RECURRED,
+                    ):
                         confirmed.append(ref)
 
         # A correct answer is evidence the corrected model is taking hold: clear active

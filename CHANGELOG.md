@@ -8,6 +8,45 @@ The local Git history is the official project history; each released version map
 
 - Nothing yet. (Phase 5 not started.)
 
+## [0.4.2] — 2026-07-21
+
+Tag: `phase-4.2` · Wire & Harden — remediation of the CTO readiness review
+([CTO_REVIEW.md](CTO_REVIEW.md)). Resolves all BLOCKER and must-fix HIGH findings; see
+[PHASE_4_2_REPORT.md](PHASE_4_2_REPORT.md).
+
+### Security
+
+- Bearer-JWT authentication + deny-by-default PDP authorization on all Curriculum Studio and Learning
+  routes; the actor's role is derived from the verified token, never the request body (B1). IDOR
+  guard on learner data. Removed `actor_role` from studio request bodies + contracts.
+- `load_settings()` fails closed in production on the default JWT secret or an unset database URL (H8).
+
+### Added / Changed
+
+- Composition root wires SQLAlchemy persistence with a request-scoped Unit of Work; the Learning API
+  is now mounted in `create_app` (H1/H2). Dynamic curriculum graph from published lessons.
+- `0002_learning_schema` Alembic migration for the `learning` schema; `env.py` registers both context
+  metadatas (H3). Added `lesson.tags` to the ORM to match the migration (H10).
+- Runtime observability for the contexts: domain metrics + correlation-tagged logs on publish,
+  attempt, mastery, and session lifecycle (H9).
+- CI: removed the permanently-red zero-install job (B2); added a PostgreSQL job that runs migration
+  reversibility + PG-gated tests (H4); lints all OpenAPI contracts (H5); new ORM↔migration
+  schema-parity test (H13).
+
+### Fixed
+
+- `RECURRED` misconception no longer a silent dead state — it stays active, blocks mastery, and is
+  re-remediable (H7).
+- Audit-immutability trigger attached to the partitioned parent so it covers all partitions (H11).
+- Learning optimistic lock now engages (aggregate root dirtied on save) (H6).
+- Session `end` no longer 500s from an out-of-order call and never overwrites an ESCALATED session
+  (M1/M2, required by mounting the router).
+
+### Quality
+
+- 140 tests (SQLite + PostgreSQL-gated); 97% coverage; ruff/black/mypy(strict) green; 3 OpenAPI
+  contracts valid; migrations reversible on PostgreSQL 16.
+
 ## [0.4.1] — 2026-07-21
 
 Tag: `phase-4.1` · Commit: feature `8a7757d` + release docs.

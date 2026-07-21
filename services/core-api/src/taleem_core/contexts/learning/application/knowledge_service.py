@@ -10,6 +10,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from dataclasses import dataclass
 
+from ....platform import observability
 from ....platform.ids import uuid7
 from ...learning.domain import events as ev
 from ...learning.domain.events import LearningEvent
@@ -90,6 +91,20 @@ class KnowledgeService:
             uow.knowledge.save(knowledge)
             uow.events.publish(events)
             uow.commit()
+
+        # Observability (CTO H9): domain telemetry for the learning write path.
+        observability.record_event("taleem_learning_attempts_total", outcome=result.outcome.value)
+        if result.newly_mastered:
+            observability.record_event("taleem_objectives_mastered_total")
+        for _ in result.confirmed_misconceptions:
+            observability.record_event("taleem_misconceptions_detected_total")
+        observability.log_event(
+            "attempt_recorded",
+            student_ref=student_ref,
+            objective=objective_code,
+            outcome=result.outcome.value,
+            mastered=result.newly_mastered,
+        )
         return RecordOutcome(result=result, events=events)
 
     def _events_for(

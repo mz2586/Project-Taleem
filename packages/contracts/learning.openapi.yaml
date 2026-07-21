@@ -21,7 +21,7 @@ paths:
       tags: [learning]
       operationId: startSession
       summary: Start a learning session
-      security: []
+      security: [{ bearerAuth: [] }]
       requestBody:
         required: true
         content: { application/json: { schema: { $ref: "#/components/schemas/StartSessionIn" } } }
@@ -33,7 +33,7 @@ paths:
       tags: [learning]
       operationId: nextDecision
       summary: Ask the decision engine for the next action
-      security: []
+      security: [{ bearerAuth: [] }]
       parameters: [{ name: sessionId, in: path, required: true, schema: { type: string } }]
       responses:
         "200": { description: Decision, content: { application/json: { schema: { $ref: "#/components/schemas/DecisionView" } } } }
@@ -44,7 +44,7 @@ paths:
       tags: [learning]
       operationId: teach
       summary: Deliver the approved lesson for an objective (templated runtime)
-      security: []
+      security: [{ bearerAuth: [] }]
       parameters: [{ name: sessionId, in: path, required: true, schema: { type: string } }]
       requestBody:
         required: true
@@ -58,7 +58,7 @@ paths:
       tags: [learning]
       operationId: submitAnswer
       summary: Submit a learner answer (scored; updates the Student Model)
-      security: []
+      security: [{ bearerAuth: [] }]
       parameters: [{ name: sessionId, in: path, required: true, schema: { type: string } }]
       requestBody:
         required: true
@@ -72,7 +72,7 @@ paths:
       tags: [learning]
       operationId: endSession
       summary: End a session
-      security: []
+      security: [{ bearerAuth: [] }]
       parameters: [{ name: sessionId, in: path, required: true, schema: { type: string } }]
       responses:
         "200": { description: Session ended, content: { application/json: { schema: { $ref: "#/components/schemas/SessionEndView" } } } }
@@ -83,7 +83,7 @@ paths:
       tags: [learning]
       operationId: getKnowledge
       summary: Student Knowledge Model summary (mastery per objective)
-      security: []
+      security: [{ bearerAuth: [] }]
       parameters: [{ name: studentRef, in: path, required: true, schema: { type: string } }]
       responses:
         "200": { description: Knowledge, content: { application/json: { schema: { $ref: "#/components/schemas/KnowledgeView" } } } }
@@ -94,12 +94,18 @@ paths:
       tags: [learning]
       operationId: getProgress
       summary: Learning-analytics progress summary
-      security: []
+      security: [{ bearerAuth: [] }]
       parameters: [{ name: studentRef, in: path, required: true, schema: { type: string } }]
       responses:
         "200": { description: Progress summary, content: { application/json: { schema: { $ref: "#/components/schemas/ProgressView" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
 components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Verified bearer JWT. A learner may only access their own data (IDOR-guarded).
   schemas:
     StartSessionIn:
       type: object

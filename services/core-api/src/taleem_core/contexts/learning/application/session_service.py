@@ -10,6 +10,8 @@ from __future__ import annotations
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass, field
 
+from ....platform import observability
+from ....platform.correlation import get_correlation_id
 from ....platform.ids import uuid7
 from ...learning.domain import events as ev
 from ...learning.domain.curriculum_view import ItemView, LessonView
@@ -57,7 +59,7 @@ class SessionService:
         knowledge_service: KnowledgeService,
         curriculum: CurriculumReadModel,
         runtime: TemplatedTeachingRuntime,
-        graph: CurriculumGraph,
+        graph: CurriculumGraph | Callable[[], CurriculumGraph],
         config: DecisionConfig,
         clock: Callable[[], float],
         uow_factory: Callable[[], LearningUnitOfWork],
@@ -66,25 +68,35 @@ class SessionService:
         self._knowledge = knowledge_service
         self._curriculum = curriculum
         self._runtime = runtime
-        self._graph = graph
+        # Accept a static graph (slice/tests) or a provider that rebuilds it from published content
+        # (the mounted app — reflects newly published lessons). Both keep the engine pure.
+        self._graph_source = graph
         self._config = config
         self._now = clock
         self._uow = uow_factory
 
     # -- lifecycle ------------------------------------------------------------------------
 
+    def get_session(self, session_id: str) -> Session | None:
+        """Public session lookup (avoids adapters reaching into the private repository)."""
+        return self._sessions.get(session_id)
+
     def start(self, student_ref: str, correlation_id: str = "") -> Session:
         now = self._now()
+        # Thread the request correlation id into the saga (CTO H9) when the caller didn't pass one.
+        cid = correlation_id or (get_correlation_id() or "")
         session = Session(
             session_id=uuid7(),
             student_ref=student_ref,
             started_at=now,
-            correlation_id=correlation_id,
+            correlation_id=cid,
         )
         session.transition_to(SessionState.LOADING)
         session.transition_to(SessionState.PLANNING)
         self._sessions.save(session)
         self._emit([ev.session_started(session.session_id, student_ref, now)])
+        observability.record_event("taleem_sessions_started_total")
+        observability.log_event("session_started", session_id=session.session_id)
         return session
 
     def plan_next(self, session: Session, *, safety_flag: bool = False) -> Decision:
@@ -93,9 +105,8 @@ class SessionService:
         knowledge = self._knowledge.snapshot(session.student_ref) or StudentKnowledge(
             student_ref=session.student_ref
         )
-        decision = select_next(
-            knowledge, self._graph, self._config, self._now(), safety_flag=safety_flag
-        )
+        graph = self._graph_source() if callable(self._graph_source) else self._graph_source
+        decision = select_next(knowledge, graph, self._config, self._now(), safety_flag=safety_flag)
         if decision.kind in _CONTEXT_FOR:
             session.transition_to(SessionState.TEACHING)
             self._sessions.save(session)
@@ -203,6 +214,7 @@ class SessionService:
             session.end(now)
         self._sessions.save(session)
         self._emit([ev.session_completed(session.session_id, session.student_ref, now)])
+        observability.record_event("taleem_sessions_completed_total")
         return session
 
     # -- internals ------------------------------------------------------------------------

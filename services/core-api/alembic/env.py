@@ -14,6 +14,7 @@ from alembic import context
 from sqlalchemy import engine_from_config, pool
 
 from taleem_core.contexts.curriculum_studio.adapters.persistence.base import SCHEMA, Base
+from taleem_core.contexts.learning.adapters.persistence.base import LearningBase
 
 config = context.config
 
@@ -21,7 +22,9 @@ _url = os.environ.get("CS_DATABASE_URL")
 if _url:
     config.set_main_option("sqlalchemy.url", _url)
 
-target_metadata = Base.metadata
+# Both bounded-context schemas are migrated by this Alembic history (CTO H3). Registering both
+# metadata objects lets --autogenerate see the learning tables (previously it saw curriculum only).
+target_metadata = [Base.metadata, LearningBase.metadata]
 
 
 def run_migrations_offline() -> None:

@@ -16,6 +16,7 @@ from __future__ import annotations
 
 import contextlib
 import time
+from collections.abc import Iterator
 from typing import Any
 
 from fastapi import Depends, FastAPI, Header, Request
@@ -24,14 +25,35 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from . import __version__
 from .auth import pdp
+from .auth.dependencies import bearer_claims
 from .auth.jwt_verifier import Claims, verify_hs256
 from .contexts.curriculum_studio.adapters.api import build_studio_router
-from .contexts.curriculum_studio.application.repository import (
-    InMemoryLessonRepository,
-    RecordingPublishPort,
+from .contexts.curriculum_studio.adapters.persistence import (
+    Base as CurriculumBase,
+)
+from .contexts.curriculum_studio.adapters.persistence import (
+    create_db_engine,
+    create_session_factory,
+    unit_of_work,
 )
 from .contexts.curriculum_studio.application.service import CurriculumStudioService
 from .contexts.health.service import Check, HealthService
+from .contexts.learning.adapters.api import LearningApiDeps, build_learning_router
+from .contexts.learning.adapters.curriculum_read_model import CurriculumStudioReadModel
+from .contexts.learning.adapters.memory import InMemorySessionRepository
+from .contexts.learning.adapters.persistence.base import (
+    LearningBase,
+    create_learning_engine,
+    create_learning_session_factory,
+)
+from .contexts.learning.adapters.persistence.uow import LearningUnitOfWork
+from .contexts.learning.application.analytics import LearningAnalytics
+from .contexts.learning.application.knowledge_service import KnowledgeService
+from .contexts.learning.application.session_service import SessionService
+from .contexts.learning.domain.decision import DecisionConfig
+from .contexts.learning.domain.estimator import BKTEstimator
+from .contexts.learning.domain.forgetting import HalfLifeForgettingModel
+from .contexts.learning.domain.runtime import TemplatedTeachingRuntime
 from .contexts.sync.domain import DeltaType, SyncDelta, SyncEngine, SyncStore
 from .platform import correlation
 from .platform.config import Settings, load_settings
@@ -76,6 +98,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 "name": "curriculum-studio",
                 "description": "Curriculum authoring platform (no child data)",
             },
+            {
+                "name": "learning",
+                "description": "Learning Intelligence Platform (governance-gated)",
+            },
         ],
     )
 
@@ -86,10 +112,60 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         checks=[Check("self", lambda: True)],  # real dep probes added as contexts land
     )
 
-    # Curriculum Studio context (governance-safe; in-memory repo — no production content).
-    studio_service = CurriculumStudioService(InMemoryLessonRepository(), RecordingPublishPort())
-    app.state.studio_service = studio_service
-    app.include_router(build_studio_router(studio_service))
+    # ---- persistence wiring (CTO H2) ----
+    # SQL persistence for both contexts. Empty DATABASE_URL => in-memory SQLite (governance-safe
+    # dev default): the tables are created from the ORM. A real PostgreSQL URL uses the schema
+    # created by the Alembic migrations (never create_all in production).
+    db_url = settings.database_url or "sqlite://"
+    curriculum_engine = create_db_engine(db_url)
+    learning_engine = create_learning_engine(db_url)
+    if curriculum_engine.dialect.name == "sqlite":
+        CurriculumBase.metadata.create_all(curriculum_engine)
+    if learning_engine.dialect.name == "sqlite":
+        LearningBase.metadata.create_all(learning_engine)
+    studio_sf = create_session_factory(curriculum_engine)
+    learning_sf = create_learning_session_factory(learning_engine)
+    # Session factories are exposed for seeding in tests / ops tooling (not a request path).
+    app.state.studio_session_factory = studio_sf
+    app.state.learning_session_factory = learning_sf
+
+    # AuthN: every business route requires a verified bearer token; the actor's role comes from
+    # the token, not the request body (CTO B1). Deny-by-default PDP does authorization.
+    claims_dependency = bearer_claims(settings.jwt_dev_secret)
+
+    # ---- Curriculum Studio (CTO H2: SQL-backed, request-scoped Unit of Work) ----
+    def studio_service_provider() -> Iterator[CurriculumStudioService]:
+        with unit_of_work(studio_sf) as uow:
+            yield CurriculumStudioService(uow.lessons, uow.publish)
+            uow.commit()  # reached only on success; the UoW rolls back on any raised exception
+
+    app.include_router(build_studio_router(studio_service_provider, claims_dependency))
+
+    # ---- Learning Intelligence Platform (CTO H1: now mounted in the deployable) ----
+    def learning_uow() -> LearningUnitOfWork:
+        return LearningUnitOfWork(learning_sf)
+
+    knowledge_service = KnowledgeService(
+        learning_uow, BKTEstimator(), HalfLifeForgettingModel(), time.time
+    )
+    read_model = CurriculumStudioReadModel(studio_sf)
+    session_service = SessionService(
+        InMemorySessionRepository(),
+        knowledge_service,
+        read_model,
+        TemplatedTeachingRuntime(),
+        read_model.published_graph,  # dynamic graph from currently-published curriculum
+        DecisionConfig(),
+        time.time,
+        learning_uow,
+    )
+    learning_deps = LearningApiDeps(
+        session_service=session_service,
+        knowledge_service=knowledge_service,
+        analytics=LearningAnalytics(learning_uow),
+        curriculum=read_model,
+    )
+    app.include_router(build_learning_router(learning_deps, claims_dependency))
 
     # Register the modules this deployable composes (plugin architecture).
     reg = module_registry()
@@ -99,6 +175,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         Module(
             "curriculum_studio", "/v1/studio", lambda: True, events_published=("LessonPublished",)
         ),
+        Module("learning", "/v1/learning", lambda: True, events_published=("ObjectiveMastered",)),
     ):
         # Idempotent across reloads/tests: re-registering the same module is a no-op.
         with contextlib.suppress(ValueError):
