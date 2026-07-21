@@ -1,0 +1,202 @@
+openapi: 3.1.0
+info:
+  title: Project Taleem — Learning Intelligence Platform API
+  version: 0.1.0
+  description: >-
+    Learning Intelligence Platform (Phase 4.1 vertical slice). Session orchestration + Student
+    Knowledge Model over published curriculum. Governance-safe: synthetic/pseudonymous learners
+    only in this phase; all child-facing use is gated on Phase-1.5 governance decisions.
+  license:
+    name: MIT
+    identifier: MIT
+servers:
+  - url: https://api.taleem.dev
+    description: Reference environment (placeholder; concrete host per FOUNDER_DECISIONS FD-02)
+tags:
+  - name: learning
+    description: Learning session lifecycle + student knowledge.
+paths:
+  /v1/learning/sessions:
+    post:
+      tags: [learning]
+      operationId: startSession
+      summary: Start a learning session
+      security: []
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/StartSessionIn" } } }
+      responses:
+        "201": { description: Session started, content: { application/json: { schema: { $ref: "#/components/schemas/SessionView" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/sessions/{sessionId}:next:
+    post:
+      tags: [learning]
+      operationId: nextDecision
+      summary: Ask the decision engine for the next action
+      security: []
+      parameters: [{ name: sessionId, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Decision, content: { application/json: { schema: { $ref: "#/components/schemas/DecisionView" } } } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/sessions/{sessionId}:teach:
+    post:
+      tags: [learning]
+      operationId: teach
+      summary: Deliver the approved lesson for an objective (templated runtime)
+      security: []
+      parameters: [{ name: sessionId, in: path, required: true, schema: { type: string } }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/TeachIn" } } }
+      responses:
+        "200": { description: Lesson delivery, content: { application/json: { schema: { $ref: "#/components/schemas/TeachView" } } } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/sessions/{sessionId}:answer:
+    post:
+      tags: [learning]
+      operationId: submitAnswer
+      summary: Submit a learner answer (scored; updates the Student Model)
+      security: []
+      parameters: [{ name: sessionId, in: path, required: true, schema: { type: string } }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/AnswerIn" } } }
+      responses:
+        "200": { description: Answer result, content: { application/json: { schema: { $ref: "#/components/schemas/AnswerView" } } } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/sessions/{sessionId}:end:
+    post:
+      tags: [learning]
+      operationId: endSession
+      summary: End a session
+      security: []
+      parameters: [{ name: sessionId, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Session ended, content: { application/json: { schema: { $ref: "#/components/schemas/SessionEndView" } } } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/students/{studentRef}/knowledge:
+    get:
+      tags: [learning]
+      operationId: getKnowledge
+      summary: Student Knowledge Model summary (mastery per objective)
+      security: []
+      parameters: [{ name: studentRef, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Knowledge, content: { application/json: { schema: { $ref: "#/components/schemas/KnowledgeView" } } } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/students/{studentRef}/progress:
+    get:
+      tags: [learning]
+      operationId: getProgress
+      summary: Learning-analytics progress summary
+      security: []
+      parameters: [{ name: studentRef, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Progress summary, content: { application/json: { schema: { $ref: "#/components/schemas/ProgressView" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+components:
+  schemas:
+    StartSessionIn:
+      type: object
+      required: [student_ref]
+      properties:
+        student_ref: { type: string }
+    TeachIn:
+      type: object
+      required: [objective_code]
+      properties:
+        objective_code: { type: string }
+    AnswerIn:
+      type: object
+      required: [objective_code, item_ref, option]
+      properties:
+        objective_code: { type: string }
+        item_ref: { type: string }
+        option: { type: integer }
+        hints_used: { type: integer, default: 0 }
+        self_confidence: { type: ["number", "null"] }
+    SessionView:
+      type: object
+      properties:
+        session_id: { type: string }
+        state: { type: string }
+    DecisionView:
+      type: object
+      properties:
+        decision:
+          type: string
+          enum: [diagnose, teach, continue, review, remediate, advance, revise, escalate, rest, complete]
+        objective_code: { type: ["string", "null"] }
+        rationale: { type: array, items: { type: string } }
+    TeachView:
+      type: object
+      properties:
+        utterances:
+          type: array
+          items:
+            type: object
+            properties:
+              kind: { type: string }
+              text: { type: string }
+        items:
+          type: array
+          items:
+            type: object
+            properties:
+              item_ref: { type: string }
+              prompt: { type: object, additionalProperties: { type: string } }
+              options: { type: array, items: { type: string } }
+    AnswerView:
+      type: object
+      properties:
+        outcome: { type: string, enum: [correct, incorrect, partial] }
+        mastery: { type: number }
+        state: { type: string }
+        post_decision: { type: string }
+        confirmed_misconceptions: { type: array, items: { type: string } }
+        cleared_misconceptions: { type: array, items: { type: string } }
+        feedback: { type: array, items: { type: string } }
+    SessionEndView:
+      type: object
+      properties:
+        state: { type: string }
+        interactions: { type: integer }
+    KnowledgeView:
+      type: object
+      properties:
+        student_ref: { type: string }
+        objectives:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              mastery: { type: number }
+              uncertainty: { type: number }
+              state: { type: string }
+    ProgressView:
+      type: object
+      properties:
+        student_ref: { type: string }
+        objectives_mastered: { type: integer }
+        objectives_in_progress: { type: integer }
+        total_attempts: { type: integer }
+        accuracy: { type: number }
+        misconceptions_detected: { type: integer }
+        misconceptions_cleared: { type: integer }
+        reviews_scheduled: { type: integer }
+        events_by_type: { type: object, additionalProperties: { type: integer } }
+        objective_mastery: { type: object, additionalProperties: { type: number } }
+    Problem:
+      type: object
+      description: RFC 9457 Problem Details
+      properties:
+        type: { type: string }
+        title: { type: string }
+        status: { type: integer }
+        detail: { type: string }
+        instance: { type: string }
