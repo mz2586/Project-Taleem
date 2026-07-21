@@ -6,7 +6,40 @@ The local Git history is the official project history; each released version map
 
 ## [Unreleased]
 
-- Nothing yet. (Phase 5 not started.)
+- Nothing pending.
+
+## [0.5.5] — 2026-07-21
+
+Tag: `phase-5.5` · Student Platform Backend APIs. See [PHASE_5_5_REPORT.md](PHASE_5_5_REPORT.md).
+
+### Added
+
+- Student-facing query APIs (all **derived** from existing learning data — no new child-data tables):
+  `GET /v1/learning/students/{ref}/{today,homework,assessments,reviews,timetable,notifications,
+  achievements,history,recommendations}`, `POST …/notifications/{id}:read`, and
+  `POST /v1/learning/sessions/{id}:hint` (authored graduated hints, never the answer).
+- `StudentReadModel` port + SQLAlchemy adapter, `StudentQueryService`, and `build_student_router`,
+  wired into the composition root behind bearer-JWT + PDP, IDOR-guarded.
+- `LessonView` projection extended with homework + assessment items (approved content only).
+- `packages/contracts/student.openapi.yaml` (CI-linted with the other contracts).
+- `tests/test_student_api.py` — SQLite + PostgreSQL-gated integration (seed → drive a real session to
+  mastery → exercise every endpoint + auth/IDOR).
+
+### Quality
+
+- 142 tests on PostgreSQL (140 + 2 skipped on SQLite), 97% coverage; ruff/black/mypy(strict) green;
+  4 OpenAPI contracts valid.
+
+## [0.5.0] — 2026-07-21
+
+Phase 5 — Student Experience. (Design docs + governance-safe portal core scaffold; untagged.)
+
+### Added
+
+- `docs/12-student-experience/` — full student-experience design (experience, architecture, UI flow,
+  API requirements, component catalog).
+- `apps/web/app/student/*` — governance-safe portal core (Today, Session, Profile, Progress) over the
+  real `/v1/learning` API with a synthetic learner + dev-stub token; no child identity/PII.
 
 ## [0.4.2] — 2026-07-21
 

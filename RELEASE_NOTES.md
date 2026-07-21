@@ -6,6 +6,42 @@ this repository has no remote and the local Git history is authoritative.
 
 ---
 
+## 0.5.5 — Phase 5.5: Student Platform Backend APIs (2026-07-21)
+
+Tag: `phase-5.5`
+
+The backend the approved Student Experience needs — implemented as **derived read models** over data
+the learning platform already stores, so **no new child-data tables** were added.
+
+### Highlights
+
+- Eleven student-facing surfaces went live behind the existing auth: the dashboard aggregate
+  (`today`), homework, assessments, revision queue, timetable, notifications, achievements, session +
+  lesson history, learning recommendations, and graduated `:hint` requests.
+- All authenticated, authorized, and **IDOR-guarded** — a learner reaches only their own data; the
+  student surface never exposes autonomous promotion/summative grading.
+- A full integration test seeds a published lesson, drives a real session to mastery, and exercises
+  every endpoint on both SQLite and PostgreSQL.
+
+### Quality
+
+- 142 tests on PostgreSQL, 97% coverage; ruff/black/mypy(strict) green; 4 OpenAPI contracts valid.
+  See `PHASE_5_5_REPORT.md`.
+
+### Scope
+
+Governance-safe. No offline subsystem, no production child auth, no new frontend features.
+
+---
+
+## 0.5.0 — Phase 5: Student Experience (2026-07-21)
+
+Complete student-experience design (`docs/12-student-experience/`) plus the governance-safe portal
+core scaffold (`apps/web/app/student/*`) — Today, Session, Profile, Progress over the real
+`/v1/learning` API with a synthetic learner and dev-stub token. No child identity, PII, or deployment.
+
+---
+
 ## 0.4.2 — Phase 4.2: Wire & Harden (2026-07-21)
 
 Tag: `phase-4.2`

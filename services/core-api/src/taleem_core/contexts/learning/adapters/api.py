@@ -44,6 +44,12 @@ class AnswerIn(BaseModel):
     self_confidence: float | None = None
 
 
+class HintIn(BaseModel):
+    objective_code: str
+    item_ref: str
+    hint_level: int = 0
+
+
 @dataclass
 class LearningApiDeps:
     session_service: SessionService
@@ -132,6 +138,28 @@ def build_learning_router(
             "confirmed_misconceptions": turn.result.confirmed_misconceptions,
             "cleared_misconceptions": turn.result.cleared_misconceptions,
             "feedback": [u.text for u in turn.feedback],
+        }
+
+    @router.post("/sessions/{session_id}:hint")
+    def hint(
+        session_id: str, body: HintIn, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        # The next AUTHORED graduated hint (never the answer first). Content comes from the approved
+        # published lesson only; if the ladder is exhausted the client offers re-explanation/help.
+        authorize(claims, "operate", "learning.session")
+        _session_or_404(session_id, claims)
+        lesson = deps.curriculum.lesson_for(body.objective_code)
+        if lesson is None:
+            raise HTTPException(status_code=404, detail="lesson not found")
+        item = next((i for i in lesson.practice_items if i.item_ref == body.item_ref), None)
+        if item is None:
+            raise HTTPException(status_code=404, detail="item not found")
+        level = body.hint_level
+        has_hint = 0 <= level < len(item.hints)
+        return {
+            "hint": item.hints[level] if has_hint else None,
+            "level": level,
+            "exhausted": level >= len(item.hints),
         }
 
     @router.post("/sessions/{session_id}:end")

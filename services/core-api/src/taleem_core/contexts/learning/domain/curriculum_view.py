@@ -39,3 +39,8 @@ class LessonView:
     misconception_corrections: dict[str, str] = field(
         default_factory=dict
     )  # ref -> correction text
+    # Projected for the student-facing Homework and Assessment surfaces (approved content only).
+    homework_items: tuple[ItemView, ...] = ()
+    assessment_formative: tuple[ItemView, ...] = ()
+    assessment_summative: tuple[ItemView, ...] = ()
+    summative_mentor_mediated: bool = True

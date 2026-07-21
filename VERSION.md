@@ -1,7 +1,7 @@
 # Version
 
-Current version: **0.4.2**
-Milestone: **phase-4.2** (Wire & Harden)
+Current version: **0.5.5**
+Milestone: **phase-5.5** (Student Platform Backend APIs)
 Status: **pre-production / development** — governance-gated; no real child data.
 Date: 2026-07-21
 
@@ -23,6 +23,8 @@ version and is bumped independently of this project milestone version.
 
 | Version | Tag | Date | Milestone |
 | --- | --- | --- | --- |
+| 0.5.5 | `phase-5.5` | 2026-07-21 | Student Platform Backend APIs (derived read models: homework, reviews, hint, …) |
+| 0.5.0 | — | 2026-07-21 | Phase 5 — Student Experience design + portal core scaffold (governance-safe) |
 | 0.4.2 | `phase-4.2` | 2026-07-21 | Wire & Harden — CTO-review remediation (auth, wiring, migration, CI, defects) |
 | 0.4.1 | `phase-4.1` | 2026-07-21 | Learning persistence + Learning Intelligence design + end-to-end vertical slice |
 | 0.3.0 | — | 2026-07-20 | Phase 3 — Curriculum Studio authoring platform |

@@ -53,6 +53,16 @@ class CurriculumStudioReadModel:
                     return self._project(lesson, objective_code)
         return None
 
+    def published_lessons(self) -> list[LessonView]:
+        """Project every published lesson once (homework/assessment/recommendation queries)."""
+        out: list[LessonView] = []
+        with cs_unit_of_work(self._sf) as uow:
+            lessons = [x for x in uow.lessons.all() if x.workflow.state.value == "published"]
+        for lesson in lessons:
+            code = lesson.learning_outcomes[0] if lesson.learning_outcomes else ""
+            out.append(self._project(lesson, code))
+        return out
+
     def published_graph(self) -> CurriculumGraph:
         """Build the decision-engine curriculum graph from currently-published lessons.
 
@@ -70,32 +80,41 @@ class CurriculumStudioReadModel:
                     infos.append(ObjectiveInfo(code, lesson.lesson_id, (), seq))
         return CurriculumGraph(objectives=tuple(infos))
 
+    def _item_view(
+        self, item: object, objective_code: str, corrections: dict[str, str]
+    ) -> ItemView:
+        key = _as_dict(getattr(item, "answer_key", {}))
+        for ref, text in _as_dict(key.get("corrections")).items():
+            corrections[str(ref)] = str(text)
+        return ItemView(
+            item_ref=str(getattr(item, "item_id", "")),
+            objective_code=objective_code,
+            prompt=_bilingual(getattr(item, "stem", None)),
+            options=tuple(_text(o) for o in getattr(item, "options", [])),
+            correct_option=_as_int(key.get("correct_option")),
+            option_misconceptions={
+                int(k): str(v) for k, v in _as_dict(key.get("option_misconceptions")).items()
+            },
+            hints=tuple(_text(h.hint) for h in getattr(item, "hints", [])),
+        )
+
     def _project(self, lesson: Lesson, objective_code: str) -> LessonView:
         steps: list[str] = []
         for we in lesson.worked_examples:
             steps.append(_text(we.prompt))
             steps.extend(_text(s) for s in we.steps)
 
-        items: list[ItemView] = []
         corrections: dict[str, str] = {}
-        for item in lesson.practice_questions:
-            key = item.answer_key
-            option_misc = {
-                int(k): str(v) for k, v in _as_dict(key.get("option_misconceptions")).items()
-            }
-            for ref, text in _as_dict(key.get("corrections")).items():
-                corrections[str(ref)] = str(text)
-            items.append(
-                ItemView(
-                    item_ref=item.item_id,
-                    objective_code=objective_code,
-                    prompt=_bilingual(item.stem),
-                    options=tuple(_text(o) for o in item.options),
-                    correct_option=_as_int(key.get("correct_option")),
-                    option_misconceptions=option_misc,
-                    hints=tuple(_text(h.hint) for h in item.hints),
-                )
-            )
+        practice = tuple(
+            self._item_view(i, objective_code, corrections) for i in lesson.practice_questions
+        )
+        homework = tuple(self._item_view(i, objective_code, corrections) for i in lesson.homework)
+        formative = tuple(
+            self._item_view(i, objective_code, corrections) for i in lesson.assessment.formative
+        )
+        summative = tuple(
+            self._item_view(i, objective_code, corrections) for i in lesson.assessment.summative
+        )
 
         return LessonView(
             lesson_id=lesson.lesson_id,
@@ -103,6 +122,10 @@ class CurriculumStudioReadModel:
             title=_bilingual(lesson.title),
             explanation=_bilingual(lesson.student_explanation),
             worked_example_steps=tuple(s for s in steps if s),
-            practice_items=tuple(items),
+            practice_items=practice,
             misconception_corrections=corrections,
+            homework_items=homework,
+            assessment_formative=formative,
+            assessment_summative=summative,
+            summative_mentor_mediated=lesson.assessment.mentor_mediated_summative,
         )

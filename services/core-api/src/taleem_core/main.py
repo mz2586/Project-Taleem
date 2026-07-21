@@ -47,9 +47,11 @@ from .contexts.learning.adapters.persistence.base import (
     create_learning_session_factory,
 )
 from .contexts.learning.adapters.persistence.uow import LearningUnitOfWork
+from .contexts.learning.adapters.student_api import build_student_router
 from .contexts.learning.application.analytics import LearningAnalytics
 from .contexts.learning.application.knowledge_service import KnowledgeService
 from .contexts.learning.application.session_service import SessionService
+from .contexts.learning.application.student_queries import StudentQueryService
 from .contexts.learning.domain.decision import DecisionConfig
 from .contexts.learning.domain.estimator import BKTEstimator
 from .contexts.learning.domain.forgetting import HalfLifeForgettingModel
@@ -166,6 +168,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         curriculum=read_model,
     )
     app.include_router(build_learning_router(learning_deps, claims_dependency))
+
+    # ---- Student query surface (derived read models: homework, reviews, history, …) ----
+    student_queries = StudentQueryService(learning_uow, read_model, time.time)
+    app.include_router(build_student_router(student_queries, claims_dependency))
 
     # Register the modules this deployable composes (plugin architecture).
     reg = module_registry()
