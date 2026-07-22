@@ -8,6 +8,33 @@ The local Git history is the official project history; each released version map
 
 - Nothing pending.
 
+## [0.7.0] — 2026-07-22
+
+Tag: `phase-7` · Curriculum Production System + Grade 4 complete. See
+[PHASE_7_REPORT.md](PHASE_7_REPORT.md). Documentation + curriculum content only — no architecture
+redesign; all existing curriculum, learning, offline, student, guardian, and assessment components
+are reused.
+
+### Added
+
+- **Curriculum production system** (the system to produce curriculum at scale, over the existing
+  platform): `CURRICULUM_FRAMEWORK.md` (KG–10 production skeleton), `CONTENT_PRODUCTION_PIPELINE.md`
+  (the Draft→Educational→Quality→Child-Safety→Publication→Offline-Packaging flow mapped to the
+  existing Curriculum Studio `Workflow` + `OfflinePackageService`), `CONTENT_STANDARDS.md` (8
+  standards), `QUALITY_ASSURANCE_CHECKLISTS.md` (6 validation checklists).
+- **Grade 4 complete curriculum package** under `curriculum/grade-4/`: `GRADE4_PACKAGE.md` (index) +
+  `URDU.md`, `ENGLISH.md`, `GENERAL_SCIENCE.md`, `SOCIAL_STUDIES.md`, `ISLAMIAT_ETHICS.md` (dual
+  track); Mathematics reused from Phase 6.1. ~123 objectives across all core subjects, each with
+  units, assessments, revision, homework, a term project, misconception library, and guides. All
+  `authored-original`, `[RE-EXPRESSED]`, child-safe, Urdu-first; sensitive subjects routed through
+  the subject-expert + child-safety review gates.
+
+### Quality
+
+- No source code changed. Gates confirm the platform is unaffected: ruff/black/mypy(strict) green;
+  pytest 159 passed, 6 skipped; OpenAPI valid; frontend tsc clean, 78 vitest tests, build green;
+  markdownlint 0 errors on all Phase 7 docs.
+
 ## [0.6.4] — 2026-07-22
 
 Tag: `phase-6.2C-1` · Offline Engineering Hardening. See [PHASE_6_2C_1_REPORT.md](PHASE_6_2C_1_REPORT.md).

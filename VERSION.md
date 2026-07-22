@@ -1,7 +1,7 @@
 # Version
 
-Current version: **0.6.4**
-Milestone: **phase-6.2C-1** (Offline Engineering Hardening)
+Current version: **0.7.0**
+Milestone: **phase-7** (Curriculum Production System + Grade 4 complete)
 Status: **pre-production / development** — governance-gated; no real child data.
 Date: 2026-07-22
 
@@ -23,6 +23,7 @@ version and is bumped independently of this project milestone version.
 
 | Version | Tag | Date | Milestone |
 | --- | --- | --- | --- |
+| 0.7.0 | `phase-7` | 2026-07-22 | Curriculum Production System (framework, pipeline, standards, QA) + Grade 4 complete package (all core subjects) — documentation + content only, reuses existing platform |
 | 0.6.4 | `phase-6.2C-1` | 2026-07-22 | Offline Engineering Hardening — Ed25519 package signing + client verification, chaos/fault-injection framework, cache purge/de-enrolment, diagnostics enhancements, LRU eviction |
 | 0.6.3 | `phase-6.2B` | 2026-07-22 | Offline Synchronization Engine — durable sync consumer (attempt→evidence, idempotent), sync queue, background drain, retry, reconcile, resume, diagnostics, status UI |
 | 0.6.2 | `phase-6.2A` | 2026-07-22 | Offline-Lite — service worker, IndexedDB, download manager, offline dashboard/lessons, local progress + resume, cache versioning; backend offline package service |

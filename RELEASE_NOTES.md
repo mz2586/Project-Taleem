@@ -6,6 +6,35 @@ this repository has no remote and the local Git history is authoritative.
 
 ---
 
+## 0.7.0 — Phase 7: Curriculum Production System + Grade 4 (2026-07-22)
+
+Tag: `phase-7`
+
+Taleem becomes a complete **educational** platform, not just a software one: a system to produce
+curriculum at scale, plus the first complete grade.
+
+### Highlights
+
+- **A production system, built on what already exists.** The authoring pipeline
+  (Draft → Educational → Quality → Child-Safety → Publication → Offline-Packaging) is the platform's
+  existing Curriculum Studio workflow + offline packaging — documented, not rebuilt. A KG–10 framework,
+  eight content standards, and six QA validation checklists complete the system.
+- **Grade 4, complete.** All six core subjects — Mathematics, Urdu, English, General Science, Social
+  Studies, and Islamiat/Ethics (dual track) — authored to the framework: ~123 objectives with units,
+  assessments, revision, homework, term projects, misconception libraries, and parent/teacher guides.
+- **Safe + original by construction.** Every outcome is our own re-expression (never verbatim
+  government text); every lesson is authored-original, child-safe, and Urdu-first. Sensitive subjects
+  are kept structural + value-level and routed through subject-expert + child-safety review — nothing
+  is fabricated.
+
+### Quality
+
+- No source code changed. All gates green: ruff/black/mypy(strict); pytest 159 passed / 6 skipped;
+  OpenAPI valid; frontend tsc clean, 78 vitest tests, build green; markdownlint clean. See
+  `PHASE_7_REPORT.md`.
+
+---
+
 ## 0.6.4 — Phase 6.2C-1: Offline Engineering Hardening (2026-07-22)
 
 Tag: `phase-6.2C-1`
