@@ -8,6 +8,30 @@ The local Git history is the official project history; each released version map
 
 - Nothing pending.
 
+## [0.10.0] — 2026-07-22
+
+Tag: `phase-10` · Pilot Validation. See [PHASE_10_REPORT.md](PHASE_10_REPORT.md). Validation
+documentation only — reviews the existing platform's readiness for Pilot 0; **no new features, no
+redesign, no new domain models, no source code changed.**
+
+### Added
+
+- **Pilot readiness review** ([PILOT_READINESS_REVIEW.md](PILOT_READINESS_REVIEW.md)) — per-dimension
+  review of all 10 phases (architecture, curriculum, AI Teacher, offline, sync, guardian, mentor, pilot
+  ops), the 8-step end-to-end journey (expected / observed / evidence / risk), and the remaining
+  engineering/content/ops gaps (G-A…G-G).
+- **Pilot risk register** ([PILOT_RISK_REGISTER.md](PILOT_RISK_REGISTER.md)) — technical / operational /
+  educational / safeguarding risks, ranked Critical / High / Medium / Low; **no open Critical risk**.
+- **Go/No-Go decision** ([GO_NO_GO_DECISION.md](GO_NO_GO_DECISION.md)) — **GO WITH CONDITIONS** for
+  Pilot 0 (conditions C1–C6); Pilot 1 (children) **NO-GO until M-Gov + M-Safe**. Evidence-backed.
+- **Post-pilot backlog** ([POST_PILOT_BACKLOG.md](POST_PILOT_BACKLOG.md)) — Must-have-before-Pilot-1 /
+  Should-have / Future (a triage of already-identified work).
+
+### Evidence
+
+- 10 phases; backend 169 passed / 7 skipped at **97% coverage**; frontend 78 vitest tests; 6 OpenAPI
+  contracts valid; ruff/black/mypy(strict) green; markdownlint clean.
+
 ## [0.9.0] — 2026-07-22
 
 Tag: `phase-9` · Pilot Operations & Guardian Experience. See [PHASE_9_REPORT.md](PHASE_9_REPORT.md).

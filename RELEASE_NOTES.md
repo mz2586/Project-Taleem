@@ -6,6 +6,34 @@ this repository has no remote and the local Git history is authoritative.
 
 ---
 
+## 0.10.0 — Phase 10: Pilot Validation (2026-07-22)
+
+Tag: `phase-10`
+
+The honest verdict on whether Taleem is ready for its first internal dry run — grounded in the real,
+measured state of the platform.
+
+### Highlights
+
+- **GO WITH CONDITIONS for Pilot 0.** The engineering core is complete and proven: architecture, the
+  AI Teacher, the offline platform, and synchronization are validated, and their hardest guarantees —
+  no data loss / no double-count, no hallucination / no answer leak, no child PII — are demonstrated by
+  tests and invariants. **No open Critical risk.**
+- **The conditions are execution, not architecture.** Pilot 0 runs once six bounded items land: recorded
+  Urdu audio, a published content arc, the student-session UI, deployed infra + kill-switch, the
+  assurance pass (accessibility / security / load), and a safeguarding drill.
+- **Pilot 1 (real children) stays NO-GO** until the governance and safeguarding gates (M-Gov, M-Safe)
+  close — unchanged and clearly separated from the Pilot-0 conditions.
+- **Everything else is triaged into a post-pilot backlog** (must-have-before-Pilot-1 / should-have /
+  future) — a triage of known work, not a new roadmap.
+
+### Evidence
+
+- 10 phases; backend 169 passed / 7 skipped at 97% coverage; frontend 78 vitest tests; 6 OpenAPI
+  contracts valid; all gates green. No source code changed. See `PHASE_10_REPORT.md`.
+
+---
+
 ## 0.9.0 — Phase 9: Pilot Operations & Guardian Experience (2026-07-22)
 
 Tag: `phase-9`
