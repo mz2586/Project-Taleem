@@ -6,6 +6,35 @@ this repository has no remote and the local Git history is authoritative.
 
 ---
 
+## 0.8.0 — Phase 8: AI Teacher (2026-07-22)
+
+Tag: `phase-8`
+
+Taleem gets its teacher — one that personalizes instruction while staying **safe, curriculum-aligned,
+and explainable**, without a single line of generated text.
+
+### Highlights
+
+- **A teacher you can trust because it can't make things up.** The AI Teacher is templated and
+  deterministic: every word it says is authored, reviewed lesson content — it *cannot* hallucinate a
+  fact or wander off-curriculum. Grounding is structural, and every response self-certifies it
+  (grounded / non-generative / never-reveals-the-answer / age-appropriate / confidence).
+- **Personalized, still explainable.** Four explanation styles (direct, worked-example-led,
+  concrete-to-abstract, question-led), difficulty that adapts to the learner, weak-topic detection, and
+  a revision plan — all chosen by transparent rules with a rationale a mentor can read.
+- **Honest about what it knows.** A calibrated confidence indicator (low by default) and escalation to
+  a human when a learner is repeatedly stuck.
+- **Works offline.** Teaching, hints, and corrections run fully offline from the signed package; only
+  grading (queued), the plan (cached), and remote escalation (queued) wait for connectivity —
+  gracefully, with honest messaging. Generative rephrasing is disabled offline, always.
+
+### Quality
+
+- Backend: 169 passed, 7 skipped; ruff/black/mypy(strict) green; OpenAPI valid. Frontend unchanged:
+  tsc clean, 78 vitest tests, build green; markdownlint clean. See `PHASE_8_REPORT.md`.
+
+---
+
 ## 0.7.0 — Phase 7: Curriculum Production System + Grade 4 (2026-07-22)
 
 Tag: `phase-7`

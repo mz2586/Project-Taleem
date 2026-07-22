@@ -38,6 +38,7 @@ from .contexts.curriculum_studio.adapters.persistence import (
 )
 from .contexts.curriculum_studio.application.service import CurriculumStudioService
 from .contexts.health.service import Check, HealthService
+from .contexts.learning.adapters.ai_teacher_api import build_ai_teacher_router
 from .contexts.learning.adapters.api import LearningApiDeps, build_learning_router
 from .contexts.learning.adapters.curriculum_read_model import CurriculumStudioReadModel
 from .contexts.learning.adapters.memory import InMemorySessionRepository
@@ -50,6 +51,7 @@ from .contexts.learning.adapters.persistence.base import (
 )
 from .contexts.learning.adapters.persistence.uow import LearningUnitOfWork
 from .contexts.learning.adapters.student_api import build_student_router
+from .contexts.learning.application.ai_teacher_service import AITeacherService
 from .contexts.learning.application.analytics import LearningAnalytics
 from .contexts.learning.application.knowledge_service import KnowledgeService
 from .contexts.learning.application.offline_service import OfflinePackageService
@@ -112,6 +114,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             {
                 "name": "offline",
                 "description": "Offline lesson packages (content-hashed; no child data)",
+            },
+            {
+                "name": "ai-teacher",
+                "description": "AI Teacher — templated, curriculum-grounded, explainable (no LLM)",
             },
         ],
     )
@@ -197,6 +203,18 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         learning_uow, read_model, BKTEstimator(), HalfLifeForgettingModel(), time.time
     )
     sync_coordinator = DurableSyncCoordinator(sync_store, sync_consumer)
+
+    # ---- AI Teacher (Phase 8): templated, curriculum-grounded, explainable (no LLM) ----
+    ai_teacher = AITeacherService(
+        session_service,
+        knowledge_service,
+        read_model,
+        TemplatedTeachingRuntime(),
+        read_model.published_graph,
+        DecisionConfig(),
+        time.time,
+    )
+    app.include_router(build_ai_teacher_router(ai_teacher, session_service, claims_dependency))
 
     # Register the modules this deployable composes (plugin architecture).
     reg = module_registry()

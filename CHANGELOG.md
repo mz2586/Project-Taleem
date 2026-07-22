@@ -8,6 +8,35 @@ The local Git history is the official project history; each released version map
 
 - Nothing pending.
 
+## [0.8.0] — 2026-07-22
+
+Tag: `phase-8` · AI Teacher. See [PHASE_8_REPORT.md](PHASE_8_REPORT.md). A templated, deterministic,
+curriculum-grounded, explainable teaching orchestration over existing components — **no generative
+model** (audit AR-C-06). No architecture redesign; no schema change; no new child-data table.
+
+### Added
+
+- **AI Teacher domain** (`contexts/learning/domain/ai_teacher.py`, pure): four explanation styles
+  (deterministic arrangements of authored content), grounding self-check (`is_grounded`), confidence
+  calibration (from BKT uncertainty), difficulty mapping, the adaptive plan (weak topics, revision,
+  personalized practice), the offline capability matrix, and escalation logic.
+- **AI Teacher service + API** (`application/ai_teacher_service.py`, `adapters/ai_teacher_api.py`):
+  `POST /v1/learning/sessions/{id}:explain` (styled, grounded, confidence-annotated, guardrail-
+  certified), `GET /v1/learning/students/{ref}/ai-teacher/plan`, and `…/ai-teacher/capabilities` —
+  authenticated, authorized, IDOR-guarded. Contract `packages/contracts/ai-teacher.openapi.yaml`.
+- **Docs:** `AI_TEACHER_ARCHITECTURE.md`, `AI_TEACHER_INTERACTION_MODEL.md`, `AI_TEACHER_SAFETY_MODEL.md`,
+  `AI_TEACHER_EVALUATION.md`, `AI_TEACHER_OFFLINE.md`.
+
+### Changed
+
+- `main.py` constructs + mounts the AI Teacher (reusing the same components as SessionService) and adds
+  the `ai-teacher` OpenAPI tag.
+
+### Quality
+
+- Backend: 169 passed, 7 skipped (PostgreSQL-gated); ruff/black/mypy(strict) green; OpenAPI valid
+  (6 contracts). Frontend unchanged: tsc clean, 78 vitest tests, build green. markdownlint clean.
+
 ## [0.7.0] — 2026-07-22
 
 Tag: `phase-7` · Curriculum Production System + Grade 4 complete. See
