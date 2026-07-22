@@ -6,6 +6,36 @@ this repository has no remote and the local Git history is authoritative.
 
 ---
 
+## 0.9.0 — Phase 9: Pilot Operations & Guardian Experience (2026-07-22)
+
+Tag: `phase-9`
+
+Everything a supervised pilot needs around the learner — the guardian and mentor experience, the
+operational runbooks, and the proof that the whole journey already works.
+
+### Highlights
+
+- **Guardians and mentors, over data that already exists.** Every guardian panel (dashboard, progress
+  timeline, weekly summary, recommendations, sync visibility, notifications) and every mentor workflow
+  (learner overview, intervention triage, escalation review, assessment review, follow-up) maps to a
+  derived read model or AI Teacher output the platform already produces — no new architecture.
+- **Ready to run.** Pilot runbook, device preparation, offline deployment, support guide, incident
+  response (safety-first), and a data-collection plan — all reusing the signed offline packages,
+  durable sync, kill-switch, and safeguarding runbook.
+- **Proven end to end.** Guardian → Student → Lesson → Offline study → Assessment → Synchronization →
+  Guardian reporting → Mentor intervention — every step mapped to an existing, tested component.
+- **Measured honestly.** Seven pilot success metrics from existing data, under one north star: **zero
+  unhandled safety incidents.** The only things left before real children are the governance and safety
+  gates (M-Gov, M-Safe) and the on-site Pilot 0 dry run — not engineering.
+
+### Quality
+
+- No source code changed. All gates green: ruff/black/mypy(strict); pytest 169 passed / 7 skipped;
+  OpenAPI valid; frontend tsc clean, 78 vitest tests, build green; markdownlint clean. See
+  `PHASE_9_REPORT.md`.
+
+---
+
 ## 0.8.0 — Phase 8: AI Teacher (2026-07-22)
 
 Tag: `phase-8`

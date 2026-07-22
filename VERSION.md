@@ -1,7 +1,7 @@
 # Version
 
-Current version: **0.8.0**
-Milestone: **phase-8** (AI Teacher — templated, curriculum-grounded, explainable)
+Current version: **0.9.0**
+Milestone: **phase-9** (Pilot Operations & Guardian Experience)
 Status: **pre-production / development** — governance-gated; no real child data.
 Date: 2026-07-22
 
@@ -23,6 +23,7 @@ version and is bumped independently of this project milestone version.
 
 | Version | Tag | Date | Milestone |
 | --- | --- | --- | --- |
+| 0.9.0 | `phase-9` | 2026-07-22 | Pilot Operations & Guardian Experience — guardian + mentor experience design (over existing read models), pilot ops runbooks (runbook, device prep, incident response), end-to-end validation, success metrics; documentation only, reuses existing platform |
 | 0.8.0 | `phase-8` | 2026-07-22 | AI Teacher — templated, curriculum-grounded, explainable teaching orchestration (no LLM): explanation styles, adaptive plan, guardrails, confidence, offline capability matrix; reuses existing components |
 | 0.7.0 | `phase-7` | 2026-07-22 | Curriculum Production System (framework, pipeline, standards, QA) + Grade 4 complete package (all core subjects) — documentation + content only, reuses existing platform |
 | 0.6.4 | `phase-6.2C-1` | 2026-07-22 | Offline Engineering Hardening — Ed25519 package signing + client verification, chaos/fault-injection framework, cache purge/de-enrolment, diagnostics enhancements, LRU eviction |

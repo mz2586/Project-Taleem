@@ -8,6 +8,34 @@ The local Git history is the official project history; each released version map
 
 - Nothing pending.
 
+## [0.9.0] — 2026-07-22
+
+Tag: `phase-9` · Pilot Operations & Guardian Experience. See [PHASE_9_REPORT.md](PHASE_9_REPORT.md).
+Documentation only — design + operations over the existing platform; no architecture redesign, no
+schema change, no new child-data table.
+
+### Added
+
+- **Guardian experience** ([GUARDIAN_EXPERIENCE.md](GUARDIAN_EXPERIENCE.md)) — dashboard, progress
+  timeline, weekly summary, attendance/activity, recommendations, offline sync visibility,
+  notifications; each mapped to an existing derived read model (guardian auth/linkage is M-Gov).
+- **Mentor workflows** ([MENTOR_WORKFLOWS.md](MENTOR_WORKFLOWS.md)) — learner overview, students needing
+  intervention, AI Teacher escalation review, progress analytics, assessment review, follow-up; over
+  mentor-privileged reads + the AI Teacher plan (cohort roster is M-Gov/admin).
+- **Pilot operations** — [PILOT_RUNBOOK.md](PILOT_RUNBOOK.md) (onboarding, offline deployment, daily
+  ops, support, data-collection plan), [DEVICE_PREPARATION.md](DEVICE_PREPARATION.md),
+  [INCIDENT_RESPONSE.md](INCIDENT_RESPONSE.md).
+- **End-to-end validation** ([END_TO_END_VALIDATION.md](END_TO_END_VALIDATION.md)) — the 8-step journey
+  mapped to existing, tested components; governance-gated pieces flagged.
+- **Pilot success metrics** ([PILOT_SUCCESS_METRICS.md](PILOT_SUCCESS_METRICS.md)) — 7 measurable
+  metrics with definition, existing data source, target, and method.
+
+### Quality
+
+- No source code changed. Gates confirm the platform is unaffected: ruff/black/mypy(strict) green;
+  pytest 169 passed, 7 skipped; OpenAPI valid; frontend tsc clean, 78 vitest tests, build green;
+  markdownlint 0 errors.
+
 ## [0.8.0] — 2026-07-22
 
 Tag: `phase-8` · AI Teacher. See [PHASE_8_REPORT.md](PHASE_8_REPORT.md). A templated, deterministic,
