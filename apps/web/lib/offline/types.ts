@@ -18,6 +18,15 @@ export interface PackageManifest {
   assets: PackageAsset[];
   total_bytes: number;
   created_at_ms: number;
+  // Phase 6.2C-1 (optional — empty/absent = unsigned, backward-compatible with 6.2A/6.2B).
+  signature?: string; // hex Ed25519 signature over `${package_id}\n${version}\n${content_hash}`
+  signing_key_id?: string;
+}
+
+export interface SigningKey {
+  key_id: string;
+  algorithm: string; // "Ed25519"
+  public_key_hex: string;
 }
 
 export interface OfflineItem {
@@ -58,6 +67,7 @@ export interface StoredPackage {
   total_bytes: number;
   installed_at: number;
   last_used_at: number;
+  signature_ok?: boolean; // Phase 6.2C-1: whether the manifest signature verified at install
 }
 
 // A locally-recorded learning event (offline-lite: persisted locally; NOT synced in 6.2A).
@@ -141,6 +151,9 @@ export interface ItemResult {
 export interface BatchResult {
   cursor: number;
   results: ItemResult[];
+  // Phase 6.2C-1 (optional, backward-compatible): student_refs the server asks the client to purge
+  // (de-enrolment / consent withdrawal). Absent when the server does not send it.
+  purge?: string[];
 }
 
 export interface SyncDiagnostics {
@@ -154,6 +167,12 @@ export interface SyncDiagnostics {
   drains: number;
   lastSyncAt: number | null;
   lastError: string | null;
+  // Phase 6.2C-1 hardening counters (all local; C1-only; no student_ref, no content, no PII).
+  signatureFailures: number;
+  integrityFailures: number;
+  evictions: number;
+  evictedBytes: number;
+  purges: number;
 }
 
 export interface DrainSummary {

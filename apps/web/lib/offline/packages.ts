@@ -1,14 +1,16 @@
-// Download manager + offline lesson store (Phase 6.2A).
+// Download manager + offline lesson store (Phase 6.2A; hardened in 6.2C-1).
 //
-// Fetches an offline package, VERIFIES its content against the manifest hash, and installs it
-// atomically into the local store (content + a package registry record). Also exposes the cached
-// lesson for offline rendering and a storage pre-flight so a device is never over-filled.
-// No background sync, no signing (6.2B/6.2C). Operates over injected deps for testability.
+// Fetches an offline package, VERIFIES its Ed25519 signature (6.2C-1) and its content hash, and
+// installs it atomically into the local store (content + a package registry record). Also exposes
+// the cached lesson for offline rendering, a storage pre-flight, and LRU eviction of disposable
+// packages (6.2C-1) — never touching the un-synced queue/checkpoints. Operates over injected deps.
 
 import { isPackageCurrent } from "./cacheVersion";
 import type { KVStore } from "./kv";
 import { STORES } from "./kv";
 import { verifyContent } from "./sha256";
+import { verifyManifestSignature } from "./signature";
+import type { KeyResolver } from "./signature";
 import type {
   OfflineContent,
   OfflinePackage,
@@ -16,6 +18,13 @@ import type {
   StorageEstimate,
   StoredPackage,
 } from "./types";
+
+// Optional hook so the download path can record hardening events (6.2C-1) without a hard dependency.
+export interface DownloadEvents {
+  onSignatureFailure?: (lessonId: string, keyId: string) => void;
+  onIntegrityFailure?: (lessonId: string) => void;
+  onEviction?: (lessonId: string, bytes: number) => void;
+}
 
 export interface DownloadDeps {
   store: KVStore;
@@ -27,6 +36,12 @@ export interface DownloadDeps {
   estimate?: () => Promise<StorageEstimate>;
   // Reserve headroom so the device is never filled to the brim.
   headroomBytes?: number;
+  // 6.2C-1 signature verification: resolves a pinned public key by signing_key_id.
+  resolveKey?: KeyResolver;
+  // 6.2C-1: if true, an unsigned manifest (or one whose key is unknown) is rejected.
+  requireSignature?: boolean;
+  // 6.2C-1: optional hardening-event hook (diagnostics).
+  events?: DownloadEvents;
 }
 
 export class QuotaExceededError extends Error {
@@ -43,6 +58,16 @@ export class IntegrityError extends Error {
   constructor(readonly lessonId: string) {
     super(`content integrity check failed for ${lessonId}`);
     this.name = "IntegrityError";
+  }
+}
+
+export class SignatureError extends Error {
+  constructor(
+    readonly lessonId: string,
+    readonly keyId: string,
+  ) {
+    super(`package signature verification failed for ${lessonId} (key ${keyId || "none"})`);
+    this.name = "SignatureError";
   }
 }
 
@@ -80,22 +105,21 @@ export class DownloadManager {
   ): Promise<StoredPackage> {
     onProgress?.(0);
     const pkg = await this.deps.fetchPackage(lessonId);
-    onProgress?.(0.4);
+    onProgress?.(0.3);
 
-    // Storage pre-flight — refuse rather than half-install.
-    if (this.deps.estimate) {
-      const est = await this.deps.estimate();
-      if (!fitsInQuota(pkg.manifest.total_bytes, est, this.deps.headroomBytes ?? 0)) {
-        throw new QuotaExceededError(
-          pkg.manifest.total_bytes,
-          Math.max(0, est.quota - est.usage),
-        );
-      }
-    }
+    // Signature verification (6.2C-1) — BEFORE trusting any bytes. Provenance + downgrade-resistance.
+    const signatureOk = await this.verifySignature(pkg.manifest);
+    onProgress?.(0.5);
+
+    // Storage pre-flight — try LRU eviction of disposable packages, then refuse rather than half-install.
+    await this.ensureSpace(pkg.manifest.total_bytes);
 
     // Integrity: the received content must match the manifest's content hash.
     const ok = await verifyContent(pkg.content, pkg.manifest.content_hash);
-    if (!ok) throw new IntegrityError(lessonId);
+    if (!ok) {
+      this.deps.events?.onIntegrityFailure?.(lessonId);
+      throw new IntegrityError(lessonId);
+    }
     onProgress?.(0.7);
 
     // Atomic-ish install: write content, then flip the registry record to "ready".
@@ -109,10 +133,40 @@ export class DownloadManager {
       total_bytes: pkg.manifest.total_bytes,
       installed_at: this.deps.now(),
       last_used_at: this.deps.now(),
+      signature_ok: signatureOk,
     };
     await this.deps.store.put<StoredPackage>(STORES.packages, lessonId, record);
     onProgress?.(1);
     return record;
+  }
+
+  // Verify the manifest signature against a pinned key. Returns whether a valid signature was
+  // present; throws SignatureError when verification fails or a signature is required but absent.
+  private async verifySignature(manifest: PackageManifest): Promise<boolean> {
+    const keyId = manifest.signing_key_id ?? "";
+    const hasSignature = Boolean(manifest.signature) && Boolean(keyId);
+    if (!hasSignature) {
+      if (this.deps.requireSignature) {
+        this.deps.events?.onSignatureFailure?.(manifest.lesson_id, keyId);
+        throw new SignatureError(manifest.lesson_id, keyId);
+      }
+      return false; // unsigned + not required → backward-compatible (6.2A/6.2B) install
+    }
+    if (!this.deps.resolveKey) {
+      // A signature is present but the client cannot resolve keys.
+      if (this.deps.requireSignature) {
+        this.deps.events?.onSignatureFailure?.(manifest.lesson_id, keyId);
+        throw new SignatureError(manifest.lesson_id, keyId);
+      }
+      return false;
+    }
+    const key = await this.deps.resolveKey(keyId);
+    const ok = key !== null && (await verifyManifestSignature(manifest, key));
+    if (!ok) {
+      this.deps.events?.onSignatureFailure?.(manifest.lesson_id, keyId);
+      throw new SignatureError(manifest.lesson_id, keyId);
+    }
+    return true;
   }
 
   // The cached lesson content for offline rendering (undefined if not installed).
@@ -132,6 +186,41 @@ export class DownloadManager {
   async remove(lessonId: string): Promise<void> {
     await this.deps.store.delete(STORES.content, lessonId);
     await this.deps.store.delete(STORES.packages, lessonId);
+  }
+
+  // Ensure `needBytes` can fit: if not, LRU-evict disposable packages, then refuse if still short.
+  // Only ever evicts installed packages/content (C0 curriculum, always re-downloadable) — NEVER the
+  // un-synced evidence queue or checkpoints (those live in other stores and are untouched here).
+  async ensureSpace(needBytes: number): Promise<void> {
+    if (!this.deps.estimate) return;
+    const headroom = this.deps.headroomBytes ?? 0;
+    let est = await this.deps.estimate();
+    if (fitsInQuota(needBytes, est, headroom)) return;
+
+    const deficit = needBytes + headroom - Math.max(0, est.quota - est.usage);
+    await this.evictLRU(deficit);
+
+    est = await this.deps.estimate();
+    if (!fitsInQuota(needBytes, est, headroom)) {
+      throw new QuotaExceededError(needBytes, Math.max(0, est.quota - est.usage));
+    }
+  }
+
+  // Evict disposable packages, least-recently-used first, until ≥ bytesToFree is removed.
+  // Returns bytes freed. Safe: packages/content are re-downloadable curriculum (C0).
+  async evictLRU(bytesToFree: number): Promise<number> {
+    if (bytesToFree <= 0) return 0;
+    const byLru = (await this.installedPackages()).sort(
+      (a, b) => a.last_used_at - b.last_used_at,
+    );
+    let freed = 0;
+    for (const pkg of byLru) {
+      if (freed >= bytesToFree) break;
+      await this.remove(pkg.lesson_id);
+      freed += pkg.total_bytes;
+      this.deps.events?.onEviction?.(pkg.lesson_id, pkg.total_bytes);
+    }
+    return freed;
   }
 }
 

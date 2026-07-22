@@ -13,23 +13,30 @@ import {
   requestPersistentStorage,
 } from "./packages";
 import { ProgressStore } from "./progress";
+import { PurgeService } from "./purge";
 import { ReadCache } from "./readCache";
 import { registerBackgroundSync, startAutoDrain } from "./backgroundSync";
 import { reconcileAndResume } from "./reconcile";
+import { pinnedKeyResolver } from "./signature";
+import type { KeyResolver } from "./signature";
 import { SyncClient } from "./syncClient";
 import { SyncQueue } from "./syncQueue";
+import type { PurgeResult } from "./purge";
 import type { BatchResult, DrainSummary, OfflinePackage, SyncDelta } from "./types";
 
 export * from "./types";
 export { STORES } from "./kv";
 export { SHELL_CACHE, APP_SHELL_VERSION, packageIsStale, isPackageCurrent } from "./cacheVersion";
-export { fitsInQuota, QuotaExceededError, IntegrityError } from "./packages";
+export { fitsInQuota, QuotaExceededError, IntegrityError, SignatureError } from "./packages";
 export { watchConnectivity, currentlyOnline, makeProbe } from "./connectivity";
 export { SyncQueue } from "./syncQueue";
 export { SyncClient, backoffMs } from "./syncClient";
 export { SyncDiagnosticsStore } from "./diagnostics";
 export { registerBackgroundSync, startAutoDrain, SYNC_TAG } from "./backgroundSync";
 export { reconcileAndResume } from "./reconcile";
+export { PurgeService } from "./purge";
+export { pinnedKeyResolver, importPublicKey, verifyManifestSignature } from "./signature";
+export { FaultyStore, faultyPostBatch } from "./chaos";
 export { uuid7 } from "./ids";
 
 export interface OfflineSync {
@@ -48,6 +55,8 @@ export interface OfflineClient {
   checkpoints: CheckpointStore;
   reads: ReadCache;
   sync: OfflineSync;
+  purge: PurgeService;
+  purgeStudent: (studentRef: string) => Promise<PurgeResult>;
   requestPersistentStorage: () => Promise<boolean>;
   watchConnectivity: (l: ConnectivityListener) => () => void;
 }
@@ -59,26 +68,51 @@ export interface CreateClientOptions {
   postBatch: (cursor: number, deltas: SyncDelta[]) => Promise<BatchResult>;
   now?: () => number;
   headroomBytes?: number;
+  // 6.2C-1: pinned Ed25519 public keys { key_id -> public_key_hex } to verify package signatures.
+  pinnedKeys?: Record<string, string>;
+  // 6.2C-1: reject an unsigned/unverifiable package rather than installing it.
+  requireSignature?: boolean;
 }
 
 // Build an offline client over the given (or default IndexedDB) store.
 export function createOfflineClient(opts: CreateClientOptions): OfflineClient {
   const store = opts.store ?? createStore();
   const now = opts.now ?? Date.now;
+  const diagnostics = new SyncDiagnosticsStore(store, now);
+
+  const resolveKey: KeyResolver | undefined = opts.pinnedKeys
+    ? pinnedKeyResolver(opts.pinnedKeys)
+    : undefined;
+
   const downloads = new DownloadManager({
     store,
     fetchPackage: opts.fetchPackage,
     now,
     estimate: browserEstimate,
     ...(opts.headroomBytes !== undefined ? { headroomBytes: opts.headroomBytes } : {}),
+    ...(resolveKey ? { resolveKey } : {}),
+    ...(opts.requireSignature !== undefined ? { requireSignature: opts.requireSignature } : {}),
+    events: {
+      onSignatureFailure: () => void diagnostics.recordSignatureFailure(),
+      onIntegrityFailure: () => void diagnostics.recordIntegrityFailure(),
+      onEviction: (_lesson, bytes) => void diagnostics.recordEviction(bytes),
+    },
   });
   const progress = new ProgressStore(store, now);
   const checkpoints = new CheckpointStore(store, now);
   const reads = new ReadCache(store, now);
+  const purge = new PurgeService(store, diagnostics);
 
   const queue = new SyncQueue(store, now);
-  const diagnostics = new SyncDiagnosticsStore(store, now);
-  const client = new SyncClient({ queue, store, diagnostics, postBatch: opts.postBatch });
+  const client = new SyncClient({
+    queue,
+    store,
+    diagnostics,
+    postBatch: opts.postBatch,
+    onPurge: async (refs) => {
+      for (const ref of refs) await purge.purgeStudent(ref);
+    },
+  });
   const drain = () => client.drain();
 
   const sync: OfflineSync = {
@@ -98,6 +132,8 @@ export function createOfflineClient(opts: CreateClientOptions): OfflineClient {
     checkpoints,
     reads,
     sync,
+    purge,
+    purgeStudent: (studentRef: string) => purge.purgeStudent(studentRef),
     requestPersistentStorage,
     watchConnectivity: (l: ConnectivityListener) => watchConnectivity(l),
   };

@@ -39,4 +39,10 @@ def build_offline_router(
             )
         return package.to_dict()
 
+    @router.get("/signing-keys")
+    def signing_keys(claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
+        # Public keys are not secret; a client pins these to verify package signatures (6.2C-1).
+        authorize(claims, "read", "learning.knowledge")
+        return service.signing_keys()
+
     return router

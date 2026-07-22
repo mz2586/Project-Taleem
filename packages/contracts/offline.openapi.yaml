@@ -43,6 +43,28 @@ paths:
           content:
             application/problem+json:
               schema: { $ref: "#/components/schemas/Problem" }
+  /v1/offline/signing-keys:
+    get:
+      tags: [offline]
+      operationId: getOfflineSigningKeys
+      summary: Public Ed25519 signing keys a client pins to verify package signatures
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Signing keys
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SigningKeyList" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
   /v1/offline/packages/{lessonId}:
     get:
       tags: [offline]
@@ -110,6 +132,26 @@ components:
           items: { $ref: "#/components/schemas/PackageAsset" }
         total_bytes: { type: integer }
         created_at_ms: { type: integer }
+        signature:
+          type: string
+          description: >-
+            Hex Ed25519 signature over `${package_id}\n${version}\n${content_hash}` (6.2C-1). Empty
+            when unsigned (backward-compatible). The private seed never leaves the server.
+        signing_key_id:
+          type: string
+          description: Id of the key that produced `signature` (empty when unsigned).
+    SigningKey:
+      type: object
+      properties:
+        key_id: { type: string }
+        algorithm: { type: string, description: '"Ed25519"' }
+        public_key_hex: { type: string, description: "32-byte raw public key, hex (not secret)" }
+    SigningKeyList:
+      type: object
+      properties:
+        keys:
+          type: array
+          items: { $ref: "#/components/schemas/SigningKey" }
     OfflineItem:
       type: object
       description: Child-safe item — prompt, options, authored hints. NO answer key.

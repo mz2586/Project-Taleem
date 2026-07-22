@@ -14,7 +14,13 @@ import type {
   TeachView,
 } from "./types";
 import { ApiError } from "./types";
-import type { BatchResult, OfflinePackage, PackageManifest, SyncDelta } from "../offline/types";
+import type {
+  BatchResult,
+  OfflinePackage,
+  PackageManifest,
+  SigningKey,
+  SyncDelta,
+} from "../offline/types";
 
 // A token provider so the auth source can be swapped (dev stub now; gated child-safe auth later).
 export type TokenProvider = () => string;
@@ -95,6 +101,8 @@ export const learningApi = {
 export const offlineApi = {
   listPackages: () => req<{ packages: PackageManifest[] }>("/v1/offline/packages"),
   fetchPackage: (lessonId: string) => req<OfflinePackage>(`/v1/offline/packages/${lessonId}`),
+  // Public Ed25519 signing keys (6.2C-1) a client may pin to verify package signatures.
+  signingKeys: () => req<{ keys: SigningKey[] }>("/v1/offline/signing-keys"),
 };
 
 // Offline sync (Phase 6.2B). Drains the durable queue to the server; attempts are graded + recorded

@@ -21,6 +21,7 @@ from __future__ import annotations
 import hashlib
 import json
 from dataclasses import dataclass
+from typing import Protocol
 
 from .curriculum_view import ItemView, LessonView
 
@@ -75,6 +76,28 @@ class PackageAsset:
         return {"ref": self.ref, "kind": self.kind, "sha256": self.sha256, "bytes": self.bytes}
 
 
+class PackageSigner(Protocol):
+    """Port for signing a manifest payload (implemented by an Ed25519 adapter). Server-side only."""
+
+    @property
+    def key_id(self) -> str: ...
+
+    @property
+    def public_key_hex(self) -> str: ...
+
+    def sign(self, payload: bytes) -> str: ...
+
+
+def signing_payload(package_id: str, version: str, content_hash: str) -> bytes:
+    """The canonicalization-free bytes that get signed (binds pointer + version + content).
+
+    Using newline-joined fields (not JSON) keeps Python↔WebCrypto interop independent of key
+    ordering. Binding ``version`` + ``package_id`` (not just the hash) also prevents downgrade/
+    pointer-swap of a validly-signed older package.
+    """
+    return f"{package_id}\n{version}\n{content_hash}".encode()
+
+
 @dataclass(frozen=True)
 class OfflinePackageManifest:
     """The verifiable descriptor a client fetches before/with a package (no child data)."""
@@ -87,6 +110,8 @@ class OfflinePackageManifest:
     assets: tuple[PackageAsset, ...]
     total_bytes: int
     created_at_ms: int
+    signature: str = ""  # hex Ed25519 signature over signing_payload (empty = unsigned)
+    signing_key_id: str = ""  # id of the key that produced `signature` (empty = unsigned)
 
     def to_dict(self) -> dict[str, object]:
         return {
@@ -98,16 +123,23 @@ class OfflinePackageManifest:
             "assets": [a.to_dict() for a in self.assets],
             "total_bytes": self.total_bytes,
             "created_at_ms": self.created_at_ms,
+            "signature": self.signature,
+            "signing_key_id": self.signing_key_id,
         }
 
 
 def build_manifest(
-    view: LessonView, *, now_ms: int, package_pointer: str | None = None
+    view: LessonView,
+    *,
+    now_ms: int,
+    package_pointer: str | None = None,
+    signer: PackageSigner | None = None,
 ) -> OfflinePackageManifest:
     """Build a deterministic manifest for a lesson's offline package.
 
-    ``now_ms`` is injected (never wall-clocked here) so builds are reproducible in tests. The
-    manifest is a pure function of (content, pointer, now_ms).
+    ``now_ms`` is injected (never wall-clocked here) so builds are reproducible in tests. If a
+    ``signer`` is provided, the manifest is Ed25519-signed (Phase 6.2C-1); otherwise it is unsigned
+    (backward-compatible with 6.2A/6.2B — empty signature fields).
     """
     content = lesson_offline_content(view)
     chash = content_hash(content)
@@ -116,15 +148,23 @@ def build_manifest(
         ref=f"{view.lesson_id}/content.json", kind=CONTENT_ASSET_KIND, sha256=chash, bytes=size
     )
     pointer = package_pointer or f"pkg/{view.lesson_id}"
+    version = chash[:VERSION_LEN]
+    signature = ""
+    key_id = ""
+    if signer is not None:
+        signature = signer.sign(signing_payload(pointer, version, chash))
+        key_id = signer.key_id
     return OfflinePackageManifest(
         package_id=pointer,
         lesson_id=view.lesson_id,
         objective_code=view.objective_code,
-        version=chash[:VERSION_LEN],
+        version=version,
         content_hash=chash,
         assets=(asset,),
         total_bytes=size,
         created_at_ms=now_ms,
+        signature=signature,
+        signing_key_id=key_id,
     )
 
 
@@ -140,11 +180,17 @@ class OfflinePackage:
 
 
 def build_package(
-    view: LessonView, *, now_ms: int, package_pointer: str | None = None
+    view: LessonView,
+    *,
+    now_ms: int,
+    package_pointer: str | None = None,
+    signer: PackageSigner | None = None,
 ) -> OfflinePackage:
     """Build the full package (manifest + child-safe content) for a lesson."""
     return OfflinePackage(
-        manifest=build_manifest(view, now_ms=now_ms, package_pointer=package_pointer),
+        manifest=build_manifest(
+            view, now_ms=now_ms, package_pointer=package_pointer, signer=signer
+        ),
         content=lesson_offline_content(view),
     )
 

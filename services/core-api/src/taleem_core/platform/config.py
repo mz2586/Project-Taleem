@@ -65,6 +65,15 @@ class Settings:
     request_timeout_ms: int = field(
         default_factory=lambda: _get_int("TALEEM_REQUEST_TIMEOUT_MS", 30000)
     )
+    # Offline package signing (Phase 6.2C-1): a 32-byte Ed25519 seed as hex. DEV DEFAULT ONLY —
+    # a fixed, well-known seed for local/dev; production MUST supply a real seed (ideally KMS-held,
+    # FD-14) via env. The private seed never leaves the server; clients hold only the public key.
+    offline_signing_seed_hex: str = field(
+        default_factory=lambda: _get("TALEEM_OFFLINE_SIGNING_SEED", DEFAULT_OFFLINE_SIGNING_SEED)
+    )
+    offline_signing_key_id: str = field(
+        default_factory=lambda: _get("TALEEM_OFFLINE_SIGNING_KEY_ID", "dev-ed25519-1")
+    )
 
     @property
     def is_production(self) -> bool:
@@ -75,6 +84,8 @@ class Settings:
 
 
 DEFAULT_JWT_DEV_SECRET = "dev-only-not-secret"  # noqa: S105 (sentinel default, rejected in prod)
+# A fixed dev Ed25519 seed (bytes 00..1f as hex). Dev/local only — rejected in production.
+DEFAULT_OFFLINE_SIGNING_SEED = "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
 
 
 class InsecureConfigurationError(RuntimeError):
@@ -92,6 +103,8 @@ def _assert_production_safe(settings: Settings) -> None:
         problems.append(
             "TALEEM_DATABASE_URL is unset (production must use PostgreSQL, not in-memory)"
         )
+    if settings.offline_signing_seed_hex == DEFAULT_OFFLINE_SIGNING_SEED:
+        problems.append("TALEEM_OFFLINE_SIGNING_SEED is the built-in default (forgeable packages)")
     if problems:
         raise InsecureConfigurationError(
             "refusing to start in production with insecure defaults: " + "; ".join(problems)

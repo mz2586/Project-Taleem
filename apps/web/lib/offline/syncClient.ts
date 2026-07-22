@@ -24,6 +24,8 @@ export interface SyncClientDeps {
   // POST a batch to the server. Throws on network failure (offline) — caller keeps the queue.
   postBatch: (cursor: number, deltas: SyncDelta[]) => Promise<BatchResult>;
   batchSize?: number;
+  // 6.2C-1: honor a server-delivered de-enrolment/consent-withdrawal purge (student_refs to clear).
+  onPurge?: (studentRefs: string[]) => Promise<void>;
 }
 
 export class SyncClient {
@@ -87,6 +89,11 @@ export class SyncClient {
         await this.deps.store.put<number>(STORES.syncMeta, CURSOR_KEY, result.cursor);
         summary.cursor = result.cursor;
         summary.sent += batch.length;
+
+        // 6.2C-1: honor a server-delivered purge (de-enrolment / consent withdrawal), if any.
+        if (result.purge && result.purge.length > 0 && this.deps.onPurge) {
+          await this.deps.onPurge(result.purge);
+        }
 
         for (const r of result.results) {
           if (r.status === "applied") {

@@ -6,6 +6,36 @@ this repository has no remote and the local Git history is authoritative.
 
 ---
 
+## 0.6.4 — Phase 6.2C-1: Offline Engineering Hardening (2026-07-22)
+
+Tag: `phase-6.2C-1`
+
+The gate-free hardening of the offline subsystem — signing, resilience, erasure, and diagnostics —
+with **no governance-gated work**.
+
+### Highlights
+
+- **Signed content, verified on the device.** Offline packages are now Ed25519-signed by the server
+  and verified by the client before any bytes are trusted — so only approved, unmodified content ever
+  renders to a child. A pure-stdlib signer (no new dependency) interoperates with browser WebCrypto,
+  proven by a locked cross-language test vector.
+- **Erasure reaches the device.** A de-enrolment / consent-withdrawal purge clears a learner's
+  on-device data (the mechanism; the trigger stays governance-gated).
+- **Resilience you can test.** A reusable chaos / fault-injection framework proves the sync engine
+  survives storage faults and flapping networks with no data loss.
+- **Smarter storage + visibility.** LRU eviction frees space by dropping only re-downloadable
+  content — never the un-synced queue — and diagnostics now count signature/integrity/eviction/purge
+  events (still local; nothing is uploaded).
+- **Backward compatible.** Unsigned packages still install; older diagnostics hydrate.
+
+### Quality
+
+- Backend: 159 passed, 6 skipped; ruff/black/mypy(strict) green; OpenAPI valid.
+- Frontend: `tsc` clean; **78 vitest tests** (incl. Python↔WebCrypto signing interop + chaos);
+  `next build` green. See `PHASE_6_2C_1_REPORT.md`.
+
+---
+
 ## 0.6.3 — Phase 6.2B: Offline Synchronization Engine (2026-07-22)
 
 Tag: `phase-6.2B`

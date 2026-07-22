@@ -41,6 +41,7 @@ def test_production_accepts_real_config() -> None:
         environment=Environment.PRODUCTION,
         jwt_dev_secret="a-real-rotated-secret",  # noqa: S106 (test fixture, not a real secret)
         database_url="postgresql+psycopg://u@h/db",
+        offline_signing_seed_hex="11" * 32,  # a non-default seed (6.2C-1)
     )
     _assert_production_safe(s)  # no raise
 

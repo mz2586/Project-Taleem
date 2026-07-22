@@ -20,6 +20,7 @@ from taleem_core.auth.jwt_verifier import sign_hs256
 from taleem_core.contexts.curriculum_studio.adapters.persistence import unit_of_work as cs_uow
 from taleem_core.contexts.curriculum_studio.application.service import CurriculumStudioService
 from taleem_core.contexts.curriculum_studio.domain.workflow import ReviewAction
+from taleem_core.contexts.learning.adapters.package_signer import Ed25519PackageSigner
 from taleem_core.contexts.learning.domain.curriculum_view import ItemView, LessonView
 from taleem_core.contexts.learning.domain.offline_package import (
     build_manifest,
@@ -27,9 +28,11 @@ from taleem_core.contexts.learning.domain.offline_package import (
     content_hash,
     fits_in_quota,
     lesson_offline_content,
+    signing_payload,
 )
 from taleem_core.main import create_app
-from taleem_core.platform.config import Settings
+from taleem_core.platform import ed25519
+from taleem_core.platform.config import DEFAULT_OFFLINE_SIGNING_SEED, Settings
 from taleem_core.vertical_slice.fractions_lesson import (
     LESSON_KEY,
     build_fractions_lesson,
@@ -115,6 +118,41 @@ def test_manifest_created_at_is_injected_not_wallclocked() -> None:
     assert build_manifest(_view(), now_ms=777).created_at_ms == 777
 
 
+# ---------------------------------------------------------------- unit: Ed25519 signing (6.2C-1)
+
+
+def test_manifest_unsigned_by_default_backward_compatible() -> None:
+    m = build_manifest(_view(), now_ms=1)
+    assert m.signature == "" and m.signing_key_id == ""
+    d = m.to_dict()
+    assert d["signature"] == "" and d["signing_key_id"] == ""
+
+
+def test_signed_manifest_verifies_against_public_key() -> None:
+    signer = Ed25519PackageSigner(DEFAULT_OFFLINE_SIGNING_SEED, "dev-ed25519-1")
+    m = build_manifest(_view(), now_ms=1, signer=signer)
+    assert m.signing_key_id == "dev-ed25519-1" and len(m.signature) == 128
+    payload = signing_payload(m.package_id, m.version, m.content_hash)
+    assert ed25519.verify(bytes.fromhex(m.signature), payload, bytes.fromhex(signer.public_key_hex))
+
+
+def test_signature_binds_content_and_version() -> None:
+    # A signature over one package must not verify for different content/version (downgrade guard).
+    signer = Ed25519PackageSigner(DEFAULT_OFFLINE_SIGNING_SEED, "k")
+    m = build_manifest(_view("first"), now_ms=1, signer=signer)
+    other = signing_payload(
+        m.package_id, m.version, content_hash(lesson_offline_content(_view("2")))
+    )
+    assert not ed25519.verify(
+        bytes.fromhex(m.signature), other, bytes.fromhex(signer.public_key_hex)
+    )
+
+
+def test_signer_rejects_bad_seed_length() -> None:
+    with pytest.raises(ValueError):
+        Ed25519PackageSigner("00", "k")
+
+
 # ---------------------------------------------------------------- unit: storage quota pre-flight
 
 
@@ -175,10 +213,21 @@ def _exercise(app: FastAPI) -> None:
     pkg = client.get(f"/v1/offline/packages/{LESSON_KEY}", headers=h)
     assert pkg.status_code == 200
     body = pkg.json()
-    assert body["manifest"]["content_hash"] == content_hash(body["content"])
+    m = body["manifest"]
+    assert m["content_hash"] == content_hash(body["content"])
     assert body["content"]["lesson_id"] == LESSON_KEY
     # No answer keys shipped to the device.
     assert "correct_option" not in str(body["content"])
+
+    # 6.2C-1: the manifest is Ed25519-signed, and the public key from /signing-keys verifies it.
+    assert m["signing_key_id"] and len(m["signature"]) == 128
+    keys = client.get("/v1/offline/signing-keys", headers=h).json()["keys"]
+    key = next(k for k in keys if k["key_id"] == m["signing_key_id"])
+    assert key["algorithm"] == "Ed25519"
+    payload = signing_payload(m["package_id"], m["version"], m["content_hash"])
+    assert ed25519.verify(
+        bytes.fromhex(m["signature"]), payload, bytes.fromhex(key["public_key_hex"])
+    )
 
     # Unknown lesson → 404.
     assert client.get("/v1/offline/packages/does-not-exist", headers=h).status_code == 404
@@ -186,6 +235,7 @@ def _exercise(app: FastAPI) -> None:
     # Auth required.
     assert client.get("/v1/offline/packages").status_code == 401
     assert client.get(f"/v1/offline/packages/{LESSON_KEY}").status_code == 401
+    assert client.get("/v1/offline/signing-keys").status_code == 401
 
 
 def test_offline_packages_over_sqlite() -> None:

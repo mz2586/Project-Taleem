@@ -42,6 +42,7 @@ from .contexts.learning.adapters.api import LearningApiDeps, build_learning_rout
 from .contexts.learning.adapters.curriculum_read_model import CurriculumStudioReadModel
 from .contexts.learning.adapters.memory import InMemorySessionRepository
 from .contexts.learning.adapters.offline_api import build_offline_router
+from .contexts.learning.adapters.package_signer import Ed25519PackageSigner
 from .contexts.learning.adapters.persistence.base import (
     LearningBase,
     create_learning_engine,
@@ -181,8 +182,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     student_queries = StudentQueryService(learning_uow, read_model, time.time)
     app.include_router(build_student_router(student_queries, claims_dependency))
 
-    # ---- Offline lesson packages (Phase 6.2A: content-hashed, no child data, no answer keys) ----
-    offline_service = OfflinePackageService(read_model, time.time)
+    # ---- Offline lesson packages (Phase 6.2A: content-hashed; 6.2C-1: Ed25519-signed) ----
+    package_signer = Ed25519PackageSigner(
+        settings.offline_signing_seed_hex, settings.offline_signing_key_id
+    )
+    offline_service = OfflinePackageService(read_model, time.time, signer=package_signer)
     app.include_router(build_offline_router(offline_service, claims_dependency))
 
     # ---- Durable offline sync (Phase 6.2B) ----

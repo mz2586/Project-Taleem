@@ -8,6 +8,45 @@ The local Git history is the official project history; each released version map
 
 - Nothing pending.
 
+## [0.6.4] — 2026-07-22
+
+Tag: `phase-6.2C-1` · Offline Engineering Hardening. See [PHASE_6_2C_1_REPORT.md](PHASE_6_2C_1_REPORT.md).
+Gate-free subset of the approved [PHASE_6_2C_IMPLEMENTATION_PLAN.md](PHASE_6_2C_IMPLEMENTATION_PLAN.md);
+no governance-gated work.
+
+### Added
+
+- **Ed25519 package signing** (pure-stdlib RFC 8032 signer `platform/ed25519.py`; `package_signer.py`;
+  optional `signer` on `build_manifest`; `GET /v1/offline/signing-keys`). The private seed never leaves
+  the server; production boot fails closed on the default seed. Signs a canonicalization-free payload
+  `${package_id}\n${version}\n${content_hash}` (downgrade-resistant).
+- **Client signature verification** (`apps/web/lib/offline/signature.ts` via WebCrypto Ed25519;
+  `DownloadManager` verifies before trusting bytes; `requireSignature` option; `signature_ok` recorded).
+  A **locked cross-language interop vector** is asserted in both the backend and frontend suites.
+- **Chaos / fault-injection framework** (`chaos.ts`: `FaultyStore`, `faultyPostBatch`) + chaos tests.
+- **Cache purge / de-enrolment mechanism** (`purge.ts` `PurgeService`; `syncClient` honors an optional
+  server `purge` signal). Mechanism only — the trigger is governance-gated.
+- **Diagnostics enhancements** (signature/integrity/eviction/purge counters; old-shape hydration; still
+  local-only).
+- **LRU cache eviction** (`DownloadManager.ensureSpace`/`evictLRU` over disposable packages; never
+  evicts the un-synced queue/checkpoints).
+
+### Changed
+
+- `_assert_production_safe` also rejects the built-in default offline signing seed in production;
+  `test_hardening_4_2` updated accordingly. Manifest gains optional `signature`/`signing_key_id`;
+  `BatchResult` gains optional `purge` (both backward-compatible).
+
+### Deferred (still gated)
+
+- Device-bound offline auth token (M-Gov + FD-14), crisis-flag routing (M-Safe), consent-gated
+  telemetry upload, at-rest encryption production keys (FD-14), residency pinning (FD-02).
+
+### Quality
+
+- Backend: 159 passed, 6 skipped (PostgreSQL-gated); ruff/black/mypy(strict) green; OpenAPI valid.
+  Frontend: `tsc` clean, **78 vitest tests** (incl. Python↔WebCrypto signing interop + chaos), build green.
+
 ## [0.6.3] — 2026-07-22
 
 Tag: `phase-6.2B` · Offline Synchronization Engine. See [PHASE_6_2B_REPORT.md](PHASE_6_2B_REPORT.md).

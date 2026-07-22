@@ -22,7 +22,17 @@ function empty(): SyncDiagnostics {
     drains: 0,
     lastSyncAt: null,
     lastError: null,
+    signatureFailures: 0,
+    integrityFailures: 0,
+    evictions: 0,
+    evictedBytes: 0,
+    purges: 0,
   };
+}
+
+// Tolerate diagnostics written by an older build (6.2B) that lacked the 6.2C-1 counters.
+function hydrate(stored: SyncDiagnostics | undefined): SyncDiagnostics {
+  return { ...empty(), ...(stored ?? {}) };
 }
 
 export class SyncDiagnosticsStore {
@@ -32,7 +42,7 @@ export class SyncDiagnosticsStore {
   ) {}
 
   async get(): Promise<SyncDiagnostics> {
-    return (await this.store.get<SyncDiagnostics>(STORES.syncMeta, KEY)) ?? empty();
+    return hydrate(await this.store.get<SyncDiagnostics>(STORES.syncMeta, KEY));
   }
 
   private async update(fn: (d: SyncDiagnostics) => SyncDiagnostics): Promise<void> {
@@ -42,6 +52,26 @@ export class SyncDiagnosticsStore {
 
   async recordQueued(n = 1): Promise<void> {
     await this.update((d) => ({ ...d, queued: d.queued + n }));
+  }
+
+  async recordSignatureFailure(): Promise<void> {
+    await this.update((d) => ({ ...d, signatureFailures: d.signatureFailures + 1 }));
+  }
+
+  async recordIntegrityFailure(): Promise<void> {
+    await this.update((d) => ({ ...d, integrityFailures: d.integrityFailures + 1 }));
+  }
+
+  async recordEviction(bytes: number): Promise<void> {
+    await this.update((d) => ({
+      ...d,
+      evictions: d.evictions + 1,
+      evictedBytes: d.evictedBytes + Math.max(0, bytes),
+    }));
+  }
+
+  async recordPurge(): Promise<void> {
+    await this.update((d) => ({ ...d, purges: d.purges + 1 }));
   }
 
   async recordDrain(delta: Partial<SyncDiagnostics>, error?: string): Promise<void> {
