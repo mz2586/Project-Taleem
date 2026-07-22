@@ -83,6 +83,10 @@ class SyncEngine:
         results = [self._apply_one(d) for d in ordered]
         return results, self._store.server_cursor
 
+    def apply(self, d: SyncDelta) -> ItemResult:
+        """Apply a single delta (public entry for a coordinator that routes by delta type)."""
+        return self._apply_one(d)
+
     def _apply_one(self, d: SyncDelta) -> ItemResult:
         if d.client_event_id in self._store._seen:  # idempotency — the heart of safe replay
             ent = self._store._entity(d.entity_key)

@@ -54,11 +54,13 @@ from .contexts.learning.application.knowledge_service import KnowledgeService
 from .contexts.learning.application.offline_service import OfflinePackageService
 from .contexts.learning.application.session_service import SessionService
 from .contexts.learning.application.student_queries import StudentQueryService
+from .contexts.learning.application.sync_consumer import SyncEvidenceConsumer
 from .contexts.learning.domain.decision import DecisionConfig
 from .contexts.learning.domain.estimator import BKTEstimator
 from .contexts.learning.domain.forgetting import HalfLifeForgettingModel
 from .contexts.learning.domain.runtime import TemplatedTeachingRuntime
-from .contexts.sync.domain import DeltaType, SyncDelta, SyncEngine, SyncStore
+from .contexts.sync.domain import DeltaType, SyncDelta, SyncStore
+from .contexts.sync.service import DurableSyncCoordinator
 from .platform import correlation
 from .platform.config import Settings, load_settings
 from .platform.errors import Problem, forbidden, unauthorized
@@ -183,6 +185,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     offline_service = OfflinePackageService(read_model, time.time)
     app.include_router(build_offline_router(offline_service, claims_dependency))
 
+    # ---- Durable offline sync (Phase 6.2B) ----
+    # attempt.submitted deltas record durable AssessmentEvidence idempotently (gap G3); other
+    # delta types keep the existing in-memory conflict policy. Idempotency is durable via the
+    # evidence table (a replay after restart is still a DUPLICATE).
+    sync_consumer = SyncEvidenceConsumer(
+        learning_uow, read_model, BKTEstimator(), HalfLifeForgettingModel(), time.time
+    )
+    sync_coordinator = DurableSyncCoordinator(sync_store, sync_consumer)
+
     # Register the modules this deployable composes (plugin architecture).
     reg = module_registry()
     for module in (
@@ -240,10 +251,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     def metrics() -> str:
         return registry().render()
 
-    # ---- sync engine prototype ----
+    # ---- offline sync (Phase 6.2B: durable evidence for attempts + in-memory policy for the rest)
     @app.post("/v1/sync/batch", tags=["sync"])
     def sync_batch(batch: BatchIn) -> dict[str, Any]:
-        engine = SyncEngine(sync_store)
         try:
             deltas = [
                 SyncDelta(
@@ -257,7 +267,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             ]
         except ValueError as exc:
             raise Problem(422, "UNKNOWN_DELTA_TYPE", "Unknown delta type", str(exc)) from exc
-        results, cursor = engine.apply_batch(deltas)
+        results, cursor = sync_coordinator.apply_batch(deltas)
         return {
             "cursor": cursor,
             "results": [

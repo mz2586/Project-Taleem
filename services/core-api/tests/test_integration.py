@@ -51,6 +51,9 @@ class TestObservability(unittest.TestCase):
 
 class TestSyncEndpoint(unittest.TestCase):
     def test_batch_apply_then_idempotent_replay(self) -> None:
+        # In-memory delta types (progress / lesson.completed) keep the prototype conflict policy.
+        # Phase 6.2B: attempt.submitted now routes to the durable evidence consumer (covered by
+        # tests/test_sync_evidence.py), so this test uses the still-in-memory types.
         c = _client()
         batch = {
             "cursor": 0,
@@ -63,9 +66,9 @@ class TestSyncEndpoint(unittest.TestCase):
                 },
                 {
                     "clientEventId": "e2",
-                    "type": "attempt.submitted",
-                    "entityKey": "S1|A1",
-                    "payload": {"attempt_id": "att-1"},
+                    "type": "lesson.completed",
+                    "entityKey": "S1|L1",
+                    "payload": {},
                 },
             ],
         }

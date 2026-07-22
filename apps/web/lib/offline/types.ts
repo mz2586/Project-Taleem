@@ -89,3 +89,79 @@ export interface StorageEstimate {
   usage: number;
   quota: number;
 }
+
+// ---------------------------------------------------------------- sync engine (Phase 6.2B)
+
+// Mirrors the backend DeltaType (contexts/sync/domain.py) and the sync.batch contract.
+export type DeltaType =
+  | "progress.updated"
+  | "lesson.completed"
+  | "attempt.submitted"
+  | "preference.set";
+
+export type SyncStatus = "applied" | "duplicate" | "ignored" | "conflict";
+
+// An offline attempt payload (graded server-side on sync; NO answer key on the device).
+export interface AttemptPayload {
+  student_ref: string;
+  objective_code: string;
+  item_ref: string;
+  option: number;
+  evidence_id: string; // client uuid7 — the durable idempotency key
+  session_id?: string;
+  hints_used?: number;
+  response_time_ms?: number;
+  self_confidence?: number | null;
+  context?: string;
+}
+
+export interface SyncDelta {
+  clientEventId: string; // uuid7 idempotency key
+  type: DeltaType;
+  entityKey: string;
+  payload: Record<string, unknown>;
+  clientSeq: number; // Lamport seq (never wall-clock)
+}
+
+export type QueueState = "pending" | "sending" | "failed" | "dead";
+
+export interface QueuedDelta extends SyncDelta {
+  syncState: QueueState;
+  attempts: number;
+  createdAt: number;
+  lastError?: string;
+}
+
+export interface ItemResult {
+  clientEventId: string;
+  status: SyncStatus;
+  version: number;
+}
+
+export interface BatchResult {
+  cursor: number;
+  results: ItemResult[];
+}
+
+export interface SyncDiagnostics {
+  queued: number;
+  applied: number;
+  duplicate: number;
+  ignored: number;
+  conflict: number;
+  failed: number;
+  deadLettered: number;
+  drains: number;
+  lastSyncAt: number | null;
+  lastError: string | null;
+}
+
+export interface DrainSummary {
+  sent: number;
+  applied: number;
+  duplicate: number;
+  ignored: number;
+  conflict: number;
+  remaining: number;
+  cursor: number;
+}

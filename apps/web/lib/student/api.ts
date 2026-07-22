@@ -14,7 +14,7 @@ import type {
   TeachView,
 } from "./types";
 import { ApiError } from "./types";
-import type { OfflinePackage, PackageManifest } from "../offline/types";
+import type { BatchResult, OfflinePackage, PackageManifest, SyncDelta } from "../offline/types";
 
 // A token provider so the auth source can be swapped (dev stub now; gated child-safe auth later).
 export type TokenProvider = () => string;
@@ -95,6 +95,13 @@ export const learningApi = {
 export const offlineApi = {
   listPackages: () => req<{ packages: PackageManifest[] }>("/v1/offline/packages"),
   fetchPackage: (lessonId: string) => req<OfflinePackage>(`/v1/offline/packages/${lessonId}`),
+};
+
+// Offline sync (Phase 6.2B). Drains the durable queue to the server; attempts are graded + recorded
+// as durable evidence server-side (idempotent by client evidence_id).
+export const syncApi = {
+  batch: (cursor: number, deltas: SyncDelta[]) =>
+    post<BatchResult>("/v1/sync/batch", { cursor, deltas }),
 };
 
 export type { ApiErrorType };

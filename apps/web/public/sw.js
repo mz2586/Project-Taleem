@@ -52,6 +52,19 @@ self.addEventListener("message", (event) => {
   }
 });
 
+// Background Sync (Phase 6.2B): when the platform wakes us on reconnect, nudge every open client to
+// drain its durable queue. The drain runs in the page (it needs the auth'd fetch + IndexedDB); the
+// SW only broadcasts. No child data is touched here.
+self.addEventListener("sync", (event) => {
+  if (event.tag === "taleem-sync") {
+    event.waitUntil(
+      self.clients.matchAll({ includeUncontrolled: true }).then((clients) => {
+        for (const client of clients) client.postMessage({ type: "SYNC_NOW" });
+      })
+    );
+  }
+});
+
 self.addEventListener("fetch", (event) => {
   const request = event.request;
 

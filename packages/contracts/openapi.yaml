@@ -17,7 +17,10 @@ tags:
   - name: observability
     description: Metrics exposition for monitoring.
   - name: sync
-    description: Offline sync engine prototype operating on synthetic data.
+    description: >-
+      Offline sync (Phase 6.2B). attempt.submitted deltas durably record AssessmentEvidence
+      (idempotent by client-generated evidence_id); progress / lesson.completed / preference keep
+      the in-memory conflict policy (monotonic max / idempotent set / server-order-wins).
   - name: skeleton
     description: Authentication and authorization seam demonstration.
 paths:
@@ -96,11 +99,14 @@ paths:
     post:
       tags: [sync]
       operationId: postSyncBatch
-      summary: Offline sync batch (idempotent, synthetic data only)
+      summary: Offline sync batch (idempotent; durable evidence for attempts)
       description: >-
         Applies client-generated deltas with the remediated conflict policy (docs/33 §6): idempotent
         on clientEventId, append-only by union, monotonic progress, server-version ordering (no
-        client wall-clock).
+        client wall-clock). Phase 6.2B: an attempt.submitted delta is graded server-side against the
+        published lesson and durably recorded as AssessmentEvidence via LearningUnitOfWork, keyed on
+        a client-generated evidence_id so a replay (even after a server restart) is a DUPLICATE.
+        A summative item is never auto-graded by sync (mentor-mediated). See AttemptPayload.
       security: []
       requestBody:
         required: true
@@ -175,6 +181,27 @@ components:
         entityKey: { type: string, maxLength: 256 }
         payload: { type: object, additionalProperties: true }
         clientSeq: { type: integer, default: 0 }
+    AttemptPayload:
+      type: object
+      description: >-
+        Shape of an attempt.submitted delta's payload (Phase 6.2B). Carries the learner's answer for
+        server-side grading; NO answer key is on the device. evidence_id is the durable idempotency
+        key (a client uuid7). No child PII — only the pseudonymous student_ref.
+      required: [student_ref, objective_code, item_ref, option, evidence_id]
+      properties:
+        student_ref: { type: string }
+        objective_code: { type: string }
+        item_ref: { type: string }
+        option: { type: integer, description: Chosen option index }
+        evidence_id: { type: string, description: Client-generated uuid7 (durable idempotency key) }
+        session_id: { type: string }
+        hints_used: { type: integer, default: 0 }
+        response_time_ms: { type: integer, default: 0 }
+        self_confidence: { type: ["number", "null"] }
+        context:
+          type: string
+          enum: [diagnose, practice, teach, review, revise, remediate]
+          default: practice
     BatchIn:
       type: object
       properties:

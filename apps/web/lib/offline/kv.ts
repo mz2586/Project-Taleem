@@ -8,7 +8,8 @@
 // modules fully unit-testable (with fake-indexeddb or MemoryStore) without a real browser.
 
 export const DB_NAME = "taleem-offline";
-export const DB_VERSION = 1;
+// v2 (Phase 6.2B) adds the durable outbound sync queue. Missing stores are created on upgrade.
+export const DB_VERSION = 2;
 
 // Object stores (OFFLINE_STORAGE_SPEC.md §1). Durable stores are never evicted before sync.
 export const STORES = {
@@ -19,6 +20,7 @@ export const STORES = {
   checkpoints: "checkpoints",
   syncMeta: "sync_meta",
   prefs: "prefs",
+  evidenceQueue: "evidence_queue",
 } as const;
 
 export type StoreName = (typeof STORES)[keyof typeof STORES];

@@ -5,7 +5,7 @@ import type { ReactNode } from "react";
 
 import type { GradeBand } from "../../lib/student/config";
 import { BottomNav } from "./BottomNav";
-import { OfflineBadge } from "./OfflineBadge";
+import { SyncStatusBadge } from "./SyncStatusBadge";
 
 export function AppShell({
   title,
@@ -34,7 +34,7 @@ export function AppShell({
         }}
       >
         <h1 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{title}</h1>
-        <OfflineBadge />
+        <SyncStatusBadge />
       </header>
       <main id="main" style={{ flex: 1, padding: "var(--space-4)", display: "grid", gap: "var(--space-4)", alignContent: "start" }}>
         {children}

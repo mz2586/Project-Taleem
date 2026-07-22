@@ -8,6 +8,42 @@ The local Git history is the official project history; each released version map
 
 - Nothing pending.
 
+## [0.6.3] — 2026-07-22
+
+Tag: `phase-6.2B` · Offline Synchronization Engine. See [PHASE_6_2B_REPORT.md](PHASE_6_2B_REPORT.md).
+
+### Added
+
+- **Durable sync consumer** (closes gap G3): `SyncEvidenceConsumer` grades an offline
+  `attempt.submitted` delta session-lessly (existing `evaluate` scorer) and records durable
+  `AssessmentEvidence` via `LearningUnitOfWork` — **idempotent by the client `evidence_id`** (the
+  evidence table is the ledger, so a replay after a server restart is a `DUPLICATE`). Summative items
+  are never auto-graded by sync.
+- **`DurableSyncCoordinator`** routes `POST /v1/sync/batch` by delta type: attempts → durable sink;
+  progress / lesson.completed / preference → the existing in-memory conflict policy. Added
+  `SyncEngine.apply(delta)`.
+- **Frontend sync engine** (`apps/web/lib/offline/`): durable `syncQueue` (IndexedDB v2 `evidence_queue`
+  store), `syncClient` drain (idempotent status handling, keep-and-retry on offline, dead-letter,
+  `backoffMs` full-jitter, cursor), `backgroundSync` (Background Sync + online/visibility auto-drain),
+  `reconcile` (idempotent session reconciliation + resume), local `diagnostics`. Service worker `sync`
+  handler; `syncApi.batch`; `SyncStatusBadge` + `useSyncStatus` wired into `AppShell`.
+
+### Changed
+
+- `test_integration.py::TestSyncEndpoint` now exercises the still-in-memory delta types, since
+  `attempt.submitted` routes to the durable consumer (covered by `tests/test_sync_evidence.py`).
+
+### Deferred (not in 6.2B)
+
+- Offline auth, device-bound credentials, governance-gated identity, child-safety escalation,
+  consent-gated telemetry upload, production deployment changes (6.2C+).
+
+### Quality
+
+- Backend: 147 passed, 6 skipped (PostgreSQL-gated); ruff/black/mypy(strict) green; OpenAPI valid.
+  Frontend: `tsc` clean, **52 vitest tests** (incl. crash-recovery + 120-attempt long-session over
+  fake-indexeddb), `next build` green.
+
 ## [0.6.2] — 2026-07-22
 
 Tag: `phase-6.2A` · Offline-Lite Implementation. See [PHASE_6_2A_REPORT.md](PHASE_6_2A_REPORT.md).

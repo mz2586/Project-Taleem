@@ -6,6 +6,35 @@ this repository has no remote and the local Git history is authoritative.
 
 ---
 
+## 0.6.3 — Phase 6.2B: Offline Synchronization Engine (2026-07-22)
+
+Tag: `phase-6.2B`
+
+The other half of offline: what a child does with no network now **syncs safely** when they reconnect.
+
+### Highlights
+
+- **Offline attempts become real evidence.** A queued offline answer is graded server-side and
+  recorded as durable `AssessmentEvidence` through the same path a live session uses — reusing the
+  existing sync contract, `SyncDelta`, `client_event_id`, and `LearningUnitOfWork`. No new child-data
+  table; no domain redesign.
+- **Exactly-once, always.** Every attempt carries a client `evidence_id`; the server dedupes on it, so
+  reconnect-retries, batch replays, reconcile re-queues, and even a **server restart** all collapse to
+  a harmless duplicate. No data loss, no double-count.
+- **It resumes itself.** A durable IndexedDB queue survives crashes; on reconnect the app drains
+  automatically (Background Sync + online/visibility), retries with jittered backoff, dead-letters the
+  truly stuck, reconciles a long offline session, and shows a calm live status.
+- **Safety held.** A summative item is never auto-graded by sync (mentor-mediated). No offline auth,
+  no consent-gated telemetry — those are later.
+
+### Quality
+
+- Backend: 147 passed, 6 skipped; ruff/black/mypy(strict) green; OpenAPI valid.
+- Frontend: `tsc` clean; **52 vitest tests** including crash-recovery and a 120-attempt long offline
+  session over fake-indexeddb; `next build` green. See `PHASE_6_2B_REPORT.md`.
+
+---
+
 ## 0.6.2 — Phase 6.2A: Offline-Lite (2026-07-22)
 
 Tag: `phase-6.2A`
