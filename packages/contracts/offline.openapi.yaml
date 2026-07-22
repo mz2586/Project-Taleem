@@ -1,0 +1,167 @@
+openapi: 3.1.0
+info:
+  title: Project Taleem — Offline Package API
+  version: 0.1.0
+  description: >-
+    Offline lesson packages (Phase 6.2A). Serves content-hashed packages the PWA caches to render
+    lessons offline. Content is published curriculum (C0 — no child data), derived on the fly from
+    the curriculum read model; no new tables. Two safety/versioning properties: packages ship the
+    teaching + attempt surface but NO answer keys (correct_option / option_misconceptions are never
+    sent to the device — grading stays server-side), and content_hash / version change iff content
+    changes (automatic cache versioning + invalidation). No Ed25519 signing yet (that is 6.2C).
+    Authenticated (bearer JWT), authorized to read learning.knowledge. Not IDOR-scoped: curriculum
+    is not per-child data.
+  license:
+    name: MIT
+    identifier: MIT
+servers:
+  - url: https://api.taleem.dev
+    description: Reference environment (placeholder; concrete host per FOUNDER_DECISIONS FD-02)
+tags:
+  - name: offline
+    description: Offline lesson packages (content-hashed; no child data).
+paths:
+  /v1/offline/packages:
+    get:
+      tags: [offline]
+      operationId: listOfflinePackages
+      summary: Index of available offline packages (manifests only)
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Package index
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PackageIndex" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/offline/packages/{lessonId}:
+    get:
+      tags: [offline]
+      operationId: getOfflinePackage
+      summary: Full offline package (manifest + child-safe content) for one lesson
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: lessonId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Package
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OfflinePackage" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "404":
+          description: No published package for this lesson
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Verified bearer JWT. Any actor with read learning.knowledge may fetch packages.
+  schemas:
+    PackageIndex:
+      type: object
+      properties:
+        packages:
+          type: array
+          items: { $ref: "#/components/schemas/PackageManifest" }
+    PackageAsset:
+      type: object
+      properties:
+        ref: { type: string }
+        kind: { type: string, description: "e.g. content" }
+        sha256: { type: string }
+        bytes: { type: integer }
+    PackageManifest:
+      type: object
+      description: Verifiable descriptor (no child data). version = content_hash prefix.
+      properties:
+        package_id: { type: string, description: "Stable pointer, e.g. pkg/math-g4-intro-fractions" }
+        lesson_id: { type: string }
+        objective_code: { type: string }
+        version: { type: string, description: "Short content_hash prefix; changes iff content changes" }
+        content_hash: { type: string, description: "SHA-256 hex over the canonical offline content" }
+        assets:
+          type: array
+          items: { $ref: "#/components/schemas/PackageAsset" }
+        total_bytes: { type: integer }
+        created_at_ms: { type: integer }
+    OfflineItem:
+      type: object
+      description: Child-safe item — prompt, options, authored hints. NO answer key.
+      properties:
+        item_ref: { type: string }
+        objective_code: { type: string }
+        prompt:
+          type: object
+          additionalProperties: { type: string }
+          description: Locale map (ur / en).
+        options:
+          type: array
+          items: { type: string }
+        hints:
+          type: array
+          items: { type: string }
+    OfflineContent:
+      type: object
+      description: The renderable lesson document (no correct_option / option_misconceptions).
+      properties:
+        lesson_id: { type: string }
+        objective_code: { type: string }
+        title:
+          type: object
+          additionalProperties: { type: string }
+        explanation:
+          type: object
+          additionalProperties: { type: string }
+        worked_example_steps:
+          type: array
+          items: { type: string }
+        practice_items:
+          type: array
+          items: { $ref: "#/components/schemas/OfflineItem" }
+        homework_items:
+          type: array
+          items: { $ref: "#/components/schemas/OfflineItem" }
+        assessment_formative:
+          type: array
+          items: { $ref: "#/components/schemas/OfflineItem" }
+        summative_mentor_mediated: { type: boolean }
+    OfflinePackage:
+      type: object
+      properties:
+        manifest: { $ref: "#/components/schemas/PackageManifest" }
+        content: { $ref: "#/components/schemas/OfflineContent" }
+    Problem:
+      type: object
+      description: RFC 9457 problem+json.
+      properties:
+        type: { type: string }
+        title: { type: string }
+        status: { type: integer }
+        detail: { type: string }
+        instance: { type: string }

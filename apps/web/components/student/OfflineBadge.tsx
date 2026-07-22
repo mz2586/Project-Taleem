@@ -3,19 +3,12 @@
 // is never blocked or scolded for being offline.
 import { useEffect, useState } from "react";
 
+import { watchConnectivity } from "../../lib/offline";
+
 export function OfflineBadge({ pendingCount = 0 }: { pendingCount?: number }) {
   const [online, setOnline] = useState(true);
 
-  useEffect(() => {
-    const update = () => setOnline(navigator.onLine);
-    update();
-    window.addEventListener("online", update);
-    window.addEventListener("offline", update);
-    return () => {
-      window.removeEventListener("online", update);
-      window.removeEventListener("offline", update);
-    };
-  }, []);
+  useEffect(() => watchConnectivity(setOnline), []);
 
   const message = online
     ? pendingCount > 0

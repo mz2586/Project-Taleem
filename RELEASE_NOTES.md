@@ -6,6 +6,35 @@ this repository has no remote and the local Git history is authoritative.
 
 ---
 
+## 0.6.2 — Phase 6.2A: Offline-Lite (2026-07-22)
+
+Tag: `phase-6.2A`
+
+The first slice of the offline subsystem: a child can open the app, view their dashboard, and load a
+downloaded lesson **with no network** — and their progress is saved on-device and resumable.
+
+### Highlights
+
+- **Offline packages.** A published lesson builds into a content-hashed package the app downloads,
+  verifies (SHA-256 against the manifest), and caches in IndexedDB. Packages ship the teaching + attempt
+  surface but **never answer keys** — a device cannot reveal an answer offline.
+- **Offline dashboard + lessons.** A versioned service worker serves the app shell and the student read
+  APIs from cache when offline; the download manager renders cached lessons directly.
+- **Local progress + resume.** Progress events and session checkpoints persist on-device (IndexedDB), so
+  an interrupted lesson resumes where it left off.
+- **Automatic cache versioning.** Content changes change the hash, so stale caches are detected and
+  refreshed; old shell caches are purged on activate.
+- **Honest, safe by design.** No background sync, no offline auth, no on-device grading, no generative
+  AI offline, no child PII — only the pseudonymous `student_ref`. Those belong to 6.2B/6.2C.
+
+### Quality
+
+- Backend: 146 passed, 5 skipped; ruff/black/mypy(strict) green; 5 OpenAPI contracts valid.
+- Frontend: `tsc` clean; **31 vitest tests** including a fake-indexeddb offline-browser simulation;
+  `next build` green. See `PHASE_6_2A_REPORT.md`.
+
+---
+
 ## 0.5.5 — Phase 5.5: Student Platform Backend APIs (2026-07-21)
 
 Tag: `phase-5.5`

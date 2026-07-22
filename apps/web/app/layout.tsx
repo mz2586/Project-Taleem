@@ -1,6 +1,7 @@
 // Root layout — Urdu-first, RTL by default (docs/16, 17). No child data.
 import type { ReactNode } from "react";
 import "../design-system/tokens.css";
+import { ServiceWorkerRegister } from "../components/ServiceWorkerRegister";
 
 export const metadata = {
   title: "Taleem",
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           fontSize: "var(--font-size-body-min-urdu)",
         }}
       >
+        <ServiceWorkerRegister />
         {children}
       </body>
     </html>

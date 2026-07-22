@@ -8,6 +8,35 @@ The local Git history is the official project history; each released version map
 
 - Nothing pending.
 
+## [0.6.2] — 2026-07-22
+
+Tag: `phase-6.2A` · Offline-Lite Implementation. See [PHASE_6_2A_REPORT.md](PHASE_6_2A_REPORT.md).
+
+### Added
+
+- **Backend offline package service** (derived, C0 curriculum — no new tables, no child data):
+  pure builder `contexts/learning/domain/offline_package.py` (content-hashed manifests; child-safe
+  content with **no answer keys**; `fits_in_quota` pre-flight), `OfflinePackageService`, and
+  `GET /v1/offline/packages` + `GET /v1/offline/packages/{lesson_id}` (auth + read `learning.knowledge`,
+  no new PDP rule). Contract `packages/contracts/offline.openapi.yaml`.
+- **Frontend offline-lite library** `apps/web/lib/offline/`: IndexedDB store (`taleem-offline`),
+  download manager (verify + quota + atomic install), local progress persistence, session checkpoints +
+  resume, offline read cache, connectivity detection, client `uuid7`, and cache-versioning helpers.
+- **Service worker** upgraded (`apps/web/public/sw.js`): versioned shell + runtime caches; offline
+  dashboard + lesson loading via network-first-with-cache-fallback; old caches purged on activate;
+  registered via `ServiceWorkerRegister`. `OfflineBadge` now driven by `watchConnectivity`.
+
+### Deferred (not in 6.2A)
+
+- Background sync, conflict resolution, offline auth, sync batching, durable session replay, telemetry
+  upload, governance-gated features (6.2B/6.2C).
+
+### Quality
+
+- Backend: 146 passed, 5 skipped (PostgreSQL-gated); ruff/black/mypy(strict) green; 5 OpenAPI contracts
+  valid. Frontend: `tsc` clean, **31 vitest tests** (incl. fake-indexeddb offline simulation),
+  `next build` green.
+
 ## [0.5.5] — 2026-07-21
 
 Tag: `phase-5.5` · Student Platform Backend APIs. See [PHASE_5_5_REPORT.md](PHASE_5_5_REPORT.md).

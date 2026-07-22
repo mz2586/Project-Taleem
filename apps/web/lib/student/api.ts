@@ -14,6 +14,7 @@ import type {
   TeachView,
 } from "./types";
 import { ApiError } from "./types";
+import type { OfflinePackage, PackageManifest } from "../offline/types";
 
 // A token provider so the auth source can be swapped (dev stub now; gated child-safe auth later).
 export type TokenProvider = () => string;
@@ -87,6 +88,13 @@ export const learningApi = {
 
   progress: (studentRef: string) =>
     req<ProgressView>(`/v1/learning/students/${studentRef}/progress`),
+};
+
+// Offline lesson packages (Phase 6.2A). Content is C0 curriculum (no child data). The download
+// manager uses `fetchPackage` to install a lesson for offline rendering.
+export const offlineApi = {
+  listPackages: () => req<{ packages: PackageManifest[] }>("/v1/offline/packages"),
+  fetchPackage: (lessonId: string) => req<OfflinePackage>(`/v1/offline/packages/${lessonId}`),
 };
 
 export type { ApiErrorType };

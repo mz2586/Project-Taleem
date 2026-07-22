@@ -41,6 +41,7 @@ from .contexts.health.service import Check, HealthService
 from .contexts.learning.adapters.api import LearningApiDeps, build_learning_router
 from .contexts.learning.adapters.curriculum_read_model import CurriculumStudioReadModel
 from .contexts.learning.adapters.memory import InMemorySessionRepository
+from .contexts.learning.adapters.offline_api import build_offline_router
 from .contexts.learning.adapters.persistence.base import (
     LearningBase,
     create_learning_engine,
@@ -50,6 +51,7 @@ from .contexts.learning.adapters.persistence.uow import LearningUnitOfWork
 from .contexts.learning.adapters.student_api import build_student_router
 from .contexts.learning.application.analytics import LearningAnalytics
 from .contexts.learning.application.knowledge_service import KnowledgeService
+from .contexts.learning.application.offline_service import OfflinePackageService
 from .contexts.learning.application.session_service import SessionService
 from .contexts.learning.application.student_queries import StudentQueryService
 from .contexts.learning.domain.decision import DecisionConfig
@@ -103,6 +105,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             {
                 "name": "learning",
                 "description": "Learning Intelligence Platform (governance-gated)",
+            },
+            {
+                "name": "offline",
+                "description": "Offline lesson packages (content-hashed; no child data)",
             },
         ],
     )
@@ -173,6 +179,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     student_queries = StudentQueryService(learning_uow, read_model, time.time)
     app.include_router(build_student_router(student_queries, claims_dependency))
 
+    # ---- Offline lesson packages (Phase 6.2A: content-hashed, no child data, no answer keys) ----
+    offline_service = OfflinePackageService(read_model, time.time)
+    app.include_router(build_offline_router(offline_service, claims_dependency))
+
     # Register the modules this deployable composes (plugin architecture).
     reg = module_registry()
     for module in (
@@ -182,6 +192,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             "curriculum_studio", "/v1/studio", lambda: True, events_published=("LessonPublished",)
         ),
         Module("learning", "/v1/learning", lambda: True, events_published=("ObjectiveMastered",)),
+        Module("offline", "/v1/offline", lambda: True),
     ):
         # Idempotent across reloads/tests: re-registering the same module is a no-op.
         with contextlib.suppress(ValueError):

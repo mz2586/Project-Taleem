@@ -1,9 +1,9 @@
 # Version
 
-Current version: **0.5.5**
-Milestone: **phase-5.5** (Student Platform Backend APIs)
+Current version: **0.6.2**
+Milestone: **phase-6.2A** (Offline-Lite Implementation)
 Status: **pre-production / development** — governance-gated; no real child data.
-Date: 2026-07-21
+Date: 2026-07-22
 
 The local Git repository is the canonical source of truth. This project is maintained locally; there
 is no remote. Every version corresponds to an annotated Git tag on this machine.
@@ -23,6 +23,7 @@ version and is bumped independently of this project milestone version.
 
 | Version | Tag | Date | Milestone |
 | --- | --- | --- | --- |
+| 0.6.2 | `phase-6.2A` | 2026-07-22 | Offline-Lite — service worker, IndexedDB, download manager, offline dashboard/lessons, local progress + resume, cache versioning; backend offline package service |
 | 0.5.5 | `phase-5.5` | 2026-07-21 | Student Platform Backend APIs (derived read models: homework, reviews, hint, …) |
 | 0.5.0 | — | 2026-07-21 | Phase 5 — Student Experience design + portal core scaffold (governance-safe) |
 | 0.4.2 | `phase-4.2` | 2026-07-21 | Wire & Harden — CTO-review remediation (auth, wiring, migration, CI, defects) |
