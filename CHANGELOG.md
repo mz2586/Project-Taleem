@@ -14,6 +14,12 @@ Software Completion Mode — finishing every task completable entirely in softwa
   `contexts/ops/adapters/ops_api.py`) — an operator-only halt of child-facing traffic (503) during an
   incident, while `/health`, `/metrics`, and `/v1/ops/*` stay reachable to observe and disengage.
   PDP-gated (`system` operates, `system`/`mentor` read status); wired into the request middleware.
+- **Pilot 0 synthetic-user simulator** (`services/core-api/src/taleem_core/tools/pilot_simulator.py`,
+  `make simulate`) — a runnable operational harness that drives N synthetic students through complete
+  learning journeys against the *real* composed app, measures latency percentiles, verifies signed
+  offline packages (Ed25519), injects failures (IDOR/unauth/malformed) and proves safe degradation +
+  recovery, and reads the platform's own misconception/mastery counters. Emits a PASS/FAIL report
+  (JSON + summary) and a non-zero exit on any invariant failure, so a pilot dry run can gate in CI.
 - **Full local gate suite + web/release automation** (`Makefile`, `scripts/release.sh`) — `make gates`
   runs backend + web + contracts + docs gates in one command; `make web-test`/`web-build`/`contracts`
   targets; `scripts/release.sh` verifies version consistency (VERSION.md ↔ CHANGELOG ↔ history table),

@@ -35,6 +35,11 @@ lint: ## Lint + type-check backend (requires dev deps)
 run: ## Run the API locally (requires runtime deps)
 	cd $(CORE) && . .venv/bin/activate && uvicorn taleem_core.main:app --reload
 
+.PHONY: simulate
+simulate: ## Run the Pilot 0 synthetic-user simulator (drives the real app; exits non-zero on failure)
+	cd $(CORE) && . .venv/bin/activate && \
+	 python -m taleem_core.tools.pilot_simulator --students 20 --offline --fail-inject --quiet
+
 .PHONY: docker-build
 docker-build: ## Build the core-api container image
 	docker build -t taleem/core-api:dev $(CORE)
