@@ -36,10 +36,16 @@ Software Completion Mode — finishing every task completable entirely in softwa
   `Referrer-Policy: no-referrer`, a locked-down `Content-Security-Policy`, COOP/CORP `same-origin`,
   HSTS, and `Cache-Control: no-store` so learner data never persists in shared caches.
 
+- **Testable student navigation model** (`apps/web/lib/student/navModel.ts`) — the band-based
+  destination logic and active-route detection are extracted from `BottomNav` into pure, unit-tested
+  functions (`navItemsFor`, `isActive`), with the component refactored to consume them.
+
 ### Changed
 
 - **CI now runs the web unit suite** (`.github/workflows/ci.yml`) — the `web-build` job runs
   `npm test` (vitest) alongside typecheck + build, closing the gap where frontend tests were not gated.
+- **vitest include broadened** (`apps/web/vitest.config.ts`) — from `lib/offline/__tests__` to
+  `lib/**/__tests__`, so every pure-logic suite (not just offline) is gated in CI (20 files, 85 tests).
 
 ## [0.11.0] — 2026-07-23
 

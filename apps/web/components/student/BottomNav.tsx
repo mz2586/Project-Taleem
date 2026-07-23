@@ -4,26 +4,11 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import type { GradeBand } from "../../lib/student/config";
-
-interface NavItem {
-  href: string;
-  label: string;
-  symbol: string;
-}
-
-// Early band shows fewer choices (less to reason about); older bands get browsing destinations.
-const FULL: NavItem[] = [
-  { href: "/student/today", label: "Today", symbol: "☀" },
-  { href: "/student/subjects", label: "Learn", symbol: "📚" },
-  { href: "/student/homework", label: "Homework", symbol: "✎" },
-  { href: "/student/progress", label: "Progress", symbol: "▲" },
-  { href: "/student/profile", label: "Profile", symbol: "👤" },
-];
-const EARLY: NavItem[] = [FULL[0]!, FULL[3]!, FULL[4]!];
+import { isActive, navItemsFor } from "../../lib/student/navModel";
 
 export function BottomNav({ band }: { band: GradeBand }) {
   const pathname = usePathname();
-  const items = band === "early" ? EARLY : FULL;
+  const items = navItemsFor(band);
   return (
     <nav
       aria-label="Main"
@@ -38,7 +23,7 @@ export function BottomNav({ band }: { band: GradeBand }) {
       }}
     >
       {items.map((item) => {
-        const active = pathname?.startsWith(item.href) ?? false;
+        const active = isActive(pathname, item.href);
         return (
           <Link
             key={item.href}
