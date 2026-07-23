@@ -6,7 +6,23 @@ The local Git history is the official project history; each released version map
 
 ## [Unreleased]
 
-- Nothing pending.
+Software Completion Mode — finishing every task completable entirely in software.
+
+### Added
+
+- **Operational kill switch** (`services/core-api/src/taleem_core/platform/kill_switch.py`,
+  `contexts/ops/adapters/ops_api.py`) — an operator-only halt of child-facing traffic (503) during an
+  incident, while `/health`, `/metrics`, and `/v1/ops/*` stay reachable to observe and disengage.
+  PDP-gated (`system` operates, `system`/`mentor` read status); wired into the request middleware.
+- **Full local gate suite + web/release automation** (`Makefile`, `scripts/release.sh`) — `make gates`
+  runs backend + web + contracts + docs gates in one command; `make web-test`/`web-build`/`contracts`
+  targets; `scripts/release.sh` verifies version consistency (VERSION.md ↔ CHANGELOG ↔ history table),
+  a clean tree, and an unused tag, then prints the annotated-tag command (never tags automatically).
+
+### Changed
+
+- **CI now runs the web unit suite** (`.github/workflows/ci.yml`) — the `web-build` job runs
+  `npm test` (vitest) alongside typecheck + build, closing the gap where frontend tests were not gated.
 
 ## [0.11.0] — 2026-07-23
 

@@ -50,3 +50,29 @@ down: ## Tear down the local stack
 .PHONY: docs-verify
 docs-verify: ## Validate blueprint docs (links + markdownlint), same as docs CI
 	npx --yes markdownlint-cli2@0.13.0 "**/*.md" "#node_modules"
+
+WEB := apps/web
+
+.PHONY: web-install
+web-install: ## Install web deps
+	cd $(WEB) && (npm ci || npm install)
+
+.PHONY: web-test
+web-test: ## Typecheck + run the web unit suite (vitest)
+	cd $(WEB) && npm run typecheck && npm test
+
+.PHONY: web-build
+web-build: ## Production build of the web app
+	cd $(WEB) && npm run build
+
+.PHONY: contracts
+contracts: ## Lint every OpenAPI contract (same pin as CI)
+	npx --yes @redocly/cli@1.25.11 lint packages/contracts/*.yaml
+
+.PHONY: gates
+gates: lint test web-test contracts docs-verify ## Run the full local gate suite (backend + web + contracts + docs)
+	@echo "All gates passed."
+
+.PHONY: release
+release: ## Verify tree is release-ready and print the tag command (VERSION required)
+	./scripts/release.sh
