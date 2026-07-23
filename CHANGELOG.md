@@ -25,6 +25,11 @@ Software Completion Mode — finishing every task completable entirely in softwa
   targets; `scripts/release.sh` verifies version consistency (VERSION.md ↔ CHANGELOG ↔ history table),
   a clean tree, and an unused tag, then prints the annotated-tag command (never tags automatically).
 
+- **Monitoring golden signals + runbook** (`platform/metrics.py`, `main.py`, `MONITORING_RUNBOOK.md`)
+  — an error counter (`taleem_errors_total{kind=client|server}`) recorded in the middleware, registry
+  aggregation helpers (`total`, `observed_mean`), and a `monitoring` block on `GET /v1/ops/status`
+  (requests, client/server errors, server error rate, mean latency). A runbook maps each signal to a
+  concrete alert threshold and operator action, and documents the pre-flight `make simulate` smoke check.
 - **Security response headers** (`services/core-api/src/taleem_core/platform/security_headers.py`) —
   the JSON API sends a strict hardening header set on *every* response path (success, domain error,
   and the fail-closed kill-switch 503): `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`,

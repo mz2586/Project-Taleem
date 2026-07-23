@@ -100,3 +100,23 @@ def test_ops_status_summary() -> None:
         "objectives_mastered",
         "misconceptions_detected",
     }
+
+
+def test_ops_status_monitoring_golden_signals() -> None:
+    app = create_app(Settings(database_url=""))
+    c = TestClient(app)
+    sysh = _auth("system")
+    # Generate a client error (401) so the error signal is non-zero.
+    assert c.get("/v1/learning/students/x/today").status_code == 401
+    mon = c.get("/v1/ops/status", headers=sysh).json()["monitoring"]
+    assert set(mon) == {
+        "requests_total",
+        "errors_server",
+        "errors_client",
+        "server_error_rate",
+        "avg_request_ms",
+    }
+    assert mon["requests_total"] >= 1
+    assert mon["errors_client"] >= 1
+    assert mon["server_error_rate"] == 0.0  # no 5xx in a healthy run
+    assert mon["avg_request_ms"] >= 0.0

@@ -224,16 +224,28 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     # ---- Operational controls (kill switch + status) ----
     def ops_status() -> dict[str, Any]:
         ready, _ = health.ready()
+        reg = registry()
+        requests = reg.total("taleem_requests_total")
+        errors_server = reg.counter_value("taleem_errors_total", kind="server")
+        errors_client = reg.counter_value("taleem_errors_total", kind="client")
         return {
             "kill_switch": kill_switch.status().to_dict(),
             "ready": ready,
             "version": __version__,
             "counters": {
-                "sessions_started": registry().counter_value("taleem_sessions_started_total"),
-                "objectives_mastered": registry().counter_value("taleem_objectives_mastered_total"),
-                "misconceptions_detected": registry().counter_value(
+                "sessions_started": reg.counter_value("taleem_sessions_started_total"),
+                "objectives_mastered": reg.counter_value("taleem_objectives_mastered_total"),
+                "misconceptions_detected": reg.counter_value(
                     "taleem_misconceptions_detected_total"
                 ),
+            },
+            # Golden signals (traffic/errors/latency) for monitoring + alert evaluation.
+            "monitoring": {
+                "requests_total": requests,
+                "errors_server": errors_server,
+                "errors_client": errors_client,
+                "server_error_rate": round(errors_server / requests, 4) if requests else 0.0,
+                "avg_request_ms": round(reg.observed_mean("taleem_request_duration_ms"), 2),
             },
         }
 
@@ -280,6 +292,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             )
         duration_ms = (time.perf_counter() - start) * 1000.0
         registry().observe("taleem_request_duration_ms", duration_ms, path=request.url.path)
+        # Error golden signal: count client (4xx) vs server (5xx) responses for monitoring/alerting.
+        if response.status_code >= 500:
+            registry().inc("taleem_errors_total", kind="server")
+        elif response.status_code >= 400:
+            registry().inc("taleem_errors_total", kind="client")
         response.headers["x-correlation-id"] = cid
         apply_security_headers(response.headers)
         log.info(

@@ -113,6 +113,21 @@ class TestMetrics(unittest.TestCase):
         self.assertIn('taleem_requests_total{method="GET"} 2', text)
         self.assertIn("dur_ms_count", text)
 
+    def test_total_sums_across_labels(self) -> None:
+        r = Registry()
+        r.inc("taleem_requests_total", method="GET", path="/a")
+        r.inc("taleem_requests_total", method="POST", path="/b")
+        r.inc("taleem_requests_total", method="GET", path="/a")
+        self.assertEqual(r.total("taleem_requests_total"), 3.0)
+        self.assertEqual(r.total("missing_metric"), 0.0)
+
+    def test_observed_mean(self) -> None:
+        r = Registry()
+        self.assertEqual(r.observed_mean("dur_ms"), 0.0)  # never observed
+        r.observe("dur_ms", 10.0, path="/a")
+        r.observe("dur_ms", 20.0, path="/b")
+        self.assertEqual(r.observed_mean("dur_ms"), 15.0)
+
 
 class TestPlugins(unittest.TestCase):
     def test_registration_and_mount_conflict(self) -> None:

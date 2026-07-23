@@ -39,6 +39,18 @@ class Registry:
     def counter_value(self, name: str, **labels: str) -> float:
         return self._counters.get((name, tuple(sorted(labels.items()))), 0.0)
 
+    def total(self, name: str) -> float:
+        """Sum a counter across every label set (e.g. requests across all method/path labels)."""
+        with self._lock:
+            return sum(v for (n, _), v in self._counters.items() if n == name)
+
+    def observed_mean(self, name: str) -> float:
+        """Mean of an observed histogram across every label set (0.0 if never observed)."""
+        with self._lock:
+            s = sum(v for (n, _), v in self._hist_sums.items() if n == name)
+            c = sum(cc for (n, _), cc in self._hist_counts.items() if n == name)
+        return s / c if c else 0.0
+
     def render(self) -> str:
         """Render Prometheus text exposition format."""
         lines: list[str] = []
