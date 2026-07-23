@@ -7,8 +7,14 @@ The local Git history is the official project history; each released version map
 ## [Unreleased]
 
 Software Completion Mode — finishing every task completable entirely in software.
+Closed by [SOFTWARE_COMPLETION_REPORT.md](SOFTWARE_COMPLETION_REPORT.md): remaining software tasks 0;
+remaining work is human-only (audio, content review, infra, secrets, governance/safeguarding
+sign-off, external pentest, on-device a11y audit, pilot execution).
 
 ### Added
+
+- **Software completion report** (`SOFTWARE_COMPLETION_REPORT.md`) — backlog walk-through, the six
+  milestones (M1–M6), green gate evidence, and the human-only remainder.
 
 - **Operational kill switch** (`services/core-api/src/taleem_core/platform/kill_switch.py`,
   `contexts/ops/adapters/ops_api.py`) — an operator-only halt of child-facing traffic (503) during an
