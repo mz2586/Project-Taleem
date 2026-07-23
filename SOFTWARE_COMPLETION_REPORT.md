@@ -68,7 +68,30 @@ markdownlint 0 errors. `make gates` passes end to end.
 
 ---
 
-## 4. Result
+## 4. Audit pass (adversarial re-review)
+
+An adversarial audit assumed this report was wrong and searched for missed work (TODOs, stubs, dead
+code, unreachable/undocumented endpoints, config drift, build inconsistencies). It **found three real
+defects** — the report as first written was not fully correct. All three were fixed completely and are
+covered by tests or end-to-end verification:
+
+| Finding | Severity | Fix |
+| --- | --- | --- |
+| `/v1/ops/*` API had **no OpenAPI contract** (every other context had one) | Undocumented API | `packages/contracts/ops.openapi.yaml` + `test_contract_parity.py` (fails if any served `/v1` path is undocumented or any documented path unserved) + declared the undeclared `pyyaml` test dep. |
+| `docker-compose` ran `core-api` on **in-memory SQLite** despite depending on Postgres; the image could not migrate anyway (Dockerfile omitted `alembic.ini`/`alembic/`) | Config + build inconsistency | Runtime image now ships Alembic config + migrations; compose sets `TALEEM_DATABASE_URL` + `CS_DATABASE_URL` and runs `alembic upgrade head` before serving. Verified end to end — the built image migrates a real Postgres (all `curriculum_studio` + `learning` tables). |
+| `MONITORING_RUNBOOK.md` sample showed `version: 0.11.0`; the app returns package version `0.1.0` | Doc-vs-behaviour drift | Corrected the example. |
+
+Also examined and found **correct, not defects**: the production-safety gate fails closed on default
+secrets; client Ed25519 verification is implemented and wired (not a stub); the `ports.{llm,cache,clock}`
+modules are intentional, tested hexagonal seams (not yet wired by design); Makefile/CI coverage
+thresholds match; no `NotImplementedError`, unimplemented throws, or debug leftovers exist.
+
+After these fixes the full gate suite is green again: backend **189 passed / 8 skipped**, coverage
+**96.4%**; web **85** tests; all six OpenAPI contracts valid; markdownlint 0 errors; `make gates` passes.
+
+---
+
+## 5. Result
 
 **Remaining software tasks: 0**
 
