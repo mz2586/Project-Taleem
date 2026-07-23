@@ -1,0 +1,197 @@
+openapi: 3.1.0
+info:
+  title: Project Taleem — Operations API
+  version: 0.1.0
+  description: >-
+    Operational controls used during a pilot (Software Completion Mode). An operator can engage /
+    disengage the kill switch (halt child-facing traffic with 503 during an incident while health,
+    metrics, and these ops routes stay reachable) and read an ops status summary (kill-switch state,
+    pseudonymous learning counters, and golden-signal monitoring). No child data — pseudonymous
+    counters only. Authenticated (bearer JWT) and PDP-gated: the `system` role operates the kill
+    switch (operate ops.control); `system` and `mentor` may read status (read ops.status).
+  license:
+    name: MIT
+    identifier: MIT
+servers:
+  - url: https://api.taleem.dev
+    description: Reference environment (placeholder; concrete host per FOUNDER_DECISIONS FD-02)
+tags:
+  - name: ops
+    description: Operational controls — kill switch + status (operator only; no child data).
+paths:
+  /v1/ops/kill-switch:
+    get:
+      tags: [ops]
+      operationId: getKillSwitch
+      summary: Current kill-switch state
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Kill-switch status
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/KillSwitchStatus" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (deny-by-default; requires read ops.status)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/ops/kill-switch:engage:
+    post:
+      tags: [ops]
+      operationId: engageKillSwitch
+      summary: Engage the kill switch (halt child-facing routes with 503)
+      description: >-
+        Operator-only. While engaged, child-facing routes (learning sessions/students, offline, sync)
+        return 503; health, metrics, and the ops routes stay reachable so the operator can observe and
+        disengage.
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/EngageIn" }
+      responses:
+        "200":
+          description: Engaged
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/KillSwitchStatus" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (requires operate ops.control — system role)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/ops/kill-switch:disengage:
+    post:
+      tags: [ops]
+      operationId: disengageKillSwitch
+      summary: Disengage the kill switch (restore child-facing routes)
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Disengaged
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/KillSwitchStatus" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (requires operate ops.control — system role)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/ops/status:
+    get:
+      tags: [ops]
+      operationId: getOpsStatus
+      summary: Ops status summary (kill-switch, counters, golden-signal monitoring)
+      description: >-
+        Pseudonymous operational summary for a dashboard or alert source. No child data — only
+        aggregate counters and golden signals (traffic / errors / latency).
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Ops status
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/OpsStatus" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (requires read ops.status — system or mentor)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Verified bearer JWT. Role from the token drives the deny-by-default PDP.
+  schemas:
+    EngageIn:
+      type: object
+      description: Optional reason recorded with the engage action (audit context).
+      properties:
+        reason:
+          type: string
+          maxLength: 200
+          default: operator-engaged
+    KillSwitchStatus:
+      type: object
+      properties:
+        engaged: { type: boolean }
+        reason: { type: string, description: Empty when disengaged }
+        changed_at: { type: number, description: Epoch seconds of the last state change }
+    OpsStatusCounters:
+      type: object
+      description: Pseudonymous learning counters (no child data).
+      properties:
+        sessions_started: { type: number }
+        objectives_mastered: { type: number }
+        misconceptions_detected: { type: number }
+    OpsStatusMonitoring:
+      type: object
+      description: Golden signals for monitoring + alert evaluation.
+      properties:
+        requests_total: { type: number }
+        errors_server: { type: number, description: Count of 5xx responses }
+        errors_client: { type: number, description: Count of 4xx responses }
+        server_error_rate: { type: number, description: errors_server / requests_total (0..1) }
+        avg_request_ms: { type: number, description: Mean request duration in milliseconds }
+    OpsStatus:
+      type: object
+      properties:
+        kill_switch: { $ref: "#/components/schemas/KillSwitchStatus" }
+        ready: { type: boolean, description: Readiness probe result }
+        version: { type: string }
+        counters: { $ref: "#/components/schemas/OpsStatusCounters" }
+        monitoring: { $ref: "#/components/schemas/OpsStatusMonitoring" }
+    Problem:
+      type: object
+      description: RFC 9457 problem+json.
+      properties:
+        type: { type: string }
+        title: { type: string }
+        status: { type: integer }
+        code: { type: string }
+        detail: { type: string }
+        instance: { type: string }

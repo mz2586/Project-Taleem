@@ -11,6 +11,15 @@ Closed by [SOFTWARE_COMPLETION_REPORT.md](SOFTWARE_COMPLETION_REPORT.md): remain
 remaining work is human-only (audio, content review, infra, secrets, governance/safeguarding
 sign-off, external pentest, on-device a11y audit, pilot execution).
 
+### Fixed
+
+- **Undocumented ops API** (audit) — the `/v1/ops/*` surface (kill-switch engage/disengage, status)
+  added in M1/M5 shipped with **no OpenAPI contract** while every other context had one. Added
+  `packages/contracts/ops.openapi.yaml` (redocly-clean) and a contract-parity test
+  (`test_contract_parity.py`) that fails if any served `/v1` path is undocumented or any documented
+  path is unserved — the guard that would have caught this. Declared the previously-undeclared
+  `pyyaml` test dependency in `pyproject.toml`.
+
 ### Added
 
 - **Software completion report** (`SOFTWARE_COMPLETION_REPORT.md`) — backlog walk-through, the six
