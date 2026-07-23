@@ -62,11 +62,13 @@ from .contexts.learning.domain.decision import DecisionConfig
 from .contexts.learning.domain.estimator import BKTEstimator
 from .contexts.learning.domain.forgetting import HalfLifeForgettingModel
 from .contexts.learning.domain.runtime import TemplatedTeachingRuntime
+from .contexts.ops.adapters.ops_api import build_ops_router
 from .contexts.sync.domain import DeltaType, SyncDelta, SyncStore
 from .contexts.sync.service import DurableSyncCoordinator
 from .platform import correlation
 from .platform.config import Settings, load_settings
 from .platform.errors import Problem, forbidden, unauthorized
+from .platform.kill_switch import KillSwitch, is_child_facing
 from .platform.logging import StructuredLogger
 from .platform.metrics import registry
 from .platform.plugins import Module
@@ -119,11 +121,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 "name": "ai-teacher",
                 "description": "AI Teacher — templated, curriculum-grounded, explainable (no LLM)",
             },
+            {"name": "ops", "description": "Operational controls — kill switch + status"},
         ],
     )
 
     # Shared, process-local state for the walking skeleton (synthetic only).
     sync_store = SyncStore()
+    kill_switch = KillSwitch(time.time)  # operator halt for child-facing traffic (ops control)
     health = HealthService(
         __version__,
         checks=[Check("self", lambda: True)],  # real dep probes added as contexts land
@@ -216,6 +220,24 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     )
     app.include_router(build_ai_teacher_router(ai_teacher, session_service, claims_dependency))
 
+    # ---- Operational controls (kill switch + status) ----
+    def ops_status() -> dict[str, Any]:
+        ready, _ = health.ready()
+        return {
+            "kill_switch": kill_switch.status().to_dict(),
+            "ready": ready,
+            "version": __version__,
+            "counters": {
+                "sessions_started": registry().counter_value("taleem_sessions_started_total"),
+                "objectives_mastered": registry().counter_value("taleem_objectives_mastered_total"),
+                "misconceptions_detected": registry().counter_value(
+                    "taleem_misconceptions_detected_total"
+                ),
+            },
+        }
+
+    app.include_router(build_ops_router(kill_switch, ops_status, claims_dependency))
+
     # Register the modules this deployable composes (plugin architecture).
     reg = module_registry()
     for module in (
@@ -226,6 +248,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         ),
         Module("learning", "/v1/learning", lambda: True, events_published=("ObjectiveMastered",)),
         Module("offline", "/v1/offline", lambda: True),
+        Module("ops", "/v1/ops", lambda: True),
     ):
         # Idempotent across reloads/tests: re-registering the same module is a no-op.
         with contextlib.suppress(ValueError):
@@ -236,6 +259,17 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         cid = correlation.ensure_correlation_id(request.headers.get("x-correlation-id"))
         start = time.perf_counter()
         registry().inc("taleem_requests_total", method=request.method, path=request.url.path)
+        # Kill switch: when engaged, child-facing routes fail closed (503); health/ops stay up.
+        if kill_switch.engaged and is_child_facing(request.url.path):
+            registry().inc("taleem_kill_switch_blocked_total")
+            response = JSONResponse(
+                status_code=503,
+                content=Problem(
+                    503, "SERVICE_HALTED", "Service temporarily halted by operator", "kill switch"
+                ).to_dict(str(request.url.path)),
+            )
+            response.headers["x-correlation-id"] = cid
+            return response
         try:
             response = await call_next(request)
         except Problem as problem:  # domain errors -> RFC9457

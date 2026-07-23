@@ -53,6 +53,9 @@ _ALLOW: frozenset[tuple[str, str, str]] = frozenset(
     {
         ("system", "read", "skeleton.protected"),
         ("system", "write", "sync.batch"),
+        ("system", "operate", "ops.control"),  # kill switch + ops controls (operator only)
+        ("system", "read", "ops.status"),  # ops health/analytics summary (operator/monitoring)
+        ("mentor", "read", "ops.status"),  # mentors may read the (pseudonymous) ops summary
         *_curriculum_rules(),
         *_learning_rules(),
     }
