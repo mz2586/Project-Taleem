@@ -8,6 +8,36 @@ The local Git history is the official project history; each released version map
 
 - Nothing pending.
 
+## [0.11.0] — 2026-07-23
+
+Tag: `phase-11` · Pilot 0 Execution Readiness. See [PHASE_11_REPORT.md](PHASE_11_REPORT.md). Satisfies
+(as far as a code environment can) the Pilot 0 conditions C1–C6. No architecture redesign, no new
+product features, no domain-model changes.
+
+### Added
+
+- **Automated Pilot-0 assurance suite** (`services/core-api/tests/test_pilot0_assurance.py`) —
+  completes the automatable portion of the assurance pass (C5): **security** (auth-required, IDOR, no
+  child PII), **offline** (Ed25519 package signature verifies; no answer keys), **load/integrity**
+  (100-attempt batch applied exactly once + idempotent replay → no double-count), **AI safety**
+  (grounded / non-generative / no-answer; generative disabled offline). SQLite + PostgreSQL-gated.
+- **Pilot 0 execution package** — [PILOT0_EXECUTION_PLAN.md](PILOT0_EXECUTION_PLAN.md) (condition
+  review: status/remaining/deps/owner/exit), [PILOT0_CHECKLIST.md](PILOT0_CHECKLIST.md) (deployment /
+  operator / mentor / guardian / rollback / support), [PILOT0_OPERATIONS.md](PILOT0_OPERATIONS.md)
+  (go-live, monitoring, on-call, safeguarding drill, kill-switch/rollback),
+  [FINAL_READINESS_REPORT.md](FINAL_READINESS_REPORT.md) (per-condition re-eval + recommendation).
+
+### Readiness
+
+- Verdict: **NOT READY** to *start* the Pilot 0 dry run — the gap is now purely human/ops/content
+  execution (C1 audio, C4 deploy, C6 drill BLOCKED-external; C2 content, C3 UI, C5 assurance PARTIAL),
+  not engineering/design. **No open Critical risk.** Go/No-Go remains GO WITH CONDITIONS.
+
+### Quality
+
+- Backend: 170 passed, 8 skipped (PostgreSQL-gated); **97% coverage**; ruff/black/mypy(strict) green;
+  6 OpenAPI contracts valid. Frontend: tsc clean, 78 vitest tests, build green. markdownlint clean.
+
 ## [0.10.0] — 2026-07-22
 
 Tag: `phase-10` · Pilot Validation. See [PHASE_10_REPORT.md](PHASE_10_REPORT.md). Validation

@@ -1,9 +1,9 @@
 # Version
 
-Current version: **0.10.0**
-Milestone: **phase-10** (Pilot Validation — Pilot 0 GO WITH CONDITIONS)
+Current version: **0.11.0**
+Milestone: **phase-11** (Pilot 0 Execution Readiness — conditions C1–C6)
 Status: **pre-production / development** — governance-gated; no real child data.
-Date: 2026-07-22
+Date: 2026-07-23
 
 The local Git repository is the canonical source of truth. This project is maintained locally; there
 is no remote. Every version corresponds to an annotated Git tag on this machine.
@@ -23,6 +23,7 @@ version and is bumped independently of this project milestone version.
 
 | Version | Tag | Date | Milestone |
 | --- | --- | --- | --- |
+| 0.11.0 | `phase-11` | 2026-07-23 | Pilot 0 Execution Readiness — condition (C1–C6) review, automated assurance validation suite (security/offline/load/AI-safety), pilot execution package (checklists + operations), final readiness re-eval (NOT READY to start: C1/C4/C6 blocked on human/ops, C2/C3/C5 partial); engineering + docs only |
 | 0.10.0 | `phase-10` | 2026-07-22 | Pilot Validation — readiness review of all 10 phases, end-to-end journey validation, pilot risk register, GO/NO-GO (Pilot 0: GO WITH CONDITIONS; Pilot 1: NO-GO until M-Gov+M-Safe), post-pilot backlog; validation docs only, no code |
 | 0.9.0 | `phase-9` | 2026-07-22 | Pilot Operations & Guardian Experience — guardian + mentor experience design (over existing read models), pilot ops runbooks (runbook, device prep, incident response), end-to-end validation, success metrics; documentation only, reuses existing platform |
 | 0.8.0 | `phase-8` | 2026-07-22 | AI Teacher — templated, curriculum-grounded, explainable teaching orchestration (no LLM): explanation styles, adaptive plan, guardrails, confidence, offline capability matrix; reuses existing components |

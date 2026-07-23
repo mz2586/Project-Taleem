@@ -6,6 +6,35 @@ this repository has no remote and the local Git history is authoritative.
 
 ---
 
+## 0.11.0 — Phase 11: Pilot 0 Execution Readiness (2026-07-23)
+
+Tag: `phase-11`
+
+Turning the Go/No-Go conditions into an honest, turnkey execution package — and completing the
+engineering that code can complete.
+
+### Highlights
+
+- **The assurance pass, automated.** A new repeatable suite proves the platform-level guarantees a pilot
+  depends on: authentication + IDOR, **no child PII in any response**, signed offline packages verify,
+  a 100-attempt sync batch applies **exactly once with idempotent replay** (no double-count), and the
+  AI Teacher stays grounded / non-generative / answer-free (disabled offline).
+- **A turnkey pilot package.** Deployment, operator, mentor, guardian, rollback, and support checklists,
+  plus a go-live + monitoring + safeguarding-drill operations guide — everything a human team needs to
+  run Pilot 0.
+- **An honest final verdict: NOT READY to *start* the dry run — but the gap is execution, not
+  engineering.** There's no recorded audio, no deployed environment, and the session UI isn't complete;
+  the live a11y audit, pentest, and safeguarding drill run during Pilot 0. Three conditions are blocked
+  on human/ops work (audio, deploy, drill) and three are partially complete (content, UI, assurance).
+  No open Critical risk; Go/No-Go stays GO WITH CONDITIONS.
+
+### Quality
+
+- Backend: 170 passed, 8 skipped at 97% coverage; frontend 78 vitest tests; 6 OpenAPI contracts valid;
+  all gates green. See `PHASE_11_REPORT.md` and `FINAL_READINESS_REPORT.md`.
+
+---
+
 ## 0.10.0 — Phase 10: Pilot Validation (2026-07-22)
 
 Tag: `phase-10`
