@@ -73,6 +73,7 @@ from .platform.logging import StructuredLogger
 from .platform.metrics import registry
 from .platform.plugins import Module
 from .platform.plugins import registry as module_registry
+from .platform.security_headers import apply_security_headers
 
 
 # Request models live at MODULE scope: with `from __future__ import annotations`, FastAPI resolves
@@ -269,6 +270,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 ).to_dict(str(request.url.path)),
             )
             response.headers["x-correlation-id"] = cid
+            apply_security_headers(response.headers)
             return response
         try:
             response = await call_next(request)
@@ -279,6 +281,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         duration_ms = (time.perf_counter() - start) * 1000.0
         registry().observe("taleem_request_duration_ms", duration_ms, path=request.url.path)
         response.headers["x-correlation-id"] = cid
+        apply_security_headers(response.headers)
         log.info(
             "request",
             method=request.method,

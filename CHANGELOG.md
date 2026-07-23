@@ -25,6 +25,12 @@ Software Completion Mode — finishing every task completable entirely in softwa
   targets; `scripts/release.sh` verifies version consistency (VERSION.md ↔ CHANGELOG ↔ history table),
   a clean tree, and an unused tag, then prints the annotated-tag command (never tags automatically).
 
+- **Security response headers** (`services/core-api/src/taleem_core/platform/security_headers.py`) —
+  the JSON API sends a strict hardening header set on *every* response path (success, domain error,
+  and the fail-closed kill-switch 503): `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`,
+  `Referrer-Policy: no-referrer`, a locked-down `Content-Security-Policy`, COOP/CORP `same-origin`,
+  HSTS, and `Cache-Control: no-store` so learner data never persists in shared caches.
+
 ### Changed
 
 - **CI now runs the web unit suite** (`.github/workflows/ci.yml`) — the `web-build` job runs
