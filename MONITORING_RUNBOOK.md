@@ -35,7 +35,7 @@ The same signals are summarised, authenticated, at **`GET /v1/ops/status`** (rol
 {
   "kill_switch": {"engaged": false, "reason": "", "changed_at": 0.0},
   "ready": true,
-  "version": "0.11.0",
+  "version": "0.1.0",
   "counters": {"sessions_started": 20, "objectives_mastered": 15, "misconceptions_detected": 1},
   "monitoring": {
     "requests_total": 214, "errors_server": 0, "errors_client": 3,

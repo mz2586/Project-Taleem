@@ -13,6 +13,16 @@ sign-off, external pentest, on-device a11y audit, pilot execution).
 
 ### Fixed
 
+- **Compose stack ran on in-memory SQLite** (audit) — `docker-compose.yml` made `core-api` depend on
+  Postgres but set no database URL, so the container silently used ephemeral in-memory SQLite (unused
+  Postgres, all data lost on restart). And the image could not have used Postgres anyway: the
+  Dockerfile never copied `alembic.ini`/`alembic/`, and the app does not `create_all` on a non-SQLite
+  engine. Fixed: the runtime image now includes the Alembic config + migrations; compose sets
+  `TALEEM_DATABASE_URL` (app) and `CS_DATABASE_URL` (Alembic) at the Postgres service and runs
+  `alembic upgrade head` before serving. Verified end to end — the image migrates a real Postgres,
+  creating all tables across the `curriculum_studio` and `learning` schemas.
+- **Monitoring runbook version example** (audit) — the sample `/v1/ops/status` payload showed
+  `"version": "0.11.0"` but the app returns the package artifact version `"0.1.0"`; corrected.
 - **Undocumented ops API** (audit) — the `/v1/ops/*` surface (kill-switch engage/disengage, status)
   added in M1/M5 shipped with **no OpenAPI contract** while every other context had one. Added
   `packages/contracts/ops.openapi.yaml` (redocly-clean) and a contract-parity test

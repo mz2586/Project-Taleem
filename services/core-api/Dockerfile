@@ -22,6 +22,10 @@ FROM base AS runtime
 RUN useradd --create-home --uid 10001 taleem
 COPY --from=builder /opt/venv /opt/venv
 COPY --from=builder /app/src /app/src
+# Alembic config + migrations so the container can run `alembic upgrade head` against PostgreSQL
+# (the app never create_all()s on a non-SQLite engine — the migrations are the authoritative schema).
+COPY alembic.ini ./
+COPY alembic ./alembic
 ENV PATH="/opt/venv/bin:$PATH" \
     TALEEM_ENV=production \
     PYTHONPATH=/app/src

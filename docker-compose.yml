@@ -9,6 +9,14 @@ services:
       TALEEM_ENV: local
       TALEEM_LOG_LEVEL: INFO
       TALEEM_DEFAULT_LOCALE: ur
+      # App runtime reads TALEEM_DATABASE_URL; Alembic reads CS_DATABASE_URL. Point both at the
+      # postgres service so the stack actually persists (previously unset => in-memory SQLite, which
+      # left the depended-on postgres unused and dropped all data on restart).
+      TALEEM_DATABASE_URL: postgresql+psycopg://taleem:local-dev-only@postgres:5432/taleem
+      CS_DATABASE_URL: postgresql+psycopg://taleem:local-dev-only@postgres:5432/taleem
+    # Apply the authoritative migration schema before serving (the app does not create_all on
+    # PostgreSQL — the Alembic migrations own the schema).
+    command: sh -c "alembic upgrade head && uvicorn taleem_core.main:app --host 0.0.0.0 --port 8000"
     ports:
       - "8000:8000"
     depends_on:
