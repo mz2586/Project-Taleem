@@ -13,8 +13,18 @@ yields identical server state (04-NFR OFFL-02).
 
 from __future__ import annotations
 
+from collections import OrderedDict
 from dataclasses import dataclass, field
 from enum import StrEnum
+
+# The store is process-global and long-lived, so its idempotency cache and per-entity state must be
+# bounded — otherwise an authenticated caller streaming unique clientEventIds / entity keys grows
+# memory without limit (storage-exhaustion DoS). Evicting the least-recently-used entry is safe:
+# attempt idempotency has a durable evidence-table backstop, and the progress/preference policies
+# are themselves idempotent (monotonic max / idempotent set), so a replay after eviction cannot
+# corrupt state — at worst a very old replay re-applies as a no-op.
+_MAX_SEEN = 100_000
+_MAX_ENTITIES = 50_000
 
 
 class DeltaType(StrEnum):
@@ -58,14 +68,34 @@ class _EntityState:
 
 @dataclass
 class SyncStore:
-    """In-memory, synthetic store. No live child data. Not persistent."""
+    """In-memory synthetic store. No live child data; not persistent. Bounded (LRU) memory cap."""
 
     server_cursor: int = 0
-    _seen: set[str] = field(default_factory=set)
-    _entities: dict[str, _EntityState] = field(default_factory=dict)
+    # OrderedDicts used as bounded LRU sets/maps (value ignored for _seen).
+    _seen: OrderedDict[str, None] = field(default_factory=OrderedDict)
+    _entities: OrderedDict[str, _EntityState] = field(default_factory=OrderedDict)
+
+    def is_seen(self, client_event_id: str) -> bool:
+        if client_event_id in self._seen:
+            self._seen.move_to_end(client_event_id)
+            return True
+        return False
+
+    def mark_seen(self, client_event_id: str) -> None:
+        self._seen[client_event_id] = None
+        self._seen.move_to_end(client_event_id)
+        while len(self._seen) > _MAX_SEEN:
+            self._seen.popitem(last=False)
 
     def _entity(self, key: str) -> _EntityState:
-        return self._entities.setdefault(key, _EntityState())
+        ent = self._entities.get(key)
+        if ent is None:
+            ent = _EntityState()
+            self._entities[key] = ent
+        self._entities.move_to_end(key)
+        while len(self._entities) > _MAX_ENTITIES:
+            self._entities.popitem(last=False)
+        return ent
 
     def snapshot(self, key: str) -> _EntityState:
         return self._entity(key)
@@ -88,7 +118,7 @@ class SyncEngine:
         return self._apply_one(d)
 
     def _apply_one(self, d: SyncDelta) -> ItemResult:
-        if d.client_event_id in self._store._seen:  # idempotency — the heart of safe replay
+        if self._store.is_seen(d.client_event_id):  # idempotency — the heart of safe replay
             ent = self._store._entity(d.entity_key)
             return ItemResult(d.client_event_id, Status.DUPLICATE, ent.version)
 
@@ -96,7 +126,7 @@ class SyncEngine:
         status = self._merge(d, ent)
 
         # Mark seen regardless of applied/ignored so a replay is always a no-op.
-        self._store._seen.add(d.client_event_id)
+        self._store.mark_seen(d.client_event_id)
         if status is Status.APPLIED:
             self._store.server_cursor += 1
             ent.version = self._store.server_cursor

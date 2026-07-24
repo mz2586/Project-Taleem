@@ -45,10 +45,10 @@ class DurableSyncCoordinator:
     def _apply_attempt(self, d: SyncDelta) -> ItemResult:
         # Fast in-process idempotency (a replay within the same run); the durable check is the
         # evidence table inside the sink, which also catches replays across restarts.
-        if d.client_event_id in self._store._seen:
+        if self._store.is_seen(d.client_event_id):
             return ItemResult(d.client_event_id, Status.DUPLICATE, self._store.server_cursor)
         status = self._sink.apply_attempt(d)
-        self._store._seen.add(d.client_event_id)
+        self._store.mark_seen(d.client_event_id)
         if status is Status.APPLIED:
             self._store.server_cursor += 1
         return ItemResult(d.client_event_id, status, self._store.server_cursor)
