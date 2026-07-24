@@ -46,6 +46,7 @@ paths:
       responses:
         "201": { description: Created, content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } } }
         "422": { description: Rule violation, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "409": { description: Concurrent modification (optimistic-lock conflict; retry), content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
   /v1/studio/lessons/{lessonId}:
     get:
@@ -68,6 +69,7 @@ paths:
       responses:
         "200": { description: Validation result, content: { application/json: { schema: { $ref: "#/components/schemas/ValidationResult" } } } }
         "422": { description: Rule violation, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "409": { description: Concurrent modification (optimistic-lock conflict; retry), content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
   /v1/studio/lessons/{lessonId}:submit:
     post:
@@ -80,6 +82,7 @@ paths:
       responses:
         "200": { description: Submitted, content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } } }
         "422": { description: Rule violation, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "409": { description: Concurrent modification (optimistic-lock conflict; retry), content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
   /v1/studio/lessons/{lessonId}:review:
     post:
@@ -92,6 +95,7 @@ paths:
       responses:
         "200": { description: Reviewed, content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } } }
         "422": { description: Rule violation, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "409": { description: Concurrent modification (optimistic-lock conflict; retry), content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
   /v1/studio/lessons/{lessonId}:publish:
     post:
@@ -104,6 +108,7 @@ paths:
       responses:
         "200": { description: Published, content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } } }
         "422": { description: Rule violation, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "409": { description: Concurrent modification (optimistic-lock conflict; retry), content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
   /v1/studio/lessons/{lessonId}:rollback:
     post:
@@ -116,6 +121,7 @@ paths:
       responses:
         "200": { description: Rolled back, content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } } }
         "422": { description: Rule violation, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "409": { description: Concurrent modification (optimistic-lock conflict; retry), content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
   /v1/studio/lessons/{lessonId}/versions:
     get:

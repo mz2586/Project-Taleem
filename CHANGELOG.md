@@ -11,6 +11,24 @@ Closed by [SOFTWARE_COMPLETION_REPORT.md](SOFTWARE_COMPLETION_REPORT.md): remain
 remaining work is human-only (audio, content review, infra, secrets, governance/safeguarding
 sign-off, external pentest, on-device a11y audit, pilot execution).
 
+### Security & robustness (adversarial validation)
+
+Found by attacking the running application; each fix has regression tests. See
+[FINAL_ADVERSARIAL_VALIDATION.md](FINAL_ADVERSARIAL_VALIDATION.md).
+
+- **Concurrent writes to one learner returned 500** — `student_knowledge` optimistic-lock conflicts
+  (`StaleDataError`) were unhandled. The UnitOfWork now translates them and `KnowledgeService` retries
+  the read-modify-write; verified on PostgreSQL (20 concurrent answers → 20×200, zero 500s).
+- **`/v1/sync/batch` was unauthenticated + IDOR-open** — anyone could durably record assessment
+  evidence for any child. Now requires auth and enforces `student_ref == token subject` on attempts.
+- **CRLF header/log injection via `x-correlation-id`** — a client CR/LF was echoed into the response
+  header and logs. The correlation id is now constrained to `[A-Za-z0-9._-]{1,128}` or regenerated.
+- **Unbounded in-memory stores (DoS)** — the session repository and the sync store grew without
+  limit. Both are now bounded LRU structures.
+- **Curriculum Studio conflict returned 500** — a concurrent double-submitted review produced a raw
+  `StaleDataError`. Optimistic-lock conflicts now map to a retryable **409** across the app (studio
+  commits inside the handler; app-level handlers catch the conflict wherever it flushes).
+
 ### Fixed
 
 - **Compose stack ran on in-memory SQLite** (audit) — `docker-compose.yml` made `core-api` depend on
