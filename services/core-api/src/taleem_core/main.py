@@ -20,6 +20,7 @@ from collections.abc import Iterator
 from typing import Any
 
 from fastapi import Depends, FastAPI, Header, Request
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, PlainTextResponse
 from pydantic import BaseModel, ConfigDict, Field
 from sqlalchemy.exc import OperationalError
@@ -128,6 +129,22 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             {"name": "ops", "description": "Operational controls — kill switch + status"},
         ],
     )
+
+    # CORS: the browser SPA is a different origin than the API, so cross-origin requests need an
+    # explicit allowlist (handles preflight OPTIONS + adds Access-Control-Allow-Origin). Only exact
+    # configured origins are allowed — never "*", since the API is credentialed (bearer JWT). Empty
+    # allowlist => no CORS headers (same-origin only).
+    cors_origins = settings.cors_allowed_origins()
+    if cors_origins:
+        app.add_middleware(
+            CORSMiddleware,
+            allow_origins=cors_origins,
+            allow_credentials=True,
+            allow_methods=["GET", "POST", "OPTIONS"],
+            allow_headers=["Authorization", "Content-Type", "X-Correlation-Id"],
+            expose_headers=["X-Correlation-Id"],
+            max_age=600,
+        )
 
     # Shared, process-local state for the walking skeleton (synthetic only).
     sync_store = SyncStore()

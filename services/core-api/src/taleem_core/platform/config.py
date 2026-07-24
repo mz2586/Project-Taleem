@@ -74,6 +74,12 @@ class Settings:
     offline_signing_key_id: str = field(
         default_factory=lambda: _get("TALEEM_OFFLINE_SIGNING_KEY_ID", "dev-ed25519-1")
     )
+    # Browser SPAs are served from a different origin than the API (e.g. app.taleem.dev vs
+    # api.taleem.dev), so cross-origin requests need an explicit CORS allowlist. CSV of exact
+    # origins; empty => same-origin only (no CORS headers). Never "*" — the API is credentialed.
+    cors_allowed_origins_csv: str = field(
+        default_factory=lambda: _get("TALEEM_CORS_ALLOWED_ORIGINS", "")
+    )
 
     @property
     def is_production(self) -> bool:
@@ -81,6 +87,9 @@ class Settings:
 
     def enabled_flags(self) -> frozenset[str]:
         return frozenset(f.strip() for f in self.enabled_flags_csv.split(",") if f.strip())
+
+    def cors_allowed_origins(self) -> list[str]:
+        return [o.strip() for o in self.cors_allowed_origins_csv.split(",") if o.strip()]
 
 
 DEFAULT_JWT_DEV_SECRET = "dev-only-not-secret"  # noqa: S105 (sentinel default, rejected in prod)

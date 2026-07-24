@@ -17,12 +17,13 @@ from pydantic import BaseModel
 
 from ....auth.dependencies import authorize, require_owner_or
 from ....auth.jwt_verifier import Claims
+from ....platform.errors import Problem
 from ..application.analytics import LearningAnalytics
 from ..application.knowledge_service import KnowledgeService
 from ..application.ports import CurriculumReadModel
 from ..application.session_service import SessionService
 from ..domain.decision import Decision, DecisionKind
-from ..domain.session import Session, SessionState
+from ..domain.session import Session, SessionError, SessionState
 
 _STUDENT_ONLY: tuple[str, ...] = ()  # learners only; no privileged override for operating a session
 _MENTOR = ("mentor",)
@@ -63,6 +64,17 @@ def build_learning_router(
 ) -> APIRouter:
     router = APIRouter(prefix="/v1/learning", tags=["learning"])
 
+    def _guard_session(fn: Callable[[], Any]) -> Any:
+        # A domain session-rule violation (e.g. an out-of-turn :teach after the planner chose a
+        # non-teach step) is a client sequencing error -> 409, never a 500. The client re-plans
+        # via :next and acts on the returned decision.
+        try:
+            return fn()
+        except SessionError as exc:
+            raise Problem(
+                409, "SESSION_STATE_CONFLICT", "Session state conflict", str(exc)
+            ) from exc
+
     def _session_or_404(session_id: str, claims: Claims) -> Session:
         session = deps.session_service.get_session(session_id)
         if session is None:
@@ -99,8 +111,11 @@ def build_learning_router(
     ) -> dict[str, Any]:
         authorize(claims, "operate", "learning.session")
         session = _session_or_404(session_id, claims)
+        # No published lesson for this objective -> 404 (like :answer / :hint), never a 500.
+        if deps.curriculum.lesson_for(body.objective_code) is None:
+            raise HTTPException(status_code=404, detail="lesson not found")
         decision = Decision(kind=DecisionKind.TEACH, objective_code=body.objective_code)
-        utterances, lesson = deps.session_service.teach(session, decision)
+        utterances, lesson = _guard_session(lambda: deps.session_service.teach(session, decision))
         return {
             "utterances": [{"kind": u.kind.value, "text": u.text} for u in utterances],
             "items": [
@@ -121,14 +136,16 @@ def build_learning_router(
         item = next((i for i in lesson.practice_items if i.item_ref == body.item_ref), None)
         if item is None:
             raise HTTPException(status_code=404, detail="item not found")
-        turn = deps.session_service.submit_answer(
-            session,
-            lesson,
-            item,
-            answer_option=body.option,
-            decision_kind=DecisionKind.CONTINUE,
-            hints_used=body.hints_used,
-            self_confidence=body.self_confidence,
+        turn = _guard_session(
+            lambda: deps.session_service.submit_answer(
+                session,
+                lesson,
+                item,
+                answer_option=body.option,
+                decision_kind=DecisionKind.CONTINUE,
+                hints_used=body.hints_used,
+                self_confidence=body.self_confidence,
+            )
         )
         return {
             "outcome": turn.result.outcome.value,
@@ -175,8 +192,8 @@ def build_learning_router(
         ):
             return {"state": session.state.value, "interactions": len(session.interactions)}
         if session.state is SessionState.INTERACTING:
-            deps.session_service.complete_objective(session)
-        ended = deps.session_service.end(session)
+            _guard_session(lambda: deps.session_service.complete_objective(session))
+        ended = _guard_session(lambda: deps.session_service.end(session))
         return {"state": ended.state.value, "interactions": len(ended.interactions)}
 
     @router.get("/students/{student_ref}/knowledge")
