@@ -9,9 +9,12 @@ from __future__ import annotations
 from collections.abc import Sequence
 from types import TracebackType
 
+from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm.exc import StaleDataError
 
 from .....platform.ids import uuid7
+from ...application.concurrency import ConcurrencyConflictError
 from ...domain.events import LearningEvent
 from .models import LearningOutboxRow
 from .repository import SqlAlchemyStudentKnowledgeRepository
@@ -67,7 +70,18 @@ class LearningUnitOfWork:
         return self._session
 
     def commit(self) -> None:
-        self.session.commit()
+        try:
+            self.session.commit()
+        except StaleDataError as exc:
+            # Optimistic-lock loser: a concurrent writer bumped version_id_col. Retryable.
+            self.session.rollback()
+            raise ConcurrencyConflictError(str(exc)) from exc
+        except OperationalError as exc:
+            # SQLite serializes writers with a lock ("database is locked"); treat as retryable too.
+            if "database is locked" in str(exc).lower():
+                self.session.rollback()
+                raise ConcurrencyConflictError(str(exc)) from exc
+            raise
 
     def rollback(self) -> None:
         self.session.rollback()

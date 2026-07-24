@@ -57,3 +57,8 @@ def forbidden(detail: str = "Not permitted") -> Problem:
 
 def unauthorized(detail: str = "Authentication required") -> Problem:
     return Problem(401, "UNAUTHORIZED", "Unauthorized", detail)
+
+
+def conflict(detail: str = "Concurrent modification; please retry") -> Problem:
+    # 409: an optimistic-lock conflict the caller may safely retry. Never leaks the losing writer.
+    return Problem(409, "CONFLICT", "Conflict", detail)

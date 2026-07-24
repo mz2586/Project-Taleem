@@ -11,6 +11,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 
 from ....platform import observability
+from ....platform.errors import conflict
 from ....platform.ids import uuid7
 from ...learning.domain import events as ev
 from ...learning.domain.events import LearningEvent
@@ -18,6 +19,7 @@ from ...learning.domain.knowledge import AttemptResult, StudentKnowledge
 from ...learning.domain.protocols import ForgettingModel, MasteryEstimator
 from ...learning.domain.values import InteractionContext
 from ..adapters.persistence.uow import LearningUnitOfWork
+from .concurrency import ConcurrencyConflictError, retry_on_conflict
 
 
 @dataclass
@@ -41,12 +43,21 @@ class KnowledgeService:
 
     def ensure_student(self, student_ref: str, objective_codes: list[str]) -> None:
         """Cold-start a learner: initialize objectives at the prior (high uncertainty)."""
-        with self._uow() as uow:
-            knowledge = uow.knowledge.get(student_ref) or StudentKnowledge(student_ref=student_ref)
-            for code in objective_codes:
-                knowledge.ensure_objective(code, initial=self._estimator.initial())
-            uow.knowledge.save(knowledge)
-            uow.commit()
+
+        def _txn() -> None:
+            with self._uow() as uow:
+                knowledge = uow.knowledge.get(student_ref) or StudentKnowledge(
+                    student_ref=student_ref
+                )
+                for code in objective_codes:
+                    knowledge.ensure_objective(code, initial=self._estimator.initial())
+                uow.knowledge.save(knowledge)
+                uow.commit()
+
+        try:
+            retry_on_conflict(_txn)
+        except ConcurrencyConflictError as exc:
+            raise conflict(f"knowledge write conflict for {student_ref}") from exc
 
     def snapshot(self, student_ref: str) -> StudentKnowledge | None:
         with self._uow() as uow:
@@ -67,30 +78,42 @@ class KnowledgeService:
         self_confidence: float | None,
     ) -> RecordOutcome:
         now = self._now()
-        with self._uow() as uow:
-            knowledge = uow.knowledge.get(student_ref) or StudentKnowledge(student_ref=student_ref)
-            knowledge.ensure_objective(objective_code, initial=self._estimator.initial())
-            result = knowledge.apply_attempt(
-                evidence_id=uuid7(),
-                objective_code=objective_code,
-                item_ref=item_ref,
-                session_id=session_id,
-                correct=correct,
-                misconception_hits=misconception_hits,
-                hints_used=hints_used,
-                response_time_ms=response_time_ms,
-                context=context,
-                self_confidence=self_confidence,
-                estimator=self._estimator,
-                forgetting=self._forgetting,
-                now=now,
-            )
-            obj = knowledge.get(objective_code)
-            next_review = obj.memory.next_review_at if obj else 0.0
-            events = self._events_for(result, student_ref, session_id, next_review, now)
-            uow.knowledge.save(knowledge)
-            uow.events.publish(events)
-            uow.commit()
+
+        def _txn() -> tuple[AttemptResult, list[LearningEvent]]:
+            # A full read-modify-write in its own transaction so a retry re-reads the latest
+            # committed version (evidence_id is minted per attempt — a retry is a fresh row).
+            with self._uow() as uow:
+                knowledge = uow.knowledge.get(student_ref) or StudentKnowledge(
+                    student_ref=student_ref
+                )
+                knowledge.ensure_objective(objective_code, initial=self._estimator.initial())
+                result = knowledge.apply_attempt(
+                    evidence_id=uuid7(),
+                    objective_code=objective_code,
+                    item_ref=item_ref,
+                    session_id=session_id,
+                    correct=correct,
+                    misconception_hits=misconception_hits,
+                    hints_used=hints_used,
+                    response_time_ms=response_time_ms,
+                    context=context,
+                    self_confidence=self_confidence,
+                    estimator=self._estimator,
+                    forgetting=self._forgetting,
+                    now=now,
+                )
+                obj = knowledge.get(objective_code)
+                next_review = obj.memory.next_review_at if obj else 0.0
+                events = self._events_for(result, student_ref, session_id, next_review, now)
+                uow.knowledge.save(knowledge)
+                uow.events.publish(events)
+                uow.commit()
+                return result, events
+
+        try:
+            result, events = retry_on_conflict(_txn)
+        except ConcurrencyConflictError as exc:
+            raise conflict(f"knowledge write conflict for {student_ref}") from exc
 
         # Observability (CTO H9): domain telemetry for the learning write path.
         observability.record_event("taleem_learning_attempts_total", outcome=result.outcome.value)
