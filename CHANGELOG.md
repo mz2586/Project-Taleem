@@ -11,6 +11,19 @@ Closed by [SOFTWARE_COMPLETION_REPORT.md](SOFTWARE_COMPLETION_REPORT.md): remain
 remaining work is human-only (audio, content review, infra, secrets, governance/safeguarding
 sign-off, external pentest, on-device a11y audit, pilot execution).
 
+### End-to-end production validation
+
+Found by running the real stack (uvicorn + PostgreSQL + browser SPA); see
+[END_TO_END_VALIDATION_REPORT.md](END_TO_END_VALIDATION_REPORT.md). 44/44 workflow checks pass.
+
+- **API had no CORS** — the browser SPA (a different origin than the API) was blocked from every
+  request, so the frontend could load no data. Added a configurable, exact-origin CORS allowlist
+  (`TALEEM_CORS_ALLOWED_ORIGINS`; never `*`, since the API is credentialed). Verified from a real
+  browser: cross-origin fetch now returns 200 + live data.
+- **`POST …:teach` returned 500** for an out-of-turn call (already-mastered objective → illegal
+  session transition) and for an objective with no published lesson. Now a `SessionError` → 409
+  (`SESSION_STATE_CONFLICT`) and a missing lesson → 404.
+
 ### Security & robustness (adversarial validation)
 
 Found by attacking the running application; each fix has regression tests. See
