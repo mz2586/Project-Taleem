@@ -40,6 +40,9 @@ from .contexts.curriculum_studio.adapters.persistence import (
     unit_of_work,
 )
 from .contexts.curriculum_studio.application.service import CurriculumStudioService
+from .contexts.guardian.adapters.guardian_api import build_guardian_router
+from .contexts.guardian.application.directory import GuardianDirectory
+from .contexts.guardian.application.guardian_service import GuardianService
 from .contexts.health.service import Check, HealthService
 from .contexts.learning.adapters.ai_teacher_api import build_ai_teacher_router
 from .contexts.learning.adapters.api import LearningApiDeps, build_learning_router
@@ -127,6 +130,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 "description": "AI Teacher — templated, curriculum-grounded, explainable (no LLM)",
             },
             {"name": "ops", "description": "Operational controls — kill switch + status"},
+            {
+                "name": "guardian",
+                "description": "Guardian Portal — read-only view of linked children",
+            },
         ],
     )
 
@@ -243,6 +250,18 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     )
     app.include_router(build_ai_teacher_router(ai_teacher, session_service, claims_dependency))
 
+    # ---- Guardian Portal: read-only aggregation over the EXISTING learning read models. No new
+    # child-data surfaces; the only new state is the guardian→children association directory.
+    guardian_directory = GuardianDirectory.from_csv(settings.guardian_links_csv)
+    guardian_service = GuardianService(
+        guardian_directory,
+        student_queries,  # reuse the same student query surface
+        LearningAnalytics(learning_uow),  # reuse learning analytics
+        ai_teacher,  # reuse the AI Teacher plan
+        time.time,
+    )
+    app.include_router(build_guardian_router(guardian_service, claims_dependency))
+
     # ---- Operational controls (kill switch + status) ----
     def ops_status() -> dict[str, Any]:
         ready, _ = health.ready()
@@ -284,6 +303,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         Module("learning", "/v1/learning", lambda: True, events_published=("ObjectiveMastered",)),
         Module("offline", "/v1/offline", lambda: True),
         Module("ops", "/v1/ops", lambda: True),
+        Module("guardian", "/v1/guardian", lambda: True),
     ):
         # Idempotent across reloads/tests: re-registering the same module is a no-op.
         with contextlib.suppress(ValueError):

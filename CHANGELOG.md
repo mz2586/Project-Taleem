@@ -11,6 +11,27 @@ Closed by [SOFTWARE_COMPLETION_REPORT.md](SOFTWARE_COMPLETION_REPORT.md): remain
 remaining work is human-only (audio, content review, infra, secrets, governance/safeguarding
 sign-off, external pentest, on-device a11y audit, pilot execution).
 
+### Guardian Portal
+
+Delivered by reuse — a thin read-only aggregation over the existing Student Platform / Learning
+Analytics / AI Teacher / Assessment / Offline Sync services. See
+[GUARDIAN_PORTAL_REPORT.md](GUARDIAN_PORTAL_REPORT.md).
+
+- **Guardian bounded context** (`contexts/guardian/`) — a `GuardianDirectory` (guardian→children
+  association, seeded from `TALEEM_GUARDIAN_LINKS`) and a `GuardianService` that aggregates every
+  WS1 data point (progress, knowledge growth, attendance, streaks, weekly summary, timeline,
+  assessment history, AI-Teacher activity, recommendations, interventions, offline-sync status,
+  achievements) by consuming existing read models — the only new logic is four pure derivations.
+- **Three endpoints** (`/v1/guardian/me|dashboard|children/{ref}`) — authenticated, PDP-authorized,
+  IDOR-guarded by the directory, validated, audit-logged, monitored, documented
+  (`packages/contracts/guardian.openapi.yaml`), read-only. A guardian can access only linked children.
+- **Guardian Portal frontend** (`/guardian`, `/guardian/children/[ref]`) — dashboard + child detail
+  reusing the existing design language, with loading / empty / error / offline+retry states and a
+  shared `createApiClient` factory.
+- **Security**: 19/19 adversarial attacks held (IDOR, privilege escalation, forged/expired tokens,
+  parameter tampering, header injection) — no defects. Tests: `test_guardian_api.py` (14),
+  `test_guardian_derivations.py` (6), `apiClient.test.ts` (5).
+
 ### End-to-end production validation
 
 Found by running the real stack (uvicorn + PostgreSQL + browser SPA); see

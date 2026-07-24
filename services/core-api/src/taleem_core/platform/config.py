@@ -80,6 +80,10 @@ class Settings:
     cors_allowed_origins_csv: str = field(
         default_factory=lambda: _get("TALEEM_CORS_ALLOWED_ORIGINS", "")
     )
+    # Guardian→children associations (the only new state the Guardian Portal adds). Software layer,
+    # not the M-Gov consent flow. Format: "guardianRef=Name:childA,childB;guardianRef2:childC".
+    # Empty in production until the consent workflow populates links; a demo link is seeded in dev.
+    guardian_links_csv: str = field(default_factory=lambda: _get("TALEEM_GUARDIAN_LINKS", ""))
 
     @property
     def is_production(self) -> bool:

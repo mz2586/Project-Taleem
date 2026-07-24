@@ -1,0 +1,203 @@
+openapi: 3.1.0
+info:
+  title: Project Taleem — Guardian Portal API
+  version: 0.1.0
+  description: >-
+    Read-only guardian view of linked children, aggregated from the existing learning read models
+    (Student Platform queries, Learning Analytics, AI Teacher plan) — no new child-data surfaces and
+    no duplicated logic. Authenticated (bearer JWT), authorized (PDP: the `guardian` role reads its
+    own portal), and IDOR-guarded by the association directory: a guardian may only reach a child it
+    is linked to. A non-linked child is a uniform 403 (no existence disclosure). Guardians never
+    mutate learner state.
+  license:
+    name: MIT
+    identifier: MIT
+servers:
+  - url: https://api.taleem.dev
+    description: Reference environment (placeholder; concrete host per FOUNDER_DECISIONS FD-02)
+tags:
+  - name: guardian
+    description: Guardian Portal — read-only view of linked children.
+paths:
+  /v1/guardian/me:
+    get:
+      tags: [guardian]
+      operationId: getGuardianProfile
+      summary: Guardian profile + linked children
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Guardian profile
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GuardianProfile" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (not a guardian)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/guardian/dashboard:
+    get:
+      tags: [guardian]
+      operationId: getGuardianDashboard
+      summary: Overview across all linked children
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Dashboard
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GuardianDashboard" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (not a guardian)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/guardian/children/{studentRef}:
+    get:
+      tags: [guardian]
+      operationId: getGuardianChild
+      summary: Full detail for one linked child
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: studentRef
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Child overview
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GuardianChildOverview" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (child not linked to this guardian)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "404":
+          description: No learner data
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Verified bearer JWT. The `guardian` role reads only its linked children.
+  schemas:
+    GuardianProfile:
+      type: object
+      properties:
+        guardian_ref: { type: string }
+        display_name: { type: string }
+        children:
+          type: array
+          items: { type: string, description: Pseudonymous student ref }
+        child_count: { type: integer }
+    SyncStatus:
+      type: object
+      description: Server-known offline-sync freshness. Pending uploads are device-reported.
+      properties:
+        last_synced_at: { type: ["number", "null"] }
+        is_stale: { type: boolean }
+        seconds_since_sync: { type: ["number", "null"] }
+        pending_is_device_reported: { type: boolean }
+    Streak:
+      type: object
+      properties:
+        current: { type: integer }
+        longest: { type: integer }
+        last_active_day: { type: ["integer", "null"] }
+    ChildSummary:
+      type: object
+      properties:
+        student_ref: { type: string }
+        progress:
+          type: object
+          properties:
+            objectives_mastered: { type: integer }
+            objectives_in_progress: { type: integer }
+            accuracy: { type: number }
+            total_attempts: { type: integer }
+        streak: { $ref: "#/components/schemas/Streak" }
+        sync_status: { $ref: "#/components/schemas/SyncStatus" }
+        open_interventions: { type: integer }
+        achievements_count: { type: integer }
+    GuardianDashboard:
+      type: object
+      properties:
+        guardian_ref: { type: string }
+        child_count: { type: integer }
+        children:
+          type: array
+          items: { $ref: "#/components/schemas/ChildSummary" }
+    GuardianChildOverview:
+      type: object
+      description: Full read-only detail aggregated from existing learning read models.
+      properties:
+        student_ref: { type: string }
+        progress_overview: { type: object, additionalProperties: true }
+        knowledge_growth:
+          type: object
+          additionalProperties: { type: number }
+        attendance: { type: object, additionalProperties: true }
+        learning_streaks: { $ref: "#/components/schemas/Streak" }
+        weekly_summary: { type: object, additionalProperties: true }
+        learning_timeline:
+          type: array
+          items: { type: object, additionalProperties: true }
+        assessment_history: { type: object, additionalProperties: true }
+        ai_teacher_activity: { type: object, additionalProperties: true }
+        recommendations:
+          type: array
+          items: { type: object, additionalProperties: true }
+        intervention_notifications:
+          type: array
+          items: { type: object, additionalProperties: true }
+        offline_sync_status: { $ref: "#/components/schemas/SyncStatus" }
+        achievement_history:
+          type: array
+          items: { type: object, additionalProperties: true }
+    Problem:
+      type: object
+      description: RFC 9457 problem+json.
+      properties:
+        type: { type: string }
+        title: { type: string }
+        status: { type: integer }
+        code: { type: string }
+        detail: { type: string }
+        instance: { type: string }
