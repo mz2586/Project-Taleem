@@ -25,7 +25,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from . import __version__
 from .auth import pdp
-from .auth.dependencies import bearer_claims
+from .auth.dependencies import bearer_claims, require_owner_or
 from .auth.jwt_verifier import Claims, verify_hs256
 from .contexts.curriculum_studio.adapters.api import build_studio_router
 from .contexts.curriculum_studio.adapters.persistence import (
@@ -329,7 +329,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     # ---- offline sync (Phase 6.2B: durable evidence for attempts + in-memory policy for the rest)
     @app.post("/v1/sync/batch", tags=["sync"])
-    def sync_batch(batch: BatchIn) -> dict[str, Any]:
+    def sync_batch(batch: BatchIn, claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
         try:
             deltas = [
                 SyncDelta(
@@ -343,6 +343,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             ]
         except ValueError as exc:
             raise Problem(422, "UNKNOWN_DELTA_TYPE", "Unknown delta type", str(exc)) from exc
+        # IDOR guard: a learner may only submit durable attempt evidence for THEMSELVES (the delta's
+        # student_ref must equal the token subject); a privileged operator may sync any. Without
+        # this a hostile caller could forge assessment evidence for any child.
+        for d in deltas:
+            if d.type is DeltaType.ATTEMPT_SUBMITTED:
+                owner = str(d.payload.get("student_ref", ""))
+                if not owner:
+                    raise Problem(422, "MISSING_STUDENT_REF", "attempt missing student_ref", "")
+                require_owner_or(claims, owner, privileged_roles=("system",))
         results, cursor = sync_coordinator.apply_batch(deltas)
         return {
             "cursor": cursor,

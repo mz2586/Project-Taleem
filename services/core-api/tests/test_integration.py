@@ -21,6 +21,12 @@ def _client() -> TestClient:
     return TestClient(create_app(Settings(jwt_dev_secret=SECRET)))
 
 
+def _sync_auth() -> dict[str, str]:
+    # Sync is authenticated (IDOR-guarded for attempts); non-attempt deltas just need a valid token.
+    tok = sign_hs256({"sub": "S1", "role": "student", "exp": 9999999999}, SECRET)
+    return {"Authorization": f"Bearer {tok}"}
+
+
 class TestBootAndHealth(unittest.TestCase):
     def test_app_boots_and_liveness(self) -> None:
         r = _client().get("/health")
@@ -72,12 +78,12 @@ class TestSyncEndpoint(unittest.TestCase):
                 },
             ],
         }
-        r1 = c.post("/v1/sync/batch", json=batch)
+        r1 = c.post("/v1/sync/batch", json=batch, headers=_sync_auth())
         self.assertEqual(r1.status_code, 200)
         statuses1 = {x["clientEventId"]: x["status"] for x in r1.json()["results"]}
         self.assertEqual(statuses1, {"e1": "applied", "e2": "applied"})
 
-        r2 = c.post("/v1/sync/batch", json=batch)  # replay same queue
+        r2 = c.post("/v1/sync/batch", json=batch, headers=_sync_auth())  # replay same queue
         statuses2 = {x["clientEventId"]: x["status"] for x in r2.json()["results"]}
         self.assertEqual(statuses2, {"e1": "duplicate", "e2": "duplicate"})
         self.assertEqual(r1.json()["cursor"], r2.json()["cursor"])  # cursor did not advance
@@ -87,6 +93,7 @@ class TestSyncEndpoint(unittest.TestCase):
         r = c.post(
             "/v1/sync/batch",
             json={"deltas": [{"clientEventId": "x", "type": "bogus.type", "entityKey": "k"}]},
+            headers=_sync_auth(),
         )
         self.assertEqual(r.status_code, 422)
         body = r.json()
@@ -95,7 +102,11 @@ class TestSyncEndpoint(unittest.TestCase):
 
     def test_validation_rejects_missing_required_field(self) -> None:
         c = _client()
-        r = c.post("/v1/sync/batch", json={"deltas": [{"type": "progress.updated"}]})
+        r = c.post(
+            "/v1/sync/batch",
+            json={"deltas": [{"type": "progress.updated"}]},
+            headers=_sync_auth(),
+        )
         # pydantic validation: missing required clientEventId / entityKey.
         self.assertEqual(r.status_code, 422)
 

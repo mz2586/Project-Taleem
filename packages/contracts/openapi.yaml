@@ -107,7 +107,11 @@ paths:
         published lesson and durably recorded as AssessmentEvidence via LearningUnitOfWork, keyed on
         a client-generated evidence_id so a replay (even after a server restart) is a DUPLICATE.
         A summative item is never auto-graded by sync (mentor-mediated). See AttemptPayload.
-      security: []
+        Authenticated (bearer JWT) and IDOR-guarded: an attempt.submitted delta's student_ref must
+        match the token subject (a privileged operator may sync any) — a learner cannot forge
+        assessment evidence for another child.
+      security:
+        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -121,8 +125,18 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/BatchResult"
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (attempt targets another learner)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
         "422":
-          description: Validation / unknown delta type
+          description: Validation / unknown delta type / missing student_ref
           content:
             application/problem+json:
               schema: { $ref: "#/components/schemas/Problem" }

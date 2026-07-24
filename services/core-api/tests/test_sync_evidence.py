@@ -94,7 +94,12 @@ def _attempt_delta(
 def _batch(
     client: TestClient, deltas: list[dict[str, object]], cursor: int = 0
 ) -> dict[str, object]:
-    r = client.post("/v1/sync/batch", json={"cursor": cursor, "deltas": deltas})
+    # Sync is authenticated + IDOR-guarded: the learner submits their own attempts (sub=_STUDENT).
+    r = client.post(
+        "/v1/sync/batch",
+        json={"cursor": cursor, "deltas": deltas},
+        headers=_auth("student", _STUDENT),
+    )
     assert r.status_code == 200, r.text
     return r.json()
 

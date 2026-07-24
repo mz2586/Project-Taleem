@@ -143,7 +143,12 @@ def _assert_offline_signed(client: TestClient) -> None:
 
 
 def _sync(client: TestClient, deltas: list[dict[str, object]]) -> list[str]:
-    r = client.post("/v1/sync/batch", json={"cursor": 0, "deltas": deltas})
+    # Sync is authenticated + IDOR-guarded; the learner submits their own attempts.
+    r = client.post(
+        "/v1/sync/batch",
+        json={"cursor": 0, "deltas": deltas},
+        headers=_auth("student", _STUDENT),
+    )
     assert r.status_code == 200, r.text
     return [row["status"] for row in r.json()["results"]]
 
