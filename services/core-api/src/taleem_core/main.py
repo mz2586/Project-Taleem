@@ -22,6 +22,8 @@ from typing import Any
 from fastapi import Depends, FastAPI, Header, Request
 from fastapi.responses import JSONResponse, PlainTextResponse
 from pydantic import BaseModel, ConfigDict, Field
+from sqlalchemy.exc import OperationalError
+from sqlalchemy.orm.exc import StaleDataError
 
 from . import __version__
 from .auth import pdp
@@ -66,8 +68,9 @@ from .contexts.ops.adapters.ops_api import build_ops_router
 from .contexts.sync.domain import DeltaType, SyncDelta, SyncStore
 from .contexts.sync.service import DurableSyncCoordinator
 from .platform import correlation
+from .platform.concurrency import ConcurrencyConflictError
 from .platform.config import Settings, load_settings
-from .platform.errors import Problem, forbidden, unauthorized
+from .platform.errors import Problem, conflict, forbidden, unauthorized
 from .platform.kill_switch import KillSwitch, is_child_facing
 from .platform.logging import StructuredLogger
 from .platform.metrics import registry
@@ -158,8 +161,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     # ---- Curriculum Studio (CTO H2: SQL-backed, request-scoped Unit of Work) ----
     def studio_service_provider() -> Iterator[CurriculumStudioService]:
         with unit_of_work(studio_sf) as uow:
-            yield CurriculumStudioService(uow.lessons, uow.publish)
-            uow.commit()  # reached only on success; the UoW rolls back on any raised exception
+            # The service commits inside each mutating method (on_commit) so an optimistic-lock
+            # conflict at commit is caught in the request handler (409), not in dependency teardown
+            # (which would surface as a 500). The UoW still rolls back on any raised exception.
+            yield CurriculumStudioService(uow.lessons, uow.publish, on_commit=uow.commit)
 
     app.include_router(build_studio_router(studio_service_provider, claims_dependency))
 
@@ -311,6 +316,30 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     @app.exception_handler(Problem)
     async def problem_handler(request: Request, exc: Problem) -> JSONResponse:
         return JSONResponse(status_code=exc.status, content=exc.to_dict(str(request.url.path)))
+
+    def _conflict_response(request: Request) -> JSONResponse:
+        problem = conflict("resource was modified concurrently; reload and retry")
+        body = problem.to_dict(str(request.url.path))
+        return JSONResponse(status_code=problem.status, content=body)
+
+    @app.exception_handler(ConcurrencyConflictError)
+    async def conflict_handler(request: Request, exc: ConcurrencyConflictError) -> JSONResponse:
+        # Optimistic-lock conflict -> a retryable 409, never a 500.
+        return _conflict_response(request)
+
+    @app.exception_handler(StaleDataError)
+    async def stale_data_handler(request: Request, exc: StaleDataError) -> JSONResponse:
+        # A raw optimistic-lock loser (the version-guarded UPDATE matched 0 rows) — e.g. a
+        # double-submitted Curriculum Studio review. Map to 409, never a 500. Caught at app level
+        # because the conflict may surface during a flush inside save(), not only at commit().
+        return _conflict_response(request)
+
+    @app.exception_handler(OperationalError)
+    async def operational_error_handler(request: Request, exc: OperationalError) -> JSONResponse:
+        # SQLite serializes writers with a lock; treat "database is locked" as a retryable conflict.
+        if "database is locked" in str(exc).lower():
+            return _conflict_response(request)
+        raise exc
 
     # ---- health ----
     @app.get("/health", tags=["health"])

@@ -49,10 +49,15 @@ class CurriculumStudioService:
         repo: LessonRepository,
         publisher: PublishPort,
         clock: Callable[[], float] | None = None,
+        on_commit: Callable[[], None] | None = None,
     ) -> None:
         self._repo = repo
         self._publisher = publisher
         self._now: Callable[[], float] = clock if clock is not None else time.time
+        # Commit inside the mutating method so an optimistic-lock conflict at commit is caught in
+        # the request handler (mapped to 409), not during dependency teardown (which becomes a 500).
+        # Defaults to a no-op: callers that own the Unit of Work commit it themselves.
+        self._commit: Callable[[], None] = on_commit if on_commit is not None else (lambda: None)
 
     # ---- authoring ----
     def create(self, lesson: Lesson) -> Lesson:
@@ -60,6 +65,7 @@ class CurriculumStudioService:
             raise StudioError(f"lesson already exists: {lesson.lesson_id}")
         lesson.workflow.state = WorkflowState.DRAFT
         self._repo.save(lesson)
+        self._commit()
         return lesson
 
     def get(self, lesson_id: str) -> Lesson:
@@ -82,6 +88,7 @@ class CurriculumStudioService:
         lesson.version = existing.version
         lesson.version_history = existing.version_history
         self._repo.save(lesson)
+        self._commit()
         return lesson
 
     # ---- validation ----
@@ -99,6 +106,7 @@ class CurriculumStudioService:
             self._record_gate(lesson, gr)
         self._transition(lesson, ReviewAction.SUBMIT, actor_role, note)
         self._repo.save(lesson)
+        self._commit()
         return lesson
 
     def review(
@@ -123,6 +131,7 @@ class CurriculumStudioService:
                 )
         self._transition(lesson, action, actor_role, note)
         self._repo.save(lesson)
+        self._commit()
         return lesson
 
     def publish(self, lesson_id: str, actor_role: str, change_summary: str = "") -> Lesson:
@@ -152,6 +161,7 @@ class CurriculumStudioService:
         self._transition(lesson, ReviewAction.PUBLISH, actor_role, change_summary)
         self._repo.save(lesson)
         self._publisher.publish(lesson, version)
+        self._commit()  # commit before telemetry so a conflict never logs a phantom publish
         observability.record_event("taleem_lessons_published_total")
         observability.log_event(
             "lesson_published", lesson_id=lesson.lesson_id, version=version.version
@@ -170,6 +180,7 @@ class CurriculumStudioService:
             lesson, ReviewAction.ROLLBACK, actor_role, note or f"rollback to v{target_version}"
         )
         self._repo.save(lesson)
+        self._commit()
         return lesson
 
     # ---- helpers ----

@@ -21,8 +21,11 @@ from types import TracebackType
 from typing import Any
 
 from sqlalchemy import select
+from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm.exc import StaleDataError
 
+from .....platform.concurrency import ConcurrencyConflictError
 from .....platform.ids import uuid7
 from .models import AuditLogRow, OutboxRow
 from .repository import SqlAlchemyLessonRepository, SqlAlchemyPublishPort
@@ -67,7 +70,17 @@ class UnitOfWork:
         return self._session
 
     def commit(self) -> None:
-        self.session.commit()
+        try:
+            self.session.commit()
+        except StaleDataError as exc:
+            # Optimistic-lock loser (a concurrent writer bumped the aggregate's version). Retryable.
+            self.rollback()
+            raise ConcurrencyConflictError(str(exc)) from exc
+        except OperationalError as exc:
+            if "database is locked" in str(exc).lower():  # SQLite serializes writers with a lock
+                self.rollback()
+                raise ConcurrencyConflictError(str(exc)) from exc
+            raise
 
     def rollback(self) -> None:
         self.session.rollback()

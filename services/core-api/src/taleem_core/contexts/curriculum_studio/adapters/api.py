@@ -14,7 +14,8 @@ from pydantic import BaseModel, Field
 
 from ....auth.dependencies import authorize
 from ....auth.jwt_verifier import Claims
-from ....platform.errors import Problem, not_found
+from ....platform.concurrency import ConcurrencyConflictError
+from ....platform.errors import Problem, conflict, not_found
 from ..application.service import CurriculumStudioService, StudioError
 from ..domain.ai_teaching import AITeachingObject
 from ..domain.assessment import AssessmentBlueprint
@@ -136,6 +137,10 @@ def build_studio_router(
             raise Problem(
                 422, "STUDIO_RULE_VIOLATION", "Curriculum Studio rule violation", str(exc)
             ) from exc
+        except ConcurrencyConflictError as exc:
+            # Two writers raced the same lesson (e.g. a double-submitted review). Optimistic-lock
+            # loser -> a retryable 409, never a 500. The client re-reads and retries.
+            raise conflict("this lesson was modified concurrently; reload and retry") from exc
 
     @router.get("/hierarchy")
     def hierarchy(claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
