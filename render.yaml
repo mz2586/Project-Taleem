@@ -1,0 +1,77 @@
+# Render Blueprint — Project Taleem RC1.
+# Provisions a managed PostgreSQL 16 database, the FastAPI backend (Docker, migrations on start),
+# and the Next.js frontend (Node). HTTPS is automatic on Render (*.onrender.com). No app changes —
+# deployment-only wiring: the DB URL scheme is normalised to postgresql+psycopg:// and CORS /
+# NEXT_PUBLIC_API_URL are composed from the sibling services' hostnames at start/build time.
+#
+# See RC1_DEPLOYMENT_GUIDE.md for the environment-variable contract.
+
+databases:
+  - name: taleem-db
+    databaseName: taleem
+    plan: free
+    postgresMajorVersion: "16"
+
+services:
+  # ----------------------------------------------------------------- Backend: FastAPI (Docker)
+  - type: web
+    name: taleem-api
+    runtime: docker
+    plan: free
+    dockerfilePath: services/core-api/Dockerfile
+    dockerContext: services/core-api
+    healthCheckPath: /health
+    # Start command: normalise Render's DATABASE_URL to the psycopg dialect, derive the CORS origin
+    # from the web service's hostname, run migrations, then serve on Render's injected $PORT.
+    dockerCommand: >-
+      sh -c '
+      export TALEEM_DATABASE_URL=$(printf "%s" "$DATABASE_URL" | sed -E "s#^postgres(ql)?://#postgresql+psycopg://#");
+      export CS_DATABASE_URL="$TALEEM_DATABASE_URL";
+      export TALEEM_CORS_ALLOWED_ORIGINS="https://$WEB_HOST";
+      alembic upgrade head &&
+      exec uvicorn taleem_core.main:app --host 0.0.0.0 --port "$PORT"
+      '
+    envVars:
+      - key: TALEEM_ENV
+        value: production
+      - key: TALEEM_LOG_LEVEL
+        value: INFO
+      # Render provides the internal connection string; the start command rewrites the scheme.
+      - key: DATABASE_URL
+        fromDatabase:
+          name: taleem-db
+          property: connectionString
+      # HS256 signing secret — any strong non-default value satisfies the fail-closed prod gate.
+      - key: TALEEM_JWT_DEV_SECRET
+        generateValue: true
+      # Ed25519 offline-package signing seed. MUST be 32-byte hex (openssl rand -hex 32).
+      # sync:false ⇒ set once in the Render UI (see the deployment report).
+      - key: TALEEM_OFFLINE_SIGNING_SEED
+        sync: false
+      - key: TALEEM_OFFLINE_SIGNING_KEY_ID
+        value: prod-ed25519-1
+      # The web service's hostname (no scheme); the start command prepends https:// for CORS.
+      - key: WEB_HOST
+        fromService:
+          name: taleem-web
+          type: web
+          property: host
+
+  # ----------------------------------------------------------------- Frontend: Next.js (Node)
+  - type: web
+    name: taleem-web
+    runtime: node
+    plan: free
+    rootDir: apps/web
+    # NEXT_PUBLIC_* are inlined at build time, so the API URL is composed from the api hostname here.
+    buildCommand: npm ci && NEXT_PUBLIC_API_URL="https://$API_HOST" npm run build
+    startCommand: npx next start -p $PORT
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: API_HOST
+        fromService:
+          name: taleem-api
+          type: web
+          property: host
