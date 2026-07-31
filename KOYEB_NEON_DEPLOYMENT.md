@@ -31,6 +31,20 @@ steps. Everything in the repo is ready.
 1. Go to **<https://www.koyeb.com>** → **Sign up** (GitHub sign-in; free tier).
 2. When prompted, **install the Koyeb GitHub app** and grant access to **`mz2586/Project-Taleem`**.
 
+### CLI authentication (current 2026 method)
+
+The API-token page **moved** — it is no longer at `app.koyeb.com/user/settings/api` (the location the
+older CLI prints). Create the token under **Organization Settings → API**
+(<https://app.koyeb.com/settings/api>): fill a name → **Create API Access Token** → copy it (shown
+once). Then authenticate the CLI with any of:
+
+```sh
+koyeb login                       # paste the token when prompted (writes ~/.koyeb.yaml)
+# or non-interactive:
+export KOYEB_TOKEN="<token>"       # CLI reads this env var
+koyeb whoami --token "<token>"     # or pass per-command
+```
+
 ---
 
 ## Step 3 — Koyeb: backend service (FastAPI)
