@@ -9,8 +9,7 @@ info:
     outbox) — no new child-data tables. Authenticated (bearer JWT), authorized (read learning.knowledge),
     and IDOR-guarded: a learner reaches only their own data; mentors may read any. Governance-safe.
   license:
-    name: MIT
-    identifier: MIT
+    name: Proprietary — license undecided; see repository LICENSE
 servers:
   - url: https://api.taleem.dev
     description: Reference environment (placeholder; concrete host per FOUNDER_DECISIONS FD-02)

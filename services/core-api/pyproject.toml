@@ -1,24 +1,24 @@
 [project]
 name = "taleem-core"
 version = "0.1.0"
-description = "Project Taleem — Core API (M1 walking skeleton). Governance-safe scaffolding only."
+description = "Project Taleem — Core API. Learning intelligence, curriculum studio, offline sync, guardian portal, and operational controls."
 requires-python = ">=3.12"
 readme = "README.md"
-license = { text = "MIT" }
+# The code license is an OPEN founding-team decision (see the repository LICENSE). Metadata must not
+# assert MIT until it is ratified — this was corrected for RC1 (previously a premature "MIT").
+license = { text = "Proprietary — license undecided; see repository LICENSE" }
 
 # NOTE: the DOMAIN + PLATFORM core is pure-stdlib and testable with no third-party installs
 # (hexagonal architecture — the domain has no framework imports). The dependencies below are
-# needed only for the ASGI *adapter* runtime (serving), not for the unit test suite.
+# needed only for the ASGI *adapter* runtime (serving) + migrations, not for the unit test suite.
+# Audited for RC1 (2026-07-31): every entry is imported by src, or is a runtime server/driver/CLI
+# (uvicorn serves, psycopg is the PostgreSQL DBAPI driver, alembic runs migrations). Removed six
+# never-referenced packages (pydantic-settings, python-json-logger, opentelemetry-api/sdk,
+# prometheus-client, pyjwt) — the config, logging, metrics, and JWT layers are pure-stdlib.
 dependencies = [
     "fastapi>=0.115",
     "uvicorn[standard]>=0.30",
     "pydantic>=2.7",
-    "pydantic-settings>=2.3",
-    "python-json-logger>=2.0",
-    "opentelemetry-api>=1.25",
-    "opentelemetry-sdk>=1.25",
-    "prometheus-client>=0.20",
-    "pyjwt>=2.8",
     "sqlalchemy>=2.0",
     "alembic>=1.13",
     "psycopg[binary]>=3.1",

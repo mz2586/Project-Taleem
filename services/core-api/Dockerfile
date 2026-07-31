@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
-# Project Taleem — Core API (M1 walking skeleton).
-# Multi-stage, non-root, minimal. Production build; not executed in the review sandbox (no registry access).
+# Project Taleem — Core API.
+# Multi-stage, non-root, minimal. Reproducible: deps are pinned via requirements.lock.
 
 FROM python:3.12-slim AS base
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -9,13 +9,15 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 WORKDIR /app
 
 FROM base AS builder
-COPY pyproject.toml README.md ./
+COPY pyproject.toml README.md requirements.lock ./
 COPY src ./src
-# Install into a venv we can copy to the runtime layer.
+# Reproducible install: pin the full runtime closure from the lock, then install the app itself
+# WITHOUT re-resolving deps. A rebuild pulls identical versions regardless of upstream releases.
 RUN python -m venv /opt/venv \
  && . /opt/venv/bin/activate \
  && pip install --upgrade pip \
- && pip install .
+ && pip install --require-hashes=false -r requirements.lock \
+ && pip install --no-deps .
 
 FROM base AS runtime
 # Non-root user (least privilege).

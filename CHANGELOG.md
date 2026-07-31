@@ -11,6 +11,30 @@ Closed by [SOFTWARE_COMPLETION_REPORT.md](SOFTWARE_COMPLETION_REPORT.md): remain
 remaining work is human-only (audio, content review, infra, secrets, governance/safeguarding
 sign-off, external pentest, on-device a11y audit, pilot execution).
 
+### Release Candidate RC1
+
+Release-quality packaging (no product features, no architecture changes). See
+[RC1_RELEASE_NOTES.md](RC1_RELEASE_NOTES.md) and [RC1_CHECKLIST.md](RC1_CHECKLIST.md).
+
+- **Reproducible builds** — pinned `services/core-api/requirements.lock` (26 packages) and
+  `apps/web/package-lock.json`; the Dockerfile installs the exact closure (`-r requirements.lock`
+  then `--no-deps .`). Verified: a clean-venv install boots with pinned fastapi and the removed deps
+  absent.
+- **Dependency audit** — removed six never-imported runtime packages (pydantic-settings,
+  python-json-logger, opentelemetry-api/sdk, prometheus-client, pyjwt); config/logging/metrics/JWT
+  are pure-stdlib.
+- **License reconciliation** — pyproject, package.json, and all OpenAPI contracts falsely asserted
+  MIT while the authoritative `LICENSE` states the license is an undecided founding-team decision;
+  metadata corrected to "proprietary — license undecided; see LICENSE" (ratification is an open
+  human decision).
+- **Documentation** — README updated from "pre-code blueprint" to the working system with a
+  quickstart; new `RC1_INSTALLATION_GUIDE.md`, `RC1_DEPLOYMENT_GUIDE.md`, `RC1_OPERATIONS_GUIDE.md`
+  (backup/restore/upgrade/troubleshooting), `RC1_RELEASE_NOTES.md`, `RC1_CHECKLIST.md`; stale
+  "M1 walking skeleton" descriptions removed.
+- **Verification** — `make gates` green (backend 243/96.4%, web 90, contracts valid, docs clean);
+  pilot simulator PASS (20/20); browser validation of the Guardian Portal against a real
+  PostgreSQL-backed deployment. Verdict: **RC1 READY** (remaining opens are governance/human).
+
 ### Guardian Portal
 
 Delivered by reuse — a thin read-only aggregation over the existing Student Platform / Learning

@@ -6,7 +6,7 @@
 
 *A complete digital school — not an LMS, not a course platform, not a chatbot.*
 
-`Status: Phase 1 — Foundation Blueprint (50/50 documents + ADRs drafted; pending approval)` · `Last updated: 2026-07-19`
+`Status: Release Candidate RC1 — working platform (core-api + PWA), governance-gated for pilot` · `Last updated: 2026-07-31`
 
 </div>
 
@@ -14,13 +14,35 @@
 
 ## What this repository is
 
-This repository is the **enterprise-grade blueprint** for Project Taleem, produced *before* a single
-line of production code is written. It contains the vision, product requirements, architecture,
-security & privacy model, child-safety framework, design system, educational engine specifications,
-portal specifications, engineering standards, and delivery plan required to build a platform that
-can serve **one million students**.
+Project Taleem is now a **working, governance-gated platform** — not only a blueprint. The repository
+contains both:
 
-Start here:
+- the **enterprise-grade blueprint** (50+ foundation documents, ADRs, security & child-safety model,
+  design system, engine specifications) that governs every decision, and
+- the **implemented system**: a FastAPI `core-api` (learning intelligence, curriculum studio, offline
+  sync, AI Teacher, guardian portal, operational controls) and a Next.js **PWA** (student, guardian,
+  and studio surfaces), with a full test suite, migrations, containerisation, and CI.
+
+It is prepared as **Release Candidate RC1**. Real child-facing operation remains gated by governance
+approvals (consent / DPIA / safeguarding — see the RC checklist); nothing in this repository ships to
+a real child until those human gates clear.
+
+### Quickstart (local, one command)
+
+```bash
+make up            # Postgres + core-api via docker-compose (migrations run automatically)
+# API:     http://localhost:8000/health
+```
+
+For the web app, backend without Docker, production install, deploy, operations, backup/restore, and
+upgrade, see:
+
+- **[RC1_INSTALLATION_GUIDE.md](RC1_INSTALLATION_GUIDE.md)** — install (local + production), from a clean machine
+- **[RC1_DEPLOYMENT_GUIDE.md](RC1_DEPLOYMENT_GUIDE.md)** — build, deploy, migrate, health, architecture
+- **[RC1_OPERATIONS_GUIDE.md](RC1_OPERATIONS_GUIDE.md)** — monitoring, kill switch, backup, restore, upgrade, troubleshooting
+- **[RC1_RELEASE_NOTES.md](RC1_RELEASE_NOTES.md)** — what's in RC1 · **[RC1_CHECKLIST.md](RC1_CHECKLIST.md)** — go/no-go checklist
+
+### Blueprint entry points
 
 1. **[Authoring Brief & Canonical Decisions](docs/_meta/authoring-brief.md)** — the single source of truth for names, scope, roles, and fixed technical decisions.
 2. **[01 · Vision](docs/00-overview/01-vision.md)** — why this exists and what "done" looks like.
@@ -208,19 +230,19 @@ See [Authoring Brief](docs/_meta/authoring-brief.md) §4 for the authoritative, 
 ```text
 taleem/
 ├── README.md                     ← you are here
-├── docs/
-│   ├── _meta/                     ← authoring brief, doc standards seed
-│   ├── 00-overview/              ← 01 vision
-│   ├── 01-product/               ← 02–07 product, personas, journeys, IA
-│   ├── 02-architecture/          ← 08–10, 32–36, ADRs
-│   ├── 03-security-privacy/      ← 11–15 auth, authz, security, privacy, child safety
-│   ├── 04-design/                ← 16–20 accessibility, design system, tokens, components, nav
-│   ├── 05-education/             ← 21–24 curriculum, lesson, assessment, AI teacher
-│   ├── 06-portals/               ← 25–31 portals, reporting, notifications, analytics
-│   ├── 07-engineering/           ← 37–42, 47–50 engineering practice
-│   ├── 08-delivery/              ← 43–46 risk, roadmap, milestones, backlog
-│   └── diagrams/                 ← standalone diagrams
-└── .github/workflows/           ← CI for docs (lint, link-check) — see 37
+├── Makefile                      ← one-command dev/ops targets (make up, gates, simulate, …)
+├── docker-compose.yml            ← local stack (Postgres + core-api)
+├── RC1_*.md                      ← Release Candidate guides (install, deploy, ops, notes, checklist)
+├── services/core-api/            ← FastAPI backend (Clean/Hexagonal/DDD); Dockerfile + Alembic
+│   ├── src/taleem_core/          ← contexts: learning, curriculum_studio, guardian, sync, ops, health
+│   ├── tests/                    ← pytest suite (unit + integration + adversarial); 96% coverage
+│   ├── alembic/                  ← database migrations (authoritative schema)
+│   ├── pyproject.toml            ← runtime deps · requirements.lock ← pinned reproducible install
+├── apps/web/                     ← Next.js PWA (student, guardian, studio); vitest suite
+│   └── package.json · package-lock.json  ← pinned reproducible web install
+├── packages/contracts/           ← OpenAPI contracts (one per surface; CI-linted)
+├── docs/                         ← the 50+ foundation blueprint (vision → engineering practice)
+└── .github/workflows/            ← CI: docs (lint, link-check) + code (lint/type/test/build)
 ```
 
 ---

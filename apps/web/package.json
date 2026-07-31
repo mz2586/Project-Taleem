@@ -2,7 +2,8 @@
   "name": "@taleem/web",
   "version": "0.1.0",
   "private": true,
-  "description": "Project Taleem — PWA (M1 scaffold). Urdu-first, offline-capable. No child data.",
+  "license": "UNLICENSED",
+  "description": "Project Taleem — Urdu-first, offline-capable PWA (student, guardian, and studio surfaces).",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
