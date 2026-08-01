@@ -16,7 +16,7 @@ COPY src ./src
 RUN python -m venv /opt/venv \
  && . /opt/venv/bin/activate \
  && pip install --upgrade pip \
- && pip install --require-hashes=false -r requirements.lock \
+ && pip install -r requirements.lock \
  && pip install --no-deps .
 
 FROM base AS runtime
@@ -28,14 +28,19 @@ COPY --from=builder /app/src /app/src
 # (the app never create_all()s on a non-SQLite engine — the migrations are the authoritative schema).
 COPY alembic.ini ./
 COPY alembic ./alembic
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 ENV PATH="/opt/venv/bin:$PATH" \
     TALEEM_ENV=production \
-    PYTHONPATH=/app/src
+    PYTHONPATH=/app/src \
+    PORT=8000
 USER taleem
 EXPOSE 8000
 
-# Container-level liveness probe hitting the app's health endpoint.
+# Container-level liveness probe (port-aware; the app binds $PORT on PaaS platforms).
 HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
-  CMD python -c "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/health').status==200 else 1)"
+  CMD python -c "import os,urllib.request,sys; p=os.environ.get('PORT','8000'); sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:'+p+'/health').status==200 else 1)"
 
-CMD ["uvicorn", "taleem_core.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Default: normalise the DB URL, run migrations, serve on $PORT. Platforms that pass their own start
+# command (docker-compose, the Render/Koyeb blueprints) still override this.
+CMD ["/usr/local/bin/docker-entrypoint.sh"]
