@@ -29,6 +29,9 @@ function isOwnedCache(name) {
 }
 
 self.addEventListener("install", (event) => {
+  // Take over promptly so a corrected SW replaces a previously-installed one without waiting for
+  // every tab to close (paired with clients.claim() on activate). No child data is touched.
+  self.skipWaiting();
   event.waitUntil(caches.open(SHELL_CACHE).then((cache) => cache.addAll(APP_SHELL)));
 });
 
@@ -74,10 +77,22 @@ self.addEventListener("fetch", (event) => {
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
 
-  // App-shell navigations: cache-first with a network fallback (so the app opens offline).
+  // App-shell navigations: NETWORK-FIRST with an offline fallback to the cached shell.
+  // (Must NOT be cache-first: this is a multi-route Next.js app where every route has its own
+  // server-rendered HTML + entry chunk. Serving the cached "/" shell for every navigation made
+  // /guardian, /student/*, /studio all render the root landing page for SW-controlled clients.
+  // Network-first serves the correct route online and still opens offline via the cached shell.)
   if (request.mode === "navigate") {
     event.respondWith(
-      caches.match("/").then((cached) => cached || fetch(request).catch(() => caches.match("/")))
+      fetch(request)
+        .then((response) => {
+          if (response.ok) {
+            const copy = response.clone();
+            caches.open(SHELL_CACHE).then((cache) => cache.put("/", copy));
+          }
+          return response;
+        })
+        .catch(() => caches.match(request).then((cached) => cached || caches.match("/")))
     );
     return;
   }

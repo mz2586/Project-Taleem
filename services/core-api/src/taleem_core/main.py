@@ -104,10 +104,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     settings = settings or load_settings()
     log = StructuredLogger(settings.service_name, settings.log_level)
 
+    # Interactive API docs (Swagger/ReDoc) and the OpenAPI schema describe the full API surface;
+    # keep them off in production (information-disclosure hardening) but available in dev/local.
+    _docs_disabled = settings.is_production
     app = FastAPI(
         title="Project Taleem — Core API",
         version=__version__,
         description="M1 walking skeleton. Governance-safe scaffolding only — no child data.",
+        docs_url=None if _docs_disabled else "/docs",
+        redoc_url=None if _docs_disabled else "/redoc",
+        openapi_url=None if _docs_disabled else "/openapi.json",
         openapi_tags=[
             {"name": "health", "description": "Liveness & readiness"},
             {"name": "observability", "description": "Metrics"},
