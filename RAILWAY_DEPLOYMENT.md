@@ -14,6 +14,20 @@ Deployment-only wiring — no application changes.
    `services/core-api/docker-entrypoint.sh`: it normalises `DATABASE_URL` → `postgresql+psycopg://`,
    runs `alembic upgrade head`, then serves on `$PORT`. Verified end-to-end against PostgreSQL.
 3. **No Railway config** — added `railway.json` to each service (Dockerfile builder + health check).
+4. **Dashboard commands overrode the Dockerfile** — the services had been set up by copying
+   `render.yaml`'s `dockerCommand` / `buildCommand` / `startCommand` into the Railway dashboard as
+   **Custom Build/Start Commands**. Those dashboard commands override the Dockerfile `CMD`, so the
+   backend never ran its entrypoint (every deploy failed with *no* logs) and the frontend used
+   Railpack (`npm: not found`) instead of its Dockerfile. Fixes:
+   - Backend: set `deploy.startCommand` in `railway.json` (code config overrides the dashboard's
+     custom start command) so the container runs `docker-entrypoint.sh`.
+   - Frontend: the dashboard's **Root Directory was unset** (so `apps/web/railway.json` was never
+     read) and it had an explicit Railpack builder + custom build/start commands. In the dashboard,
+     set **Root Directory = `apps/web`**, **Builder = Dockerfile**, and **clear** the custom Build
+     and Start commands. (`RAILWAY_DOCKERFILE_PATH=Dockerfile` pins the Dockerfile relative to that
+     root.) `railway.json`'s `builder` alone does **not** override an explicit dashboard builder.
+5. **GitHub auto-deploy** — pushes did not trigger builds during setup; use `railway up` from the
+   service's directory, or the dashboard **Deploy** button, to build a new commit.
 
 ## Service setup (Railway dashboard)
 
