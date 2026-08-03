@@ -19,7 +19,7 @@ import time
 from collections.abc import Iterator
 from typing import Any
 
-from fastapi import Depends, FastAPI, Header, Request
+from fastapi import Depends, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, PlainTextResponse
 from pydantic import BaseModel, ConfigDict, Field
@@ -28,8 +28,9 @@ from sqlalchemy.orm.exc import StaleDataError
 
 from . import __version__
 from .auth import pdp
-from .auth.dependencies import bearer_claims, require_owner_or
-from .auth.jwt_verifier import Claims, verify_hs256
+from .auth.dependencies import bearer_claims_from, require_owner_or
+from .auth.jwt_verifier import Claims
+from .auth.setup import build_auth_context
 from .contexts.curriculum_studio.adapters.api import build_studio_router
 from .contexts.curriculum_studio.adapters.persistence import (
     Base as CurriculumBase,
@@ -74,7 +75,7 @@ from .contexts.sync.service import DurableSyncCoordinator
 from .platform import correlation
 from .platform.concurrency import ConcurrencyConflictError
 from .platform.config import Settings, load_settings
-from .platform.errors import Problem, conflict, forbidden, unauthorized
+from .platform.errors import Problem, conflict, forbidden
 from .platform.kill_switch import KillSwitch, is_child_facing
 from .platform.logging import StructuredLogger
 from .platform.metrics import registry
@@ -185,8 +186,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.state.learning_session_factory = learning_sf
 
     # AuthN: every business route requires a verified bearer token; the actor's role comes from
-    # the token, not the request body (CTO B1). Deny-by-default PDP does authorization.
-    claims_dependency = bearer_claims(settings.jwt_dev_secret)
+    # the token, not the request body (CTO B1). Deny-by-default PDP does authorization. The verifier
+    # is asymmetric (EdDSA/JWKS) in production and HS256 in dev/test (FD-14). The auth context is
+    # exposed on app.state so the identity/login flow can issue tokens with the signing key.
+    auth = build_auth_context(settings)
+    app.state.auth = auth
+    claims_dependency = bearer_claims_from(auth.verifier)
 
     # ---- Curriculum Studio (CTO H2: SQL-backed, request-scoped Unit of Work) ----
     def studio_service_provider() -> Iterator[CurriculumStudioService]:
@@ -437,15 +442,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             ],
         }
 
-    # ---- AuthN/AuthZ seam demo ----
-    def require_claims(authorization: str = Header(default="")) -> Claims:
-        if not authorization.lower().startswith("bearer "):
-            raise unauthorized("Missing bearer token")
-        token = authorization.split(" ", 1)[1]
-        return verify_hs256(token, settings.jwt_dev_secret)
+    # ---- JWKS: publish the public verification keys (asymmetric token signing, FD-14) ----
+    # Standard discovery endpoint so clients/other resource servers can verify tokens and so key
+    # rotation is an overlap (new key appears here before signing switches to it). Public keys only.
+    @app.get("/.well-known/jwks.json", tags=["auth"])
+    def jwks() -> dict[str, Any]:
+        return auth.keyset.jwks()
 
+    # ---- AuthN/AuthZ seam demo ----
     @app.get("/v1/skeleton/protected", tags=["skeleton"])
-    def protected(claims: Claims = Depends(require_claims)) -> dict[str, Any]:
+    def protected(claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
         decision = pdp.authorize(claims.role, "read", "skeleton.protected")
         if not decision.allow:
             raise forbidden("Not permitted")

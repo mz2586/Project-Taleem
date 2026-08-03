@@ -54,10 +54,26 @@ class Settings:
     enabled_flags_csv: str = field(default_factory=lambda: _get("TALEEM_ENABLED_FLAGS", ""))
     metrics_enabled: bool = field(default_factory=lambda: _get_bool("TALEEM_METRICS_ENABLED", True))
     tracing_enabled: bool = field(default_factory=lambda: _get_bool("TALEEM_TRACING_ENABLED", True))
-    # Auth: JWT verification secret is a *placeholder* for the walking skeleton only.
-    # Production uses asymmetric JWKS + KMS (docs/11 + FD-14). Never a real secret.
+    # Auth (dev/test only): HS256 verification secret — a placeholder for the walking skeleton.
+    # Rejected in production, which is asymmetric-only (below).
     jwt_dev_secret: str = field(
         default_factory=lambda: _get("TALEEM_JWT_DEV_SECRET", "dev-only-not-secret")
+    )
+    # Auth (production): asymmetric token signing/verification — Ed25519/EdDSA, rotating JWKS keys
+    # (FD-14, docs/03 §11 §7, §13). The signing seed is a 32-byte Ed25519 seed as hex; the Identity
+    # node holds it and issues tokens, resource servers hold only the derived public key. Empty in
+    # dev (HS256 path). ``TALEEM_JWT_VERIFICATION_KEYS`` = extra "kid:hexpub,.." public keys held
+    # during a rotation overlap. iss/aud bind tokens to this issuer + audience.
+    jwt_signing_seed_hex: str = field(default_factory=lambda: _get("TALEEM_JWT_SIGNING_SEED", ""))
+    jwt_signing_kid: str = field(
+        default_factory=lambda: _get("TALEEM_JWT_SIGNING_KID", "taleem-ed25519-1")
+    )
+    jwt_verification_keys_csv: str = field(
+        default_factory=lambda: _get("TALEEM_JWT_VERIFICATION_KEYS", "")
+    )
+    jwt_issuer: str = field(default_factory=lambda: _get("TALEEM_JWT_ISSUER", "taleem-identity"))
+    jwt_audience: str = field(
+        default_factory=lambda: _get("TALEEM_JWT_AUDIENCE", "taleem-core-api")
     )
     # Database URL for the SQL persistence adapters. Empty => in-memory SQLite (governance-safe
     # local/dev default). Production MUST set a real PostgreSQL URL (enforced in load_settings).
@@ -89,6 +105,10 @@ class Settings:
     def is_production(self) -> bool:
         return self.environment is Environment.PRODUCTION
 
+    @property
+    def has_asymmetric_signing(self) -> bool:
+        return bool(self.jwt_signing_seed_hex.strip())
+
     def enabled_flags(self) -> frozenset[str]:
         return frozenset(f.strip() for f in self.enabled_flags_csv.split(",") if f.strip())
 
@@ -110,8 +130,24 @@ def _assert_production_safe(settings: Settings) -> None:
     if not settings.is_production:
         return
     problems: list[str] = []
-    if settings.jwt_dev_secret == DEFAULT_JWT_DEV_SECRET or not settings.jwt_dev_secret.strip():
-        problems.append("TALEEM_JWT_DEV_SECRET is the built-in default (forgeable tokens)")
+    # Production is asymmetric-only (FD-14): require a real Ed25519 signing seed; the HS256 dev path
+    # is not used in production, so a lingering default dev secret is not itself the gate.
+    if not settings.has_asymmetric_signing:
+        problems.append(
+            "TALEEM_JWT_SIGNING_SEED is unset (production signs tokens asymmetrically, not HS256)"
+        )
+    else:
+        seed = settings.jwt_signing_seed_hex.strip()
+        try:
+            raw = bytes.fromhex(seed)
+        except ValueError:
+            raw = b""
+        if len(raw) != 32:
+            problems.append("TALEEM_JWT_SIGNING_SEED must be a 32-byte hex Ed25519 seed")
+        elif seed == settings.offline_signing_seed_hex.strip():
+            problems.append(
+                "TALEEM_JWT_SIGNING_SEED must differ from the offline-signing seed (key separation)"
+            )
     if not settings.database_url.strip():
         problems.append(
             "TALEEM_DATABASE_URL is unset (production must use PostgreSQL, not in-memory)"

@@ -40,10 +40,22 @@ def test_production_accepts_real_config() -> None:
     s = Settings(
         environment=Environment.PRODUCTION,
         jwt_dev_secret="a-real-rotated-secret",  # noqa: S106 (test fixture, not a real secret)
+        jwt_signing_seed_hex="22" * 32,  # asymmetric signing seed (FD-14) — distinct from offline
         database_url="postgresql+psycopg://u@h/db",
         offline_signing_seed_hex="11" * 32,  # a non-default seed (6.2C-1)
     )
     _assert_production_safe(s)  # no raise
+
+
+def test_production_rejects_missing_asymmetric_signing() -> None:
+    s = Settings(
+        environment=Environment.PRODUCTION,
+        jwt_dev_secret="a-real-secret",  # noqa: S106 (test fixture, not a real secret)
+        database_url="postgresql+psycopg://u@h/db",
+        offline_signing_seed_hex="11" * 32,
+    )
+    with pytest.raises(InsecureConfigurationError):
+        _assert_production_safe(s)  # no asymmetric signing seed => fail closed
 
 
 def test_local_allows_defaults() -> None:

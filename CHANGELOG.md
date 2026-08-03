@@ -6,6 +6,35 @@ The local Git history is the official project history; each released version map
 
 ## [Unreleased]
 
+### Production Blocker 1 — Asymmetric authentication (EdDSA / rotating JWKS)
+
+Replaces the HS256 walking-skeleton auth stub with the documented production token architecture
+(FD-14; `docs/03-security-privacy/11-authentication-strategy.md` §7, `13-security-model.md`). No
+architecture change — the seam is still `Bearer JWT → verify → Claims → deny-by-default PDP`; only
+the signature scheme and key handling move to production form.
+
+- **Asymmetric token signing (Ed25519 / `alg: EdDSA`).** Tokens are signed with a private Ed25519
+  seed held only by the issuer; resource servers verify with the **public key** alone. Reuses the
+  in-repo pure-stdlib `platform/ed25519` primitive (same one that signs offline packages) — no new
+  dependencies. New `auth/keys.py` (`SigningKey`, `VerifyKey`, `KeySet`), `auth/jwt_verifier.py`
+  (`sign_eddsa`, `verify_eddsa`, and a unified alg-dispatching `TokenVerifier`), and `auth/setup.py`
+  (`build_auth_context`).
+- **Rotating, `kid`-addressed keys.** A verifier holds a *set* of public keys, so rotation is an
+  overlap (publish the new public key, switch signing to the new `kid`, retire the old one) — never
+  a flag-day. Extra verification keys are supplied via `TALEEM_JWT_VERIFICATION_KEYS`.
+- **JWKS discovery endpoint** — `GET /.well-known/jwks.json` publishes the public keys (OKP /
+  Ed25519 JWK).
+- **Issuer / audience binding** — production enforces `iss`/`aud` (`TALEEM_JWT_ISSUER`,
+  `TALEEM_JWT_AUDIENCE`); leniently ignored in dev so existing HS256 test tokens keep verifying.
+- **Alg-confusion / downgrade defense** — the production verifier is **asymmetric-only**
+  (`allow_hs256=False`): an HS256 token is rejected even if its secret is known.
+- **Fail-closed config** — production now requires a valid 32-byte `TALEEM_JWT_SIGNING_SEED`,
+  distinct from the offline-signing seed (key separation); boot refuses insecure defaults.
+- **HS256 retained for local/dev/tests only** (`sign_hs256`/`verify_hs256` unchanged), so the full
+  existing suite is unaffected. New `tests/test_auth_asymmetric.py` covers roundtrip, tamper,
+  rotation/overlap, unknown-`kid`, expiry, `iss`/`aud`, alg-confusion, JWKS shape, and the composed
+  app in production mode. Backend suite: 258 passed / 8 skipped, 96% coverage; ruff + mypy clean.
+
 Software Completion Mode — finishing every task completable entirely in software.
 Closed by [SOFTWARE_COMPLETION_REPORT.md](SOFTWARE_COMPLETION_REPORT.md): remaining software tasks 0;
 remaining work is human-only (audio, content review, infra, secrets, governance/safeguarding

@@ -6,6 +6,36 @@ this repository has no remote and the local Git history is authoritative.
 
 ---
 
+## 0.12.0 — Production Blocker 1: Asymmetric Authentication (2026-08-03)
+
+Milestone 1 of the production-blocker programme (infrastructure frozen on Railway staging). This
+milestone replaces the development-only HS256 authentication with the **production token
+architecture** the security design has always specified — without changing the architecture.
+
+### Highlights
+
+- **Tokens are now signed asymmetrically (Ed25519 / EdDSA).** The private signing seed lives only
+  with the issuer; every API node verifies with the **public key** alone. If a resource server is
+  compromised, no token-forging secret leaks with it — the class of risk HS256 shared-secrets carry.
+  Built on the platform's existing pure-stdlib Ed25519 (the same primitive that signs offline
+  lesson packages), so **no new dependencies** and no architectural change.
+- **Keys rotate without downtime.** Verifiers hold a *set* of `kid`-addressed public keys, so a
+  rotation is an overlap — publish the new key, switch signing, retire the old — never a flag-day.
+- **Standard JWKS discovery** at `GET /.well-known/jwks.json`.
+- **Hardened against downgrade.** Production is asymmetric-only: an HS256 token is refused even if
+  its secret were known (alg-confusion / "none"-alg defense). Tokens are bound to the platform's
+  issuer and audience.
+- **Fail-closed by default.** Production refuses to boot without a real 32-byte signing seed that is
+  distinct from the offline-signing key (key separation).
+- **Nothing else changed for developers.** The HS256 path remains for local/dev/tests; the whole
+  existing test suite is unaffected. New tests cover roundtrip, tampering, rotation, expiry,
+  issuer/audience, alg-confusion, JWKS shape, and the composed app in production mode.
+
+Verification: [VERIFICATION_BLOCKER_1_AUTH.md](VERIFICATION_BLOCKER_1_AUTH.md). Backend suite 258
+passed / 8 skipped, 96% coverage; ruff + mypy clean. Deployed and verified on Railway staging.
+
+---
+
 ## 0.11.0 — Phase 11: Pilot 0 Execution Readiness (2026-07-23)
 
 Tag: `phase-11`
