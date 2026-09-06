@@ -6,9 +6,11 @@ it exists only so a serverless platform can find the app.
 
 Two deployment facts this entrypoint depends on:
 
-- **Migrations do not run here.** The container entrypoint applies ``alembic upgrade head`` before
-  serving; a serverless invocation must not, because concurrent cold starts would race. Schema
-  changes are applied by the ``Migrate database`` GitHub Actions workflow instead.
+- **Migrations do not run here.** A serverless invocation must not migrate, because concurrent
+  cold starts would race. They run once per deployment in the Vercel build step
+  (``scripts/vercel_migrate.py``, wired via ``buildCommand``), which also keeps the database
+  credential inside the platform. The ``Migrate database`` workflow remains available for
+  out-of-band runs.
 - **The kill switch is shared state.** It reads ``ops.kill_switch`` from the database on every
   request, so an operator halt takes effect across every instance. Instances are otherwise
   stateless.
