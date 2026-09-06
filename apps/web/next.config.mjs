@@ -3,9 +3,10 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
-  // Self-contained server output for container deploys (Koyeb/Docker). Deployment-only; the app,
-  // routing, and `next start` behaviour are unchanged.
-  output: "standalone",
+  // Self-contained server output for container deploys (Docker). Deployment-only; the app, routing,
+  // and `next start` behaviour are unchanged. Vercel builds its own output, so the standalone
+  // bundle is skipped there (VERCEL is set by the Vercel build environment).
+  output: process.env.VERCEL ? undefined : "standalone",
   // Security headers (docs/13 §4). CSP tightened when asset origins are finalized.
   async headers() {
     return [

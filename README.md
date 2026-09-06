@@ -27,6 +27,23 @@ It is prepared as **Release Candidate RC1**. Real child-facing operation remains
 approvals (consent / DPIA / safeguarding — see the RC checklist); nothing in this repository ships to
 a real child until those human gates clear.
 
+### Quickstart (cloud, zero local setup)
+
+Open the repository in **GitHub Codespaces** (Code → Codespaces → Create codespace on `main`). The
+devcontainer in [`.devcontainer/`](.devcontainer/) provisions Python 3.12, Node 20, the GitHub CLI,
+Docker-in-Docker, and a PostgreSQL 16 service, then installs both dependency trees and applies the
+migrations. Nothing needs to be installed on your own machine.
+
+```bash
+make gates      # full gate suite: lint, types, tests, contracts, docs
+make test-pg    # migrations + the PostgreSQL-gated tests (Postgres is already running)
+make run        # backend on :8000
+cd apps/web && npm run dev   # frontend on :3000
+```
+
+The database is reachable as `postgresql+psycopg://taleem:local-dev-only@postgres:5432/taleem`;
+`TALEEM_DATABASE_URL` and `CS_DATABASE_URL` are pre-set in the container environment.
+
 ### Quickstart (local, one command)
 
 ```bash
