@@ -6,7 +6,7 @@ import { AppShell } from "@/components/student/AppShell";
 import { Card, EmptyState, ErrorBanner, Skeleton } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
 import { learningApi } from "@/lib/student/api";
-import { DEV_LEARNER } from "@/lib/student/config";
+import { useLearner } from "@/lib/session/useLearner";
 import { ApiError, type ProgressView } from "@/lib/student/types";
 
 function StatTile({ label, value }: { label: string; value: string }) {
@@ -21,7 +21,7 @@ function StatTile({ label, value }: { label: string; value: string }) {
 }
 
 export default function ProgressPage() {
-  const ref = DEV_LEARNER.student_ref;
+  const { studentRef: ref, band, displayName } = useLearner();
   const [progress, setProgress] = useState<ProgressView | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "offline" | "error">("loading");
 
@@ -40,7 +40,7 @@ export default function ProgressPage() {
   }, [load]);
 
   return (
-    <AppShell title="Progress" band={DEV_LEARNER.grade_band}>
+    <AppShell title="Progress" band={band}>
       {status === "loading" ? <Skeleton lines={4} /> : null}
       {status === "offline" ? (
         <EmptyState title="Offline" body="Your saved progress will show when you&apos;re online." action={<Button variant="ghost" label="Try again" onClick={() => void load()} />} />

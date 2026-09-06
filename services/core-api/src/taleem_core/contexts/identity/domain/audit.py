@@ -33,6 +33,12 @@ class AuditAction(StrEnum):
     LEARNER_REINSTATED = "learner.reinstated"
     CONSENT_GRANTED = "consent.granted"
     CONSENT_WITHDRAWN = "consent.withdrawn"
+    SESSION_REFRESHED = "session.refreshed"
+    SESSION_SIGNED_OUT = "session.signed_out"
+    SESSION_REVOKED = "session.revoked"
+    # A consumed refresh token presented a second time. Either a race or a stolen token, and the
+    # two are indistinguishable — so the whole rotation family is revoked and this is recorded.
+    SESSION_REUSE_DETECTED = "session.reuse_detected"
 
 
 # Actions a guardian must be able to see for their own family without an operator in the loop:

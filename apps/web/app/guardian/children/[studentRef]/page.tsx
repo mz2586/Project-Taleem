@@ -8,6 +8,7 @@ import { Button } from "@/design-system/Button";
 import { Card, EmptyState, ErrorBanner, Skeleton } from "@/components/student/ui";
 import { guardianApi } from "@/lib/guardian/api";
 import type { ChildOverview } from "@/lib/guardian/types";
+import { RequireSession } from "@/components/RequireSession";
 import { ApiError } from "@/lib/student/types";
 
 import { GuardianShell } from "../../GuardianShell";
@@ -28,7 +29,7 @@ function fmtDay(dayIndex: number | null): string {
   return new Date(dayIndex * 86_400_000).toISOString().slice(0, 10);
 }
 
-export default function GuardianChildPage() {
+function GuardianChildPage() {
   const params = useParams<{ studentRef: string }>();
   const ref = decodeURIComponent(String(params.studentRef));
   const [data, setData] = useState<ChildOverview | null>(null);
@@ -187,5 +188,14 @@ export default function GuardianChildPage() {
         </>
       ) : null}
     </GuardianShell>
+  );
+}
+
+
+export default function GuardedGuardianChildPage() {
+  return (
+    <RequireSession role="guardian" signInPath="/guardian/signin">
+      <GuardianChildPage />
+    </RequireSession>
   );
 }

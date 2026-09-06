@@ -7,11 +7,11 @@ import { AppShell } from "@/components/student/AppShell";
 import { Card, EmptyState, ErrorBanner, Skeleton, StateBadge } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
 import { learningApi } from "@/lib/student/api";
-import { DEV_LEARNER } from "@/lib/student/config";
+import { useLearner } from "@/lib/session/useLearner";
 import { ApiError, type KnowledgeView } from "@/lib/student/types";
 
 export default function ProfilePage() {
-  const ref = DEV_LEARNER.student_ref;
+  const { studentRef: ref, band, displayName } = useLearner();
   const [knowledge, setKnowledge] = useState<KnowledgeView | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "offline" | "error">("loading");
 
@@ -33,10 +33,10 @@ export default function ProfilePage() {
   const mastered = objectives.filter(([, o]) => o.state === "mastered").length;
 
   return (
-    <AppShell title="My Profile" band={DEV_LEARNER.grade_band}>
+    <AppShell title="My Profile" band={band}>
       <section style={{ display: "grid", gap: "var(--space-1)" }}>
-        <h2 style={{ margin: 0 }}>{DEV_LEARNER.display_name}</h2>
-        <span>Grade band: {DEV_LEARNER.grade_band}</span>
+        <h2 style={{ margin: 0 }}>{displayName}</h2>
+        <span>Grade band: {band}</span>
       </section>
 
       {status === "loading" ? <Skeleton lines={5} /> : null}

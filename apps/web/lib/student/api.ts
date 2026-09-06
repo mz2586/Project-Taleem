@@ -2,7 +2,7 @@
 // Bearer auth, RFC 9457 problem+json errors. Presentation layer only — no AI content is ever
 // constructed here; the client only relays approved server responses.
 
-import { API_BASE, DEV_STUDENT_TOKEN } from "./config";
+import { API_BASE } from "./config";
 import type {
   AnswerView,
   ApiError as ApiErrorType,
@@ -14,6 +14,7 @@ import type {
   TeachView,
 } from "./types";
 import { ApiError } from "./types";
+import { currentAccessToken } from "../session/store";
 import type {
   BatchResult,
   OfflinePackage,
@@ -22,10 +23,11 @@ import type {
   SyncDelta,
 } from "../offline/types";
 
-// A token provider so the auth source can be swapped (dev stub now; gated child-safe auth later).
+// The access token comes from the session store, which keeps it fresh. The indirection remains so
+// tests can supply a fixed token without a browser.
 export type TokenProvider = () => string;
 
-let tokenProvider: TokenProvider = () => DEV_STUDENT_TOKEN;
+let tokenProvider: TokenProvider = currentAccessToken;
 
 export function setTokenProvider(provider: TokenProvider): void {
   tokenProvider = provider;

@@ -197,6 +197,88 @@ paths:
           content:
             application/problem+json:
               schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/sessions:refresh:
+    post:
+      tags: [identity]
+      operationId: refreshSession
+      summary: Exchange a rotating refresh token for a fresh access token
+      security: []  # public: the refresh token is itself the credential
+      description: >-
+        Session continuity that never outlives permission. Refreshing re-runs every gate that
+        applied at sign-in — account status and, for a learner, the derived consent state — so a
+        withdrawn consent, a locked account, or a reset PIN stops the session here rather than
+        thirty days later.
+
+
+        The token is opaque, single-use, and rotated: the response carries a successor and the
+        presented token is consumed. Presenting a consumed token is treated as theft (the legitimate
+        holder and a thief hold members of the same chain and are indistinguishable) and revokes the
+        entire rotation family. A token bound to a device is refused from any other.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/RefreshRequest" }
+      responses:
+        "200":
+          description: New access token and successor refresh token
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/RefreshedSession" }
+        "401":
+          description: >-
+            Uniform sign-in failure — unknown token, wrong secret, expired, revoked, wrong device,
+            or a consumed token being replayed.
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: "`CONSENT_REQUIRED` — consent lapsed while the session was live"
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "429":
+          description: Rate limited
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/sessions:signout:
+    post:
+      tags: [identity]
+      operationId: signOut
+      summary: End a session
+      security: []  # public: the refresh token is itself the credential
+      description: >-
+        Revokes the presented token's whole rotation family. Idempotent, and deliberately identical
+        for a token that never existed — signing out must not become a way to probe token validity.
+        Signing out on one device does not end sessions on another, because each sign-in starts its
+        own family.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SignOutRequest" }
+      responses:
+        "200":
+          description: Signed out (always, whatever was presented)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SignOutResult" }
+        "422":
+          description: Malformed request body
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
   /v1/identity/policy:
     get:
       tags: [identity]
@@ -566,11 +648,19 @@ components:
         locale: { type: string }
         status: { type: string, enum: [active, locked, suspended] }
         created_at: { type: number }
+    RefreshTokenValue:
+      type: string
+      description: >-
+        Opaque, single-use, high-entropy. Format is `<token id>.<secret>` so lookup is a primary-key
+        read; only the SHA-256 digest of the secret is stored server-side. Never a JWT — it cannot
+        be verified without the database, which is what makes revocation real. Treat it as a
+        credential: store it where the access token is stored and never place it in a URL.
     GuardianSession:
       type: object
       properties:
         guardian: { $ref: "#/components/schemas/Guardian" }
         session: { $ref: "#/components/schemas/Session" }
+        refresh_token: { $ref: "#/components/schemas/RefreshTokenValue" }
     GuardianProfile:
       type: object
       properties:
@@ -654,6 +744,35 @@ components:
         learner: { $ref: "#/components/schemas/Learner" }
         session: { $ref: "#/components/schemas/Session" }
         consent: { $ref: "#/components/schemas/ConsentState" }
+        refresh_token: { $ref: "#/components/schemas/RefreshTokenValue" }
+    RefreshRequest:
+      type: object
+      required: [refreshToken]
+      properties:
+        refreshToken: { $ref: "#/components/schemas/RefreshTokenValue" }
+        deviceId:
+          type: string
+          maxLength: 64
+          description: Must match the device the token was bound to at sign-in.
+    RefreshedSession:
+      type: object
+      description: >-
+        Carries `learner` + `consent` for a student session, or `guardian` for a guardian session.
+      properties:
+        session: { $ref: "#/components/schemas/Session" }
+        refresh_token: { $ref: "#/components/schemas/RefreshTokenValue" }
+        learner: { $ref: "#/components/schemas/Learner" }
+        consent: { $ref: "#/components/schemas/ConsentState" }
+        guardian: { $ref: "#/components/schemas/Guardian" }
+    SignOutRequest:
+      type: object
+      required: [refreshToken]
+      properties:
+        refreshToken: { $ref: "#/components/schemas/RefreshTokenValue" }
+    SignOutResult:
+      type: object
+      properties:
+        signed_out: { type: boolean, const: true }
     ConsentScope:
       type: string
       enum: [learning_data, ai_teaching, voice_audio, progress_sharing]

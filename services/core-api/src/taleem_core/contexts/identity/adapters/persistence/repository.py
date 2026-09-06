@@ -15,7 +15,8 @@ from sqlalchemy.orm import Session
 from ...domain.accounts import AccountStatus, GuardianAccount, LearnerAccount, roster_key
 from ...domain.audit import AuditAction, AuditEvent
 from ...domain.consent import ConsentAction, ConsentEvidence, ConsentRecord, ConsentScope
-from .models import AuditRow, ConsentRow, GuardianRow, LearnerRow
+from ...domain.sessions import RefreshToken
+from .models import AuditRow, ConsentRow, GuardianRow, LearnerRow, RefreshTokenRow
 
 # ------------------------------------------------------------------------------------- mapping
 
@@ -71,6 +72,21 @@ def _to_consent(row: ConsentRow) -> ConsentRecord:
             user_agent_hash=str(evidence.get("user_agent_hash", "")),
             attestation=str(evidence.get("attestation", "")),
         ),
+    )
+
+
+def _to_refresh(row: RefreshTokenRow) -> RefreshToken:
+    return RefreshToken(
+        token_id=row.token_id,
+        token_hash=row.token_hash,
+        subject_ref=row.subject_ref,
+        role=row.role,
+        device_id=row.device_id,
+        family_id=row.family_id,
+        issued_at=row.issued_at,
+        expires_at=row.expires_at,
+        consumed_at=row.consumed_at,
+        revoked_at=row.revoked_at,
     )
 
 
@@ -272,3 +288,64 @@ class SqlAuditRepository:
             .limit(limit)
         ).all()
         return [_to_audit(row) for row in rows]
+
+
+class SqlRefreshTokenRepository:
+    """Primary-key reads only. The presented secret is verified against the stored digest, so an
+    id that leaks (in a log, say) is not itself a credential."""
+
+    def __init__(self, session: Session) -> None:
+        self._session = session
+
+    def add(self, token: RefreshToken) -> None:
+        self._session.add(
+            RefreshTokenRow(
+                token_id=token.token_id,
+                token_hash=token.token_hash,
+                subject_ref=token.subject_ref,
+                role=token.role,
+                device_id=token.device_id,
+                family_id=token.family_id,
+                issued_at=token.issued_at,
+                expires_at=token.expires_at,
+                consumed_at=token.consumed_at,
+                revoked_at=token.revoked_at,
+            )
+        )
+
+    def get(self, token_id: str) -> RefreshToken | None:
+        row = self._session.get(RefreshTokenRow, token_id)
+        return _to_refresh(row) if row else None
+
+    def save(self, token: RefreshToken) -> None:
+        row = self._session.get(RefreshTokenRow, token.token_id)
+        if row is None:
+            self.add(token)
+            return
+        row.consumed_at = token.consumed_at
+        row.revoked_at = token.revoked_at
+
+    def revoke_family(self, family_id: str, *, now: float) -> int:
+        """Kill an entire rotation chain. Called on reuse detection, where the legitimate holder and
+        a thief both hold members of the chain and cannot be told apart."""
+        rows = self._session.scalars(
+            select(RefreshTokenRow).where(
+                RefreshTokenRow.family_id == family_id, RefreshTokenRow.revoked_at.is_(None)
+            )
+        ).all()
+        for row in rows:
+            row.revoked_at = now
+        return len(rows)
+
+    def revoke_all_for(self, subject_ref: str, *, now: float) -> int:
+        """Every session for one subject — used on sign-out-everywhere, a PIN reset, and whenever a
+        guardian withdraws consent, so a live device stops at the next refresh rather than the next
+        access-token expiry."""
+        rows = self._session.scalars(
+            select(RefreshTokenRow).where(
+                RefreshTokenRow.subject_ref == subject_ref, RefreshTokenRow.revoked_at.is_(None)
+            )
+        ).all()
+        for row in rows:
+            row.revoked_at = now
+        return len(rows)

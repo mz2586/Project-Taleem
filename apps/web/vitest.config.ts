@@ -6,6 +6,9 @@ import { defineConfig } from "vitest/config";
 export default defineConfig({
   test: {
     environment: "node",
+    // A tiny in-memory `window.localStorage`, so the session and offline modules can be exercised
+    // on their browser branch without pulling jsdom into CI.
+    setupFiles: ["./test/setup.ts"],
     include: ["lib/**/__tests__/**/*.test.ts"],
   },
 });

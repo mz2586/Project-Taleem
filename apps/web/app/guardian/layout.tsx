@@ -1,6 +1,7 @@
-// Guardian route group. Governance-safe: synthetic guardian, dev-stub auth, read-only aggregates of
-// a linked child's existing learning data. Production guardian identity + consent-linked children are
-// blocked by the Phase-1.5 (M-Gov) gate.
+// Guardian route group.
+//
+// Deliberately NOT guarded here: /guardian/signin lives inside this tree and must stay reachable to
+// a signed-out adult. The pages that need a session guard themselves.
 import type { ReactNode } from "react";
 
 export default function GuardianLayout({ children }: { children: ReactNode }) {

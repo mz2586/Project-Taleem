@@ -6,11 +6,12 @@ import Link from "next/link";
 import { AppShell } from "@/components/student/AppShell";
 import { EmptyState } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
-import { DEV_LEARNER } from "@/lib/student/config";
+import { useLearner } from "@/lib/session/useLearner";
 
 export default function HomeworkPage() {
+  const { band } = useLearner();
   return (
-    <AppShell title="Homework" band={DEV_LEARNER.grade_band}>
+    <AppShell title="Homework" band={band}>
       <EmptyState
         title="No homework right now"
         body="When your teacher sets practice, it will appear here. For now, keep learning from Today."

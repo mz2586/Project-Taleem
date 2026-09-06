@@ -9,13 +9,13 @@ import { ReadAloud } from "@/components/student/ReadAloud";
 import { Card, EmptyState, ErrorBanner, ProgressRing, Skeleton, StateBadge } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
 import { learningApi } from "@/lib/student/api";
-import { DEV_LEARNER } from "@/lib/student/config";
+import { useLearner } from "@/lib/session/useLearner";
 import { ApiError, type KnowledgeView, type ProgressView } from "@/lib/student/types";
 
 const REVIEW_STATES = new Set(["needs_review", "at_risk"]);
 
 export default function TodayPage() {
-  const ref = DEV_LEARNER.student_ref;
+  const { studentRef: ref, band, displayName } = useLearner();
   const [knowledge, setKnowledge] = useState<KnowledgeView | null>(null);
   const [progress, setProgress] = useState<ProgressView | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | "offline" | "error">("loading");
@@ -44,10 +44,10 @@ export default function TodayPage() {
   const masteryValue = total > 0 ? mastered / total : 0;
 
   return (
-    <AppShell title="Taleem" band={DEV_LEARNER.grade_band}>
+    <AppShell title="Taleem" band={band}>
       <section style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)" }}>
         <div>
-          <h2 style={{ margin: 0 }}>السلام علیکم، {DEV_LEARNER.display_name}</h2>
+          <h2 style={{ margin: 0 }}>السلام علیکم، {displayName}</h2>
           <p style={{ margin: 0 }}>آئیے آج سیکھتے ہیں۔</p>
         </div>
         <ReadAloud label="Greeting" />

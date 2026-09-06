@@ -7,9 +7,11 @@ import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/design-system/Button";
 import { Card, EmptyState, ErrorBanner, ProgressRing, Skeleton } from "@/components/student/ui";
 import { guardianApi } from "@/lib/guardian/api";
-import { DEV_GUARDIAN_NAME } from "@/lib/guardian/config";
+import { useSession } from "@/lib/session/useSession";
 import type { ChildSummary, GuardianDashboard } from "@/lib/guardian/types";
 import { ApiError } from "@/lib/student/types";
+
+import { RequireSession } from "@/components/RequireSession";
 
 import { GuardianShell } from "./GuardianShell";
 
@@ -63,7 +65,9 @@ function ChildCard({ child }: { child: ChildSummary }) {
   );
 }
 
-export default function GuardianDashboardPage() {
+function GuardianDashboardPage() {
+  const { session } = useSession("guardian");
+  const guardianName = session?.guardian?.display_name ?? "";
   const [data, setData] = useState<GuardianDashboard | null>(null);
   const [status, setStatus] = useState<Status>("loading");
 
@@ -85,7 +89,7 @@ export default function GuardianDashboardPage() {
   return (
     <GuardianShell title="Taleem — Guardian">
       <section>
-        <h2 style={{ margin: 0 }}>السلام علیکم، {DEV_GUARDIAN_NAME}</h2>
+        <h2 style={{ margin: 0 }}>السلام علیکم، {guardianName}</h2>
         <p style={{ margin: 0 }}>Your children&apos;s learning at a glance.</p>
       </section>
 
@@ -123,5 +127,14 @@ export default function GuardianDashboardPage() {
         </>
       ) : null}
     </GuardianShell>
+  );
+}
+
+
+export default function GuardedGuardianDashboard() {
+  return (
+    <RequireSession role="guardian" signInPath="/guardian/signin">
+      <GuardianDashboardPage />
+    </RequireSession>
   );
 }

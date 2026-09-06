@@ -43,6 +43,8 @@ from ..domain.consent import (
     ConsentState,
     derive_state,
 )
+from ..domain.sessions import RefreshToken, RefreshTokenError
+from ..domain.sessions import split as split_refresh_token
 from .ports import IdentityUnitOfWork
 from .tokens import (
     GUARDIAN_TOKEN_TTL_SECONDS,
@@ -122,9 +124,14 @@ class IdentityService:
                     correlation_id=get_correlation_id() or "",
                 )
             )
+            refresh = self._mint_refresh(uow, account.guardian_ref, "guardian", "", now)
             uow.commit()
             token = self._issue_guardian_token(account, now)
-            return {"guardian": _guardian_view(account), "session": token.to_dict()}
+            return {
+                "guardian": _guardian_view(account),
+                "session": token.to_dict(),
+                "refresh_token": refresh,
+            }
 
     def sign_in_guardian(self, *, email: str, passphrase: str) -> dict[str, Any]:
         now = self._now()
@@ -158,10 +165,12 @@ class IdentityService:
                     correlation_id=get_correlation_id() or "",
                 )
             )
+            refresh = self._mint_refresh(uow, account.guardian_ref, "guardian", "", now)
             uow.commit()
             return {
                 "guardian": _guardian_view(account),
                 "session": self._issue_guardian_token(account, now).to_dict(),
+                "refresh_token": refresh,
             }
 
     def guardian_profile(self, guardian_ref: str) -> dict[str, Any]:
@@ -267,6 +276,9 @@ class IdentityService:
             if learner.status is AccountStatus.LOCKED:
                 learner.status = AccountStatus.ACTIVE
             uow.learners.save(learner)
+            # Changing the credential ends sessions opened with the old one — otherwise a device a
+            # guardian was trying to lock out would keep refreshing indefinitely.
+            uow.refresh_tokens.revoke_all_for(student_ref, now=now)
             uow.audit.append(
                 AuditEvent.record(
                     action=AuditAction.LEARNER_PIN_RESET,
@@ -345,6 +357,11 @@ class IdentityService:
                 evidence=evidence,
             )
             uow.consents.append(record)
+            # A withdrawal that no longer permits sign-in ends every live session for this learner
+            # now, rather than waiting for an access token to expire. "Stop" has to mean stop.
+            remaining = derive_state(student_ref, [*uow.consents.history(student_ref)])
+            if not remaining.permits_sign_in:
+                uow.refresh_tokens.revoke_all_for(student_ref, now=now)
             uow.audit.append(
                 AuditEvent.record(
                     action=AuditAction.CONSENT_WITHDRAWN,
@@ -488,6 +505,7 @@ class IdentityService:
                     detail={"device_bound": bool(device_id)},
                 )
             )
+            refresh = self._mint_refresh(uow, learner.student_ref, "student", device_id, now)
             uow.commit()
             token = self._issuer.issue(
                 subject=learner.student_ref,
@@ -500,7 +518,144 @@ class IdentityService:
                 "learner": _learner_view(learner, state),
                 "session": token.to_dict(),
                 "consent": state.to_dict(),
+                "refresh_token": refresh,
             }
+
+    # --------------------------------------------------------------------------------- sessions
+
+    def refresh_session(self, *, refresh_token: str, device_id: str = "") -> dict[str, Any]:
+        """Exchange a refresh token for a new access token and a successor refresh token.
+
+        Every gate that applied at sign-in is re-run here — account status and, for a learner, the
+        derived consent state — so session continuity never outlives permission. That is what keeps
+        the ten-minute access token an honest bound rather than a formality.
+        """
+        now = self._now()
+        try:
+            token_id, secret = split_refresh_token(refresh_token)
+        except RefreshTokenError:
+            raise _sign_in_failed() from None
+
+        with self._uow() as uow:
+            record = uow.refresh_tokens.get(token_id)
+            if record is None or not record.matches(secret):
+                raise _sign_in_failed()
+
+            if record.consumed_at is not None:
+                # Reuse. The legitimate holder and a thief hold members of the same chain and are
+                # indistinguishable, so the whole family goes (OAuth 2.0 BCP 4.14.2).
+                revoked = uow.refresh_tokens.revoke_family(record.family_id, now=now)
+                uow.audit.append(
+                    AuditEvent.record(
+                        action=AuditAction.SESSION_REUSE_DETECTED,
+                        actor_ref=record.subject_ref,
+                        actor_role=record.role,
+                        subject_ref=record.subject_ref,
+                        now=now,
+                        correlation_id=get_correlation_id() or "",
+                        detail={"revoked_sessions": revoked},
+                    )
+                )
+                uow.commit()
+                raise _sign_in_failed()
+
+            if not record.is_usable(now, device_id):
+                raise _sign_in_failed()
+
+            if record.role == "student":
+                learner = uow.learners.get(record.subject_ref)
+                if learner is None or not learner.can_sign_in:
+                    raise _sign_in_failed()
+                state = derive_state(learner.student_ref, uow.consents.history(learner.student_ref))
+                if not state.permits_sign_in:
+                    # Consent went away while the session was live. Kill every session for this
+                    # learner rather than only this chain: a guardian pressing stop means stop.
+                    uow.refresh_tokens.revoke_all_for(learner.student_ref, now=now)
+                    uow.audit.append(
+                        AuditEvent.record(
+                            action=AuditAction.LEARNER_SIGN_IN_DENIED_NO_CONSENT,
+                            actor_ref=learner.student_ref,
+                            actor_role="student",
+                            subject_ref=learner.student_ref,
+                            now=now,
+                            correlation_id=get_correlation_id() or "",
+                            detail={"on": "refresh"},
+                        )
+                    )
+                    uow.commit()
+                    raise Problem(
+                        403,
+                        "CONSENT_REQUIRED",
+                        "Guardian consent required",
+                        "a guardian must give consent for this learner before they can sign in",
+                    )
+                access = self._issuer.issue(
+                    subject=learner.student_ref,
+                    role="student",
+                    now=now,
+                    ttl_seconds=LEARNER_TOKEN_TTL_SECONDS,
+                    device_id=record.device_id or None,
+                )
+                payload: dict[str, Any] = {
+                    "learner": _learner_view(learner, state),
+                    "consent": state.to_dict(),
+                }
+            else:
+                guardian = uow.guardians.get(record.subject_ref)
+                if guardian is None or not guardian.can_sign_in:
+                    raise _sign_in_failed()
+                access = self._issue_guardian_token(guardian, now)
+                payload = {"guardian": _guardian_view(guardian)}
+
+            record.consume(now)
+            uow.refresh_tokens.save(record)
+            successor = self._mint_refresh(
+                uow,
+                record.subject_ref,
+                record.role,
+                record.device_id,
+                now,
+                family_id=record.family_id,
+            )
+            uow.audit.append(
+                AuditEvent.record(
+                    action=AuditAction.SESSION_REFRESHED,
+                    actor_ref=record.subject_ref,
+                    actor_role=record.role,
+                    subject_ref=record.subject_ref,
+                    now=now,
+                    correlation_id=get_correlation_id() or "",
+                )
+            )
+            uow.commit()
+            return {**payload, "session": access.to_dict(), "refresh_token": successor}
+
+    def sign_out(self, *, refresh_token: str) -> dict[str, Any]:
+        """End one session. Idempotent, and silent about tokens it does not recognise — signing out
+        must never become a way to probe whether a token was ever valid."""
+        now = self._now()
+        try:
+            token_id, secret = split_refresh_token(refresh_token)
+        except RefreshTokenError:
+            return {"signed_out": True}
+        with self._uow() as uow:
+            record = uow.refresh_tokens.get(token_id)
+            if record is None or not record.matches(secret):
+                return {"signed_out": True}
+            revoked = uow.refresh_tokens.revoke_family(record.family_id, now=now)
+            uow.audit.append(
+                AuditEvent.record(
+                    action=AuditAction.SESSION_SIGNED_OUT,
+                    actor_ref=record.subject_ref,
+                    actor_role=record.role,
+                    subject_ref=record.subject_ref,
+                    now=now,
+                    correlation_id=get_correlation_id() or "",
+                    detail={"revoked_sessions": revoked},
+                )
+            )
+            uow.commit()
+            return {"signed_out": True}
 
     # ------------------------------------------------------------------------------------ audit
 
@@ -520,6 +675,26 @@ class IdentityService:
             now=now,
             ttl_seconds=GUARDIAN_TOKEN_TTL_SECONDS,
         )
+
+    def _mint_refresh(
+        self,
+        uow: IdentityUnitOfWork,
+        subject_ref: str,
+        role: str,
+        device_id: str,
+        now: float,
+        *,
+        family_id: str | None = None,
+    ) -> str:
+        record, wire = RefreshToken.issue(
+            subject_ref=subject_ref,
+            role=role,
+            device_id=device_id,
+            now=now,
+            family_id=family_id,
+        )
+        uow.refresh_tokens.add(record)
+        return wire
 
     def _require_guardian(self, uow: IdentityUnitOfWork, guardian_ref: str) -> GuardianAccount:
         account = uow.guardians.get(guardian_ref)

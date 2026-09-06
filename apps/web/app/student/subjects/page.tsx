@@ -5,11 +5,12 @@ import { AppShell } from "@/components/student/AppShell";
 import { EmptyState } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
 import Link from "next/link";
-import { DEV_LEARNER } from "@/lib/student/config";
+import { useLearner } from "@/lib/session/useLearner";
 
 export default function SubjectsPage() {
+  const { band } = useLearner();
   return (
-    <AppShell title="Learn" band={DEV_LEARNER.grade_band}>
+    <AppShell title="Learn" band={band}>
       <EmptyState
         title="Guided learning is the best way to start"
         body="Tap Start on Today and your AI teacher will pick the right next lesson. Browsing subjects arrives with the next milestone."

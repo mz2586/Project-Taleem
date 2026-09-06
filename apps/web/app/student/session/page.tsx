@@ -9,7 +9,7 @@ import { ReadAloud } from "@/components/student/ReadAloud";
 import { Card, ErrorBanner, ProgressRing, Skeleton } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
 import { learningApi } from "@/lib/student/api";
-import { DEV_LEARNER } from "@/lib/student/config";
+import { useLearner } from "@/lib/session/useLearner";
 import {
   ApiError,
   type AnswerView,
@@ -36,7 +36,7 @@ function loc(text: Record<string, string>): string {
 }
 
 export default function SessionPage() {
-  const ref = DEV_LEARNER.student_ref;
+  const { studentRef: ref, band, displayName } = useLearner();
   const started = useRef(false);
   const [phase, setPhase] = useState<Phase>("starting");
   const [sessionId, setSessionId] = useState<string>("");

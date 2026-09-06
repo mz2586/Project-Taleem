@@ -84,6 +84,17 @@ class LearnerSignInIn(BaseModel):
     device_id: str = Field(default="", alias="deviceId", max_length=64)
 
 
+class RefreshIn(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+    refresh_token: str = Field(alias="refreshToken", min_length=1, max_length=256)
+    device_id: str = Field(default="", alias="deviceId", max_length=64)
+
+
+class SignOutIn(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+    refresh_token: str = Field(alias="refreshToken", min_length=1, max_length=256)
+
+
 class RosterIn(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
     family_code: str = Field(alias="familyCode", min_length=1, max_length=16)
@@ -180,6 +191,21 @@ def build_identity_router(
             pin=body.pin,
             device_id=body.device_id,
         )
+
+    @router.post("/sessions:refresh")
+    def refresh_session(body: RefreshIn, request: Request) -> dict[str, Any]:
+        """Exchange a rotating refresh token for a fresh access token.
+
+        Public because the refresh token *is* the credential. Rate limited like sign-in, since a
+        caller guessing token ids would otherwise get unlimited attempts.
+        """
+        sign_in_limiter.check(_client_key(request))
+        return service.refresh_session(refresh_token=body.refresh_token, device_id=body.device_id)
+
+    @router.post("/sessions:signout")
+    def sign_out(body: SignOutIn) -> dict[str, Any]:
+        """End a session. Idempotent, and deliberately identical for a token that never existed."""
+        return service.sign_out(refresh_token=body.refresh_token)
 
     # ------------------------------------------------------------------------ guardian, authed
 

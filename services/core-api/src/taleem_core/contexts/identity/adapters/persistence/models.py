@@ -97,6 +97,29 @@ class ConsentRow(IdentityBase):
     evidence: Mapped[dict[str, Any]] = mapped_column(JsonType, nullable=False, default=dict)
 
 
+class RefreshTokenRow(IdentityBase):
+    """A rotating, device-bound refresh token. Rows are retained after use so that presenting a
+    consumed token is *detectable* — deleting them would turn theft into a silent success."""
+
+    __tablename__ = "refresh_token"
+    __table_args__ = (
+        Index("ix_refresh_family", "family_id"),
+        Index("ix_refresh_subject", "subject_ref"),
+        {"schema": IDENTITY_SCHEMA},
+    )
+
+    token_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    token_hash: Mapped[str] = mapped_column(String(64), nullable=False)
+    subject_ref: Mapped[str] = mapped_column(String(64), nullable=False)
+    role: Mapped[str] = mapped_column(String(32), nullable=False)
+    device_id: Mapped[str] = mapped_column(String(64), nullable=False, default="")
+    family_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    issued_at: Mapped[float] = mapped_column(Float, nullable=False)
+    expires_at: Mapped[float] = mapped_column(Float, nullable=False)
+    consumed_at: Mapped[float | None] = mapped_column(Float, nullable=True)
+    revoked_at: Mapped[float | None] = mapped_column(Float, nullable=True)
+
+
 class AuditRow(IdentityBase):
     """Append-only. Nothing in the application updates or deletes a row here."""
 

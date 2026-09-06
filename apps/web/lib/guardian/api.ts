@@ -3,10 +3,11 @@
 // already aggregates from the existing learning read models.
 
 import { createApiClient, type TokenProvider } from "../apiClient";
-import { API_BASE, DEV_GUARDIAN_TOKEN } from "./config";
+import { currentAccessToken } from "../session/store";
+import { API_BASE } from "./config";
 import type { ChildOverview, GuardianDashboard, GuardianProfile } from "./types";
 
-let tokenProvider: TokenProvider = () => DEV_GUARDIAN_TOKEN;
+let tokenProvider: TokenProvider = currentAccessToken;
 
 export function setGuardianTokenProvider(provider: TokenProvider): void {
   tokenProvider = provider;
