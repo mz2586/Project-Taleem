@@ -1,0 +1,77 @@
+name: Migrate database
+
+# Applies the Alembic migrations to a hosted database from CI, so schema changes never require a
+# developer machine. Manual by default — a schema change is an operational act, not a side effect
+# of merging.
+#
+# Requires one repository secret:
+#   DATABASE_URL — the hosted PostgreSQL connection string. Use the DIRECT (unpooled) URL for
+#                  migrations; poolers can reject the DDL/session behaviour Alembic needs.
+#
+# The entrypoint accepts postgres:// or postgresql:// and normalises the SQLAlchemy dialect.
+
+on:
+  workflow_dispatch:
+    inputs:
+      revision:
+        description: "Alembic target revision"
+        required: false
+        default: "head"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: migrate-database
+  cancel-in-progress: false
+
+jobs:
+  migrate:
+    name: Alembic upgrade
+    runs-on: ubuntu-latest
+    environment: database
+    defaults:
+      run:
+        working-directory: services/core-api
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install runtime dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.lock
+          pip install --no-deps -e .
+
+      - name: Show pending migrations
+        env:
+          CS_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          python - <<'PY'
+          import os, re
+          url = os.environ.get("CS_DATABASE_URL", "")
+          os.environ["CS_DATABASE_URL"] = re.sub(r"^postgres(ql)?://", "postgresql+psycopg://", url)
+          from alembic.config import Config
+          from alembic import command
+          cfg = Config("alembic.ini")
+          command.current(cfg)
+          command.history(cfg)
+          PY
+
+      - name: Apply migrations
+        env:
+          CS_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          python - <<'PY'
+          import os, re
+          url = os.environ.get("CS_DATABASE_URL", "")
+          os.environ["CS_DATABASE_URL"] = re.sub(r"^postgres(ql)?://", "postgresql+psycopg://", url)
+          from alembic.config import Config
+          from alembic import command
+          cfg = Config("alembic.ini")
+          command.upgrade(cfg, "${{ inputs.revision }}")
+          command.current(cfg)
+          PY

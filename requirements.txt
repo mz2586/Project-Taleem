@@ -1,0 +1,4 @@
+# Vercel Python Function dependencies for the core API.
+# Pinned to the same closure the container uses (services/core-api/requirements.lock) so the
+# serverless and container deployments run identical versions.
+-r services/core-api/requirements.lock

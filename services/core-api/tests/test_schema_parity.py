@@ -20,8 +20,10 @@ from sqlalchemy import create_engine, inspect
 # Importing the model modules registers all tables on each MetaData.
 import taleem_core.contexts.curriculum_studio.adapters.persistence.models  # noqa: F401
 import taleem_core.contexts.learning.adapters.persistence.models  # noqa: F401
+import taleem_core.contexts.ops.adapters.persistence.models  # noqa: F401
 from taleem_core.contexts.curriculum_studio.adapters.persistence.base import Base
 from taleem_core.contexts.learning.adapters.persistence.base import LearningBase
+from taleem_core.contexts.ops.adapters.persistence.base import OpsBase
 
 PG_URL = os.environ.get("CS_DATABASE_URL")
 _pg_only = pytest.mark.skipif(not PG_URL, reason="CS_DATABASE_URL not set (PostgreSQL required)")
@@ -53,7 +55,7 @@ def test_orm_matches_migration_columns() -> None:
     inspector = inspect(engine)
     mismatches: list[str] = []
 
-    for base in (Base, LearningBase):
+    for base in (Base, LearningBase, OpsBase):
         for table in base.metadata.tables.values():
             schema = table.schema
             name = table.name

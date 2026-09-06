@@ -70,6 +70,12 @@ from .contexts.learning.domain.estimator import BKTEstimator
 from .contexts.learning.domain.forgetting import HalfLifeForgettingModel
 from .contexts.learning.domain.runtime import TemplatedTeachingRuntime
 from .contexts.ops.adapters.ops_api import build_ops_router
+from .contexts.ops.adapters.persistence.base import (
+    OpsBase,
+    create_ops_engine,
+    create_ops_session_factory,
+)
+from .contexts.ops.adapters.persistence.kill_switch_store import SqlKillSwitchState
 from .contexts.sync.domain import DeltaType, SyncDelta, SyncStore
 from .contexts.sync.service import DurableSyncCoordinator
 from .platform import correlation
@@ -160,9 +166,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             max_age=600,
         )
 
-    # Shared, process-local state for the walking skeleton (synthetic only).
+    # Process-local synthetic state for the walking skeleton. Safe to keep per-instance: the
+    # durable idempotency check for attempts is the evidence table inside the sink, and the other
+    # delta policies are idempotent by construction (monotonic max / idempotent set / server-order-
+    # wins), so a replay against a different instance re-applies as a no-op.
     sync_store = SyncStore()
-    kill_switch = KillSwitch(time.time)  # operator halt for child-facing traffic (ops control)
     health = HealthService(
         __version__,
         checks=[Check("self", lambda: True)],  # real dep probes added as contexts land
@@ -181,6 +189,18 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         LearningBase.metadata.create_all(learning_engine)
     studio_sf = create_session_factory(curriculum_engine)
     learning_sf = create_learning_session_factory(learning_engine)
+
+    # Operator halt for child-facing traffic (ops control). The flag lives in the database so it is
+    # shared by every instance — a kill switch held in process memory fails OPEN as soon as more
+    # than one instance serves traffic (a second replica, or a fresh serverless invocation), which
+    # is the one failure mode a safety control must not have. In-memory SQLite (the governance-safe
+    # dev default) is single-process anyway, so behaviour there is unchanged.
+    ops_engine = create_ops_engine(db_url)
+    if ops_engine.dialect.name == "sqlite":
+        OpsBase.metadata.create_all(ops_engine)
+    ops_sf = create_ops_session_factory(ops_engine)
+    kill_switch = KillSwitch(time.time, SqlKillSwitchState(ops_sf))
+    app.state.ops_session_factory = ops_sf
     # Session factories are exposed for seeding in tests / ops tooling (not a request path).
     app.state.studio_session_factory = studio_sf
     app.state.learning_session_factory = learning_sf

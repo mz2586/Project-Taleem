@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/index.py": {
+      "runtime": "python3.12",
+      "maxDuration": 60
+    }
+  },
+  "rewrites": [
+    { "source": "/health", "destination": "/api/index" },
+    { "source": "/health/:path*", "destination": "/api/index" },
+    { "source": "/metrics", "destination": "/api/index" },
+    { "source": "/.well-known/jwks.json", "destination": "/api/index" },
+    { "source": "/v1/:path*", "destination": "/api/index" }
+  ]
+}
