@@ -1,0 +1,61 @@
+name: Devcontainer
+
+# Proves that a clean clone can recreate the complete development environment in the cloud — the
+# same devcontainer GitHub Codespaces uses. Builds .devcontainer/, runs its postCreateCommand
+# (venv + dev deps, npm ci, alembic upgrade) against the bundled PostgreSQL service, then runs the
+# project's own gate suite inside the container.
+#
+# This is the cloud-development contract: if this workflow is green, a Codespace on this branch
+# gives a working environment with no local setup.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".devcontainer/**"
+      - ".github/workflows/devcontainer.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: devcontainer-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Build devcontainer and run gates inside it
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the devcontainer and run the gate suite
+        uses: devcontainers/ci@v0.3
+        with:
+          configFile: .devcontainer/devcontainer.json
+          push: never
+          runCmd: |
+            set -e
+            echo "::group::environment"
+            python3 --version
+            node --version
+            echo "CS_DATABASE_URL is ${CS_DATABASE_URL:+set}"
+            echo "::endgroup::"
+
+            echo "::group::database reachable + migrations at head"
+            cd services/core-api
+            . .venv/bin/activate
+            alembic current
+            cd ../..
+            echo "::endgroup::"
+
+            echo "::group::gate suite"
+            make gates
+            echo "::endgroup::"
+
+            echo "::group::postgres-gated suite"
+            cd services/core-api
+            . .venv/bin/activate
+            pytest -q --no-cov
+            echo "::endgroup::"
