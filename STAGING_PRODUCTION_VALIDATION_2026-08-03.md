@@ -1,7 +1,7 @@
 # Production Validation Report — Railway Staging
 
 **Date:** 2026-08-03  ·  **Environment:** Railway staging (`zonal-victory`, env `production`)
-**Backend:** https://taleem-api-production.up.railway.app  ·  **Frontend:** https://taleem-web-production-403a.up.railway.app
+**Backend:** <https://taleem-api-production.up.railway.app>  ·  **Frontend:** <https://taleem-web-production-403a.up.railway.app>
 **Commit at validation:** `0bc2afd` (+ live redeploys)
 
 ---
@@ -75,6 +75,7 @@ project is on a Railway free trial and hammering it would burn credit and risk a
 ## 4. Defects found and fixed this pass
 
 ### 🔴 CRITICAL — Service worker served the root shell for every route *(fixed)*
+
 `apps/web/public/sw.js` used a **cache-first app-shell** strategy for navigations
 (`caches.match("/")` for every `navigate` request). That pattern is for single-shell SPAs; Project
 Taleem is a **multi-route Next.js app** where each route has its own server-rendered HTML + entry
@@ -85,6 +86,7 @@ plus `skipWaiting` so the corrected SW takes over promptly. **Verified live:** w
 `/student/today` now renders the real student page.
 
 ### 🟡 HARDENING — Interactive API docs exposed in production *(fixed)*
+
 `/docs`, `/redoc`, `/openapi.json` were publicly reachable. Now **disabled when
 `TALEEM_ENV=production`** (still available in dev/local). Verified live: all three → 404, health 200.
 
