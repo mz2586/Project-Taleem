@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "python3 -m venv /tmp/migvenv && env -u PYTHONPATH /tmp/migvenv/bin/pip install -q -r requirements.txt && env -u PYTHONPATH /tmp/migvenv/bin/python scripts/vercel_migrate.py && mkdir -p public",
+  "buildCommand": "python3 -m venv /tmp/migvenv && env -u PYTHONPATH /tmp/migvenv/bin/pip install -q -r requirements.txt && env -u PYTHONPATH /tmp/migvenv/bin/python scripts/vercel_migrate.py",
   "functions": {
     "api/index.py": {
       "maxDuration": 60
