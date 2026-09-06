@@ -1,16 +1,31 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "pip install --quiet -r requirements.txt && python3 scripts/vercel_migrate.py",
+  "buildCommand": "PY=.vercel/python/.venv/bin/python; [ -x \"$PY\" ] || PY=python3; \"$PY\" scripts/vercel_migrate.py",
   "functions": {
     "api/index.py": {
       "maxDuration": 60
     }
   },
   "rewrites": [
-    { "source": "/health", "destination": "/api/index" },
-    { "source": "/health/:path*", "destination": "/api/index" },
-    { "source": "/metrics", "destination": "/api/index" },
-    { "source": "/.well-known/jwks.json", "destination": "/api/index" },
-    { "source": "/v1/:path*", "destination": "/api/index" }
+    {
+      "source": "/health",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/health/:path*",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/metrics",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/.well-known/jwks.json",
+      "destination": "/api/index"
+    },
+    {
+      "source": "/v1/:path*",
+      "destination": "/api/index"
+    }
   ]
 }
