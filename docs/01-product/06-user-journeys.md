@@ -319,7 +319,7 @@ Nadia; safety wins over all other goals (Vision §7.1).
 
 ```mermaid
 flowchart TD
-    subgraph Online window (brief, metered)
+    subgraph Online["Online window (brief, metered)"]
         A[Good signal / power] --> B[Download today/week<br/>lessons + assessment items + media]
         B --> C[Content packaged for offline<br/>data cost shown before download]
     end
