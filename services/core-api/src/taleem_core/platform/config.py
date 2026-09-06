@@ -96,6 +96,13 @@ class Settings:
     cors_allowed_origins_csv: str = field(
         default_factory=lambda: _get("TALEEM_CORS_ALLOWED_ORIGINS", "")
     )
+    # Work factor for guardian passphrase and child PIN hashing (identity context). Exposed so the
+    # test suite can run hundreds of sign-ins without spending minutes on PBKDF2; production is
+    # protected by ``_assert_production_safe``, which refuses to boot below the OWASP minimum, so a
+    # stray environment variable cannot weaken a real deployment.
+    kdf_iterations: int = field(
+        default_factory=lambda: _get_int("TALEEM_KDF_ITERATIONS", MIN_KDF_ITERATIONS)
+    )
     # Guardian→children associations (the only new state the Guardian Portal adds). Software layer,
     # not the M-Gov consent flow. Format: "guardianRef=Name:childA,childB;guardianRef2:childC".
     # Empty in production until the consent workflow populates links; a demo link is seeded in dev.
@@ -115,6 +122,10 @@ class Settings:
     def cors_allowed_origins(self) -> list[str]:
         return [o.strip() for o in self.cors_allowed_origins_csv.split(",") if o.strip()]
 
+
+# OWASP Password Storage Cheat Sheet (2023) for PBKDF2-HMAC-SHA256. Production may raise this but
+# never lower it.
+MIN_KDF_ITERATIONS = 600_000
 
 DEFAULT_JWT_DEV_SECRET = "dev-only-not-secret"  # noqa: S105 (sentinel default, rejected in prod)
 # A fixed dev Ed25519 seed (bytes 00..1f as hex). Dev/local only — rejected in production.
@@ -151,6 +162,11 @@ def _assert_production_safe(settings: Settings) -> None:
     if not settings.database_url.strip():
         problems.append(
             "TALEEM_DATABASE_URL is unset (production must use PostgreSQL, not in-memory)"
+        )
+    if settings.kdf_iterations < MIN_KDF_ITERATIONS:
+        problems.append(
+            f"TALEEM_KDF_ITERATIONS is {settings.kdf_iterations}, below the minimum "
+            f"{MIN_KDF_ITERATIONS} (guardian passphrases and child PINs would hash too cheaply)"
         )
     if settings.offline_signing_seed_hex == DEFAULT_OFFLINE_SIGNING_SEED:
         problems.append("TALEEM_OFFLINE_SIGNING_SEED is the built-in default (forgeable packages)")

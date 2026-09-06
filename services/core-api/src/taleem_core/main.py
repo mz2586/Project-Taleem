@@ -45,6 +45,16 @@ from .contexts.guardian.adapters.guardian_api import build_guardian_router
 from .contexts.guardian.application.directory import GuardianDirectory
 from .contexts.guardian.application.guardian_service import GuardianService
 from .contexts.health.service import Check, HealthService
+from .contexts.identity.adapters.identity_api import build_identity_router
+from .contexts.identity.adapters.persistence.base import (
+    IdentityBase,
+    create_identity_engine,
+    create_identity_session_factory,
+)
+from .contexts.identity.adapters.persistence.uow import SqlIdentityUnitOfWork
+from .contexts.identity.application.identity_service import IdentityService
+from .contexts.identity.application.tokens import TokenIssuer
+from .contexts.identity.domain.credentials import SecretHasher
 from .contexts.learning.adapters.ai_teacher_api import build_ai_teacher_router
 from .contexts.learning.adapters.api import LearningApiDeps, build_learning_router
 from .contexts.learning.adapters.curriculum_read_model import CurriculumStudioReadModel
@@ -147,6 +157,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 "name": "guardian",
                 "description": "Guardian Portal — read-only view of linked children",
             },
+            {
+                "name": "identity",
+                "description": (
+                    "Guardian accounts, verifiable consent, learner enrolment, child-safe sign-in"
+                ),
+            },
         ],
     )
 
@@ -212,6 +228,31 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     auth = build_auth_context(settings)
     app.state.auth = auth
     claims_dependency = bearer_claims_from(auth.verifier)
+
+    # ---- Identity, consent & child-safe sign-in (FD-14) ----
+    # This is the context that issues tokens, so it is the one place holding the signing key. In
+    # production ``auth.signing_key`` is always present (config refuses to boot without an Ed25519
+    # seed); locally it may be absent, and the issuer falls back to the HS256 development path that
+    # the dev verifier already accepts.
+    identity_engine = create_identity_engine(db_url)
+    if identity_engine.dialect.name == "sqlite":
+        IdentityBase.metadata.create_all(identity_engine)
+    identity_sf = create_identity_session_factory(identity_engine)
+    app.state.identity_session_factory = identity_sf
+
+    identity_service = IdentityService(
+        lambda: SqlIdentityUnitOfWork(identity_sf),
+        TokenIssuer(
+            issuer=settings.jwt_issuer,
+            audience=settings.jwt_audience,
+            signing_key=auth.signing_key,
+            hs256_secret=None if settings.is_production else settings.jwt_dev_secret,
+        ),
+        time.time,
+        SecretHasher(iterations=settings.kdf_iterations),
+    )
+    app.state.identity_service = identity_service
+    app.include_router(build_identity_router(identity_service, claims_dependency, clock=time.time))
 
     # ---- Curriculum Studio (CTO H2: SQL-backed, request-scoped Unit of Work) ----
     def studio_service_provider() -> Iterator[CurriculumStudioService]:
@@ -335,6 +376,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         Module("offline", "/v1/offline", lambda: True),
         Module("ops", "/v1/ops", lambda: True),
         Module("guardian", "/v1/guardian", lambda: True),
+        Module("identity", "/v1/identity", lambda: True, events_published=("ConsentGranted",)),
     ):
         # Idempotent across reloads/tests: re-registering the same module is a no-op.
         with contextlib.suppress(ValueError):

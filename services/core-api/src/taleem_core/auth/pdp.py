@@ -37,6 +37,24 @@ def _curriculum_rules() -> set[tuple[str, str, str]]:
     return rules
 
 
+def _identity_rules() -> set[tuple[str, str, str]]:
+    """Guardian self-service over their own family (ownership is re-checked in the service).
+
+    The PDP answers only "may a guardian manage learners at all"; *which* learners is an ownership
+    question the identity service settles against the token subject, because a policy table keyed on
+    roles cannot express "their own". Operators get read access to the audit trail for safeguarding
+    and nothing else — no operator route can grant consent or reset a child's PIN on a guardian's
+    behalf, which keeps consent something only the responsible adult can give.
+    """
+    return {
+        ("guardian", "read", "identity.self"),
+        ("guardian", "manage", "identity.learner"),
+        ("guardian", "manage", "identity.consent"),
+        ("guardian", "read", "identity.audit"),
+        ("system", "read", "identity.audit"),
+    }
+
+
 def _learning_rules() -> set[tuple[str, str, str]]:
     return {
         ("student", "operate", "learning.session"),
@@ -59,6 +77,7 @@ _ALLOW: frozenset[tuple[str, str, str]] = frozenset(
         ("guardian", "read", "guardian.self"),  # a guardian may read its own portal (linked kids)
         *_curriculum_rules(),
         *_learning_rules(),
+        *_identity_rules(),
     }
 )
 

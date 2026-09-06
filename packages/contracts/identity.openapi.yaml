@@ -1,0 +1,767 @@
+openapi: 3.1.0
+info:
+  title: Project Taleem — Identity, Consent & Child-Safe Sign-In API
+  version: 0.1.0
+  description: >-
+    Guardian accounts, verifiable parental consent, learner enrolment, and the child-safe sign-in
+    journey (FD-14). Production token cryptography (EdDSA + rotating JWKS) already existed; this
+    surface is the journey on top of it.
+
+
+    Child-safety properties this contract commits to:
+
+
+    * A learner has no email address, no phone number, and no recoverable credential. A child is
+      created by a guardian and signs in with a family code, their own display name, and a short
+      PIN.
+    * `POST /v1/identity/learners:signin` denies sign-in unless live, un-withdrawn, current-policy
+      guardian consent exists. Withdrawal takes effect on the next attempt.
+    * Every sign-in failure returns one identical `401` regardless of cause, so no endpoint here is
+      an enumeration oracle. `learners:roster` returns an empty list for an unknown family code.
+    * Consent and audit are append-only. A withdrawal is a new record; nothing is edited or deleted.
+    * Guardian-scoped routes derive the acting guardian from the verified token subject, never from
+      the request body. A learner belonging to another family is reported `404`, not `403`, so a
+      probe cannot confirm the ref names a real child elsewhere.
+    * The `learners:*` routes are halted by the operator kill switch; guardian routes are not, so a
+      guardian can still withdraw consent during an incident.
+  license:
+    name: Proprietary — license undecided; see repository LICENSE
+servers:
+  - url: https://api.taleem.dev
+    description: Reference environment (placeholder; concrete host per FOUNDER_DECISIONS FD-02)
+tags:
+  - name: identity
+    description: Guardian accounts, consent, learner enrolment, child-safe sign-in.
+paths:
+  /v1/identity/guardians:
+    post:
+      tags: [identity]
+      operationId: registerGuardian
+      summary: Register a guardian account
+      security: []  # public: this is how a caller obtains a token
+      description: >-
+        Public. Creates an adult account with a family code and returns a first session. Rate
+        limited per client.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GuardianRegistration" }
+      responses:
+        "201":
+          description: Account created; session issued
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GuardianSession" }
+        "409":
+          description: An account already exists for this email address
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "422":
+          description: Validation failed (email shape, passphrase policy, display name)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "429":
+          description: Rate limited
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/guardians:signin:
+    post:
+      tags: [identity]
+      operationId: signInGuardian
+      summary: Sign in a guardian
+      security: []  # public: this is how a caller obtains a token
+      description: >-
+        Public. An unknown address and a wrong passphrase return the same `401` with the same
+        detail, and take comparable time.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GuardianCredentials" }
+      responses:
+        "200":
+          description: Session issued
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GuardianSession" }
+        "401":
+          description: Sign-in details are not correct (uniform for every cause)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "429":
+          description: Rate limited
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/learners:roster:
+    post:
+      tags: [identity]
+      operationId: getFamilyRoster
+      summary: Display names for one family code, so a child taps rather than types
+      security: []  # public: guarded by the family code, rate limiting, and the kill switch
+      description: >-
+        Public, rate limited. A `POST` because the family code is a shared secret and must not land
+        in a URL, a proxy log, or browser history. Returns display names and grade levels only — no
+        refs, no progress. An unknown code returns an empty list, indistinguishable from a family
+        with no learners. Halted by the kill switch.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/FamilyCodeRequest" }
+      responses:
+        "200":
+          description: Roster (possibly empty)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/RosterResponse" }
+        "429":
+          description: Rate limited
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "503":
+          description: Halted by the operator kill switch
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/learners:signin:
+    post:
+      tags: [identity]
+      operationId: signInLearner
+      summary: Sign in a learner (family code + display name + PIN)
+      security: []  # public: this is how a learner obtains a token
+      description: >-
+        Public, rate limited, and gated on live guardian consent. Five wrong PINs lock the learner
+        account durably; the owning guardian unlocks it by resetting the PIN. Halted by the kill
+        switch.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/LearnerCredentials" }
+      responses:
+        "200":
+          description: Session issued
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/LearnerSession" }
+        "401":
+          description: >-
+            Sign-in details are not correct. Returned identically for an unknown family code, an
+            unknown learner, a wrong PIN, and a locked account.
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: >-
+            `CONSENT_REQUIRED` — the credential was correct but no current guardian consent covers
+            this learner. Distinguished from `401` on purpose: the caller already holds the family
+            code, the name, and the PIN, so this leaks nothing, and it is what tells the child to
+            hand the device to their guardian instead of retrying a correct PIN.
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "429":
+          description: Rate limited
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "503":
+          description: Halted by the operator kill switch
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/policy:
+    get:
+      tags: [identity]
+      operationId: getConsentPolicy
+      summary: The consent scope vocabulary and current policy version
+      security: []  # public: contains no account data
+      description: Public — contains no account data. Clients render the consent form from this.
+      responses:
+        "200":
+          description: Policy descriptor
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PolicyDescriptor" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/me:
+    get:
+      tags: [identity]
+      operationId: getGuardianIdentityProfile
+      summary: The acting guardian, their family code, and their learners
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Guardian profile with per-learner consent state
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GuardianProfile" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (not a guardian token)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "404":
+          description: No such guardian account
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/learners:
+    get:
+      tags: [identity]
+      operationId: listLearners
+      summary: The acting guardian's own learners
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Learners with consent state
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/LearnerList" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+    post:
+      tags: [identity]
+      operationId: enrolLearner
+      summary: Enrol a child into the acting guardian's family
+      description: >-
+        A newly enrolled learner cannot sign in until the guardian grants consent — enrol, then
+        consent, then learn. Display names are unique within a family because the name is the
+        child's sign-in handle there.
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/LearnerEnrolment" }
+      responses:
+        "201":
+          description: Learner enrolled (cannot sign in until consent is granted)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Learner" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "422":
+          description: PIN policy, duplicate display name, or family size limit
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/learners/{studentRef}/pin:reset:
+    post:
+      tags: [identity]
+      operationId: resetLearnerPin
+      summary: Reset a learner's PIN (also unlocks a locked learner)
+      description: >-
+        The only recovery path for a child, because a child has no address a reset link could be
+        sent to. Owner-only; another family's learner is `404`.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: studentRef
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/PinReset" }
+      responses:
+        "200":
+          description: PIN reset; learner reactivated if it was locked
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Learner" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "404":
+          description: Not this guardian's learner
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "422":
+          description: PIN policy
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/consents:
+    post:
+      tags: [identity]
+      operationId: grantConsent
+      summary: Grant guardian consent for one learner
+      description: >-
+        Appends an immutable consent record carrying the policy version and the evidence of capture
+        (method, hashed client context, the attestation sentence). Must include `learning_data`.
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ConsentGrant" }
+      responses:
+        "200":
+          description: Derived consent state after the grant
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ConsentState" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (only a guardian may consent — not an operator)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "404":
+          description: Not this guardian's learner
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "422":
+          description: Unknown scope, or the required `learning_data` scope was omitted
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/consents:withdraw:
+    post:
+      tags: [identity]
+      operationId: withdrawConsent
+      summary: Withdraw some or all consent scopes for one learner
+      description: >-
+        Omitting `scopes` withdraws everything — the guardian's stop button. Takes effect on the
+        learner's next sign-in attempt, not when a cached claim expires.
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ConsentWithdrawal" }
+      responses:
+        "200":
+          description: Derived consent state after the withdrawal
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ConsentState" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "404":
+          description: Not this guardian's learner
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/consents/{studentRef}:
+    get:
+      tags: [identity]
+      operationId: getConsentState
+      summary: Current consent state plus the full append-only history for one learner
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: studentRef
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Consent state with history, newest first
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ConsentStateWithHistory" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "404":
+          description: Not this guardian's learner
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/audit:
+    get:
+      tags: [identity]
+      operationId: getIdentityAuditTrail
+      summary: Append-only identity audit trail for the acting guardian's own family
+      description: >-
+        Answers "who signed in as my child, and when". Scoped to the guardian and their own
+        learners; refs and hashes only, never names or addresses.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema: { type: integer, minimum: 1, maximum: 500, default: 100 }
+      responses:
+        "200":
+          description: Audit events, newest first
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AuditTrail" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    GuardianRegistration:
+      type: object
+      required: [email, passphrase, displayName]
+      properties:
+        email: { type: string, maxLength: 254 }
+        passphrase: { type: string, minLength: 10, maxLength: 256 }
+        displayName: { type: string, minLength: 1, maxLength: 60 }
+        locale: { type: string, default: "ur" }
+    GuardianCredentials:
+      type: object
+      required: [email, passphrase]
+      properties:
+        email: { type: string }
+        passphrase: { type: string }
+    Session:
+      type: object
+      description: A signed access token. EdDSA in production; HS256 on the dev path only.
+      properties:
+        access_token: { type: string }
+        token_type: { type: string, const: "Bearer" }
+        expires_at: { type: integer, description: Unix seconds }
+        expires_in: { type: integer }
+        role: { type: string, enum: [guardian, student] }
+        subject: { type: string }
+    Guardian:
+      type: object
+      properties:
+        guardian_ref: { type: string }
+        email: { type: string }
+        display_name: { type: string }
+        family_code:
+          type: string
+          description: >-
+            The guardian-held secret that scopes their learner roster, e.g. `K7QM-3XPZ`. Excludes
+            characters that are misread when spoken aloud.
+        locale: { type: string }
+        status: { type: string, enum: [active, locked, suspended] }
+        created_at: { type: number }
+    GuardianSession:
+      type: object
+      properties:
+        guardian: { $ref: "#/components/schemas/Guardian" }
+        session: { $ref: "#/components/schemas/Session" }
+    GuardianProfile:
+      type: object
+      properties:
+        guardian: { $ref: "#/components/schemas/Guardian" }
+        learners:
+          type: array
+          items: { $ref: "#/components/schemas/Learner" }
+        policy_version: { type: string }
+    LearnerEnrolment:
+      type: object
+      required: [displayName, pin]
+      properties:
+        displayName: { type: string, minLength: 1, maxLength: 60 }
+        pin:
+          type: string
+          pattern: "^[0-9]{4,6}$"
+          description: 4–6 digits. Most-guessed sequences are refused.
+        gradeBand: { type: string, enum: [early, middle, senior], default: middle }
+        gradeLevel: { type: integer, minimum: 0, maximum: 12, default: 4 }
+        locale: { type: string, default: "ur" }
+    Learner:
+      type: object
+      description: >-
+        A child. Note what is absent by design: no email, no phone, no date of birth, no address.
+      properties:
+        student_ref: { type: string }
+        display_name: { type: string }
+        grade_band: { type: string, enum: [early, middle, senior] }
+        grade_level: { type: integer }
+        locale: { type: string }
+        status: { type: string, enum: [active, locked, suspended] }
+        created_at: { type: number }
+        consent: { $ref: "#/components/schemas/ConsentState" }
+        can_sign_in:
+          type: boolean
+          description: True only when the account is active *and* consent permits sign-in.
+    LearnerList:
+      type: object
+      properties:
+        learners:
+          type: array
+          items: { $ref: "#/components/schemas/Learner" }
+    PinReset:
+      type: object
+      required: [pin]
+      properties:
+        pin: { type: string, pattern: "^[0-9]{4,6}$" }
+    FamilyCodeRequest:
+      type: object
+      required: [familyCode]
+      properties:
+        familyCode: { type: string, maxLength: 16 }
+    RosterEntry:
+      type: object
+      description: Display names only — deliberately no refs, grades aside, and no progress.
+      properties:
+        display_name: { type: string }
+        grade_level: { type: integer }
+    RosterResponse:
+      type: object
+      properties:
+        learners:
+          type: array
+          items: { $ref: "#/components/schemas/RosterEntry" }
+    LearnerCredentials:
+      type: object
+      required: [familyCode, displayName, pin]
+      properties:
+        familyCode: { type: string }
+        displayName: { type: string }
+        pin: { type: string, pattern: "^[0-9]{4,6}$" }
+        deviceId:
+          type: string
+          maxLength: 64
+          description: >-
+            Opaque, client-generated, and rotatable by clearing site data. Used to show a guardian
+            where their child learns and to bind offline packages — never a tracking identifier.
+    LearnerSession:
+      type: object
+      properties:
+        learner: { $ref: "#/components/schemas/Learner" }
+        session: { $ref: "#/components/schemas/Session" }
+        consent: { $ref: "#/components/schemas/ConsentState" }
+    ConsentScope:
+      type: string
+      enum: [learning_data, ai_teaching, voice_audio, progress_sharing]
+      description: >-
+        Separable because they carry different risk: a guardian may allow curriculum learning while
+        refusing AI-generated teaching. `learning_data` is required — without it the platform holds
+        no learning record, so there is nothing to sign a child in for.
+    ConsentGrant:
+      type: object
+      required: [studentRef, scopes]
+      properties:
+        studentRef: { type: string }
+        scopes:
+          type: array
+          items: { $ref: "#/components/schemas/ConsentScope" }
+        attestation:
+          type: string
+          maxLength: 500
+          description: The exact sentence the guardian affirmed, stored verbatim as evidence.
+    ConsentWithdrawal:
+      type: object
+      required: [studentRef]
+      properties:
+        studentRef: { type: string }
+        scopes:
+          type: [array, "null"]
+          items: { $ref: "#/components/schemas/ConsentScope" }
+          description: Omit or send null to withdraw every scope.
+        attestation: { type: string, maxLength: 500 }
+    ConsentState:
+      type: object
+      description: Derived by folding the append-only consent history — not a stored flag.
+      properties:
+        student_ref: { type: string }
+        granted_scopes:
+          type: array
+          items: { $ref: "#/components/schemas/ConsentScope" }
+        policy_version: { type: string }
+        current_policy_version: { type: string }
+        policy_current:
+          type: boolean
+          description: >-
+            False once the policy version is superseded. Consent under a superseded version does
+            not permit sign-in: a material change requires fresh agreement, not inheritance.
+        permits_sign_in: { type: boolean }
+        granted_at: { type: number }
+        last_change_at: { type: number }
+    ConsentHistoryEntry:
+      type: object
+      properties:
+        consent_id: { type: string }
+        action: { type: string, enum: [granted, withdrawn] }
+        scopes:
+          type: array
+          items: { $ref: "#/components/schemas/ConsentScope" }
+        policy_version: { type: string }
+        recorded_at: { type: number }
+        method: { type: string }
+    ConsentStateWithHistory:
+      allOf:
+        - $ref: "#/components/schemas/ConsentState"
+        - type: object
+          properties:
+            history:
+              type: array
+              items: { $ref: "#/components/schemas/ConsentHistoryEntry" }
+    PolicyScope:
+      type: object
+      properties:
+        key: { $ref: "#/components/schemas/ConsentScope" }
+        required: { type: boolean }
+    PolicyDescriptor:
+      type: object
+      properties:
+        policy_version: { type: string }
+        scopes:
+          type: array
+          items: { $ref: "#/components/schemas/PolicyScope" }
+    AuditEvent:
+      type: object
+      properties:
+        event_id: { type: string }
+        at: { type: number }
+        action:
+          type: string
+          description: >-
+            e.g. `guardian.registered`, `learner.created`, `consent.granted`, `consent.withdrawn`,
+            `learner.signed_in`, `learner.sign_in_failed`,
+            `learner.sign_in_denied_no_consent`, `learner.locked`, `learner.pin_reset`.
+        actor_ref: { type: string }
+        actor_role: { type: string }
+        subject_ref: { type: string }
+        correlation_id: { type: string }
+        detail: { type: object, additionalProperties: true }
+    AuditTrail:
+      type: object
+      properties:
+        events:
+          type: array
+          items: { $ref: "#/components/schemas/AuditEvent" }
+    Problem:
+      type: object
+      description: RFC 9457 problem+json.
+      properties:
+        type: { type: string }
+        title: { type: string }
+        status: { type: integer }
+        code: { type: string }
+        detail: { type: string }
+        instance: { type: string }
+        traceId: { type: string }

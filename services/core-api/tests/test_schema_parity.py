@@ -19,9 +19,11 @@ from sqlalchemy import create_engine, inspect
 
 # Importing the model modules registers all tables on each MetaData.
 import taleem_core.contexts.curriculum_studio.adapters.persistence.models  # noqa: F401
+import taleem_core.contexts.identity.adapters.persistence.models  # noqa: F401
 import taleem_core.contexts.learning.adapters.persistence.models  # noqa: F401
 import taleem_core.contexts.ops.adapters.persistence.models  # noqa: F401
 from taleem_core.contexts.curriculum_studio.adapters.persistence.base import Base
+from taleem_core.contexts.identity.adapters.persistence.base import IdentityBase
 from taleem_core.contexts.learning.adapters.persistence.base import LearningBase
 from taleem_core.contexts.ops.adapters.persistence.base import OpsBase
 
@@ -55,7 +57,7 @@ def test_orm_matches_migration_columns() -> None:
     inspector = inspect(engine)
     mismatches: list[str] = []
 
-    for base in (Base, LearningBase, OpsBase):
+    for base in (Base, LearningBase, OpsBase, IdentityBase):
         for table in base.metadata.tables.values():
             schema = table.schema
             name = table.name

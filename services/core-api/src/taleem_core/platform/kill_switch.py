@@ -84,6 +84,11 @@ _CHILD_FACING_PREFIXES: tuple[str, ...] = (
     "/v1/learning/students",
     "/v1/offline",
     "/v1/sync",
+    # Learner sign-in and the family roster it reads. A halt must stop children *entering* the
+    # platform, not only using it. The guardian routes are deliberately NOT listed: during an
+    # incident a guardian must still be able to sign in and withdraw consent, and the kill switch
+    # exists to protect children, not to lock adults out of the control they hold over their data.
+    "/v1/identity/learners:",
 )
 
 
