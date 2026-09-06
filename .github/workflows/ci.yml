@@ -30,6 +30,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -e ".[dev]"
+      - name: Vercel requirements match the lock
+        working-directory: ${{ github.workspace }}
+        run: |
+          # requirements.txt is a generated copy of requirements.lock (Vercel cannot use `-r`).
+          diff <(tail -n +6 requirements.txt) services/core-api/requirements.lock \
+            || { echo "requirements.txt has drifted from services/core-api/requirements.lock"; exit 1; }
+
       - name: Ruff (lint)
         run: ruff check src tests
       - name: Black (format check)
