@@ -4332,5 +4332,528 @@
     "`curriculum/grade-4/GRADE4_PACKAGE.md`: declares 5 teaching units for Social Studies; the `SOC-G4-*` tables group objectives into 4.",
     "`curriculum/grade-4/GRADE4_PACKAGE.md`: declares 5 teaching units for Islamiat / Ethics; the `ISL-G4-*` tables group objectives into 4.",
     "`curriculum/grade-4/GRADE4_PACKAGE.md`: declares 5 teaching units for Islamiat / Ethics; the `ETH-G4-*` tables group objectives into 4."
-  ]
+  ],
+  "authored_content": {
+    "MATH-G4-NB-01": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L1.1"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "4878084ac5e65f20",
+        "hints": "d7d114704590b29d",
+        "homework": "3f4b00fd70a8ae2a",
+        "mentor_notes": "5fa485282b7d56e5",
+        "parent_notes": "8f00976128cc5d5f",
+        "vocabulary": "7329b2a77036d1a9",
+        "worked_examples": "d819fe6a72f0a7a0"
+      }
+    },
+    "MATH-G4-NB-02": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L1.2"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "4878084ac5e65f20",
+        "hints": "c21f17dcd66e5ec5",
+        "homework": "09680391c9df6103",
+        "mentor_notes": "6eb42a137ecac5a0",
+        "parent_notes": "ccd2e745bebf00bb",
+        "vocabulary": "171c8128894e861a"
+      }
+    },
+    "MATH-G4-NB-03": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L1.3"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "e2c30f06099f11d3",
+        "hints": "93cb7e07a4885488",
+        "homework": "65d18edc1388353d",
+        "mentor_notes": "db2f4a67ed1a5201",
+        "parent_notes": "5a28add3d26e71d9",
+        "vocabulary": "167574c9719e96e5"
+      }
+    },
+    "MATH-G4-NB-04": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L1.4"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "hints": "01913410c9569e91",
+        "homework": "80efd71be9e6647a",
+        "mentor_notes": "66b05c8356ceeea7",
+        "parent_notes": "85bf8d5352ed0939",
+        "vocabulary": "1f87811eee667022"
+      }
+    },
+    "MATH-G4-AS-01": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L2.1"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "2bdd62d96ef60f3a",
+        "hints": "0bfa9c3884bdf765",
+        "homework": "65e52694d67fb9a2",
+        "mentor_notes": "0427fdf69cc907df",
+        "parent_notes": "872c219a7217e02e",
+        "vocabulary": "22c857f5af30ffee",
+        "worked_examples": "277319c807a9d253"
+      }
+    },
+    "MATH-G4-AS-02": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L2.2"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "f61df2792e3f53eb",
+        "hints": "8e1ce8db656b58ca",
+        "homework": "ef3bbce4328886b5",
+        "mentor_notes": "f88379c536a7373b",
+        "parent_notes": "a1d6666b00dd5f87",
+        "vocabulary": "77e9b5d5f51263f3"
+      }
+    },
+    "MATH-G4-AS-03": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L2.3"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "hints": "c6c40998851435a6",
+        "homework": "730ec7ef04be7645",
+        "mentor_notes": "9ca06aa920d1c809",
+        "parent_notes": "f09daaad4b249211",
+        "vocabulary": "704a44e10df2fc42"
+      }
+    },
+    "MATH-G4-AS-04": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L2.4"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "hints": "0600356ea3858d04",
+        "homework": "5b256a7ed2ea584f",
+        "mentor_notes": "58a3cd085385d093",
+        "parent_notes": "788356187df51fb3",
+        "vocabulary": "baaad2ca4870e965"
+      }
+    },
+    "MATH-G4-ML-01": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L3.1"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "8656b1d1a513034b",
+        "hints": "d04eb8b576588d50",
+        "homework": "1162a96c1874a47f",
+        "mentor_notes": "fed51be50a38dc93",
+        "parent_notes": "39cae0948b077c3d",
+        "vocabulary": "7f92a6086f2e9a53",
+        "worked_examples": "0d4f3a6390cbb064"
+      }
+    },
+    "MATH-G4-ML-02": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L3.2"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "f4baee187ca76a5a",
+        "hints": "8a8ed999d1f8ac77",
+        "homework": "57f2216d2b572f14",
+        "mentor_notes": "a6ad10c02c9dbe30",
+        "parent_notes": "8aec97992fe27fb4",
+        "vocabulary": "994a4c320e15e024"
+      }
+    },
+    "MATH-G4-ML-03": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L3.3"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "hints": "43c66a5e990660bd",
+        "homework": "869a59c34349a1c1",
+        "mentor_notes": "9a4be39f73d96ac0",
+        "parent_notes": "c51663d868f9799c",
+        "vocabulary": "9ed001337911ae39"
+      }
+    },
+    "MATH-G4-ML-04": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L3.4"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "8656b1d1a513034b",
+        "hints": "86925a1b3257c9c5",
+        "homework": "14089de69fcea2a7",
+        "mentor_notes": "a97e9810854c2e8b",
+        "parent_notes": "6102ccb54fa0d369",
+        "vocabulary": "6ddeea21224ce214"
+      }
+    },
+    "MATH-G4-DV-01": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L4.1"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "84b2c4763243652e",
+        "hints": "74e3efa5d1d47b68",
+        "homework": "55c69873f911bbe6",
+        "mentor_notes": "f177cad729639843",
+        "parent_notes": "ece20a7429cf1d58",
+        "vocabulary": "3723d511959f5382",
+        "worked_examples": "2510fdc4ce88cc7c"
+      }
+    },
+    "MATH-G4-DV-02": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L4.2"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "63d73de686a61132",
+        "hints": "8e7755f35d438f98",
+        "homework": "16b96cb8a5e6f92a",
+        "mentor_notes": "664a369efc37c067",
+        "parent_notes": "f5550ee36001d492",
+        "vocabulary": "b1a0afde3cf421d8"
+      }
+    },
+    "MATH-G4-DV-03": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L4.3"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "63d73de686a61132",
+        "hints": "a52be3ac5e6c9434",
+        "homework": "7ec00cb775d6e259",
+        "mentor_notes": "8a30d9242a4e1267",
+        "parent_notes": "0aeb90520fab7d19",
+        "vocabulary": "891c756d61a0db25"
+      }
+    },
+    "MATH-G4-DV-04": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L4.4"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "9bd57ec189fdaf4d",
+        "hints": "1b49b403fca8c331",
+        "homework": "c09b5027c350bb92",
+        "mentor_notes": "5706543106ae4755",
+        "parent_notes": "7a6b0ef57f216fc9",
+        "vocabulary": "1f2e1c90980c227d"
+      }
+    },
+    "MATH-G4-FR-01": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L5.1",
+        "services/core-api/src/taleem_core/vertical_slice/fractions_lesson.py (build_fractions_lesson)"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "adaptive_remediation": "ca5f97cc83fe63ef",
+        "ai_teaching_object": "afd868adb713f94f",
+        "assessment": "d74d32fd77b288f5",
+        "common_misconceptions": "05ba942c25302747",
+        "hints": "b07a4869bfbd7ea2",
+        "homework": "67214b5e670d3d68",
+        "interactive_activities": "1f1a471b5c9305a9",
+        "keywords": "4c1ca5ac88b148a3",
+        "mentor_notes": "7c0eb59b082fe6d6",
+        "parent_notes": "a7342900083028d8",
+        "practice_questions": "10ed2bc170ba92c8",
+        "revision_notes": "0fe53349c33c21ca",
+        "student_explanation": "6e9c486867e626d5",
+        "summary": "fe4f4b4d0c7fdb14",
+        "teacher_script": "ead64dc2b836aaa0",
+        "vocabulary": "086db06a772f58c5",
+        "worked_examples": "60ee7185ad2bb4ce"
+      }
+    },
+    "MATH-G4-FR-02": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L5.2"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "hints": "5de46c3a5b9aa9d5",
+        "homework": "49343a739b6cb9b5",
+        "mentor_notes": "2e489005ffa7b37b",
+        "parent_notes": "159ec158a9a937d7",
+        "vocabulary": "3d0b1e2e139a9b91"
+      }
+    },
+    "MATH-G4-FR-03": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L5.3"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "eb48fb05ba43d458",
+        "hints": "759d99b16040822e",
+        "homework": "a795c19e82d79bff",
+        "mentor_notes": "459b3e90bfe10f70",
+        "parent_notes": "cde3c51635cbb4ba",
+        "vocabulary": "588b905f545b2c05"
+      }
+    },
+    "MATH-G4-FR-04": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L5.4"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "8449f70c8484b2cd",
+        "hints": "67967e948cfbb752",
+        "homework": "62bc6df86718b50f",
+        "mentor_notes": "7f3970cd9269e29d",
+        "parent_notes": "e106e0347e7bbe21",
+        "vocabulary": "c9ecfa29580444b7"
+      }
+    },
+    "MATH-G4-FR-05": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L5.5"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "47b38114de2627f1",
+        "hints": "1f18ec71966815c3",
+        "homework": "ca4ed7bd67bb33c0",
+        "mentor_notes": "cb3278c1a584c6ba",
+        "parent_notes": "150883abe07d1aa0",
+        "vocabulary": "0325800cb62f7add"
+      }
+    },
+    "MATH-G4-ME-01": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L6.1"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "938609dc0b79bb8b",
+        "hints": "9733a591279f91cb",
+        "homework": "1c390a1f6519b276",
+        "mentor_notes": "661afd85a78ee368",
+        "parent_notes": "15eca3d184e225d3",
+        "vocabulary": "9a98b04c1c5112d5",
+        "worked_examples": "622947908fabdf02"
+      }
+    },
+    "MATH-G4-ME-02": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L6.2"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "938609dc0b79bb8b",
+        "hints": "fd6a1bde0b08a4d1",
+        "homework": "2dd0708ca38d6757",
+        "mentor_notes": "12e192d138a7a9cf",
+        "parent_notes": "33d16631127c149a",
+        "vocabulary": "f87e6e53fd627efe"
+      }
+    },
+    "MATH-G4-ME-03": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L6.3"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "938609dc0b79bb8b",
+        "hints": "bb81c07e2a80e833",
+        "homework": "1e36ea0fe690366a",
+        "mentor_notes": "e24759dd4670ed7e",
+        "parent_notes": "05fb8a7ccd645e05",
+        "vocabulary": "0321a93004af3cd2"
+      }
+    },
+    "MATH-G4-ME-04": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L6.4"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "855267ad2435ca2b",
+        "hints": "e457d381eaa8e933",
+        "homework": "a485f5afb340074c",
+        "mentor_notes": "7dfe89b4c7fdeb06",
+        "parent_notes": "20eb3bad2f6b2d7e",
+        "vocabulary": "d78a072ca6bc42d0"
+      }
+    },
+    "MATH-G4-GE-01": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L7.1"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "hints": "24855a88dd50ad0b",
+        "homework": "f1006b353f484a3b",
+        "mentor_notes": "f99d15d8ca970a5a",
+        "parent_notes": "8eece9f26702ebd2",
+        "vocabulary": "d1c953941ebbf96f",
+        "worked_examples": "035d4478ec0ef345"
+      }
+    },
+    "MATH-G4-GE-02": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L7.2"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "61aecc9aaf1e1195",
+        "hints": "bb47695a04b55fcc",
+        "homework": "d43f2da16d3d93f7",
+        "mentor_notes": "93932372a8336ba7",
+        "parent_notes": "d6df72c65c4f6dd8",
+        "vocabulary": "76e7cde631d6c2aa"
+      }
+    },
+    "MATH-G4-GE-03": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L7.3"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "hints": "8869ff994a5b6157",
+        "homework": "43fa34d52df16eb6",
+        "mentor_notes": "27325244f270a503",
+        "parent_notes": "110694c9fb263178",
+        "vocabulary": "f05549b61560bbd8"
+      }
+    },
+    "MATH-G4-GE-04": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L7.4"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "5a3a5f623ff6f7d7",
+        "hints": "6c4560ca2af9f611",
+        "homework": "e805e1d060965481",
+        "mentor_notes": "9b736e51e8dbf631",
+        "parent_notes": "1aaab62de2ff41df",
+        "vocabulary": "79084c623f23f92e"
+      }
+    },
+    "MATH-G4-DA-01": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L8.1"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "97e39ea4558470e3",
+        "hints": "72923131909cd9f0",
+        "homework": "fc22580e3841ca37",
+        "mentor_notes": "05d7840b056d674e",
+        "parent_notes": "5b960183be857296",
+        "vocabulary": "7f984c1ae3144322",
+        "worked_examples": "f53062ee2072223a"
+      }
+    },
+    "MATH-G4-DA-02": {
+      "sources": [
+        "GRADE4_MATH_CURRICULUM.md §7 L8.2"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "97e39ea4558470e3",
+        "hints": "7a329cce0f4a3481",
+        "homework": "ca9e3dd59794723c",
+        "mentor_notes": "8bda45f20c653ca5",
+        "parent_notes": "1c2a1ef59961a250",
+        "vocabulary": "54f226d8438728c4"
+      }
+    },
+    "URD-G4-RD-03": {
+      "sources": [
+        "curriculum/grade-4/URDU.md §3 (exemplar)"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "82f12cc6531cf414",
+        "hints": "abf7ec55feb4019a",
+        "homework": "3fcdb5037c6b88e2",
+        "mentor_notes": "f20babb0eb0659db",
+        "parent_notes": "d18050b620d87dcd",
+        "vocabulary": "5b9cb608b9eca68d",
+        "worked_examples": "bf304218209aaddd"
+      }
+    },
+    "ENG-G4-GR-03": {
+      "sources": [
+        "curriculum/grade-4/ENGLISH.md §3 (exemplar)"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "24bfdc2c6480117b",
+        "hints": "59f4b424792511ea",
+        "homework": "b236e4e3543803a8",
+        "mentor_notes": "23fd34f0e7734e4f",
+        "parent_notes": "0d3811a38b077983",
+        "vocabulary": "0aa7a2ced2bf143f",
+        "worked_examples": "1a7bf7d74d25d862"
+      }
+    },
+    "SCI-G4-LIV-01": {
+      "sources": [
+        "curriculum/grade-4/GENERAL_SCIENCE.md §3 (exemplar)"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "297ca3fd28576a5b",
+        "hints": "0e3891504bcf7a08",
+        "homework": "420c3cedefe9c3b2",
+        "mentor_notes": "352164994ec2e76d",
+        "parent_notes": "38f083b066586032",
+        "vocabulary": "e15893ce4ec6ef38",
+        "worked_examples": "70d90ebd4878c67b"
+      }
+    },
+    "SOC-G4-ECO-01": {
+      "sources": [
+        "curriculum/grade-4/SOCIAL_STUDIES.md §3 (exemplar)"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "fbf92c91c7dba705",
+        "hints": "ab293b48ccc928df",
+        "homework": "7e6f5d2fbf5442b0",
+        "mentor_notes": "71923f42a3a46835",
+        "parent_notes": "6c8bf1b70602f447",
+        "vocabulary": "4c334b86b7a11a95",
+        "worked_examples": "7f1b23a2980d1936"
+      }
+    },
+    "ETH-G4-HON-01": {
+      "sources": [
+        "curriculum/grade-4/ISLAMIAT_ETHICS.md §3 (exemplar)"
+      ],
+      "status": "content-status:provisional-pending-review",
+      "fields": {
+        "common_misconceptions": "a33e6234f1b1088c",
+        "hints": "6b7e4ef1fa54b8b5",
+        "homework": "a46aae63b0501d26",
+        "mentor_notes": "7dd1cf32578b5368",
+        "parent_notes": "27fedef5a29aa01f",
+        "vocabulary": "a8181303829d05fa",
+        "worked_examples": "46265d63a2a6c074"
+      }
+    }
+  }
 }

@@ -2,24 +2,28 @@
 
 Reads the Grade 4 design documents into a validated objective spine (``curriculum_spine``), then
 creates one Studio draft lesson per objective **through the application service**
-(``CurriculumStudioService.create``) — never by writing tables directly.
+(``CurriculumStudioService.create``) — never by writing tables directly. It then imports the
+human-authored lesson content already in the repository (``curriculum_content`` +
+``curriculum_import``) into the matching drafts via ``CurriculumStudioService.update``.
 
 Honesty rules (non-negotiable, enforced here and asserted by ``tests/test_curriculum_ingest.py``):
 
 - Ingested lessons are **drafts**. This tool never submits, reviews, approves or publishes, and
   never records a quality-gate result.
-- It carries only what the spine states: code, ``[RE-EXPRESSED]`` outcome, difficulty, duration,
-  prerequisites, competency, assessment type, unit/topic placement (as tags) and, for
-  mathematics, the bilingual title from ``LESSON_CATALOG.md``. It does **not** write Urdu
-  explanations, scripts, questions, hints, misconceptions, media, or audio references, and no AI
-  writes lesson content.
+- A new draft carries only what the spine states: code, ``[RE-EXPRESSED]`` outcome, difficulty,
+  duration, prerequisites, competency, assessment type, unit/topic placement (as tags) and, for
+  mathematics, the bilingual title from ``LESSON_CATALOG.md``.
+- Authored content is imported **verbatim** from the exemplar sections, the math lesson sections
+  and the FR-01 fixture, and tagged ``provisional`` / ``content-status:provisional-pending-review``.
+  Nothing is gap-filled, translated or AI-written; a missing Urdu or English side stays empty. No
+  audio, media or offline-package pointer is imported (none of those assets exist).
 - Provenance is ``authored-original`` exactly as the documents declare; the Studio's provenance rule
   (``check_provenance``) runs before anything is created, so a prohibited source is refused.
-- Idempotent: an objective that already has a lesson (matched by objective code or lesson id) is
-  skipped, whatever its state. Re-running never duplicates and never edits.
+- Idempotent and non-destructive: an objective that already has a lesson is not re-created; an
+  imported field an author has since edited in the Studio is kept and reported, never overwritten.
 
-The ``--dry-run`` report runs the Studio validation on every draft and lists, per lesson, which of
-the 9 quality gates fail and why: that report is the honest content-gap list.
+The ``--dry-run`` report runs the Studio validation on every draft and lists, per lesson, which
+fields were imported and which of the 9 quality gates still fail and why: the honest gap list.
 
 Usage (from ``services/core-api``)::
 
@@ -31,9 +35,10 @@ Usage (from ``services/core-api``)::
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import sys
-from collections.abc import Callable, Iterable, Sequence
+from collections.abc import Callable, Iterable, Mapping, Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -62,6 +67,9 @@ from ..contexts.curriculum_studio.domain.provenance import (
 )
 from ..contexts.curriculum_studio.domain.quality import ALL_GATES, AUTOMATED_GATES, Gate
 from ..contexts.curriculum_studio.domain.workflow import STATE_ROLE, WorkflowState
+from ..vertical_slice.fractions_lesson import build_fractions_lesson
+from .curriculum_content import AuthoredContent, parse_authored_content
+from .curriculum_import import ImportResult, content_manifest, import_authored
 from .curriculum_spine import (
     GRADE_KEY,
     PREFIX_ORDER,
@@ -72,7 +80,8 @@ from .curriculum_spine import (
     Objective,
     Spine,
     SpineError,
-    load_spine,
+    build_spine,
+    read_docs,
     split_bilingual,
 )
 
@@ -255,6 +264,37 @@ def ingest(spine: Spine, service: CurriculumStudioService) -> IngestResult:
     return result
 
 
+# --------------------------------------------------------------------------------- full run
+
+
+@dataclass
+class RunResult:
+    ingest: IngestResult
+    imports: ImportResult
+
+
+def load_inputs(root: Path) -> tuple[Spine, dict[str, AuthoredContent]]:
+    docs = read_docs(root)
+    return build_spine(docs), parse_authored_content(docs)
+
+
+def run(
+    spine: Spine, contents: Mapping[str, AuthoredContent], service: CurriculumStudioService
+) -> RunResult:
+    """Create missing drafts, then import authored content into the drafts that have some."""
+    created = ingest(spine, service)
+    lesson_ids = {e.code: e.lesson_id for e in plan(spine, service.list()).entries}
+    imports = import_authored(
+        spine,
+        service,
+        contents,
+        baseline=lambda o: build_draft(spine, o),
+        lesson_ids=lesson_ids,
+        fixture=build_fractions_lesson(),
+    )
+    return RunResult(created, imports)
+
+
 # --------------------------------------------------------------------------------- gate report
 
 _HUMAN_STAGE: dict[Gate, WorkflowState] = {
@@ -321,10 +361,16 @@ def _esc(text: str) -> str:
     return text.replace("|", "\\|").replace("\n", " ")
 
 
-def render_report(spine: Spine, rows: Sequence[LessonGateRow]) -> str:
+def _codes(names: Iterable[str]) -> str:
+    return ", ".join(f"`{_esc(n)}`" for n in names) or "—"
+
+
+def render_report(spine: Spine, rows: Sequence[LessonGateRow], imports: ImportResult) -> str:
     """The generated, markdownlint-clean INGESTION_REPORT.md (deterministic)."""
     n = len(rows)
     all_green = [r for r in rows if not r.failing]
+    imported = imports.by_code()
+    with_content = [r for r in rows if r.code in imported and imported[r.code].current]
     out: list[str] = [
         "# Grade 4 Ingestion Report",
         "",
@@ -332,10 +378,11 @@ def render_report(spine: Spine, rows: Sequence[LessonGateRow]) -> str:
         "design documents. **Do not edit by hand**: `--check` fails when this file or "
         "[`spine.json`](spine.json) is stale.",
         "",
-        "This is the honest content-gap list. Each lesson below is a Curriculum Studio **draft** "
-        "built from the objective spine only. The ingest never advances a lesson through review, "
-        "never records an approval, and never writes Urdu explanations, questions, hints, "
-        "misconceptions, media or audio references.",
+        "This is the honest content-gap list. Every lesson below is a Curriculum Studio **draft**. "
+        "The ingest never advances a lesson through review and never records an approval. Where "
+        "the repository already holds human-authored lesson content, it is imported **verbatim** "
+        "and the lesson is tagged `provisional` and `content-status:provisional-pending-review`: "
+        "it is **not reviewed curriculum**.",
         "",
         "## Summary",
         "",
@@ -343,46 +390,75 @@ def render_report(spine: Spine, rows: Sequence[LessonGateRow]) -> str:
         f"({len(spine.counts_by_subject())} Studio subjects).",
         f"- Drafts the ingest creates: **{n}**, every one in state `draft`, with "
         "`Provenance.derivation == authored-original` as the documents declare.",
+        f"- Drafts carrying imported provisional content: **{len(with_content)}**; the other "
+        f"{n - len(with_content)} hold spine metadata only.",
         f"- Lessons passing all 9 quality gates: **{len(all_green)}**.",
-        "- Why: the spine supplies metadata only (code, outcome, difficulty, duration, "
-        "prerequisites, competency, assessment type). Every lesson still needs authored bilingual "
-        "content, recorded Urdu audio, an offline package, and five human review stages. Those "
-        "cannot be produced by a parser and are not faked here.",
+        "- Why: publication needs the 5-stage human review (subject expert, educational QA, "
+        "accessibility, language, AI safety) and recorded Urdu audio. Neither can come from a "
+        "parser, and neither is faked here. Most drafts also still lack authored content.",
         "",
-        "| Track | Studio subject | Source | Objectives | Units | Exemplar ★ |",
-        "| --- | --- | --- | --- | --- | --- |",
+        "| Track | Studio subject | Source | Objectives | Units | Exemplar ★ | With content |",
+        "| --- | --- | --- | --- | --- | --- | --- |",
     ]
     counts = spine.counts_by_prefix()
     for t in spine.tracks:
         stars = sum(1 for o in spine.objectives if o.prefix == t.prefix and o.exemplar)
+        filled = sum(1 for r in with_content if r.prefix == t.prefix)
         out.append(
             f"| {t.title} (`{t.prefix}-G4-*`) | `{t.subject_key}` | `{t.source}` | "
-            f"{counts[t.prefix]} | {len(t.units)} | {stars} |"
+            f"{counts[t.prefix]} | {len(t.units)} | {stars} | {filled} |"
         )
     out += [
         f"| **Total** | | | **{len(spine.objectives)}** | "
         f"**{sum(len(t.units) for t in spine.tracks)}** | "
-        f"**{sum(1 for o in spine.objectives if o.exemplar)}** |",
+        f"**{sum(1 for o in spine.objectives if o.exemplar)}** | **{len(with_content)}** |",
+        "",
+        "## Closest lessons to publishable",
+        "",
+        "Ranked by remaining submission blockers, then failing gates. **None of these can be "
+        "published yet**: each still needs its remaining fields authored, recorded Urdu audio, an "
+        "offline package, and all five human review stages.",
+        "",
+        "| Rank | Objective | Lesson | Blockers left | Gates failing | Remaining blockers |",
+        "| --- | --- | --- | --- | --- | --- |",
+    ]
+    ranked = sorted(rows, key=lambda r: (len(r.blockers), len(r.failing), r.code))[:10]
+    for i, r in enumerate(ranked, 1):
+        out.append(
+            f"| {i} | `{r.code}` | `{r.lesson_id}` | {len(r.blockers)} | {len(r.failing)}/9 | "
+            f"{_codes(r.blockers)} |"
+        )
+    out += [
         "",
         "## What the ingest carries",
         "",
-        "- **Carried from the spine:** objective code (`learning_outcomes`, "
+        "- **From the spine (every draft):** objective code (`learning_outcomes`, "
         "`provenance.aligned_slo_codes`, `ai_teaching_object.learning_goals`), the "
         "`[RE-EXPRESSED]` outcome (English `description`), difficulty, duration, resolved "
         "prerequisites, and placement plus competency and assessment type as `metadata.tags`.",
         "- **Titles:** mathematics titles are the bilingual titles in `LESSON_CATALOG.md`. The "
         "other subjects' documents state no lesson title, so the English title is the outcome "
         "and the Urdu title is left empty.",
+        "- **Imported verbatim (provisional):** from each ★ exemplar section and each "
+        "`GRADE4_MATH_CURRICULUM.md` §7 lesson: vocabulary pairs, worked-example *scripts*, the "
+        "quoted H1/H2 hints, the referenced misconception-library rows, homework, and parent and "
+        "teacher notes (`parent_notes`, `mentor_notes`). For `MATH-G4-FR-01`, the authored "
+        "fixture `vertical_slice/fractions_lesson.py` (scripts, explanation, practice items with "
+        "answer keys, hints, misconceptions, homework, notes, AI-teaching object).",
+        "- **Never invented:** text is split into Urdu and English only where the document writes "
+        "both. A side it does not write stays empty and shows up below as a `title`/notes "
+        "blocker. Practice and assessment lines in the documents are item *specifications* with "
+        "no item wording, so no items are created from them.",
+        "- **Not imported from the fixture:** audio pointers, the `m-fraction-circle` media "
+        "reference, the offline-package id, and its accessibility note (which states audio and an "
+        "image are provided). None of those assets exist in the repository.",
+        "- **Marking:** every imported lesson carries `provisional`, "
+        "`content-status:provisional-pending-review`, `imported-from:<doc §section>` and a "
+        "`provenance-note:` tag, plus an `import-hash:<field>=…` fingerprint per field. A field "
+        "an author has edited since is never overwritten (it is reported instead).",
         "- **Hierarchy:** grade `G4` → subjects → chapters (units) → topics (unit × domain) "
         "is built and validated as Studio hierarchy objects. The Studio service has no hierarchy "
         "persistence port, so placement travels as `unit:`/`topic:` tags and in `spine.json`.",
-        "- **Not carried:** `GRADE4_MATH_CURRICULUM.md` and each exemplar section contain authored "
-        "prose (vocabulary, worked examples, hint ladders, homework, notes). It is not "
-        "transferred: it is prose, not structured bilingual Studio items, and splitting it "
-        "into items, hints or scripts would be machine authoring. An author transfers it in the "
-        "Studio.",
-        "- **Offline packages:** none are set. The catalog's planned `pkg/…` ids name packages "
-        "that do not exist yet; they are built after publish.",
         "",
         "## Gate status across all drafts",
         "",
@@ -395,8 +471,11 @@ def render_report(spine: Spine, rows: Sequence[LessonGateRow]) -> str:
         reasons = sorted({reason for s in statuses for reason in s.reasons})
         checked = _checked_by(gate, _HUMAN_STAGE.get(gate))
         why = "; ".join(_esc(r) for r in reasons) or "—"
-        if any(s.vacuous for s in statuses):
-            why = "passes vacuously: there is no Urdu `student_explanation` text to measure"
+        vacuous = sum(1 for s in statuses if s.vacuous)
+        if vacuous:
+            why = (
+                f"{vacuous} pass vacuously: there is no Urdu `student_explanation` text to measure"
+            )
         out.append(f"| `{gate.value}` | {checked} | {passing} | {n - passing} | {why} |")
     blocker_counts: dict[str, int] = {}
     for r in rows:
@@ -413,6 +492,39 @@ def render_report(spine: Spine, rows: Sequence[LessonGateRow]) -> str:
     ]
     for name, count in sorted(blocker_counts.items(), key=lambda kv: (-kv[1], kv[0])):
         out.append(f"| `{_esc(name)}` | {count} |")
+    out += [
+        "",
+        "## Imported content per lesson",
+        "",
+        "Only lessons with authored content in the repository are listed. A field marked "
+        "*English only* / *Urdu only* is imported exactly as the document wrote it; the missing "
+        'side is a gap for an author, never a translation. "In the documents, not imported" '
+        "names the source field and the reason it has no faithful Studio target.",
+        "",
+        "| Objective | Source | Imported (provisional) | In the documents, not imported |",
+        "| --- | --- | --- | --- |",
+    ]
+    for r in rows:
+        entry = imported.get(r.code)
+        if entry is None:
+            continue
+        fields_cell = (
+            ", ".join(
+                f"`{name}`"
+                + (f" ({entry.one_language[name]})" if name in entry.one_language else "")
+                for name in entry.current
+            )
+            or "—"
+        )
+        if entry.author_edited:
+            fields_cell += f"; kept author edits: {_codes(entry.author_edited)}"
+        if entry.skipped_state:
+            fields_cell = f"not touched (state `{entry.skipped_state}`)"
+        missing = "; ".join(f"{_esc(name)}: {_esc(why)}" for name, why in entry.not_imported)
+        out.append(
+            f"| `{r.code}` | {'; '.join(_esc(s) for s in entry.sources)} | {fields_cell} | "
+            f"{missing or '—'} |"
+        )
     out += ["", "## Per-lesson gate failures", ""]
     for prefix in PREFIX_ORDER:
         prefix_rows = [r for r in rows if r.prefix == prefix]
@@ -421,8 +533,9 @@ def render_report(spine: Spine, rows: Sequence[LessonGateRow]) -> str:
         out += [
             f"### {PREFIXES[prefix][2]} (`{prefix}-G4-*`)",
             "",
-            "| Objective | Lesson | State | Gates failing | Why (automated checks) | Blockers |",
-            "| --- | --- | --- | --- | --- | --- |",
+            "| Objective | Lesson | State | Content | Gates failing | Why (automated checks) "
+            "| Blockers |",
+            "| --- | --- | --- | --- | --- | --- | --- |",
         ]
         for r in prefix_rows:
             failing = ", ".join(f"`{g.gate.value}`" for g in r.failing) or "none"
@@ -436,9 +549,11 @@ def render_report(spine: Spine, rows: Sequence[LessonGateRow]) -> str:
             why = auto_why or "—"
             if human:
                 why += f"; {len(human)} gates await human review"
+            entry = imported.get(r.code)
+            content = "provisional import" if entry is not None and entry.current else "spine only"
             out.append(
-                f"| `{r.code}` | `{r.lesson_id}` | `{r.state}` | {len(r.failing)}/9: {failing} | "
-                f"{why} | {len(r.blockers)} |"
+                f"| `{r.code}` | `{r.lesson_id}` | `{r.state}` | {content} | "
+                f"{len(r.failing)}/9: {failing} | {why} | {len(r.blockers)} |"
             )
         out.append("")
     dag_edges = sum(len(o.prerequisites) for o in spine.objectives)
@@ -480,17 +595,22 @@ def in_memory_service() -> CurriculumStudioService:
     return CurriculumStudioService(InMemoryLessonRepository(), RecordingPublishPort())
 
 
-def generate(spine: Spine) -> tuple[str, str, list[LessonGateRow]]:
+def generate(
+    spine: Spine, contents: Mapping[str, AuthoredContent]
+) -> tuple[str, str, list[LessonGateRow]]:
     """(spine.json text, INGESTION_REPORT.md text, gate rows) — independent of any database."""
     service = in_memory_service()
-    ingest(spine, service)
+    result = run(spine, contents, service)
     rows = gate_rows(spine, service)
-    return spine.to_json(), render_report(spine, rows), rows
+    data = spine.to_dict()
+    data["authored_content"] = content_manifest(spine, contents, build_fractions_lesson())
+    spine_text = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+    return spine_text, render_report(spine, rows, result.imports), rows
 
 
-def stale_artifacts(root: Path, spine: Spine) -> list[str]:
+def stale_artifacts(root: Path, spine: Spine, contents: Mapping[str, AuthoredContent]) -> list[str]:
     """Repo-relative paths whose committed content differs from a fresh generation."""
-    spine_text, report_text, _rows = generate(spine)
+    spine_text, report_text, _rows = generate(spine, contents)
     stale: list[str] = []
     for rel, fresh in ((SPINE_PATH, spine_text), (REPORT_PATH, report_text)):
         path = root / rel
@@ -499,8 +619,10 @@ def stale_artifacts(root: Path, spine: Spine) -> list[str]:
     return stale
 
 
-def write_artifacts(root: Path, spine: Spine) -> list[LessonGateRow]:
-    spine_text, report_text, rows = generate(spine)
+def write_artifacts(
+    root: Path, spine: Spine, contents: Mapping[str, AuthoredContent]
+) -> list[LessonGateRow]:
+    spine_text, report_text, rows = generate(spine, contents)
     (root / SPINE_PATH).write_text(spine_text, encoding="utf-8")
     (root / REPORT_PATH).write_text(report_text, encoding="utf-8")
     return rows
@@ -509,9 +631,9 @@ def write_artifacts(root: Path, spine: Spine) -> list[LessonGateRow]:
 # --------------------------------------------------------------------------------- database
 
 
-def run_with_database(
-    url: str, fn: Callable[[CurriculumStudioService], IngestResult], *, commit: bool
-) -> IngestResult:
+def run_with_database[T](
+    url: str, fn: Callable[[CurriculumStudioService], T], *, commit: bool
+) -> T:
     """Open one Unit of Work on ``url`` and run ``fn`` against a service bound to it.
 
     The whole ingest is one transaction: it commits only when ``commit`` is true and ``fn`` returns.
@@ -542,10 +664,20 @@ def run_with_database(
 # --------------------------------------------------------------------------------- CLI
 
 
-def _print_plan(result: IngestResult, *, verb: str) -> None:
-    print(f"{verb}: {len(result.created)} draft(s); skip {len(result.skipped)} existing.")
-    for e in result.skipped:
-        print(f"  skip {e.code} -> {e.lesson_id} (state {e.existing_state})")
+def _print_run(result: RunResult, *, prefix: str) -> None:
+    ing, imp = result.ingest, result.imports
+    print(f"{prefix}create {len(ing.created)} draft(s); skip {len(ing.skipped)} existing.")
+    for e in ing.skipped:
+        print(f"  exists {e.code} -> {e.lesson_id} (state {e.existing_state})")
+    print(
+        f"{prefix}import provisional content into {len(imp.updated)} draft(s); "
+        f"{sum(1 for e in imp.entries if e.current and not e.imported)} already current."
+    )
+    for entry in imp.entries:
+        if entry.author_edited:
+            print(f"  kept author edits in {entry.code}: {', '.join(entry.author_edited)}")
+        if entry.skipped_state:
+            print(f"  not touched {entry.code} (state {entry.skipped_state})")
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -571,7 +703,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     root: Path = args.root
 
     try:
-        spine = load_spine(root)
+        spine, contents = load_inputs(root)
     except SpineError as exc:
         print("curriculum documents are inconsistent:", file=sys.stderr)
         for p in exc.problems:
@@ -579,7 +711,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 1
 
     if args.check:
-        stale = stale_artifacts(root, spine)
+        stale = stale_artifacts(root, spine, contents)
         if stale:
             for rel in stale:
                 print(f"STALE: {rel} (regenerate with --dry-run)", file=sys.stderr)
@@ -588,15 +720,16 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
 
     if args.dry_run:
-        rows = write_artifacts(root, spine)
+        rows = write_artifacts(root, spine, contents)
         print((root / REPORT_PATH).read_text(encoding="utf-8"))
         green = sum(1 for r in rows if not r.failing)
         print(f"wrote {SPINE_PATH} and {REPORT_PATH}; {green}/{len(rows)} lessons all-gates-green.")
         if args.database_url:
+            # Run the real ingest inside a transaction that is rolled back: an exact plan.
             result = run_with_database(
-                args.database_url, lambda s: plan(spine, s.list()), commit=False
+                args.database_url, lambda s: run(spine, contents, s), commit=False
             )
-            _print_plan(result, verb="against the configured database, would create")
+            _print_run(result, prefix="against the configured database, would ")
         else:
             print("CS_DATABASE_URL not set: plan shown against an empty database.")
         return 0
@@ -607,11 +740,13 @@ def main(argv: Sequence[str] | None = None) -> int:
         )
         return 2
     try:
-        result = run_with_database(args.database_url, lambda s: ingest(spine, s), commit=True)
+        result = run_with_database(
+            args.database_url, lambda s: run(spine, contents, s), commit=True
+        )
     except (ProvenanceError, SpineError) as exc:
         print(f"refused: {exc}", file=sys.stderr)
         return 1
-    _print_plan(result, verb="created")
+    _print_run(result, prefix="did ")
     return 0
 
 
