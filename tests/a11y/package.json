@@ -1,0 +1,17 @@
+{
+  "name": "@taleem/a11y",
+  "version": "0.1.0",
+  "private": true,
+  "license": "UNLICENSED",
+  "description": "Automated WCAG 2.2 A/AA scan (axe-core in Playwright) of every apps/web route, in ur (RTL) and en, signed in through the real identity API. Separate package so its lockfile never conflicts with apps/web.",
+  "scripts": {
+    "test": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.1",
+    "@playwright/test": "1.49.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -123,6 +123,66 @@
 
 ---
 
+## Automated pre-audit evidence and audit inputs
+
+> **The external audits have NOT happened.** No independent penetration test (EV-04) and no
+> accessibility audit with assistive technology (EV-05) has been commissioned or performed. Everything
+> in this section is self-generated, automated evidence and preparation material. It narrows what an
+> auditor has to find on their own; it does not replace them, and none of it moves EV-04 or EV-05 off ☐.
+
+### What we hand an auditor
+
+| Input | Where | Used by |
+| --- | --- | --- |
+| Threat model (per-boundary STRIDE, attacker trees) | [51 Threat Model](./docs/03-security-privacy/51-threat-model.md) | EV-04 |
+| Authentication, authorization, security model | [11](./docs/03-security-privacy/11-authentication-strategy.md), [12](./docs/03-security-privacy/12-authorization-model.md), [13](./docs/03-security-privacy/13-security-model.md) | EV-04 |
+| Signing-key storage decision brief (FD-14) | [FD-14](./docs/decisions/FD-14-signing-key-storage.md) | EV-04 |
+| Offline security review | [OFFLINE_SECURITY_REVIEW.md](./OFFLINE_SECURITY_REVIEW.md) | EV-04 |
+| API surface, one OpenAPI contract per context | [`packages/contracts/`](./packages/contracts/) (`identity`, `learning`, `student`, `guardian`, `offline`, `ai-teacher`, `curriculum-studio`, `ops`) | EV-04 |
+| Access-boundary regression suite (IDOR, role confusion, expired tokens) | [`services/core-api/tests/test_access_boundaries.py`](./services/core-api/tests/test_access_boundaries.py) | EV-04 |
+| Accessibility standard the product targets | [16 Accessibility](./docs/04-design/16-accessibility-standards.md) | EV-05 |
+| Automated axe scan of every route, ur (RTL) and en | [`tests/a11y/`](./tests/a11y/), `make a11y` | EV-05 |
+| Reproducible evidence report | [`scripts/release_evidence.sh`](./scripts/release_evidence.sh), `make release-evidence` | EV-04, EV-05 |
+
+### Scope to propose
+
+- **EV-04.** The Core API (`services/core-api`), every public route in the contracts above, with
+  emphasis on the unauthenticated identity routes (registration, guardian and learner sign-in, roster,
+  refresh, sign-out), the consent gate, refresh-token rotation and reuse detection, the shared rate
+  limiter, guardian-to-child authorization, the offline-package signatures, and the operator kill
+  switch. Also the web client's token handling (`apps/web/lib/session/`) and the supply chain
+  (`.github/workflows/security.yml`, `.github/dependabot.yml`).
+- **EV-05.** Every `apps/web` route, in Urdu (RTL) and English, on the reference low-end Android
+  device with TalkBack in Urdu: `/`, `/join`, `/signin`, `/guardian/signin`, `/student/today`,
+  `/student/subjects`, `/student/homework`, `/student/progress`, `/student/profile`,
+  `/student/session`, `/student/offline`, `/student/offline/play`, `/guardian`, `/guardian/family`, `/guardian/children/{studentRef}`, plus the
+  signed-out states of the student and guardian areas.
+
+### Test accounts: synthetic data only
+
+Auditors never receive or create real child data. For each engagement:
+
+1. Stand up a dedicated, disposable environment with its own empty PostgreSQL database. Never use a
+   shared or production database.
+2. Create accounts through the public identity API only, with clearly synthetic values: guardian
+   e-mail addresses under `example.invalid`, nicknames such as "Synthetic Learner", and randomly
+   generated passphrases and PINs. The e2e harness (`services/core-api/src/taleem_core/tools/e2e_journey.py`)
+   and the a11y suite show the exact calls.
+3. Hand credentials to the auditor out of band, never in a ticket or the repository. Rotate them by
+   deleting the environment at the end of the engagement.
+4. The only seeded content is the labelled synthetic fixture lesson
+   (`python -m taleem_core.tools.e2e_journey --seed-fixture`, which refuses `TALEEM_ENV=production`).
+
+### The evidence report
+
+`make release-evidence` (`scripts/release_evidence.sh`) runs the quality gates, the recorded
+end-to-end journey against a real server, the backup and restore drill, `pip-audit`, `npm audit`, and
+the axe scan, then writes one markdown report with the commit, tool versions, and a summary of each,
+with full logs alongside. The report states on its first line that it is not an external audit.
+Attach the report generated at the commit under review to the engagement record.
+
+---
+
 ## Aggregate exit gate
 
 Real children may be onboarded only when **EV-01 through EV-09 are ☑**, all **Phase-1.5 founder decisions**
@@ -134,3 +194,4 @@ Phase-2 gate shows **zero open Critical findings**.
 | Date | Change | Author |
 |---|---|---|
 | 2026-07-19 | Initial external-validation checklist: 9 independent reviews with coverage, inputs, and exit criteria; aggregate onboarding gate. | Review team |
+| 2026-10-22 | Added "Automated pre-audit evidence and audit inputs": what EV-04/EV-05 auditors receive, proposed scope, the synthetic-only test-account procedure, and the evidence report script. States explicitly that no external audit has happened. | Platform engineering |

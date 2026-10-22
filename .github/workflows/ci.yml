@@ -111,6 +111,9 @@ jobs:
       TALEEM_DATABASE_URL: postgresql+psycopg://postgres:ci@localhost:5432/taleem
       E2E_FIRST_EXPECT: empty
       E2E_PORT: "8765"
+      # Strict: any GAP step fails CI. Both recorded gaps are closed (guardian portal fdd181f;
+      # per-request consent gate c8ab6f3), so a GAP appearing here is a regression.
+      E2E_STRICT: "1"
       E2E_OUT_DIR: ${{ github.workspace }}/e2e-evidence
     steps:
       - uses: actions/checkout@v4

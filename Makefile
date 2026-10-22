@@ -53,6 +53,14 @@ audit: ## Dependency vulnerability scan: pip-audit (core-api lock) + npm audit (
 	python3 -m pip_audit --strict -r $(CORE)/requirements.lock
 	cd $(WEB) && npm audit --omit=dev --audit-level=high
 
+.PHONY: a11y
+a11y: ## Automated WCAG 2.2 A/AA scan (axe + Playwright) of every web route, ur + en, real API sign-in
+	./scripts/a11y/run_a11y.sh
+
+.PHONY: release-evidence
+release-evidence: ## Reproducible pre-audit evidence report (gates, e2e, drill, audits, a11y) as markdown
+	./scripts/release_evidence.sh
+
 .PHONY: docker-build
 docker-build: ## Build the core-api container image
 	docker build -t taleem/core-api:dev $(CORE)

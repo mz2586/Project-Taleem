@@ -1,0 +1,79 @@
+name: Accessibility scan
+
+# Automated WCAG 2.2 A/AA scan (axe-core in Playwright) of every apps/web route, in Urdu (RTL) and
+# English, with signed-in pages reached through the REAL identity API (scripts/a11y/run_a11y.sh).
+# Fails on any serious or critical violation. Automated checks are a subset of WCAG; this is not the
+# external accessibility audit (EXTERNAL_VALIDATION_CHECKLIST.md EV-05).
+#
+# Its own workflow so a newly found violation is a clear, separate signal rather than a red Code CI.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "apps/web/**"
+      - "tests/a11y/**"
+      - "scripts/a11y/**"
+      - "scripts/e2e/api_server.sh"
+      - ".github/workflows/a11y.yml"
+  pull_request:
+    paths:
+      - "apps/web/**"
+      - "tests/a11y/**"
+      - "scripts/a11y/**"
+      - "scripts/e2e/api_server.sh"
+      - ".github/workflows/a11y.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  axe:
+    name: axe WCAG 2.2 A/AA (ur + en, signed in)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: taleem
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      CS_DATABASE_URL: postgresql+psycopg://postgres:ci@localhost:5432/taleem
+      TALEEM_DATABASE_URL: postgresql+psycopg://postgres:ci@localhost:5432/taleem
+      A11Y_OUT: ${{ github.workspace }}/a11y-evidence
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install core-api
+        working-directory: services/core-api
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - name: Install web + a11y packages
+        run: |
+          (cd apps/web && npm ci --no-audit --no-fund)
+          (cd tests/a11y && npm ci --no-audit --no-fund)
+      - name: Install Chromium
+        working-directory: tests/a11y
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Scan every route
+        run: ./scripts/a11y/run_a11y.sh
+      - name: Upload report + screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: a11y-evidence
+          path: a11y-evidence/
+          if-no-files-found: warn
