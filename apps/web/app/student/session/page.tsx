@@ -9,7 +9,7 @@
 // Two languages meet on this screen and are kept apart: the chrome (buttons, progress, messages) is
 // in the interface locale; every piece of lesson content carries its own `lang`/`dir`, so an Urdu
 // lesson stays right-to-left inside an English interface and vice versa.
-import { useEffect, useReducer, useRef, useState } from "react";
+import { useEffect, useId, useReducer, useRef, useState } from "react";
 
 import { ReadAloud } from "@/components/student/ReadAloud";
 import { Card, ErrorBanner, ProgressRing, Skeleton } from "@/components/student/ui";
@@ -19,7 +19,22 @@ import { contentAttrs, pickLocalized } from "@/lib/i18n/content";
 import { speechLang } from "@/lib/student/speech";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { useLearner } from "@/lib/session/useLearner";
-import { learningApi } from "@/lib/student/api";
+import { aiTeacherApi, learningApi } from "@/lib/student/api";
+import {
+  classifyExplainError,
+  EXPLAIN_FAILURE_COPY,
+  explainAvailability,
+  explainReducer,
+  explanationView,
+  initialExplainState,
+  styleLabel,
+  styleToRequest,
+  type CapabilitiesWire,
+  type ExplainContext,
+  type ExplainState,
+} from "@/lib/student/aiTeacher";
+import { watchConnectivity } from "@/lib/offline";
+import { formatList } from "@/lib/guardian/format";
 import {
   classifyLoadError,
   ENDING_COPY,
@@ -42,14 +57,127 @@ import {
 } from "@/lib/student/lessonPlayer";
 import type { TodayView } from "@/lib/student/types";
 
+/**
+ * "Explain it another way" — verified authored text shown like the lesson; an AI-written rephrase
+ * (only ever present when the generative tier is on) shown in a separate, labelled block with its
+ * notice always visible and announced with it. See lib/student/aiTeacher.ts.
+ */
+function ExplainPanel({
+  state,
+  onAgain,
+  onClose,
+  canAskAgain,
+}: {
+  state: ExplainState;
+  onAgain: () => void;
+  onClose: () => void;
+  canAskAgain: boolean;
+}) {
+  const { t, locale } = useLocale();
+  const noticeId = useId();
+  if (state.status === "closed") return null;
+  return (
+    <section aria-label={t("student.aiTeacher.title")} style={{ display: "grid", gap: "var(--space-3)" }}>
+      {state.status === "loading" ? <Skeleton lines={3} label={t("student.aiTeacher.loading")} /> : null}
+      {state.status === "failed" ? <ErrorBanner message={t(EXPLAIN_FAILURE_COPY[state.error])} /> : null}
+      {state.status === "shown" ? (
+        <Card>
+          <div style={{ display: "grid", gap: "var(--space-3)" }}>
+            <h2 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>
+              {t("student.aiTeacher.title")} · {t(styleLabel(state.view.style))}
+            </h2>
+            {state.view.utterances.map((u, i) => (
+              <div key={i} style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-2)", alignItems: "start" }}>
+                <p {...contentAttrs({ locale: u.locale, text: u.text })} style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>
+                  {u.text}
+                </p>
+                <ReadAloud label={t("student.aiTeacher.teacherAudio")} text={u.text} lang={speechLang(u.text, u.locale)} />
+              </div>
+            ))}
+            {state.view.escalate ? <p style={{ margin: 0 }}>{t("student.aiTeacher.mentorSoon")}</p> : null}
+          </div>
+        </Card>
+      ) : null}
+      {state.status === "shown" && state.view.generated ? (
+        // Visually and semantically separate from verified curriculum text: its own landmark, a
+        // dashed frame, a visible "written by a computer" label, and the notice before the text
+        // (also tied to it with aria-describedby). Generated text never renders without it.
+        <aside
+          aria-label={t("student.aiTeacher.generated.label")}
+          style={{
+            display: "grid",
+            gap: "var(--space-2)",
+            padding: "var(--space-4)",
+            border: "2px dashed var(--color-action-primary)",
+            borderRadius: "var(--radius-md)",
+          }}
+        >
+          <strong style={{ color: "var(--color-action-primary)" }}>
+            <span aria-hidden="true">✎ </span>
+            {t("student.aiTeacher.generated.label")}
+          </strong>
+          <p id={noticeId} style={{ margin: 0, fontSize: "var(--font-size-body-min)" }}>
+            {t(state.view.generated.notice)}
+          </p>
+          <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-2)", alignItems: "start" }}>
+            <p
+              {...contentAttrs({ locale: state.view.generated.locale, text: state.view.generated.text })}
+              aria-describedby={noticeId}
+              style={{ margin: 0, fontStyle: "italic" }}
+            >
+              {state.view.generated.text}
+            </p>
+            <ReadAloud
+              label={t("student.aiTeacher.generated.audio")}
+              text={state.view.generated.text}
+              lang={speechLang(state.view.generated.text, state.view.generated.locale)}
+            />
+          </div>
+          {state.view.generated.groundedOn.length > 0 ? (
+            <p style={{ margin: 0, fontSize: "var(--font-size-body-min)" }}>
+              {t("student.aiTeacher.generated.basedOn", {
+                list: formatList(state.view.generated.groundedOn.map((g) => t(g.key, g.params)), locale),
+              })}
+            </p>
+          ) : null}
+        </aside>
+      ) : null}
+      {state.status !== "loading" ? (
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
+          {canAskAgain ? <Button variant="ghost" label={t("student.aiTeacher.explainAgain")} onClick={onAgain} /> : null}
+          <Button variant="ghost" label={t("student.aiTeacher.close")} onClick={onClose} />
+        </div>
+      ) : null}
+    </section>
+  );
+}
+
 export default function SessionPage() {
-  const { studentRef: ref } = useLearner();
+  const { studentRef: ref, band } = useLearner();
   const { t, formatPercent } = useLocale();
   const started = useRef(false);
   const [state, dispatch] = useReducer(playerReducer, initialPlayerState);
   // How a session that ended without the normal celebration ended (null: still going, or finished).
   const [ending, setEnding] = useState<Exclude<SessionEnding, "finished"> | null>(null);
   const { phase, sessionId, objective, teach, step, itemIndex, hints, answer, mastery, summary } = state;
+  // "Explain it another way": its own reducer, so the lesson player is unchanged.
+  const [explain, dispatchExplain] = useReducer(explainReducer, initialExplainState);
+  const [capabilities, setCapabilities] = useState<CapabilitiesWire | null>(null);
+  const [online, setOnline] = useState(true);
+
+  useEffect(() => watchConnectivity(setOnline), []);
+  useEffect(() => {
+    if (!ref) return;
+    // Without an answer the server stays the gate; the feature is offered and :explain decides.
+    aiTeacherApi.capabilities(ref).then(setCapabilities).catch(() => setCapabilities(null));
+  }, [ref]);
+  // A new objective starts the styles over; leaving the lesson or the feedback closes the panel.
+  useEffect(() => {
+    dispatchExplain({ type: "reset" });
+  }, [objective]);
+  useEffect(() => {
+    if (phase !== "presenting" && phase !== "feedback") dispatchExplain({ type: "close" });
+  }, [phase]);
 
   // Only a network failure is "offline". A 401 that survives the session refresh has already cleared
   // the session (the route guard redirects to sign-in); calling it "offline" sent children to look
@@ -151,6 +279,52 @@ export default function SessionPage() {
     }
   };
 
+  const availability = explainAvailability(capabilities, online);
+
+  const requestExplain = async (context: ExplainContext) => {
+    if (!availability.available || !objective) return;
+    const style = styleToRequest(explain, availability.styles);
+    dispatchExplain({ type: "request", context });
+    try {
+      const wire = await aiTeacherApi.explain(sessionId, {
+        objective_code: objective,
+        ...(style ? { style } : {}),
+        grade_band: band,
+        // The lesson's content language, never the interface language.
+        ...(lessonLocale ? { locale: lessonLocale } : {}),
+      });
+      dispatchExplain({ type: "loaded", view: explanationView(wire) });
+    } catch (e) {
+      dispatchExplain({ type: "failed", error: classifyExplainError(e) });
+    }
+  };
+
+  const explainControls = (context: ExplainContext) => {
+    if (explain.status !== "closed" && explain.context === context) {
+      return (
+        <ExplainPanel
+          state={explain}
+          canAskAgain={availability.available}
+          onAgain={() => void requestExplain(context)}
+          onClose={() => dispatchExplain({ type: "close" })}
+        />
+      );
+    }
+    if (!availability.available) {
+      return availability.reason === "offline" ? <p style={{ margin: 0 }}>{t("student.aiTeacher.offline")}</p> : null;
+    }
+    return (
+      <div>
+        <Button
+          variant="ghost"
+          label={t("student.aiTeacher.explainAnother")}
+          icon={<span aria-hidden="true">💬</span>}
+          onClick={() => void requestExplain(context)}
+        />
+      </div>
+    );
+  };
+
   const onContinue = () => {
     const next = continueAfterFeedback(state);
     if (next === "plan") void plan(sessionId);
@@ -233,6 +407,7 @@ export default function SessionPage() {
                 <Button variant="brand" label={t("common.next")} onClick={() => dispatch({ type: "nextStep" })} />
               )}
             </div>
+            {explainControls("presenting")}
           </section>
         ) : null}
 
@@ -301,6 +476,8 @@ export default function SessionPage() {
             </div>
           </Card>
         ) : null}
+
+        {phase === "feedback" && answer && answer.outcome !== "correct" ? explainControls("feedback") : null}
 
         {phase === "complete" ? (
           <Card>

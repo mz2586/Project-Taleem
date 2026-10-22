@@ -16,6 +16,7 @@ import type {
   TodayView,
 } from "./types";
 import { ApiError } from "./types";
+import type { AdaptivePlanWire, CapabilitiesWire, ExplainStyle, ExplanationWire } from "./aiTeacher";
 import { currentAccessToken, withSession } from "../session/store";
 import type {
   BatchResult,
@@ -115,6 +116,21 @@ export const learningApi = {
   // Dashboard aggregate: next action (or "complete") + mastery summary + due reviews.
   today: (studentRef: string) =>
     authed(() => req<TodayView>(`/v1/learning/students/${studentRef}/today`)),
+};
+
+// AI Teacher (packages/contracts/ai-teacher.openapi.yaml). Templated, curriculum-grounded; any
+// generated rephrase arrives separately in `generation` and is labelled by lib/student/aiTeacher.ts.
+export const aiTeacherApi = {
+  explain: (
+    sessionId: string,
+    body: { objective_code: string; style?: ExplainStyle | null; grade_band?: string; locale?: string },
+  ) => authed(() => post<ExplanationWire>(`/v1/learning/sessions/${sessionId}:explain`, body)),
+
+  plan: (studentRef: string) =>
+    authed(() => req<AdaptivePlanWire>(`/v1/learning/students/${studentRef}/ai-teacher/plan`)),
+
+  capabilities: (studentRef: string) =>
+    authed(() => req<CapabilitiesWire>(`/v1/learning/students/${studentRef}/ai-teacher/capabilities`)),
 };
 
 // Offline lesson packages (Phase 6.2A). Content is C0 curriculum (no child data). The download

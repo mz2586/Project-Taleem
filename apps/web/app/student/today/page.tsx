@@ -14,7 +14,8 @@ import { Card, EmptyState, ProgressRing, Skeleton, StateBadge } from "@/componen
 import { ButtonLink } from "@/design-system/ButtonLink";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { useLearner } from "@/lib/session/useLearner";
-import { learningApi } from "@/lib/student/api";
+import { aiTeacherApi, learningApi } from "@/lib/student/api";
+import { whyNextModel, type WhyNextModel } from "@/lib/student/aiTeacher";
 import {
   classifyLoadError,
   emptyKnowledge,
@@ -25,6 +26,73 @@ import {
   type LoadFailure as Failure,
   type TodayModel,
 } from "@/lib/student/journey";
+
+/**
+ * "Why this next?" — the AI Teacher's plan in plain words (lib/student/aiTeacher.ts `whyNextModel`).
+ * Loaded only when opened: a native disclosure, so it is keyboard- and screen-reader-operable.
+ */
+function WhyNext({ studentRef }: { studentRef: string }) {
+  const { t, locale } = useLocale();
+  const [open, setOpen] = useState(false);
+  const [model, setModel] = useState<WhyNextModel | null>(null);
+  const [failed, setFailed] = useState(false);
+
+  useEffect(() => {
+    if (!open || model) return;
+    let live = true;
+    setFailed(false);
+    aiTeacherApi
+      .plan(studentRef)
+      .then((plan) => live && setModel(whyNextModel(plan)))
+      .catch(() => live && setFailed(true));
+    return () => {
+      live = false;
+    };
+  }, [open, model, studentRef]);
+
+  const spoken = model
+    ? [t("student.whyNext.chose", { choice: t(model.choice) }), ...model.reasons.map((r) => t(r.key, r.params)), t(model.certainty)].join(" ")
+    : "";
+
+  return (
+    <details onToggle={(e) => setOpen((e.currentTarget as HTMLDetailsElement).open)}>
+      <summary style={{ minHeight: "var(--size-touch-min)", display: "flex", alignItems: "center", cursor: "pointer" }}>
+        {t("student.whyNext.open")}
+      </summary>
+      <div aria-live="polite" style={{ display: "grid", gap: "var(--space-2)", paddingTop: "var(--space-2)" }}>
+        {open && !model && !failed ? <Skeleton lines={2} label={t("student.whyNext.loading")} /> : null}
+        {failed ? <p style={{ margin: 0 }}>{t("student.whyNext.error")}</p> : null}
+        {model ? (
+          <Card>
+            <div style={{ display: "grid", gap: "var(--space-2)" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-2)", alignItems: "start" }}>
+                <h3 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{t("student.whyNext.title")}</h3>
+                {/* Interface text, so it is read in the interface locale. */}
+                <ReadAloud label={t("student.whyNext.title")} text={spoken} lang={locale} />
+              </div>
+              <p style={{ margin: 0 }}>
+                {t("student.whyNext.chose", { choice: t(model.choice) })}
+                {model.objective ? (
+                  <>
+                    {" · "}
+                    <bdi dir="auto">{model.objective}</bdi>
+                  </>
+                ) : null}
+              </p>
+              <span>{t("student.whyNext.becauseLabel")}</span>
+              <ul style={{ margin: 0, paddingInlineStart: "var(--space-4)" }}>
+                {model.reasons.map((r) => (
+                  <li key={r.key}>{t(r.key, r.params)}</li>
+                ))}
+              </ul>
+              <p style={{ margin: 0, fontSize: "var(--font-size-body-min)" }}>{t(model.certainty)}</p>
+            </div>
+          </Card>
+        ) : null}
+      </div>
+    </details>
+  );
+}
 
 export default function TodayPage() {
   const { studentRef: ref, band, displayName } = useLearner();
@@ -100,6 +168,8 @@ export default function TodayPage() {
                 </div>
               </Card>
             ) : null}
+
+            {model.canStart && ref ? <WhyNext studentRef={ref} /> : null}
 
             {model.kind === "learning" ? (
               <>
