@@ -1,7 +1,7 @@
 # Project Taleem — Master Product Scope & Roadmap
 
 **Status:** Living document — the single authoritative scope-status and execution reference ·
-**Last updated:** 2026-10-22 · **Repository HEAD at last update:** `1db49a0`
+**Last updated:** 2026-10-22 · **Repository HEAD at last update:** `92423df`
 
 **Binding product definition:** [`docs/GLOBAL_PRODUCT_SCOPE.md`](docs/GLOBAL_PRODUCT_SCOPE.md)
 (adopted and revised 2026-10-22). That document says *what* the product must be — a global platform
@@ -846,33 +846,33 @@ Status vocabulary (adopted 2026-10-22, replacing the earlier colour key for this
 | Area | Scope ref | Release | Status | Evidence or reason | Remaining work |
 | --- | --- | --- | --- | --- | --- |
 | Platform core (hexagonal domain, config, logging, metrics, errors, flags) | G | R1 | complete-and-verified | `platform/*`, `test_platform.py`, strict `mypy` on 136 files | — |
-| Persistence (schemas, reversible migrations, ORM parity, optimistic locking) | E, G | R1 | complete-and-verified | `alembic/versions/0001`–`0005`, `test_schema_parity.py`, PG 16 up/down in Codespace | Retention/erasure across schemas (Phase G) |
-| Authentication — crypto (EdDSA, rotating JWKS, iss/aud, alg-confusion) | F, G | R1 | complete-and-verified | `auth/*`, `test_auth_asymmetric.py` | KMS-held keys — **blocked** on FD-14 |
-| Authorization (deny-by-default PDP, IDOR guards, no self-approval) | F | R1 | complete-and-verified | `auth/pdp.py`, `test_attack_hardening.py` | Teacher, mentor, admin roles |
-| Guardian identity, consent, child sign-in, refresh/revocation | F | R1 | complete-and-verified | `contexts/identity/*`, `identity.openapi.yaml`, web `lib/session/*` + 24 store tests, `noDevAuth.test.ts` | Guardian email verification and recovery (Phase F) |
-| Student web journey — sign-in → dashboard → lesson → progress | A | R1 | implemented-but-unverified | 17 routes build; lesson player reducer tested (`lessonPlayer.test.ts`) | Recorded end-to-end run against a live API; no published content to run it on |
+| Persistence (schemas, reversible migrations, ORM parity, optimistic locking) | E, G | R1 | complete-and-verified | `alembic/versions/0001`–`0006`, `test_schema_parity.py`; up/down/up on PG 16 in Codespace and CI | Retention/erasure across schemas (Phase G) |
+| Authentication — crypto (EdDSA, rotating JWKS, iss/aud, alg-confusion, mandatory `exp`) | F, G | R1 | complete-and-verified | `auth/*`, `test_auth_asymmetric.py`; `exp` made mandatory after the audit found expiry-less tokens accepted (`db81df0`); `Signer` port with byte-identical env signer and inert `KmsSigner` (`92423df`, `test_signer_port.py`) | KMS provider wiring — **blocked** on FD-14 ([brief](docs/decisions/FD-14-signing-key-storage.md)) |
+| Authorization (deny-by-default PDP, IDOR guards, no self-approval) | F | R1 | complete-and-verified | `auth/pdp.py`, `test_attack_hardening.py`, `test_access_boundaries.py` (cross-guardian, learner→guardian routes, expired tokens) | Teacher, mentor, admin roles |
+| Guardian identity, consent, child sign-in, refresh/revocation, shared rate limiting | F | R1 | complete-and-verified | `contexts/identity/*`; shared PostgreSQL sliding-window limiter (alembic `0006`, multi-engine race test); e2e journey steps register→consent→sign-in→rotate→withdraw→denied | Per-request consent gate on learner routes (in progress — e2e GAP 2); guardian email verification/recovery (Phase F) |
+| Student web journey — sign-in → dashboard → lesson → progress | A | R1 | implemented-but-unverified | `make e2e` drives the real API end to end on PG (57 PASS steps, synthetic fixture lesson); web journey states (`lib/student/journey.ts`, 23 tests); i18n, a11y pass | Browser-level e2e; real published content |
 | Lesson player (paced steps, authored hints, evidence of help used) | A, B | R1 | complete-and-verified | `lib/student/lessonPlayer.ts`, 18 tests; `:teach` `hint_count` in `test_learning_api.py` | Visual/interactive blocks (Phase E) |
-| Curriculum domain — curriculum-independent model and packs | D | R1 | in-progress | Hierarchy is generic, **but** the PK-NCP grade/subject roster, the closed `ur`/`en` locale set, and Urdu-only publish gates are hard-coded (§20.2) | Curriculum-pack configuration — **the current task (§24)** |
-| Curriculum Studio (authoring, 9 gates, 5-stage review, publish, versioning, provenance) | D | R1 | complete-and-verified | `contexts/curriculum_studio/*`, `test_studio_*.py` | Full authoring UI, preview, media upload, bulk import |
-| Curriculum content — published lessons | A, D | R1 | not-started | **Zero published lessons in any database**; Grade 4 design documents exist under `curriculum/grade-4/` | Ingest, review, publish Grade 4 (Phase B); SLO text is **blocked** on the NCC/MoFEPT MoU |
+| Curriculum domain — curriculum-independent model and packs | D | R1 | complete-and-verified | `curriculum_studio/domain/packs.py`, `packs/pk-ncp.json`; gates read rules from the lesson's pack; PK-NCP equivalence + synthetic second pack tests (`test_curriculum_packs*.py`); `GET /v1/studio/curriculum-packs` | Hierarchy persistence port and locale-generic draft API (in progress) |
+| Curriculum Studio (authoring, 9 gates, 5-stage review, publish, versioning, provenance) | D | R1 | complete-and-verified | `contexts/curriculum_studio/*`, `test_studio_*.py`; readability no longer passes empty text, audio refs must resolve to clean registered assets (`814b9da`) | Full authoring UI, preview, media upload, bulk import |
+| Curriculum content — published lessons | A, D | R1 | in-progress | 139 Grade 4 objectives ingested as **drafts** (`tools/curriculum_ingest.py`, `curriculum/grade-4/spine.json`); authored exemplar content imported verbatim into 36 drafts, tagged provisional-pending-review; **0 published** — see [`INGESTION_REPORT.md`](curriculum/grade-4/INGESTION_REPORT.md) | Author remaining content; recorded audio; 5-stage **human** review; SLO text **blocked** on NCC/MoFEPT MoU |
 | Assessments (blueprints, scoring, evidence, spaced review) | A, C | R1 | complete-and-verified | `test_sync_evidence.py`, `test_learning_domain.py` | Summative exams, free-text grading, report cards |
 | Learning intelligence (BKT mastery, forgetting, decision graph, misconceptions) | C | R2 | complete-and-verified | `contexts/learning/domain/*`, `test_learning_domain.py` | Diagnostic placement; teacher-visible rationale UI; confidence shown to teachers |
-| Offline persistence and sync (IndexedDB, signed packages, idempotent sync, chaos, crash recovery) | E | R1 | implemented-but-unverified | `lib/offline/*` with ~90 vitest tests, `test_sync_*.py` | On-device validation; saved / synced / confirmed distinction surfaced in every view |
-| Guardian Portal (dashboard, progress, timeline, consent, PIN reset, audit) | F | R1 | implemented-but-unverified | `contexts/guardian/*`, `/guardian/*` routes | Journey tests per control; Urdu limited-literacy usability check |
+| Offline persistence and sync (IndexedDB, signed packages, idempotent sync, consent-gated sync, crash recovery) | E | R1 | implemented-but-unverified | Guarantee→test map in `OFFLINE_TEST_PLAN.md` §7; `syncGuarantees.test.ts` (401/403/idempotency/partial/durable), `test_sync_consent.py`, `test_sync_idempotency.py` (`a815497`) | On-device validation; status UI (in progress); durable progress/preference deltas server-side |
+| Guardian Portal (dashboard, progress, timeline, consent, PIN reset, audit) | F | R1 | implemented-but-unverified | Children resolved from identity enrolments + live consent (`fdd181f`, e2e step PASS); every identity/guardian operation reachable from the UI with per-scope consent fixed to actually withdraw (`5530b20`, 99 guardian tests) | Rename/suspend learner and stable error codes (in progress); limited-literacy usability check with real guardians |
 | AI tutor — templated, curriculum-grounded engine | B | R2 | complete-and-verified | `domain/ai_teacher.py`, grounding tests | — (deliberately no LLM) |
-| AI tutor — generative provider behind `LLMGateway` | B | R2 | blocked | FD-03 (inference residency, zero-retention) is undecided; no paid provider may be connected without it | Stub-provider wiring, safety gate, golden-set evaluation can proceed once Phase B content exists |
-| Localization foundation (catalogs, RTL, numerals) | D, G | R1 | in-progress | `platform/i18n.py`, RTL shell; locale is a closed enum and defaults to `ur` in core | Open locale registry; per-pack locale policy; web string catalog |
-| Accessibility (WCAG 2.2 AA) | A, G | R3 | implemented-but-unverified | ARIA, RTL, visible-label `ReadAloud` | Automated audit; assistive-technology session (external) |
-| Audio and voice | B, H | R4 (voice) / R1 (read-aloud) | not-started | Zero audio assets | Platform TTS behind `ReadAloud` (Phase E) |
+| AI tutor — generative tier behind `LLMGateway` | B | R2 | implemented-but-unverified | Flag (off) → kill switch → escalation → `ai_teaching` consent → per-learner quota → safety gate; stub + inert adapters only; golden set 32/32 unsafe refused, 8/8 safe accepted against **stub** outputs (`3bcb6dc`, `AI_TEACHER_EVALUATION.md` §8) | Real provider — **blocked** on FD-03 ([brief](docs/decisions/FD-03-ai-provider-residency.md)); semantic contradiction check; durable ledger (in progress) |
+| Localization foundation (catalogs, RTL/LTR, numerals, independent UI/instruction/region) | D, G | R1 | complete-and-verified | `apps/web/lib/i18n/*` typed ur/en catalogs (29 tests), content `lang`/`dir` independent of UI locale; open BCP-47 `Locale` + pack instructional locales | Validation of the English UI with real users; additional locales are R3 |
+| Accessibility (WCAG 2.2 AA) | A, G | R3 | implemented-but-unverified | ESLint `jsx-a11y/strict` gates the build (`347eb8e`); focus ring, skip link, one h1, live regions; accessible consent form | Automated axe scan (in progress); assistive-technology audit — external (EV-05) |
+| Audio and voice | B, H | R4 (voice) / R1 (read-aloud) | in-progress | Device read-aloud voiced by the **content's** locale, never cross-language, honest unavailability (`3778a3f`, 29 tests) | Recorded audio assets (content); real-device Urdu voice check; voice input R4 |
 | Teacher experience (planning, assignments, class insights, AI oversight) | F | R2 | not-started | PDP role names only | All of it |
 | Organization / school tenancy with isolation | G | R3 | not-started | No tenant concept in schema | Tenant model, isolation tests |
 | Notifications delivery | F | R2 | in-progress | In-app read state only | Channels — SMS/email **blocked** on a cost decision |
-| Security (headers, CORS, validation, lockout, uniform errors, audit) | G | R1 | complete-and-verified | 5 dedicated test modules | External pentest — **blocked** (commission); distributed rate limiting |
+| Security (headers, CORS, validation, lockout, uniform errors, audit, dependency scanning) | G | R1 | in-progress | 5 dedicated test modules + boundary audit; pip-audit clean; `security.yml` + dependabot | **npm audit: critical advisories in `next@14.2.35`** — upgrade in progress; external pentest — **blocked** (commission, EV-04) |
 | Privacy (minimisation, pseudonymity, no PII in tokens/logs) | G | R1 | in-progress | Schema and code | Retention, export, erasure; DPIA and notice text — **blocked** on M-Gov |
-| Child safety (consent gate, kill switch) | B, F, G | R1 | in-progress | `contexts/identity/*`, `kill_switch.py` | Distress detection, triage queue, abuse reporting — sign-off **blocked** on M-Gov/M-Safe |
-| Operations (health, metrics, kill switch, runbooks, simulator, CI) | G | R1 | complete-and-verified | `.github/workflows/`, `tools/pilot_simulator.py` | Alerting, backup/restore rehearsal |
+| Child safety (consent gates, kill switch) | B, F, G | R1 | in-progress | Sign-in, refresh, and **sync** consent-gated against live identity state (`a815497`); AI path consent-gated | Per-request gate on all learner routes (in progress); distress detection, triage, abuse reporting; sign-off **blocked** on M-Gov/M-Safe |
+| Operations (health, metrics, kill switch, runbooks, simulator, CI, e2e, backup) | G | R1 | complete-and-verified | CI `e2e-journey` job; `make backup-drill` PASS (restore 0.66 s on dev Codespace data, [`BACKUP_RESTORE_RUNBOOK.md`](BACKUP_RESTORE_RUNBOOK.md)) | Alerting to a staffed destination; drill on production-sized data |
 | Production deployment | G | R1 | implemented-but-unverified | `vercel.json`, `api/index.py`, build-step migrations | Provision and verify a live environment with recorded health evidence |
-| Per-learner AI and operating cost tracking, quotas | B, G | R2 | in-progress | Agent workstream E (ledger + quota, in-memory) | Durable ledger; funding/quota policy is a ⚫ business decision |
+| Per-learner AI and operating cost tracking, quotas | B, G | R2 | in-progress | `InMemoryCostLedger`, `LearnerQuota` with fallback to the authored engine (`3bcb6dc`) | Durable ledger (in progress); quota values — ⚫ FD-07 |
 | Taleem School (classes, teacher-led assignments, calendars, partner accreditation) | H | R3–R4 | not-started | Product definition only | Pilot-minimum class/assignment model; accreditation is ⚫ partner-dependent |
 | Future expansion (school admin, hubs, vocational, integrations, scholarships) | H | R4 | not-started | Tracked only | Independently scoped milestones |
 
@@ -1073,26 +1073,29 @@ None of the following is resolved. Each is listed with what would resolve it.
 | 1 | **M-Gov** — DPIA, consent model approval, mandatory-reporting policy, external safety review, residency | ⚫ Governance | DPO, legal, and founder sign-off |
 | 2 | **M-Safe** — safeguarding policy approval and a passed live drill | ⚫ Governance | Safeguarding lead; staffed on-call |
 | 3 | **Pilot 1 with real children is NO-GO** | ⚫ Governance | Blockers 1 and 2 |
-| 4 | **No published curriculum content** | 🔴 Engineering + content | Phase B |
+| 4 | **No published curriculum content** | 🟡 Engineering done, ⚫ content + human review | 139 drafts ingested, 36 with provisional authored content; publication needs authors, recorded audio, and the 5-stage human review |
 | 5 | **Zero audio assets for an audio-first product** | 🔴 Content | Phase E |
-| 6 | **AI Teacher has no LLM; the port is unwired** | 🟡 Engineering, ⚫ blocked | Phase D, gated on FD-03 |
-| 7 | **FD-03** — LLM inference residency and zero-retention | ⚫ Founder + legal | Founder decision |
-| 8 | **FD-14** — KMS/HSM topology for signing keys | ⚫ Founder + security | Founder decision |
+| 6 | **AI Teacher has no real LLM** | ⚫ Blocked on FD-03 | Port wired, gated, evaluated against stub (`3bcb6dc`); provider stays inert until the six FD-03 approvals |
+| 7 | **FD-03** — LLM inference residency and zero-retention | ⚫ Founder + legal | Founder decision; [brief](docs/decisions/FD-03-ai-provider-residency.md) |
+| 8 | **FD-14** — KMS/HSM topology for signing keys | ⚫ Founder + security | Founder decision; [brief](docs/decisions/FD-14-signing-key-storage.md); signer port ready (`92423df`) |
 | 9 | **FD-02** — cloud provider and data-residency posture | ⚫ Founder + legal | Founder decision |
 | 10 | ~~Frontend still uses development auth stubs~~ | Resolved | Commit `d8609c0` |
 | 11 | **No verified live environment** | 🔴 Engineering | Phase H; needs a hosting decision |
 | 12 | **No external penetration test** | 🔴 External | Commission a test |
 | 13 | **No accessibility audit with assistive technology** | 🔴 External | Commission an audit |
 | 14 | **No cross-browser, load, soak, or spike testing** | 🔴 Engineering | Phase H |
-| 15 | **No backup, restore, or alerting** | 🔴 Engineering | Phase H |
-| 16 | **Production secrets are environment variables only** | 🔴 Engineering | Phase F, gated on FD-14 |
+| 15 | **No alerting; backup/restore rehearsed only on dev data** | 🟡 Engineering | Drill script + runbook done; alerting and a production-sized drill remain |
+| 16 | **Production signing keys are environment variables only** | ⚫ Blocked on FD-14 | Signer port in place; production also now refuses the well-known dev JWT seed |
 | 17 | **Repository licence undecided** | ⚫ Founding team | [`LICENSE`](LICENSE) records this as open |
 | 18 | **NCC/MoFEPT MoU for authoritative SLO text** | ⚫ Legal / partnership | Partnership decision |
 | 19 | **Privacy notice text for the enforced policy version does not exist** | 🔴 Legal + engineering | M-Gov |
 | 20 | **No data retention, export, or erasure workflow** | 🔴 Engineering + legal | Phase G |
 | 21 | **Notifications have no delivery channel** | 🔴 Engineering | Phase C or later; SMS needs a cost decision |
-| 22 | **Rate limiting is process-local** | 🟡 Engineering | Phase F |
-| 23 | **Core curriculum model hard-codes the Pakistan roster and Urdu-only gates** | 🔴 Engineering | Curriculum packs (§24) |
+| 22 | ~~Rate limiting is process-local~~ | Resolved | Shared PostgreSQL limiter, commit `db81df0` |
+| 23 | ~~Core curriculum model hard-codes the Pakistan roster and Urdu-only gates~~ | Resolved | Curriculum packs, commit `6cba77e` |
+| 24 | **`next@14.2.35` has critical security advisories** (npm audit) | 🔴 Engineering | Next.js 15.5.x upgrade — in progress |
+| 25 | **A learner's unexpired access token survives consent withdrawal for up to 10 minutes** | 🔴 Engineering (child safety) | Per-request consent gate — in progress (e2e GAP 2) |
+| 26 | **Taleem School has no accreditation partner** | ⚫ Owner / partnership | [`docs/TALEEM_SCHOOL_PARTNER_REQUIREMENTS.md`](docs/TALEEM_SCHOOL_PARTNER_REQUIREMENTS.md); does not block Taleem Learn |
 
 ---
 
@@ -1100,30 +1103,29 @@ None of the following is resolved. Each is listed with what would resolve it.
 
 ### Exact current development position
 
-**Last completed units.** Phase A sign-in journey (`d8609c0`) and the paced lesson player with the
-authored hint ladder (`1db49a0`): `make gates` green in Codespace — backend 368 passed, web 139
-passed, 9/9 contracts, `next build` 17/17 routes.
+**Last integration cycle (2026-10-22).** Eleven agent commits integrated and pushed
+(`a815497`…`92423df`) on top of `db81df0`, `039a7c9`, `45ae1e8`, `347eb8e`. Evidence at `92423df`,
+Codespace: `make gates` green — backend **670 passed**, coverage 96.66%, strict mypy on 153 files;
+web **345 passed**, ESLint (jsx-a11y strict) clean, `next build` 17/17; 9/9 contracts; markdownlint
+0 errors. `make e2e` against a live uvicorn + PostgreSQL: both branches PASS (57 PASS steps), one
+remaining GAP (blocker #25). `make backup-drill` PASS.
 
-**Current active milestone.** **R1 — curriculum packs**, the prerequisite of Phase B.
+**Current active milestone.** **R1 — Reliable learning platform.** Engineering-only work in flight:
 
-**Immediate next implementation task.** Replace the hard-coded PK-NCP roster and the Urdu-only
-publish gates with a **curriculum pack**: a versioned, data-defined description of an education
-system — country, grade structure, subject roster per grade, language of instruction, required
-authoring locales, locales that require recorded audio, and readability limits. PK-NCP becomes the
-first pack, with behaviour byte-identical to today for lessons authored against it; the gates read
-their rules from the lesson's pack instead of from constants.
+| Workstream | Task | Closes |
+| --- | --- | --- |
+| Child safety | Per-request live consent gate on every learner route | Blocker #25, e2e GAP 2 |
+| Security | Next.js 15.5.x upgrade | Blocker #24 |
+| Offline UX | Saved / sent / server-confirmed / held states in the student UI | §E "UI distinguishes local saves" |
+| Identity | Stable error codes; learner rename and suspend/reinstate | Phase C acceptance |
+| AI Teacher | Durable per-learner usage ledger (alembic `0007`); localized worked steps | R2 cost tracking |
+| Curriculum | Hierarchy persistence port; locale-generic draft API | Phase B |
+| Release eng. | Automated axe accessibility scan; reproducible release-evidence report; strict e2e in CI | Phase H inputs for EV-04/EV-05 |
 
-**Why this task is next.**
-
-1. **Phase B builds on it.** Ingesting the Grade 4 content into the current model would bake
-   Pakistan-only rules into the first real published data, and every later market would pay to
-   migrate it.
-2. **It is the binding scope's first core-logic violation** (§20.2), and it is engineering-only:
-   nothing about it is blocked.
-3. **It preserves safety.** No gate is removed or weakened; each becomes a pack policy whose PK-NCP
-   value equals today's rule, proven by the existing Studio tests passing unchanged.
-
-**Then:** Phase B ingestion of `curriculum/grade-4/` into Studio drafts against the PK-NCP pack.
+**Hard R1 gates that engineering cannot close:** published, human-reviewed content with recorded
+audio (#4, #5); M-Gov and M-Safe (#1–#3); a live production environment (#11, hosting account
+owner); external pentest and accessibility audit (#12, #13); FD-14 for production keys (#16).
+Optional or later: generative AI (R2, FD-03), Taleem School (R3–R4, #26), voice input (R4).
 
 ## Related Documents
 
@@ -1140,4 +1142,5 @@ their rules from the lesson's pack instead of from constants.
 | Date | Change | Author |
 | --- | --- | --- |
 | 2026-09-06 | Initial master scope and roadmap, authored against repository HEAD `23747f9`. | Engineering |
+| 2026-10-22 | Integration cycle 1: matrix and blockers updated with evidence for 15 agent commits; blockers #22 and #23 resolved; #24–#26 added. | Engineering |
 | 2026-10-22 | Adopted the global product scope (`docs/GLOBAL_PRODUCT_SCOPE.md`); five-status matrix; mapping to R1–R4; recorded Phase A progress (`d8609c0`, `1db49a0`); §20.2 global-readiness gaps; next task set to curriculum packs. | Engineering |
