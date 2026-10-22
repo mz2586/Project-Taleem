@@ -21,6 +21,7 @@ import { pinnedKeyResolver } from "./signature";
 import type { KeyResolver } from "./signature";
 import { SyncClient } from "./syncClient";
 import { SyncQueue } from "./syncQueue";
+import { AckLedger } from "./syncStatus";
 import type { PurgeResult } from "./purge";
 import type { BatchResult, DrainSummary, OfflinePackage, SyncDelta } from "./types";
 
@@ -29,8 +30,17 @@ export { STORES } from "./kv";
 export { SHELL_CACHE, APP_SHELL_VERSION, packageIsStale, isPackageCurrent } from "./cacheVersion";
 export { fitsInQuota, QuotaExceededError, IntegrityError, SignatureError } from "./packages";
 export { watchConnectivity, currentlyOnline, makeProbe } from "./connectivity";
-export { SyncQueue } from "./syncQueue";
-export { SyncClient, backoffMs } from "./syncClient";
+export { SyncQueue, ownerOf } from "./syncQueue";
+export { SyncClient, backoffMs, classifyFailure, LEARNER_LEVEL_REFUSALS } from "./syncClient";
+export {
+  AckLedger,
+  ackedItemStatus,
+  isDurableAck,
+  itemStatus,
+  queuedItemStatus,
+  summarizeSyncStatus,
+} from "./syncStatus";
+export type { ItemBlock, ItemStatus, ItemSyncState, SyncStatusSummary } from "./syncStatus";
 export { SyncDiagnosticsStore } from "./diagnostics";
 export { registerBackgroundSync, startAutoDrain, SYNC_TAG } from "./backgroundSync";
 export { reconcileAndResume } from "./reconcile";
@@ -43,6 +53,7 @@ export interface OfflineSync {
   queue: SyncQueue;
   client: SyncClient;
   diagnostics: SyncDiagnosticsStore;
+  acks: AckLedger;
   drain: () => Promise<DrainSummary>;
   reconcile: (studentRef: string) => Promise<{ enqueued: number; drain: DrainSummary }>;
   startAutoDrain: () => () => void;
@@ -72,6 +83,11 @@ export interface CreateClientOptions {
   pinnedKeys?: Record<string, string>;
   // 6.2C-1: reject an unsigned/unverifiable package rather than installing it.
   requireSignature?: boolean;
+  // Force one session refresh after a 401 during a drain (the session store's single-flight
+  // refresh). Resolves true when a usable session exists afterwards.
+  refreshSession?: () => Promise<boolean>;
+  // The signed-in learner whose token carries the batch (null = none; nothing is sent).
+  currentLearner?: () => string | null;
 }
 
 // Build an offline client over the given (or default IndexedDB) store.
@@ -104,13 +120,21 @@ export function createOfflineClient(opts: CreateClientOptions): OfflineClient {
   const purge = new PurgeService(store, diagnostics);
 
   const queue = new SyncQueue(store, now);
+  const acks = new AckLedger(store);
   const client = new SyncClient({
     queue,
     store,
     diagnostics,
+    acks,
+    now,
     postBatch: opts.postBatch,
+    ...(opts.refreshSession ? { refreshSession: opts.refreshSession } : {}),
+    ...(opts.currentLearner ? { currentLearner: opts.currentLearner } : {}),
     onPurge: async (refs) => {
-      for (const ref of refs) await purge.purgeStudent(ref);
+      for (const ref of refs) {
+        await purge.purgeStudent(ref);
+        await acks.forget(ref);
+      }
     },
   });
   const drain = () => client.drain();
@@ -119,6 +143,7 @@ export function createOfflineClient(opts: CreateClientOptions): OfflineClient {
     queue,
     client,
     diagnostics,
+    acks,
     drain,
     reconcile: (studentRef: string) =>
       reconcileAndResume(studentRef, { progress, checkpoints, queue, drain }),

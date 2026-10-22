@@ -4,6 +4,10 @@
 // reload/crash. Deltas are ordered by (clientSeq, clientEventId) for deterministic draining; each
 // carries a client-generated `clientEventId` (uuid7) that is the server idempotency key. Attempts
 // additionally carry a client `evidence_id` — the DURABLE idempotency key on the server.
+//
+// Nothing leaves this store except on a server acknowledgement (applied / duplicate / ignored).
+// Every other outcome keeps the delta: transient failures are retried, permission refusals are
+// HELD, and server-rejected deltas are dead-lettered WITH their reason — never silently deleted.
 
 import { uuid7 } from "./ids";
 import type { KVStore } from "./kv";
@@ -60,20 +64,38 @@ export class SyncQueue {
     return this.store.getAll<QueuedDelta>(STORES.evidenceQueue);
   }
 
-  // Deltas eligible to send (pending or previously-failed), ordered deterministically.
-  async pending(limit?: number): Promise<QueuedDelta[]> {
+  async get(id: string): Promise<QueuedDelta | undefined> {
+    return this.store.get<QueuedDelta>(STORES.evidenceQueue, id);
+  }
+
+  // Deltas eligible to send (pending, previously-failed, or a "sending" marker stranded by a
+  // crash), ordered deterministically. `owner` restricts to one learner's deltas: on a shared
+  // device only the signed-in learner's work may be sent under their token. Held and dead deltas
+  // are never eligible, so neither can cause a retry loop.
+  async pending(limit?: number, owner?: string): Promise<QueuedDelta[]> {
     const ready = (await this.all())
-      .filter((d) => d.syncState === "pending" || d.syncState === "failed")
+      .filter(
+        (d) => d.syncState === "pending" || d.syncState === "failed" || d.syncState === "sending",
+      )
+      .filter((d) => {
+        if (owner === undefined) return true;
+        const o = ownerOf(d);
+        return o === owner || o === null; // device-level deltas travel with any learner's session
+      })
       .sort((a, b) => a.clientSeq - b.clientSeq || (a.clientEventId < b.clientEventId ? -1 : 1));
     return limit !== undefined ? ready.slice(0, limit) : ready;
   }
 
-  async pendingCount(): Promise<number> {
-    return (await this.pending()).length;
+  async pendingCount(owner?: string): Promise<number> {
+    return (await this.pending(undefined, owner)).length;
   }
 
   async deadLetters(): Promise<QueuedDelta[]> {
     return (await this.all()).filter((d) => d.syncState === "dead");
+  }
+
+  async held(): Promise<QueuedDelta[]> {
+    return (await this.all()).filter((d) => d.syncState === "held");
   }
 
   async markSending(ids: string[]): Promise<void> {
@@ -88,7 +110,8 @@ export class SyncQueue {
     await this.store.delete(STORES.evidenceQueue, id);
   }
 
-  // A transient failure: increment attempts, keep for retry, dead-letter past the cap.
+  // A failure attributable to THIS delta's content (e.g. a 422 isolated to it): attempts++, keep
+  // for retry, dead-letter past the cap. Not used for network/auth/permission failures.
   async markFailed(id: string, error: string): Promise<QueuedDelta | undefined> {
     const d = await this.store.get<QueuedDelta>(STORES.evidenceQueue, id);
     if (!d) return undefined;
@@ -103,7 +126,51 @@ export class SyncQueue {
     return next;
   }
 
+  // A transient failure (offline, 5xx, a server that dropped an item): attempts++ for diagnostics,
+  // but NEVER dead-lettered — a week without signal must not turn a child's work into a dead letter.
+  async markRetry(id: string, error: string): Promise<void> {
+    const d = await this.store.get<QueuedDelta>(STORES.evidenceQueue, id);
+    if (!d) return;
+    await this.store.put<QueuedDelta>(STORES.evidenceQueue, id, {
+      ...d,
+      attempts: d.attempts + 1,
+      lastError: error,
+      syncState: "failed",
+    });
+  }
+
+  // A permission refusal (403): retain the delta intact and stop offering it to the drain, so a
+  // withdrawn consent never causes a hot retry loop and never deletes the child's work.
+  async hold(ids: string[], reason: string): Promise<void> {
+    for (const id of ids) {
+      const d = await this.store.get<QueuedDelta>(STORES.evidenceQueue, id);
+      if (d && d.syncState !== "dead") {
+        await this.store.put<QueuedDelta>(STORES.evidenceQueue, id, {
+          ...d,
+          syncState: "held",
+          heldReason: reason,
+          lastError: reason,
+        });
+      }
+    }
+  }
+
+  // Make held deltas eligible again (a new session; consent re-granted), optionally for one
+  // learner. Returns how many were released. Called on a session change, so never a hot loop.
+  async releaseHeld(owner?: string): Promise<number> {
+    let released = 0;
+    for (const d of await this.held()) {
+      if (owner !== undefined && ownerOf(d) !== owner) continue;
+      const next: QueuedDelta = { ...d, syncState: "pending" };
+      delete next.heldReason;
+      await this.store.put<QueuedDelta>(STORES.evidenceQueue, d.clientEventId, next);
+      released++;
+    }
+    return released;
+  }
+
   // A non-retryable rejection (conflict): dead-letter immediately so it never blocks the queue.
+  // The record — and its reason — stays on the device for support; it is never deleted here.
   async deadLetter(id: string, error: string): Promise<void> {
     const d = await this.store.get<QueuedDelta>(STORES.evidenceQueue, id);
     if (d) {
@@ -114,4 +181,13 @@ export class SyncQueue {
       });
     }
   }
+}
+
+// The learner a delta belongs to: the attempt payload's student_ref, else the `student:<ref>|…`
+// entity key. Null when neither is present (a device-level delta).
+export function ownerOf(d: Pick<SyncDelta, "payload" | "entityKey">): string | null {
+  const ref = d.payload["student_ref"];
+  if (typeof ref === "string" && ref) return ref;
+  const m = /^student:([^|]+)(\||$)/.exec(d.entityKey);
+  return m?.[1] ?? null;
 }

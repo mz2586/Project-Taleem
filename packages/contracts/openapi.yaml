@@ -109,7 +109,11 @@ paths:
         A summative item is never auto-graded by sync (mentor-mediated). See AttemptPayload.
         Authenticated (bearer JWT) and IDOR-guarded: an attempt.submitted delta's student_ref must
         match the token subject (a privileged operator may sync any) — a learner cannot forge
-        assessment evidence for another child.
+        assessment evidence for another child. Consent-gated: every learner the batch writes for
+        (each attempt's student_ref, and the caller when it is a learner) is re-checked against
+        live identity state on every batch; a learner without current learning_data consent
+        (CONSENT_REQUIRED) or whose account is not active (LEARNER_INACTIVE) rejects the WHOLE
+        batch with 403 and nothing is applied, so the client can hold and later re-send it.
       security:
         - bearerAuth: []
       requestBody:
@@ -131,7 +135,9 @@ paths:
             application/problem+json:
               schema: { $ref: "#/components/schemas/Problem" }
         "403":
-          description: Forbidden (attempt targets another learner)
+          description: >-
+            Forbidden — attempt targets another learner (FORBIDDEN), or the learner lacks live
+            consent (CONSENT_REQUIRED) or is not active (LEARNER_INACTIVE). Nothing is applied.
           content:
             application/problem+json:
               schema: { $ref: "#/components/schemas/Problem" }

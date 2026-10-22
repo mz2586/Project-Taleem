@@ -1,21 +1,28 @@
 // useSyncStatus (Phase 6.2B) — live sync status for the UI, and the auto-drain wiring.
-// Registers Background Sync, drains automatically on reconnect, and surfaces the pending count +
-// last-sync time. Client-only (runs in an effect). No offline auth, no consent-gated telemetry.
+// Registers Background Sync, drains automatically on reconnect, and surfaces the per-item status
+// model (saved on this device / synchronized / server-confirmed, plus what is blocked and why).
+// Client-only (runs in an effect). The model itself is the pure `summarizeSyncStatus`; this hook
+// only gathers its inputs.
 
 import { useEffect, useState } from "react";
 
-import { watchConnectivity } from "../offline";
-import { getOfflineClient } from "./offlineClient";
+import { summarizeSyncStatus, watchConnectivity } from "../offline";
+import type { SyncStatusSummary } from "../offline";
+import { sessionStore } from "../session/store";
+import { getOfflineClient, learnerOf } from "./offlineClient";
 
-export interface SyncStatusValue {
+export interface SyncStatusValue extends SyncStatusSummary {
   online: boolean;
+  // Items still waiting to go (kept for existing callers; equals `waiting`).
   pending: number;
   lastSyncAt: number | null;
 }
 
+const EMPTY: SyncStatusSummary = summarizeSyncStatus({ queue: [], acks: [] });
+
 export function useSyncStatus(pollMs = 4000): SyncStatusValue {
   const [online, setOnline] = useState(true);
-  const [pending, setPending] = useState(0);
+  const [summary, setSummary] = useState<SyncStatusSummary>(EMPTY);
   const [lastSyncAt, setLastSyncAt] = useState<number | null>(null);
 
   useEffect(() => {
@@ -23,12 +30,22 @@ export function useSyncStatus(pollMs = 4000): SyncStatusValue {
     let alive = true;
 
     const refresh = async () => {
-      const count = await client.sync.queue.pendingCount();
-      const diag = await client.sync.diagnostics.get();
-      if (alive) {
-        setPending(count);
-        setLastSyncAt(diag.lastSyncAt);
-      }
+      const [queue, acks, lastBlock, diag] = await Promise.all([
+        client.sync.queue.all(),
+        client.sync.acks.all(),
+        client.sync.acks.lastBlock(),
+        client.sync.diagnostics.get(),
+      ]);
+      if (!alive) return;
+      setSummary(
+        summarizeSyncStatus({
+          queue,
+          acks,
+          lastBlock,
+          studentRef: learnerOf(sessionStore.peek()),
+        }),
+      );
+      setLastSyncAt(diag.lastSyncAt);
     };
 
     void client.sync.registerBackgroundSync();
@@ -49,5 +66,5 @@ export function useSyncStatus(pollMs = 4000): SyncStatusValue {
     };
   }, [pollMs]);
 
-  return { online, pending, lastSyncAt };
+  return { ...summary, online, pending: summary.waiting, lastSyncAt };
 }

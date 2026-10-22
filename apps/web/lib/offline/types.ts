@@ -133,14 +133,40 @@ export interface SyncDelta {
   clientSeq: number; // Lamport seq (never wall-clock)
 }
 
-export type QueueState = "pending" | "sending" | "failed" | "dead";
+// pending  — saved on this device, waiting for a drain
+// sending  — legacy in-flight marker; treated as pending after a crash (never stranded)
+// failed   — a send failed transiently (offline / 5xx); retried on the next drain
+// held     — the server refused it for PERMISSION (consent withdrawn, learner suspended, wrong
+//            learner): retained intact, not retried in a loop, released on the next session change
+// dead     — the server rejected this specific delta (conflict / invalid): retained with a reason
+//            for support, never silently deleted
+export type QueueState = "pending" | "sending" | "failed" | "held" | "dead";
 
 export interface QueuedDelta extends SyncDelta {
   syncState: QueueState;
   attempts: number;
   createdAt: number;
   lastError?: string;
+  // Why a delta is held (server problem code, e.g. CONSENT_REQUIRED / LEARNER_INACTIVE / FORBIDDEN).
+  heldReason?: string;
 }
+
+// What the server said about an item that has LEFT the local queue (bounded local ledger). Lets
+// the UI tell "synchronized" from "server-confirmed" after the local copy is gone.
+export interface AckRecord {
+  clientEventId: string;
+  type: DeltaType;
+  studentRef: string | null;
+  status: SyncStatus;
+  ackedAt: number;
+}
+
+// Why a drain stopped without finishing (null = it did not stop early).
+//   offline    — network unreachable; retried on reconnect
+//   auth       — 401 survived one session refresh, or no learner is signed in on this device
+//   permission — 403: consent withdrawn / learner suspended / not this learner's data
+//   server     — a 5xx; retried later
+export type SyncBlock = "offline" | "auth" | "permission" | "server";
 
 export interface ItemResult {
   clientEventId: string;
@@ -183,4 +209,8 @@ export interface DrainSummary {
   conflict: number;
   remaining: number;
   cursor: number;
+  // Optional so older call sites / fixtures that build a summary by hand still type-check.
+  held?: number;
+  blocked?: SyncBlock | null;
+  blockedCode?: string | null;
 }

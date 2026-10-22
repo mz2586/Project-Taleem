@@ -87,6 +87,7 @@ from .contexts.ops.adapters.persistence.base import (
     create_ops_session_factory,
 )
 from .contexts.ops.adapters.persistence.kill_switch_store import SqlKillSwitchState
+from .contexts.sync.consent_gate import IdentitySyncGate, SyncRefusedError
 from .contexts.sync.domain import DeltaType, SyncDelta, SyncStore
 from .contexts.sync.service import DurableSyncCoordinator
 from .platform import correlation
@@ -322,7 +323,21 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     sync_consumer = SyncEvidenceConsumer(
         learning_uow, read_model, BKTEstimator(), HalfLifeForgettingModel(), time.time
     )
-    sync_coordinator = DurableSyncCoordinator(sync_store, sync_consumer)
+
+    # Child-safety gate: every learner a batch writes for is re-checked against LIVE identity state
+    # (account active + current consent), so a withdrawn consent or a suspension stops sync on the
+    # next batch, not when a cached access token expires. Production also refuses learners with no
+    # identity account (dev/test HS256 tokens may name synthetic learners).
+    def _learner_lookup(student_ref: str) -> Any:
+        with SqlIdentityUnitOfWork(identity_sf) as uow:
+            return uow.learners.get(student_ref)
+
+    sync_gate = IdentitySyncGate(
+        identity_service.consent_state_for,
+        _learner_lookup,
+        require_enrolled=settings.is_production,
+    )
+    sync_coordinator = DurableSyncCoordinator(sync_store, sync_consumer, sync_gate)
 
     # ---- AI Teacher (Phase 8): templated, curriculum-grounded, explainable (no LLM) ----
     ai_teacher = AITeacherService(
@@ -505,7 +520,18 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 if not owner:
                     raise Problem(422, "MISSING_STUDENT_REF", "attempt missing student_ref", "")
                 require_owner_or(claims, owner, privileged_roles=("system",))
-        results, cursor = sync_coordinator.apply_batch(deltas)
+        acting_learner = claims.sub if claims.role == "student" else None
+        try:
+            results, cursor = sync_coordinator.apply_batch(deltas, acting_learner=acting_learner)
+        except SyncRefusedError as exc:
+            # Nothing was applied. The client holds the batch (never deletes it) until the
+            # learner's session changes; the code tells it why. No student_ref in the detail.
+            raise Problem(
+                403,
+                exc.code,
+                "Learner may not sync",
+                "this learner's consent or account status does not permit recording learning data",
+            ) from exc
         return {
             "cursor": cursor,
             "results": [

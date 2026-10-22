@@ -215,3 +215,75 @@ Full offline sessions (6.2B) and unsupervised at-home offline (needs 6.2C + M-Sa
 for Pilot 1 and are **gated** for Pilot 2. This matches the phased GO/NO-GO in
 [OFFLINE_ARCHITECTURE.md](OFFLINE_ARCHITECTURE.md) §14: **GO to build 6.2A now; conditional/NO-GO for
 6.2B/6.2C pending the named dependencies.**
+
+---
+
+## 7. Guarantee traceability (GLOBAL_PRODUCT_SCOPE §E)
+
+Audit of 2026-10-22 against the code on `main`, then the gaps closed in the same change. Each
+§E guarantee maps to the tests that prove it. Client tests run under vitest (node env,
+`fake-indexeddb` where real storage semantics matter): `cd apps/web && npx vitest run lib/offline
+lib/student`. Server tests: `cd services/core-api && .venv/bin/pytest -q tests/test_sync_*.py`.
+
+### 7.1 Map
+
+| §E guarantee | Client proof (`apps/web/lib/...`) | Server proof (`services/core-api/tests/`) |
+| --- | --- | --- |
+| Durable queued learner activity | `offline/__tests__/syncCrashRecovery.test.ts` (queue survives reopen; 120-item session); `idb.test.ts`; `syncGuarantees.test.ts` "G-DURABLE" (50 offline drains + a 5xx outage never dead-letter work) | `test_sync_evidence.py` (evidence is durable `AssessmentEvidence`) |
+| Idempotent event processing | `syncClient.test.ts` (re-drain → duplicate); `syncGuarantees.test.ts` "G-IDEM" (crash between ack and delete over IndexedDB → re-send → duplicate, evidence once; new clientEventId + same evidence_id → duplicate) | `test_sync_engine.py`; `test_sync_evidence.py` §2–3; `test_sync_idempotency.py` (re-send after a server restart over a shared DB → duplicate, recorded once; conflict is not remembered) |
+| Conflict detection + deterministic reconciliation | `reconcile.test.ts` (stable evidence_id re-queue); `syncQueue.test.ts` (ordering by clientSeq, clientEventId) | `test_sync_engine.py` (monotonic max, idempotent set, union, server-order-wins, no wall-clock); `test_sync_evidence.py` §6 |
+| Recovery after browser restart / connectivity loss | `syncCrashRecovery.test.ts` (partial drain then reopen); `syncGuarantees.test.ts` (stranded `sending` state drained after a crash); `chaos.test.ts`; `backgroundSync.test.ts`; `connectivity.test.ts` | `test_sync_idempotency.py` (server restart) |
+| Saved-on-device / synchronized / server-confirmed distinction | `offline/__tests__/syncStatus.test.ts` (pure `summarizeSyncStatus` / `itemStatus` used by `useSyncStatus`; bounded ack ledger) | — (the server contract supplies the per-item statuses the model maps) |
+| Expired session | `syncGuarantees.test.ts` "G-AUTH" (401 → one refresh → retry with the same deltas; 401 after refresh or failed refresh → queue byte-for-byte intact; no learner signed in → nothing sent) | `test_attack_hardening.py` (unauthenticated sync → 401) |
+| Revoked consent / authorization change | `syncGuarantees.test.ts` "G-PERM" (403 → the learner's deltas held, no hot loop, blocked-by-permission surfaced, synced exactly once after release); `student/__tests__/offlineClient.test.ts` (held work released when that learner signs in) | `test_sync_consent.py` (withdrawn consent with a still-valid token → 403 `CONSENT_REQUIRED`, nothing written; operator token cannot bypass; suspended → `LEARNER_INACTIVE`; never-consented → refused; re-grant → the same batch applies once); `test_attack_hardening.py` (IDOR) |
+| Acknowledged work never silently lost | `syncGuarantees.test.ts` "G-PARTIAL" (accepted removed; conflict retained with reason; server-dropped item retained; 422 poison isolated, rest syncs); "G-DURABLE" (shared device: another learner's work is never sent under the wrong token, never dropped); `purge.test.ts` | `test_sync_idempotency.py` (partial batch: per-item statuses, only valid attempts recorded) |
+
+### 7.2 Gaps found in the audit, and how they were closed
+
+1. **Child safety — sync ignored consent and account status (server).** `POST /v1/sync/batch`
+   checked only token validity and IDOR. A learner whose guardian had withdrawn consent could keep
+   writing evidence for the life of their access token, and a `system` token could write evidence
+   for any learner regardless. Fixed: `contexts/sync/consent_gate.py` re-checks every learner the
+   batch writes for (each attempt's `student_ref` plus a student caller) against live identity
+   state (`IdentityService.consent_state_for` + the learner's account status) before anything is
+   applied; a refusal rejects the whole batch (403 `CONSENT_REQUIRED` / `LEARNER_INACTIVE`).
+   Production also refuses learners with no identity account; dev/test permit synthetic HS256
+   learners that have none.
+2. **A CONFLICT was remembered as "seen" (server).** A re-send of an attempt that had failed with
+   `conflict` (e.g. lesson not yet published) answered `duplicate`, so the client would release
+   work the server never stored. Only final outcomes are now remembered.
+3. **Every HTTP error was treated as a network failure (client).** 401, 403 and 5xx all incremented
+   `attempts` and dead-lettered after eight drains — a week offline, an expired token or a
+   withdrawn consent turned a child's work into dead letters. Now: network and 5xx retry forever
+   (never dead-lettered); 401 does one session refresh then retries, else leaves the queue intact;
+   403 holds the deltas until the learner's session changes; only a 422 isolated to one delta
+   dead-letters it, with the server's reason.
+4. **A server that dropped an item from a response caused an unbounded re-send loop (client).** The
+   drain now sends each item at most once per drain and keeps unanswered items for the next.
+5. **A delta stranded in `sending` was never drained again (client).** It is now eligible.
+6. **Shared device (client).** The drain sent every learner's deltas under the current token; a
+   sibling's work triggered a 403 for the whole batch. Only the signed-in learner's deltas (and
+   device-level ones) are sent; others wait for their own session.
+7. **No three-state status (client).** The UI saw only a pending count. `lib/offline/syncStatus.ts`
+   defines the model and a bounded ack ledger; `useSyncStatus` exposes it.
+
+### 7.3 Status model definitions
+
+- **Saved on this device** — in the IndexedDB queue, not yet acknowledged; includes waiting,
+  held-for-permission and server-rejected items (each named).
+- **Synchronized** — acknowledged, but not a durable server record: progress / completion /
+  preference deltas live in the server's process-local policy store, and an `ignored` attempt
+  (e.g. summative, mentor-mediated) is received but not recorded.
+- **Server-confirmed** — an `attempt.submitted` acknowledged `applied` or `duplicate`: its
+  `AssessmentEvidence` row was committed before the response.
+
+### 7.4 Open items
+
+- **Purge vs hold (policy D-5).** `PurgeService.purgeStudent` (triggered only by a server `purge`
+  field, which the server does not send today) erases un-synced deltas by default; a 403 hold
+  retains them. Which wins on a confirmed withdrawal is a governance decision.
+- **Non-attempt deltas are not durable server-side** (G5): the reason "synchronized" and
+  "server-confirmed" differ. Persisting them needs a migration.
+- **The ack ledger and drain block live in `sync_meta`**, bounded to the latest 500 acks.
+- **No UI yet renders the held / rejected states**; `SyncStatusBadge` still shows the waiting
+  count. `useSyncStatus` exposes the full summary for the component owners.
