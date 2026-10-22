@@ -11,7 +11,9 @@ from collections.abc import Callable
 
 from ....platform import observability
 from ..domain import validation
+from ..domain.audio import AudioAssetResolver
 from ..domain.lesson import Lesson
+from ..domain.packs import PackRegistry
 from ..domain.quality import (
     ALL_GATES,
     Gate,
@@ -50,8 +52,15 @@ class CurriculumStudioService:
         publisher: PublishPort,
         clock: Callable[[], float] | None = None,
         on_commit: Callable[[], None] | None = None,
+        audio_assets: AudioAssetResolver | None = None,
+        packs: PackRegistry | None = None,
     ) -> None:
         self._repo = repo
+        # Gate dependencies: the audio-asset resolver (None = synthetic dev/test fixture refs only;
+        # production wiring passes the media registry) and the curriculum-pack registry
+        # (None = the packs shipped with the package).
+        self._audio_assets = audio_assets
+        self._packs = packs
         self._publisher = publisher
         self._now: Callable[[], float] = clock if clock is not None else time.time
         # Commit inside the mutating method so an optimistic-lock conflict at commit is caught in
@@ -93,12 +102,12 @@ class CurriculumStudioService:
 
     # ---- validation ----
     def validate(self, lesson_id: str) -> validation.ValidationResult:
-        return validation.validate(self.get(lesson_id))
+        return self._validate(self.get(lesson_id))
 
     # ---- workflow ----
     def submit(self, lesson_id: str, actor_role: str, note: str = "") -> Lesson:
         lesson = self.get(lesson_id)
-        result = validation.validate(lesson)
+        result = self._validate(lesson)
         if not result.ok:
             raise StudioError("cannot submit: automated validation failed (fix findings first)")
         # Store the automated gate results so they count toward the 9 at publish.
@@ -138,7 +147,7 @@ class CurriculumStudioService:
         lesson = self.get(lesson_id)
         if lesson.workflow.state is not WorkflowState.APPROVED:
             raise StudioError("only approved lessons can be published")
-        if not validation.validate(lesson).ok:
+        if not self._validate(lesson).ok:
             raise StudioError("cannot publish: automated validation no longer passes")
         if not all_gates_green(lesson.quality_gate_results):
             missing = [
@@ -184,6 +193,9 @@ class CurriculumStudioService:
         return lesson
 
     # ---- helpers ----
+    def _validate(self, lesson: Lesson) -> validation.ValidationResult:
+        return validation.validate(lesson, self._packs, self._audio_assets)
+
     def _transition(self, lesson: Lesson, action: ReviewAction, actor_role: str, note: str) -> None:
         frm = lesson.workflow.state
         try:

@@ -16,6 +16,7 @@ from .base import (
     create_session_factory,
     session_scope,
 )
+from .media import SqlMediaAudioResolver, studio_audio_resolver
 from .repository import SqlAlchemyLessonRepository, SqlAlchemyPublishPort
 from .uow import UnitOfWork
 
@@ -30,9 +31,11 @@ __all__ = [
     "Base",
     "SqlAlchemyLessonRepository",
     "SqlAlchemyPublishPort",
+    "SqlMediaAudioResolver",
     "UnitOfWork",
     "create_db_engine",
     "create_session_factory",
     "session_scope",
+    "studio_audio_resolver",
     "unit_of_work",
 ]

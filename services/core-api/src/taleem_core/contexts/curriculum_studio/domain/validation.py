@@ -14,6 +14,7 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
+from .audio import SYNTHETIC_FIXTURE_AUDIO, AudioAssetResolver
 from .content import Difficulty, LocalizedText
 from .lesson import Lesson
 from .packs import CurriculumPack, InstructionRules, PackRegistry, default_pack, default_registry
@@ -172,7 +173,9 @@ def _alignment_gate(lesson: Lesson, ctx: _PackContext) -> GateResult:
     return _gate(Gate.CURRICULUM_ALIGNMENT, f)
 
 
-def _accessibility_gate(lesson: Lesson, ctx: _PackContext) -> GateResult:
+def _accessibility_gate(
+    lesson: Lesson, ctx: _PackContext, audio_assets: AudioAssetResolver
+) -> GateResult:
     f: list[Finding] = []
     for i, mv in enumerate(lesson.visual_concepts):
         if not any(v.strip() for v in mv.alt_text.text.values()):
@@ -181,11 +184,21 @@ def _accessibility_gate(lesson: Lesson, ctx: _PackContext) -> GateResult:
         f.append(_blk(ctx.unresolved(), "student_explanation"))
     else:
         for loc in ctx.rules.audio_required_locales:
+            name = ctx.pack.locale_name(loc)
             if not lesson.student_explanation.has_audio(loc):
-                name = ctx.pack.locale_name(loc)
                 f.append(
                     _blk(
                         f"student_explanation missing recorded {name} audio (mandatory)",
+                        "student_explanation",
+                    )
+                )
+                continue
+            # A non-empty ref is not a recording: it must resolve to a registered audio asset.
+            ref = lesson.student_explanation.audio_ref[loc].strip()
+            if not audio_assets.exists(ref):
+                f.append(
+                    _blk(
+                        f"student_explanation {name} audio {ref!r} is not a registered audio asset",
                         "student_explanation",
                     )
                 )
@@ -200,7 +213,13 @@ def _readability_gate(lesson: Lesson, ctx: _PackContext) -> GateResult:
     several = len(ctx.rules.readability_locales) > 1
     for loc in ctx.rules.readability_locales:
         max_words = ctx.pack.readability[loc].for_grade(lesson.metadata.grade_key)
-        avg = _avg_words_per_sentence(lesson.student_explanation.text.get(loc, ""))
+        text = lesson.student_explanation.text.get(loc, "")
+        if not any(s.strip() for s in _SENTENCE_SPLIT.split(text)):
+            # Nothing to measure is a failure, never a vacuous pass.
+            name = ctx.pack.locale_name(loc)
+            f.append(_blk(f"no {name} student_explanation to measure", "student_explanation"))
+            continue
+        avg = _avg_words_per_sentence(text)
         if avg > max_words:
             where = f" ({ctx.pack.locale_name(loc)})" if several else ""
             f.append(_blk(f"avg sentence length {avg:.1f} exceeds grade max {max_words}{where}"))
@@ -214,14 +233,24 @@ def _performance_gate(lesson: Lesson) -> GateResult:
     return _gate(Gate.PERFORMANCE, f)
 
 
-def validate(lesson: Lesson, registry: PackRegistry | None = None) -> ValidationResult:
-    """Run structural + provenance + automated gate pre-checks under the lesson's pack rules."""
+def validate(
+    lesson: Lesson,
+    registry: PackRegistry | None = None,
+    audio_assets: AudioAssetResolver | None = None,
+) -> ValidationResult:
+    """Run structural + provenance + automated gate pre-checks under the lesson's pack rules.
+
+    ``audio_assets`` resolves recorded-audio refs. Without one, only the synthetic dev/test
+    fixture refs resolve (``audio.SYNTHETIC_FIXTURE_AUDIO``); production wiring passes the media
+    registry resolver.
+    """
     ctx = _resolve(lesson, registry if registry is not None else default_registry())
+    audio = audio_assets if audio_assets is not None else SYNTHETIC_FIXTURE_AUDIO
     return ValidationResult(
         structural=_structural_findings(lesson, ctx),
         gate_results=[
             _alignment_gate(lesson, ctx),
-            _accessibility_gate(lesson, ctx),
+            _accessibility_gate(lesson, ctx, audio),
             _readability_gate(lesson, ctx),
             _performance_gate(lesson),
         ],

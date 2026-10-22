@@ -27,6 +27,7 @@ from sqlalchemy.orm.exc import StaleDataError
 
 from .....platform.concurrency import ConcurrencyConflictError
 from .....platform.ids import uuid7
+from .media import SqlMediaAudioResolver
 from .models import AuditLogRow, OutboxRow
 from .repository import SqlAlchemyLessonRepository, SqlAlchemyPublishPort
 
@@ -47,6 +48,7 @@ class UnitOfWork:
         self._session = self._session_factory()
         self.lessons = SqlAlchemyLessonRepository(self._session, self)
         self.publish = SqlAlchemyPublishPort(self._session, self)
+        self.audio_assets = SqlMediaAudioResolver(self._session)
         return self
 
     def __exit__(

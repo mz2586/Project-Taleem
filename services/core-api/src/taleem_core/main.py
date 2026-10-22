@@ -38,6 +38,7 @@ from .contexts.curriculum_studio.adapters.persistence import (
 from .contexts.curriculum_studio.adapters.persistence import (
     create_db_engine,
     create_session_factory,
+    studio_audio_resolver,
     unit_of_work,
 )
 from .contexts.curriculum_studio.application.service import CurriculumStudioService
@@ -275,7 +276,12 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             # The service commits inside each mutating method (on_commit) so an optimistic-lock
             # conflict at commit is caught in the request handler (409), not in dependency teardown
             # (which would surface as a 500). The UoW still rolls back on any raised exception.
-            yield CurriculumStudioService(uow.lessons, uow.publish, on_commit=uow.commit)
+            # Recorded audio must resolve in the media registry; synthetic fixture refs are
+            # accepted outside production only.
+            audio = studio_audio_resolver(uow.audio_assets, production=settings.is_production)
+            yield CurriculumStudioService(
+                uow.lessons, uow.publish, on_commit=uow.commit, audio_assets=audio
+            )
 
     app.include_router(build_studio_router(studio_service_provider, claims_dependency))
 
