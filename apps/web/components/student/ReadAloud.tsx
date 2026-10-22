@@ -55,6 +55,10 @@ export function ReadAloud({ audioSrc, label }: { audioSrc?: string; label: strin
       <span aria-hidden="true">🔊</span>
       <span>{text}</span>
       {audioSrc ? (
+        // Read-aloud of text that is already on screen next to this button: the visible text is the
+        // transcript, so a caption <track> would duplicate it. Audio-only lesson media (no on-screen
+        // text) must not use this component without captions.
+        // eslint-disable-next-line jsx-a11y/media-has-caption
         <audio ref={audioRef} src={audioSrc} onEnded={() => setState("idle")} preload="none" />
       ) : null}
     </button>

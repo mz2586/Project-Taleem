@@ -63,8 +63,12 @@ web-install: ## Install web deps
 	cd $(WEB) && (npm ci || npm install)
 
 .PHONY: web-test
-web-test: ## Typecheck + run the web unit suite (vitest)
-	cd $(WEB) && npm run typecheck && npm test
+web-test: ## Typecheck + lint (next/core-web-vitals + jsx-a11y strict) + run the web unit suite (vitest)
+	cd $(WEB) && npm run typecheck && npm run lint && npm test
+
+.PHONY: web-lint
+web-lint: ## ESLint the web app only (also part of web-test)
+	cd $(WEB) && npm run lint
 
 .PHONY: web-build
 web-build: ## Production build of the web app

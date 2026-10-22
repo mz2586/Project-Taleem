@@ -20,6 +20,9 @@
   "devDependencies": {
     "@types/node": "^20.14.0",
     "@types/react": "^18.3.0",
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.35",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
     "fake-indexeddb": "^6.2.5",
     "typescript": "^5.5.0",
     "vitest": "^2.1.9"
