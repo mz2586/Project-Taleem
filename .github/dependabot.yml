@@ -1,0 +1,55 @@
+# Dependabot version + security updates (master scope Phase H: dependency scanning).
+#
+# Python: the shipped closure is pinned twice, in services/core-api/requirements.lock (container)
+# and its generated copy requirements.txt (Vercel cannot use `-r`). Dependabot updates the root
+# requirements.txt; Code CI's "Vercel requirements match the lock" check then fails until the same
+# pin is copied into requirements.lock. That red check is intended: a bump must land in both files
+# in one PR. pyproject.toml uses lower bounds, so it rarely needs a bump of its own.
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    groups:
+      python-runtime:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    commit-message:
+      prefix: "deps(py)"
+
+  - package-ecosystem: "pip"
+    directory: "/services/core-api"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "deps(py)"
+
+  - package-ecosystem: "npm"
+    directory: "/apps/web"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    groups:
+      web-minor-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]
+    commit-message:
+      prefix: "deps(web)"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    groups:
+      actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "ci"

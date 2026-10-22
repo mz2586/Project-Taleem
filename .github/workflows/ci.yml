@@ -7,9 +7,9 @@ name: Code CI
 on:
   push:
     branches: [main]
-    paths: ["services/**", "apps/**", "packages/**", ".github/workflows/ci.yml"]
+    paths: ["services/**", "apps/**", "packages/**", "scripts/**", "Makefile", ".github/workflows/ci.yml"]
   pull_request:
-    paths: ["services/**", "apps/**", "packages/**"]
+    paths: ["services/**", "apps/**", "packages/**", "scripts/**", "Makefile", ".github/workflows/ci.yml"]
 
 permissions:
   contents: read
@@ -85,6 +85,64 @@ jobs:
       # trigger, and the ORM<->migration schema-parity guard (CTO H13).
       - name: PostgreSQL-gated tests
         run: pytest -q
+
+  # Phase A completion evidence: the recorded end-to-end journey against a REAL running server
+  # (uvicorn over HTTP, PostgreSQL behind it), not the in-process TestClient. The fresh service
+  # database has no curriculum, so run 1 must give the honest "nothing to learn" decision; the
+  # script then seeds the clearly labelled synthetic fixture lesson and run 2 must complete it.
+  # The same populated database then goes through the backup + restore drill (RTO evidence).
+  e2e-journey:
+    name: E2E journey (uvicorn + PostgreSQL) · backup drill
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: taleem
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      CS_DATABASE_URL: postgresql+psycopg://postgres:ci@localhost:5432/taleem
+      TALEEM_DATABASE_URL: postgresql+psycopg://postgres:ci@localhost:5432/taleem
+      E2E_FIRST_EXPECT: empty
+      E2E_PORT: "8765"
+      E2E_OUT_DIR: ${{ github.workspace }}/e2e-evidence
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install core-api (runtime + dev)
+        working-directory: services/core-api
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      # Migrates, launches uvicorn in the background, waits for /health, runs both journeys, and
+      # always stops the server. Exits non-zero on any FAIL step.
+      - name: Recorded end-to-end journey
+        run: ./scripts/e2e/run_journey.sh
+      # pg_dump must be at least the server's major version (16).
+      - name: PostgreSQL client for the drill
+        run: |
+          if ! pg_dump --version 2>/dev/null | grep -Eq ' (1[6-9]|[2-9][0-9])\.'; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq postgresql-client
+          fi
+          pg_dump --version
+      - name: Backup + restore drill (dump, scratch DB, verify)
+        run: ./scripts/db_backup_restore_drill.sh | tee "$E2E_OUT_DIR/backup-drill.txt"
+      - name: Upload journey transcripts + drill report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-evidence
+          path: e2e-evidence/
+          if-no-files-found: warn
 
   openapi-lint:
     name: OpenAPI contract lint

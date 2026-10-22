@@ -40,6 +40,19 @@ simulate: ## Run the Pilot 0 synthetic-user simulator (drives the real app; exit
 	cd $(CORE) && . .venv/bin/activate && \
 	 python -m taleem_core.tools.pilot_simulator --students 20 --offline --fail-inject --quiet
 
+.PHONY: e2e
+e2e: ## Recorded end-to-end journey: real uvicorn + PostgreSQL at TALEEM_DATABASE_URL (both curriculum branches)
+	./scripts/e2e/run_journey.sh
+
+.PHONY: backup-drill
+backup-drill: ## Backup + restore drill (pg_dump -> scratch DB -> verify counts + alembic head); prints RTO
+	./scripts/db_backup_restore_drill.sh
+
+.PHONY: audit
+audit: ## Dependency vulnerability scan: pip-audit (core-api lock) + npm audit (web, prod deps, high+)
+	python3 -m pip_audit --strict -r $(CORE)/requirements.lock
+	cd $(WEB) && npm audit --omit=dev --audit-level=high
+
 .PHONY: docker-build
 docker-build: ## Build the core-api container image
 	docker build -t taleem/core-api:dev $(CORE)

@@ -6,7 +6,8 @@ implemented** in `core-api`: the golden-signal counters, the `/v1/ops/status` su
 threshold and an operator action. Design rationale lives in
 [docs/07-engineering/38-monitoring.md](docs/07-engineering/38-monitoring.md); incident handling in
 [INCIDENT_RESPONSE.md](INCIDENT_RESPONSE.md); pilot operations in
-[PILOT0_OPERATIONS.md](PILOT0_OPERATIONS.md).
+[PILOT0_OPERATIONS.md](PILOT0_OPERATIONS.md); database backup and restore in
+[BACKUP_RESTORE_RUNBOOK.md](BACKUP_RESTORE_RUNBOOK.md).
 
 > **Overriding rule:** a child-safety signal outranks any availability or latency alert. When a
 > safety concern and a technical alert coincide, act on safety first (see INCIDENT_RESPONSE.md).
