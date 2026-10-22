@@ -16,6 +16,8 @@ import { lessonLocales, localizedRows, versionRows, hasContent } from "@/lib/stu
 import { gateLabelKey, gateRows, importedFrom, isProvisional, stageLabelKey } from "@/lib/studio/workflow";
 
 import { ActionPanel } from "../../ActionPanel";
+import { DraftEditor } from "../../DraftEditor";
+import { VersionDiff } from "../../VersionDiff";
 import { ProvisionalBadge } from "../../controls";
 import { LearnerPreview } from "../../LearnerPreview";
 import { useActor } from "../../StudioShell";
@@ -26,7 +28,7 @@ const cell = { padding: "var(--space-2)", borderBottom: "1px solid var(--color-f
 
 export default function StudioLessonPage() {
   const actor = useActor();
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const params = useParams<{ lessonId: string }>();
   const lessonId = decodeURIComponent(String(params.lessonId));
   const [lesson, setLesson] = useState<LessonView | null>(null);
@@ -137,6 +139,19 @@ export default function StudioLessonPage() {
         ) : null}
       </header>
 
+      {lesson.state === "draft" && actor.role === "subject_author" ? (
+        <DraftEditor
+          key={lesson.etag ?? lesson.version}
+          lesson={lesson}
+          locales={locales}
+          onSaved={(u) => {
+            setLesson(u);
+            setValidation(null);
+          }}
+          onReload={() => void load()}
+        />
+      ) : null}
+
       <ActionPanel
         lesson={lesson}
         actor={actor}
@@ -190,7 +205,12 @@ export default function StudioLessonPage() {
                 <td style={cell}>
                   {t(r.mode === "auto" ? "studio.gateMode.auto" : r.mode === "human" ? "studio.gateMode.human" : "studio.gateMode.autoHuman")}
                   {r.certifiedAt ? <div>{t("studio.lesson.certifiedAt", { stage: t(`studio.stages.${r.certifiedAt}`) })}</div> : null}
-                  {r.reviewerRole ? <div>{t("studio.lesson.certifiedBy", { role: r.reviewerRole })}</div> : null}
+                  {r.reviewerRole && r.reviewerSubject ? (
+                    <div>{t("studio.lesson.certifiedByPerson", { subject: r.reviewerSubject, role: r.reviewerRole })}</div>
+                  ) : r.reviewerRole ? (
+                    <div>{t("studio.lesson.certifiedBy", { role: r.reviewerRole })}</div>
+                  ) : null}
+                  {r.certifiedOn ? <div>{new Date(r.certifiedOn * 1000).toLocaleString(locale)}</div> : null}
                 </td>
                 <td style={cell}>
                   {r.findings.length > 0 ? (
@@ -295,7 +315,8 @@ export default function StudioLessonPage() {
                 </li>
               ))}
             </ol>
-            <p style={{ margin: 0 }}>{t("studio.lesson.diffUnavailable")}</p>
+            <h3 style={{ marginBlockEnd: 0 }}>{t("studio.lesson.diffHeading")}</h3>
+            <VersionDiff lessonId={lesson.lesson_id} versions={versions} />
           </>
         )}
         <h3 style={{ marginBlockEnd: 0 }}>{t("studio.lesson.history")}</h3>
@@ -303,7 +324,8 @@ export default function StudioLessonPage() {
           <ol style={{ margin: 0 }}>
             {lesson.workflow.history.map((h, i) => (
               <li key={i}>
-                {h.action} · {h.from_state} → {h.to_state} · {h.actor_role}
+                {h.action} · {h.from_state} → {h.to_state} · {h.actor_subject ? `${h.actor_subject} (${h.actor_role})` : h.actor_role}
+                {h.at ? ` · ${new Date(h.at * 1000).toLocaleString(locale)}` : ""}
                 {h.note ? ` · ${h.note}` : ""}
               </li>
             ))}

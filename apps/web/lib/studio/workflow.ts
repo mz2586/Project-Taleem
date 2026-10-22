@@ -109,6 +109,10 @@ export interface GateRow {
   /** For a human gate: the stage whose reviewer certifies it. */
   certifiedAt: ReviewStage | null;
   reviewerRole: string | null;
+  /** Pseudonymous staff id of the human who certified it. */
+  reviewerSubject: string | null;
+  /** Unix seconds. */
+  certifiedOn: number | null;
   findings: string[];
 }
 
@@ -136,7 +140,9 @@ export function gateRows(gates: readonly GateView[], validation?: ValidationResu
       status,
       mode: auto && certifiedAt ? "auto+human" : auto ? "auto" : "human",
       certifiedAt,
-      reviewerRole: recorded?.reviewer_role ?? null,
+      reviewerRole: recorded?.reviewer_role || null,
+      reviewerSubject: recorded?.reviewer_subject || null,
+      certifiedOn: recorded?.at ?? null,
       findings: checked?.findings ?? [],
     };
   });
@@ -145,6 +151,14 @@ export function gateRows(gates: readonly GateView[], validation?: ValidationResu
 export function gateSummary(gates: readonly GateView[]): { passed: number; total: number; allGreen: boolean } {
   const passed = ALL_GATES.filter((g) => gates.some((r) => r.gate === g && r.passed)).length;
   return { passed, total: ALL_GATES.length, allGreen: passed === ALL_GATES.length };
+}
+
+/** Everyone who authored the lesson: its recorded author and whoever submitted it (service.py). */
+export function authorSubjects(lesson: LessonView): Set<string> {
+  const out = new Set<string>();
+  if (lesson.metadata?.author_subject) out.add(lesson.metadata.author_subject);
+  for (const t of lesson.workflow?.history ?? []) if (t.action === "submit" && t.actor_subject) out.add(t.actor_subject);
+  return out;
 }
 
 // ---- actions -----------------------------------------------------------------------------------
@@ -176,6 +190,7 @@ export function availableActions(
   const out: ActionOption[] = [];
   const state = lesson.state;
   const authorRole = lesson.metadata?.author_role ?? null;
+  const authors = authorSubjects(lesson);
 
   if (state === "draft" && actor.role === "subject_author") {
     const failing = validation ? !validation.ok : false;
@@ -188,8 +203,9 @@ export function availableActions(
   }
 
   if (isReviewStage(state) && STAGE_ROLE[state] === actor.role) {
-    // The backend refuses a reviewer whose role authored the lesson. Show that up front.
-    const selfReview = authorRole !== null && authorRole === actor.role;
+    // The backend refuses a reviewer who authored the lesson — by role, and by person (the recorded
+    // author or anyone who submitted it). Show that up front.
+    const selfReview = (authorRole !== null && authorRole === actor.role) || authors.has(actor.subject);
     for (const action of ["approve", "request_changes"] as const) {
       out.push({
         action,

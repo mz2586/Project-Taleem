@@ -14,10 +14,14 @@
  * IndexedDB, written by the app, not the SW).
  */
 
-const SHELL_VERSION = "v1";
+// v2: precaches the self-hosted Urdu font, so Urdu renders in Nastaliq offline too.
+const SHELL_VERSION = "v2";
 const SHELL_CACHE = `taleem-shell-${SHELL_VERSION}`;
 const RUNTIME_CACHE = `taleem-runtime-${SHELL_VERSION}`;
-const APP_SHELL = ["/", "/manifest.webmanifest"];
+// The Urdu font is part of the shell: without it an offline device falls back to a face with
+// disconnected letters (design-system/fonts.css). Static, licence-cleared (public/fonts/OFL.txt).
+const URDU_FONT = "/fonts/NotoNastaliqUrdu-Regular.arabic.woff2";
+const APP_SHELL = ["/", "/manifest.webmanifest", URDU_FONT];
 // Offline lessons (R1): the library and the player must open with the network off. Precached
 // best-effort (a missing route never fails the install), and refreshed under their OWN URL on every
 // online visit, so offline they render themselves rather than the root shell.

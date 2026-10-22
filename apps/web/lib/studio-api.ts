@@ -5,9 +5,10 @@
 // identity come from that verified token server-side — never from a request body. The old client
 // sent `actor_role` in bodies, which the server ignored; that misleading field is gone.
 //
-// Fields marked "not in the contract yet" mirror the domain's `Lesson.to_dict()` names. The current
-// API does not return them; they are optional so the UI shows "not provided by the API" honestly
-// today and lights up unchanged when the backend exposes them (see the API gaps in the commit).
+// A single-lesson read returns the full content (domain `Lesson` field names), tags, author and
+// reviewer subjects, workflow history and an `etag`. Answer keys are included only for review-stage
+// roles and the architect (`answer_keys_included`). Content fields stay optional because list and
+// mutation responses and older servers may omit them; the UI says so rather than showing blanks.
 
 import { ApiError } from "./student/types";
 import { API_BASE } from "./session/config";
@@ -17,8 +18,11 @@ export interface GateView {
   gate: string;
   passed: boolean;
   mode?: "auto" | "human" | string;
-  /** Not in the contract yet: the reviewer role the domain records on a human gate. */
+  /** The certifying reviewer's role and pseudonymous staff id (human gates). */
   reviewer_role?: string;
+  reviewer_subject?: string;
+  /** Unix seconds. */
+  at?: number;
 }
 
 /** A localized field as the domain serialises it: `{ text: {locale: string}, audio_ref: {...} }`. */
@@ -60,6 +64,8 @@ export interface TransitionView {
   to_state: string;
   action: string;
   actor_role: string;
+  /** Pseudonymous staff id of the actor. */
+  actor_subject?: string;
   at: number;
   note?: string;
 }
@@ -75,14 +81,24 @@ export interface LessonView {
   version: number;
   learning_outcomes: string[];
   gates: GateView[];
-  // ---- not in the contract yet (domain `Lesson.to_dict()` names) ----
-  metadata?: { tags?: string[]; author_role?: string; languages?: string[] };
+  title_audio?: Record<string, string>;
+  metadata?: { tags?: string[]; author_role?: string; author_subject?: string; languages?: string[] };
   provenance?: ProvenanceView;
+  description?: LocalizedTextView;
+  teacher_script?: LocalizedTextView;
   student_explanation?: LocalizedTextView;
+  summary?: LocalizedTextView;
+  revision_notes?: LocalizedTextView;
+  parent_notes?: LocalizedTextView;
+  mentor_notes?: LocalizedTextView;
+  accessibility_notes?: LocalizedTextView;
   worked_examples?: WorkedExampleView[];
   practice_questions?: AssessmentItemView[];
   hints?: HintView[];
   workflow?: { state: string; history: TransitionView[] };
+  /** If-Match precondition for PATCH. */
+  etag?: string;
+  answer_keys_included?: boolean;
 }
 
 export interface Finding {
@@ -102,7 +118,33 @@ export interface VersionView {
   content_hash: string;
   change_summary: string;
   author_role: string;
+  created_at?: number;
 }
+
+/** One published version with the lesson body as published (for diffing). */
+export interface VersionWithBody extends VersionView {
+  body: Record<string, unknown>;
+  answer_keys_included?: boolean;
+}
+
+/** The localized draft fields PATCH accepts, as `{locale: text}` maps merged per locale. */
+export const PATCHABLE_LOCALIZED = [
+  "title",
+  "description",
+  "teacher_script",
+  "student_explanation",
+  "summary",
+  "revision_notes",
+  "parent_notes",
+  "mentor_notes",
+  "accessibility_notes",
+] as const;
+export type PatchableLocalized = (typeof PATCHABLE_LOCALIZED)[number];
+
+/** LessonPatchIn: partial; omitted fields unchanged; an empty string removes that locale. */
+export type LessonPatchIn = Partial<Record<PatchableLocalized, Record<string, string>>> & {
+  learning_outcomes?: string[];
+};
 
 export interface PackLocale {
   tag: string;
@@ -122,10 +164,8 @@ export interface CurriculumPackSummary {
 
 export interface LessonDraftIn {
   lesson_id: string;
-  // The create contract still takes exactly these two locales (locale-generic draft fields are a
-  // pending backend change).
-  title_ur: string;
-  title_en: string;
+  /** Title keyed by locale; every key must be a locale of the lesson's pack. */
+  title: Record<string, string>;
   grade: string;
   subject: string;
   curriculum_pack?: string;
@@ -173,6 +213,15 @@ export const studioApi = {
     ),
   list: () => req<{ lessons: LessonView[] }>("/v1/studio/lessons"),
   get: (id: string) => req<LessonView>(`/v1/studio/lessons/${encodeURIComponent(id)}`),
+  version: (id: string, version: number) =>
+    req<VersionWithBody>(`/v1/studio/lessons/${encodeURIComponent(id)}/versions/${version}`),
+  /** Edit a draft. `etag` is the lesson's current ETag; a 412 means someone changed it since. */
+  patch: (id: string, body: LessonPatchIn, etag: string) =>
+    req<LessonView>(`/v1/studio/lessons/${encodeURIComponent(id)}`, {
+      method: "PATCH",
+      body: JSON.stringify(body),
+      headers: { "if-match": etag },
+    }),
   versions: (id: string) => req<{ versions: VersionView[] }>(`/v1/studio/lessons/${encodeURIComponent(id)}/versions`),
   create: (body: LessonDraftIn) => post<LessonView>("/v1/studio/lessons", body),
   validate: (id: string) => post<ValidationResult>(`/v1/studio/lessons/${encodeURIComponent(id)}:validate`),

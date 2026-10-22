@@ -6,6 +6,7 @@
 import type { ReactNode } from "react";
 import "../design-system/tokens.css";
 import "../design-system/a11y.css";
+import "../design-system/fonts.css";
 import { ServiceWorkerRegister } from "../components/ServiceWorkerRegister";
 import { defaultLocale, directionOf } from "../lib/i18n/config";
 import { HtmlLocaleSync } from "../lib/i18n/HtmlLocaleSync";

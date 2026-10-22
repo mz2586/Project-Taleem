@@ -3,11 +3,14 @@ import { describe, expect, it } from "vitest";
 import { initialPlayerState, isLastStep, playerReducer, presentationSteps } from "../../student/lessonPlayer";
 import { translate } from "../../i18n/translate";
 import type { LessonView, ValidationResult } from "../../studio-api";
-import { draftErrors, EMPTY_DRAFT, parseOutcomes, toDraftIn } from "../draft";
+import { diffBodies, flatten, leafLocale } from "../diff";
+import { draftErrors, EMPTY_DRAFT, packLocales, parseOutcomes, toDraftIn } from "../draft";
+import { buildPatch, editableFields, editErrors } from "../edit";
 import { itemHints, hasContent, learnerPreview, lessonLocales, localizedRows, versionRows } from "../preview";
 import { parseStudioToken, STUDIO_ROLES, type StudioActor, type StudioRole } from "../session";
 import {
   ALL_GATES,
+  authorSubjects,
   availableActions,
   DEFAULT_FILTERS,
   facets,
@@ -119,6 +122,23 @@ describe("availableActions — never offer what the role cannot do", () => {
     expect(actions.every((a) => !a.enabled && a.reason === "studio.actions.reason.selfApproval")).toBe(true);
   });
 
+  it("blocks self-approval by person: the recorded author or any submitter, whatever their role", () => {
+    const l = lesson({
+      state: "subject_expert",
+      metadata: { author_role: "subject_author", author_subject: "staff-a" },
+      workflow: {
+        state: "subject_expert",
+        history: [{ from_state: "draft", to_state: "subject_expert", action: "submit", actor_role: "subject_author", actor_subject: "staff-b", at: 1 }],
+      },
+    });
+    expect([...authorSubjects(l)].sort()).toEqual(["staff-a", "staff-b"]);
+    for (const who of ["staff-a", "staff-b"]) {
+      const actions = availableActions(l, actor("subject_expert", who));
+      expect(actions.every((a) => !a.enabled && a.reason === "studio.actions.reason.selfApproval")).toBe(true);
+    }
+    expect(availableActions(l, actor("subject_expert", "staff-c")).every((a) => a.enabled)).toBe(true);
+  });
+
   it("offers Publish only to the architect on an approved lesson, naming the blocking gates", () => {
     const missing = lesson({ state: "approved", gates: allGreen.filter((g) => g.gate !== "ai_safety" && g.gate !== "readability") });
     const publish = availableActions(missing, actor("curriculum_architect")).find((a) => a.action === "publish")!;
@@ -175,6 +195,14 @@ describe("gates", () => {
     expect(rows.find((r) => r.gate === "performance")!.status).toBe("passed");
     // Accessibility also needs a human: a passing pre-check alone is not a pass.
     expect(rows.find((r) => r.gate === "accessibility")).toMatchObject({ status: "not-run", mode: "auto+human" });
+  });
+
+  it("carries the certifying reviewer's identity and time", () => {
+    const rows = gateRows([{ gate: "ai_safety", passed: true, mode: "human", reviewer_role: "safety_officer", reviewer_subject: "staff-9", at: 1700000000 }]);
+    expect(rows.find((r) => r.gate === "ai_safety")).toMatchObject({ reviewerRole: "safety_officer", reviewerSubject: "staff-9", certifiedOn: 1700000000 });
+    // The backend sends "" for an automated result: no identity is invented.
+    const auto = gateRows([{ gate: "readability", passed: true, mode: "auto", reviewer_role: "", reviewer_subject: "" }]);
+    expect(auto.find((r) => r.gate === "readability")).toMatchObject({ reviewerRole: null, reviewerSubject: null });
   });
 
   it("summarises", () => {
@@ -318,8 +346,7 @@ describe("draft form", () => {
   it("requires the fields the create API needs", () => {
     expect(draftErrors(EMPTY_DRAFT, hierarchy)).toEqual({
       lessonId: "studio.draft.errors.lessonId",
-      titleUr: "studio.draft.errors.required",
-      titleEn: "studio.draft.errors.required",
+      titles: "studio.draft.errors.title",
       grade: "studio.draft.errors.required",
       subject: "studio.draft.errors.required",
       outcomes: "studio.draft.errors.outcomes",
@@ -327,19 +354,43 @@ describe("draft form", () => {
   });
 
   it("checks grade and subject against the pack roster", () => {
-    const form = { ...EMPTY_DRAFT, lessonId: "G4-1", titleUr: "a", titleEn: "b", grade: "G9", subject: "math", outcomes: "X" };
+    const form = { ...EMPTY_DRAFT, lessonId: "G4-1", titles: { ur: "a" }, grade: "G9", subject: "math", outcomes: "X" };
     expect(draftErrors(form, hierarchy).grade).toBe("studio.draft.errors.notInPack");
     expect(draftErrors({ ...form, grade: "G4", subject: "art" }, hierarchy).subject).toBe("studio.draft.errors.notInPack");
     expect(draftErrors({ ...form, grade: "G4" }, hierarchy)).toEqual({});
   });
 
+  it("needs one title, in the pack's locales only; blank titles do not count", () => {
+    const form = { ...EMPTY_DRAFT, lessonId: "G4-1", grade: "G4", subject: "math", outcomes: "X" };
+    expect(draftErrors({ ...form, titles: { ur: "  ", en: "" } }, hierarchy).titles).toBe("studio.draft.errors.title");
+    expect(draftErrors({ ...form, titles: { sd: "x" } }, hierarchy, ["ur", "en"]).titles).toBe("studio.draft.errors.locale");
+    expect(draftErrors({ ...form, titles: { en: "Fractions" } }, hierarchy, ["ur", "en"]).titles).toBeUndefined();
+  });
+
+  it("offers the pack's declared locales", () => {
+    const pack = {
+      pack_id: "PK-NCP",
+      version: "1",
+      country: "PK",
+      education_system: "NCP",
+      language_of_instruction: "ur",
+      instructional_locales: ["ur"],
+      locales: [
+        { tag: "ur", name: "Urdu", direction: "rtl" as const },
+        { tag: "en", name: "English", direction: "ltr" as const },
+      ],
+    };
+    expect(packLocales(pack).map((l) => l.tag)).toEqual(["ur", "en"]);
+    expect(packLocales({ ...pack, locales: [] }).map((l) => l.tag)).toEqual(["ur"]);
+    expect(packLocales(null)).toEqual([]);
+  });
+
   it("parses outcomes and builds the contract body", () => {
     expect(parseOutcomes("A, B\nB  C")).toEqual(["A", "B", "C"]);
-    const body = toDraftIn({ ...EMPTY_DRAFT, lessonId: " L1 ", titleUr: " ا ", titleEn: "E", pack: "PK-NCP", grade: "G4", subject: "math", outcomes: "A,B" });
+    const body = toDraftIn({ ...EMPTY_DRAFT, lessonId: " L1 ", titles: { ur: " ا ", en: "E", sd: " " }, pack: "PK-NCP", grade: "G4", subject: "math", outcomes: "A,B" });
     expect(body).toEqual({
       lesson_id: "L1",
-      title_ur: "ا",
-      title_en: "E",
+      title: { ur: "ا", en: "E" },
       grade: "G4",
       subject: "math",
       curriculum_pack: "PK-NCP",
@@ -365,5 +416,80 @@ describe("staff token parsing (display only)", () => {
     expect(parseStudioToken(token({ role: "subject_expert" }), 0)).toEqual({ ok: false, reason: "malformed" });
     expect(parseStudioToken(token({ sub: "g", role: "guardian" }), 0)).toEqual({ ok: false, reason: "not-studio-role" });
     expect(parseStudioToken(token({ sub: "s", role: "subject_expert", exp: 10 }), 10)).toEqual({ ok: false, reason: "expired" });
+  });
+});
+
+// ---- draft editing ------------------------------------------------------------------------------------
+
+describe("draft editing builds a minimal, locale-keyed PATCH", () => {
+  const draft = lesson({
+    title: { ur: "کسور", en: "Fractions" },
+    student_explanation: { text: { ur: "کسر حصہ ہے۔" } },
+    etag: '"abc"',
+  });
+
+  it("starts from the draft's current localized fields", () => {
+    const f = editableFields(draft);
+    expect(f.title).toEqual({ ur: "کسور", en: "Fractions" });
+    expect(f.student_explanation).toEqual({ ur: "کسر حصہ ہے۔" });
+    expect(f.summary).toEqual({});
+  });
+
+  it("sends nothing when nothing changed (whitespace-only edits included)", () => {
+    const f = editableFields(draft);
+    expect(buildPatch(f, { ...f, title: { ur: " کسور ", en: "Fractions" } })).toBeNull();
+  });
+
+  it("sends only the changed locales, and an empty string to remove one", () => {
+    const f = editableFields(draft);
+    const edited = {
+      ...f,
+      title: { ur: "کسور", en: "" },
+      student_explanation: { ur: "کسر حصہ ہے۔", en: "A fraction is a part." },
+    };
+    expect(buildPatch(f, edited)).toEqual({
+      title: { en: "" },
+      student_explanation: { en: "A fraction is a part." },
+    });
+  });
+
+  it("refuses to remove every title", () => {
+    const f = editableFields(draft);
+    expect(editErrors({ ...f, title: { ur: " ", en: "" } })).toBe("studio.edit.titleRequired");
+    expect(editErrors(f)).toBeNull();
+  });
+});
+
+describe("version diff from published bodies", () => {
+  const v1 = {
+    lesson_id: "L",
+    title: { text: { ur: "کسور", en: "Fractions" }, audio_ref: {} },
+    worked_examples: [{ prompt: { text: { ur: "مثال" } }, steps: [] }],
+    workflow: { state: "published", history: [{ at: 1 }] },
+    version: 1,
+  };
+  const v2 = {
+    lesson_id: "L",
+    title: { text: { ur: "کسور", en: "Fractions and parts" }, audio_ref: {} },
+    worked_examples: [{ prompt: { text: { ur: "مثال", en: "Example" } }, steps: [{ text: { ur: "قدم" } }] }],
+    workflow: { state: "published", history: [{ at: 1 }, { at: 2 }] },
+    version: 2,
+  };
+
+  it("lists added, removed and changed content leaves, ignoring workflow and version bookkeeping", () => {
+    expect(diffBodies(v1, v2)).toEqual([
+      { path: "title.text.en", kind: "changed", before: "Fractions", after: "Fractions and parts" },
+      { path: "worked_examples[0].prompt.text.en", kind: "added", before: undefined, after: "Example" },
+      { path: "worked_examples[0].steps[0].text.ur", kind: "added", before: undefined, after: "قدم" },
+    ]);
+    expect(diffBodies(v2, v1).find((d) => d.path === "worked_examples[0].prompt.text.en")!.kind).toBe("removed");
+    expect(diffBodies(v1, v1)).toEqual([]);
+    expect([...flatten(v1).keys()].some((k) => k.startsWith("workflow"))).toBe(false);
+  });
+
+  it("knows which locale a leaf is in, for lang/dir", () => {
+    expect(leafLocale("title.text.ur")).toBe("ur");
+    expect(leafLocale("practice_questions[0].stem.text.en-GB")).toBe("en-GB");
+    expect(leafLocale("lesson_id")).toBeNull();
   });
 });

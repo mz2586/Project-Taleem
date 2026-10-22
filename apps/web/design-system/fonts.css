@@ -1,0 +1,35 @@
+/*
+ * Project Taleem — self-hosted Urdu font. Additive; pairs with --font-urdu in tokens.css.
+ *
+ * Noto Nastaliq Urdu v4.000 (notofonts/nastaliq release NotoNastaliqUrdu-v4.000, unhinted
+ * Regular TTF), SIL Open Font License 1.1 — licence in public/fonts/OFL.txt, provenance in
+ * public/fonts/FONTS.txt. Subset to Arabic-script ranges with every OpenType layout feature
+ * kept (Nastaliq's joining and stacking live in GSUB/GPOS), WOFF2: 67,056 bytes.
+ *
+ * - The family name is the one --font-urdu already asks for, and local() comes first: a device
+ *   that has the font installed never downloads it.
+ * - unicode-range limits it to Arabic-script text, so Latin text (English UI, digits in a lesson)
+ *   never triggers the download or renders in this face.
+ * - One Regular face serves weights 400-700. Shipping Bold would double the payload on 2G, and a
+ *   synthesised bold smears Nastaliq strokes, so bold Urdu uses the regular glyphs.
+ * - font-display: swap: text is readable at once in a fallback, then swaps in.
+ */
+@font-face {
+  font-family: "Noto Nastaliq Urdu";
+  src:
+    local("Noto Nastaliq Urdu"),
+    local("NotoNastaliqUrdu-Regular"),
+    url("/fonts/NotoNastaliqUrdu-Regular.arabic.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0020, U+00A0, U+0600-06FF, U+0750-077F, U+08A0-08FF, U+200C-200F, U+25CC,
+    U+FB50-FDFF, U+FE70-FEFF;
+}
+
+/* Urdu is set in Nastaliq wherever it is marked Urdu, whatever the interface direction or
+   language: an Urdu lesson block inside the English UI gets it, English text does not. */
+:lang(ur) {
+  font-family: var(--font-urdu);
+  font-synthesis-weight: none;
+}

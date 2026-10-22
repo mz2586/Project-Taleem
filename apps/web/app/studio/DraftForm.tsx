@@ -8,7 +8,7 @@ import { Button } from "@/design-system/Button";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { ApiError } from "@/lib/student/types";
 import { studioApi, type CurriculumPackSummary } from "@/lib/studio-api";
-import { EMPTY_DRAFT, draftErrors, toDraftIn, type DraftErrors, type DraftForm as Form } from "@/lib/studio/draft";
+import { EMPTY_DRAFT, draftErrors, packLocales, toDraftIn, type DraftErrors, type DraftForm as Form } from "@/lib/studio/draft";
 
 import { SelectField, TextAreaField } from "./controls";
 
@@ -35,14 +35,15 @@ export function DraftForm({ packs, onCreated }: { packs: CurriculumPackSummary[]
     };
   }, [form.pack]);
 
-  const set = (key: keyof Form, value: string) => setForm((f) => ({ ...f, [key]: value }));
-  const err = (key: keyof Form) => (errors[key] ? t(errors[key]!) : undefined);
+  const set = (key: Exclude<keyof Form, "titles">, value: string) => setForm((f) => ({ ...f, [key]: value }));
+  const err = (key: keyof DraftErrors) => (errors[key] ? t(errors[key]!) : undefined);
+  const locales = packLocales(packs.find((p) => p.pack_id === form.pack));
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setNotice(null);
     setFailure(null);
-    const found = draftErrors(form, hierarchy);
+    const found = draftErrors(form, hierarchy, locales.map((l) => l.tag));
     setErrors(found);
     if (Object.keys(found).length > 0) return;
     setBusy(true);
@@ -68,12 +69,10 @@ export function DraftForm({ packs, onCreated }: { packs: CurriculumPackSummary[]
         {t("studio.draft.heading")}
       </h2>
       <p style={{ margin: 0 }}>{t("studio.draft.localesNote")}</p>
-      <p style={{ margin: 0 }}>{t("studio.draft.editUnavailable")}</p>
+      <p style={{ margin: 0 }}>{t("studio.draft.editHint")}</p>
       <form onSubmit={(e) => void onSubmit(e)} noValidate style={{ display: "grid", gap: "var(--space-3)" }}>
         <TextField id={`${base}-id`} label={t("studio.draft.lessonId")} value={form.lessonId} onChange={(e) => set("lessonId", e.target.value)} dir="ltr" error={err("lessonId")} />
-        <TextField id={`${base}-ur`} label={t("studio.draft.titleUr")} value={form.titleUr} onChange={(e) => set("titleUr", e.target.value)} lang="ur" dir="rtl" error={err("titleUr")} />
-        <TextField id={`${base}-en`} label={t("studio.draft.titleEn")} value={form.titleEn} onChange={(e) => set("titleEn", e.target.value)} lang="en" dir="ltr" error={err("titleEn")} />
-        <SelectField id={`${base}-pack`} label={t("studio.draft.pack")} value={form.pack} onChange={(e) => setForm((f) => ({ ...f, pack: e.target.value, grade: "", subject: "" }))}>
+        <SelectField id={`${base}-pack`} label={t("studio.draft.pack")} value={form.pack} onChange={(e) => setForm((f) => ({ ...f, pack: e.target.value, grade: "", subject: "", titles: {} }))}>
           <option value="">{t("studio.draft.choose")}</option>
           {packs.map((p) => (
             <option key={p.pack_id} value={p.pack_id}>
@@ -81,6 +80,26 @@ export function DraftForm({ packs, onCreated }: { packs: CurriculumPackSummary[]
             </option>
           ))}
         </SelectField>
+        <fieldset style={{ border: "1px solid var(--color-focus-ring)", borderRadius: "var(--radius-md)", display: "grid", gap: "var(--space-2)", padding: "var(--space-3)" }}>
+          <legend>{t("studio.draft.titles")}</legend>
+          {locales.length === 0 ? <p style={{ margin: 0 }}>{t("studio.draft.choosePackFirst")}</p> : null}
+          {locales.map((l) => (
+            <TextField
+              key={l.tag}
+              id={`${base}-title-${l.tag}`}
+              label={t("studio.draft.title", { locale: `${l.name} · ${l.tag}` })}
+              value={form.titles[l.tag] ?? ""}
+              onChange={(e) => setForm((f) => ({ ...f, titles: { ...f.titles, [l.tag]: e.target.value } }))}
+              lang={l.tag}
+              dir={l.direction}
+            />
+          ))}
+          {errors.titles ? (
+            <span role="alert" style={{ color: "var(--color-danger)" }}>
+              {err("titles")}
+            </span>
+          ) : null}
+        </fieldset>
         <SelectField id={`${base}-grade`} label={t("studio.draft.grade")} value={form.grade} onChange={(e) => setForm((f) => ({ ...f, grade: e.target.value, subject: "" }))} error={err("grade")}>
           <option value="">{t("studio.draft.choose")}</option>
           {grades.map((g) => (

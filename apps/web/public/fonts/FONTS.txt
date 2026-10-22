@@ -1,0 +1,16 @@
+Self-hosted fonts
+=================
+
+NotoNastaliqUrdu-Regular.arabic.woff2
+  Family:   Noto Nastaliq Urdu, version 4.000
+  Source:   https://github.com/notofonts/nastaliq/releases/tag/NotoNastaliqUrdu-v4.000
+            (NotoNastaliqUrdu-v4.000.zip, sha256 0725a7a9dfd450961b18227445cc9a5d21624d68b1f88fa52e4c6a0fe7576728)
+  Input:    NotoNastaliqUrdu/unhinted/ttf/NotoNastaliqUrdu-Regular.ttf
+            (sha256 6decda3b03f6366dbd75e3a22544d248ca686b582f897fae8a7dc027302812e3)
+  Licence:  SIL Open Font License 1.1 (OFL.txt in this directory, copied unmodified from the release)
+  Subset:   fonttools 4.55.3 pyftsubset, --flavor=woff2 --layout-features='*'
+            --unicodes=U+0020,U+00A0,U+0600-06FF,U+0750-077F,U+08A0-08FF,U+200C-200F,U+25CC,U+FB50-FDFF,U+FE70-FEFF
+  Output:   67,056 bytes, sha256 2dde006ada6cca3d5fd2e12f56342426e0ba6f89bfbded8aa9e33b644eaa2f5f
+
+The subset is a Modified Version under the OFL; it keeps the original font name, which the OFL
+allows because "Noto" is not a Reserved Font Name.

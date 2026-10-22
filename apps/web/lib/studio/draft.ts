@@ -1,16 +1,16 @@
 // The new-draft form: what an author fills in, checked before it is sent. Pure; unit-tested.
 //
-// The create contract (LessonDraftIn) takes `title_ur` and `title_en` and nothing locale-generic
-// yet, so the form asks for exactly those. The server still runs every gate; this only spares an
-// author a round trip for the obvious mistakes.
+// Titles are locale-keyed (`title: {locale: text}`); the form offers exactly the locales of the
+// chosen curriculum pack, and at least one title is required. The server still runs every gate;
+// this only spares an author a round trip for the obvious mistakes.
 
 import type { MessageKey } from "../i18n/messages";
-import type { LessonDraftIn } from "../studio-api";
+import type { CurriculumPackSummary, LessonDraftIn } from "../studio-api";
 
 export interface DraftForm {
   lessonId: string;
-  titleUr: string;
-  titleEn: string;
+  /** Title per pack locale. */
+  titles: Record<string, string>;
   pack: string;
   grade: string;
   subject: string;
@@ -20,18 +20,24 @@ export interface DraftForm {
 
 export const EMPTY_DRAFT: DraftForm = {
   lessonId: "",
-  titleUr: "",
-  titleEn: "",
+  titles: {},
   pack: "",
   grade: "",
   subject: "",
   outcomes: "",
 };
 
-export type DraftErrors = Partial<Record<keyof DraftForm, MessageKey>>;
+export type DraftErrors = Partial<Record<"lessonId" | "titles" | "grade" | "subject" | "outcomes", MessageKey>>;
 
 export function parseOutcomes(text: string): string[] {
   return [...new Set(text.split(/[\s,]+/).map((s) => s.trim()).filter(Boolean))];
+}
+
+/** The locales a pack's lessons may carry: its declared locales, else its instructional locales. */
+export function packLocales(pack: CurriculumPackSummary | null | undefined): { tag: string; name: string; direction: "ltr" | "rtl" }[] {
+  if (!pack) return [];
+  if (pack.locales?.length) return pack.locales;
+  return pack.instructional_locales.map((tag) => ({ tag, name: tag, direction: "ltr" as const }));
 }
 
 const LESSON_ID = /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/;
@@ -39,11 +45,13 @@ const LESSON_ID = /^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$/;
 export function draftErrors(
   form: DraftForm,
   hierarchy: { grades: string[]; subjects_by_grade: Record<string, string[]> } | null,
+  allowedLocales?: readonly string[],
 ): DraftErrors {
   const e: DraftErrors = {};
   if (!LESSON_ID.test(form.lessonId.trim())) e.lessonId = "studio.draft.errors.lessonId";
-  if (!form.titleUr.trim()) e.titleUr = "studio.draft.errors.required";
-  if (!form.titleEn.trim()) e.titleEn = "studio.draft.errors.required";
+  const titled = Object.entries(form.titles).filter(([, v]) => v.trim() !== "");
+  if (titled.length === 0) e.titles = "studio.draft.errors.title";
+  else if (allowedLocales && titled.some(([loc]) => !allowedLocales.includes(loc))) e.titles = "studio.draft.errors.locale";
   if (!form.grade) e.grade = "studio.draft.errors.required";
   else if (hierarchy && !hierarchy.grades.includes(form.grade)) e.grade = "studio.draft.errors.notInPack";
   if (!form.subject) e.subject = "studio.draft.errors.required";
@@ -56,10 +64,14 @@ export function draftErrors(
 
 export function toDraftIn(form: DraftForm): LessonDraftIn {
   const outcomes = parseOutcomes(form.outcomes);
+  const title = Object.fromEntries(
+    Object.entries(form.titles)
+      .map(([loc, text]) => [loc, text.trim()] as const)
+      .filter(([, text]) => text !== ""),
+  );
   return {
     lesson_id: form.lessonId.trim(),
-    title_ur: form.titleUr.trim(),
-    title_en: form.titleEn.trim(),
+    title,
     grade: form.grade,
     subject: form.subject,
     ...(form.pack ? { curriculum_pack: form.pack } : {}),
