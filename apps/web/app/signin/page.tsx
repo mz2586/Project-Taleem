@@ -20,7 +20,10 @@ import { deviceId } from "@/lib/session/device";
 import { publicIdentityApi } from "@/lib/session/identityApi";
 import { sessionStore } from "@/lib/session/store";
 import type { RosterEntry } from "@/lib/session/types";
-import { ApiError } from "@/lib/student/types";
+import { identityErrorKey } from "@/lib/guardian/errors";
+import type { MessageKey } from "@/lib/i18n/messages";
+import { useLocale } from "@/lib/i18n/useLocale";
+import { LanguagePicker } from "@/app/guardian/LanguagePicker";
 
 // Remembering the family code is a convenience for the child, not a credential store: it is not a
 // secret to the family that owns it, and it alone signs nobody in.
@@ -43,37 +46,26 @@ function rememberCode(code: string): void {
   }
 }
 
-function messageFor(error: unknown): string {
-  if (error instanceof ApiError) {
-    if (error.status === 0) return "انٹرنیٹ دستیاب نہیں۔ دوبارہ کوشش کریں۔";
-    if (error.problem.code === "CONSENT_REQUIRED") {
-      return "آپ کے سرپرست کی اجازت درکار ہے۔ یہ فون اپنے والدین کو دکھائیں۔";
-    }
-    if (error.status === 429) return "بہت زیادہ کوششیں۔ تھوڑی دیر بعد کوشش کریں۔";
-    if (error.status === 401) return "کوڈ، نام یا پن درست نہیں۔";
-  }
-  return "کچھ غلط ہو گیا۔ دوبارہ کوشش کریں۔";
-}
-
 export default function SignInPage() {
   const router = useRouter();
+  const { t } = useLocale();
   const [step, setStep] = useState<"code" | "who">("code");
   const [familyCode, setFamilyCode] = useState("");
   const [roster, setRoster] = useState<RosterEntry[]>([]);
   const [chosen, setChosen] = useState<string | null>(null);
   const [pin, setPin] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<MessageKey | null>(null);
   const [busy, setBusy] = useState(false);
 
   const loadRoster = useCallback(async (code: string) => {
     setBusy(true);
-    setError("");
+    setError(null);
     try {
       const { learners } = await publicIdentityApi.roster(code);
       if (learners.length === 0) {
         // An unknown code and a family with nobody enrolled are the same answer from the server, so
         // this message covers both without implying which.
-        setError("اس کوڈ کے لیے کوئی نام نہیں ملا۔ کوڈ دوبارہ دیکھیں۔");
+        setError("auth.learner.noNames");
         return;
       }
       setRoster(learners);
@@ -81,7 +73,7 @@ export default function SignInPage() {
       setStep("who");
       if (learners.length === 1) setChosen(learners[0]!.display_name);
     } catch (e) {
-      setError(messageFor(e));
+      setError(identityErrorKey(e, "roster"));
     } finally {
       setBusy(false);
     }
@@ -104,7 +96,7 @@ export default function SignInPage() {
     event.preventDefault();
     if (!chosen) return;
     setBusy(true);
-    setError("");
+    setError(null);
     try {
       const envelope = await publicIdentityApi.signInLearner({
         familyCode,
@@ -115,7 +107,7 @@ export default function SignInPage() {
       sessionStore.adopt(envelope);
       router.replace("/student/today");
     } catch (e) {
-      setError(messageFor(e));
+      setError(identityErrorKey(e, "learner-sign-in"));
       setPin("");
     } finally {
       setBusy(false);
@@ -125,23 +117,25 @@ export default function SignInPage() {
   if (step === "code") {
     return (
       <AuthShell
-        title="تعلیم"
-        subtitle="اپنے گھر کا کوڈ لکھیں — یہ آپ کے والدین کے پاس ہے۔"
+        title={t("auth.learner.codeTitle")}
+        subtitle={t("auth.learner.codeSubtitle")}
         footer={
           <p style={{ margin: 0 }}>
-            سرپرست ہیں؟{" "}
+            {t("auth.learner.guardianPrompt")}{" "}
             <Link href="/guardian/signin" style={{ color: "var(--color-action-primary)" }}>
-              یہاں داخل ہوں
+              {t("auth.learner.guardianLink")}
             </Link>
           </p>
         }
       >
+        <LanguagePicker />
         <form onSubmit={submitCode} style={{ display: "grid", gap: "var(--space-4)" }}>
-          {error ? <FormError message={error} /> : null}
+          <div aria-live="polite">{error ? <FormError message={t(error)} /> : null}</div>
           <TextField
             id="family-code"
-            label="گھر کا کوڈ"
-            hint="مثال: K7QM-3XPZ"
+            label={t("auth.learner.familyCode")}
+            hint={t("auth.learner.familyCodeHint")}
+            dir="ltr"
             value={familyCode}
             onChange={(e) => setFamilyCode(e.target.value)}
             autoComplete="off"
@@ -149,7 +143,7 @@ export default function SignInPage() {
             spellCheck={false}
             required
           />
-          <Button type="submit" variant="brand" label="آگے" loading={busy} />
+          <Button type="submit" variant="brand" label={t("auth.learner.next")} loading={busy} />
         </form>
       </AuthShell>
     );
@@ -157,23 +151,23 @@ export default function SignInPage() {
 
   return (
     <AuthShell
-      title="آپ کون ہیں؟"
-      subtitle="اپنا نام چنیں، پھر اپنا پن لکھیں۔"
+      title={t("auth.learner.whoTitle")}
+      subtitle={t("auth.learner.whoSubtitle")}
       footer={
         <Button
           variant="ghost"
-          label="کوڈ بدلیں"
+          label={t("auth.learner.changeCode")}
           onClick={() => {
             setStep("code");
             setChosen(null);
             setPin("");
-            setError("");
+            setError(null);
           }}
         />
       }
     >
       <ul
-        aria-label="اس گھر کے طالبِ علم"
+        aria-label={t("auth.learner.rosterLabel")}
         style={{ listStyle: "none", margin: 0, padding: 0, display: "grid", gap: "var(--space-2)" }}
       >
         {roster.map((entry) => {
@@ -186,7 +180,7 @@ export default function SignInPage() {
                 onClick={() => {
                   setChosen(entry.display_name);
                   setPin("");
-                  setError("");
+                  setError(null);
                 }}
                 style={{
                   width: "100%",
@@ -208,7 +202,7 @@ export default function SignInPage() {
                   gap: "var(--space-2)",
                 }}
               >
-                <span>{entry.display_name}</span>
+                <bdi>{entry.display_name}</bdi>
                 <span aria-hidden="true">{selected ? "✓" : "›"}</span>
               </button>
             </li>
@@ -218,11 +212,11 @@ export default function SignInPage() {
 
       {chosen ? (
         <form onSubmit={submitPin} style={{ display: "grid", gap: "var(--space-4)" }}>
-          {error ? <FormError message={error} /> : null}
+          <div aria-live="polite">{error ? <FormError message={t(error)} /> : null}</div>
           <PinField
             id="pin"
-            label={`${chosen} کا پن`}
-            hint="چار سے چھ ہندسے"
+            label={t("auth.learner.pinLabel", { name: chosen })}
+            hint={t("auth.learner.pinHint")}
             value={pin}
             onChange={(e) => setPin(e.target.value.replace(/\D/g, ""))}
             required
@@ -230,7 +224,7 @@ export default function SignInPage() {
           <Button
             type="submit"
             variant="brand"
-            label="سیکھنا شروع کریں"
+            label={t("auth.learner.start")}
             loading={busy}
             disabled={pin.length < 4}
           />

@@ -4,49 +4,42 @@
 //
 // The family code is shown immediately afterwards rather than emailed: this product is used by
 // families who may not have reliable email, and the code is what their child needs to sign in.
+//
+// The account is created in the language the guardian is reading this screen in, so the portal
+// stays in that language on their other devices.
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
+import { LanguagePicker } from "@/app/guardian/LanguagePicker";
 import { AuthShell, FormError, TextField } from "@/components/form";
 import { Button } from "@/design-system/Button";
+import { identityErrorKey } from "@/lib/guardian/errors";
+import type { MessageKey } from "@/lib/i18n/messages";
+import { useLocale } from "@/lib/i18n/useLocale";
 import { publicIdentityApi } from "@/lib/session/identityApi";
 import { sessionStore } from "@/lib/session/store";
-import { ApiError } from "@/lib/student/types";
-
-function messageFor(error: unknown): string {
-  if (error instanceof ApiError) {
-    if (error.status === 0) return "انٹرنیٹ دستیاب نہیں۔ دوبارہ کوشش کریں۔";
-    if (error.status === 409) return "اس ای میل کے ساتھ اکاؤنٹ پہلے سے موجود ہے۔";
-    if (error.status === 429) return "بہت زیادہ کوششیں۔ تھوڑی دیر بعد کوشش کریں۔";
-    if (error.status === 422) return error.problem.detail ?? "دی گئی معلومات درست نہیں۔";
-  }
-  return "کچھ غلط ہو گیا۔ دوبارہ کوشش کریں۔";
-}
 
 export default function JoinPage() {
   const router = useRouter();
+  const { t, locale } = useLocale();
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [passphrase, setPassphrase] = useState("");
-  const [error, setError] = useState("");
+  const [error, setError] = useState<MessageKey | null>(null);
   const [busy, setBusy] = useState(false);
 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
     setBusy(true);
-    setError("");
+    setError(null);
     try {
-      const envelope = await publicIdentityApi.registerGuardian({
-        email,
-        passphrase,
-        displayName,
-      });
+      const envelope = await publicIdentityApi.registerGuardian({ email, passphrase, displayName, locale });
       sessionStore.adopt(envelope);
       router.replace("/guardian/family");
     } catch (e) {
-      setError(messageFor(e));
+      setError(identityErrorKey(e, "register"));
     } finally {
       setBusy(false);
     }
@@ -54,32 +47,38 @@ export default function JoinPage() {
 
   return (
     <AuthShell
-      title="اپنے بچے کو داخل کروائیں"
-      subtitle="پہلے آپ اپنا سرپرست اکاؤنٹ بنائیں۔ پھر آپ اپنے بچوں کو شامل کریں گے۔"
+      title={t("auth.join.title")}
+      subtitle={t("auth.join.subtitle")}
       footer={
-        <p style={{ margin: 0 }}>
-          پہلے سے اکاؤنٹ ہے؟{" "}
-          <Link href="/guardian/signin" style={{ color: "var(--color-action-primary)" }}>
-            داخل ہوں
-          </Link>
-        </p>
+        <div style={{ display: "grid", gap: "var(--space-3)" }}>
+          <p style={{ margin: 0 }}>
+            {t("auth.join.haveAccount")}{" "}
+            <Link href="/guardian/signin" style={{ color: "var(--color-action-primary)" }}>
+              {t("auth.join.signIn")}
+            </Link>
+          </p>
+          <LanguagePicker />
+        </div>
       }
     >
       <form onSubmit={submit} style={{ display: "grid", gap: "var(--space-4)" }}>
-        {error ? <FormError message={error} /> : null}
+        <div aria-live="polite">{error ? <FormError message={t(error)} /> : null}</div>
         <TextField
           id="display-name"
-          label="آپ کا نام"
+          label={t("auth.join.name")}
           value={displayName}
           onChange={(e) => setDisplayName(e.target.value)}
           autoComplete="name"
+          dir="auto"
+          maxLength={60}
           required
         />
         <TextField
           id="email"
-          label="ای میل"
-          hint="صرف آپ کے اکاؤنٹ کے لیے۔ آپ کے بچے کی کوئی ای میل نہیں ہوتی۔"
+          label={t("auth.join.email")}
+          hint={t("auth.join.emailHint")}
           type="email"
+          dir="ltr"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           autoComplete="email"
@@ -87,8 +86,8 @@ export default function JoinPage() {
         />
         <TextField
           id="passphrase"
-          label="خفیہ جملہ"
-          hint="کم از کم دس حروف۔ ایک جملہ یاد رکھنا آسان اور محفوظ ہوتا ہے۔"
+          label={t("auth.join.passphrase")}
+          hint={t("auth.join.passphraseHint")}
           type="password"
           value={passphrase}
           onChange={(e) => setPassphrase(e.target.value)}
@@ -96,7 +95,7 @@ export default function JoinPage() {
           minLength={10}
           required
         />
-        <Button type="submit" variant="brand" label="اکاؤنٹ بنائیں" loading={busy} />
+        <Button type="submit" variant="brand" label={t("auth.join.submit")} loading={busy} />
       </form>
     </AuthShell>
   );

@@ -111,7 +111,87 @@ authorized, and IDOR-guarded (a guardian sees only their linked child; a mentor 
 
 ---
 
-## 9. What lands with M-Gov (not built here)
+## 9. Phase C — the guardian portal as built (2026-10-22)
+
+The guardian identity, consent, and child-linkage layer that §0–§8 anticipated now exists
+(`/v1/identity`, FD-14), and the web portal is the screen over it. A guardian can run their family
+from it without an engineer. Every guardian screen reads its text from the typed i18n catalog
+(`apps/web/lib/i18n/messages`, `guardian` and `auth` namespaces, Urdu and English), so an English
+interface is English and left-to-right, and an Urdu interface is Urdu and right-to-left. Curriculum
+codes and any server-generated sentence keep their own `lang`/`dir` (`contentAttrs`).
+
+### 9.1 Screens
+
+| Route | What a guardian does there |
+| --- | --- |
+| `/join` | Create the guardian account (in the language they are reading) |
+| `/guardian/signin` | Sign in |
+| `/guardian` | See every child: can they sign in, a progress summary, what needs attention |
+| `/guardian/family` | Family code; add a child; per child: permissions, permission history, PIN reset / unlock; the activity record |
+| `/guardian/children/{ref}` | One child's progress: this week, overview, attention, recommendations, the AI Teacher's next step, learning days, ideas, sessions, checks, achievements, phone sync |
+| `/signin` | The child's sign-in (family code, tap name, PIN) |
+
+### 9.2 Capability map — every `/v1/identity` and `/v1/guardian` operation
+
+| Operation | Reached from |
+| --- | --- |
+| `registerGuardian` | `/join` |
+| `signInGuardian` | `/guardian/signin` |
+| `getFamilyRoster`, `signInLearner` | `/signin` |
+| `refreshSession` | Automatic: every guardian call runs inside `withSession` |
+| `signOut` | "Sign out" in the guardian header |
+| `getConsentPolicy` | `/guardian/family` renders the consent form from it (built-in fallback if unreachable) |
+| `getGuardianIdentityProfile` | `/guardian` (names, consent status) and `/guardian/family` |
+| `listLearners` | `/guardian/family`, refreshing the list after each change |
+| `enrolLearner` | `/guardian/family` → "Add a child" (name, PIN, class, the child's app language) |
+| `resetLearnerPin` | `/guardian/family` → PIN (also unlocks a locked child) |
+| `grantConsent` | `/guardian/family` → Permissions, per scope |
+| `withdrawConsent` | `/guardian/family` → untick a scope (that scope only) or "Stop all permissions" (everything); both confirmed first |
+| `getConsentState` | `/guardian/family` → "Permission history" |
+| `getIdentityAuditTrail` | `/guardian/family` → Activity record, with "show older" (`limit` up to 500) |
+| `getGuardianDashboard` | `/guardian` |
+| `getGuardianChild` | `/guardian/children/{ref}` |
+| `getGuardianProfile` (`/v1/guardian/me`) | Not called: its fields (display name, linked refs) are a subset of `getGuardianIdentityProfile` + `getGuardianDashboard`, which the screens already read |
+
+### 9.3 The consent form
+
+- Rendered from `GET /v1/identity/policy`: one `<fieldset>`/`<legend>` for "needed to learn"
+  (`learning_data`, shown ticked and disabled) and one for "your choice" (the optional scopes, unticked
+  for a child without live consent).
+- Each scope has a plain-language title, a one- or two-sentence explanation of what saying yes allows,
+  and a Listen button, as the student screens have.
+- The attestation sentence is shown above the button in the guardian's language and is stored
+  verbatim with the record.
+- Grants are additive on the server, so unticking a scope is sent as a withdrawal of that scope (the
+  previous form only ever sent grants, so unticking did nothing). `lib/guardian/consent.ts`
+  `planConsentChange` computes the calls.
+- Any withdrawal stops at a confirmation that says what will happen. "Stop all permissions" says the
+  child will be signed out on every phone now, cannot sign in until permission is given again, and
+  that nothing is deleted. Focus moves to the confirmation; Escape or "No, go back" returns it.
+- Errors are `role="alert"`; saved notices are polite status messages.
+- A policy that requires a scope this app cannot explain disables the grant: agreeing to something
+  the screen cannot describe is not consent.
+
+### 9.4 Honest states
+
+`lib/guardian/dashboard.ts`, unit-tested: a newly registered guardian sees "add your first child"; a
+child with no answered question shows "no progress yet" (never zeros and a 0% accuracy); if the
+learning service is down the dashboard still shows names and permissions; if both services are down
+it says so (offline, signed out, or an error, each with the right next step). A child's detail answers
+404 ("no learning data yet") with "no progress yet", not an error.
+
+### 9.5 Not surfaced, and the backend changes that would surface them
+
+| Capability | Why not | Backend change needed |
+| --- | --- | --- |
+| Rename a child's display name | No operation in `identity.openapi.yaml` | `PATCH /v1/identity/learners/{ref}` with `displayName` (unique within the family, audited) |
+| Disable / pause a child's account | No guardian-facing operation; `learner.suspended` exists only as an audit action | `POST /v1/identity/learners/{ref}:suspend` and `:reinstate`, owner-only. Today "Stop all permissions" is the guardian's equivalent: it blocks sign-in and ends sessions |
+| Optional scopes taking effect | Only `learning_data` is enforced (the sign-in gate). `ai_teaching`, `voice_audio`, and `progress_sharing` are recorded but no feature checks them, so the copy describes what each covers and does not promise behaviour | Enforce each optional scope where its feature runs |
+| Localised validation messages | Every identity 422 is `VALIDATION_FAILED` with an English `detail`; the client matches known sentences to catalog keys (`lib/guardian/errors.ts`) | A stable per-error `code` (e.g. `PIN_TOO_EASY`, `DUPLICATE_NAME`) |
+| Objective titles in progress text | Achievements and notifications carry English sentences built from objective codes | Machine-readable kinds and objective titles in the guardian read model |
+| Notification preferences, data export / deletion | Not implemented in the backend (§18 of the master scope) | New endpoints |
+
+## 10. What lands with M-Gov (not built here)
 
 The guardian **role, identity, and child-linkage** (a thin authorization + linkage layer over the same
 reads) land with the child-safe auth work (WS3) once M-Gov closes. The **data surfaces already exist**;

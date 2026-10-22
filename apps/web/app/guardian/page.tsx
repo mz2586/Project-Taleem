@@ -1,65 +1,96 @@
 "use client";
-// Guardian dashboard — one card per linked child: progress, streak, open interventions, and the
-// offline-sync freshness. Loading / empty / error / retry states; optimistic refresh on demand.
-import Link from "next/link";
+// Family dashboard — one card per child: name, whether they can sign in, and a learning summary.
+// The states (loading, a new guardian with no children, children without progress yet, one service
+// down, both down) come from lib/guardian/dashboard.ts, where they are unit-tested.
 import { useCallback, useEffect, useState } from "react";
-
-import { Button } from "@/design-system/Button";
-import { Card, EmptyState, ErrorBanner, ProgressRing, Skeleton } from "@/components/student/ui";
-import { guardianApi } from "@/lib/guardian/api";
-import { useSession } from "@/lib/session/useSession";
-import type { ChildSummary, GuardianDashboard } from "@/lib/guardian/types";
-import { ApiError } from "@/lib/student/types";
 
 import { RequireSession } from "@/components/RequireSession";
 
+import { Card, EmptyState, ProgressRing, Skeleton } from "@/components/student/ui";
+import { Button } from "@/design-system/Button";
+import { ButtonLink } from "@/design-system/ButtonLink";
+import { guardianApi, familyApi } from "@/lib/guardian/api";
+import { familyDashboardModel, familyNudge, type ChildAccess, type ChildRow, type Request } from "@/lib/guardian/dashboard";
+import { formatChildSummary } from "@/lib/guardian/progress";
+import type { GuardianDashboard } from "@/lib/guardian/types";
+import type { MessageKey } from "@/lib/i18n/messages";
+import { useLocale } from "@/lib/i18n/useLocale";
+import type { GuardianProfile } from "@/lib/session/types";
+import { useSession } from "@/lib/session/useSession";
+
+import { GuardianLoadFailure } from "./GuardianLoadFailure";
 import { GuardianShell } from "./GuardianShell";
 
-type Status = "loading" | "ready" | "offline" | "error";
+const ACCESS_KEYS: Record<ChildAccess, MessageKey> = {
+  given: "guardian.access.given",
+  "not-given": "guardian.access.notGiven",
+  "policy-changed": "guardian.access.policyChanged",
+  withdrawn: "guardian.access.withdrawn",
+  locked: "guardian.access.locked",
+  suspended: "guardian.access.suspended",
+  unknown: "guardian.access.unknown",
+};
 
-function SyncPill({ stale }: { stale: boolean }) {
+function AccessBadge({ access }: { access: ChildAccess }) {
+  const { t } = useLocale();
+  const ok = access === "given";
   return (
-    <span
-      style={{
-        fontSize: "var(--font-size-body-min)",
-        padding: "2px 8px",
-        borderRadius: "var(--radius-md)",
-        background: stale ? "var(--color-danger)" : "var(--color-surface-2, #eef)",
-        color: stale ? "var(--color-on-danger)" : "var(--color-text-primary)",
-      }}
-    >
-      {stale ? "Data may be out of date" : "Synced recently"}
+    <span style={{ display: "inline-flex", gap: "var(--space-1)", alignItems: "center", color: ok ? "var(--color-brand)" : "var(--color-danger)" }}>
+      {/* Shape as well as colour: filled for "can learn", hollow otherwise. */}
+      <span aria-hidden="true">{ok ? "●" : "○"}</span>
+      <span>{t(ACCESS_KEYS[access])}</span>
     </span>
   );
 }
 
-function ChildCard({ child }: { child: ChildSummary }) {
-  const total =
-    child.progress.objectives_mastered + child.progress.objectives_in_progress || 1;
-  const mastery = child.progress.objectives_mastered / total;
+function ChildCard({ child }: { child: ChildRow }) {
+  const { t, locale, formatPercent } = useLocale();
+  const name = child.name ?? t("guardian.dashboard.unnamedChild");
+  const summary = child.progress.kind === "summary" ? formatChildSummary({ locale }, child.progress.summary) : null;
+  const href = `/guardian/children/${encodeURIComponent(child.studentRef)}`;
+
   return (
     <Card>
-      <div style={{ display: "flex", alignItems: "center", gap: "var(--space-4)" }}>
-        <ProgressRing value={mastery} label="Mastered" />
-        <div style={{ display: "grid", gap: "var(--space-1)", flex: 1 }}>
-          <strong>{child.student_ref}</strong>
-          <span>
-            {child.progress.objectives_mastered} mastered ·{" "}
-            {child.progress.objectives_in_progress} in progress
-          </span>
-          <span>🔥 {child.streak.current}-day streak · 🏅 {child.achievements_count}</span>
-          <SyncPill stale={child.sync_status.is_stale} />
-          {child.open_interventions > 0 ? (
-            <span role="status" style={{ color: "var(--color-danger)" }}>
-              {child.open_interventions} thing(s) need attention
-            </span>
-          ) : null}
+      <div style={{ display: "grid", gap: "var(--space-3)" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "space-between", gap: "var(--space-2)" }}>
+          <h2 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }} dir="auto">
+            {name}
+          </h2>
+          <AccessBadge access={child.access} />
         </div>
-      </div>
-      <div style={{ marginTop: "var(--space-3)" }}>
-        <Link href={`/guardian/children/${encodeURIComponent(child.student_ref)}`}>
-          <Button label="View details" />
-        </Link>
+
+        {summary ? (
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "var(--space-4)" }}>
+            <ProgressRing value={summary.masteryRatio} label={t("guardian.dashboard.masteryRing")} formatPercent={formatPercent} />
+            <ul style={{ margin: 0, paddingInlineStart: "var(--space-4)", display: "grid", gap: "var(--space-1)", flex: 1 }}>
+              <li>{summary.mastered}</li>
+              <li>{summary.inProgress}</li>
+              {summary.accuracy ? <li>{summary.accuracy}</li> : null}
+              <li>{summary.streak}</li>
+              {summary.achievements ? <li>{summary.achievements}</li> : null}
+              <li>
+                <span aria-hidden="true">{summary.syncStale ? "⚠ " : "✓ "}</span>
+                {summary.sync}
+              </li>
+              {summary.attention ? <li style={{ color: "var(--color-danger)" }}>{summary.attention}</li> : null}
+            </ul>
+          </div>
+        ) : null}
+        {child.progress.kind === "none-yet" ? <p style={{ margin: 0 }}>{t("guardian.dashboard.childNoProgress")}</p> : null}
+        {child.progress.kind === "unavailable" ? (
+          <p style={{ margin: 0 }}>{t("guardian.dashboard.childProgressUnavailable")}</p>
+        ) : null}
+
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)" }}>
+          {child.progress.kind === "summary" ? (
+            <ButtonLink href={href} variant="primary" label={t("guardian.dashboard.viewProgress")} />
+          ) : null}
+          {child.access === "not-given" || child.access === "policy-changed" ? (
+            <ButtonLink href={`/guardian/family#learner-${child.studentRef}`} variant="brand" label={t("guardian.dashboard.givePermission")} />
+          ) : (
+            <ButtonLink href={`/guardian/family#learner-${child.studentRef}`} variant="ghost" label={t("guardian.dashboard.manage")} />
+          )}
+        </div>
       </div>
     </Card>
   );
@@ -67,69 +98,78 @@ function ChildCard({ child }: { child: ChildSummary }) {
 
 function GuardianDashboardPage() {
   const { session } = useSession("guardian");
+  const { t } = useLocale();
   const guardianName = session?.guardian?.display_name ?? "";
-  const [data, setData] = useState<GuardianDashboard | null>(null);
-  const [status, setStatus] = useState<Status>("loading");
+  const [identity, setIdentity] = useState<Request<GuardianProfile>>({ status: "pending" });
+  const [dashboard, setDashboard] = useState<Request<GuardianDashboard>>({ status: "pending" });
 
   const load = useCallback(async () => {
-    setStatus("loading");
-    try {
-      setData(await guardianApi.dashboard());
-      setStatus("ready");
-    } catch (e) {
-      if (e instanceof ApiError && (e.status === 0 || e.isAuth)) setStatus("offline");
-      else setStatus("error");
-    }
+    setIdentity({ status: "pending" });
+    setDashboard({ status: "pending" });
+    const [me, dash] = await Promise.allSettled([familyApi.me(), guardianApi.dashboard()]);
+    setIdentity(me.status === "fulfilled" ? { status: "ok", value: me.value } : { status: "error", error: me.reason });
+    setDashboard(dash.status === "fulfilled" ? { status: "ok", value: dash.value } : { status: "error", error: dash.reason });
   }, []);
 
   useEffect(() => {
     void load();
   }, [load]);
 
+  const model = familyDashboardModel({ identity, dashboard });
+  const nudge = familyNudge(model);
+
   return (
-    <GuardianShell title="Taleem — Guardian">
-      <section>
-        <h2 style={{ margin: 0 }}>السلام علیکم، {guardianName}</h2>
-        <p style={{ margin: 0 }}>Your children&apos;s learning at a glance.</p>
+    <GuardianShell title={t("guardian.dashboard.title")}>
+      <section style={{ display: "grid", gap: "var(--space-1)" }}>
+        <h2 style={{ margin: 0 }}>
+          {guardianName ? t("guardian.dashboard.greeting", { name: guardianName }) : t("guardian.dashboard.greetingNoName")}
+        </h2>
+        <p style={{ margin: 0 }}>{t("guardian.dashboard.subtitle")}</p>
       </section>
 
-      {status === "loading" ? <Skeleton lines={4} /> : null}
+      <div aria-live="polite" style={{ display: "grid", gap: "var(--space-4)" }}>
+        {model.kind === "loading" ? <Skeleton lines={4} label={t("guardian.dashboard.loading")} /> : null}
 
-      {status === "offline" ? (
-        <ErrorBanner
-          message="You're offline or your session expired."
-          action={<Button label="Try again" onClick={() => void load()} />}
-        />
-      ) : null}
+        {model.kind === "failed" ? (
+          <GuardianLoadFailure
+            failure={model.failure}
+            offlineTitle="guardian.dashboard.offlineTitle"
+            offlineBody="guardian.dashboard.offlineBody"
+            errorMessage="guardian.dashboard.error"
+            onRetry={() => void load()}
+          />
+        ) : null}
 
-      {status === "error" ? (
-        <ErrorBanner
-          message="Something went wrong loading the dashboard."
-          action={<Button label="Retry" onClick={() => void load()} />}
-        />
-      ) : null}
+        {model.kind === "no-children" ? (
+          <EmptyState
+            title={t("guardian.dashboard.noChildrenTitle")}
+            body={t("guardian.dashboard.noChildrenBody")}
+            action={<ButtonLink href="/guardian/family#enrol" variant="brand" label={t("guardian.dashboard.addChild")} />}
+          />
+        ) : null}
 
-      {status === "ready" && data && data.children.length === 0 ? (
-        <EmptyState
-          title="No children linked yet"
-          body="When a child is linked to your account, their progress will appear here."
-        />
-      ) : null}
-
-      {status === "ready" && data && data.children.length > 0 ? (
-        <>
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <Button label="Refresh" onClick={() => void load()} />
-          </div>
-          {data.children.map((child) => (
-            <ChildCard key={child.student_ref} child={child} />
-          ))}
-        </>
-      ) : null}
+        {model.kind === "children" ? (
+          <>
+            {nudge === "give-permission" ? <p role="status" style={{ margin: 0 }}>{t("guardian.dashboard.nudgePermission")}</p> : null}
+            {nudge === "unlock" ? <p role="status" style={{ margin: 0 }}>{t("guardian.dashboard.nudgeUnlock")}</p> : null}
+            {model.noProgressYet ? (
+              <EmptyState title={t("guardian.dashboard.noProgressTitle")} body={t("guardian.dashboard.noProgressBody")} />
+            ) : null}
+            {model.progressUnavailable ? <p style={{ margin: 0 }}>{t("guardian.dashboard.progressUnavailable")}</p> : null}
+            {model.identityUnavailable ? <p style={{ margin: 0 }}>{t("guardian.dashboard.identityUnavailable")}</p> : null}
+            {model.children.map((child) => (
+              <ChildCard key={child.studentRef} child={child} />
+            ))}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", justifyContent: "space-between" }}>
+              <ButtonLink href="/guardian/family#enrol" variant="ghost" label={t("guardian.dashboard.addChild")} />
+              <Button variant="ghost" label={t("guardian.dashboard.refresh")} onClick={() => void load()} />
+            </div>
+          </>
+        ) : null}
+      </div>
     </GuardianShell>
   );
 }
-
 
 export default function GuardedGuardianDashboard() {
   return (

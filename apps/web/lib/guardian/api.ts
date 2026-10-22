@@ -1,9 +1,17 @@
-// Typed client for the Guardian Portal API (/v1/guardian/*). Read-only; reuses the shared HTTP
-// client (bearer auth + problem+json + offline ApiError). No aggregation logic here — the server
-// already aggregates from the existing learning read models.
+// Typed clients for everything the guardian portal calls.
+//
+// - `guardianApi` — the Guardian Portal API (/v1/guardian/*): read-only learning aggregates. No
+//   aggregation here; the server already aggregates from the learning read models.
+// - `familyApi` — the guardian's half of the identity API (/v1/identity/*), from the shared session
+//   client, plus the audit trail with its `limit` parameter.
+//
+// Every call runs through `withSession`, so a guardian who leaves the tab open past the access
+// token's lifetime gets a refreshed token instead of a spurious "offline" or "signed out".
 
 import { createApiClient, type TokenProvider } from "../apiClient";
-import { currentAccessToken } from "../session/store";
+import { createGuardianIdentityApi, publicIdentityApi } from "../session/identityApi";
+import { currentAccessToken, withSession } from "../session/store";
+import type { AuditEvent } from "../session/types";
 import { API_BASE } from "./config";
 import type { ChildOverview, GuardianDashboard, GuardianProfile } from "./types";
 
@@ -14,10 +22,32 @@ export function setGuardianTokenProvider(provider: TokenProvider): void {
 }
 
 const client = createApiClient(API_BASE, () => tokenProvider());
+const identity = createGuardianIdentityApi(() => tokenProvider());
 
 export const guardianApi = {
-  me: () => client.get<GuardianProfile>("/v1/guardian/me"),
-  dashboard: () => client.get<GuardianDashboard>("/v1/guardian/dashboard"),
+  me: () => withSession(() => client.get<GuardianProfile>("/v1/guardian/me")),
+  dashboard: () => withSession(() => client.get<GuardianDashboard>("/v1/guardian/dashboard")),
   child: (studentRef: string) =>
-    client.get<ChildOverview>(`/v1/guardian/children/${encodeURIComponent(studentRef)}`),
+    withSession(() =>
+      client.get<ChildOverview>(`/v1/guardian/children/${encodeURIComponent(studentRef)}`),
+    ),
+};
+
+type IdentityApi = ReturnType<typeof createGuardianIdentityApi>;
+
+export const familyApi = {
+  me: () => withSession(() => identity.me()),
+  listLearners: () => withSession(() => identity.listLearners()),
+  enrolLearner: (body: Parameters<IdentityApi["enrolLearner"]>[0]) =>
+    withSession(() => identity.enrolLearner(body)),
+  resetPin: (studentRef: string, pin: string) => withSession(() => identity.resetPin(studentRef, pin)),
+  consent: (studentRef: string) => withSession(() => identity.consent(studentRef)),
+  grantConsent: (body: Parameters<IdentityApi["grantConsent"]>[0]) =>
+    withSession(() => identity.grantConsent(body)),
+  withdrawConsent: (body: Parameters<IdentityApi["withdrawConsent"]>[0]) =>
+    withSession(() => identity.withdrawConsent(body)),
+  audit: (limit: number) =>
+    withSession(() => client.get<{ events: AuditEvent[] }>(`/v1/identity/audit?limit=${encodeURIComponent(limit)}`)),
+  /** Public; the consent form is rendered from it. */
+  policy: () => publicIdentityApi.policy(),
 };
