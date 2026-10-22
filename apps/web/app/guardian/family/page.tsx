@@ -1,7 +1,8 @@
 "use client";
 // Family settings — the guardian's control room. Every identity capability a guardian has is here:
 // the family code, enrolling a child, consent per scope (grant, change, withdraw — confirmed first),
-// the consent history, PIN reset / unlock, and the family audit trail. The consent form is
+// the consent history, joining a teacher's class (shares progress), PIN reset / unlock, and the
+// family audit trail. The consent form is
 // ./ConsentForm.tsx; the rules behind every control are in lib/guardian/* and unit-tested.
 import { useCallback, useEffect, useId, useMemo, useState } from "react";
 
@@ -26,6 +27,7 @@ import type { AuditEvent, ConsentStateWithHistory, GuardianProfile, Learner, Pol
 import { GuardianLoadFailure } from "../GuardianLoadFailure";
 import { GuardianShell } from "../GuardianShell";
 import { ConsentForm } from "./ConsentForm";
+import { JoinClassForm } from "./JoinClassForm";
 
 const sectionStyle = {
   border: "1px solid var(--color-focus-ring)",
@@ -326,6 +328,8 @@ function LearnerSection({
       <h4 style={{ margin: 0 }}>{t("guardian.consent.title")}</h4>
       <ConsentForm learner={learner} policy={policy} onChanged={onChanged} />
       <ConsentHistory learner={learner} />
+
+      <JoinClassForm learner={learner} onJoined={onChanged} />
 
       <h4 style={{ margin: 0 }}>{t("guardian.pin.title")}</h4>
       <PinResetForm learner={learner} onReset={onChanged} />

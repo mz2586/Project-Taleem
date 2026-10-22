@@ -3,7 +3,9 @@
 // Note what a Learner does not have: an email, a phone number, a date of birth. The type mirrors
 // the database, and the database has no column for any of them.
 
-export type Role = "student" | "guardian";
+// `teacher` sessions come from POST /v1/school/teachers:signin, which issues an access token only —
+// no refresh token (see lib/teacher/session.ts). The store treats that as "sign in again at expiry".
+export type Role = "student" | "guardian" | "teacher";
 export type GradeBand = "early" | "middle" | "senior";
 export type AccountStatus = "active" | "locked" | "suspended";
 

@@ -276,3 +276,46 @@ describe("withSession", () => {
     expect(call).toHaveBeenCalledOnce();
   });
 });
+
+// Teacher sessions (POST /v1/school/teachers:signin) carry an access token and no refresh token.
+// The store must keep them, never send an empty refresh token to identity, and end them at expiry.
+describe("teacher session (no refresh token)", () => {
+  function teacherEnvelope(expiresIn = 3600): SessionEnvelope {
+    return envelope(
+      { role: "teacher", subject: "tch_1", expires_at: Math.floor(Date.now() / 1000) + expiresIn },
+      "",
+    );
+  }
+
+  it("is adopted and survives a reload from storage", async () => {
+    sessionStore.adopt(teacherEnvelope());
+    vi.resetModules();
+    const fresh = await import("../store");
+    expect(fresh.sessionStore.peek()?.role).toBe("teacher");
+    expect(fresh.currentAccessToken()).toBe("access-1");
+  });
+
+  it("still rejects a stored non-teacher session that has no refresh token", async () => {
+    window.localStorage.setItem(
+      "taleem.session.v1",
+      JSON.stringify({ role: "guardian", subject: "g", accessToken: "a", expiresAt: 0, refreshToken: "" }),
+    );
+    vi.resetModules();
+    const fresh = await import("../store");
+    expect(fresh.sessionStore.peek()).toBeNull();
+  });
+
+  it("is cleared at expiry without calling the refresh endpoint", async () => {
+    sessionStore.adopt(teacherEnvelope(5));
+    expect(await sessionStore.valid()).toBeNull();
+    expect(sessionStore.peek()).toBeNull();
+    expect(refreshMock).not.toHaveBeenCalled();
+  });
+
+  it("signs out locally without calling identity sign-out", async () => {
+    sessionStore.adopt(teacherEnvelope());
+    await sessionStore.signOut();
+    expect(sessionStore.peek()).toBeNull();
+    expect(signOutMock).not.toHaveBeenCalled();
+  });
+});

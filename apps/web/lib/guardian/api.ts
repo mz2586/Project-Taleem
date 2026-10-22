@@ -12,6 +12,7 @@ import { createApiClient, type TokenProvider } from "../apiClient";
 import { createGuardianIdentityApi, publicIdentityApi } from "../session/identityApi";
 import { currentAccessToken, withSession } from "../session/store";
 import type { AuditEvent } from "../session/types";
+import type { JoinClassResult } from "../teacher/types";
 import { API_BASE } from "./config";
 import type { ChildOverview, GuardianDashboard, GuardianProfile } from "./types";
 
@@ -48,6 +49,12 @@ export const familyApi = {
     withSession(() => identity.withdrawConsent(body)),
   audit: (limit: number) =>
     withSession(() => client.get<{ events: AuditEvent[] }>(`/v1/identity/audit?limit=${encodeURIComponent(limit)}`)),
+  /**
+   * Join the guardian's own child to a teacher's class with its code (POST /v1/school/classes:join).
+   * The server records the `progress_sharing` consent with `attestation` stored verbatim.
+   */
+  joinClass: (body: { classCode: string; studentRef: string; attestation: string }) =>
+    withSession(() => client.post<JoinClassResult>("/v1/school/classes:join", body)),
   /** Public; the consent form is rendered from it. */
   policy: () => publicIdentityApi.policy(),
 };
