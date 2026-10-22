@@ -72,6 +72,10 @@ def test_session_flow_teaches_and_records(client: TestClient) -> None:
     assert taught.status_code == 200
     item_refs = [i["item_ref"] for i in taught.json()["items"]]
     assert "p2-compare-half-quarter" in item_refs
+    # Each item says how many authored hints it has, so the player only offers help that exists.
+    hint_counts = {i["item_ref"]: i["hint_count"] for i in taught.json()["items"]}
+    assert hint_counts["p2-compare-half-quarter"] >= 1
+    assert all(isinstance(n, int) and n >= 0 for n in hint_counts.values())
 
     wrong = client.post(
         f"/v1/learning/sessions/{session_id}:answer",

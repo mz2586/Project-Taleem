@@ -119,7 +119,12 @@ def build_learning_router(
         return {
             "utterances": [{"kind": u.kind.value, "text": u.text} for u in utterances],
             "items": [
-                {"item_ref": it.item_ref, "prompt": it.prompt, "options": list(it.options)}
+                {
+                    "item_ref": it.item_ref,
+                    "prompt": it.prompt,
+                    "options": list(it.options),
+                    "hint_count": len(it.hints),
+                }
                 for it in lesson.practice_items
             ],
         }

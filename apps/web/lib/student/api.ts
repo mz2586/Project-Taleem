@@ -7,6 +7,7 @@ import type {
   AnswerView,
   ApiError as ApiErrorType,
   DecisionView,
+  HintView,
   KnowledgeView,
   ProgressView,
   SessionEndView,
@@ -87,6 +88,10 @@ export const learningApi = {
       self_confidence?: number | null;
     },
   ) => post<AnswerView>(`/v1/learning/sessions/${sessionId}:answer`, body),
+
+  // The next AUTHORED hint on the item's graduated ladder (never the answer).
+  hint: (sessionId: string, body: { objective_code: string; item_ref: string; hint_level: number }) =>
+    post<HintView>(`/v1/learning/sessions/${sessionId}:hint`, body),
 
   end: (sessionId: string) =>
     post<SessionEndView>(`/v1/learning/sessions/${sessionId}:end`),

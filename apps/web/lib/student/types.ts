@@ -35,6 +35,14 @@ export interface ItemView {
   item_ref: string;
   prompt: Record<string, string>; // locale -> text
   options: string[];
+  /** Authored graduated hints available via `:hint` (absent on servers that predate it). */
+  hint_count?: number;
+}
+
+export interface HintView {
+  hint: string | null; // the authored hint at `level`; null once the ladder is exhausted
+  level: number;
+  exhausted: boolean;
 }
 
 export interface TeachView {

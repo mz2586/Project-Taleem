@@ -1,33 +1,28 @@
 "use client";
 // Learning Session player — the AI teacher interaction. Drives the real /v1/learning session:
-// start -> next(decision) -> teach -> answer(loop) -> end. Renders ONLY approved server content
-// (utterances/items); it never constructs AI content. Governance-safe (synthetic learner).
+// start -> next(decision) -> teach -> present (one step at a time) -> ask (+ authored hints) ->
+// answer (loop) -> end. The teaching rules live in `lib/student/lessonPlayer.ts`; this page only
+// renders approved server content (utterances/items/hints) and never constructs AI content.
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useReducer, useRef } from "react";
 
 import { ReadAloud } from "@/components/student/ReadAloud";
 import { Card, ErrorBanner, ProgressRing, Skeleton } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
 import { learningApi } from "@/lib/student/api";
-import { useLearner } from "@/lib/session/useLearner";
 import {
-  ApiError,
-  type AnswerView,
-  type ItemView,
-  type SessionEndView,
-  type TeachView,
-  type Utterance,
-} from "@/lib/student/types";
-
-type Phase =
-  | "starting"
-  | "teaching"
-  | "asking"
-  | "feedback"
-  | "complete"
-  | "escalated"
-  | "offline"
-  | "error";
+  canRequestHint,
+  continueAfterFeedback,
+  currentItem,
+  hintsUsed,
+  initialPlayerState,
+  isLastStep,
+  nextHintLevel,
+  playerReducer,
+  presentationSteps,
+} from "@/lib/student/lessonPlayer";
+import { useLearner } from "@/lib/session/useLearner";
+import { ApiError } from "@/lib/student/types";
 
 const TEACHABLE = new Set(["teach", "continue", "review", "remediate", "diagnose"]);
 
@@ -36,38 +31,25 @@ function loc(text: Record<string, string>): string {
 }
 
 export default function SessionPage() {
-  const { studentRef: ref, band, displayName } = useLearner();
+  const { studentRef: ref } = useLearner();
   const started = useRef(false);
-  const [phase, setPhase] = useState<Phase>("starting");
-  const [sessionId, setSessionId] = useState<string>("");
-  const [objective, setObjective] = useState<string>("");
-  const [teach, setTeach] = useState<TeachView | null>(null);
-  const [itemIndex, setItemIndex] = useState(0);
-  const [answer, setAnswer] = useState<AnswerView | null>(null);
-  const [summary, setSummary] = useState<SessionEndView | null>(null);
-  const [mastery, setMastery] = useState(0);
+  const [state, dispatch] = useReducer(playerReducer, initialPlayerState);
+  const { phase, sessionId, objective, teach, step, itemIndex, hints, answer, mastery, summary } = state;
 
-  const fail = (e: unknown) => {
-    if (e instanceof ApiError && (e.status === 0 || e.isAuth)) setPhase("offline");
-    else setPhase("error");
-  };
+  const fail = (e: unknown) =>
+    dispatch({ type: "failed", offline: e instanceof ApiError && (e.status === 0 || e.isAuth) });
 
   const plan = async (id: string) => {
+    dispatch({ type: "planning" });
     try {
       const decision = await learningApi.next(id);
-      if (decision.decision === "escalate") return setPhase("escalated");
+      if (decision.decision === "escalate") return dispatch({ type: "escalated" });
       if (TEACHABLE.has(decision.decision) && decision.objective_code) {
         const t = await learningApi.teach(id, decision.objective_code);
-        setObjective(decision.objective_code);
-        setTeach(t);
-        setItemIndex(0);
-        setAnswer(null);
-        setPhase("teaching");
+        dispatch({ type: "taught", objective: decision.objective_code, teach: t });
         return;
       }
-      const end = await learningApi.end(id);
-      setSummary(end);
-      setPhase("complete");
+      dispatch({ type: "completed", summary: await learningApi.end(id) });
     } catch (e) {
       fail(e);
     }
@@ -79,7 +61,7 @@ export default function SessionPage() {
     void (async () => {
       try {
         const s = await learningApi.startSession(ref);
-        setSessionId(s.session_id);
+        dispatch({ type: "started", sessionId: s.session_id });
         await plan(s.session_id);
       } catch (e) {
         fail(e);
@@ -88,7 +70,27 @@ export default function SessionPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const item: ItemView | undefined = teach?.items[itemIndex];
+  const steps = presentationSteps(state);
+  const item = currentItem(state);
+
+  const onReady = () => {
+    if (item) dispatch({ type: "ready" });
+    else void plan(sessionId); // a lesson with no practice items: move on
+  };
+
+  const requestHint = async () => {
+    if (!item) return;
+    try {
+      const h = await learningApi.hint(sessionId, {
+        objective_code: objective,
+        item_ref: item.item_ref,
+        hint_level: nextHintLevel(state),
+      });
+      dispatch({ type: "hint", hint: h.hint, exhausted: h.exhausted });
+    } catch (e) {
+      fail(e);
+    }
+  };
 
   const submit = async (option: number) => {
     if (!item) return;
@@ -97,30 +99,18 @@ export default function SessionPage() {
         objective_code: objective,
         item_ref: item.item_ref,
         option,
+        hints_used: hintsUsed(state),
       });
-      setAnswer(a);
-      setMastery(a.mastery);
-      setPhase("feedback");
+      dispatch({ type: "answered", answer: a });
     } catch (e) {
       fail(e);
     }
   };
 
-  const onContinue = async () => {
-    if (!answer) return;
-    if (answer.outcome !== "correct") {
-      setPhase("asking"); // retry the same item (never reveal the answer)
-      return;
-    }
-    const nextIndex = itemIndex + 1;
-    if (teach && nextIndex < teach.items.length) {
-      setItemIndex(nextIndex);
-      setAnswer(null);
-      setPhase("asking");
-    } else {
-      setPhase("starting");
-      await plan(sessionId);
-    }
+  const onContinue = () => {
+    const next = continueAfterFeedback(state);
+    if (next === "plan") void plan(sessionId);
+    else dispatch({ type: next });
   };
 
   return (
@@ -130,7 +120,7 @@ export default function SessionPage() {
           ‹ Pause
         </Link>
         <ProgressRing value={mastery} label="Mastery" />
-        <Button variant="ghost" label="Help" icon={<span aria-hidden="true">✋</span>} onClick={() => setPhase("escalated")} />
+        <Button variant="ghost" label="Help" icon={<span aria-hidden="true">✋</span>} onClick={() => dispatch({ type: "escalated" })} />
       </header>
 
       <div aria-live="polite" style={{ display: "grid", gap: "var(--space-4)" }}>
@@ -155,64 +145,85 @@ export default function SessionPage() {
           </Card>
         ) : null}
 
-        {(phase === "teaching" || phase === "asking" || phase === "feedback") && teach ? (
-          <>
-            {phase === "teaching" ? (
-              <section style={{ display: "grid", gap: "var(--space-3)" }}>
-                {teach.utterances.map((u: Utterance, i) => (
-                  <Card key={i}>
-                    <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-2)", alignItems: "start" }}>
-                      <p style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{u.text}</p>
-                      <ReadAloud label="Teacher" />
-                    </div>
-                  </Card>
-                ))}
-                <Button variant="brand" label="I'm ready" onClick={() => setPhase("asking")} />
-              </section>
-            ) : null}
+        {phase === "presenting" && steps[step] ? (
+          <section aria-label="Lesson" style={{ display: "grid", gap: "var(--space-3)" }}>
+            <p style={{ margin: 0 }}>
+              Step {step + 1} of {steps.length}
+            </p>
+            <Card>
+              <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-2)", alignItems: "start" }}>
+                {step === 0 ? (
+                  <h1 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{steps[step].text}</h1>
+                ) : (
+                  <p style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{steps[step].text}</p>
+                )}
+                <ReadAloud label="Teacher" />
+              </div>
+            </Card>
+            <div style={{ display: "flex", gap: "var(--space-2)", justifyContent: "space-between" }}>
+              <Button variant="ghost" label="Back" disabled={step === 0} onClick={() => dispatch({ type: "previousStep" })} />
+              {isLastStep(state) ? (
+                <Button variant="brand" label="I'm ready" onClick={onReady} />
+              ) : (
+                <Button variant="brand" label="Next" onClick={() => dispatch({ type: "nextStep" })} />
+              )}
+            </div>
+          </section>
+        ) : null}
 
-            {(phase === "asking" || phase === "feedback") && item ? (
-              <Card>
-                <div style={{ display: "grid", gap: "var(--space-3)" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-2)", alignItems: "start" }}>
-                    <p style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{loc(item.prompt)}</p>
-                    <ReadAloud label="Question" />
-                  </div>
-                  <div role="group" aria-label="Answers" style={{ display: "grid", gap: "var(--space-2)" }}>
-                    {item.options.map((opt, i) => (
-                      <Button
-                        key={i}
-                        variant="primary"
-                        label={opt}
-                        disabled={phase === "feedback"}
-                        onClick={() => void submit(i)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </Card>
-            ) : null}
-
-            {phase === "feedback" && answer ? (
-              <Card>
-                <div style={{ display: "grid", gap: "var(--space-2)" }}>
-                  <strong style={{ color: answer.outcome === "correct" ? "var(--color-brand)" : "var(--color-text-primary)" }}>
-                    {answer.outcome === "correct" ? "بہت خوب! ✓" : "آئیے دوبارہ سوچتے ہیں"}
-                  </strong>
-                  {answer.feedback.map((f, i) => (
-                    <p key={i} style={{ margin: 0 }}>
-                      {f}
-                    </p>
-                  ))}
+        {(phase === "asking" || phase === "feedback") && item && teach ? (
+          <Card>
+            <div style={{ display: "grid", gap: "var(--space-3)" }}>
+              <p style={{ margin: 0 }}>
+                Question {itemIndex + 1} of {teach.items.length}
+              </p>
+              <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-2)", alignItems: "start" }}>
+                <p style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{loc(item.prompt)}</p>
+                <ReadAloud label="Question" />
+              </div>
+              <div role="group" aria-label="Answers" style={{ display: "grid", gap: "var(--space-2)" }}>
+                {item.options.map((opt, i) => (
                   <Button
-                    variant="brand"
-                    label={answer.outcome === "correct" ? "Continue" : "Try again"}
-                    onClick={() => void onContinue()}
+                    key={i}
+                    variant="primary"
+                    label={opt}
+                    disabled={phase === "feedback"}
+                    onClick={() => void submit(i)}
                   />
-                </div>
-              </Card>
-            ) : null}
-          </>
+                ))}
+              </div>
+              {hints.length > 0 ? (
+                <ol aria-label="Hints" style={{ margin: 0, paddingInlineStart: "var(--space-4)", display: "grid", gap: "var(--space-1)" }}>
+                  {hints.map((h, i) => (
+                    <li key={i}>💡 {h}</li>
+                  ))}
+                </ol>
+              ) : null}
+              {canRequestHint(state) ? (
+                <Button variant="ghost" label={hints.length === 0 ? "Give me a hint" : "Another hint"} onClick={() => void requestHint()} />
+              ) : null}
+            </div>
+          </Card>
+        ) : null}
+
+        {phase === "feedback" && answer ? (
+          <Card>
+            <div style={{ display: "grid", gap: "var(--space-2)" }}>
+              <strong style={{ color: answer.outcome === "correct" ? "var(--color-brand)" : "var(--color-text-primary)" }}>
+                {answer.outcome === "correct" ? "بہت خوب! ✓" : "آئیے دوبارہ سوچتے ہیں"}
+              </strong>
+              {answer.feedback.map((f, i) => (
+                <p key={i} style={{ margin: 0 }}>
+                  {f}
+                </p>
+              ))}
+              <Button
+                variant="brand"
+                label={answer.outcome === "correct" ? "Continue" : "Try again"}
+                onClick={onContinue}
+              />
+            </div>
+          </Card>
         ) : null}
 
         {phase === "complete" ? (

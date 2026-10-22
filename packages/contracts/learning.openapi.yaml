@@ -156,6 +156,10 @@ components:
               item_ref: { type: string }
               prompt: { type: object, additionalProperties: { type: string } }
               options: { type: array, items: { type: string } }
+              hint_count:
+                type: integer
+                minimum: 0
+                description: Number of authored graduated hints available via the :hint operation.
     AnswerView:
       type: object
       properties:
