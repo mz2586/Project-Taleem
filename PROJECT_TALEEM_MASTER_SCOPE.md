@@ -4,8 +4,10 @@
 **Last updated:** 2026-10-22 · **Repository HEAD at last update:** `1db49a0`
 
 **Binding product definition:** [`docs/GLOBAL_PRODUCT_SCOPE.md`](docs/GLOBAL_PRODUCT_SCOPE.md)
-(adopted 2026-10-22). That document says *what* the product must be — a global platform with
-Pakistan as its launch market — and defines Releases R1–R4. This document says *how much of it
+(adopted and revised 2026-10-22). That document says *what* the product must be — a global platform
+with Pakistan as a launch market, delivered as **Taleem Learn** (free core learning) and **Taleem
+School** (partner-supported, teacher-led schooling; never presented as accredited without an
+accreditation partner) — and defines Releases R1–R4 and the R1 acceptance condition. This document says *how much of it
 exists*, with evidence, and what is built next.
 
 This is the **single high-level reference** for what Project Taleem is, what it will be when it is
@@ -870,6 +872,8 @@ Status vocabulary (adopted 2026-10-22, replacing the earlier colour key for this
 | Child safety (consent gate, kill switch) | B, F, G | R1 | in-progress | `contexts/identity/*`, `kill_switch.py` | Distress detection, triage queue, abuse reporting — sign-off **blocked** on M-Gov/M-Safe |
 | Operations (health, metrics, kill switch, runbooks, simulator, CI) | G | R1 | complete-and-verified | `.github/workflows/`, `tools/pilot_simulator.py` | Alerting, backup/restore rehearsal |
 | Production deployment | G | R1 | implemented-but-unverified | `vercel.json`, `api/index.py`, build-step migrations | Provision and verify a live environment with recorded health evidence |
+| Per-learner AI and operating cost tracking, quotas | B, G | R2 | in-progress | Agent workstream E (ledger + quota, in-memory) | Durable ledger; funding/quota policy is a ⚫ business decision |
+| Taleem School (classes, teacher-led assignments, calendars, partner accreditation) | H | R3–R4 | not-started | Product definition only | Pilot-minimum class/assignment model; accreditation is ⚫ partner-dependent |
 | Future expansion (school admin, hubs, vocational, integrations, scholarships) | H | R4 | not-started | Tracked only | Independently scoped milestones |
 
 ### 20.1 Supported today — stated precisely
