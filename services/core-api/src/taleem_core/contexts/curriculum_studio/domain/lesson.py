@@ -44,6 +44,9 @@ class Metadata:
     # The instructional locale(s) the lesson is taught in; empty = the pack's language of
     # instruction. Independent of any user's interface language.
     instructional_locales: list[Locale] = field(default_factory=list)
+    # The author's verified token subject (pseudonymous staff id), set at creation from the bearer
+    # token. Identity bookkeeping, not content: excluded from ``content_hash``.
+    author_subject: str = ""
 
 
 @dataclass
@@ -106,6 +109,7 @@ class Lesson:
         # before packs existed (published-version hashes stay comparable); any non-default value
         # is content and is hashed.
         meta = payload.get("metadata", {})
+        meta.pop("author_subject", None)
         if meta.get("curriculum_pack") == DEFAULT_PACK_ID:
             meta.pop("curriculum_pack")
         if not meta.get("instructional_locales"):

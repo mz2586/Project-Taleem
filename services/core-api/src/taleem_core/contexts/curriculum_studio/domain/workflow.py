@@ -62,6 +62,9 @@ class TransitionRecord:
     actor_role: str
     at: float
     note: str = ""
+    # The actor's verified token subject (pseudonymous staff id); "" for records made before
+    # identities were recorded. Persisted in the lesson body JSON (adapters/persistence/mapper).
+    actor_subject: str = ""
 
 
 @dataclass

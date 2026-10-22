@@ -6,11 +6,12 @@ resolve body types via module globals). Governance-safe: no child data.
 
 from __future__ import annotations
 
+import copy
 from collections.abc import Callable
 from typing import Any
 
-from fastapi import APIRouter, Depends, Query
-from pydantic import BaseModel, Field
+from fastapi import APIRouter, Depends, Header, Query, Response
+from pydantic import BaseModel, ConfigDict, Field
 
 from ....auth.dependencies import authorize
 from ....auth.jwt_verifier import Claims
@@ -19,12 +20,21 @@ from ....platform.errors import Problem, conflict, not_found
 from ..application.service import CurriculumStudioService, StudioError
 from ..domain.ai_teaching import AITeachingObject
 from ..domain.assessment import AssessmentBlueprint
-from ..domain.content import Locale, LocalizedText
+from ..domain.content import Difficulty, Locale, LocalizedText
 from ..domain.hierarchy import Grade
 from ..domain.lesson import Lesson, Metadata
 from ..domain.packs import DEFAULT_PACK_ID, default_registry
 from ..domain.provenance import Derivation, Provenance
 from ..domain.workflow import ReviewAction
+from .views import (
+    LocaleError,
+    etag,
+    lesson_view,
+    localized_map,
+    may_see_answer_keys,
+    text_of,
+    version_view,
+)
 
 
 class ProvenanceIn(BaseModel):
@@ -81,6 +91,54 @@ class RollbackIn(BaseModel):
     note: str = ""
 
 
+# Localized prose fields a draft PATCH may set, each as a {locale: text} map.
+LOCALIZED_FIELDS: tuple[str, ...] = (
+    "title",
+    "description",
+    "teacher_script",
+    "student_explanation",
+    "revision_notes",
+    "summary",
+    "parent_notes",
+    "mentor_notes",
+    "accessibility_notes",
+)
+
+
+class LessonPatchIn(BaseModel):
+    """Partial update of a DRAFT lesson. Omitted fields are unchanged.
+
+    Localized fields merge per locale: a provided locale replaces that locale's text, an empty
+    string removes it. Every locale must be one of the lesson's curriculum pack.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    title: dict[str, str] | None = None
+    title_ur: str | None = None  # compatibility aliases for title["ur"/"en"]
+    title_en: str | None = None
+    description: dict[str, str] | None = None
+    teacher_script: dict[str, str] | None = None
+    student_explanation: dict[str, str] | None = None
+    revision_notes: dict[str, str] | None = None
+    summary: dict[str, str] | None = None
+    parent_notes: dict[str, str] | None = None
+    mentor_notes: dict[str, str] | None = None
+    accessibility_notes: dict[str, str] | None = None
+    grade: str | None = Field(default=None, min_length=1)
+    subject: str | None = Field(default=None, min_length=1)
+    curriculum_pack: str | None = Field(default=None, min_length=1, max_length=64)
+    instructional_locales: list[str] | None = None
+    languages: list[str] | None = None
+    learning_outcomes: list[str] | None = None
+    prerequisites: list[str] | None = None
+    keywords: list[str] | None = None
+    tags: list[str] | None = None
+    estimated_duration_min: int | None = Field(default=None, ge=1, le=600)
+    difficulty: str | None = None
+    offline_package: str | None = None
+
+
 def _bad_locale(detail: str) -> Problem:
     return Problem(422, "BAD_LOCALE", "Invalid locale", detail)
 
@@ -98,20 +156,75 @@ def _draft_title(d: LessonDraftIn) -> dict[Locale, str]:
         raw[tag] = alias
     if not raw:
         raise _bad_locale("a title is required in at least one locale")
-    pack = default_registry().get(d.curriculum_pack)
-    title: dict[Locale, str] = {}
-    for tag, text in raw.items():
+    try:
+        return localized_map(raw, d.curriculum_pack, "title")
+    except LocaleError as exc:
+        raise _bad_locale(str(exc)) from exc
+
+
+def _locales(tags: list[str]) -> list[Locale]:
+    try:
+        return [Locale(t) for t in tags]
+    except ValueError as exc:
+        raise _bad_locale(str(exc)) from exc
+
+
+def _apply_patch(existing: Lesson, p: LessonPatchIn) -> Lesson:
+    """A copy of ``existing`` with the patch applied (validation of content is the gates' job)."""
+    lesson = copy.deepcopy(existing)
+    meta = lesson.metadata
+    if p.curriculum_pack is not None:
+        meta.curriculum_pack = p.curriculum_pack
+    if p.grade is not None:
+        meta.grade_key = p.grade
+    if p.subject is not None:
+        meta.subject_key = p.subject
+    if p.instructional_locales is not None:
+        meta.instructional_locales = _locales(p.instructional_locales)
+    if p.languages is not None:
+        meta.languages = _locales(p.languages)
+    if p.tags is not None:
+        meta.tags = list(p.tags)
+    title = dict(p.title or {})
+    for tag, alias in (("ur", p.title_ur), ("en", p.title_en)):
+        if alias is not None:
+            if tag in title and title[tag] != alias:
+                raise _bad_locale(f"title[{tag!r}] conflicts with title_{tag}")
+            title[tag] = alias
+    patches = {name: getattr(p, name) for name in LOCALIZED_FIELDS}
+    patches["title"] = title if (p.title is not None or title) else None
+    for name, raw in patches.items():
+        if raw is None:
+            continue
         try:
-            loc = Locale(tag)
-        except ValueError as exc:
+            changes = localized_map(raw, meta.curriculum_pack, name)
+        except LocaleError as exc:
             raise _bad_locale(str(exc)) from exc
-        if pack is not None and not pack.supports_locale(loc):
-            raise _bad_locale(f"title locale {tag!r} is not a locale of pack {pack.pack_id}")
-        title[loc] = text
-    return title
+        field: LocalizedText = getattr(lesson, name)
+        for loc, text in changes.items():
+            if text.strip():
+                field.text[loc] = text
+            else:
+                field.text.pop(loc, None)
+    if not any(v.strip() for v in lesson.title.text.values()):
+        raise _bad_locale("a title is required in at least one locale")
+    for name in ("learning_outcomes", "prerequisites", "keywords"):
+        value = getattr(p, name)
+        if value is not None:
+            setattr(lesson, name, list(value))
+    if p.estimated_duration_min is not None:
+        lesson.estimated_duration_min = p.estimated_duration_min
+    if p.difficulty is not None:
+        try:
+            lesson.difficulty = Difficulty(p.difficulty)
+        except ValueError as exc:
+            raise Problem(422, "BAD_DIFFICULTY", "Unknown difficulty", str(exc)) from exc
+    if p.offline_package is not None:
+        lesson.offline_package = p.offline_package
+    return lesson
 
 
-def _draft_to_lesson(d: LessonDraftIn, author_role: str) -> Lesson:
+def _draft_to_lesson(d: LessonDraftIn, author_role: str, author_subject: str = "") -> Lesson:
     try:
         instructional = [Locale(t) for t in d.instructional_locales]
     except ValueError as exc:
@@ -125,6 +238,7 @@ def _draft_to_lesson(d: LessonDraftIn, author_role: str) -> Lesson:
             author_role=author_role,
             curriculum_pack=d.curriculum_pack,
             instructional_locales=instructional,
+            author_subject=author_subject,
         ),
         provenance=Provenance(
             derivation=Derivation(d.provenance.derivation),
@@ -147,22 +261,18 @@ def _draft_to_lesson(d: LessonDraftIn, author_role: str) -> Lesson:
     )
 
 
-def _text(title: LocalizedText) -> dict[str, str]:
-    return {str.__str__(k): v for k, v in title.text.items()}
-
-
 def _grade_view(grade: Grade) -> dict[str, Any]:
     return {
         "key": grade.key,
         "subjects": [
             {
                 "key": subj.key,
-                "title": _text(subj.title),
+                "title": text_of(subj.title),
                 "chapters": [
                     {
                         "key": ch.key,
-                        "title": _text(ch.title),
-                        "topics": [{"key": t.key, "title": _text(t.title)} for t in ch.topics],
+                        "title": text_of(ch.title),
+                        "topics": [{"key": t.key, "title": text_of(t.title)} for t in ch.topics],
                     }
                     for ch in subj.chapters
                 ],
@@ -173,21 +283,17 @@ def _grade_view(grade: Grade) -> dict[str, Any]:
 
 
 def _lesson_view(lesson: Lesson) -> dict[str, Any]:
-    return {
-        "lesson_id": lesson.lesson_id,
-        "title": _text(lesson.title),
-        "grade": lesson.metadata.grade_key,
-        "subject": lesson.metadata.subject_key,
-        "curriculum_pack": lesson.metadata.curriculum_pack,
-        "instructional_locales": [str.__str__(t) for t in lesson.metadata.instructional_locales],
-        "state": lesson.workflow.state.value,
-        "version": lesson.version,
-        "learning_outcomes": lesson.learning_outcomes,
-        "gates": [
-            {"gate": g.gate.value, "passed": g.passed, "mode": g.mode}
-            for g in lesson.quality_gate_results
-        ],
-    }
+    # Lists and mutation responses: content without answer keys, whatever the caller's role.
+    return lesson_view(lesson, answer_keys=False)
+
+
+def _etag_matches(header: str | None, current: str) -> bool:
+    if header is None:
+        raise Problem(
+            428, "PRECONDITION_REQUIRED", "Precondition required", "send If-Match: <lesson etag>"
+        )
+    candidates = [c.strip().removeprefix("W/") for c in header.split(",")]
+    return current in candidates
 
 
 RESOURCE = "curriculum.lesson"
@@ -270,11 +376,13 @@ def build_studio_router(
         s: CurriculumStudioService = Depends(service_provider),
     ) -> dict[str, Any]:
         authorize(claims, "author", RESOURCE)
-        return _lesson_view(_guard(lambda: s.create(_draft_to_lesson(body, claims.role))))
+        lesson = _draft_to_lesson(body, claims.role, claims.sub)
+        return _lesson_view(_guard(lambda: s.create(lesson)))
 
     @router.get("/lessons/{lesson_id}")
     def get(
         lesson_id: str,
+        response: Response,
         claims: Claims = Depends(claims_dependency),
         s: CurriculumStudioService = Depends(service_provider),
     ) -> dict[str, Any]:
@@ -282,7 +390,37 @@ def build_studio_router(
         lesson = s.find(lesson_id)
         if lesson is None:
             raise not_found(f"lesson {lesson_id}")
-        return _lesson_view(lesson)
+        response.headers["ETag"] = etag(lesson)
+        # Answer keys only here (and on a single version), and only for reviewers/architects.
+        return lesson_view(lesson, answer_keys=may_see_answer_keys(claims.role))
+
+    @router.patch("/lessons/{lesson_id}")
+    def patch(
+        lesson_id: str,
+        body: LessonPatchIn,
+        response: Response,
+        if_match: str | None = Header(default=None, alias="If-Match"),
+        claims: Claims = Depends(claims_dependency),
+        s: CurriculumStudioService = Depends(service_provider),
+    ) -> dict[str, Any]:
+        # Draft edit (author role; the service refuses non-draft lessons). Optimistic locking:
+        # If-Match must carry the current ETag (412 if stale, 428 if absent); a writer racing past
+        # that check still loses at commit (409).
+        authorize(claims, "author", RESOURCE)
+        existing = s.find(lesson_id)
+        if existing is None:
+            raise not_found(f"lesson {lesson_id}")
+        if not _etag_matches(if_match, etag(existing)):
+            raise Problem(
+                412,
+                "PRECONDITION_FAILED",
+                "Precondition failed",
+                "the lesson changed since it was read; reload and retry",
+            )
+        updated = _apply_patch(existing, body)
+        saved = _guard(lambda: s.update(updated))
+        response.headers["ETag"] = etag(saved)
+        return _lesson_view(saved)
 
     @router.post("/lessons/{lesson_id}:validate")
     def validate(
@@ -316,7 +454,9 @@ def build_studio_router(
         s: CurriculumStudioService = Depends(service_provider),
     ) -> dict[str, Any]:
         authorize(claims, "author", RESOURCE)
-        return _lesson_view(_guard(lambda: s.submit(lesson_id, claims.role, body.note)))
+        return _lesson_view(
+            _guard(lambda: s.submit(lesson_id, claims.role, body.note, actor_subject=claims.sub))
+        )
 
     @router.post("/lessons/{lesson_id}:review")
     def review(
@@ -330,7 +470,13 @@ def build_studio_router(
             action = ReviewAction(body.action)
         except ValueError as exc:
             raise Problem(422, "BAD_ACTION", "Unknown review action", str(exc)) from exc
-        return _lesson_view(_guard(lambda: s.review(lesson_id, action, claims.role, body.note)))
+        return _lesson_view(
+            _guard(
+                lambda: s.review(
+                    lesson_id, action, claims.role, body.note, actor_subject=claims.sub
+                )
+            )
+        )
 
     @router.post("/lessons/{lesson_id}:publish")
     def publish(
@@ -340,7 +486,13 @@ def build_studio_router(
         s: CurriculumStudioService = Depends(service_provider),
     ) -> dict[str, Any]:
         authorize(claims, "publish", RESOURCE)
-        return _lesson_view(_guard(lambda: s.publish(lesson_id, claims.role, body.change_summary)))
+        return _lesson_view(
+            _guard(
+                lambda: s.publish(
+                    lesson_id, claims.role, body.change_summary, actor_subject=claims.sub
+                )
+            )
+        )
 
     @router.post("/lessons/{lesson_id}:rollback")
     def rollback(
@@ -351,7 +503,15 @@ def build_studio_router(
     ) -> dict[str, Any]:
         authorize(claims, "rollback", RESOURCE)
         return _lesson_view(
-            _guard(lambda: s.rollback(lesson_id, body.target_version, claims.role, body.note))
+            _guard(
+                lambda: s.rollback(
+                    lesson_id,
+                    body.target_version,
+                    claims.role,
+                    body.note,
+                    actor_subject=claims.sub,
+                )
+            )
         )
 
     @router.get("/lessons/{lesson_id}/versions")
@@ -364,16 +524,21 @@ def build_studio_router(
         lesson = s.find(lesson_id)
         if lesson is None:
             raise not_found(f"lesson {lesson_id}")
-        return {
-            "versions": [
-                {
-                    "version": v.version,
-                    "content_hash": v.content_hash,
-                    "change_summary": v.change_summary,
-                    "author_role": v.author_role,
-                }
-                for v in lesson.version_history.versions
-            ]
-        }
+        return {"versions": [version_view(v) for v in lesson.version_history.versions]}
+
+    @router.get("/lessons/{lesson_id}/versions/{version_no}")
+    def version(
+        lesson_id: str,
+        version_no: int,
+        claims: Claims = Depends(claims_dependency),
+        s: CurriculumStudioService = Depends(service_provider),
+    ) -> Any:
+        # One published version with its lesson body, for diffing. Same answer-key rule as GET.
+        authorize(claims, "read", RESOURCE)
+        lesson = s.find(lesson_id)
+        found = lesson.version_history.get(version_no) if lesson is not None else None
+        if found is None:
+            raise not_found(f"lesson {lesson_id} version {version_no}")
+        return version_view(found, body=True, answer_keys=may_see_answer_keys(claims.role))
 
     return router

@@ -76,12 +76,46 @@ paths:
     get:
       tags: [curriculum-studio]
       operationId: getLesson
-      summary: Read a lesson
+      summary: Read a lesson (content; answer keys only for reviewer and architect roles)
+      description: >-
+        Returns the lesson's full content. Assessment-item answer keys (`answer_key`,
+        `accepted_variants`, `auto_marking_guidance`) are included only on this route and only for
+        the review-stage roles and `curriculum_architect` (`answer_keys_included: true`). The
+        `ETag` header (also `etag` in the body) is the If-Match precondition for PATCH.
       security: [{ bearerAuth: [] }]
       parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
       responses:
-        "200": { description: Lesson, content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } } }
+        "200":
+          description: Lesson
+          headers:
+            ETag: { description: Strong ETag of the lesson content, schema: { type: string } }
+          content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } }
         "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+    patch:
+      tags: [curriculum-studio]
+      operationId: updateDraftLesson
+      summary: Edit a draft lesson (author role; draft state only; If-Match required)
+      description: >-
+        Partial update; omitted fields are unchanged. Localized fields are `{locale: text}` maps
+        merged per locale (an empty string removes that locale); every locale must belong to the
+        lesson's curriculum pack. Optimistic locking: `If-Match` must carry the current ETag.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: lessonId, in: path, required: true, schema: { type: string } }
+        - { name: If-Match, in: header, required: true, schema: { type: string } }
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/LessonPatchIn" } } } }
+      responses:
+        "200":
+          description: Updated (answer keys never included)
+          headers:
+            ETag: { description: The new ETag, schema: { type: string } }
+          content: { application/json: { schema: { $ref: "#/components/schemas/LessonView" } } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "409": { description: Concurrent modification (optimistic-lock conflict; retry), content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "412": { description: If-Match does not match the current ETag (reload and retry), content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "422": { description: "Not a draft; invalid locale or field", content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "428": { description: If-Match header missing, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
   /v1/studio/lessons/{lessonId}:validate:
     post:
@@ -155,7 +189,39 @@ paths:
       security: [{ bearerAuth: [] }]
       parameters: [{ name: lessonId, in: path, required: true, schema: { type: string } }]
       responses:
-        "200": { description: Versions }
+        "200":
+          description: Versions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  versions: { type: array, items: { $ref: "#/components/schemas/VersionView" } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/studio/lessons/{lessonId}/versions/{version}:
+    get:
+      tags: [curriculum-studio]
+      operationId: getVersion
+      summary: One published version with its lesson body (for diffing)
+      description: >-
+        `body` is the lesson as published at that version. Same answer-key rule as getLesson.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: lessonId, in: path, required: true, schema: { type: string } }
+        - { name: version, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: Version with body
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - { $ref: "#/components/schemas/VersionView" }
+                  - type: object
+                    properties:
+                      body: { type: object, additionalProperties: true }
+                      answer_keys_included: { type: boolean }
         "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
 components:
@@ -186,6 +252,86 @@ components:
               gate: { type: string }
               passed: { type: boolean }
               mode: { type: string, enum: [auto, human] }
+              reviewer_role: { type: string }
+              reviewer_subject: { type: string, description: Pseudonymous staff id of the certifying reviewer }
+              at: { type: number }
+        title_audio: { type: object, additionalProperties: { type: string } }
+        metadata:
+          type: object
+          description: Domain metadata (tags, author_role, author_subject, languages, ...).
+          additionalProperties: true
+          properties:
+            tags: { type: array, items: { type: string } }
+            author_role: { type: string }
+            author_subject: { type: string, description: Pseudonymous staff id of the author }
+        provenance: { type: object, additionalProperties: true }
+        student_explanation: { $ref: "#/components/schemas/LocalizedTextView" }
+        teacher_script: { $ref: "#/components/schemas/LocalizedTextView" }
+        worked_examples: { type: array, items: { type: object, additionalProperties: true } }
+        practice_questions: { type: array, items: { type: object, additionalProperties: true } }
+        homework: { type: array, items: { type: object, additionalProperties: true } }
+        assessment: { type: object, additionalProperties: true }
+        workflow:
+          type: object
+          properties:
+            state: { type: string }
+            history:
+              type: array
+              items:
+                type: object
+                properties:
+                  from_state: { type: string }
+                  to_state: { type: string }
+                  action: { type: string }
+                  actor_role: { type: string }
+                  actor_subject: { type: string, description: Pseudonymous staff id of the actor }
+                  at: { type: number }
+                  note: { type: string }
+        etag: { type: string }
+        answer_keys_included:
+          type: boolean
+          description: True only on a single-lesson read by a reviewer or architect role.
+      additionalProperties: true
+    LocalizedTextView:
+      type: object
+      properties:
+        text: { type: object, additionalProperties: { type: string } }
+        audio_ref: { type: object, additionalProperties: { type: string } }
+    VersionView:
+      type: object
+      properties:
+        version: { type: integer }
+        content_hash: { type: string }
+        change_summary: { type: string }
+        author_role: { type: string }
+        created_at: { type: number }
+    LessonPatchIn:
+      type: object
+      additionalProperties: false
+      properties:
+        title: { $ref: "#/components/schemas/LocalizedTitle" }
+        title_ur: { type: string, deprecated: true }
+        title_en: { type: string, deprecated: true }
+        description: { $ref: "#/components/schemas/LocalizedTitle" }
+        teacher_script: { $ref: "#/components/schemas/LocalizedTitle" }
+        student_explanation: { $ref: "#/components/schemas/LocalizedTitle" }
+        revision_notes: { $ref: "#/components/schemas/LocalizedTitle" }
+        summary: { $ref: "#/components/schemas/LocalizedTitle" }
+        parent_notes: { $ref: "#/components/schemas/LocalizedTitle" }
+        mentor_notes: { $ref: "#/components/schemas/LocalizedTitle" }
+        accessibility_notes: { $ref: "#/components/schemas/LocalizedTitle" }
+        grade: { type: string }
+        subject: { type: string }
+        curriculum_pack: { type: string }
+        instructional_locales: { type: array, items: { type: string } }
+        languages: { type: array, items: { type: string } }
+        learning_outcomes: { type: array, items: { type: string } }
+        prerequisites: { type: array, items: { type: string } }
+        keywords: { type: array, items: { type: string } }
+        tags: { type: array, items: { type: string } }
+        estimated_duration_min: { type: integer, minimum: 1, maximum: 600 }
+        difficulty: { type: string, enum: [intro, developing, secure, challenge] }
+        offline_package: { type: string }
     Hierarchy:
       type: object
       properties:

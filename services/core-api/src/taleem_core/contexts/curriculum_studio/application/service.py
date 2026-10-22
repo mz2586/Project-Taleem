@@ -100,6 +100,9 @@ class CurriculumStudioService:
         lesson.workflow = existing.workflow
         lesson.version = existing.version
         lesson.version_history = existing.version_history
+        # Authorship is fixed at creation: an edit can never re-attribute the lesson.
+        if existing.metadata.author_subject:
+            lesson.metadata.author_subject = existing.metadata.author_subject
         self._repo.save(lesson)
         self._commit()
         return lesson
@@ -141,7 +144,9 @@ class CurriculumStudioService:
         return self._validate(self.get(lesson_id))
 
     # ---- workflow ----
-    def submit(self, lesson_id: str, actor_role: str, note: str = "") -> Lesson:
+    def submit(
+        self, lesson_id: str, actor_role: str, note: str = "", actor_subject: str = ""
+    ) -> Lesson:
         lesson = self.get(lesson_id)
         result = self._validate(lesson)
         if not result.ok:
@@ -149,13 +154,18 @@ class CurriculumStudioService:
         # Store the automated gate results so they count toward the 9 at publish.
         for gr in result.gate_results:
             self._record_gate(lesson, gr)
-        self._transition(lesson, ReviewAction.SUBMIT, actor_role, note)
+        self._transition(lesson, ReviewAction.SUBMIT, actor_role, note, actor_subject)
         self._repo.save(lesson)
         self._commit()
         return lesson
 
     def review(
-        self, lesson_id: str, action: ReviewAction, actor_role: str, note: str = ""
+        self,
+        lesson_id: str,
+        action: ReviewAction,
+        actor_role: str,
+        note: str = "",
+        actor_subject: str = "",
     ) -> Lesson:
         lesson = self.get(lesson_id)
         state = lesson.workflow.state
@@ -168,18 +178,29 @@ class CurriculumStudioService:
             )
         if actor_role == lesson.metadata.author_role:
             raise StudioError("no self-approval: the author cannot review their own lesson")
+        # The same person may not author and review, whatever role their token carries now.
+        if actor_subject and actor_subject in self._author_subjects(lesson):
+            raise StudioError("no self-approval: the author cannot review their own lesson")
         if action is ReviewAction.APPROVE:
             for gate in STAGE_GATES.get(state, ()):
                 self._record_gate(
                     lesson,
-                    GateResult(gate=gate, passed=True, mode="human", reviewer_role=actor_role),
+                    GateResult(
+                        gate=gate,
+                        passed=True,
+                        mode="human",
+                        reviewer_role=actor_role,
+                        reviewer_subject=actor_subject,
+                    ),
                 )
-        self._transition(lesson, action, actor_role, note)
+        self._transition(lesson, action, actor_role, note, actor_subject)
         self._repo.save(lesson)
         self._commit()
         return lesson
 
-    def publish(self, lesson_id: str, actor_role: str, change_summary: str = "") -> Lesson:
+    def publish(
+        self, lesson_id: str, actor_role: str, change_summary: str = "", actor_subject: str = ""
+    ) -> Lesson:
         lesson = self.get(lesson_id)
         if lesson.workflow.state is not WorkflowState.APPROVED:
             raise StudioError("only approved lessons can be published")
@@ -199,11 +220,12 @@ class CurriculumStudioService:
             author_role=actor_role,
             content_hash=lesson.content_hash(),
             change_summary=change_summary,
-            snapshot=lesson.to_dict(),
+            # The lesson body at this version (prior versions are not nested inside it).
+            snapshot={k: v for k, v in lesson.to_dict().items() if k != "version_history"},
         )
         lesson.version_history.add(version)
         lesson.version = version_no
-        self._transition(lesson, ReviewAction.PUBLISH, actor_role, change_summary)
+        self._transition(lesson, ReviewAction.PUBLISH, actor_role, change_summary, actor_subject)
         self._repo.save(lesson)
         self._publisher.publish(lesson, version)
         self._commit()  # commit before telemetry so a conflict never logs a phantom publish
@@ -214,7 +236,12 @@ class CurriculumStudioService:
         return lesson
 
     def rollback(
-        self, lesson_id: str, target_version: int, actor_role: str, note: str = ""
+        self,
+        lesson_id: str,
+        target_version: int,
+        actor_role: str,
+        note: str = "",
+        actor_subject: str = "",
     ) -> Lesson:
         lesson = self.get(lesson_id)
         target = lesson.version_history.get(target_version)
@@ -222,7 +249,11 @@ class CurriculumStudioService:
             raise StudioError(f"version not found: {target_version}")
         lesson.version = target.version
         self._transition(
-            lesson, ReviewAction.ROLLBACK, actor_role, note or f"rollback to v{target_version}"
+            lesson,
+            ReviewAction.ROLLBACK,
+            actor_role,
+            note or f"rollback to v{target_version}",
+            actor_subject,
         )
         self._repo.save(lesson)
         self._commit()
@@ -232,7 +263,24 @@ class CurriculumStudioService:
     def _validate(self, lesson: Lesson) -> validation.ValidationResult:
         return validation.validate(lesson, self._packs, self._audio_assets)
 
-    def _transition(self, lesson: Lesson, action: ReviewAction, actor_role: str, note: str) -> None:
+    @staticmethod
+    def _author_subjects(lesson: Lesson) -> set[str]:
+        """Everyone who authored the lesson: its recorded author and whoever submitted it."""
+        subjects = {lesson.metadata.author_subject}
+        subjects |= {
+            t.actor_subject for t in lesson.workflow.history if t.action is ReviewAction.SUBMIT
+        }
+        subjects.discard("")
+        return subjects
+
+    def _transition(
+        self,
+        lesson: Lesson,
+        action: ReviewAction,
+        actor_role: str,
+        note: str,
+        actor_subject: str = "",
+    ) -> None:
         frm = lesson.workflow.state
         try:
             to = next_state(frm, action)
@@ -240,7 +288,9 @@ class CurriculumStudioService:
             raise StudioError(str(exc)) from exc
         lesson.workflow.state = to
         lesson.workflow.history.append(
-            TransitionRecord(frm, to, action, actor_role, float(self._now()), note)
+            TransitionRecord(
+                frm, to, action, actor_role, float(self._now()), note, actor_subject=actor_subject
+            )
         )
 
     @staticmethod

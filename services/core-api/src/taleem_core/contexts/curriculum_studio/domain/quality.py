@@ -52,6 +52,8 @@ class GateResult:
     reviewer_role: str = ""
     findings: list[Finding] = field(default_factory=list)
     at: float = 0.0
+    # Who certified a human gate: the reviewer's token subject ("" for automated results).
+    reviewer_subject: str = ""
 
     @property
     def has_blocker(self) -> bool:

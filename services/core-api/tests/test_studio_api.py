@@ -27,7 +27,10 @@ REVIEW_ROLES = [
 ]
 
 
-def _auth(role: str, sub: str = "u1") -> dict[str, str]:
+def _auth(role: str, sub: str | None = None) -> dict[str, str]:
+    # One distinct staff member per role: self-approval is refused by token subject, so a single
+    # subject holding every role would (correctly) be blocked from reviewing its own lesson.
+    sub = sub or f"staff-{role}"
     token = sign_hs256({"sub": sub, "role": role, "exp": int(time.time()) + 3600}, _SECRET)
     return {"Authorization": f"Bearer {token}"}
 

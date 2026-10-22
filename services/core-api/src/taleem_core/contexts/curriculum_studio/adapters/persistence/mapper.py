@@ -31,11 +31,29 @@ from .models import (
 # exclusion set of ``Lesson.content_hash`` so body and hash describe the same content.
 _BOOKKEEPING = ("workflow", "quality_gate_results", "version", "version_history")
 
+# Reviewer identities. The workflow_transition and quality_gate_result tables have role columns but
+# no subject column, so the actor subjects ride in the body under this reserved key (never a Lesson
+# field, so ``serde.build`` ignores it). Transitions are matched back on (from, to, action) in
+# history order — robust even when the table returns same-timestamp rows in another order — and
+# gates by gate key.
+IDENTITY_KEY = "_review_identity"
+
 
 def to_body(lesson: Lesson) -> dict[str, Any]:
-    """Serialize the authored document (content-only) for the ``lesson.body`` JSONB column."""
+    """Serialize the authored document (content-only) for the ``lesson.body`` JSONB column.
+
+    Plus the reviewer-identity bookkeeping (``IDENTITY_KEY``), which no column can hold.
+    """
     full = serde.to_jsonable(lesson)
-    return {k: v for k, v in full.items() if k not in _BOOKKEEPING}
+    body = {k: v for k, v in full.items() if k not in _BOOKKEEPING}
+    body[IDENTITY_KEY] = {
+        "transitions": [
+            [t.from_state.value, t.to_state.value, t.action.value, t.actor_subject]
+            for t in lesson.workflow.history
+        ],
+        "gates": {g.gate.value: g.reviewer_subject for g in lesson.quality_gate_results},
+    }
+    return body
 
 
 def column_values(lesson: Lesson) -> dict[str, Any]:
@@ -136,4 +154,16 @@ def from_row(row: LessonRow) -> Lesson:
     lesson.version = row.current_version_no
     for v in row.versions:
         lesson.version_history.add(_version_from_row(v))
+    identity = dict(row.body or {}).get(IDENTITY_KEY) or {}
+    pending = [list(e) for e in identity.get("transitions") or [] if len(e) == 4]
+    for record in lesson.workflow.history:
+        key = [record.from_state.value, record.to_state.value, record.action.value]
+        for i, entry in enumerate(pending):
+            if entry[:3] == key:
+                record.actor_subject = str(entry[3] or "")
+                del pending[i]
+                break
+    gate_subjects = dict(identity.get("gates") or {})
+    for result in lesson.quality_gate_results:
+        result.reviewer_subject = str(gate_subjects.get(result.gate.value) or "")
     return lesson
