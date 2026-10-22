@@ -1,17 +1,20 @@
 "use client";
-// Bottom navigation — ≤5 thumb-reachable destinations, RTL-mirrored, aria-current on the active one.
+// Bottom navigation — ≤5 thumb-reachable destinations, direction-mirrored by the document's `dir`,
+// aria-current on the active one. Labels come from the catalog via the nav model's keys.
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { useLocale } from "../../lib/i18n/useLocale";
 import type { GradeBand } from "../../lib/student/config";
 import { isActive, navItemsFor } from "../../lib/student/navModel";
 
 export function BottomNav({ band }: { band: GradeBand }) {
   const pathname = usePathname();
+  const { t } = useLocale();
   const items = navItemsFor(band);
   return (
     <nav
-      aria-label="Main"
+      aria-label={t("student.nav.label")}
       style={{
         position: "sticky",
         bottom: 0,
@@ -46,7 +49,7 @@ export function BottomNav({ band }: { band: GradeBand }) {
             <span aria-hidden="true" style={{ fontSize: "20px" }}>
               {item.symbol}
             </span>
-            <span>{item.label}</span>
+            <span>{t(item.labelKey)}</span>
           </Link>
         );
       })}

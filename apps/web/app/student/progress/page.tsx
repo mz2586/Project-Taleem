@@ -1,13 +1,18 @@
 "use client";
-// Progress — supportive learning statistics (never a rank or a score to beat).
+// Progress — supportive learning statistics (never a rank or a score to beat). Before the first
+// answered question the screen says there is no progress yet, rather than showing a grid of zeros
+// and a "0%" accuracy the child has not earned.
 import { useCallback, useEffect, useState } from "react";
 
 import { AppShell } from "@/components/student/AppShell";
-import { Card, EmptyState, ErrorBanner, Skeleton } from "@/components/student/ui";
-import { Button } from "@/design-system/Button";
-import { learningApi } from "@/lib/student/api";
+import { LoadFailure } from "@/components/student/LoadFailure";
+import { Card, EmptyState, Skeleton } from "@/components/student/ui";
+import { ButtonLink } from "@/design-system/ButtonLink";
+import { useLocale } from "@/lib/i18n/useLocale";
 import { useLearner } from "@/lib/session/useLearner";
-import { ApiError, type ProgressView } from "@/lib/student/types";
+import { learningApi } from "@/lib/student/api";
+import { classifyLoadError, type LoadFailure as Failure } from "@/lib/student/journey";
+import type { ProgressView } from "@/lib/student/types";
 
 function StatTile({ label, value }: { label: string; value: string }) {
   return (
@@ -21,9 +26,10 @@ function StatTile({ label, value }: { label: string; value: string }) {
 }
 
 export default function ProgressPage() {
-  const { studentRef: ref, band, displayName } = useLearner();
+  const { studentRef: ref, band } = useLearner();
+  const { t, formatNumber, formatPercent } = useLocale();
   const [progress, setProgress] = useState<ProgressView | null>(null);
-  const [status, setStatus] = useState<"loading" | "ready" | "offline" | "error">("loading");
+  const [status, setStatus] = useState<"loading" | "ready" | Failure>("loading");
 
   const load = useCallback(async () => {
     setStatus("loading");
@@ -31,7 +37,7 @@ export default function ProgressPage() {
       setProgress(await learningApi.progress(ref));
       setStatus("ready");
     } catch (e) {
-      setStatus(e instanceof ApiError && (e.status === 0 || e.isAuth) ? "offline" : "error");
+      setStatus(classifyLoadError(e));
     }
   }, [ref]);
 
@@ -39,26 +45,44 @@ export default function ProgressPage() {
     void load();
   }, [load]);
 
-  return (
-    <AppShell title="Progress" band={band}>
-      {status === "loading" ? <Skeleton lines={4} /> : null}
-      {status === "offline" ? (
-        <EmptyState title="Offline" body="Your saved progress will show when you&apos;re online." action={<Button variant="ghost" label="Try again" onClick={() => void load()} />} />
-      ) : null}
-      {status === "error" ? (
-        <ErrorBanner message="Couldn&apos;t load progress." action={<Button variant="ghost" label="Retry" onClick={() => void load()} />} />
-      ) : null}
+  const hasProgress = !!progress && progress.total_attempts > 0;
 
-      {status === "ready" && progress ? (
-        <section aria-label="Your statistics" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-2)" }}>
-          <StatTile label="Ideas mastered" value={String(progress.objectives_mastered)} />
-          <StatTile label="Ideas in progress" value={String(progress.objectives_in_progress)} />
-          <StatTile label="Questions answered" value={String(progress.total_attempts)} />
-          <StatTile label="Accuracy" value={`${Math.round(progress.accuracy * 100)}%`} />
-          <StatTile label="Reviews scheduled" value={String(progress.reviews_scheduled)} />
-          <StatTile label="Misconceptions cleared" value={String(progress.misconceptions_cleared)} />
-        </section>
-      ) : null}
+  return (
+    <AppShell title={t("student.progress.title")} band={band}>
+      <div aria-live="polite" style={{ display: "grid", gap: "var(--space-4)" }}>
+        {status === "loading" ? <Skeleton lines={4} label={t("common.loading")} /> : null}
+        {status === "offline" || status === "signed-out" || status === "error" ? (
+          <LoadFailure
+            failure={status}
+            offlineTitle="student.progress.offlineTitle"
+            offlineBody="student.progress.offlineBody"
+            errorMessage="student.progress.error"
+            onRetry={() => void load()}
+          />
+        ) : null}
+
+        {status === "ready" && !hasProgress ? (
+          <EmptyState
+            title={t("student.progress.emptyTitle")}
+            body={t("student.progress.emptyBody")}
+            action={<ButtonLink href="/student/today" variant="brand" label={t("common.goToToday")} />}
+          />
+        ) : null}
+
+        {status === "ready" && progress && hasProgress ? (
+          <section
+            aria-label={t("student.progress.statsLabel")}
+            style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "var(--space-2)" }}
+          >
+            <StatTile label={t("student.progress.mastered")} value={formatNumber(progress.objectives_mastered)} />
+            <StatTile label={t("student.progress.inProgress")} value={formatNumber(progress.objectives_in_progress)} />
+            <StatTile label={t("student.progress.answered")} value={formatNumber(progress.total_attempts)} />
+            <StatTile label={t("student.progress.accuracy")} value={formatPercent(progress.accuracy)} />
+            <StatTile label={t("student.progress.reviews")} value={formatNumber(progress.reviews_scheduled)} />
+            <StatTile label={t("student.progress.misconceptions")} value={formatNumber(progress.misconceptions_cleared)} />
+          </section>
+        ) : null}
+      </div>
     </AppShell>
   );
 }

@@ -1,12 +1,14 @@
 import { describe, expect, it } from "vitest";
 
+import { translate } from "../../i18n/translate";
 import { EARLY_NAV, FULL_NAV, isActive, navItemsFor } from "../navModel";
 
 describe("navItemsFor", () => {
   it("gives the early band a reduced destination set", () => {
     const early = navItemsFor("early");
     expect(early).toBe(EARLY_NAV);
-    expect(early.map((i) => i.label)).toEqual(["Today", "Progress", "Profile"]);
+    expect(early.map((i) => translate("en", i.labelKey))).toEqual(["Today", "Progress", "Profile"]);
+    expect(early.map((i) => translate("ur", i.labelKey))).toEqual(["آج", "پیش رفت", "پروفائل"]);
   });
 
   it("gives middle and senior bands the full set", () => {

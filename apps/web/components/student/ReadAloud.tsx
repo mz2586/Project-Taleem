@@ -1,13 +1,16 @@
 "use client";
 // Student ReadAloud — audio-first primitive with a VISIBLE label (never icon-only, fixing the
-// low-literacy access rule). Plays packaged Urdu audio; surfaces missing/offline states honestly.
+// low-literacy access rule). Plays packaged lesson audio; surfaces missing/offline states honestly.
 import { useRef, useState } from "react";
+
+import { useLocale } from "../../lib/i18n/useLocale";
 
 type State = "idle" | "playing" | "unavailable";
 
 export function ReadAloud({ audioSrc, label }: { audioSrc?: string; label: string }) {
   const [state, setState] = useState<State>(audioSrc ? "idle" : "unavailable");
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const { t } = useLocale();
 
   const onClick = () => {
     if (!audioSrc) {
@@ -20,7 +23,12 @@ export function ReadAloud({ audioSrc, label }: { audioSrc?: string; label: strin
     void el.play().catch(() => setState("unavailable"));
   };
 
-  const text = state === "unavailable" ? "Audio not available" : state === "playing" ? "Playing…" : "Listen";
+  const text =
+    state === "unavailable"
+      ? t("common.readAloud.unavailable")
+      : state === "playing"
+        ? t("common.readAloud.playing")
+        : t("common.readAloud.listen");
   return (
     <button
       type="button"
@@ -30,6 +38,7 @@ export function ReadAloud({ audioSrc, label }: { audioSrc?: string; label: strin
       data-state={state}
       style={{
         minHeight: "var(--size-touch-min)",
+        minWidth: "var(--size-touch-min)",
         display: "inline-flex",
         alignItems: "center",
         gap: "var(--space-2)",
@@ -40,6 +49,7 @@ export function ReadAloud({ audioSrc, label }: { audioSrc?: string; label: strin
         color: "var(--color-text-primary)",
         font: "inherit",
         cursor: "pointer",
+        flexShrink: 0,
       }}
     >
       <span aria-hidden="true">🔊</span>

@@ -13,9 +13,10 @@ import type {
   SessionEndView,
   SessionView,
   TeachView,
+  TodayView,
 } from "./types";
 import { ApiError } from "./types";
-import { currentAccessToken } from "../session/store";
+import { currentAccessToken, withSession } from "../session/store";
 import type {
   BatchResult,
   OfflinePackage,
@@ -66,17 +67,25 @@ async function req<T>(path: string, init?: RequestInit): Promise<T> {
 const post = <T>(path: string, body?: unknown): Promise<T> =>
   req<T>(path, { method: "POST", body: body ? JSON.stringify(body) : undefined });
 
+// Learner calls run inside `withSession`: the access token lives ten minutes, and without a refresh
+// a child who paused mid-lesson came back to every call failing 401 — which the screens then showed
+// as "offline". A refresh that fails terminally clears the session, and the route guard sends the
+// child to sign-in.
+const authed = <T>(call: () => Promise<T>): Promise<T> => withSession(call);
+
 export const learningApi = {
   startSession: (studentRef: string) =>
-    post<SessionView>("/v1/learning/sessions", { student_ref: studentRef }),
+    authed(() => post<SessionView>("/v1/learning/sessions", { student_ref: studentRef })),
 
   next: (sessionId: string) =>
-    post<DecisionView>(`/v1/learning/sessions/${sessionId}:next`),
+    authed(() => post<DecisionView>(`/v1/learning/sessions/${sessionId}:next`)),
 
   teach: (sessionId: string, objectiveCode: string) =>
-    post<TeachView>(`/v1/learning/sessions/${sessionId}:teach`, {
-      objective_code: objectiveCode,
-    }),
+    authed(() =>
+      post<TeachView>(`/v1/learning/sessions/${sessionId}:teach`, {
+        objective_code: objectiveCode,
+      }),
+    ),
 
   answer: (
     sessionId: string,
@@ -87,20 +96,25 @@ export const learningApi = {
       hints_used?: number;
       self_confidence?: number | null;
     },
-  ) => post<AnswerView>(`/v1/learning/sessions/${sessionId}:answer`, body),
+  ) => authed(() => post<AnswerView>(`/v1/learning/sessions/${sessionId}:answer`, body)),
 
   // The next AUTHORED hint on the item's graduated ladder (never the answer).
   hint: (sessionId: string, body: { objective_code: string; item_ref: string; hint_level: number }) =>
-    post<HintView>(`/v1/learning/sessions/${sessionId}:hint`, body),
+    authed(() => post<HintView>(`/v1/learning/sessions/${sessionId}:hint`, body)),
 
   end: (sessionId: string) =>
-    post<SessionEndView>(`/v1/learning/sessions/${sessionId}:end`),
+    authed(() => post<SessionEndView>(`/v1/learning/sessions/${sessionId}:end`)),
 
+  // 404 for a learner with no recorded knowledge yet (a brand-new learner) — see journey.ts.
   knowledge: (studentRef: string) =>
-    req<KnowledgeView>(`/v1/learning/students/${studentRef}/knowledge`),
+    authed(() => req<KnowledgeView>(`/v1/learning/students/${studentRef}/knowledge`)),
 
   progress: (studentRef: string) =>
-    req<ProgressView>(`/v1/learning/students/${studentRef}/progress`),
+    authed(() => req<ProgressView>(`/v1/learning/students/${studentRef}/progress`)),
+
+  // Dashboard aggregate: next action (or "complete") + mastery summary + due reviews.
+  today: (studentRef: string) =>
+    authed(() => req<TodayView>(`/v1/learning/students/${studentRef}/today`)),
 };
 
 // Offline lesson packages (Phase 6.2A). Content is C0 curriculum (no child data). The download

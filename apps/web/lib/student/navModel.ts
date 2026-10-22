@@ -4,20 +4,22 @@
 // learners); middle/senior get the full browsing set. Active-state detection is a prefix match so a
 // nested route (e.g. /student/today/detail) still highlights its top-level destination.
 
+import type { MessageKey } from "../i18n/messages";
 import type { GradeBand } from "./config";
 
 export interface NavItem {
   href: string;
-  label: string;
+  /** Catalog key of the visible label (translated by the view). */
+  labelKey: MessageKey;
   symbol: string;
 }
 
 export const FULL_NAV: readonly NavItem[] = [
-  { href: "/student/today", label: "Today", symbol: "☀" },
-  { href: "/student/subjects", label: "Learn", symbol: "📚" },
-  { href: "/student/homework", label: "Homework", symbol: "✎" },
-  { href: "/student/progress", label: "Progress", symbol: "▲" },
-  { href: "/student/profile", label: "Profile", symbol: "👤" },
+  { href: "/student/today", labelKey: "student.nav.today", symbol: "☀" },
+  { href: "/student/subjects", labelKey: "student.nav.learn", symbol: "📚" },
+  { href: "/student/homework", labelKey: "student.nav.homework", symbol: "✎" },
+  { href: "/student/progress", labelKey: "student.nav.progress", symbol: "▲" },
+  { href: "/student/profile", labelKey: "student.nav.profile", symbol: "👤" },
 ];
 
 // Early band: Today / Progress / Profile only (a subset of FULL, same objects so labels stay in sync).

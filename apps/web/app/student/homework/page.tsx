@@ -1,25 +1,22 @@
 "use client";
-// Homework — scaffolded. The homework list/submit endpoints (STUDENT_API_REQUIREMENTS §2.7) are not
-// yet built; this milestone shows a governance-safe empty state that routes back to guided learning.
-import Link from "next/link";
-
+// Homework — an honest empty state. `GET /students/{ref}/homework` exists, but nothing assigns
+// homework yet (no teacher assignment flow, and no published lessons), so there is nothing to list;
+// the screen says so and routes back to guided learning rather than rendering an empty list.
 import { AppShell } from "@/components/student/AppShell";
 import { EmptyState } from "@/components/student/ui";
-import { Button } from "@/design-system/Button";
+import { ButtonLink } from "@/design-system/ButtonLink";
+import { useLocale } from "@/lib/i18n/useLocale";
 import { useLearner } from "@/lib/session/useLearner";
 
 export default function HomeworkPage() {
   const { band } = useLearner();
+  const { t } = useLocale();
   return (
-    <AppShell title="Homework" band={band}>
+    <AppShell title={t("student.homework.title")} band={band}>
       <EmptyState
-        title="No homework right now"
-        body="When your teacher sets practice, it will appear here. For now, keep learning from Today."
-        action={
-          <Link href="/student/today" style={{ textDecoration: "none" }}>
-            <Button variant="brand" label="Go to Today" />
-          </Link>
-        }
+        title={t("student.homework.emptyTitle")}
+        body={t("student.homework.emptyBody")}
+        action={<ButtonLink href="/student/today" variant="brand" label={t("common.goToToday")} />}
       />
     </AppShell>
   );

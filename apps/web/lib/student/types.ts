@@ -76,6 +76,15 @@ export interface KnowledgeView {
   objectives: Record<string, ObjectiveKnowledge>;
 }
 
+// GET /v1/learning/students/{ref}/today (student.openapi.yaml TodayView). `next_action.reason` is
+// "complete" with a null objective when nothing is left to recommend — which, with a zero total, is
+// what a learner sees while no lesson has been published.
+export interface TodayView {
+  next_action: { objective_code: string | null; reason: string };
+  mastery_summary: { mastered: number; in_progress: number; total: number };
+  revision_due_count: number;
+}
+
 export interface ProgressView {
   student_ref: string;
   objectives_mastered: number;

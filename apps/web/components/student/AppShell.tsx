@@ -1,8 +1,10 @@
 "use client";
-// App shell — header slot, scrollable content, sticky bottom nav, offline badge, and a skip link.
-// The single aria-live region for the shell lives here (screens announce via their own regions too).
+// App shell — header (the page's single h1), scrollable content, sticky bottom nav, offline badge,
+// and a skip link that becomes visible on focus. Screens announce async changes through their own
+// polite live regions; the shell's badge is a status region too.
 import type { ReactNode } from "react";
 
+import { useLocale } from "../../lib/i18n/useLocale";
 import type { GradeBand } from "../../lib/student/config";
 import { BottomNav } from "./BottomNav";
 import { SyncStatusBadge } from "./SyncStatusBadge";
@@ -18,10 +20,11 @@ export function AppShell({
   showNav?: boolean;
   children: ReactNode;
 }) {
+  const { t } = useLocale();
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", maxWidth: 720, margin: "0 auto" }}>
-      <a href="#main" style={{ position: "absolute", insetInlineStart: -9999 }}>
-        Skip to content
+      <a href="#main" className="skip-link">
+        {t("common.skipToContent")}
       </a>
       <header
         style={{
@@ -36,7 +39,11 @@ export function AppShell({
         <h1 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{title}</h1>
         <SyncStatusBadge />
       </header>
-      <main id="main" style={{ flex: 1, padding: "var(--space-4)", display: "grid", gap: "var(--space-4)", alignContent: "start" }}>
+      <main
+        id="main"
+        tabIndex={-1}
+        style={{ flex: 1, padding: "var(--space-4)", display: "grid", gap: "var(--space-4)", alignContent: "start" }}
+      >
         {children}
       </main>
       {showNav ? <BottomNav band={band} /> : null}

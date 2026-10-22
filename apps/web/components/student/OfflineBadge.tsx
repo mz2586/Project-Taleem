@@ -3,20 +3,22 @@
 // is never blocked or scolded for being offline.
 import { useEffect, useState } from "react";
 
+import { useLocale } from "../../lib/i18n/useLocale";
 import { watchConnectivity } from "../../lib/offline";
 
 export function OfflineBadge({ pendingCount = 0 }: { pendingCount?: number }) {
   const [online, setOnline] = useState(true);
+  const { t } = useLocale();
 
   useEffect(() => watchConnectivity(setOnline), []);
 
   const message = online
     ? pendingCount > 0
-      ? `Saving ${pendingCount}…`
-      : "Online"
+      ? t("common.connectivity.saving", { count: pendingCount })
+      : t("common.connectivity.online")
     : pendingCount > 0
-      ? `Offline · ${pendingCount} saved`
-      : "Offline · saved on your device";
+      ? t("common.connectivity.offlineSaved", { count: pendingCount })
+      : t("common.connectivity.offline");
 
   return (
     <span

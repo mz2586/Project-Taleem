@@ -1,35 +1,51 @@
 "use client";
 // Dashboard "Today" — answers "what should I do now?" with one clear action, plus encouraging
-// progress. Governance-safe: reads the synthetic learner's progress/knowledge from /v1/learning.
-import Link from "next/link";
+// progress. The journey rules (including "no published lessons yet") live in lib/student/journey.ts;
+// this page renders `todayModel`.
+//
+// The Start action is shown only once we know it leads somewhere: while no lesson is published the
+// screen says there is nothing to learn yet, instead of offering a button into an empty session.
 import { useCallback, useEffect, useState } from "react";
 
 import { AppShell } from "@/components/student/AppShell";
+import { LoadFailure } from "@/components/student/LoadFailure";
 import { ReadAloud } from "@/components/student/ReadAloud";
-import { Card, EmptyState, ErrorBanner, ProgressRing, Skeleton, StateBadge } from "@/components/student/ui";
-import { Button } from "@/design-system/Button";
-import { learningApi } from "@/lib/student/api";
+import { Card, EmptyState, ProgressRing, Skeleton, StateBadge } from "@/components/student/ui";
+import { ButtonLink } from "@/design-system/ButtonLink";
+import { useLocale } from "@/lib/i18n/useLocale";
 import { useLearner } from "@/lib/session/useLearner";
-import { ApiError, type KnowledgeView, type ProgressView } from "@/lib/student/types";
-
-const REVIEW_STATES = new Set(["needs_review", "at_risk"]);
+import { learningApi } from "@/lib/student/api";
+import {
+  classifyLoadError,
+  emptyKnowledge,
+  masteryStateKey,
+  orOnNotFound,
+  TODAY_EMPTY_COPY,
+  todayModel,
+  type LoadFailure as Failure,
+  type TodayModel,
+} from "@/lib/student/journey";
 
 export default function TodayPage() {
   const { studentRef: ref, band, displayName } = useLearner();
-  const [knowledge, setKnowledge] = useState<KnowledgeView | null>(null);
-  const [progress, setProgress] = useState<ProgressView | null>(null);
-  const [status, setStatus] = useState<"loading" | "ready" | "offline" | "error">("loading");
+  const { t, formatPercent } = useLocale();
+  const [model, setModel] = useState<TodayModel | null>(null);
+  const [status, setStatus] = useState<"loading" | "ready" | Failure>("loading");
 
   const load = useCallback(async () => {
     setStatus("loading");
     try {
-      const [k, p] = await Promise.all([learningApi.knowledge(ref), learningApi.progress(ref)]);
-      setKnowledge(k);
-      setProgress(p);
+      const [today, knowledge, progress] = await Promise.all([
+        // An older server without the aggregate: carry on without it (journey.ts handles null).
+        orOnNotFound(learningApi.today(ref), null),
+        // A brand-new learner has no knowledge record yet: that is empty, not an error.
+        orOnNotFound(learningApi.knowledge(ref), emptyKnowledge(ref)),
+        orOnNotFound(learningApi.progress(ref), null),
+      ]);
+      setModel(todayModel({ today, knowledge, progress }));
       setStatus("ready");
     } catch (e) {
-      if (e instanceof ApiError && (e.status === 0 || e.isAuth)) setStatus("offline");
-      else setStatus("error");
+      setStatus(classifyLoadError(e));
     }
   }, [ref]);
 
@@ -37,84 +53,84 @@ export default function TodayPage() {
     void load();
   }, [load]);
 
-  const objectives = knowledge ? Object.entries(knowledge.objectives) : [];
-  const total = objectives.length;
-  const mastered = objectives.filter(([, o]) => o.state === "mastered").length;
-  const dueCount = objectives.filter(([, o]) => REVIEW_STATES.has(o.state)).length;
-  const masteryValue = total > 0 ? mastered / total : 0;
+  const greeting = displayName ? t("student.today.greeting", { name: displayName }) : t("student.today.greetingNoName");
 
   return (
-    <AppShell title="Taleem" band={band}>
+    <AppShell title={t("common.appName")} band={band}>
       <section style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)" }}>
         <div>
-          <h2 style={{ margin: 0 }}>السلام علیکم، {displayName}</h2>
-          <p style={{ margin: 0 }}>آئیے آج سیکھتے ہیں۔</p>
+          <h2 style={{ margin: 0 }}>{greeting}</h2>
+          <p style={{ margin: 0 }}>{t("student.today.subtitle")}</p>
         </div>
-        <ReadAloud label="Greeting" />
+        <ReadAloud label={t("student.today.greetingAudio")} />
       </section>
 
-      {/* The one clear action — largest, first-focus. */}
-      <Card>
-        <div style={{ display: "grid", gap: "var(--space-2)" }}>
-          <strong style={{ fontSize: "var(--font-size-body-min-urdu)" }}>Start today&apos;s learning</strong>
-          <p style={{ margin: 0 }}>Your AI teacher will pick the best next step for you.</p>
-          <Link href="/student/session" style={{ textDecoration: "none" }}>
-            <Button variant="brand" label="Start" icon={<span aria-hidden="true">▶</span>} />
-          </Link>
-        </div>
-      </Card>
+      <div aria-live="polite" style={{ display: "grid", gap: "var(--space-4)" }}>
+        {status === "loading" ? <Skeleton lines={4} label={t("common.loading")} /> : null}
 
-      {status === "loading" ? <Skeleton lines={4} /> : null}
+        {status === "offline" || status === "signed-out" || status === "error" ? (
+          <LoadFailure
+            failure={status}
+            offlineTitle="student.today.offlineTitle"
+            offlineBody="student.today.offlineBody"
+            errorMessage="student.today.error"
+            onRetry={() => void load()}
+          />
+        ) : null}
 
-      {status === "offline" ? (
-        <EmptyState
-          title="You&apos;re offline"
-          body="We&apos;ll show your saved plan and sync when you&apos;re back online."
-          action={<Button variant="ghost" label="Try again" onClick={() => void load()} />}
-        />
-      ) : null}
+        {status === "ready" && model ? (
+          <>
+            {model.canStart ? (
+              // The one clear action — largest, first in reading order.
+              <Card>
+                <div style={{ display: "grid", gap: "var(--space-2)", justifyItems: "start" }}>
+                  <h2 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{t("student.today.startTitle")}</h2>
+                  <p style={{ margin: 0 }}>{t("student.today.startBody")}</p>
+                  <ButtonLink
+                    href="/student/session"
+                    variant="brand"
+                    label={t("student.today.start")}
+                    icon={<span aria-hidden="true">▶</span>}
+                  />
+                </div>
+              </Card>
+            ) : null}
 
-      {status === "error" ? (
-        <ErrorBanner
-          message="We couldn&apos;t load your progress. Let&apos;s try again."
-          action={<Button variant="ghost" label="Retry" onClick={() => void load()} />}
-        />
-      ) : null}
-
-      {status === "ready" ? (
-        <>
-          <section style={{ display: "flex", gap: "var(--space-4)", alignItems: "center", flexWrap: "wrap" }}>
-            <ProgressRing value={masteryValue} label="Mastery" />
-            <div style={{ display: "grid", gap: "var(--space-1)" }}>
-              <span>
-                <strong>{mastered}</strong> of {total} ideas mastered
-              </span>
-              <Link href="/student/session" style={{ color: "var(--color-action-primary)" }}>
-                {dueCount > 0 ? `${dueCount} to review today →` : "No reviews due — great!"}
-              </Link>
-              {progress ? <span>Accuracy so far: {Math.round(progress.accuracy * 100)}%</span> : null}
-            </div>
-          </section>
-
-          {total === 0 ? (
-            <EmptyState
-              title="Your journey starts here"
-              body="Tap Start to begin your first lesson. Your progress map will fill as you learn."
-            />
-          ) : (
-            <section aria-label="Your ideas" style={{ display: "grid", gap: "var(--space-2)" }}>
-              {objectives.slice(0, 8).map(([code, o]) => (
-                <Card key={code}>
-                  <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-2)" }}>
-                    <span>{code}</span>
-                    <StateBadge state={o.state} />
+            {model.kind === "learning" ? (
+              <>
+                <section style={{ display: "flex", gap: "var(--space-4)", alignItems: "center", flexWrap: "wrap" }}>
+                  <ProgressRing value={model.masteryValue} label={t("common.mastery.label")} formatPercent={formatPercent} />
+                  <div style={{ display: "grid", gap: "var(--space-1)" }}>
+                    <span>{t("student.today.masteredOf", { mastered: model.mastered, total: model.total })}</span>
+                    <span>
+                      {model.dueCount > 0
+                        ? t("student.today.reviewsDue", { count: model.dueCount })
+                        : t("student.today.noReviews")}
+                    </span>
+                    {model.accuracy !== null ? (
+                      <span>{t("student.today.accuracy", { value: formatPercent(model.accuracy) })}</span>
+                    ) : null}
                   </div>
-                </Card>
-              ))}
-            </section>
-          )}
-        </>
-      ) : null}
+                </section>
+                {model.objectives.length > 0 ? (
+                  <section aria-label={t("student.today.ideasLabel")} style={{ display: "grid", gap: "var(--space-2)" }}>
+                    {model.objectives.slice(0, 8).map(([code, o]) => (
+                      <Card key={code}>
+                        <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-2)" }}>
+                          <span dir="auto">{code}</span>
+                          <StateBadge state={o.state} label={t(masteryStateKey(o.state))} />
+                        </div>
+                      </Card>
+                    ))}
+                  </section>
+                ) : null}
+              </>
+            ) : (
+              <EmptyState title={t(TODAY_EMPTY_COPY[model.kind].title)} body={t(TODAY_EMPTY_COPY[model.kind].body)} />
+            )}
+          </>
+        ) : null}
+      </div>
     </AppShell>
   );
 }
