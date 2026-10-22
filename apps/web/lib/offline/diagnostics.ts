@@ -27,6 +27,7 @@ function empty(): SyncDiagnostics {
     evictions: 0,
     evictedBytes: 0,
     purges: 0,
+    signingKeysPinned: null,
   };
 }
 
@@ -68,6 +69,10 @@ export class SyncDiagnosticsStore {
       evictions: d.evictions + 1,
       evictedBytes: d.evictedBytes + Math.max(0, bytes),
     }));
+  }
+
+  async recordKeyPinning(pinned: boolean): Promise<void> {
+    await this.update((d) => ({ ...d, signingKeysPinned: pinned }));
   }
 
   async recordPurge(): Promise<void> {

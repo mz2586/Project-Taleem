@@ -124,12 +124,13 @@ describe("install -> play -> queue -> resume (fake-indexeddb)", () => {
         return { cursor: cursor + deltas.length, results: deltas.map((d, i) => ({ clientEventId: d.clientEventId, status: "applied", version: i + 1 })) };
       },
       currentLearner: () => SYNTHETIC_STUDENT,
+      pinnedKeys: {},
+      fetchSigningKeys: async () => ({ keys: [fx.key] }),
     });
+    // The library uses the client's own (signature-verifying) download manager.
     const library = createLibrary({
-      store,
+      downloads: client.downloads,
       listPackages: async () => ({ packages: [fx.pkg.manifest] }),
-      fetchPackage: async () => fx.pkg,
-      signingKeys: async () => ({ keys: [fx.key] }),
     });
     const runner = () =>
       createOfflineRunner(

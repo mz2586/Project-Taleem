@@ -1,78 +1,25 @@
 // The offline lesson library — what /student/offline lists, and how a lesson gets onto the phone.
-// The view model is pure and tested; the service below composes lib/offline's DownloadManager.
+// The view model is pure and tested; the service composes the app's ONE download manager.
 //
-// Verification is not optional here. The app-wide offline client (lib/student/offlineClient.ts) was
-// built with no pinned keys and `requireSignature` off, which means an unsigned package — or a
-// signed one whose key the client cannot resolve — installs unverified (the 6.2A compatibility
-// path). The library therefore builds its OWN DownloadManager over the same IndexedDB store with
-// `requireSignature: true` and a key resolver, so a package that does not verify is refused and
-// nothing is written. The server signs every package (Ed25519, TALEEM_OFFLINE_SIGNING_SEED).
-//
-// Where the public keys come from, strongest first:
-//   1. NEXT_PUBLIC_OFFLINE_SIGNING_KEYS — keys bundled into the app at build time ({key_id: hex}).
-//   2. Keys this device saw before (trust on first use, stored in the `prefs` store). A later
-//      answer from the server that gives a DIFFERENT key for a known key_id is refused: that key_id
-//      is dropped, so its packages fail verification instead of silently trusting the new key.
-//   3. GET /v1/offline/signing-keys, for a key_id never seen before.
-// (2) and (3) are weaker than real pinning — the first fetch is trusted — and that is called out in
-// the report; setting (1) in a deployment closes it.
+// Verification is not optional. Every install goes through lib/offline's DownloadManager, which
+// fails closed: an unsigned package, one whose key cannot be resolved, or one that does not verify
+// is refused and nothing is written. The keys come from lib/offline/keys.ts (build-time
+// NEXT_PUBLIC_OFFLINE_SIGNING_KEYS, else trust-on-first-use that refuses a changed key). The library
+// is handed the shared client's manager (lib/student/offlineClient.ts), so there is a single
+// download configuration in the app.
 
 import type { MessageKey } from "../i18n/messages";
-import type { KVStore } from "../offline/kv";
-import { STORES } from "../offline/kv";
-import { DownloadManager, IntegrityError, QuotaExceededError, SignatureError } from "../offline/packages";
-import { pinnedKeyResolver } from "../offline/signature";
-import type { OfflineContent, OfflinePackage, PackageManifest, SigningKey, StorageEstimate, StoredPackage } from "../offline/types";
+import { IntegrityError, QuotaExceededError, SignatureError } from "../offline/packages";
+import type { DownloadManager } from "../offline/packages";
+import type { OfflineContent, PackageManifest, StoredPackage } from "../offline/types";
 import { pickLocalized } from "../i18n/content";
 import { INSTRUCTION_LOCALE_PREFERENCE } from "./journey";
 import { ApiError } from "./types";
 
-// ---- signing keys (trust on first use, configured keys win) -------------------------------------
+// ---- signing keys: see lib/offline/keys.ts (re-exported for existing callers) ---------------------
 
-export interface KeyMerge {
-  keys: Record<string, string>;
-  /** key_ids the server tried to change: refused. */
-  conflicts: string[];
-  /** What to remember on this device afterwards. */
-  remember: Record<string, string>;
-}
-
-export function mergeSigningKeys(input: {
-  configured: Record<string, string>;
-  remembered: Record<string, string>;
-  fetched: readonly SigningKey[];
-}): KeyMerge {
-  const keys: Record<string, string> = { ...input.remembered, ...input.configured };
-  const remember: Record<string, string> = { ...input.remembered };
-  const conflicts: string[] = [];
-  for (const k of input.fetched) {
-    if (k.algorithm && k.algorithm !== "Ed25519") continue;
-    const hex = k.public_key_hex.toLowerCase();
-    const known = keys[k.key_id];
-    if (known === undefined) {
-      keys[k.key_id] = hex;
-      remember[k.key_id] = hex;
-    } else if (known.toLowerCase() !== hex) {
-      conflicts.push(k.key_id);
-    }
-  }
-  // A key_id with a conflicting answer is not trusted at all, unless the build pinned it.
-  for (const id of conflicts) if (!(id in input.configured)) delete keys[id];
-  return { keys, conflicts, remember };
-}
-
-export function configuredSigningKeys(raw: string | undefined = process.env.NEXT_PUBLIC_OFFLINE_SIGNING_KEYS): Record<string, string> {
-  if (!raw) return {};
-  try {
-    const parsed: unknown = JSON.parse(raw);
-    if (!parsed || typeof parsed !== "object") return {};
-    return Object.fromEntries(
-      Object.entries(parsed as Record<string, unknown>).filter((e): e is [string, string] => typeof e[1] === "string"),
-    );
-  } catch {
-    return {};
-  }
-}
+export { configuredSigningKeys, mergeSigningKeys } from "../offline/keys";
+export type { KeyMerge } from "../offline/keys";
 
 // ---- download failures ---------------------------------------------------------------------------
 
@@ -205,64 +152,28 @@ export function formatBytes(bytes: number, locale: string): string {
 
 // ---- the service -------------------------------------------------------------------------------------
 
-const KEYS_PREF = "offline_signing_keys";
-
 export interface LibraryDeps {
-  store: KVStore;
+  /** The app's download manager (signature-verifying; see lib/offline createDownloadManager). */
+  downloads: DownloadManager;
   listPackages: () => Promise<{ packages: PackageManifest[] }>;
-  fetchPackage: (lessonId: string) => Promise<OfflinePackage>;
-  signingKeys: () => Promise<{ keys: SigningKey[] }>;
-  configuredKeys?: Record<string, string>;
-  estimate?: () => Promise<StorageEstimate>;
-  now?: () => number;
 }
 
 export function createLibrary(deps: LibraryDeps) {
-  const now = deps.now ?? Date.now;
-
-  async function resolver() {
-    const remembered = (await deps.store.get<Record<string, string>>(STORES.prefs, KEYS_PREF)) ?? {};
-    let fetched: SigningKey[] = [];
-    try {
-      fetched = (await deps.signingKeys()).keys;
-    } catch {
-      // Offline or unavailable: verify with what this device already trusts.
-    }
-    const merged = mergeSigningKeys({ configured: deps.configuredKeys ?? {}, remembered, fetched });
-    await deps.store.put(STORES.prefs, KEYS_PREF, merged.remember);
-    return pinnedKeyResolver(merged.keys);
-  }
-
-  async function manager(): Promise<DownloadManager> {
-    return new DownloadManager({
-      store: deps.store,
-      fetchPackage: deps.fetchPackage,
-      now,
-      requireSignature: true,
-      resolveKey: await resolver(),
-      ...(deps.estimate ? { estimate: deps.estimate } : {}),
-    });
-  }
-
-  // A manager for reads/removal only (no network, no keys needed).
-  const local = new DownloadManager({ store: deps.store, fetchPackage: deps.fetchPackage, now });
-
   return {
     list: () => deps.listPackages().then((r) => r.packages),
-    installed: () => local.installedPackages(),
+    installed: (): Promise<StoredPackage[]> => deps.downloads.installedPackages(),
     async titles(lessonIds: string[]): Promise<Record<string, OfflineContent["title"]>> {
       const out: Record<string, OfflineContent["title"]> = {};
       for (const id of lessonIds) {
-        const c = await deps.store.get<OfflineContent>(STORES.content, id);
+        const c = await deps.downloads.peekLesson(id);
         if (c) out[id] = c.title;
       }
       return out;
     },
     /** Download, verify the signature and content hash, then install. Throws without installing. */
-    async install(lessonId: string, onProgress?: (fraction: number) => void): Promise<StoredPackage> {
-      return (await manager()).download(lessonId, onProgress);
-    },
-    remove: (lessonId: string) => local.remove(lessonId),
+    install: (lessonId: string, onProgress?: (fraction: number) => void): Promise<StoredPackage> =>
+      deps.downloads.download(lessonId, onProgress),
+    remove: (lessonId: string) => deps.downloads.remove(lessonId),
   };
 }
 

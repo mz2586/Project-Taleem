@@ -38,8 +38,14 @@ export interface DownloadDeps {
   headroomBytes?: number;
   // 6.2C-1 signature verification: resolves a pinned public key by signing_key_id.
   resolveKey?: KeyResolver;
-  // 6.2C-1: if true, an unsigned manifest (or one whose key is unknown) is rejected.
-  requireSignature?: boolean;
+  // Signatures are ALWAYS required: an unsigned manifest, one whose key cannot be resolved, or one
+  // that does not verify is rejected and nothing is installed (fail closed). `requireSignature` is
+  // kept only so existing callers that pass `true` still type-check; it cannot be turned off.
+  requireSignature?: true;
+  // The ONLY opt-out, for unit tests of unrelated behaviour (integrity, quota, eviction). Honoured
+  // only inside the Vitest runner (process.env.VITEST === "true"), which no Next.js build — server
+  // or browser bundle — defines, so no deployment setting can disable verification.
+  allowUnsignedForTests?: true;
   // 6.2C-1: optional hardening-event hook (diagnostics).
   events?: DownloadEvents;
 }
@@ -69,6 +75,15 @@ export class SignatureError extends Error {
     super(`package signature verification failed for ${lessonId} (key ${keyId || "none"})`);
     this.name = "SignatureError";
   }
+}
+
+/** True only inside the Vitest runner AND when the caller explicitly asked. */
+export function unsignedAllowedForTests(deps: Pick<DownloadDeps, "allowUnsignedForTests">): boolean {
+  return (
+    deps.allowUnsignedForTests === true &&
+    typeof process !== "undefined" &&
+    process.env?.VITEST === "true"
+  );
 }
 
 // Pure storage pre-flight (mirrors backend fits_in_quota).
@@ -140,25 +155,23 @@ export class DownloadManager {
     return record;
   }
 
-  // Verify the manifest signature against a pinned key. Returns whether a valid signature was
-  // present; throws SignatureError when verification fails or a signature is required but absent.
+  // Verify the manifest signature against a trusted key. Returns true when it verified (or false
+  // only under the test-only opt-out); otherwise throws SignatureError — fail closed.
   private async verifySignature(manifest: PackageManifest): Promise<boolean> {
     const keyId = manifest.signing_key_id ?? "";
     const hasSignature = Boolean(manifest.signature) && Boolean(keyId);
+    const reject = (): never => {
+      this.deps.events?.onSignatureFailure?.(manifest.lesson_id, keyId);
+      throw new SignatureError(manifest.lesson_id, keyId);
+    };
     if (!hasSignature) {
-      if (this.deps.requireSignature) {
-        this.deps.events?.onSignatureFailure?.(manifest.lesson_id, keyId);
-        throw new SignatureError(manifest.lesson_id, keyId);
-      }
-      return false; // unsigned + not required → backward-compatible (6.2A/6.2B) install
+      if (unsignedAllowedForTests(this.deps)) return false;
+      return reject();
     }
     if (!this.deps.resolveKey) {
-      // A signature is present but the client cannot resolve keys.
-      if (this.deps.requireSignature) {
-        this.deps.events?.onSignatureFailure?.(manifest.lesson_id, keyId);
-        throw new SignatureError(manifest.lesson_id, keyId);
-      }
-      return false;
+      // A signature is present but this client has no way to resolve keys.
+      if (unsignedAllowedForTests(this.deps)) return false;
+      return reject();
     }
     const key = await this.deps.resolveKey(keyId);
     const ok = key !== null && (await verifyManifestSignature(manifest, key));
@@ -167,6 +180,11 @@ export class DownloadManager {
       throw new SignatureError(manifest.lesson_id, keyId);
     }
     return true;
+  }
+
+  // The cached lesson content without marking it used (listing screens must not skew LRU).
+  async peekLesson(lessonId: string): Promise<OfflineContent | undefined> {
+    return this.deps.store.get<OfflineContent>(STORES.content, lessonId);
   }
 
   // The cached lesson content for offline rendering (undefined if not installed).
@@ -195,6 +213,10 @@ export class DownloadManager {
     if (!this.deps.estimate) return;
     const headroom = this.deps.headroomBytes ?? 0;
     let est = await this.deps.estimate();
+    // A quota of 0 means "unknown": `browserEstimate` reports {0, 0} where StorageManager is
+    // missing (older Android WebViews, and Node). Refusing then would block every install on those
+    // devices; the browser's own quota error still stops a write that truly does not fit.
+    if (est.quota <= 0) return;
     if (fitsInQuota(needBytes, est, headroom)) return;
 
     const deficit = needBytes + headroom - Math.max(0, est.quota - est.usage);

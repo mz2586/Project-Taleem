@@ -197,6 +197,37 @@ sync channel).
 | SG-6 | Offline safety for **unsupervised** at-home use | limitation | **NO-GO** until a stronger offline-safety design + M-Safe |
 | SG-7 | Durable server-side idempotency ledger | in-memory prototype (G5) | Persist `client_event_id` + cursor, sharded by `hash(student_ref)` |
 
+### 8.1 Change: package signatures are mandatory on every install path (2026-10-23)
+
+**Finding.** The shared web offline client (`apps/web/lib/student/offlineClient.ts`) was built with
+no pinned keys and `requireSignature` off. Through it, an unsigned package — or a signed one whose
+key the client could not resolve — installed unverified (the 6.2A/6.2B compatibility path). Only the
+offline library screen forced verification, with its own second download-manager configuration.
+
+**Change (fail closed).**
+
+- `DownloadManager` (`apps/web/lib/offline/packages.ts`) always requires a signature. An unsigned
+  manifest, a missing key resolver, an unknown `signing_key_id`, or a signature that does not verify
+  throws `SignatureError`; nothing is written and `signatureFailures` is counted. `requireSignature`
+  can no longer be set to `false`.
+- The only opt-out is `allowUnsignedForTests: true`, honoured only when `process.env.VITEST === "true"`
+  — set by the Vitest runner and defined by no Next.js build, server or browser bundle. A test proves
+  the flag is ignored outside Vitest and that it never accepts a signature that fails to verify.
+- One configuration: `createDownloadManager` (`lib/offline/index.ts`) is used by `createOfflineClient`,
+  and the offline library screen now uses the shared client's manager instead of building its own.
+- Keys (`lib/offline/keys.ts`): build-time `NEXT_PUBLIC_OFFLINE_SIGNING_KEYS` (`{key_id: hex}`) is the
+  preferred source. Without it, trust-on-first-use from `GET /v1/offline/signing-keys`, remembered
+  per device; a later answer with a different key for a known `key_id` is refused and that `key_id`
+  is dropped. A **production build without pinned keys** logs `OFFLINE_SIGNING_KEYS_NOT_PINNED` to the
+  console and records `signingKeysPinned: false` in the local sync diagnostics (tested).
+- Fixed alongside: the storage pre-flight treated an unknown quota (`{usage: 0, quota: 0}` where
+  `navigator.storage` is missing) as "no space" and refused every install on such devices. Unknown
+  quota now defers to the browser's own quota error.
+
+**Residual risk.** Trust-on-first-use trusts the first key a device sees. Set
+`NEXT_PUBLIC_OFFLINE_SIGNING_KEYS` in every production deployment to close it (SG-1 key custody
+remains open).
+
 **Security verdict:** the offline design **preserves every online security invariant** and adds
 integrity (signing) and confidentiality (at-rest encryption) controls. It is **safe to implement 6.2A
 foundations** now. **6.2C security items and unsupervised at-home offline are NO-GO until M-Gov

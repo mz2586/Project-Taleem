@@ -14,7 +14,7 @@
 
 import { createOfflineClient } from "../offline";
 import type { OfflineClient } from "../offline";
-import { sessionStore } from "../session/store";
+import { sessionStore, withSession } from "../session/store";
 import type { StoredSession } from "../session/store";
 import { offlineApi, syncApi } from "./api";
 
@@ -28,7 +28,10 @@ export function learnerOf(session: StoredSession | null): string | null {
 export function getOfflineClient(): OfflineClient {
   if (!singleton) {
     const client = createOfflineClient({
-      fetchPackage: (lessonId: string) => offlineApi.fetchPackage(lessonId),
+      fetchPackage: (lessonId: string) => withSession(() => offlineApi.fetchPackage(lessonId)),
+      // Every install is signature-verified (lib/offline/packages.ts fails closed). Keys: the
+      // build-time NEXT_PUBLIC_OFFLINE_SIGNING_KEYS, else trust-on-first-use from this endpoint.
+      fetchSigningKeys: () => withSession(() => offlineApi.signingKeys()),
       postBatch: async (cursor, deltas) => {
         await sessionStore.valid();
         return syncApi.batch(cursor, deltas);

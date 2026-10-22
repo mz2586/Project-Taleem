@@ -118,13 +118,48 @@ describe("package signature enforcement (6.2C-1)", () => {
     await expect(mgr.download("L1")).rejects.toBeInstanceOf(SignatureError);
   });
 
-  it("backward-compatible: an unsigned package installs when signatures are not required", async () => {
+  it("fails closed by default: an unsigned package is rejected with no options at all", async () => {
     const store = new MemoryStore();
     const pkg = await unsignedPackage();
     const mgr = new DownloadManager({ store, fetchPackage: async () => pkg, now: () => 1 });
+    await expect(mgr.download("L1")).rejects.toBeInstanceOf(SignatureError);
+    expect(await mgr.installed("L1")).toBeUndefined();
+  });
+
+  it("fails closed by default: a signed package with no key resolver is rejected", async () => {
+    const store = new MemoryStore();
+    const { pkg } = await signedPackage();
+    const mgr = new DownloadManager({ store, fetchPackage: async () => pkg, now: () => 1 });
+    await expect(mgr.download("L1")).rejects.toBeInstanceOf(SignatureError);
+  });
+
+  it("the test-only opt-out installs unsigned under Vitest", async () => {
+    const store = new MemoryStore();
+    const pkg = await unsignedPackage();
+    const mgr = new DownloadManager({ store, fetchPackage: async () => pkg, now: () => 1, allowUnsignedForTests: true });
     const rec = await mgr.download("L1");
     expect(rec.signature_ok).toBe(false);
-    expect((await mgr.getLesson("L1"))?.lesson_id).toBe("L1");
+  });
+
+  it("the test-only opt-out is ignored outside Vitest (no build can disable verification)", async () => {
+    const store = new MemoryStore();
+    const pkg = await unsignedPackage();
+    const mgr = new DownloadManager({ store, fetchPackage: async () => pkg, now: () => 1, allowUnsignedForTests: true });
+    const saved = process.env.VITEST;
+    process.env.VITEST = "";
+    try {
+      await expect(mgr.download("L1")).rejects.toBeInstanceOf(SignatureError);
+    } finally {
+      process.env.VITEST = saved;
+    }
+  });
+
+  it("the test-only opt-out never accepts a signature that fails to verify", async () => {
+    const store = new MemoryStore();
+    const { pkg, resolve } = await signedPackage();
+    const tampered: OfflinePackage = { ...pkg, manifest: { ...pkg.manifest, signature: "00".repeat(64) } };
+    const mgr = new DownloadManager({ store, fetchPackage: async () => tampered, now: () => 1, resolveKey: resolve, allowUnsignedForTests: true });
+    await expect(mgr.download("L1")).rejects.toBeInstanceOf(SignatureError);
   });
 
   it("interop: verifies the backend public key can be imported", async () => {
@@ -168,6 +203,7 @@ describe("LRU eviction (6.2C-1)", () => {
     const mgr = new DownloadManager({
       store,
       fetchPackage: async () => await unsignedPackage("Big"),
+      allowUnsignedForTests: true,
       now: () => 1,
       estimate: est(100, 100), // 0 free, nothing to evict
     });

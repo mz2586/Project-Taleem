@@ -72,12 +72,12 @@ describe("IndexedDB store (offline browser simulation)", () => {
   it("installs a package and renders it fully offline (persisted in IndexedDB)", async () => {
     const store = new IdbStore(indexedDB);
     const p = await pkg();
-    const mgr = new DownloadManager({ store, fetchPackage: async () => p, now: () => 1 });
+    const mgr = new DownloadManager({ allowUnsignedForTests: true, store, fetchPackage: async () => p, now: () => 1 });
     await mgr.download("L-frac");
 
     // Simulate a fresh open (new IdbStore instance over the same database) — data persists.
     const reopened = new IdbStore(indexedDB);
-    const mgr2 = new DownloadManager({ store: reopened, fetchPackage: async () => p, now: () => 2 });
+    const mgr2 = new DownloadManager({ allowUnsignedForTests: true, store: reopened, fetchPackage: async () => p, now: () => 2 });
     const lesson = await mgr2.getLesson("L-frac");
     expect(lesson?.lesson_id).toBe("L-frac");
     expect(await mgr2.isCurrent(p.manifest)).toBe(true);

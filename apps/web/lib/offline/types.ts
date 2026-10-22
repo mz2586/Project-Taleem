@@ -199,6 +199,9 @@ export interface SyncDiagnostics {
   evictions: number;
   evictedBytes: number;
   purges: number;
+  // Whether offline package signing keys were pinned at build time (NEXT_PUBLIC_OFFLINE_SIGNING_KEYS).
+  // false = trust-on-first-use only (flagged in production); null = not recorded yet.
+  signingKeysPinned: boolean | null;
 }
 
 export interface DrainSummary {

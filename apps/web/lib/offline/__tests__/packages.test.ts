@@ -59,7 +59,7 @@ describe("download manager", () => {
     const store = new MemoryStore();
     const pkg = await makePackage(offlineContent());
     const progress: number[] = [];
-    const mgr = new DownloadManager({
+    const mgr = new DownloadManager({ allowUnsignedForTests: true,
       store,
       fetchPackage: async () => pkg,
       now: () => 123,
@@ -83,7 +83,7 @@ describe("download manager", () => {
     const store = new MemoryStore();
     // Manifest claims a hash that does not match the (tampered) content.
     const pkg = await makePackage(offlineContent(), "deadbeef".repeat(8));
-    const mgr = new DownloadManager({ store, fetchPackage: async () => pkg, now: () => 0 });
+    const mgr = new DownloadManager({ allowUnsignedForTests: true, store, fetchPackage: async () => pkg, now: () => 0 });
 
     await expect(mgr.download("L1")).rejects.toBeInstanceOf(IntegrityError);
     expect(await mgr.getLesson("L1")).toBeUndefined();
@@ -93,7 +93,7 @@ describe("download manager", () => {
   it("refuses a download that would exceed storage (quota) and installs nothing", async () => {
     const store = new MemoryStore();
     const pkg = await makePackage(offlineContent());
-    const mgr = new DownloadManager({
+    const mgr = new DownloadManager({ allowUnsignedForTests: true,
       store,
       fetchPackage: async () => pkg,
       now: () => 0,
@@ -107,7 +107,7 @@ describe("download manager", () => {
   it("removes a cached package (disposable eviction)", async () => {
     const store = new MemoryStore();
     const pkg = await makePackage(offlineContent());
-    const mgr = new DownloadManager({ store, fetchPackage: async () => pkg, now: () => 0 });
+    const mgr = new DownloadManager({ allowUnsignedForTests: true, store, fetchPackage: async () => pkg, now: () => 0 });
     await mgr.download("L1");
     await mgr.remove("L1");
     expect(await mgr.getLesson("L1")).toBeUndefined();

@@ -17,18 +17,26 @@ import { PurgeService } from "./purge";
 import { ReadCache } from "./readCache";
 import { registerBackgroundSync, startAutoDrain } from "./backgroundSync";
 import { reconcileAndResume } from "./reconcile";
-import { pinnedKeyResolver } from "./signature";
-import type { KeyResolver } from "./signature";
+import { configuredSigningKeys, keyPinningDiagnostic, trustedKeyResolver } from "./keys";
+import type { KeyPinningDiagnostic } from "./keys";
+import type { DownloadEvents } from "./packages";
 import { SyncClient } from "./syncClient";
 import { SyncQueue } from "./syncQueue";
 import { AckLedger } from "./syncStatus";
 import type { PurgeResult } from "./purge";
-import type { BatchResult, DrainSummary, OfflinePackage, SyncDelta } from "./types";
+import type { BatchResult, DrainSummary, OfflinePackage, SigningKey, StorageEstimate, SyncDelta } from "./types";
 
 export * from "./types";
 export { STORES } from "./kv";
 export { SHELL_CACHE, APP_SHELL_VERSION, packageIsStale, isPackageCurrent } from "./cacheVersion";
-export { fitsInQuota, QuotaExceededError, IntegrityError, SignatureError } from "./packages";
+export { fitsInQuota, QuotaExceededError, IntegrityError, SignatureError, DownloadManager } from "./packages";
+export {
+  configuredSigningKeys,
+  keyPinningDiagnostic,
+  mergeSigningKeys,
+  trustedKeyResolver,
+} from "./keys";
+export type { KeyMerge, KeyPinningDiagnostic } from "./keys";
 export { watchConnectivity, currentlyOnline, makeProbe } from "./connectivity";
 export { SyncQueue, ownerOf } from "./syncQueue";
 export { SyncClient, backoffMs, classifyFailure, LEARNER_LEVEL_REFUSALS } from "./syncClient";
@@ -70,6 +78,10 @@ export interface OfflineClient {
   purgeStudent: (studentRef: string) => Promise<PurgeResult>;
   requestPersistentStorage: () => Promise<boolean>;
   watchConnectivity: (l: ConnectivityListener) => () => void;
+  /** Non-null when this build relies on trust-on-first-use keys in production. */
+  keyPinning: KeyPinningDiagnostic | null;
+  /** Resolves once the key-pinning state is recorded in diagnostics. */
+  keyPinningRecorded: Promise<void>;
 }
 
 export interface CreateClientOptions {
@@ -79,15 +91,54 @@ export interface CreateClientOptions {
   postBatch: (cursor: number, deltas: SyncDelta[]) => Promise<BatchResult>;
   now?: () => number;
   headroomBytes?: number;
-  // 6.2C-1: pinned Ed25519 public keys { key_id -> public_key_hex } to verify package signatures.
+  // Build-time pinned Ed25519 public keys { key_id -> public_key_hex }. Defaults to
+  // NEXT_PUBLIC_OFFLINE_SIGNING_KEYS. Preferred over trust-on-first-use.
   pinnedKeys?: Record<string, string>;
-  // 6.2C-1: reject an unsigned/unverifiable package rather than installing it.
-  requireSignature?: boolean;
+  // GET /v1/offline/signing-keys, for trust-on-first-use of a key_id this device has never seen.
+  fetchSigningKeys?: () => Promise<{ keys: SigningKey[] }>;
+  // Signatures are always required (see DownloadDeps). Kept so `true` still type-checks.
+  requireSignature?: true;
+  // Test-only opt-out, honoured only under Vitest (see DownloadDeps.allowUnsignedForTests).
+  allowUnsignedForTests?: true;
+  // The build mode, for the key-pinning diagnostic (default process.env.NODE_ENV).
+  nodeEnv?: string;
   // Force one session refresh after a 401 during a drain (the session store's single-flight
   // refresh). Resolves true when a usable session exists afterwards.
   refreshSession?: () => Promise<boolean>;
   // The signed-in learner whose token carries the batch (null = none; nothing is sent).
   currentLearner?: () => string | null;
+}
+
+export interface DownloadConfig {
+  store: KVStore;
+  fetchPackage: (lessonId: string) => Promise<OfflinePackage>;
+  now?: () => number;
+  estimate?: () => Promise<StorageEstimate>;
+  headroomBytes?: number;
+  pinnedKeys?: Record<string, string>;
+  fetchSigningKeys?: () => Promise<{ keys: SigningKey[] }>;
+  allowUnsignedForTests?: true;
+  events?: DownloadEvents;
+}
+
+// THE download-manager configuration: every install path goes through this, so every package is
+// signature-verified against the same trusted keys (pinned, else trust-on-first-use).
+export function createDownloadManager(config: DownloadConfig): DownloadManager {
+  return new DownloadManager({
+    store: config.store,
+    fetchPackage: config.fetchPackage,
+    now: config.now ?? Date.now,
+    ...(config.estimate ? { estimate: config.estimate } : {}),
+    ...(config.headroomBytes !== undefined ? { headroomBytes: config.headroomBytes } : {}),
+    resolveKey: trustedKeyResolver({
+      store: config.store,
+      configured: config.pinnedKeys ?? configuredSigningKeys(),
+      ...(config.fetchSigningKeys ? { fetchKeys: config.fetchSigningKeys } : {}),
+    }),
+    requireSignature: true,
+    ...(config.allowUnsignedForTests ? { allowUnsignedForTests: true as const } : {}),
+    ...(config.events ? { events: config.events } : {}),
+  });
 }
 
 // Build an offline client over the given (or default IndexedDB) store.
@@ -96,18 +147,22 @@ export function createOfflineClient(opts: CreateClientOptions): OfflineClient {
   const now = opts.now ?? Date.now;
   const diagnostics = new SyncDiagnosticsStore(store, now);
 
-  const resolveKey: KeyResolver | undefined = opts.pinnedKeys
-    ? pinnedKeyResolver(opts.pinnedKeys)
-    : undefined;
+  const pinnedKeys = opts.pinnedKeys ?? configuredSigningKeys();
+  const keyPinning = keyPinningDiagnostic({ configured: pinnedKeys, nodeEnv: opts.nodeEnv ?? process.env.NODE_ENV });
+  if (keyPinning && typeof console !== "undefined") console.warn(`[taleem] ${keyPinning.code}: ${keyPinning.message}`);
+  const keyPinningRecorded = diagnostics
+    .recordKeyPinning(Object.keys(pinnedKeys).length > 0)
+    .catch(() => undefined);
 
-  const downloads = new DownloadManager({
+  const downloads = createDownloadManager({
     store,
     fetchPackage: opts.fetchPackage,
     now,
     estimate: browserEstimate,
     ...(opts.headroomBytes !== undefined ? { headroomBytes: opts.headroomBytes } : {}),
-    ...(resolveKey ? { resolveKey } : {}),
-    ...(opts.requireSignature !== undefined ? { requireSignature: opts.requireSignature } : {}),
+    pinnedKeys,
+    ...(opts.fetchSigningKeys ? { fetchSigningKeys: opts.fetchSigningKeys } : {}),
+    ...(opts.allowUnsignedForTests ? { allowUnsignedForTests: true as const } : {}),
     events: {
       onSignatureFailure: () => void diagnostics.recordSignatureFailure(),
       onIntegrityFailure: () => void diagnostics.recordIntegrityFailure(),
@@ -161,6 +216,8 @@ export function createOfflineClient(opts: CreateClientOptions): OfflineClient {
     purgeStudent: (studentRef: string) => purge.purgeStudent(studentRef),
     requestPersistentStorage,
     watchConnectivity: (l: ConnectivityListener) => watchConnectivity(l),
+    keyPinning,
+    keyPinningRecorded,
   };
 }
 

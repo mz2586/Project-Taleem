@@ -12,15 +12,14 @@ import { Button } from "@/design-system/Button";
 import { ButtonLink } from "@/design-system/ButtonLink";
 import { contentAttrs } from "@/lib/i18n/content";
 import { useLocale } from "@/lib/i18n/useLocale";
-import { createStore } from "@/lib/offline/kv";
 import { browserEstimate, requestPersistentStorage } from "@/lib/offline/packages";
 import type { OfflineContent, StoredPackage } from "@/lib/offline/types";
 import { withSession } from "@/lib/session/store";
 import { useLearner } from "@/lib/session/useLearner";
 import { offlineApi } from "@/lib/student/api";
+import { getOfflineClient } from "@/lib/student/offlineClient";
 import {
   classifyDownloadError,
-  configuredSigningKeys,
   createLibrary,
   DOWNLOAD_FAILURE_COPY,
   formatBytes,
@@ -31,14 +30,11 @@ import {
   type OfflineLibrary,
 } from "@/lib/student/offlineLibrary";
 
+// The app's single download manager (lib/student/offlineClient.ts): signature-verified installs.
 function buildLibrary(): OfflineLibrary {
   return createLibrary({
-    store: createStore(),
+    downloads: getOfflineClient().downloads,
     listPackages: () => withSession(() => offlineApi.listPackages()),
-    fetchPackage: (id) => withSession(() => offlineApi.fetchPackage(id)),
-    signingKeys: () => withSession(() => offlineApi.signingKeys()),
-    configuredKeys: configuredSigningKeys(),
-    estimate: browserEstimate,
   });
 }
 

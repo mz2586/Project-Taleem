@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 
+import { createDownloadManager } from "../../offline";
 import { MemoryStore, STORES } from "../../offline/kv";
 import { IntegrityError, QuotaExceededError, SignatureError } from "../../offline/packages";
 import type { PackageManifest, StoredPackage } from "../../offline/types";
@@ -145,10 +146,13 @@ describe("createLibrary — install only verified packages", () => {
     const fx = await signedFixture();
     const store = new MemoryStore();
     const library = createLibrary({
-      store,
+      downloads: createDownloadManager({
+        store,
+        fetchPackage: async () => (serve === "signed" ? fx.pkg : serve === "forged" ? fx.forged : fx.unsigned),
+        pinnedKeys: {},
+        fetchSigningKeys: async () => ({ keys: [fx.key] }),
+      }),
       listPackages: async () => ({ packages: [fx.pkg.manifest] }),
-      fetchPackage: async () => (serve === "signed" ? fx.pkg : serve === "forged" ? fx.forged : fx.unsigned),
-      signingKeys: async () => ({ keys: [fx.key] }),
     });
     return { fx, store, library };
   }
