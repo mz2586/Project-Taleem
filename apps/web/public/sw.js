@@ -18,6 +18,14 @@ const SHELL_VERSION = "v1";
 const SHELL_CACHE = `taleem-shell-${SHELL_VERSION}`;
 const RUNTIME_CACHE = `taleem-runtime-${SHELL_VERSION}`;
 const APP_SHELL = ["/", "/manifest.webmanifest"];
+// Offline lessons (R1): the library and the player must open with the network off. Precached
+// best-effort (a missing route never fails the install), and refreshed under their OWN URL on every
+// online visit, so offline they render themselves rather than the root shell.
+const OFFLINE_ROUTES = ["/student/offline", "/student/offline/play"];
+
+function isOfflineRoute(url) {
+  return OFFLINE_ROUTES.includes(url.pathname);
+}
 
 // Read routes safe to cache for offline rendering (GET, no child mutation).
 function isCacheableRead(url) {
@@ -32,7 +40,13 @@ self.addEventListener("install", (event) => {
   // Take over promptly so a corrected SW replaces a previously-installed one without waiting for
   // every tab to close (paired with clients.claim() on activate). No child data is touched.
   self.skipWaiting();
-  event.waitUntil(caches.open(SHELL_CACHE).then((cache) => cache.addAll(APP_SHELL)));
+  event.waitUntil(
+    caches.open(SHELL_CACHE).then((cache) =>
+      cache
+        .addAll(APP_SHELL)
+        .then(() => Promise.all(OFFLINE_ROUTES.map((route) => cache.add(route).catch(() => undefined))))
+    )
+  );
 });
 
 self.addEventListener("activate", (event) => {
@@ -89,10 +103,20 @@ self.addEventListener("fetch", (event) => {
           if (response.ok) {
             const copy = response.clone();
             caches.open(SHELL_CACHE).then((cache) => cache.put("/", copy));
+            if (isOfflineRoute(url)) {
+              const own = response.clone();
+              caches.open(SHELL_CACHE).then((cache) => cache.put(url.pathname, own));
+            }
           }
           return response;
         })
-        .catch(() => caches.match(request).then((cached) => cached || caches.match("/")))
+        .catch(() =>
+          caches
+            .match(request)
+            // The player is /student/offline/play?lesson=...: match its cached page whatever the query.
+            .then((cached) => cached || (isOfflineRoute(url) ? caches.match(url.pathname) : undefined))
+            .then((cached) => cached || caches.match("/"))
+        )
     );
     return;
   }

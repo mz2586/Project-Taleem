@@ -205,6 +205,12 @@ export default function TodayPage() {
             )}
           </>
         ) : null}
+
+        {/* Always reachable — including offline, when Today itself cannot load. */}
+        <section style={{ display: "grid", gap: "var(--space-1)", justifyItems: "start" }}>
+          <p style={{ margin: 0 }}>{t("student.offline.entryBody")}</p>
+          <ButtonLink href="/student/offline" variant="ghost" label={t("student.offline.entry")} icon={<span aria-hidden="true">📥</span>} />
+        </section>
       </div>
     </AppShell>
   );

@@ -17,6 +17,10 @@ export default function SubjectsPage() {
         body={t("student.subjects.emptyBody")}
         action={<ButtonLink href="/student/today" variant="brand" label={t("common.goToToday")} />}
       />
+      <section style={{ display: "grid", gap: "var(--space-1)", justifyItems: "center", textAlign: "center" }}>
+        <p style={{ margin: 0 }}>{t("student.offline.entryBody")}</p>
+        <ButtonLink href="/student/offline" variant="ghost" label={t("student.offline.entry")} icon={<span aria-hidden="true">📥</span>} />
+      </section>
     </AppShell>
   );
 }
