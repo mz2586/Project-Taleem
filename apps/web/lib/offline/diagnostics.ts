@@ -10,6 +10,9 @@ import type { SyncDiagnostics } from "./types";
 
 const KEY = "sync_diagnostics";
 
+// The tail of the pending-update chain for each store (see `update`).
+const chains = new WeakMap<object, Promise<void>>();
+
 function empty(): SyncDiagnostics {
   return {
     queued: 0,
@@ -46,9 +49,20 @@ export class SyncDiagnosticsStore {
     return hydrate(await this.store.get<SyncDiagnostics>(STORES.syncMeta, KEY));
   }
 
-  private async update(fn: (d: SyncDiagnostics) => SyncDiagnostics): Promise<void> {
-    const current = await this.get();
-    await this.store.put<SyncDiagnostics>(STORES.syncMeta, KEY, fn(current));
+  // Read-modify-write, serialized per underlying store: every update to the diagnostics record —
+  // from this instance or any other over the same KVStore — waits for the previous one, so
+  // concurrent increments (e.g. at app start) are never lost. A failed update does not block later
+  // ones. (Scope: one page. Two tabs are separate JS heaps; their counters are best-effort.)
+  private update(fn: (d: SyncDiagnostics) => SyncDiagnostics): Promise<void> {
+    const previous = chains.get(this.store) ?? Promise.resolve();
+    const next = previous
+      .catch(() => undefined)
+      .then(async () => {
+        const current = await this.get();
+        await this.store.put<SyncDiagnostics>(STORES.syncMeta, KEY, fn(current));
+      });
+    chains.set(this.store, next);
+    return next;
   }
 
   async recordQueued(n = 1): Promise<void> {
@@ -95,6 +109,6 @@ export class SyncDiagnosticsStore {
   }
 
   async reset(): Promise<void> {
-    await this.store.put<SyncDiagnostics>(STORES.syncMeta, KEY, empty());
+    await this.update(() => empty());
   }
 }
