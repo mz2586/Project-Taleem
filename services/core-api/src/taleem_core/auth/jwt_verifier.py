@@ -73,8 +73,16 @@ def _validate_and_build(
 ) -> Claims:
     """Validate the registered claims (exp/nbf/iss/aud + required sub+role) and build ``Claims``."""
     current = now if now is not None else int(time.time())
-    exp = int(payload.get("exp", 0) or 0)
-    if exp and current >= exp:
+    # ``exp`` is mandatory (RFC 8725 §3.10 posture): a token without one would be valid forever,
+    # outliving every revocation the identity context relies on (consent withdrawal, PIN reset).
+    # The only issuer (identity/application/tokens.py) always sets it.
+    try:
+        exp = int(payload.get("exp", 0) or 0)
+    except (TypeError, ValueError):
+        raise unauthorized("Malformed expiry") from None
+    if exp <= 0:
+        raise unauthorized("Token has no expiry")
+    if current >= exp:
         raise unauthorized("Token expired")
     nbf = int(payload.get("nbf", 0) or 0)
     if nbf and current < nbf:

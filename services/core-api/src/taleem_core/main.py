@@ -51,6 +51,7 @@ from .contexts.identity.adapters.persistence.base import (
     create_identity_engine,
     create_identity_session_factory,
 )
+from .contexts.identity.adapters.persistence.rate_limit_store import SqlRateLimitStore
 from .contexts.identity.adapters.persistence.uow import SqlIdentityUnitOfWork
 from .contexts.identity.application.identity_service import IdentityService
 from .contexts.identity.application.tokens import TokenIssuer
@@ -252,7 +253,20 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         SecretHasher(iterations=settings.kdf_iterations),
     )
     app.state.identity_service = identity_service
-    app.include_router(build_identity_router(identity_service, claims_dependency, clock=time.time))
+    # Public-route rate limits are shared across instances whenever a real database is configured:
+    # a process-local budget is per serverless invocation, i.e. no limit at all in production.
+    rate_limit_store = (
+        SqlRateLimitStore(identity_engine) if identity_engine.dialect.name == "postgresql" else None
+    )
+    app.include_router(
+        build_identity_router(
+            identity_service,
+            claims_dependency,
+            clock=time.time,
+            rate_limit_store=rate_limit_store,
+            client_ip_header=settings.client_ip_header,
+        )
+    )
 
     # ---- Curriculum Studio (CTO H2: SQL-backed, request-scoped Unit of Work) ----
     def studio_service_provider() -> Iterator[CurriculumStudioService]:

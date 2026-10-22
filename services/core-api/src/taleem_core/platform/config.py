@@ -107,6 +107,15 @@ class Settings:
     # not the M-Gov consent flow. Format: "guardianRef=Name:childA,childB;guardianRef2:childC".
     # Empty in production until the consent workflow populates links; a demo link is seeded in dev.
     guardian_links_csv: str = field(default_factory=lambda: _get("TALEEM_GUARDIAN_LINKS", ""))
+    # Header a trusted edge overwrites with the real client address, used to key the public identity
+    # routes' rate limit. Without it every request behind a proxy shares one budget. Defaults to
+    # ``x-real-ip`` on Vercel (``VERCEL=1``), which sets that header itself and does not pass a
+    # client-supplied value through; empty elsewhere (the socket peer is used).
+    client_ip_header: str = field(
+        default_factory=lambda: _get(
+            "TALEEM_CLIENT_IP_HEADER", "x-real-ip" if os.environ.get("VERCEL") == "1" else ""
+        )
+    )
 
     @property
     def is_production(self) -> bool:

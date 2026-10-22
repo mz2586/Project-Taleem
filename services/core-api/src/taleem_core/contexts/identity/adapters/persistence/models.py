@@ -17,7 +17,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from sqlalchemy import Float, ForeignKey, Index, Integer, String, Text
+from sqlalchemy import BigInteger, Float, ForeignKey, Index, Integer, String, Text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import IDENTITY_SCHEMA, IdentityBase, JsonType
@@ -118,6 +118,27 @@ class RefreshTokenRow(IdentityBase):
     expires_at: Mapped[float] = mapped_column(Float, nullable=False)
     consumed_at: Mapped[float | None] = mapped_column(Float, nullable=True)
     revoked_at: Mapped[float | None] = mapped_column(Float, nullable=True)
+
+
+class RateLimitBucketRow(IdentityBase):
+    """One fixed window of the shared sliding-window rate limiter (alembic 0006).
+
+    ``key_hash`` is a SHA-256 digest of the client identifier, never the identifier itself, and a
+    row is purged once ``expires_at`` passes (two windows after it opened), so this table holds
+    neither PII nor history.
+    """
+
+    __tablename__ = "rate_limit_bucket"
+    __table_args__ = (
+        Index("ix_rate_limit_expires", "expires_at"),
+        {"schema": IDENTITY_SCHEMA},
+    )
+
+    scope: Mapped[str] = mapped_column(String(32), primary_key=True)
+    key_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    window_start: Mapped[int] = mapped_column(BigInteger, primary_key=True, autoincrement=False)
+    hits: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    expires_at: Mapped[float] = mapped_column(Float, nullable=False)
 
 
 class AuditRow(IdentityBase):

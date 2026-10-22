@@ -25,7 +25,7 @@ from ....auth.jwt_verifier import Claims
 from ....platform.errors import Problem, forbidden
 from ..application.identity_service import IdentityService
 from ..domain.consent import CURRENT_POLICY_VERSION, ConsentEvidence, ConsentScope
-from .rate_limit import RateLimiter
+from .rate_limit import Limiter, RateLimiter, RateLimitStore, SharedRateLimiter
 
 # Sign-in and registration attempts per client per window. Generous enough that a family sharing one
 # connection is unaffected; tight enough that a PIN space of 10 000 cannot be walked.
@@ -146,12 +146,33 @@ def build_identity_router(
     claims_dependency: Callable[..., Claims],
     *,
     clock: Callable[[], float],
+    rate_limit_store: RateLimitStore | None = None,
+    client_ip_header: str = "",
 ) -> APIRouter:
+    """Build the identity router.
+
+    ``rate_limit_store`` makes the per-client limits shared across every instance (PostgreSQL in
+    production); without it they are process-local. ``client_ip_header`` names a header that a
+    trusted edge *overwrites* with the real client address (e.g. ``x-real-ip`` on Vercel) — only set
+    it when the edge guarantees that, since a client-supplied header would let a caller pick a fresh
+    budget per request.
+    """
     router = APIRouter(prefix="/v1/identity", tags=["identity"])
-    sign_in_limiter = RateLimiter(SIGN_IN_LIMIT, SIGN_IN_WINDOW_SECONDS, clock)
-    roster_limiter = RateLimiter(ROSTER_LIMIT, ROSTER_WINDOW_SECONDS, clock)
+
+    def _limiter(scope: str, limit: int, window: float) -> Limiter:
+        if rate_limit_store is None:
+            return RateLimiter(limit, window, clock)
+        return SharedRateLimiter(scope, limit, window, clock, rate_limit_store)
+
+    sign_in_limiter = _limiter("identity.sign_in", SIGN_IN_LIMIT, SIGN_IN_WINDOW_SECONDS)
+    roster_limiter = _limiter("identity.roster", ROSTER_LIMIT, ROSTER_WINDOW_SECONDS)
+    ip_header = client_ip_header.strip().lower()
 
     def _client_key(request: Request) -> str:
+        if ip_header:
+            forwarded = request.headers.get(ip_header, "").split(",")[0].strip()
+            if forwarded:
+                return forwarded[:64]
         return request.client.host if request.client else "unknown"
 
     # ------------------------------------------------------------------ public (token-issuing)
