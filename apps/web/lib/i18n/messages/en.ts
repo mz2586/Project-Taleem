@@ -176,6 +176,42 @@ export const en = {
       offlineBody: "Your map will show when you're back online.",
       error: "Couldn't load your map.",
     },
+    // Offline sync, for a child. Held or refused work is never called lost: it is kept on the phone.
+    sync: {
+      panelLabel: "Your saved work",
+      badge: {
+        online: "Online",
+        offline: "Offline",
+        offlineSaved: "Offline · saved on this phone: {count}",
+        sending: "Sending: {count}",
+        later: "Will send later · saved on this phone: {count}",
+        allSent: "All work sent",
+        held: "Waiting for a grown-up · saved on this phone: {count}",
+        rejected: "Needs help · kept on this phone: {count}",
+      },
+      rows: {
+        device: "Saved on this phone: {count}",
+        deviceMeaning: "Not sent yet. It is safe on this phone.",
+        sent: "Sent to Taleem: {count}",
+        sentMeaning: "Taleem got it.",
+        confirmed: "Saved safely by Taleem: {count}",
+        confirmedMeaning: "It is in your Taleem record. It will not be lost.",
+        recentNote: "These numbers are for your recent work.",
+      },
+      held: {
+        consent: "Waiting: {count}. A grown-up needs to allow learning again. Your work is kept on this phone.",
+        paused: "Waiting: {count}. Your account is paused. Ask a grown-up. Your work is kept on this phone.",
+        other: "Waiting: {count}. A grown-up needs to check your account. Your work is kept on this phone.",
+      },
+      rejected: "Could not send: {count}. It is still kept on this phone. Ask a grown-up or your teacher for help.",
+      waiting: {
+        offline: "It will send when the internet is back.",
+        signIn: "It will send after you sign in again.",
+        server: "Taleem is busy. It will send soon by itself.",
+      },
+      lastSync: "Last sent: {time}",
+      neverSynced: "Nothing sent yet.",
+    },
   },
   // Guardian portal. Written for a parent who may read slowly: short sentences, one idea each,
   // "label: value" for numbers (no plural rules to get wrong), and no machine words.

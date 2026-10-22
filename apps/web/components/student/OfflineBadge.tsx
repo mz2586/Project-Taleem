@@ -1,39 +1,32 @@
 "use client";
-// Persistent, calm online/offline indicator (+ pending-to-sync count). Never alarming; the learner
-// is never blocked or scolded for being offline.
-import { useEffect, useState } from "react";
-
+// Persistent, calm sync indicator: one line from lib/student/syncView.ts (saved on this phone /
+// sending / sent / waiting for a grown-up). Never alarming; the learner is never blocked or
+// scolded for being offline, and held work is never called lost. Presentational — the live data
+// comes from SyncStatusBadge. The text is a polite live region so a change is announced.
 import { useLocale } from "../../lib/i18n/useLocale";
-import { watchConnectivity } from "../../lib/offline";
+import type { SyncView } from "../../lib/student/syncView";
 
-export function OfflineBadge({ pendingCount = 0 }: { pendingCount?: number }) {
-  const [online, setOnline] = useState(true);
+const TONE_COLOR: Record<SyncView["tone"], string> = {
+  calm: "var(--color-text-primary)",
+  busy: "var(--color-action-primary)",
+  attention: "var(--color-danger)",
+};
+
+export function OfflineBadge({ view }: { view: SyncView }) {
   const { t } = useLocale();
-
-  useEffect(() => watchConnectivity(setOnline), []);
-
-  const message = online
-    ? pendingCount > 0
-      ? t("common.connectivity.saving", { count: pendingCount })
-      : t("common.connectivity.online")
-    : pendingCount > 0
-      ? t("common.connectivity.offlineSaved", { count: pendingCount })
-      : t("common.connectivity.offline");
-
   return (
     <span
-      role="status"
-      aria-live="polite"
       style={{
         display: "inline-flex",
         alignItems: "center",
         gap: "var(--space-1)",
         fontSize: "var(--font-size-body-min)",
-        color: "var(--color-text-primary)",
+        color: TONE_COLOR[view.tone],
       }}
     >
-      <span aria-hidden="true">{online ? "●" : "◍"}</span>
-      <span>{message}</span>
+      {/* The symbol is decoration; the words carry the state (never colour or shape alone). */}
+      <span aria-hidden="true">{view.symbol}</span>
+      <span aria-live="polite">{t(view.headline.key, view.headline.params)}</span>
     </span>
   );
 }
