@@ -64,6 +64,25 @@ def _learning_rules() -> set[tuple[str, str, str]]:
     }
 
 
+def _school_rules() -> set[tuple[str, str, str]]:
+    """Organization / teacher pilot minimum (contexts/school).
+
+    The PDP answers only "may a teacher manage classes at all". *Which* classes and learners is an
+    ownership + consent question the school service settles per request: the teacher's own
+    organization and classes, and only learners whose guardian currently shares progress. Operators
+    create organizations and teacher accounts and nothing else — no operator rule reads a learner's
+    progress. A guardian may enrol their own learner (ownership re-checked against identity).
+    """
+    return {
+        ("system", "manage", "school.organization"),
+        ("teacher", "read", "school.self"),
+        ("teacher", "manage", "school.class"),
+        ("teacher", "manage", "school.assignment"),
+        ("teacher", "read", "school.learner_progress"),
+        ("guardian", "manage", "school.enrolment"),
+    }
+
+
 # Policy table: (role, action, resource) -> allow. Everything not listed is DENIED (fail closed).
 # Note: the Curriculum Studio *workflow* rules (correct stage role, no self-approval) are also
 # enforced in the domain service — the PDP is the coarse authZ gate, the domain is defence in depth.
@@ -78,6 +97,7 @@ _ALLOW: frozenset[tuple[str, str, str]] = frozenset(
         *_curriculum_rules(),
         *_learning_rules(),
         *_identity_rules(),
+        *_school_rules(),
     }
 )
 

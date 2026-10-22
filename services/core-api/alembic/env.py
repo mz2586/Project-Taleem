@@ -16,6 +16,7 @@ from sqlalchemy import engine_from_config, pool
 from taleem_core.contexts.curriculum_studio.adapters.persistence.base import SCHEMA, Base
 from taleem_core.contexts.identity.adapters.persistence.base import IdentityBase
 from taleem_core.contexts.learning.adapters.persistence.base import LearningBase
+from taleem_core.contexts.school.adapters.persistence.base import SchoolBase
 
 config = context.config
 
@@ -25,7 +26,12 @@ if _url:
 
 # Both bounded-context schemas are migrated by this Alembic history (CTO H3). Registering both
 # metadata objects lets --autogenerate see the learning tables (previously it saw curriculum only).
-target_metadata = [Base.metadata, LearningBase.metadata, IdentityBase.metadata]
+target_metadata = [
+    Base.metadata,
+    LearningBase.metadata,
+    IdentityBase.metadata,
+    SchoolBase.metadata,
+]
 
 
 def run_migrations_offline() -> None:

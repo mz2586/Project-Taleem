@@ -1,0 +1,436 @@
+openapi: 3.1.0
+info:
+  title: Project Taleem — School Organizations, Teachers, Classes & Assignments API
+  version: 0.1.0
+  description: >-
+    The pilot-minimum teacher and organization backend. Nothing in this API is, or is described as,
+    an accredited programme.
+
+
+    Properties this contract commits to:
+
+
+    * **Tenant isolation.** An organization is a tenant. A teacher's organization comes from the
+      teacher's own record (the token subject), never from a request. A class, assignment, or
+      organization outside the teacher's scope is reported `404`, never `403`, so a probe cannot
+      confirm that an id exists in another school.
+    * **Guardian-approved enrolment.** A learner joins a class only when their guardian submits the
+      class code (`POST /v1/school/classes:join`). That act records `progress_sharing` consent in the
+      identity context — the scope defined for sharing progress with a mentor or teacher. Joining
+      never restores a withdrawn learning consent: it is refused (`409 CONSENT_REQUIRED`).
+    * **Live visibility.** A teacher sees an enrolled learner only while the guardian's consent covers
+      `progress_sharing` and the learner may still learn (active account, current learning
+      consent). It is checked on every request, with no cache: after a withdrawal the learner
+      disappears from the next response.
+    * **Deny by default.** `system` creates organizations and teacher accounts; `teacher` manages its
+      own classes and assignments; `guardian` joins its own learner. Everything else is denied.
+    * Teacher sign-in failures return one identical `401` and are rate limited.
+  license:
+    name: Proprietary — license undecided; see repository LICENSE
+servers:
+  - url: https://api.taleem.dev
+    description: Reference environment (placeholder; concrete host per FOUNDER_DECISIONS FD-02)
+tags:
+  - name: school
+    description: Organizations (tenants), teacher accounts, classes, enrolment, assignments.
+paths:
+  /v1/school/organizations:
+    post:
+      tags: [school]
+      operationId: createOrganization
+      summary: Create an organization (operator)
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/OrganizationIn" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Organization" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/organizations/{organizationId}:
+    get:
+      tags: [school]
+      operationId: getOrganization
+      summary: Read an organization (operator, or a teacher of that organization)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: organizationId, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: The organization
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Organization" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/organizations/{organizationId}/teachers:
+    post:
+      tags: [school]
+      operationId: createTeacher
+      summary: Create a teacher account in an organization (operator)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: organizationId, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TeacherIn" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Teacher" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/teachers:signin:
+    post:
+      tags: [school]
+      operationId: signInTeacher
+      summary: Teacher sign-in (public, rate limited, uniform failure)
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/TeacherCredentials" }
+      responses:
+        "200":
+          description: Signed in
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  teacher: { $ref: "#/components/schemas/Teacher" }
+                  session: { $ref: "#/components/schemas/Session" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "429": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/me:
+    get:
+      tags: [school]
+      operationId: getTeacherProfile
+      summary: The signed-in teacher and their organization
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Profile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  teacher: { $ref: "#/components/schemas/Teacher" }
+                  organization: { $ref: "#/components/schemas/Organization" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/classes:
+    post:
+      tags: [school]
+      operationId: createClass
+      summary: Create a class (teacher); returns its join code
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string, minLength: 1, maxLength: 80 }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Classroom" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+    get:
+      tags: [school]
+      operationId: listClasses
+      summary: The teacher's own classes
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Classes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  classes:
+                    type: array
+                    items: { $ref: "#/components/schemas/Classroom" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/classes:join:
+    post:
+      tags: [school]
+      operationId: joinClass
+      summary: Guardian enrols their own learner with a class code (records progress_sharing consent)
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/JoinIn" }
+      responses:
+        "200":
+          description: Joined (idempotent)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  class_id: { type: string }
+                  class_name: { type: string }
+                  joined: { type: boolean }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        "429": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/classes/{classId}:
+    get:
+      tags: [school]
+      operationId: getClass
+      summary: A class and the learners currently sharing progress with its teacher
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: classId, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Class detail
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ClassDetail" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/classes/{classId}/assignments:
+    post:
+      tags: [school]
+      operationId: createAssignment
+      summary: Assign a published lesson (by objective code) with a due date
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: classId, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AssignmentIn" }
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Assignment" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+    get:
+      tags: [school]
+      operationId: listAssignments
+      summary: Assignments in one of the teacher's classes
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: classId, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Assignments
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  assignments:
+                    type: array
+                    items: { $ref: "#/components/schemas/Assignment" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/classes/{classId}/assignments/{assignmentId}/progress:
+    get:
+      tags: [school]
+      operationId: getAssignmentProgress
+      summary: Per-learner completion and mastery for an assignment (sharing learners only)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: classId, in: path, required: true, schema: { type: string } }
+        - { name: assignmentId, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Progress
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AssignmentProgress" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    Problem:
+      description: RFC 9457 problem details
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+  schemas:
+    Problem:
+      type: object
+      properties:
+        type: { type: string }
+        title: { type: string }
+        status: { type: integer }
+        code: { type: string }
+        detail: { type: string }
+        traceId: { type: string }
+    Session:
+      type: object
+      properties:
+        access_token: { type: string }
+        token_type: { type: string, const: "Bearer" }
+        expires_at: { type: integer }
+        expires_in: { type: integer }
+        role: { type: string, const: "teacher" }
+        subject: { type: string }
+    OrganizationIn:
+      type: object
+      required: [name, country, curriculumPackId, defaultLocale]
+      properties:
+        name: { type: string, minLength: 1, maxLength: 120 }
+        country: { type: string, description: ISO 3166-1 alpha-2, minLength: 2, maxLength: 2 }
+        curriculumPackId: { type: string, maxLength: 64 }
+        defaultLocale: { type: string, maxLength: 8 }
+    Organization:
+      type: object
+      properties:
+        organization_id: { type: string }
+        name: { type: string }
+        country: { type: string }
+        curriculum_pack_id: { type: string }
+        default_locale: { type: string }
+        created_at: { type: number }
+    TeacherIn:
+      type: object
+      required: [email, displayName, passphrase]
+      properties:
+        email: { type: string, maxLength: 254 }
+        displayName: { type: string, minLength: 1, maxLength: 60 }
+        passphrase: { type: string, minLength: 10, maxLength: 256 }
+    TeacherCredentials:
+      type: object
+      required: [email, passphrase]
+      properties:
+        email: { type: string }
+        passphrase: { type: string }
+    Teacher:
+      type: object
+      properties:
+        teacher_ref: { type: string }
+        organization_id: { type: string }
+        email: { type: string }
+        display_name: { type: string }
+        status: { type: string, enum: [active, locked, suspended] }
+        created_at: { type: number }
+    Classroom:
+      type: object
+      properties:
+        class_id: { type: string }
+        organization_id: { type: string }
+        teacher_ref: { type: string }
+        name: { type: string }
+        join_code: { type: string, description: "ABCD-EFGH; give it to guardians" }
+        created_at: { type: number }
+    ClassDetail:
+      allOf:
+        - { $ref: "#/components/schemas/Classroom" }
+        - type: object
+          properties:
+            learners:
+              type: array
+              items:
+                type: object
+                properties:
+                  student_ref: { type: string }
+                  display_name: { type: string }
+                  joined_at: { type: number }
+    JoinIn:
+      type: object
+      required: [classCode, studentRef, attestation]
+      properties:
+        classCode: { type: string }
+        studentRef: { type: string }
+        attestation:
+          type: string
+          maxLength: 500
+          description: The sentence the guardian affirmed, stored verbatim as consent evidence.
+    AssignmentIn:
+      type: object
+      required: [objectiveCode, dueAt]
+      properties:
+        objectiveCode: { type: string, maxLength: 64 }
+        dueAt: { type: number, description: Unix seconds; must be in the future }
+    Assignment:
+      type: object
+      properties:
+        assignment_id: { type: string }
+        class_id: { type: string }
+        objective_code: { type: string }
+        due_at: { type: number }
+        assigned_by: { type: string }
+        created_at: { type: number }
+    AssignmentProgress:
+      allOf:
+        - { $ref: "#/components/schemas/Assignment" }
+        - type: object
+          properties:
+            overdue: { type: boolean }
+            learners:
+              type: array
+              items:
+                type: object
+                properties:
+                  student_ref: { type: string }
+                  display_name: { type: string }
+                  completed:
+                    type: boolean
+                    description: Practised this objective since it was assigned.
+                  attempts_since_assigned: { type: integer }
+                  mastery: { type: ["number", "null"] }
+                  mastery_state: { type: string }
+                  mastered: { type: boolean }

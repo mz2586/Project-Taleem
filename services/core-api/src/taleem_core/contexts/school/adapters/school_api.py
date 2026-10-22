@@ -1,0 +1,186 @@
+"""FastAPI router for /v1/school/** (contract: packages/contracts/school.openapi.yaml).
+
+Who may call what (deny-by-default PDP, then ownership in the service):
+
+- ``system`` (operator): create organizations and teacher accounts.
+- ``teacher``: their own profile, their own classes, assignments in their own classes, and the
+  progress of learners in those classes whose guardians share it. The acting teacher — and so the
+  organization — always comes from the verified token, never from the request.
+- ``guardian``: join their own learner to a class with a class code (records consent).
+
+One route is public: teacher sign-in, which is rate limited and fails uniformly.
+"""
+
+from __future__ import annotations
+
+from collections.abc import Callable
+from typing import Any
+
+from fastapi import APIRouter, Depends, Request
+from pydantic import BaseModel, ConfigDict, Field
+
+from ....auth.dependencies import authorize
+from ....auth.jwt_verifier import Claims
+from ....platform.errors import not_found
+from ..application.school_service import SchoolService
+
+
+class OrganizationIn(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+    name: str = Field(min_length=1, max_length=120)
+    country: str = Field(min_length=2, max_length=2)
+    curriculum_pack_id: str = Field(alias="curriculumPackId", min_length=1, max_length=64)
+    default_locale: str = Field(alias="defaultLocale", min_length=2, max_length=8)
+
+
+class TeacherIn(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+    email: str = Field(min_length=3, max_length=254)
+    display_name: str = Field(alias="displayName", min_length=1, max_length=60)
+    passphrase: str = Field(min_length=1, max_length=256)
+
+
+class TeacherSignInIn(BaseModel):
+    email: str = Field(min_length=3, max_length=254)
+    passphrase: str = Field(min_length=1, max_length=256)
+
+
+class ClassIn(BaseModel):
+    name: str = Field(min_length=1, max_length=80)
+
+
+class JoinIn(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+    class_code: str = Field(alias="classCode", min_length=4, max_length=16)
+    student_ref: str = Field(alias="studentRef", min_length=1, max_length=64)
+    attestation: str = Field(min_length=1, max_length=500)
+
+
+class AssignmentIn(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
+    objective_code: str = Field(alias="objectiveCode", min_length=1, max_length=64)
+    due_at: float = Field(alias="dueAt", gt=0)
+
+
+def build_school_router(
+    service: SchoolService,
+    claims_dependency: Callable[..., Claims],
+    *,
+    sign_in_guard: Callable[[Request], None] = lambda _request: None,
+) -> APIRouter:
+    router = APIRouter(prefix="/v1/school", tags=["school"])
+
+    # ------------------------------------------------------------------- operator (system)
+
+    @router.post("/organizations", status_code=201)
+    def create_organization(
+        body: OrganizationIn, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "manage", "school.organization")
+        return service.create_organization(
+            name=body.name,
+            country=body.country,
+            curriculum_pack_id=body.curriculum_pack_id,
+            default_locale=body.default_locale,
+        )
+
+    @router.get("/organizations/{organization_id}")
+    def get_organization(
+        organization_id: str, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        if claims.role == "teacher":
+            authorize(claims, "read", "school.self")
+            org = service.teacher_profile(claims.sub)["organization"]
+            if not org or org["organization_id"] != organization_id:
+                raise not_found("organization not found")  # never confirm another tenant exists
+            return dict(org)
+        authorize(claims, "manage", "school.organization")
+        return service.get_organization(organization_id)
+
+    @router.post("/organizations/{organization_id}/teachers", status_code=201)
+    def create_teacher(
+        organization_id: str, body: TeacherIn, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "manage", "school.organization")
+        return service.create_teacher(
+            organization_id=organization_id,
+            email=body.email,
+            display_name=body.display_name,
+            passphrase=body.passphrase,
+        )
+
+    # ------------------------------------------------------------------- public sign-in
+
+    @router.post("/teachers:signin")
+    def sign_in_teacher(body: TeacherSignInIn, request: Request) -> dict[str, Any]:
+        sign_in_guard(request)
+        return service.sign_in_teacher(email=body.email, passphrase=body.passphrase)
+
+    # ------------------------------------------------------------------------- teacher
+
+    @router.get("/me")
+    def me(claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
+        authorize(claims, "read", "school.self")
+        return service.teacher_profile(claims.sub)
+
+    @router.post("/classes", status_code=201)
+    def create_class(body: ClassIn, claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
+        authorize(claims, "manage", "school.class")
+        return service.create_class(teacher_ref=claims.sub, name=body.name)
+
+    @router.get("/classes")
+    def list_classes(claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
+        authorize(claims, "manage", "school.class")
+        return {"classes": service.list_classes(claims.sub)}
+
+    # ------------------------------------------------------------------------ guardian
+
+    @router.post("/classes:join")
+    def join_class(
+        body: JoinIn, request: Request, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "manage", "school.enrolment")
+        sign_in_guard(request)  # bounds class-code guessing per client
+        return service.join_class(
+            guardian_ref=claims.sub,
+            student_ref=body.student_ref,
+            class_code=body.class_code,
+            attestation=body.attestation,
+        )
+
+    # ------------------------------------------------------------------------- teacher
+
+    @router.get("/classes/{class_id}")
+    def class_detail(class_id: str, claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
+        authorize(claims, "read", "school.learner_progress")
+        return service.class_detail(teacher_ref=claims.sub, class_id=class_id)
+
+    @router.post("/classes/{class_id}/assignments", status_code=201)
+    def create_assignment(
+        class_id: str, body: AssignmentIn, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "manage", "school.assignment")
+        return service.create_assignment(
+            teacher_ref=claims.sub,
+            class_id=class_id,
+            objective_code=body.objective_code,
+            due_at=body.due_at,
+        )
+
+    @router.get("/classes/{class_id}/assignments")
+    def list_assignments(
+        class_id: str, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "manage", "school.assignment")
+        return {"assignments": service.list_assignments(teacher_ref=claims.sub, class_id=class_id)}
+
+    @router.get("/classes/{class_id}/assignments/{assignment_id}/progress")
+    def assignment_progress(
+        class_id: str, assignment_id: str, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "read", "school.learner_progress")
+        return service.assignment_progress(
+            teacher_ref=claims.sub, class_id=class_id, assignment_id=assignment_id
+        )
+
+    return router

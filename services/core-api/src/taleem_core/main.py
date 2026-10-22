@@ -61,9 +61,10 @@ from .contexts.identity.adapters.persistence.base import (
 )
 from .contexts.identity.adapters.persistence.rate_limit_store import SqlRateLimitStore
 from .contexts.identity.adapters.persistence.uow import SqlIdentityUnitOfWork
+from .contexts.identity.adapters.rate_limit import Limiter, RateLimiter, SharedRateLimiter
 from .contexts.identity.application.identity_service import IdentityService
-from .contexts.identity.application.tokens import TokenIssuer
-from .contexts.identity.domain.consent import ConsentScope
+from .contexts.identity.application.tokens import GUARDIAN_TOKEN_TTL_SECONDS, TokenIssuer
+from .contexts.identity.domain.consent import ConsentEvidence, ConsentScope
 from .contexts.identity.domain.credentials import SecretHasher
 from .contexts.learning.adapters.ai_teacher_api import build_ai_teacher_router
 from .contexts.learning.adapters.api import LearningApiDeps, build_learning_router
@@ -104,6 +105,20 @@ from .contexts.ops.adapters.persistence.base import (
 from .contexts.ops.adapters.persistence.kill_switch_store import SqlKillSwitchState
 from .contexts.privacy.adapters.privacy_api import build_privacy_router
 from .contexts.privacy.adapters.wiring import build_privacy_service
+from .contexts.school.adapters.context_ports import (
+    CallablePublishedCurriculum,
+    CallableSharingConsent,
+    IdentityLearnerDirectory,
+    KnowledgeProgressReader,
+)
+from .contexts.school.adapters.persistence.base import (
+    SchoolBase,
+    create_school_session_factory,
+    school_engine_sharing,
+)
+from .contexts.school.adapters.persistence.uow import SqlSchoolUnitOfWork
+from .contexts.school.adapters.school_api import build_school_router
+from .contexts.school.application.school_service import SchoolService
 from .contexts.sync.domain import DeltaType, SyncDelta, SyncStore
 from .contexts.sync.service import DurableSyncCoordinator
 from .platform import correlation
@@ -267,14 +282,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     identity_sf = create_identity_session_factory(identity_engine)
     app.state.identity_session_factory = identity_sf
 
+    # One token issuer (the identity context's) for every token, teacher tokens included.
+    token_issuer = TokenIssuer(
+        issuer=settings.jwt_issuer,
+        audience=settings.jwt_audience,
+        signer=auth.signer,
+        hs256_secret=None if settings.is_production else settings.jwt_dev_secret,
+    )
     identity_service = IdentityService(
         lambda: SqlIdentityUnitOfWork(identity_sf),
-        TokenIssuer(
-            issuer=settings.jwt_issuer,
-            audience=settings.jwt_audience,
-            signer=auth.signer,
-            hs256_secret=None if settings.is_production else settings.jwt_dev_secret,
-        ),
+        token_issuer,
         time.time,
         SecretHasher(iterations=settings.kdf_iterations),
     )
@@ -372,6 +389,68 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     offline_service = OfflinePackageService(read_model, time.time, signer=package_signer)
     app.include_router(
         build_offline_router(offline_service, claims_dependency), dependencies=learner_permitted
+    )
+
+    # ---- School / organization pilot minimum (teachers, classes, assignments) ----
+    # Identity, learning and curriculum are reached only through the school ports, wired here.
+    # Teacher visibility of a learner is LIVE per request: the learner gate (consent + account)
+    # AND the guardian's progress_sharing scope — the scope identity defines for "share progress
+    # with an assigned mentor/teacher". Joining a class with a code is the guardian's grant.
+    # Shares the identity engine's pool (one pool per app, not one more per context).
+    school_engine = school_engine_sharing(identity_engine)
+    if school_engine.dialect.name == "sqlite":
+        SchoolBase.metadata.create_all(school_engine)
+    school_sf = create_school_session_factory(school_engine)
+    app.state.school_session_factory = school_sf
+
+    def _grant_class_sharing(guardian_ref: str, student_ref: str, attestation: str) -> object:
+        # learning_data is required by every grant record; the join refuses a learner without it,
+        # so including it here never restores a withdrawn learning consent.
+        return identity_service.grant_consent(
+            guardian_ref=guardian_ref,
+            student_ref=student_ref,
+            scopes={ConsentScope.LEARNING_DATA, ConsentScope.PROGRESS_SHARING},
+            evidence=ConsentEvidence(method="class_join", attestation=attestation),
+        )
+
+    def _issue_teacher_token(*, teacher_ref: str, now: float) -> dict[str, object]:
+        return token_issuer.issue(
+            subject=teacher_ref, role="teacher", now=now, ttl_seconds=GUARDIAN_TOKEN_TTL_SECONDS
+        ).to_dict()
+
+    school_limiter: Limiter = (
+        SharedRateLimiter("school.sign_in", 10, 60.0, time.time, rate_limit_store)
+        if rate_limit_store is not None
+        else RateLimiter(10, 60.0, time.time)
+    )
+    school_ip_header = settings.client_ip_header.strip().lower()
+
+    def _school_sign_in_guard(request: Request) -> None:
+        key = ""
+        if school_ip_header:
+            key = request.headers.get(school_ip_header, "").split(",")[0].strip()
+        if not key:
+            key = request.client.host if request.client else "unknown"
+        school_limiter.check(key[:64])
+
+    school_service = SchoolService(
+        lambda: SqlSchoolUnitOfWork(school_sf),
+        hasher=SecretHasher(iterations=settings.kdf_iterations),
+        issue_token=_issue_teacher_token,
+        learners=IdentityLearnerDirectory(
+            learner_lookup=_learner_lookup,
+            learner_refusal=learner_gate.refusal,
+            sharing_allowed=lambda ref: identity_service.consent_state_for(ref).allows(
+                ConsentScope.PROGRESS_SHARING
+            ),
+        ),
+        sharing_consent=CallableSharingConsent(_grant_class_sharing),
+        progress=KnowledgeProgressReader(knowledge_service.snapshot),
+        curriculum=CallablePublishedCurriculum(read_model.lesson_for),
+        clock=time.time,
+    )
+    app.include_router(
+        build_school_router(school_service, claims_dependency, sign_in_guard=_school_sign_in_guard)
     )
 
     # ---- Durable offline sync (Phase 6.2B) ----
@@ -519,6 +598,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         Module("guardian", "/v1/guardian", lambda: True),
         Module("identity", "/v1/identity", lambda: True, events_published=("ConsentGranted",)),
         Module("privacy", "/v1/privacy", lambda: True),
+        Module("school", "/v1/school", lambda: True),
     ):
         # Idempotent across reloads/tests: re-registering the same module is a no-op.
         with contextlib.suppress(ValueError):
