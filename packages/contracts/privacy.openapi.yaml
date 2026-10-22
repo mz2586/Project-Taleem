@@ -1,0 +1,271 @@
+openapi: 3.1.0
+info:
+  title: Project Taleem — Privacy API
+  version: 0.1.0
+  description: >-
+    Data-subject rights for a pseudonymous learner, exercised by their guardian: a machine-readable
+    export of everything held about the learner across every store (identity, learning, in-process
+    sync and session state, the AI usage ledger), and a two-step, irreversible erasure. Authenticated
+    (bearer JWT) and PDP-gated (`guardian manage identity.learner`); ownership is checked against
+    the identity record, and a learner that is not the caller's — or no longer exists — is a uniform
+    404. After an erasure only a minimum tombstone remains (consent decisions and one erasure event,
+    keyed by a salted one-way tombstone ref, never the student ref); that retained set and every
+    retention period are configuration PENDING M-Gov approval. Retention periods default to "not
+    set; purge disabled", and the operator purge report is a dry run that deletes nothing.
+  license:
+    name: Proprietary — license undecided; see repository LICENSE
+servers:
+  - url: https://api.taleem.dev
+    description: Reference environment (placeholder; concrete host per FOUNDER_DECISIONS FD-02)
+tags:
+  - name: privacy
+    description: Learner data export, erasure, and the retention schedule.
+paths:
+  /v1/privacy/policy:
+    get:
+      tags: [privacy]
+      operationId: getPrivacyPolicy
+      summary: What an erasure retains, the retention periods, and whether erasure is enabled
+      description: Readable by a guardian or an operator (`system`).
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Current privacy configuration (PENDING M-Gov approval)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/PrivacyPolicy" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "403": { $ref: "#/components/responses/Forbidden" }
+        default: { $ref: "#/components/responses/Error" }
+  /v1/privacy/learners/{studentRef}/export:
+    get:
+      tags: [privacy]
+      operationId: exportLearnerData
+      summary: Machine-readable export of everything held about one learner
+      description: >-
+        Guardian of the learner only. Credential digests (PIN hash, refresh-token hash) are
+        withheld and listed under each section's `withheld`.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - $ref: "#/components/parameters/StudentRef"
+      responses:
+        "200":
+          description: Export bundle
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ExportBundle" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "403": { $ref: "#/components/responses/Forbidden" }
+        "404": { $ref: "#/components/responses/NotFound" }
+        default: { $ref: "#/components/responses/Error" }
+  /v1/privacy/learners/{studentRef}/erasure-requests:
+    post:
+      tags: [privacy]
+      operationId: requestLearnerErasure
+      summary: Step 1 — request erasure; returns a short-lived signed confirmation token
+      description: Nothing is erased by this call. The token expires after the configured TTL.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - $ref: "#/components/parameters/StudentRef"
+      responses:
+        "202":
+          description: Erasure requested; confirm with the token to proceed
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErasureRequest" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "403": { $ref: "#/components/responses/Forbidden" }
+        "404": { $ref: "#/components/responses/NotFound" }
+        "503":
+          description: Erasure not configured (no confirmation key in production)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default: { $ref: "#/components/responses/Error" }
+  /v1/privacy/learners/{studentRef}/erasure:confirm:
+    post:
+      tags: [privacy]
+      operationId: confirmLearnerErasure
+      summary: Step 2 — confirm and perform the irreversible erasure
+      description: >-
+        Erases every store (identity last), writes the tombstone, then re-scans every store and
+        fails loudly if anything still references the learner. A replay after success is a 404.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - $ref: "#/components/parameters/StudentRef"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ConfirmIn" }
+      responses:
+        "200":
+          description: Erasure receipt
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ErasureReceipt" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "403": { $ref: "#/components/responses/Forbidden" }
+        "404": { $ref: "#/components/responses/NotFound" }
+        "422":
+          description: Confirmation token invalid, expired, or for another request
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "503":
+          description: Erasure not configured
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default: { $ref: "#/components/responses/Error" }
+  /v1/privacy/retention:dry-run:
+    get:
+      tags: [privacy]
+      operationId: retentionDryRun
+      summary: Operator report of what the retention schedule would purge (deletes nothing)
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Dry-run purge report
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/RetentionReport" }
+        "401": { $ref: "#/components/responses/Unauthorized" }
+        "403": { $ref: "#/components/responses/Forbidden" }
+        default: { $ref: "#/components/responses/Error" }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: Verified bearer JWT. Role from the token drives the deny-by-default PDP.
+  parameters:
+    StudentRef:
+      name: studentRef
+      in: path
+      required: true
+      description: The learner's pseudonymous ref.
+      schema: { type: string }
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    Forbidden:
+      description: Forbidden (role not permitted)
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    NotFound:
+      description: Not this guardian's learner, or no such learner (uniform; no existence disclosure)
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+    Error:
+      description: Error
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+  schemas:
+    ConfirmIn:
+      type: object
+      required: [confirmationToken]
+      properties:
+        confirmationToken: { type: string, minLength: 10, maxLength: 2048 }
+    RetainedSet:
+      type: object
+      description: Exactly what survives an erasure (PENDING M-Gov approval).
+      properties:
+        approval: { type: string }
+        consent_evidence: { type: object, additionalProperties: true }
+        erasure_event: { type: object, additionalProperties: true }
+        student_ref_retained: { type: boolean, const: false }
+    PrivacyPolicy:
+      type: object
+      properties:
+        retained_after_erasure: { $ref: "#/components/schemas/RetainedSet" }
+        retention:
+          type: object
+          properties:
+            approval: { type: string }
+            periods_seconds:
+              type: object
+              description: Data class -> seconds; null means not set (purge disabled).
+              additionalProperties: { type: [number, "null"] }
+        erasure_enabled: { type: boolean }
+        confirmation_ttl_seconds: { type: number }
+    ExportBundle:
+      type: object
+      properties:
+        format: { type: string, const: taleem.learner-export/1 }
+        generated_at: { type: number }
+        student_ref: { type: string }
+        requested_by: { type: string, description: The guardian ref }
+        stores:
+          type: array
+          description: Every table / in-process store covered.
+          items: { type: string }
+        sections:
+          type: object
+          description: One section per store (identity, learning, sync, ai_usage, guardian).
+          additionalProperties: { type: object, additionalProperties: true }
+        notice: { type: string }
+    ErasureScope:
+      type: object
+      properties:
+        erased: { type: array, items: { type: string } }
+        retained: { $ref: "#/components/schemas/RetainedSet" }
+        irreversible: { type: boolean }
+    ErasureRequest:
+      type: object
+      properties:
+        request_id: { type: string }
+        student_ref: { type: string }
+        confirmation_token: { type: string }
+        expires_at: { type: number }
+        scope: { $ref: "#/components/schemas/ErasureScope" }
+        warning: { type: string }
+    ErasureReceipt:
+      type: object
+      properties:
+        request_id: { type: string }
+        tombstone_ref: { type: string }
+        erased:
+          type: object
+          description: Store -> table -> affected rows.
+          additionalProperties:
+            type: object
+            additionalProperties: { type: integer }
+        verified: { type: boolean }
+        retained: { $ref: "#/components/schemas/RetainedSet" }
+        irreversible: { type: boolean }
+    RetentionClass:
+      type: object
+      properties:
+        data_class: { type: string }
+        description: { type: string }
+        period_seconds: { type: [number, "null"] }
+        cutoff: { type: number }
+        status: { type: string }
+        would_purge: { type: [integer, "null"] }
+    RetentionReport:
+      type: object
+      properties:
+        generated_at: { type: number }
+        dry_run: { type: boolean, const: true }
+        approval: { type: string }
+        classes:
+          type: array
+          items: { $ref: "#/components/schemas/RetentionClass" }
+    Problem:
+      type: object
+      description: RFC 9457 problem+json.
+      properties:
+        type: { type: string }
+        title: { type: string }
+        status: { type: integer }
+        code: { type: string }
+        detail: { type: string }
+        instance: { type: string }

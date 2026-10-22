@@ -15,6 +15,7 @@ Endpoints (M1 walking skeleton — governance-safe):
 from __future__ import annotations
 
 import contextlib
+import os
 import time
 from collections.abc import Iterator
 from typing import Any
@@ -101,6 +102,8 @@ from .contexts.ops.adapters.persistence.base import (
     create_ops_session_factory,
 )
 from .contexts.ops.adapters.persistence.kill_switch_store import SqlKillSwitchState
+from .contexts.privacy.adapters.privacy_api import build_privacy_router
+from .contexts.privacy.adapters.wiring import build_privacy_service
 from .contexts.sync.domain import DeltaType, SyncDelta, SyncStore
 from .contexts.sync.service import DurableSyncCoordinator
 from .platform import correlation
@@ -335,8 +338,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         learning_uow, BKTEstimator(), HalfLifeForgettingModel(), time.time
     )
     read_model = CurriculumStudioReadModel(studio_sf)
+    session_repo = InMemorySessionRepository()
     session_service = SessionService(
-        InMemorySessionRepository(),
+        session_repo,
         knowledge_service,
         read_model,
         TemplatedTeachingRuntime(),
@@ -457,6 +461,20 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     )
     app.include_router(build_guardian_router(guardian_service, claims_dependency))
 
+    # ---- Privacy: per-learner export, two-step erasure, retention dry-run (R1) ----
+    privacy_service = build_privacy_service(
+        identity_sf=identity_sf,
+        learning_sf=learning_sf,
+        session_store=session_repo,
+        sync_store=sync_store,
+        ai_ledger=ai_cost_ledger,
+        env=os.environ,
+        production=settings.is_production,
+        clock=time.time,
+    )
+    app.state.privacy_service = privacy_service
+    app.include_router(build_privacy_router(privacy_service, claims_dependency))
+
     # ---- Operational controls (kill switch + status) ----
     def ops_status() -> dict[str, Any]:
         ready, _ = health.ready()
@@ -500,6 +518,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         Module("ops", "/v1/ops", lambda: True),
         Module("guardian", "/v1/guardian", lambda: True),
         Module("identity", "/v1/identity", lambda: True, events_published=("ConsentGranted",)),
+        Module("privacy", "/v1/privacy", lambda: True),
     ):
         # Idempotent across reloads/tests: re-registering the same module is a no-op.
         with contextlib.suppress(ValueError):
