@@ -20,11 +20,12 @@ from ...identity.adapters.persistence.models import (
     LearnerRow,
     RefreshTokenRow,
 )
+from ...identity.domain.audit import AuditAction
 from ..application.ports import Tombstone
 from ..domain.policy import RetainedSet
 from ._rows import affected, mentions, row_dict, text_contains
 
-TOMBSTONE_ACTION = "privacy.learner_erased"
+TOMBSTONE_ACTION = AuditAction.LEARNER_ERASED.value
 _S = "identity"
 
 

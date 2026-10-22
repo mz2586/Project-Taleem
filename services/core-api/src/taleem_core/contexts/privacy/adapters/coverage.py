@@ -34,6 +34,10 @@ EXEMPT_TABLES: dict[str, str] = {
     ),
     "identity.rate_limit_bucket": "SHA-256 of the client network identifier; no learner ref",
     "ops.kill_switch": "operator control state; no learner data",
+    "school.organization": "a school (tenant); no learner data",
+    "school.teacher_account": "an adult staff member, a separate data subject; no learner data",
+    "school.classroom": "a teacher's class; no learner data",
+    "school.assignment": "lessons a teacher assigned to a class; no learner ref",
     **{
         f"curriculum_studio.{t}": "authored curriculum content and its workflow; no learner data"
         for t in _CURRICULUM

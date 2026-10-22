@@ -62,7 +62,7 @@ def test_up_down_up_and_orm_parity() -> None:
     expected = {t.name for t in SchoolBase.metadata.tables.values()}
     assert _school_tables() == expected
 
-    command.downgrade(cfg, "-1")  # 0008 is head: drop just the school schema
+    command.downgrade(cfg, "0007_ai_usage")  # drop just the school schema (and anything after)
     assert _school_tables() == set()
 
     command.upgrade(cfg, "head")

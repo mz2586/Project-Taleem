@@ -40,6 +40,9 @@ class AuditAction(StrEnum):
     # A consumed refresh token presented a second time. Either a race or a stolen token, and the
     # two are indistinguishable — so the whole rotation family is revoked and this is recorded.
     SESSION_REUSE_DETECTED = "session.reuse_detected"
+    # Written by the privacy context as the erasure tombstone (subject is the tombstone ref, never
+    # the erased learner's ref); declared here so any reader of the audit log can parse it.
+    LEARNER_ERASED = "privacy.learner_erased"
 
 
 # Actions a guardian must be able to see for their own family without an operator in the loop:

@@ -37,6 +37,13 @@ from taleem_core.contexts.privacy.domain.policy import (
     RetainedSet,
     RetentionPolicy,
 )
+from taleem_core.contexts.school.adapters.persistence.base import SchoolBase
+from taleem_core.contexts.school.adapters.persistence.models import (
+    ClassroomRow,
+    EnrolmentRow,
+    OrganizationRow,
+    TeacherRow,
+)
 from taleem_core.main import create_app
 from taleem_core.platform.config import Settings
 from taleem_core.platform.errors import Problem
@@ -55,6 +62,7 @@ _SCHEMAS: tuple[tuple[MetaData, str], ...] = (
     (LearningBase.metadata, "learning_session_factory"),
     (CurriculumBase.metadata, "studio_session_factory"),
     (OpsBase.metadata, "ops_session_factory"),
+    (SchoolBase.metadata, "school_session_factory"),
 )
 
 
@@ -71,6 +79,52 @@ def _qualified(table: Any) -> str:
 
 
 # ------------------------------------------------------------------------- seeding (real APIs)
+
+
+def _enrol_in_class(app: FastAPI, *refs: str) -> None:
+    """Put both families' learners in one synthetic class (school rows have no seeding API that
+    bypasses teacher sign-in, so they are written directly; the erasure path is what is tested)."""
+    tag = uuid.uuid4().hex[:8]
+    with app.state.school_session_factory() as s, s.begin():
+        s.add(
+            OrganizationRow(
+                organization_id=f"org-{tag}",
+                name="Synthetic school",
+                country="ZZ",
+                curriculum_pack_id="PK-NCP",
+                default_locale="en",
+            )
+        )
+        s.flush()
+        s.add(
+            TeacherRow(
+                teacher_ref=f"tch-{tag}",
+                organization_id=f"org-{tag}",
+                email=f"t-{tag}@example.com",
+                display_name="Teacher",
+                passphrase_hash="not-a-real-hash",  # noqa: S106 (synthetic fixture row)
+            )
+        )
+        s.flush()
+        s.add(
+            ClassroomRow(
+                class_id=f"cls-{tag}",
+                organization_id=f"org-{tag}",
+                teacher_ref=f"tch-{tag}",
+                name="4A",
+                join_code=f"J{tag}"[:16],
+            )
+        )
+        s.flush()
+        for ref in refs:
+            s.add(
+                EnrolmentRow(
+                    class_id=f"cls-{tag}",
+                    student_ref=ref,
+                    organization_id=f"org-{tag}",
+                    approved_by="guardian",
+                )
+            )
 
 
 def _family(client: TestClient, name: str) -> dict[str, Any]:
@@ -205,6 +259,7 @@ def _exercise(app: FastAPI, *, blocked: bool = False) -> None:
     other = _family(client, "Bilal")  # a control family that must be untouched
     _activity(client, app, fam)
     _activity(client, app, other)
+    _enrol_in_class(app, fam["ref"], other["ref"])
     ref = fam["ref"]
     before = _scan(app, ref)
     assert {
@@ -215,6 +270,7 @@ def _exercise(app: FastAPI, *, blocked: bool = False) -> None:
         "learning.student_knowledge",
         "learning.objective_mastery",
         "learning.assessment_evidence",
+        "school.enrolment",
     } <= set(before), before
     assert _memory_hits(app, ref)  # live session, sync entity, AI usage
 
@@ -328,8 +384,10 @@ def test_erasure_is_complete_across_every_schema_over_postgres() -> None:
     command.upgrade(cfg, "head")
     app = create_app(Settings(database_url=PG_URL or "", kdf_iterations=_FAST_KDF))
     try:
-        blocked = bool(app.state.privacy_service.blockers())
-        _exercise(app, blocked=blocked)
+        # Migration 0009 lets the append-only evidence trigger admit an erasure DELETE, so on a
+        # migrated database nothing may block erasure: the full path must run, never the xfail.
+        assert app.state.privacy_service.blockers() == []
+        _exercise(app)
         # The live catalog, not just the ORM: a table created by a migration but absent from the
         # metadata would otherwise escape both coverage and the scan.
         with app.state.identity_session_factory() as s:
@@ -346,12 +404,6 @@ def test_erasure_is_complete_across_every_schema_over_postgres() -> None:
     svc: PrivacyService = app.state.privacy_service
     known = svc.covered_tables() | set(EXEMPT_TABLES) | set(EXEMPT_CATALOG_TABLES)
     assert catalog - known == set(), catalog - known
-    if blocked:
-        pytest.xfail(
-            "erasure is blocked on PostgreSQL until a migration lets learning.forbid_mutation() "
-            "admit an erasure DELETE (SET LOCAL taleem.privacy_erasure); export and fail-closed "
-            "behaviour were verified above"
-        )
 
 
 # ------------------------------------------------------------------------- coverage
@@ -473,3 +525,42 @@ def test_consent_evidence_can_be_configured_away() -> None:
     assert config.retained.describe()["consent_evidence"] == {"kept": False}
     assert config.retained.describe()["erasure_event"] == {"kept": False}
     assert config.erasure_enabled  # a per-process key outside production
+
+
+@pytest.mark.skipif(not PG_URL, reason="CS_DATABASE_URL not set (PostgreSQL required)")
+def test_evidence_stays_append_only_outside_an_erasure() -> None:
+    """0009 narrows the evidence trigger to one exception: a DELETE with the erasure flag set.
+    An UPDATE is refused even with the flag, and a DELETE without it is refused. Exercised on a
+    scratch table wired to the same trigger function, so real rows are deterministic."""
+    from alembic import command
+    from alembic.config import Config
+    from sqlalchemy import create_engine
+
+    base = Path(__file__).resolve().parents[1]
+    cfg = Config(str(base / "alembic.ini"))
+    cfg.set_main_option("script_location", str(base / "alembic"))
+    command.upgrade(cfg, "head")
+    engine = create_engine(PG_URL or "")
+    setup = (
+        "CREATE TEMP TABLE evidence_probe (id int PRIMARY KEY, v text)",
+        "CREATE TRIGGER probe_immutable BEFORE UPDATE OR DELETE ON evidence_probe "
+        "FOR EACH ROW EXECUTE FUNCTION learning.forbid_mutation()",
+        "INSERT INTO evidence_probe VALUES (1, 'a')",
+    )
+
+    def attempt(statement: str, *, flag: bool) -> None:
+        with engine.connect() as conn, conn.begin():
+            for ddl in setup:
+                conn.execute(text(ddl))
+            if flag:
+                conn.execute(text("SET LOCAL taleem.privacy_erasure = 'on'"))
+            conn.execute(text(statement))
+
+    try:
+        with pytest.raises(Exception, match="append-only"):
+            attempt("UPDATE evidence_probe SET v = 'b'", flag=True)
+        with pytest.raises(Exception, match="append-only"):
+            attempt("DELETE FROM evidence_probe", flag=False)
+        attempt("DELETE FROM evidence_probe", flag=True)  # the one admitted case
+    finally:
+        engine.dispose()

@@ -544,6 +544,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     privacy_service = build_privacy_service(
         identity_sf=identity_sf,
         learning_sf=learning_sf,
+        school_sf=school_sf,
         session_store=session_repo,
         sync_store=sync_store,
         ai_ledger=ai_cost_ledger,

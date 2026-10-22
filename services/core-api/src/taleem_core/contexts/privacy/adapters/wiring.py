@@ -12,12 +12,14 @@ from ..domain.policy import PrivacyConfig
 from .identity_data import IdentityLearnerData
 from .learning_data import LearningLearnerData
 from .memory_data import AiUsageLearnerData, GuardianViewData, SyncLearnerData
+from .school_data import SchoolLearnerData
 
 
 def build_privacy_service(
     *,
     identity_sf: sessionmaker[Session],
     learning_sf: sessionmaker[Session],
+    school_sf: sessionmaker[Session],
     session_store: Any,
     sync_store: Any,
     ai_ledger: Any,
@@ -29,6 +31,7 @@ def build_privacy_service(
         IdentityLearnerData(identity_sf),
         [
             LearningLearnerData(learning_sf, session_store),
+            SchoolLearnerData(school_sf),
             SyncLearnerData(sync_store),
             AiUsageLearnerData(ai_ledger),
             GuardianViewData(),
