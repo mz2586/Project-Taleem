@@ -1,7 +1,8 @@
 """ORM models for the learning-context durable data (LEARNING_DOMAIN_MODEL §9).
 
 Tables: student_knowledge (aggregate root), objective_mastery (owned), assessment_evidence
-(immutable, append-only — the system of record), and learning_outbox (transactional events).
+(immutable, append-only — the system of record), learning_outbox (transactional events), and
+ai_usage_ledger (per-learner AI inference usage for quotas; counts only).
 Value objects with no query need (memory/confidence/pace/threshold/misconceptions) are stored as
 JSON on the objective row; queryable facets (mastery_value, state, next_review_at) are columns.
 """
@@ -12,11 +13,13 @@ from datetime import datetime
 from typing import Any
 
 from sqlalchemy import (
+    BigInteger,
     DateTime,
     Float,
     ForeignKey,
     Index,
     Integer,
+    String,
     Text,
     UniqueConstraint,
     func,
@@ -124,3 +127,31 @@ class LearningOutboxRow(LearningBase):
     payload: Mapped[dict[str, Any]] = mapped_column(_JSON, nullable=False)
     occurred_at: Mapped[float] = mapped_column(Float, nullable=False)
     published_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
+# bigserial on PostgreSQL; SQLite only auto-increments an INTEGER PRIMARY KEY.
+_LedgerId = BigInteger().with_variant(Integer(), "sqlite")
+
+
+class AIUsageRow(LearningBase):
+    """One AI gateway call's usage (migration 0007). Counts only — never prompt or output text.
+
+    ``learner_ref`` is the pseudonymous student_ref; the row carries nothing else about the learner.
+    """
+
+    __tablename__ = "ai_usage_ledger"
+    __table_args__ = (
+        Index("ix_ai_usage_learner_time", "learner_ref", "recorded_at"),
+        Index("ix_ai_usage_time", "recorded_at"),
+        {"schema": LEARNING_SCHEMA},
+    )
+
+    id: Mapped[int] = mapped_column(_LedgerId, primary_key=True, autoincrement=True)
+    learner_ref: Mapped[str] = mapped_column(Text, nullable=False)
+    provider: Mapped[str] = mapped_column(String(64), nullable=False)
+    tier: Mapped[str] = mapped_column(String(16), nullable=False)
+    purpose: Mapped[str] = mapped_column(String(64), nullable=False, default="")
+    prompt_tokens: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    completion_tokens: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    cost_micros: Mapped[int] = mapped_column(BigInteger, nullable=False, default=0)
+    recorded_at: Mapped[float] = mapped_column(Float, nullable=False)

@@ -154,9 +154,13 @@ same result on every commit.
   ledger that cannot be read — serves the templated authored engine: never an error, never a weaker
   safety path. Refused outputs still count, so adversarial output cannot be retried for free. Real
   limits await the FD-07 cost envelope.
-- **Follow-up: a durable, shared ledger.** The ledger is in-memory (process-local, lost on restart,
-  not shared across instances). A database-backed ledger needs a migration and is required before
-  any real provider is connected.
+- **Durable, shared ledger.** With a real database the ledger is `learning.ai_usage_ledger`
+  (migration `0007_ai_usage_ledger.py`, reversible), so one learner's quota holds across every
+  instance and restart (PostgreSQL-gated test: two app instances, one budget). Rows hold counts and
+  the pseudonymous ref only; `purge_older_than` is the hook for the retention schedule, which is not
+  yet set. The in-memory ledger remains for the SQLite dev/test default. Known limit: the check
+  happens before the call, so two instances serving the *same* learner at the same instant can each
+  pass once (overshoot of at most instances − 1 calls).
 
 ### What this result does not license
 

@@ -70,6 +70,7 @@ from .contexts.learning.adapters.curriculum_read_model import CurriculumStudioRe
 from .contexts.learning.adapters.memory import InMemorySessionRepository
 from .contexts.learning.adapters.offline_api import build_offline_router
 from .contexts.learning.adapters.package_signer import Ed25519PackageSigner
+from .contexts.learning.adapters.persistence.ai_usage_ledger import SqlLearnerUsageLedger
 from .contexts.learning.adapters.persistence.base import (
     LearningBase,
     create_learning_engine,
@@ -113,7 +114,13 @@ from .platform.metrics import registry
 from .platform.plugins import Module
 from .platform.plugins import registry as module_registry
 from .platform.security_headers import apply_security_headers
-from .ports.llm import InMemoryCostLedger, LearnerQuota, LLMGateway, StubLLMGateway
+from .ports.llm import (
+    InMemoryCostLedger,
+    LearnerQuota,
+    LearnerUsageLedger,
+    LLMGateway,
+    StubLLMGateway,
+)
 from .ports.llm_inert import InertProviderGateway
 
 
@@ -378,7 +385,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     # generative tier is wired at all; a named provider is inert (refuses every call).
     flags = StaticFlagProvider(settings.enabled_flags())
     app.state.flags = flags
-    ai_cost_ledger = InMemoryCostLedger()  # follow-up: durable shared ledger (needs a migration)
+    # Per-learner usage ledger: shared in PostgreSQL (quotas hold across instances); process-local
+    # for the in-memory SQLite dev/test default.
+    ai_cost_ledger: LearnerUsageLedger = (
+        InMemoryCostLedger()
+        if learning_engine.dialect.name == "sqlite"
+        else SqlLearnerUsageLedger(learning_sf)
+    )
     app.state.ai_cost_ledger = ai_cost_ledger
     provider = settings.ai_provider.strip()
     ai_gateway: LLMGateway | None = None

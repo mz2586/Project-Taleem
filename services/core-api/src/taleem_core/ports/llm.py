@@ -119,13 +119,21 @@ class LearnerUsageLedger(CostMeter, Protocol):
         self, learner_ref: str, *, since: float = 0.0, until: float | None = None
     ) -> UsageSummary: ...
 
+    def by_learner(
+        self, *, since: float = 0.0, until: float | None = None
+    ) -> dict[str, UsageSummary]: ...
+
+    def purge_older_than(self, cutoff: float) -> int:
+        """Delete records with ``recorded_at < cutoff``; returns how many (retention hook)."""
+        ...
+
 
 @dataclass
 class InMemoryCostLedger:
     """Process-local ledger (dev/test only).
 
-    FOLLOW-UP: a durable, shared ledger (a table, so quotas hold across instances and restarts) is
-    required before any real provider is connected; it needs a migration and is out of this scope.
+    Production uses the durable, shared ``SqlLearnerUsageLedger``
+    (``learning.ai_usage_ledger``, migration 0007) so quotas hold across instances and restarts.
     """
 
     records: list[UsageRecord] = field(default_factory=list)
@@ -168,6 +176,12 @@ class InMemoryCostLedger:
         """Per-learner aggregates for a period (an operator cost view)."""
         refs = sorted({r.learner_ref for r in self.records})
         return {ref: self.usage_for(ref, since=since, until=until) for ref in refs}
+
+    def purge_older_than(self, cutoff: float) -> int:
+        kept = [r for r in self.records if r.recorded_at >= cutoff]
+        removed = len(self.records) - len(kept)
+        self.records = kept
+        return removed
 
 
 @dataclass(frozen=True)
