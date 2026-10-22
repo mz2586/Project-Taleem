@@ -12,8 +12,9 @@ from collections.abc import Callable
 from ....platform import observability
 from ..domain import validation
 from ..domain.audio import AudioAssetResolver
+from ..domain.hierarchy import EducationSystem, check_against_pack, merge_hierarchy
 from ..domain.lesson import Lesson
-from ..domain.packs import PackRegistry
+from ..domain.packs import CurriculumPack, PackRegistry, default_registry
 from ..domain.quality import (
     ALL_GATES,
     Gate,
@@ -29,7 +30,7 @@ from ..domain.workflow import (
     WorkflowState,
     next_state,
 )
-from .repository import LessonRepository, PublishPort
+from .repository import HierarchyRepository, LessonRepository, PublishPort
 
 # Which quality gates each human review stage certifies (the 4 remaining gates are auto pre-checks).
 STAGE_GATES: dict[WorkflowState, tuple[Gate, ...]] = {
@@ -54,6 +55,7 @@ class CurriculumStudioService:
         on_commit: Callable[[], None] | None = None,
         audio_assets: AudioAssetResolver | None = None,
         packs: PackRegistry | None = None,
+        hierarchy: HierarchyRepository | None = None,
     ) -> None:
         self._repo = repo
         # Gate dependencies: the audio-asset resolver (None = synthetic dev/test fixture refs only;
@@ -61,6 +63,8 @@ class CurriculumStudioService:
         # (None = the packs shipped with the package).
         self._audio_assets = audio_assets
         self._packs = packs
+        # Pack-scoped hierarchy store (None = not configured: upserts are refused, reads are empty).
+        self._hierarchy = hierarchy
         self._publisher = publisher
         self._now: Callable[[], float] = clock if clock is not None else time.time
         # Commit inside the mutating method so an optimistic-lock conflict at commit is caught in
@@ -99,6 +103,38 @@ class CurriculumStudioService:
         self._repo.save(lesson)
         self._commit()
         return lesson
+
+    # ---- curriculum hierarchy (scoped by curriculum pack) ----
+    def upsert_hierarchy(self, pack_id: str, system: EducationSystem) -> EducationSystem:
+        """Merge ``system`` (Grade → Subject → Chapter → Topic) into the pack's stored hierarchy.
+
+        Validated against the pack first (grades, roster, title locales, duplicate keys); any
+        violation raises ``StudioError`` and nothing is written. Idempotent and non-destructive:
+        nodes match by key, titles merge per locale, nothing absent from ``system`` is removed.
+        Returns the full stored hierarchy with canonical ids.
+        """
+        if self._hierarchy is None:
+            raise StudioError("no hierarchy repository is configured for this service")
+        pack = self._pack(pack_id)
+        errors = check_against_pack(system, pack)
+        if errors:
+            raise StudioError(f"invalid hierarchy for {pack.pack_id}: " + "; ".join(errors))
+        merged = merge_hierarchy(self._hierarchy.get(pack.pack_id), system, pack)
+        self._hierarchy.save(merged, pack)
+        self._commit()
+        return merged
+
+    def get_hierarchy(self, pack_id: str) -> EducationSystem | None:
+        """The stored hierarchy for ``pack_id``, or None if none has been stored."""
+        if self._hierarchy is None:
+            return None
+        return self._hierarchy.get(self._pack(pack_id).pack_id)
+
+    def _pack(self, pack_id: str) -> CurriculumPack:
+        pack = (self._packs if self._packs is not None else default_registry()).get(pack_id)
+        if pack is None:
+            raise StudioError(f"unknown curriculum pack {pack_id!r}")
+        return pack
 
     # ---- validation ----
     def validate(self, lesson_id: str) -> validation.ValidationResult:

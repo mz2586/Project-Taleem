@@ -36,6 +36,7 @@ from taleem_core.contexts.curriculum_studio.domain.packs import (
 )
 from taleem_core.contexts.curriculum_studio.domain.quality import Gate, Severity
 from taleem_core.main import create_app
+from taleem_core.platform.config import Settings
 from taleem_core.vertical_slice.fractions_lesson import build_fractions_lesson
 from tests.studio_helpers import make_valid_lesson
 
@@ -533,7 +534,7 @@ def _auth(role: str = "subject_author") -> dict[str, str]:
 
 
 def test_api_lists_packs() -> None:
-    c = TestClient(create_app())
+    c = TestClient(create_app(Settings(database_url="")))  # private in-memory store
     assert c.get("/v1/studio/curriculum-packs").status_code == 401
     r = c.get("/v1/studio/curriculum-packs", headers=_auth())
     assert r.status_code == 200
@@ -556,10 +557,12 @@ def test_api_lists_packs() -> None:
 
 
 def test_api_hierarchy_is_served_from_the_registry() -> None:
-    c = TestClient(create_app())
+    # A private in-memory store: no persisted hierarchy, so the pack roster is served.
+    c = TestClient(create_app(Settings(database_url="")))
     r = c.get("/v1/studio/hierarchy", headers=_auth())
     assert r.status_code == 200
     body = r.json()
+    assert body["source"] == "pack" and body["tree"] == []
     assert body["system"] == "PK-NCP"
     assert body["grades"] == list(OLD_GRADE_KEYS)
     assert body["subjects_by_grade"] == {g: list(s) for g, s in OLD_SUBJECT_ROSTER.items()}
@@ -568,7 +571,7 @@ def test_api_hierarchy_is_served_from_the_registry() -> None:
 
 
 def test_api_draft_declares_pack_and_unknown_pack_blocks_validation() -> None:
-    c = TestClient(create_app())
+    c = TestClient(create_app(Settings(database_url="")))  # private in-memory store
     base = {
         "title_ur": "گنتی",
         "title_en": "Counting",

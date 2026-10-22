@@ -6,9 +6,12 @@ adapter lands later behind the same port.
 
 from __future__ import annotations
 
+import copy
 from typing import Protocol, runtime_checkable
 
+from ..domain.hierarchy import EducationSystem
 from ..domain.lesson import Lesson
+from ..domain.packs import CurriculumPack
 from ..domain.versioning import Version
 
 
@@ -17,6 +20,14 @@ class LessonRepository(Protocol):
     def save(self, lesson: Lesson) -> None: ...
     def get(self, lesson_id: str) -> Lesson | None: ...
     def all(self) -> list[Lesson]: ...
+
+
+@runtime_checkable
+class HierarchyRepository(Protocol):
+    """Stores one curriculum hierarchy (EducationSystem tree) per curriculum pack."""
+
+    def get(self, pack_id: str) -> EducationSystem | None: ...
+    def save(self, system: EducationSystem, pack: CurriculumPack) -> None: ...
 
 
 @runtime_checkable
@@ -38,6 +49,18 @@ class InMemoryLessonRepository:
 
     def all(self) -> list[Lesson]:
         return list(self._store.values())
+
+
+class InMemoryHierarchyRepository:
+    def __init__(self) -> None:
+        self._store: dict[str, EducationSystem] = {}
+
+    def get(self, pack_id: str) -> EducationSystem | None:
+        found = self._store.get(pack_id)
+        return copy.deepcopy(found) if found is not None else None
+
+    def save(self, system: EducationSystem, pack: CurriculumPack) -> None:
+        self._store[pack.pack_id] = copy.deepcopy(system)
 
 
 class RecordingPublishPort:

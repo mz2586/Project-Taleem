@@ -318,7 +318,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             # accepted outside production only.
             audio = studio_audio_resolver(uow.audio_assets, production=settings.is_production)
             yield CurriculumStudioService(
-                uow.lessons, uow.publish, on_commit=uow.commit, audio_assets=audio
+                uow.lessons,
+                uow.publish,
+                on_commit=uow.commit,
+                audio_assets=audio,
+                hierarchy=uow.hierarchy,
             )
 
     app.include_router(build_studio_router(studio_service_provider, claims_dependency))

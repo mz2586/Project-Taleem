@@ -18,7 +18,11 @@ paths:
     get:
       tags: [curriculum-studio]
       operationId: getHierarchy
-      summary: A curriculum pack's hierarchy (grades × subjects); defaults to PK-NCP
+      summary: A curriculum pack's hierarchy; the persisted tree when stored, else the pack roster
+      description: >-
+        Returns the hierarchy persisted for the pack (Grade → Subject → Chapter → Topic,
+        `source: persisted`) when one has been stored; otherwise the pack registry's grade ×
+        subject roster with an empty `tree` (`source: pack`). Defaults to PK-NCP.
       security: [{ bearerAuth: [] }]
       parameters:
         - name: pack
@@ -185,10 +189,41 @@ components:
     Hierarchy:
       type: object
       properties:
-        system: { type: string }
-        version: { type: string }
+        system: { type: string, description: Curriculum pack id }
+        version: { type: string, description: Curriculum pack version }
+        source: { type: string, enum: [persisted, pack] }
         grades: { type: array, items: { type: string } }
         subjects_by_grade: { type: object, additionalProperties: { type: array, items: { type: string } } }
+        tree: { type: array, items: { $ref: "#/components/schemas/HierarchyGrade" } }
+    LocalizedTitle:
+      type: object
+      description: Title text keyed by locale tag.
+      additionalProperties: { type: string }
+    HierarchyGrade:
+      type: object
+      properties:
+        key: { type: string }
+        subjects:
+          type: array
+          items:
+            type: object
+            properties:
+              key: { type: string }
+              title: { $ref: "#/components/schemas/LocalizedTitle" }
+              chapters:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    key: { type: string }
+                    title: { $ref: "#/components/schemas/LocalizedTitle" }
+                    topics:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          key: { type: string }
+                          title: { $ref: "#/components/schemas/LocalizedTitle" }
     CurriculumPackSummary:
       type: object
       properties:
@@ -230,11 +265,16 @@ components:
         misconception_detectors: { type: array, items: { type: string } }
     LessonDraftIn:
       type: object
-      required: [lesson_id, title_ur, title_en, grade, subject]
+      required: [lesson_id, grade, subject]
+      description: >-
+        A title is required in at least one locale. Every `title` key must be a locale of the
+        lesson's curriculum pack (otherwise 422 BAD_LOCALE). `title_ur` / `title_en` are
+        compatibility aliases for `title.ur` / `title.en`; a conflicting value is a 422.
       properties:
         lesson_id: { type: string, maxLength: 128 }
-        title_ur: { type: string }
-        title_en: { type: string }
+        title: { $ref: "#/components/schemas/LocalizedTitle" }
+        title_ur: { type: string, minLength: 1, deprecated: true, description: Alias of title.ur }
+        title_en: { type: string, minLength: 1, deprecated: true, description: Alias of title.en }
         grade: { type: string }
         subject: { type: string }
         curriculum_pack: { type: string, default: PK-NCP, minLength: 1, maxLength: 64 }

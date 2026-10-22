@@ -20,6 +20,7 @@ from ..application.service import CurriculumStudioService, StudioError
 from ..domain.ai_teaching import AITeachingObject
 from ..domain.assessment import AssessmentBlueprint
 from ..domain.content import Locale, LocalizedText
+from ..domain.hierarchy import Grade
 from ..domain.lesson import Lesson, Metadata
 from ..domain.packs import DEFAULT_PACK_ID, default_registry
 from ..domain.provenance import Derivation, Provenance
@@ -46,8 +47,11 @@ class AITeachingIn(BaseModel):
 
 class LessonDraftIn(BaseModel):
     lesson_id: str = Field(min_length=1, max_length=128)
-    title_ur: str = Field(min_length=1)
-    title_en: str = Field(min_length=1)
+    # Localized title keyed by locale tag; every key must be a locale of the lesson's curriculum
+    # pack. ``title_ur`` / ``title_en`` remain as compatibility aliases for ``title["ur"/"en"]``.
+    title: dict[str, str] = Field(default_factory=dict)
+    title_ur: str | None = Field(default=None, min_length=1)
+    title_en: str | None = Field(default=None, min_length=1)
     grade: str
     subject: str
     # The curriculum pack and instructional locale(s) the lesson is authored against; validated by
@@ -77,14 +81,44 @@ class RollbackIn(BaseModel):
     note: str = ""
 
 
+def _bad_locale(detail: str) -> Problem:
+    return Problem(422, "BAD_LOCALE", "Invalid locale", detail)
+
+
+def _draft_title(d: LessonDraftIn) -> dict[Locale, str]:
+    """The draft's title: the locale-keyed ``title`` map merged with the ``title_ur``/``title_en``
+    aliases, every key checked against the lesson's curriculum pack (an unknown pack is left to
+    the gates, which block it)."""
+    raw: dict[str, str] = {k: v for k, v in d.title.items() if v.strip()}
+    for tag, alias in (("ur", d.title_ur), ("en", d.title_en)):
+        if alias is None:
+            continue
+        if tag in raw and raw[tag] != alias:
+            raise _bad_locale(f"title[{tag!r}] conflicts with title_{tag}")
+        raw[tag] = alias
+    if not raw:
+        raise _bad_locale("a title is required in at least one locale")
+    pack = default_registry().get(d.curriculum_pack)
+    title: dict[Locale, str] = {}
+    for tag, text in raw.items():
+        try:
+            loc = Locale(tag)
+        except ValueError as exc:
+            raise _bad_locale(str(exc)) from exc
+        if pack is not None and not pack.supports_locale(loc):
+            raise _bad_locale(f"title locale {tag!r} is not a locale of pack {pack.pack_id}")
+        title[loc] = text
+    return title
+
+
 def _draft_to_lesson(d: LessonDraftIn, author_role: str) -> Lesson:
     try:
         instructional = [Locale(t) for t in d.instructional_locales]
     except ValueError as exc:
-        raise Problem(422, "BAD_LOCALE", "Invalid locale tag", str(exc)) from exc
+        raise _bad_locale(str(exc)) from exc
     return Lesson(
         lesson_id=d.lesson_id,
-        title=LocalizedText(text={Locale.UR: d.title_ur, Locale.EN: d.title_en}),
+        title=LocalizedText(text=_draft_title(d)),
         metadata=Metadata(
             grade_key=d.grade,
             subject_key=d.subject,
@@ -113,10 +147,35 @@ def _draft_to_lesson(d: LessonDraftIn, author_role: str) -> Lesson:
     )
 
 
+def _text(title: LocalizedText) -> dict[str, str]:
+    return {str.__str__(k): v for k, v in title.text.items()}
+
+
+def _grade_view(grade: Grade) -> dict[str, Any]:
+    return {
+        "key": grade.key,
+        "subjects": [
+            {
+                "key": subj.key,
+                "title": _text(subj.title),
+                "chapters": [
+                    {
+                        "key": ch.key,
+                        "title": _text(ch.title),
+                        "topics": [{"key": t.key, "title": _text(t.title)} for t in ch.topics],
+                    }
+                    for ch in subj.chapters
+                ],
+            }
+            for subj in grade.subjects
+        ],
+    }
+
+
 def _lesson_view(lesson: Lesson) -> dict[str, Any]:
     return {
         "lesson_id": lesson.lesson_id,
-        "title": {str.__str__(k): v for k, v in lesson.title.text.items()},
+        "title": _text(lesson.title),
         "grade": lesson.metadata.grade_key,
         "subject": lesson.metadata.subject_key,
         "curriculum_pack": lesson.metadata.curriculum_pack,
@@ -162,16 +221,31 @@ def build_studio_router(
     def hierarchy(
         pack: str = Query(default=DEFAULT_PACK_ID, min_length=1, max_length=64),
         claims: Claims = Depends(claims_dependency),
+        s: CurriculumStudioService = Depends(service_provider),
     ) -> dict[str, Any]:
+        # The stored hierarchy when one has been persisted for the pack; otherwise the pack's
+        # registry roster (grades x subjects, no chapters/topics).
         authorize(claims, "read", RESOURCE)
         found = default_registry().get(pack)
         if found is None:
             raise not_found(f"curriculum pack {pack}")
+        stored = s.get_hierarchy(found.pack_id)
+        if stored is not None:
+            return {
+                "system": found.pack_id,
+                "version": found.version,
+                "source": "persisted",
+                "grades": [g.key for g in stored.grades],
+                "subjects_by_grade": {g.key: [x.key for x in g.subjects] for g in stored.grades},
+                "tree": [_grade_view(g) for g in stored.grades],
+            }
         return {
             "system": found.pack_id,
             "version": found.version,
+            "source": "pack",
             "grades": list(found.grade_keys),
-            "subjects_by_grade": {g: list(s) for g, s in found.subject_roster.items()},
+            "subjects_by_grade": {g: list(x) for g, x in found.subject_roster.items()},
+            "tree": [],
         }
 
     @router.get("/curriculum-packs")

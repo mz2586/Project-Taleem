@@ -16,6 +16,7 @@ from .base import (
     create_session_factory,
     session_scope,
 )
+from .hierarchy import SqlAlchemyHierarchyRepository
 from .media import SqlMediaAudioResolver, studio_audio_resolver
 from .repository import SqlAlchemyLessonRepository, SqlAlchemyPublishPort
 from .uow import UnitOfWork
@@ -29,6 +30,7 @@ def unit_of_work(session_factory: sessionmaker[Session]) -> UnitOfWork:
 __all__ = [
     "SCHEMA",
     "Base",
+    "SqlAlchemyHierarchyRepository",
     "SqlAlchemyLessonRepository",
     "SqlAlchemyPublishPort",
     "SqlMediaAudioResolver",
