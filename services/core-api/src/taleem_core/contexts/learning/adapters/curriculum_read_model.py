@@ -99,10 +99,13 @@ class CurriculumStudioReadModel:
         )
 
     def _project(self, lesson: Lesson, objective_code: str) -> LessonView:
-        steps: list[str] = []
+        # Each worked-example text, kept bilingual; the English projection below is unchanged.
+        bilingual_steps: list[dict[str, str]] = []
         for we in lesson.worked_examples:
-            steps.append(_text(we.prompt))
-            steps.extend(_text(s) for s in we.steps)
+            bilingual_steps.append(_bilingual(we.prompt))
+            bilingual_steps.extend(_bilingual(s) for s in we.steps)
+        # Index-aligned with ``worked_example_steps``: the same filter (a non-empty English text).
+        kept = [b for b in bilingual_steps if b.get("en", "")]
 
         corrections: dict[str, str] = {}
         practice = tuple(
@@ -121,11 +124,12 @@ class CurriculumStudioReadModel:
             objective_code=objective_code,
             title=_bilingual(lesson.title),
             explanation=_bilingual(lesson.student_explanation),
-            worked_example_steps=tuple(s for s in steps if s),
+            worked_example_steps=tuple(b["en"] for b in kept),
             practice_items=practice,
             misconception_corrections=corrections,
             homework_items=homework,
             assessment_formative=formative,
             assessment_summative=summative,
             summative_mentor_mediated=lesson.assessment.mentor_mediated_summative,
+            worked_example_steps_localized=tuple({k: v for k, v in b.items() if v} for b in kept),
         )

@@ -44,3 +44,7 @@ class LessonView:
     assessment_formative: tuple[ItemView, ...] = ()
     assessment_summative: tuple[ItemView, ...] = ()
     summative_mentor_mediated: bool = True
+    # The same worked-example steps, per locale ({"ur": …, "en": …}), index-aligned with
+    # ``worked_example_steps`` (which stays the English projection for compatibility: the runtime,
+    # offline packages and their content hashes are unchanged). Used to ground a localized rephrase.
+    worked_example_steps_localized: tuple[dict[str, str], ...] = ()

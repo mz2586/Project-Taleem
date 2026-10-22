@@ -197,6 +197,8 @@ def _authored_texts(lesson: LessonView) -> set[str]:
     texts.update(lesson.title.values())
     texts.update(lesson.explanation.values())
     texts.update(lesson.worked_example_steps)
+    for step in lesson.worked_example_steps_localized:  # the same authored steps, per locale
+        texts.update(step.values())
     texts.update(lesson.misconception_corrections.values())
     pools: tuple[tuple[ItemView, ...], ...] = (
         lesson.practice_items,

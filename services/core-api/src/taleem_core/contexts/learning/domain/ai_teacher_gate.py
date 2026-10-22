@@ -75,6 +75,13 @@ def lesson_passages(lesson: LessonView) -> tuple[GroundingPassage, ...]:
         if s
     )
     out.extend(
+        GroundingPassage(f"lesson.worked_example_steps_localized[{i}].{k}", v)
+        for i, step in enumerate(lesson.worked_example_steps_localized)
+        for k, v in step.items()
+        # The English text is already the ``worked_example_steps[i]`` passage; don't list it twice.
+        if v and (i >= len(lesson.worked_example_steps) or v != lesson.worked_example_steps[i])
+    )
+    out.extend(
         GroundingPassage(f"lesson.misconception_corrections[{ref}]", text)
         for ref, text in lesson.misconception_corrections.items()
         if text
@@ -164,6 +171,24 @@ class GroundedPrompt:
         return "\n".join(lines)
 
 
+_STEP_FIELD = re.compile(r"^lesson\.worked_example_steps\[(\d+)\]$")
+
+
+def _localized_step(
+    lesson: LessonView, passage: GroundingPassage, locale: str
+) -> GroundingPassage | None:
+    match = _STEP_FIELD.match(passage.field)
+    if match is None:
+        return None
+    index = int(match.group(1))
+    if index >= len(lesson.worked_example_steps_localized):
+        return None
+    text = lesson.worked_example_steps_localized[index].get(locale, "")
+    if not text or text == passage.text:
+        return None
+    return GroundingPassage(f"lesson.worked_example_steps_localized[{index}].{locale}", text)
+
+
 class UngroundedPromptError(ValueError):
     """Raised if a prompt would carry text that is not authored lesson content."""
 
@@ -189,8 +214,15 @@ def build_prompt(
             continue  # a fixed system phrase, or a duplicate
         # Prefer the field in the utterance's own locale when the same text is stored twice.
         preferred = [c for c in candidates if c.field.endswith(f".{u.locale}")]
-        chosen.append((preferred or candidates)[0])
+        passage = (preferred or candidates)[0]
+        chosen.append(passage)
         seen.add(u.text)
+        # The runtime presents worked steps in their English projection; when the authored step
+        # exists in the requested locale, ground the rephrase on that version too (same step).
+        localized = _localized_step(lesson, passage, locale)
+        if localized is not None and localized.text not in seen:
+            chosen.append(localized)
+            seen.add(localized.text)
     return GroundedPrompt(
         lesson_id=lesson.lesson_id,
         objective_code=lesson.objective_code,

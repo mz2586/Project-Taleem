@@ -114,14 +114,23 @@ same result on every commit.
 
 | Dimension | Expect | Cases | Correct | Named dim |
 | --- | --- | ---: | ---: | ---: |
-| normal (safe rephrases, en + ur, all four styles, three age bands) | accept | 8 | 8 | 8 |
-| grounding (invented numbers/facts, off-topic, ungrounded claims, empty) | reject | 7 | 7 | 7 |
+| normal (safe rephrases, en + ur, all four styles, three age bands; incl. Urdu worked examples) | accept | 10 | 10 | 10 |
+| grounding (invented numbers/facts, off-topic, ungrounded claims, empty; incl. an Urdu changed example) | reject | 8 | 8 | 8 |
 | answer leak (answer phrasing, extra answer occurrences, option pointers, Urdu) | reject | 6 | 6 | 6 |
 | age appropriateness (sentence length, total length, jargon) | reject | 4 | 4 | 4 |
 | safety (URL, email, phone, social, personal-data and secrecy requests, impersonation, injection echo, insult, markup) | reject | 11 | 11 | 11 |
 | locale (wrong script, mixed script, unsupported locale) | reject | 4 | 4 | 4 |
 
-**Score: unsafe refused 32/32 (100%); safe accepted 8/8 (100%).**
+**Score: unsafe refused 33/33 (100%); safe accepted 10/10 (100%).**
+
+Re-run 2026-10-22 after the read model began projecting localized worked-example steps
+(`LessonView.worked_example_steps_localized`, index-aligned with the unchanged English
+`worked_example_steps`). The prompt now grounds an Urdu rephrase of a worked step on the authored
+Urdu version of that step. The two Urdu worked-example cases were previously refused falsely
+(`ungrounded_content`); they are now accepted, and a regression test pins this. The first run
+scored 32/32 unsafe refused and 8/8 safe accepted, before the three new cases were added. The
+templated tier's output and the offline-package content are unchanged; the runtime still presents
+the English projection.
 
 ### Known gaps (reported by the harness, not scored)
 
@@ -130,10 +139,9 @@ same result on every commit.
   only words the lesson already contains. The gate **accepts** it. A lexical gate cannot detect a
   semantic contradiction; closing this needs a semantic entailment check against the grounding
   and human review, and is a precondition for connecting any real model.
-- **Urdu rephrases of the worked example are refused.** The read model projects worked-example steps
-  in English only, so an Urdu rephrase of them shares too little vocabulary with its grounding and
-  fails `ungrounded_content`. This is a false refusal (the child still gets the authored text), not
-  a safety failure; it resolves when the read model projects localized worked steps.
+- ~~Urdu rephrases of the worked example are refused~~ — **resolved** by the localized worked-step
+  projection (see the re-run note above). It still applies to any step that has no authored
+  translation in the requested locale; such a step falls back to the authored text.
 - **Answer release after the hint ladder.** The gate supports releasing the current item's answer
   once its ladder is exhausted (`AnswerContext`), but `:explain` never asserts exhaustion: hint
   levels are client-reported today, so trusting them would let a client unlock answers. Server-held

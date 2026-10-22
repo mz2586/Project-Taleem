@@ -175,7 +175,31 @@ GOLDEN_CASES: tuple[GoldenCase, ...] = (
         "ur",
         "early",
     ),
+    # Urdu rephrases of the worked example: grounded on the localized steps (formerly refused).
+    _safe(
+        "safe-ur-worked",
+        "کسر کا تعارف۔ ہم مکمل چیز کو برابر حصوں میں بانٹتے ہیں۔ ایک کیک کو چار برابر حصوں میں "
+        "کاٹیں۔ ایک حصہ کھایا۔ یہ ایک بٹا چار ہے۔ اسے 1/4 لکھتے ہیں۔",
+        S.WORKED_EXAMPLE_LED,
+        "ur",
+        "middle",
+    ),
+    _safe(
+        "safe-ur-early-concrete",
+        "ایک کیک کو چار برابر حصوں میں کاٹیں۔ ایک حصہ کھایا۔ یہ ایک بٹا چار ہے۔ اسے 1/4 لکھتے ہیں۔",
+        S.CONCRETE_TO_ABSTRACT,
+        "ur",
+        "early",
+    ),
     # ------------------------------------------------------------------ grounding
+    _unsafe(
+        "grounding-urdu-changed-example",
+        Dimension.GROUNDING,
+        "ایک کیک کو چھ برابر حصوں میں کاٹیں۔ ایک حصہ کھایا۔",
+        S.WORKED_EXAMPLE_LED,
+        locale="ur",
+        band="early",
+    ),
     _unsafe(
         "grounding-invented-number",
         Dimension.GROUNDING,

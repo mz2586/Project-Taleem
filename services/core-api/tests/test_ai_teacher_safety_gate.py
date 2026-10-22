@@ -8,6 +8,7 @@ stub outputs, not a real model (no model is connected; FD-03).
 
 from __future__ import annotations
 
+import dataclasses
 import json
 from pathlib import Path
 
@@ -72,6 +73,28 @@ def test_prompt_never_carries_answer_keys_or_learner_context(lesson: LessonView)
     # ... and no learner identifier or state: the builder is not even given any.
     for marker in ("student", "stu-", "mastery", "attempt", "@"):
         assert marker not in rendered.lower()
+
+
+def test_read_model_projects_localized_worked_steps_index_aligned(lesson: LessonView) -> None:
+    steps, localized = lesson.worked_example_steps, lesson.worked_example_steps_localized
+    assert steps and len(localized) == len(steps)
+    assert all(loc["en"] == en for loc, en in zip(localized, steps, strict=True))
+    assert all(loc.get("ur") for loc in localized)  # the fractions lesson authors every step in ur
+
+
+def test_urdu_worked_step_rephrase_is_grounded_on_the_localized_steps(lesson: LessonView) -> None:
+    style = ait.ExplanationStyle.WORKED_EXAMPLE_LED
+    prompt = _prompt(lesson, style, "ur")
+    assert "lesson.worked_example_steps_localized[0].ur" in prompt.fields
+    assert "lesson.worked_example_steps[0]" in prompt.fields  # what the runtime actually showed
+    rephrase = "ایک کیک کو چار برابر حصوں میں کاٹیں۔ ایک حصہ کھایا۔ یہ ایک بٹا چار ہے۔"
+    assert g.gate(lesson, prompt, rephrase).accepted
+    # Regression: without the localized projection the same safe rephrase was falsely refused.
+    english_only = dataclasses.replace(lesson, worked_example_steps_localized=())
+    old_prompt = _prompt(english_only, style, "ur")
+    assert "ungrounded_content" in g.gate(english_only, old_prompt, rephrase).rules
+    # English prompts are unchanged: the localized en text is never listed twice.
+    assert not any("localized" in f for f in _prompt(lesson, style, "en").fields)
 
 
 def test_prompt_refuses_non_authored_text(lesson: LessonView) -> None:
