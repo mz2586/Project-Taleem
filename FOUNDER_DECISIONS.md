@@ -65,6 +65,7 @@ every decision marked **Required by: Phase 1.5** to be closed before build.
 - **Recommendation.** (b) for distress classification + the holding response in-region; (a) for the rest, under a technically-enforced zero-retention contract; never forward pre-classified-C4 text out of region.
 - **Consequences.** Determines the AI provider contract, cost (FD-07), and whether the residency posture (FD-02) holds. Blocks the production AI path (already excluded from Track C).
 - **Required by.** **Phase 1.5.** — **Decision:** _____
+- **Full decision brief (2026-10-22):** [`docs/decisions/FD-03-ai-provider-residency.md`](docs/decisions/FD-03-ai-provider-residency.md) — options compared on residency, retention, safety, Urdu quality, cost, and operations; the six approvals required before any learner-derived text is transmitted.
 
 ## FD-04 · Mandatory-reporting / external-referral policy
 
@@ -129,6 +130,7 @@ every decision marked **Required by: Phase 1.5** to be closed before build.
 - **Recommendation.** (a) Redpanda (Kafka-API, lower ops) — matches CDC outbox + warehouse ingestion in [54 Capacity](./docs/02-architecture/54-capacity-and-scale-model.md).
 - **Consequences.** Unblocks the event API + Track C messaging abstraction (already abstracted behind a port).
 - **Required by.** **Phase 1.5** (to unblock engineering). — **Decision:** _____
+- **Full decision brief (2026-10-22):** [`docs/decisions/FD-14-signing-key-storage.md`](docs/decisions/FD-14-signing-key-storage.md) — four options compared; recommendation: cloud KMS non-exportable signing in the FD-02 region, behind a signer port that engineering is building now.
 
 ## FD-12 · Vector store for RAG
 
@@ -153,6 +155,7 @@ every decision marked **Required by: Phase 1.5** to be closed before build.
 - **Recommendation.** (b): HSM-backed keys for safeguarding + per-subject data keys (crypto-shred); resolve alongside FD-02.
 - **Consequences.** Unblocks the storage/crypto abstraction (Track C) and the retention/erasure mechanism.
 - **Required by.** **Phase 1.5** (to unblock engineering). — **Decision:** _____
+- **Full decision brief (2026-10-22):** [`docs/decisions/FD-14-signing-key-storage.md`](docs/decisions/FD-14-signing-key-storage.md) — four options compared; recommendation: cloud KMS non-exportable signing in the FD-02 region, behind a signer port that engineering is building now.
 
 ## FD-15 · Numeral system per pedagogical context
 
@@ -184,4 +187,5 @@ every decision marked **Required by: Phase 1.5** to be closed before build.
 
 | Date | Change | Author |
 |---|---|---|
+| 2026-10-22 | Added full decision briefs for FD-03 and FD-14 under `docs/decisions/`. | Engineering |
 | 2026-07-19 | Initial founder-decision pack: 17 decisions with options, recommendations, consequences, and milestone gates; 8 marked Phase-1.5 (build-blocking). | Review team |
