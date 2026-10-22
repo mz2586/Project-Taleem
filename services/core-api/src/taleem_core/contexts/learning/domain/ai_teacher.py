@@ -9,6 +9,10 @@ same). Personalization is expressed as deterministic *arrangement* of authored c
 *selection* of next steps — fully explainable, with a rationale and a calibrated confidence.
 
 This module is pure (no I/O); the application service wires it to the read model + knowledge.
+
+The optional generative tier (Phase D, flag-gated, OFF by default) never replaces this module: it
+may only *rephrase* the utterances chosen here, and every rephrase must pass the safety gate in
+``ai_teacher_gate.py`` or it is discarded in favour of the authored response.
 """
 
 from __future__ import annotations

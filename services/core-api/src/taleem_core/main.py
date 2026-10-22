@@ -56,6 +56,7 @@ from .contexts.identity.adapters.persistence.rate_limit_store import SqlRateLimi
 from .contexts.identity.adapters.persistence.uow import SqlIdentityUnitOfWork
 from .contexts.identity.application.identity_service import IdentityService
 from .contexts.identity.application.tokens import TokenIssuer
+from .contexts.identity.domain.consent import ConsentScope
 from .contexts.identity.domain.credentials import SecretHasher
 from .contexts.learning.adapters.ai_teacher_api import build_ai_teacher_router
 from .contexts.learning.adapters.api import LearningApiDeps, build_learning_router
@@ -70,7 +71,12 @@ from .contexts.learning.adapters.persistence.base import (
 )
 from .contexts.learning.adapters.persistence.uow import LearningUnitOfWork
 from .contexts.learning.adapters.student_api import build_student_router
-from .contexts.learning.application.ai_teacher_service import AITeacherService
+from .contexts.learning.application.ai_teacher_service import (
+    SAFETY_LOG_ALLOW,
+    AITeacherService,
+    GenerativeTier,
+    logging_safety_sink,
+)
 from .contexts.learning.application.analytics import LearningAnalytics
 from .contexts.learning.application.knowledge_service import KnowledgeService
 from .contexts.learning.application.offline_service import OfflinePackageService
@@ -95,12 +101,15 @@ from .platform import correlation
 from .platform.concurrency import ConcurrencyConflictError
 from .platform.config import Settings, load_settings
 from .platform.errors import Problem, conflict, forbidden
+from .platform.feature_flags import StaticFlagProvider
 from .platform.kill_switch import KillSwitch, is_child_facing
 from .platform.logging import StructuredLogger
 from .platform.metrics import registry
 from .platform.plugins import Module
 from .platform.plugins import registry as module_registry
 from .platform.security_headers import apply_security_headers
+from .ports.llm import InMemoryCostLedger, LearnerQuota, LLMGateway, StubLLMGateway
+from .ports.llm_inert import InertProviderGateway
 
 
 # Request models live at MODULE scope: with `from __future__ import annotations`, FastAPI resolves
@@ -345,7 +354,42 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     )
     sync_coordinator = DurableSyncCoordinator(sync_store, sync_consumer, sync_gate)
 
-    # ---- AI Teacher (Phase 8): templated, curriculum-grounded, explainable (no LLM) ----
+    # ---- AI Teacher (Phase 8): templated, curriculum-grounded, explainable ----
+    # Phase D generative tier: OFF unless the `ai_teacher.generative_rephrase` flag is enabled, and
+    # then only per request under live `ai_teaching` consent, a disengaged kill switch, and the
+    # learner's inference quota. Per FD-03 no provider is configured anywhere, so by default no
+    # generative tier is wired at all; a named provider is inert (refuses every call).
+    flags = StaticFlagProvider(settings.enabled_flags())
+    app.state.flags = flags
+    ai_cost_ledger = InMemoryCostLedger()  # follow-up: durable shared ledger (needs a migration)
+    app.state.ai_cost_ledger = ai_cost_ledger
+    provider = settings.ai_provider.strip()
+    ai_gateway: LLMGateway | None = None
+    if provider.lower() == "stub":
+        ai_gateway = StubLLMGateway()
+    elif provider:
+        ai_gateway = InertProviderGateway(provider)
+    app.state.ai_gateway = ai_gateway
+    generative = (
+        GenerativeTier(
+            gateway=ai_gateway,
+            flags=flags,
+            ai_teaching_consent=lambda ref: identity_service.consent_state_for(ref).allows(
+                ConsentScope.AI_TEACHING
+            ),
+            kill_switch_engaged=lambda: kill_switch.engaged,
+            cost_meter=ai_cost_ledger,
+            safety_events=logging_safety_sink(
+                StructuredLogger(settings.service_name, settings.log_level, allow=SAFETY_LOG_ALLOW)
+            ),
+            quota=LearnerQuota(
+                max_calls=settings.ai_learner_daily_calls,
+                max_tokens=settings.ai_learner_daily_tokens,
+            ),
+        )
+        if ai_gateway is not None
+        else None
+    )
     ai_teacher = AITeacherService(
         session_service,
         knowledge_service,
@@ -354,6 +398,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         read_model.published_graph,
         DecisionConfig(),
         time.time,
+        generative=generative,
     )
     app.include_router(build_ai_teacher_router(ai_teacher, session_service, claims_dependency))
 

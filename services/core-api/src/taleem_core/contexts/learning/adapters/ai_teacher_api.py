@@ -6,7 +6,10 @@ Two derived, explainable surfaces over existing data (no new child-data table):
   GET  /v1/learning/students/{ref}/ai-teacher/capabilities  — the offline capability matrix
 
 Authenticated + authorized (operate learning.session / read learning.knowledge) + IDOR-guarded, in
-line with the existing session + student routers. The AI Teacher is templated — no generative model.
+line with the existing session + student routers. The AI Teacher is templated. The Phase D
+generative tier (flag-gated, default OFF; consent- and kill-switch-gated) can only add a separate,
+safety-gated ``generation`` block to ``:explain`` — the request shape is unchanged, and no real
+model provider is connected in this build (FD-03).
 """
 
 from __future__ import annotations

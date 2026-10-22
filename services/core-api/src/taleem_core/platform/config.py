@@ -116,6 +116,19 @@ class Settings:
             "TALEEM_CLIENT_IP_HEADER", "x-real-ip" if os.environ.get("VERCEL") == "1" else ""
         )
     )
+    # AI Teacher generative tier provider slot (Phase D). "" => inert (refuses every call);
+    # "stub" => the deterministic offline stub (dev/test only, refused in production); any other
+    # value names a provider but is STILL inert — no network adapter exists until FD-03 is decided.
+    # The tier itself is off unless the `ai_teacher.generative_rephrase` flag is enabled.
+    ai_provider: str = field(default_factory=lambda: _get("TALEEM_AI_PROVIDER", ""))
+    # Per-learner, per-UTC-day inference quota for the generative tier (free-tier sustainability).
+    # Exhaustion serves the templated authored engine — never an error. Real values await FD-07.
+    ai_learner_daily_calls: int = field(
+        default_factory=lambda: _get_int("TALEEM_AI_LEARNER_DAILY_CALLS", 20)
+    )
+    ai_learner_daily_tokens: int = field(
+        default_factory=lambda: _get_int("TALEEM_AI_LEARNER_DAILY_TOKENS", 20_000)
+    )
 
     @property
     def is_production(self) -> bool:
@@ -179,6 +192,8 @@ def _assert_production_safe(settings: Settings) -> None:
         )
     if settings.offline_signing_seed_hex == DEFAULT_OFFLINE_SIGNING_SEED:
         problems.append("TALEEM_OFFLINE_SIGNING_SEED is the built-in default (forgeable packages)")
+    if settings.ai_provider.strip().lower() == "stub":
+        problems.append("TALEEM_AI_PROVIDER=stub (a scripted test gateway; never for children)")
     if problems:
         raise InsecureConfigurationError(
             "refusing to start in production with insecure defaults: " + "; ".join(problems)
