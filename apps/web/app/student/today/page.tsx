@@ -28,7 +28,7 @@ import {
 
 export default function TodayPage() {
   const { studentRef: ref, band, displayName } = useLearner();
-  const { t, formatPercent } = useLocale();
+  const { t, locale, formatPercent } = useLocale();
   const [model, setModel] = useState<TodayModel | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | Failure>("loading");
 
@@ -62,7 +62,12 @@ export default function TodayPage() {
           <h2 style={{ margin: 0 }}>{greeting}</h2>
           <p style={{ margin: 0 }}>{t("student.today.subtitle")}</p>
         </div>
-        <ReadAloud label={t("student.today.greetingAudio")} />
+        {/* Interface text, so it is read in the interface locale. */}
+        <ReadAloud
+          label={t("student.today.greetingAudio")}
+          text={`${greeting} ${t("student.today.subtitle")}`}
+          lang={locale}
+        />
       </section>
 
       <div aria-live="polite" style={{ display: "grid", gap: "var(--space-4)" }}>

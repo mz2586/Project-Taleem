@@ -25,8 +25,13 @@ export const ur: Messages = {
     },
     readAloud: {
       listen: "سنیں",
+      listenDevice: "سنیں · آلے کی آواز",
       playing: "چل رہا ہے…",
+      stop: "روکیں",
       unavailable: "آواز دستیاب نہیں",
+      noEngine: "اس آلے پر پڑھ کر سنانے کی سہولت دستیاب نہیں",
+      noVoice: "اس آلے پر {language} آواز دستیاب نہیں",
+      muted: "پڑھ کر سنانا بند ہے",
     },
     mastery: {
       label: "مہارت",
@@ -106,6 +111,7 @@ export const ur: Messages = {
       notYet: "آئیے دوبارہ سوچتے ہیں",
       teacherAudio: "استاد",
       questionAudio: "سوال",
+      hintAudio: "اشارہ",
       offline: "آپ آف لائن ہیں۔ ابھی سبق کے لیے انٹرنیٹ ضروری ہے۔",
       error: "کچھ غلط ہو گیا۔ آئیے واپس چل کر دوبارہ کوشش کریں۔",
       escalatedTitle: "ہم آپ کی مدد کے لیے کسی کو بلا رہے ہیں۔",

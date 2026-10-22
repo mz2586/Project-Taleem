@@ -30,8 +30,13 @@ export const en = {
     },
     readAloud: {
       listen: "Listen",
+      listenDevice: "Listen · device voice",
       playing: "Playing…",
+      stop: "Stop",
       unavailable: "Audio not available",
+      noEngine: "Read-aloud isn't available on this device",
+      noVoice: "No {language} voice on this device",
+      muted: "Read-aloud is turned off",
     },
     mastery: {
       label: "Mastery",
@@ -112,6 +117,7 @@ export const en = {
       notYet: "Let's think again",
       teacherAudio: "Teacher",
       questionAudio: "Question",
+      hintAudio: "Hint",
       offline: "You're offline. Lessons need an internet connection for now.",
       error: "Something went wrong. Let's go back and try again.",
       escalatedTitle: "We're getting someone to help you.",

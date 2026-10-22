@@ -16,6 +16,7 @@ import { Card, ErrorBanner, ProgressRing, Skeleton } from "@/components/student/
 import { Button } from "@/design-system/Button";
 import { ButtonLink } from "@/design-system/ButtonLink";
 import { contentAttrs, pickLocalized } from "@/lib/i18n/content";
+import { speechLang } from "@/lib/student/speech";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { useLearner } from "@/lib/session/useLearner";
 import { learningApi } from "@/lib/student/api";
@@ -112,6 +113,9 @@ export default function SessionPage() {
   const steps = presentationSteps(state);
   const item = currentItem(state);
   const prompt = item ? pickLocalized(item.prompt, INSTRUCTION_LOCALE_PREFERENCE) : null;
+  // The lesson's content language, as declared by its first item. Untagged lesson text (steps,
+  // hints) is read in it only when the text's script agrees — see `speechLang`.
+  const lessonLocale = teach?.items[0] ? (pickLocalized(teach.items[0].prompt, INSTRUCTION_LOCALE_PREFERENCE)?.locale ?? null) : null;
 
   const onReady = () => {
     if (item) dispatch({ type: "ready" });
@@ -214,7 +218,11 @@ export default function SessionPage() {
                     {steps[step].text}
                   </p>
                 )}
-                <ReadAloud label={t("student.session.teacherAudio")} />
+                <ReadAloud
+                  label={t("student.session.teacherAudio")}
+                  text={steps[step].text}
+                  lang={speechLang(steps[step].text, null, lessonLocale)}
+                />
               </div>
             </Card>
             <div style={{ display: "flex", gap: "var(--space-2)", justifyContent: "space-between" }}>
@@ -236,7 +244,7 @@ export default function SessionPage() {
                 <p {...contentAttrs({ locale: prompt?.locale, text: prompt?.text })} style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>
                   {prompt?.text ?? ""}
                 </p>
-                <ReadAloud label={t("student.session.questionAudio")} />
+                <ReadAloud label={t("student.session.questionAudio")} text={prompt?.text} lang={prompt?.locale} />
               </div>
               <div role="group" aria-label={t("student.session.answers")} style={{ display: "grid", gap: "var(--space-2)" }}>
                 {item.options.map((opt, i) => (
@@ -253,9 +261,12 @@ export default function SessionPage() {
               {hints.length > 0 ? (
                 <ol aria-label={t("student.session.hints")} style={{ margin: 0, paddingInlineStart: "var(--space-4)", display: "grid", gap: "var(--space-1)" }}>
                   {hints.map((h, i) => (
-                    <li key={i}>
-                      <span aria-hidden="true">💡 </span>
-                      <span {...contentAttrs({ text: h })}>{h}</span>
+                    <li key={i} style={{ display: "flex", gap: "var(--space-2)", alignItems: "start", justifyContent: "space-between" }}>
+                      <span>
+                        <span aria-hidden="true">💡 </span>
+                        <span {...contentAttrs({ text: h })}>{h}</span>
+                      </span>
+                      <ReadAloud label={t("student.session.hintAudio")} text={h} lang={speechLang(h, null, lessonLocale)} />
                     </li>
                   ))}
                 </ol>

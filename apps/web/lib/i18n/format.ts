@@ -44,3 +44,15 @@ export function formatPercent(
   const clamped = Number.isFinite(ratio) ? Math.max(0, Math.min(1, ratio)) : 0;
   return formatter(locale, { maximumFractionDigits: 0, ...options, style: "percent" }).format(clamped);
 }
+
+/**
+ * The name of a language, written in the interface locale ("ur" in an English UI -> "Urdu"; in an
+ * Urdu UI -> "اردو"). Falls back to the tag itself where the runtime has no display names.
+ */
+export function languageName(tag: string, uiLocale: Locale): string {
+  try {
+    return new Intl.DisplayNames([uiLocale], { type: "language" }).of(tag) ?? tag;
+  } catch {
+    return tag;
+  }
+}
