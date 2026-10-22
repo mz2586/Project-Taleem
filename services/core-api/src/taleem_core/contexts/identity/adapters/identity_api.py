@@ -35,11 +35,19 @@ ROSTER_LIMIT = 20
 ROSTER_WINDOW_SECONDS = 60.0
 
 
+# Request-size bounds below are deliberately looser than the domain rules they sit in front of, so
+# a value the domain refuses reaches the domain and gets its stable reason code (PIN_FORMAT,
+# DISPLAY_NAME_TOO_LONG, …) instead of a generic schema error. They still bound the payload.
+_NAME_BOUND = 120
+_PIN_BOUND = 32
+_PASSPHRASE_BOUND = 1024
+
+
 class GuardianRegisterIn(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
-    email: str = Field(min_length=3, max_length=254)
-    passphrase: str = Field(min_length=1, max_length=256)
-    display_name: str = Field(alias="displayName", min_length=1, max_length=60)
+    email: str = Field(min_length=1, max_length=320)
+    passphrase: str = Field(max_length=_PASSPHRASE_BOUND)
+    display_name: str = Field(alias="displayName", max_length=_NAME_BOUND)
     locale: str = Field(default="ur", max_length=8)
 
 
@@ -50,15 +58,22 @@ class GuardianSignInIn(BaseModel):
 
 class LearnerCreateIn(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
-    display_name: str = Field(alias="displayName", min_length=1, max_length=60)
-    pin: str = Field(min_length=4, max_length=6)
-    grade_band: str = Field(default="middle", alias="gradeBand", max_length=16)
-    grade_level: int = Field(default=4, alias="gradeLevel", ge=0, le=12)
+    display_name: str = Field(alias="displayName", max_length=_NAME_BOUND)
+    pin: str = Field(max_length=_PIN_BOUND)
+    grade_band: str = Field(default="middle", alias="gradeBand", max_length=32)
+    grade_level: int = Field(default=4, alias="gradeLevel", ge=-1000, le=1000)
     locale: str = Field(default="ur", max_length=8)
 
 
+class LearnerRenameIn(BaseModel):
+    """Display name only. Nothing else about a child is editable here, and nothing is added."""
+
+    model_config = ConfigDict(populate_by_name=True, extra="forbid")
+    display_name: str = Field(alias="displayName", max_length=_NAME_BOUND)
+
+
 class PinResetIn(BaseModel):
-    pin: str = Field(min_length=4, max_length=6)
+    pin: str = Field(max_length=_PIN_BOUND)
 
 
 class ConsentIn(BaseModel):
@@ -261,6 +276,33 @@ def build_identity_router(
         authorize(claims, "manage", "identity.learner")
         return service.reset_learner_pin(
             guardian_ref=_guardian_ref(claims), student_ref=student_ref, pin=body.pin
+        )
+
+    @router.patch("/learners/{student_ref}")
+    def rename_learner(
+        student_ref: str, body: LearnerRenameIn, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "manage", "identity.learner")
+        return service.rename_learner(
+            guardian_ref=_guardian_ref(claims),
+            student_ref=student_ref,
+            display_name=body.display_name,
+        )
+
+    @router.post("/learners/{student_ref}:suspend")
+    def suspend_learner(
+        student_ref: str, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "manage", "identity.learner")
+        return service.suspend_learner(guardian_ref=_guardian_ref(claims), student_ref=student_ref)
+
+    @router.post("/learners/{student_ref}:reinstate")
+    def reinstate_learner(
+        student_ref: str, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "manage", "identity.learner")
+        return service.reinstate_learner(
+            guardian_ref=_guardian_ref(claims), student_ref=student_ref
         )
 
     # ------------------------------------------------------------------------------- consent

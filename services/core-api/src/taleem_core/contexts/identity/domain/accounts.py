@@ -40,10 +40,22 @@ class AccountStatus(StrEnum):
     ACTIVE = "active"
     LOCKED = "locked"  # too many failed sign-in attempts; a guardian/operator must reset
     SUSPENDED = "suspended"  # an operator halted this account (safeguarding)
+    # The owning guardian suspended this learner (``:suspend``). Reversible by that guardian with
+    # ``:reinstate``; an operator ``suspended`` is not.
+    PAUSED = "paused"
 
 
 class InvalidAccountError(ValueError):
-    """Raised when proposed account data violates the domain's rules."""
+    """Raised when proposed account data violates the domain's rules.
+
+    ``code`` is a stable machine-readable reason a client can localize (see identity.openapi.yaml,
+    ``ValidationError``); ``field`` names the request field it concerns.
+    """
+
+    def __init__(self, message: str, *, code: str = "INVALID_ACCOUNT", field: str = "") -> None:
+        super().__init__(message)
+        self.code = code
+        self.field = field
 
 
 def new_family_code() -> str:
@@ -59,14 +71,18 @@ def normalise_family_code(raw: str) -> str:
     """Accept what a parent types (lower case, spaces, a missing dash) and canonicalise it."""
     compact = re.sub(r"[^A-Za-z0-9]", "", raw).upper()
     if len(compact) != FAMILY_CODE_GROUPS * FAMILY_CODE_GROUP_SIZE:
-        raise InvalidAccountError("family code must be 8 letters and digits")
+        raise InvalidAccountError(
+            "family code must be 8 letters and digits",
+            code="FAMILY_CODE_FORMAT",
+            field="familyCode",
+        )
     return f"{compact[:FAMILY_CODE_GROUP_SIZE]}-{compact[FAMILY_CODE_GROUP_SIZE:]}"
 
 
 def normalise_email(raw: str) -> str:
     email = unicodedata.normalize("NFKC", raw).strip().lower()
     if not _EMAIL_PATTERN.match(email) or len(email) > 254:
-        raise InvalidAccountError("email address is not valid")
+        raise InvalidAccountError("email address is not valid", code="EMAIL_INVALID", field="email")
     return email
 
 
@@ -77,11 +93,21 @@ def normalise_display_name(raw: str) -> str:
     # trying to sign in.
     name = re.sub(r"\s+", " ", name)
     if not name:
-        raise InvalidAccountError("display name must not be empty")
+        raise InvalidAccountError(
+            "display name must not be empty", code="DISPLAY_NAME_EMPTY", field="displayName"
+        )
     if len(name) > MAX_DISPLAY_NAME:
-        raise InvalidAccountError(f"display name must be at most {MAX_DISPLAY_NAME} characters")
+        raise InvalidAccountError(
+            f"display name must be at most {MAX_DISPLAY_NAME} characters",
+            code="DISPLAY_NAME_TOO_LONG",
+            field="displayName",
+        )
     if any(unicodedata.category(ch) == "Cc" for ch in name):
-        raise InvalidAccountError("display name must not contain control characters")
+        raise InvalidAccountError(
+            "display name must not contain control characters",
+            code="DISPLAY_NAME_INVALID_CHARACTERS",
+            field="displayName",
+        )
     return name
 
 
@@ -169,9 +195,17 @@ class LearnerAccount:
         student_ref: str | None = None,
     ) -> LearnerAccount:
         if grade_band not in GRADE_BANDS:
-            raise InvalidAccountError(f"grade band must be one of {', '.join(GRADE_BANDS)}")
+            raise InvalidAccountError(
+                f"grade band must be one of {', '.join(GRADE_BANDS)}",
+                code="GRADE_BAND_INVALID",
+                field="gradeBand",
+            )
         if not 0 <= grade_level <= 12:
-            raise InvalidAccountError("grade level must be between 0 (KG) and 12")
+            raise InvalidAccountError(
+                "grade level must be between 0 (KG) and 12",
+                code="GRADE_LEVEL_INVALID",
+                field="gradeLevel",
+            )
         return LearnerAccount(
             # Opaque and unguessable: student_ref is the key every learning read model is scoped by,
             # so it must not be derivable from anything a guardian shares (docs/09 §3).

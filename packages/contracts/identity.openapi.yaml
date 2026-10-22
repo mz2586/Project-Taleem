@@ -22,6 +22,12 @@ info:
     * Guardian-scoped routes derive the acting guardian from the verified token subject, never from
       the request body. A learner belonging to another family is reported `404`, not `403`, so a
       probe cannot confirm the ref names a real child elsewhere.
+    * Every domain validation failure is a `422` problem whose `code` stays `VALIDATION_FAILED`
+      (compatibility) and whose single `errors[0].code` carries a stable reason a client can
+      localize — see `ValidationProblem`. The English `detail` is for logs, not for display.
+      Schema-level body errors (a missing or mistyped field) still use the framework's own
+      `422` body, and an unknown consent scope keeps its own top-level code
+      `UNKNOWN_CONSENT_SCOPE`.
     * The `learners:*` routes are halted by the operator kill switch; guardian routes are not, so a
       guardian can still withdraw consent during an incident.
   license:
@@ -62,7 +68,7 @@ paths:
           description: Validation failed (email shape, passphrase policy, display name)
           content:
             application/problem+json:
-              schema: { $ref: "#/components/schemas/Problem" }
+              schema: { $ref: "#/components/schemas/ValidationProblem" }
         "429":
           description: Rate limited
           content:
@@ -390,7 +396,7 @@ paths:
           description: PIN policy, duplicate display name, or family size limit
           content:
             application/problem+json:
-              schema: { $ref: "#/components/schemas/Problem" }
+              schema: { $ref: "#/components/schemas/ValidationProblem" }
         default:
           description: Error
           content:
@@ -440,6 +446,150 @@ paths:
           description: PIN policy
           content:
             application/problem+json:
+              schema: { $ref: "#/components/schemas/ValidationProblem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/learners/{studentRef}:
+    patch:
+      tags: [identity]
+      operationId: renameLearner
+      summary: Rename a learner (display name only)
+      description: >-
+        The display name is the only editable field, and no other field is accepted (an unknown
+        property is a `422`). It stays unique within the family because it is the child's
+        sign-in handle there. Audited as `learner.renamed`; the audit entry records that the
+        name changed, never the name itself. Owner-only; another family's learner is `404`.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: studentRef
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/LearnerRename" }
+      responses:
+        "200":
+          description: Learner renamed (a no-op when the name is unchanged)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Learner" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (not a guardian)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "404":
+          description: Not this guardian's learner
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "422":
+          description: DISPLAY_NAME_* or DUPLICATE_LEARNER_NAME
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/ValidationProblem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/learners/{studentRef}:suspend:
+    post:
+      tags: [identity]
+      operationId: suspendLearner
+      summary: Suspend (pause) a learner — sign-in stops and every session ends now
+      description: >-
+        Sets `status` to `paused`, blocks sign-in, and revokes every refresh-token family for
+        the learner immediately, so no device can refresh; an already-issued access token is
+        refused on its next learner request by the per-request learner gate (`LEARNER_INACTIVE`).
+        Idempotent. An operator-`suspended` learner stays
+        `suspended`. Audited as `learner.suspended` with the number of sessions revoked.
+        Owner-only; another family's learner is `404`.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: studentRef
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Learner paused
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Learner" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (not a guardian)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "404":
+          description: Not this guardian's learner
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/learners/{studentRef}:reinstate:
+    post:
+      tags: [identity]
+      operationId: reinstateLearner
+      summary: Lift the guardian's own suspension
+      description: >-
+        `paused` becomes `active` and the failed-PIN counter is cleared. Idempotent for a
+        learner that is not paused. Consent is untouched: a learner without consent still
+        cannot sign in. An operator suspension cannot be lifted here (`409`
+        `LEARNER_SUSPENDED_BY_OPERATOR`). Audited as `learner.reinstated`. Owner-only; another
+        family's learner is `404`.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: studentRef
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200":
+          description: Learner active again (or unchanged)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Learner" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (not a guardian)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "404":
+          description: Not this guardian's learner
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "409":
+          description: Suspended by an operator
+          content:
+            application/problem+json:
               schema: { $ref: "#/components/schemas/Problem" }
         default:
           description: Error
@@ -485,7 +635,7 @@ paths:
           description: Unknown scope, or the required `learning_data` scope was omitted
           content:
             application/problem+json:
-              schema: { $ref: "#/components/schemas/Problem" }
+              schema: { $ref: "#/components/schemas/ValidationProblem" }
         default:
           description: Error
           content:
@@ -691,7 +841,13 @@ components:
         grade_band: { type: string, enum: [early, middle, senior] }
         grade_level: { type: integer }
         locale: { type: string }
-        status: { type: string, enum: [active, locked, suspended] }
+        status:
+          type: string
+          enum: [active, locked, paused, suspended]
+          description: >-
+            `locked`: too many wrong PINs (a PIN reset unlocks). `paused`: the guardian suspended
+            this learner (`:suspend`; lifted by `:reinstate`). `suspended`: an operator hold that
+            a guardian cannot lift. Only `active` can sign in.
         created_at: { type: number }
         consent: { $ref: "#/components/schemas/ConsentState" }
         can_sign_in:
@@ -703,6 +859,12 @@ components:
         learners:
           type: array
           items: { $ref: "#/components/schemas/Learner" }
+    LearnerRename:
+      type: object
+      additionalProperties: false
+      required: [displayName]
+      properties:
+        displayName: { type: string, minLength: 1, maxLength: 60 }
     PinReset:
       type: object
       required: [pin]
@@ -873,6 +1035,36 @@ components:
         events:
           type: array
           items: { $ref: "#/components/schemas/AuditEvent" }
+    ValidationProblem:
+      description: >-
+        A `422` from a domain rule. `code` is always `VALIDATION_FAILED`; `errors` holds exactly
+        one entry whose `code` is the stable reason. Reasons: `EMAIL_INVALID`,
+        `PASSPHRASE_TOO_SHORT`, `PASSPHRASE_TOO_LONG`, `PASSPHRASE_WHITESPACE`,
+        `DISPLAY_NAME_EMPTY`, `DISPLAY_NAME_TOO_LONG`, `DISPLAY_NAME_INVALID_CHARACTERS`,
+        `PIN_FORMAT`, `PIN_TOO_EASY`, `GRADE_BAND_INVALID`, `GRADE_LEVEL_INVALID`,
+        `DUPLICATE_LEARNER_NAME`, `LEARNER_LIMIT_REACHED`, `CONSENT_SCOPE_REQUIRED`. New reasons
+        may be added; a client should fall back to a generic message for one it does not know.
+      allOf:
+        - $ref: "#/components/schemas/Problem"
+        - type: object
+          required: [errors]
+          properties:
+            code: { type: string, const: VALIDATION_FAILED }
+            errors:
+              type: array
+              minItems: 1
+              maxItems: 1
+              items:
+                type: object
+                required: [code, message]
+                properties:
+                  code:
+                    type: string
+                    examples: [PIN_TOO_EASY, DUPLICATE_LEARNER_NAME]
+                  field:
+                    type: string
+                    description: The request field concerned (camelCase), when there is one.
+                  message: { type: string, description: "English, for logs only." }
     Problem:
       type: object
       description: RFC 9457 problem+json.

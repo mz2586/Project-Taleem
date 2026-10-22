@@ -42,7 +42,15 @@ MAX_PASSPHRASE_ATTEMPTS = 10
 
 
 class WeakSecretError(ValueError):
-    """Raised when a proposed secret does not meet the minimum policy."""
+    """Raised when a proposed secret does not meet the minimum policy.
+
+    ``code`` is a stable machine-readable reason (see identity.openapi.yaml, ``ValidationError``).
+    """
+
+    def __init__(self, message: str, *, code: str = "WEAK_SECRET", field: str = "") -> None:
+        super().__init__(message)
+        self.code = code
+        self.field = field
 
 
 @dataclass(frozen=True)
@@ -99,12 +107,24 @@ def verify_secret(secret: str, encoded: str) -> bool:
 def assert_passphrase_policy(passphrase: str) -> None:
     """Guardian passphrase policy: length-led, per NIST SP 800-63B — no composition rules."""
     if len(passphrase) < MIN_PASSPHRASE_LENGTH:
-        raise WeakSecretError(f"passphrase must be at least {MIN_PASSPHRASE_LENGTH} characters")
+        raise WeakSecretError(
+            f"passphrase must be at least {MIN_PASSPHRASE_LENGTH} characters",
+            code="PASSPHRASE_TOO_SHORT",
+            field="passphrase",
+        )
     if len(passphrase) > MAX_PASSPHRASE_LENGTH:
-        raise WeakSecretError(f"passphrase must be at most {MAX_PASSPHRASE_LENGTH} characters")
+        raise WeakSecretError(
+            f"passphrase must be at most {MAX_PASSPHRASE_LENGTH} characters",
+            code="PASSPHRASE_TOO_LONG",
+            field="passphrase",
+        )
     if passphrase.strip() != passphrase.strip(" "):
         # Leading/trailing whitespace other than spaces is almost always a paste accident.
-        raise WeakSecretError("passphrase must not begin or end with whitespace")
+        raise WeakSecretError(
+            "passphrase must not begin or end with whitespace",
+            code="PASSPHRASE_WHITESPACE",
+            field="passphrase",
+        )
 
 
 # The most common four-digit PINs, which cover a disproportionate share of real choices. A guardian
@@ -137,9 +157,11 @@ _BANNED_PINS = frozenset(
 def assert_pin_policy(pin: str) -> None:
     """Child PIN policy: 4–6 digits, not one of the most-guessed sequences."""
     if not PIN_PATTERN.match(pin):
-        raise WeakSecretError("PIN must be 4 to 6 digits")
+        raise WeakSecretError("PIN must be 4 to 6 digits", code="PIN_FORMAT", field="pin")
     if pin in _BANNED_PINS:
-        raise WeakSecretError("PIN is too easily guessed; choose another")
+        raise WeakSecretError(
+            "PIN is too easily guessed; choose another", code="PIN_TOO_EASY", field="pin"
+        )
 
 
 @dataclass(frozen=True)

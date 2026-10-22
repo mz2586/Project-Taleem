@@ -31,6 +31,7 @@ class AuditAction(StrEnum):
     LEARNER_PIN_RESET = "learner.pin_reset"
     LEARNER_SUSPENDED = "learner.suspended"
     LEARNER_REINSTATED = "learner.reinstated"
+    LEARNER_RENAMED = "learner.renamed"
     CONSENT_GRANTED = "consent.granted"
     CONSENT_WITHDRAWN = "consent.withdrawn"
     SESSION_REFRESHED = "session.refreshed"

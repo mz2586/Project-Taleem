@@ -187,11 +187,53 @@ components:
           items: { type: object, additionalProperties: true }
         intervention_notifications:
           type: array
-          items: { type: object, additionalProperties: true }
+          items: { $ref: "#/components/schemas/GuardianNotification" }
         offline_sync_status: { $ref: "#/components/schemas/SyncStatus" }
         achievement_history:
           type: array
-          items: { type: object, additionalProperties: true }
+          items: { $ref: "#/components/schemas/GuardianAchievement" }
+    GuardianNotification:
+      type: object
+      description: >-
+        A learner notification a guardian should act on. Render from `kind` + `objective_code` +
+        `params` in the guardian's own language; `message` is the learner-facing English text,
+        kept for compatibility.
+      additionalProperties: true
+      required: [kind, objective_code, params]
+      properties:
+        id: { type: string }
+        type: { type: string, description: Legacy learner-side type (kept for compatibility). }
+        kind:
+          type: string
+          description: >-
+            Stable kind. Known values: `revision_due`, `at_risk`, `objective_mastered`; a client
+            should fall back to a generic message for an unknown kind.
+          examples: [revision_due]
+        objective_code: { type: ["string", "null"] }
+        params:
+          type: object
+          description: Values the localized text needs, e.g. `due_count` for `revision_due`.
+          additionalProperties: true
+        message: { type: string }
+    GuardianAchievement:
+      type: object
+      description: >-
+        One earned achievement. Render from `kind` + `objective_code`; `name` and `description`
+        are the learner-facing English text, kept for compatibility.
+      additionalProperties: true
+      required: [kind, objective_code]
+      properties:
+        id: { type: string }
+        kind:
+          type: string
+          description: >-
+            Stable kind. Known values: `objective_mastered`, `misconception_cleared`; unknown
+            achievements report `achievement`.
+          examples: [objective_mastered]
+        objective_code: { type: ["string", "null"] }
+        name: { type: string }
+        description: { type: string }
+        earned_at: { type: number }
     Problem:
       type: object
       description: RFC 9457 problem+json.

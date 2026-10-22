@@ -30,6 +30,7 @@ class _StudentQueries(Protocol):
     def achievements(self, student_ref: str) -> dict[str, Any]: ...
     def notifications(self, student_ref: str) -> dict[str, Any]: ...
     def recommendations(self, student_ref: str) -> dict[str, Any]: ...
+    def reviews(self, student_ref: str) -> dict[str, Any]: ...
 
 
 class _Analytics(Protocol):
@@ -98,6 +99,53 @@ def sync_status(sessions: list[dict[str, Any]], now: float) -> dict[str, Any]:
         # The device tracks unsynced local attempts; the server surfaces only what it has received.
         "pending_is_device_reported": True,
     }
+
+
+# Stable, client-localizable kinds. The English ``message`` / ``name`` / ``description`` produced by
+# the learning read model are kept for compatibility, but a client renders from ``kind`` +
+# ``objective_code`` (+ ``params``) so the guardian sees their own language.
+NOTIFICATION_KINDS = ("revision_due", "at_risk", "objective_mastered")
+ACHIEVEMENT_KINDS = ("objective_mastered", "misconception_cleared")
+
+
+def _strip_prefix(value: str, prefix: str) -> str | None:
+    return value[len(prefix) :] if value.startswith(prefix) else None
+
+
+def localizable_notification(
+    note: dict[str, Any], *, due_count: int | None = None
+) -> dict[str, Any]:
+    """Add ``kind``, ``objective_code`` and ``params`` to one learner notification."""
+    raw_type = str(note.get("type", ""))
+    kind = "objective_mastered" if raw_type == "mastered" else raw_type or "unknown"
+    objective_code = note.get("objective_code")
+    if objective_code is None and kind == "objective_mastered":
+        objective_code = _strip_prefix(str(note.get("id", "")), "mastered-")
+    params: dict[str, Any] = {}
+    if kind == "revision_due" and due_count is not None:
+        params["due_count"] = due_count
+    return {**note, "kind": kind, "objective_code": objective_code or None, "params": params}
+
+
+def localizable_achievement(item: dict[str, Any]) -> dict[str, Any]:
+    """Add ``kind`` and ``objective_code`` to one learner achievement.
+
+    The learning read model's ids are deterministic (``mastery-<code>``,
+    ``cleared-<code>-<earned_at>``), which is what makes this projection stable.
+    """
+    ident = str(item.get("id", ""))
+    kind = "achievement"
+    code: str | None = item.get("objective_code")
+    mastered = _strip_prefix(ident, "mastery-")
+    cleared = _strip_prefix(ident, "cleared-")
+    if mastered is not None:
+        kind, code = "objective_mastered", code or mastered
+    elif cleared is not None:
+        kind = "misconception_cleared"
+        suffix = f"-{item.get('earned_at')}"
+        if code is None:
+            code = cleared[: len(cleared) - len(suffix)] if cleared.endswith(suffix) else cleared
+    return {**item, "kind": kind, "objective_code": code or None}
 
 
 class GuardianService:
@@ -171,9 +219,12 @@ class GuardianService:
             "assessment_history": self._q.assessments(student_ref),
             "ai_teacher_activity": self._ai.plan(student_ref),
             "recommendations": self._q.recommendations(student_ref)["recommendations"],
-            "intervention_notifications": self._interventions(student_ref, notifs),
+            "intervention_notifications": self._localized_interventions(student_ref, notifs),
             "offline_sync_status": sync_status(sessions, now),
-            "achievement_history": self._q.achievements(student_ref)["achievements"],
+            "achievement_history": [
+                localizable_achievement(a)
+                for a in self._q.achievements(student_ref)["achievements"]
+            ],
         }
 
     # -- derivations ---------------------------------------------------------------------------
@@ -181,3 +232,12 @@ class GuardianService:
         # A guardian's "intervention" list = the learner's actionable notifications (revision due,
         # etc.) surfaced read-only. Reuses the notifications read model; no new logic.
         return [n for n in notifs["notifications"] if n.get("type") in ("revision_due", "at_risk")]
+
+    def _localized_interventions(
+        self, student_ref: str, notifs: dict[str, Any]
+    ) -> list[dict[str, Any]]:
+        notes = self._interventions(student_ref, notifs)
+        due_count: int | None = None
+        if any(n.get("type") == "revision_due" for n in notes):
+            due_count = int(self._q.reviews(student_ref).get("due_count", 0))
+        return [localizable_notification(n, due_count=due_count) for n in notes]

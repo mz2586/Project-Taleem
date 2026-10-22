@@ -56,6 +56,30 @@ from .tokens import (
 UnitOfWorkFactory = Callable[[], IdentityUnitOfWork]
 
 
+def _invalid(code: str, detail: str, field: str = "") -> Problem:
+    """A 422 with a stable, machine-readable reason (identity.openapi.yaml ``ValidationProblem``).
+
+    The top-level ``code`` stays ``VALIDATION_FAILED`` for compatibility; the refinement is the
+    single entry in ``errors``: ``{"code": <REASON>, "field": <request field>, "message": ...}``.
+    """
+    entry = {"code": code, "message": detail}
+    if field:
+        entry["field"] = field
+    return validation_error(detail, errors=[entry])
+
+
+def _invalid_from(exc: InvalidAccountError | credentials.WeakSecretError) -> Problem:
+    return _invalid(exc.code, str(exc), exc.field)
+
+
+def _duplicate_name() -> Problem:
+    return _invalid(
+        "DUPLICATE_LEARNER_NAME",
+        "a learner with this name already exists in your family",
+        "displayName",
+    )
+
+
 def _sign_in_failed() -> Problem:
     """One error for every sign-in failure — see rule 2 in the module docstring."""
     return unauthorized("Sign-in details are not correct")
@@ -92,7 +116,7 @@ class IdentityService:
             normalise_display_name(display_name)
             credentials.assert_passphrase_policy(passphrase)
         except (InvalidAccountError, credentials.WeakSecretError) as exc:
-            raise validation_error(str(exc)) from exc
+            raise _invalid_from(exc) from exc
 
         now = self._now()
         with self._uow() as uow:
@@ -207,7 +231,7 @@ class IdentityService:
             credentials.assert_pin_policy(pin)
             name = normalise_display_name(display_name)
         except (credentials.WeakSecretError, InvalidAccountError) as exc:
-            raise validation_error(str(exc)) from exc
+            raise _invalid_from(exc) from exc
 
         now = self._now()
         with self._uow() as uow:
@@ -216,10 +240,11 @@ class IdentityService:
             if any(s.roster_key == roster_key(name) for s in siblings):
                 # Two children in one family cannot share a display name: the name *is* the child's
                 # sign-in handle within the family, so a duplicate would make sign-in ambiguous.
-                raise validation_error("a learner with this name already exists in your family")
+                raise _duplicate_name()
             if len(siblings) >= MAX_LEARNERS_PER_GUARDIAN:
-                raise validation_error(
-                    f"a guardian may enrol at most {MAX_LEARNERS_PER_GUARDIAN} learners"
+                raise _invalid(
+                    "LEARNER_LIMIT_REACHED",
+                    f"a guardian may enrol at most {MAX_LEARNERS_PER_GUARDIAN} learners",
                 )
             try:
                 learner = LearnerAccount.create(
@@ -232,7 +257,7 @@ class IdentityService:
                     now=now,
                 )
             except InvalidAccountError as exc:
-                raise validation_error(str(exc)) from exc
+                raise _invalid_from(exc) from exc
             uow.learners.add(learner)
             uow.audit.append(
                 AuditEvent.record(
@@ -266,7 +291,7 @@ class IdentityService:
         try:
             credentials.assert_pin_policy(pin)
         except credentials.WeakSecretError as exc:
-            raise validation_error(str(exc)) from exc
+            raise _invalid_from(exc) from exc
         now = self._now()
         with self._uow() as uow:
             learner = self._require_own_learner(uow, guardian_ref, student_ref)
@@ -290,6 +315,112 @@ class IdentityService:
                 )
             )
             uow.commit()
+            return _learner_view(
+                learner, derive_state(student_ref, uow.consents.history(student_ref))
+            )
+
+    def rename_learner(
+        self, *, guardian_ref: str, student_ref: str, display_name: str
+    ) -> dict[str, Any]:
+        """Change a learner's display name — the only field this route touches.
+
+        The name is the child's sign-in handle within the family, so it stays unique there. The
+        audit entry records *that* the name changed, never the old or new name: the trail must not
+        become a second copy of a child's identifying data.
+        """
+        try:
+            name = normalise_display_name(display_name)
+        except InvalidAccountError as exc:
+            raise _invalid_from(exc) from exc
+        now = self._now()
+        with self._uow() as uow:
+            learner = self._require_own_learner(uow, guardian_ref, student_ref)
+            if name != learner.display_name:
+                key = roster_key(name)
+                siblings = uow.learners.for_guardian(guardian_ref)
+                if any(s.roster_key == key and s.student_ref != student_ref for s in siblings):
+                    raise _duplicate_name()
+                learner.display_name = name
+                uow.learners.save(learner)
+                uow.audit.append(
+                    AuditEvent.record(
+                        action=AuditAction.LEARNER_RENAMED,
+                        actor_ref=guardian_ref,
+                        actor_role="guardian",
+                        subject_ref=student_ref,
+                        now=now,
+                        correlation_id=get_correlation_id() or "",
+                    )
+                )
+                uow.commit()
+            return _learner_view(
+                learner, derive_state(student_ref, uow.consents.history(student_ref))
+            )
+
+    def suspend_learner(self, *, guardian_ref: str, student_ref: str) -> dict[str, Any]:
+        """A guardian pauses their child's account: sign-in stops and every live session ends.
+
+        Idempotent. An account an operator has ``suspended`` stays operator-suspended (the guardian
+        cannot downgrade a safeguarding hold into something they can lift themselves).
+        """
+        now = self._now()
+        with self._uow() as uow:
+            learner = self._require_own_learner(uow, guardian_ref, student_ref)
+            # Revoke regardless of the prior state: "stop" has to mean every device, now.
+            revoked = uow.refresh_tokens.revoke_all_for(student_ref, now=now)
+            changed = learner.status not in (AccountStatus.PAUSED, AccountStatus.SUSPENDED)
+            if changed:
+                learner.status = AccountStatus.PAUSED
+                uow.learners.save(learner)
+            if changed or revoked:
+                uow.audit.append(
+                    AuditEvent.record(
+                        action=AuditAction.LEARNER_SUSPENDED,
+                        actor_ref=guardian_ref,
+                        actor_role="guardian",
+                        subject_ref=student_ref,
+                        now=now,
+                        correlation_id=get_correlation_id() or "",
+                        detail={"revoked_sessions": revoked},
+                    )
+                )
+            uow.commit()
+            return _learner_view(
+                learner, derive_state(student_ref, uow.consents.history(student_ref))
+            )
+
+    def reinstate_learner(self, *, guardian_ref: str, student_ref: str) -> dict[str, Any]:
+        """Lift a guardian's own suspension. Idempotent for a learner that is not paused.
+
+        Reinstating also clears the failed-attempt counter: it is the same guardian authority that a
+        PIN reset uses to unlock a child. Consent is untouched — a learner without it still cannot
+        sign in. An operator suspension cannot be lifted here (409).
+        """
+        now = self._now()
+        with self._uow() as uow:
+            learner = self._require_own_learner(uow, guardian_ref, student_ref)
+            if learner.status is AccountStatus.SUSPENDED:
+                raise Problem(
+                    409,
+                    "LEARNER_SUSPENDED_BY_OPERATOR",
+                    "Suspended by an operator",
+                    "this learner was suspended by an operator and cannot be reinstated here",
+                )
+            if learner.status is AccountStatus.PAUSED:
+                learner.status = AccountStatus.ACTIVE
+                learner.failed_attempts = 0
+                uow.learners.save(learner)
+                uow.audit.append(
+                    AuditEvent.record(
+                        action=AuditAction.LEARNER_REINSTATED,
+                        actor_ref=guardian_ref,
+                        actor_role="guardian",
+                        subject_ref=student_ref,
+                        now=now,
+                        correlation_id=get_correlation_id() or "",
+                    )
+                )
+                uow.commit()
             return _learner_view(
                 learner, derive_state(student_ref, uow.consents.history(student_ref))
             )
@@ -318,7 +449,7 @@ class IdentityService:
             except ConsentError as exc:
                 # A consent set that omits the required scope is a client mistake, not a server
                 # fault: the guardian gets the same 422 shape as any other invalid submission.
-                raise validation_error(str(exc)) from exc
+                raise _invalid("CONSENT_SCOPE_REQUIRED", str(exc), "scopes") from exc
             uow.consents.append(record)
             uow.audit.append(
                 AuditEvent.record(
@@ -745,7 +876,12 @@ class IdentityService:
     ) -> None:
         account.failed_attempts += 1
         action = AuditAction.GUARDIAN_SIGN_IN_FAILED
-        if account.failed_attempts >= credentials.MAX_PASSPHRASE_ATTEMPTS:
+        # Only an active account becomes locked: overwriting ``suspended`` with ``locked`` would let
+        # an unlock path (a PIN or passphrase reset) lift a suspension it has no authority over.
+        if (
+            account.failed_attempts >= credentials.MAX_PASSPHRASE_ATTEMPTS
+            and account.status is AccountStatus.ACTIVE
+        ):
             account.status = AccountStatus.LOCKED
             action = AuditAction.GUARDIAN_LOCKED
         uow.guardians.save(account)
@@ -766,7 +902,12 @@ class IdentityService:
     ) -> None:
         learner.failed_attempts += 1
         action = AuditAction.LEARNER_SIGN_IN_FAILED
-        if learner.failed_attempts >= credentials.MAX_PIN_ATTEMPTS:
+        # Same rule as for guardians: a paused or suspended learner stays paused or suspended, or a
+        # PIN reset (which unlocks) would become a way round the guardian's or operator's hold.
+        if (
+            learner.failed_attempts >= credentials.MAX_PIN_ATTEMPTS
+            and learner.status is AccountStatus.ACTIVE
+        ):
             learner.status = AccountStatus.LOCKED
             action = AuditAction.LEARNER_LOCKED
         uow.learners.save(learner)
