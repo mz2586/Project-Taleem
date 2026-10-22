@@ -243,7 +243,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     # ---- Identity, consent & child-safe sign-in (FD-14) ----
     # This is the context that issues tokens, so it is the one place holding the signing key. In
-    # production ``auth.signing_key`` is always present (config refuses to boot without an Ed25519
+    # production ``auth.signer`` is always present (config refuses to boot without an Ed25519
     # seed); locally it may be absent, and the issuer falls back to the HS256 development path that
     # the dev verifier already accepts.
     identity_engine = create_identity_engine(db_url)
@@ -257,7 +257,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         TokenIssuer(
             issuer=settings.jwt_issuer,
             audience=settings.jwt_audience,
-            signing_key=auth.signing_key,
+            signer=auth.signer,
             hs256_secret=None if settings.is_production else settings.jwt_dev_secret,
         ),
         time.time,

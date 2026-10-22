@@ -122,11 +122,11 @@ class TestBuildAuthContext(unittest.TestCase):
 
     def test_production_is_asymmetric_only(self) -> None:
         ctx = build_auth_context(self._prod_settings())
-        self.assertIsNotNone(ctx.signing_key)
+        self.assertIsNotNone(ctx.signer)
         self.assertFalse(ctx.verifier.allow_hs256)
         # A token signed by the prod signing key, with iss/aud, verifies.
         tok = sign_eddsa(
-            _claims(iss="taleem-identity", aud="taleem-core-api"), ctx.signing_key  # type: ignore[arg-type]
+            _claims(iss="taleem-identity", aud="taleem-core-api"), ctx.signer  # type: ignore[arg-type]
         )
         self.assertEqual(ctx.verifier.verify(tok).role, "student")
         # HS256 is rejected in production.
@@ -137,7 +137,7 @@ class TestBuildAuthContext(unittest.TestCase):
         ctx = build_auth_context(
             Settings(environment=Environment.LOCAL, jwt_dev_secret="s")  # noqa: S106 (test fixture)
         )
-        self.assertIsNone(ctx.signing_key)
+        self.assertIsNone(ctx.signer)
         self.assertEqual(ctx.verifier.verify(sign_hs256(_claims(), "s")).sub, "u1")
 
 

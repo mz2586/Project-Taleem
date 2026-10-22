@@ -1,9 +1,10 @@
 """Access-token issuance for the identity context.
 
-This is the *only* place in the platform that mints a token. It reuses the key material built by
-``auth.setup`` — EdDSA with the rotating kid-addressed key set where a signing seed is configured
-(production always is, because ``platform.config`` refuses to boot without one), falling back to the
-HS256 development path locally so the suite and a laptop can exercise the journey without key setup.
+This is the *only* place in the platform that mints a token. It signs through the ``auth.signer``
+port (FD-14) — EdDSA under the signer's kid, whatever holds the key (an environment seed today, a
+KMS key once FD-14 is decided) — and never touches key material itself. Production always has a
+signer, because ``platform.config`` refuses to boot without one; locally it falls back to the HS256
+development path so the suite and a laptop can exercise the journey without key setup.
 
 Token lifetimes are short on purpose. Consent can be withdrawn at any moment and the sign-in gate is
 the thing that reads it, so a long-lived token is a window in which a withdrawn consent is still
@@ -17,7 +18,7 @@ import time
 from dataclasses import dataclass
 
 from ....auth.jwt_verifier import sign_eddsa, sign_hs256
-from ....auth.keys import SigningKey
+from ....auth.signer import Signer
 
 # A learner token is short-lived: it is the blast radius of a withdrawn consent.
 LEARNER_TOKEN_TTL_SECONDS = 10 * 60
@@ -50,11 +51,11 @@ class TokenIssuer:
 
     issuer: str
     audience: str
-    signing_key: SigningKey | None = None
+    signer: Signer | None = None
     hs256_secret: str | None = None
 
     def __post_init__(self) -> None:
-        if self.signing_key is None and not self.hs256_secret:
+        if self.signer is None and not self.hs256_secret:
             raise ValueError(
                 "TokenIssuer needs an Ed25519 signing key (production) or an HS256 secret (dev)"
             )
@@ -85,8 +86,8 @@ class TokenIssuer:
         }
         if device_id:
             claims["device_id"] = device_id
-        if self.signing_key is not None:
-            token = sign_eddsa(claims, self.signing_key)
+        if self.signer is not None:
+            token = sign_eddsa(claims, self.signer)
         elif self.hs256_secret:
             # Dev/local only. Unreachable in production: config fails closed without an asymmetric
             # seed, and the verifier refuses HS256 there even if a token were somehow minted.

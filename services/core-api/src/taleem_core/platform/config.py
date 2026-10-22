@@ -71,6 +71,14 @@ class Settings:
     jwt_verification_keys_csv: str = field(
         default_factory=lambda: _get("TALEEM_JWT_VERIFICATION_KEYS", "")
     )
+    # Signer port backend (FD-14): "env" signs with TALEEM_JWT_SIGNING_SEED held in memory (the
+    # only backend that can be built today); "kms" needs a key reference, its public key, and a
+    # provider adapter that does not exist until FD-14 is decided, so it fails closed at startup.
+    signer_backend: str = field(default_factory=lambda: _get("TALEEM_SIGNER_BACKEND", "env"))
+    kms_token_key_ref: str = field(default_factory=lambda: _get("TALEEM_KMS_TOKEN_KEY_REF", ""))
+    kms_token_public_key_hex: str = field(
+        default_factory=lambda: _get("TALEEM_KMS_TOKEN_PUBLIC_KEY", "")
+    )
     jwt_issuer: str = field(default_factory=lambda: _get("TALEEM_JWT_ISSUER", "taleem-identity"))
     jwt_audience: str = field(
         default_factory=lambda: _get("TALEEM_JWT_AUDIENCE", "taleem-core-api")
@@ -165,7 +173,22 @@ def _assert_production_safe(settings: Settings) -> None:
     problems: list[str] = []
     # Production is asymmetric-only (FD-14): require a real Ed25519 signing seed; the HS256 dev path
     # is not used in production, so a lingering default dev secret is not itself the gate.
-    if not settings.has_asymmetric_signing:
+    backend = settings.signer_backend.strip().lower() or "env"
+    if backend == "kms":
+        # The key never leaves the KMS, so there is no seed to check. Startup still fails closed in
+        # build_auth_context until a provider adapter exists (FD-14).
+        if not settings.kms_token_key_ref.strip() or not settings.kms_token_public_key_hex.strip():
+            problems.append(
+                "TALEEM_SIGNER_BACKEND=kms needs TALEEM_KMS_TOKEN_KEY_REF and "
+                "TALEEM_KMS_TOKEN_PUBLIC_KEY"
+            )
+        if settings.has_asymmetric_signing:
+            problems.append(
+                "TALEEM_JWT_SIGNING_SEED must be unset when tokens are signed by a KMS key"
+            )
+    elif backend != "env":
+        problems.append(f"TALEEM_SIGNER_BACKEND={settings.signer_backend!r} is not a known backend")
+    elif not settings.has_asymmetric_signing:
         problems.append(
             "TALEEM_JWT_SIGNING_SEED is unset (production signs tokens asymmetrically, not HS256)"
         )
@@ -177,6 +200,8 @@ def _assert_production_safe(settings: Settings) -> None:
             raw = b""
         if len(raw) != 32:
             problems.append("TALEEM_JWT_SIGNING_SEED must be a 32-byte hex Ed25519 seed")
+        elif seed.lower() == DEFAULT_OFFLINE_SIGNING_SEED:
+            problems.append("TALEEM_JWT_SIGNING_SEED is the well-known development seed")
         elif seed == settings.offline_signing_seed_hex.strip():
             problems.append(
                 "TALEEM_JWT_SIGNING_SEED must differ from the offline-signing seed (key separation)"

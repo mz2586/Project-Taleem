@@ -21,6 +21,7 @@ from typing import Any
 from ..platform import ed25519
 from ..platform.errors import unauthorized
 from .keys import KeySet, SigningKey
+from .signer import EnvSeedSigner, Signer
 
 ALG_HS256 = "HS256"
 ALG_EDDSA = "EdDSA"
@@ -143,13 +144,21 @@ def verify_hs256(
 # --------------------------------------------------------------------------- EdDSA (production)
 
 
-def sign_eddsa(claims: dict[str, object], signing_key: SigningKey) -> str:
-    """Mint an EdDSA (Ed25519) token. The Identity service is the only holder of the seed."""
-    header = {"alg": ALG_EDDSA, "typ": "JWT", "kid": signing_key.kid}
+def sign_eddsa(claims: dict[str, object], signer: Signer | SigningKey) -> str:
+    """Mint an EdDSA (Ed25519) token through the signer port (FD-14).
+
+    The caller never sees key material: the signer returns a signature over the JWS signing input.
+    A bare ``SigningKey`` is accepted for tests and tooling and is wrapped in ``EnvSeedSigner``.
+    """
+    if isinstance(signer, SigningKey):
+        signer = EnvSeedSigner(signer.kid, signer.seed)
+    if signer.algorithm != ALG_EDDSA:
+        raise ValueError(f"unsupported token signing algorithm {signer.algorithm!r}")
+    header = {"alg": ALG_EDDSA, "typ": "JWT", "kid": signer.kid}
     h = _b64url_encode(json.dumps(header, separators=(",", ":")).encode())
     p = _b64url_encode(json.dumps(claims, separators=(",", ":")).encode())
     signing_input = f"{h}.{p}".encode()
-    sig = ed25519.sign(signing_input, signing_key.seed)
+    sig = signer.sign(signing_input)
     return f"{h}.{p}.{_b64url_encode(sig)}"
 
 
