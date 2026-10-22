@@ -14,7 +14,8 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any, Protocol
 
-from .directory import GuardianDirectory, GuardianProfile
+from .directory import GuardianProfile
+from .links import GuardianLinks
 
 _DAY = 86_400.0
 # A learner's server data is "stale" for a guardian if nothing has synced in this window. Pending
@@ -104,7 +105,7 @@ class GuardianService:
 
     def __init__(
         self,
-        directory: GuardianDirectory,
+        directory: GuardianLinks,
         queries: _StudentQueries,
         analytics: _Analytics,
         ai_teacher: _AITeacher,

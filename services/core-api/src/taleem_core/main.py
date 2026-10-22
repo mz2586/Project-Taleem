@@ -43,7 +43,7 @@ from .contexts.curriculum_studio.adapters.persistence import (
 )
 from .contexts.curriculum_studio.application.service import CurriculumStudioService
 from .contexts.guardian.adapters.guardian_api import build_guardian_router
-from .contexts.guardian.application.directory import GuardianDirectory
+from .contexts.guardian.adapters.identity_links import build_guardian_links
 from .contexts.guardian.application.guardian_service import GuardianService
 from .contexts.health.service import Check, HealthService
 from .contexts.identity.adapters.identity_api import build_identity_router
@@ -403,8 +403,13 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(build_ai_teacher_router(ai_teacher, session_service, claims_dependency))
 
     # ---- Guardian Portal: read-only aggregation over the EXISTING learning read models. No new
-    # child-data surfaces; the only new state is the guardian→children association directory.
-    guardian_directory = GuardianDirectory.from_csv(settings.guardian_links_csv)
+    # child-data surfaces. Which children a guardian may see comes from the identity context
+    # (enrolled learners with live consent); the static seed is a dev/demo aid, ignored in prod.
+    guardian_directory = build_guardian_links(
+        identity_service,
+        seed_csv=settings.guardian_links_csv,
+        production=settings.is_production,
+    )
     guardian_service = GuardianService(
         guardian_directory,
         student_queries,  # reuse the same student query surface

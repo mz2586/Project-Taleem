@@ -103,9 +103,9 @@ class Settings:
     kdf_iterations: int = field(
         default_factory=lambda: _get_int("TALEEM_KDF_ITERATIONS", MIN_KDF_ITERATIONS)
     )
-    # Guardian→children associations (the only new state the Guardian Portal adds). Software layer,
-    # not the M-Gov consent flow. Format: "guardianRef=Name:childA,childB;guardianRef2:childC".
-    # Empty in production until the consent workflow populates links; a demo link is seeded in dev.
+    # DEV/DEMO SEED ONLY: static guardian→children links layered under the identity context's real
+    # links (enrolled learners with live consent). Ignored in production, where only consent links.
+    # Format: "guardianRef=Name:childA,childB;guardianRef2:childC".
     guardian_links_csv: str = field(default_factory=lambda: _get("TALEEM_GUARDIAN_LINKS", ""))
     # Header a trusted edge overwrites with the real client address, used to key the public identity
     # routes' rate limit. Without it every request behind a proxy shares one budget. Defaults to

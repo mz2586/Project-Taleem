@@ -6,9 +6,11 @@ info:
     Read-only guardian view of linked children, aggregated from the existing learning read models
     (Student Platform queries, Learning Analytics, AI Teacher plan) — no new child-data surfaces and
     no duplicated logic. Authenticated (bearer JWT), authorized (PDP: the `guardian` role reads its
-    own portal), and IDOR-guarded by the association directory: a guardian may only reach a child it
-    is linked to. A non-linked child is a uniform 403 (no existence disclosure). Guardians never
-    mutate learner state.
+    own portal), and IDOR-guarded by the identity context: a guardian may only reach a learner they
+    enrolled whose live, current-policy consent includes the `learning_data` scope. Withdrawing that
+    consent removes the child from every portal response on the next request. A non-linked child is
+    a uniform 403 (no existence disclosure). Guardians never mutate learner state. A static
+    dev/demo seed (`TALEEM_GUARDIAN_LINKS`) may add demo families outside production only.
   license:
     name: Proprietary — license undecided; see repository LICENSE
 servers:
@@ -124,7 +126,7 @@ components:
         display_name: { type: string }
         children:
           type: array
-          items: { type: string, description: Pseudonymous student ref }
+          items: { type: string, description: Pseudonymous student ref of a consented learner }
         child_count: { type: integer }
     SyncStatus:
       type: object

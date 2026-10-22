@@ -404,6 +404,31 @@ class IdentityService:
         with self._uow() as uow:
             return derive_state(student_ref, uow.consents.history(student_ref))
 
+    def portal_links(self, guardian_ref: str) -> tuple[str, list[str]] | None:
+        """The learners a guardian may see in the Guardian Portal, read for another context.
+
+        Returns ``(guardian display name, student refs)``, or ``None`` when there is no such
+        guardian or the account is suspended. A learner is included only while it belongs to this
+        guardian, is not suspended, and holds live, current-policy consent for ``learning_data`` —
+        the scope under which a progress record exists at all. Withdrawing it removes the child
+        from the portal on the next request; nothing is cached. (``progress_sharing`` governs
+        sharing with a mentor or teacher, not the consenting guardian's own view.) A *locked*
+        learner stays visible: a forgotten PIN is exactly when a guardian needs to see the account.
+        """
+        with self._uow() as uow:
+            account = uow.guardians.get(guardian_ref)
+            if account is None or account.status is AccountStatus.SUSPENDED:
+                return None
+            refs = [
+                learner.student_ref
+                for learner in uow.learners.for_guardian(guardian_ref)
+                if learner.status is not AccountStatus.SUSPENDED
+                and derive_state(
+                    learner.student_ref, uow.consents.history(learner.student_ref)
+                ).allows(ConsentScope.LEARNING_DATA)
+            ]
+        return account.display_name, refs
+
     # --------------------------------------------------------------------------- learner sign-in
 
     def family_roster(self, family_code: str) -> list[dict[str, Any]]:
