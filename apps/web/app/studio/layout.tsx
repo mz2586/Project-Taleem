@@ -1,21 +1,14 @@
-// Curriculum Studio — internal authoring tool chrome (LTR desktop; distinct from the student PWA).
+// Curriculum Studio: the internal authoring and review tool, separate from the student PWA. The
+// chrome follows the interface locale (StudioShell); lesson content inside keeps its own lang/dir.
 import type { ReactNode } from "react";
+
+import { StudioShell } from "./StudioShell";
 
 export const metadata = {
   title: "Curriculum Studio",
-  description: "Internal curriculum authoring platform — no child data.",
+  description: "Internal curriculum authoring and review — no child data.",
 };
 
 export default function StudioLayout({ children }: { children: ReactNode }) {
-  return (
-    <div dir="ltr" style={{ fontFamily: "var(--font-latin)", padding: "var(--space-6)" }}>
-      <header style={{ borderBottom: "1px solid var(--color-border-default)", marginBottom: "var(--space-4)" }}>
-        <strong style={{ color: "var(--color-brand)" }}>Curriculum Studio</strong>
-        <span style={{ color: "var(--color-text-primary)", marginInlineStart: "var(--space-2)" }}>
-          — governance-safe · no child data
-        </span>
-      </header>
-      {children}
-    </div>
-  );
+  return <StudioShell>{children}</StudioShell>;
 }
