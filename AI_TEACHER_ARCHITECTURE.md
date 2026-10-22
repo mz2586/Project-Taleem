@@ -33,8 +33,9 @@ Implementation: `contexts/learning/domain/ai_teacher.py` (pure), `application/ai
 
 - **Templated, not generative.** Every word the teacher emits is authored lesson content (or a fixed
   system phrase). It **cannot invent a fact or source new curriculum** — grounding is structural. The
-  generative tiers (small/frontier model behind the `LLMGateway` port) are a *future* rephrasing layer
-  that never sources curriculum; they are **off for children** and **off offline**.
+  generative tier (behind the `LLMGateway` port) is a rephrasing layer whose plumbing exists (§5) but
+  which has no model connected; it never sources curriculum, is **off by default**, and is **off
+  offline**.
 - **Curriculum-aligned by construction.** The teacher only ever sees a published `LessonView` (the
   Curriculum Studio → learning read-model boundary). Off-curriculum content is unreachable.
 - **Explainable by default.** Every response carries a **rationale** (why this style, why this next
@@ -105,11 +106,56 @@ Contract: `packages/contracts/ai-teacher.openapi.yaml`.
 
 ---
 
-## 5. Where the generative tiers fit (future, gated)
+## 5. Where the generative tier fits (Phase D: built, off, no provider connected)
 
-The Master AI strategy is *Curriculum → Retrieval → small model → safety → frontier LLM*. The AI
-Teacher implements the **curriculum + templated** floor. A generative tier would plug in behind the
-existing `LLMGateway` port to **rephrase** a teacher utterance for a struggling learner — **never to
-source curriculum**, **never for children in the pilot**, and **never offline** (AR-C-06). It would sit
-*after* the guardrail (grounded content in) and *before* delivery (safety-checked rephrase out), and is
-out of scope for Phase 8. The templated tier is the safe, sufficient, explainable teacher for the pilot.
+The Master AI strategy is *Curriculum → Retrieval → small model → safety → frontier LLM*. The
+templated tier above is the floor, and it is what children receive today. Phase D adds the
+**plumbing** for a generative tier that can only **rephrase** the utterances the templated teacher
+already chose. It is not connected to any model.
+
+**Status, stated precisely.**
+
+- **No model is connected anywhere.** Provider selection is blocked on
+  [FD-03](docs/decisions/FD-03-ai-provider-residency.md). `TALEEM_AI_PROVIDER` is unset in every
+  environment, so the composition root wires **no generative tier at all**.
+- A named provider gets `InertProviderGateway` (`ports/llm_inert.py`). It refuses to construct
+  without a name, has no network transport, and refuses every call.
+- The deterministic `StubLLMGateway` exists for tests and the evaluation harness. Production
+  refuses to boot with it.
+
+**Request path** (`application/ai_teacher_service.py`). On `:explain`, the templated response is
+built exactly as before. A rephrase is then attempted only if every check passes, in this order:
+
+1. **Feature flag** `ai_teacher.generative_rephrase` is on. It is off by default, and per-learner
+   rollout is possible. With the flag off nothing else is consulted, and the response is
+   byte-identical to the templated tier (tested).
+2. **Kill switch** is disengaged.
+3. **No escalation** is pending: after repeated failure the learner is handed to a human, not to a
+   model.
+4. **Live `ai_teaching` consent** exists, read from the identity context on every request.
+5. **Per-learner quota** is not exhausted. Usage lives in the `learning.ai_usage_ledger` table on
+   PostgreSQL, with counts and a pseudonymous ref only.
+6. **Grounded prompt** (`domain/ai_teacher_gate.py`). It is built only from published `LessonView`
+   fields, each with its field path. It never includes answer options, learner refs or learner
+   state. If no grounding can be established, the model is not called.
+7. **Safety gate** on the output. It checks grounding, answer leak, age band, disallowed content
+   and locale. The rules are in [AI_TEACHER_SAFETY_MODEL.md](AI_TEACHER_SAFETY_MODEL.md) §9.
+
+Every check fails closed. Any failure serves the authored response unchanged, with no error and no
+weaker path. An accepted rephrase is returned only in a separate `generation` block, marked
+`generated: true` and `verified: false`. It carries `grounded_on` provenance and a `notice_key` the
+client must display. The verified `utterances` are never altered. There is still **no generation
+offline**: the capability matrix reports `disabled_offline`, and the tier runs server-side only.
+
+**What this does not establish.** The gate has been evaluated only against scripted stub outputs
+([AI_TEACHER_EVALUATION.md](AI_TEACHER_EVALUATION.md) §8). It is lexical, and it has a known gap: a
+misstatement built entirely from grounded words passes. Enabling the tier for children requires all
+of the following:
+
+- the FD-03 approvals;
+- a real-model red-team;
+- a semantic grounding check;
+- independent safety review;
+- transcript review.
+
+None of these exist yet.
