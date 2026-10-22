@@ -509,16 +509,14 @@ class Journey:
             check=_problem_code("CONSENT_REQUIRED"),
         )
         self.step(
-            "child's next request with the still-unexpired access token",
+            "child's next request with the still-unexpired access token is refused",
             "POST",
             "/v1/learning/sessions",
-            expect=(401, 403),
+            expect=403,
             token=child_token,
             body={"student_ref": student_ref},
-            gap=(
-                "learner access tokens are not consent-checked per request; withdrawal takes "
-                "effect at the next refresh (access token TTL bounds the window)"
-            ),
+            # Learner tokens are consent-checked on every request: withdrawal is immediate.
+            check=_problem_code("CONSENT_REQUIRED"),
         )
         audit = self.step(
             "guardian reads the audit trail",

@@ -30,6 +30,12 @@ from . import __version__
 from .auth import pdp
 from .auth.dependencies import bearer_claims_from, require_owner_or
 from .auth.jwt_verifier import Claims
+from .auth.learner_gate import (
+    IdentityLearnerGate,
+    LearnerRefusedError,
+    learner_permission_dependency,
+    refusal_problem,
+)
 from .auth.setup import build_auth_context
 from .contexts.curriculum_studio.adapters.api import build_studio_router
 from .contexts.curriculum_studio.adapters.persistence import (
@@ -94,7 +100,6 @@ from .contexts.ops.adapters.persistence.base import (
     create_ops_session_factory,
 )
 from .contexts.ops.adapters.persistence.kill_switch_store import SqlKillSwitchState
-from .contexts.sync.consent_gate import IdentitySyncGate, SyncRefusedError
 from .contexts.sync.domain import DeltaType, SyncDelta, SyncStore
 from .contexts.sync.service import DurableSyncCoordinator
 from .platform import correlation
@@ -279,6 +284,23 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         )
     )
 
+    # ---- Per-request learner permission gate (child safety; e2e GAP 2) ----
+    # A learner's access token outlives a consent withdrawal or a suspension by up to its TTL. So
+    # every route a student token can call that reads or writes learning data re-checks the learner
+    # against LIVE identity state on every request (no cache): learning, student read models, the
+    # AI teacher, offline packages — and every learner a sync batch writes for. Production also
+    # refuses learners with no identity account (dev/test HS256 tokens may name synthetic learners).
+    def _learner_lookup(student_ref: str) -> Any:
+        with SqlIdentityUnitOfWork(identity_sf) as uow:
+            return uow.learners.get(student_ref)
+
+    learner_gate = IdentityLearnerGate(
+        identity_service.consent_state_for,
+        _learner_lookup,
+        require_enrolled=settings.is_production,
+    )
+    learner_permitted = [Depends(learner_permission_dependency(learner_gate, claims_dependency))]
+
     # ---- Curriculum Studio (CTO H2: SQL-backed, request-scoped Unit of Work) ----
     def studio_service_provider() -> Iterator[CurriculumStudioService]:
         with unit_of_work(studio_sf) as uow:
@@ -318,18 +340,24 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         analytics=LearningAnalytics(learning_uow),
         curriculum=read_model,
     )
-    app.include_router(build_learning_router(learning_deps, claims_dependency))
+    app.include_router(
+        build_learning_router(learning_deps, claims_dependency), dependencies=learner_permitted
+    )
 
     # ---- Student query surface (derived read models: homework, reviews, history, …) ----
     student_queries = StudentQueryService(learning_uow, read_model, time.time)
-    app.include_router(build_student_router(student_queries, claims_dependency))
+    app.include_router(
+        build_student_router(student_queries, claims_dependency), dependencies=learner_permitted
+    )
 
     # ---- Offline lesson packages (Phase 6.2A: content-hashed; 6.2C-1: Ed25519-signed) ----
     package_signer = Ed25519PackageSigner(
         settings.offline_signing_seed_hex, settings.offline_signing_key_id
     )
     offline_service = OfflinePackageService(read_model, time.time, signer=package_signer)
-    app.include_router(build_offline_router(offline_service, claims_dependency))
+    app.include_router(
+        build_offline_router(offline_service, claims_dependency), dependencies=learner_permitted
+    )
 
     # ---- Durable offline sync (Phase 6.2B) ----
     # attempt.submitted deltas record durable AssessmentEvidence idempotently (gap G3); other
@@ -339,20 +367,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         learning_uow, read_model, BKTEstimator(), HalfLifeForgettingModel(), time.time
     )
 
-    # Child-safety gate: every learner a batch writes for is re-checked against LIVE identity state
-    # (account active + current consent), so a withdrawn consent or a suspension stops sync on the
-    # next batch, not when a cached access token expires. Production also refuses learners with no
-    # identity account (dev/test HS256 tokens may name synthetic learners).
-    def _learner_lookup(student_ref: str) -> Any:
-        with SqlIdentityUnitOfWork(identity_sf) as uow:
-            return uow.learners.get(student_ref)
-
-    sync_gate = IdentitySyncGate(
-        identity_service.consent_state_for,
-        _learner_lookup,
-        require_enrolled=settings.is_production,
-    )
-    sync_coordinator = DurableSyncCoordinator(sync_store, sync_consumer, sync_gate)
+    # The same learner gate: every learner a batch writes for (a student caller, and each attempt's
+    # student_ref — which also covers operator tokens) is re-checked before anything is applied.
+    sync_coordinator = DurableSyncCoordinator(sync_store, sync_consumer, learner_gate)
 
     # ---- AI Teacher (Phase 8): templated, curriculum-grounded, explainable ----
     # Phase D generative tier: OFF unless the `ai_teacher.generative_rephrase` flag is enabled, and
@@ -400,7 +417,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         time.time,
         generative=generative,
     )
-    app.include_router(build_ai_teacher_router(ai_teacher, session_service, claims_dependency))
+    # Router-level wiring: the AI teacher router itself is untouched (owned elsewhere).
+    app.include_router(
+        build_ai_teacher_router(ai_teacher, session_service, claims_dependency),
+        dependencies=learner_permitted,
+    )
 
     # ---- Guardian Portal: read-only aggregation over the EXISTING learning read models. No new
     # child-data surfaces. Which children a guardian may see comes from the identity context
@@ -579,15 +600,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         acting_learner = claims.sub if claims.role == "student" else None
         try:
             results, cursor = sync_coordinator.apply_batch(deltas, acting_learner=acting_learner)
-        except SyncRefusedError as exc:
+        except LearnerRefusedError as exc:
             # Nothing was applied. The client holds the batch (never deletes it) until the
-            # learner's session changes; the code tells it why. No student_ref in the detail.
-            raise Problem(
-                403,
-                exc.code,
-                "Learner may not sync",
-                "this learner's consent or account status does not permit recording learning data",
-            ) from exc
+            # learner's session changes; the code tells it why. No student_ref in the body.
+            raise refusal_problem(exc.code) from exc
         return {
             "cursor": cursor,
             "results": [
