@@ -29,11 +29,21 @@ def to_jsonable(value: Any) -> Any:
         return {f.name: to_jsonable(getattr(value, f.name)) for f in dataclasses.fields(value)}
     if isinstance(value, Enum):
         return value.value
+    if isinstance(value, str) and type(value) is not str:
+        return str.__str__(value)
     if isinstance(value, dict):
-        return {(k.value if isinstance(k, Enum) else k): to_jsonable(v) for k, v in value.items()}
+        return {_jsonable_key(k): to_jsonable(v) for k, v in value.items()}
     if isinstance(value, (list, tuple)):
         return [to_jsonable(v) for v in value]
     return value
+
+
+def _jsonable_key(key: Any) -> Any:
+    if isinstance(key, Enum):
+        return key.value
+    if isinstance(key, str):
+        return str.__str__(key)  # plain str for str value types such as ``Locale``
+    return key
 
 
 def _is_optional(tp: Any) -> tuple[bool, Any]:
@@ -57,6 +67,10 @@ def _coerce(tp: Any, value: Any) -> Any:
         return build(tp, value)
 
     if isinstance(tp, type) and issubclass(tp, Enum):
+        return tp(value)
+
+    # Validated ``str`` value types (e.g. ``Locale``): rebuild so the tag is re-validated on load.
+    if isinstance(tp, type) and issubclass(tp, str) and tp is not str:
         return tp(value)
 
     origin = get_origin(tp)

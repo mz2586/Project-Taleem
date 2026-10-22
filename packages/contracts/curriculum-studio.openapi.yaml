@@ -18,10 +18,31 @@ paths:
     get:
       tags: [curriculum-studio]
       operationId: getHierarchy
-      summary: NCP education-system hierarchy (grades × subjects)
+      summary: A curriculum pack's hierarchy (grades × subjects); defaults to PK-NCP
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: pack
+          in: query
+          required: false
+          description: Curriculum pack id (default PK-NCP).
+          schema: { type: string, default: PK-NCP, minLength: 1, maxLength: 64 }
+      responses:
+        "200": { description: Hierarchy, content: { application/json: { schema: { $ref: "#/components/schemas/Hierarchy" } } } }
+        "404": { description: Unknown curriculum pack, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "429": { description: Rate limited, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/studio/curriculum-packs:
+    get:
+      tags: [curriculum-studio]
+      operationId: listCurriculumPacks
+      summary: List the curriculum packs lessons can be authored against (read-only)
+      description: >-
+        A pack describes a curriculum region / education system and the instructional locales it
+        supports, independent of any interface language. Listing a pack is not a claim that its
+        curriculum is supported for learners.
       security: [{ bearerAuth: [] }]
       responses:
-        "200": { description: Hierarchy }
+        "200": { description: Packs, content: { application/json: { schema: { $ref: "#/components/schemas/CurriculumPackList" } } } }
         "429": { description: Rate limited, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
   /v1/studio/lessons:
@@ -148,6 +169,8 @@ components:
         title: { type: object, additionalProperties: { type: string } }
         grade: { type: string }
         subject: { type: string }
+        curriculum_pack: { type: string }
+        instructional_locales: { type: array, items: { type: string } }
         state: { type: string, enum: [draft, in_review, subject_expert, educational_qa, accessibility, language, ai_safety, approved, published, archived] }
         version: { type: integer }
         learning_outcomes: { type: array, items: { type: string } }
@@ -159,6 +182,34 @@ components:
               gate: { type: string }
               passed: { type: boolean }
               mode: { type: string, enum: [auto, human] }
+    Hierarchy:
+      type: object
+      properties:
+        system: { type: string }
+        version: { type: string }
+        grades: { type: array, items: { type: string } }
+        subjects_by_grade: { type: object, additionalProperties: { type: array, items: { type: string } } }
+    CurriculumPackSummary:
+      type: object
+      properties:
+        pack_id: { type: string }
+        version: { type: string }
+        country: { type: string, description: ISO 3166-1 alpha-2 }
+        education_system: { type: string }
+        language_of_instruction: { type: string }
+        instructional_locales: { type: array, items: { type: string } }
+        locales:
+          type: array
+          items:
+            type: object
+            properties:
+              tag: { type: string }
+              name: { type: string }
+              direction: { type: string, enum: [ltr, rtl] }
+    CurriculumPackList:
+      type: object
+      properties:
+        packs: { type: array, items: { $ref: "#/components/schemas/CurriculumPackSummary" } }
     ProvenanceIn:
       type: object
       properties:
@@ -186,6 +237,11 @@ components:
         title_en: { type: string }
         grade: { type: string }
         subject: { type: string }
+        curriculum_pack: { type: string, default: PK-NCP, minLength: 1, maxLength: 64 }
+        instructional_locales:
+          type: array
+          description: BCP-47-style tags; empty = the pack's language of instruction.
+          items: { type: string }
         learning_outcomes: { type: array, items: { type: string } }
         provenance: { $ref: "#/components/schemas/ProvenanceIn" }
         ai_teaching: { $ref: "#/components/schemas/AITeachingIn" }

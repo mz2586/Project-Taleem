@@ -9,6 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 from .content import LocalizedText
+from .packs import default_pack
 
 
 @dataclass
@@ -37,7 +38,7 @@ class Subject:
 @dataclass
 class Grade:
     grade_id: str
-    key: str  # KG, G1..G10
+    key: str  # a grade key of the education system's curriculum pack (PK-NCP: KG, G1..G10)
     subjects: list[Subject] = field(default_factory=list)
 
 
@@ -49,46 +50,22 @@ class EducationSystem:
     grades: list[Grade] = field(default_factory=list)
 
 
-# The canonical NCP grade keys and the verified subject roster per grade band
-# (see curriculum-research/02_MASTER_CURRICULUM_MATRIX.md). Roster is data, not hardcoded.
-GRADE_KEYS: tuple[str, ...] = ("KG", "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10")
-
-SUBJECT_ROSTER: dict[str, tuple[str, ...]] = {
-    "KG": ("ece",),
-    "G1": ("urdu", "english", "math", "gk"),
-    "G2": ("urdu", "english", "math", "gk"),
-    "G3": ("urdu", "english", "math", "gk", "islamiat_ethics"),
-    "G4": ("urdu", "english", "math", "science", "social_studies", "islamiat_ethics"),
-    "G5": ("urdu", "english", "math", "science", "social_studies", "islamiat_ethics"),
-    "G6": ("urdu", "english", "math", "science", "social_studies", "islamiat_ethics", "computer"),
-    "G7": ("urdu", "english", "math", "science", "social_studies", "islamiat_ethics", "computer"),
-    "G8": ("urdu", "english", "math", "science", "social_studies", "islamiat_ethics", "computer"),
-    "G9": (
-        "urdu",
-        "english",
-        "math",
-        "physics",
-        "chemistry",
-        "biology",
-        "pak_studies",
-        "islamiat_ethics",
-    ),
-    "G10": (
-        "urdu",
-        "english",
-        "math",
-        "physics",
-        "chemistry",
-        "biology",
-        "pak_studies",
-        "islamiat_ethics",
-    ),
-}
+# Grade structures and subject rosters are curriculum-pack data (packs.py, packs/*.json), not
+# constants. These helpers keep the original API by delegating to the default pack (PK-NCP).
 
 
 def subjects_for(grade_key: str) -> tuple[str, ...]:
-    return SUBJECT_ROSTER.get(grade_key, ())
+    return default_pack().subjects_for(grade_key)
 
 
 def is_valid_grade_subject(grade_key: str, subject_key: str) -> bool:
-    return subject_key in SUBJECT_ROSTER.get(grade_key, ())
+    return default_pack().is_valid_grade_subject(grade_key, subject_key)
+
+
+def __getattr__(name: str) -> object:
+    # Lazy compatibility for the former module constants (now the default pack's data).
+    if name == "GRADE_KEYS":
+        return default_pack().grade_keys
+    if name == "SUBJECT_ROSTER":
+        return dict(default_pack().subject_roster)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")

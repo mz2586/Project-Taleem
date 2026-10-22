@@ -24,6 +24,7 @@ from .content import (
     VocabularyTerm,
     WorkedExample,
 )
+from .packs import DEFAULT_PACK_ID
 from .provenance import Provenance
 from .quality import GateResult
 from .versioning import VersionHistory
@@ -32,11 +33,17 @@ from .workflow import Workflow
 
 @dataclass
 class Metadata:
-    grade_key: str  # KG..G10
-    subject_key: str  # math, urdu, ...
+    grade_key: str  # a grade key of the lesson's curriculum pack (PK-NCP: KG..G10)
+    subject_key: str  # a subject in that pack's roster for the grade (math, urdu, ...)
     languages: list[Locale] = field(default_factory=lambda: [Locale.UR, Locale.EN])
     author_role: str = "subject_author"
     tags: list[str] = field(default_factory=list)
+    # The curriculum pack whose rules govern this lesson (packs.py). Defaults to PK-NCP so lessons
+    # persisted before packs existed (no key in the stored body) load unchanged.
+    curriculum_pack: str = DEFAULT_PACK_ID
+    # The instructional locale(s) the lesson is taught in; empty = the pack's language of
+    # instruction. Independent of any user's interface language.
+    instructional_locales: list[Locale] = field(default_factory=list)
 
 
 @dataclass
@@ -95,5 +102,13 @@ class Lesson:
         payload = self.to_dict()
         for k in ("workflow", "quality_gate_results", "version", "version_history"):
             payload.pop(k, None)
+        # Pack fields at their defaults are omitted so a PK-NCP lesson hashes exactly as it did
+        # before packs existed (published-version hashes stay comparable); any non-default value
+        # is content and is hashed.
+        meta = payload.get("metadata", {})
+        if meta.get("curriculum_pack") == DEFAULT_PACK_ID:
+            meta.pop("curriculum_pack")
+        if not meta.get("instructional_locales"):
+            meta.pop("instructional_locales", None)
         blob = json.dumps(payload, default=str, sort_keys=True, ensure_ascii=False)
         return "sha256:" + hashlib.sha256(blob.encode("utf-8")).hexdigest()

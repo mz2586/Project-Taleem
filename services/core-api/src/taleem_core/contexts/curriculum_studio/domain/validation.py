@@ -2,6 +2,11 @@
 
 Runs on `:validate` before human review, so reviewers see complete, clean
 lessons. See docs/10-curriculum-studio/QUALITY_ASSURANCE_STANDARD.md §2 and LESSON_STANDARD.md §2.
+
+Every market-specific rule — valid grade/subject, which locales a core field must be complete in,
+which need recorded audio, and readability limits — comes from the lesson's curriculum pack and
+instructional locale(s) (packs.py). A lesson whose pack or instructional locale cannot be resolved
+gets BLOCKER findings in every pack-dependent check: an unknown rule set never passes silently.
 """
 
 from __future__ import annotations
@@ -9,26 +14,19 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-from .content import Difficulty, Locale
-from .hierarchy import is_valid_grade_subject
+from .content import Difficulty, LocalizedText
 from .lesson import Lesson
+from .packs import CurriculumPack, InstructionRules, PackRegistry, default_pack, default_registry
 from .provenance import check_provenance
 from .quality import Finding, Gate, GateResult, Severity
 
-# Readability: max average words/sentence by grade band (CONTENT_STYLE_GUIDE §2).
-READABILITY_MAX_WORDS: dict[str, int] = {
-    "KG": 8,
-    "G1": 8,
-    "G2": 8,
-    "G3": 8,
-    "G4": 12,
-    "G5": 12,
-    "G6": 16,
-    "G7": 16,
-    "G8": 16,
-    "G9": 20,
-    "G10": 20,
-}
+
+def __getattr__(name: str) -> object:
+    # Lazy compatibility: readability limits are now curriculum-pack data (PK-NCP, Urdu).
+    if name == "READABILITY_MAX_WORDS":
+        return dict(default_pack().readability[default_pack().language_of_instruction].max_words)
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
 
 _SENTENCE_SPLIT = re.compile(r"[.!?۔]+")
 
@@ -57,20 +55,54 @@ def _blk(msg: str, field_name: str = "") -> Finding:
     return Finding(Severity.BLOCKER, msg, field_name)
 
 
-def _structural_findings(lesson: Lesson) -> list[Finding]:
+@dataclass(frozen=True)
+class _PackContext:
+    """The lesson's resolved pack + effective instruction rules (``rules`` None = unresolved)."""
+
+    pack: CurriculumPack | None
+    rules: InstructionRules | None
+    error: str = ""
+
+    def unresolved(self) -> str:
+        return f"{self.error}: pack rules cannot be applied (blocked)"
+
+    def required_names(self) -> str:
+        if self.pack is None or self.rules is None:
+            return ""
+        return " + ".join(self.pack.locale_name(t) for t in self.rules.required_locales)
+
+
+def _resolve(lesson: Lesson, registry: PackRegistry) -> _PackContext:
+    pack_id = lesson.metadata.curriculum_pack
+    pack = registry.get(pack_id)
+    if pack is None:
+        return _PackContext(None, None, f"unknown curriculum pack {pack_id!r}")
+    declared = lesson.metadata.instructional_locales
+    unknown = [str(t) for t in declared if t not in pack.instructional_locales]
+    if unknown:
+        msg = f"instructional locale(s) {unknown} not offered by curriculum pack {pack_id}"
+        return _PackContext(pack, None, msg)
+    return _PackContext(pack, pack.rules_for(lesson.metadata.instructional_locales))
+
+
+def _structural_findings(lesson: Lesson, ctx: _PackContext) -> list[Finding]:
     f: list[Finding] = []
-    if not lesson.title.is_complete_core():
-        f.append(_blk("title requires Urdu + English", "title"))
+    if ctx.rules is None:
+        f.append(_blk(ctx.unresolved(), "metadata"))
+
+    def complete(name: str, text: LocalizedText) -> None:
+        if ctx.rules is not None and not text.is_complete_in(ctx.rules.required_locales):
+            f.append(_blk(f"{name} requires {ctx.required_names()}", name))
+
+    complete("title", lesson.title)
     if not lesson.learning_outcomes:
         f.append(_blk("at least one learning outcome (SLO) required", "learning_outcomes"))
     if not 5 <= lesson.estimated_duration_min <= 40:
         f.append(_blk("estimated_duration_min must be 5-40", "estimated_duration_min"))
     if not lesson.keywords:
         f.append(_blk("keywords required", "keywords"))
-    if not lesson.student_explanation.is_complete_core():
-        f.append(_blk("student_explanation requires Urdu + English", "student_explanation"))
-    if not lesson.teacher_script.is_complete_core():
-        f.append(_blk("teacher_script requires Urdu + English", "teacher_script"))
+    complete("student_explanation", lesson.student_explanation)
+    complete("teacher_script", lesson.teacher_script)
     if lesson.difficulty is not Difficulty.INTRO and not lesson.worked_examples:
         f.append(_blk("worked_examples required for developing+", "worked_examples"))
     if not lesson.visual_concepts:
@@ -94,8 +126,7 @@ def _structural_findings(lesson: Lesson) -> list[Finding]:
         "mentor_notes",
         "accessibility_notes",
     ):
-        if not getattr(lesson, name).is_complete_core():
-            f.append(_blk(f"{name} requires Urdu + English", name))
+        complete(name, getattr(lesson, name))
     if not lesson.offline_package.strip():
         f.append(_blk("offline_package required", "offline_package"))
     # Provenance gate.
@@ -112,14 +143,27 @@ def _gate(gate: Gate, findings: list[Finding]) -> GateResult:
     return GateResult(gate=gate, passed=not findings, mode="auto", findings=findings)
 
 
-def _alignment_gate(lesson: Lesson) -> GateResult:
+def _alignment_gate(lesson: Lesson, ctx: _PackContext) -> GateResult:
     f: list[Finding] = []
-    if not is_valid_grade_subject(lesson.metadata.grade_key, lesson.metadata.subject_key):
+    if ctx.pack is None or ctx.rules is None:
+        f.append(_blk(ctx.unresolved()))
+    if ctx.pack is not None and not ctx.pack.is_valid_grade_subject(
+        lesson.metadata.grade_key, lesson.metadata.subject_key
+    ):
         f.append(
             _blk(
                 f"invalid grade-subject: {lesson.metadata.grade_key}/{lesson.metadata.subject_key}"
             )
         )
+    if ctx.pack is not None:
+        foreign = [str(t) for t in lesson.metadata.languages if not ctx.pack.supports_locale(t)]
+        if foreign:
+            f.append(
+                _blk(
+                    f"language(s) {foreign} not declared by curriculum pack {ctx.pack.pack_id}",
+                    "metadata",
+                )
+            )
     if any(not code.strip() for code in lesson.learning_outcomes):
         f.append(_blk("every learning outcome needs a non-empty standard_code"))
     overlap = set(lesson.prerequisites) & set(lesson.learning_outcomes)
@@ -128,27 +172,38 @@ def _alignment_gate(lesson: Lesson) -> GateResult:
     return _gate(Gate.CURRICULUM_ALIGNMENT, f)
 
 
-def _accessibility_gate(lesson: Lesson) -> GateResult:
+def _accessibility_gate(lesson: Lesson, ctx: _PackContext) -> GateResult:
     f: list[Finding] = []
     for i, mv in enumerate(lesson.visual_concepts):
         if not any(v.strip() for v in mv.alt_text.text.values()):
             f.append(_blk(f"visual concept {i} missing alt text", "visual_concepts"))
-    if not lesson.student_explanation.has_urdu_audio():
-        f.append(
-            _blk(
-                "student_explanation missing recorded Urdu audio (mandatory)", "student_explanation"
-            )
-        )
+    if ctx.pack is None or ctx.rules is None:
+        f.append(_blk(ctx.unresolved(), "student_explanation"))
+    else:
+        for loc in ctx.rules.audio_required_locales:
+            if not lesson.student_explanation.has_audio(loc):
+                name = ctx.pack.locale_name(loc)
+                f.append(
+                    _blk(
+                        f"student_explanation missing recorded {name} audio (mandatory)",
+                        "student_explanation",
+                    )
+                )
     return _gate(Gate.ACCESSIBILITY, f)
 
 
-def _readability_gate(lesson: Lesson) -> GateResult:
+def _readability_gate(lesson: Lesson, ctx: _PackContext) -> GateResult:
     f: list[Finding] = []
-    max_words = READABILITY_MAX_WORDS.get(lesson.metadata.grade_key, 20)
-    ur = lesson.student_explanation.text.get(Locale.UR, "")
-    avg = _avg_words_per_sentence(ur)
-    if avg > max_words:
-        f.append(_blk(f"avg sentence length {avg:.1f} exceeds grade max {max_words}"))
+    if ctx.pack is None or ctx.rules is None:
+        f.append(_blk(ctx.unresolved()))
+        return _gate(Gate.READABILITY, f)
+    several = len(ctx.rules.readability_locales) > 1
+    for loc in ctx.rules.readability_locales:
+        max_words = ctx.pack.readability[loc].for_grade(lesson.metadata.grade_key)
+        avg = _avg_words_per_sentence(lesson.student_explanation.text.get(loc, ""))
+        if avg > max_words:
+            where = f" ({ctx.pack.locale_name(loc)})" if several else ""
+            f.append(_blk(f"avg sentence length {avg:.1f} exceeds grade max {max_words}{where}"))
     return _gate(Gate.READABILITY, f)
 
 
@@ -159,14 +214,15 @@ def _performance_gate(lesson: Lesson) -> GateResult:
     return _gate(Gate.PERFORMANCE, f)
 
 
-def validate(lesson: Lesson) -> ValidationResult:
-    """Run structural + provenance + automated gate pre-checks."""
+def validate(lesson: Lesson, registry: PackRegistry | None = None) -> ValidationResult:
+    """Run structural + provenance + automated gate pre-checks under the lesson's pack rules."""
+    ctx = _resolve(lesson, registry if registry is not None else default_registry())
     return ValidationResult(
-        structural=_structural_findings(lesson),
+        structural=_structural_findings(lesson, ctx),
         gate_results=[
-            _alignment_gate(lesson),
-            _accessibility_gate(lesson),
-            _readability_gate(lesson),
+            _alignment_gate(lesson, ctx),
+            _accessibility_gate(lesson, ctx),
+            _readability_gate(lesson, ctx),
             _performance_gate(lesson),
         ],
     )

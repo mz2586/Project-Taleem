@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "pack_id": "PK-NCP",
+  "version": "1.0.0",
+  "country": "PK",
+  "education_system": "Pakistan National Curriculum (NCP)",
+  "grades": ["KG", "G1", "G2", "G3", "G4", "G5", "G6", "G7", "G8", "G9", "G10"],
+  "subject_roster": {
+    "KG": ["ece"],
+    "G1": ["urdu", "english", "math", "gk"],
+    "G2": ["urdu", "english", "math", "gk"],
+    "G3": ["urdu", "english", "math", "gk", "islamiat_ethics"],
+    "G4": ["urdu", "english", "math", "science", "social_studies", "islamiat_ethics"],
+    "G5": ["urdu", "english", "math", "science", "social_studies", "islamiat_ethics"],
+    "G6": ["urdu", "english", "math", "science", "social_studies", "islamiat_ethics", "computer"],
+    "G7": ["urdu", "english", "math", "science", "social_studies", "islamiat_ethics", "computer"],
+    "G8": ["urdu", "english", "math", "science", "social_studies", "islamiat_ethics", "computer"],
+    "G9": [
+      "urdu", "english", "math", "physics", "chemistry", "biology", "pak_studies", "islamiat_ethics"
+    ],
+    "G10": [
+      "urdu", "english", "math", "physics", "chemistry", "biology", "pak_studies", "islamiat_ethics"
+    ]
+  },
+  "academic_calendar": {
+    "year_start_month": 4,
+    "terms": [
+      { "key": "term-1", "name": "First term" },
+      { "key": "term-2", "name": "Second term" }
+    ],
+    "notes": "Descriptive only, not enforced. Provincial and school calendars vary; not validated."
+  },
+  "language_of_instruction": "ur",
+  "default_numeral_system": "western",
+  "locales": {
+    "ur": { "name": "Urdu", "direction": "rtl" },
+    "en": { "name": "English", "direction": "ltr" }
+  },
+  "instructional_locales": {
+    "ur": {
+      "required_locales": ["ur", "en"],
+      "audio_required_locales": ["ur"],
+      "readability_locales": ["ur"]
+    },
+    "en": {
+      "required_locales": ["ur", "en"],
+      "audio_required_locales": ["ur", "en"],
+      "readability_locales": ["ur", "en"]
+    }
+  },
+  "readability": {
+    "ur": {
+      "max_words_per_sentence": {
+        "KG": 8, "G1": 8, "G2": 8, "G3": 8, "G4": 12, "G5": 12,
+        "G6": 16, "G7": 16, "G8": 16, "G9": 20, "G10": 20
+      },
+      "default_max_words": 20
+    },
+    "en": {
+      "max_words_per_sentence": {
+        "KG": 8, "G1": 8, "G2": 8, "G3": 8, "G4": 12, "G5": 12,
+        "G6": 16, "G7": 16, "G8": 16, "G9": 20, "G10": 20
+      },
+      "default_max_words": 20
+    }
+  }
+}

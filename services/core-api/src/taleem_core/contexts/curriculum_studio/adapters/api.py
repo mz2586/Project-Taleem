@@ -9,7 +9,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, Query
 from pydantic import BaseModel, Field
 
 from ....auth.dependencies import authorize
@@ -20,8 +20,8 @@ from ..application.service import CurriculumStudioService, StudioError
 from ..domain.ai_teaching import AITeachingObject
 from ..domain.assessment import AssessmentBlueprint
 from ..domain.content import Locale, LocalizedText
-from ..domain.hierarchy import GRADE_KEYS, SUBJECT_ROSTER
 from ..domain.lesson import Lesson, Metadata
+from ..domain.packs import DEFAULT_PACK_ID, default_registry
 from ..domain.provenance import Derivation, Provenance
 from ..domain.workflow import ReviewAction
 
@@ -50,6 +50,10 @@ class LessonDraftIn(BaseModel):
     title_en: str = Field(min_length=1)
     grade: str
     subject: str
+    # The curriculum pack and instructional locale(s) the lesson is authored against; validated by
+    # the gates (an unknown pack/locale is a BLOCKER finding, not a silent pass).
+    curriculum_pack: str = Field(default=DEFAULT_PACK_ID, min_length=1, max_length=64)
+    instructional_locales: list[str] = Field(default_factory=list)
     learning_outcomes: list[str] = Field(default_factory=list)
     provenance: ProvenanceIn = Field(default_factory=ProvenanceIn)
     ai_teaching: AITeachingIn = Field(default_factory=AITeachingIn)
@@ -74,10 +78,20 @@ class RollbackIn(BaseModel):
 
 
 def _draft_to_lesson(d: LessonDraftIn, author_role: str) -> Lesson:
+    try:
+        instructional = [Locale(t) for t in d.instructional_locales]
+    except ValueError as exc:
+        raise Problem(422, "BAD_LOCALE", "Invalid locale tag", str(exc)) from exc
     return Lesson(
         lesson_id=d.lesson_id,
         title=LocalizedText(text={Locale.UR: d.title_ur, Locale.EN: d.title_en}),
-        metadata=Metadata(grade_key=d.grade, subject_key=d.subject, author_role=author_role),
+        metadata=Metadata(
+            grade_key=d.grade,
+            subject_key=d.subject,
+            author_role=author_role,
+            curriculum_pack=d.curriculum_pack,
+            instructional_locales=instructional,
+        ),
         provenance=Provenance(
             derivation=Derivation(d.provenance.derivation),
             source=d.provenance.source,
@@ -102,9 +116,11 @@ def _draft_to_lesson(d: LessonDraftIn, author_role: str) -> Lesson:
 def _lesson_view(lesson: Lesson) -> dict[str, Any]:
     return {
         "lesson_id": lesson.lesson_id,
-        "title": {k.value: v for k, v in lesson.title.text.items()},
+        "title": {str.__str__(k): v for k, v in lesson.title.text.items()},
         "grade": lesson.metadata.grade_key,
         "subject": lesson.metadata.subject_key,
+        "curriculum_pack": lesson.metadata.curriculum_pack,
+        "instructional_locales": [str.__str__(t) for t in lesson.metadata.instructional_locales],
         "state": lesson.workflow.state.value,
         "version": lesson.version,
         "learning_outcomes": lesson.learning_outcomes,
@@ -143,13 +159,27 @@ def build_studio_router(
             raise conflict("this lesson was modified concurrently; reload and retry") from exc
 
     @router.get("/hierarchy")
-    def hierarchy(claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
+    def hierarchy(
+        pack: str = Query(default=DEFAULT_PACK_ID, min_length=1, max_length=64),
+        claims: Claims = Depends(claims_dependency),
+    ) -> dict[str, Any]:
         authorize(claims, "read", RESOURCE)
+        found = default_registry().get(pack)
+        if found is None:
+            raise not_found(f"curriculum pack {pack}")
         return {
-            "system": "PK-NCP",
-            "grades": GRADE_KEYS,
-            "subjects_by_grade": {g: list(s) for g, s in SUBJECT_ROSTER.items()},
+            "system": found.pack_id,
+            "version": found.version,
+            "grades": list(found.grade_keys),
+            "subjects_by_grade": {g: list(s) for g, s in found.subject_roster.items()},
         }
+
+    @router.get("/curriculum-packs")
+    def curriculum_packs(claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
+        # Read-only: the packs the studio can author against. Listing a pack is not a claim that
+        # its curriculum is supported for learners.
+        authorize(claims, "read", RESOURCE)
+        return {"packs": [p.summary() for p in default_registry().packs()]}
 
     @router.get("/lessons")
     def list_lessons(
