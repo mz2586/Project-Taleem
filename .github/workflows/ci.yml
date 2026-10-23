@@ -22,8 +22,8 @@ jobs:
       run:
         working-directory: services/core-api
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Install dev deps
@@ -67,8 +67,8 @@ jobs:
     env:
       CS_DATABASE_URL: postgresql+psycopg://postgres:ci@localhost:5432/taleem
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Install dev deps
@@ -116,8 +116,8 @@ jobs:
       E2E_STRICT: "1"
       E2E_OUT_DIR: ${{ github.workspace }}/e2e-evidence
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - name: Install core-api (runtime + dev)
@@ -141,7 +141,7 @@ jobs:
         run: ./scripts/db_backup_restore_drill.sh | tee "$E2E_OUT_DIR/backup-drill.txt"
       - name: Upload journey transcripts + drill report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: e2e-evidence
           path: e2e-evidence/
@@ -151,7 +151,7 @@ jobs:
     name: Alert rules (promtool)
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       # check rules + check config + unit tests of every alert against synthetic series. promtool
       # is the pinned Prometheus 2.53.2 release, sha256-verified by the script.
       - name: promtool check + test infra/monitoring/alerts.yml
@@ -161,7 +161,7 @@ jobs:
     name: OpenAPI contract lint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       # CTO H5: lint every contract, not just openapi.yaml. Pinned for reproducibility.
       - name: Validate all OpenAPI contracts
         run: npx --yes @redocly/cli@1.25.11 lint packages/contracts/*.yaml
@@ -170,7 +170,7 @@ jobs:
     name: Container build
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Build core-api image
         run: docker build -t taleem/core-api:ci services/core-api
 
@@ -181,8 +181,8 @@ jobs:
       run:
         working-directory: apps/web
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: "20"
       - name: Install + typecheck + test + build

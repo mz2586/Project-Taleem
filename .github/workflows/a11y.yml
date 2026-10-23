@@ -56,11 +56,11 @@ jobs:
       TALEEM_DATABASE_URL: postgresql+psycopg://postgres:ci@localhost:5432/taleem
       A11Y_OUT: ${{ github.workspace }}/a11y-evidence
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "20"
       - name: Install core-api
@@ -79,7 +79,7 @@ jobs:
         run: ./scripts/a11y/run_a11y.sh
       - name: Upload report + screenshots
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: a11y-evidence
           path: a11y-evidence/
@@ -105,11 +105,11 @@ jobs:
       TALEEM_DATABASE_URL: postgresql+psycopg://postgres:ci@localhost:5432/taleem
       E2E_WEB_OUT: ${{ github.workspace }}/e2e-web-evidence
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "20"
       - name: Install core-api
@@ -130,7 +130,7 @@ jobs:
         run: ./scripts/e2e-web/run_e2e_web.sh
       - name: Upload trace, screenshots, findings
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: e2e-web-evidence
           path: e2e-web-evidence/
