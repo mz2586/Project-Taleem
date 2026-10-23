@@ -70,7 +70,7 @@ from .contexts.identity.application.tokens import (
     IssuedToken,
     TokenIssuer,
 )
-from .contexts.identity.domain.consent import ConsentEvidence, ConsentScope
+from .contexts.identity.domain.consent import ConsentEvidence, ConsentScope, derive_state
 from .contexts.identity.domain.credentials import SecretHasher
 from .contexts.learning.adapters.ai_teacher_api import build_ai_teacher_router
 from .contexts.learning.adapters.api import LearningApiDeps, build_learning_router
@@ -480,6 +480,29 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         school_limiter.check(key[:64])
 
     school_audit = SqlSchoolAuditLog(school_sf, log)  # durable: school.enrolment_audit (0011)
+
+    def _visible_to_teacher(student_refs: list[str]) -> dict[str, str]:
+        # The same live rules as IdentityLearnerDirectory.shares_with_teacher (an identity
+        # account, the learner gate's refusal, and progress_sharing consent), read for a whole
+        # class in ONE identity transaction instead of several per learner. Nothing is cached.
+        with SqlIdentityUnitOfWork(identity_sf) as uow:
+            accounts = {ref: uow.learners.get(ref) for ref in student_refs}
+            states = {
+                ref: derive_state(ref, uow.consents.history(ref))
+                for ref, account in accounts.items()
+                if account is not None
+            }
+        gate = IdentityLearnerGate(
+            states.__getitem__, accounts.get, require_enrolled=settings.is_production
+        )
+        return {
+            ref: str(account.display_name)
+            for ref, account in accounts.items()
+            if account is not None
+            and gate.refusal(ref) is None
+            and states[ref].allows(ConsentScope.PROGRESS_SHARING)
+        }
+
     app.state.school_audit = school_audit
     school_service = SchoolService(
         lambda: SqlSchoolUnitOfWork(school_sf),
@@ -491,9 +514,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             sharing_allowed=lambda ref: identity_service.consent_state_for(ref).allows(
                 ConsentScope.PROGRESS_SHARING
             ),
+            visible_many=_visible_to_teacher,
         ),
         sharing_consent=CallableSharingConsent(_grant_class_sharing),
-        progress=KnowledgeProgressReader(knowledge_service.snapshot),
+        progress=KnowledgeProgressReader(
+            knowledge_service.snapshot,
+            progress_many=lambda refs, code, since: knowledge_service.objective_progress(
+                refs, code, since=since
+            ),
+        ),
         curriculum=CallablePublishedCurriculum(read_model.lesson_for, read_model.published_catalog),
         audit=school_audit,
         clock=time.time,
@@ -668,7 +697,9 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         cid = correlation.ensure_correlation_id(request.headers.get("x-correlation-id"))
         start = time.perf_counter()
         # Kill switch: when engaged, child-facing routes fail closed (503); health/ops stay up.
-        if kill_switch.engaged and is_child_facing(request.url.path):
+        # The path test comes first so only child-facing requests read the flag (a database read);
+        # for those the read stays live on every request — engaging it takes effect immediately.
+        if is_child_facing(request.url.path) and kill_switch.engaged:
             registry().inc("taleem_kill_switch_blocked_total")
             registry().inc("taleem_requests_total", method=request.method, path=obs.HALTED_ROUTE)
             response = JSONResponse(

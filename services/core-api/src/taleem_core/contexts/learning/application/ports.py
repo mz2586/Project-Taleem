@@ -38,6 +38,18 @@ class CurriculumReadModel(Protocol):
     def published_graph(self) -> CurriculumGraph: ...
 
 
+@runtime_checkable
+class PublishedLessonFingerprints(Protocol):
+    """Optional, cheap companion to ``CurriculumReadModel.published_lessons``.
+
+    ``(lesson_id, fingerprint)`` per published lesson, in the same order; a fingerprint changes
+    whenever that lesson's stored content or state changes. Lets a consumer cache content derived
+    from a lesson (signed offline manifests) without re-reading every lesson on every request.
+    """
+
+    def published_fingerprints(self) -> list[tuple[str, str]]: ...
+
+
 # --- read-model row DTOs for the student query surface (derived; no new child-data tables) ---
 
 

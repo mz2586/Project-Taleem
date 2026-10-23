@@ -117,6 +117,10 @@ class LearnerDirectory(Protocol):
     def may_learn(self, student_ref: str) -> bool:
         """True while the learner holds live learning consent and an active account."""
 
+    def visible_to_teacher(self, student_refs: list[str]) -> dict[str, str]:
+        """``shares_with_teacher`` for many learners in one live read: the learners a teacher may
+        see right now, each with their display name (absent = hidden). Never cached."""
+
 
 class GuardianSharingConsent(Protocol):
     """Records the guardian's consent to share a learner's progress with a class teacher (identity's
@@ -138,6 +142,11 @@ class LearnerProgressReader(Protocol):
     def objective_progress(
         self, student_ref: str, objective_code: str, *, since: float
     ) -> ObjectiveProgress: ...
+
+    def objective_progress_many(
+        self, student_refs: list[str], objective_code: str, *, since: float
+    ) -> dict[str, ObjectiveProgress]:
+        """``objective_progress`` for many learners (one batched read; every ref is a key)."""
 
 
 @dataclass(frozen=True)

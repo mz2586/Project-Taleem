@@ -205,7 +205,7 @@ def build_learning_router(
     def knowledge(student_ref: str, claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
         authorize(claims, "read", "learning.knowledge")
         require_owner_or(claims, student_ref, privileged_roles=_MENTOR)
-        snap = deps.knowledge_service.snapshot(student_ref)
+        snap = deps.knowledge_service.snapshot(student_ref, include_evidence=False)
         if snap is None:
             raise HTTPException(status_code=404, detail="student not found")
         return {

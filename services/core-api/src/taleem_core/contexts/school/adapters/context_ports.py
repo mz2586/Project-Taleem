@@ -21,10 +21,14 @@ class IdentityLearnerDirectory:
         learner_lookup: Callable[[str], Any | None],
         learner_refusal: Callable[[str], str | None],
         sharing_allowed: Callable[[str], bool],
+        visible_many: Callable[[list[str]], dict[str, str]] | None = None,
     ) -> None:
         self._lookup = learner_lookup
         self._refusal = learner_refusal
         self._sharing = sharing_allowed
+        # Optional batched form of ``shares_with_teacher`` + ``display_name`` (one identity read
+        # for a whole class). Must apply exactly the same live rules; absent → per-learner calls.
+        self._visible_many = visible_many
 
     def guardian_of(self, student_ref: str) -> str | None:
         learner = self._lookup(student_ref)
@@ -39,6 +43,14 @@ class IdentityLearnerDirectory:
 
     def shares_with_teacher(self, student_ref: str) -> bool:
         return self.may_learn(student_ref) and self._sharing(student_ref)
+
+    def visible_to_teacher(self, student_refs: list[str]) -> dict[str, str]:
+        refs = list(dict.fromkeys(r for r in student_refs if r))
+        if not refs:
+            return {}
+        if self._visible_many is not None:
+            return self._visible_many(refs)
+        return {ref: self.display_name(ref) or "" for ref in refs if self.shares_with_teacher(ref)}
 
 
 class CallableSharingConsent:
@@ -58,8 +70,43 @@ class KnowledgeProgressReader:
     ``evidence[*].objective_code / .occurred_at``); learning's domain types are never imported.
     """
 
-    def __init__(self, snapshot: Callable[[str], Any | None]) -> None:
+    def __init__(
+        self,
+        snapshot: Callable[[str], Any | None],
+        *,
+        progress_many: Callable[[list[str], str, float], dict[str, dict[str, Any]]] | None = None,
+    ) -> None:
         self._snapshot = snapshot
+        # Optional batched read: ``{ref: {"mastery", "state", "attempts_since"}}`` for refs that
+        # have any knowledge (see learning's ``KnowledgeService.objective_progress``).
+        self._progress_many = progress_many
+
+    def objective_progress_many(
+        self, student_refs: list[str], objective_code: str, *, since: float
+    ) -> dict[str, ObjectiveProgress]:
+        refs = list(dict.fromkeys(student_refs))
+        if self._progress_many is None:
+            return {r: self.objective_progress(r, objective_code, since=since) for r in refs}
+        found = self._progress_many(refs, objective_code, since) if refs else {}
+        out: dict[str, ObjectiveProgress] = {}
+        for ref in refs:
+            row = found.get(ref)
+            if row is None:  # no knowledge at all
+                out[ref] = ObjectiveProgress(mastery=None, state="not_started", attempts_since=0)
+                continue
+            attempts = int(row.get("attempts_since") or 0)
+            mastery = row.get("mastery")
+            if mastery is None:  # knowledge, but never this objective
+                out[ref] = ObjectiveProgress(
+                    mastery=None, state="not_started", attempts_since=attempts
+                )
+                continue
+            out[ref] = ObjectiveProgress(
+                mastery=round(float(mastery), 4),
+                state=str(row.get("state")),
+                attempts_since=attempts,
+            )
+        return out
 
     def objective_progress(
         self, student_ref: str, objective_code: str, *, since: float

@@ -223,11 +223,12 @@ class SchoolService:
                 for c in classes
             }
         # Counts only learners the teacher may currently see (live consent), so the number never
-        # reveals that a hidden learner exists.
+        # reveals that a hidden learner exists. One live identity read covers every class.
+        visible = self._visible_names([e for c in classes for e in enrolled[c.class_id]])
         return [
             {
                 **_class_view(c, include_code=True),
-                "learner_count": len(self._visible(enrolled[c.class_id])),
+                "learner_count": sum(1 for e in enrolled[c.class_id] if e.student_ref in visible),
             }
             for c in classes
         ]
@@ -242,10 +243,10 @@ class SchoolService:
             "learners": [
                 {
                     "student_ref": e.student_ref,
-                    "display_name": self._learners.display_name(e.student_ref) or "",
+                    "display_name": name,
                     "joined_at": e.joined_at,
                 }
-                for e in self._visible(enrolments)
+                for e, name in self._visible(enrolments)
             ],
         }
 
@@ -406,15 +407,20 @@ class SchoolService:
                 raise not_found("assignment not found")
             enrolments = uow.enrolments.for_class(teacher.organization_id, class_id)
         now = self._now()
+        visible = self._visible(enrolments)
+        # One batched knowledge read for the visible learners only (hidden learners are never read).
+        progress = self._progress.objective_progress_many(
+            [e.student_ref for e, _ in visible],
+            assignment.objective_code,
+            since=assignment.created_at,
+        )
         rows: list[dict[str, Any]] = []
-        for e in self._visible(enrolments):
-            p = self._progress.objective_progress(
-                e.student_ref, assignment.objective_code, since=assignment.created_at
-            )
+        for e, name in visible:
+            p = progress[e.student_ref]
             rows.append(
                 {
                     "student_ref": e.student_ref,
-                    "display_name": self._learners.display_name(e.student_ref) or "",
+                    "display_name": name,
                     # Completed = practised this objective since it was assigned.
                     "completed": p.attempts_since > 0,
                     "attempts_since_assigned": p.attempts_since,
@@ -431,9 +437,15 @@ class SchoolService:
 
     # ------------------------------------------------------------------------------ helpers
 
-    def _visible(self, enrolments: list[Enrolment]) -> list[Enrolment]:
+    def _visible_names(self, enrolments: list[Enrolment]) -> dict[str, str]:
         # LIVE, per request: a withdrawn progress_sharing consent hides the learner immediately.
-        return [e for e in enrolments if self._learners.shares_with_teacher(e.student_ref)]
+        # One batched identity read per request, never cached across requests.
+        return self._learners.visible_to_teacher([e.student_ref for e in enrolments])
+
+    def _visible(self, enrolments: list[Enrolment]) -> list[tuple[Enrolment, str]]:
+        """The enrolments the teacher may see right now, in order, with display names."""
+        names = self._visible_names(enrolments)
+        return [(e, names[e.student_ref]) for e in enrolments if e.student_ref in names]
 
     def _require_teacher(self, uow: SchoolUnitOfWork, teacher_ref: str) -> Teacher:
         teacher = uow.teachers.get(teacher_ref)

@@ -102,9 +102,10 @@ class SessionService:
     def plan_next(self, session: Session, *, safety_flag: bool = False) -> Decision:
         # A not-yet-persisted learner still gets a plan: an empty knowledge yields first-exposure
         # teaching for the entry objective (the first attempt then persists their knowledge).
-        knowledge = self._knowledge.snapshot(session.student_ref) or StudentKnowledge(
-            student_ref=session.student_ref
-        )
+        # Objective state only: the decision engine never reads the evidence history.
+        knowledge = self._knowledge.snapshot(
+            session.student_ref, include_evidence=False
+        ) or StudentKnowledge(student_ref=session.student_ref)
         graph = self._graph_source() if callable(self._graph_source) else self._graph_source
         decision = select_next(knowledge, graph, self._config, self._now(), safety_flag=safety_flag)
         if decision.kind in _CONTEXT_FOR:
@@ -168,7 +169,7 @@ class SessionService:
                 feedback.append(self._runtime.correct(lesson, ref))
 
         # Record the interaction (append-only within the session).
-        knowledge = self._knowledge.snapshot(session.student_ref)
+        knowledge = self._knowledge.snapshot(session.student_ref, include_evidence=False)
         obj = knowledge.get(item.objective_code) if knowledge else None
         post = (
             post_interaction(obj, result, self._config)

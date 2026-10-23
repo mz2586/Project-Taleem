@@ -18,6 +18,7 @@ state through the injected ``LearnerGate``. A refused learner rejects the whole 
 
 from __future__ import annotations
 
+import contextlib
 from typing import Protocol
 
 from .consent_gate import LearnerGate, enforce
@@ -61,11 +62,15 @@ class DurableSyncCoordinator:
         enforce(self._gate, learners_touched(deltas, acting_learner))
         ordered = sorted(deltas, key=lambda d: (d.client_seq, d.client_event_id))
         results: list[ItemResult] = []
-        for d in ordered:
-            if d.type is DeltaType.ATTEMPT_SUBMITTED:
-                results.append(self._apply_attempt(d))
-            else:
-                results.append(self._engine.apply(d))
+        # A sink may scope per-batch work (the learning consumer reads each lesson once per batch).
+        # Each delta is still applied — and committed — on its own.
+        batch_scope = getattr(self._sink, "batch", None)
+        with batch_scope() if callable(batch_scope) else contextlib.nullcontext():
+            for d in ordered:
+                if d.type is DeltaType.ATTEMPT_SUBMITTED:
+                    results.append(self._apply_attempt(d))
+                else:
+                    results.append(self._engine.apply(d))
         return results, self._store.server_cursor
 
     def _apply_attempt(self, d: SyncDelta) -> ItemResult:

@@ -9,9 +9,11 @@ know the ``CurriculumReadModel`` port.
 
 from __future__ import annotations
 
+from sqlalchemy import select
 from sqlalchemy.orm import Session, sessionmaker
 
 from ...curriculum_studio.adapters.persistence import unit_of_work as cs_unit_of_work
+from ...curriculum_studio.adapters.persistence.models import LessonRow
 from ...curriculum_studio.domain.content import Locale
 from ...curriculum_studio.domain.lesson import Lesson
 from ..domain.curriculum_view import ItemView, LessonView
@@ -62,6 +64,33 @@ class CurriculumStudioReadModel:
             code = lesson.learning_outcomes[0] if lesson.learning_outcomes else ""
             out.append(self._project(lesson, code))
         return out
+
+    def published_fingerprints(self) -> list[tuple[str, str]]:
+        """``(lesson_id, fingerprint)`` for every published lesson, in ``published_lessons`` order.
+
+        Reads row columns only (no body, no child rows). The fingerprint changes whenever the
+        lesson row is written: it carries the row id and its optimistic-lock ``lock_version``
+        (bumped by every ORM update: a publish, a rollback, any edit), plus ``updated_at``, the
+        studio content hash and the published version number. Consumers key caches of derived
+        content on it, so a changed lesson is never served from a stale entry.
+        """
+        with self._sf() as session:
+            rows = session.execute(
+                select(
+                    LessonRow.lesson_key,
+                    LessonRow.id,
+                    LessonRow.lock_version,
+                    LessonRow.updated_at,
+                    LessonRow.content_hash,
+                    LessonRow.current_version_no,
+                )
+                .where(LessonRow.deleted_at.is_(None), LessonRow.state == "published")
+                .order_by(LessonRow.updated_at.desc())
+            )
+            return [
+                (str(key), "|".join(str(part) for part in (row_id, lock, updated, chash, ver)))
+                for key, row_id, lock, updated, chash, ver in rows
+            ]
 
     def published_catalog(self) -> list[dict[str, object]]:
         """Titles-only index of published lessons: one entry per (lesson, objective code).

@@ -59,9 +59,20 @@ class KnowledgeService:
         except ConcurrencyConflictError as exc:
             raise conflict(f"knowledge write conflict for {student_ref}") from exc
 
-    def snapshot(self, student_ref: str) -> StudentKnowledge | None:
+    def snapshot(
+        self, student_ref: str, *, include_evidence: bool = True
+    ) -> StudentKnowledge | None:
+        """The learner's aggregate. ``include_evidence=False`` skips the evidence history (the
+        decision engine and the attempt path read objective state only)."""
         with self._uow() as uow:
-            return uow.knowledge.get(student_ref)
+            return uow.knowledge.get(student_ref, include_evidence=include_evidence)
+
+    def objective_progress(
+        self, student_refs: list[str], objective_code: str, *, since: float
+    ) -> dict[str, dict[str, object]]:
+        """One objective's progress for many learners in a constant number of queries."""
+        with self._uow() as uow:
+            return uow.knowledge.objective_progress(student_refs, objective_code, since=since)
 
     def record_attempt(
         self,
@@ -83,9 +94,10 @@ class KnowledgeService:
             # A full read-modify-write in its own transaction so a retry re-reads the latest
             # committed version (evidence_id is minted per attempt — a retry is a fresh row).
             with self._uow() as uow:
-                knowledge = uow.knowledge.get(student_ref) or StudentKnowledge(
-                    student_ref=student_ref
-                )
+                # Root + this objective only: the attempt never reads past evidence.
+                knowledge = uow.knowledge.get_for_objectives(
+                    student_ref, (objective_code,)
+                ) or StudentKnowledge(student_ref=student_ref)
                 knowledge.ensure_objective(objective_code, initial=self._estimator.initial())
                 result = knowledge.apply_attempt(
                     evidence_id=uuid7(),
