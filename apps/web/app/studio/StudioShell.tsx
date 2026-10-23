@@ -1,14 +1,15 @@
 "use client";
 // Curriculum Studio chrome: interface-locale direction, the signed-in staff identity, and the
-// sign-in gate. Every studio page renders inside it and reads the actor from context.
-import { createContext, useContext, useId, useState, type FormEvent, type ReactNode } from "react";
+// staff sign-in gate (operator-provisioned accounts via /v1/identity/staff:signin). Every studio page renders inside it and reads the actor from context.
+import { createContext, useContext, type ReactNode } from "react";
 
-import { TextField } from "@/components/form";
 import { Button } from "@/design-system/Button";
-import type { MessageKey } from "@/lib/i18n/messages";
 import { useLocale } from "@/lib/i18n/useLocale";
-import { studioSession, type StudioActor } from "@/lib/studio/session";
+import { type StudioActor } from "@/lib/studio/session";
+import { signOutStaff } from "@/lib/studio/sessionSignIn";
 import { useStudioActor } from "@/lib/studio/useStudioActor";
+
+import { StaffSignInForm } from "./signin/StaffSignInForm";
 
 const ActorContext = createContext<StudioActor | null>(null);
 
@@ -17,43 +18,6 @@ export function useActor(): StudioActor {
   const actor = useContext(ActorContext);
   if (!actor) throw new Error("useActor outside a signed-in StudioShell");
   return actor;
-}
-
-const SIGN_IN_ERRORS: Record<"malformed" | "not-studio-role" | "expired", MessageKey> = {
-  malformed: "studio.signIn.errors.malformed",
-  "not-studio-role": "studio.signIn.errors.notStudioRole",
-  expired: "studio.signIn.errors.expired",
-};
-
-function SignIn() {
-  const { t } = useLocale();
-  const id = useId();
-  const [token, setToken] = useState("");
-  const [error, setError] = useState<MessageKey | null>(null);
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    const result = studioSession.signIn(token);
-    setError(result.ok ? null : SIGN_IN_ERRORS[result.reason]);
-  };
-  return (
-    <main style={{ maxWidth: 560, display: "grid", gap: "var(--space-4)" }}>
-      <h1 style={{ margin: 0 }}>{t("studio.signIn.heading")}</h1>
-      <p style={{ margin: 0 }}>{t("studio.signIn.body")}</p>
-      <form onSubmit={onSubmit} style={{ display: "grid", gap: "var(--space-3)", justifyItems: "start" }}>
-        <TextField
-          id={id}
-          label={t("studio.signIn.tokenLabel")}
-          value={token}
-          onChange={(e) => setToken(e.target.value)}
-          autoComplete="off"
-          spellCheck={false}
-          dir="ltr"
-          error={error ? t(error) : undefined}
-        />
-        <Button type="submit" variant="brand" label={t("studio.signIn.submit")} />
-      </form>
-    </main>
-  );
 }
 
 export function StudioShell({ children }: { children: ReactNode }) {
@@ -89,7 +53,7 @@ export function StudioShell({ children }: { children: ReactNode }) {
                 role: t(`studio.roles.${session.actor.role}`),
               })}
             </span>
-            <Button variant="ghost" label={t("studio.signIn.signOut")} onClick={() => studioSession.clear()} />
+            <Button variant="ghost" label={t("studio.signIn.signOut")} onClick={() => void signOutStaff()} />
           </div>
         ) : null}
       </header>
@@ -99,7 +63,7 @@ export function StudioShell({ children }: { children: ReactNode }) {
             {t("common.loading")}
           </p>
         ) : session.status === "signed-out" ? (
-          <SignIn />
+          <StaffSignInForm />
         ) : (
           <ActorContext.Provider value={session.actor}>{children}</ActorContext.Provider>
         )}

@@ -1,11 +1,21 @@
 "use client";
-// /studio/signin — staff passphrase sign-in for the Curriculum Studio. Replaces the paste-a-token
-// step: an operator provisions the account (one Studio role), the staff member signs in here.
+// /studio/signin — staff passphrase sign-in for the Curriculum Studio. The studio layout's
+// StudioShell renders the sign-in form for anyone signed out (on every studio route), so this page
+// is only ever reached signed in: it forwards to the review queue.
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
-import { StaffSignInForm } from "./StaffSignInForm";
+import { useLocale } from "@/lib/i18n/useLocale";
 
 export default function StudioSignInPage() {
   const router = useRouter();
-  return <StaffSignInForm onSignedIn={() => router.replace("/studio")} />;
+  const { t } = useLocale();
+  useEffect(() => {
+    router.replace("/studio");
+  }, [router]);
+  return (
+    <p role="status" aria-busy="true">
+      {t("common.loading")}
+    </p>
+  );
 }

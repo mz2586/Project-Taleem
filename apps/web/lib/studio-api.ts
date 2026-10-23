@@ -12,6 +12,7 @@
 
 import { ApiError } from "./student/types";
 import { API_BASE } from "./session/config";
+import { refreshStaffSession } from "./studio/sessionSignIn";
 import { studioSession } from "./studio/session";
 
 export interface GateView {
@@ -174,7 +175,7 @@ export interface LessonDraftIn {
   provenance?: { aligned_slo_codes: string[] };
 }
 
-async function req<T>(path: string, init?: RequestInit): Promise<T> {
+async function req<T>(path: string, init?: RequestInit, retried = false): Promise<T> {
   const token = studioSession.token();
   let res: Response;
   try {
@@ -196,7 +197,12 @@ async function req<T>(path: string, init?: RequestInit): Promise<T> {
     } catch {
       /* non-JSON error body */
     }
-    if (res.status === 401) studioSession.clear(); // expired or revoked: sign in again
+    if (res.status === 401) {
+      // Expired access token: rotate once through the staff refresh token, then retry. If the
+      // session is over (revoked, suspended, idle-expired) refreshStaffSession signs the tab out.
+      if (!retried && (await refreshStaffSession())) return req<T>(path, init, true);
+      studioSession.clear();
+    }
     throw new ApiError(res.status, { ...problem, status: res.status });
   }
   return (await res.json()) as T;
