@@ -3,6 +3,10 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Downlevel the offline-signature fallback (OFFLINE_SECURITY_REVIEW.md §8.2) to the app's browser
+  // target. Shipped as-is it uses optional chaining, which put its floor at Chromium 80; transpiled,
+  // only BigInt remains, so old Android WebViews (Chromium 67+) can still verify lesson packages.
+  transpilePackages: ["@noble/ed25519"],
   // Self-contained server output for container deploys (Docker). Deployment-only; the app, routing,
   // and `next start` behaviour are unchanged. Vercel builds its own output, so the standalone
   // bundle is skipped there (VERCEL is set by the Vercel build environment).

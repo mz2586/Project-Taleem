@@ -291,8 +291,11 @@ tampered message, signature and key, wrong lengths, non-hex input, S + L, y = p,
 
 - **WebCrypto path:** Chromium / Android WebView 137+, Safari 17+, Firefox 129+.
 - **Fallback path:** any browser with WebCrypto SHA-512 in a secure context (HTTPS), IndexedDB and
-  a service worker. The library chunk is not transpiled, so it needs BigInt and optional chaining
-  (ES2020): Chromium / Android WebView 80+, Safari 14+, Firefox 74+.
+  a service worker. The library chunk is transpiled to the app's browser target
+  (`transpilePackages` in `next.config.mjs`; the built chunk contains no optional chaining), so
+  BigInt is its remaining requirement: Chromium / Android WebView 67+, Safari 14+, Firefox 68+.
+  Verified through the real UI on Chromium 131; the lower floor follows from the BigInt requirement
+  and has not yet been tested on a physical Chromium 67–79 device.
 
 On an older engine the fallback chunk fails to load, and saving fails closed with the honest "could
 not be checked" message. Nothing is installed unverified. The always-loaded offline module uses no
