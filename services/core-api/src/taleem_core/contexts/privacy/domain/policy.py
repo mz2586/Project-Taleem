@@ -9,6 +9,12 @@ The defaults encode the most conservative engineering position, not a legal opin
   Neither carries the learner's ``student_ref``: both are keyed by a one-way *tombstone ref*
   (salted SHA-256 of the ref), which lets a guardian who still holds the ref prove the erasure
   happened, and lets nobody else reverse it.
+- **Safeguarding concerns** (an explicit retained-set entry, also PENDING M-Gov, and tied to the
+  FD-04 reporting policy). A guardian requests an erasure, and a child's concern may be about that
+  guardian; deleting the child's report on the guardian's request could destroy the record of a
+  disclosure. The default is therefore ``retain_pseudonymised``: the concern rows are kept, re-keyed
+  to the tombstone ref (no ``student_ref`` survives), and the erasure receipt says so. ``erase``
+  deletes them with everything else. Either way the choice is stated, never silent.
 - **Retention schedule.** Every data class starts as "period not set" ⇒ automated purge disabled.
   No period is invented; a period exists only when an operator configures one, and even then this
   phase only produces a dry-run report.
@@ -67,6 +73,15 @@ RETENTION_CLASSES: dict[str, str] = {
 }
 
 
+SAFEGUARDING_ERASE = "erase"
+SAFEGUARDING_RETAIN = "retain_pseudonymised"
+SAFEGUARDING_MODES: tuple[str, ...] = (SAFEGUARDING_RETAIN, SAFEGUARDING_ERASE)
+SAFEGUARDING_APPROVAL = (
+    "PENDING M-Gov approval (DPO + counsel) and FD-04 (mandatory-reporting policy): whether a "
+    "safeguarding record must outlive a guardian-requested erasure"
+)
+
+
 class PolicyError(ValueError):
     """An invalid privacy configuration (refused at start-up, never silently corrected)."""
 
@@ -79,12 +94,22 @@ class RetainedSet:
     consent_fields: tuple[str, ...] = DEFAULT_CONSENT_FIELDS
     keep_erasure_event: bool = True
     tombstone_salt: str = ""
+    safeguarding_concerns: str = SAFEGUARDING_RETAIN
     approval: str = APPROVAL_STATUS
 
     def __post_init__(self) -> None:
         unknown = sorted(set(self.consent_fields) - set(CONSENT_FIELDS))
         if unknown:
             raise PolicyError(f"unknown consent tombstone fields: {unknown}")
+        if self.safeguarding_concerns not in SAFEGUARDING_MODES:
+            raise PolicyError(
+                f"safeguarding_concerns must be one of {list(SAFEGUARDING_MODES)}, "
+                f"not {self.safeguarding_concerns!r}"
+            )
+
+    @property
+    def retain_safeguarding(self) -> bool:
+        return self.safeguarding_concerns == SAFEGUARDING_RETAIN
 
     def tombstone_ref(self, student_ref: str) -> str:
         """One-way, salted pseudonym for a learner that no longer exists."""
@@ -103,6 +128,16 @@ class RetainedSet:
                 {"kept": True, "fields": list(ERASURE_EVENT_FIELDS), "keyed_by": "tombstone_ref"}
                 if self.keep_erasure_event
                 else {"kept": False}
+            ),
+            "safeguarding_concerns": (
+                {
+                    "kept": True,
+                    "mode": SAFEGUARDING_RETAIN,
+                    "keyed_by": "tombstone_ref",
+                    "approval": SAFEGUARDING_APPROVAL,
+                }
+                if self.retain_safeguarding
+                else {"kept": False, "mode": SAFEGUARDING_ERASE, "approval": SAFEGUARDING_APPROVAL}
             ),
             "student_ref_retained": False,
         }
@@ -183,6 +218,9 @@ class PrivacyConfig:
             keep_erasure_event=env.get("TALEEM_PRIVACY_KEEP_ERASURE_EVENT", "true").lower()
             != "false",
             tombstone_salt=env.get("TALEEM_PRIVACY_TOMBSTONE_SALT", ""),
+            safeguarding_concerns=(
+                env.get("TALEEM_PRIVACY_SAFEGUARDING_CONCERNS", "").strip() or SAFEGUARDING_RETAIN
+            ),
         )
         ttl = float(env.get("TALEEM_PRIVACY_CONFIRMATION_TTL_S", "900") or 900)
         return cls(

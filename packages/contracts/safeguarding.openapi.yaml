@@ -1,0 +1,416 @@
+openapi: 3.1.0
+info:
+  title: Project Taleem — Safeguarding Concerns API
+  version: 0.1.0
+  description: >-
+    A child or a guardian raises a safeguarding concern; a safeguarding lead triages it. **Software
+    only: the workflow is not approved or staffed.** Who triages and how fast is FD-06; where an
+    external referral goes is FD-04; sign-off is M-Safe
+    (docs/03-security-privacy/59-safeguarding-concerns.md).
+
+
+    Properties this contract commits to:
+
+
+    * **A child gets a receipt, nothing more.** `POST /v1/safeguarding/concerns` with a `student`
+      token records a concern about that learner and answers `{received, raised_at, notice}` — no
+      id, and there is no route by which a child lists concerns. A family device is often shared.
+    * **A guardian sees only what they raised.** A guardian raises about one of their own learners
+      (another family's learner is `404`) and `GET /v1/safeguarding/my-concerns` lists only the
+      concerns that guardian raised, with a coarse status (`received`, `in_review`, `closed`). A
+      concern a child raised is never returned to any guardian — including a guardian it may be
+      about — here, in the guardian portal, or in the privacy export.
+    * **Free text, notes and audit reach `safeguarding_lead` only.** Teachers, mentors, operators
+      and every Curriculum Studio role are denied (`403`). The lead is an operator-provisioned
+      staff account (identity.openapi.yaml `/v1/identity/staff`); a suspended lead's live token is
+      refused on its next request (`403 STAFF_INACTIVE`).
+    * **Every action is audited** by actor subject, in the same transaction as the change; opening
+      a concern's detail is itself audited (`concern.viewed`).
+    * **Escalation contacts nobody.** `:escalate` records "external referral needed" for a human to
+      act on. No referral channel exists until FD-04 is decided.
+    * **SLA thresholds are unset by default.** The queue states `sla.configured: false` and
+      `sla.notice: "SLA not set — owner decision FD-06"`; `overdue` is `null` (unknown), never a
+      verdict against an invented number. Thresholds come from
+      `TALEEM_SAFEGUARDING_ACK_SLA_SECONDS` only.
+    * **The channel stays open.** Raising is not behind the learner consent gate and is not
+      halted by the kill switch.
+    * Raising is rate limited per subject (20 per hour): `429 RATE_LIMITED`.
+  license:
+    name: Proprietary — license undecided; see repository LICENSE
+servers:
+  - url: https://api.taleem.dev
+    description: Reference environment (placeholder; concrete host per FOUNDER_DECISIONS FD-02)
+tags:
+  - name: safeguarding
+    description: Raise (child, guardian) and triage (safeguarding lead) safeguarding concerns.
+paths:
+  /v1/safeguarding/concerns:
+    post:
+      tags: [safeguarding]
+      operationId: raiseConcern
+      summary: Raise a concern (student about themselves, or guardian about their own learner)
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/RaiseConcernIn" }
+      responses:
+        "201":
+          description: >-
+            Recorded. A `student` gets a `ChildReceipt`; a `guardian` gets a `GuardianConcern`.
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - { $ref: "#/components/schemas/ChildReceipt" }
+                  - { $ref: "#/components/schemas/GuardianConcern" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        "429": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/safeguarding/my-concerns:
+    get:
+      tags: [safeguarding]
+      operationId: listMyConcerns
+      summary: The concerns this guardian raised (coarse status only)
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Concerns raised by the calling guardian, newest first
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [concerns]
+                properties:
+                  concerns:
+                    type: array
+                    items: { $ref: "#/components/schemas/GuardianConcern" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/safeguarding/queue:
+    get:
+      tags: [safeguarding]
+      operationId: triageQueue
+      summary: Open concerns by priority, then age (safeguarding lead)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: includeResolved
+          in: query
+          required: false
+          schema: { type: boolean, default: false }
+      responses:
+        "200":
+          description: The queue, with the SLA configuration stated
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Queue" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/safeguarding/concerns/{concernId}:
+    get:
+      tags: [safeguarding]
+      operationId: concernDetail
+      summary: One concern with its free text, notes and audit (safeguarding lead; audited)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { $ref: "#/components/parameters/ConcernId" }
+      responses:
+        "200":
+          description: The concern
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ConcernDetail" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/safeguarding/concerns/{concernId}:acknowledge:
+    post:
+      tags: [safeguarding]
+      operationId: acknowledgeConcern
+      summary: Acknowledge an open concern (idempotent; safeguarding lead)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { $ref: "#/components/parameters/ConcernId" }
+      responses:
+        "200":
+          description: The concern after the action
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ConcernDetail" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/safeguarding/concerns/{concernId}/notes:
+    post:
+      tags: [safeguarding]
+      operationId: addConcernNote
+      summary: Add a triage note (safeguarding lead)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { $ref: "#/components/parameters/ConcernId" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [body]
+              properties:
+                body: { type: string, minLength: 1, maxLength: 2000 }
+      responses:
+        "201":
+          description: The concern after the action
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ConcernDetail" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/safeguarding/concerns/{concernId}:escalate:
+    post:
+      tags: [safeguarding]
+      operationId: escalateConcern
+      summary: Record "external referral needed" (contacts nobody; safeguarding lead)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { $ref: "#/components/parameters/ConcernId" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [reason]
+              properties:
+                reason: { type: string, minLength: 1, maxLength: 2000 }
+      responses:
+        "200":
+          description: The concern after the action (`contacted` is always empty)
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ConcernDetail" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/safeguarding/concerns/{concernId}:resolve:
+    post:
+      tags: [safeguarding]
+      operationId: resolveConcern
+      summary: Resolve with an outcome (safeguarding lead)
+      description: >-
+        `referred_externally` is accepted only after an escalation (`409 CONCERN_NOT_ESCALATED`);
+        a resolved concern cannot change (`409 CONCERN_CLOSED`).
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { $ref: "#/components/parameters/ConcernId" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required: [outcome]
+              properties:
+                outcome: { $ref: "#/components/schemas/Outcome" }
+                note: { type: string, maxLength: 2000 }
+      responses:
+        "200":
+          description: The concern after the action
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ConcernDetail" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  parameters:
+    ConcernId:
+      name: concernId
+      in: path
+      required: true
+      schema: { type: string, pattern: "^sgc_" }
+  responses:
+    Problem:
+      description: RFC 9457 problem details
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+  schemas:
+    Problem:
+      type: object
+      properties:
+        type: { type: string }
+        title: { type: string }
+        status: { type: integer }
+        code: { type: string }
+        detail: { type: string }
+        traceId: { type: string }
+    Category:
+      type: string
+      description: >-
+        The fixed, tap-to-choose list. `felt_unsafe` and `very_sad` are tier T1; `bullying` and
+        `upsetting_lesson` T2; `other` T3. No category is T0 (imminent harm needs a live human 24/7,
+        which is not staffed).
+      enum: [felt_unsafe, very_sad, bullying, upsetting_lesson, other]
+    Priority:
+      type: string
+      enum: [T1, T2, T3]
+    Status:
+      type: string
+      description: "`escalated` means external referral needed (a human decision)."
+      enum: [open, acknowledged, escalated, resolved]
+    Outcome:
+      type: string
+      enum: [no_further_action, support_given, referred_externally, duplicate]
+    RaiseConcernIn:
+      type: object
+      additionalProperties: false
+      required: [category]
+      properties:
+        category: { $ref: "#/components/schemas/Category" }
+        text:
+          type: string
+          maxLength: 500
+          description: Optional. The child flow needs no typing at all.
+        studentRef:
+          type: string
+          description: Guardian only — which of their learners. A learner may omit it.
+        context:
+          type: object
+          additionalProperties: false
+          properties:
+            screen:
+              type: string
+              description: Route-like token (`student/today`); anything else is dropped.
+            lessonId: { type: string, maxLength: 128 }
+    ChildReceipt:
+      type: object
+      required: [received, raised_at, notice]
+      properties:
+        received: { type: boolean, const: true }
+        raised_at: { type: number }
+        notice: { type: string }
+    GuardianConcern:
+      type: object
+      required: [concern_id, student_ref, category, raised_at, status]
+      properties:
+        concern_id: { type: string }
+        student_ref: { type: string }
+        category: { $ref: "#/components/schemas/Category" }
+        text: { type: [string, "null"] }
+        raised_at: { type: number }
+        status: { type: string, enum: [received, in_review, closed] }
+    Sla:
+      type: object
+      required: [configured, acknowledge_within_seconds]
+      properties:
+        configured: { type: boolean }
+        acknowledge_within_seconds:
+          type: object
+          additionalProperties: { type: [number, "null"] }
+        notice:
+          type: [string, "null"]
+          description: '"SLA not set — owner decision FD-06" until every tier has a threshold.'
+    ConcernSummary:
+      type: object
+      properties:
+        concern_id: { type: string }
+        subject_ref: { type: string }
+        raised_by_role: { type: string, enum: [student, guardian] }
+        category: { $ref: "#/components/schemas/Category" }
+        priority: { $ref: "#/components/schemas/Priority" }
+        status: { $ref: "#/components/schemas/Status" }
+        created_at: { type: number }
+        age_seconds: { type: number }
+        overdue:
+          type: [boolean, "null"]
+          description: "`null` when no SLA threshold is configured for the tier."
+        has_text: { type: boolean }
+        context:
+          type: object
+          properties:
+            screen: { type: string }
+            lesson_id: { type: [string, "null"] }
+    Queue:
+      type: object
+      required: [generated_at, sla, concerns]
+      properties:
+        generated_at: { type: number }
+        sla: { $ref: "#/components/schemas/Sla" }
+        concerns:
+          type: array
+          items: { $ref: "#/components/schemas/ConcernSummary" }
+    ConcernDetail:
+      allOf:
+        - { $ref: "#/components/schemas/ConcernSummary" }
+        - type: object
+          properties:
+            text: { type: [string, "null"] }
+            raised_by_ref: { type: string }
+            outcome:
+              oneOf:
+                - { $ref: "#/components/schemas/Outcome" }
+                - { type: "null" }
+            acknowledged_at: { type: [number, "null"] }
+            acknowledged_by: { type: [string, "null"] }
+            escalated_at: { type: [number, "null"] }
+            escalated_by: { type: [string, "null"] }
+            resolved_at: { type: [number, "null"] }
+            resolved_by: { type: [string, "null"] }
+            external_referral_needed: { type: boolean }
+            guardian_informed: { type: boolean, const: false }
+            household_caution:
+              type: boolean
+              description: >-
+                True for a concern a child raised: it may be about their household; the guardian
+                was not told and must not be contacted until ruled out (doc 52 §4).
+            notes:
+              type: array
+              items:
+                type: object
+                properties:
+                  note_id: { type: string }
+                  author_ref: { type: string }
+                  body: { type: string }
+                  created_at: { type: number }
+            audit:
+              type: array
+              items:
+                type: object
+                properties:
+                  action: { type: string }
+                  actor_ref: { type: string }
+                  actor_role: { type: string }
+                  at: { type: number }
+                  detail: { type: object, additionalProperties: { type: string } }
+            contacted:
+              type: array
+              maxItems: 0
+              items: { type: string }
+            contact_notice: { type: string }

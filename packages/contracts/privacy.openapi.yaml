@@ -181,6 +181,17 @@ components:
         approval: { type: string }
         consent_evidence: { type: object, additionalProperties: true }
         erasure_event: { type: object, additionalProperties: true }
+        safeguarding_concerns:
+          type: object
+          description: >-
+            Explicit entry (PENDING M-Gov and FD-04). `retain_pseudonymised` (default) keeps
+            safeguarding concerns re-keyed to the tombstone ref; `erase` deletes them. The guardian's
+            export never contains concerns the learner raised (safeguarding.openapi.yaml).
+          properties:
+            kept: { type: boolean }
+            mode: { type: string, enum: [retain_pseudonymised, erase] }
+            keyed_by: { type: string }
+            approval: { type: string }
         student_ref_retained: { type: boolean, const: false }
     PrivacyPolicy:
       type: object

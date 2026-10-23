@@ -35,6 +35,7 @@ import {
 } from "@/lib/student/aiTeacher";
 import { watchConnectivity } from "@/lib/offline";
 import { formatList } from "@/lib/guardian/format";
+import { helpHref } from "@/lib/safeguarding/context";
 import {
   classifyLoadError,
   ENDING_COPY,
@@ -365,6 +366,14 @@ export default function SessionPage() {
               <h2 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{t("student.session.escalatedTitle")}</h2>
               <p style={{ margin: 0 }}>{t("student.session.escalatedBody")}</p>
               <ButtonLink href="/student/today" variant="brand" label={t("common.backToToday")} />
+              {/* Help here means "stuck on the lesson". Something wrong or upsetting goes to a person. */}
+              <p style={{ margin: 0 }}>{t("safeguarding.child.somethingElse")}</p>
+              <ButtonLink
+                href={helpHref("/student/session")}
+                variant="ghost"
+                icon={<span aria-hidden="true">🙋</span>}
+                label={t("safeguarding.entry.label")}
+              />
             </div>
           </Card>
         ) : null}

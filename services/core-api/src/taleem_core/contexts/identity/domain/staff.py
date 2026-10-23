@@ -1,6 +1,7 @@
-"""Curriculum Studio staff accounts (pure domain).
+"""Operator-provisioned staff accounts (pure domain): Curriculum Studio roles and the safeguarding
+lead.
 
-A staff account is an adult an operator provisions for exactly one Curriculum Studio role. It is
+A staff account is an adult an operator provisions for exactly one staff role. It is
 deliberately its own aggregate — not a guardian, not a teacher, not a learner — so that the role
 set it can ever carry is closed: ``STAFF_ROLES`` and nothing else. The Studio blocks self-approval
 by token subject, so one person must be one subject: ``staff_ref`` is that subject, pseudonymous
@@ -15,8 +16,9 @@ from dataclasses import dataclass
 from ....platform.ids import uuid7
 from .accounts import AccountStatus, InvalidAccountError, normalise_display_name, normalise_email
 
-# Exactly the Curriculum Studio roles in ``auth/pdp.py`` (a test pins the two lists equal). No
-# learner, guardian, teacher, mentor, or system role can be held by a staff account.
+# Exactly ``auth/pdp.py``'s STAFF_ACCOUNT_ROLES: the Curriculum Studio roles plus the safeguarding
+# lead (a test pins the two lists equal). No learner, guardian, teacher, mentor, or system role can
+# be held by a staff account.
 STAFF_ROLES: tuple[str, ...] = (
     "subject_author",
     "subject_expert",
@@ -25,6 +27,7 @@ STAFF_ROLES: tuple[str, ...] = (
     "language_editor",
     "safety_officer",
     "curriculum_architect",
+    "safeguarding_lead",
 )
 
 STAFF_REF_PREFIX = "stf_"
@@ -33,7 +36,7 @@ STAFF_REF_PREFIX = "stf_"
 def assert_staff_role(role: str) -> str:
     if role not in STAFF_ROLES:
         raise InvalidAccountError(
-            "role must be one Curriculum Studio role: " + ", ".join(STAFF_ROLES),
+            "role must be one staff role: " + ", ".join(STAFF_ROLES),
             code="STAFF_ROLE_INVALID",
             field="role",
         )

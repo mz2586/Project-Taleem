@@ -32,7 +32,10 @@ EXEMPT_TABLES: dict[str, str] = {
     "identity.guardian_account": (
         "the guardian is a separate data subject; erasing a learner leaves the adult account"
     ),
-    "identity.rate_limit_bucket": "SHA-256 of the client network identifier; no learner ref",
+    "identity.rate_limit_bucket": (
+        "short-lived window counters keyed by a SHA-256 digest (a client network identifier, or a "
+        "rate-limited subject such as a safeguarding raiser); no ref in clear; purged by window"
+    ),
     "identity.staff_account": (
         "a Curriculum Studio staff member, a separate adult data subject; no learner data"
     ),

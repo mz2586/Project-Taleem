@@ -56,6 +56,15 @@ def test_every_documented_path_is_served() -> None:
     assert not orphan, f"documented in a contract but not served by the app: {orphan}"
 
 
+def test_safeguarding_surface_is_documented_in_its_own_contract() -> None:
+    spec = yaml.safe_load(
+        (_CONTRACTS_DIR / "safeguarding.openapi.yaml").read_text(encoding="utf-8")
+    )
+    documented = {_normalize(p) for p in spec["paths"]}
+    served = {p for p in _app_paths() if p.startswith("/v1/safeguarding")}
+    assert served and served == documented
+
+
 def test_ops_surface_is_documented() -> None:
     # The specific regression this audit fixed: the ops API must be documented.
     documented = _documented_paths()

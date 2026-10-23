@@ -113,6 +113,19 @@ from .contexts.ops.adapters.persistence.base import (
 from .contexts.ops.adapters.persistence.kill_switch_store import SqlKillSwitchState
 from .contexts.privacy.adapters.privacy_api import build_privacy_router
 from .contexts.privacy.adapters.wiring import build_privacy_service
+from .contexts.safeguarding.adapters.persistence.base import (
+    SafeguardingBase,
+    create_safeguarding_session_factory,
+    safeguarding_engine_sharing,
+)
+from .contexts.safeguarding.adapters.persistence.uow import SqlSafeguardingUnitOfWork
+from .contexts.safeguarding.adapters.safeguarding_api import (
+    RAISE_LIMIT,
+    RAISE_WINDOW_SECONDS,
+    build_safeguarding_router,
+)
+from .contexts.safeguarding.application.service import SafeguardingService
+from .contexts.safeguarding.domain.model import SlaPolicy
 from .contexts.school.adapters.audit_log import SqlSchoolAuditLog
 from .contexts.school.adapters.context_ports import (
     CallableExplanationReader,
@@ -206,6 +219,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 "description": "AI Teacher — templated, curriculum-grounded, explainable (no LLM)",
             },
             {"name": "ops", "description": "Operational controls — kill switch + status"},
+            {
+                "name": "safeguarding",
+                "description": "Safeguarding concerns: raise (child, guardian) and triage (lead)",
+            },
             {
                 "name": "guardian",
                 "description": "Guardian Portal — read-only view of linked children",
@@ -644,11 +661,49 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     )
     app.include_router(build_guardian_router(guardian_service, claims_dependency))
 
+    # ---- Safeguarding concerns (raise + triage). Software only: not approved or staffed (M-Safe,
+    # FD-04, FD-06). Raising is deliberately outside the learner consent gate and the kill switch's
+    # child-facing list — a safety channel stays open when learning is halted. Triage is
+    # safeguarding_lead only, behind the same live staff-account gate as the Studio.
+    safeguarding_engine = safeguarding_engine_sharing(identity_engine)
+    if safeguarding_engine.dialect.name == "sqlite":
+        SafeguardingBase.metadata.create_all(safeguarding_engine)
+    safeguarding_sf = create_safeguarding_session_factory(safeguarding_engine)
+    app.state.safeguarding_session_factory = safeguarding_sf
+
+    class _LearnerGuardians:
+        def guardian_of(self, student_ref: str) -> str | None:
+            account = _learner_lookup(student_ref)
+            return str(account.guardian_ref) if account is not None else None
+
+    safeguarding_service = SafeguardingService(
+        lambda: SqlSafeguardingUnitOfWork(safeguarding_sf),
+        _LearnerGuardians(),
+        time.time,
+        SlaPolicy.from_json(settings.safeguarding_ack_sla_json),
+        require_enrolled=settings.is_production,
+    )
+    app.state.safeguarding_service = safeguarding_service
+    raise_limiter: Limiter = (
+        SharedRateLimiter(
+            "safeguarding.raise", RAISE_LIMIT, RAISE_WINDOW_SECONDS, time.time, rate_limit_store
+        )
+        if rate_limit_store is not None
+        else RateLimiter(RAISE_LIMIT, RAISE_WINDOW_SECONDS, time.time)
+    )
+    app.include_router(
+        build_safeguarding_router(
+            safeguarding_service, claims_dependency, raise_limiter=raise_limiter
+        ),
+        dependencies=staff_permitted,
+    )
+
     # ---- Privacy: per-learner export, two-step erasure, retention dry-run (R1) ----
     privacy_service = build_privacy_service(
         identity_sf=identity_sf,
         learning_sf=learning_sf,
         school_sf=school_sf,
+        safeguarding_sf=safeguarding_sf,
         session_store=session_repo,
         sync_store=sync_store,
         ai_ledger=ai_cost_ledger,
@@ -704,6 +759,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         Module("identity", "/v1/identity", lambda: True, events_published=("ConsentGranted",)),
         Module("privacy", "/v1/privacy", lambda: True),
         Module("school", "/v1/school", lambda: True),
+        Module("safeguarding", "/v1/safeguarding", lambda: True),
     ):
         # Idempotent across reloads/tests: re-registering the same module is a no-op.
         with contextlib.suppress(ValueError):
@@ -818,6 +874,26 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         # Point-in-time gauges, refreshed per scrape (alerts: kill switch engaged, pool saturation).
         registry().set_gauge("taleem_kill_switch_engaged", 1.0 if kill_switch.engaged else 0.0)
         registry().set_gauge("taleem_ready", 1.0 if health.ready()[0] else 0.0)
+        # Safeguarding queue gauges, read from the database (identical on every instance). A failed
+        # read must not take the whole scrape down with it; it is counted, and alerted on instead.
+        try:
+            safeguarding = safeguarding_service.gauges()
+        except Exception as exc:  # any store failure: the scrape must still render
+            registry().inc("taleem_safeguarding_gauge_errors_total")
+            log.info("safeguarding_gauges_unavailable", error=type(exc).__name__)
+        else:
+            for priority, count in safeguarding["unacknowledged"].items():
+                registry().set_gauge(
+                    "taleem_safeguarding_concerns_unacknowledged", count, priority=priority
+                )
+            for priority, count in safeguarding["overdue"].items():
+                registry().set_gauge(
+                    "taleem_safeguarding_concerns_overdue", count, priority=priority
+                )
+        registry().set_gauge(
+            "taleem_safeguarding_sla_configured",
+            1.0 if safeguarding_service.sla.fully_configured else 0.0,
+        )
         for pool_name, engine in (
             ("curriculum", curriculum_engine),
             ("learning", learning_engine),

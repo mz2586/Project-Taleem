@@ -724,9 +724,10 @@ paths:
       operationId: createStaff
       summary: Provision a Curriculum Studio staff account (operator)
       description: >-
-        `system` only. Creates an adult staff account holding exactly one Studio role
+        `system` only. Creates an adult staff account holding exactly one staff role: a Studio role
         (`subject_author`, `subject_expert`, `instructional_designer`, `a11y_specialist`,
-        `language_editor`, `safety_officer`, `curriculum_architect`). No other role can be
+        `language_editor`, `safety_officer`, `curriculum_architect`) or `safeguarding_lead` (the
+        safeguarding triage console, which holds no Studio permission). No other role can be
         requested, and the database refuses any other value. The `staff_ref` is the stable,
         pseudonymous token subject the Studio uses to block self-approval, so one person must
         hold one account per role and never share it. Audited as `staff.created`.
@@ -1311,7 +1312,10 @@ components:
     StaffRole:
       type: string
       enum: [subject_author, subject_expert, instructional_designer, a11y_specialist,
-        language_editor, safety_officer, curriculum_architect]
+        language_editor, safety_officer, curriculum_architect, safeguarding_lead]
+      description: >-
+        The seven Curriculum Studio roles, plus `safeguarding_lead` (the safeguarding triage console;
+        safeguarding.openapi.yaml). A staff account holds exactly one.
     StaffCreate:
       type: object
       additionalProperties: false

@@ -194,3 +194,98 @@ tests:
       - eval_time: 30h
         alertname: TaleemBackupNeverReported
         exp_alerts: []
+
+  - name: a waiting T1 concern pages team safeguarding; T3 warns; two instances report once
+    interval: 1m
+    input_series:
+      - series: 'taleem_safeguarding_concerns_unacknowledged{instance="a", priority="T1"}'
+        values: "0 1 1"
+      - series: 'taleem_safeguarding_concerns_unacknowledged{instance="b", priority="T1"}'
+        values: "0 1 1"
+      - series: 'taleem_safeguarding_concerns_unacknowledged{instance="a", priority="T2"}'
+        values: "0 0 0"
+      - series: 'taleem_safeguarding_concerns_unacknowledged{instance="a", priority="T3"}'
+        values: "2 2 2"
+    alert_rule_test:
+      - eval_time: 0m
+        alertname: TaleemSafeguardingConcernAwaiting
+        exp_alerts: []
+      - eval_time: 2m
+        alertname: TaleemSafeguardingConcernAwaiting
+        exp_alerts:
+          - exp_labels: {severity: critical, service: core-api, team: safeguarding, priority: T1}
+            exp_annotations:
+              summary: "1 unacknowledged T1 safeguarding concern(s)"
+              description: "A child or guardian raised a T1 concern (felt unsafe / very sad) that no safeguarding lead has acknowledged. Destination unconfigured until M-Safe."
+              runbook: "MONITORING_RUNBOOK.md#taleemsafeguardingconcernawaiting"
+      - eval_time: 2m
+        alertname: TaleemSafeguardingConcernAwaitingLowerTier
+        exp_alerts:
+          - exp_labels: {severity: warning, service: core-api, team: safeguarding, priority: T3}
+            exp_annotations:
+              summary: "2 unacknowledged T3 safeguarding concern(s)"
+              description: "A T2/T3 concern is waiting for a safeguarding lead. Destination unconfigured until M-Safe."
+              runbook: "MONITORING_RUNBOOK.md#taleemsafeguardingconcernawaiting"
+
+  - name: overdue fires only when a configured SLA is breached
+    interval: 1m
+    input_series:
+      - series: 'taleem_safeguarding_concerns_overdue{instance="a", priority="T1"}'
+        values: "0 0 1"
+      - series: 'taleem_safeguarding_concerns_overdue{instance="a", priority="T2"}'
+        values: "0 0 0"
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: TaleemSafeguardingConcernOverdue
+        exp_alerts: []
+      - eval_time: 2m
+        alertname: TaleemSafeguardingConcernOverdue
+        exp_alerts:
+          - exp_labels: {severity: critical, service: core-api, team: safeguarding, priority: T1}
+            exp_annotations:
+              summary: "1 T1 safeguarding concern(s) past the configured SLA"
+              description: "Unacknowledged past TALEEM_SAFEGUARDING_ACK_SLA_SECONDS for the tier. Never fires while the SLA is unset (FD-06). Destination unconfigured until M-Safe."
+              runbook: "MONITORING_RUNBOOK.md#taleemsafeguardingconcernoverdue"
+
+  - name: SLA not set warns after an hour (a configured SLA stays quiet in the next test)
+    interval: 1m
+    input_series:
+      - series: 'taleem_safeguarding_sla_configured{instance="a"}'
+        values: "0x80"
+      - series: 'taleem_safeguarding_gauge_errors_total{instance="a"}'
+        values: "0x80"
+    alert_rule_test:
+      - eval_time: 30m
+        alertname: TaleemSafeguardingSlaNotSet
+        exp_alerts: []
+      - eval_time: 70m
+        alertname: TaleemSafeguardingSlaNotSet
+        exp_alerts:
+          - exp_labels: {severity: warning, service: core-api, team: safeguarding}
+            exp_annotations:
+              summary: "Safeguarding SLA not set: owner decision FD-06"
+              description: "At least one tier has no acknowledge-within threshold, so overdue concerns cannot be detected for it. EXPECTED today: the SLA is an owner decision (FD-06)."
+              runbook: "MONITORING_RUNBOOK.md#taleemsafeguardingslanotset"
+      - eval_time: 70m
+        alertname: TaleemSafeguardingGaugesFailing
+        exp_alerts: []
+
+  - name: a failed safeguarding gauge read is critical
+    interval: 1m
+    input_series:
+      - series: 'taleem_safeguarding_gauge_errors_total{instance="a"}'
+        values: "0 0 1 2"
+      - series: 'taleem_safeguarding_sla_configured{instance="a"}'
+        values: "1x3"
+    alert_rule_test:
+      - eval_time: 3m
+        alertname: TaleemSafeguardingGaugesFailing
+        exp_alerts:
+          - exp_labels: {severity: critical, service: core-api, team: safeguarding}
+            exp_annotations:
+              summary: "The scrape cannot read the safeguarding queue"
+              description: "The waiting and overdue concern alerts are blind while this fires. Destination unconfigured until M-Safe."
+              runbook: "MONITORING_RUNBOOK.md#taleemsafeguardinggaugesfailing"
+      - eval_time: 3m
+        alertname: TaleemSafeguardingSlaNotSet
+        exp_alerts: []

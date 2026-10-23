@@ -2,9 +2,17 @@
 // App shell — header (the page's single h1), scrollable content, sticky bottom nav, offline badge,
 // and a skip link that becomes visible on focus. Screens announce async changes through their own
 // polite live regions; the shell's badge is a status region too.
-import type { ReactNode } from "react";
+//
+// Every screen's header also carries "Tell a grown-up": the safeguarding entry, with a picture and
+// words, reachable in one tap (doc 15 SAC-7). It is separate from the lesson player's "Help" (stuck
+// on a question); it opens /student/help with the screen (and lesson, if any) as context.
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState, type ReactNode } from "react";
 
+import { buttonStyle } from "../../design-system/Button";
 import { useLocale } from "../../lib/i18n/useLocale";
+import { helpHref } from "../../lib/safeguarding/context";
 import type { GradeBand } from "../../lib/student/config";
 import { BottomNav } from "./BottomNav";
 import { SyncStatusBadge } from "./SyncStatusBadge";
@@ -21,6 +29,13 @@ export function AppShell({
   children: ReactNode;
 }) {
   const { t } = useLocale();
+  const pathname = usePathname() ?? "";
+  const [help, setHelp] = useState(() => helpHref(pathname));
+  useEffect(() => {
+    // The lesson id, when a screen has one, is in the query string (read after mount, not in render).
+    setHelp(helpHref(pathname, new URLSearchParams(window.location.search).get("lesson")));
+  }, [pathname]);
+  const onHelp = pathname === "/student/help";
   return (
     <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", maxWidth: 720, margin: "0 auto" }}>
       <a href="#main" className="skip-link">
@@ -38,7 +53,17 @@ export function AppShell({
         }}
       >
         <h1 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{title}</h1>
-        <SyncStatusBadge />
+        <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "var(--space-2)" }}>
+          <SyncStatusBadge />
+          <Link
+            href={help}
+            aria-current={onHelp ? "page" : undefined}
+            style={{ ...buttonStyle("ghost"), border: "2px solid var(--color-brand)", fontWeight: 700 }}
+          >
+            <span aria-hidden="true">🙋</span>
+            <span>{t("safeguarding.entry.label")}</span>
+          </Link>
+        </div>
       </header>
       <main
         id="main"

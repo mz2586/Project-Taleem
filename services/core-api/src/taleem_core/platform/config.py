@@ -137,6 +137,11 @@ class Settings:
     ai_learner_daily_tokens: int = field(
         default_factory=lambda: _get_int("TALEEM_AI_LEARNER_DAILY_TOKENS", 20_000)
     )
+    # Safeguarding "acknowledge within" thresholds, JSON {"T1": seconds, ...}. UNSET by default and
+    # deliberately so: the SLA is an owner decision (FD-06); no number is invented here.
+    safeguarding_ack_sla_json: str = field(
+        default_factory=lambda: _get("TALEEM_SAFEGUARDING_ACK_SLA_SECONDS", "")
+    )
 
     @property
     def is_production(self) -> bool:

@@ -14,6 +14,7 @@ import { LanguagePicker } from "./LanguagePicker";
 const NAV = [
   { href: "/guardian", key: "guardian.shell.dashboard" },
   { href: "/guardian/family", key: "guardian.shell.family" },
+  { href: "/guardian/concerns", key: "safeguarding.guardian.nav" },
 ] as const;
 
 export function GuardianShell({ title, children }: { title: string; children: ReactNode }) {

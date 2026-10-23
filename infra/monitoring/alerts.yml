@@ -16,6 +16,11 @@
 #   taleem_rate_limit_store_errors_total{scope} shared limiter fell back (identity/adapters/rate_limit.py)
 #   taleem_db_pool_checked_out / _capacity      SQLAlchemy pool gauges per scrape {pool}
 #   taleem_backup_last_success_timestamp_seconds  textfile metric, infra/monitoring/record_backup_success.sh
+#   taleem_safeguarding_concerns_unacknowledged{priority}  gauge per scrape, read from the DB (main.py)
+#   taleem_safeguarding_concerns_overdue{priority}  gauge per scrape; 0 while no SLA is set (FD-06)
+#   taleem_safeguarding_sla_configured         gauge per scrape: 1 only when every tier has a threshold
+#   taleem_safeguarding_gauge_errors_total     the scrape could not read the safeguarding queue
+#   taleem_safeguarding_concerns_raised_total{priority,raised_by}  counter (no alert; for dashboards)
 #   up                                          Prometheus' own scrape result for the job below
 #
 # Scrape job name assumed: taleem-core-api (see infra/monitoring/prometheus.yml).
@@ -238,3 +243,69 @@ groups:
           summary: "No backup job has ever reported success"
           description: "taleem_backup_last_success_timestamp_seconds is absent. Today this is EXPECTED: no scheduled backup exists (BACKUP_RESTORE_RUNBOOK.md §5)."
           runbook: "MONITORING_RUNBOOK.md#taleembackupstale"
+
+  # Child-safety signals. Routed by `team: safeguarding`, which NO receiver handles yet: the
+  # destination (the safeguarding lead's pager or rota) is UNCONFIGURED until M-Safe. These outrank
+  # every availability alert above (MONITORING_RUNBOOK.md overriding rule). The gauges are read from
+  # the database, so every instance reports the same value and the rules take `max`.
+  - name: taleem-safeguarding
+    rules:
+      - alert: TaleemSafeguardingConcernAwaiting
+        expr: max by (priority) (taleem_safeguarding_concerns_unacknowledged{priority="T1"}) > 0
+        for: 0m
+        labels:
+          severity: critical
+          service: core-api
+          team: safeguarding
+        annotations:
+          summary: "{{ $value | humanize }} unacknowledged {{ $labels.priority }} safeguarding concern(s)"
+          description: "A child or guardian raised a T1 concern (felt unsafe / very sad) that no safeguarding lead has acknowledged. Destination unconfigured until M-Safe."
+          runbook: "MONITORING_RUNBOOK.md#taleemsafeguardingconcernawaiting"
+
+      - alert: TaleemSafeguardingConcernAwaitingLowerTier
+        expr: max by (priority) (taleem_safeguarding_concerns_unacknowledged{priority=~"T2|T3"}) > 0
+        for: 0m
+        labels:
+          severity: warning
+          service: core-api
+          team: safeguarding
+        annotations:
+          summary: "{{ $value | humanize }} unacknowledged {{ $labels.priority }} safeguarding concern(s)"
+          description: "A T2/T3 concern is waiting for a safeguarding lead. Destination unconfigured until M-Safe."
+          runbook: "MONITORING_RUNBOOK.md#taleemsafeguardingconcernawaiting"
+
+      - alert: TaleemSafeguardingConcernOverdue
+        expr: max by (priority) (taleem_safeguarding_concerns_overdue) > 0
+        for: 0m
+        labels:
+          severity: critical
+          service: core-api
+          team: safeguarding
+        annotations:
+          summary: "{{ $value | humanize }} {{ $labels.priority }} safeguarding concern(s) past the configured SLA"
+          description: "Unacknowledged past TALEEM_SAFEGUARDING_ACK_SLA_SECONDS for the tier. Never fires while the SLA is unset (FD-06). Destination unconfigured until M-Safe."
+          runbook: "MONITORING_RUNBOOK.md#taleemsafeguardingconcernoverdue"
+
+      - alert: TaleemSafeguardingSlaNotSet
+        expr: max(taleem_safeguarding_sla_configured) == 0
+        for: 1h
+        labels:
+          severity: warning
+          service: core-api
+          team: safeguarding
+        annotations:
+          summary: "Safeguarding SLA not set: owner decision FD-06"
+          description: "At least one tier has no acknowledge-within threshold, so overdue concerns cannot be detected for it. EXPECTED today: the SLA is an owner decision (FD-06)."
+          runbook: "MONITORING_RUNBOOK.md#taleemsafeguardingslanotset"
+
+      - alert: TaleemSafeguardingGaugesFailing
+        expr: sum(increase(taleem_safeguarding_gauge_errors_total[10m])) > 0
+        for: 0m
+        labels:
+          severity: critical
+          service: core-api
+          team: safeguarding
+        annotations:
+          summary: "The scrape cannot read the safeguarding queue"
+          description: "The waiting and overdue concern alerts are blind while this fires. Destination unconfigured until M-Safe."
+          runbook: "MONITORING_RUNBOOK.md#taleemsafeguardinggaugesfailing"

@@ -25,16 +25,38 @@ _REVIEWER_ROLES = (
     "safety_officer",
 )
 _CURRICULUM_ROLES = ("subject_author", "curriculum_architect", *_REVIEWER_ROLES)
-# Public view of the Studio role set: the roles an operator-provisioned staff account may hold
-# (identity/domain/staff.py pins its own copy equal to this one in a test).
+# Public view of the Studio role set.
 CURRICULUM_ROLES: tuple[str, ...] = _CURRICULUM_ROLES
+# The safeguarding triage role (contexts/safeguarding). Deliberately NOT a Studio role and holding
+# no curriculum, learning, school or identity permission: it reads safeguarding concerns and nothing
+# else. The doc-15 "Safety Officer" curriculum reviewer (`safety_officer`) is a different role.
+SAFEGUARDING_ROLES: tuple[str, ...] = ("safeguarding_lead",)
+# Every role an operator-provisioned staff account may hold (identity/domain/staff.py pins its own
+# copy equal to this one in a test).
+STAFF_ACCOUNT_ROLES: tuple[str, ...] = (*_CURRICULUM_ROLES, *SAFEGUARDING_ROLES)
 
 
 def _staff_rules() -> set[tuple[str, str, str]]:
-    """Operators provision and suspend Studio staff; each staff role reads its own account."""
+    """Operators provision and suspend staff; each staff role reads its own account."""
     rules = {("system", "manage", "identity.staff")}
-    rules |= {(r, "read", "identity.staff_self") for r in _CURRICULUM_ROLES}
+    rules |= {(r, "read", "identity.staff_self") for r in STAFF_ACCOUNT_ROLES}
     return rules
+
+
+def _safeguarding_rules() -> set[tuple[str, str, str]]:
+    """Safeguarding concerns (contexts/safeguarding).
+
+    A child and a guardian may *raise* a concern; which learner a guardian may name, and that a
+    guardian lists only concerns they raised, are ownership rules the service settles against the
+    token subject. Only ``safeguarding_lead`` triages (reads the queue, free text, notes, audit).
+    No teacher, mentor, operator or other staff role is listed: they are denied by default.
+    """
+    return {
+        ("student", "raise", "safeguarding.concern"),
+        ("guardian", "raise", "safeguarding.concern"),
+        ("guardian", "read", "safeguarding.own_concern"),
+        ("safeguarding_lead", "triage", "safeguarding.concern"),
+    }
 
 
 def _curriculum_rules() -> set[tuple[str, str, str]]:
@@ -109,6 +131,7 @@ _ALLOW: frozenset[tuple[str, str, str]] = frozenset(
         *_identity_rules(),
         *_school_rules(),
         *_staff_rules(),
+        *_safeguarding_rules(),
     }
 )
 

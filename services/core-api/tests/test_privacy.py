@@ -37,6 +37,11 @@ from taleem_core.contexts.privacy.domain.policy import (
     RetainedSet,
     RetentionPolicy,
 )
+from taleem_core.contexts.safeguarding.adapters.persistence.base import SafeguardingBase
+from taleem_core.contexts.safeguarding.adapters.persistence.models import (
+    ConcernAuditRow,
+    ConcernRow,
+)
 from taleem_core.contexts.school.adapters.persistence.base import SchoolBase
 from taleem_core.contexts.school.adapters.persistence.models import (
     ClassroomRow,
@@ -64,7 +69,9 @@ _SCHEMAS: tuple[tuple[MetaData, str], ...] = (
     (CurriculumBase.metadata, "studio_session_factory"),
     (OpsBase.metadata, "ops_session_factory"),
     (SchoolBase.metadata, "school_session_factory"),
+    (SafeguardingBase.metadata, "safeguarding_session_factory"),
 )
+_CHILD_WORDS = "someone at home frightens me"
 
 
 def _dispose(app: FastAPI) -> None:
@@ -233,6 +240,19 @@ def _activity(client: TestClient, app: FastAPI, fam: dict[str, Any]) -> None:
     app.state.ai_cost_ledger.record(
         UsageRecord("stub", Tier.LIGHT, 10, 5, 0, "ai_teacher.rephrase", ref, 1.0)
     )
+    # Safeguarding: one concern the child raised, one the guardian raised about the child.
+    child = client.post(
+        "/v1/safeguarding/concerns",
+        json={"category": "felt_unsafe", "text": _CHILD_WORDS},
+        headers=h,
+    )
+    assert child.status_code == 201, child.text
+    guardian = client.post(
+        "/v1/safeguarding/concerns",
+        json={"category": "bullying", "studentRef": ref, "text": "older pupils"},
+        headers=fam["auth"],
+    )
+    assert guardian.status_code == 201, guardian.text
 
 
 # ------------------------------------------------------------------------- scanning
@@ -266,7 +286,7 @@ def _memory_hits(app: FastAPI, ref: str) -> dict[str, int]:
 # ------------------------------------------------------------------------- the journey
 
 
-def _exercise(app: FastAPI, *, blocked: bool = False) -> None:
+def _exercise(app: FastAPI, *, blocked: bool = False, safeguarding_kept: bool = True) -> None:
     _publish(app)
     client = TestClient(app)
     fam = _family(client, "Ayesha")
@@ -286,6 +306,8 @@ def _exercise(app: FastAPI, *, blocked: bool = False) -> None:
         "learning.assessment_evidence",
         "school.enrolment",
         "school.enrolment_audit",
+        "safeguarding.concern",
+        "safeguarding.concern_audit",
     } <= set(before), before
     assert _memory_hits(app, ref)  # live session, sync entity, AI usage
 
@@ -318,6 +340,10 @@ def _exercise(app: FastAPI, *, blocked: bool = False) -> None:
     assert [u["learner_ref"] for u in usage] == [ref]
     assert sections["guardian"]["stored_rows"] == 0
     assert other["ref"] not in json.dumps(bundle)  # nothing about another family leaks
+    # Safeguarding: the guardian's own concern is exported; the child's is withheld, silently.
+    raised = sections["safeguarding"]["concerns_raised_by_guardian"]
+    assert [c["text"] for c in raised] == ["older pupils"]
+    assert _CHILD_WORDS not in json.dumps(bundle) and sections["safeguarding"]["withheld"]
 
     if blocked:
         # Fail closed: no token is issued and not one row anywhere is touched.
@@ -360,6 +386,18 @@ def _exercise(app: FastAPI, *, blocked: bool = False) -> None:
         events = s.scalars(select(AuditRow).where(AuditRow.subject_ref == tomb)).all()
         assert [e.action for e in events] == [TOMBSTONE_ACTION]
         assert events[0].detail["retained"]["student_ref_retained"] is False
+    # Safeguarding concerns follow the explicit retained-set entry (PENDING M-Gov), never silently.
+    kept = receipt["retained"]["safeguarding_concerns"]
+    assert kept["kept"] is safeguarding_kept and "PENDING M-Gov" in kept["approval"]
+    with app.state.safeguarding_session_factory() as s:
+        concerns = s.scalars(select(ConcernRow).where(ConcernRow.subject_ref == tomb)).all()
+        raised = s.scalars(select(ConcernAuditRow).where(ConcernAuditRow.actor_ref == tomb)).all()
+    if safeguarding_kept:  # re-keyed to the tombstone: the record survives, the ref does not
+        assert sorted(c.raised_by_role for c in concerns) == ["guardian", "student"]
+        assert [c.raised_by_ref for c in concerns if c.raised_by_role == "student"] == [tomb]
+        assert [a.action for a in raised] == ["concern.raised"]
+    else:
+        assert concerns == [] and raised == []
 
     # Afterwards: the learner is gone everywhere it could be named; a replay is a 404.
     replay = client.post(url, json={"confirmationToken": token}, headers=fam["auth"])
@@ -382,6 +420,22 @@ def _exercise(app: FastAPI, *, blocked: bool = False) -> None:
 
 def test_erasure_is_complete_across_every_schema_over_sqlite() -> None:
     _exercise(create_app(Settings(database_url="", kdf_iterations=_FAST_KDF)))
+
+
+def test_erasure_can_be_configured_to_delete_safeguarding_concerns(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    monkeypatch.setenv("TALEEM_PRIVACY_SAFEGUARDING_CONCERNS", "erase")
+    app = create_app(Settings(database_url="", kdf_iterations=_FAST_KDF))
+    _exercise(app, safeguarding_kept=False)
+
+
+def test_safeguarding_retention_mode_is_validated() -> None:
+    assert RetainedSet().retain_safeguarding is True  # the default, stated in describe()
+    described = RetainedSet().describe()["safeguarding_concerns"]
+    assert isinstance(described, dict) and described["mode"] == "retain_pseudonymised"
+    with pytest.raises(PolicyError):
+        RetainedSet(safeguarding_concerns="keep_forever")
 
 
 PG_URL = os.environ.get("CS_DATABASE_URL")

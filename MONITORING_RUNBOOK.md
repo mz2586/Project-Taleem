@@ -45,6 +45,11 @@ of series stays bounded however many sessions and learners exist. Unrouted reque
 | `taleem_rate_limited_total{scope}` | counter | Requests refused with 429 by the shared limiter. |
 | `taleem_db_pool_checked_out{pool}` / `taleem_db_pool_capacity{pool}` | gauge | SQLAlchemy pool connections in use vs `size + max_overflow`, per pool (`curriculum`, `learning`, `ops`, `identity`; school shares `identity`). |
 | `taleem_backup_last_success_timestamp_seconds` | gauge (textfile) | Written by [`infra/monitoring/record_backup_success.sh`](infra/monitoring/record_backup_success.sh) after a successful backup. No scheduled backup calls it yet. |
+| `taleem_safeguarding_concerns_unacknowledged{priority}` | gauge | Safeguarding concerns still `open` (no lead has acknowledged), per tier `T1`–`T3`. Read from the database at scrape time, so every instance reports the same value. |
+| `taleem_safeguarding_concerns_overdue{priority}` | gauge | Unacknowledged concerns past the configured SLA for the tier. Always `0` for a tier with no threshold (the SLA is FD-06). |
+| `taleem_safeguarding_sla_configured` | gauge | `1` only when every tier has a threshold in `TALEEM_SAFEGUARDING_ACK_SLA_SECONDS`. |
+| `taleem_safeguarding_concerns_raised_total{priority,raised_by}` | counter | Concerns raised, by tier and by `student` / `guardian`. No ref, no category, no text. |
+| `taleem_safeguarding_gauge_errors_total` | counter | The scrape could not read the safeguarding queue (the gauges above are then stale). |
 | `taleem_sessions_started_total`, `taleem_objectives_mastered_total`, `taleem_misconceptions_detected_total` | counter | Learning activity. |
 
 The same signals are summarised, authenticated, at **`GET /v1/ops/status`** (role `system` or
@@ -98,7 +103,7 @@ Only a `system` operator may flip it (deny-by-default PDP). See INCIDENT_RESPONS
 
 | File | Purpose |
 | --- | --- |
-| [`infra/monitoring/alerts.yml`](infra/monitoring/alerts.yml) | Prometheus alerting rules (16 rules in 6 groups). |
+| [`infra/monitoring/alerts.yml`](infra/monitoring/alerts.yml) | Prometheus alerting rules (21 rules in 7 groups). |
 | [`infra/monitoring/alerts_test.yml`](infra/monitoring/alerts_test.yml) | `promtool test rules` cases: each alert fires on a bad synthetic series and stays quiet on a good one. |
 | [`infra/monitoring/prometheus.yml`](infra/monitoring/prometheus.yml) | Template scrape config (job `taleem-core-api`); placeholder targets, no Alertmanager. |
 | [`infra/monitoring/check_rules.sh`](infra/monitoring/check_rules.sh) | Runs `promtool check rules`, `check config` and `test rules` (pinned Prometheus 2.53.2). `make alerts-check`; CI job `Alert rules (promtool)`. |
@@ -126,6 +131,14 @@ baseline exists; the dev-Codespace measurements behind them are in
 | `TaleemDbPoolExhausted` | critical | a pool 100% checked out for 2 min |
 | `TaleemBackupStale` | critical | last successful backup > 26 h old |
 | `TaleemBackupNeverReported` | warning | no backup has ever reported success (expected today) |
+| `TaleemSafeguardingConcernAwaiting` | critical, `team: safeguarding` | a T1 concern is unacknowledged |
+| `TaleemSafeguardingConcernAwaitingLowerTier` | warning, `team: safeguarding` | a T2/T3 concern is unacknowledged |
+| `TaleemSafeguardingConcernOverdue` | critical, `team: safeguarding` | a concern is past its configured SLA (never while unset) |
+| `TaleemSafeguardingSlaNotSet` | warning, `team: safeguarding` | a tier has no SLA threshold for 1 h (expected today: FD-06) |
+| `TaleemSafeguardingGaugesFailing` | critical, `team: safeguarding` | the scrape could not read the safeguarding queue |
+
+The `team: safeguarding` rules go to the safeguarding lead, not to engineering on-call — and **no
+receiver routes that label yet**. The destination is unconfigured until M-Safe (§6).
 
 ---
 
@@ -221,6 +234,35 @@ backup job has ever reported — **expected today**, because no scheduled backup
 dump and the drill (`make backup-drill`). The job must call `record_backup_success.sh` only after a
 verified dump.
 
+### TaleemSafeguardingConcernAwaiting
+
+**Meaning:** a child or a guardian raised a safeguarding concern and no safeguarding lead has
+acknowledged it (`…LowerTier` for T2/T3). This is a child-safety signal and outranks every technical
+alert. **First response:** the safeguarding lead signs in at `/safeguarding`, opens the concern and
+acknowledges it. Engineering never opens a concern's free text and never contacts the family. A
+concern a child raised may be about their own household: do not contact the guardian until they are
+ruled out ([docs/03-security-privacy/59-safeguarding-concerns.md](docs/03-security-privacy/59-safeguarding-concerns.md)).
+
+### TaleemSafeguardingConcernOverdue
+
+**Meaning:** an unacknowledged concern is older than the tier's configured threshold
+(`TALEEM_SAFEGUARDING_ACK_SLA_SECONDS`). It cannot fire while the SLA is unset. **First response:** as
+above, and record the breach for the safeguarding review.
+
+### TaleemSafeguardingSlaNotSet
+
+**Meaning:** at least one tier has no acknowledge-within threshold. **Expected today**: the numbers are
+an owner decision (FD-06); doc 52's values are planning assumptions awaiting clinical sign-off, and
+the software never invents one. **First response:** none in engineering; it resolves when the owner
+sets the thresholds.
+
+### TaleemSafeguardingGaugesFailing
+
+**Meaning:** `/metrics` could not read the safeguarding queue (database error), so the two alerts
+above are blind. **First response:** treat as a database incident (§`TaleemNotReady`); the log line
+`safeguarding_gauges_unavailable` carries the error type. Until fixed, the lead checks `/safeguarding`
+by hand.
+
 ---
 
 ## 6. Alert destination — not configured (owner decision, M-Safe)
@@ -234,7 +276,7 @@ engineering decision:
 | An Alertmanager (or the managed tool's router) with receivers per severity | `critical` pages, `warning` goes to a channel | Engineering, once the tool is chosen |
 | A paging tool account (for example PagerDuty or Opsgenie) | Somewhere a page can reach a phone | Owner / budget |
 | A staffed on-call rota with named primary and secondary | Master scope §19: on-call is ⚫ M-Safe | Owner + safeguarding lead |
-| Routing for child-safety signals to the safeguarding lead | Child-safety signals outrank availability (overriding rule above) | Safeguarding lead (M-Safe) |
+| Routing for child-safety signals to the safeguarding lead | Child-safety signals outrank availability (overriding rule above). The rules already carry `team: safeguarding`; a receiver matching that label must reach the lead's rota, not engineering on-call | Safeguarding lead (M-Safe) |
 
 When these exist: fill in the `alerting:` block in `infra/monitoring/prometheus.yml`, route
 `severity="critical"` to the pager, run a game-day that fires each alert once

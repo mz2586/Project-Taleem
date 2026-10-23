@@ -16,6 +16,7 @@ from sqlalchemy import engine_from_config, pool
 from taleem_core.contexts.curriculum_studio.adapters.persistence.base import SCHEMA, Base
 from taleem_core.contexts.identity.adapters.persistence.base import IdentityBase
 from taleem_core.contexts.learning.adapters.persistence.base import LearningBase
+from taleem_core.contexts.safeguarding.adapters.persistence.base import SafeguardingBase
 from taleem_core.contexts.school.adapters.persistence.base import SchoolBase
 
 config = context.config
@@ -31,6 +32,7 @@ target_metadata = [
     LearningBase.metadata,
     IdentityBase.metadata,
     SchoolBase.metadata,
+    SafeguardingBase.metadata,
 ]
 
 

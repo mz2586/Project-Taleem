@@ -111,8 +111,9 @@ def _audit(app: FastAPI, staff_ref: str) -> list[str]:
 # ------------------------------------------------------------------------------- provisioning
 
 
-def test_the_staff_role_set_is_exactly_the_studio_role_set() -> None:
-    assert set(STAFF_ROLES) == set(pdp.CURRICULUM_ROLES)
+def test_the_staff_role_set_is_exactly_the_pdp_staff_role_set() -> None:
+    assert set(STAFF_ROLES) == set(pdp.STAFF_ACCOUNT_ROLES)
+    assert set(pdp.STAFF_ACCOUNT_ROLES) == set(pdp.CURRICULUM_ROLES) | {"safeguarding_lead"}
     assert not {"student", "guardian", "teacher", "mentor", "system"} & set(STAFF_ROLES)
 
 

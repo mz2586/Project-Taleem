@@ -353,7 +353,8 @@ test("control: a deliberately inaccessible page is flagged", async ({ page }) =>
   expect(rules).toEqual(expect.arrayContaining(["image-alt", "button-name", "label"]));
 });
 
-const PUBLIC_ROUTES = ["/", "/join", "/signin", "/guardian/signin", "/teacher/signin"];
+// /safeguarding signed out is the safeguarding lead's sign-in form.
+const PUBLIC_ROUTES = ["/", "/join", "/signin", "/guardian/signin", "/teacher/signin", "/safeguarding"];
 const TEACHER_ROUTES = [
   "/teacher",
   "/teacher/classes/:classId",
@@ -367,11 +368,18 @@ const STUDENT_ROUTES = [
   "/student/profile",
   "/student/session",
   "/student/offline",
+  // "Tell a grown-up" (safeguarding), opened from a screen the way the header link opens it.
+  "/student/help?from=student%2Ftoday",
   // The fixture lesson is published but not downloaded into this fresh browser, so this scans the
   // player's "not saved on this phone" state, not a lesson mid-play.
   "/student/offline/play?lesson=E2E-SYNTHETIC-FIXTURE-fractions",
 ];
-const GUARDIAN_ROUTES = ["/guardian", "/guardian/family", "/guardian/children/:studentRef"];
+const GUARDIAN_ROUTES = [
+  "/guardian",
+  "/guardian/family",
+  "/guardian/children/:studentRef",
+  "/guardian/concerns",
+];
 
 for (const locale of LOCALES) {
   test.describe(`locale ${locale}`, () => {
