@@ -1,7 +1,7 @@
 # Project Taleem — Master Product Scope & Roadmap
 
 **Status:** Living document — the single authoritative scope-status and execution reference ·
-**Last updated:** 2026-10-23 · **Repository HEAD at last update:** `23fcb63`
+**Last updated:** 2026-10-23 · **Repository HEAD at last update:** `e73a446`
 
 **Binding product definition:** [`docs/GLOBAL_PRODUCT_SCOPE.md`](docs/GLOBAL_PRODUCT_SCOPE.md)
 (adopted and revised 2026-10-22). That document says *what* the product must be — a global platform
@@ -280,7 +280,7 @@ on and CI enforces.
 | Grade / age placement at enrolment | 🟢 | `grade_band`, `grade_level` (KG–12) |
 | Student profile screen | 🟡 | `/student/profile` exists but reads the dev-stub learner, not the identity API |
 | **Onboarding UI (join, consent, sign-in screens)** | 🔴 | No `/join`, `/consent`, or `/signin` route exists. The API is complete; the journey has no interface |
-| Diagnostic placement assessment | 🔴 | Not implemented. Grade is declared by the guardian, not measured |
+| Diagnostic placement assessment | 🟡 | Built (`5524063`); see §20. Previously: Not implemented. Grade is declared by the guardian, not measured |
 
 ### 5.2 Student dashboard
 
@@ -617,11 +617,11 @@ either name reappears.
 | **M-Gov**: DPIA signed, consent model approved, mandatory-reporting policy, external safety review, data residency decided | ⚫ | DPO / legal / founder |
 | **M-Safe**: distress→human within SLA proven in a drill, reporting workflow tested, on-call staffed | ⚫ | Safeguarding lead |
 | Distress detection in learner input | 🔴 | Engineering, after M-Gov |
-| Safeguarding triage queue and reviewer console | 🔴 | Engineering |
-| Abuse reporting route for a child or guardian | 🔴 | Engineering |
+| Safeguarding triage queue and reviewer console | 🟡 Built, not approved (`e73a446`) — needs M-Safe drill, FD-06 SLA, staffed rota | Engineering → Safeguarding lead |
+| Abuse reporting route for a child or guardian | 🟡 Built, not approved (`e73a446`): "Tell a grown-up" for children, concern page for guardians; never contacts anyone automatically (FD-04) | Engineering → Safeguarding lead |
 | Age verification beyond guardian declaration | 🔴 | Product / legal |
-| Data retention schedule and automated purge | 🔴 | Engineering + legal |
-| Subject access, export, and erasure workflows | 🔴 | Engineering + legal |
+| Data retention schedule and automated purge | 🟡 Purge mechanism and dry-run built (`59ff51c`); every period unset pending M-Gov | Legal |
+| Subject access, export, and erasure workflows | 🟡 Built and tested across every schema (`59ff51c`, `f6105b7`); retained set pending M-Gov | Legal |
 | Independent child-safety review of the AI path | ⚫ | External reviewer |
 
 **Standing position:** [`GO_NO_GO_DECISION.md`](GO_NO_GO_DECISION.md) records **NO-GO for Pilot 1
@@ -870,7 +870,7 @@ Status vocabulary (adopted 2026-10-22, replacing the earlier colour key for this
 | Notifications delivery | F | R2 | in-progress | In-app read state only | Channels — SMS/email **blocked** on a cost decision |
 | Security (headers, CORS, validation, lockout, uniform errors, audit, dependency scanning) | G | R1 | complete-and-verified | 5 dedicated test modules + boundary audit; pip-audit clean; production npm audit 0 on Next 15.5.28 (`72b6439`); `security.yml` + dependabot | External pentest — **blocked** (commission, EV-04) |
 | Privacy (minimisation, pseudonymity, export, erasure, retention) | G | R1 | implemented-but-unverified | `contexts/privacy/*`: guardian export; two-step signed erasure across every schema with a metadata-introspection completeness gate (`59ff51c`); PG erasure enabled by migration `0009` (evidence delete only inside erasure; update still forbidden) (`f6105b7`); retention policy present but **all periods unset** | Retention periods, tombstone contents, DPIA, privacy notice — **blocked** on M-Gov |
-| Child safety (consent gates, kill switch) | B, F, G | R1 | in-progress | Sign-in, refresh, sync, and **every learner request** consent-gated against live identity state (`a815497`, `c8ab6f3`); AI path consent-gated | Distress detection, triage, abuse reporting; sign-off **blocked** on M-Gov/M-Safe |
+| Child safety (consent gates, kill switch, concern reporting, triage) | B, F, G | R1 | implemented-but-unverified | Consent-gated sign-in, refresh, sync and every learner request (`a815497`, `c8ab6f3`); concern reporting + safeguarding-lead triage queue, child-raised concerns invisible to guardians, works under kill switch and after consent withdrawal (`e73a446`, alembic `0012`) | Distress detection (no child free-text chat exists yet); approval, drill, SLA, referral channels — **blocked** on M-Safe / FD-04 / FD-06 |
 | Operations (health, metrics, kill switch, runbooks, simulator, CI, e2e, backup) | G | R1 | complete-and-verified | CI `e2e-journey` job; `make backup-drill` PASS (restore 0.66 s on dev Codespace data, [`BACKUP_RESTORE_RUNBOOK.md`](BACKUP_RESTORE_RUNBOOK.md)) | Alerting to a staffed destination; drill on production-sized data |
 | Production deployment | G | R1 | implemented-but-unverified | `vercel.json`, `api/index.py`, build-step migrations | Provision and verify a live environment with recorded health evidence |
 | Per-learner AI and operating cost tracking, quotas | B, G | R2 | complete-and-verified | Durable `learning.ai_usage_ledger` (alembic `0007`), quota shared across instances, fallback to the authored engine (`d11695b`, PG-gated tests) | Quota values — ⚫ FD-07; ledger retention period — ⚫ M-Gov |
@@ -1147,6 +1147,7 @@ Optional or later: generative AI (R2, FD-03), Taleem School (R3–R4, #26), voic
 | Date | Change | Author |
 | --- | --- | --- |
 | 2026-09-06 | Initial master scope and roadmap, authored against repository HEAD `23747f9`. | Engineering |
+| 2026-10-23 | Safeguarding concern reporting and triage (`e73a446`); diagnostic placement and explainable recommendations (`5524063`). | Engineering |
 | 2026-10-23 | Performance fixes (`d0cc01f`); cross-learner leak in progress counts fixed (`23fcb63`). | Engineering |
 | 2026-10-23 | Ed25519 fallback for older Android (`4b7e96a`, `97d62e2`); load/soak/spike evidence and alert rules (`f64fce6`); blockers #14 and #15 narrowed. | Engineering |
 | 2026-10-23 | Integration cycle 4: staff sign-in, teacher refresh and durable school audit; browser journey in CI found and fixed a critical lesson-start bug; student journey now complete-and-verified. | Engineering |
