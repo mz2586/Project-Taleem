@@ -3,7 +3,8 @@
 Covers the parser over the real documents (counts per subject), prerequisite-DAG validation (cycle +
 dangling prereq fixtures), idempotency, provenance enforcement (a prohibited source is refused),
 drafts-only (no lesson leaves ``draft``, no gate is recorded, nothing authored is invented), the
-``--check`` staleness mode, and an end-to-end write over SQLite and a PostgreSQL-gated variant.
+``--check`` staleness mode, hierarchy persistence + chapter/topic linking, and an end-to-end write
+over SQLite and a PostgreSQL-gated variant.
 """
 
 from __future__ import annotations
@@ -23,6 +24,7 @@ from taleem_core.contexts.curriculum_studio.adapters.persistence import (
 )
 from taleem_core.contexts.curriculum_studio.application.service import CurriculumStudioService
 from taleem_core.contexts.curriculum_studio.domain.content import Hint, Locale, LocalizedText
+from taleem_core.contexts.curriculum_studio.domain.hierarchy import EducationSystem
 from taleem_core.contexts.curriculum_studio.domain.lesson import Lesson
 from taleem_core.contexts.curriculum_studio.domain.provenance import Derivation, ProvenanceError
 from taleem_core.contexts.curriculum_studio.domain.workflow import ReviewAction, WorkflowState
@@ -536,6 +538,122 @@ def test_non_draft_lessons_are_not_touched(
     assert len(drafts) == TOTAL - 1
 
 
+# ---------------------------------------------------------------- hierarchy + placement
+
+
+def _tree(system: EducationSystem | None) -> object:
+    """Comparable structure of a stored hierarchy (keys, canonical ids, titles)."""
+    assert system is not None
+    return [
+        (
+            g.grade_id,
+            [
+                (
+                    s.subject_id,
+                    dict(s.title.text),
+                    [
+                        (c.chapter_id, dict(c.title.text), [t.topic_id for t in c.topics])
+                        for c in s.chapters
+                    ],
+                )
+                for s in g.subjects
+            ],
+        )
+        for g in system.grades
+    ]
+
+
+def _assert_every_draft_linked(lessons: list[Lesson], system: EducationSystem | None) -> None:
+    assert system is not None
+    known = ci._placements(system)
+    assert len(lessons) == TOTAL
+    for lesson in lessons:
+        meta = lesson.metadata
+        assert meta.chapter_key and meta.topic_key, lesson.lesson_id
+        assert (meta.subject_key, meta.chapter_key, meta.topic_key) in known, lesson.lesson_id
+        # The placement agrees with the spine tags the drafts already carried.
+        assert f"unit:{meta.chapter_key}" in meta.tags
+        assert f"topic:{meta.topic_key}" in meta.tags
+
+
+def test_run_persists_the_hierarchy_and_links_every_draft(
+    spine: cs.Spine, contents: dict[str, cc.AuthoredContent]
+) -> None:
+    service = ci.in_memory_service()
+    result = ci.run(spine, contents, service)
+    stored = service.get_hierarchy("PK-NCP")
+    assert _tree(stored) == _tree(result.hierarchy)
+    assert stored is not None and [g.key for g in stored.grades] == ["G4"]
+    assert {s.key for s in stored.grades[0].subjects} == set(EXPECTED_BY_SUBJECT)
+    chapters = sum(len(s.chapters) for s in stored.grades[0].subjects)
+    assert chapters == sum(len(t.units) for t in spine.tracks)
+    _assert_every_draft_linked(service.list(), stored)
+    assert all(x.workflow.state is WorkflowState.DRAFT for x in service.list())
+    # New drafts are created already placed; nothing needed linking afterwards.
+    assert result.links.linked == [] and len(result.links.current) == TOTAL
+
+
+def test_rerun_leaves_hierarchy_and_links_unchanged(
+    spine: cs.Spine, contents: dict[str, cc.AuthoredContent]
+) -> None:
+    service = ci.in_memory_service()
+    ci.run(spine, contents, service)
+    tree = _tree(service.get_hierarchy("PK-NCP"))
+    before = {x.lesson_id: x.to_dict() for x in service.list()}
+    again = ci.run(spine, contents, service)
+    assert _tree(service.get_hierarchy("PK-NCP")) == tree
+    assert again.links.linked == [] and len(again.links.current) == TOTAL
+    assert {x.lesson_id: x.to_dict() for x in service.list()} == before
+
+
+def test_existing_unplaced_drafts_are_linked_and_others_respected(
+    spine: cs.Spine, contents: dict[str, cc.AuthoredContent]
+) -> None:
+    service = ci.in_memory_service()
+    ci.ingest(spine, service)
+    # A draft from before placement existed (no keys), one an author placed elsewhere, and one
+    # that has left draft.
+    unplaced = service.get("L-math-g4-nb-place-value")
+    unplaced.metadata.chapter_key = unplaced.metadata.topic_key = ""
+    service.update(unplaced)
+    moved = service.get("L-sci-g4-liv-01")
+    moved.metadata.chapter_key, moved.metadata.topic_key = "SCI-G4-U9", "SCI-G4-U9-X"
+    service.update(moved)
+    unplaced_before = service.get("L-math-g4-nb-place-value").content_hash()
+    result = ci.run(spine, contents, service)
+    assert "L-math-g4-nb-place-value" in result.links.linked
+    linked = service.get("L-math-g4-nb-place-value")
+    assert linked.workflow.state is WorkflowState.DRAFT
+    assert (linked.metadata.chapter_key, linked.metadata.topic_key) == (
+        "MATH-G4-U1",
+        next(o.topic for o in spine.objectives if o.code == "MATH-G4-NB-02"),
+    )
+    assert linked.content_hash() != unplaced_before  # placement is content once set
+    assert result.links.kept == ["L-sci-g4-liv-01"]
+    assert service.get("L-sci-g4-liv-01").metadata.chapter_key == "SCI-G4-U9"
+
+
+def test_placement_outside_the_stored_hierarchy_fails_closed(spine: cs.Spine) -> None:
+    service = ci.in_memory_service()
+    ci.ingest(spine, service)
+    lesson_ids = {e.code: e.lesson_id for e in ci.plan(spine, service.list()).entries}
+    empty = EducationSystem(system_id="", key="PK-NCP", name="", grades=[])
+    with pytest.raises(cs.SpineError, match="is not in the stored hierarchy"):
+        ci.link_placement(spine, service, empty, lesson_ids)
+
+
+def test_unplaced_lessons_keep_their_hash() -> None:
+    lesson = build_fractions_lesson()
+    assert lesson.metadata.chapter_key == lesson.metadata.topic_key == ""
+    # The hash taken on main before placement keys existed (also asserted in test_curriculum_packs).
+    assert lesson.content_hash() == (
+        "sha256:ce1a6c726a9210c36b2a39562f20a464c8148a3e7c37e73521734f738085c1f9"
+    )
+    placed = build_fractions_lesson()
+    placed.metadata.chapter_key = "MATH-G4-U3"
+    assert placed.content_hash() != lesson.content_hash()
+
+
 # ---------------------------------------------------------------- CLI: --dry-run / --check
 
 
@@ -602,15 +720,50 @@ def _db_lessons(url: str) -> list[Lesson]:
         engine.dispose()
 
 
+def _db_hierarchy(url: str) -> EducationSystem | None:
+    engine = create_db_engine(url)
+    try:
+        with unit_of_work(create_session_factory(engine)) as uow:
+            svc = CurriculumStudioService(uow.lessons, uow.publish, hierarchy=uow.hierarchy)
+            return svc.get_hierarchy("PK-NCP")
+    finally:
+        engine.dispose()
+
+
+def _db_placement_rows(url: str) -> dict[str, tuple[str, str]]:
+    from sqlalchemy import select
+
+    from taleem_core.contexts.curriculum_studio.adapters.persistence.models import LessonRow
+
+    engine = create_db_engine(url)
+    try:
+        with unit_of_work(create_session_factory(engine)) as uow:
+            rows = uow.session.execute(
+                select(LessonRow.lesson_key, LessonRow.chapter_key, LessonRow.topic_key)
+            ).all()
+            return {r[0]: (r[1], r[2]) for r in rows}
+    finally:
+        engine.dispose()
+
+
 def _end_to_end(url: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     root = _copy_docs(tmp_path)
     monkeypatch.setenv("CS_DATABASE_URL", url)
     assert ci.main(["--dry-run", "--root", str(root)]) == 0  # read-only plan (rolled back)
     assert _db_lessons(url) == []
+    assert _db_hierarchy(url) is None
     assert ci.main(["--root", str(root)]) == 0
     lessons = _db_lessons(url)
     assert len(lessons) == TOTAL
     _assert_honest_run(lessons)
+    # The hierarchy is stored once and every draft links to an existing chapter/topic, in the
+    # body and in the lesson table's placement columns.
+    stored = _db_hierarchy(url)
+    tree = _tree(stored)
+    _assert_every_draft_linked(lessons, stored)
+    columns = _db_placement_rows(url)
+    for x in lessons:
+        assert columns[x.lesson_id] == (x.metadata.chapter_key, x.metadata.topic_key)
     # Idempotent over a real database round trip: nothing is re-created or re-imported, and no
     # imported field reads back as an "author edit" (fingerprints survive persistence).
     spine, contents = ci.load_inputs(root)
@@ -618,8 +771,11 @@ def _end_to_end(url: str, tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> No
     assert not again.ingest.created and len(again.ingest.skipped) == TOTAL
     assert again.imports.updated == []
     assert all(not e.author_edited for e in again.imports.entries)
+    assert again.links.linked == [] and len(again.links.current) == TOTAL
+    assert _tree(_db_hierarchy(url)) == tree  # unchanged on re-run
     assert ci.main(["--root", str(root)]) == 0
     assert len(_db_lessons(url)) == TOTAL
+    assert _tree(_db_hierarchy(url)) == tree
 
 
 def test_end_to_end_over_sqlite(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
@@ -639,5 +795,9 @@ def test_end_to_end_over_postgres(tmp_path: Path, monkeypatch: pytest.MonkeyPatc
     cfg.set_main_option("script_location", str(base / "alembic"))
     command.downgrade(cfg, "base")
     command.upgrade(cfg, "head")
-
-    _end_to_end(PG_URL or "", tmp_path, monkeypatch)
+    try:
+        _end_to_end(PG_URL or "", tmp_path, monkeypatch)
+    finally:
+        # Leave a clean schema: later API tests on this database expect no stored hierarchy.
+        command.downgrade(cfg, "base")
+        command.upgrade(cfg, "head")

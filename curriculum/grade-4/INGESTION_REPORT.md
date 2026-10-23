@@ -48,7 +48,7 @@ Ranked by remaining submission blockers, then failing gates. **None of these can
 - **Never invented:** text is split into Urdu and English only where the document writes both. A side it does not write stays empty and shows up below as a `title`/notes blocker. Practice and assessment lines in the documents are item *specifications* with no item wording, so no items are created from them.
 - **Not imported from the fixture:** audio pointers, the `m-fraction-circle` media reference, the offline-package id, and its accessibility note (which states audio and an image are provided). None of those assets exist in the repository.
 - **Marking:** every imported lesson carries `provisional`, `content-status:provisional-pending-review`, `imported-from:<doc §section>` and a `provenance-note:` tag, plus an `import-hash:<field>=…` fingerprint per field. A field an author has edited since is never overwritten (it is reported instead).
-- **Hierarchy:** grade `G4` → subjects → chapters (units) → topics (unit × domain) is built and validated as Studio hierarchy objects. The Studio service has no hierarchy persistence port, so placement travels as `unit:`/`topic:` tags and in `spine.json`.
+- **Hierarchy:** grade `G4` → subjects → chapters (units) → topics (unit × domain) is stored under the `PK-NCP` pack through `CurriculumStudioService.upsert_hierarchy` (6 subjects, 37 chapters, 39 topics). Every draft links to its chapter and topic by `metadata.chapter_key` / `metadata.topic_key`; the `unit:`/`topic:` tags remain.
 
 ## Gate status across all drafts
 

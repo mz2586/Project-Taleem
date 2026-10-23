@@ -11,7 +11,8 @@ Honesty rules (non-negotiable, enforced here and asserted by ``tests/test_curric
 - Ingested lessons are **drafts**. This tool never submits, reviews, approves or publishes, and
   never records a quality-gate result.
 - A new draft carries only what the spine states: code, ``[RE-EXPRESSED]`` outcome, difficulty,
-  duration, prerequisites, competency, assessment type, unit/topic placement (as tags) and, for
+  duration, prerequisites, competency, assessment type, unit/topic placement (as tags and as
+  ``metadata.chapter_key``/``topic_key``) and, for
   mathematics, the bilingual title from ``LESSON_CATALOG.md``.
 - Authored content is imported **verbatim** from the exemplar sections, the math lesson sections
   and the FR-01 fixture, and tagged ``provisional`` / ``content-status:provisional-pending-review``.
@@ -43,6 +44,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from ..contexts.curriculum_studio.application.repository import (
+    InMemoryHierarchyRepository,
     InMemoryLessonRepository,
     RecordingPublishPort,
 )
@@ -133,7 +135,13 @@ def build_draft(spine: Spine, o: Objective) -> Lesson:
     return Lesson(
         lesson_id=o.lesson_id,
         title=title,
-        metadata=Metadata(grade_key=GRADE_KEY, subject_key=o.subject_key, tags=_tags(o)),
+        metadata=Metadata(
+            grade_key=GRADE_KEY,
+            subject_key=o.subject_key,
+            tags=_tags(o),
+            chapter_key=o.unit,
+            topic_key=o.topic,
+        ),
         provenance=lesson_provenance(spine, o),
         # Only the SLO the lesson advances; strategy/escalation/forbidden behaviours are authored.
         ai_teaching_object=AITeachingObject(learning_goals=[o.code]),
@@ -149,9 +157,8 @@ def build_draft(spine: Spine, o: Objective) -> Lesson:
 def build_hierarchy(spine: Spine) -> EducationSystem:
     """Grade G4 -> subjects -> chapters (units) -> topics, as Studio hierarchy objects.
 
-    The Studio application service persists lessons only (there is no hierarchy repository/port),
-    so the hierarchy is validated here, carried on each lesson as ``unit:``/``topic:`` tags, and
-    published in ``spine.json``.
+    Persisted through ``CurriculumStudioService.upsert_hierarchy`` (``persist_hierarchy``); each
+    draft links to its chapter/topic by ``metadata.chapter_key``/``topic_key``.
     """
     subjects: dict[str, Subject] = {}
     for t in spine.tracks:
@@ -264,6 +271,67 @@ def ingest(spine: Spine, service: CurriculumStudioService) -> IngestResult:
     return result
 
 
+# --------------------------------------------------------------------------------- hierarchy
+
+
+def persist_hierarchy(spine: Spine, service: CurriculumStudioService) -> EducationSystem:
+    """Store the Grade 4 hierarchy under the PK-NCP pack (idempotent merge by key)."""
+    return service.upsert_hierarchy(SYSTEM_KEY, build_hierarchy(spine))
+
+
+@dataclass
+class LinkResult:
+    linked: list[str] = field(default_factory=list)  # lesson ids whose placement was written
+    current: list[str] = field(default_factory=list)  # already placed as the spine says
+    kept: list[str] = field(default_factory=list)  # placed elsewhere by an author: not changed
+    not_draft: list[str] = field(default_factory=list)  # past draft: never touched
+
+
+def _placements(system: EducationSystem) -> set[tuple[str, str, str]]:
+    """Every (subject, chapter, topic) in a stored hierarchy."""
+    return {
+        (subj.key, ch.key, tp.key)
+        for grade in system.grades
+        if grade.key == GRADE_KEY
+        for subj in grade.subjects
+        for ch in subj.chapters
+        for tp in ch.topics
+    }
+
+
+def link_placement(
+    spine: Spine,
+    service: CurriculumStudioService,
+    system: EducationSystem,
+    lesson_ids: Mapping[str, str],
+) -> LinkResult:
+    """Point each draft at its chapter/topic in the stored hierarchy (idempotent).
+
+    Only drafts are updated, only through ``CurriculumStudioService.update``. A placement must
+    exist in ``system`` (fails closed otherwise); a draft an author has placed elsewhere is kept.
+    """
+    known = _placements(system)
+    result = LinkResult()
+    for o in spine.objectives:
+        if (o.subject_key, o.unit, o.topic) not in known:
+            raise SpineError([f"{o.code}: {o.unit}/{o.topic} is not in the stored hierarchy"])
+        lesson = service.get(lesson_ids[o.code])
+        meta = lesson.metadata
+        if (meta.chapter_key, meta.topic_key) == (o.unit, o.topic):
+            result.current.append(lesson.lesson_id)
+        elif lesson.workflow.state is not WorkflowState.DRAFT:
+            result.not_draft.append(lesson.lesson_id)
+        elif meta.chapter_key or meta.topic_key:
+            result.kept.append(lesson.lesson_id)
+        else:
+            meta.chapter_key, meta.topic_key = o.unit, o.topic
+            updated = service.update(lesson)
+            if updated.workflow.state is not WorkflowState.DRAFT:  # pragma: no cover - defensive
+                raise RuntimeError(f"{updated.lesson_id} left draft state on update")
+            result.linked.append(lesson.lesson_id)
+    return result
+
+
 # --------------------------------------------------------------------------------- full run
 
 
@@ -271,6 +339,8 @@ def ingest(spine: Spine, service: CurriculumStudioService) -> IngestResult:
 class RunResult:
     ingest: IngestResult
     imports: ImportResult
+    hierarchy: EducationSystem
+    links: LinkResult
 
 
 def load_inputs(root: Path) -> tuple[Spine, dict[str, AuthoredContent]]:
@@ -281,9 +351,12 @@ def load_inputs(root: Path) -> tuple[Spine, dict[str, AuthoredContent]]:
 def run(
     spine: Spine, contents: Mapping[str, AuthoredContent], service: CurriculumStudioService
 ) -> RunResult:
-    """Create missing drafts, then import authored content into the drafts that have some."""
+    """Persist the hierarchy, create missing drafts, link every draft to its chapter/topic, then
+    import authored content into the drafts that have some."""
+    system = persist_hierarchy(spine, service)
     created = ingest(spine, service)
     lesson_ids = {e.code: e.lesson_id for e in plan(spine, service.list()).entries}
+    links = link_placement(spine, service, system, lesson_ids)
     imports = import_authored(
         spine,
         service,
@@ -292,7 +365,7 @@ def run(
         lesson_ids=lesson_ids,
         fixture=build_fractions_lesson(),
     )
-    return RunResult(created, imports)
+    return RunResult(created, imports, system, links)
 
 
 # --------------------------------------------------------------------------------- gate report
@@ -365,7 +438,12 @@ def _codes(names: Iterable[str]) -> str:
     return ", ".join(f"`{_esc(n)}`" for n in names) or "—"
 
 
-def render_report(spine: Spine, rows: Sequence[LessonGateRow], imports: ImportResult) -> str:
+def render_report(
+    spine: Spine,
+    rows: Sequence[LessonGateRow],
+    imports: ImportResult,
+    hierarchy: EducationSystem | None = None,
+) -> str:
     """The generated, markdownlint-clean INGESTION_REPORT.md (deterministic)."""
     n = len(rows)
     all_green = [r for r in rows if not r.failing]
@@ -456,9 +534,10 @@ def render_report(spine: Spine, rows: Sequence[LessonGateRow], imports: ImportRe
         "`content-status:provisional-pending-review`, `imported-from:<doc §section>` and a "
         "`provenance-note:` tag, plus an `import-hash:<field>=…` fingerprint per field. A field "
         "an author has edited since is never overwritten (it is reported instead).",
-        "- **Hierarchy:** grade `G4` → subjects → chapters (units) → topics (unit × domain) "
-        "is built and validated as Studio hierarchy objects. The Studio service has no hierarchy "
-        "persistence port, so placement travels as `unit:`/`topic:` tags and in `spine.json`.",
+        "- **Hierarchy:** grade `G4` → subjects → chapters (units) → topics (unit × domain) is "
+        "stored under the `PK-NCP` pack through `CurriculumStudioService.upsert_hierarchy` "
+        f"({_hierarchy_counts(hierarchy)}). Every draft links to its chapter and topic by "
+        "`metadata.chapter_key` / `metadata.topic_key`; the `unit:`/`topic:` tags remain.",
         "",
         "## Gate status across all drafts",
         "",
@@ -591,8 +670,19 @@ def _checked_by(gate: Gate, stage: WorkflowState | None) -> str:
 # --------------------------------------------------------------------------------- artifacts
 
 
+def _hierarchy_counts(system: EducationSystem | None) -> str:
+    if system is None:
+        return "not stored"
+    subjects = [s for g in system.grades for s in g.subjects]
+    chapters = [c for s in subjects for c in s.chapters]
+    topics = [t for c in chapters for t in c.topics]
+    return f"{len(subjects)} subjects, {len(chapters)} chapters, {len(topics)} topics"
+
+
 def in_memory_service() -> CurriculumStudioService:
-    return CurriculumStudioService(InMemoryLessonRepository(), RecordingPublishPort())
+    return CurriculumStudioService(
+        InMemoryLessonRepository(), RecordingPublishPort(), hierarchy=InMemoryHierarchyRepository()
+    )
 
 
 def generate(
@@ -605,7 +695,7 @@ def generate(
     data = spine.to_dict()
     data["authored_content"] = content_manifest(spine, contents, build_fractions_lesson())
     spine_text = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
-    return spine_text, render_report(spine, rows, result.imports), rows
+    return spine_text, render_report(spine, rows, result.imports, result.hierarchy), rows
 
 
 def stale_artifacts(root: Path, spine: Spine, contents: Mapping[str, AuthoredContent]) -> list[str]:
@@ -650,7 +740,7 @@ def run_with_database[T](
         Base.metadata.create_all(engine)
     try:
         with unit_of_work(create_session_factory(engine)) as uow:
-            service = CurriculumStudioService(uow.lessons, uow.publish)
+            service = CurriculumStudioService(uow.lessons, uow.publish, hierarchy=uow.hierarchy)
             result = fn(service)
             if commit:
                 uow.commit()
@@ -665,8 +755,17 @@ def run_with_database[T](
 
 
 def _print_run(result: RunResult, *, prefix: str) -> None:
-    ing, imp = result.ingest, result.imports
+    ing, imp, links = result.ingest, result.imports, result.links
+    print(f"{prefix}store the G4 hierarchy ({_hierarchy_counts(result.hierarchy)}).")
     print(f"{prefix}create {len(ing.created)} draft(s); skip {len(ing.skipped)} existing.")
+    print(
+        f"{prefix}link {len(links.linked)} draft(s) to their chapter/topic; "
+        f"{len(links.current)} already linked."
+    )
+    for lesson_id in links.kept:
+        print(f"  kept author placement of {lesson_id}")
+    for lesson_id in links.not_draft:
+        print(f"  not placed {lesson_id} (past draft)")
     for e in ing.skipped:
         print(f"  exists {e.code} -> {e.lesson_id} (state {e.existing_state})")
     print(

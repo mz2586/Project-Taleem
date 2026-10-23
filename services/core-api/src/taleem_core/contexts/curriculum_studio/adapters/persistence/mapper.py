@@ -62,6 +62,8 @@ def column_values(lesson: Lesson) -> dict[str, Any]:
         "lesson_key": lesson.lesson_id,
         "grade_key": lesson.metadata.grade_key,
         "subject_key": lesson.metadata.subject_key,
+        "chapter_key": lesson.metadata.chapter_key,
+        "topic_key": lesson.metadata.topic_key,
         "state": lesson.workflow.state.value,
         "difficulty": lesson.difficulty.value,
         "estimated_duration_min": lesson.estimated_duration_min,

@@ -47,6 +47,10 @@ class Metadata:
     # The author's verified token subject (pseudonymous staff id), set at creation from the bearer
     # token. Identity bookkeeping, not content: excluded from ``content_hash``.
     author_subject: str = ""
+    # Placement in the pack's stored hierarchy (Grade → Subject → Chapter → Topic), by natural
+    # key; "" = not placed. Hashed only when set, so unplaced lessons keep their hashes.
+    chapter_key: str = ""
+    topic_key: str = ""
 
 
 @dataclass
@@ -110,6 +114,9 @@ class Lesson:
         # is content and is hashed.
         meta = payload.get("metadata", {})
         meta.pop("author_subject", None)
+        for key in ("chapter_key", "topic_key"):
+            if not meta.get(key):
+                meta.pop(key, None)
         if meta.get("curriculum_pack") == DEFAULT_PACK_ID:
             meta.pop("curriculum_pack")
         if not meta.get("instructional_locales"):
