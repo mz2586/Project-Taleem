@@ -529,7 +529,11 @@ def test_staff_lifecycle_over_postgres_across_two_instances() -> None:
 
         # Cross-role escalation is refused over the real schema too.
         wire = _plant_refresh(app_a, staff["staff_ref"], "guardian")
-        escalated = b.post("/v1/identity/sessions:refresh", json={"refreshToken": wire})
+        # Refresh is rate limited per client like sign-in, and on PostgreSQL that budget is shared
+        # by the whole test run, so each call carries its own synthetic address (as _signin does).
+        escalated = b.post(
+            "/v1/identity/sessions:refresh", json={"refreshToken": wire}, headers=_ip()
+        )
         assert escalated.status_code == 401
 
         # Instance A suspends; instance B refuses the live token on its next request.
@@ -538,7 +542,9 @@ def test_staff_lifecycle_over_postgres_across_two_instances() -> None:
         assert refused.status_code == 403 and refused.json()["code"] == "STAFF_INACTIVE"
         assert (
             b.post(
-                "/v1/identity/sessions:refresh", json={"refreshToken": session["refresh_token"]}
+                "/v1/identity/sessions:refresh",
+                json={"refreshToken": session["refresh_token"]},
+                headers=_ip(),
             ).status_code
             == 401
         )
