@@ -1,7 +1,7 @@
 # Project Taleem — Master Product Scope & Roadmap
 
 **Status:** Living document — the single authoritative scope-status and execution reference ·
-**Last updated:** 2026-10-23 · **Repository HEAD at last update:** `02e1164`
+**Last updated:** 2026-10-23 · **Repository HEAD at last update:** `f64fce6`
 
 **Binding product definition:** [`docs/GLOBAL_PRODUCT_SCOPE.md`](docs/GLOBAL_PRODUCT_SCOPE.md)
 (adopted and revised 2026-10-22). That document says *what* the product must be — a global platform
@@ -857,7 +857,7 @@ Status vocabulary (adopted 2026-10-22, replacing the earlier colour key for this
 | Curriculum content — published lessons | A, D | R1 | in-progress | 139 Grade 4 drafts placed in a persisted PK-NCP hierarchy (6 subjects, 37 chapters, 39 topics; `7d3a28a`); 36 with provisional authored content; **0 published** — [`INGESTION_REPORT.md`](curriculum/grade-4/INGESTION_REPORT.md) | Author remaining content; recorded audio; 5-stage **human** review; SLO text **blocked** on NCC/MoFEPT MoU |
 | Assessments (blueprints, scoring, evidence, spaced review) | A, C | R1 | complete-and-verified | `test_sync_evidence.py`, `test_learning_domain.py` | Summative exams, free-text grading, report cards |
 | Learning intelligence (BKT mastery, forgetting, decision graph, misconceptions) | C | R2 | complete-and-verified | `contexts/learning/domain/*`, `test_learning_domain.py` | Diagnostic placement; teacher-visible rationale UI; confidence shown to teachers |
-| Offline persistence and sync (IndexedDB, signed packages, idempotent sync, consent-gated sync, crash recovery) | E | R1 | implemented-but-unverified | Browser journey in CI: save a signed package, go offline, answer, "saved on this phone" → back online → "Saved safely by Taleem", server total_attempts 0 → 10 (`bcb431a`); guarantee→test map `OFFLINE_TEST_PLAN.md` §7; signatures mandatory (`7bc14ee`) | Older Android WebViews lack WebCrypto Ed25519 — fallback verifier in progress; on-device validation |
+| Offline persistence and sync (IndexedDB, signed packages, idempotent sync, consent-gated sync, crash recovery) | E | R1 | implemented-but-unverified | Browser journey in CI: save a signed package, go offline, answer, "saved on this phone" → back online → "Saved safely by Taleem", server total_attempts 0 → 10 (`bcb431a`); guarantee→test map `OFFLINE_TEST_PLAN.md` §7; signatures mandatory (`7bc14ee`) | On-device validation on a physical low-end phone |
 | Guardian Portal (dashboard, progress, timeline, consent, PIN reset, audit) | F | R1 | implemented-but-unverified | Children resolved from identity enrolments + live consent (`fdd181f`, e2e step PASS); every identity/guardian operation reachable from the UI with per-scope consent fixed to actually withdraw (`5530b20`, 99 guardian tests) | Rename/suspend learner and stable error codes (in progress); limited-literacy usability check with real guardians |
 | AI tutor — templated, curriculum-grounded engine | B | R2 | complete-and-verified | `domain/ai_teacher.py`, grounding tests | — (deliberately no LLM) |
 | AI tutor — generative tier behind `LLMGateway` | B | R2 | implemented-but-unverified | Flag (off) → kill switch → escalation → `ai_teaching` consent → per-learner quota → safety gate; stub + inert adapters only; golden set 33/33 unsafe refused, 10/10 safe accepted against **stub** outputs (`3bcb6dc`, `6505329`); reachable from the student UI with generated text always labelled unverified (`4c8df7b`) | Real provider — **blocked** on FD-03 ([brief](docs/decisions/FD-03-ai-provider-residency.md)); semantic contradiction check |
@@ -1083,8 +1083,8 @@ None of the following is resolved. Each is listed with what would resolve it.
 | 11 | **No verified live environment** | 🔴 Engineering | Phase H; needs a hosting decision |
 | 12 | **No external penetration test** | 🔴 External | Commission a test |
 | 13 | **No accessibility audit with assistive technology** | 🔴 External | Commission an audit |
-| 14 | **No cross-browser, load, soak, or spike testing** | 🔴 Engineering | Phase H |
-| 15 | **No alerting; backup/restore rehearsed only on dev data** | 🟡 Engineering | Drill script + runbook done; alerting and a production-sized drill remain |
+| 14 | **Performance not yet measured on real hosting; p95 budget missed at saturation on one dev worker** | 🟡 Engineering + hosting | k6 load/soak/spike suite and results in `tests/perf/` (`f64fce6`, dev Codespace: 0% errors, PERF-01 p95 met below ~10 concurrent learners per worker, missed above); history-dependent sync cost and other hot spots being fixed; re-measure on the chosen hosting; cross-browser matrix covered by the Chromium 131/141 browser journey only |
+| 15 | **No alert destination; backup/restore rehearsed only on dev data** | ⚫ Owner (M-Safe) + 🟡 Engineering | 16 Prometheus alert rules as code, promtool-checked in CI (`f64fce6`); needs a deployed Prometheus/Alertmanager, a paging account, and a staffed on-call rota; scheduled backups not yet configured |
 | 16 | **Production signing keys are environment variables only** | ⚫ Blocked on FD-14 | Signer port in place; production also now refuses the well-known dev JWT seed |
 | 17 | **Repository licence undecided** | ⚫ Founding team | [`LICENSE`](LICENSE) records this as open |
 | 18 | **NCC/MoFEPT MoU for authoritative SLO text** | ⚫ Legal / partnership | Partnership decision |
@@ -1146,6 +1146,7 @@ Optional or later: generative AI (R2, FD-03), Taleem School (R3–R4, #26), voic
 | Date | Change | Author |
 | --- | --- | --- |
 | 2026-09-06 | Initial master scope and roadmap, authored against repository HEAD `23747f9`. | Engineering |
+| 2026-10-23 | Ed25519 fallback for older Android (`4b7e96a`, `97d62e2`); load/soak/spike evidence and alert rules (`f64fce6`); blockers #14 and #15 narrowed. | Engineering |
 | 2026-10-23 | Integration cycle 4: staff sign-in, teacher refresh and durable school audit; browser journey in CI found and fixed a critical lesson-start bug; student journey now complete-and-verified. | Engineering |
 | 2026-10-23 | Integration cycle 3: privacy export/erasure, school backend and teacher portal, Studio review end to end, Urdu webfont, axe scan; blocker #20 narrowed to the legal half. | Engineering |
 | 2026-10-23 | Integration cycle 2: #24 and #25 resolved; offline UI, AI Teacher in the student app, durable AI ledger recorded; new workstreams listed. | Engineering |
