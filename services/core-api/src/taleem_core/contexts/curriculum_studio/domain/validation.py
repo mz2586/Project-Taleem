@@ -16,6 +16,7 @@ from dataclasses import dataclass, field
 
 from .audio import SYNTHETIC_FIXTURE_AUDIO, AudioAssetResolver
 from .content import Difficulty, LocalizedText
+from .hierarchy import EducationSystem, placement_errors
 from .lesson import Lesson
 from .packs import CurriculumPack, InstructionRules, PackRegistry, default_pack, default_registry
 from .provenance import check_provenance
@@ -141,10 +142,14 @@ def _structural_findings(lesson: Lesson, ctx: _PackContext) -> list[Finding]:
 
 
 def _gate(gate: Gate, findings: list[Finding]) -> GateResult:
-    return GateResult(gate=gate, passed=not findings, mode="auto", findings=findings)
+    # A gate fails on any BLOCKER; lower-severity findings are reported without failing it.
+    passed = not any(f.severity is Severity.BLOCKER for f in findings)
+    return GateResult(gate=gate, passed=passed, mode="auto", findings=findings)
 
 
-def _alignment_gate(lesson: Lesson, ctx: _PackContext) -> GateResult:
+def _alignment_gate(
+    lesson: Lesson, ctx: _PackContext, hierarchy: EducationSystem | None
+) -> GateResult:
     f: list[Finding] = []
     if ctx.pack is None or ctx.rules is None:
         f.append(_blk(ctx.unresolved()))
@@ -165,6 +170,26 @@ def _alignment_gate(lesson: Lesson, ctx: _PackContext) -> GateResult:
                     "metadata",
                 )
             )
+    if ctx.pack is not None:
+        meta = lesson.metadata
+        if not meta.chapter_key and not meta.topic_key:
+            # Unplaced is allowed for now, but reported (non-blocking).
+            f.append(
+                Finding(
+                    Severity.MINOR,
+                    "lesson is not placed in the curriculum hierarchy (no chapter/topic)",
+                    "metadata",
+                )
+            )
+        for msg in placement_errors(
+            hierarchy,
+            pack_id=ctx.pack.pack_id,
+            grade_key=meta.grade_key,
+            subject_key=meta.subject_key,
+            chapter_key=meta.chapter_key,
+            topic_key=meta.topic_key,
+        ):
+            f.append(_blk(msg, "metadata"))
     if any(not code.strip() for code in lesson.learning_outcomes):
         f.append(_blk("every learning outcome needs a non-empty standard_code"))
     overlap = set(lesson.prerequisites) & set(lesson.learning_outcomes)
@@ -237,8 +262,12 @@ def validate(
     lesson: Lesson,
     registry: PackRegistry | None = None,
     audio_assets: AudioAssetResolver | None = None,
+    hierarchy: EducationSystem | None = None,
 ) -> ValidationResult:
     """Run structural + provenance + automated gate pre-checks under the lesson's pack rules.
+
+    ``hierarchy`` is the lesson's pack's stored hierarchy (None = none stored): a non-empty
+    chapter/topic placement must exist in it (BLOCKER otherwise).
 
     ``audio_assets`` resolves recorded-audio refs. Without one, only the synthetic dev/test
     fixture refs resolve (``audio.SYNTHETIC_FIXTURE_AUDIO``); production wiring passes the media
@@ -249,7 +278,7 @@ def validate(
     return ValidationResult(
         structural=_structural_findings(lesson, ctx),
         gate_results=[
-            _alignment_gate(lesson, ctx),
+            _alignment_gate(lesson, ctx, hierarchy),
             _accessibility_gate(lesson, ctx, audio),
             _readability_gate(lesson, ctx),
             _performance_gate(lesson),

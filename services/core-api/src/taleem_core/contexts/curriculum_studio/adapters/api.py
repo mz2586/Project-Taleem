@@ -134,6 +134,9 @@ class LessonPatchIn(BaseModel):
     prerequisites: list[str] | None = None
     keywords: list[str] | None = None
     tags: list[str] | None = None
+    # Placement in the pack's stored hierarchy; "" clears it. Validated against the stored tree.
+    chapter_key: str | None = Field(default=None, max_length=128)
+    topic_key: str | None = Field(default=None, max_length=128)
     estimated_duration_min: int | None = Field(default=None, ge=1, le=600)
     difficulty: str | None = None
     offline_package: str | None = None
@@ -185,6 +188,10 @@ def _apply_patch(existing: Lesson, p: LessonPatchIn) -> Lesson:
         meta.languages = _locales(p.languages)
     if p.tags is not None:
         meta.tags = list(p.tags)
+    if p.chapter_key is not None:
+        meta.chapter_key = p.chapter_key.strip()
+    if p.topic_key is not None:
+        meta.topic_key = p.topic_key.strip()
     title = dict(p.title or {})
     for tag, alias in (("ur", p.title_ur), ("en", p.title_en)):
         if alias is not None:
@@ -418,6 +425,9 @@ def build_studio_router(
                 "the lesson changed since it was read; reload and retry",
             )
         updated = _apply_patch(existing, body)
+        placement = s.placement_errors(updated)
+        if placement:
+            raise Problem(422, "BAD_PLACEMENT", "Invalid placement", "; ".join(placement))
         saved = _guard(lambda: s.update(updated))
         response.headers["ETag"] = etag(saved)
         return _lesson_view(saved)

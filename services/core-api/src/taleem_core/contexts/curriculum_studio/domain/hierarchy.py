@@ -213,3 +213,43 @@ def canonicalize(system: EducationSystem) -> EducationSystem:
                 for t in c.topics:
                     t.topic_id = f"{c.chapter_id}/{t.key}"
     return system
+
+
+def placement_errors(
+    system: EducationSystem | None,
+    *,
+    pack_id: str,
+    grade_key: str,
+    subject_key: str,
+    chapter_key: str,
+    topic_key: str,
+) -> list[str]:
+    """Why a lesson placement (chapter/topic keys) is not in the pack's stored hierarchy.
+
+    An empty placement has no errors (it is unplaced, not misplaced). ``system`` is the stored
+    hierarchy for ``pack_id``, or None when none is stored.
+    """
+    if not chapter_key and not topic_key:
+        return []
+    if not chapter_key:
+        return [f"topic_key {topic_key!r} requires a chapter_key"]
+    if system is None:
+        return [f"no stored {pack_id} hierarchy: chapter {chapter_key!r} cannot be verified"]
+    where = f"{grade_key}/{subject_key}"
+    chapter = next(
+        (
+            c
+            for g in system.grades
+            if g.key == grade_key
+            for s in g.subjects
+            if s.key == subject_key
+            for c in s.chapters
+            if c.key == chapter_key
+        ),
+        None,
+    )
+    if chapter is None:
+        return [f"chapter {chapter_key!r} is not in the stored {pack_id} hierarchy for {where}"]
+    if topic_key and all(t.key != topic_key for t in chapter.topics):
+        return [f"topic {topic_key!r} is not in chapter {chapter_key!r} ({pack_id} {where})"]
+    return []

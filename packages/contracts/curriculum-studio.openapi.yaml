@@ -114,7 +114,7 @@ paths:
         "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         "409": { description: Concurrent modification (optimistic-lock conflict; retry), content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         "412": { description: If-Match does not match the current ETag (reload and retry), content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
-        "422": { description: "Not a draft; invalid locale or field", content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "422": { description: "Not a draft; invalid locale, placement or field", content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         "428": { description: If-Match header missing, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
   /v1/studio/lessons/{lessonId}:validate:
@@ -329,6 +329,13 @@ components:
         prerequisites: { type: array, items: { type: string } }
         keywords: { type: array, items: { type: string } }
         tags: { type: array, items: { type: string } }
+        chapter_key:
+          type: string
+          maxLength: 128
+          description: >-
+            Chapter in the pack's stored hierarchy for the lesson's grade/subject; "" clears the
+            placement. An unknown chapter/topic is a 422 BAD_PLACEMENT.
+        topic_key: { type: string, maxLength: 128, description: Topic within chapter_key }
         estimated_duration_min: { type: integer, minimum: 1, maximum: 600 }
         difficulty: { type: string, enum: [intro, developing, secure, challenge] }
         offline_package: { type: string }

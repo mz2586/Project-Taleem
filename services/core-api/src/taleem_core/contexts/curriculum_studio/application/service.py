@@ -6,13 +6,19 @@ See docs/10-curriculum-studio/AUTHORING_WORKFLOW.md.
 
 from __future__ import annotations
 
+import builtins
 import time
 from collections.abc import Callable
 
 from ....platform import observability
 from ..domain import validation
 from ..domain.audio import AudioAssetResolver
-from ..domain.hierarchy import EducationSystem, check_against_pack, merge_hierarchy
+from ..domain.hierarchy import (
+    EducationSystem,
+    check_against_pack,
+    merge_hierarchy,
+    placement_errors,
+)
 from ..domain.lesson import Lesson
 from ..domain.packs import CurriculumPack, PackRegistry, default_registry
 from ..domain.quality import (
@@ -261,7 +267,31 @@ class CurriculumStudioService:
 
     # ---- helpers ----
     def _validate(self, lesson: Lesson) -> validation.ValidationResult:
-        return validation.validate(lesson, self._packs, self._audio_assets)
+        return validation.validate(
+            lesson, self._packs, self._audio_assets, hierarchy=self._stored_hierarchy(lesson)
+        )
+
+    def _stored_hierarchy(self, lesson: Lesson) -> EducationSystem | None:
+        """The stored hierarchy of the lesson's pack, fetched only when the lesson is placed."""
+        meta = lesson.metadata
+        if self._hierarchy is None or not (meta.chapter_key or meta.topic_key):
+            return None
+        registry = self._packs if self._packs is not None else default_registry()
+        if registry.get(meta.curriculum_pack) is None:
+            return None  # an unknown pack is already a BLOCKER in every pack-dependent check
+        return self._hierarchy.get(meta.curriculum_pack)
+
+    def placement_errors(self, lesson: Lesson) -> builtins.list[str]:
+        """Why the lesson's chapter/topic placement is not in its pack's stored hierarchy."""
+        meta = lesson.metadata
+        return placement_errors(
+            self._stored_hierarchy(lesson),
+            pack_id=meta.curriculum_pack,
+            grade_key=meta.grade_key,
+            subject_key=meta.subject_key,
+            chapter_key=meta.chapter_key,
+            topic_key=meta.topic_key,
+        )
 
     @staticmethod
     def _author_subjects(lesson: Lesson) -> set[str]:
