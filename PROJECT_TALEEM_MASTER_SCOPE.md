@@ -1,7 +1,7 @@
 # Project Taleem — Master Product Scope & Roadmap
 
 **Status:** Living document — the single authoritative scope-status and execution reference ·
-**Last updated:** 2026-10-23 · **Repository HEAD at last update:** `f64fce6`
+**Last updated:** 2026-10-23 · **Repository HEAD at last update:** `23fcb63`
 
 **Binding product definition:** [`docs/GLOBAL_PRODUCT_SCOPE.md`](docs/GLOBAL_PRODUCT_SCOPE.md)
 (adopted and revised 2026-10-22). That document says *what* the product must be — a global platform
@@ -1083,7 +1083,7 @@ None of the following is resolved. Each is listed with what would resolve it.
 | 11 | **No verified live environment** | 🔴 Engineering | Phase H; needs a hosting decision |
 | 12 | **No external penetration test** | 🔴 External | Commission a test |
 | 13 | **No accessibility audit with assistive technology** | 🔴 External | Commission an audit |
-| 14 | **Performance not yet measured on real hosting; p95 budget missed at saturation on one dev worker** | 🟡 Engineering + hosting | k6 load/soak/spike suite and results in `tests/perf/` (`f64fce6`, dev Codespace: 0% errors, PERF-01 p95 met below ~10 concurrent learners per worker, missed above); history-dependent sync cost and other hot spots being fixed; re-measure on the chosen hosting; cross-browser matrix covered by the Chromium 131/141 browser journey only |
+| 14 | **Performance not yet measured on real hosting** | 🟡 Engineering + hosting | k6 suite in `tests/perf/` (`f64fce6`); hot paths fixed (`d0cc01f`): on the dev Codespace soak, learning p95 945→135 ms, packages 1 411→79 ms, sync time now flat as history grows, load throughput 13.5→29.1 req/s, 0 5xx. One worker remains CPU-bound under load/spike — re-measure with the chosen hosting's worker/instance count; cross-browser covered by the Chromium 131/141 browser journey only |
 | 15 | **No alert destination; backup/restore rehearsed only on dev data** | ⚫ Owner (M-Safe) + 🟡 Engineering | 16 Prometheus alert rules as code, promtool-checked in CI (`f64fce6`); needs a deployed Prometheus/Alertmanager, a paging account, and a staffed on-call rota; scheduled backups not yet configured |
 | 16 | **Production signing keys are environment variables only** | ⚫ Blocked on FD-14 | Signer port in place; production also now refuses the well-known dev JWT seed |
 | 17 | **Repository licence undecided** | ⚫ Founding team | [`LICENSE`](LICENSE) records this as open |
@@ -1146,6 +1146,7 @@ Optional or later: generative AI (R2, FD-03), Taleem School (R3–R4, #26), voic
 | Date | Change | Author |
 | --- | --- | --- |
 | 2026-09-06 | Initial master scope and roadmap, authored against repository HEAD `23747f9`. | Engineering |
+| 2026-10-23 | Performance fixes (`d0cc01f`); cross-learner leak in progress counts fixed (`23fcb63`). | Engineering |
 | 2026-10-23 | Ed25519 fallback for older Android (`4b7e96a`, `97d62e2`); load/soak/spike evidence and alert rules (`f64fce6`); blockers #14 and #15 narrowed. | Engineering |
 | 2026-10-23 | Integration cycle 4: staff sign-in, teacher refresh and durable school audit; browser journey in CI found and fixed a critical lesson-start bug; student journey now complete-and-verified. | Engineering |
 | 2026-10-23 | Integration cycle 3: privacy export/erasure, school backend and teacher portal, Studio review end to end, Urdu webfont, axe scan; blocker #20 narrowed to the legal half. | Engineering |
