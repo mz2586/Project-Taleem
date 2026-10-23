@@ -31,6 +31,7 @@ export function AppShell({
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
+          flexWrap: "wrap",
           gap: "var(--space-2)",
           padding: "var(--space-3) var(--space-4)",
           borderBottom: "1px solid var(--color-focus-ring)",
@@ -42,7 +43,9 @@ export function AppShell({
       <main
         id="main"
         tabIndex={-1}
-        style={{ flex: 1, padding: "var(--space-4)", display: "grid", gap: "var(--space-4)", alignContent: "start" }}
+        // minmax(0, 1fr): a grid track otherwise grows to its widest child, so one long Urdu line
+        // could widen the page past the screen (the browser journey caught a 395px page on 393px).
+        style={{ flex: 1, padding: "var(--space-4)", display: "grid", gridTemplateColumns: "minmax(0, 1fr)", gap: "var(--space-4)", alignContent: "start", overflowWrap: "anywhere" }}
       >
         {children}
       </main>

@@ -62,6 +62,13 @@ describe("classifyLoadError", () => {
     expect(classifyLoadError(new ApiError(500, {}))).toBe("error");
     expect(classifyLoadError(new Error("boom"))).toBe("error");
   });
+  it("names a withdrawn consent and a paused account instead of a retryable error", () => {
+    // What the per-request learner gate returns once a guardian withdraws consent or pauses the
+    // child; the browser journey found Today showing "couldn't load, try again" here.
+    expect(classifyLoadError(new ApiError(403, { code: "CONSENT_REQUIRED" }))).toBe("consent");
+    expect(classifyLoadError(new ApiError(403, { code: "LEARNER_INACTIVE" }))).toBe("paused");
+    expect(classifyLoadError(new ApiError(403, { code: "FORBIDDEN" }))).toBe("error");
+  });
 });
 
 describe("orOnNotFound", () => {

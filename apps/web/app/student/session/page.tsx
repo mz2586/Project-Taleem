@@ -224,7 +224,8 @@ export default function SessionPage() {
   };
 
   useEffect(() => {
-    if (started.current) return;
+    // Start only once the signed-in learner is known; never ask the server for an empty ref.
+    if (started.current || !ref) return;
     started.current = true;
     void (async () => {
       try {
@@ -236,7 +237,7 @@ export default function SessionPage() {
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [ref]);
 
   const steps = presentationSteps(state);
   const item = currentItem(state);

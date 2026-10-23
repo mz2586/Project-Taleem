@@ -25,7 +25,7 @@ import {
 
 // ---- load failures ----------------------------------------------------------------------------
 
-export type LoadFailure = "offline" | "signed-out" | "error";
+export type LoadFailure = "offline" | "signed-out" | "consent" | "paused" | "error";
 
 /**
  * How to describe a failed request. Only a network failure is "offline": a 401 that survived the
@@ -36,6 +36,10 @@ export function classifyLoadError(error: unknown): LoadFailure {
   if (error instanceof ApiError) {
     if (error.status === 0) return "offline";
     if (error.status === 401) return "signed-out";
+    // The per-request learner gate: a guardian withdrew consent, or paused the child. Neither is
+    // an error the child can retry away, so each gets its own honest message (no Retry button).
+    if (error.status === 403 && error.problem.code === "CONSENT_REQUIRED") return "consent";
+    if (error.status === 403 && error.problem.code === "LEARNER_INACTIVE") return "paused";
   }
   return "error";
 }

@@ -42,6 +42,11 @@ export function LoadFailure({
       </div>
     );
   }
+  if (failure === "consent" || failure === "paused") {
+    return (
+      <ErrorBanner message={t(failure === "consent" ? "auth.errors.consentNeeded" : "common.accountPaused")} />
+    );
+  }
   return (
     <div style={{ display: "grid", gap: "var(--space-2)", justifyItems: "start" }}>
       <ErrorBanner message={t(errorMessage)} />

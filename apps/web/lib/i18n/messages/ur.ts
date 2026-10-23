@@ -16,6 +16,7 @@ export const ur: Messages = {
     backToToday: "آج پر واپس جائیں",
     signInAgain: "دوبارہ داخل ہوں",
     signedOut: "آپ سائن آؤٹ ہو گئے ہیں۔ براہِ کرم دوبارہ داخل ہوں۔",
+    accountPaused: "ابھی آپ کی پڑھائی روک دی گئی ہے۔ کسی بڑے سے پوچھیں۔ آپ کا کام محفوظ ہے۔",
     interfaceLanguage: "ایپ کی زبان",
     connectivity: {
       online: "آن لائن",

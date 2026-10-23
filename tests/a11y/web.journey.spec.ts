@@ -364,6 +364,9 @@ async function childSignsInAndLearns(browser: Browser, locale: Locale, family: F
       const options = group.getByRole("button");
       await tap(options.first());
       answers += 1;
+      // The answer is graded by the server; the options stay disabled until its feedback (Continue /
+      // Try again) renders. Wait for it, or the next iteration taps a disabled option.
+      await expect(cont.or(again)).toBeVisible({ timeout: 10_000 });
     } else {
       idle += 1;
       await page.waitForTimeout(400);

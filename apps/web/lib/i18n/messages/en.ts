@@ -22,6 +22,7 @@ export const en = {
     backToToday: "Back to Today",
     signInAgain: "Sign in again",
     signedOut: "You have been signed out. Please sign in again.",
+    accountPaused: "Your learning is paused for now. Ask a grown-up. Your work is kept safe.",
     interfaceLanguage: "App language",
     connectivity: {
       online: "Online",

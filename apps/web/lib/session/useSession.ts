@@ -18,13 +18,25 @@ export interface SessionHandle {
   signOut: () => Promise<void>;
 }
 
+// Set once the first useSession has mounted, i.e. once the page has hydrated. A component that
+// mounts after that (every page under a RequireSession guard, which renders its children only once
+// signed in) is client-only, so it may read the store during its first render. Without this, such a
+// page saw an empty session on its first render and its mount effects ran with an empty learner
+// ref — the browser journey caught /student/session starting a session for student_ref "" (403).
+let hydrated = false;
+
 export function useSession(expectedRole?: Role): SessionHandle {
-  const [session, setSession] = useState<StoredSession | null>(null);
-  const [status, setStatus] = useState<SessionStatus>("loading");
+  const [session, setSession] = useState<StoredSession | null>(() =>
+    hydrated ? sessionStore.peek() : null,
+  );
+  const [status, setStatus] = useState<SessionStatus>(() =>
+    hydrated ? (sessionStore.peek() ? "signed-in" : "signed-out") : "loading",
+  );
 
   useEffect(() => {
-    // Reading localStorage has to happen after mount: it does not exist during the server render,
-    // and reading it in the render body would desynchronise the two.
+    hydrated = true;
+    // Reading localStorage has to happen after mount for the first (hydrating) render: it does not
+    // exist during the server render, and reading it then would desynchronise the two.
     const initial = sessionStore.peek();
     setSession(initial);
     setStatus(initial ? "signed-in" : "signed-out");

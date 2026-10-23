@@ -1,3 +1,12 @@
+/* Borders and padding count inside an element's width. Without this, any full-width element with
+   padding or a border is wider than its container — the browser journey caught Urdu pages 2-3px
+   wider than a 393px phone screen, which makes mobile browsers zoom the whole page out. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 /*
  * Project Taleem — accessibility utilities. Additive; uses only tokens from tokens.css.
  */
@@ -40,4 +49,10 @@
 }
 .skip-link:focus {
   transform: none;
+}
+
+/* The student bottom navigation is sticky: keep anything scrolled or focused into view clear of it
+   (WCAG 2.4.11 Focus Not Obscured). */
+html {
+  scroll-padding-bottom: 88px;
 }

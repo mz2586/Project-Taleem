@@ -88,7 +88,7 @@ export default function ProfilePage() {
 
       <div aria-live="polite" style={{ display: "grid", gap: "var(--space-4)" }}>
         {status === "loading" ? <Skeleton lines={5} label={t("common.loading")} /> : null}
-        {status === "offline" || status === "signed-out" || status === "error" ? (
+        {status !== "loading" && status !== "ready" ? (
           <LoadFailure
             failure={status}
             offlineTitle="student.profile.offlineTitle"

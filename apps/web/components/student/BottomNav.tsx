@@ -35,6 +35,11 @@ export function BottomNav({ band }: { band: GradeBand }) {
             style={{
               minHeight: "var(--size-touch-min)",
               minWidth: "var(--size-touch-min)",
+              // Equal shares of the bar, never wider: Nastaliq labels are wider than their English
+              // counterparts, and content-sized items pushed the Urdu page 2-3px past a 393px screen.
+              flex: "1 1 0",
+              textAlign: "center",
+              overflowWrap: "anywhere",
               display: "inline-flex",
               flexDirection: "column",
               alignItems: "center",

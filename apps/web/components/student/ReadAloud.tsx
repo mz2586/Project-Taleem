@@ -143,7 +143,13 @@ export function ReadAloud({
         color: "var(--color-text-primary)",
         font: "inherit",
         cursor: unavailable ? "default" : "pointer",
-        flexShrink: 0,
+        // Long status labels ("No English voice on this device") wrap instead of pushing the row
+        // past a 393px phone screen, which made mobile browsers zoom the whole page out.
+        flexShrink: 1,
+        maxWidth: "100%",
+        whiteSpace: "normal",
+        overflowWrap: "anywhere",
+        textAlign: "start",
       }}
     >
       <span aria-hidden="true">{playing ? "⏹" : "🔊"}</span>

@@ -51,7 +51,7 @@ export default function ProgressPage() {
     <AppShell title={t("student.progress.title")} band={band}>
       <div aria-live="polite" style={{ display: "grid", gap: "var(--space-4)" }}>
         {status === "loading" ? <Skeleton lines={4} label={t("common.loading")} /> : null}
-        {status === "offline" || status === "signed-out" || status === "error" ? (
+        {status !== "loading" && status !== "ready" ? (
           <LoadFailure
             failure={status}
             offlineTitle="student.progress.offlineTitle"
