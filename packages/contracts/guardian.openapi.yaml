@@ -182,6 +182,12 @@ components:
           items: { type: object, additionalProperties: true }
         assessment_history: { type: object, additionalProperties: true }
         ai_teacher_activity: { type: object, additionalProperties: true }
+        recommendation_explanations:
+          type: array
+          description: >-
+            Additive — why each next step was recommended: stable reason codes + parameters,
+            confidence/uncertainty and evidence counts. Render in the guardian's own language.
+          items: { $ref: "./ai-teacher.openapi.yaml#/components/schemas/ExplainedRecommendation" }
         recommendations:
           type: array
           items: { type: object, additionalProperties: true }

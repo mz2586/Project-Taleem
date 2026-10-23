@@ -17,6 +17,7 @@ import type {
   TeacherProfile,
   TeacherSignInResponse,
 } from "./types";
+import type { ClassLearnerDetail } from "./learnerDetail";
 
 const anonymous = createApiClient(API_BASE, () => "");
 const client = createApiClient(API_BASE, () => currentAccessToken());
@@ -54,6 +55,12 @@ export const teacherApi = {
       client.get<AssignmentProgress>(
         `/v1/school/classes/${seg(classId)}/assignments/${seg(assignmentId)}/progress`,
       ),
+    ),
+
+  /** One learner of the class with the explained recommendations (404 once sharing stops). */
+  learnerDetail: (classId: string, studentRef: string) =>
+    withSession(() =>
+      client.get<ClassLearnerDetail>(`/v1/school/classes/${seg(classId)}/learners/${seg(studentRef)}`),
     ),
 
   /**

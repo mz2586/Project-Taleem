@@ -199,3 +199,42 @@ When the learner is stuck after hints, the engine decides *how to re-explain*:
 
 Domain types for `Decision`, policies, and the engine's ports are in
 [LEARNING_DOMAIN_MODEL.md](LEARNING_DOMAIN_MODEL.md).
+
+---
+
+## 11. Diagnostic placement and structured rationale (R2, as built)
+
+**Diagnostic placement** (`domain/placement.py`, `application/placement_service.py`,
+`GET/POST /v1/learning/students/{ref}/placement[:answer]`) is offered only to a learner with no
+practice history. It is a staircase over the prerequisite DAG: start at the grade's entry objective,
+step up to a dependent on a hit, down to a prerequisite on a miss (or ask a second item on the same
+objective when there is none). When the published graph declares no prerequisites (today), the
+curriculum sequence is used as the chain, and the response says so (`chain_from_sequence`).
+
+- Each answer is a BKT update (slip 0.15, guess 0.25, no learning transition) from a neutral 0.5,
+  **capped at 0.15 per answer**. An objective is `not_yet` only after **two consistent misses** and a
+  prior below 0.30; with fewer misses the prior is floored at 0.30. `secure` needs the last answer
+  right, a prior of at least 0.60, and at least two net consistent observations (direct hits plus
+  hits on objectives that build on it). Unasked prerequisites of a secure objective are inferred
+  secure (`inferred_from`).
+- **Stop rule:** 12 items, or the widest uncertainty on the unresolved frontier at or below 0.5, or
+  nothing left to ask. With nothing published the state is `unavailable` ("no placement possible
+  yet").
+- **Provenance:** every seeded prior carries `PriorProvenance` (source `diagnostic`, placement id,
+  item refs, right/wrong counts, timestamp, `inferred_from`), stored in the objective row's existing
+  `confidence` JSON — no migration. Each answer is evidence with `context=diagnostic` and the
+  placement id as `session_id`, so it is distinguishable from practice evidence; it is not an
+  attempt and never marks mastery or schedules a review.
+- **Effect on the engine:** an objective placed `secure` counts like mastery for eligibility and is
+  skipped, only while the learner has not practised it. Learners without a placement are unaffected.
+- **Evaluation:** `python -m taleem_core.tools.placement_eval` scores placement on *simulated*
+  learners with known ability. It is a simulation, not a learning-outcome study.
+
+**Structured rationale.** Every `RationaleStep` now carries `reasons`: stable codes with parameters
+(`ReasonCode` in `domain/decision.py`; the list and parameters are in the ai-teacher contract's
+`Reason` schema). `domain/explain.py` builds `recommendations` — each with its reasons, confidence,
+uncertainty and evidence counts (practice and diagnostic apart). They appear additively on
+`/ai-teacher/plan`, on the teacher's learner panel
+(`GET /v1/school/classes/{id}/learners/{ref}`, visible only under live `progress_sharing` consent),
+and on the guardian child view (`recommendation_explanations`). Clients render the codes from their
+own ur/en catalogs (`apps/web/lib/learning/rationale.ts`); the English `note` stays a trace only.

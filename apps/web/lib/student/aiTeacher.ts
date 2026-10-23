@@ -14,12 +14,20 @@
 //   A refused or unavailable rephrase (`explanation: null`) shows nothing extra.
 // - `/ai-teacher/capabilities` reports the offline matrix. `lesson_explanation` other than
 //   available/cached hides the feature; with no capabilities answer the server stays the gate.
-// - `/ai-teacher/plan` explains the next step. Its `rationale` notes are English engine strings, so
-//   the "Why this next?" view is rebuilt from the plan's machine-readable fields instead.
+// - `/ai-teacher/plan` explains the next step. Its `rationale` notes are English engine strings and
+//   are never shown. The "Why this next?" view renders the plan's structured `reasons` (stable codes
+//   + parameters, lib/learning/rationale.ts) in the child's language; an older server without them
+//   falls back to the plan's machine-readable state fields — never to matching English text.
 //
 // None of this changes lib/student/lessonPlayer.ts: the explanation has its own small reducer.
 
 import type { MessageKey } from "../i18n/messages";
+import {
+  reasonLines,
+  type ExplainedRecommendationWire,
+  type PlacementSummaryWire,
+  type ReasonWire,
+} from "../learning/rationale";
 import { ApiError, type DecisionKind } from "./types";
 
 // ---- contract types ------------------------------------------------------------------------------
@@ -66,12 +74,28 @@ export interface ExplanationWire {
 }
 
 export interface AdaptivePlanWire {
-  next_action: { kind: string; objective_code: string | null; rationale?: Array<{ rule_id: string; note: string }> };
-  weak_topics: Array<{ objective_code: string; state: string; mastery: number; active_misconceptions: string[]; reason: string }>;
+  next_action: {
+    kind: string;
+    objective_code: string | null;
+    rationale?: Array<{ rule_id: string; note: string }>;
+    /** Additive: the structured, localizable rationale. */
+    reasons?: ReasonWire[];
+  };
+  weak_topics: Array<{
+    objective_code: string;
+    state: string;
+    mastery: number;
+    active_misconceptions: string[];
+    reason: string;
+    reasons?: ReasonWire[];
+  }>;
   revision_due: string[];
   practice: Array<{ objective_code: string; difficulty: string; confidence: string }>;
   confidence: "low" | "medium" | "high";
   rationale: string[];
+  /** Additive: each recommendation with its reasons, confidence and evidence. */
+  recommendations?: ExplainedRecommendationWire[];
+  placement?: PlacementSummaryWire;
 }
 
 export interface CapabilitiesWire {
@@ -274,19 +298,29 @@ function isKind(value: string): value is DecisionKind {
   return (KINDS as readonly string[]).includes(value);
 }
 
-const WEAK_REASON: Record<string, MessageKey> = {
-  "active misconception": "student.whyNext.because.misconception",
-  "retention at risk": "student.whyNext.because.atRisk",
-  "still learning": "student.whyNext.because.stillLearning",
-};
+/** An older server's weak topic, read from its state fields (never its English `reason`). */
+function weakTopicReason(w: AdaptivePlanWire["weak_topics"][number]): MessageKey {
+  if ((w.active_misconceptions ?? []).length > 0) return "student.whyNext.because.misconception";
+  if (w.state === "at_risk") return "student.whyNext.because.atRisk";
+  return "student.whyNext.because.stillLearning";
+}
 
 export function whyNextModel(plan: AdaptivePlanWire): WhyNextModel {
   const kind = plan.next_action?.kind ?? "";
   const reasons: WhyNextModel["reasons"] = [];
 
   const objective = plan.next_action?.objective_code ?? null;
-  const focus = objective ? plan.weak_topics?.find((w) => w.objective_code === objective) : undefined;
-  if (focus && WEAK_REASON[focus.reason]) reasons.push({ key: WEAK_REASON[focus.reason]! });
+  const structured = plan.next_action?.reasons ?? [];
+  if (structured.length > 0) {
+    for (const line of reasonLines(structured, "student")) {
+      const params: Record<string, number> = {};
+      for (const [k, v] of Object.entries(line.params ?? {})) if (typeof v === "number") params[k] = v;
+      reasons.push(Object.keys(params).length ? { key: line.key, params } : { key: line.key });
+    }
+  } else {
+    const focus = objective ? plan.weak_topics?.find((w) => w.objective_code === objective) : undefined;
+    if (focus) reasons.push({ key: weakTopicReason(focus) });
+  }
 
   const due = plan.revision_due?.length ?? 0;
   if (due > 0) reasons.push({ key: "student.whyNext.because.reviewsDue", params: { count: due } });

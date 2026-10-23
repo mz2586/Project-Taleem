@@ -1,5 +1,7 @@
 // Guardian Portal view types — mirror the /v1/guardian responses (read-only aggregates).
 
+import type { ExplainedRecommendationWire } from "../learning/rationale";
+
 export interface Streak {
   current: number;
   longest: number;
@@ -69,4 +71,6 @@ export interface ChildOverview {
   intervention_notifications: Array<{ id: string; type: string; message: string }>;
   offline_sync_status: SyncStatus;
   achievement_history: Array<{ id: string; name: string; description: string; earned_at: number }>;
+  /** Additive: why each next step was recommended (stable reason codes; see lib/learning/rationale.ts). */
+  recommendation_explanations?: ExplainedRecommendationWire[];
 }

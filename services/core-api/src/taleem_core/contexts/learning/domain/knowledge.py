@@ -70,6 +70,30 @@ class MisconceptionRecord:
         )
 
 
+@dataclass(frozen=True)
+class PriorProvenance:
+    """Where a seeded knowledge prior came from (GLOBAL_PRODUCT_SCOPE §C: provenance on estimates).
+
+    Written by diagnostic placement (``domain/placement.py``) onto an objective the learner has not
+    practised yet. ``status`` is the placement verdict: ``secure`` (placed above this objective),
+    ``not_yet`` (two or more consistent misses), or ``uncertain``. ``inferred_from`` names the
+    objective whose secure placement implied this one (no direct observation); ``item_refs`` are the
+    diagnostic items answered on this objective. Practice evidence never rewrites it: the provenance
+    stays the record of where the *starting* estimate came from.
+    """
+
+    source: str  # "diagnostic"
+    placement_id: str
+    status: str  # secure | not_yet | uncertain
+    value: float  # the prior as seeded
+    uncertainty: float
+    item_refs: tuple[str, ...] = ()
+    correct: int = 0
+    incorrect: int = 0
+    recorded_at: float = 0.0
+    inferred_from: str | None = None
+
+
 @dataclass
 class ObjectiveMastery:
     """One learner's state on one SLO."""
@@ -85,6 +109,17 @@ class ObjectiveMastery:
     correct_streak: int = 0
     consecutive_failures: int = 0
     misconceptions: list[MisconceptionRecord] = field(default_factory=list)
+    # Set only by diagnostic placement; None for every learner without one (existing behaviour).
+    provenance: PriorProvenance | None = None
+
+    @property
+    def placed_secure(self) -> bool:
+        """Diagnostic placement put the learner above this objective, and they have not practised it
+        since (practice evidence, once present, is what the state machine reads instead)."""
+        p = self.provenance
+        if p is None or self.attempts:
+            return False
+        return p.source == "diagnostic" and p.status == "secure"
 
     def has_confirmed_misconception(self) -> bool:
         # CONFIRMED or RECURRED both block mastery and require remediation (CTO H7).
@@ -151,6 +186,55 @@ class StudentKnowledge:
             and obj.memory.next_review_at
             and obj.memory.next_review_at <= now
         ]
+
+    def record_diagnostic(
+        self,
+        *,
+        evidence_id: str,
+        objective_code: str,
+        item_ref: str,
+        placement_id: str,
+        correct: bool,
+        misconception_hits: tuple[str, ...],
+        response_time_ms: int,
+        prior_before: float,
+        prior_after: float,
+        now: float,
+    ) -> AssessmentEvidence:
+        """Append one diagnostic-placement answer to the evidence record.
+
+        Distinguishable from practice evidence by ``context=DIAGNOSTIC`` and the placement's
+        ``session_id``. It does NOT run the practice estimator, count as an attempt, or touch
+        misconceptions/memory: placement seeds priors separately (``seed_prior``), so a diagnostic
+        can never mark an objective mastered or schedule a review.
+        """
+        evidence = AssessmentEvidence(
+            evidence_id=evidence_id,
+            student_ref=self.student_ref,
+            objective_code=objective_code,
+            item_ref=item_ref,
+            session_id=placement_id,
+            outcome=Outcome.CORRECT if correct else Outcome.INCORRECT,
+            context=InteractionContext.DIAGNOSTIC,
+            misconception_hits=misconception_hits,
+            hints_used=0,
+            response_time_ms=response_time_ms,
+            mastery_before=prior_before,
+            mastery_after=prior_after,
+            occurred_at=now,
+        )
+        self.evidence.append(evidence)
+        return evidence
+
+    def seed_prior(self, objective_code: str, provenance: PriorProvenance) -> bool:
+        """Seed (or re-seed) an unpractised objective's prior from placement. Returns False — and
+        changes nothing — once the learner has practised the objective: practice evidence wins."""
+        obj = self.ensure_objective(objective_code)
+        if obj.attempts:
+            return False
+        obj.mastery = Mastery(value=provenance.value, uncertainty=provenance.uncertainty)
+        obj.provenance = provenance
+        return True
 
     def apply_attempt(
         self,

@@ -98,6 +98,39 @@ paths:
       responses:
         "200": { description: Progress summary, content: { application/json: { schema: { $ref: "#/components/schemas/ProgressView" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/students/{studentRef}/placement:
+    get:
+      tags: [learning]
+      operationId: getPlacement
+      summary: Diagnostic placement — state, the next question, or the seeded priors
+      description: >-
+        For a learner with no practice history. `unavailable` when no published lesson has a
+        diagnostic item (an honest "no placement possible yet"). Rebuilt from the durable
+        diagnostic evidence on every request; never includes an item's answer key.
+      security: [{ bearerAuth: [] }]
+      parameters: [{ name: studentRef, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Placement, content: { application/json: { schema: { $ref: "#/components/schemas/PlacementView" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/students/{studentRef}/placement:answer:
+    post:
+      tags: [learning]
+      operationId: answerPlacement
+      summary: Answer the placement's current question
+      description: >-
+        Records diagnostic evidence (context `diagnostic`, distinguishable from practice) and
+        re-seeds the priors with provenance. A retried answer is not recounted (`duplicate: true`).
+        409 PLACEMENT_ITEM_MISMATCH for any other item; 409 PLACEMENT_COMPLETE /
+        PLACEMENT_UNAVAILABLE / PLACEMENT_NOT_ELIGIBLE when there is nothing to answer.
+      security: [{ bearerAuth: [] }]
+      parameters: [{ name: studentRef, in: path, required: true, schema: { type: string } }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/PlacementAnswerIn" } } }
+      responses:
+        "200": { description: Placement after the answer, content: { application/json: { schema: { $ref: "#/components/schemas/PlacementView" } } } }
+        "409": { description: Not the current question / nothing to answer, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
 components:
   securitySchemes:
     bearerAuth:
@@ -106,6 +139,56 @@ components:
       bearerFormat: JWT
       description: Verified bearer JWT. A learner may only access their own data (IDOR-guarded).
   schemas:
+    PlacementAnswerIn:
+      type: object
+      required: [item_ref, option]
+      properties:
+        item_ref: { type: string }
+        option: { type: integer, minimum: 0 }
+        response_time_ms: { type: integer, minimum: 0 }
+    PlacementObjective:
+      type: object
+      description: A seeded prior with its confidence and provenance.
+      properties:
+        objective_code: { type: string }
+        status: { type: string, enum: [secure, not_yet, uncertain] }
+        prior: { type: number }
+        uncertainty: { type: number }
+        correct: { type: integer, description: Direct diagnostic answers right on this objective }
+        incorrect: { type: integer }
+        inferred_from:
+          type: ["string", "null"]
+          description: Set when this objective was not asked but implied by a secure one above it.
+        item_refs: { type: array, items: { type: string } }
+        source: { type: string, enum: [diagnostic] }
+        recorded_at: { type: number }
+    PlacementView:
+      type: object
+      properties:
+        student_ref: { type: string }
+        status: { type: string, enum: [unavailable, not_eligible, available, in_progress, completed] }
+        reason: { type: ["string", "null"], enum: [no_published_items, has_history, null] }
+        placement_id: { type: ["string", "null"] }
+        items_used: { type: integer }
+        max_items: { type: integer }
+        stop_reason: { type: ["string", "null"], enum: [max_items, frontier_resolved, items_exhausted, null] }
+        placement_uncertainty: { type: number }
+        stop_uncertainty: { type: number }
+        chain_from_sequence:
+          type: boolean
+          description: True when the curriculum declares no prerequisites and its order is used as the chain.
+        start_objective: { type: ["string", "null"] }
+        duplicate: { type: boolean }
+        next_item:
+          type: ["object", "null"]
+          properties:
+            item_ref: { type: string }
+            objective_code: { type: string }
+            prompt: { type: object, additionalProperties: { type: string } }
+            options: { type: array, items: { type: string } }
+        objectives:
+          type: array
+          items: { $ref: "#/components/schemas/PlacementObjective" }
     StartSessionIn:
       type: object
       required: [student_ref]

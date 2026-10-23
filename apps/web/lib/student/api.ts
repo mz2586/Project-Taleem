@@ -17,6 +17,7 @@ import type {
 } from "./types";
 import { ApiError } from "./types";
 import type { AdaptivePlanWire, CapabilitiesWire, ExplainStyle, ExplanationWire } from "./aiTeacher";
+import type { PlacementWire } from "./placement";
 import { currentAccessToken, withSession } from "../session/store";
 import type {
   BatchResult,
@@ -116,6 +117,13 @@ export const learningApi = {
   // Dashboard aggregate: next action (or "complete") + mastery summary + due reviews.
   today: (studentRef: string) =>
     authed(() => req<TodayView>(`/v1/learning/students/${studentRef}/today`)),
+
+  // Diagnostic placement ("Find your starting point") — see lib/student/placement.ts.
+  placement: (studentRef: string) =>
+    authed(() => req<PlacementWire>(`/v1/learning/students/${studentRef}/placement`)),
+
+  placementAnswer: (studentRef: string, body: { item_ref: string; option: number; response_time_ms?: number }) =>
+    authed(() => post<PlacementWire>(`/v1/learning/students/${studentRef}/placement:answer`, body)),
 };
 
 // AI Teacher (packages/contracts/ai-teacher.openapi.yaml). Templated, curriculum-grounded; any

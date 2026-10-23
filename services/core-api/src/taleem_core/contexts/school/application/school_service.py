@@ -38,6 +38,7 @@ from ..domain.model import (
 from .ports import (
     GuardianSharingConsent,
     LearnerDirectory,
+    LearnerExplanationReader,
     LearnerProgressReader,
     PublishedCurriculum,
     SchoolAuditLog,
@@ -72,6 +73,7 @@ class SchoolService:
         audit: SchoolAuditLog,
         clock: Callable[[], float],
         sessions: TeacherSessions | None = None,
+        explanations: LearnerExplanationReader | None = None,
     ) -> None:
         self._uow = uow_factory
         self._hasher = hasher
@@ -83,6 +85,7 @@ class SchoolService:
         self._audit = audit
         self._now = clock
         self._sessions = sessions
+        self._explanations = explanations
         self._equalising_hash = hasher.equalising_hash()
 
     # ------------------------------------------------------------------ operator (system role)
@@ -248,6 +251,40 @@ class SchoolService:
                 }
                 for e, name in self._visible(enrolments)
             ],
+        }
+
+    def learner_detail(
+        self, *, teacher_ref: str, class_id: str, student_ref: str
+    ) -> dict[str, Any]:
+        """One learner of the teacher's own class, with the explained recommendations.
+
+        Visibility is exactly that of ``class_detail``: enrolled in this class AND, live on this
+        request, the guardian's progress_sharing consent plus the learner gate. Anything else is
+        *not found*, so the route never reveals that a hidden learner exists. The learning context
+        is read only after the visibility check passes.
+        """
+        with self._uow() as uow:
+            teacher = self._require_teacher(uow, teacher_ref)
+            self._require_own_class(uow, teacher, class_id)
+            enrolment = uow.enrolments.get(teacher.organization_id, class_id, student_ref)
+        if enrolment is None:
+            raise not_found("learner not found")
+        visible = self._visible([enrolment])
+        if not visible:
+            raise not_found("learner not found")
+        _, name = visible[0]
+        explained: dict[str, object] = (
+            self._explanations.explain(student_ref) if self._explanations is not None else {}
+        )
+        return {
+            "student_ref": student_ref,
+            "display_name": name,
+            "class_id": class_id,
+            "joined_at": enrolment.joined_at,
+            "confidence": explained.get("confidence", "low"),
+            "next_action": explained.get("next_action"),
+            "recommendations": explained.get("recommendations", []),
+            "placement": explained.get("placement"),
         }
 
     # ------------------------------------------------------------------ guardian-approved join

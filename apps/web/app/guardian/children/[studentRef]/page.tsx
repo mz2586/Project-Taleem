@@ -5,6 +5,7 @@
 import { useParams } from "next/navigation";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 
+import { RecommendationList } from "@/components/RecommendationList";
 import { RequireSession } from "@/components/RequireSession";
 import { Card, EmptyState, Skeleton } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
@@ -14,6 +15,7 @@ import { childDetailModel, type DetailItem, type ForeignText } from "@/lib/guard
 import type { ChildOverview } from "@/lib/guardian/types";
 import { contentAttrs } from "@/lib/i18n/content";
 import { useLocale } from "@/lib/i18n/useLocale";
+import { recommendationViews } from "@/lib/learning/rationale";
 import { classifyLoadError, type LoadFailure } from "@/lib/student/journey";
 import { ApiError } from "@/lib/student/types";
 
@@ -91,6 +93,7 @@ function GuardianChildPage() {
   }, [load]);
 
   const model = status === "ready" && data ? childDetailModel({ locale }, data) : null;
+  const explained = status === "ready" && data ? recommendationViews(data.recommendation_explanations) : [];
   const title = name ? t("guardian.child.title", { name }) : t("guardian.child.titleUnnamed");
 
   return (
@@ -114,6 +117,17 @@ function GuardianChildPage() {
 
         {model && !model.hasProgress ? (
           <EmptyState title={t("guardian.child.noDataTitle")} body={t("guardian.child.noDataBody")} />
+        ) : null}
+
+        {/* Why the AI teacher recommends each step — shown even before practice (e.g. after the
+            starting questions), because the reasons rest on the child's own answers. */}
+        {model && explained.length > 0 ? (
+          <Section title={t("guardian.child.whyTitle")}>
+            <RecommendationList items={explained} empty={t("guardian.child.whyEmpty")} />
+            <p style={{ margin: 0, marginTop: "var(--space-2)", fontSize: "var(--font-size-body-min)" }}>
+              {t("guardian.child.whyNote")}
+            </p>
+          </Section>
         ) : null}
 
         {model && model.hasProgress ? (

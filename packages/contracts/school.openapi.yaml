@@ -379,6 +379,28 @@ paths:
         "403": { $ref: "#/components/responses/Problem" }
         "404": { $ref: "#/components/responses/Problem" }
         default: { $ref: "#/components/responses/Problem" }
+  /v1/school/classes/{classId}/learners/{studentRef}:
+    get:
+      tags: [school]
+      operationId: getClassLearner
+      summary: One learner of the teacher's class with the explained recommendations
+      description: >-
+        Visible only while the learner's guardian shares progress (the same live check as every
+        class read). A hidden, unknown, or not-enrolled learner is 404 — never a hint it exists.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: classId, in: path, required: true, schema: { type: string } }
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Learner detail
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ClassLearnerDetail" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
 components:
   securitySchemes:
     bearerAuth:
@@ -527,6 +549,29 @@ components:
         due_at: { type: number }
         assigned_by: { type: string }
         created_at: { type: number }
+    ClassLearnerDetail:
+      type: object
+      properties:
+        student_ref: { type: string }
+        display_name: { type: string }
+        class_id: { type: string }
+        joined_at: { type: number }
+        confidence: { type: string, enum: [low, medium, high] }
+        next_action:
+          type: ["object", "null"]
+          properties:
+            kind: { type: string }
+            objective_code: { type: ["string", "null"] }
+            reasons:
+              type: array
+              items: { $ref: "./ai-teacher.openapi.yaml#/components/schemas/Reason" }
+        recommendations:
+          type: array
+          items: { $ref: "./ai-teacher.openapi.yaml#/components/schemas/ExplainedRecommendation" }
+        placement:
+          oneOf:
+            - { $ref: "./ai-teacher.openapi.yaml#/components/schemas/PlacementSummary" }
+            - { type: "null" }
     AssignmentProgress:
       allOf:
         - { $ref: "#/components/schemas/Assignment" }

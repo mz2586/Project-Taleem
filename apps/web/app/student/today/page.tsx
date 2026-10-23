@@ -16,6 +16,7 @@ import { useLocale } from "@/lib/i18n/useLocale";
 import { useLearner } from "@/lib/session/useLearner";
 import { aiTeacherApi, learningApi } from "@/lib/student/api";
 import { whyNextModel, type WhyNextModel } from "@/lib/student/aiTeacher";
+import { placementEntry, type PlacementEntry } from "@/lib/student/placement";
 import {
   classifyLoadError,
   emptyKnowledge,
@@ -98,6 +99,7 @@ export default function TodayPage() {
   const { studentRef: ref, band, displayName } = useLearner();
   const { t, locale, formatPercent } = useLocale();
   const [model, setModel] = useState<TodayModel | null>(null);
+  const [entry, setEntry] = useState<PlacementEntry | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | Failure>("loading");
 
   const load = useCallback(async () => {
@@ -112,6 +114,12 @@ export default function TodayPage() {
       ]);
       setModel(todayModel({ today, knowledge, progress }));
       setStatus("ready");
+      // "Find your starting point" — offered only when a placement is possible for this learner
+      // (lib/student/placement.ts). It never blocks Today: any failure simply hides the entry.
+      learningApi
+        .placement(ref)
+        .then((p) => setEntry(placementEntry(p)))
+        .catch(() => setEntry(null));
     } catch (e) {
       setStatus(classifyLoadError(e));
     }
@@ -153,6 +161,16 @@ export default function TodayPage() {
 
         {status === "ready" && model ? (
           <>
+            {entry ? (
+              <Card>
+                <div style={{ display: "grid", gap: "var(--space-2)", justifyItems: "start" }}>
+                  <h2 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{t(entry.title)}</h2>
+                  <p style={{ margin: 0 }}>{t(entry.body)}</p>
+                  <ButtonLink href={entry.href} variant="brand" label={t(entry.action)} icon={<span aria-hidden="true">🧭</span>} />
+                </div>
+              </Card>
+            ) : null}
+
             {model.canStart ? (
               // The one clear action — largest, first in reading order.
               <Card>

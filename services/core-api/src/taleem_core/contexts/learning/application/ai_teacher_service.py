@@ -46,6 +46,7 @@ from ....ports.llm import (
 )
 from ...learning.domain import ai_teacher as ait
 from ...learning.domain import ai_teacher_gate as gate
+from ...learning.domain import explain as xp
 from ...learning.domain.curriculum_view import LessonView
 from ...learning.domain.decision import CurriculumGraph, DecisionConfig
 from ...learning.domain.knowledge import StudentKnowledge
@@ -432,11 +433,20 @@ class AITeacherService:
         return ait.choose_style(grade_band, attempts, last_incorrect)
 
     def plan(self, student_ref: str) -> dict[str, Any]:
-        """The adaptive plan: weak topics, revision, personalized practice, and next action."""
+        """The adaptive plan: weak topics, revision, personalized practice, and next action.
+
+        Additive (contract parity): ``next_action.reasons``, ``weak_topics[].reasons``,
+        ``recommendations`` and ``placement`` carry the structured, localizable rationale — stable
+        reason codes with parameters plus the confidence/uncertainty and evidence counts behind each
+        recommendation. Every pre-existing field is unchanged.
+        """
         knowledge = self._knowledge.snapshot(student_ref) or StudentKnowledge(
             student_ref=student_ref
         )
-        plan = ait.adaptive_plan(knowledge, self._graph_now(), self._config, self._now())
+        graph = self._graph_now()
+        now = self._now()
+        plan = ait.adaptive_plan(knowledge, graph, self._config, now)
+        explained = self._explained(knowledge, graph, plan, now)
         return {
             "next_action": {
                 "kind": plan.next_action.kind.value,
@@ -444,6 +454,7 @@ class AITeacherService:
                 "rationale": [
                     {"rule_id": r.rule_id, "note": r.note} for r in plan.next_action.rationale
                 ],
+                "reasons": explained["next_action_reasons"],
             },
             "weak_topics": [
                 {
@@ -452,6 +463,10 @@ class AITeacherService:
                     "mastery": round(w.mastery, 4),
                     "active_misconceptions": list(w.active_misconceptions),
                     "reason": w.reason,
+                    "reasons": [
+                        r.to_dict()
+                        for r in xp.objective_reasons(knowledge, graph, w.objective_code, now)
+                    ],
                 }
                 for w in plan.weak_topics
             ],
@@ -466,6 +481,61 @@ class AITeacherService:
             ],
             "confidence": plan.confidence.value,
             "rationale": list(plan.rationale),
+            "recommendations": explained["recommendations"],
+            "placement": explained["placement"],
+        }
+
+    def explained_recommendations(self, student_ref: str) -> dict[str, Any]:
+        """The structured "why" for one learner — what a teacher's learner panel reads.
+
+        The same recommendations as ``plan``'s, without the student-facing practice list. The
+        caller (the school context) decides whether the reader may see this learner at all.
+        """
+        knowledge = self._knowledge.snapshot(student_ref) or StudentKnowledge(
+            student_ref=student_ref
+        )
+        graph = self._graph_now()
+        now = self._now()
+        plan = ait.adaptive_plan(knowledge, graph, self._config, now)
+        explained = self._explained(knowledge, graph, plan, now)
+        return {
+            "confidence": plan.confidence.value,
+            "next_action": {
+                "kind": plan.next_action.kind.value,
+                "objective_code": plan.next_action.objective_code,
+                "reasons": explained["next_action_reasons"],
+            },
+            "recommendations": explained["recommendations"],
+            "placement": explained["placement"],
+        }
+
+    @staticmethod
+    def _explained(
+        knowledge: StudentKnowledge, graph: CurriculumGraph, plan: ait.AdaptivePlan, now: float
+    ) -> dict[str, Any]:
+        recs = xp.recommendations(
+            knowledge,
+            graph,
+            plan.next_action,
+            tuple(w.objective_code for w in plan.weak_topics),
+            plan.revision_due,
+            now,
+        )
+        placed = [o for o in knowledge.objectives.values() if o.provenance is not None]
+        statuses = [o.provenance.status for o in placed if o.provenance is not None]
+        placement_ids = sorted({o.provenance.placement_id for o in placed if o.provenance})
+        return {
+            "next_action_reasons": [
+                r.to_dict() for step in plan.next_action.rationale for r in step.reasons
+            ],
+            "recommendations": [r.to_dict() for r in recs],
+            "placement": {
+                "placed": bool(placed),
+                "placement_id": placement_ids[0] if placement_ids else None,
+                "objectives_secure": statuses.count("secure"),
+                "objectives_not_yet": statuses.count("not_yet"),
+                "objectives_uncertain": statuses.count("uncertain"),
+            },
         }
 
     def capabilities(self) -> dict[str, Any]:

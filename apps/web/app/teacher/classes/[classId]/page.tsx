@@ -5,9 +5,10 @@
 // "not available" — the same answer as one that does not exist.
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useCallback, useEffect, useId, useState } from "react";
+import { useCallback, useEffect, useId, useReducer, useState } from "react";
 
 import { FormError, FormNotice, TextField } from "@/components/form";
+import { RecommendationList } from "@/components/RecommendationList";
 import { RequireSession } from "@/components/RequireSession";
 import { Skeleton } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
@@ -26,6 +27,7 @@ import {
   type LessonChoices,
 } from "@/lib/teacher/assignments";
 import { learnerRows } from "@/lib/teacher/classes";
+import { learnerPanelReducer } from "@/lib/teacher/learnerDetail";
 import { createAssignmentErrorKey, teacherFailure, type TeacherFailure } from "@/lib/teacher/errors";
 import type { Assignment, ClassDetail } from "@/lib/teacher/types";
 
@@ -53,6 +55,54 @@ const selectStyle = {
 } as const;
 
 const nowSeconds = () => Math.floor(Date.now() / 1000);
+
+/**
+ * "Why this next?" for one learner — loaded each time it is opened (visibility is live: a guardian
+ * who stops sharing hides the learner on the next load). A native disclosure: keyboard- and
+ * screen-reader-operable.
+ */
+function LearnerWhy({ classId, studentRef }: { classId: string; studentRef: string }) {
+  const { t } = useLocale();
+  const [state, dispatch] = useReducer(learnerPanelReducer, { status: "closed" });
+
+  const load = useCallback(() => {
+    dispatch({ type: "open" });
+    teacherApi
+      .learnerDetail(classId, studentRef)
+      .then((detail) => dispatch({ type: "loaded", detail }))
+      .catch((error: unknown) => dispatch({ type: "failed", error }));
+  }, [classId, studentRef]);
+
+  return (
+    <details
+      onToggle={(e) => {
+        if ((e.currentTarget as HTMLDetailsElement).open) load();
+        else dispatch({ type: "close" });
+      }}
+    >
+      <summary style={{ minHeight: "var(--size-touch-min)", display: "flex", alignItems: "center", cursor: "pointer" }}>
+        {t("teacher.learner.open")}
+      </summary>
+      <div aria-live="polite" style={{ display: "grid", gap: "var(--space-2)", paddingTop: "var(--space-2)" }}>
+        {state.status === "loading" ? <Skeleton lines={2} label={t("teacher.learner.loading")} /> : null}
+        {state.status === "hidden" ? <p style={{ margin: 0 }}>{t("teacher.learner.hidden")}</p> : null}
+        {state.status === "failed" ? (
+          <div style={{ display: "grid", gap: "var(--space-2)", justifyItems: "start" }}>
+            <p style={{ margin: 0 }}>{t(state.error)}</p>
+            <Button variant="ghost" label={t("teacher.learner.retry")} onClick={load} />
+          </div>
+        ) : null}
+        {state.status === "shown" ? (
+          <>
+            <h3 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{t("teacher.learner.title")}</h3>
+            <RecommendationList items={state.view.recommendations} empty={t("teacher.learner.empty")} />
+            <p style={{ margin: 0, fontSize: "var(--font-size-body-min)" }}>{t(state.view.placement.key, state.view.placement.params)}</p>
+          </>
+        ) : null}
+      </div>
+    </details>
+  );
+}
 
 function AssignForm({ classId, onAssigned }: { classId: string; onAssigned: () => Promise<void> }) {
   const { t, locale } = useLocale();
@@ -281,6 +331,7 @@ function ClassPage() {
                     <time dateTime={isoDateTime(l.joinedAt)} style={{ fontSize: "var(--font-size-body-min)" }}>
                       {t("teacher.detail.joined", { date: formatDate(l.joinedAt, locale) })}
                     </time>
+                    <LearnerWhy classId={classId} studentRef={l.ref} />
                   </li>
                 ))}
               </ul>

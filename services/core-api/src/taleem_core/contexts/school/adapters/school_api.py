@@ -213,4 +213,15 @@ def build_school_router(
             teacher_ref=claims.sub, class_id=class_id, assignment_id=assignment_id
         )
 
+    @router.get("/classes/{class_id}/learners/{student_ref}")
+    def learner_detail(
+        class_id: str, student_ref: str, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        # The "why this recommendation" panel. Visible only while the guardian shares progress —
+        # the same live check as every class read; a hidden learner is simply not found.
+        authorize(claims, "read", "school.learner_progress")
+        return service.learner_detail(
+            teacher_ref=claims.sub, class_id=class_id, student_ref=student_ref
+        )
+
     return router

@@ -85,3 +85,28 @@ def session_completed(session_id: str, student_ref: str, now: float) -> Learning
     return LearningEvent(
         "SessionCompleted", "session", session_id, now, {"student_ref": student_ref}
     )
+
+
+def placement_answer_recorded(
+    student_ref: str, placement_id: str, objective_code: str, outcome: str, now: float
+) -> LearningEvent:
+    """One diagnostic-placement answer (diagnostic evidence, not practice)."""
+    return LearningEvent(
+        "PlacementAnswerRecorded",
+        "placement",
+        placement_id,
+        now,
+        {"student_ref": student_ref, "objective_code": objective_code, "outcome": outcome},
+    )
+
+
+def placement_completed(
+    student_ref: str, placement_id: str, stop_reason: str, items_used: int, now: float
+) -> LearningEvent:
+    return LearningEvent(
+        "PlacementCompleted",
+        "placement",
+        placement_id,
+        now,
+        {"student_ref": student_ref, "stop_reason": stop_reason, "items_used": items_used},
+    )

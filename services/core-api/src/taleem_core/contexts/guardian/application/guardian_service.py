@@ -208,6 +208,7 @@ class GuardianService:
         hist = self._q.history(student_ref)
         sessions = hist["sessions"]
         notifs = self._q.notifications(student_ref)
+        plan = self._ai.plan(student_ref)
         return {
             "student_ref": student_ref,
             "progress_overview": progress,
@@ -217,7 +218,10 @@ class GuardianService:
             "weekly_summary": weekly_summary(sessions, now),
             "learning_timeline": sessions[:20],
             "assessment_history": self._q.assessments(student_ref),
-            "ai_teacher_activity": self._ai.plan(student_ref),
+            "ai_teacher_activity": plan,
+            # Additive: why each next step was recommended — stable reason codes + parameters,
+            # confidence/uncertainty and evidence counts (rendered from the guardian's own catalog).
+            "recommendation_explanations": plan.get("recommendations", []),
             "recommendations": self._q.recommendations(student_ref)["recommendations"],
             "intervention_notifications": self._localized_interventions(student_ref, notifs),
             "offline_sync_status": sync_status(sessions, now),

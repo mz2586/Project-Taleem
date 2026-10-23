@@ -129,6 +129,16 @@ class KnowledgeProgressReader:
         )
 
 
+class CallableExplanationReader:
+    """``LearnerExplanationReader`` over the learning context's explained recommendations."""
+
+    def __init__(self, explain: Callable[[str], dict[str, Any]]) -> None:
+        self._explain = explain
+
+    def explain(self, student_ref: str) -> dict[str, object]:
+        return dict(self._explain(student_ref))
+
+
 class CallablePublishedCurriculum:
     """``PublishedCurriculum`` over the learning read model (lookup + titles-only catalog)."""
 

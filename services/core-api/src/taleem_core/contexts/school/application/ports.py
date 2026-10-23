@@ -149,6 +149,17 @@ class LearnerProgressReader(Protocol):
         """``objective_progress`` for many learners (one batched read; every ref is a key)."""
 
 
+class LearnerExplanationReader(Protocol):
+    """The learning context's explained recommendations for one learner, through a port.
+
+    Returns the learning context's JSON-shaped view (stable reason codes + parameters, confidence,
+    uncertainty, evidence counts). The school context never interprets learning's domain; it only
+    decides whether the teacher may see the learner, live, before asking.
+    """
+
+    def explain(self, student_ref: str) -> dict[str, object]: ...
+
+
 @dataclass(frozen=True)
 class PublishedLesson:
     """A titles-only catalog entry (no items, answers or other content)."""

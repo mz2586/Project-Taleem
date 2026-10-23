@@ -1,4 +1,9 @@
-"""Domain <-> ORM mapping for the StudentKnowledge aggregate."""
+"""Domain <-> ORM mapping for the StudentKnowledge aggregate.
+
+A diagnostic placement's ``PriorProvenance`` is stored inside the objective row's existing
+``confidence`` JSON under ``prior_provenance`` (no migration): the key is absent for every learner
+without a placement, and readers that only know ``self_reported``/``sampled_at`` ignore it.
+"""
 
 from __future__ import annotations
 
@@ -8,6 +13,7 @@ from ...domain.knowledge import (
     AssessmentEvidence,
     MisconceptionRecord,
     ObjectiveMastery,
+    PriorProvenance,
     StudentKnowledge,
 )
 from ...domain.values import (
@@ -22,6 +28,51 @@ from ...domain.values import (
     Pace,
 )
 from .models import AssessmentEvidenceRow, ObjectiveMasteryRow, StudentKnowledgeRow
+
+PROVENANCE_KEY = "prior_provenance"
+
+
+def provenance_values(p: PriorProvenance) -> dict[str, Any]:
+    return {
+        "source": p.source,
+        "placement_id": p.placement_id,
+        "status": p.status,
+        "value": p.value,
+        "uncertainty": p.uncertainty,
+        "item_refs": list(p.item_refs),
+        "correct": p.correct,
+        "incorrect": p.incorrect,
+        "recorded_at": p.recorded_at,
+        "inferred_from": p.inferred_from,
+    }
+
+
+def provenance_from(raw: object) -> PriorProvenance | None:
+    if not isinstance(raw, dict) or not raw.get("source"):
+        return None
+    inferred = raw.get("inferred_from")
+    return PriorProvenance(
+        source=str(raw["source"]),
+        placement_id=str(raw.get("placement_id", "")),
+        status=str(raw.get("status", "uncertain")),
+        value=float(raw.get("value", 0.0)),
+        uncertainty=float(raw.get("uncertainty", 1.0)),
+        item_refs=tuple(str(r) for r in raw.get("item_refs") or ()),
+        correct=int(raw.get("correct", 0)),
+        incorrect=int(raw.get("incorrect", 0)),
+        recorded_at=float(raw.get("recorded_at", 0.0)),
+        inferred_from=str(inferred) if inferred else None,
+    )
+
+
+def _confidence_values(obj: ObjectiveMastery) -> dict[str, Any]:
+    values: dict[str, Any] = {
+        "self_reported": obj.confidence.self_reported,
+        "sampled_at": obj.confidence.sampled_at,
+    }
+    if obj.provenance is not None:
+        values[PROVENANCE_KEY] = provenance_values(obj.provenance)
+    return values
 
 
 def objective_column_values(obj: ObjectiveMastery) -> dict[str, Any]:
@@ -39,10 +90,7 @@ def objective_column_values(obj: ObjectiveMastery) -> dict[str, Any]:
             "last_seen_at": obj.memory.last_seen_at,
             "next_review_at": obj.memory.next_review_at,
         },
-        "confidence": {
-            "self_reported": obj.confidence.self_reported,
-            "sampled_at": obj.confidence.sampled_at,
-        },
+        "confidence": _confidence_values(obj),
         "pace": {
             "attempts_to_mastery": obj.pace.attempts_to_mastery,
             "time_to_mastery_s": obj.pace.time_to_mastery_s,
@@ -104,6 +152,7 @@ def objective_from_row(row: ObjectiveMasteryRow) -> ObjectiveMastery:
             )
             for m in (row.misconceptions or [])
         ],
+        provenance=provenance_from(conf.get(PROVENANCE_KEY)),
     )
 
 

@@ -85,6 +85,7 @@ from .contexts.learning.adapters.persistence.base import (
     create_learning_session_factory,
 )
 from .contexts.learning.adapters.persistence.uow import LearningUnitOfWork
+from .contexts.learning.adapters.placement_api import build_placement_router
 from .contexts.learning.adapters.student_api import build_student_router
 from .contexts.learning.application.ai_teacher_service import (
     SAFETY_LOG_ALLOW,
@@ -95,6 +96,7 @@ from .contexts.learning.application.ai_teacher_service import (
 from .contexts.learning.application.analytics import LearningAnalytics
 from .contexts.learning.application.knowledge_service import KnowledgeService
 from .contexts.learning.application.offline_service import OfflinePackageService
+from .contexts.learning.application.placement_service import PlacementService
 from .contexts.learning.application.session_service import SessionService
 from .contexts.learning.application.student_queries import StudentQueryService
 from .contexts.learning.application.sync_consumer import SyncEvidenceConsumer
@@ -113,6 +115,7 @@ from .contexts.privacy.adapters.privacy_api import build_privacy_router
 from .contexts.privacy.adapters.wiring import build_privacy_service
 from .contexts.school.adapters.audit_log import SqlSchoolAuditLog
 from .contexts.school.adapters.context_ports import (
+    CallableExplanationReader,
     CallablePublishedCurriculum,
     CallableSharingConsent,
     IdentityLearnerDirectory,
@@ -415,6 +418,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         build_learning_router(learning_deps, claims_dependency), dependencies=learner_permitted
     )
 
+    # ---- Diagnostic placement (R2): seeds priors for a learner with no history ----
+    placement_service = PlacementService(
+        learning_uow, read_model, read_model.published_graph, time.time
+    )
+    app.include_router(
+        build_placement_router(placement_service, claims_dependency),
+        dependencies=learner_permitted,
+    )
+
     # ---- Student query surface (derived read models: homework, reviews, history, …) ----
     student_queries = StudentQueryService(learning_uow, read_model, time.time)
     app.include_router(
@@ -527,6 +539,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         audit=school_audit,
         clock=time.time,
         sessions=_TeacherSessions(),
+        # The teacher learner panel's "why": read only after the live visibility check passes.
+        # (`ai_teacher` is built below; the lambda resolves it at call time.)
+        explanations=CallableExplanationReader(
+            lambda ref: ai_teacher.explained_recommendations(ref)
+        ),
     )
     # Teachers continue sessions through identity's rotating refresh tokens (rotation, replay
     # revokes the family, device binding, sign-out). The live check runs on every refresh.

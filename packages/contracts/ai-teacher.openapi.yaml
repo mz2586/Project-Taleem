@@ -249,7 +249,90 @@ components:
         active_misconceptions:
           type: array
           items: { type: string }
-        reason: { type: string }
+        reason:
+          type: string
+          description: English engine label, kept for compatibility. Render from `reasons`.
+        reasons:
+          type: array
+          description: Additive — structured, localizable reasons (stable codes + parameters).
+          items: { $ref: "#/components/schemas/Reason" }
+    Reason:
+      type: object
+      description: >-
+        One stable, localizable reason. Clients render `code` + `params` from their own catalogs;
+        codes are never renamed (a new reason gets a new code). Parameter values are objective /
+        misconception codes, placement statuses, or numbers (probabilities in [0, 1], counts, days).
+        Parameters by code — safety_gate {}; review_due {objective, days_overdue, due_count};
+        misconception_active {objective, misconception, evidence_count}; high_uncertainty
+        {objective, uncertainty}; ready_for_new {objective, prerequisites}; mastery_below_threshold
+        {objective, mastery, threshold}; prerequisite_gap {objective, prereq}; diagnostic_placement
+        {objective, status, correct, incorrect, prior, uncertainty, inferred_from?}; placed_above
+        {count}; retention_at_risk {objective, mastery}; repeated_failure {objective,
+        consecutive_failures}; mastery_reached {objective, mastery, threshold}; all_mastered {}.
+      required: [code, params]
+      properties:
+        code:
+          type: string
+          enum:
+            - safety_gate
+            - review_due
+            - misconception_active
+            - high_uncertainty
+            - ready_for_new
+            - mastery_below_threshold
+            - prerequisite_gap
+            - diagnostic_placement
+            - placed_above
+            - retention_at_risk
+            - repeated_failure
+            - mastery_reached
+            - all_mastered
+        params:
+          type: object
+          additionalProperties:
+            oneOf:
+              - { type: string }
+              - { type: number }
+    EvidenceCounts:
+      type: object
+      description: >-
+        The evidence behind an estimate. Diagnostic-placement evidence is counted separately from
+        practice evidence — they are different kinds of evidence.
+      properties:
+        practice: { type: integer }
+        practice_correct: { type: integer }
+        diagnostic: { type: integer }
+        diagnostic_correct: { type: integer }
+        last_at: { type: ["number", "null"] }
+    ExplainedRecommendation:
+      type: object
+      description: One recommendation with the reasons, confidence and evidence behind it.
+      properties:
+        kind:
+          type: string
+          description: The next action's decision kind, else review / practice / remediate.
+        objective_code: { type: ["string", "null"] }
+        is_next_action: { type: boolean }
+        reasons:
+          type: array
+          items: { $ref: "#/components/schemas/Reason" }
+        confidence: { type: string, enum: [low, medium, high] }
+        mastery: { type: ["number", "null"] }
+        uncertainty: { type: ["number", "null"] }
+        state: { type: string }
+        evidence: { $ref: "#/components/schemas/EvidenceCounts" }
+        estimate_source:
+          type: string
+          enum: [practice, diagnostic, none]
+          description: What the current estimate rests on.
+    PlacementSummary:
+      type: object
+      properties:
+        placed: { type: boolean }
+        placement_id: { type: ["string", "null"] }
+        objectives_secure: { type: integer }
+        objectives_not_yet: { type: integer }
+        objectives_uncertain: { type: integer }
     PracticeItem:
       type: object
       properties:
@@ -271,6 +354,10 @@ components:
                 properties:
                   rule_id: { type: string }
                   note: { type: string }
+            reasons:
+              type: array
+              description: Additive — the structured, localizable form of `rationale`.
+              items: { $ref: "#/components/schemas/Reason" }
         weak_topics:
           type: array
           items: { $ref: "#/components/schemas/WeakTopic" }
@@ -284,6 +371,13 @@ components:
         rationale:
           type: array
           items: { type: string }
+        recommendations:
+          type: array
+          description: >-
+            Additive — the next action first, then due reviews and weak topics, each with its
+            reasons, confidence/uncertainty and evidence counts.
+          items: { $ref: "#/components/schemas/ExplainedRecommendation" }
+        placement: { $ref: "#/components/schemas/PlacementSummary" }
     Capabilities:
       type: object
       properties:
