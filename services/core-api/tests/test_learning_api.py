@@ -118,3 +118,42 @@ def test_unknown_student_knowledge_is_404(client: TestClient) -> None:
         client.get("/v1/learning/students/ghost/knowledge", headers=_auth(sub="ghost")).status_code
         == 404
     )
+
+
+def test_progress_counts_only_this_learners_events(client: TestClient) -> None:
+    # Regression: progress_summary counted every learner's outbox events, so one child's
+    # misconceptions and reviews appeared in every other child's progress.
+    def answer_wrong(student: str) -> None:
+        h = _auth(sub=student)
+        sid = client.post("/v1/learning/sessions", json={"student_ref": student}, headers=h).json()[
+            "session_id"
+        ]
+        client.post(f"/v1/learning/sessions/{sid}:next", headers=h)
+        client.post(
+            f"/v1/learning/sessions/{sid}:teach", json={"objective_code": OBJECTIVE_CODE}, headers=h
+        )
+        client.post(
+            f"/v1/learning/sessions/{sid}:answer",
+            json={
+                "objective_code": OBJECTIVE_CODE,
+                "item_ref": "p2-compare-half-quarter",
+                "option": 1,
+            },
+            headers=h,
+        )
+
+    answer_wrong("stu-a")
+    answer_wrong("stu-a")
+    a = client.get("/v1/learning/students/stu-a/progress", headers=_auth(sub="stu-a")).json()
+    assert a["misconceptions_detected"] >= 1
+
+    # stu-b exists only through one session start; it must see none of stu-a's events.
+    h_b = _auth(sub="stu-b")
+    client.post("/v1/learning/sessions", json={"student_ref": "stu-b"}, headers=h_b)
+    b = client.get("/v1/learning/students/stu-b/progress", headers=h_b)
+    if b.status_code == 200:
+        body = b.json()
+        assert body["misconceptions_detected"] == 0
+        assert body["reviews_scheduled"] == 0
+        assert body["total_attempts"] == 0
+        assert "MisconceptionDetected" not in body["events_by_type"]

@@ -11,7 +11,7 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from typing import Any
 
-from sqlalchemy import func, select
+from sqlalchemy import String, and_, case, cast, func, or_, select
 
 from ..adapters.persistence.models import (
     AssessmentEvidenceRow,
@@ -63,24 +63,47 @@ class LearningAnalytics:
                     )
                 ).scalars()
             )
-            evidence = list(
-                session.execute(
-                    select(AssessmentEvidenceRow).where(
-                        AssessmentEvidenceRow.student_ref == student_ref
+            total, correct = session.execute(
+                select(
+                    func.count(),
+                    func.coalesce(
+                        func.sum(case((AssessmentEvidenceRow.outcome == "correct", 1), else_=0)), 0
+                    ),
+                ).where(AssessmentEvidenceRow.student_ref == student_ref)
+            ).one()
+            # Only THIS learner's events. Knowledge events (mastered, misconceptions, reviews) are
+            # keyed by the learner's ref; session events by session id. A learner's sessions are
+            # the ones whose SessionStarted payload names them (exact match, so stu_1 never matches
+            # stu_10). Counting the whole outbox leaked other learners' activity into every
+            # learner's progress (found by the load tests' query review).
+            started = session.execute(
+                select(LearningOutboxRow.aggregate_id, LearningOutboxRow.payload).where(
+                    LearningOutboxRow.event_type == "SessionStarted",
+                    cast(LearningOutboxRow.payload, String).contains(student_ref, autoescape=True),
+                )
+            ).all()
+            session_ids = {
+                str(sid)
+                for sid, payload in started
+                if isinstance(payload, dict) and payload.get("student_ref") == student_ref
+            }
+            event_rows = session.execute(
+                select(LearningOutboxRow.event_type, func.count())
+                .where(
+                    or_(
+                        LearningOutboxRow.aggregate_id == student_ref,
+                        and_(
+                            LearningOutboxRow.aggregate_type == "session",
+                            LearningOutboxRow.aggregate_id.in_(session_ids),
+                        ),
                     )
-                ).scalars()
-            )
-            event_rows = list(
-                session.execute(
-                    select(LearningOutboxRow.event_type, func.count()).group_by(
-                        LearningOutboxRow.event_type
-                    )
-                ).all()
-            )
+                )
+                .group_by(LearningOutboxRow.event_type)
+            ).all()
 
         events_by_type: dict[str, int] = {str(etype): int(count) for etype, count in event_rows}
-        total = len(evidence)
-        correct = sum(1 for e in evidence if e.outcome == "correct")
+        total = int(total or 0)
+        correct = int(correct or 0)
         return ProgressSummary(
             student_ref=student_ref,
             objectives_mastered=sum(1 for o in objectives if o.state == "mastered"),
