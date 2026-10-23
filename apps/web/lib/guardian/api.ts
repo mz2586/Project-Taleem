@@ -12,7 +12,7 @@ import { createApiClient, type TokenProvider } from "../apiClient";
 import { createGuardianIdentityApi, publicIdentityApi } from "../session/identityApi";
 import { currentAccessToken, withSession } from "../session/store";
 import type { AuditEvent } from "../session/types";
-import type { JoinClassResult } from "../teacher/types";
+import type { ChildClass, JoinClassResult } from "../teacher/types";
 import { API_BASE } from "./config";
 import type { ChildOverview, GuardianDashboard, GuardianProfile } from "./types";
 
@@ -55,6 +55,18 @@ export const familyApi = {
    */
   joinClass: (body: { classCode: string; studentRef: string; attestation: string }) =>
     withSession(() => client.post<JoinClassResult>("/v1/school/classes:join", body)),
+  /** The classes this guardian's child has joined (another family's child is a 404). */
+  childClasses: (studentRef: string) =>
+    withSession(() =>
+      client.get<{ classes: ChildClass[] }>(`/v1/school/children/${encodeURIComponent(studentRef)}/classes`),
+    ),
+  /** Leave one class; that teacher stops seeing the child at once. progress_sharing is untouched. */
+  leaveClass: (studentRef: string, classId: string) =>
+    withSession(() =>
+      client.post<{ class_id: string; left: boolean }>(
+        `/v1/school/children/${encodeURIComponent(studentRef)}/classes/${encodeURIComponent(classId)}:leave`,
+      ),
+    ),
   /** Public; the consent form is rendered from it. */
   policy: () => publicIdentityApi.policy(),
 };

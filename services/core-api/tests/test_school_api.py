@@ -523,3 +523,169 @@ def test_organization_and_teacher_validation(world: World) -> None:
         headers=_SYSTEM,
     )
     assert missing.status_code == 404
+
+
+# ------------------------------------------------------------- guardian per-class control
+
+
+def _child_classes(w: World, fam: Family) -> list[dict[str, object]]:
+    r = w.client.get(f"/v1/school/children/{fam.student_ref}/classes", headers=fam.guardian)
+    assert r.status_code == 200, r.text
+    return list(r.json()["classes"])
+
+
+def _leave(w: World, fam: Family, class_id: object, headers: dict[str, str] | None = None) -> int:
+    r = w.client.post(
+        f"/v1/school/children/{fam.student_ref}/classes/{class_id}:leave",
+        headers=headers or fam.guardian,
+    )
+    return r.status_code
+
+
+def test_guardian_lists_their_childs_classes(world: World) -> None:
+    w = world
+    assert _join(w.client, w.family, w.class_b["join_code"]) == 200
+    rows = _child_classes(w, w.family)
+    assert [r["class_id"] for r in rows] == [w.class_a["class_id"], w.class_b["class_id"]]
+    first = rows[0]
+    assert first["class_name"] == "Grade 4 Blue"
+    assert first["organization_name"] == "School A"
+    assert first["teacher_display_name"] == "Ms Ayesha"
+    assert first["teacher_can_see_progress"] is True
+    assert "join_code" not in first  # a guardian never learns a code they did not enter
+
+
+def test_leaving_one_class_cuts_off_only_that_teacher(world: World) -> None:
+    w = world
+    assert _join(w.client, w.family, w.class_b["join_code"]) == 200
+    assert _learners(w, w.teacher_b, w.class_b["class_id"]) == [w.family.student_ref]
+
+    assert _leave(w, w.family, w.class_a["class_id"]) == 200
+    # Teacher A loses the child on the next request; teacher B keeps them.
+    assert _learners(w, w.teacher_a, w.class_a["class_id"]) == []
+    assert _learners(w, w.teacher_b, w.class_b["class_id"]) == [w.family.student_ref]
+    assert [c["class_id"] for c in _child_classes(w, w.family)] == [w.class_b["class_id"]]
+    # progress_sharing is untouched: leaving a class is not a consent withdrawal.
+    state = w.client.get(f"/v1/identity/consents/{w.family.student_ref}", headers=w.family.guardian)
+    assert "progress_sharing" in state.json()["granted_scopes"]
+    # Audited: who, which learner, which class.
+    events = [e for e in w.app.state.school_audit.events() if e.action == "enrolment.left"]
+    assert len(events) == 1
+    assert (events[0].subject_ref, events[0].class_id) == (
+        w.family.student_ref,
+        w.class_a["class_id"],
+    )
+    assert events[0].actor_role == "guardian"
+    # Leaving again is a 404 (nothing to leave); re-joining with the code restores visibility.
+    assert _leave(w, w.family, w.class_a["class_id"]) == 404
+    assert _join(w.client, w.family, w.class_a["join_code"]) == 200
+    assert _learners(w, w.teacher_a, w.class_a["class_id"]) == [w.family.student_ref]
+
+
+def test_progress_sharing_stays_the_master_switch(world: World) -> None:
+    w = world
+    assert _join(w.client, w.family, w.class_b["join_code"]) == 200
+    w.client.post(
+        "/v1/identity/consents:withdraw",
+        json={"studentRef": w.family.student_ref, "scopes": ["progress_sharing"]},
+        headers=w.family.guardian,
+    )
+    assert _learners(w, w.teacher_a, w.class_a["class_id"]) == []
+    assert _learners(w, w.teacher_b, w.class_b["class_id"]) == []
+    rows = _child_classes(w, w.family)
+    assert len(rows) == 2 and all(r["teacher_can_see_progress"] is False for r in rows)
+
+
+def test_guardian_b_cannot_list_or_leave_guardian_as_childs_classes(world: World) -> None:
+    w = world
+    other = _family(w.client, "other@example.com")
+    ref = w.family.student_ref
+    listed = w.client.get(f"/v1/school/children/{ref}/classes", headers=other.guardian)
+    assert listed.status_code == 404 and str(w.class_a["class_id"]) not in listed.text
+    assert _leave(w, w.family, w.class_a["class_id"], headers=other.guardian) == 404
+    assert _learners(w, w.teacher_a, w.class_a["class_id"]) == [ref]  # nothing changed
+    # Other roles are denied outright.
+    for headers in (w.teacher_a, w.family.learner, _SYSTEM):
+        r = w.client.get(f"/v1/school/children/{ref}/classes", headers=headers)
+        assert r.status_code == 403
+        assert _leave(w, w.family, w.class_a["class_id"], headers=headers) == 403
+
+
+def test_leaving_a_class_the_child_is_not_in_is_not_found(world: World) -> None:
+    w = world
+    assert _leave(w, w.family, w.class_b["class_id"]) == 404
+
+
+# ------------------------------------------------------------------ teacher lesson catalog
+
+
+def test_teacher_lesson_catalog_is_titles_only_and_pack_scoped(world: World) -> None:
+    w = world
+    # The fixture lesson is authored against PK-NCP; neither fixture org uses that pack.
+    assert w.client.get("/v1/school/lessons", headers=w.teacher_a).json()["lessons"] == []
+
+    r = w.client.post(
+        "/v1/school/organizations",
+        json={
+            "name": "PK School",
+            "country": "PK",
+            "curriculumPackId": "PK-NCP",
+            "defaultLocale": "ur",
+        },
+        headers=_SYSTEM,
+    )
+    assert r.status_code == 201, r.text
+    teacher = _teacher(w.client, str(r.json()["organization_id"]), "pk@school.example")
+    lessons = w.client.get("/v1/school/lessons", headers=teacher).json()["lessons"]
+    assert [x["objective_code"] for x in lessons] == [OBJECTIVE_CODE]
+    assert set(lessons[0]) == {"objective_code", "title"}  # nothing beyond the title
+    assert lessons[0]["title"].get("en")
+    for role_headers in (w.family.guardian, w.family.learner):
+        assert w.client.get("/v1/school/lessons", headers=role_headers).status_code == 403
+
+
+# ------------------------------------------------------------- learner_count + teacher state
+
+
+def _counts(w: World) -> dict[str, int]:
+    classes = w.client.get("/v1/school/classes", headers=w.teacher_a).json()["classes"]
+    return {c["class_id"]: c["learner_count"] for c in classes}
+
+
+def test_class_list_counts_only_visible_learners(world: World) -> None:
+    w = world
+    second = _family(w.client, "second@example.com")
+    assert _join(w.client, second, w.class_a["join_code"]) == 200
+    assert _counts(w)[str(w.class_a["class_id"])] == 2
+    w.client.post(
+        "/v1/identity/consents:withdraw",
+        json={"studentRef": second.student_ref, "scopes": ["progress_sharing"]},
+        headers=second.guardian,
+    )
+    assert _counts(w)[str(w.class_a["class_id"])] == 1  # the hidden learner is not even counted
+
+
+def test_locked_teacher_is_told_only_after_authentication(world: World) -> None:
+    w = world
+    me = w.client.get("/v1/school/me", headers=w.teacher_a2).json()["teacher"]["teacher_ref"]
+    with SqlSchoolUnitOfWork(w.app.state.school_session_factory) as uow:
+        t = uow.teachers.get(me)
+        assert t is not None
+        t.status = TeacherStatus.LOCKED  # the state 10 failed sign-ins produce (domain-tested)
+        uow.teachers.save(t)
+        uow.commit()
+    # Sign-in stays uniform: a locked account with the RIGHT passphrase looks like an unknown one.
+    locked = w.client.post(
+        "/v1/school/teachers:signin",
+        json={"email": "a2@school-a.example", "passphrase": _TEACHER_PASS},
+    )
+    unknown = w.client.post(
+        "/v1/school/teachers:signin",
+        json={"email": "nobody@x.example", "passphrase": _TEACHER_PASS},
+    )
+    assert locked.status_code == unknown.status_code == 401
+    assert locked.json()["detail"] == unknown.json()["detail"]
+    assert "code" not in locked.json() or locked.json()["code"] == unknown.json()["code"]
+    # With a still-valid token, the state is named.
+    r = w.client.get("/v1/school/classes", headers=w.teacher_a2)
+    assert r.status_code == 403 and r.json()["code"] == "TEACHER_LOCKED"

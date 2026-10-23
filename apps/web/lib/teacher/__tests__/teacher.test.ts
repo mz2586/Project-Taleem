@@ -22,7 +22,13 @@ import {
 import { joinAvailability, normaliseClassCode, sharesProgress } from "../join";
 import { learnerStatus, masteryKey, progressView } from "../progress";
 import { teacherEnvelope } from "../session";
-import type { Assignment, AssignmentProgress, Classroom, LearnerAssignmentProgress } from "../types";
+import type {
+  Assignment,
+  AssignmentProgress,
+  Classroom,
+  LearnerAssignmentProgress,
+  PublishedLesson,
+} from "../types";
 
 const err = (status: number, problem: Record<string, unknown> = {}) => new ApiError(status, problem);
 
@@ -142,26 +148,32 @@ describe("classes", () => {
 });
 
 describe("lessonChoices — honest about what is published", () => {
-  it("is 'unavailable' (not 'none') when the index cannot be read, e.g. 403 for the teacher role", () => {
+  it("is 'unavailable' (not 'none') when the list cannot be read (403, offline)", () => {
     expect(lessonChoices({ ok: false, error: err(403) })).toEqual({ kind: "unavailable" });
     expect(lessonChoices({ ok: false, error: err(0) })).toEqual({ kind: "unavailable" });
   });
 
   it("is 'none-published' for an empty index — today's reality", () => {
-    expect(lessonChoices({ ok: true, value: { packages: [] } })).toEqual({ kind: "none-published" });
+    expect(lessonChoices({ ok: true, value: { lessons: [] } })).toEqual({ kind: "none-published" });
     expect(lessonChoices({ ok: true, value: {} })).toEqual({ kind: "none-published" });
   });
 
-  it("lists each published objective once, sorted", () => {
-    const pkg = (objective_code: string, lesson_id: string) => ({ package_id: `pkg/${lesson_id}`, lesson_id, objective_code, version: "v" });
-    expect(
-      lessonChoices({ ok: true, value: { packages: [pkg("M4-B", "l2"), pkg("M4-A", "l1"), pkg("M4-B", "l3")] } }),
-    ).toEqual({
+  it("lists each published objective once, sorted, with the title in the reader's locale", () => {
+    const lesson = (objective_code: string, en: string, ur?: string): PublishedLesson => ({
+      objective_code,
+      title: ur ? { en, ur } : { en },
+    });
+    const value = { lessons: [lesson("M4-B", "Fractions", "کسور"), lesson("M4-A", "Place value"), lesson("M4-B", "Dup")] };
+    expect(lessonChoices({ ok: true, value }, "ur")).toEqual({
       kind: "list",
       lessons: [
-        { objectiveCode: "M4-A", lessonId: "l1" },
-        { objectiveCode: "M4-B", lessonId: "l2" },
+        { objectiveCode: "M4-A", title: "Place value" }, // no Urdu title: falls back to English
+        { objectiveCode: "M4-B", title: "کسور" },
       ],
+    });
+    expect(lessonChoices({ ok: true, value: { lessons: [{ objective_code: "X", title: {} }] } })).toEqual({
+      kind: "list",
+      lessons: [{ objectiveCode: "X", title: "" }],
     });
   });
 });

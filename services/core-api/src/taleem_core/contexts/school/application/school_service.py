@@ -27,7 +27,9 @@ from ..domain.model import (
     Enrolment,
     InvalidSchoolDataError,
     Organization,
+    SchoolAuditEvent,
     Teacher,
+    TeacherStatus,
     assert_passphrase_policy,
     new_join_code,
     normalise_email,
@@ -38,6 +40,7 @@ from .ports import (
     LearnerDirectory,
     LearnerProgressReader,
     PublishedCurriculum,
+    SchoolAuditLog,
     SchoolUnitOfWork,
     SecretHasher,
     TeacherTokenIssuer,
@@ -65,6 +68,7 @@ class SchoolService:
         sharing_consent: GuardianSharingConsent,
         progress: LearnerProgressReader,
         curriculum: PublishedCurriculum,
+        audit: SchoolAuditLog,
         clock: Callable[[], float],
     ) -> None:
         self._uow = uow_factory
@@ -74,6 +78,7 @@ class SchoolService:
         self._consent = sharing_consent
         self._progress = progress
         self._curriculum = curriculum
+        self._audit = audit
         self._now = clock
         self._equalising_hash = hasher.equalising_hash()
 
@@ -189,7 +194,19 @@ class SchoolService:
         with self._uow() as uow:
             teacher = self._require_teacher(uow, teacher_ref)
             classes = uow.classrooms.for_teacher(teacher.organization_id, teacher.teacher_ref)
-        return [_class_view(c, include_code=True) for c in classes]
+            enrolled = {
+                c.class_id: uow.enrolments.for_class(teacher.organization_id, c.class_id)
+                for c in classes
+            }
+        # Counts only learners the teacher may currently see (live consent), so the number never
+        # reveals that a hidden learner exists.
+        return [
+            {
+                **_class_view(c, include_code=True),
+                "learner_count": len(self._visible(enrolled[c.class_id])),
+            }
+            for c in classes
+        ]
 
     def class_detail(self, *, teacher_ref: str, class_id: str) -> dict[str, Any]:
         with self._uow() as uow:
@@ -224,8 +241,7 @@ class SchoolService:
             raise _class_not_found() from None
         if not attestation.strip():
             raise validation_error("an attestation is required to share progress with a teacher")
-        if self._learners.guardian_of(student_ref) != guardian_ref:
-            raise not_found("learner not found")  # same answer as identity's IDOR guard
+        self._require_own_child(guardian_ref, student_ref)
         if not self._learners.may_learn(student_ref):
             raise Problem(
                 409,
@@ -256,8 +272,68 @@ class SchoolService:
                     )
                 )
                 uow.commit()
+            self._record("enrolment.joined", guardian_ref, student_ref, classroom)
         # The guardian learns the class name (they hold the code) — nothing about other learners.
         return {"class_id": classroom.class_id, "class_name": classroom.name, "joined": True}
+
+    def child_classes(self, *, guardian_ref: str, student_ref: str) -> list[dict[str, Any]]:
+        """The classes one learner is in, for that learner's guardian only (404 otherwise)."""
+        self._require_own_child(guardian_ref, student_ref)
+        sharing = self._learners.shares_with_teacher(student_ref)
+        out: list[dict[str, Any]] = []
+        with self._uow() as uow:
+            for e in uow.enrolments.for_student(student_ref):
+                classroom = uow.classrooms.get(e.organization_id, e.class_id)
+                if classroom is None:
+                    continue
+                org = uow.organizations.get(e.organization_id)
+                teacher = uow.teachers.get(classroom.teacher_ref)
+                out.append(
+                    {
+                        "class_id": classroom.class_id,
+                        "class_name": classroom.name,
+                        "organization_name": org.name if org else "",
+                        "teacher_display_name": teacher.display_name if teacher else "",
+                        "joined_at": e.joined_at,
+                        # The master switch: progress_sharing (plus live learning consent).
+                        "teacher_can_see_progress": sharing,
+                    }
+                )
+        return out
+
+    def leave_class(self, *, guardian_ref: str, student_ref: str, class_id: str) -> dict[str, Any]:
+        """Remove one class enrolment. That teacher stops seeing the learner on their next request;
+        other classes are untouched, and ``progress_sharing`` stays the master switch."""
+        self._require_own_child(guardian_ref, student_ref)
+        with self._uow() as uow:
+            mine = next(
+                (e for e in uow.enrolments.for_student(student_ref) if e.class_id == class_id), None
+            )
+            classroom = uow.classrooms.get(mine.organization_id, class_id) if mine else None
+            if mine is None or classroom is None:
+                raise _class_not_found()
+            uow.enrolments.remove(mine.organization_id, class_id, student_ref)
+            uow.commit()
+        self._record("enrolment.left", guardian_ref, student_ref, classroom)
+        return {"class_id": class_id, "left": True}
+
+    # ------------------------------------------------------------------ lesson catalog (teacher)
+
+    def published_lessons(self, teacher_ref: str) -> list[dict[str, Any]]:
+        """Published lessons of the teacher's organization's curriculum pack: objective code and
+        localized title only — the assignment picker needs nothing else."""
+        with self._uow() as uow:
+            teacher = self._require_teacher(uow, teacher_ref)
+            org = uow.organizations.get(teacher.organization_id)
+        pack = (org.curriculum_pack_id if org else "").casefold()
+        seen: set[str] = set()
+        out: list[dict[str, Any]] = []
+        for lesson in self._curriculum.catalog():
+            if lesson.curriculum_pack.casefold() != pack or lesson.objective_code in seen:
+                continue
+            seen.add(lesson.objective_code)
+            out.append({"objective_code": lesson.objective_code, "title": dict(lesson.title)})
+        return sorted(out, key=lambda x: str(x["objective_code"]))
 
     # ------------------------------------------------------------------------- assignments
 
@@ -337,10 +413,35 @@ class SchoolService:
 
     def _require_teacher(self, uow: SchoolUnitOfWork, teacher_ref: str) -> Teacher:
         teacher = uow.teachers.get(teacher_ref)
+        # Only reached with a verified teacher token, so naming the reason is not an enumeration
+        # oracle (sign-in failures stay uniform). Access ends on the next request, not at expiry.
+        if teacher is not None and teacher.status is TeacherStatus.LOCKED:
+            raise Problem(
+                403,
+                "TEACHER_LOCKED",
+                "Forbidden",
+                "too many failed sign-ins; ask your school administrator to unlock the account",
+            )
         if teacher is None or not teacher.can_sign_in:
-            # A suspended/locked teacher loses access on the next request, not at token expiry.
             raise Problem(403, "TEACHER_INACTIVE", "Forbidden", "teacher account is not active")
         return teacher
+
+    def _require_own_child(self, guardian_ref: str, student_ref: str) -> None:
+        if self._learners.guardian_of(student_ref) != guardian_ref:
+            raise not_found("learner not found")  # same answer as identity's IDOR guard
+
+    def _record(self, action: str, guardian_ref: str, student_ref: str, c: Classroom) -> None:
+        self._audit.record(
+            SchoolAuditEvent(
+                action=action,
+                actor_ref=guardian_ref,
+                actor_role="guardian",
+                subject_ref=student_ref,
+                organization_id=c.organization_id,
+                class_id=c.class_id,
+                at=self._now(),
+            )
+        )
 
     def _require_own_class(
         self, uow: SchoolUnitOfWork, teacher: Teacher, class_id: str

@@ -1,22 +1,28 @@
 // Assigning a published lesson. Pure; unit-tested.
 //
 // Two honest limits shape this module:
-// - The school API has no published-lesson list. The only index is GET /v1/offline/packages, which
-//   the teacher role is not granted today (403). `lessonChoices` turns each outcome into what the
-//   screen can truthfully say: a list, "none are published yet", or "the list is not available".
+// - The lesson list is GET /v1/school/lessons (the teacher's curriculum pack, titles only). If it
+//   cannot be read, `lessonChoices` says so rather than claiming nothing is published: a list,
+//   "none are published yet", or "the list is not available".
 // - The server is the judge of "published": an objective code typed by hand is checked there
 //   (422 LESSON_NOT_PUBLISHED), never assumed here.
 
 import type { MessageKey } from "../i18n/messages";
 import { ApiError } from "../student/types";
-import type { Assignment, PublishedLessonManifest } from "./types";
+import type { Assignment, PublishedLesson } from "./types";
 
 /** Server limit (AssignmentIn.objectiveCode maxLength 64). */
 export const OBJECTIVE_CODE_MAX = 64;
 
 export interface LessonChoice {
   objectiveCode: string;
-  lessonId: string;
+  /** The title in the requested locale, else English, else any; "" if the lesson has none. */
+  title: string;
+}
+
+function pickTitle(title: Record<string, string> | undefined, locale: string): string {
+  if (!title) return "";
+  return title[locale] || title.en || Object.values(title).find((v) => v) || "";
 }
 
 export type LessonChoices =
@@ -26,17 +32,20 @@ export type LessonChoices =
 
 export type Outcome<T> = { ok: true; value: T } | { ok: false; error: unknown };
 
-export function lessonChoices(outcome: Outcome<{ packages?: PublishedLessonManifest[] }>): LessonChoices {
+export function lessonChoices(
+  outcome: Outcome<{ lessons?: PublishedLesson[] }>,
+  locale = "en",
+): LessonChoices {
   if (!outcome.ok) {
-    // 403 (role not granted), 404, offline, anything: the list cannot be shown. Not "none exist".
+    // 403, 404, offline, anything: the list cannot be shown. Not "none exist".
     return { kind: "unavailable" };
   }
   const seen = new Set<string>();
   const lessons: LessonChoice[] = [];
-  for (const p of outcome.value.packages ?? []) {
+  for (const p of outcome.value.lessons ?? []) {
     if (!p.objective_code || seen.has(p.objective_code)) continue;
     seen.add(p.objective_code);
-    lessons.push({ objectiveCode: p.objective_code, lessonId: p.lesson_id });
+    lessons.push({ objectiveCode: p.objective_code, title: pickTitle(p.title, locale) });
   }
   if (lessons.length === 0) return { kind: "none-published" };
   lessons.sort((a, b) => a.objectiveCode.localeCompare(b.objectiveCode));

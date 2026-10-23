@@ -9,7 +9,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any
 
-from ..application.ports import ObjectiveProgress
+from ..application.ports import ObjectiveProgress, PublishedLesson
 
 
 class IdentityLearnerDirectory:
@@ -83,8 +83,25 @@ class KnowledgeProgressReader:
 
 
 class CallablePublishedCurriculum:
-    def __init__(self, lesson_for: Callable[[str], object | None]) -> None:
+    """``PublishedCurriculum`` over the learning read model (lookup + titles-only catalog)."""
+
+    def __init__(
+        self,
+        lesson_for: Callable[[str], object | None],
+        catalog: Callable[[], list[dict[str, Any]]] = list,
+    ) -> None:
         self._lesson_for = lesson_for
+        self._catalog = catalog
 
     def is_published(self, objective_code: str) -> bool:
         return self._lesson_for(objective_code) is not None
+
+    def catalog(self) -> list[PublishedLesson]:
+        return [
+            PublishedLesson(
+                objective_code=str(row["objective_code"]),
+                curriculum_pack=str(row.get("curriculum_pack", "")),
+                title={str(k): str(v) for k, v in dict(row.get("title") or {}).items() if v},
+            )
+            for row in self._catalog()
+        ]

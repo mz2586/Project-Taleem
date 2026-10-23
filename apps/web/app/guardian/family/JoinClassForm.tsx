@@ -1,9 +1,10 @@
 "use client";
 // "Join a class" for one child. Entering a teacher's class code is the guardian's consent act: the
 // server records the `progress_sharing` scope for this child, storing the sentence the guardian
-// ticked verbatim. The copy says what is shared, with whom, and how to stop (untick that scope in
-// the consent form above). Rules: lib/teacher/join.ts and lib/teacher/errors.ts, unit-tested.
-import { useId, useState } from "react";
+// ticked verbatim. The copy says what is shared, with whom, and how to stop: leave one class in the
+// list here, or untick that scope in the consent form above to stop every class at once (the master
+// switch). Rules: lib/teacher/join.ts and lib/teacher/errors.ts, unit-tested.
+import { useCallback, useEffect, useId, useState } from "react";
 
 import { FormError, FormNotice, TextField } from "@/components/form";
 import { Button } from "@/design-system/Button";
@@ -12,6 +13,7 @@ import { scopeCopy } from "@/lib/guardian/consent";
 import type { MessageKey } from "@/lib/i18n/messages";
 import { useLocale } from "@/lib/i18n/useLocale";
 import type { Learner } from "@/lib/session/types";
+import type { ChildClass } from "@/lib/teacher/types";
 import { joinClassErrorKey } from "@/lib/teacher/errors";
 import { joinAvailability, normaliseClassCode, sharesProgress } from "@/lib/teacher/join";
 
@@ -27,6 +29,39 @@ export function JoinClassForm({ learner, onJoined }: { learner: Learner; onJoine
   const [busy, setBusy] = useState(false);
   const available = joinAvailability(learner) === "ready";
   const attestation = t("teacher.guardianJoin.agree", { name });
+  const [classes, setClasses] = useState<ChildClass[] | null>(null);
+  const [listFailed, setListFailed] = useState(false);
+  const [leaving, setLeaving] = useState<string | null>(null);
+
+  const loadClasses = useCallback(async () => {
+    try {
+      const result = await familyApi.childClasses(learner.student_ref);
+      setClasses(result.classes);
+      setListFailed(false);
+    } catch {
+      setListFailed(true);
+    }
+  }, [learner.student_ref]);
+
+  useEffect(() => {
+    void loadClasses();
+  }, [loadClasses]);
+
+  async function leave(c: ChildClass) {
+    setError(null);
+    setNotice("");
+    setLeaving(c.class_id);
+    try {
+      await familyApi.leaveClass(learner.student_ref, c.class_id);
+      setNotice(t("teacher.guardianJoin.left", { name, className: c.class_name }));
+      await loadClasses();
+      await onJoined();
+    } catch {
+      setError("teacher.guardianJoin.leaveFailed");
+    } finally {
+      setLeaving(null);
+    }
+  }
 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
@@ -45,6 +80,7 @@ export function JoinClassForm({ learner, onJoined }: { learner: Learner; onJoine
       setCode("");
       setAgreed(false);
       setNotice(t("teacher.guardianJoin.done", { name, className: result.class_name }));
+      await loadClasses();
       await onJoined();
     } catch (e) {
       setError(joinClassErrorKey(e));
@@ -72,6 +108,38 @@ export function JoinClassForm({ learner, onJoined }: { learner: Learner; onJoine
           {error ? <FormError message={t(error)} /> : null}
           {notice ? <FormNotice message={notice} /> : null}
         </div>
+        <h5 style={{ margin: 0 }}>{t("teacher.guardianJoin.joinedTitle", { name })}</h5>
+        {listFailed ? <p style={{ margin: 0 }}>{t("teacher.guardianJoin.joinedLoadFailed")}</p> : null}
+        {classes && classes.length === 0 ? (
+          <p style={{ margin: 0 }}>{t("teacher.guardianJoin.joinedNone", { name })}</p>
+        ) : null}
+        {classes && classes.length > 0 ? (
+          <ul style={{ margin: 0, paddingInlineStart: "var(--space-4)", display: "grid", gap: "var(--space-2)" }}>
+            {classes.map((c) => (
+              <li key={c.class_id} style={{ display: "grid", gap: "var(--space-1)" }}>
+                <span>
+                  {t("teacher.guardianJoin.joinedClass", {
+                    className: c.class_name,
+                    teacher: c.teacher_display_name,
+                    organization: c.organization_name,
+                  })}
+                </span>
+                {c.teacher_can_see_progress ? null : (
+                  <span style={{ fontSize: "var(--font-size-body-min)" }}>{t("teacher.guardianJoin.sharingPaused")}</span>
+                )}
+                <div>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    label={t("teacher.guardianJoin.leave")}
+                    loading={leaving === c.class_id}
+                    onClick={() => void leave(c)}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        ) : null}
         {available ? (
           <form onSubmit={submit} noValidate style={{ display: "grid", gap: "var(--space-3)" }}>
             <TextField

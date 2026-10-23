@@ -836,7 +836,15 @@ export const en = {
       sharing:
         "When you join, {name}'s progress in Taleem Learn is shared with that class's teacher: which lessons {name} practised and how well {name} understands them. The teacher sees {name}'s name, not your details.",
       stop:
-        "To stop sharing, untick \"{scope}\" in {name}'s permissions above and save. The teacher stops seeing {name} straight away.",
+        "To stop sharing with one class, leave it in the list below. To stop sharing with every class at once, untick \"{scope}\" in {name}'s permissions above and save. Either way the teacher stops seeing {name} straight away.",
+      joinedTitle: "Classes {name} has joined",
+      joinedNone: "{name} has not joined a class.",
+      joinedLoadFailed: "The list of classes could not be loaded. Please try again.",
+      joinedClass: "\"{className}\" with {teacher}, {organization}",
+      sharingPaused: "Not shared now — the progress-sharing permission is off.",
+      leave: "Leave this class",
+      left: "{name} has left \"{className}\". Its teacher no longer sees {name}.",
+      leaveFailed: "{name} could not leave the class. Nothing changed. Please try again.",
       note: "This only shares learning progress inside Taleem Learn. It does not register {name} anywhere else and gives no certificate.",
       sharingNow: "{name}'s progress is shared with a teacher now.",
       needsLearningConsent: "{name} needs the learning permission before joining a class. Give it in the permissions above first.",

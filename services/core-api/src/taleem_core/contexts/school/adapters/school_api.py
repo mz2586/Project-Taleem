@@ -148,7 +148,31 @@ def build_school_router(
             attestation=body.attestation,
         )
 
+    @router.get("/children/{student_ref}/classes")
+    def child_classes(
+        student_ref: str, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        """The guardian's own child's classes (another family's child is a 404)."""
+        authorize(claims, "manage", "school.enrolment")
+        return {"classes": service.child_classes(guardian_ref=claims.sub, student_ref=student_ref)}
+
+    @router.post("/children/{student_ref}/classes/{class_id}:leave")
+    def leave_class(
+        student_ref: str, class_id: str, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        """Leave one class. progress_sharing stays the master switch for all classes."""
+        authorize(claims, "manage", "school.enrolment")
+        return service.leave_class(
+            guardian_ref=claims.sub, student_ref=student_ref, class_id=class_id
+        )
+
     # ------------------------------------------------------------------------- teacher
+
+    @router.get("/lessons")
+    def published_lessons(claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
+        """Published lessons of the teacher's curriculum pack (objective code + title only)."""
+        authorize(claims, "manage", "school.assignment")
+        return {"lessons": service.published_lessons(claims.sub)}
 
     @router.get("/classes/{class_id}")
     def class_detail(class_id: str, claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:

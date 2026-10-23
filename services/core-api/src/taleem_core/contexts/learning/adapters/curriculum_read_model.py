@@ -63,6 +63,27 @@ class CurriculumStudioReadModel:
             out.append(self._project(lesson, code))
         return out
 
+    def published_catalog(self) -> list[dict[str, object]]:
+        """Titles-only index of published lessons: one entry per (lesson, objective code).
+
+        ``{"objective_code", "lesson_id", "curriculum_pack", "title": {locale: text}}`` — no items,
+        answers, explanations or any other content. Used by the teacher assignment picker.
+        """
+        out: list[dict[str, object]] = []
+        with cs_unit_of_work(self._sf) as uow:
+            lessons = [x for x in uow.lessons.all() if x.workflow.state.value == "published"]
+        for lesson in lessons:
+            for code in lesson.learning_outcomes:
+                out.append(
+                    {
+                        "objective_code": code,
+                        "lesson_id": lesson.lesson_id,
+                        "curriculum_pack": lesson.metadata.curriculum_pack,
+                        "title": _bilingual(lesson.title),
+                    }
+                )
+        return out
+
     def published_graph(self) -> CurriculumGraph:
         """Build the decision-engine curriculum graph from currently-published lessons.
 

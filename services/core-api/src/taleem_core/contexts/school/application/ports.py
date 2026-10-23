@@ -8,7 +8,14 @@ from dataclasses import dataclass
 from types import TracebackType
 from typing import Protocol
 
-from ..domain.model import Assignment, Classroom, Enrolment, Organization, Teacher
+from ..domain.model import (
+    Assignment,
+    Classroom,
+    Enrolment,
+    Organization,
+    SchoolAuditEvent,
+    Teacher,
+)
 
 # ------------------------------------------------------------------------------- persistence
 
@@ -39,6 +46,10 @@ class EnrolmentRepository(Protocol):
     def add(self, enrolment: Enrolment) -> None: ...
     def get(self, organization_id: str, class_id: str, student_ref: str) -> Enrolment | None: ...
     def for_class(self, organization_id: str, class_id: str) -> list[Enrolment]: ...
+    def for_student(self, student_ref: str) -> list[Enrolment]:
+        """Every class one learner is in, across organizations — for that learner's guardian."""
+
+    def remove(self, organization_id: str, class_id: str, student_ref: str) -> bool: ...
 
 
 class AssignmentRepository(Protocol):
@@ -122,5 +133,21 @@ class LearnerProgressReader(Protocol):
     ) -> ObjectiveProgress: ...
 
 
+@dataclass(frozen=True)
+class PublishedLesson:
+    """A titles-only catalog entry (no items, answers or other content)."""
+
+    objective_code: str
+    curriculum_pack: str
+    title: dict[str, str]
+
+
 class PublishedCurriculum(Protocol):
     def is_published(self, objective_code: str) -> bool: ...
+    def catalog(self) -> list[PublishedLesson]: ...
+
+
+class SchoolAuditLog(Protocol):
+    """Records changes to class membership (see SchoolAuditEvent)."""
+
+    def record(self, event: SchoolAuditEvent) -> None: ...

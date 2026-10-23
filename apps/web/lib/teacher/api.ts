@@ -12,7 +12,7 @@ import type {
   AssignmentProgress,
   ClassDetail,
   Classroom,
-  PublishedLessonManifest,
+  PublishedLesson,
   TeacherProfile,
   TeacherSignInResponse,
 } from "./types";
@@ -55,10 +55,8 @@ export const teacherApi = {
     ),
 
   /**
-   * The published-lesson index. The school API has no lesson list of its own; this is the offline
-   * package index, which today's PDP does not grant to the `teacher` role (403). The caller turns
-   * that into an honest "the list is not available" — see lessonChoices().
+   * Published lessons of the teacher's organization's curriculum pack — objective code and localized
+   * title only. A failure becomes an honest "the list is not available" — see lessonChoices().
    */
-  publishedLessons: () =>
-    withSession(() => client.get<{ packages: PublishedLessonManifest[] }>("/v1/offline/packages")),
+  publishedLessons: () => withSession(() => client.get<{ lessons: PublishedLesson[] }>("/v1/school/lessons")),
 };

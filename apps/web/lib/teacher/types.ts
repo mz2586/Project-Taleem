@@ -31,7 +31,7 @@ export interface TeacherSessionToken {
   subject: string;
 }
 
-/** POST /v1/school/teachers:signin — note: no refresh token. */
+/** POST /v1/school/teachers:signin — note: no refresh token yet (60-minute access token). */
 export interface TeacherSignInResponse {
   teacher: Teacher;
   session: TeacherSessionToken;
@@ -49,6 +49,8 @@ export interface Classroom {
   name: string;
   join_code?: string;
   created_at: number;
+  /** GET /v1/school/classes only: learners the teacher can see now (never hidden ones). */
+  learner_count?: number;
 }
 
 export interface ClassLearner {
@@ -91,10 +93,20 @@ export interface JoinClassResult {
   joined: boolean;
 }
 
-/** One entry of GET /v1/offline/packages — the only index of published lessons the API has. */
-export interface PublishedLessonManifest {
-  package_id: string;
-  lesson_id: string;
+/** One entry of GET /v1/school/lessons: the teacher's curriculum pack, titles only. */
+export interface PublishedLesson {
   objective_code: string;
-  version: string;
+  /** Localized title by locale tag ({ ur, en }). */
+  title: Record<string, string>;
+}
+
+/** One entry of GET /v1/school/children/{ref}/classes (guardian of that child only). */
+export interface ChildClass {
+  class_id: string;
+  class_name: string;
+  organization_name: string;
+  teacher_display_name: string;
+  joined_at: number;
+  /** Live: progress_sharing (the master switch) and learning consent are both current. */
+  teacher_can_see_progress: boolean;
 }

@@ -22,7 +22,7 @@ class InvalidSchoolDataError(ValueError):
 
 _COUNTRY = re.compile(r"^[A-Z]{2}$")  # ISO 3166-1 alpha-2
 _LOCALE = re.compile(r"^[a-z]{2,3}(-[A-Z]{2})?$")
-_PACK = re.compile(r"^[a-z0-9][a-z0-9._-]{0,63}$")
+_PACK = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,63}$")  # e.g. "PK-NCP"
 _EMAIL = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 _OBJECTIVE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:-]{0,63}$")
 MIN_PASSPHRASE_LENGTH = 10
@@ -169,6 +169,19 @@ class Enrolment:
     student_ref: str
     approved_by: str  # guardian_ref
     joined_at: float
+
+
+@dataclass(frozen=True)
+class SchoolAuditEvent:
+    """Who changed a learner's class membership, and when. Refs only — no names."""
+
+    action: str  # "enrolment.joined" | "enrolment.left"
+    actor_ref: str
+    actor_role: str
+    subject_ref: str  # the learner
+    organization_id: str
+    class_id: str
+    at: float
 
 
 @dataclass(frozen=True)

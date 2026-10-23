@@ -69,12 +69,12 @@ function AssignForm({ classId, onAssigned }: { classId: string; onAssigned: () =
     let live = true;
     teacherApi
       .publishedLessons()
-      .then((value) => live && setChoices(lessonChoices({ ok: true, value })))
+      .then((value) => live && setChoices(lessonChoices({ ok: true, value }, locale)))
       .catch((error: unknown) => live && setChoices(lessonChoices({ ok: false, error })));
     return () => {
       live = false;
     };
-  }, []);
+  }, [locale]);
 
   async function submit(event: React.FormEvent) {
     event.preventDefault();
@@ -127,8 +127,8 @@ function AssignForm({ classId, onAssigned }: { classId: string; onAssigned: () =
               >
                 <option value="">{t("teacher.assign.lessonPick")}</option>
                 {choices.lessons.map((l) => (
-                  <option key={l.objectiveCode} value={l.objectiveCode} dir="ltr">
-                    {l.objectiveCode}
+                  <option key={l.objectiveCode} value={l.objectiveCode}>
+                    {l.title ? `${l.title} (${l.objectiveCode})` : l.objectiveCode}
                   </option>
                 ))}
               </select>

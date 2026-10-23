@@ -24,7 +24,14 @@ info:
       disappears from the next response.
     * **Deny by default.** `system` creates organizations and teacher accounts; `teacher` manages its
       own classes and assignments; `guardian` joins its own learner. Everything else is denied.
-    * Teacher sign-in failures return one identical `401` and are rate limited.
+    * **Per-class control for guardians.** A guardian lists their own child's classes and can leave
+      one (`…/classes/{classId}:leave`); that teacher stops seeing the child on the next request.
+      `progress_sharing` remains the master switch for every class at once. Another family's child
+      is a `404`.
+    * Teacher sign-in failures return one identical `401` and are rate limited. Only on a request
+      that already carries a valid teacher token is the account state named: `403 TEACHER_LOCKED`
+      (too many failed sign-ins) or `403 TEACHER_INACTIVE` (suspended).
+    * Teacher sessions are access tokens only (60 minutes); there is no refresh token yet.
   license:
     name: Proprietary — license undecided; see repository LICENSE
 servers:
@@ -181,7 +188,7 @@ paths:
                 properties:
                   classes:
                     type: array
-                    items: { $ref: "#/components/schemas/Classroom" }
+                    items: { $ref: "#/components/schemas/ClassroomListed" }
         "401": { $ref: "#/components/responses/Problem" }
         "403": { $ref: "#/components/responses/Problem" }
         default: { $ref: "#/components/responses/Problem" }
@@ -213,6 +220,72 @@ paths:
         "409": { $ref: "#/components/responses/Problem" }
         "422": { $ref: "#/components/responses/Problem" }
         "429": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/children/{studentRef}/classes:
+    get:
+      tags: [school]
+      operationId: listChildClasses
+      summary: The classes the guardian's own child has joined
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Classes
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  classes:
+                    type: array
+                    items: { $ref: "#/components/schemas/ChildClass" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/children/{studentRef}/classes/{classId}:leave:
+    post:
+      tags: [school]
+      operationId: leaveClass
+      summary: Remove the child from one class (audited); that teacher loses visibility at once
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+        - { name: classId, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Left
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  class_id: { type: string }
+                  left: { type: boolean }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/lessons:
+    get:
+      tags: [school]
+      operationId: listPublishedLessons
+      summary: Published lessons of the teacher's curriculum pack (objective code + title only)
+      security: [{ bearerAuth: [] }]
+      responses:
+        "200":
+          description: Lessons available to assign
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  lessons:
+                    type: array
+                    items: { $ref: "#/components/schemas/PublishedLesson" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
         default: { $ref: "#/components/responses/Problem" }
   /v1/school/classes/{classId}:
     get:
@@ -376,6 +449,33 @@ components:
         name: { type: string }
         join_code: { type: string, description: "ABCD-EFGH; give it to guardians" }
         created_at: { type: number }
+    ClassroomListed:
+      allOf:
+        - { $ref: "#/components/schemas/Classroom" }
+        - type: object
+          properties:
+            learner_count:
+              type: integer
+              description: Learners the teacher can currently see (sharing progress), never hidden ones.
+    ChildClass:
+      type: object
+      properties:
+        class_id: { type: string }
+        class_name: { type: string }
+        organization_name: { type: string }
+        teacher_display_name: { type: string }
+        joined_at: { type: number }
+        teacher_can_see_progress:
+          type: boolean
+          description: Live; progress_sharing (the master switch) and learning consent are both current.
+    PublishedLesson:
+      type: object
+      properties:
+        objective_code: { type: string }
+        title:
+          type: object
+          additionalProperties: { type: string }
+          description: Localized title by locale tag. No items, answers or other content.
     ClassDetail:
       allOf:
         - { $ref: "#/components/schemas/Classroom" }

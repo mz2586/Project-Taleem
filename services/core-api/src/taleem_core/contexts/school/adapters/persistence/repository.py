@@ -198,6 +198,27 @@ class SqlEnrolmentRepository:
         )
         return [_enrolment(r) for r in rows]
 
+    def for_student(self, student_ref: str) -> list[Enrolment]:
+        rows = self._s.scalars(
+            select(EnrolmentRow)
+            .where(EnrolmentRow.student_ref == student_ref)
+            .order_by(EnrolmentRow.joined_at, EnrolmentRow.class_id)
+        )
+        return [_enrolment(r) for r in rows]
+
+    def remove(self, organization_id: str, class_id: str, student_ref: str) -> bool:
+        row = self._s.scalars(
+            select(EnrolmentRow).where(
+                EnrolmentRow.organization_id == organization_id,
+                EnrolmentRow.class_id == class_id,
+                EnrolmentRow.student_ref == student_ref,
+            )
+        ).first()
+        if row is None:
+            return False
+        self._s.delete(row)
+        return True
+
 
 def _assignment(row: AssignmentRow) -> Assignment:
     return Assignment(

@@ -105,6 +105,7 @@ from .contexts.ops.adapters.persistence.base import (
 from .contexts.ops.adapters.persistence.kill_switch_store import SqlKillSwitchState
 from .contexts.privacy.adapters.privacy_api import build_privacy_router
 from .contexts.privacy.adapters.wiring import build_privacy_service
+from .contexts.school.adapters.audit_log import InMemorySchoolAuditLog
 from .contexts.school.adapters.context_ports import (
     CallablePublishedCurriculum,
     CallableSharingConsent,
@@ -433,6 +434,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             key = request.client.host if request.client else "unknown"
         school_limiter.check(key[:64])
 
+    school_audit = InMemorySchoolAuditLog(log)  # durable school.audit_event: follow-up migration
+    app.state.school_audit = school_audit
     school_service = SchoolService(
         lambda: SqlSchoolUnitOfWork(school_sf),
         hasher=SecretHasher(iterations=settings.kdf_iterations),
@@ -446,7 +449,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         ),
         sharing_consent=CallableSharingConsent(_grant_class_sharing),
         progress=KnowledgeProgressReader(knowledge_service.snapshot),
-        curriculum=CallablePublishedCurriculum(read_model.lesson_for),
+        curriculum=CallablePublishedCurriculum(read_model.lesson_for, read_model.published_catalog),
+        audit=school_audit,
         clock=time.time,
     )
     app.include_router(
