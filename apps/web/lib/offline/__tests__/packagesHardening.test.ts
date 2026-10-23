@@ -164,7 +164,8 @@ describe("package signature enforcement (6.2C-1)", () => {
 
   it("interop: verifies the backend public key can be imported", async () => {
     // The pinned dev key from the server imports as a verify key (sanity for real wiring).
-    const key = await importPublicKey(VECTOR.publicKeyHex);
+    // (Node has WebCrypto Ed25519, so this is a CryptoKey; signatureFallback.test.ts covers noble.)
+    const key = (await importPublicKey(VECTOR.publicKeyHex)) as CryptoKey;
     expect(key.type).toBe("public");
   });
 });

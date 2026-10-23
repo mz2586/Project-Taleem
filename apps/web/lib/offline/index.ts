@@ -19,6 +19,7 @@ import { registerBackgroundSync, startAutoDrain } from "./backgroundSync";
 import { reconcileAndResume } from "./reconcile";
 import { configuredSigningKeys, keyPinningDiagnostic, trustedKeyResolver } from "./keys";
 import type { KeyPinningDiagnostic } from "./keys";
+import { detectSignatureVerifier } from "./signature";
 import type { DownloadEvents } from "./packages";
 import { SyncClient } from "./syncClient";
 import { SyncQueue } from "./syncQueue";
@@ -53,7 +54,8 @@ export { SyncDiagnosticsStore } from "./diagnostics";
 export { registerBackgroundSync, startAutoDrain, SYNC_TAG } from "./backgroundSync";
 export { reconcileAndResume } from "./reconcile";
 export { PurgeService } from "./purge";
-export { pinnedKeyResolver, importPublicKey, verifyManifestSignature } from "./signature";
+export { detectSignatureVerifier, pinnedKeyResolver, importPublicKey, verifyManifestSignature } from "./signature";
+export type { KeyResolver, NobleEd25519Key, SignatureVerifier, VerifyKey } from "./signature";
 export { FaultyStore, faultyPostBatch } from "./chaos";
 export { uuid7 } from "./ids";
 
@@ -82,6 +84,8 @@ export interface OfflineClient {
   keyPinning: KeyPinningDiagnostic | null;
   /** Resolves once the key-pinning state is recorded in diagnostics. */
   keyPinningRecorded: Promise<void>;
+  /** Resolves once the Ed25519 verifier in use ("webcrypto" | "noble") is recorded in diagnostics. */
+  signatureVerifierRecorded: Promise<void>;
 }
 
 export interface CreateClientOptions {
@@ -102,6 +106,9 @@ export interface CreateClientOptions {
   allowUnsignedForTests?: true;
   // The build mode, for the key-pinning diagnostic (default process.env.NODE_ENV).
   nodeEnv?: string;
+  // WebCrypto for signature verification (default globalThis.crypto.subtle). Injectable so tests
+  // can stand in for a browser without WebCrypto Ed25519, which selects the noble fallback.
+  subtle?: SubtleCrypto;
   // Force one session refresh after a 401 during a drain (the session store's single-flight
   // refresh). Resolves true when a usable session exists afterwards.
   refreshSession?: () => Promise<boolean>;
@@ -119,6 +126,7 @@ export interface DownloadConfig {
   fetchSigningKeys?: () => Promise<{ keys: SigningKey[] }>;
   allowUnsignedForTests?: true;
   events?: DownloadEvents;
+  subtle?: SubtleCrypto;
 }
 
 // THE download-manager configuration: every install path goes through this, so every package is
@@ -134,7 +142,9 @@ export function createDownloadManager(config: DownloadConfig): DownloadManager {
       store: config.store,
       configured: config.pinnedKeys ?? configuredSigningKeys(),
       ...(config.fetchSigningKeys ? { fetchKeys: config.fetchSigningKeys } : {}),
+      ...(config.subtle ? { subtle: config.subtle } : {}),
     }),
+    ...(config.subtle ? { subtle: config.subtle } : {}),
     requireSignature: true,
     ...(config.allowUnsignedForTests ? { allowUnsignedForTests: true as const } : {}),
     ...(config.events ? { events: config.events } : {}),
@@ -153,6 +163,10 @@ export function createOfflineClient(opts: CreateClientOptions): OfflineClient {
   const keyPinningRecorded = diagnostics
     .recordKeyPinning(Object.keys(pinnedKeys).length > 0)
     .catch(() => undefined);
+  // Which verifier this device uses (no PII: just "webcrypto" or "noble").
+  const signatureVerifierRecorded = detectSignatureVerifier(opts.subtle ?? globalThis.crypto?.subtle)
+    .then((v) => diagnostics.recordSignatureVerifier(v))
+    .catch(() => undefined);
 
   const downloads = createDownloadManager({
     store,
@@ -163,6 +177,7 @@ export function createOfflineClient(opts: CreateClientOptions): OfflineClient {
     pinnedKeys,
     ...(opts.fetchSigningKeys ? { fetchSigningKeys: opts.fetchSigningKeys } : {}),
     ...(opts.allowUnsignedForTests ? { allowUnsignedForTests: true as const } : {}),
+    ...(opts.subtle ? { subtle: opts.subtle } : {}),
     events: {
       onSignatureFailure: () => void diagnostics.recordSignatureFailure(),
       onIntegrityFailure: () => void diagnostics.recordIntegrityFailure(),
@@ -218,6 +233,7 @@ export function createOfflineClient(opts: CreateClientOptions): OfflineClient {
     watchConnectivity: (l: ConnectivityListener) => watchConnectivity(l),
     keyPinning,
     keyPinningRecorded,
+    signatureVerifierRecorded,
   };
 }
 

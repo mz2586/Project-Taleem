@@ -13,7 +13,7 @@
 import type { KVStore } from "./kv";
 import { STORES } from "./kv";
 import { importPublicKey } from "./signature";
-import type { KeyResolver } from "./signature";
+import type { KeyResolver, VerifyKey } from "./signature";
 import type { SigningKey } from "./types";
 
 export interface KeyMerge {
@@ -93,7 +93,7 @@ export function trustedKeyResolver(deps: {
   subtle?: SubtleCrypto;
 }): KeyResolver {
   let fetched: Promise<SigningKey[]> | null = null;
-  const imported = new Map<string, Promise<CryptoKey>>();
+  const imported = new Map<string, Promise<VerifyKey>>();
 
   async function current(keyId: string): Promise<Record<string, string>> {
     const remembered = (await deps.store.get<Record<string, string>>(STORES.prefs, KEYS_PREF)) ?? {};

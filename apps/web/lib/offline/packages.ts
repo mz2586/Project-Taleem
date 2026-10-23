@@ -38,6 +38,10 @@ export interface DownloadDeps {
   headroomBytes?: number;
   // 6.2C-1 signature verification: resolves a pinned public key by signing_key_id.
   resolveKey?: KeyResolver;
+  // WebCrypto used to verify a CryptoKey (injectable for tests; default globalThis.crypto.subtle).
+  // A fallback key (`NobleEd25519Key`, from `importPublicKey` on a device without WebCrypto
+  // Ed25519) verifies with @noble/ed25519 instead. Either way verification is mandatory.
+  subtle?: SubtleCrypto;
   // Signatures are ALWAYS required: an unsigned manifest, one whose key cannot be resolved, or one
   // that does not verify is rejected and nothing is installed (fail closed). `requireSignature` is
   // kept only so existing callers that pass `true` still type-check; it cannot be turned off.
@@ -174,7 +178,7 @@ export class DownloadManager {
       return reject();
     }
     const key = await this.deps.resolveKey(keyId);
-    const ok = key !== null && (await verifyManifestSignature(manifest, key));
+    const ok = key !== null && (await verifyManifestSignature(manifest, key, this.deps.subtle ?? globalThis.crypto?.subtle));
     if (!ok) {
       this.deps.events?.onSignatureFailure?.(manifest.lesson_id, keyId);
       throw new SignatureError(manifest.lesson_id, keyId);

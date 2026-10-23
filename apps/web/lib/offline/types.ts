@@ -202,6 +202,9 @@ export interface SyncDiagnostics {
   // Whether offline package signing keys were pinned at build time (NEXT_PUBLIC_OFFLINE_SIGNING_KEYS).
   // false = trust-on-first-use only (flagged in production); null = not recorded yet.
   signingKeysPinned: boolean | null;
+  // Which Ed25519 verifier this device uses: "webcrypto" (crypto.subtle) or "noble" (the lazily
+  // loaded @noble/ed25519 fallback for browsers without WebCrypto Ed25519). null = not probed yet.
+  signatureVerifier: "webcrypto" | "noble" | null;
 }
 
 export interface DrainSummary {

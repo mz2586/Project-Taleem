@@ -31,6 +31,7 @@ function empty(): SyncDiagnostics {
     evictedBytes: 0,
     purges: 0,
     signingKeysPinned: null,
+    signatureVerifier: null,
   };
 }
 
@@ -87,6 +88,10 @@ export class SyncDiagnosticsStore {
 
   async recordKeyPinning(pinned: boolean): Promise<void> {
     await this.update((d) => ({ ...d, signingKeysPinned: pinned }));
+  }
+
+  async recordSignatureVerifier(verifier: "webcrypto" | "noble"): Promise<void> {
+    await this.update((d) => ({ ...d, signatureVerifier: verifier }));
   }
 
   async recordPurge(): Promise<void> {

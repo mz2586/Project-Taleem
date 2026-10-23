@@ -59,7 +59,8 @@ sync channel).
   object storage/CDN. Client: fetch manifest → **verify signature** against the pinned key for
   `signing_key_id` → download assets → **verify each SHA-256** → only then install atomically (state →
   `ready`). Any failure → discard, do not install, surface an honest error.
-- **APIs used:** Web Crypto (`crypto.subtle.verify` for Ed25519, `digest` for SHA-256); Cache
+- **APIs used:** Web Crypto (`crypto.subtle.verify` for Ed25519, `digest` for SHA-256), with a
+  lazily loaded `@noble/ed25519` fallback where WebCrypto Ed25519 is missing (§8.2); Cache
   Storage/IndexedDB for staging; the manifest fetched over HTTPS.
 - **Failure modes:** signature invalid (tampered/forged); asset hash mismatch (corruption/MITM); unknown
   or revoked `signing_key_id`; downgrade to an older/unsigned pack; key compromise.
@@ -227,6 +228,83 @@ offline library screen forced verification, with its own second download-manager
 **Residual risk.** Trust-on-first-use trusts the first key a device sees. Set
 `NEXT_PUBLIC_OFFLINE_SIGNING_KEYS` in every production deployment to close it (SG-1 key custody
 remains open).
+
+### 8.2 Change: fallback Ed25519 verifier for browsers without WebCrypto Ed25519 (2026-10-23)
+
+**Finding.** Package signatures were verified only with WebCrypto Ed25519 (`crypto.subtle`,
+`{ name: "Ed25519" }`). That exists in Chromium 137+, Safari 17+ and Firefox 129+. The browser
+journey on Chromium 131 failed to save a lesson ("This lesson could not be checked"). Many of
+Taleem's users have low-end Android phones with older WebViews, so they could not save lessons for
+offline use. Verification stayed mandatory and fail closed, so this was an availability failure,
+not a security one.
+
+**Change.** `apps/web/lib/offline/signature.ts` now picks one of two verifiers per device. The check
+stays mandatory and fail closed on both.
+
+- **Selection.** `detectSignatureVerifier` runs once per `SubtleCrypto` and caches the answer. It
+  imports the RFC 8032 §7.1 TEST 1 public key with WebCrypto, then checks that the TEST 1 signature
+  verifies and that a copy with one bit flipped does not. If that works, the device uses
+  `"webcrypto"`. If it throws (`NotSupportedError` on Chromium < 137) or gives a wrong answer, the
+  device uses `"noble"`.
+- **The choice is fixed on the key.** `importPublicKey` returns a `CryptoKey` on the WebCrypto path
+  and a `NobleEd25519Key` (the raw 32 bytes) on the fallback path. `verifyManifestSignature` sends
+  each key to its own verifier. If WebCrypto rejects a signature, or throws while verifying it, the
+  result is a failure. The fallback is used only when WebCrypto Ed25519 is *unavailable*. It never
+  re-checks a signature that WebCrypto rejected (tested with a pass-through spy on the library).
+- **Library.** `@noble/ed25519` **3.2.0** is pinned exactly in `apps/web/package.json` (released
+  2026-08-27; audited; no dependencies; MIT). It is called through `verifyAsync`, which hashes with
+  WebCrypto SHA-512 (`crypto.subtle.digest`), so no second dependency is needed. It lives in
+  `lib/offline/ed25519Fallback.ts` and is loaded with a dynamic `import()`. Webpack puts it in its
+  own async chunk (7.1 kB raw, 3.2 kB gzip), so devices with WebCrypto Ed25519 never download it.
+  The always-loaded offline code grew by about 1.1 kB gzip: `/student/offline` First Load JS went
+  from 154 kB to 155 kB in the `next build` output.
+- **Diagnostics.** The local sync diagnostics record `signatureVerifier: "webcrypto" | "noble"`
+  (`null` until probed). This holds no PII and does not leave the device.
+
+**Semantics (strictness parity).** Before either verifier runs, the same encoding checks apply on
+both paths, so the two paths do not depend on how each library treats edge cases:
+
+| Check | Both paths (`signature.ts`) |
+| --- | --- |
+| Hex | strict: an odd length or a non-hex character is rejected (it used to parse silently as `0`) |
+| Lengths | public key exactly 32 bytes, signature exactly 64 bytes |
+| Public key A | canonical encoding (y < p), and not a small-order point (all 8, plus the x = 0 encodings with the sign bit set) |
+| R | canonical encoding (y < p) |
+| S | canonical: **S < L** (rejects S + L malleability) |
+
+After these checks, each verifier uses its own equation:
+
+- **WebCrypto:** the platform's RFC 8032 verifier (BoringSSL in Chromium, the cofactorless equation
+  `[S]B = R + [k]A`).
+- **noble:** `verifyAsync(..., { zip215: false })`, the library's strict RFC 8032 / FIPS 186-5
+  branch. This is **not** ZIP-215. It rejects non-canonical A and R and small-order A, enforces
+  S < L, and uses the cofactored equation `[8][S]B = [8]R + [8][k]A`.
+
+The two equations can differ only for a signature whose R has a small-order component. An honest
+signer never produces one, and only the holder of the private key could make one. Every
+attacker-supplied malformation is rejected identically on both paths. Tests cover RFC 8032 TEST 1–3,
+tampered message, signature and key, wrong lengths, non-hex input, S + L, y = p, and small-order keys
+(including the identity-key forgery), each on both paths
+(`lib/offline/__tests__/signatureFallback.test.ts`).
+
+**Minimum supported browsers for saving lessons offline.**
+
+- **WebCrypto path:** Chromium / Android WebView 137+, Safari 17+, Firefox 129+.
+- **Fallback path:** any browser with WebCrypto SHA-512 in a secure context (HTTPS), IndexedDB and
+  a service worker. The library chunk is not transpiled, so it needs BigInt and optional chaining
+  (ES2020): Chromium / Android WebView 80+, Safari 14+, Firefox 74+.
+
+On an older engine the fallback chunk fails to load, and saving fails closed with the honest "could
+not be checked" message. Nothing is installed unverified. The always-loaded offline module uses no
+BigInt literals, so it still parses on the Next.js build target (Chrome 64). Verified in Node 20
+(both paths, the fallback forced by a WebCrypto stub). Also verified in a real browser: the
+`make e2e-web` journey on Playwright 1.49.1's Chromium 131.0.6778.33, which has no WebCrypto
+Ed25519 (`NotSupportedError`). There the pinned-key package saved, played offline from the service
+worker, and synced (10 answers, server `total_attempts` 5 → 15).
+
+**Residual risk.** The fallback uses JavaScript BigInt arithmetic, which is not constant time.
+Verification handles only public data (public key, signature, message), so there is no secret to
+leak through timing.
 
 **Security verdict:** the offline design **preserves every online security invariant** and adds
 integrity (signing) and confidentiality (at-rest encryption) controls. It is **safe to implement 6.2A
