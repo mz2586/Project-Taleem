@@ -42,6 +42,7 @@ from taleem_core.contexts.school.adapters.persistence.models import (
     ClassroomRow,
     EnrolmentRow,
     OrganizationRow,
+    SchoolAuditRow,
     TeacherRow,
 )
 from taleem_core.main import create_app
@@ -123,6 +124,19 @@ def _enrol_in_class(app: FastAPI, *refs: str) -> None:
                     student_ref=ref,
                     organization_id=f"org-{tag}",
                     approved_by="guardian",
+                )
+            )
+            # The durable join audit (0011) names the learner too, so erasure must cover it.
+            s.add(
+                SchoolAuditRow(
+                    event_id=f"sae-{tag}-{ref}"[:64],
+                    action="enrolment.joined",
+                    actor_ref="guardian",
+                    actor_role="guardian",
+                    subject_ref=ref,
+                    organization_id=f"org-{tag}",
+                    class_id=f"cls-{tag}",
+                    at=1.0,
                 )
             )
 
@@ -271,6 +285,7 @@ def _exercise(app: FastAPI, *, blocked: bool = False) -> None:
         "learning.objective_mastery",
         "learning.assessment_evidence",
         "school.enrolment",
+        "school.enrolment_audit",
     } <= set(before), before
     assert _memory_hits(app, ref)  # live session, sync entity, AI usage
 

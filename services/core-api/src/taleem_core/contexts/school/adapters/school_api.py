@@ -41,8 +41,10 @@ class TeacherIn(BaseModel):
 
 
 class TeacherSignInIn(BaseModel):
+    model_config = ConfigDict(populate_by_name=True)
     email: str = Field(min_length=3, max_length=254)
     passphrase: str = Field(min_length=1, max_length=256)
+    device_id: str = Field(default="", alias="deviceId", max_length=64)
 
 
 class ClassIn(BaseModel):
@@ -114,7 +116,11 @@ def build_school_router(
     @router.post("/teachers:signin")
     def sign_in_teacher(body: TeacherSignInIn, request: Request) -> dict[str, Any]:
         sign_in_guard(request)
-        return service.sign_in_teacher(email=body.email, passphrase=body.passphrase)
+        # The refresh token is continued at /v1/identity/sessions:refresh (and ended at
+        # sessions:signout) — identity's rotating chains, registered for the teacher role.
+        return service.sign_in_teacher(
+            email=body.email, passphrase=body.passphrase, device_id=body.device_id
+        )
 
     # ------------------------------------------------------------------------- teacher
 

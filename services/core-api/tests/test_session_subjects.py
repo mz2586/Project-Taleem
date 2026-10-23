@@ -148,7 +148,7 @@ def test_a_role_registers_once_and_unregistered_roles_get_no_chain(
             ROLE, is_active=owner.is_active, issue_access=owner.issue_access
         )
     with pytest.raises(ValueError, match="not a registered session subject"):
-        identity.issue_refresh_token("t_1", "teacher")
+        identity.issue_refresh_token("t_1", "not_a_registered_role")
     with pytest.raises(ValueError, match="positive"):
         identity.register_session_subject(
             "other_role",

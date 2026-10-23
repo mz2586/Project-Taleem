@@ -78,3 +78,28 @@ def test_up_down_up_and_orm_parity() -> None:
             )
     engine.dispose()
     assert not drift, "ORM/migration drift:\n" + "\n".join(drift)
+
+
+def test_0011_follows_the_staff_accounts_migration() -> None:
+    import importlib.util
+
+    path = Path(__file__).resolve().parents[1] / "alembic" / "versions" / "0011_school_audit.py"
+    spec = importlib.util.spec_from_file_location("m0011", path)
+    assert spec and spec.loader
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    assert (module.revision, module.down_revision) == ("0011_school_audit", "0010_staff_accounts")
+
+
+@_pg_only
+def test_0011_school_audit_up_down_up() -> None:
+    from alembic import command
+
+    cfg = _cfg()
+    command.upgrade(cfg, "head")
+    assert "enrolment_audit" in _school_tables()
+    command.downgrade(cfg, "0010_staff_accounts")
+    tables = _school_tables()
+    assert "enrolment_audit" not in tables and "enrolment" in tables  # only 0011 was reverted
+    command.upgrade(cfg, "head")
+    assert "enrolment_audit" in _school_tables()

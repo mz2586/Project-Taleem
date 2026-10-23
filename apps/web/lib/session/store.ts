@@ -52,9 +52,7 @@ function read(): StoredSession | null {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as StoredSession;
-    if (!parsed?.accessToken || !parsed?.role) return null;
-    // Only a teacher session may lack a refresh token (the school API issues none).
-    if (!parsed.refreshToken && parsed.role !== "teacher") return null;
+    if (!parsed?.accessToken || !parsed?.refreshToken || !parsed?.role) return null;
     return parsed;
   } catch {
     // Unparseable or unavailable storage is the same as no session — never a crash on boot.
@@ -139,11 +137,6 @@ export const sessionStore = {
     if (inFlight) return inFlight;
     const session = sessionStore.peek();
     if (!session) return null;
-    if (!session.refreshToken) {
-      // Nothing to refresh with (a teacher session): an expired token means signing in again.
-      sessionStore.clear();
-      return null;
-    }
 
     inFlight = (async () => {
       try {

@@ -65,7 +65,11 @@ from .contexts.identity.adapters.rate_limit import Limiter, RateLimiter, SharedR
 from .contexts.identity.adapters.staff_api import build_staff_router, staff_gate_dependency
 from .contexts.identity.application.identity_service import IdentityService
 from .contexts.identity.application.staff_service import StaffService
-from .contexts.identity.application.tokens import GUARDIAN_TOKEN_TTL_SECONDS, TokenIssuer
+from .contexts.identity.application.tokens import (
+    GUARDIAN_TOKEN_TTL_SECONDS,
+    IssuedToken,
+    TokenIssuer,
+)
 from .contexts.identity.domain.consent import ConsentEvidence, ConsentScope
 from .contexts.identity.domain.credentials import SecretHasher
 from .contexts.learning.adapters.ai_teacher_api import build_ai_teacher_router
@@ -107,7 +111,7 @@ from .contexts.ops.adapters.persistence.base import (
 from .contexts.ops.adapters.persistence.kill_switch_store import SqlKillSwitchState
 from .contexts.privacy.adapters.privacy_api import build_privacy_router
 from .contexts.privacy.adapters.wiring import build_privacy_service
-from .contexts.school.adapters.audit_log import InMemorySchoolAuditLog
+from .contexts.school.adapters.audit_log import SqlSchoolAuditLog
 from .contexts.school.adapters.context_ports import (
     CallablePublishedCurriculum,
     CallableSharingConsent,
@@ -447,10 +451,17 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             evidence=ConsentEvidence(method="class_join", attestation=attestation),
         )
 
-    def _issue_teacher_token(*, teacher_ref: str, now: float) -> dict[str, object]:
+    def _teacher_access(teacher_ref: str, now: float) -> IssuedToken:
         return token_issuer.issue(
             subject=teacher_ref, role="teacher", now=now, ttl_seconds=GUARDIAN_TOKEN_TTL_SECONDS
-        ).to_dict()
+        )
+
+    def _issue_teacher_token(*, teacher_ref: str, now: float) -> dict[str, object]:
+        return _teacher_access(teacher_ref, now).to_dict()
+
+    class _TeacherSessions:
+        def open(self, *, teacher_ref: str, device_id: str) -> str:
+            return identity_service.issue_refresh_token(teacher_ref, "teacher", device_id)
 
     school_limiter: Limiter = (
         SharedRateLimiter("school.sign_in", 10, 60.0, time.time, rate_limit_store)
@@ -467,7 +478,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             key = request.client.host if request.client else "unknown"
         school_limiter.check(key[:64])
 
-    school_audit = InMemorySchoolAuditLog(log)  # durable school.audit_event: follow-up migration
+    school_audit = SqlSchoolAuditLog(school_sf, log)  # durable: school.enrolment_audit (0011)
     app.state.school_audit = school_audit
     school_service = SchoolService(
         lambda: SqlSchoolUnitOfWork(school_sf),
@@ -485,6 +496,15 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         curriculum=CallablePublishedCurriculum(read_model.lesson_for, read_model.published_catalog),
         audit=school_audit,
         clock=time.time,
+        sessions=_TeacherSessions(),
+    )
+    # Teachers continue sessions through identity's rotating refresh tokens (rotation, replay
+    # revokes the family, device binding, sign-out). The live check runs on every refresh.
+    identity_service.register_session_subject(
+        "teacher",
+        is_active=school_service.teacher_may_continue,
+        issue_access=_teacher_access,
+        profile=school_service.teacher_session_profile,
     )
     app.include_router(
         build_school_router(school_service, claims_dependency, sign_in_guard=_school_sign_in_guard)

@@ -43,6 +43,7 @@ from .ports import (
     SchoolAuditLog,
     SchoolUnitOfWork,
     SecretHasher,
+    TeacherSessions,
     TeacherTokenIssuer,
 )
 
@@ -70,6 +71,7 @@ class SchoolService:
         curriculum: PublishedCurriculum,
         audit: SchoolAuditLog,
         clock: Callable[[], float],
+        sessions: TeacherSessions | None = None,
     ) -> None:
         self._uow = uow_factory
         self._hasher = hasher
@@ -80,6 +82,7 @@ class SchoolService:
         self._curriculum = curriculum
         self._audit = audit
         self._now = clock
+        self._sessions = sessions
         self._equalising_hash = hasher.equalising_hash()
 
     # ------------------------------------------------------------------ operator (system role)
@@ -138,7 +141,9 @@ class SchoolService:
 
     # ----------------------------------------------------------------------- teacher sign-in
 
-    def sign_in_teacher(self, *, email: str, passphrase: str) -> dict[str, Any]:
+    def sign_in_teacher(
+        self, *, email: str, passphrase: str, device_id: str = ""
+    ) -> dict[str, Any]:
         try:
             normalised = normalise_email(email)
         except InvalidSchoolDataError:
@@ -160,7 +165,26 @@ class SchoolService:
             uow.teachers.save(teacher)
             uow.commit()
         session = self._issue(teacher_ref=teacher.teacher_ref, now=self._now())
-        return {"teacher": _teacher_view(teacher), "session": session}
+        body: dict[str, Any] = {"teacher": _teacher_view(teacher), "session": session}
+        if self._sessions is not None:
+            # A rotating, device-bound refresh chain, continued through identity's refresh route.
+            body["refresh_token"] = self._sessions.open(
+                teacher_ref=teacher.teacher_ref, device_id=device_id
+            )
+        return body
+
+    def teacher_may_continue(self, teacher_ref: str) -> bool:
+        """The live check identity runs on every teacher refresh: the account exists and is ACTIVE
+        (a locked or suspended teacher's refresh fails like any other)."""
+        with self._uow() as uow:
+            teacher = uow.teachers.get(teacher_ref)
+        return teacher is not None and teacher.can_sign_in
+
+    def teacher_session_profile(self, teacher_ref: str) -> dict[str, Any]:
+        """What a teacher refresh response carries besides the tokens."""
+        with self._uow() as uow:
+            teacher = uow.teachers.get(teacher_ref)
+        return {"teacher": _teacher_view(teacher)} if teacher is not None else {}
 
     def teacher_profile(self, teacher_ref: str) -> dict[str, Any]:
         with self._uow() as uow:

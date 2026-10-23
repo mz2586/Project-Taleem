@@ -95,6 +95,13 @@ class TeacherTokenIssuer(Protocol):
     def __call__(self, *, teacher_ref: str, now: float) -> dict[str, object]: ...
 
 
+class TeacherSessions(Protocol):
+    """Opens a rotating refresh chain for a teacher (identity's generic session machinery; the
+    chain is refreshed and ended at /v1/identity/sessions:refresh and :signout)."""
+
+    def open(self, *, teacher_ref: str, device_id: str) -> str: ...
+
+
 class LearnerDirectory(Protocol):
     """Identity, read for the school context. All checks are LIVE — never cached."""
 

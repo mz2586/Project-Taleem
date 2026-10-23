@@ -6,6 +6,7 @@
 
 import { createApiClient } from "../apiClient";
 import { API_BASE } from "../session/config";
+import { deviceId } from "../session/device";
 import { currentAccessToken, withSession } from "../session/store";
 import type {
   Assignment,
@@ -23,8 +24,9 @@ const client = createApiClient(API_BASE, () => currentAccessToken());
 const seg = encodeURIComponent;
 
 export const publicTeacherApi = {
+  // The device id binds the refresh chain to this device (identity checks it on every refresh).
   signIn: (body: { email: string; passphrase: string }) =>
-    anonymous.post<TeacherSignInResponse>("/v1/school/teachers:signin", body),
+    anonymous.post<TeacherSignInResponse>("/v1/school/teachers:signin", { ...body, deviceId: deviceId() }),
 };
 
 export const teacherApi = {

@@ -104,3 +104,27 @@ class AssignmentRow(SchoolBase):
     due_at: Mapped[float] = mapped_column(Float, nullable=False)
     assigned_by: Mapped[str] = mapped_column(String(64), nullable=False)
     created_at: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
+
+
+class SchoolAuditRow(SchoolBase):
+    """Append-only record of class-membership changes (see alembic 0011_school_audit).
+
+    Pseudonymous refs only — never a learner's or an adult's name. ``subject_ref`` is the learner's
+    ``student_ref``; the privacy context erases these rows with the learner.
+    """
+
+    __tablename__ = "enrolment_audit"
+    __table_args__ = (
+        Index("ix_school_audit_subject", "subject_ref"),
+        Index("ix_school_audit_org_at", "organization_id", "at"),
+        {"schema": SCHOOL_SCHEMA},
+    )
+
+    event_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    action: Mapped[str] = mapped_column(String(32), nullable=False)
+    actor_ref: Mapped[str] = mapped_column(String(64), nullable=False)
+    actor_role: Mapped[str] = mapped_column(String(32), nullable=False)
+    subject_ref: Mapped[str] = mapped_column(String(64), nullable=False)
+    organization_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    class_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    at: Mapped[float] = mapped_column(Float, nullable=False)

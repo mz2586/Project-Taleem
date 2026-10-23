@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass
+from typing import Any
 
 import pytest
 from fastapi import FastAPI
@@ -689,3 +690,89 @@ def test_locked_teacher_is_told_only_after_authentication(world: World) -> None:
     # With a still-valid token, the state is named.
     r = w.client.get("/v1/school/classes", headers=w.teacher_a2)
     assert r.status_code == 403 and r.json()["code"] == "TEACHER_LOCKED"
+
+
+# ------------------------------------------------------- teacher refresh (identity's chains)
+
+
+def _teacher_signin(w: World, email: str, device: str = "") -> dict[str, Any]:
+    r = w.client.post(
+        "/v1/school/teachers:signin",
+        json={"email": email, "passphrase": _TEACHER_PASS, "deviceId": device},
+    )
+    assert r.status_code == 200, r.text
+    return dict(r.json())
+
+
+def _refresh(w: World, token: object, device: str = "") -> Any:
+    return w.client.post(
+        "/v1/identity/sessions:refresh", json={"refreshToken": token, "deviceId": device}
+    )
+
+
+def test_teacher_sessions_refresh_through_identity_and_rotate(world: World) -> None:
+    w = world
+    body = _teacher_signin(w, "a1@school-a.example", "tablet-1")
+    first = body["refresh_token"]
+    assert isinstance(first, str) and first
+
+    r = _refresh(w, first, "tablet-1")
+    assert r.status_code == 200, r.text
+    refreshed = r.json()
+    assert refreshed["session"]["role"] == "teacher"
+    assert refreshed["teacher"]["email"] == "a1@school-a.example"
+    second = refreshed["refresh_token"]
+    assert second and second != first
+    # The new access token works on the school API.
+    me = w.client.get("/v1/school/me", headers=_h(refreshed["session"]["access_token"]))
+    assert me.status_code == 200
+
+    # Replaying the consumed token revokes the whole family: the successor dies too.
+    assert _refresh(w, first, "tablet-1").status_code == 401
+    assert _refresh(w, second, "tablet-1").status_code == 401
+
+
+def test_teacher_refresh_is_device_bound_and_ends_at_sign_out(world: World) -> None:
+    w = world
+    token = _teacher_signin(w, "a1@school-a.example", "tablet-1")["refresh_token"]
+    assert _refresh(w, token, "another-device").status_code == 401
+
+    fresh = _teacher_signin(w, "a1@school-a.example")["refresh_token"]
+    out = w.client.post("/v1/identity/sessions:signout", json={"refreshToken": fresh})
+    assert out.status_code == 200
+    assert _refresh(w, fresh).status_code == 401
+
+
+@pytest.mark.parametrize("status", [TeacherStatus.LOCKED, TeacherStatus.SUSPENDED])
+def test_a_locked_or_suspended_teacher_cannot_refresh(world: World, status: TeacherStatus) -> None:
+    w = world
+    body = _teacher_signin(w, "b1@school-b.example")
+    teacher_ref = body["teacher"]["teacher_ref"]
+    with SqlSchoolUnitOfWork(w.app.state.school_session_factory) as uow:
+        t = uow.teachers.get(str(teacher_ref))
+        assert t is not None
+        t.status = status
+        uow.teachers.save(t)
+        uow.commit()
+    r = _refresh(w, body["refresh_token"])
+    assert r.status_code == 401
+    # Uniform, like every refresh failure: no account state is disclosed here.
+    assert "TEACHER" not in r.text
+
+
+def test_join_and_leave_are_recorded_in_the_durable_audit(world: World) -> None:
+    w = world
+    assert _leave(w, w.family, w.class_a["class_id"]) == 200
+    with w.app.state.school_session_factory() as s:
+        from sqlalchemy import select
+
+        from taleem_core.contexts.school.adapters.persistence.models import SchoolAuditRow
+
+        rows = s.scalars(
+            select(SchoolAuditRow).where(SchoolAuditRow.subject_ref == w.family.student_ref)
+        ).all()
+    assert [r.action for r in sorted(rows, key=lambda r: r.at)] == [
+        "enrolment.joined",
+        "enrolment.left",
+    ]
+    assert all(r.class_id == w.class_a["class_id"] and r.actor_role == "guardian" for r in rows)

@@ -31,7 +31,11 @@ info:
     * Teacher sign-in failures return one identical `401` and are rate limited. Only on a request
       that already carries a valid teacher token is the account state named: `403 TEACHER_LOCKED`
       (too many failed sign-ins) or `403 TEACHER_INACTIVE` (suspended).
-    * Teacher sessions are access tokens only (60 minutes); there is no refresh token yet.
+    * Teacher sessions: a 60-minute access token plus a rotating, device-bound refresh token from
+      the identity context. Refresh at `POST /v1/identity/sessions:refresh` and end the session at
+      `POST /v1/identity/sessions:signout` (identity.openapi.yaml) — the same routes guardians use.
+      Every refresh re-checks the teacher account live; a locked or suspended teacher's refresh
+      fails with the same uniform `401` as any other refresh failure.
   license:
     name: Proprietary — license undecided; see repository LICENSE
 servers:
@@ -126,6 +130,11 @@ paths:
                 properties:
                   teacher: { $ref: "#/components/schemas/Teacher" }
                   session: { $ref: "#/components/schemas/Session" }
+                  refresh_token:
+                    type: string
+                    description: >-
+                      Rotating, single-use, device-bound. Exchange at /v1/identity/sessions:refresh
+                      with the same deviceId used here.
         "401": { $ref: "#/components/responses/Problem" }
         "429": { $ref: "#/components/responses/Problem" }
         default: { $ref: "#/components/responses/Problem" }
@@ -431,6 +440,10 @@ components:
       properties:
         email: { type: string }
         passphrase: { type: string }
+        deviceId:
+          type: string
+          maxLength: 64
+          description: Optional; binds the refresh chain to this device.
     Teacher:
       type: object
       properties:

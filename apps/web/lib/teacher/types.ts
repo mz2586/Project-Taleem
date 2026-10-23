@@ -31,10 +31,11 @@ export interface TeacherSessionToken {
   subject: string;
 }
 
-/** POST /v1/school/teachers:signin — note: no refresh token yet (60-minute access token). */
+/** POST /v1/school/teachers:signin. The refresh token is continued at /v1/identity/sessions:refresh. */
 export interface TeacherSignInResponse {
   teacher: Teacher;
   session: TeacherSessionToken;
+  refresh_token: string;
 }
 
 export interface TeacherProfile {

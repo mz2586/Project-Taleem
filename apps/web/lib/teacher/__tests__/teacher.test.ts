@@ -98,7 +98,7 @@ describe("mutation error keys", () => {
 });
 
 describe("teacherEnvelope", () => {
-  it("adapts the school sign-in into the shared session envelope with no refresh token", () => {
+  it("adapts the school sign-in into the shared session envelope, refresh token included", () => {
     const env = teacherEnvelope({
       teacher: {
         teacher_ref: "tch_1",
@@ -109,8 +109,9 @@ describe("teacherEnvelope", () => {
         created_at: 1,
       },
       session: { access_token: "tok", token_type: "Bearer", expires_at: 99, expires_in: 60, role: "teacher", subject: "tch_1" },
+      refresh_token: "rft_t.s1",
     });
-    expect(env.refresh_token).toBe("");
+    expect(env.refresh_token).toBe("rft_t.s1");
     expect(env.session.role).toBe("teacher");
     expect(env.session.access_token).toBe("tok");
     // Nothing about the teacher's account is copied into the stored learner/guardian slots.
