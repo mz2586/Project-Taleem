@@ -14,7 +14,7 @@
 // Tokens are never written to the report.
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Page } from "@playwright/test";
-import { randomBytes, randomInt } from "node:crypto";
+import { createHmac, randomBytes, randomInt } from "node:crypto";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -29,7 +29,7 @@ const DEVICE_ID = randomBytes(16).toString("hex");
 const CLIENT_IP = `198.51.100.${randomInt(1, 255)}`;
 
 type Locale = (typeof LOCALES)[number];
-type Auth = "signed-out" | "guardian" | "student";
+type Auth = "signed-out" | "guardian" | "student" | "teacher";
 
 interface Envelope {
   session: { access_token: string; expires_at: number; role: string; subject: string };
@@ -52,7 +52,21 @@ interface Finding {
   selectors: string[];
 }
 
-const sessions: Partial<Record<Exclude<Auth, "signed-out">, Envelope>> = {};
+const sessions: Partial<Record<"guardian" | "student", Envelope>> = {};
+// The teacher signs in through the real /teacher/signin form for each scan.
+const teacher = { email: "", passphrase: "", classId: "", assignmentId: "", unavailable: "" };
+// Operator (role `system`) actions — creating a school and a teacher — have no public sign-in; like
+// the school API tests, the harness mints a short-lived dev HS256 token. A local/dev API accepts it;
+// production refuses HS256 entirely.
+const DEV_JWT_SECRET = process.env.A11Y_DEV_JWT_SECRET ?? "dev-only-not-secret";
+
+function devToken(role: string, sub: string): string {
+  const b64 = (v: object) => Buffer.from(JSON.stringify(v)).toString("base64url");
+  const head = b64({ alg: "HS256", typ: "JWT" });
+  const body = b64({ sub, role, exp: Math.floor(Date.now() / 1000) + 3600 });
+  const sig = createHmac("sha256", DEV_JWT_SECRET).update(`${head}.${body}`).digest("base64url");
+  return `${head}.${body}.${sig}`;
+}
 let studentRef = "";
 const findings: Finding[] = [];
 const scanned: {
@@ -114,6 +128,37 @@ test.beforeAll(async () => {
     guardian.session.access_token,
   );
   sessions.guardian = await api<Envelope>("/v1/identity/guardians:signin", { email, passphrase });
+  try {
+    const system = devToken("system", "a11y-operator");
+    const org = await api<{ organization_id: string }>(
+      "/v1/school/organizations",
+      { name: "Synthetic School", country: "PK", curriculumPackId: "pk-g4-math", defaultLocale: "ur" },
+      system,
+    );
+    teacher.email = `a11y-teacher-${randomBytes(6).toString("hex")}@example.invalid`;
+    teacher.passphrase = randomBytes(18).toString("base64url");
+    await api(
+      `/v1/school/organizations/${org.organization_id}/teachers`,
+      { email: teacher.email, displayName: "Synthetic Teacher", passphrase: teacher.passphrase },
+      system,
+    );
+    const signedIn = await api<{ session: { access_token: string } }>("/v1/school/teachers:signin", {
+      email: teacher.email,
+      passphrase: teacher.passphrase,
+    });
+    const token = signedIn.session.access_token;
+    const cls = await api<{ class_id: string }>("/v1/school/classes", { name: "Synthetic Class 4A" }, token);
+    teacher.classId = cls.class_id;
+    const assignment = await api<{ assignment_id: string }>(
+      `/v1/school/classes/${cls.class_id}/assignments`,
+      { objectiveCode: "MATH-G4-FR-01", dueAt: Math.floor(Date.now() / 1000) + 7 * 86400 },
+      token,
+    );
+    teacher.assignmentId = assignment.assignment_id;
+  } catch (error) {
+    // Recorded in the report and failed below, never silently skipped.
+    teacher.unavailable = String(error);
+  }
   sessions.student = await api<Envelope>("/v1/identity/learners:signin", {
     familyCode: guardian.guardian.family_code,
     displayName: learnerName,
@@ -194,7 +239,7 @@ function renderMarkdown(): string {
 }
 
 async function prepare(page: Page, locale: Locale, auth: Auth): Promise<void> {
-  const envelope = auth === "signed-out" ? undefined : sessions[auth];
+  const envelope = auth === "guardian" || auth === "student" ? sessions[auth] : undefined;
   const stored = envelope
     ? {
         role: envelope.session.role,
@@ -216,8 +261,18 @@ async function prepare(page: Page, locale: Locale, auth: Auth): Promise<void> {
   );
 }
 
+async function teacherSignIn(page: Page): Promise<void> {
+  expect(teacher.unavailable, `teacher provisioning failed: ${teacher.unavailable}`).toBe("");
+  await page.goto("/teacher/signin", { waitUntil: "networkidle" });
+  await page.locator("#teacher-email").fill(teacher.email);
+  await page.locator("#teacher-passphrase").fill(teacher.passphrase);
+  await page.locator('form button[type="submit"]').click();
+  await page.waitForURL("**/teacher");
+}
+
 async function scan(page: Page, route: string, locale: Locale, auth: Auth): Promise<void> {
   await prepare(page, locale, auth);
+  if (auth === "teacher") await teacherSignIn(page);
   await page.goto(route, { waitUntil: "networkidle" });
   // Client components hydrate, read the session, and fetch; give them a moment to settle.
   await page.waitForTimeout(750);
@@ -298,7 +353,12 @@ test("control: a deliberately inaccessible page is flagged", async ({ page }) =>
   expect(rules).toEqual(expect.arrayContaining(["image-alt", "button-name", "label"]));
 });
 
-const PUBLIC_ROUTES = ["/", "/join", "/signin", "/guardian/signin"];
+const PUBLIC_ROUTES = ["/", "/join", "/signin", "/guardian/signin", "/teacher/signin"];
+const TEACHER_ROUTES = [
+  "/teacher",
+  "/teacher/classes/:classId",
+  "/teacher/classes/:classId/assignments/:assignmentId",
+];
 const STUDENT_ROUTES = [
   "/student/today",
   "/student/subjects",
@@ -325,8 +385,19 @@ for (const locale of LOCALES) {
       test(`${route} as guardian`, async ({ page }) =>
         scan(page, route.replace(":studentRef", encodeURIComponent(studentRef)), locale, "guardian"));
     }
-    // The signed-out state of the protected areas: what a child or guardian sees before sign-in.
-    for (const route of ["/student/today", "/guardian"]) {
+    for (const route of TEACHER_ROUTES) {
+      test(`${route} as teacher`, async ({ page }) =>
+        scan(
+          page,
+          route
+            .replace(":classId", encodeURIComponent(teacher.classId))
+            .replace(":assignmentId", encodeURIComponent(teacher.assignmentId)),
+          locale,
+          "teacher",
+        ));
+    }
+    // The signed-out state of the protected areas: what a child, guardian or teacher sees first.
+    for (const route of ["/student/today", "/guardian", "/teacher"]) {
       test(`${route} signed-out`, async ({ page }) => scan(page, route, locale, "signed-out"));
     }
   });

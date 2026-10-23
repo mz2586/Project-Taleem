@@ -27,41 +27,19 @@ ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 api_require_database
 api_python_env
 
+# shellcheck source=scripts/e2e/web_server.sh
+. "$ROOT/scripts/e2e/web_server.sh"
+
 API_PORT="${A11Y_API_PORT:-8766}"
 WEB_PORT="${A11Y_WEB_PORT:-3100}"
 API_URL="http://127.0.0.1:$API_PORT"
 WEB_URL="http://127.0.0.1:$WEB_PORT"
 OUT="${A11Y_OUT:-$(mktemp -d "${TMPDIR:-/tmp}/taleem-a11y.XXXXXX")}"
 mkdir -p "$OUT"
-WEB_PID=""
-WEB_PGROUP=0
-
-# next forks worker processes, so the web server runs in its own process group (setsid) and the
-# whole group is stopped: TERM, then KILL after five seconds. Killing only the parent would orphan
-# a next-server that keeps the port.
-stop_web() {
-  [ -n "$WEB_PID" ] || return 0
-  if [ "$WEB_PGROUP" = "1" ]; then
-    kill -TERM -- "-$WEB_PID" 2>/dev/null || true
-  else
-    kill -TERM "$WEB_PID" 2>/dev/null || true
-  fi
-  for _ in 1 2 3 4 5; do
-    kill -0 "$WEB_PID" 2>/dev/null || break
-    sleep 1
-  done
-  if kill -0 "$WEB_PID" 2>/dev/null; then
-    if [ "$WEB_PGROUP" = "1" ]; then kill -KILL -- "-$WEB_PID" 2>/dev/null || true; fi
-    kill -KILL "$WEB_PID" 2>/dev/null || true
-  fi
-  wait "$WEB_PID" 2>/dev/null || true
-  WEB_PID=""
-  echo "== a11y: web server stopped"
-}
 
 cleanup() {
   status=$?
-  stop_web
+  web_stop
   api_stop
   if [ "$status" -ne 0 ] && [ -f "$OUT/web.log" ]; then
     echo "== a11y: exit $status; last web log lines:" >&2
@@ -76,34 +54,11 @@ api_migrate
 echo "== a11y: seeding the SYNTHETIC TEST FIXTURE lesson (not curriculum)"
 python -m taleem_core.tools.e2e_journey --seed-fixture
 TALEEM_CORS_ALLOWED_ORIGINS="$WEB_URL" api_start "$API_PORT" "$OUT/uvicorn.log"
-
-cd "$ROOT/apps/web"
-if [ "${A11Y_SKIP_BUILD:-0}" != "1" ]; then
-  [ -d node_modules ] || npm ci --no-audit --no-fund
-  echo "== a11y: building apps/web against $API_URL"
-  NEXT_PUBLIC_API_URL="$API_URL" NEXT_TELEMETRY_DISABLED=1 npm run build >"$OUT/web-build.log" 2>&1 \
-    || { tail -n 40 "$OUT/web-build.log" >&2; exit 1; }
-fi
-echo "== a11y: starting next on $WEB_URL"
-NEXT_BIN="$ROOT/apps/web/node_modules/next/dist/bin/next"
-if command -v setsid >/dev/null; then
-  NEXT_TELEMETRY_DISABLED=1 setsid node "$NEXT_BIN" start -H 127.0.0.1 -p "$WEB_PORT" \
-    >"$OUT/web.log" 2>&1 &
-  WEB_PGROUP=1
-else
-  NEXT_TELEMETRY_DISABLED=1 node "$NEXT_BIN" start -H 127.0.0.1 -p "$WEB_PORT" >"$OUT/web.log" 2>&1 &
-fi
-WEB_PID=$!
-for _ in $(seq 1 60); do
-  curl -fsS -o /dev/null "$WEB_URL/" 2>/dev/null && break
-  kill -0 "$WEB_PID" 2>/dev/null || { echo "next exited early" >&2; exit 1; }
-  sleep 1
-done
-curl -fsS -o /dev/null "$WEB_URL/" || { echo "web app never became ready" >&2; exit 1; }
-echo "== a11y: web app is up"
+[ "${A11Y_SKIP_BUILD:-0}" = "1" ] || web_build "$API_URL" "$OUT/web-build.log"
+web_start "$WEB_PORT" "$OUT/web.log"
 
 cd "$ROOT/tests/a11y"
 [ -d node_modules ] || npm ci --no-audit --no-fund
 [ "${A11Y_INSTALL_BROWSER:-0}" = "1" ] && npx --no-install playwright install chromium
 echo "== a11y: scanning (report: $OUT/a11y-report.md)"
-A11Y_WEB_URL="$WEB_URL" A11Y_API_URL="$API_URL" A11Y_OUT="$OUT" npx --no-install playwright test
+A11Y_WEB_URL="$WEB_URL" A11Y_API_URL="$API_URL" A11Y_OUT="$OUT" npx --no-install playwright test --config playwright.config.ts

@@ -4,7 +4,8 @@ import { defineConfig, devices } from "@playwright/test";
 // must be built against a real API, and that API needs PostgreSQL and migrations first.
 export default defineConfig({
   testDir: ".",
-  testMatch: /.*\.spec\.ts$/,
+  // Only the axe scan; the browser journey has its own config (playwright.e2e.config.ts).
+  testMatch: /.*\.a11y\.spec\.ts$/,
   // One worker: the suite signs in once (beforeAll) and every scan reuses those synthetic accounts.
   workers: 1,
   fullyParallel: false,

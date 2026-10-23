@@ -47,6 +47,8 @@ api_port_free() {
   python3 - "$1" <<'PY'
 import socket, sys
 s = socket.socket()
+# Same option the servers use: a port whose last connections are only in TIME_WAIT is free.
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 try:
     s.bind(("127.0.0.1", int(sys.argv[1])))
 except OSError:
@@ -73,7 +75,8 @@ api_start() {
   # (PostgreSQL) limiter persists across runs, so without this, repeated runs throttle each other.
   export TALEEM_CLIENT_IP_HEADER="${TALEEM_CLIENT_IP_HEADER:-x-real-ip}"
   echo "== api: starting uvicorn on $base"
-  (cd "$API_CORE" && exec python -m uvicorn taleem_core.main:app --host 127.0.0.1 --port "$port" \
+  # Unbuffered, so the request log is complete even when the server is stopped mid-run.
+  (cd "$API_CORE" && PYTHONUNBUFFERED=1 exec python -m uvicorn taleem_core.main:app --host 127.0.0.1 --port "$port" \
     --workers 1 --log-level warning) >"$log" 2>&1 &
   API_PID=$!
   local _

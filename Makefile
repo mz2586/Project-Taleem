@@ -57,6 +57,10 @@ audit: ## Dependency vulnerability scan: pip-audit (core-api lock) + npm audit (
 a11y: ## Automated WCAG 2.2 A/AA scan (axe + Playwright) of every web route, ur + en, real API sign-in
 	./scripts/a11y/run_a11y.sh
 
+.PHONY: e2e-web
+e2e-web: ## Browser journey through the REAL UI (Playwright): join, consent, lesson, offline + sync, withdrawal
+	./scripts/e2e-web/run_e2e_web.sh
+
 .PHONY: release-evidence
 release-evidence: ## Reproducible pre-audit evidence report (gates, e2e, drill, audits, a11y) as markdown
 	./scripts/release_evidence.sh

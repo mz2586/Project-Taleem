@@ -1,5 +1,8 @@
 name: Accessibility scan
 
+# Also hosts the browser-level end-to-end journey (job `browser-journey`): both drive the real web
+# app built against a real API, so they share triggers and setup.
+
 # Automated WCAG 2.2 A/AA scan (axe-core in Playwright) of every apps/web route, in Urdu (RTL) and
 # English, with signed-in pages reached through the REAL identity API (scripts/a11y/run_a11y.sh).
 # Fails on any serious or critical violation. Automated checks are a subset of WCAG; this is not the
@@ -15,6 +18,8 @@ on:
       - "tests/a11y/**"
       - "scripts/a11y/**"
       - "scripts/e2e/api_server.sh"
+      - "scripts/e2e/web_server.sh"
+      - "scripts/e2e-web/**"
       - ".github/workflows/a11y.yml"
   pull_request:
     paths:
@@ -22,6 +27,8 @@ on:
       - "tests/a11y/**"
       - "scripts/a11y/**"
       - "scripts/e2e/api_server.sh"
+      - "scripts/e2e/web_server.sh"
+      - "scripts/e2e-web/**"
       - ".github/workflows/a11y.yml"
   workflow_dispatch:
 
@@ -76,4 +83,55 @@ jobs:
         with:
           name: a11y-evidence
           path: a11y-evidence/
+          if-no-files-found: warn
+
+  browser-journey:
+    name: Browser journey through the real UI (ur + en, offline, withdrawal)
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: taleem
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      CS_DATABASE_URL: postgresql+psycopg://postgres:ci@localhost:5432/taleem
+      TALEEM_DATABASE_URL: postgresql+psycopg://postgres:ci@localhost:5432/taleem
+      E2E_WEB_OUT: ${{ github.workspace }}/e2e-web-evidence
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install core-api
+        working-directory: services/core-api
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - name: Install web + browser-test packages
+        run: |
+          (cd apps/web && npm ci --no-audit --no-fund)
+          (cd tests/a11y && npm ci --no-audit --no-fund)
+      - name: Install Chromium
+        working-directory: tests/a11y
+        run: npx --no-install playwright install --with-deps chromium
+      # Journey: join -> enrol -> consent -> child sign-in -> lesson -> offline play + sync ->
+      # guardian view -> withdrawal. Fails on any recorded UI defect (expect.soft).
+      - name: Browser journey
+        run: ./scripts/e2e-web/run_e2e_web.sh
+      - name: Upload trace, screenshots, findings
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: e2e-web-evidence
+          path: e2e-web-evidence/
           if-no-files-found: warn
