@@ -16,7 +16,8 @@ from ...domain.accounts import AccountStatus, GuardianAccount, LearnerAccount, r
 from ...domain.audit import AuditAction, AuditEvent
 from ...domain.consent import ConsentAction, ConsentEvidence, ConsentRecord, ConsentScope
 from ...domain.sessions import RefreshToken
-from .models import AuditRow, ConsentRow, GuardianRow, LearnerRow, RefreshTokenRow
+from ...domain.staff import StaffAccount
+from .models import AuditRow, ConsentRow, GuardianRow, LearnerRow, RefreshTokenRow, StaffRow
 
 # ------------------------------------------------------------------------------------- mapping
 
@@ -349,3 +350,63 @@ class SqlRefreshTokenRepository:
         for row in rows:
             row.revoked_at = now
         return len(rows)
+
+
+def _to_staff(row: StaffRow) -> StaffAccount:
+    return StaffAccount(
+        staff_ref=row.staff_ref,
+        email=row.email,
+        passphrase_hash=row.passphrase_hash,
+        display_name=row.display_name,
+        role=row.role,
+        status=AccountStatus(row.status),
+        failed_attempts=row.failed_attempts,
+        created_at=row.created_at,
+        created_by=row.created_by,
+        version=row.version,
+    )
+
+
+class SqlStaffRepository:
+    def __init__(self, session: Session) -> None:
+        self._session = session
+
+    def add(self, account: StaffAccount) -> None:
+        self._session.add(
+            StaffRow(
+                staff_ref=account.staff_ref,
+                email=account.email,
+                passphrase_hash=account.passphrase_hash,
+                display_name=account.display_name,
+                role=account.role,
+                status=account.status.value,
+                failed_attempts=account.failed_attempts,
+                created_at=account.created_at,
+                created_by=account.created_by,
+            )
+        )
+
+    def get(self, staff_ref: str) -> StaffAccount | None:
+        row = self._session.get(StaffRow, staff_ref)
+        return _to_staff(row) if row else None
+
+    def by_email(self, email: str) -> StaffAccount | None:
+        row = self._session.scalars(select(StaffRow).where(StaffRow.email == email)).one_or_none()
+        return _to_staff(row) if row else None
+
+    def all(self) -> list[StaffAccount]:
+        rows = self._session.scalars(
+            select(StaffRow).order_by(StaffRow.created_at, StaffRow.staff_ref)
+        ).all()
+        return [_to_staff(row) for row in rows]
+
+    def save(self, account: StaffAccount) -> None:
+        row = self._session.get(StaffRow, account.staff_ref)
+        if row is None:
+            self.add(account)
+            return
+        # ``role`` is never rewritten: a staff account holds the one role it was created with.
+        row.passphrase_hash = account.passphrase_hash
+        row.display_name = account.display_name
+        row.status = account.status.value
+        row.failed_attempts = account.failed_attempts

@@ -25,6 +25,16 @@ _REVIEWER_ROLES = (
     "safety_officer",
 )
 _CURRICULUM_ROLES = ("subject_author", "curriculum_architect", *_REVIEWER_ROLES)
+# Public view of the Studio role set: the roles an operator-provisioned staff account may hold
+# (identity/domain/staff.py pins its own copy equal to this one in a test).
+CURRICULUM_ROLES: tuple[str, ...] = _CURRICULUM_ROLES
+
+
+def _staff_rules() -> set[tuple[str, str, str]]:
+    """Operators provision and suspend Studio staff; each staff role reads its own account."""
+    rules = {("system", "manage", "identity.staff")}
+    rules |= {(r, "read", "identity.staff_self") for r in _CURRICULUM_ROLES}
+    return rules
 
 
 def _curriculum_rules() -> set[tuple[str, str, str]]:
@@ -98,6 +108,7 @@ _ALLOW: frozenset[tuple[str, str, str]] = frozenset(
         *_learning_rules(),
         *_identity_rules(),
         *_school_rules(),
+        *_staff_rules(),
     }
 )
 

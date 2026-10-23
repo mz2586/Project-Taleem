@@ -18,6 +18,7 @@ service is called — API, migration script, or operator tool:
 from __future__ import annotations
 
 from collections.abc import Callable
+from dataclasses import dataclass
 from typing import Any
 
 from ....platform.correlation import get_correlation_id
@@ -43,7 +44,7 @@ from ..domain.consent import (
     ConsentState,
     derive_state,
 )
-from ..domain.sessions import RefreshToken, RefreshTokenError
+from ..domain.sessions import REFRESH_TOKEN_TTL_SECONDS, RefreshToken, RefreshTokenError
 from ..domain.sessions import split as split_refresh_token
 from .ports import IdentityUnitOfWork
 from .tokens import (
@@ -54,6 +55,27 @@ from .tokens import (
 )
 
 UnitOfWorkFactory = Callable[[], IdentityUnitOfWork]
+
+# Roles whose session continuity identity implements itself; nothing may re-register them.
+_BUILT_IN_SESSION_ROLES = frozenset({"student", "guardian"})
+
+
+@dataclass(frozen=True)
+class SessionSubject:
+    """How identity's refresh flow continues a session for a role another component owns.
+
+    ``is_active(subject_ref)`` is consulted on **every** refresh — return ``False`` for an
+    unknown, suspended or locked subject, or one that no longer holds this role, and the refresh
+    fails with the uniform ``401``. ``issue_access(subject_ref, now)`` mints the access token
+    (role and subject must come from the owner's stored record, never from the refresh request).
+    ``profile(subject_ref)`` optionally adds ``{key: view}`` to the response.
+    ``refresh_ttl_seconds`` is the idle lifetime of each token in the chain.
+    """
+
+    is_active: Callable[[str], bool]
+    issue_access: Callable[[str, float], IssuedToken]
+    profile: Callable[[str], dict[str, Any]] | None = None
+    refresh_ttl_seconds: int = REFRESH_TOKEN_TTL_SECONDS
 
 
 def _invalid(code: str, detail: str, field: str = "") -> Problem:
@@ -100,6 +122,56 @@ class IdentityService:
         # Computed once per service, not per import: at the production work factor this is a third
         # of a second, which belongs at composition time rather than in every module that imports.
         self._equalising_hash = self._hasher.equalising_hash()
+        self._session_subjects: dict[str, SessionSubject] = {}
+
+    # ------------------------------------------------------------ sessions for other components
+
+    def register_session_subject(
+        self,
+        role: str,
+        *,
+        is_active: Callable[[str], bool],
+        issue_access: Callable[[str, float], IssuedToken],
+        profile: Callable[[str], dict[str, Any]] | None = None,
+        refresh_ttl_seconds: int = REFRESH_TOKEN_TTL_SECONDS,
+    ) -> None:
+        """Let identity's rotating refresh tokens carry sessions for a role it does not own.
+
+        Rotation, single use, replay-revokes-the-family, device binding and sign-out apply
+        unchanged; the owner supplies only the live "may this subject continue" check and the
+        token minting.
+        ``student`` and ``guardian`` are built in and cannot be re-registered, and a role can be
+        registered once (a second registration is a wiring bug, so it raises).
+        """
+        if not role or role in _BUILT_IN_SESSION_ROLES:
+            raise ValueError(f"role {role!r} cannot be registered as a session subject")
+        if role in self._session_subjects:
+            raise ValueError(f"session subject role {role!r} is already registered")
+        if refresh_ttl_seconds <= 0:
+            raise ValueError("refresh_ttl_seconds must be positive")
+        self._session_subjects[role] = SessionSubject(
+            is_active=is_active,
+            issue_access=issue_access,
+            profile=profile,
+            refresh_ttl_seconds=refresh_ttl_seconds,
+        )
+
+    def issue_refresh_token(self, subject_ref: str, role: str, device_id: str = "") -> str:
+        """Open a new refresh chain for a registered role (call after a successful sign-in).
+
+        Returns the wire form, handed to the client once; only its digest is stored. Refuses a role
+        nobody registered, so a component cannot mint chains that refresh could never honour.
+        """
+        registered = self._session_subjects.get(role)
+        if registered is None:
+            raise ValueError(f"role {role!r} is not a registered session subject")
+        now = self._now()
+        with self._uow() as uow:
+            wire = self._mint_refresh(
+                uow, subject_ref, role, device_id, now, ttl_seconds=registered.refresh_ttl_seconds
+            )
+            uow.commit()
+        return wire
 
     # ------------------------------------------------------------------ guardian account lifecycle
 
@@ -756,12 +828,24 @@ class IdentityService:
                     "learner": _learner_view(learner, state),
                     "consent": state.to_dict(),
                 }
-            else:
+            elif record.role in self._session_subjects:
+                # A role another component owns (e.g. Studio staff). Its live check runs on every
+                # refresh; the token it mints carries the role the chain was opened with.
+                registered = self._session_subjects[record.role]
+                if not registered.is_active(record.subject_ref):
+                    raise _sign_in_failed()
+                access = registered.issue_access(record.subject_ref, now)
+                if access.role != record.role or access.subject != record.subject_ref:
+                    raise _sign_in_failed()  # an owner may never widen or move a session
+                payload = registered.profile(record.subject_ref) if registered.profile else {}
+            elif record.role == "guardian":
                 guardian = uow.guardians.get(record.subject_ref)
                 if guardian is None or not guardian.can_sign_in:
                     raise _sign_in_failed()
                 access = self._issue_guardian_token(guardian, now)
                 payload = {"guardian": _guardian_view(guardian)}
+            else:
+                raise _sign_in_failed()
 
             record.consume(now)
             uow.refresh_tokens.save(record)
@@ -772,6 +856,11 @@ class IdentityService:
                 record.device_id,
                 now,
                 family_id=record.family_id,
+                ttl_seconds=(
+                    self._session_subjects[record.role].refresh_ttl_seconds
+                    if record.role in self._session_subjects
+                    else REFRESH_TOKEN_TTL_SECONDS
+                ),
             )
             uow.audit.append(
                 AuditEvent.record(
@@ -841,6 +930,7 @@ class IdentityService:
         now: float,
         *,
         family_id: str | None = None,
+        ttl_seconds: int = REFRESH_TOKEN_TTL_SECONDS,
     ) -> str:
         record, wire = RefreshToken.issue(
             subject_ref=subject_ref,
@@ -848,6 +938,7 @@ class IdentityService:
             device_id=device_id,
             now=now,
             family_id=family_id,
+            ttl_seconds=ttl_seconds,
         )
         uow.refresh_tokens.add(record)
         return wire

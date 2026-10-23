@@ -34,6 +34,14 @@ class AuditAction(StrEnum):
     LEARNER_RENAMED = "learner.renamed"
     CONSENT_GRANTED = "consent.granted"
     CONSENT_WITHDRAWN = "consent.withdrawn"
+    # Curriculum Studio staff (operator-provisioned; see domain/staff.py).
+    STAFF_CREATED = "staff.created"
+    STAFF_SIGNED_IN = "staff.signed_in"
+    STAFF_SIGN_IN_FAILED = "staff.sign_in_failed"
+    STAFF_LOCKED = "staff.locked"
+    STAFF_SUSPENDED = "staff.suspended"
+    STAFF_REINSTATED = "staff.reinstated"
+    STAFF_PASSPHRASE_CHANGED = "staff.passphrase_changed"  # noqa: S105 (an event name)
     SESSION_REFRESHED = "session.refreshed"
     SESSION_SIGNED_OUT = "session.signed_out"
     SESSION_REVOKED = "session.revoked"

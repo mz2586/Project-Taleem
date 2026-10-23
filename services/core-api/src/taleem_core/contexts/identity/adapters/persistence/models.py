@@ -141,6 +141,28 @@ class RateLimitBucketRow(IdentityBase):
     expires_at: Mapped[float] = mapped_column(Float, nullable=False)
 
 
+class StaffRow(IdentityBase):
+    """A Curriculum Studio staff account (alembic 0010). Its own table: never a guardian, teacher,
+    or learner row, and the CHECK constraint in the migration limits ``role`` to the Studio roles.
+    """
+
+    __tablename__ = "staff_account"
+    __table_args__ = ({"schema": IDENTITY_SCHEMA},)
+
+    staff_ref: Mapped[str] = mapped_column(String(64), primary_key=True)
+    email: Mapped[str] = mapped_column(String(254), nullable=False, unique=True)
+    passphrase_hash: Mapped[str] = mapped_column(Text, nullable=False)
+    display_name: Mapped[str] = mapped_column(String(60), nullable=False)
+    role: Mapped[str] = mapped_column(String(32), nullable=False)
+    status: Mapped[str] = mapped_column(String(16), nullable=False, default="active")
+    failed_attempts: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    created_at: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
+    created_by: Mapped[str] = mapped_column(String(64), nullable=False, default="")
+    version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+
+    __mapper_args__ = {"version_id_col": version}
+
+
 class AuditRow(IdentityBase):
     """Append-only. Nothing in the application updates or deletes a row here."""
 

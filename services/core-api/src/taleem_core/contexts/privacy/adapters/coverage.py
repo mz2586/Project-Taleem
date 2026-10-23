@@ -33,6 +33,9 @@ EXEMPT_TABLES: dict[str, str] = {
         "the guardian is a separate data subject; erasing a learner leaves the adult account"
     ),
     "identity.rate_limit_bucket": "SHA-256 of the client network identifier; no learner ref",
+    "identity.staff_account": (
+        "a Curriculum Studio staff member, a separate adult data subject; no learner data"
+    ),
     "ops.kill_switch": "operator control state; no learner data",
     "school.organization": "a school (tenant); no learner data",
     "school.teacher_account": "an adult staff member, a separate data subject; no learner data",

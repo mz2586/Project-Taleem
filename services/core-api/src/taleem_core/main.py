@@ -62,7 +62,9 @@ from .contexts.identity.adapters.persistence.base import (
 from .contexts.identity.adapters.persistence.rate_limit_store import SqlRateLimitStore
 from .contexts.identity.adapters.persistence.uow import SqlIdentityUnitOfWork
 from .contexts.identity.adapters.rate_limit import Limiter, RateLimiter, SharedRateLimiter
+from .contexts.identity.adapters.staff_api import build_staff_router, staff_gate_dependency
 from .contexts.identity.application.identity_service import IdentityService
+from .contexts.identity.application.staff_service import StaffService
 from .contexts.identity.application.tokens import GUARDIAN_TOKEN_TTL_SECONDS, TokenIssuer
 from .contexts.identity.domain.consent import ConsentEvidence, ConsentScope
 from .contexts.identity.domain.credentials import SecretHasher
@@ -312,6 +314,34 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         )
     )
 
+    # ---- Curriculum Studio staff accounts (operator-provisioned; one Studio role each) ----
+    staff_service = StaffService(
+        lambda: SqlIdentityUnitOfWork(identity_sf),
+        token_issuer,
+        time.time,
+        SecretHasher(iterations=settings.kdf_iterations),
+        identity_service,  # staff sessions refresh through identity's registered-role hook
+    )
+    app.state.staff_service = staff_service
+    app.include_router(
+        build_staff_router(
+            staff_service,
+            claims_dependency,
+            clock=time.time,
+            rate_limit_store=rate_limit_store,
+            client_ip_header=settings.client_ip_header,
+        )
+    )
+    # A Studio-role token is re-checked against its live staff account on every Studio request, so
+    # a suspension takes effect at once. Production refuses Studio tokens with no staff account.
+    staff_permitted = [
+        Depends(
+            staff_gate_dependency(
+                staff_service, claims_dependency, require_account=settings.is_production
+            )
+        )
+    ]
+
     # ---- Per-request learner permission gate (child safety; e2e GAP 2) ----
     # A learner's access token outlives a consent withdrawal or a suspension by up to its TTL. So
     # every route a student token can call that reads or writes learning data re-checks the learner
@@ -346,7 +376,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 hierarchy=uow.hierarchy,
             )
 
-    app.include_router(build_studio_router(studio_service_provider, claims_dependency))
+    app.include_router(
+        build_studio_router(studio_service_provider, claims_dependency),
+        dependencies=staff_permitted,
+    )
 
     # ---- Learning Intelligence Platform (CTO H1: now mounted in the deployable) ----
     def learning_uow() -> LearningUnitOfWork:

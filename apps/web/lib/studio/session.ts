@@ -1,10 +1,9 @@
 // Curriculum Studio staff session.
 //
-// There is no staff sign-in flow yet: identity issues tokens to learners and guardians only (an API
-// gap, listed in the commit). Until one exists, a staff member signs in with an access token an
-// operator issued to them. The token is typed in at run time and kept in sessionStorage for this
-// tab only. Nothing is compiled into the bundle, so this is not a dev stub, and closing the tab
-// forgets it.
+// Staff sign in with their own operator-provisioned account at /studio/signin (email + passphrase,
+// POST /v1/identity/staff:signin — see ./sessionSignIn.ts), which yields an access token and a
+// rotating refresh token. Both are kept in sessionStorage for this tab only; closing the tab forgets
+// them. `signIn(token)` (adopting a raw token) remains for tooling and tests.
 //
 // The claims are decoded here ONLY to drive the interface (which actions to show). The server
 // verifies the signature and re-derives the role on every request; a forged token buys nothing but
@@ -62,6 +61,7 @@ export function parseStudioToken(token: string, nowSeconds: number): ActorParse 
 }
 
 const STORAGE_KEY = "taleem.studio.token.v1";
+const REFRESH_KEY = "taleem.studio.refresh.v1";
 type Listener = (actor: StudioActor | null) => void;
 const listeners = new Set<Listener>();
 let memory: string | null = null;
@@ -109,10 +109,27 @@ export const studioSession = {
     notify();
     return parsed;
   },
+  /** The rotating refresh token from a passphrase sign-in, if any. */
+  refreshToken(): string | null {
+    try {
+      return storage()?.getItem(REFRESH_KEY) ?? null;
+    } catch {
+      return null;
+    }
+  },
+  setRefreshToken(token: string | null): void {
+    try {
+      if (token) storage()?.setItem(REFRESH_KEY, token);
+      else storage()?.removeItem(REFRESH_KEY);
+    } catch {
+      /* tab-lifetime only */
+    }
+  },
   clear(): void {
     memory = null;
     try {
       storage()?.removeItem(STORAGE_KEY);
+      storage()?.removeItem(REFRESH_KEY);
     } catch {
       /* nothing stored */
     }

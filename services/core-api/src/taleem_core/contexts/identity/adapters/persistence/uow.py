@@ -24,6 +24,7 @@ from .repository import (
     SqlGuardianRepository,
     SqlLearnerRepository,
     SqlRefreshTokenRepository,
+    SqlStaffRepository,
 )
 
 
@@ -39,6 +40,7 @@ class SqlIdentityUnitOfWork:
         self.consents = SqlConsentRepository(self._session)
         self.audit = SqlAuditRepository(self._session)
         self.refresh_tokens = SqlRefreshTokenRepository(self._session)
+        self.staff = SqlStaffRepository(self._session)
         return self
 
     def __exit__(
