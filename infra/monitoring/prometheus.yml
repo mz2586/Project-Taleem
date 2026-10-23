@@ -1,0 +1,28 @@
+# Example Prometheus configuration for the Core API — a TEMPLATE, not a deployed config.
+#
+# No Prometheus, Alertmanager or paging destination is deployed (MONITORING_RUNBOOK.md §6). This
+# file exists so `promtool check config` validates the rule wiring and so whoever stands monitoring
+# up starts from the job name the alert rules assume (taleem-core-api).
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+
+rule_files:
+  - alerts.yml
+
+# alerting:
+#   alertmanagers:
+#     - static_configs:
+#         - targets: ["<alertmanager-host>:9093"]   # owner decision (M-Safe): not configured
+
+scrape_configs:
+  - job_name: taleem-core-api
+    metrics_path: /metrics
+    scheme: https
+    static_configs:
+      - targets: ["core-api.example.invalid"]  # placeholder: no verified live environment exists
+  # Backup freshness: a node_exporter textfile collector reading the file written by
+  # infra/monitoring/record_backup_success.sh after each successful scheduled backup.
+  - job_name: taleem-backup
+    static_configs:
+      - targets: ["backup-host.example.invalid:9100"]  # placeholder

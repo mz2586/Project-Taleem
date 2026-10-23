@@ -1,0 +1,68 @@
+name: Performance (load / soak / spike)
+
+# Manual only. These runs are slow (5-15 minutes each) and their numbers are noisy on shared
+# runners, so they never run on push or pull request. A GitHub-hosted runner is NOT production
+# hardware: label every number by the runner it came from (tests/perf/README.md).
+
+on:
+  workflow_dispatch:
+    inputs:
+      profile:
+        description: "Scenario profile"
+        type: choice
+        options: [load, soak, spike]
+        default: load
+      enforce:
+        description: "Fail the run when a latency/error budget is missed"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  perf:
+    name: k6 ${{ inputs.profile }} (uvicorn + PostgreSQL, synthetic data)
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: ci
+          POSTGRES_DB: taleem
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      CS_DATABASE_URL: postgresql+psycopg://postgres:ci@localhost:5432/taleem
+      TALEEM_DATABASE_URL: postgresql+psycopg://postgres:ci@localhost:5432/taleem
+      PERF_OUT_DIR: ${{ github.workspace }}/perf-evidence
+      PERF_ENFORCE: ${{ inputs.enforce && '1' || '0' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install core-api
+        working-directory: services/core-api
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+      - name: Run ${{ inputs.profile }} (k6 pinned + sha256-verified by run.sh)
+        run: ./tests/perf/run.sh "${{ inputs.profile }}"
+      - name: Job summary
+        if: always()
+        run: cat "$PERF_OUT_DIR/summary.md" >> "$GITHUB_STEP_SUMMARY" || true
+      - name: Remove synthetic credentials before upload
+        if: always()
+        run: rm -f "$PERF_OUT_DIR/seed.json"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: perf-${{ inputs.profile }}
+          path: perf-evidence/
+          if-no-files-found: warn

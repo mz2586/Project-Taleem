@@ -129,6 +129,7 @@ from .contexts.school.application.school_service import SchoolService
 from .contexts.sync.domain import DeltaType, SyncDelta, SyncStore
 from .contexts.sync.service import DurableSyncCoordinator
 from .platform import correlation
+from .platform import observability as obs
 from .platform.concurrency import ConcurrencyConflictError
 from .platform.config import Settings, load_settings
 from .platform.errors import Problem, conflict, forbidden
@@ -666,10 +667,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     async def observability(request: Request, call_next: Any) -> Any:
         cid = correlation.ensure_correlation_id(request.headers.get("x-correlation-id"))
         start = time.perf_counter()
-        registry().inc("taleem_requests_total", method=request.method, path=request.url.path)
         # Kill switch: when engaged, child-facing routes fail closed (503); health/ops stay up.
         if kill_switch.engaged and is_child_facing(request.url.path):
             registry().inc("taleem_kill_switch_blocked_total")
+            registry().inc("taleem_requests_total", method=request.method, path=obs.HALTED_ROUTE)
             response = JSONResponse(
                 status_code=503,
                 content=Problem(
@@ -682,16 +683,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         try:
             response = await call_next(request)
         except Problem as problem:  # domain errors -> RFC9457
+            obs.record_problem(problem.status, problem.code)
             response = JSONResponse(
                 status_code=problem.status, content=problem.to_dict(str(request.url.path))
             )
-        duration_ms = (time.perf_counter() - start) * 1000.0
-        registry().observe("taleem_request_duration_ms", duration_ms, path=request.url.path)
-        # Error golden signal: count client (4xx) vs server (5xx) responses for monitoring/alerting.
-        if response.status_code >= 500:
-            registry().inc("taleem_errors_total", kind="server")
-        elif response.status_code >= 400:
-            registry().inc("taleem_errors_total", kind="client")
+        except Exception:
+            # An unhandled error becomes a 500 further out (ServerErrorMiddleware). Count it here,
+            # or the 5xx golden signal — and the alert on it — would miss exactly these.
+            _record_request(request, start, status=500)
+            raise
+        duration_ms = _record_request(request, start, status=response.status_code)
         response.headers["x-correlation-id"] = cid
         apply_security_headers(response.headers)
         log.info(
@@ -703,8 +704,30 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         )
         return response
 
+    def _record_request(request: Request, start: float, *, status: int) -> float:
+        duration_ms = (time.perf_counter() - start) * 1000.0
+        # Labelled by the route TEMPLATE, not the raw path: raw paths carry session/learner ids and
+        # grew one series per id for the life of the process (see tests/perf/README.md).
+        route = obs.route_label(request.scope)
+        registry().inc("taleem_requests_total", method=request.method, path=route)
+        registry().observe("taleem_request_duration_ms", duration_ms, path=route)
+        # Bucketed twin (seconds) so the p95/p99 budget alerts can use histogram_quantile.
+        registry().observe_histogram(
+            "taleem_http_request_duration_seconds",
+            duration_ms / 1000.0,
+            method=request.method,
+            route=route,
+        )
+        # Error golden signal: count client (4xx) vs server (5xx) responses for monitoring/alerting.
+        if status >= 500:
+            registry().inc("taleem_errors_total", kind="server")
+        elif status >= 400:
+            registry().inc("taleem_errors_total", kind="client")
+        return duration_ms
+
     @app.exception_handler(Problem)
     async def problem_handler(request: Request, exc: Problem) -> JSONResponse:
+        obs.record_problem(exc.status, exc.code)
         return JSONResponse(status_code=exc.status, content=exc.to_dict(str(request.url.path)))
 
     def _conflict_response(request: Request) -> JSONResponse:
@@ -744,6 +767,16 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     # ---- observability ----
     @app.get("/metrics", tags=["observability"], response_class=PlainTextResponse)
     def metrics() -> str:
+        # Point-in-time gauges, refreshed per scrape (alerts: kill switch engaged, pool saturation).
+        registry().set_gauge("taleem_kill_switch_engaged", 1.0 if kill_switch.engaged else 0.0)
+        registry().set_gauge("taleem_ready", 1.0 if health.ready()[0] else 0.0)
+        for pool_name, engine in (
+            ("curriculum", curriculum_engine),
+            ("learning", learning_engine),
+            ("ops", ops_engine),
+            ("identity", identity_engine),  # school shares this pool
+        ):
+            obs.record_db_pool(pool_name, engine)
         return registry().render()
 
     # ---- offline sync (Phase 6.2B: durable evidence for attempts + in-memory policy for the rest)
@@ -777,7 +810,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         except LearnerRefusedError as exc:
             # Nothing was applied. The client holds the batch (never deletes it) until the
             # learner's session changes; the code tells it why. No student_ref in the body.
+            registry().inc("taleem_sync_batches_refused_total", code=exc.code)
             raise refusal_problem(exc.code) from exc
+        for r in results:  # per-delta outcome (applied/duplicate/ignored/conflict) for alerting
+            registry().inc("taleem_sync_deltas_total", status=r.status.value)
         return {
             "cursor": cursor,
             "results": [

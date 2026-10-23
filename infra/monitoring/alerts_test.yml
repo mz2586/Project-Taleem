@@ -1,0 +1,196 @@
+# promtool unit tests for alerts.yml:  promtool test rules infra/monitoring/alerts_test.yml
+# Synthetic series only. Each test proves an alert fires on the bad case and stays quiet on the
+# good one, so a typo in a metric name or label shows up here rather than as a silent alert.
+rule_files:
+  - alerts.yml
+
+evaluation_interval: 1m
+
+tests:
+  - name: api down fires after 2m, healthy instance stays quiet
+    interval: 1m
+    input_series:
+      - series: 'up{job="taleem-core-api", instance="a"}'
+        values: "0 0 0 0"
+      - series: 'up{job="taleem-core-api", instance="b"}'
+        values: "1 1 1 1"
+    alert_rule_test:
+      - eval_time: 3m
+        alertname: TaleemApiDown
+        exp_alerts:
+          - exp_labels: {severity: critical, service: core-api, job: taleem-core-api, instance: a}
+            exp_annotations:
+              summary: "Core API scrape failing on a"
+              description: "Prometheus could not scrape /metrics for 2 minutes: the process is down or unreachable."
+              runbook: "MONITORING_RUNBOOK.md#taleemapidown"
+
+  - name: 5xx rate over 1% warns, under stays quiet
+    interval: 1m
+    input_series:
+      # 1000 requests/min, 20 of them 5xx = 2%
+      - series: 'taleem_requests_total{method="GET", path="/v1/learning/sessions"}'
+        values: "0+1000x15"
+      - series: 'taleem_errors_total{kind="server"}'
+        values: "0+20x15"
+    alert_rule_test:
+      - eval_time: 12m
+        alertname: TaleemHigh5xxRate
+        exp_alerts:
+          - exp_labels: {severity: warning, service: core-api}
+            exp_annotations:
+              summary: "5xx rate 2% over 1% for 5 minutes"
+              description: "Server errors above 1% of requests (proposal; availability target AVAIL-01 is 99.9%)."
+              runbook: "MONITORING_RUNBOOK.md#taleemhigh5xxrate"
+      - eval_time: 12m
+        alertname: TaleemHigh5xxRateCritical
+        exp_alerts: []
+
+  - name: p95 over budget fires on slow learning routes but ignores slow sign-in
+    interval: 1m
+    input_series:
+      # Learning route: every request lands in the 0.5 s bucket -> p95 ~0.5 s > 0.3 s.
+      - series: 'taleem_http_request_duration_seconds_bucket{method="POST", route="/v1/learning/sessions/{session_id}:answer", le="0.3"}'
+        values: "0+0x20"
+      - series: 'taleem_http_request_duration_seconds_bucket{method="POST", route="/v1/learning/sessions/{session_id}:answer", le="0.5"}'
+        values: "0+100x20"
+      - series: 'taleem_http_request_duration_seconds_bucket{method="POST", route="/v1/learning/sessions/{session_id}:answer", le="+Inf"}'
+        values: "0+100x20"
+    alert_rule_test:
+      - eval_time: 20m
+        alertname: TaleemLatencyP95OverBudget
+        exp_alerts:
+          - exp_labels: {severity: warning, service: core-api}
+            exp_annotations:
+              summary: "API p95 490ms over the 300 ms budget (PERF-01)"
+              description: "p95 latency excluding credential routes has been over 300 ms for 10 minutes."
+              runbook: "MONITORING_RUNBOOK.md#taleemlatencyp95overbudget"
+
+  - name: slow sign-in alone does not trip the general p95 budget
+    interval: 1m
+    input_series:
+      - series: 'taleem_http_request_duration_seconds_bucket{method="POST", route="/v1/identity/learners:signin", le="0.3"}'
+        values: "0+0x20"
+      - series: 'taleem_http_request_duration_seconds_bucket{method="POST", route="/v1/identity/learners:signin", le="1.0"}'
+        values: "0+50x20"
+      - series: 'taleem_http_request_duration_seconds_bucket{method="POST", route="/v1/identity/learners:signin", le="+Inf"}'
+        values: "0+50x20"
+      - series: 'taleem_http_request_duration_seconds_bucket{method="GET", route="/v1/offline/packages", le="0.3"}'
+        values: "0+100x20"
+      - series: 'taleem_http_request_duration_seconds_bucket{method="GET", route="/v1/offline/packages", le="+Inf"}'
+        values: "0+100x20"
+    alert_rule_test:
+      - eval_time: 20m
+        alertname: TaleemLatencyP95OverBudget
+        exp_alerts: []
+      - eval_time: 20m
+        alertname: TaleemSignInLatencyOverBudget
+        exp_alerts: []
+
+  - name: kill switch engaged fires immediately
+    interval: 1m
+    input_series:
+      - series: 'taleem_kill_switch_engaged{instance="a"}'
+        values: "0 1 1"
+    alert_rule_test:
+      - eval_time: 0m
+        alertname: TaleemKillSwitchEngaged
+        exp_alerts: []
+      - eval_time: 1m
+        alertname: TaleemKillSwitchEngaged
+        exp_alerts:
+          - exp_labels: {severity: critical, service: core-api}
+            exp_annotations:
+              summary: "Kill switch ENGAGED: child-facing routes are returning 503"
+              description: "An operator halted child-facing traffic. Confirm it was intended and track the incident."
+              runbook: "MONITORING_RUNBOOK.md#taleemkillswitchengaged"
+
+  - name: consent refusal spike
+    interval: 1m
+    input_series:
+      - series: 'taleem_problem_responses_total{status="403", code="CONSENT_REQUIRED"}'
+        values: "0+3x20"
+      - series: 'taleem_problem_responses_total{status="401", code="UNAUTHENTICATED"}'
+        values: "0+100x20"
+    alert_rule_test:
+      - eval_time: 20m
+        alertname: TaleemConsentRefusalSpike
+        exp_alerts:
+          - exp_labels: {severity: warning, service: core-api}
+            exp_annotations:
+              summary: "45 CONSENT_REQUIRED refusals in 15 minutes"
+              description: "Learners are being refused for missing consent at an unusual rate: a consent-state regression, a bulk withdrawal, or a policy-version bump."
+              runbook: "MONITORING_RUNBOOK.md#taleemconsentrefusalspike"
+
+  - name: rate-limit store errors
+    interval: 1m
+    input_series:
+      - series: 'taleem_rate_limit_store_errors_total{scope="identity.sign_in"}'
+        values: "0 0 2 2"
+    alert_rule_test:
+      - eval_time: 3m
+        alertname: TaleemRateLimitStoreErrors
+        exp_alerts:
+          - exp_labels: {severity: warning, service: core-api, scope: identity.sign_in}
+            exp_annotations:
+              summary: "Shared rate-limit store failing for identity.sign_in"
+              description: "The PostgreSQL limiter errored and fell back to a per-process limit: sign-in throttling is weaker across instances."
+              runbook: "MONITORING_RUNBOOK.md#taleemratelimitstoreerrors"
+
+  - name: sync rejection spike
+    interval: 1m
+    input_series:
+      - series: 'taleem_sync_batches_refused_total{code="CONSENT_REQUIRED"}'
+        values: "0+2x20"
+      - series: 'taleem_problem_responses_total{status="422", code="UNKNOWN_DELTA_TYPE"}'
+        values: "0+0x20"
+    alert_rule_test:
+      - eval_time: 20m
+        alertname: TaleemSyncBatchRejectionSpike
+        exp_alerts:
+          - exp_labels: {severity: warning, service: core-api}
+            exp_annotations:
+              summary: "30 offline sync batches rejected in 15 minutes"
+              description: "Whole batches refused (learner gate) or invalid. Devices keep the deltas, so nothing is lost yet, but children's offline work is not landing."
+              runbook: "MONITORING_RUNBOOK.md#taleemsyncbatchrejectionspike"
+
+  - name: db pool saturation
+    interval: 1m
+    input_series:
+      - series: 'taleem_db_pool_checked_out{instance="a", pool="learning"}'
+        values: "13x10"
+      - series: 'taleem_db_pool_capacity{instance="a", pool="learning"}'
+        values: "15x10"
+      - series: 'taleem_db_pool_checked_out{instance="a", pool="identity"}'
+        values: "2x10"
+      - series: 'taleem_db_pool_capacity{instance="a", pool="identity"}'
+        values: "15x10"
+    alert_rule_test:
+      - eval_time: 6m
+        alertname: TaleemDbPoolSaturation
+        exp_alerts:
+          - exp_labels: {severity: warning, service: core-api, instance: a, pool: learning}
+            exp_annotations:
+              summary: "DB pool learning at 86.67% on a"
+              description: "Over 80% of the SQLAlchemy pool (size + overflow) is checked out; requests will start waiting for a connection."
+              runbook: "MONITORING_RUNBOOK.md#taleemdbpoolsaturation"
+      - eval_time: 6m
+        alertname: TaleemDbPoolExhausted
+        exp_alerts: []
+
+  - name: backup never reported / stale
+    interval: 1h
+    input_series:
+      - series: 'taleem_backup_last_success_timestamp_seconds{job="taleem-backup"}'
+        values: "0x40"
+    alert_rule_test:
+      - eval_time: 30h
+        alertname: TaleemBackupStale
+        exp_alerts:
+          - exp_labels: {severity: critical, service: database}
+            exp_annotations:
+              summary: "Last successful database backup is 1d 6h 0m 0s old"
+              description: "No successful backup in over 26 hours (a daily schedule plus slack)."
+              runbook: "MONITORING_RUNBOOK.md#taleembackupstale"
+      - eval_time: 30h
+        alertname: TaleemBackupNeverReported
+        exp_alerts: []

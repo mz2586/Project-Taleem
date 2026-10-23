@@ -44,6 +44,22 @@ simulate: ## Run the Pilot 0 synthetic-user simulator (drives the real app; exit
 e2e: ## Recorded end-to-end journey: real uvicorn + PostgreSQL at TALEEM_DATABASE_URL (both curriculum branches)
 	./scripts/e2e/run_journey.sh
 
+.PHONY: perf-load
+perf-load: ## k6 load test: ramp learners to PERF_LOAD_VUS (60) on real uvicorn + PostgreSQL (synthetic)
+	./tests/perf/run.sh load
+
+.PHONY: perf-soak
+perf-soak: ## k6 soak test: steady PERF_SOAK_VUS (10) for PERF_SOAK_DURATION (12m); RSS leak check
+	./tests/perf/run.sh soak
+
+.PHONY: perf-spike
+perf-spike: ## k6 spike test: sudden 10x burst of learners (5 -> 50) and back
+	./tests/perf/run.sh spike
+
+.PHONY: alerts-check
+alerts-check: ## Validate + unit-test the Prometheus alert rules (promtool, pinned)
+	./infra/monitoring/check_rules.sh
+
 .PHONY: backup-drill
 backup-drill: ## Backup + restore drill (pg_dump -> scratch DB -> verify counts + alembic head); prints RTO
 	./scripts/db_backup_restore_drill.sh

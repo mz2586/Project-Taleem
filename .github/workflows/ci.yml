@@ -7,9 +7,9 @@ name: Code CI
 on:
   push:
     branches: [main]
-    paths: ["services/**", "apps/**", "packages/**", "scripts/**", "Makefile", ".github/workflows/ci.yml"]
+    paths: ["services/**", "apps/**", "packages/**", "scripts/**", "infra/monitoring/**", "Makefile", ".github/workflows/ci.yml"]
   pull_request:
-    paths: ["services/**", "apps/**", "packages/**", "scripts/**", "Makefile", ".github/workflows/ci.yml"]
+    paths: ["services/**", "apps/**", "packages/**", "scripts/**", "infra/monitoring/**", "Makefile", ".github/workflows/ci.yml"]
 
 permissions:
   contents: read
@@ -146,6 +146,16 @@ jobs:
           name: e2e-evidence
           path: e2e-evidence/
           if-no-files-found: warn
+
+  alert-rules:
+    name: Alert rules (promtool)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # check rules + check config + unit tests of every alert against synthetic series. promtool
+      # is the pinned Prometheus 2.53.2 release, sha256-verified by the script.
+      - name: promtool check + test infra/monitoring/alerts.yml
+        run: ./infra/monitoring/check_rules.sh
 
   openapi-lint:
     name: OpenAPI contract lint

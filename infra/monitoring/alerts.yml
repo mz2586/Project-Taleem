@@ -1,0 +1,240 @@
+# Project Taleem — Prometheus alerting rules for the Core API (rules as code).
+#
+# Status: DEFINED, NOT ROUTED. No Alertmanager receiver, paging tool or on-call rota exists yet; the
+# staffed destination is an owner decision under M-Safe (MONITORING_RUNBOOK.md §6). Until then these
+# rules only evaluate. Every alert names its runbook entry (MONITORING_RUNBOOK.md §5).
+#
+# Every series referenced here is emitted by the code in this repository:
+#   taleem_requests_total{method,path}          HTTP middleware (main.py), path = route TEMPLATE
+#   taleem_errors_total{kind=client|server}     HTTP middleware; unhandled exceptions count as server
+#   taleem_http_request_duration_seconds_*      bucketed latency {method,route,le} (main.py)
+#   taleem_problem_responses_total{status,code} every RFC 9457 Problem response (main.py)
+#   taleem_sync_deltas_total{status}            per-delta sync outcome (main.py /v1/sync/batch)
+#   taleem_sync_batches_refused_total{code}     whole batch refused by the learner gate (main.py)
+#   taleem_kill_switch_engaged / _blocked_total gauge per scrape / counter (main.py)
+#   taleem_ready                                readiness gauge per scrape (main.py)
+#   taleem_rate_limit_store_errors_total{scope} shared limiter fell back (identity/adapters/rate_limit.py)
+#   taleem_db_pool_checked_out / _capacity      SQLAlchemy pool gauges per scrape {pool}
+#   taleem_backup_last_success_timestamp_seconds  textfile metric, infra/monitoring/record_backup_success.sh
+#   up                                          Prometheus' own scrape result for the job below
+#
+# Scrape job name assumed: taleem-core-api (see infra/monitoring/prometheus.yml).
+# Thresholds: PERF-01 (docs/01-product/04-non-functional-requirements.md) for API latency;
+# everything else is a starting PROPOSAL to tune against a real baseline (tests/perf/README.md).
+#
+# Validate: infra/monitoring/check_rules.sh  (promtool check rules + promtool test rules)
+
+groups:
+  - name: taleem-availability
+    rules:
+      - alert: TaleemApiDown
+        expr: up{job="taleem-core-api"} == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: core-api
+        annotations:
+          summary: "Core API scrape failing on {{ $labels.instance }}"
+          description: "Prometheus could not scrape /metrics for 2 minutes: the process is down or unreachable."
+          runbook: "MONITORING_RUNBOOK.md#taleemapidown"
+
+      - alert: TaleemNotReady
+        expr: max by (instance) (taleem_ready) == 0
+        for: 2m
+        labels:
+          severity: critical
+          service: core-api
+        annotations:
+          summary: "Core API reports not ready on {{ $labels.instance }}"
+          description: "/health/ready dependency probes are failing (the same check the readiness gauge reports)."
+          runbook: "MONITORING_RUNBOOK.md#taleemnotready"
+
+      - alert: TaleemHigh5xxRate
+        expr: |
+          sum(rate(taleem_errors_total{kind="server"}[5m]))
+            / clamp_min(sum(rate(taleem_requests_total[5m])), 1e-9) > 0.01
+        for: 5m
+        labels:
+          severity: warning
+          service: core-api
+        annotations:
+          summary: "5xx rate {{ $value | humanizePercentage }} over 1% for 5 minutes"
+          description: "Server errors above 1% of requests (proposal; availability target AVAIL-01 is 99.9%)."
+          runbook: "MONITORING_RUNBOOK.md#taleemhigh5xxrate"
+
+      - alert: TaleemHigh5xxRateCritical
+        expr: |
+          sum(rate(taleem_errors_total{kind="server"}[5m]))
+            / clamp_min(sum(rate(taleem_requests_total[5m])), 1e-9) > 0.05
+        for: 2m
+        labels:
+          severity: critical
+          service: core-api
+        annotations:
+          summary: "5xx rate {{ $value | humanizePercentage }} over 5%"
+          description: "Server errors above 5% of requests for 2 minutes."
+          runbook: "MONITORING_RUNBOOK.md#taleemhigh5xxrate"
+
+  - name: taleem-latency
+    rules:
+      # p95 over the PERF-01 budget (300 ms) for every route except the deliberately slow
+      # credential routes (PBKDF2 at 600 000 iterations) and the scrape/probe routes.
+      - alert: TaleemLatencyP95OverBudget
+        expr: |
+          histogram_quantile(0.95, sum by (le) (
+            rate(taleem_http_request_duration_seconds_bucket{route!~"/metrics|/health.*"}[10m])
+              unless on (method, route, le)
+            rate(taleem_http_request_duration_seconds_bucket{method="POST", route=~".*:signin|/v1/identity/guardians|/v1/identity/learners|.*pin:reset|/v1/school/organizations/.*/teachers|/v1/identity/staff.*"}[10m])
+          )) > 0.3
+        for: 10m
+        labels:
+          severity: warning
+          service: core-api
+        annotations:
+          summary: "API p95 {{ $value | humanizeDuration }} over the 300 ms budget (PERF-01)"
+          description: "p95 latency excluding credential routes has been over 300 ms for 10 minutes."
+          runbook: "MONITORING_RUNBOOK.md#taleemlatencyp95overbudget"
+
+      - alert: TaleemLatencyP99OverBudget
+        expr: |
+          histogram_quantile(0.99, sum by (le) (
+            rate(taleem_http_request_duration_seconds_bucket{route!~"/metrics|/health.*"}[10m])
+              unless on (method, route, le)
+            rate(taleem_http_request_duration_seconds_bucket{method="POST", route=~".*:signin|/v1/identity/guardians|/v1/identity/learners|.*pin:reset|/v1/school/organizations/.*/teachers|/v1/identity/staff.*"}[10m])
+          )) > 0.8
+        for: 10m
+        labels:
+          severity: warning
+          service: core-api
+        annotations:
+          summary: "API p99 {{ $value | humanizeDuration }} over the 800 ms budget (PERF-01)"
+          description: "p99 latency excluding credential routes has been over 800 ms for 10 minutes."
+          runbook: "MONITORING_RUNBOOK.md#taleemlatencyp95overbudget"
+
+      - alert: TaleemSignInLatencyOverBudget
+        expr: |
+          histogram_quantile(0.95, sum by (le) (
+            rate(taleem_http_request_duration_seconds_bucket{method="POST", route=~".*:signin"}[10m])
+          )) > 1.5
+        for: 10m
+        labels:
+          severity: warning
+          service: core-api
+        annotations:
+          summary: "Sign-in p95 {{ $value | humanizeDuration }} over the PROPOSED 1.5 s budget"
+          description: "Credential verification (PBKDF2) is queueing: CPU saturation or a sign-in burst."
+          runbook: "MONITORING_RUNBOOK.md#taleemsigninlatencyoverbudget"
+
+  - name: taleem-safety-controls
+    rules:
+      - alert: TaleemKillSwitchEngaged
+        expr: max(taleem_kill_switch_engaged) == 1
+        for: 0m
+        labels:
+          severity: critical
+          service: core-api
+        annotations:
+          summary: "Kill switch ENGAGED: child-facing routes are returning 503"
+          description: "An operator halted child-facing traffic. Confirm it was intended and track the incident."
+          runbook: "MONITORING_RUNBOOK.md#taleemkillswitchengaged"
+
+      - alert: TaleemConsentRefusalSpike
+        expr: sum(increase(taleem_problem_responses_total{code="CONSENT_REQUIRED"}[15m])) > 20
+        for: 0m
+        labels:
+          severity: warning
+          service: core-api
+        annotations:
+          summary: "{{ $value | humanize }} CONSENT_REQUIRED refusals in 15 minutes"
+          description: "Learners are being refused for missing consent at an unusual rate: a consent-state regression, a bulk withdrawal, or a policy-version bump."
+          runbook: "MONITORING_RUNBOOK.md#taleemconsentrefusalspike"
+
+      - alert: TaleemRateLimitStoreErrors
+        expr: sum by (scope) (increase(taleem_rate_limit_store_errors_total[5m])) > 0
+        for: 0m
+        labels:
+          severity: warning
+          service: core-api
+        annotations:
+          summary: "Shared rate-limit store failing for {{ $labels.scope }}"
+          description: "The PostgreSQL limiter errored and fell back to a per-process limit: sign-in throttling is weaker across instances."
+          runbook: "MONITORING_RUNBOOK.md#taleemratelimitstoreerrors"
+
+  - name: taleem-sync
+    rules:
+      - alert: TaleemSyncBatchRejectionSpike
+        expr: |
+          sum(increase(taleem_sync_batches_refused_total[15m]))
+            + sum(increase(taleem_problem_responses_total{code=~"UNKNOWN_DELTA_TYPE|MISSING_STUDENT_REF"}[15m]))
+            > 20
+        for: 0m
+        labels:
+          severity: warning
+          service: core-api
+        annotations:
+          summary: "{{ $value | humanize }} offline sync batches rejected in 15 minutes"
+          description: "Whole batches refused (learner gate) or invalid. Devices keep the deltas, so nothing is lost yet, but children's offline work is not landing."
+          runbook: "MONITORING_RUNBOOK.md#taleemsyncbatchrejectionspike"
+
+      - alert: TaleemSyncConflictRatioHigh
+        expr: |
+          sum(rate(taleem_sync_deltas_total{status="conflict"}[15m]))
+            / clamp_min(sum(rate(taleem_sync_deltas_total[15m])), 1e-9) > 0.05
+        for: 15m
+        labels:
+          severity: warning
+          service: core-api
+        annotations:
+          summary: "{{ $value | humanizePercentage }} of synced deltas conflict"
+          description: "More than 5% of offline deltas resolve as conflicts for 15 minutes (proposal)."
+          runbook: "MONITORING_RUNBOOK.md#taleemsyncbatchrejectionspike"
+
+  - name: taleem-saturation
+    rules:
+      - alert: TaleemDbPoolSaturation
+        expr: |
+          max by (instance, pool) (taleem_db_pool_checked_out / taleem_db_pool_capacity) > 0.8
+        for: 5m
+        labels:
+          severity: warning
+          service: core-api
+        annotations:
+          summary: "DB pool {{ $labels.pool }} at {{ $value | humanizePercentage }} on {{ $labels.instance }}"
+          description: "Over 80% of the SQLAlchemy pool (size + overflow) is checked out; requests will start waiting for a connection."
+          runbook: "MONITORING_RUNBOOK.md#taleemdbpoolsaturation"
+
+      - alert: TaleemDbPoolExhausted
+        expr: |
+          max by (instance, pool) (taleem_db_pool_checked_out / taleem_db_pool_capacity) >= 1
+        for: 2m
+        labels:
+          severity: critical
+          service: core-api
+        annotations:
+          summary: "DB pool {{ $labels.pool }} exhausted on {{ $labels.instance }}"
+          description: "Every pooled connection is in use; new requests queue until pool_timeout and then fail."
+          runbook: "MONITORING_RUNBOOK.md#taleemdbpoolsaturation"
+
+  - name: taleem-backup
+    rules:
+      - alert: TaleemBackupStale
+        expr: time() - max(taleem_backup_last_success_timestamp_seconds) > 26 * 3600
+        for: 0m
+        labels:
+          severity: critical
+          service: database
+        annotations:
+          summary: "Last successful database backup is {{ $value | humanizeDuration }} old"
+          description: "No successful backup in over 26 hours (a daily schedule plus slack)."
+          runbook: "MONITORING_RUNBOOK.md#taleembackupstale"
+
+      - alert: TaleemBackupNeverReported
+        expr: absent(taleem_backup_last_success_timestamp_seconds)
+        for: 1h
+        labels:
+          severity: warning
+          service: database
+        annotations:
+          summary: "No backup job has ever reported success"
+          description: "taleem_backup_last_success_timestamp_seconds is absent. Today this is EXPECTED: no scheduled backup exists (BACKUP_RESTORE_RUNBOOK.md §5)."
+          runbook: "MONITORING_RUNBOOK.md#taleembackupstale"
