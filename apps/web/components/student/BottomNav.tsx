@@ -16,8 +16,8 @@ export function BottomNav({ band }: { band: GradeBand }) {
     <nav
       aria-label={t("student.nav.label")}
       style={{
-        position: "sticky",
-        bottom: 0,
+        // The last row of the AppShell column (see AppShell): it never overlays the content.
+        flexShrink: 0,
         display: "flex",
         justifyContent: "space-around",
         borderTop: "1px solid var(--color-focus-ring)",

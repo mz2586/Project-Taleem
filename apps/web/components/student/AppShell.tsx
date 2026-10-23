@@ -37,7 +37,10 @@ export function AppShell({
   }, [pathname]);
   const onHelp = pathname === "/student/help";
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", maxWidth: 720, margin: "0 auto" }}>
+    // App-shell layout: a full-height column where only <main> scrolls and the bottom nav is the
+    // last row. A sticky nav over scrolling content covered whatever control sat beneath it (axe
+    // target-size caught "Why this next?" left with a 17px visible strip).
+    <div style={{ display: "flex", flexDirection: "column", height: "100dvh", maxWidth: 720, margin: "0 auto" }}>
       <a href="#main" className="skip-link">
         {t("common.skipToContent")}
       </a>
@@ -70,7 +73,7 @@ export function AppShell({
         tabIndex={-1}
         // minmax(0, 1fr): a grid track otherwise grows to its widest child, so one long Urdu line
         // could widen the page past the screen (the browser journey caught a 395px page on 393px).
-        style={{ flex: 1, padding: "var(--space-4)", display: "grid", gridTemplateColumns: "minmax(0, 1fr)", gap: "var(--space-4)", alignContent: "start", overflowWrap: "anywhere" }}
+        style={{ flex: 1, minHeight: 0, overflowY: "auto", padding: "var(--space-4)", display: "grid", gridTemplateColumns: "minmax(0, 1fr)", gap: "var(--space-4)", alignContent: "start", overflowWrap: "anywhere" }}
       >
         {children}
       </main>

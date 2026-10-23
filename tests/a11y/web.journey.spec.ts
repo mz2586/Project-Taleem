@@ -313,7 +313,7 @@ async function childSignsInAndLearns(browser: Browser, locale: Locale, family: F
   await shot(page, `${locale}-today`);
   await checkClipping(page, `${step} /student/today`);
 
-  await tap(page.getByRole("link", { name: t(locale, "student.today.start") }));
+  await tap(page.getByRole("link", { name: t(locale, "student.today.start"), exact: true }));
   await page.waitForURL("**/student/session");
   let hintUsed = false;
   let answers = 0;
@@ -334,7 +334,7 @@ async function childSignsInAndLearns(browser: Browser, locale: Locale, family: F
       retried = true;
       await tap(page.getByRole("link", { name: t(locale, "common.backToToday") }));
       await page.waitForURL("**/student/today");
-      await tap(page.getByRole("link", { name: t(locale, "student.today.start") }));
+      await tap(page.getByRole("link", { name: t(locale, "student.today.start"), exact: true }));
       await page.waitForURL("**/student/session");
       note(`${step}: retried Start from Today after the session error`);
       continue;
@@ -577,7 +577,7 @@ async function guardianSeesAndWithdraws(family: Family, child: Page): Promise<vo
   // The child's tab is still open on the progress page. Their next action: start learning again.
   await child.goto("/student/today");
   await child.waitForTimeout(1500);
-  const start = child.getByRole("link", { name: t(locale, "student.today.start") });
+  const start = child.getByRole("link", { name: t(locale, "student.today.start"), exact: true });
   if (await start.isVisible()) {
     await tap(start);
     await child.waitForTimeout(3000);

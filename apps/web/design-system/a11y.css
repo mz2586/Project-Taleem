@@ -51,8 +51,12 @@
   transform: none;
 }
 
-/* The student bottom navigation is sticky: keep anything scrolled or focused into view clear of it
-   (WCAG 2.4.11 Focus Not Obscured). */
-html {
-  scroll-padding-bottom: 88px;
+
+/* Disclosure toggles (<details><summary>) are tap targets too: give every one the touch-target
+   minimum (WCAG 2.5.8), as buttons and links already have. axe flagged a small summary on Today. */
+summary {
+  /* Keep the native list-item display so the disclosure triangle (the "this opens" cue) stays. */
+  min-height: var(--size-touch-min);
+  padding-block: var(--space-2);
+  cursor: pointer;
 }

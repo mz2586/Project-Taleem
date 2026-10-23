@@ -339,6 +339,10 @@ async function scan(page: Page, route: string, locale: Locale, auth: Auth): Prom
   const blocking = results.violations
     .filter((v) => BLOCKING.has(v.impact ?? ""))
     .map((v) => `${v.impact} ${v.id}: ${v.nodes.map((n) => n.target.join(" ")).join(", ")}`);
+  // Per-node detail (what axe measured) so a failure is diagnosable from the CI log alone.
+  for (const v of results.violations.filter((x) => BLOCKING.has(x.impact ?? ""))) {
+    for (const n of v.nodes) console.log(`[axe ${v.id}] ${n.target.join(" ")}: ${n.failureSummary ?? ""}`);
+  }
   expect(blocking, `serious/critical WCAG violations on ${label} (${locale}, ${auth})`).toEqual([]);
 }
 
