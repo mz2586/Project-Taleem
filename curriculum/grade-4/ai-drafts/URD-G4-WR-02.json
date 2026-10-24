@@ -1,0 +1,560 @@
+{
+  "code": "URD-G4-WR-02",
+  "title": {
+    "ur": "مکمل اور درست جملے لکھنا",
+    "en": "Writing complete, correct sentences"
+  },
+  "description": {
+    "ur": "ایسے جملے لکھنا جن میں پوری بات ہو، فعل درست ہو اور آخر میں صحیح نشان ہو۔",
+    "en": "Writing sentences that give a whole thought, have a correct verb and end with the right mark."
+  },
+  "keywords": [
+    "complete sentence",
+    "sentence fragment",
+    "writing",
+    "end mark",
+    "verb"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مکمل جملہ",
+        "en": "complete sentence"
+      },
+      "definition": {
+        "ur": "ایسا جملہ جس سے پوری بات سمجھ آئے۔",
+        "en": "a sentence that gives a whole thought."
+      }
+    },
+    {
+      "term": {
+        "ur": "ادھورا جملہ",
+        "en": "incomplete sentence (fragment)"
+      },
+      "definition": {
+        "ur": "جملہ جس میں بات پوری نہ ہو، اکثر فعل نہ ہو۔",
+        "en": "a sentence that does not finish the thought, often with no verb."
+      }
+    },
+    {
+      "term": {
+        "ur": "املا",
+        "en": "spelling"
+      },
+      "definition": {
+        "ur": "لفظ کو درست حروف سے لکھنا۔",
+        "en": "writing a word with the right letters."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "لکھتے وقت ہمارا پڑھنے والا ہم سے سوال نہیں پوچھ سکتا۔ اس لیے ہر جملہ پوری بات بتائے۔ مکمل جملے میں کوئی کام کرنے والا ہوتا ہے اور ایک فعل۔ آخر میں ختمہ یا سوالیہ نشان ہوتا ہے۔ آج ہم ادھورے جملوں کو مکمل کرنا سیکھیں گے۔",
+    "en": "When we write, our reader cannot ask us questions. So every sentence must give the whole thought. A complete sentence has a doer and a verb. It ends with a full stop or a question mark. Today we will learn to complete unfinished sentences."
+  },
+  "student_explanation": {
+    "ur": "مکمل جملہ پوری بات بتاتا ہے۔ اس میں کام کرنے والا ہوتا ہے۔ اس میں فعل بھی ہوتا ہے۔ 'صبح سویرے باغ میں' ادھورا ہے۔ اس میں نہ کام کرنے والا ہے، نہ فعل۔ 'دادا جان صبح سویرے باغ میں سیر کرتے ہیں۔' یہ مکمل ہے۔ جملے کے آخر میں ختمہ (۔) یا سوالیہ نشان (؟) لگائیں۔ لکھنے کے بعد جملہ ایک بار دوبارہ پڑھیں۔",
+    "en": "A complete sentence gives the whole thought. It has a doer. It also has a verb. 'Early in the morning in the garden' is incomplete. It has no doer and no verb. 'Dada Jaan walks in the garden early in the morning.' This is complete. End a sentence with a full stop (۔) or a question mark (؟). After writing, read the sentence once more."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "یہ ادھورا جملہ مکمل کریں: 'بارش کے بعد'",
+        "en": "Complete this fragment: 'After the rain'"
+      },
+      "steps": [
+        {
+          "ur": "پوچھیں: کیا کام کرنے والا ہے؟ نہیں۔",
+          "en": "Ask: is there a doer? No."
+        },
+        {
+          "ur": "پوچھیں: کیا فعل ہے؟ نہیں۔",
+          "en": "Ask: is there a verb? No."
+        },
+        {
+          "ur": "کام کرنے والا اور فعل جوڑیں: 'بچے ... کھیلنے لگے'۔",
+          "en": "Add a doer and a verb: 'the children ... started playing'."
+        },
+        {
+          "ur": "مکمل جملہ: 'بارش کے بعد بچے صحن میں کھیلنے لگے۔'",
+          "en": "Complete: 'After the rain the children started playing in the courtyard.'"
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "یہ جملہ درست کریں: 'میری بہن سکول جاتا ہے اور وہ خوش ہے'",
+        "en": "Correct this: 'Meri behan school jaata hai aur woh khush hai'"
+      },
+      "steps": [
+        {
+          "ur": "'بہن' مؤنث ہے، اس لیے 'جاتی ہے'۔",
+          "en": "'Behan' is feminine, so 'jaati hai'."
+        },
+        {
+          "ur": "'سکول' کو اردو املا میں عموماً 'اسکول' لکھتے ہیں۔",
+          "en": "'School' is usually spelt 'اسکول' in Urdu."
+        },
+        {
+          "ur": "آخر میں ختمہ نہیں؛ لگائیں۔",
+          "en": "There is no full stop; add one."
+        },
+        {
+          "ur": "درست: 'میری بہن اسکول جاتی ہے اور وہ خوش ہے۔'",
+          "en": "Correct: 'Meri behan school jaati hai aur woh khush hai.'"
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-complete",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر ٹکڑے کو 'مکمل جملہ' یا 'ادھورا' کے خانے میں رکھیں: 'گلی کے آخر میں'، 'مرغی نے انڈا دیا۔'، 'نیلی کتاب والا'، 'ہم شام کو پارک گئے۔'",
+        "en": "Sort each into 'complete' or 'incomplete': 'at the end of the lane', 'The hen laid an egg.', 'the one with the blue book', 'We went to the park in the evening.'"
+      },
+      "answer_key": {
+        "مکمل": [
+          "مرغی نے انڈا دیا۔",
+          "ہم شام کو پارک گئے۔"
+        ],
+        "ادھورا": [
+          "گلی کے آخر میں",
+          "نیلی کتاب والا"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر ٹکڑے میں فعل تلاش کریں۔",
+            "en": "Look for a verb in each piece."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-complete-it",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "جملہ مکمل کریں: 'کسان کھیت میں ہل ___۔'",
+        "en": "Complete: 'Kisaan khet mein hal ___.'"
+      },
+      "answer_key": {
+        "answer": "چلاتا ہے"
+      },
+      "accepted_variants": [
+        "چلاتا ہے",
+        "چلا رہا ہے",
+        "چلائے گا",
+        "چلایا"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہل کے ساتھ کون سا کام ہوتا ہے؟",
+            "en": "What action goes with a plough?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'کسان کھیت میں ہل چلاتا ہے۔'",
+        "en": "'The farmer ploughs the field.'"
+      }
+    },
+    {
+      "id": "p6-write-two",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "بلی کے بارے میں دو مکمل جملے لکھیں۔",
+        "en": "Write two complete sentences about a cat."
+      },
+      "answer_key": {
+        "sample_answer": "بلی کو دودھ پسند ہے۔ وہ دھوپ میں سوتی ہے۔"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بلی کیا کرتی ہے؟ ہر جملے کے آخر میں ختمہ لگائیں۔",
+            "en": "What does a cat do? End each sentence with ۔."
+          }
+        }
+      ],
+      "rubric": {
+        "criteria": "complete, correct written sentences",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "جملہ ادھورا ہے یا آخری نشان نہیں۔",
+              "en": "The sentence is incomplete or has no end mark."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "جملہ مکمل ہے مگر املا یا فعل میں ایک غلطی ہے۔",
+              "en": "The sentence is complete but has one spelling or verb error."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "جملہ مکمل، درست اور صحیح نشان کے ساتھ۔",
+              "en": "The sentence is complete, correct and has the right end mark."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor marks each sentence with the rubric; both must have a doer, a verb and an end mark."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-which-complete",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کون سا مکمل جملہ ہے؟",
+        "en": "Which is a complete sentence?"
+      },
+      "options": [
+        {
+          "ur": "سبز رنگ کی بس میں",
+          "en": "in the green bus"
+        },
+        {
+          "ur": "ہم سبز رنگ کی بس میں بیٹھے۔",
+          "en": "We sat in the green bus."
+        },
+        {
+          "ur": "بس میں بیٹھے ہوئے سبز",
+          "en": "sitting in the bus green"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کس میں کام کرنے والا اور فعل دونوں ہیں؟",
+            "en": "Which one has both a doer and a verb?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'ہم' کام کرنے والے ہیں اور 'بیٹھے' فعل ہے۔",
+        "en": "'We' is the doer and 'sat' is the verb."
+      }
+    },
+    {
+      "id": "p2-missing",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "'چھوٹا بھائی دودھ' اس جملے میں کیا کمی ہے؟",
+        "en": "'Chhota bhai doodh' — what is missing?"
+      },
+      "options": [
+        {
+          "ur": "فعل",
+          "en": "a verb"
+        },
+        {
+          "ur": "کام کرنے والا",
+          "en": "a doer"
+        },
+        {
+          "ur": "کچھ نہیں، جملہ مکمل ہے",
+          "en": "nothing, it is complete"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بھائی دودھ کے ساتھ کیا کر رہا ہے؟",
+            "en": "What is the brother doing with the milk?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "فعل نہیں ہے؛ جیسے 'پیتا ہے'۔",
+        "en": "There is no verb, like 'peeta hai'."
+      }
+    },
+    {
+      "id": "p4-long-complete",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "جو جملہ لمبا ہو وہ ہمیشہ مکمل ہوتا ہے۔",
+        "en": "A long sentence is always complete."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'بڑے سے سرخ رنگ کے پرانے گھر کی چھت پر' کیا یہ مکمل ہے؟",
+            "en": "'On the roof of the big old red house' — is it complete?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "لمبائی سے نہیں، کام کرنے والے اور فعل سے جملہ مکمل ہوتا ہے۔",
+        "en": "Length does not make it complete; a doer and a verb do."
+      }
+    },
+    {
+      "id": "p7-end-mark",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "مکمل جملے کے آخر میں ختمہ (۔) یا سوالیہ نشان (؟) لگتا ہے۔",
+        "en": "A complete sentence ends with a full stop (۔) or a question mark (؟)."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "آخری نشان بتاتا ہے کہ بات پوری ہو گئی۔",
+        "en": "The end mark shows the thought is finished."
+      }
+    },
+    {
+      "id": "p5-correct-written",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کون سا جملہ درست لکھا گیا ہے؟",
+        "en": "Which sentence is written correctly?"
+      },
+      "options": [
+        {
+          "ur": "امی بازار جاتا ہے۔",
+          "en": "Ammi bazaar jaata hai."
+        },
+        {
+          "ur": "امی بازار جاتی ہیں",
+          "en": "Ammi bazaar jaati hain (no mark)"
+        },
+        {
+          "ur": "امی بازار جاتی ہیں۔",
+          "en": "Ammi bazaar jaati hain."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-gender-default-male"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "فعل اور آخری نشان دونوں دیکھیں۔",
+            "en": "Check both the verb and the end mark."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "فعل 'جاتی ہیں' درست ہے اور آخر میں ختمہ ہے۔",
+        "en": "The verb 'jaati hain' is right and there is a full stop."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-fix-three",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "یہ تین ٹکڑے مکمل اور درست جملوں میں بدلیں: 'صبح کی ٹھنڈی ہوا'، 'لڑکیاں رسی کودتا'، 'کیا تم نے دیکھا'",
+        "en": "Turn these three pieces into complete, correct sentences: 'the cool morning breeze', 'larkiyaan rassi koodta', 'kya tum ne dekha'"
+      },
+      "answer_key": {
+        "sample_answer": "صبح کی ٹھنڈی ہوا اچھی لگتی ہے۔ لڑکیاں رسی کودتی ہیں۔ کیا تم نے چاند دیکھا؟"
+      },
+      "rubric": {
+        "criteria": "complete, correct written sentences",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "جملہ ادھورا ہے یا آخری نشان نہیں۔",
+              "en": "The sentence is incomplete or has no end mark."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "جملہ مکمل ہے مگر املا یا فعل میں ایک غلطی ہے۔",
+              "en": "The sentence is complete but has one spelling or verb error."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "جملہ مکمل، درست اور صحیح نشان کے ساتھ۔",
+              "en": "The sentence is complete, correct and has the right end mark."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor marks each with the rubric (max 9). Second needs agreement fix; third needs an object and ؟."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-three-sentences",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کاپی میں بارش کے بارے میں تین مکمل جملے لکھیں۔ ہر جملہ دوبارہ پڑھ کر دیکھیں کہ اس میں فعل اور ختمہ ہے۔",
+        "en": "Write three complete sentences about rain in your notebook. Re-read each to check it has a verb and a full stop."
+      },
+      "answer_key": {
+        "sample_answer": "Three complete sentences about rain."
+      },
+      "mentor_review_guidance": "Notebook only; mentor checks with the rubric later."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کیا اس میں کوئی کام کرنے والا ہے؟ کیا فعل ہے؟",
+        "en": "Is there a doer? Is there a verb?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "جملہ دوبارہ پڑھیں: کیا بات پوری ہوئی؟ آخر میں نشان ہے؟",
+        "en": "Read it again: is the thought finished? Is there an end mark?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "لمبا ٹکڑا خود بخود مکمل جملہ ہوتا ہے۔",
+        "en": "A long piece of words is automatically a complete sentence."
+      },
+      "correction": {
+        "ur": "مکمل جملے میں کام کرنے والا اور فعل ضروری ہیں۔",
+        "en": "A complete sentence needs a doer and a verb."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "مؤنث فاعل کے ساتھ بھی 'جاتا ہے' لکھنا۔",
+        "en": "Treats all nouns as masculine when writing the verb."
+      },
+      "correction": {
+        "ur": "ہر اسم کی جنس الگ ہے — یاد کریں یا نشانی دیکھیں",
+        "en": "Each noun has its own gender — remember it or look for the sign."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:URD-G4-GR-05",
+      "remediation_ref": "URD-G4-GR-05"
+    },
+    {
+      "signal": "misconception:m-letter-form-position",
+      "remediation_ref": "URD-G4-WR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "مکمل جملہ = کام کرنے والا + فعل + پوری بات + آخری نشان۔ لکھنے کے بعد ایک بار دوبارہ پڑھیں۔",
+    "en": "Complete sentence = doer + verb + whole thought + end mark. Re-read once after writing."
+  },
+  "summary": {
+    "ur": "ہم نے ادھورے جملوں کو مکمل اور درست جملوں میں لکھنا سیکھا۔",
+    "en": "We learned to write complete, correct sentences instead of fragments."
+  },
+  "parent_notes": {
+    "ur": "بچے کی کاپی میں ایک جملہ چن کر پوچھیں: 'اس میں کون کیا کر رہا ہے؟' اگر جواب جملے میں ہے تو جملہ مکمل ہے۔",
+    "en": "Pick one sentence in your child's notebook and ask: 'Who is doing what here?' If the answer is in the sentence, it is complete."
+  },
+  "mentor_notes": {
+    "ur": "p6، چیلنج اور گھر کا کام کاپی یا اسکرین پر روبرک سے جانچیں۔ املا کی ہر غلطی کو مکمل جملے کی غلطی نہ گنیں؛ ایک وقت میں ایک بات درست کرائیں۔",
+    "en": "Mark p6, the challenge and homework with the rubric, on screen or in the notebook. Do not count every spelling slip as a sentence error; correct one thing at a time."
+  },
+  "accessibility_notes": {
+    "ur": "مکمل/ادھورا جملہ دکھانے والی تصویر (پزل کے ٹکڑے) ابھی بنانی ہے، متبادل متن کے ساتھ۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے والی سرگرمی کا متبادل: ہر ٹکڑے کے لیے 'مکمل' یا 'ادھورا' بٹن۔ جو بچہ لکھ نہیں سکتا وہ جملے زبانی بنائے؛ مینٹر لکھے اور جانچے۔",
+    "en": "A complete/incomplete picture (puzzle pieces) is still to be made, with alt text. Urdu audio is not yet recorded. Alternative to the drag activity: a 'complete' or 'incomplete' button for each piece. A child who cannot write may say the sentences; the mentor writes and marks them."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "doer + verb + whole thought + end mark; fix fragments by asking what is missing",
+    "questioning_strategy": "ask 'who is doing what?' for every sentence the learner writes",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "writes fragments with no verb",
+      "leaves out end marks"
+    ],
+    "hint_policy": "graduated; two hints max; first ask for doer and verb, then the end mark; never write the corrected sentence for the learner",
+    "example_policy": "everyday scenes (rain, animals, bazaar, family chores); no personal details asked",
+    "misconception_detectors": [
+      "fragment accepted as complete",
+      "agreement error with a feminine subject"
+    ],
+    "critical_thinking_prompts": [
+      "Can a sentence with only two words be complete? Make one."
+    ],
+    "personalization_rules": "for word order or agreement errors route to URD-G4-GR-05; for letter-shape errors URD-G4-WR-01",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "written sentences (p6, challenge, homework) are marked by a human mentor using the rubric"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "language editor: worked example 2 corrects 'سکول' to 'اسکول'; confirm the preferred school spelling",
+    "mentor team: confirm how typed vs notebook answers reach the mentor for rubric marking"
+  ]
+}

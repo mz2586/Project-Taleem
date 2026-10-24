@@ -1,0 +1,406 @@
+{
+  "code": "MATH-G4-FR-03",
+  "description": {
+    "ur": "سادہ مساوی کسریں تلاش کرنا، جیسے ۱/۲ = ۲/۴ = ۳/۶۔",
+    "en": "Find simple equivalent fractions, such as 1/2 = 2/4 = 3/6."
+  },
+  "keywords": [
+    "equivalent fractions",
+    "fraction",
+    "numerator",
+    "denominator",
+    "fraction bar",
+    "multiply"
+  ],
+  "teacher_script": {
+    "ur": "ایک روٹی کو دو برابر حصوں میں کاٹیں اور آدھی اٹھا لیں۔ اب ہر آدھے کو پھر دو حصوں میں کاٹیں۔ آپ کے ہاتھ میں روٹی اتنی ہی ہے، بس ٹکڑے زیادہ ہو گئے۔ آج ہم ایسی کسریں ڈھونڈیں گے جو الگ لکھی جاتی ہیں مگر برابر ہوتی ہیں۔ ان کا اصول ہے: اوپر اور نیچے دونوں کو ایک ہی عدد سے ضرب دیں۔",
+    "en": "Cut a roti into two equal parts and pick up one half. Now cut each half into two again. You are holding the same amount of roti; there are just more pieces. Today we look for fractions that are written differently but are equal. Their rule is: multiply the top and the bottom by the same number."
+  },
+  "student_explanation": {
+    "ur": "کچھ کسریں الگ لکھی جاتی ہیں مگر برابر ہوتی ہیں۔ انہیں مساوی کسریں کہتے ہیں۔ آدھی روٹی لیں۔ اب ہر آدھے کے دو برابر ٹکڑے کریں۔ روٹی کے اب ۴ حصے ہیں اور آپ کے پاس ۲ ہیں۔ تو ۱/۲ اور ۲/۴ برابر ہیں۔ اصول یہ ہے: اوپر اور نیچے کو ایک ہی عدد سے ضرب دیں۔ ۱/۲ کے اوپر اور نیچے کو ۳ سے ضرب دیں۔ تو ۳/۶ بنتا ہے۔ صرف اوپر کا نمبر بدلیں تو کسر برابر نہیں رہتی۔",
+    "en": "Some fractions are written differently but are equal. We call them equivalent fractions. Take half a roti. Now cut each half into two equal pieces. The roti now has 4 parts and you have 2. So 1/2 and 2/4 are equal. The rule is: multiply the top and the bottom by the same number. Multiply the top and bottom of 1/2 by 3. You get 3/6. If you change only the top number, the fraction is no longer equal."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۱/۳ کے برابر وہ کسر لکھیں جس کا نیچے کا نمبر ۶ ہو۔",
+        "en": "Write a fraction equal to 1/3 whose bottom number is 6."
+      },
+      "steps": [
+        {
+          "ur": "نیچے ۳ سے ۶ کیسے بنا؟ ۳ × ۲ = ۶۔",
+          "en": "How does the bottom 3 become 6? 3 × 2 = 6."
+        },
+        {
+          "ur": "اوپر کو بھی ۲ سے ضرب دیں: ۱ × ۲ = ۲۔",
+          "en": "Multiply the top by 2 as well: 1 × 2 = 2."
+        },
+        {
+          "ur": "تو ۱/۳ = ۲/۶۔",
+          "en": "So 1/3 = 2/6."
+        },
+        {
+          "ur": "پٹی سے جانچیں: تہائی پٹی اور دو چھٹے حصے برابر لمبے ہیں۔",
+          "en": "Check with a bar: one third of the bar and two sixths are the same length."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "کیا ۲/۵ اور ۴/۱۰ برابر ہیں؟",
+        "en": "Are 2/5 and 4/10 equal?"
+      },
+      "steps": [
+        {
+          "ur": "اوپر: ۲ × ۲ = ۴۔",
+          "en": "Top: 2 × 2 = 4."
+        },
+        {
+          "ur": "نیچے: ۵ × ۲ = ۱۰۔",
+          "en": "Bottom: 5 × 2 = 10."
+        },
+        {
+          "ur": "دونوں کو ایک ہی عدد، ۲، سے ضرب دی گئی۔",
+          "en": "Both were multiplied by the same number, 2."
+        },
+        {
+          "ur": "تو ہاں، ۲/۵ = ۴/۱۰۔",
+          "en": "So yes, 2/5 = 4/10."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-half",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "ہر کارڈ کو صحیح ڈبے میں رکھیں: '۱/۲ کے برابر' یا '۱/۲ کے برابر نہیں'۔ کارڈ: ۲/۴، ۳/۶، ۲/۲، ۴/۸، ۱/۳۔",
+        "en": "Put each card in the right box: 'equal to 1/2' or 'not equal to 1/2'. Cards: 2/4, 3/6, 2/2, 4/8, 1/3."
+      },
+      "answer_key": {
+        "equal_to_half": [
+          "2/4",
+          "3/6",
+          "4/8"
+        ],
+        "not_equal_to_half": [
+          "2/2",
+          "1/3"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا اوپر کا نمبر نیچے کا بالکل آدھا ہے؟",
+            "en": "Is the top number exactly half of the bottom number?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-third-to-sixths",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۱/۳ = ___/۶",
+        "en": "1/3 = ___/6"
+      },
+      "answer_key": {
+        "answer": "2"
+      },
+      "accepted_variants": [
+        "2",
+        "۲"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۳ سے ۶ بنانے کے لیے کس عدد سے ضرب دیں گے؟",
+            "en": "What do you multiply 3 by to get 6?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-fifths-to-tenths",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۲/۵ = ۴/___",
+        "en": "2/5 = 4/___"
+      },
+      "answer_key": {
+        "answer": "10"
+      },
+      "accepted_variants": [
+        "10",
+        "۱۰"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اوپر ۲ سے ۴ ہوا۔ نیچے بھی ویسا ہی کریں۔",
+            "en": "The top went from 2 to 4. Do the same to the bottom."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-equal-to-half",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کونسی کسر ۱/۲ کے برابر ہے؟",
+        "en": "Which fraction is equal to 1/2?"
+      },
+      "options": [
+        {
+          "ur": "۲/۲",
+          "en": "2/2"
+        },
+        {
+          "ur": "۳/۶",
+          "en": "3/6"
+        },
+        {
+          "ur": "۱/۴",
+          "en": "1/4"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-equivalent-only-numerator"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا اوپر اور نیچے دونوں کو ایک ہی عدد سے ضرب دی گئی ہے؟",
+            "en": "Were the top and the bottom both multiplied by the same number?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱ × ۳ = ۳ اور ۲ × ۳ = ۶، اس لیے ۳/۶ = ۱/۲۔",
+        "en": "1 × 3 = 3 and 2 × 3 = 6, so 3/6 = 1/2."
+      }
+    },
+    {
+      "id": "p4-three-quarters",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۳/۴ اور ۶/۸ مساوی کسریں ہیں۔",
+        "en": "3/4 and 6/8 are equivalent fractions."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۳ اور ۴ کو ۲ سے ضرب دیں۔",
+            "en": "Multiply 3 and 4 by 2."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۳ × ۲ = ۶ اور ۴ × ۲ = ۸، اس لیے دونوں برابر ہیں۔",
+        "en": "3 × 2 = 6 and 4 × 2 = 8, so they are equal."
+      }
+    },
+    {
+      "id": "p5-sana-doubles-top",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ثنا کہتی ہے کہ ۱/۴ = ۲/۴، کیونکہ اس نے اوپر کا نمبر دگنا کیا۔ کیا وہ صحیح ہے؟",
+        "en": "Sana says 1/4 = 2/4 because she doubled the top number. Is she right?"
+      },
+      "options": [
+        {
+          "ur": "ہاں، ۲/۴ اور ۱/۴ برابر ہیں",
+          "en": "Yes, 2/4 is equal to 1/4"
+        },
+        {
+          "ur": "نہیں، ۱/۴ کے برابر ۲/۸ ہے",
+          "en": "No, 1/4 is equal to 2/8"
+        },
+        {
+          "ur": "نہیں، ۱/۴ کے برابر ۲/۵ ہے",
+          "en": "No, 1/4 is equal to 2/5"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-equivalent-only-numerator"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جو اوپر کے ساتھ کیا، کیا وہی نیچے کے ساتھ بھی ہوا؟",
+            "en": "Was the bottom changed the same way as the top?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اوپر اور نیچے دونوں کو ۲ سے ضرب دیں: ۲/۸۔",
+        "en": "Multiply both top and bottom by 2: 2/8."
+      }
+    },
+    {
+      "id": "p6-not-equivalent",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کونسی جوڑی برابر نہیں ہے؟",
+        "en": "Which pair is NOT equivalent?"
+      },
+      "options": [
+        {
+          "ur": "۱/۲ اور ۴/۸",
+          "en": "1/2 and 4/8"
+        },
+        {
+          "ur": "۲/۳ اور ۴/۶",
+          "en": "2/3 and 4/6"
+        },
+        {
+          "ur": "۱/۳ اور ۲/۳",
+          "en": "1/3 and 2/3"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر جوڑی میں دیکھیں کہ کیا نیچے کا نمبر بھی بدلا ہے۔",
+            "en": "In each pair, check whether the bottom number changed too."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱/۳ اور ۲/۳ میں صرف اوپر بدلا ہے، اس لیے یہ برابر نہیں۔",
+        "en": "In 1/3 and 2/3 only the top changed, so they are not equal."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-three-for-two-thirds",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "۲/۳ کے برابر تین کسریں لکھیں۔",
+        "en": "Write three fractions that are equal to 2/3."
+      },
+      "answer_key": {
+        "answer": "any three of 4/6, 6/9, 8/12, 10/15 (top and bottom multiplied by the same number)"
+      },
+      "accepted_variants": [
+        "4/6",
+        "6/9",
+        "8/12",
+        "10/15"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۲ اور ۳ کو پہلے ۲ سے، پھر ۳ سے، پھر ۴ سے ضرب دیں۔",
+            "en": "Multiply 2 and 3 by 2, then by 3, then by 4."
+          }
+        }
+      ]
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-equivalent-only-numerator",
+      "remediation_ref": "MATH-G4-FR-03"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-FR-02",
+      "remediation_ref": "MATH-G4-FR-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "مساوی کسریں الگ لکھی جاتی ہیں مگر برابر ہوتی ہیں۔ اوپر اور نیچے کو ایک ہی عدد سے ضرب دیں۔ ۱/۲ = ۲/۴ = ۳/۶۔",
+    "en": "Equivalent fractions are written differently but are equal. Multiply the top and the bottom by the same number. 1/2 = 2/4 = 3/6."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ اوپر اور نیچے کو ایک ہی عدد سے ضرب دے کر مساوی کسر بنتی ہے۔",
+    "en": "We learned that multiplying the top and bottom by the same number makes an equivalent fraction."
+  },
+  "parent_notes": {
+    "ur": "دکھائیں کہ آدھی روٹی دو چوتھائی ٹکڑوں کے برابر ہے۔",
+    "en": "show that half a roti = two quarters."
+  },
+  "mentor_notes": {
+    "ur": "'اوپر اور نیچے ایک ہی عدد' والا اصول بول کر بھی بتائیں اور تصویر سے بھی دکھائیں۔",
+    "en": "the \"same number top and bottom\" rule must be stated and shown visually."
+  },
+  "accessibility_notes": {
+    "ur": "کسر کی پٹیاں اور روٹی کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن بتائے کہ کل کتنے برابر حصے ہیں اور کتنے رنگے ہیں۔ رنگے حصوں پر رنگ کے ساتھ لکیروں کا نمونہ بھی ہو تاکہ رنگ نہ پہچاننے والے بچے بھی دیکھ سکیں۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ہر سرگرمی تھپتھپا کر یا جواب چن کر ہو سکتی ہے؛ گھسیٹنا ضروری نہیں۔",
+    "en": "The fraction bars and roti pictures are still to be made; each alt text should say how many equal parts there are in all and how many are shaded. Shaded parts should carry a pattern, not colour alone, for colour-blind learners. Urdu audio is not yet recorded. Every activity works by tapping or choosing an answer; no dragging is needed."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "fraction bars first (same length, more pieces), then the rule: multiply top and bottom by the same number",
+    "questioning_strategy": "ask 'what was the bottom multiplied by?' before asking for the missing number",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "changes only the top number",
+      "multiplication facts are slow"
+    ],
+    "hint_policy": "graduated; two hints max before a worked re-teach of a similar problem; never reveal the answer first",
+    "example_policy": "halves, thirds, quarters and fifths only; multipliers 2 to 5; roti, chapati and paper-strip contexts",
+    "misconception_detectors": [
+      "changes the top number but keeps the bottom",
+      "adds the same number instead of multiplying"
+    ],
+    "critical_thinking_prompts": [
+      "Why does cutting each piece in two not change how much roti you have?"
+    ],
+    "personalization_rules": "if multiplication facts are the obstacle, route to MATH-G4-ML-01; if the learner cannot name the parts, route to MATH-G4-FR-02",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, upset or fear -> stop the lesson and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information",
+      "shame or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: this STRETCH lesson only multiplies to find equivalents; confirm simplifying (dividing) is out of scope for Grade 4",
+    "subject expert: the challenge is a human-graded short item with several right answers; confirm the marking guidance"
+  ]
+}

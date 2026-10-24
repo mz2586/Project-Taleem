@@ -1,0 +1,454 @@
+{
+  "code": "SCI-G4-INQ-03",
+  "title": {
+    "ur": "سوچو، جانچو، دیکھو",
+    "en": "Predict and check"
+  },
+  "description": {
+    "ur": "کسی آسان اور محفوظ روزمرہ نتیجے کی پیش گوئی کرنا، اسے جانچنا اور نتیجے کا پیش گوئی سے موازنہ کرنا۔",
+    "en": "Predicting a simple, safe everyday outcome, checking it, and comparing the result with the prediction."
+  },
+  "keywords": [
+    "predict",
+    "prediction",
+    "test",
+    "check",
+    "result",
+    "float",
+    "sink",
+    "fair test"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "پیش گوئی",
+        "en": "prediction"
+      },
+      "definition": {
+        "ur": "جانچ سے پہلے سوچ سمجھ کر بتانا کہ کیا ہوگا، اور کیوں۔",
+        "en": "A thoughtful guess, before a test, about what will happen and why."
+      }
+    },
+    {
+      "term": {
+        "ur": "جانچ",
+        "en": "test"
+      },
+      "definition": {
+        "ur": "کچھ کر کے دیکھنا کہ واقعی کیا ہوتا ہے۔",
+        "en": "Doing something to see what really happens."
+      }
+    },
+    {
+      "term": {
+        "ur": "نتیجہ",
+        "en": "result"
+      },
+      "definition": {
+        "ur": "جانچ کے بعد جو واقعی ہوا۔",
+        "en": "What really happened after the test."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "سائنسدان پہلے سوچتے ہیں: \"میرے خیال میں یہ ہوگا، کیونکہ…\"۔ پھر جانچ کرتے ہیں اور دیکھتے ہیں۔ آج ہم پانی کے پیالے سے کھیلیں گے: کون سی چیز تیرے گی اور کون سی ڈوبے گی؟ اگر پیش گوئی غلط ہو تو بھی ہم کچھ نیا سیکھتے ہیں۔",
+    "en": "Scientists first think: 'I think this will happen, because…'. Then they test and watch. Today we play with a bowl of water: which things will float and which will sink? Even when a prediction is wrong, we learn something new."
+  },
+  "student_explanation": {
+    "ur": "پیش گوئی جانچ سے پہلے کی جاتی ہے۔ کہو: \"میرے خیال میں… کیونکہ…\"۔ پھر محفوظ طریقے سے جانچ کرو۔ غور سے دیکھو کیا ہوا۔ نتیجہ لکھو۔ اب نتیجے کو پیش گوئی سے ملاؤ۔ پیش گوئی غلط ہو تو کوئی بات نہیں۔ اس سے ہم سیکھتے ہیں۔ بھاری چیز ہمیشہ نہیں ڈوبتی۔ لکڑی کا بڑا ٹکڑا تیر سکتا ہے، چھوٹا سکہ ڈوب جاتا ہے۔",
+    "en": "A prediction is made before a test. Say: 'I think… because…'. Then test it in a safe way. Watch carefully what happens. Write down the result. Now compare the result with your prediction. A wrong prediction is fine. It helps us learn. A heavy thing does not always sink. A big piece of wood can float, but a small coin sinks."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "پیالے کے پانی میں سکہ، لکڑی کا ٹکڑا اور پلاسٹک کی بوتل کا ڈھکن ڈالیں تو کیا ہوگا؟",
+        "en": "What happens if a coin, a piece of wood and a plastic bottle cap are put in a bowl of water?"
+      },
+      "steps": [
+        {
+          "ur": "پیش گوئی لکھو: \"میرے خیال میں سکہ ڈوبے گا، کیونکہ وہ دھات کا ہے۔\"",
+          "en": "Write a prediction: 'I think the coin will sink, because it is metal.'"
+        },
+        {
+          "ur": "ایک ایک چیز آہستہ سے پانی پر رکھو اور دیکھو۔",
+          "en": "Gently place each thing on the water, one at a time, and watch."
+        },
+        {
+          "ur": "نتیجہ: سکہ ڈوبا؛ لکڑی اور ڈھکن تیرے۔",
+          "en": "Result: the coin sank; the wood and the cap floated."
+        },
+        {
+          "ur": "موازنہ کرو: کون سی پیش گوئی ٹھیک نکلی اور کون سی نہیں؟",
+          "en": "Compare: which predictions were right and which were not?"
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "گیلا رومال دھوپ میں جلدی سوکھے گا یا سائے میں؟ جانچ منصفانہ کیسے بنے؟",
+        "en": "Will a wet handkerchief dry faster in the sun or the shade? How do we make the test fair?"
+      },
+      "steps": [
+        {
+          "ur": "پیش گوئی: \"دھوپ میں جلدی، کیونکہ وہاں گرمی ہے۔\"",
+          "en": "Prediction: 'In the sun, because it is warmer there.'"
+        },
+        {
+          "ur": "دو ایک جیسے رومال ایک جتنے گیلے کرو۔ صرف جگہ بدلو۔",
+          "en": "Wet two identical handkerchiefs equally. Change only the place."
+        },
+        {
+          "ur": "ہر آدھے گھنٹے بعد چھو کر دیکھو اور نتیجہ پیش گوئی سے ملاؤ۔",
+          "en": "Feel them every half hour and compare the result with your prediction."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-predict-sort",
+      "type": "interactive",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پہلے پیش گوئی کرو: ہر چیز کو \"تیرے گی\" یا \"ڈوبے گی\" میں رکھو۔ پھر جانچنے کے لیے جواب کا خانہ کھولو۔ چیزیں: پتا، سکہ، لکڑی کا تختہ، کنکر، پلاسٹک کا ڈھکن، لوہے کی چابی۔",
+        "en": "First predict: put each thing under 'will float' or 'will sink'. Then open the answer box to check. Things: leaf, coin, wooden board, pebble, plastic cap, iron key."
+      },
+      "answer_key": {
+        "floats": [
+          "leaf",
+          "wooden board",
+          "plastic cap"
+        ],
+        "sinks": [
+          "coin",
+          "pebble",
+          "iron key"
+        ],
+        "scoring": "the prediction itself is not marked; only the check step is compared with this key"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچو: یہ چیز کس مادے کی بنی ہے؟",
+            "en": "Think: what material is this thing made of?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a2-steps",
+      "type": "ordering",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "سائنس کے قدم ترتیب سے رکھو۔",
+        "en": "Put the science steps in order."
+      },
+      "options": [
+        {
+          "ur": "نتیجہ لکھو",
+          "en": "Record the result"
+        },
+        {
+          "ur": "پیش گوئی کرو",
+          "en": "Make a prediction"
+        },
+        {
+          "ur": "نتیجے کا پیش گوئی سے موازنہ کرو",
+          "en": "Compare the result with the prediction"
+        },
+        {
+          "ur": "محفوظ جانچ کرو",
+          "en": "Do a safe test"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          3,
+          0,
+          2
+        ]
+      }
+    },
+    {
+      "id": "a3-my-prediction",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک چیز چنو (جیسے پتا یا چابی)۔ \"میرے خیال میں… کیونکہ…\" کے ساتھ پیش گوئی لکھو کہ یہ پانی میں تیرے گی یا ڈوبے گی۔",
+        "en": "Choose one thing (like a leaf or a key). Write a prediction about whether it will float or sink, using 'I think… because…'."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor-graded: credit a clear prediction plus a reason; do not mark down a wrong prediction — reasoning is what counts."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-when-predict",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پیش گوئی کب کی جاتی ہے؟",
+        "en": "When is a prediction made?"
+      },
+      "options": [
+        {
+          "ur": "جانچ کے بعد",
+          "en": "After the test"
+        },
+        {
+          "ur": "جانچ سے پہلے",
+          "en": "Before the test"
+        },
+        {
+          "ur": "کبھی نہیں",
+          "en": "Never"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p3-heavy-sinks",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "بھاری چیز ہمیشہ ڈوبتی ہے۔",
+        "en": "A heavier thing always sinks."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-heavier-always-sinks"
+        }
+      },
+      "explanation": {
+        "ur": "لکڑی کا بڑا تختہ سکے سے بھاری ہے مگر تیرتا ہے۔ یہ مادے اور شکل پر منحصر ہے۔",
+        "en": "A big wooden board is heavier than a coin but floats. It depends on the material and shape."
+      }
+    },
+    {
+      "id": "p4-wrong-prediction",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "تمہاری پیش گوئی غلط نکلی۔ اب کیا کرنا چاہیے؟",
+        "en": "Your prediction turned out wrong. What should you do now?"
+      },
+      "options": [
+        {
+          "ur": "نتیجہ بدل کر پیش گوئی جیسا لکھ دو",
+          "en": "Change the result to match the prediction"
+        },
+        {
+          "ur": "جانچ چھوڑ دو",
+          "en": "Give up on the test"
+        },
+        {
+          "ur": "سچا نتیجہ لکھو اور سوچو کیوں ایسا ہوا",
+          "en": "Write the true result and think about why"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-fair",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "دھوپ اور سائے والی جانچ منصفانہ کیسے ہوگی؟",
+        "en": "How is the sun-and-shade drying test made fair?"
+      },
+      "options": [
+        {
+          "ur": "دونوں رومال ایک جیسے اور برابر گیلے ہوں؛ صرف جگہ بدلے",
+          "en": "Both cloths are the same and equally wet; only the place changes"
+        },
+        {
+          "ur": "دھوپ والا رومال کم گیلا ہو",
+          "en": "The sun cloth is less wet"
+        },
+        {
+          "ur": "ایک رومال بڑا اور ایک چھوٹا ہو",
+          "en": "One cloth is big and one is small"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-fair-one-change",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "منصفانہ جانچ میں ہم ایک وقت میں صرف ایک چیز بدلتے ہیں۔",
+        "en": "In a fair test we change only one thing at a time."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "اگر کئی چیزیں بدلیں تو پتا نہیں چلے گا کہ فرق کس سے آیا۔",
+        "en": "If several things change, we cannot tell which one made the difference."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-explain-surprise",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "سارہ نے سوچا تھا کہ بڑا تختہ ڈوب جائے گا کیونکہ وہ بھاری ہے، مگر وہ تیرا۔ اسے کیا سیکھنا چاہیے؟",
+        "en": "Sara predicted a big board would sink because it is heavy, but it floated. What should she learn?"
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Look for: weight alone does not decide sinking; the material (wood) matters. Credit kind wording that values the wrong prediction."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-bowl-test",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک پیالے میں پانی لو۔ گھر کی چار محفوظ چیزیں چنو (جیسے چمچ، پتا، ڈھکن، کنکر)۔ ہر ایک کے لیے پہلے پیش گوئی لکھو، پھر جانچو، پھر نتیجہ لکھو۔ کام کے بعد پانی پودوں میں ڈال دو۔ بجلی کی کسی چیز کے قریب پانی نہ رکھو۔",
+        "en": "Take a bowl of water. Choose four safe things from home (like a spoon, a leaf, a lid, a pebble). For each, first write a prediction, then test, then write the result. Afterwards, pour the water on plants. Keep the water away from anything electrical."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor-graded: credit four prediction-result pairs and one sentence comparing them. Safe without an adult: a bowl of water and everyday objects only."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پہلے سوچو: یہ چیز کس مادے کی بنی ہے؟",
+        "en": "First think: what material is this made of?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اپنی پیش گوئی \"کیونکہ\" کے ساتھ مکمل کرو، پھر جانچ کر دیکھو۔",
+        "en": "Finish your prediction with 'because', then test and see."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "بھاری چیزیں ہمیشہ ڈوبتی ہیں۔",
+        "en": "Heavier things always sink."
+      },
+      "correction": {
+        "ur": "یہ مادے اور شکل پر منحصر ہے، صرف وزن پر نہیں۔",
+        "en": "It depends on the material and shape, not just weight."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "غلط پیش گوئی کا مطلب ہے میں ناکام ہو گیا۔",
+        "en": "A wrong prediction means I failed."
+      },
+      "correction": {
+        "ur": "غلط پیش گوئی بھی سائنس کا حصہ ہے؛ اس سے ہم کچھ نیا سیکھتے ہیں۔",
+        "en": "Wrong predictions are part of science; they teach us something new."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-heavier-always-sinks",
+      "remediation_ref": "SCI-G4-INQ-03"
+    },
+    {
+      "signal": "misses_prerequisite:SCI-G4-INQ-01",
+      "remediation_ref": "SCI-G4-INQ-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "قدم: پیش گوئی (کیونکہ کے ساتھ) ← محفوظ جانچ ← نتیجہ لکھنا ← موازنہ۔ منصفانہ جانچ میں صرف ایک چیز بدلو۔ بھاری چیز ہمیشہ نہیں ڈوبتی۔ غلط پیش گوئی بھی سکھاتی ہے۔",
+    "en": "Steps: predict (with 'because') → safe test → record result → compare. In a fair test change only one thing. Heavy things do not always sink. Wrong predictions teach us too."
+  },
+  "summary": {
+    "ur": "ہم نے پیش گوئی کرنا، محفوظ جانچ کرنا اور نتیجے کا موازنہ کرنا سیکھا۔",
+    "en": "We learned to predict, test safely and compare the result with our prediction."
+  },
+  "parent_notes": {
+    "ur": "بچے کے ساتھ پانی کے پیالے میں تیرنے ڈوبنے کا کھیل کریں۔ پہلے اس سے پوچھیں: \"تمہارے خیال میں کیا ہوگا؟\" غلط پیش گوئی پر شاباش دیں کہ اس نے سوچا۔",
+    "en": "Play the float-or-sink game with a bowl of water. First ask: 'What do you think will happen?' Praise a wrong prediction for the thinking."
+  },
+  "mentor_notes": {
+    "ur": "یہ سبق مینٹر کی جانچ والا ہے؛ پیش گوئی کے صحیح یا غلط ہونے پر نہیں، وجہ اور ایماندار نتیجے پر نمبر دیں۔ m-heavier-always-sinks یہاں کھلتی ہے۔ سب جانچیں صرف پانی اور گھر کی محفوظ چیزوں سے ہیں۔",
+    "en": "This lesson is mentor-assessed; mark the reasoning and honest result, not whether the prediction was right. m-heavier-always-sinks is opened here. All tests use only water and safe household things."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ تیرنے اور ڈوبنے کا خاکہ اور اس کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے کا متبادل: ہر چیز کے لیے \"تیرے گی\" یا \"ڈوبے گی\" کا بٹن دبائیں۔ جو بچے لکھ نہیں سکتے وہ پیش گوئی اور نتیجہ زبانی بتا سکتے ہیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. The float/sink diagram and its alt text are still to be made. Alternative to dragging: tap 'will float' or 'will sink' for each thing. Learners who cannot write can say their prediction and result aloud."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "predict -> test -> record -> compare, every time; value the reason over the right answer; one change only in a fair test",
+    "questioning_strategy": "ask 'what do you think will happen, and why?' before any check",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "changes the result to match the prediction",
+      "seems upset by a wrong prediction"
+    ],
+    "hint_policy": "graduated; first ask about the material, then ask for 'because'; never reveal the result before the learner predicts",
+    "example_policy": "use safe home tests only: a bowl of water with coins, leaves, wooden pieces, plastic caps, pebbles; wet cloths in sun and shade",
+    "misconception_detectors": [
+      "says heavier always sinks",
+      "treats a wrong prediction as failure"
+    ],
+    "critical_thinking_prompts": [
+      "Why must we change only one thing in a fair test?"
+    ],
+    "personalization_rules": "if the learner cannot record a result, route to SCI-G4-INQ-01",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor",
+      "constructed answers (short items) -> mentor marks them; the AI gives feedback but no final grade"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples",
+      "suggest tests with heat, fire, electricity, chemicals or tasting",
+      "tell the learner their prediction was 'bad'"
+    ]
+  },
+  "review_flags": [
+    "subject expert: 'a big piece of wood can float' — most dry wood floats; confirm no dense-wood exception is needed at Grade 4",
+    "child-safety: home bowl test is water-only; confirm the 'away from anything electrical' line",
+    "mentor lead: the interactive activity's prediction step is unscored — confirm the player supports that"
+  ]
+}

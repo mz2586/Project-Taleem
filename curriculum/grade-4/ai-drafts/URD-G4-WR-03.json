@@ -1,0 +1,597 @@
+{
+  "code": "URD-G4-WR-03",
+  "title": {
+    "ur": "ایک چھوٹا پیراگراف لکھنا",
+    "en": "Writing a short paragraph"
+  },
+  "description": {
+    "ur": "کسی جانے پہچانے موضوع پر رہنمائی کے ساتھ پانچ سے سات جملوں کا پیراگراف لکھنا۔",
+    "en": "Writing a guided paragraph of five to seven sentences on a familiar topic."
+  },
+  "keywords": [
+    "paragraph",
+    "topic sentence",
+    "supporting details",
+    "closing sentence",
+    "writing",
+    "composition"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "پیراگراف",
+        "en": "paragraph"
+      },
+      "definition": {
+        "ur": "ایک ہی موضوع پر چند جملوں کا گروہ۔",
+        "en": "a group of sentences about one topic."
+      }
+    },
+    {
+      "term": {
+        "ur": "موضوع",
+        "en": "topic"
+      },
+      "definition": {
+        "ur": "وہ بات جس کے بارے میں ہم لکھ رہے ہیں۔",
+        "en": "the thing we are writing about."
+      }
+    },
+    {
+      "term": {
+        "ur": "پہلا جملہ",
+        "en": "opening (topic) sentence"
+      },
+      "definition": {
+        "ur": "وہ جملہ جو بتائے کہ پیراگراف کس بارے میں ہے۔",
+        "en": "the sentence that tells what the paragraph is about."
+      }
+    },
+    {
+      "term": {
+        "ur": "آخری جملہ",
+        "en": "closing sentence"
+      },
+      "definition": {
+        "ur": "وہ جملہ جو بات ختم کرے۔",
+        "en": "the sentence that finishes the paragraph."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ایک پیراگراف ایک ہی بات کے بارے میں چند جملوں سے بنتا ہے۔ پہلا جملہ موضوع بتاتا ہے۔ بیچ کے جملے تفصیل دیتے ہیں۔ آخری جملہ بات ختم کرتا ہے۔ آج ہم 'بارش کا دن' پر ایک نمونہ پڑھیں گے اور پھر اپنا پیراگراف لکھیں گے۔",
+    "en": "A paragraph is a few sentences about one thing. The first sentence tells the topic. The middle sentences give details. The last sentence finishes the idea. Today we will read a model on 'A rainy day' and then write our own paragraph."
+  },
+  "student_explanation": {
+    "ur": "پیراگراف ایک موضوع پر چند جملے ہوتے ہیں۔ پہلا جملہ موضوع بتاتا ہے۔ پھر تین سے پانچ جملے تفصیل دیتے ہیں۔ ہر جملہ اسی موضوع کے بارے میں ہو۔ جملے ترتیب سے لکھیں۔ آخری جملہ بات کو ختم کرتا ہے۔ لکھنے سے پہلے تین باتیں سوچ لیں۔ لکھنے کے بعد پیراگراف دوبارہ پڑھیں۔",
+    "en": "A paragraph is a few sentences on one topic. The first sentence tells the topic. Then three to five sentences give details. Every sentence must be about the same topic. Write the sentences in order. The last sentence ends the idea. Think of three points before you write. Read your paragraph again after writing."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "نمونہ پیراگراف 'بارش کا دن' کے حصے پہچانیں:\nبارش کا دن سب کو اچھا لگتا ہے۔ صبح آسمان پر کالے بادل چھا جاتے ہیں۔ پھر ٹھنڈی ہوا چلتی ہے اور بوندیں گرنے لگتی ہیں۔ بچے برآمدے میں بیٹھ کر بارش کی آواز سنتے ہیں۔ کچھ گھروں میں گرم گرم پکوڑے بنتے ہیں۔ بارش کے بعد درخت دھلے ہوئے اور ہرے بھرے لگتے ہیں۔ اسی لیے بارش کا دن ایک خوشی بھرا دن ہوتا ہے۔",
+        "en": "Find the parts of the model paragraph 'A rainy day':\nEveryone likes a rainy day. In the morning dark clouds cover the sky. Then a cool wind blows and drops begin to fall. Children sit on the veranda and listen to the sound of the rain. In some homes hot pakoras are made. After the rain the trees look washed and green. That is why a rainy day is a happy day."
+      },
+      "steps": [
+        {
+          "ur": "پہلا جملہ: 'بارش کا دن سب کو اچھا لگتا ہے۔' یہ موضوع بتاتا ہے۔",
+          "en": "Opening: 'Everyone likes a rainy day.' It tells the topic."
+        },
+        {
+          "ur": "تفصیل: بادل، ہوا اور بوندیں، بچے، پکوڑے، دھلے ہوئے درخت۔",
+          "en": "Details: clouds, wind and drops, children, pakoras, washed trees."
+        },
+        {
+          "ur": "تفصیل ترتیب سے ہے: صبح، پھر بارش، پھر بارش کے بعد۔",
+          "en": "The details are in order: morning, then rain, then after the rain."
+        },
+        {
+          "ur": "آخری جملہ: 'اسی لیے بارش کا دن ایک خوشی بھرا دن ہوتا ہے۔'",
+          "en": "Closing: 'That is why a rainy day is a happy day.'"
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "موضوع 'ہمارا بازار' کے لیے پیراگراف کا خاکہ بنائیں۔",
+        "en": "Make a plan for a paragraph on 'Our bazaar'."
+      },
+      "steps": [
+        {
+          "ur": "پہلا جملہ سوچیں: 'ہمارے محلے کا بازار ہر وقت بھرا رہتا ہے۔'",
+          "en": "Think of an opening: 'The bazaar in our area is always busy.'"
+        },
+        {
+          "ur": "تین باتیں لکھیں: پھل اور سبزی کی دکانیں، شور اور آوازیں، شام کی رونق۔",
+          "en": "Note three points: fruit and vegetable shops, noise and voices, evening bustle."
+        },
+        {
+          "ur": "ہر بات پر ایک یا دو جملے لکھیں۔",
+          "en": "Write one or two sentences on each point."
+        },
+        {
+          "ur": "آخری جملہ: 'بازار جا کر ہمیں بہت مزا آتا ہے۔'",
+          "en": "Closing: 'We really enjoy going to the bazaar.'"
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-order-para",
+      "type": "ordering",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ان جملوں کو ترتیب دے کر پیراگراف بنائیں۔",
+        "en": "Put these sentences in order to make a paragraph."
+      },
+      "options": [
+        {
+          "ur": "اسی لیے سردیوں کی دھوپ سب کو پیاری لگتی ہے۔",
+          "en": "That is why everyone loves winter sunshine."
+        },
+        {
+          "ur": "سردیوں کی دھوپ بہت مزے کی ہوتی ہے۔",
+          "en": "Winter sunshine is lovely."
+        },
+        {
+          "ur": "دوپہر کو سب چھت پر بیٹھ کر مونگ پھلی کھاتے ہیں۔",
+          "en": "At noon everyone sits on the roof and eats peanuts."
+        },
+        {
+          "ur": "صبح ٹھنڈ ہوتی ہے، مگر دھوپ نکلتے ہی ہاتھ گرم ہو جاتے ہیں۔",
+          "en": "Mornings are cold, but hands warm up as soon as the sun comes out."
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          3,
+          2,
+          0
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا جملہ موضوع بتاتا ہے؟ کون سا 'اسی لیے' سے ختم کرتا ہے؟",
+            "en": "Which sentence gives the topic? Which ends with 'that is why'?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a2-write-para",
+      "type": "long",
+      "competency": "analysis",
+      "stem": {
+        "ur": "'میرا پسندیدہ پھل' پر پانچ سے سات جملوں کا پیراگراف لکھیں۔ پہلا جملہ موضوع بتائے اور آخری جملہ بات ختم کرے۔",
+        "en": "Write a paragraph of five to seven sentences on 'My favourite fruit'. The first sentence gives the topic and the last ends it."
+      },
+      "answer_key": {
+        "sample_answer": "آم میرا پسندیدہ پھل ہے۔ یہ گرمیوں میں آتا ہے۔ اس کا رنگ پیلا اور خوشبو میٹھی ہوتی ہے۔ ہم اسے ٹھنڈے پانی میں رکھ کر کھاتے ہیں۔ امی اس سے آم کا رس بھی بناتی ہیں۔ اسی لیے مجھے گرمیوں کا انتظار رہتا ہے۔"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے تین باتیں سوچیں: پھل کیسا دکھتا ہے، کیسا لگتا ہے، کب ملتا ہے۔",
+            "en": "First think of three points: how it looks, how it tastes, when we get it."
+          }
+        }
+      ],
+      "rubric": {
+        "criteria": "guided paragraph: topic sentence, 3-5 on-topic detail sentences, closing sentence, correct sentences",
+        "max_score": 4,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "چند جملے ہیں مگر ایک موضوع پر نہیں، یا زیادہ تر جملے ادھورے ہیں۔",
+              "en": "A few sentences, but not on one topic, or most are incomplete."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "موضوع ایک ہے مگر پہلا یا آخری جملہ نہیں، یا صرف دو تفصیلی جملے۔",
+              "en": "One topic, but no opening or closing sentence, or only two detail sentences."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "پہلا جملہ، تین تفصیلی جملے اور آخری جملہ؛ کچھ جملوں میں غلطیاں۔",
+              "en": "Opening sentence, three detail sentences and a closing sentence; some sentence errors."
+            }
+          },
+          {
+            "level": 4,
+            "descriptor": {
+              "ur": "مکمل پیراگراف: واضح پہلا جملہ، ترتیب سے تفصیل، آخری جملہ، درست جملے اور نشان۔",
+              "en": "Full paragraph: clear opening, ordered details, closing sentence, correct sentences and marks."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mark with the 4-level rubric. Any fruit is fine; inexpensive fruits (امرود، کیلا، بیر) are equally good. Do not mark down for simple vocabulary."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-topic-sentence",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "'ہمارا اسکول' پر پیراگراف کا سب سے اچھا پہلا جملہ کون سا ہے؟",
+        "en": "Which is the best opening sentence for a paragraph on 'Our school'?"
+      },
+      "options": [
+        {
+          "ur": "ہمارا اسکول ایک صاف ستھری اور خوش گوار جگہ ہے۔",
+          "en": "Our school is a clean and cheerful place."
+        },
+        {
+          "ur": "کل بارش ہوئی تھی۔",
+          "en": "It rained yesterday."
+        },
+        {
+          "ur": "مجھے آم پسند ہیں۔",
+          "en": "I like mangoes."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا جملہ موضوع 'اسکول' بتاتا ہے؟",
+            "en": "Which sentence names the topic 'school'?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پہلا جملہ موضوع بتاتا ہے؛ باقی دو موضوع سے ہٹ کر ہیں۔",
+        "en": "The opening tells the topic; the other two are off-topic."
+      }
+    },
+    {
+      "id": "p2-odd-one",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "'بارش کا دن' والے پیراگراف میں کون سا جملہ نہیں ہونا چاہیے؟",
+        "en": "Which sentence does not belong in a paragraph on 'A rainy day'?"
+      },
+      "options": [
+        {
+          "ur": "بادل گرجنے لگے۔",
+          "en": "The clouds began to thunder."
+        },
+        {
+          "ur": "میرے بھائی کی سائیکل نیلی ہے۔",
+          "en": "My brother's bicycle is blue."
+        },
+        {
+          "ur": "گلیوں میں پانی جمع ہو گیا۔",
+          "en": "Water collected in the lanes."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا جملہ بارش کے بارے میں نہیں؟",
+            "en": "Which sentence is not about rain?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سائیکل کا رنگ بارش کے موضوع سے ہٹ کر ہے۔",
+        "en": "The bicycle's colour is not about the rainy day."
+      }
+    },
+    {
+      "id": "p3-closing",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "'ہمارا بازار' کے پیراگراف کا سب سے اچھا آخری جملہ کون سا ہے؟",
+        "en": "Which is the best closing sentence for 'Our bazaar'?"
+      },
+      "options": [
+        {
+          "ur": "بازار میں ایک دکان ہے۔",
+          "en": "There is a shop in the bazaar."
+        },
+        {
+          "ur": "پھر سبزی والا آیا۔",
+          "en": "Then the vegetable seller came."
+        },
+        {
+          "ur": "اسی لیے ہمارا بازار سب کو اچھا لگتا ہے۔",
+          "en": "That is why everyone likes our bazaar."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا جملہ بات کو ختم کرتا ہے؟",
+            "en": "Which sentence finishes the idea?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'اسی لیے...' پوری بات سمیٹ کر ختم کرتا ہے۔",
+        "en": "'That is why...' sums up and ends the paragraph."
+      }
+    },
+    {
+      "id": "p4-one-topic",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پیراگراف کا ہر جملہ ایک ہی موضوع کے بارے میں ہونا چاہیے۔",
+        "en": "Every sentence in a paragraph should be about one topic."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "ایک پیراگراف، ایک موضوع۔",
+        "en": "One paragraph, one topic."
+      }
+    },
+    {
+      "id": "p5-one-sentence",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ایک جملہ بھی پورا پیراگراف ہوتا ہے۔",
+        "en": "One sentence on its own is a whole paragraph."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پیراگراف کے کتنے حصے ہیں؟",
+            "en": "How many parts does a paragraph have?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پیراگراف میں پہلا جملہ، تفصیل اور آخری جملہ ہوتے ہیں۔",
+        "en": "A paragraph has an opening, details and a closing sentence."
+      }
+    },
+    {
+      "id": "p6-plan-first",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پیراگراف لکھنے سے پہلے کیا کرنا سب سے مفید ہے؟",
+        "en": "What is most useful to do before writing a paragraph?"
+      },
+      "options": [
+        {
+          "ur": "جتنی جلدی ہو سکے لکھنا شروع کر دیں",
+          "en": "start writing as fast as possible"
+        },
+        {
+          "ur": "موضوع پر تین باتیں سوچ لیں",
+          "en": "think of three points on the topic"
+        },
+        {
+          "ur": "سب سے لمبے لفظ ڈھونڈیں",
+          "en": "look for the longest words"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "تین باتیں سوچنے سے جملے ترتیب سے بنتے ہیں۔",
+        "en": "Thinking of three points helps you write in order."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-paragraph",
+      "type": "long",
+      "competency": "analysis",
+      "stem": {
+        "ur": "'میرا پسندیدہ کھیل' پر سات جملوں تک کا پیراگراف لکھیں۔ کھیل کیسے کھیلتے ہیں، کہاں اور کس کے ساتھ، یہ سب شامل کریں۔ کسی کا اصل نام لکھنا ضروری نہیں۔",
+        "en": "Write a paragraph of up to seven sentences on 'My favourite game'. Include how it is played, where and with whom. You do not need to write anyone's real name."
+      },
+      "answer_key": {
+        "sample_answer": "کرکٹ میرا پسندیدہ کھیل ہے۔ ہم اسے شام کو گلی میں کھیلتے ہیں۔ ایک بچہ گیند کرواتا ہے اور دوسرا بلے سے مارتا ہے۔ جو زیادہ رنز بنائے وہ جیتتا ہے۔ ہم پرانی گیند سے بھی کھیل لیتے ہیں۔ اس کھیل سے ہم سب دوست بن جاتے ہیں۔"
+      },
+      "rubric": {
+        "criteria": "guided paragraph: topic sentence, 3-5 on-topic detail sentences, closing sentence, correct sentences",
+        "max_score": 4,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "چند جملے ہیں مگر ایک موضوع پر نہیں، یا زیادہ تر جملے ادھورے ہیں۔",
+              "en": "A few sentences, but not on one topic, or most are incomplete."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "موضوع ایک ہے مگر پہلا یا آخری جملہ نہیں، یا صرف دو تفصیلی جملے۔",
+              "en": "One topic, but no opening or closing sentence, or only two detail sentences."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "پہلا جملہ، تین تفصیلی جملے اور آخری جملہ؛ کچھ جملوں میں غلطیاں۔",
+              "en": "Opening sentence, three detail sentences and a closing sentence; some sentence errors."
+            }
+          },
+          {
+            "level": 4,
+            "descriptor": {
+              "ur": "مکمل پیراگراف: واضح پہلا جملہ، ترتیب سے تفصیل، آخری جملہ، درست جملے اور نشان۔",
+              "en": "Full paragraph: clear opening, ordered details, closing sentence, correct sentences and marks."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mark with the rubric. Any game is fine (کرکٹ، لوڈو، کبڈی، چھپن چھپائی، gilli-danda); children with disabilities may choose board or word games."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-plan",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کاپی میں 'ہماری گلی' یا 'ہمارا محلہ' پر پیراگراف کا خاکہ بنائیں: ایک پہلا جملہ، تین باتیں اور ایک آخری جملہ۔",
+        "en": "In your notebook, plan a paragraph on 'our lane' or 'our neighbourhood': one opening sentence, three points and one closing sentence."
+      },
+      "answer_key": {
+        "sample_answer": "Opening + 3 bullet points + closing."
+      },
+      "mentor_review_guidance": "Plan only; any home or lane is fine; no addresses or names needed."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "آپ کا موضوع کیا ہے؟ پہلا جملہ اسی کا نام لے۔",
+        "en": "What is your topic? The first sentence should name it."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "تین باتیں سوچیں اور ہر بات پر ایک جملہ لکھیں۔ آخر میں 'اسی لیے...' سے ختم کریں۔",
+        "en": "Think of three points and write a sentence for each. End with 'That is why...'."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "پیراگراف میں جو بات یاد آئے لکھ دیں، چاہے موضوع سے ہٹ کر ہو۔",
+        "en": "Write anything that comes to mind, even off-topic."
+      },
+      "correction": {
+        "ur": "ہر جملہ اسی ایک موضوع کے بارے میں ہو۔",
+        "en": "Every sentence must be about the one topic."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "پیراگراف کا کوئی آخری جملہ نہیں ہوتا، بس لکھنا روک دیتے ہیں۔",
+        "en": "A paragraph just stops; it needs no closing sentence."
+      },
+      "correction": {
+        "ur": "آخری جملہ بات سمیٹتا ہے، جیسے 'اسی لیے...'۔",
+        "en": "A closing sentence sums up, like 'That is why...'."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:URD-G4-WR-02",
+      "remediation_ref": "URD-G4-WR-02"
+    },
+    {
+      "signal": "detail_sentences_out_of_order",
+      "remediation_ref": "URD-G4-RD-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پیراگراف: پہلا جملہ (موضوع) + تین سے پانچ تفصیلی جملے (ترتیب سے) + آخری جملہ۔ ایک پیراگراف، ایک موضوع۔ پہلے سوچیں، بعد میں دوبارہ پڑھیں۔",
+    "en": "Paragraph: opening (topic) + three to five ordered detail sentences + closing. One paragraph, one topic. Plan first, re-read after."
+  },
+  "summary": {
+    "ur": "ہم نے موضوع، تفصیل اور آخری جملے کے ساتھ ایک چھوٹا پیراگراف لکھنا سیکھا۔",
+    "en": "We learned to write a short paragraph with a topic, details and a closing sentence."
+  },
+  "parent_notes": {
+    "ur": "بچے سے کسی بھی موضوع پر تین باتیں زبانی پوچھیں، پھر کہیں کہ انہیں لکھ دے۔ پیراگراف پڑھ کر ایک اچھی بات ضرور بتائیں۔",
+    "en": "Ask your child for three points on any topic aloud, then ask them to write them down. After reading, always say one good thing about it."
+  },
+  "mentor_notes": {
+    "ur": "لمبا جواب (a2) اور چیلنج آپ چار درجوں والے روبرک سے جانچیں۔ موضوع ایسے رکھیں جو ہر بچے کے لیے ممکن ہوں؛ مہنگی چیزوں یا سفر والے موضوع نہ دیں۔ نمونہ پیراگراف کی نقل پر نمبر نہ دیں۔",
+    "en": "Mark the long answer (a2) and the challenge with the four-level rubric. Keep topics possible for every child; avoid topics needing costly things or travel. Do not credit a copy of the model paragraph."
+  },
+  "accessibility_notes": {
+    "ur": "پیراگراف کے تین حصے (اوپر، بیچ، نیچے) دکھانے والی تصویر ابھی بنانی ہے، متبادل متن کے ساتھ۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ترتیب والی (گھسیٹنے کی) سرگرمی کا متبادل: ہر جملے کے لیے ۱ سے ۴ نمبر چنیں۔ جو بچہ لکھ نہیں سکتا وہ پیراگراف زبانی سنائے؛ مینٹر لکھ کر روبرک سے جانچے۔",
+    "en": "A picture of the paragraph's three parts (top, middle, bottom) is still to be made, with alt text. Urdu audio is not yet recorded. Alternative to the drag ordering activity: choose 1 to 4 for each sentence. A child who cannot write may say the paragraph aloud; the mentor writes it and marks with the rubric."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "model paragraph -> name its parts -> plan (opening, three points, closing) -> write -> re-read",
+    "questioning_strategy": "ask 'is this sentence about your topic?' and 'which sentence ends your paragraph?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "writes one long run-on sentence",
+      "copies the model paragraph"
+    ],
+    "hint_policy": "graduated; two hints max; first ask for the topic, then for three points; never write the learner's paragraph or sentences",
+    "example_policy": "familiar, resource-light topics (rain, winter sun, fruit, a game, the lane); no topics that need travel or costly things",
+    "misconception_detectors": [
+      "off-topic detail sentences",
+      "no opening or closing sentence"
+    ],
+    "critical_thinking_prompts": [
+      "If you swapped two middle sentences, would your paragraph still make sense?"
+    ],
+    "personalization_rules": "if sentences themselves are incomplete, route to URD-G4-WR-02 before paragraph work",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "long answers (a2, challenge) are marked by a human mentor using the rubric"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "mentor team: the 4-level paragraph rubric is new; check it against how Grade 4 composition is usually marked",
+    "subject expert: model paragraph mentions pakoras 'in some homes'; confirm it is inclusive and natural"
+  ]
+}

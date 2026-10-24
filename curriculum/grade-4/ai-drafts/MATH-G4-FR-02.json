@@ -1,0 +1,432 @@
+{
+  "code": "MATH-G4-FR-02",
+  "description": {
+    "ur": "کسر پڑھنا اور لکھنا، اور جاننا کہ اوپر کا نمبر (شمار کنندہ) اور نیچے کا نمبر (نسب نما) کیا بتاتے ہیں؛ تہائی، پانچویں اور آٹھویں حصے سمیت۔",
+    "en": "Read and write fractions and know what the top number (numerator) and the bottom number (denominator) tell us, including thirds, fifths and eighths."
+  },
+  "keywords": [
+    "fraction",
+    "numerator",
+    "denominator",
+    "equal parts",
+    "thirds",
+    "fifths",
+    "eighths"
+  ],
+  "teacher_script": {
+    "ur": "پچھلے سبق میں ہم نے چیزوں کو برابر حصوں میں بانٹا تھا۔ آج ہم کسر کے دونوں نمبروں کے نام سیکھیں گے۔ نیچے کا نمبر نسب نما ہے؛ یہ بتاتا ہے کہ کل کتنے برابر حصے ہیں۔ اوپر کا نمبر شمار کنندہ ہے؛ یہ ہمارے لیے یا رنگے ہوئے حصے گنتا ہے۔ ہم تین، پانچ اور آٹھ برابر حصوں والی کسریں بھی پڑھیں گے۔",
+    "en": "Last time we shared things into equal parts. Today we learn the names of the two numbers in a fraction. The bottom number is the denominator; it tells how many equal parts there are in all. The top number is the numerator; it counts the parts we take or shade. We will also read fractions with three, five and eight equal parts."
+  },
+  "student_explanation": {
+    "ur": "ایک کسر کے دو نمبر ہوتے ہیں۔ دونوں کے بیچ ایک لکیر ہوتی ہے۔ نیچے کا نمبر نسب نما کہلاتا ہے۔ یہ بتاتا ہے کہ کل کتنے برابر حصے ہیں۔ اوپر کا نمبر شمار کنندہ کہلاتا ہے۔ یہ بتاتا ہے کہ کتنے حصے لیے یا رنگے گئے۔ ایک روٹی کے ۵ برابر حصے ہیں۔ ان میں سے ۳ حصے رنگے ہیں۔ تو کسر ۳/۵ ہے، یعنی تین بٹا پانچ۔",
+    "en": "A fraction has two numbers. A line sits between them. The bottom number is called the denominator. It tells how many equal parts there are in all. The top number is called the numerator. It tells how many parts are taken or shaded. A roti has 5 equal parts. 3 of the parts are shaded. So the fraction is 3/5, three fifths."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "پٹی کے ۵ برابر حصے ہیں۔ ۳ حصے رنگیں اور کسر لکھیں۔",
+        "en": "A bar has 5 equal parts. Shade 3 parts and write the fraction."
+      },
+      "steps": [
+        {
+          "ur": "کل برابر حصے گنیں: ۵۔ یہ نیچے کا نمبر ہے۔",
+          "en": "Count all the equal parts: 5. This is the bottom number."
+        },
+        {
+          "ur": "۳ حصے رنگیں۔ یہ اوپر کا نمبر ہے۔",
+          "en": "Shade 3 parts. This is the top number."
+        },
+        {
+          "ur": "کسر لکھیں: ۳/۵۔ پڑھیں: تین بٹا پانچ۔",
+          "en": "Write the fraction: 3/5. Read it: three fifths."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ایک پراٹھے کے ۸ برابر ٹکڑے ہیں۔ عائشہ نے ۳ ٹکڑے کھائے۔ اس نے کتنا کھایا؟ کتنا بچا؟",
+        "en": "A paratha is cut into 8 equal pieces. Ayesha eats 3 pieces. What fraction did she eat? What fraction is left?"
+      },
+      "steps": [
+        {
+          "ur": "کل برابر ٹکڑے ۸ ہیں، تو نیچے کا نمبر ۸ ہے۔",
+          "en": "There are 8 equal pieces, so the bottom number is 8."
+        },
+        {
+          "ur": "عائشہ نے ۳ ٹکڑے کھائے: ۳/۸۔",
+          "en": "Ayesha ate 3 pieces: 3/8."
+        },
+        {
+          "ur": "بچے ہوئے ٹکڑے: ۸ − ۳ = ۵۔",
+          "en": "Pieces left: 8 − 3 = 5."
+        },
+        {
+          "ur": "تو ۵/۸ پراٹھا بچا، یعنی پانچ بٹا آٹھ۔",
+          "en": "So 5/8 of the paratha is left: five eighths."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-shade-two-thirds",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پٹی کے ۳ برابر حصے ہیں۔ ۲/۳ دکھانے کے لیے صحیح تعداد میں حصوں کو تھپتھپا کر رنگیں۔",
+        "en": "The bar has 3 equal parts. Tap to shade the right number of parts to show 2/3."
+      },
+      "answer_key": {
+        "total_parts": 3,
+        "shaded_parts": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "نیچے کا نمبر کل حصے بتاتا ہے۔ اوپر کا نمبر کیا بتاتا ہے؟",
+            "en": "The bottom number gives all the parts. What does the top number tell you?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-cake-eaten",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک کیک کے ۵ برابر ٹکڑے ہیں۔ ۴ ٹکڑے کھا لیے گئے۔ کھایا ہوا حصہ ___/۵ ہے۔",
+        "en": "A cake has 5 equal pieces. 4 pieces are eaten. The fraction eaten is ___/5."
+      },
+      "answer_key": {
+        "answer": "4"
+      },
+      "accepted_variants": [
+        "4",
+        "۴"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کتنے ٹکڑے کھائے گئے؟ یہی اوپر کا نمبر ہے۔",
+            "en": "How many pieces were eaten? That is the top number."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-match-words",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر کسر کو اس کے نام سے ملائیں۔",
+        "en": "Match each fraction to its name."
+      },
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "۱/۵",
+              "en": "1/5"
+            },
+            "right": {
+              "ur": "ایک بٹا پانچ",
+              "en": "one fifth"
+            }
+          },
+          {
+            "left": {
+              "ur": "۳/۸",
+              "en": "3/8"
+            },
+            "right": {
+              "ur": "تین بٹا آٹھ",
+              "en": "three eighths"
+            }
+          },
+          {
+            "left": {
+              "ur": "۲/۳",
+              "en": "2/3"
+            },
+            "right": {
+              "ur": "دو بٹا تین",
+              "en": "two thirds"
+            }
+          }
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے اوپر کا نمبر پڑھیں، پھر نیچے کا۔",
+            "en": "Read the top number first, then the bottom."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-name-shaded",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ایک پٹی کے ۸ برابر حصے ہیں۔ ۵ حصے رنگے ہیں۔ کونسی کسر رنگی ہے؟",
+        "en": "A bar has 8 equal parts. 5 parts are shaded. Which fraction is shaded?"
+      },
+      "options": [
+        {
+          "ur": "۸/۵",
+          "en": "8/5"
+        },
+        {
+          "ur": "۵/۸",
+          "en": "5/8"
+        },
+        {
+          "ur": "۳/۸",
+          "en": "3/8"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے کل برابر حصے گنیں۔",
+            "en": "First count all the equal parts."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کل حصے ۸ ہیں اور ۵ رنگے ہیں، اس لیے ۵/۸۔",
+        "en": "There are 8 parts in all and 5 are shaded, so 5/8."
+      }
+    },
+    {
+      "id": "p2-meaning-of-bottom",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کسر ۲/۳ میں نیچے کا ۳ کیا بتاتا ہے؟",
+        "en": "In the fraction 2/3, what does the bottom number 3 tell us?"
+      },
+      "options": [
+        {
+          "ur": "کتنے حصے رنگے ہیں",
+          "en": "how many parts are shaded"
+        },
+        {
+          "ur": "کل کتنے برابر حصے ہیں",
+          "en": "how many equal parts there are in all"
+        },
+        {
+          "ur": "کتنی پوری چیزیں ہیں",
+          "en": "how many whole things there are"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "نیچے کا نمبر، یعنی نسب نما، کل برابر حصے بتاتا ہے۔",
+        "en": "The bottom number, the denominator, tells all the equal parts."
+      }
+    },
+    {
+      "id": "p3-unequal-thirds",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ایک روٹی کے ۳ ٹکڑے ہیں، مگر ٹکڑے چھوٹے بڑے ہیں۔ ہر ٹکڑا ۱/۳ ہے۔",
+        "en": "A roti is in 3 pieces, but the pieces are different sizes. Each piece is 1/3."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-unequal-parts"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا ٹکڑے برابر ہیں؟",
+            "en": "Are the pieces equal?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کسر کے لیے حصے برابر ہونے چاہییں۔ چھوٹے بڑے ٹکڑے تہائی نہیں ہوتے۔",
+        "en": "A fraction needs equal parts. Pieces of different sizes are not thirds."
+      }
+    },
+    {
+      "id": "p5-one-third",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "'ایک بٹا تین' کو کیسے لکھتے ہیں؟",
+        "en": "How do we write 'one third'?"
+      },
+      "options": [
+        {
+          "ur": "۳/۱",
+          "en": "3/1"
+        },
+        {
+          "ur": "۱/۲",
+          "en": "1/2"
+        },
+        {
+          "ur": "۱/۳",
+          "en": "1/3"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کل حصے نیچے لکھے جاتے ہیں۔",
+            "en": "All the parts are written at the bottom."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ایک حصہ اوپر، کل ۳ حصے نیچے: ۱/۳۔",
+        "en": "One part on top, 3 parts in all at the bottom: 1/3."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-closed-panes",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک کھڑکی میں ۸ برابر شیشے ہیں۔ ۳ شیشے کھلے ہیں۔ بند شیشوں کی کسر لکھیں۔ بتائیں کہ اوپر اور نیچے کا نمبر کیا بتاتا ہے۔",
+        "en": "A window has 8 equal panes. 3 panes are open. Write the fraction of panes that are closed. Say what its top and bottom numbers tell us."
+      },
+      "answer_key": {
+        "answer": "5/8"
+      },
+      "accepted_variants": [
+        "5/8",
+        "۵/۸"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے بند شیشے گنیں: ۸ میں سے کتنے کھلے نہیں ہیں؟",
+            "en": "First find the closed panes: how many of the 8 are not open?"
+          }
+        }
+      ]
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "کسی بھی چیز کے ٹکڑے کسر ہیں، چاہے ٹکڑے چھوٹے بڑے ہوں۔",
+        "en": "Any pieces make a fraction, even if they are different sizes."
+      },
+      "correction": {
+        "ur": "کسر کے لیے سب حصے برابر ہونے چاہییں۔ پہلے دیکھیں کہ حصے برابر ہیں۔",
+        "en": "A fraction needs equal parts. First check that the parts are equal."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "۳ حصے رنگے ہوں اور کل ۵ ہوں تو کسر ۵/۳ لکھتے ہیں۔",
+        "en": "If 3 parts of 5 are shaded, the fraction is written 5/3."
+      },
+      "correction": {
+        "ur": "کل حصے نیچے جاتے ہیں اور رنگے حصے اوپر: ۳/۵۔",
+        "en": "All the parts go at the bottom and the shaded parts on top: 3/5."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-unequal-parts",
+      "remediation_ref": "MATH-G4-FR-01"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-FR-01",
+      "remediation_ref": "MATH-G4-FR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "نیچے کا نمبر (نسب نما): کل برابر حصے۔ اوپر کا نمبر (شمار کنندہ): لیے یا رنگے حصے۔ حصے ہمیشہ برابر ہوں۔ ۳/۵ کو تین بٹا پانچ پڑھتے ہیں۔",
+    "en": "Bottom number (denominator): all the equal parts. Top number (numerator): the parts taken or shaded. Parts must always be equal. 3/5 is read three fifths."
+  },
+  "summary": {
+    "ur": "ہم نے کسر کے اوپر اور نیچے کے نمبر کا مطلب سیکھا۔",
+    "en": "We learned what the top and bottom numbers of a fraction mean."
+  },
+  "parent_notes": {
+    "ur": "کھانے کو برابر حصوں میں کاٹیں اور بچے سے پوچھیں کہ کھائے گئے حصے کی کسر کیا ہے۔",
+    "en": "cut food into equal parts and name the fraction eaten."
+  },
+  "mentor_notes": {
+    "ur": "برابر حصوں پر زور دیں؛ غیر برابر حصے رنگنا سب سے عام غلطی ہے۔",
+    "en": "insist on *equal* parts; unequal shading is the classic error."
+  },
+  "accessibility_notes": {
+    "ur": "کسر کی پٹیاں اور روٹی کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن بتائے کہ کل کتنے برابر حصے ہیں اور کتنے رنگے ہیں۔ رنگے حصوں پر رنگ کے ساتھ لکیروں کا نمونہ بھی ہو تاکہ رنگ نہ پہچاننے والے بچے بھی دیکھ سکیں۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ہر سرگرمی تھپتھپا کر یا جواب چن کر ہو سکتی ہے؛ گھسیٹنا ضروری نہیں۔",
+    "en": "The fraction bars and roti pictures are still to be made; each alt text should say how many equal parts there are in all and how many are shaded. Shaded parts should carry a pattern, not colour alone, for colour-blind learners. Urdu audio is not yet recorded. Every activity works by tapping or choosing an answer; no dragging is needed."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "count all the equal parts first (bottom number), then the taken or shaded parts (top number); always check the parts are equal",
+    "questioning_strategy": "ask 'how many equal parts in all?' before 'how many are shaded?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "swaps the top and bottom numbers",
+      "accepts unequal parts as a fraction"
+    ],
+    "hint_policy": "graduated; two hints max before a worked re-teach of a similar problem; never reveal the answer first",
+    "example_policy": "thirds, fifths and eighths of everyday wholes (roti, paratha, cake, window panes); no money or expensive objects",
+    "misconception_detectors": [
+      "writes the total on top and the shaded count at the bottom",
+      "counts unequal pieces as equal parts"
+    ],
+    "critical_thinking_prompts": [
+      "Why must all the parts be the same size before we can name a fraction?"
+    ],
+    "personalization_rules": "if the learner cannot name halves or quarters, route back to MATH-G4-FR-01",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, upset or fear -> stop the lesson and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information",
+      "shame or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: m-unequal-parts is a local id the doc suggests ('add locally if observed'); it is not yet in the §4 library",
+    "language editor: confirm شمار کنندہ / نسب نما sit well beside FR-01's 'اوپر کا نمبر / نیچے کا نمبر', and the 'تین بٹا پانچ' reading style",
+    "subject expert: the human homework, hints and parent/teacher notes are English-only or Urdu-only in the doc; check the imported sides read well together"
+  ]
+}

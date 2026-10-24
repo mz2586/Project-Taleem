@@ -1,0 +1,539 @@
+{
+  "code": "URD-G4-LS-03",
+  "title": {
+    "ur": "ایک منٹ صاف صاف بولنا",
+    "en": "Speaking clearly for one minute"
+  },
+  "description": {
+    "ur": "کسی جانے پہچانے موضوع پر تیاری کر کے تقریباً ایک منٹ صاف آواز اور ترتیب سے بولنا۔",
+    "en": "Planning and speaking clearly and in order for about one minute on a familiar topic."
+  },
+  "keywords": [
+    "speaking",
+    "presentation",
+    "clear voice",
+    "planning a talk",
+    "one minute",
+    "oral"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "موضوع",
+        "en": "topic"
+      },
+      "definition": {
+        "ur": "وہ بات جس پر ہم بول رہے ہیں۔",
+        "en": "the thing we are talking about."
+      }
+    },
+    {
+      "term": {
+        "ur": "رفتار",
+        "en": "pace"
+      },
+      "definition": {
+        "ur": "کتنا تیز یا آہستہ بولتے ہیں۔",
+        "en": "how fast or slowly we speak."
+      }
+    },
+    {
+      "term": {
+        "ur": "تیاری",
+        "en": "preparation"
+      },
+      "definition": {
+        "ur": "بولنے سے پہلے باتیں سوچ لینا۔",
+        "en": "thinking of what to say before speaking."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج آپ ایک منٹ کے لیے بولنے والے بنیں گے۔ ایک منٹ میں تقریباً آٹھ دس جملے آتے ہیں۔ پہلے تین باتیں سوچیں گے: شروع میں کیا کہیں، بیچ میں کیا اور آخر میں کیا۔ پھر آہستہ، صاف اور اونچی آواز میں بولیں گے۔ گھبرانا نہیں؛ غلطی ہو جائے تو مسکرا کر آگے بڑھیں۔",
+    "en": "Today you will be a speaker for one minute. One minute holds about eight to ten sentences. First we think of three points: what to say at the beginning, middle and end. Then we speak slowly, clearly and loudly enough. Do not worry; if you make a mistake, smile and carry on."
+  },
+  "student_explanation": {
+    "ur": "اچھا بولنے والا پہلے تیاری کرتا ہے۔ موضوع پر تین باتیں سوچیں۔ شروع میں موضوع کا نام لیں۔ بیچ میں دو تین باتیں بتائیں۔ آخر میں ایک جملے سے بات ختم کریں۔ آہستہ اور صاف بولیں۔ آواز اتنی ہو کہ سننے والا آسانی سے سنے۔ سننے والے کی طرف دیکھیں۔ پورے جملے بولیں۔",
+    "en": "A good speaker prepares first. Think of three points on the topic. At the start, name the topic. In the middle, tell two or three things. At the end, finish with one sentence. Speak slowly and clearly. Your voice should be loud enough for the listener to hear easily. Look at your listener. Speak in full sentences."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "موضوع 'میرا پسندیدہ موسم' پر ایک منٹ کی تیاری کیسے کریں؟",
+        "en": "How do we prepare one minute on 'My favourite season'?"
+      },
+      "steps": [
+        {
+          "ur": "شروع: 'مجھے سردی کا موسم سب سے اچھا لگتا ہے۔'",
+          "en": "Start: 'I like winter best.'"
+        },
+        {
+          "ur": "بیچ کی باتیں: دھوپ میں بیٹھنا، گرم چائے اور مونگ پھلی، لمبی راتیں۔",
+          "en": "Middle points: sitting in the sun, hot tea and peanuts, long nights."
+        },
+        {
+          "ur": "ہر بات پر دو جملے سوچیں۔",
+          "en": "Think of two sentences for each point."
+        },
+        {
+          "ur": "آخر: 'اسی لیے سردی میرا پسندیدہ موسم ہے۔'",
+          "en": "End: 'That is why winter is my favourite season.'"
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "یہ بولنا کیسے بہتر ہو؟ 'مجھےآموں...اممم...پسند...ہیں...گرمی...بس۔'",
+        "en": "How can this talk improve? 'I mangoes... umm... like... summer... that's it.'"
+      },
+      "steps": [
+        {
+          "ur": "پورے جملے بولیں: 'مجھے آم بہت پسند ہیں۔'",
+          "en": "Use full sentences: 'I like mangoes very much.'"
+        },
+        {
+          "ur": "'اممم' کی جگہ ایک لمحہ خاموش رہ کر سوچیں۔",
+          "en": "Instead of 'umm', pause silently for a moment."
+        },
+        {
+          "ur": "بیچ میں دو باتیں جوڑیں: آم کب آتے ہیں، کیسے کھاتے ہیں۔",
+          "en": "Add two middle points: when mangoes come, how we eat them."
+        },
+        {
+          "ur": "'بس' کی جگہ آخری جملہ: 'اسی لیے مجھے گرمیوں کا انتظار رہتا ہے۔'",
+          "en": "Replace 'that's it' with a closing: 'That is why I wait for summer.'"
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-plan",
+      "type": "ordering",
+      "competency": "application",
+      "stem": {
+        "ur": "'ہمارا بازار' پر بولنے کے لیے ان جملوں کو ترتیب دیں۔",
+        "en": "Order these sentences for a talk on 'Our bazaar'."
+      },
+      "options": [
+        {
+          "ur": "اسی لیے مجھے بازار جانا اچھا لگتا ہے۔",
+          "en": "That is why I like going to the bazaar."
+        },
+        {
+          "ur": "ہمارے علاقے کا بازار بہت رونق والا ہے۔",
+          "en": "Our area's bazaar is very lively."
+        },
+        {
+          "ur": "شام کو وہاں روشنیاں اور آوازیں ہوتی ہیں۔",
+          "en": "In the evening there are lights and voices."
+        },
+        {
+          "ur": "وہاں پھل، سبزی اور کپڑوں کی دکانیں ہیں۔",
+          "en": "There are fruit, vegetable and cloth shops."
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          3,
+          2,
+          0
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "موضوع کا نام لینے والا جملہ سب سے پہلے۔",
+            "en": "The sentence naming the topic goes first."
+          }
+        }
+      ]
+    },
+    {
+      "id": "a2-talk",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ان میں سے ایک موضوع چنیں اور مینٹر کے سامنے تقریباً ایک منٹ بولیں: 'بارش کا دن'، 'میرا پسندیدہ کھانا'، 'ایک جانور جو مجھے پسند ہے'، 'ہمارا بازار'۔",
+        "en": "Choose one topic and speak for about one minute to your mentor: 'A rainy day', 'My favourite food', 'An animal I like', 'Our bazaar'."
+      },
+      "answer_key": {
+        "sample_answer": "About 8-10 sentences with an opening, 2-3 points and a closing."
+      },
+      "rubric": {
+        "criteria": "one-minute talk: plan, clarity, pace, volume, order",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "بات بہت چھوٹی، بکھری ہوئی، یا آواز سمجھ نہیں آتی۔",
+              "en": "Very short, scattered, or the voice cannot be understood."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "ایک موضوع پر بات، کچھ ترتیب، مگر بہت تیز/آہستہ یا بہت رک رک کر۔",
+              "en": "Stays on one topic with some order, but too fast/slow or with many stops."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "تقریباً ایک منٹ، شروع-بیچ-آخر کے ساتھ، صاف آواز، مناسب رفتار اور سننے والے کی طرف دیکھ کر۔",
+              "en": "About a minute, with beginning-middle-end, clear voice, steady pace, facing the listener."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor listens live and marks with the 3-level speaking rubric. Time loosely (45-75 seconds is fine). No recording feature yet."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-first-step",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "بولنے سے پہلے سب سے پہلا کام کیا ہے؟",
+        "en": "What is the very first step before speaking?"
+      },
+      "options": [
+        {
+          "ur": "موضوع پر تین باتیں سوچنا",
+          "en": "think of three points on the topic"
+        },
+        {
+          "ur": "جتنا تیز ہو سکے بولنا",
+          "en": "speak as fast as possible"
+        },
+        {
+          "ur": "نیچے زمین کی طرف دیکھنا",
+          "en": "look down at the floor"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "تیاری سے بات ترتیب سے اور آسانی سے ہوتی ہے۔",
+        "en": "Preparing makes the talk ordered and easy."
+      }
+    },
+    {
+      "id": "p2-pace",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "سننے والوں کے لیے کون سی رفتار سب سے اچھی ہے؟",
+        "en": "Which pace is best for listeners?"
+      },
+      "options": [
+        {
+          "ur": "بہت تیز، تاکہ جلدی ختم ہو",
+          "en": "very fast, to finish quickly"
+        },
+        {
+          "ur": "بہت آہستہ، ہر لفظ کے بعد رک کر",
+          "en": "very slow, stopping after every word"
+        },
+        {
+          "ur": "آرام سے اور صاف، درمیانی رفتار",
+          "en": "calm and clear, a steady pace"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سننے والے کو ہر لفظ سمجھ آنا چاہیے۔",
+            "en": "The listener must catch every word."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "درمیانی رفتار سے بات سب کو سمجھ آتی ہے۔",
+        "en": "A steady pace lets everyone understand."
+      }
+    },
+    {
+      "id": "p3-opening",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "'ایک جانور جو مجھے پسند ہے' پر بات کا سب سے اچھا پہلا جملہ کون سا ہے؟",
+        "en": "Which is the best opening for 'An animal I like'?"
+      },
+      "options": [
+        {
+          "ur": "اور پھر وہ بھاگ گیا۔",
+          "en": "And then it ran away."
+        },
+        {
+          "ur": "مجھے طوطا بہت پسند ہے، کیونکہ وہ باتیں دہراتا ہے۔",
+          "en": "I really like parrots because they repeat words."
+        },
+        {
+          "ur": "بس، اتنا ہی۔",
+          "en": "That's all."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "پہلا جملہ موضوع کا نام لیتا ہے۔",
+        "en": "The opening names the topic."
+      }
+    },
+    {
+      "id": "p4-look",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "بولتے وقت سننے والے کی طرف دیکھنا اچھی عادت ہے۔",
+        "en": "Looking at the listener while speaking is a good habit."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "اس سے سننے والا جڑا رہتا ہے۔ جو بچے نہیں دیکھ سکتے وہ چہرہ آواز کی طرف رکھ سکتے ہیں۔",
+        "en": "It keeps the listener with you. Children who cannot see can face towards the listener's voice."
+      }
+    },
+    {
+      "id": "p5-mistake",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "بولتے ہوئے غلطی ہو جائے تو شروع سے دوبارہ بولنا ضروری ہے۔",
+        "en": "If you make a mistake while speaking, you must start again from the beginning."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "ٹھیک کر کے آگے بڑھ جائیں؛ یہ بالکل عام بات ہے۔",
+        "en": "Correct it and carry on; that is completely normal."
+      }
+    },
+    {
+      "id": "p6-ending",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "بات ختم کرنے کا سب سے اچھا طریقہ کون سا ہے؟",
+        "en": "What is the best way to end a talk?"
+      },
+      "options": [
+        {
+          "ur": "ایک جملہ جو بات سمیٹے، جیسے 'اسی لیے...'",
+          "en": "one sentence that sums up, like 'That is why...'"
+        },
+        {
+          "ur": "اچانک چپ ہو جانا",
+          "en": "suddenly going quiet"
+        },
+        {
+          "ur": "نئی بات شروع کر دینا",
+          "en": "starting a new topic"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "آخری جملہ سننے والے کو بتاتا ہے کہ بات پوری ہو گئی۔",
+        "en": "A closing sentence tells listeners the talk is complete."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-improve",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اپنی ایک منٹ کی بات دو بار بولیں۔ دوسری بار ایک چیز بہتر کریں (رفتار، آواز، یا آخری جملہ)۔ بتائیں آپ نے کیا بہتر کیا۔",
+        "en": "Give your one-minute talk twice. The second time improve one thing (pace, volume or the closing sentence). Say what you improved."
+      },
+      "answer_key": {
+        "sample_answer": "e.g. 'دوسری بار میں نے آہستہ بولا اور آخر میں 'اسی لیے...' کہا۔'"
+      },
+      "rubric": {
+        "criteria": "one-minute talk: plan, clarity, pace, volume, order",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "بات بہت چھوٹی، بکھری ہوئی، یا آواز سمجھ نہیں آتی۔",
+              "en": "Very short, scattered, or the voice cannot be understood."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "ایک موضوع پر بات، کچھ ترتیب، مگر بہت تیز/آہستہ یا بہت رک رک کر۔",
+              "en": "Stays on one topic with some order, but too fast/slow or with many stops."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "تقریباً ایک منٹ، شروع-بیچ-آخر کے ساتھ، صاف آواز، مناسب رفتار اور سننے والے کی طرف دیکھ کر۔",
+              "en": "About a minute, with beginning-middle-end, clear voice, steady pace, facing the listener."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor marks the second talk with the rubric and praises the named improvement."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-family-talk",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "گھر والوں کے سامنے کسی ایک موضوع پر ایک منٹ بولیں۔ ان سے پوچھیں کہ آواز صاف تھی یا نہیں۔",
+        "en": "Speak for one minute on one topic in front of your family. Ask them if your voice was clear."
+      },
+      "answer_key": {
+        "sample_answer": "Learner reports topic and family's feedback."
+      },
+      "mentor_review_guidance": "No device or timer needed; counting to sixty or a short song's length is enough."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پہلے تین باتیں سوچیں: شروع، بیچ، آخر۔",
+        "en": "First think of three points: start, middle, end."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "ہر بات پر دو جملے بولیں اور آخر میں 'اسی لیے...' سے ختم کریں۔",
+        "en": "Say two sentences for each point and end with 'That is why...'."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "تیز بولنا اچھا بولنا ہے۔",
+        "en": "Speaking fast is speaking well."
+      },
+      "correction": {
+        "ur": "صاف اور درمیانی رفتار سے بولنا اچھا بولنا ہے۔",
+        "en": "Speaking clearly at a steady pace is speaking well."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "بولنے کے لیے کوئی تیاری نہیں چاہیے، جو منہ میں آئے کہہ دیں۔",
+        "en": "No preparation is needed; just say whatever comes."
+      },
+      "correction": {
+        "ur": "تین باتیں سوچ کر بولیں تو بات ترتیب سے ہوتی ہے۔",
+        "en": "Thinking of three points first makes the talk ordered."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:URD-G4-LS-02",
+      "remediation_ref": "URD-G4-LS-02"
+    },
+    {
+      "signal": "talk_has_no_order",
+      "remediation_ref": "URD-G4-WR-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "تیاری: تین باتیں۔ شروع میں موضوع، بیچ میں تفصیل، آخر میں 'اسی لیے...'۔ آہستہ، صاف، مناسب آواز، سننے والے کی طرف۔",
+    "en": "Prepare three points. Topic at the start, details in the middle, 'That is why...' at the end. Slow, clear, loud enough, facing the listener."
+  },
+  "summary": {
+    "ur": "ہم نے تیاری کر کے ایک منٹ صاف اور ترتیب سے بولنا سیکھا۔",
+    "en": "We learned to prepare and speak clearly and in order for one minute."
+  },
+  "parent_notes": {
+    "ur": "کھانے کے وقت بچے کو ایک منٹ کسی موضوع پر بولنے دیں اور سب توجہ سے سنیں۔ آخر میں ایک اچھی بات ضرور کہیں۔",
+    "en": "At mealtime let your child speak for a minute on a topic while everyone listens. Always say one good thing at the end."
+  },
+  "mentor_notes": {
+    "ur": "یہ جانچ آپ براہِ راست کریں؛ ریکارڈنگ کا نظام ابھی نہیں۔ شرمیلے بچوں کو پہلے صرف آپ کے سامنے بولنے دیں۔ لہجے یا مقامی زبان کے اثر پر نمبر نہ کاٹیں؛ صفائی اور ترتیب دیکھیں۔ وقت کی سختی نہ کریں۔",
+    "en": "Assess this live; there is no recording feature yet. Let shy children speak only to you first. Do not mark down accent or home-language influence; judge clarity and order. Do not be strict about time."
+  },
+  "accessibility_notes": {
+    "ur": "بولنے کی تین ترکیبوں (تیاری، رفتار، دیکھنا) کی تصویر ابھی بنانی ہے، متبادل متن کے ساتھ۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ترتیب والی (گھسیٹنے کی) سرگرمی کا متبادل: ہر جملے کے لیے ۱ سے ۴ نمبر چنیں۔ جو بچہ بول نہیں سکتا یا ہکلاتا ہے، اس کے لیے مینٹر اشاروں کی زبان، لکھ کر پیش کرنا یا زیادہ وقت طے کرے؛ ہکلاہٹ پر کبھی نمبر نہ کاٹیں۔",
+    "en": "A picture of the three speaking tips (prepare, pace, face the listener) is still to be made, with alt text. Urdu audio is not yet recorded. Alternative to the drag ordering activity: choose 1 to 4 for each sentence. For a child who cannot speak or who stammers, the mentor decides on sign language, a written presentation or extra time; never mark down a stammer."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "plan three points -> opening, middle, closing -> rehearse once -> speak to a human listener",
+    "questioning_strategy": "ask 'what is your opening sentence?' and 'how will you end?' before the talk",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "learner says they are scared or upset to speak",
+      "plans fewer than two points"
+    ],
+    "hint_policy": "graduated; two hints max; first ask for three points, then suggest an opening and 'That is why...' ending; never script the whole talk",
+    "example_policy": "familiar, low-cost topics (rain, a favourite food, an animal, the bazaar); no topics needing travel or costly things",
+    "misconception_detectors": [
+      "no plan before speaking",
+      "talk has no ending"
+    ],
+    "critical_thinking_prompts": [
+      "What could you change to make your listener more interested?"
+    ],
+    "personalization_rules": "if the learner cannot order ideas, route to URD-G4-LS-02 retelling practice",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "the spoken talk is judged by a human mentor using the rubric, not the AI",
+      "a learner who is very anxious about speaking -> mentor, with a smaller audience"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer",
+      "record or store the child's voice"
+    ]
+  },
+  "review_flags": [
+    "mentor team: 3-level speaking rubric is new; confirm it matches how oral work is marked",
+    "inclusion: accommodations for non-speaking and stammering learners need sign-off by the inclusion lead"
+  ]
+}

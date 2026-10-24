@@ -1,0 +1,471 @@
+{
+  "code": "ISL-G4-SIR-03",
+  "title": {
+    "ur": "دوسروں کی مدد کا سبق",
+    "en": "A Lesson in Helping Others"
+  },
+  "description": {
+    "ur": "سیرت سے دوسروں کی مدد کا سبق سننا اور سنانا: گھر کے کاموں میں ہاتھ بٹانا اور مل جل کر کام کرنا۔",
+    "en": "Hearing and retelling lessons about helping others from the seerah: helping at home and working together."
+  },
+  "keywords": [
+    "seerah",
+    "helping others",
+    "teamwork",
+    "household chores",
+    "Masjid an-Nabawi",
+    "retelling"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ہاتھ بٹانا",
+        "en": "to lend a hand"
+      },
+      "definition": {
+        "ur": "کسی کے کام میں اس کی مدد کرنا۔",
+        "en": "To help someone with their work."
+      }
+    },
+    {
+      "term": {
+        "ur": "مل جل کر",
+        "en": "together"
+      },
+      "definition": {
+        "ur": "سب ساتھ مل کر کوئی کام کرنا۔",
+        "en": "Everyone doing a job side by side."
+      }
+    },
+    {
+      "term": {
+        "ur": "عاجزی",
+        "en": "humility"
+      },
+      "definition": {
+        "ur": "خود کو دوسروں سے بڑا نہ سمجھنا۔",
+        "en": "Not thinking of yourself as better than others."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم سیرت سے مدد کا سبق سنیں گے۔ حضرت محمد ﷺ سب سے بڑے رہنما تھے۔ پھر بھی آپ ﷺ خود کام کرتے تھے اور دوسروں کی مدد کرتے تھے۔ غور سے سنیں، پھر یہ کہانی اپنے مینٹور کو سنائیں۔",
+    "en": "Today we will hear lessons about helping from the seerah. Prophet Muhammad (peace be upon him) was the greatest leader. Still, he did work himself and helped others. Listen carefully, then retell the story to your mentor."
+  },
+  "student_explanation": {
+    "ur": "حضرت محمد ﷺ گھر کے کاموں میں ہاتھ بٹاتے تھے۔ آپ ﷺ اپنے کپڑے خود سی لیتے تھے۔ آپ ﷺ گھر والوں کی مدد کرتے تھے۔ مدینہ میں مسلمانوں نے مل کر مسجد بنائی۔ آپ ﷺ نے بھی سب کے ساتھ اینٹیں اور پتھر اٹھائے۔ آپ ﷺ نے یہ نہیں کہا کہ کوئی اور کر لے گا۔ سبق یہ ہے کہ ہر کوئی مدد کرے۔ بڑا ہو یا چھوٹا، سب مل کر کام کریں۔",
+    "en": "Prophet Muhammad (peace be upon him) helped with work at home. He mended his own clothes. He helped his family. In Madinah, the Muslims built a masjid together. He also carried bricks and stones with everyone. He did not say that someone else would do it. The lesson is that everyone should help. Young or old, we all work together."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "اس سبق کو دو حصوں میں کیسے سنائیں؟",
+        "en": "How can we retell this lesson in two parts?"
+      },
+      "steps": [
+        {
+          "ur": "گھر میں: آپ ﷺ کپڑے خود سیتے اور گھر والوں کی مدد کرتے تھے۔",
+          "en": "At home: he mended his own clothes and helped his family."
+        },
+        {
+          "ur": "مدینہ میں: مسجد بناتے وقت آپ ﷺ نے سب کے ساتھ اینٹیں اٹھائیں۔",
+          "en": "In Madinah: when the masjid was built, he carried bricks with everyone."
+        },
+        {
+          "ur": "سبق: بڑا رہنما بھی خود کام کرتا ہے؛ ہم سب مدد کرتے ہیں۔",
+          "en": "Lesson: even a great leader works himself; we all help."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "عید سے پہلے گھر کی صفائی ہو رہی ہے۔ رضا کیا کرے؟",
+        "en": "The house is being cleaned before Eid. What can Raza do?"
+      },
+      "steps": [
+        {
+          "ur": "وہ سوچتا ہے: یہ صرف امی یا باجی کا کام نہیں۔",
+          "en": "He thinks: this is not only Ammi's or big sister's job."
+        },
+        {
+          "ur": "وہ اپنی چیزیں سمیٹتا ہے اور جھاڑو میں ہاتھ بٹاتا ہے۔",
+          "en": "He tidies his own things and helps with the sweeping."
+        },
+        {
+          "ur": "سب مل کر جلدی کام ختم کر لیتے ہیں۔",
+          "en": "Working together, they finish quickly."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-masjid-story",
+      "type": "ordering",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مسجد بنانے کی کہانی کو ترتیب سے لگائیں۔",
+        "en": "Put the masjid-building story in order."
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے مدینہ پہنچنا، آخر میں مسجد کا بن جانا۔",
+            "en": "First arriving in Madinah; last, the masjid is finished."
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "آپ ﷺ مدینہ پہنچے",
+          "en": "He arrived in Madinah"
+        },
+        {
+          "ur": "مسلمانوں نے مل کر مسجد بنانا شروع کی",
+          "en": "The Muslims began building a masjid together"
+        },
+        {
+          "ur": "آپ ﷺ نے بھی سب کے ساتھ اینٹیں اٹھائیں",
+          "en": "He also carried bricks with everyone"
+        },
+        {
+          "ur": "مل جل کر مسجد بن گئی",
+          "en": "Working together, the masjid was built"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-home",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "آپ ﷺ گھر میں کیا کرتے تھے؟",
+        "en": "What did he do at home?"
+      },
+      "options": [
+        {
+          "ur": "کپڑے خود سیتے اور گھر والوں کی مدد کرتے",
+          "en": "Mended his own clothes and helped his family"
+        },
+        {
+          "ur": "سب کام دوسروں پر چھوڑ دیتے",
+          "en": "Left all the work to others"
+        },
+        {
+          "ur": "صرف آرام کرتے",
+          "en": "Only rested"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-masjid",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "مدینہ میں مسجد بنتے وقت آپ ﷺ نے کیا کیا؟",
+        "en": "What did he do when the masjid in Madinah was being built?"
+      },
+      "options": [
+        {
+          "ur": "صرف دیکھتے رہے",
+          "en": "Only watched"
+        },
+        {
+          "ur": "سب کے ساتھ اینٹیں اٹھائیں",
+          "en": "Carried bricks with everyone"
+        },
+        {
+          "ur": "کہا کوئی اور بنا دے گا",
+          "en": "Said someone else would build it"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "2": "m-responsibility-someone-else"
+        }
+      }
+    },
+    {
+      "id": "p3-someone-else",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مدد کرنا صرف دوسروں کا کام ہے، ہمارا نہیں۔",
+        "en": "Helping is only other people's job, not ours."
+      },
+      "explanation": {
+        "ur": "ہم میں سے ہر ایک کا حصہ ہے۔",
+        "en": "Each of us has a share of responsibility."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-responsibility-someone-else"
+        }
+      }
+    },
+    {
+      "id": "p4-lesson",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اس کہانی کا سبق کیا ہے؟",
+        "en": "What is the lesson of this story?"
+      },
+      "options": [
+        {
+          "ur": "بڑے لوگ کام نہیں کرتے",
+          "en": "Important people do not work"
+        },
+        {
+          "ur": "صرف بچے کام کرتے ہیں",
+          "en": "Only children do the work"
+        },
+        {
+          "ur": "ہر کوئی مدد کرے، بڑا ہو یا چھوٹا",
+          "en": "Everyone helps, young or old"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-today",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کھانے کے بعد برتن اٹھانے ہیں۔ مدد والا بچہ کیا کرے؟",
+        "en": "After the meal, the dishes need clearing. What does a helpful child do?"
+      },
+      "options": [
+        {
+          "ur": "اپنی پلیٹ اٹھا کر رکھ دے",
+          "en": "Clear away their own plate"
+        },
+        {
+          "ur": "بھاگ جائے",
+          "en": "Run off"
+        },
+        {
+          "ur": "کہے کہ بہن اٹھا لے گی",
+          "en": "Say that sister will do it"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "2": "m-responsibility-someone-else"
+        }
+      }
+    },
+    {
+      "id": "p6-humility",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "آپ ﷺ سب کے رہنما تھے، پھر بھی سب کے ساتھ مل کر کام کرتے تھے۔",
+        "en": "He was everyone's leader, yet he worked side by side with everyone."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-oral-retell",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اپنے مینٹور کو یہ دونوں باتیں اپنے الفاظ میں سنائیں: گھر کی مدد اور مسجد بنانا۔ پھر سبق بتائیں۔",
+        "en": "Retell both parts to your mentor in your own words: helping at home and building the masjid. Then say the lesson."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor-mediated oral item. Accept simple wording. Gently correct added details; do not add new ones yourself.",
+      "rubric": {
+        "criteria": "oral retelling, mentor-assessed: sequence of the story and the lesson about helping others",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "بچہ کہانی کا ایک حصہ بتاتا ہے، سبق ابھی واضح نہیں۔",
+              "en": "The child tells one part of the story; the lesson is not yet clear."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "بچہ کہانی ترتیب سے بتاتا ہے اور سبق کا نام لیتا ہے۔",
+              "en": "The child tells the story in order and names the lesson."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "بچہ کہانی ترتیب سے بتاتا ہے اور سبق کو اپنی زندگی کی ایک مثال سے جوڑتا ہے۔",
+              "en": "The child tells the story in order and links the lesson to an everyday example."
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-help-chore",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج گھر کے کسی ایک کام میں بغیر کہے ہاتھ بٹائیں۔",
+        "en": "Today, help with one job at home without being asked."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. Chores should be safe and age-appropriate (no cooking on a flame, no heavy lifting)."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: کہانی میں آپ ﷺ نے کام خود کیا یا دوسروں پر چھوڑا؟",
+        "en": "Think: in the story, did he do the work himself or leave it to others?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: ہر کوئی مدد کرتا ہے، کوئی 'کوئی اور' نہیں۔",
+        "en": "Remember: everyone helps; there is no 'someone else'."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "کوئی اور کر لے گا۔",
+        "en": "Someone else will do it."
+      },
+      "correction": {
+        "ur": "ہم میں سے ہر ایک کا حصہ ہے؛ آپ ﷺ نے بھی خود کام کیا۔",
+        "en": "Each of us has a share; he did the work himself too."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "گھر کے کام صرف لڑکیوں یا امی کے ہیں۔",
+        "en": "Housework is only for girls or for mother."
+      },
+      "correction": {
+        "ur": "آپ ﷺ خود گھر والوں کی مدد کرتے تھے؛ گھر کے کام سب کے ہیں۔",
+        "en": "He helped his own family; housework belongs to everyone."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-responsibility-someone-else",
+      "remediation_ref": "ISL-G4-IBA-02"
+    },
+    {
+      "signal": "low_score:retelling_skill",
+      "remediation_ref": "ISL-G4-SIR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "آپ ﷺ گھر میں ہاتھ بٹاتے اور کپڑے خود سیتے تھے۔ مدینہ میں مسجد بناتے وقت سب کے ساتھ اینٹیں اٹھائیں۔ ہر کوئی مدد کرے۔",
+    "en": "He helped at home and mended his own clothes. In Madinah he carried bricks with everyone to build the masjid. Everyone should help."
+  },
+  "summary": {
+    "ur": "ہم نے سیرت سے سیکھا کہ ہر کوئی مل جل کر مدد کرے۔",
+    "en": "We learned from the seerah that everyone should help together."
+  },
+  "parent_notes": {
+    "ur": "بچوں کو، لڑکا ہو یا لڑکی، گھر کے آسان کاموں میں شامل کریں اور ان کی مدد کی تعریف کریں۔",
+    "en": "Include your children, boys and girls alike, in simple jobs at home, and praise their help."
+  },
+  "mentor_notes": {
+    "ur": "اس سبق میں گھر کے کاموں کو سب کی ذمہ داری کے طور پر دکھایا گیا ہے۔ زبانی سنانے میں نئی تفصیلات نہ جوڑیں۔ گھر کے کام بچے کی عمر کے لحاظ سے محفوظ ہوں۔",
+    "en": "This lesson presents housework as everyone's job. Do not add new details during the retelling. Home tasks must be safe for the child's age."
+  },
+  "accessibility_notes": {
+    "ur": "کسی تصویر میں حضرت محمد ﷺ، آپ ﷺ کے گھر والوں یا صحابہ کی شکل یا جسم نہ دکھایا جائے؛ صرف جگہیں اور چیزیں دکھائی جائیں۔ اینٹوں اور سادہ مسجد کا خاکہ اور اس کا متبادل متن ابھی بنانا ہے۔ کہانی کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ترتیب والی سرگرمی کا متبادل: 'پہلے کیا ہوا؟' جیسے بٹن والے سوال۔ زبانی جائزہ تصویری کارڈوں یا اشاروں سے بھی ہو سکتا ہے۔",
+    "en": "No picture may show the Prophet (peace be upon him), his family or the companions, in face or body; show only places and objects. A sketch of bricks and a simple masjid, with alt text, is still to be made. Urdu audio of the story is not yet recorded. Alternative to the ordering activity: button questions such as 'what happened first?'. The oral check may also be done with picture cards or gestures."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "two short accounts (helping at home, building the masjid together), name humility and shared work, then link to safe chores at home",
+    "questioning_strategy": "ask 'did he leave the work to others?' then 'what can you do at home?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says housework belongs to one person"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "safe, age-appropriate chores; boys and girls equally; tell only the details in this lesson, which a scholar must confirm",
+    "misconception_detectors": [
+      "chooses 'someone else will do it'",
+      "assigns housework to girls or mother only"
+    ],
+    "critical_thinking_prompts": [
+      "Why do you think a great leader chose to carry bricks himself?"
+    ],
+    "personalization_rules": "if the learner keeps choosing 'someone else', route to ISL-G4-IBA-02 for more helping practice",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions",
+      "add story details, dialogue or quotations that are not in the approved lesson text"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: verify that he mended his own clothes and helped his family at home, and carried bricks while the masjid in Madinah was built, are accurately stated and suitably sourced",
+    "scholar: these accounts are described without hadith citations; add approved references or keep them general",
+    "illustration reviewer: no depiction of the Prophet (peace be upon him) or the companions"
+  ]
+}

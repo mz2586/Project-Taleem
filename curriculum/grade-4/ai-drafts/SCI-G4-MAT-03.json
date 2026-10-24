@@ -1,0 +1,479 @@
+{
+  "code": "SCI-G4-MAT-03",
+  "title": {
+    "ur": "پگھلنا، جمنا اور بخارات بننا",
+    "en": "Melting, freezing and evaporation"
+  },
+  "description": {
+    "ur": "روزمرہ مثالوں سے پگھلنے، جمنے اور بخارات بننے کو بیان کرنا۔",
+    "en": "Describing melting, freezing and evaporation with everyday examples."
+  },
+  "keywords": [
+    "melting",
+    "freezing",
+    "evaporation",
+    "ice",
+    "water vapour",
+    "heat",
+    "change"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "پگھلنا",
+        "en": "melting"
+      },
+      "definition": {
+        "ur": "گرمی ملنے پر ٹھوس کا مائع بن جانا، جیسے برف کا پانی بننا۔",
+        "en": "A solid turning into a liquid when it warms up, like ice into water."
+      }
+    },
+    {
+      "term": {
+        "ur": "جمنا",
+        "en": "freezing"
+      },
+      "definition": {
+        "ur": "بہت ٹھنڈا ہونے پر مائع کا ٹھوس بن جانا، جیسے پانی کا برف بننا۔",
+        "en": "A liquid turning into a solid when it gets very cold, like water into ice."
+      }
+    },
+    {
+      "term": {
+        "ur": "بخارات بننا",
+        "en": "evaporation"
+      },
+      "definition": {
+        "ur": "پانی کا آہستہ آہستہ ہوا میں نہ دکھنے والے بخارات بن جانا۔",
+        "en": "Water slowly turning into invisible water vapour in the air."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "گرمیوں میں قلفی ہاتھ میں جلدی پگھل جاتی ہے۔ دھوپ میں دھلے کپڑے سوکھ جاتے ہیں۔ فریزر میں پانی برف بن جاتا ہے۔ یہ سب گرمی اور ٹھنڈک کے کھیل ہیں۔ آج ہم ان تبدیلیوں کو نام دیں گے۔",
+    "en": "In summer a kulfi melts fast in your hand. Washed clothes dry in the sun. In a freezer water turns to ice. These are all about warming and cooling. Today we give these changes their names."
+  },
+  "student_explanation": {
+    "ur": "برف ٹھوس ہے۔ گرمی ملے تو برف پانی بن جاتی ہے۔ اسے پگھلنا کہتے ہیں۔ پانی کو بہت ٹھنڈا کرو تو وہ برف بن جاتا ہے۔ اسے جمنا کہتے ہیں۔ گیلے کپڑے دھوپ میں سوکھ جاتے ہیں۔ پانی غائب نہیں ہوتا۔ وہ بخارات بن کر ہوا میں چلا جاتا ہے۔ اسے بخارات بننا کہتے ہیں۔ گرمی اور ہوا میں یہ جلدی ہوتا ہے۔",
+    "en": "Ice is a solid. When it warms up, ice turns into water. This is called melting. Make water very cold and it turns into ice. This is called freezing. Wet clothes dry in the sun. The water does not vanish. It turns into water vapour and goes into the air. This is called evaporation. It happens faster when it is warm and windy."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "بارش کے بعد صحن کا پانی دوپہر تک کہاں چلا گیا؟",
+        "en": "After rain, where did the water in the courtyard go by afternoon?"
+      },
+      "steps": [
+        {
+          "ur": "صبح صحن میں پانی کھڑا تھا۔",
+          "en": "In the morning there was a puddle in the courtyard."
+        },
+        {
+          "ur": "دھوپ نے پانی کو گرم کیا۔",
+          "en": "The sun warmed the water."
+        },
+        {
+          "ur": "پانی بخارات بن کر ہوا میں چلا گیا۔ کچھ پانی زمین میں بھی جذب ہوا ہوگا۔",
+          "en": "The water evaporated into the air. Some may also have soaked into the ground."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "گھی سردیوں میں جم جاتا ہے اور گرمیوں میں پتلا رہتا ہے۔ کیوں؟",
+        "en": "Ghee goes solid in winter and stays runny in summer. Why?"
+      },
+      "steps": [
+        {
+          "ur": "سردیوں میں کمرہ ٹھنڈا ہوتا ہے، اس لیے گھی جم کر ٹھوس ہو جاتا ہے۔",
+          "en": "In winter the room is cold, so the ghee freezes into a solid."
+        },
+        {
+          "ur": "گرمیوں میں کمرہ گرم ہوتا ہے، اس لیے گھی پگھل کر مائع رہتا ہے۔",
+          "en": "In summer the room is warm, so the ghee melts and stays liquid."
+        },
+        {
+          "ur": "ٹھنڈک سے جمنا، گرمی سے پگھلنا۔",
+          "en": "Cooling causes freezing; warming causes melting."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-match-change",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر واقعے کو اس کی تبدیلی سے ملاؤ۔",
+        "en": "Match each event to its change."
+      },
+      "options": [
+        {
+          "ur": "قلفی دھوپ میں نرم ہو کر ٹپکنے لگی",
+          "en": "A kulfi drips in the sun"
+        },
+        {
+          "ur": "فریزر میں پانی کی ٹرے برف بن گئی",
+          "en": "A water tray turns to ice in the freezer"
+        },
+        {
+          "ur": "دھلے کپڑے دھوپ میں سوکھ گئے",
+          "en": "Washed clothes dry in the sun"
+        },
+        {
+          "ur": "بخارات بننا",
+          "en": "Evaporation"
+        },
+        {
+          "ur": "پگھلنا",
+          "en": "Melting"
+        },
+        {
+          "ur": "جمنا",
+          "en": "Freezing"
+        }
+      ],
+      "answer_key": {
+        "left": [
+          0,
+          1,
+          2
+        ],
+        "right": [
+          3,
+          4,
+          5
+        ],
+        "pairs": {
+          "0": 4,
+          "1": 5,
+          "2": 3
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھو: کیا یہ ٹھوس سے مائع بنا، مائع سے ٹھوس، یا مائع سے ہوا میں گیا؟",
+            "en": "Ask: solid to liquid, liquid to solid, or liquid into the air?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-p5-ghee",
+      "type": "fill_blank",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "سردی میں گھی ___ جاتا ہے۔",
+        "en": "In cold weather, ghee ___ and becomes solid."
+      },
+      "answer_key": {
+        "answer": "freezes"
+      },
+      "accepted_variants": [
+        "freezes",
+        "sets",
+        "solidifies",
+        "جم",
+        "جم جاتا ہے"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ٹھنڈک سے مائع کیا بنتا ہے؟",
+            "en": "What does cold do to a liquid?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-melt",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "برف کا پانی بن جانا کیا کہلاتا ہے؟",
+        "en": "What is it called when ice turns into water?"
+      },
+      "options": [
+        {
+          "ur": "جمنا",
+          "en": "Freezing"
+        },
+        {
+          "ur": "پگھلنا",
+          "en": "Melting"
+        },
+        {
+          "ur": "بخارات بننا",
+          "en": "Evaporation"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p2-freeze-cause",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پانی برف کب بنتا ہے؟",
+        "en": "When does water turn into ice?"
+      },
+      "options": [
+        {
+          "ur": "جب وہ بہت ٹھنڈا ہو جائے",
+          "en": "When it gets very cold"
+        },
+        {
+          "ur": "جب اسے ہلایا جائے",
+          "en": "When it is shaken"
+        },
+        {
+          "ur": "جب اسے دھوپ میں رکھا جائے",
+          "en": "When it is put in the sun"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-water-vanishes",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کپڑے سوکھتے ہیں تو پانی ہمیشہ کے لیے ختم ہو جاتا ہے۔",
+        "en": "When clothes dry, the water is gone for ever."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "پانی بخارات بن کر ہوا میں چلا جاتا ہے۔ وہ ختم نہیں ہوتا۔",
+        "en": "The water turns into vapour and goes into the air. It is not destroyed."
+      }
+    },
+    {
+      "id": "p4-faster-dry",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "دو ایک جیسے گیلے دوپٹے ہیں۔ کون سا جلدی سوکھے گا؟",
+        "en": "There are two identical wet dupattas. Which one dries faster?"
+      },
+      "options": [
+        {
+          "ur": "جو بند الماری میں تہہ کر کے رکھا ہو",
+          "en": "The one folded in a closed cupboard"
+        },
+        {
+          "ur": "جو سائے میں گٹھڑی بنا کر رکھا ہو",
+          "en": "The one bundled up in the shade"
+        },
+        {
+          "ur": "جو دھوپ اور ہوا میں پھیلا کر لٹکایا ہو",
+          "en": "The one spread out in the sun and wind"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بخارات بننا کن چیزوں سے تیز ہوتا ہے؟",
+            "en": "What makes evaporation faster?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-evap-no-boil",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پانی کو بخارات بننے کے لیے ابالنا ضروری ہے۔",
+        "en": "Water must be boiled before it can evaporate."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "صحن کا پانی ابالے بغیر دھوپ میں سوکھ جاتا ہے۔",
+        "en": "A courtyard puddle dries in the sun without boiling."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-matka",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "گیلے برتن کو پنکھے کے سامنے رکھیں تو وہ جلدی سوکھتا ہے۔ کیوں؟",
+        "en": "A wet pot dries faster in front of a fan. Why?"
+      },
+      "options": [
+        {
+          "ur": "ہوا چلنے سے بخارات جلدی بنتے ہیں",
+          "en": "Moving air makes evaporation faster"
+        },
+        {
+          "ur": "پنکھا پانی کو جما دیتا ہے",
+          "en": "The fan freezes the water"
+        },
+        {
+          "ur": "پنکھا پانی کو پگھلا دیتا ہے",
+          "en": "The fan melts the water"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-two-cloths",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "دو ایک جیسے رومال گیلے کرو۔ ایک دھوپ میں، ایک سائے میں رکھو۔ ہر آدھے گھنٹے بعد چھو کر دیکھو۔ لکھو کون سا پہلے سوکھا۔",
+        "en": "Wet two identical handkerchiefs. Put one in the sun and one in the shade. Touch them every half hour. Write which one dried first."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Credit a prediction (optional), regular checks and a recorded result; the sun cloth should usually dry first. Safe: water and cloth only."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پہلے دیکھو: شروع میں چیز ٹھوس تھی یا مائع؟",
+        "en": "First look: was the thing solid or liquid at the start?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اب دیکھو آخر میں کیا بنی: ٹھوس، مائع یا ہوا میں بخارات؟",
+        "en": "Now look at what it became: solid, liquid, or vapour in the air?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "کپڑے سوکھنے پر پانی غائب یا ختم ہو جاتا ہے۔",
+        "en": "When clothes dry, the water disappears or is used up."
+      },
+      "correction": {
+        "ur": "پانی بخارات بن کر ہوا میں چلا جاتا ہے۔ ہم انہیں دیکھ نہیں سکتے۔",
+        "en": "The water turns into vapour in the air. We just cannot see it."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "بخارات صرف ابلتے پانی سے بنتے ہیں۔",
+        "en": "Evaporation happens only when water boils."
+      },
+      "correction": {
+        "ur": "بخارات عام درجہ حرارت پر بھی بنتے ہیں؛ گرمی اور ہوا میں یہ تیز ہوتا ہے۔",
+        "en": "Evaporation happens at ordinary temperatures too; it is faster when warm and windy."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:SCI-G4-MAT-02",
+      "remediation_ref": "SCI-G4-MAT-02"
+    },
+    {
+      "signal": "mixes up melting and freezing twice",
+      "remediation_ref": "SCI-G4-MAT-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پگھلنا: ٹھوس ← مائع (گرمی سے)۔ جمنا: مائع ← ٹھوس (ٹھنڈک سے)۔ بخارات بننا: پانی ← ہوا میں بخارات؛ دھوپ اور ہوا میں تیز۔",
+    "en": "Melting: solid → liquid (warming). Freezing: liquid → solid (cooling). Evaporation: water → vapour in the air; faster in sun and wind."
+  },
+  "summary": {
+    "ur": "ہم نے روزمرہ مثالوں سے پگھلنا، جمنا اور بخارات بننا سیکھا۔",
+    "en": "We learned melting, freezing and evaporation from everyday examples."
+  },
+  "parent_notes": {
+    "ur": "کپڑے سکھاتے یا برف نکالتے وقت بچے سے پوچھیں: یہاں کون سی تبدیلی ہو رہی ہے؟ چولہے یا ابلتے پانی کے پاس بچے کو تجربہ نہ کرنے دیں۔",
+    "en": "When drying clothes or taking out ice, ask: which change is happening here? Do not let your child experiment near the stove or boiling water."
+  },
+  "mentor_notes": {
+    "ur": "تمام سرگرمیاں دھوپ، سائے اور فریزر تک محدود ہیں — چولہا یا ابالنا نہیں۔ \"پانی غائب ہو گیا\" کی غلط فہمی پر زور دیں۔",
+    "en": "All activities use sun, shade and the freezer only — no stove or boiling. Focus on the 'water disappeared' misconception."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ تینوں تبدیلیوں کا تیر والا خاکہ اور اس کا متبادل متن ابھی بنانا ہے۔ ملانے والی سرگرمی کا متبادل: ہر واقعے کے نیچے تین بٹنوں میں سے تبدیلی کا نام چنیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. The arrow diagram of the three changes and its alt text are still to be made. Alternative to the matching activity: choose the change name from three buttons under each event."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "always name the start state and the end state, then the cause (warming or cooling), then the change's name",
+    "questioning_strategy": "ask 'what was it at the start, and what is it now?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "swaps melting and freezing",
+      "says the water is gone"
+    ],
+    "hint_policy": "graduated; first start state, then end state; never give the change's name first",
+    "example_policy": "use Pakistani home examples: kulfi, ice from the freezer, ghee in winter, clothes on the roof, puddles after monsoon rain",
+    "misconception_detectors": [
+      "thinks evaporated water is destroyed",
+      "thinks evaporation needs boiling"
+    ],
+    "critical_thinking_prompts": [
+      "Why do clothes take longer to dry on a cloudy monsoon day?"
+    ],
+    "personalization_rules": "if the learner is unsure what a solid or liquid is, route to SCI-G4-MAT-02",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples",
+      "suggest heating, boiling or using a stove, candle or matches"
+    ]
+  },
+  "review_flags": [
+    "subject expert: 'ghee freezes' uses freezing for a fat setting at room temperature — confirm this wording is acceptable",
+    "subject expert: confirm Urdu term بخارات بننا (vs تبخیر) for Grade 4"
+  ]
+}

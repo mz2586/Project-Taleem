@@ -1,0 +1,467 @@
+{
+  "code": "MATH-G4-ML-04",
+  "description": {
+    "ur": "برابر گروہ، قطاروں اور شرح والے ضرب کے لفظی مسائل پہچان کر حل کرنا۔",
+    "en": "Recognising and solving multiplication word problems about equal groups, arrays and rates."
+  },
+  "keywords": [
+    "word problems",
+    "multiplication",
+    "equal groups",
+    "arrays",
+    "rate",
+    "per"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "فی",
+        "en": "per"
+      },
+      "definition": {
+        "ur": "ہر ایک کے لیے، جیسے فی ڈبہ ۸ پنسلیں۔",
+        "en": "For each one, as in 8 pencils per box."
+      }
+    },
+    {
+      "term": {
+        "ur": "قطار",
+        "en": "row/array"
+      },
+      "definition": {
+        "ur": "ایک لائن میں رکھی چیزیں؛ کئی برابر قطاریں مل کر ترتیب بناتی ہیں۔",
+        "en": "Things in a line; equal rows together make an array."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم ضرب والی کہانیاں حل کریں گے۔ ایسی کہانی میں برابر گروہ ہوتے ہیں، جیسے ڈبے، قطاریں یا دن۔ ہم دو سوال پوچھیں گے: کتنے گروہ ہیں، اور ہر گروہ میں کتنے؟ پھر ضرب کریں گے اور اندازے سے جانچیں گے۔",
+    "en": "Today we solve multiplication stories. These stories have equal groups, like boxes, rows or days. We ask two questions: how many groups, and how many in each? Then we multiply and check with an estimate."
+  },
+  "student_explanation": {
+    "ur": "کچھ لفظی مسئلے برابر گروہوں کے بارے میں ہوتے ہیں۔ ایسے گروہ دیکھیں جو سب ایک جتنے ہوں۔ دو سوال پوچھیں۔ کتنے گروہ ہیں؟ ہر گروہ میں کتنے ہیں؟ پھر دونوں عدد ضرب کریں۔ کرسیوں کی برابر قطاریں بھی گروہ ہیں۔ قطاریں ضرب ہر قطار کی کرسیاں، کل کرسیاں بتاتی ہیں۔ \"فی\" کا مطلب ہے \"ہر ایک کے لیے\"۔ آخر میں اندازہ لگا کر جواب جانچیں۔",
+    "en": "Some word problems are about equal groups. Look for groups that are all the same size. Ask two questions. How many groups are there? How many are in each group? Then multiply the two numbers. Equal rows of chairs are groups too. Rows times chairs in each row gives the total. \"Per\" means \"for each one\". Last, estimate to check your answer."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۶ ڈبے ہیں، ہر ڈبے میں ۸ پنسلیں۔ کل کتنی پنسلیں؟",
+        "en": "There are 6 boxes with 8 pencils in each. How many pencils?"
+      },
+      "steps": [
+        {
+          "ur": "گروہ: ۶ ڈبے۔ ہر گروہ میں: ۸ پنسلیں۔",
+          "en": "Groups: 6 boxes. In each group: 8 pencils."
+        },
+        {
+          "ur": "برابر گروہ ہیں، اس لیے ضرب: ۸ × ۶ = ۴۸۔",
+          "en": "The groups are equal, so multiply: 8 × 6 = 48."
+        },
+        {
+          "ur": "جانچ: ۸ + ۸ + ۸ + ۸ + ۸ + ۸ = ۴۸۔ جواب ۴۸ پنسلیں۔",
+          "en": "Check: 8 + 8 + 8 + 8 + 8 + 8 = 48. Answer: 48 pencils."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ایک درزی روزانہ ۱۴ قمیضیں سیتا ہے۔ ۶ دن میں کتنی قمیضیں سیے گا؟",
+        "en": "A tailor sews 14 shirts each day. How many shirts in 6 days?"
+      },
+      "steps": [
+        {
+          "ur": "\"روزانہ\" یعنی ہر دن ۱۴۔ گروہ: ۶ دن۔",
+          "en": "\"Each day\" means 14 per day. Groups: 6 days."
+        },
+        {
+          "ur": "ضرب: ۱۴ × ۶ = ۸۴۔",
+          "en": "Multiply: 14 × 6 = 84."
+        },
+        {
+          "ur": "اندازہ: ۱۰ × ۶ = ۶۰ اور ۱۵ × ۶ = ۹۰۔ ۸۴ درمیان میں ہے۔",
+          "en": "Estimate: 10 × 6 = 60 and 15 × 6 = 90. 84 is in between."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-chair-array",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کرسیاں گھسیٹ کر ۳ قطاریں بنائیں، ہر قطار میں ۷ کرسیاں۔ پھر کل کرسیاں لکھیں۔",
+        "en": "Drag chairs to make 3 rows with 7 chairs in each row. Then type the total number of chairs."
+      },
+      "answer_key": {
+        "rows": 3,
+        "per_row": 7,
+        "total": 21
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر قطار میں ۷ ہیں۔ کتنی قطاریں ہیں؟",
+            "en": "Each row has 7. How many rows are there?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-garden-array",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک باغ میں پودوں کی ۸ قطاریں ہیں، ہر قطار میں ۱۲ پودے۔ کل کتنے پودے؟ ___",
+        "en": "A garden has 8 rows of plants with 12 plants in each row. How many plants? ___"
+      },
+      "answer_key": {
+        "answer": "96"
+      },
+      "accepted_variants": [
+        "96",
+        "۹۶"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "قطاریں ضرب ہر قطار کے پودے۔",
+            "en": "Rows times plants in each row."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-bus-tickets",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "بس کا ایک ٹکٹ ۳۵ روپے کا ہے۔ ۲۸ بچے سفر کرتے ہیں۔ کل کرایہ کتنا؟ ___ روپے",
+        "en": "A bus ticket costs Rs 35. 28 children travel. What is the total fare? Rs ___"
+      },
+      "answer_key": {
+        "answer": "980"
+      },
+      "accepted_variants": [
+        "980",
+        "۹۸۰"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۳۵ × ۸ اور ۳۵ × ۲۰ الگ الگ نکالیں۔",
+            "en": "Work out 35 × 8 and 35 × 20 separately."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۳۵ × ۸ = ۲۸۰، ۳۵ × ۲۰ = ۷۰۰۔ ۲۸۰ + ۷۰۰ = ۹۸۰۔",
+        "en": "35 × 8 = 280, 35 × 20 = 700. 280 + 700 = 980."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-vans-operation",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر وین میں ۹ بچے بیٹھتے ہیں۔ ۷ وینیں ہیں۔ کل بچے جاننے کے لیے کون سا جملہ ٹھیک ہے؟",
+        "en": "Each van carries 9 children. There are 7 vans. Which sentence finds the total number of children?"
+      },
+      "options": [
+        {
+          "ur": "۹ + ۷",
+          "en": "9 + 7"
+        },
+        {
+          "ur": "۹ × ۷",
+          "en": "9 × 7"
+        },
+        {
+          "ur": "۹ − ۷",
+          "en": "9 − 7"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-mult-add-instead"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا ہر وین میں بچے برابر ہیں؟",
+            "en": "Does every van have the same number of children?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۷ برابر گروہ، ہر ایک میں ۹: ۹ × ۷ = ۶۳۔",
+        "en": "7 equal groups of 9: 9 × 7 = 63."
+      }
+    },
+    {
+      "id": "p3-naan-rate",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک تندور ہر گھنٹے ۳۶ نان پکاتا ہے۔ ۵ گھنٹوں میں کتنے نان؟",
+        "en": "A tandoor bakes 36 naans every hour. How many naans in 5 hours?"
+      },
+      "options": [
+        {
+          "ur": "۴۱",
+          "en": "41"
+        },
+        {
+          "ur": "۱۵۰",
+          "en": "150"
+        },
+        {
+          "ur": "۱۸۰",
+          "en": "180"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-mult-add-instead",
+          "1": "m-carry-forgotten"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "\"ہر گھنٹے\" کا مطلب ہے ہر گروہ میں ۳۶۔",
+            "en": "\"Every hour\" means 36 in each group."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۳۶ × ۵: ۶ × ۵ = ۳۰، ۰ لکھیں ۳ ہاتھ میں۔ ۳ × ۵ + ۳ = ۱۸۔ جواب ۱۸۰۔",
+        "en": "36 × 5: 6 × 5 = 30, write 0, carry 3. 3 × 5 + 3 = 18. Answer 180."
+      }
+    },
+    {
+      "id": "p4-which-multiply",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کون سا مسئلہ ضرب سے حل ہوگا؟",
+        "en": "Which problem is solved by multiplying?"
+      },
+      "options": [
+        {
+          "ur": "۴ شیلفیں ہیں، ہر شیلف پر ۲۳ کتابیں۔",
+          "en": "There are 4 shelves with 23 books on each."
+        },
+        {
+          "ur": "سارہ کے پاس ۲۵ کنچے ہیں، وہ ۸ دے دیتی ہے۔",
+          "en": "Sara has 25 marbles and gives away 8."
+        },
+        {
+          "ur": "علی کے پاس ۱۵ سیب ہیں، وہ ۵ اور خریدتا ہے۔",
+          "en": "Ali has 15 apples and buys 5 more."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کس کہانی میں برابر گروہ ہیں؟",
+            "en": "Which story has equal groups?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴ برابر شیلفیں، ہر ایک پر ۲۳: ۲۳ × ۴ = ۹۲۔",
+        "en": "4 equal shelves of 23: 23 × 4 = 92."
+      }
+    },
+    {
+      "id": "p5-egg-boxes",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ایک ڈبے میں ۲۴ انڈے آتے ہیں۔ ۳ ڈبوں میں ۲۷ انڈے آئیں گے۔",
+        "en": "A box holds 24 eggs. 3 boxes hold 27 eggs."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-mult-add-instead"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۲۴ کو ۳ بار لینا ہے یا ۳ جمع کرنا ہے؟",
+            "en": "Do we take 24 three times, or add 3?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۲۴ × ۳ = ۷۲۔ ۲۷ تو ۲۴ + ۳ ہے۔",
+        "en": "24 × 3 = 72. 27 is 24 + 3."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-show-tickets",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اسکول کے ایک پروگرام کا ٹکٹ بچوں کے لیے ۲۵ روپے اور بڑوں کے لیے ۴۰ روپے ہے۔ ۱۲ بچے اور ۵ بڑے آتے ہیں۔ کل کتنے روپے جمع ہوئے؟",
+        "en": "Tickets for a school show cost Rs 25 for children and Rs 40 for adults. 12 children and 5 adults come. How much money is collected?"
+      },
+      "answer_key": {
+        "answer": "500"
+      },
+      "accepted_variants": [
+        "500",
+        "۵۰۰"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بچوں اور بڑوں کا حساب الگ الگ کریں، پھر جمع کریں۔",
+            "en": "Work out children and adults separately, then add."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-equal-groups-home",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کی چیزوں سے برابر گروہوں والا ایک مسئلہ بنائیں اور حل کریں۔",
+        "en": "one equal-groups problem from home."
+      },
+      "answer_key": {
+        "answer": "a problem with equal groups and a correct product"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "کتنے گروہ، ہر ایک میں کتنے؟",
+        "en": "How many groups, and how many in each?"
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "ضرب کریں",
+        "en": "Multiply."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ضرب کی جگہ دونوں عدد جوڑ دینا۔",
+        "en": "Adds the two factors instead of multiplying"
+      },
+      "correction": {
+        "ur": "ضرب یعنی بار بار جوڑ: ۶ کو ۴ بار",
+        "en": "Multiply = repeated add: six, four times = 24."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-mult-add-instead",
+      "remediation_ref": "MATH-G4-ML-01"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-ML-02",
+      "remediation_ref": "MATH-G4-ML-02"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-ML-03",
+      "remediation_ref": "MATH-G4-ML-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "برابر گروہ؟ تو ضرب۔ کتنے گروہ × ہر گروہ میں کتنے = کل۔ قطاریں × ہر قطار = کل۔ \"فی\" = ہر ایک کے لیے۔",
+    "en": "Equal groups? Then multiply. Number of groups × number in each = total. Rows × number in each row = total. \"Per\" = for each one."
+  },
+  "summary": {
+    "ur": "ہم نے برابر گروہوں، قطاروں اور شرح والے مسائل ضرب سے حل کیے۔",
+    "en": "We solved equal-group, array and rate problems by multiplying."
+  },
+  "parent_notes": {
+    "ur": "ٹرے یا فرش کی ٹائلوں میں قطاریں × کالم گنیں۔",
+    "en": "count rows × columns in a tray or tiles."
+  },
+  "mentor_notes": {
+    "ur": "قطاروں والی ترتیب کو رقبے سے جوڑیں (یہ جیومیٹری اور پیمائش کی تیاری ہے)۔",
+    "en": "connect arrays to area (previews geometry/measurement)."
+  },
+  "accessibility_notes": {
+    "ur": "کرسیوں کی قطاروں کی تصویر ابھی بنانی ہے؛ متبادل متن قطاروں کی تعداد اور ہر قطار کی کرسیاں بتائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ کہانیاں سن سکنا ضروری ہے۔ گھسیٹنے کا متبادل: قطاروں اور کرسیوں کی تعداد ٹائپ کریں۔",
+    "en": "The chair-rows picture is still to be made; alt text should say the number of rows and chairs in each row. Urdu audio is not yet recorded; learners need to hear the stories. Alternative to dragging: type the number of rows and of chairs per row."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "picture the groups (boxes, rows, days), name the number of groups and the size of each, multiply, then check with an estimate",
+    "questioning_strategy": "ask 'what are the groups here?' and 'are they all the same size?' before choosing the operation",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "adds the two numbers in the story",
+      "multiplies in a story with unequal groups"
+    ],
+    "hint_policy": "graduated; two hints max (how many groups and how many in each; multiply) then a worked re-teach on a parallel story; never give the answer first",
+    "example_policy": "equal groups, arrays and 'per' rates from daily life (naans per hour, books per shelf, fares); names from across Pakistan and of all genders",
+    "misconception_detectors": [
+      "answers 41 for 36 naans per hour for 5 hours",
+      "chooses 9 + 7 for 7 vans of 9"
+    ],
+    "critical_thinking_prompts": [
+      "How can you tell from a story that the groups are equal?"
+    ],
+    "personalization_rules": "if the operation is right but the product is wrong, route to MATH-G4-ML-02 or MATH-G4-ML-03 by number size",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the bus-fare item (Rs 35 × 28) needs 2-digit × 2-digit from ML-03; confirm this is fair at the 'developing' level",
+    "language editor: check that تندور / نان and درزی contexts read naturally for all regions"
+  ]
+}

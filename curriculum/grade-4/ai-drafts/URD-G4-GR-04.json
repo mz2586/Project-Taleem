@@ -1,0 +1,514 @@
+{
+  "code": "URD-G4-GR-04",
+  "title": {
+    "ur": "رموزِ اوقاف: درست نشان لگانا",
+    "en": "Punctuation: using the right marks"
+  },
+  "description": {
+    "ur": "اردو جملوں میں ختمہ، سکتہ، سوالیہ نشان، ندائیہ نشان اور واوین درست جگہ لگانا۔",
+    "en": "Using the full stop, comma, question mark, exclamation mark and quotation marks correctly in Urdu sentences."
+  },
+  "keywords": [
+    "punctuation",
+    "full stop",
+    "comma",
+    "question mark",
+    "exclamation mark",
+    "quotation marks"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "رموزِ اوقاف",
+        "en": "punctuation"
+      },
+      "definition": {
+        "ur": "وہ نشان جو بتائیں کہاں رکنا ہے اور بات کیسی ہے۔",
+        "en": "marks that show where to pause and what kind of sentence it is."
+      }
+    },
+    {
+      "term": {
+        "ur": "ختمہ (۔)",
+        "en": "full stop (۔)"
+      },
+      "definition": {
+        "ur": "سادہ جملے کے آخر کا نشان۔",
+        "en": "the mark at the end of a plain sentence."
+      }
+    },
+    {
+      "term": {
+        "ur": "سکتہ (،)",
+        "en": "comma (،)"
+      },
+      "definition": {
+        "ur": "چھوٹے وقفے کا نشان، جیسے چیزوں کی فہرست میں۔",
+        "en": "the mark for a short pause, as in a list."
+      }
+    },
+    {
+      "term": {
+        "ur": "واوین (\" \")",
+        "en": "quotation marks (\" \")"
+      },
+      "definition": {
+        "ur": "کسی کی کہی ہوئی بات کے دونوں طرف لگنے والے نشان۔",
+        "en": "marks on both sides of someone's exact words."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "لکھتے وقت ہم آواز سے نہیں بول سکتے، اس لیے نشان لگاتے ہیں۔ یہ نشان پڑھنے والے کو بتاتے ہیں کہ کہاں رکنا ہے۔ وہ یہ بھی بتاتے ہیں کہ جملہ سوال ہے یا خوشی کی بات۔ ان نشانوں کو رموزِ اوقاف کہتے ہیں۔ آج ہم پانچ اہم نشان سیکھیں گے۔",
+    "en": "When we write, we cannot use our voice, so we use marks. These marks tell the reader where to pause. They also show whether a sentence is a question or an exclamation. These marks are called punctuation (rumooz-e-auqaaf). Today we will learn five important marks."
+  },
+  "student_explanation": {
+    "ur": "ختمہ (۔) سادہ جملے کے آخر میں آتا ہے۔ سوالیہ نشان (؟) سوال کے آخر میں آتا ہے۔ ندائیہ نشان (!) خوشی، حیرت یا پکار کے بعد آتا ہے۔ سکتہ (،) چھوٹا وقفہ ہے۔ یہ چیزوں کی فہرست میں آتا ہے۔ واوین (\" \") کسی کی کہی ہوئی بات کو گھیرتے ہیں۔ اردو میں انگریزی والا نقطہ (.) نہیں لگاتے۔ اردو کا ختمہ چھوٹی لکیر جیسا ہے۔",
+    "en": "A full stop (۔) comes at the end of a plain sentence. A question mark (؟) comes at the end of a question. An exclamation mark (!) comes after joy, surprise or a call. A comma (،) is a short pause. It is used in lists. Quotation marks (\" \") go around someone's exact words. In Urdu we do not use the English dot (.). The Urdu full stop looks like a small dash."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "نشان لگائیں: سارہ نے پوچھا امی آج کیا پکے گا",
+        "en": "Add marks: Sara asked Ammi what will be cooked today"
+      },
+      "steps": [
+        {
+          "ur": "یہ کسی کی کہی ہوئی بات ہے، اس لیے واوین لگیں گے۔",
+          "en": "These are someone's words, so we use quotation marks."
+        },
+        {
+          "ur": "'پوچھا' کے بعد رابطے کا نشان (:) لگائیں۔",
+          "en": "Put a colon (:) after 'asked'."
+        },
+        {
+          "ur": "بات سوال ہے، اس لیے آخر میں ؟ لگے گا۔",
+          "en": "It is a question, so it ends with ؟."
+        },
+        {
+          "ur": "درست: سارہ نے پوچھا: \"امی، آج کیا پکے گا؟\"",
+          "en": "Correct: Sara asked: \"Ammi, what will be cooked today?\""
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "نشان لگائیں: ابو بازار سے آلو ٹماٹر پیاز اور دھنیا لائے",
+        "en": "Add marks: Abbu brought potatoes tomatoes onions and coriander from the bazaar"
+      },
+      "steps": [
+        {
+          "ur": "یہ چیزوں کی فہرست ہے۔",
+          "en": "This is a list of things."
+        },
+        {
+          "ur": "چیزوں کے بیچ سکتہ لگائیں: آلو، ٹماٹر، پیاز۔",
+          "en": "Put commas between the things: potatoes, tomatoes, onions."
+        },
+        {
+          "ur": "آخری چیز سے پہلے 'اور' ہو تو وہاں سکتہ نہیں۔",
+          "en": "Before 'and' at the last item, no comma."
+        },
+        {
+          "ur": "جملہ سادہ ہے، ختمہ لگائیں: ابو بازار سے آلو، ٹماٹر، پیاز اور دھنیا لائے۔",
+          "en": "It is a plain sentence, so add a full stop."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-add-marks",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "خالی جگہوں پر درست نشان رکھیں: 'واہ ___ کتنا پیارا باغ ہے ___ بلال نے پوچھا ___ \"یہ پھول کس نے لگائے ___\"'",
+        "en": "Place the right mark in each gap: 'Wah ___ what a lovely garden ___ Bilal asked ___ \"Who planted these flowers ___\"'"
+      },
+      "options": [
+        {
+          "ur": "!",
+          "en": "!"
+        },
+        {
+          "ur": "۔",
+          "en": "۔"
+        },
+        {
+          "ur": ":",
+          "en": ":"
+        },
+        {
+          "ur": "؟",
+          "en": "؟"
+        }
+      ],
+      "answer_key": {
+        "gaps": [
+          "!",
+          "!",
+          ":",
+          "؟"
+        ],
+        "accept_gap2": [
+          "!",
+          "۔"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر جملے سے پوچھیں: یہ سوال ہے، خوشی ہے یا سادہ بات؟",
+            "en": "Ask each sentence: is it a question, joy, or a plain statement?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-match",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر نشان کو اس کے نام سے ملائیں: ۔ ، ؟ !",
+        "en": "Match each mark to its name: ۔ ، ؟ !"
+      },
+      "options": [
+        {
+          "ur": "سکتہ",
+          "en": "comma"
+        },
+        {
+          "ur": "سوالیہ نشان",
+          "en": "question mark"
+        },
+        {
+          "ur": "ختمہ",
+          "en": "full stop"
+        },
+        {
+          "ur": "ندائیہ نشان",
+          "en": "exclamation mark"
+        }
+      ],
+      "answer_key": {
+        "pairs": {
+          "۔": "ختمہ",
+          "،": "سکتہ",
+          "؟": "سوالیہ نشان",
+          "!": "ندائیہ نشان"
+        }
+      },
+      "explanation": {
+        "ur": "۔ ختمہ، ، سکتہ، ؟ سوالیہ نشان، ! ندائیہ نشان۔",
+        "en": "۔ full stop, ، comma, ؟ question mark, ! exclamation mark."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-question",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "'تم کہاں جا رہے ہو' کے آخر میں کون سا نشان آئے گا؟",
+        "en": "Which mark ends 'Where are you going'?"
+      },
+      "options": [
+        {
+          "ur": "۔",
+          "en": "۔ (full stop)"
+        },
+        {
+          "ur": "،",
+          "en": "، (comma)"
+        },
+        {
+          "ur": "؟",
+          "en": "؟ (question mark)"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'کہاں' کس طرح کا لفظ ہے؟",
+            "en": "What kind of word is 'kahaan'?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "یہ سوال ہے، اس لیے سوالیہ نشان (؟)۔",
+        "en": "It is a question, so a question mark (؟)."
+      }
+    },
+    {
+      "id": "p2-exclaim",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "'واہ' جیسے خوشی یا حیرت کے لفظ کے بعد کون سا نشان آتا ہے؟",
+        "en": "Which mark comes after a word of joy or surprise like 'wah'?"
+      },
+      "options": [
+        {
+          "ur": "!",
+          "en": "! (exclamation mark)"
+        },
+        {
+          "ur": "۔",
+          "en": "۔ (full stop)"
+        },
+        {
+          "ur": "،",
+          "en": "، (comma)"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "خوشی، حیرت یا پکار کے بعد ندائیہ نشان (!) آتا ہے۔",
+        "en": "After joy, surprise or a call comes an exclamation mark (!)."
+      }
+    },
+    {
+      "id": "p3-comma",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کس جملے میں سکتہ درست لگا ہے؟",
+        "en": "In which sentence is the comma used correctly?"
+      },
+      "options": [
+        {
+          "ur": "امی نے، آلو ٹماٹر اور پیاز خریدے۔",
+          "en": "Ammi, bought potatoes tomatoes and onions."
+        },
+        {
+          "ur": "امی نے آلو، ٹماٹر اور پیاز خریدے۔",
+          "en": "Ammi bought potatoes, tomatoes and onions."
+        },
+        {
+          "ur": "امی نے آلو ٹماٹر اور، پیاز خریدے۔",
+          "en": "Ammi bought potatoes tomatoes and, onions."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سکتہ فہرست کی چیزوں کے بیچ آتا ہے۔",
+            "en": "A comma goes between items in a list."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سکتہ 'آلو' اور 'ٹماٹر' کے بیچ ہے؛ 'اور' سے پہلے نہیں۔",
+        "en": "The comma is between 'potatoes' and 'tomatoes'; not before 'and'."
+      }
+    },
+    {
+      "id": "p4-english-dot",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "اردو جملے کے آخر میں انگریزی والا نقطہ (.) لگاتے ہیں۔",
+        "en": "We put the English dot (.) at the end of an Urdu sentence."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اردو کا ختمہ کیسا دکھتا ہے؟",
+            "en": "What does the Urdu full stop look like?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اردو میں ختمہ (۔) لگتا ہے، نقطہ نہیں۔",
+        "en": "Urdu uses the full stop (۔), not a dot."
+      }
+    },
+    {
+      "id": "p5-quote",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کسی کی کہی ہوئی بات کس نشان کے اندر لکھتے ہیں؟",
+        "en": "Which marks go around someone's exact words?"
+      },
+      "options": [
+        {
+          "ur": "سکتہ (،)",
+          "en": "comma (،)"
+        },
+        {
+          "ur": "ختمہ (۔)",
+          "en": "full stop (۔)"
+        },
+        {
+          "ur": "واوین (\" \")",
+          "en": "quotation marks (\" \")"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "explanation": {
+        "ur": "کہی ہوئی بات واوین میں: \"میں آ رہا ہوں۔\"",
+        "en": "Spoken words go in quotation marks: \"I am coming.\""
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-fix-passage",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اس عبارت میں نشان لگا کر دوبارہ لکھیں: 'نور نے کہا آج موسم کتنا اچھا ہے چلو باغ چلیں ثنا نے پوچھا کیا ہم جھولا بھی جھولیں گے'",
+        "en": "Rewrite this passage with marks: 'Noor said how nice the weather is today let us go to the garden Sana asked will we also swing'"
+      },
+      "answer_key": {
+        "sample_answer": "نور نے کہا: \"آج موسم کتنا اچھا ہے! چلو باغ چلیں۔\" ثنا نے پوچھا: \"کیا ہم جھولا بھی جھولیں گے؟\""
+      },
+      "mentor_review_guidance": "Full credit: quotation marks around both speeches, ؟ after the question, ۔ or ! after the weather sentence. Accept ۔ instead of !."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-find-marks",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں کسی کتاب یا اخبار کے ایک صفحے پر ختمے، سوالیہ نشان اور سکتے گنیں۔ کاپی میں لکھیں کہ ہر نشان کتنی بار آیا۔",
+        "en": "At home, count the full stops, question marks and commas on one page of a book or newspaper. Write how many of each in your notebook."
+      },
+      "answer_key": {
+        "sample_answer": "۔ = 12، ؟ = 2، ، = 7"
+      },
+      "mentor_review_guidance": "Any honest count; the aim is noticing marks."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "یہ جملہ سادہ بات ہے، سوال ہے یا خوشی کی پکار؟",
+        "en": "Is this sentence a plain statement, a question or a cry of joy?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "سوال = ؟، خوشی یا حیرت = !، سادہ بات = ۔، فہرست = ،",
+        "en": "Question = ؟, joy or surprise = !, plain = ۔, list = ،"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "اردو میں بھی انگریزی کا نقطہ (.) یا الٹا سوالیہ نشان (?) لگانا۔",
+        "en": "Using the English dot (.) or the English question mark (?) in Urdu."
+      },
+      "correction": {
+        "ur": "اردو میں ختمہ (۔) اور اردو سوالیہ نشان (؟) لگتے ہیں۔",
+        "en": "Urdu uses the full stop (۔) and the Urdu question mark (؟)."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ہر جملے کے آخر میں ختمہ لگانا، سوال میں بھی۔",
+        "en": "Putting a full stop at the end of every sentence, even questions."
+      },
+      "correction": {
+        "ur": "پہلے دیکھیں جملہ کیسا ہے: سوال کے آخر میں ؟ آتا ہے۔",
+        "en": "First see what kind of sentence it is: a question ends with ؟."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:URD-G4-GR-01",
+      "remediation_ref": "URD-G4-GR-01"
+    },
+    {
+      "signal": "question_mark_missed",
+      "remediation_ref": "URD-G4-RD-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "۔ ختمہ: سادہ جملہ۔ ؟ سوالیہ: سوال۔ ! ندائیہ: خوشی، حیرت، پکار۔ ، سکتہ: فہرست اور چھوٹا وقفہ۔ \" \" واوین: کہی ہوئی بات۔",
+    "en": "۔ full stop: plain sentence. ؟ question mark: question. ! exclamation: joy, surprise, a call. ، comma: list and short pause. \" \" quotation marks: spoken words."
+  },
+  "summary": {
+    "ur": "ہم نے پانچ اہم نشان اور ان کی درست جگہ سیکھی۔",
+    "en": "We learned five important marks and where they go."
+  },
+  "parent_notes": {
+    "ur": "بچے کی لکھائی دیکھتے وقت صرف ایک بات پوچھیں: 'کیا ہر جملے کے آخر میں نشان ہے؟'",
+    "en": "When you look at your child's writing, ask just one thing: 'Does every sentence end with a mark?'"
+  },
+  "mentor_notes": {
+    "ur": "نشانوں کے نام اسکولوں میں کچھ مختلف ہو سکتے ہیں (ندائیہ/فجائیہ)؛ دونوں قبول کریں۔ موبائل کی بورڈ پر اردو ختمہ اور ؟ ڈھونڈنا مشکل ہو سکتا ہے؛ بچے کو ایک بار دکھا دیں۔",
+    "en": "Mark names can differ slightly between schools (ندائیہ/فجائیہ); accept both. Finding the Urdu ۔ and ؟ on a phone keyboard can be hard; show the learner once."
+  },
+  "accessibility_notes": {
+    "ur": "پانچ نشانوں کا بڑا چارٹ ابھی بنانا ہے؛ متبادل متن ہر نشان کا نام اور کام پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ نشان چھوٹے ہوتے ہیں، اس لیے انہیں بڑا اور صاف دکھائیں۔ گھسیٹنے والی سرگرمی کا متبادل: ہر خالی جگہ کے لیے چار بٹنوں میں سے ایک نشان چنیں۔",
+    "en": "A large chart of the five marks is still to be made; its alt text should read each mark's name and job. Urdu audio is not yet recorded. Marks are small, so show them large and clear. Alternative to the drag activity: choose one of four mark buttons for each gap."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "decide the sentence type first (statement, question, exclamation, list, speech), then choose the mark",
+    "questioning_strategy": "ask 'what kind of sentence is this?' before 'which mark?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "uses English . or ?",
+      "puts ۔ after every sentence"
+    ],
+    "hint_policy": "graduated; two hints max; first ask the sentence type, then show the type-to-mark list; never place the mark for the learner",
+    "example_policy": "short dialogues and lists from family and bazaar life",
+    "misconception_detectors": [
+      "English punctuation in Urdu text",
+      "full stop after a question"
+    ],
+    "critical_thinking_prompts": [
+      "Why does a writer need marks but a speaker does not?"
+    ],
+    "personalization_rules": "if sentence types are unclear when read aloud, route to URD-G4-RD-01",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm mark names ختمہ، سکتہ، سوالیہ نشان، ندائیہ نشان، واوین (and رابطہ for :) match Grade 4 school terms",
+    "subject expert: the activity's second gap accepts ! or ۔; confirm the answer key"
+  ]
+}

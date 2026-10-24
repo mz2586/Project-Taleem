@@ -1,0 +1,488 @@
+{
+  "code": "MATH-G4-ML-02",
+  "description": {
+    "ur": "دو ہندسی عدد کو ایک ہندسی عدد سے ضرب دینا، ہاتھ لے جا کر۔",
+    "en": "Multiplying a 2-digit number by a 1-digit number, with carrying."
+  },
+  "keywords": [
+    "multiplication",
+    "2-digit by 1-digit",
+    "carrying",
+    "regrouping",
+    "column method",
+    "product"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ہاتھ لے جانا",
+        "en": "carry in multiplication"
+      },
+      "definition": {
+        "ur": "اکائی کی ضرب میں بننے والی دہائیاں دہائی کے خانے میں لے جانا۔",
+        "en": "Moving the tens made in the ones step over to the tens column."
+      }
+    },
+    {
+      "term": {
+        "ur": "حاصلِ ضرب",
+        "en": "product"
+      },
+      "definition": {
+        "ur": "ضرب کا جواب۔",
+        "en": "The answer to a multiplication."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم ۳۷ × ۴ جیسی ضرب کریں گے۔ ہم پہلے اکائی کو ضرب دیں گے، پھر دہائی کو۔ جو دہائیاں بنیں، انہیں ہاتھ میں رکھ کر اگلے خانے میں لے جائیں گے۔ یاد رکھیں: ہاتھ والا عدد ضرب کے بعد جمع ہوتا ہے۔",
+    "en": "Today we do multiplications like 37 × 4. We multiply the ones first, then the tens. Any tens we make are carried to the next column. Remember: the carried number is added after you multiply."
+  },
+  "student_explanation": {
+    "ur": "دو ہندسی عدد اوپر لکھیں۔ ایک ہندسی عدد اکائی کے نیچے لکھیں۔ پہلے اکائی کے ہندسے کو ضرب دیں۔ اگر جواب ۱۰ یا زیادہ ہو تو صرف اکائی لکھیں۔ دہائیاں دہائی کے خانے میں لے جائیں۔ پھر دہائی کے ہندسے کو ضرب دیں۔ اب ہاتھ والا عدد اس میں جمع کریں۔ یہ جواب آگے لکھ دیں۔",
+    "en": "Write the 2-digit number on top. Write the 1-digit number under the ones. First multiply the ones digit. If the answer is 10 or more, write only its ones. Carry the tens to the tens column. Next multiply the tens digit. Then add the carried number. Write this result in front."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۳۷ × ۴ = ؟",
+        "en": "37 × 4 = ?"
+      },
+      "steps": [
+        {
+          "ur": "اکائی: ۷ × ۴ = ۲۸۔ ۸ لکھیں، ۲ ہاتھ میں۔",
+          "en": "Ones: 7 × 4 = 28. Write 8, carry 2."
+        },
+        {
+          "ur": "دہائی: ۳ × ۴ = ۱۲۔",
+          "en": "Tens: 3 × 4 = 12."
+        },
+        {
+          "ur": "ہاتھ والا ۲ جمع کریں: ۱۲ + ۲ = ۱۴۔ ۱۴ لکھیں۔",
+          "en": "Add the carried 2: 12 + 2 = 14. Write 14."
+        },
+        {
+          "ur": "جواب: ۱۴۸۔",
+          "en": "Answer: 148."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "۵۶ × ۳ = ؟",
+        "en": "56 × 3 = ?"
+      },
+      "steps": [
+        {
+          "ur": "اکائی: ۶ × ۳ = ۱۸۔ ۸ لکھیں، ۱ ہاتھ میں۔",
+          "en": "Ones: 6 × 3 = 18. Write 8, carry 1."
+        },
+        {
+          "ur": "دہائی: ۵ × ۳ = ۱۵، پھر ۱۵ + ۱ = ۱۶۔",
+          "en": "Tens: 5 × 3 = 15, then 15 + 1 = 16."
+        },
+        {
+          "ur": "جواب: ۱۶۸۔ اندازہ: ۶۰ × ۳ = ۱۸۰، قریب ہے۔",
+          "en": "Answer: 168. Estimate: 60 × 3 = 180, which is close."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-carry-56x3",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "۵۶ × ۳ میں اکائی کا لکھا جانے والا ہندسہ اور ہاتھ والا ہندسہ صحیح خانوں میں گھسیٹیں۔ پھر جواب لکھیں۔",
+        "en": "For 56 × 3, drag the ones digit to write and the carried digit into the right boxes. Then type the answer."
+      },
+      "answer_key": {
+        "ones_written": 8,
+        "carry": 1,
+        "answer": "168"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۶ × ۳ کتنے ہیں؟",
+            "en": "What is 6 × 3?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-45x6",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۴۵ × ۶ = ___",
+        "en": "45 × 6 = ___"
+      },
+      "answer_key": {
+        "answer": "270"
+      },
+      "accepted_variants": [
+        "270",
+        "۲۷۰"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۵ × ۶ = ۳۰۔ ۰ لکھیں اور ۳ ہاتھ میں رکھیں۔",
+            "en": "5 × 6 = 30. Write 0 and carry 3."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴ × ۶ = ۲۴، ۲۴ + ۳ = ۲۷۔ جواب ۲۷۰۔",
+        "en": "4 × 6 = 24, 24 + 3 = 27. Answer 270."
+      }
+    },
+    {
+      "id": "p6-72x9",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۷۲ × ۹ = ___",
+        "en": "72 × 9 = ___"
+      },
+      "answer_key": {
+        "answer": "648"
+      },
+      "accepted_variants": [
+        "648",
+        "۶۴۸"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۲ × ۹ = ۱۸۔ ہاتھ والا ۱ مت بھولیں۔",
+            "en": "2 × 9 = 18. Don't forget the carried 1."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۸ لکھیں، ۱ ہاتھ میں۔ ۷ × ۹ = ۶۳، ۶۳ + ۱ = ۶۴۔ جواب ۶۴۸۔",
+        "en": "Write 8, carry 1. 7 × 9 = 63, 63 + 1 = 64. Answer 648."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-28x3",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۲۸ × ۳ = ؟",
+        "en": "28 × 3 = ?"
+      },
+      "options": [
+        {
+          "ur": "۶۴",
+          "en": "64"
+        },
+        {
+          "ur": "۸۴",
+          "en": "84"
+        },
+        {
+          "ur": "۱۲۴",
+          "en": "124"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-carry-forgotten"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۸ × ۳ = ۲۴۔ ۲ کو کہاں لے جائیں گے؟",
+            "en": "8 × 3 = 24. Where does the 2 go?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴ لکھیں، ۲ ہاتھ میں۔ ۲ × ۳ = ۶، ۶ + ۲ = ۸۔ جواب ۸۴۔",
+        "en": "Write 4, carry 2. 2 × 3 = 6, 6 + 2 = 8. Answer 84."
+      }
+    },
+    {
+      "id": "p3-19x5",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۱۹ × ۵ = ؟",
+        "en": "19 × 5 = ?"
+      },
+      "options": [
+        {
+          "ur": "۹۵",
+          "en": "95"
+        },
+        {
+          "ur": "۲۴",
+          "en": "24"
+        },
+        {
+          "ur": "۵۵",
+          "en": "55"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-mult-add-instead",
+          "2": "m-carry-forgotten"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۹ × ۵ = ۴۵۔ ہاتھ میں کیا رہا؟",
+            "en": "9 × 5 = 45. What is carried?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۵ لکھیں، ۴ ہاتھ میں۔ ۱ × ۵ = ۵، ۵ + ۴ = ۹۔ جواب ۹۵۔",
+        "en": "Write 5, carry 4. 1 × 5 = 5, 5 + 4 = 9. Answer 95."
+      }
+    },
+    {
+      "id": "p4-63x4-step",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۶۳ × ۴ میں اکائی کی ضرب ۱۲ دیتی ہے، اس لیے ہم ۲ لکھتے ہیں اور ۱ ہاتھ میں رکھتے ہیں۔",
+        "en": "In 63 × 4, the ones step gives 12, so we write 2 and carry 1."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۳ × ۴ کتنے ہیں؟",
+            "en": "What is 3 × 4?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ہاں۔ پھر ۶ × ۴ = ۲۴، ۲۴ + ۱ = ۲۵۔ جواب ۲۵۲۔",
+        "en": "Yes. Then 6 × 4 = 24, 24 + 1 = 25. The answer is 252."
+      }
+    },
+    {
+      "id": "p5-pencil-boxes",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "پنسلوں کا ایک ڈبہ ۸۵ روپے کا ہے۔ ۳ ڈبے کتنے کے ہوں گے؟",
+        "en": "One box of pencils costs Rs 85. How much do 3 boxes cost?"
+      },
+      "options": [
+        {
+          "ur": "۲۴۵",
+          "en": "245"
+        },
+        {
+          "ur": "۸۸",
+          "en": "88"
+        },
+        {
+          "ur": "۲۵۵",
+          "en": "255"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-carry-forgotten",
+          "1": "m-mult-add-instead"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۸۵ کو ۳ بار لینا ہے۔ اکائی سے شروع کریں۔",
+            "en": "We take 85 three times. Start with the ones."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۵ × ۳ = ۱۵: ۵ لکھیں، ۱ ہاتھ میں۔ ۸ × ۳ = ۲۴، ۲۴ + ۱ = ۲۵۔ جواب ۲۵۵ روپے۔",
+        "en": "5 × 3 = 15: write 5, carry 1. 8 × 3 = 24, 24 + 1 = 25. Answer Rs 255."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-missing-digit",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "خالی جگہ کا ہندسہ بتائیں: ۴_ × ۶ = ۲۷۶",
+        "en": "Find the missing digit: 4_ × 6 = 276"
+      },
+      "answer_key": {
+        "answer": "6"
+      },
+      "accepted_variants": [
+        "6",
+        "۶"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اکائی × ۶ کا آخری ہندسہ ۶ ہونا چاہیے۔ کون سے ہندسے یہ دیتے ہیں؟",
+            "en": "The ones digit × 6 must end in 6. Which digits do that?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-home-products",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر سے دو ایسے سوال حل کریں: دو ہندسی × ایک ہندسی (جیسے ۴ چیزوں کی قیمت)۔",
+        "en": "two 2-digit × 1-digit problems from home (e.g., cost of 4 items)."
+      },
+      "answer_key": {
+        "answer": "two correct products with working"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "اکائی سے شروع",
+        "en": "Start with the ones."
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "لے جانا نہ بھولیں",
+        "en": "Don't forget the carry."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "خانوں میں جمع کرتے وقت ہاتھ لے جانا بھول جانا۔",
+        "en": "Forgets to carry in column addition"
+      },
+      "correction": {
+        "ur": "جب جوڑ ۹ سے بڑا ہو تو اگلی جگہ ایک لے جائیں",
+        "en": "When a column adds past 9, carry one to the next place."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ضرب کی جگہ دونوں عدد جوڑ دینا۔",
+        "en": "Adds the two factors instead of multiplying"
+      },
+      "correction": {
+        "ur": "ضرب یعنی بار بار جوڑ: ۶ کو ۴ بار",
+        "en": "Multiply = repeated add: six, four times = 24."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-mult-add-instead",
+      "remediation_ref": "MATH-G4-ML-01"
+    },
+    {
+      "signal": "misconception:m-carry-forgotten",
+      "remediation_ref": "MATH-G4-ML-02"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-ML-01",
+      "remediation_ref": "MATH-G4-ML-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "اکائی کو ضرب دیں، اکائی لکھیں، دہائیاں ہاتھ میں۔ پھر دہائی کو ضرب دیں اور ہاتھ والا جمع کریں۔",
+    "en": "Multiply the ones, write the ones digit, carry the tens. Then multiply the tens and add the carry."
+  },
+  "summary": {
+    "ur": "ہم نے دو ہندسی عدد کو ایک ہندسی عدد سے ضرب دینا اور ہاتھ لے جانا سیکھا۔",
+    "en": "We learned to multiply a 2-digit number by a 1-digit number and carry."
+  },
+  "parent_notes": {
+    "ur": "if one costs ۳۷, four cost…?",
+    "en": "if one costs 37, four cost…?"
+  },
+  "mentor_notes": {
+    "ur": "ہندسے سیدھ میں رکھیں؛ اکائی سے دہائی میں ہاتھ لے جانے میں ہی اکثر غلطی ہوتی ہے۔",
+    "en": "align digits; the carry from ones into tens is the usual slip."
+  },
+  "accessibility_notes": {
+    "ur": "خانوں والی ضرب کی تصویر ابھی بنانی ہے؛ متبادل متن ہر قدم اور ہاتھ والا ہندسہ پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے کا متبادل: دونوں خانوں میں ہندسے ٹائپ کریں۔",
+    "en": "The column-multiplication picture is still to be made; alt text should read each step and the carried digit. Urdu audio is not yet recorded. Alternative to dragging: type the digits into both boxes."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "column method: ones first, write the ones digit, carry the tens; multiply the tens, then add the carry; estimate to check",
+    "questioning_strategy": "ask 'what is the ones product?' and 'what do you carry?' before moving to the tens",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "drops the carry",
+      "adds the carry before multiplying",
+      "adds the two numbers"
+    ],
+    "hint_policy": "graduated; two hints max (start with the ones; don't forget the carry) then a worked re-teach with 37 × 4; never give the answer first",
+    "example_policy": "2-digit × 1-digit products with a carry, mostly under 1000; rupee prices of school items",
+    "misconception_detectors": [
+      "answers 64 for 28 × 3 (carry dropped)",
+      "answers 124 for 28 × 3 (carry added before multiplying)",
+      "answers 24 for 19 × 5"
+    ],
+    "critical_thinking_prompts": [
+      "Why must the carried 2 be added after 3 × 4, not before?"
+    ],
+    "personalization_rules": "if a times-table fact is wrong, route to MATH-G4-ML-01 before more column work",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "language editor: the doc's parent note ('if one costs ۳۷, four cost…?') is English with Urdu digits, so the importer treats it as the Urdu side; a real Urdu note is needed, e.g. 'اگر ایک چیز ۳۷ روپے کی ہو تو چار کتنے کی ہوں گی؟'",
+    "subject expert: the library's m-carry-forgotten correction talks about addition columns; a multiplication version of the correction may be clearer here"
+  ]
+}

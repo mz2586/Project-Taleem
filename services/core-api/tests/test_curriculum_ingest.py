@@ -28,6 +28,7 @@ from taleem_core.contexts.curriculum_studio.domain.hierarchy import EducationSys
 from taleem_core.contexts.curriculum_studio.domain.lesson import Lesson
 from taleem_core.contexts.curriculum_studio.domain.provenance import Derivation, ProvenanceError
 from taleem_core.contexts.curriculum_studio.domain.workflow import ReviewAction, WorkflowState
+from taleem_core.tools import curriculum_ai_drafts as cad
 from taleem_core.tools import curriculum_content as cc
 from taleem_core.tools import curriculum_import as cimp
 from taleem_core.tools import curriculum_ingest as ci
@@ -147,8 +148,9 @@ def test_spine_json_round_trip(spine: cs.Spine) -> None:
 
 def test_committed_spine_is_fresh(spine: cs.Spine, contents: dict[str, cc.AuthoredContent]) -> None:
     """CI drift guard: curriculum/grade-4/spine.json matches the markdown."""
+    drafts = cad.load_drafts(ROOT, spine)
     assert cs.SPINE_PATH not in ci.stale_artifacts(
-        ROOT, spine, contents
+        ROOT, spine, contents, drafts
     ), "spine.json is stale: run `python -m taleem_core.tools.curriculum_ingest --dry-run`"
 
 
@@ -377,11 +379,12 @@ def test_import_is_verbatim_from_the_documents(
         },
     ]
     assert nb01.parent_notes.text == {
-        UR: "بچے سے گھر کے نمبر پڑھوائیں",
-        EN: "ask your child to read the house/page numbers aloud.",
+        UR: "بچے سے کتاب کے صفحہ نمبر اور قیمتیں پڑھوائیں",
+        EN: "ask your child to read page numbers and prices aloud.",
     }
     assert nb01.homework[0].stem.text == {
-        EN: "write three household numbers (page number, house number, a price) in words."
+        EN: "write three numbers from a book or a price label (a page number, a price, a date) "
+        "in words."
     }
     (mis,) = nb01.common_misconceptions
     assert mis.misconception.text == {EN: "A digit's value equals the digit, ignoring its column"}

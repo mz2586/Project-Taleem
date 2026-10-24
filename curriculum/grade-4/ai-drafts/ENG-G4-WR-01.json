@@ -1,0 +1,407 @@
+{
+  "code": "ENG-G4-WR-01",
+  "title": {
+    "ur": "صاف اور درست ہجے والے الفاظ",
+    "en": "Neat Words, Right Spellings"
+  },
+  "description": {
+    "ur": "بچہ انگریزی الفاظ صاف لکھتا ہے اور عام الفاظ کے ہجے درست لکھتا ہے۔",
+    "en": "The learner writes English words neatly and spells common words correctly."
+  },
+  "keywords": [
+    "spelling",
+    "handwriting",
+    "look say cover write check",
+    "letter shapes",
+    "writing"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ہجے (spelling)",
+        "en": "spelling"
+      },
+      "definition": {
+        "ur": "لفظ کے حروف کی صحیح ترتیب۔",
+        "en": "The right letters of a word in the right order."
+      }
+    },
+    {
+      "term": {
+        "ur": "لمبے حروف (tall letters)",
+        "en": "tall letters"
+      },
+      "definition": {
+        "ur": "وہ حروف جو اوپر کی لکیر تک جاتے ہیں: b، d، h، k، l، t۔",
+        "en": "Letters that reach the top line: b, d, h, k, l, t."
+      }
+    },
+    {
+      "term": {
+        "ur": "دم والے حروف (tail letters)",
+        "en": "tail letters"
+      },
+      "definition": {
+        "ur": "وہ حروف جو نیچے کی لکیر سے نیچے جاتے ہیں: g، j، p، q، y۔",
+        "en": "Letters that go below the line: g, j, p, q, y."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "صاف لکھا لفظ ہر کوئی آسانی سے پڑھ سکتا ہے۔ آج ہم حروف کا سائز اور جگہ دیکھیں گے۔ پھر ہجے یاد کرنے کا ایک طریقہ سیکھیں گے۔ اسے کہتے ہیں: دیکھو، بولو، ڈھانپو، لکھو، جانچو۔ آپ کو اپنی کاپی اور پنسل چاہیے۔",
+    "en": "A neatly written word is easy for anyone to read. Today we will look at the size and place of letters. Then we will learn a way to remember spellings. It is called: Look, Say, Cover, Write, Check. You need your notebook and a pencil."
+  },
+  "student_explanation": {
+    "ur": "انگریزی بائیں سے دائیں لکھی جاتی ہے۔ چھوٹے حروف درمیان میں رہتے ہیں، جیسے a، c، e۔ لمبے حروف اوپر جاتے ہیں، جیسے b، d، h۔ دم والے حروف نیچے جاتے ہیں، جیسے g، p، y۔ الفاظ کے درمیان ایک انگلی جتنی جگہ چھوڑیں۔ ہجے یاد کرنے کے لیے لفظ دیکھیں۔ اسے بولیں۔ پھر ڈھانپ دیں۔ اب لکھیں۔ آخر میں ملا کر جانچیں۔",
+    "en": "English is written from left to right. Small letters stay in the middle, like a, c, e. Tall letters go up, like b, d, h. Tail letters go down, like g, p, y. Leave one finger space between words. To learn a spelling, look at the word. Say it. Then cover it. Now write it. Last, check it against the word."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "لفظ school کے ہجے یاد کریں۔",
+        "en": "Learn to spell the word school."
+      },
+      "steps": [
+        {
+          "ur": "دیکھیں: s-c-h-o-o-l۔ ch اور oo پر دھیان دیں۔",
+          "en": "Look: s-c-h-o-o-l. Notice ch and the double o."
+        },
+        {
+          "ur": "بولیں: school۔",
+          "en": "Say it: school."
+        },
+        {
+          "ur": "ڈھانپیں اور لکھیں۔",
+          "en": "Cover it and write it."
+        },
+        {
+          "ur": "جانچیں: کیا h اور دونوں o موجود ہیں؟",
+          "en": "Check: are the h and both o's there?"
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-letter-height",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر حرف کو صحیح ڈبے میں ڈالیں، لمبا، چھوٹا یا دم والا: h، a، g، t، e، y",
+        "en": "Sort each letter into the right box, tall, small or tail: h, a, g, t, e, y"
+      },
+      "answer_key": {
+        "groups": {
+          "tall": [
+            "h",
+            "t"
+          ],
+          "small": [
+            "a",
+            "e"
+          ],
+          "tail": [
+            "g",
+            "y"
+          ]
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "حرف لکھ کر دیکھیں: کیا یہ اوپر یا نیچے جاتا ہے؟",
+            "en": "Write the letter and see: does it go up or down?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-friend",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "غائب حرف لکھیں: fr_end",
+        "en": "Write the missing letter: fr_end"
+      },
+      "answer_key": {
+        "answer": "i"
+      },
+      "accepted_variants": [
+        "i"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "e سے پہلے ایک حرفِ علت آتا ہے۔",
+            "en": "A vowel comes before e."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-school",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "صحیح ہجے کونسے ہیں؟",
+        "en": "Which spelling is correct?"
+      },
+      "options": [
+        {
+          "ur": "scool",
+          "en": "scool"
+        },
+        {
+          "ur": "school",
+          "en": "school"
+        },
+        {
+          "ur": "skool",
+          "en": "skool"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اس لفظ میں c کے بعد ایک خاموش h ہے۔",
+            "en": "This word has a quiet h after c."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "s-c-h-o-o-l۔",
+        "en": "s-c-h-o-o-l."
+      }
+    },
+    {
+      "id": "p3-water",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "صحیح ہجے کونسے ہیں؟",
+        "en": "Which spelling is correct?"
+      },
+      "options": [
+        {
+          "ur": "woter",
+          "en": "woter"
+        },
+        {
+          "ur": "watar",
+          "en": "watar"
+        },
+        {
+          "ur": "water",
+          "en": "water"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ wa سے شروع ہوتا ہے۔",
+            "en": "The word starts with wa."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-tall-letter",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "حرف d ایک لمبا حرف ہے جو اوپر کی لکیر تک جاتا ہے۔",
+        "en": "The letter d is a tall letter that reaches the top line."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p5-spacing",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کونسا جملہ صاف لکھا گیا ہے؟",
+        "en": "Which sentence is written neatly?"
+      },
+      "options": [
+        {
+          "ur": "I like green mangoes.",
+          "en": "I like green mangoes."
+        },
+        {
+          "ur": "Ilikegreenmangoes.",
+          "en": "Ilikegreenmangoes."
+        },
+        {
+          "ur": "I lik egreen man goes.",
+          "en": "I lik egreen man goes."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "الفاظ کے درمیان جگہ دیکھیں۔",
+            "en": "Look at the spaces between words."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-five-words",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "یہ پانچ الفاظ دیکھو، بولو، ڈھانپو، لکھو، جانچو سے سیکھیں اور کاپی میں صاف لکھیں: school، water، green، teacher، mother",
+        "en": "Learn these five words with Look, Say, Cover, Write, Check and write them neatly in your notebook: school, water, green, teacher, mother"
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "spelling and neatness of five words",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "زیادہ تر ہجے درست، لکھائی کچھ بے ترتیب۔",
+              "en": "Most spellings right; handwriting a little uneven."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "پانچوں ہجے درست اور حروف صحیح سائز میں۔",
+              "en": "All five spelled right with letters the right size."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor checks the notebook in person or from the parent's report; no photo upload is needed."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "لفظ آہستہ بولیں اور ہر آواز کا حرف سوچیں۔",
+        "en": "Say the word slowly and think of the letter for each sound."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "لفظ کا مشکل حصہ ڈھونڈیں، جیسے school میں ch، اور اسے دو بار دیکھیں۔",
+        "en": "Find the tricky part, like ch in school, and look at it twice."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "لفظ ویسے ہی لکھنا جیسے بولا جاتا ہے (skool)۔",
+        "en": "Writing a word exactly as it sounds (skool)."
+      },
+      "correction": {
+        "ur": "کچھ الفاظ میں خاموش یا غیر متوقع حروف ہوتے ہیں؛ انہیں دیکھ کر یاد کریں۔",
+        "en": "Some words have quiet or surprising letters; learn them by looking."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "سب حروف ایک ہی سائز میں لکھنا۔",
+        "en": "Writing all letters the same size."
+      },
+      "correction": {
+        "ur": "لمبے حروف اوپر، دم والے نیچے، باقی درمیان میں۔",
+        "en": "Tall letters go up, tail letters go down, the rest stay in the middle."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "three_or_more_misspellings",
+      "remediation_ref": "ENG-G4-WR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "لمبے: b، d، h، k، l، t۔ دم والے: g، j، p، q، y۔ دیکھو، بولو، ڈھانپو، لکھو، جانچو۔",
+    "en": "Tall: b, d, h, k, l, t. Tail: g, j, p, q, y. Look, Say, Cover, Write, Check."
+  },
+  "summary": {
+    "ur": "ہم نے حروف صحیح سائز میں لکھے اور ہجے یاد کرنے کا طریقہ سیکھا۔",
+    "en": "We wrote letters the right size and learned a way to remember spellings."
+  },
+  "parent_notes": {
+    "ur": "بچے کو روز پانچ منٹ کاپی میں انگریزی الفاظ لکھنے دیں۔ صاف لکھائی پر شاباش دیں۔",
+    "en": "Let your child write English words in a notebook for five minutes each day. Praise neat writing."
+  },
+  "mentor_notes": {
+    "ur": "لکھائی کی جانچ کاپی دیکھ کر کریں۔ b/d کی الٹ عام ہے؛ اس عمر میں نرمی سے ٹھیک کریں۔",
+    "en": "Check handwriting by looking at the notebook. b/d reversals are common; correct them gently at this age."
+  },
+  "accessibility_notes": {
+    "ur": "ہدایات کی اردو/انگریزی آڈیو ابھی ریکارڈ نہیں ہوئی۔ چار لکیروں والی کاپی اور حروف کے سائز کی تصویر، اور اس کا متبادل متن، ابھی بنانا ہے۔ گھسیٹنے والی سرگرمی کا متبادل: ہر حرف کے آگے 'لمبا'، 'چھوٹا' یا 'دم والا' چنیں۔ ہاتھ سے لکھنے میں مشکل والے بچے کے لیے حروف ٹیپ کر کے ہجے بنانے کی اجازت ہو اور لکھائی کا معیار مینٹر طے کرے۔",
+    "en": "Urdu/English audio for instructions is not yet recorded. The four-line notebook and letter-size picture, and its alt text, are still to be made. Alternative to the drag activity: choose 'tall', 'small' or 'tail' next to each letter. A child with difficulty writing by hand may build spellings by tapping letters; the mentor sets the handwriting expectation."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "letter height groups first, then Look-Say-Cover-Write-Check for 3–5 common words",
+    "questioning_strategy": "ask 'which part of the word is tricky?' before the learner writes",
+    "slow_down_signals": [
+      "spells phonetically (skool)",
+      "two wrong answers in a row",
+      "reverses b and d"
+    ],
+    "hint_policy": "graduated; two hints max; first say it slowly, then point to the tricky part; never show the full spelling before the attempt",
+    "example_policy": "high-frequency school and home words (school, water, green, teacher, mother, friend)",
+    "misconception_detectors": [
+      "writes words as they sound",
+      "ignores letter height",
+      "no spaces between words"
+    ],
+    "critical_thinking_prompts": [
+      "Why do we need spaces between words?"
+    ],
+    "personalization_rules": "handwriting is checked by the mentor in the notebook; the AI only checks spellings",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)"
+    ]
+  },
+  "review_flags": [
+    "mentor-mediated: confirm how the mentor sees the notebook (in person or via a parent report) without photo upload",
+    "subject expert: confirm the five spelling words suit Grade 4"
+  ]
+}

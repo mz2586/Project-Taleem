@@ -1,0 +1,471 @@
+{
+  "code": "SCI-G4-ENF-04",
+  "title": {
+    "ur": "توانائی کہاں سے آتی ہے؟",
+    "en": "Where energy comes from"
+  },
+  "description": {
+    "ur": "توانائی کے روزمرہ ذرائع کی مثالیں دینا: سورج، خوراک، ہوا، بہتا پانی اور ایندھن (محفوظ طریقے سے)۔",
+    "en": "Giving everyday examples of energy sources: the Sun, food, wind, moving water and fuels (safely)."
+  },
+  "keywords": [
+    "energy",
+    "source",
+    "sun",
+    "food",
+    "fuel",
+    "wind",
+    "water",
+    "battery"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "توانائی کا ذریعہ",
+        "en": "energy source"
+      },
+      "definition": {
+        "ur": "وہ چیز جس سے ہمیں کام کرنے کی طاقت ملتی ہے۔",
+        "en": "Something that gives us the power to do work."
+      }
+    },
+    {
+      "term": {
+        "ur": "ایندھن",
+        "en": "fuel"
+      },
+      "definition": {
+        "ur": "وہ چیز جو جل کر گرمی دیتی ہے، جیسے لکڑی یا گیس۔ اسے صرف بڑے استعمال کرتے ہیں۔",
+        "en": "Something that gives heat when burned, like wood or gas. Only adults use it."
+      }
+    },
+    {
+      "term": {
+        "ur": "سولر پینل",
+        "en": "solar panel"
+      },
+      "definition": {
+        "ur": "وہ پلیٹ جو دھوپ سے بجلی بناتی ہے۔",
+        "en": "A panel that makes electricity from sunlight."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "تم دوڑتے ہو، پنکھا چلتا ہے، گاڑی سڑک پر بھاگتی ہے۔ ان سب کو توانائی چاہیے۔ مگر یہ توانائی آتی کہاں سے ہے؟ آج ہم توانائی کے ذرائع ڈھونڈیں گے: سورج، خوراک، ہوا، پانی اور ایندھن۔",
+    "en": "You run, a fan spins, a car speeds along the road. All of them need energy. But where does that energy come from? Today we find energy sources: the Sun, food, wind, water and fuel."
+  },
+  "student_explanation": {
+    "ur": "سورج توانائی کا سب سے بڑا ذریعہ ہے۔ دھوپ گرمی اور روشنی دیتی ہے۔ پودے دھوپ سے خوراک بناتے ہیں۔ ہم خوراک کھاتے ہیں تو ہمیں توانائی ملتی ہے۔ روٹی اور دال ہمیں کھیلنے کی طاقت دیتی ہیں۔ چلتی ہوا پون چکی گھماتی ہے۔ بہتا پانی ڈیموں میں بجلی بناتا ہے۔ گیس اور پیٹرول ایندھن ہیں۔ ایندھن صرف بڑے احتیاط سے استعمال کرتے ہیں۔",
+    "en": "The Sun is the biggest source of energy. Sunshine gives heat and light. Plants make food using sunlight. When we eat food, we get energy. Roti and daal give us power to play. Moving wind turns windmills. Moving water makes electricity at dams. Gas and petrol are fuels. Only adults use fuels, carefully."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "تمہارے کھیلنے کی توانائی دراصل کہاں سے شروع ہوئی؟",
+        "en": "Where did the energy for your playing really start?"
+      },
+      "steps": [
+        {
+          "ur": "تم نے گندم کی روٹی کھائی، اس سے توانائی ملی۔",
+          "en": "You ate a wheat roti, which gave you energy."
+        },
+        {
+          "ur": "گندم کے پودے نے دھوپ سے اپنی خوراک بنائی تھی۔",
+          "en": "The wheat plant made its food using sunlight."
+        },
+        {
+          "ur": "تو یہ توانائی آخرکار سورج سے آئی۔",
+          "en": "So the energy came, in the end, from the Sun."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "گھر کی چھت پر سولر پینل کیا کرتا ہے؟",
+        "en": "What does a solar panel on a roof do?"
+      },
+      "steps": [
+        {
+          "ur": "سولر پینل پر دھوپ پڑتی ہے۔",
+          "en": "Sunlight falls on the solar panel."
+        },
+        {
+          "ur": "پینل دھوپ کی توانائی سے بجلی بناتا ہے۔",
+          "en": "The panel makes electricity from the sunlight's energy."
+        },
+        {
+          "ur": "اس بجلی سے پنکھا یا بلب چلتا ہے۔ ذریعہ: سورج۔",
+          "en": "That electricity runs a fan or a bulb. Source: the Sun."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-match-source",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر کام کو اس کے توانائی کے ذریعے سے ملاؤ۔",
+        "en": "Match each job to its energy source."
+      },
+      "options": [
+        {
+          "ur": "گیلے کپڑے سوکھنا",
+          "en": "Wet clothes drying"
+        },
+        {
+          "ur": "بچے کا دوڑنا",
+          "en": "A child running"
+        },
+        {
+          "ur": "پون چکی کا گھومنا",
+          "en": "A windmill turning"
+        },
+        {
+          "ur": "کھلونا کار کا چلنا",
+          "en": "A toy car moving"
+        },
+        {
+          "ur": "ہوا",
+          "en": "Wind"
+        },
+        {
+          "ur": "بیٹری",
+          "en": "Battery"
+        },
+        {
+          "ur": "سورج",
+          "en": "The Sun"
+        },
+        {
+          "ur": "خوراک",
+          "en": "Food"
+        }
+      ],
+      "answer_key": {
+        "left": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "right": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "pairs": {
+          "0": 6,
+          "1": 7,
+          "2": 4,
+          "3": 5
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچو: اس کام کے پیچھے کیا طاقت ہے؟",
+            "en": "Think: what gives this job its power?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-biggest",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "زمین پر توانائی کا سب سے بڑا ذریعہ کیا ہے؟",
+        "en": "What is the biggest source of energy for the Earth?"
+      },
+      "options": [
+        {
+          "ur": "سورج",
+          "en": "The Sun"
+        },
+        {
+          "ur": "چاند",
+          "en": "The Moon"
+        },
+        {
+          "ur": "بیٹری",
+          "en": "A battery"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-body",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہمارے جسم کو توانائی کہاں سے ملتی ہے؟",
+        "en": "Where does our body get its energy from?"
+      },
+      "options": [
+        {
+          "ur": "پنکھے سے",
+          "en": "From the fan"
+        },
+        {
+          "ur": "خوراک سے",
+          "en": "From food"
+        },
+        {
+          "ur": "کپڑوں سے",
+          "en": "From clothes"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p3-fuel-safe",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "بچوں کو خود گیس کا چولہا یا ماچس جلا کر توانائی دیکھنی چاہیے۔",
+        "en": "Children should light a gas stove or matches themselves to see energy."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "ایندھن اور آگ صرف بڑے استعمال کرتے ہیں۔ بچے دور رہیں۔",
+        "en": "Only adults use fuels and fire. Children stay away."
+      }
+    },
+    {
+      "id": "p4-wind",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پون چکی کو کون سی توانائی گھماتی ہے؟",
+        "en": "What energy turns a windmill?"
+      },
+      "options": [
+        {
+          "ur": "خوراک",
+          "en": "Food"
+        },
+        {
+          "ur": "روشنی",
+          "en": "Light"
+        },
+        {
+          "ur": "چلتی ہوا",
+          "en": "Moving wind"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-fuel",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ان میں سے ایندھن کون سا ہے؟",
+        "en": "Which of these is a fuel?"
+      },
+      "options": [
+        {
+          "ur": "پیٹرول",
+          "en": "Petrol"
+        },
+        {
+          "ur": "پانی",
+          "en": "Water"
+        },
+        {
+          "ur": "ریت",
+          "en": "Sand"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سی چیز گاڑی کی ٹینکی میں ڈالی جاتی ہے؟",
+            "en": "What goes into a car's tank?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-dam",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ڈیم میں بہتا پانی بجلی بنانے میں کام آتا ہے۔",
+        "en": "Moving water at a dam is used to make electricity."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-chain",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک چکر بناؤ جو دکھائے کہ آم کھانے سے ملنے والی توانائی سورج سے کیسے آئی۔ تین قدم لکھو۔",
+        "en": "Make a chain that shows how the energy from eating a mango came from the Sun. Write three steps."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Expected: Sun -> mango tree makes food in its leaves -> mango eaten -> energy for the child. Credit any correct three-link chain."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-energy-hunt",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں تین چیزیں دیکھو جو توانائی استعمال کرتی ہیں۔ ہر ایک کا ذریعہ لکھو: سورج، خوراک، ہوا، بیٹری یا بجلی۔ کسی سوئچ، تار یا چولہے کو ہاتھ نہ لگاؤ۔",
+        "en": "Find three things at home that use energy. Write the source of each: Sun, food, wind, battery or electricity. Do not touch any switch, wire or stove."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Credit three objects each with a sensible source; observation only, no handling of mains devices or fuels."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچو: اگر یہ ذریعہ نہ ہو تو کیا یہ کام رک جائے گا؟",
+        "en": "Think: if this source were gone, would the job stop?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "جسم: خوراک۔ دھوپ: سورج۔ پون چکی: ہوا۔ کھلونے: بیٹری۔ اب دوبارہ دیکھو۔",
+        "en": "Body: food. Sunshine: Sun. Windmill: wind. Toys: battery. Now look again."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "توانائی صرف بجلی ہے۔",
+        "en": "Energy just means electricity."
+      },
+      "correction": {
+        "ur": "خوراک، دھوپ، ہوا اور بہتا پانی سب توانائی دیتے ہیں۔ بجلی ان میں سے ایک شکل ہے۔",
+        "en": "Food, sunshine, wind and moving water all give energy. Electricity is just one kind."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "خوراک صرف پیٹ بھرنے کے لیے ہے۔",
+        "en": "Food is only for filling the stomach."
+      },
+      "correction": {
+        "ur": "خوراک جسم کو بڑھنے، کھیلنے اور سوچنے کی توانائی دیتی ہے۔",
+        "en": "Food gives the body energy to grow, play and think."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:SCI-G4-ENF-02",
+      "remediation_ref": "SCI-G4-ENF-02"
+    },
+    {
+      "signal": "cannot link food energy to plants",
+      "remediation_ref": "SCI-G4-LIV-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "توانائی کے ذرائع: سورج (سب سے بڑا)، خوراک، ہوا، بہتا پانی، ایندھن، بیٹری۔ ہماری خوراک کی توانائی آخرکار سورج سے آتی ہے۔ ایندھن اور آگ صرف بڑوں کا کام ہے۔",
+    "en": "Energy sources: the Sun (the biggest), food, wind, moving water, fuels, batteries. Our food energy comes in the end from the Sun. Fuels and fire are for adults only."
+  },
+  "summary": {
+    "ur": "ہم نے توانائی کے روزمرہ ذرائع کی مثالیں سیکھیں اور جانا کہ سورج سب سے بڑا ذریعہ ہے۔",
+    "en": "We learned everyday energy sources and that the Sun is the biggest one."
+  },
+  "parent_notes": {
+    "ur": "بچے کو بتائیں کہ گیس، ماچس اور بجلی کے سوئچ بورڈ صرف بڑے استعمال کرتے ہیں۔ دھوپ میں کپڑے سکھاتے ہوئے پوچھیں: یہ توانائی کہاں سے آئی؟",
+    "en": "Tell your child that gas, matches and switchboards are for adults only. When drying clothes in the sun, ask: where did this energy come from?"
+  },
+  "mentor_notes": {
+    "ur": "\"ایندھن\" ہمیشہ حفاظتی قاعدے کے ساتھ پڑھائیں: بچے آگ، گیس یا پیٹرول کے قریب نہ جائیں۔ ہوا اور ڈیم کی مثالیں تصویر یا بات چیت سے دیں۔",
+    "en": "Always teach 'fuel' with the safety rule: children keep away from fire, gas and petrol. Give wind and dam examples through pictures or talk."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ توانائی کے ذرائع (سورج، روٹی، پون چکی، ڈیم، بیٹری) کی تصویریں اور ان کا متبادل متن ابھی بنانا ہے۔ ملانے والی سرگرمی کا متبادل: ہر کام کے نیچے چار بٹنوں میں سے ذریعہ چنیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. Pictures of the energy sources (Sun, roti, windmill, dam, battery) and their alt text are still to be made. Alternative to the matching activity: choose the source from four buttons under each job."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "start with the learner's own energy (food), trace it back to the Sun, then widen to wind, water, fuel and batteries; pair 'fuel' with the safety rule every time",
+    "questioning_strategy": "ask 'what would stop if this source were gone?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says energy only means electricity",
+      "suggests lighting a fire or stove"
+    ],
+    "hint_policy": "graduated; first the 'what would stop?' question, then the source list; never name the source first",
+    "example_policy": "use Pakistani contexts: rooftop solar panels, wind farms in Sindh, dams on rivers, roti and daal, kites in the wind",
+    "misconception_detectors": [
+      "equates energy with electricity only",
+      "does not link food to energy"
+    ],
+    "critical_thinking_prompts": [
+      "Where did the energy in your breakfast come from, before it reached your plate?"
+    ],
+    "personalization_rules": "if the learner is unsure that plants make food from sunlight, route to SCI-G4-LIV-03",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples",
+      "suggest lighting, burning or handling any fuel",
+      "suggest touching switches, sockets or wires"
+    ]
+  },
+  "review_flags": [
+    "child-safety: fuels are mentioned only with an adults-only rule — confirm wording is strong enough",
+    "subject expert: 'wind farms in Sindh' appears only in AI teaching guidance as an example; confirm it before learner-facing use"
+  ]
+}

@@ -21,6 +21,7 @@ from .lesson import Lesson
 from .packs import CurriculumPack, InstructionRules, PackRegistry, default_pack, default_registry
 from .provenance import check_provenance
 from .quality import Finding, Gate, GateResult, Severity
+from .safety import lesson_personal_detail_requests
 
 
 def __getattr__(name: str) -> object:
@@ -134,6 +135,11 @@ def _structural_findings(lesson: Lesson, ctx: _PackContext) -> list[Finding]:
     # Provenance gate.
     for msg in check_provenance(lesson.provenance):
         f.append(_blk(msg, "provenance"))
+    # Child safety: learner-facing text never asks for a home address, phone or family ages.
+    for name, sentence in lesson_personal_detail_requests(lesson):
+        f.append(
+            _blk(f"{name} asks the learner for a personal detail: {sentence!r}", "child_safety")
+        )
     # AI teaching object completeness.
     missing = lesson.ai_teaching_object.missing_required()
     if missing:

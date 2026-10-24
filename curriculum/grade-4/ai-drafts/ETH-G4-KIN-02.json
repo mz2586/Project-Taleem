@@ -1,0 +1,493 @@
+{
+  "code": "ETH-G4-KIN-02",
+  "title": {
+    "ur": "گھر والوں، دوستوں اور جانوروں کا خیال",
+    "en": "Caring for family, friends and animals"
+  },
+  "description": {
+    "ur": "گھر والوں، دوستوں اور جانوروں کا خیال رکھنے کے آسان اور محفوظ طریقے۔",
+    "en": "Simple, safe ways to care for family, friends and animals."
+  },
+  "keywords": [
+    "caring",
+    "family",
+    "friends",
+    "animals",
+    "birds",
+    "water bowl",
+    "safety"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "خیال رکھنا",
+        "en": "to care for"
+      },
+      "definition": {
+        "ur": "کسی کی ضرورت دیکھ کر اس کی مدد کرنا۔",
+        "en": "noticing what someone needs and helping."
+      }
+    },
+    {
+      "term": {
+        "ur": "جاندار",
+        "en": "living thing"
+      },
+      "definition": {
+        "ur": "جو سانس لے اور بڑھے، جیسے انسان، جانور اور پرندے۔",
+        "en": "something that breathes and grows, like people, animals and birds."
+      }
+    },
+    {
+      "term": {
+        "ur": "محفوظ",
+        "en": "safe"
+      },
+      "definition": {
+        "ur": "جہاں کسی کو چوٹ نہ لگے۔",
+        "en": "where no one gets hurt."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "پچھلی بار ہم نے سیکھا کہ مہربانی سب کے لیے ہے۔ آج ہم تین دائرے دیکھیں گے: گھر والے، دوست، اور جانور۔ ہر دائرے میں خیال رکھنے کا ایک طریقہ سوچیں گے۔ گرمی کے دنوں کی ایک کہانی بھی سنیں گے جس میں کرن نے پرندوں کے لیے پانی رکھا۔",
+    "en": "Last time we learned that kindness is for everyone. Today we will look at three circles: family, friends and animals. In each circle we will think of one way to care. We will also hear a summer story in which Kiran puts out water for birds."
+  },
+  "student_explanation": {
+    "ur": "خیال رکھنا مہربانی کی ایک شکل ہے۔ گھر میں ہم بڑوں اور چھوٹوں کی مدد کرتے ہیں۔ دادا کو پانی دینا خیال رکھنا ہے۔ دوست بیمار ہو تو ہم اس کا حال پوچھتے ہیں۔ جانور بھی درد اور پیاس محسوس کرتے ہیں۔ گرمی میں پرندوں کے لیے پانی رکھ سکتے ہیں۔ جانوروں کو تنگ نہیں کرتے اور پتھر نہیں مارتے۔ انجان یا آوارہ جانور کو نہ چھوئیں۔ مدد چاہیے ہو تو کسی بڑے کو بلائیں۔",
+    "en": "Caring is one kind of kindness. At home we help older and younger people. Giving Dada some water is caring. If a friend is ill, we ask how they are. Animals also feel pain and thirst. In summer we can put out water for birds. We do not tease animals or throw stones. Do not touch an unknown or stray animal. If help is needed, call an adult."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "گرمی بہت ہے۔ کرن دیکھتی ہے کہ چھت پر چڑیاں پیاسی لگ رہی ہیں۔ وہ کیسے خیال رکھ سکتی ہے؟",
+        "en": "It is very hot. Kiran sees that sparrows on the roof look thirsty. How can she care for them?"
+      },
+      "steps": [
+        {
+          "ur": "کرن امی سے ایک پرانا برتن مانگتی ہے۔",
+          "en": "Kiran asks Ammi for an old bowl."
+        },
+        {
+          "ur": "وہ اس میں پانی بھر کر سائے میں رکھتی ہے۔",
+          "en": "She fills it with water and puts it in the shade."
+        },
+        {
+          "ur": "وہ روز پانی بدلتی ہے۔ چڑیاں آ کر پانی پیتی ہیں۔",
+          "en": "She changes the water every day. The sparrows come to drink."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "شیراز کا دوست کئی دن سے بیمار ہے اور اسکول نہیں آ رہا۔ شیراز کیا کر سکتا ہے؟",
+        "en": "Shiraz's friend has been ill for days and is missing school. What can Shiraz do?"
+      },
+      "steps": [
+        {
+          "ur": "شیراز سوچتا ہے: دوست کیسا محسوس کر رہا ہو گا؟ شاید اکیلا۔",
+          "en": "Shiraz thinks: how might his friend feel? Maybe lonely."
+        },
+        {
+          "ur": "وہ گھر والوں کی اجازت سے ایک «جلدی ٹھیک ہو جاؤ» کارڈ بناتا ہے۔",
+          "en": "With his family's permission he makes a \"get well soon\" card."
+        },
+        {
+          "ur": "وہ دوست کو آج کا سبق بتانے میں بھی مدد کرتا ہے۔",
+          "en": "He also helps by telling his friend today's lesson."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-three-circles",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کام کو اس دائرے میں رکھیں جس کا خیال رکھا جا رہا ہے: گھر والے، دوست، یا جانور۔",
+        "en": "Put each action in the circle being cared for: family, friends, or animals."
+      },
+      "options": [
+        {
+          "ur": "نانی کی عینک ڈھونڈ کر دینا",
+          "en": "Finding Nani's glasses for her"
+        },
+        {
+          "ur": "پرندوں کے لیے پانی رکھنا",
+          "en": "Putting out water for birds"
+        },
+        {
+          "ur": "بیمار دوست کے لیے کارڈ بنانا",
+          "en": "Making a card for an ill friend"
+        },
+        {
+          "ur": "بکری کو تازہ گھاس دینا",
+          "en": "Giving fresh grass to a goat"
+        }
+      ],
+      "answer_key": {
+        "sort": {
+          "family": [
+            0
+          ],
+          "friends": [
+            2
+          ],
+          "animals": [
+            1,
+            3
+          ]
+        },
+        "mode": "tap a card, then tap its group (drag also works)"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: کس کی مدد ہو رہی ہے؟",
+            "en": "Ask: who is being helped?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-stray-dog",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "گلی میں ایک انجان کتا لنگڑا کر چل رہا ہے۔ سب سے محفوظ اور مہربان کام کیا ہے؟",
+        "en": "An unknown dog is limping in the street. What is the safest and kindest thing to do?"
+      },
+      "options": [
+        {
+          "ur": "اسے پکڑ کر اٹھانا",
+          "en": "Pick it up"
+        },
+        {
+          "ur": "کسی بڑے کو بتانا اور دور رہنا",
+          "en": "Tell an adult and keep a distance"
+        },
+        {
+          "ur": "اسے پتھر مار کر بھگانا",
+          "en": "Throw a stone to chase it away"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "مہربانی کے ساتھ محفوظ رہنا بھی ضروری ہے۔",
+            "en": "Being kind also means staying safe."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "انجان جانور کو نہ چھوئیں؛ بڑے مدد کریں گے۔",
+        "en": "Don't touch unknown animals; adults will help."
+      }
+    },
+    {
+      "id": "p2-animals-feel",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "جانور بھی درد اور پیاس محسوس کرتے ہیں۔",
+        "en": "Animals also feel pain and thirst."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-grandpa",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "دادا جان سیڑھیاں چڑھتے ہوئے تھک جاتے ہیں۔ پوتی کیسے خیال رکھ سکتی ہے؟",
+        "en": "Dada ji gets tired climbing the stairs. How can his granddaughter care for him?"
+      },
+      "options": [
+        {
+          "ur": "ان کے آگے بھاگ کر جانا",
+          "en": "Run ahead of him"
+        },
+        {
+          "ur": "ان کی چیزیں اٹھا کر ساتھ چلنا",
+          "en": "Carry his things and walk beside him"
+        },
+        {
+          "ur": "کہنا «جلدی کریں!»",
+          "en": "Say \"hurry up!\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p4-only-people",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہمیں صرف انسانوں کا خیال رکھنا ہے، جانوروں کا نہیں۔",
+        "en": "We only need to care for people, not animals."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-kindness-to-friends-only"
+        }
+      },
+      "explanation": {
+        "ur": "مہربانی سب کے لیے ہے، جانوروں کے لیے بھی۔",
+        "en": "Kindness is for everyone, including animals."
+      }
+    },
+    {
+      "id": "p5-tease-cat",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کچھ بچے بلی کی دم کھینچ کر ہنس رہے ہیں۔ آپ کیا کر سکتے ہیں؟",
+        "en": "Some children are pulling a cat's tail and laughing. What could you do?"
+      },
+      "options": [
+        {
+          "ur": "ان کے ساتھ ہنسنا",
+          "en": "Laugh with them"
+        },
+        {
+          "ur": "کچھ نہ کہنا، بلی کسی کی نہیں",
+          "en": "Say nothing, the cat belongs to no one"
+        },
+        {
+          "ur": "نرمی سے کہنا «اسے درد ہوتا ہے، چھوڑ دو» اور ضرورت ہو تو بڑے کو بتانا",
+          "en": "Say gently \"it hurts her, let go\" and tell an adult if needed"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "1": "m-kindness-to-friends-only"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بلی کیسا محسوس کر رہی ہو گی؟",
+            "en": "How might the cat feel?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-sibling",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "چھوٹا بھائی جوتے کے تسمے نہیں باندھ پاتا اور پریشان ہے۔ خیال رکھنے والا کام کون سا ہے؟",
+        "en": "A little brother can't tie his shoelaces and is upset. Which action shows care?"
+      },
+      "options": [
+        {
+          "ur": "اسے آہستہ آہستہ تسمے باندھنا سکھانا",
+          "en": "Slowly show him how to tie them"
+        },
+        {
+          "ur": "اس پر ہنسنا",
+          "en": "Laugh at him"
+        },
+        {
+          "ur": "اسے چھوڑ کر چلے جانا",
+          "en": "Walk away"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-bird-nest",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پیڑ کے نیچے ایک چڑیا کا بچہ گرا ہوا ہے۔ ماں چڑیا اوپر شور کر رہی ہے۔ سب سے اچھا کام کون سا ہے؟",
+        "en": "A baby bird has fallen under a tree. The mother bird is calling from above. Which is the best choice?"
+      },
+      "options": [
+        {
+          "ur": "اسے گھر لے جا کر پنجرے میں رکھنا",
+          "en": "Take it home and keep it in a cage"
+        },
+        {
+          "ur": "کسی بڑے کو بلانا اور پاس سے بلیوں کو دور رکھنا",
+          "en": "Call an adult and keep cats away"
+        },
+        {
+          "ur": "اسے ہاتھ میں لے کر سب کو دکھانا",
+          "en": "Hold it and show everyone"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا ماں چڑیا پاس ہے؟ کون مدد کر سکتا ہے؟",
+            "en": "Is the mother nearby? Who can help?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-caring-circle",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کاغذ پر تین دائرے بنائیں: گھر والے، دوست، جانور۔ ہر دائرے میں خیال رکھنے کا ایک طریقہ بنائیں یا لکھیں۔",
+        "en": "Draw three circles on paper: family, friends, animals. In each, draw or write one way to care."
+      },
+      "answer_key": {
+        "guidance": "Paper-and-pencil task at home; no names or photos needed; nothing is uploaded."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "اس کہانی میں کس کو مدد چاہیے؟ انسان یا جانور؟",
+        "en": "In this story, who needs help? A person or an animal?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "کون سا کام مہربان بھی ہے اور محفوظ بھی؟",
+        "en": "Which action is both kind and safe?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "مہربانی صرف دوستوں یا انسانوں کے لیے ہے۔",
+        "en": "Kindness is only for friends or people."
+      },
+      "correction": {
+        "ur": "مہربانی سب کے لیے ہے، جانوروں کے لیے بھی۔",
+        "en": "Kindness is for everyone, including animals."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ہر زخمی جانور کو خود اٹھا لینا چاہیے۔",
+        "en": "We should pick up every hurt animal ourselves."
+      },
+      "correction": {
+        "ur": "انجان جانور کو نہ چھوئیں؛ بڑے کو بتانا مہربانی بھی ہے اور حفاظت بھی۔",
+        "en": "Don't touch unknown animals; telling an adult is kind and safe."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-kindness-to-friends-only",
+      "remediation_ref": "ETH-G4-KIN-01"
+    },
+    {
+      "signal": "chooses unsafe animal-handling options",
+      "remediation_ref": "ETH-G4-KIN-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "تین دائرے: گھر والے، دوست، جانور۔ سب کا خیال رکھیں۔ جانوروں کو تنگ نہ کریں۔ انجان جانور کو نہ چھوئیں، بڑے کو بتائیں۔",
+    "en": "Three circles: family, friends, animals. Care for all. Don't tease animals. Don't touch unknown animals; tell an adult."
+  },
+  "summary": {
+    "ur": "ہم نے گھر والوں، دوستوں اور جانوروں کا محفوظ طریقے سے خیال رکھنا سیکھا۔",
+    "en": "We learned to care for family, friends and animals in safe ways."
+  },
+  "parent_notes": {
+    "ur": "گرمیوں میں بچے کے ساتھ پرندوں کے لیے پانی کا برتن رکھیں۔ بچے کو یاد دلائیں کہ آوارہ جانوروں کو نہ چھوئے۔",
+    "en": "In summer, put out a water bowl for birds with your child. Remind your child not to touch stray animals."
+  },
+  "mentor_notes": {
+    "ur": "حفاظت والا پیغام (انجان جانور کو نہ چھونا، بڑے کو بتانا) ہر جانور والی مثال میں دہرائیں۔ کچھ بچوں کے گھر میں جانور نہیں ہوتے؛ پرندوں اور گلی کی مثالیں سب کے لیے ہیں۔",
+    "en": "Repeat the safety message (don't touch unknown animals, tell an adult) in every animal example. Some homes have no animals; birds and street examples work for everyone."
+  },
+  "accessibility_notes": {
+    "ur": "تین دائروں کی تصویر اور کہانی کی تصویریں ابھی بنانی ہیں؛ متبادل متن ہر دائرے کا نام اور اس میں موجود کام پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ ہر متن آواز میں پڑھا جائے۔ ترتیب دینے والی سرگرمی کا متبادل: ہر کارڈ کے لیے تین بٹنوں (گھر والے، دوست، جانور) میں سے ایک چنیں۔",
+    "en": "The three-circles picture and story pictures are still to be made; alt text should read each circle's name and the actions in it. Urdu audio is not yet recorded; all text must be read aloud. Alternative to the sort activity: for each card, tap one of three buttons (family, friends, animals)."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "three circles (family, friends, animals); one story per circle; every animal example carries the safety rule",
+    "questioning_strategy": "ask 'who needs care here?' then 'what could you do that is kind and safe?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "chooses to handle unknown animals",
+      "excludes animals from kindness"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "everyday Pakistani settings (roof, street, courtyard, grandparents at home); animals: sparrows, cats, goats, street dogs at a distance",
+    "misconception_detectors": [
+      "thinks kindness excludes animals",
+      "thinks kindness means picking up any hurt animal"
+    ],
+    "critical_thinking_prompts": [
+      "Why is telling an adult sometimes the kindest thing?",
+      "How do we know an animal is thirsty or in pain?"
+    ],
+    "personalization_rules": "if the learner chooses unsafe animal options, repeat the 'kind and safe' check before more items",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths"
+    ]
+  },
+  "review_flags": [
+    "subject expert: check animal-safety advice (don't touch stray/unknown animals; fallen baby bird -> call an adult) is accurate and age-appropriate",
+    "language editor: check «جاندار» definition and «آوارہ» are child-level"
+  ]
+}

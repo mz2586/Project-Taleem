@@ -70,6 +70,7 @@ from ..contexts.curriculum_studio.domain.provenance import (
 from ..contexts.curriculum_studio.domain.quality import ALL_GATES, AUTOMATED_GATES, Gate
 from ..contexts.curriculum_studio.domain.workflow import STATE_ROLE, WorkflowState
 from ..vertical_slice.fractions_lesson import build_fractions_lesson
+from .curriculum_ai_drafts import AIDraft, AIDraftError, load_drafts
 from .curriculum_content import AuthoredContent, parse_authored_content
 from .curriculum_import import ImportResult, content_manifest, import_authored
 from .curriculum_spine import (
@@ -349,7 +350,10 @@ def load_inputs(root: Path) -> tuple[Spine, dict[str, AuthoredContent]]:
 
 
 def run(
-    spine: Spine, contents: Mapping[str, AuthoredContent], service: CurriculumStudioService
+    spine: Spine,
+    contents: Mapping[str, AuthoredContent],
+    service: CurriculumStudioService,
+    drafts: Mapping[str, AIDraft] | None = None,
 ) -> RunResult:
     """Persist the hierarchy, create missing drafts, link every draft to its chapter/topic, then
     import authored content into the drafts that have some."""
@@ -364,6 +368,7 @@ def run(
         baseline=lambda o: build_draft(spine, o),
         lesson_ids=lesson_ids,
         fixture=build_fractions_lesson(),
+        drafts=drafts,
     )
     return RunResult(created, imports, system, links)
 
@@ -449,6 +454,11 @@ def render_report(
     all_green = [r for r in rows if not r.failing]
     imported = imports.by_code()
     with_content = [r for r in rows if r.code in imported and imported[r.code].current]
+    human_rows = [
+        r for r in with_content if set(imported[r.code].current) - set(imported[r.code].ai_drafted)
+    ]
+    ai_drafted = [r for r in with_content if imported[r.code].ai_drafted]
+    ai_fields = sum(len(imported[r.code].ai_drafted) for r in ai_drafted)
     out: list[str] = [
         "# Grade 4 Ingestion Report",
         "",
@@ -468,28 +478,34 @@ def render_report(
         f"({len(spine.counts_by_subject())} Studio subjects).",
         f"- Drafts the ingest creates: **{n}**, every one in state `draft`, with "
         "`Provenance.derivation == authored-original` as the documents declare.",
-        f"- Drafts carrying imported provisional content: **{len(with_content)}**; the other "
-        f"{n - len(with_content)} hold spine metadata only.",
+        f"- Drafts carrying human-authored provisional content: **{len(human_rows)}**.",
+        f"- Drafts carrying **AI-drafted** content: **{len(ai_drafted)}** ({ai_fields} fields), "
+        "tagged `ai-drafted` and `content-status:ai-draft-pending-review`. AI text is a first "
+        "draft that no human has reviewed. It never replaces human-authored text.",
+        f"- Drafts with no content beyond spine metadata: **{n - len(with_content)}**.",
         f"- Lessons passing all 9 quality gates: **{len(all_green)}**.",
         "- Why: publication needs the 5-stage human review (subject expert, educational QA, "
         "accessibility, language, AI safety) and recorded Urdu audio. Neither can come from a "
-        "parser, and neither is faked here. Most drafts also still lack authored content.",
+        "parser or a model, and neither is faked here.",
         "",
-        "| Track | Studio subject | Source | Objectives | Units | Exemplar ★ | With content |",
-        "| --- | --- | --- | --- | --- | --- | --- |",
+        "| Track | Studio subject | Source | Objectives | Units | Exemplar ★ | Human content "
+        "| AI-drafted |",
+        "| --- | --- | --- | --- | --- | --- | --- | --- |",
     ]
     counts = spine.counts_by_prefix()
     for t in spine.tracks:
         stars = sum(1 for o in spine.objectives if o.prefix == t.prefix and o.exemplar)
-        filled = sum(1 for r in with_content if r.prefix == t.prefix)
+        filled = sum(1 for r in human_rows if r.prefix == t.prefix)
+        drafted = sum(1 for r in ai_drafted if r.prefix == t.prefix)
         out.append(
             f"| {t.title} (`{t.prefix}-G4-*`) | `{t.subject_key}` | `{t.source}` | "
-            f"{counts[t.prefix]} | {len(t.units)} | {stars} | {filled} |"
+            f"{counts[t.prefix]} | {len(t.units)} | {stars} | {filled} | {drafted} |"
         )
     out += [
         f"| **Total** | | | **{len(spine.objectives)}** | "
         f"**{sum(len(t.units) for t in spine.tracks)}** | "
-        f"**{sum(1 for o in spine.objectives if o.exemplar)}** | **{len(with_content)}** |",
+        f"**{sum(1 for o in spine.objectives if o.exemplar)}** | **{len(human_rows)}** | "
+        f"**{len(ai_drafted)}** |",
         "",
         "## Closest lessons to publishable",
         "",
@@ -534,6 +550,12 @@ def render_report(
         "`content-status:provisional-pending-review`, `imported-from:<doc §section>` and a "
         "`provenance-note:` tag, plus an `import-hash:<field>=…` fingerprint per field. A field "
         "an author has edited since is never overwritten (it is reported instead).",
+        "- **AI drafts:** `curriculum/grade-4/ai-drafts/<code>.json` (format and rules in "
+        "`tools/curriculum_ai_drafts.py`). A draft fills only fields the human sources leave "
+        "empty, plus the missing language of a human field written in one language. Each lesson "
+        "it touches is tagged `ai-drafted`, `content-status:ai-draft-pending-review` and "
+        "`ai-drafted-field:<name>` per field. Drafts carry no audio, media or offline-package "
+        "pointer.",
         "- **Hierarchy:** grade `G4` → subjects → chapters (units) → topics (unit × domain) is "
         "stored under the `PK-NCP` pack through `CurriculumStudioService.upsert_hierarchy` "
         f"({_hierarchy_counts(hierarchy)}). Every draft links to its chapter and topic by "
@@ -580,6 +602,8 @@ def render_report(
         'side is a gap for an author, never a translation. "In the documents, not imported" '
         "names the source field and the reason it has no faithful Studio target.",
         "",
+        "Fields marked **(AI)** are AI drafts, not human writing.",
+        "",
         "| Objective | Source | Imported (provisional) | In the documents, not imported |",
         "| --- | --- | --- | --- |",
     ]
@@ -591,6 +615,7 @@ def render_report(
             ", ".join(
                 f"`{name}`"
                 + (f" ({entry.one_language[name]})" if name in entry.one_language else "")
+                + (" **(AI)**" if name in entry.ai_drafted else "")
                 for name in entry.current
             )
             or "—"
@@ -629,7 +654,17 @@ def render_report(
             if human:
                 why += f"; {len(human)} gates await human review"
             entry = imported.get(r.code)
-            content = "provisional import" if entry is not None and entry.current else "spine only"
+            content = "spine only"
+            if entry is not None and entry.current:
+                by_human = bool(set(entry.current) - set(entry.ai_drafted))
+                content = " + ".join(
+                    label
+                    for label, present in (
+                        ("provisional import", by_human),
+                        ("AI draft", bool(entry.ai_drafted)),
+                    )
+                    if present
+                )
             out.append(
                 f"| `{r.code}` | `{r.lesson_id}` | `{r.state}` | {content} | "
                 f"{len(r.failing)}/9: {failing} | {why} | {len(r.blockers)} |"
@@ -685,22 +720,40 @@ def in_memory_service() -> CurriculumStudioService:
     )
 
 
+def generate_service(
+    spine: Spine,
+    contents: Mapping[str, AuthoredContent],
+    drafts: Mapping[str, AIDraft] | None = None,
+) -> tuple[CurriculumStudioService, dict[str, str]]:
+    """An in-memory service after a full run, and objective code -> lesson id."""
+    service = in_memory_service()
+    run(spine, contents, service, drafts)
+    return service, {e.code: e.lesson_id for e in plan(spine, service.list()).entries}
+
+
 def generate(
-    spine: Spine, contents: Mapping[str, AuthoredContent]
+    spine: Spine,
+    contents: Mapping[str, AuthoredContent],
+    drafts: Mapping[str, AIDraft] | None = None,
 ) -> tuple[str, str, list[LessonGateRow]]:
     """(spine.json text, INGESTION_REPORT.md text, gate rows) — independent of any database."""
     service = in_memory_service()
-    result = run(spine, contents, service)
+    result = run(spine, contents, service, drafts)
     rows = gate_rows(spine, service)
     data = spine.to_dict()
-    data["authored_content"] = content_manifest(spine, contents, build_fractions_lesson())
+    data["authored_content"] = content_manifest(spine, contents, build_fractions_lesson(), drafts)
     spine_text = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
     return spine_text, render_report(spine, rows, result.imports, result.hierarchy), rows
 
 
-def stale_artifacts(root: Path, spine: Spine, contents: Mapping[str, AuthoredContent]) -> list[str]:
+def stale_artifacts(
+    root: Path,
+    spine: Spine,
+    contents: Mapping[str, AuthoredContent],
+    drafts: Mapping[str, AIDraft] | None = None,
+) -> list[str]:
     """Repo-relative paths whose committed content differs from a fresh generation."""
-    spine_text, report_text, _rows = generate(spine, contents)
+    spine_text, report_text, _rows = generate(spine, contents, drafts)
     stale: list[str] = []
     for rel, fresh in ((SPINE_PATH, spine_text), (REPORT_PATH, report_text)):
         path = root / rel
@@ -710,9 +763,12 @@ def stale_artifacts(root: Path, spine: Spine, contents: Mapping[str, AuthoredCon
 
 
 def write_artifacts(
-    root: Path, spine: Spine, contents: Mapping[str, AuthoredContent]
+    root: Path,
+    spine: Spine,
+    contents: Mapping[str, AuthoredContent],
+    drafts: Mapping[str, AIDraft] | None = None,
 ) -> list[LessonGateRow]:
-    spine_text, report_text, rows = generate(spine, contents)
+    spine_text, report_text, rows = generate(spine, contents, drafts)
     (root / SPINE_PATH).write_text(spine_text, encoding="utf-8")
     (root / REPORT_PATH).write_text(report_text, encoding="utf-8")
     return rows
@@ -808,9 +864,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         for p in exc.problems:
             print(f"  - {p}", file=sys.stderr)
         return 1
+    try:
+        drafts = load_drafts(root, spine)
+    except AIDraftError as exc:
+        print(f"AI draft rejected: {exc}", file=sys.stderr)
+        return 1
 
     if args.check:
-        stale = stale_artifacts(root, spine, contents)
+        stale = stale_artifacts(root, spine, contents, drafts)
         if stale:
             for rel in stale:
                 print(f"STALE: {rel} (regenerate with --dry-run)", file=sys.stderr)
@@ -819,14 +880,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 0
 
     if args.dry_run:
-        rows = write_artifacts(root, spine, contents)
+        rows = write_artifacts(root, spine, contents, drafts)
         print((root / REPORT_PATH).read_text(encoding="utf-8"))
         green = sum(1 for r in rows if not r.failing)
         print(f"wrote {SPINE_PATH} and {REPORT_PATH}; {green}/{len(rows)} lessons all-gates-green.")
         if args.database_url:
             # Run the real ingest inside a transaction that is rolled back: an exact plan.
             result = run_with_database(
-                args.database_url, lambda s: run(spine, contents, s), commit=False
+                args.database_url, lambda s: run(spine, contents, s, drafts), commit=False
             )
             _print_run(result, prefix="against the configured database, would ")
         else:
@@ -840,7 +901,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         return 2
     try:
         result = run_with_database(
-            args.database_url, lambda s: run(spine, contents, s), commit=True
+            args.database_url, lambda s: run(spine, contents, s, drafts), commit=True
         )
     except (ProvenanceError, SpineError) as exc:
         print(f"refused: {exc}", file=sys.stderr)

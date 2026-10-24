@@ -1,0 +1,487 @@
+{
+  "code": "ISL-G4-AKH-02",
+  "title": {
+    "ur": "سب کے ساتھ مہربانی",
+    "en": "Kindness to Everyone"
+  },
+  "description": {
+    "ur": "گھر والوں، پڑوسیوں اور جانوروں کے ساتھ مہربانی، جیسا کہ اسلام سکھاتا ہے۔",
+    "en": "Kindness to family, neighbours and animals, as Islam teaches."
+  },
+  "keywords": [
+    "kindness",
+    "neighbours",
+    "family",
+    "animals",
+    "mercy",
+    "akhlaq"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مہربانی",
+        "en": "kindness"
+      },
+      "definition": {
+        "ur": "دوسروں کا خیال رکھنا اور ان سے نرمی کرنا۔",
+        "en": "Caring for others and being gentle with them."
+      }
+    },
+    {
+      "term": {
+        "ur": "پڑوسی",
+        "en": "neighbour"
+      },
+      "definition": {
+        "ur": "جو ہمارے گھر کے پاس رہتا ہے۔",
+        "en": "Someone who lives near our home."
+      }
+    },
+    {
+      "term": {
+        "ur": "رحم",
+        "en": "mercy"
+      },
+      "definition": {
+        "ur": "کسی کی تکلیف دیکھ کر اس کی مدد کرنا چاہنا۔",
+        "en": "Wanting to help when you see someone in pain."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم مہربانی کی بات کریں گے۔ اسلام ہمیں سب کے ساتھ مہربان ہونا سکھاتا ہے۔ گھر والے، پڑوسی اور جانور، سب ہماری مہربانی کے حق دار ہیں۔ مہربانی کے لیے پیسے ضروری نہیں۔ ایک مسکراہٹ اور مدد کا ہاتھ بھی بہت ہے۔",
+    "en": "Today we will talk about kindness. Islam teaches us to be kind to everyone. Family, neighbours and animals all deserve our kindness. Kindness does not need money. A smile and a helping hand are plenty."
+  },
+  "student_explanation": {
+    "ur": "مہربانی کا مطلب ہے دوسروں کا خیال رکھنا۔ اسلام ہمیں سب سے مہربانی سکھاتا ہے۔ گھر میں ہم چھوٹے بہن بھائیوں کی مدد کرتے ہیں۔ حضرت محمد ﷺ نے پڑوسیوں سے اچھا سلوک سکھایا۔ ہم پڑوسیوں کو سلام کرتے ہیں۔ بیمار پڑوسی کا حال پوچھتے ہیں۔ جانوروں کو بھی تکلیف ہوتی ہے۔ ہم انہیں پانی دیتے ہیں اور تنگ نہیں کرتے۔ مہربانی صرف دوستوں کے لیے نہیں، سب کے لیے ہے۔",
+    "en": "Kindness means caring for others. Islam teaches kindness to everyone. At home we help our younger brothers and sisters. Prophet Muhammad (peace be upon him) taught us to treat neighbours well. We greet our neighbours. We ask how a sick neighbour is feeling. Animals can feel pain too. We give them water and never tease them. Kindness is not only for friends. It is for everyone."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "گرمی ہے۔ گلی میں ایک بلی پیاسی بیٹھی ہے۔ زینب کیا کرے؟",
+        "en": "It is hot. A thirsty cat is sitting in the street. What can Zainab do?"
+      },
+      "steps": [
+        {
+          "ur": "سوچیں: بلی کو بھی ہماری طرح پیاس لگتی ہے۔",
+          "en": "Think: the cat feels thirsty, just like us."
+        },
+        {
+          "ur": "زینب ایک پرانے برتن میں پانی رکھ دیتی ہے۔",
+          "en": "Zainab puts some water in an old bowl."
+        },
+        {
+          "ur": "وہ بلی کو تنگ نہیں کرتی اور اسے آرام سے پینے دیتی ہے۔",
+          "en": "She does not tease the cat and lets it drink in peace."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "حمزہ کے پڑوس میں ایک بزرگ خالہ رہتی ہیں۔ بارش میں ان کے لیے بازار جانا مشکل ہے۔",
+        "en": "An elderly auntie lives next door to Hamza. In the rain it is hard for her to go to the bazaar."
+      },
+      "steps": [
+        {
+          "ur": "پہلے سوچیں: انہیں کس چیز کی ضرورت ہو سکتی ہے؟",
+          "en": "First think: what might she need?"
+        },
+        {
+          "ur": "حمزہ اپنے گھر کے کسی بڑے کے ساتھ جا کر پوچھتا ہے۔",
+          "en": "Hamza goes with an adult from his home to ask her."
+        },
+        {
+          "ur": "وہ ان کا سودا لا دیتے ہیں۔ چھوٹی سی مدد سے پڑوسی خوش ہو جاتی ہیں۔",
+          "en": "They bring her shopping. A small help makes the neighbour happy."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-who-gets-kindness",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو چھو کر بتائیں: یہ کس کے ساتھ مہربانی ہے؟ گھر والے، پڑوسی یا جانور۔",
+        "en": "Tap each card to show who the kindness is for: family, neighbour or animal."
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے سوچیں: یہ کون ہے؟",
+            "en": "First think: who is this?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "چھوٹے بھائی کے جوتے باندھنے میں مدد",
+          "en": "Helping a little brother tie his shoes"
+        },
+        {
+          "ur": "ساتھ والے گھر کی آنٹی کو سلام",
+          "en": "Greeting the auntie next door"
+        },
+        {
+          "ur": "چڑیوں کے لیے پانی رکھنا",
+          "en": "Putting out water for sparrows"
+        },
+        {
+          "ur": "دادی کو پانی کا گلاس دینا",
+          "en": "Bringing grandmother a glass of water"
+        },
+        {
+          "ur": "بکری کو نہ مارنا",
+          "en": "Not hitting a goat"
+        }
+      ],
+      "answer_key": {
+        "mode": "sort",
+        "groups": {
+          "family": [
+            0,
+            3
+          ],
+          "neighbour": [
+            1
+          ],
+          "animal": [
+            2,
+            4
+          ]
+        }
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-who",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہمیں کس کے ساتھ مہربانی کرنی چاہیے؟",
+        "en": "Who should we be kind to?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا جانور اور پڑوسی بھی گنے جاتے ہیں؟",
+            "en": "Do animals and neighbours count too?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "مہربانی سب کے لیے ہے۔",
+        "en": "Kindness is for everyone."
+      },
+      "options": [
+        {
+          "ur": "صرف دوستوں کے ساتھ",
+          "en": "Only our friends"
+        },
+        {
+          "ur": "صرف گھر والوں کے ساتھ",
+          "en": "Only our family"
+        },
+        {
+          "ur": "سب کے ساتھ، جانوروں کے ساتھ بھی",
+          "en": "Everyone, animals too"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-kindness-to-friends-only"
+        }
+      }
+    },
+    {
+      "id": "p2-new-family",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "گلی میں ایک نیا خاندان آیا ہے۔ ان کا بچہ اکیلا کھڑا ہے۔ مہربان بچہ کیا کرے؟",
+        "en": "A new family has moved into the street. Their child is standing alone. What does a kind child do?"
+      },
+      "explanation": {
+        "ur": "نئے پڑوسی کو خوش آمدید کہنا مہربانی ہے۔",
+        "en": "Welcoming a new neighbour is kindness."
+      },
+      "options": [
+        {
+          "ur": "سلام کر کے کھیلنے کو بلائے",
+          "en": "Say salam and invite them to play"
+        },
+        {
+          "ur": "دیکھ کر منہ پھیر لے",
+          "en": "Look away"
+        },
+        {
+          "ur": "ان پر ہنسے",
+          "en": "Laugh at them"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-kindness-to-friends-only"
+        }
+      }
+    },
+    {
+      "id": "p3-animals-pain",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "جانوروں کو بھی تکلیف ہوتی ہے، اس لیے انہیں تنگ نہیں کرنا چاہیے۔",
+        "en": "Animals can feel pain too, so we should not tease them."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-sick-neighbour",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ساتھ والے انکل بیمار ہیں۔ ہم کیا کر سکتے ہیں؟",
+        "en": "The uncle next door is ill. What can we do?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بیمار آدمی کو کس چیز سے اچھا لگے گا؟",
+            "en": "What would make an ill person feel better?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "ان کے دروازے پر زور زور سے کھیلیں",
+          "en": "Play loudly by his door"
+        },
+        {
+          "ur": "گھر والوں کے ساتھ جا کر حال پوچھیں",
+          "en": "Go with our family to ask how he is"
+        },
+        {
+          "ur": "کچھ نہ کریں، یہ ہمارا کام نہیں",
+          "en": "Do nothing, it is not our job"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "2": "m-responsibility-someone-else"
+        }
+      }
+    },
+    {
+      "id": "p5-friends-only",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مہربانی صرف ان لوگوں سے کرنی ہے جو ہمارے دوست ہیں۔",
+        "en": "We only need to be kind to people who are our friends."
+      },
+      "explanation": {
+        "ur": "مہربانی سب کے لیے ہے، جانوروں سمیت۔",
+        "en": "Kindness is for everyone, including animals."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-kindness-to-friends-only"
+        }
+      }
+    },
+    {
+      "id": "p6-no-money",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "حنا کے پاس پیسے نہیں ہیں۔ کیا وہ پھر بھی مہربانی کر سکتی ہے؟",
+        "en": "Hina has no money. Can she still be kind?"
+      },
+      "explanation": {
+        "ur": "مسکراہٹ اور مدد بھی مہربانی ہے۔",
+        "en": "A smile and help are kindness too."
+      },
+      "options": [
+        {
+          "ur": "نہیں، مہربانی کے لیے پیسے چاہییں",
+          "en": "No, kindness needs money"
+        },
+        {
+          "ur": "صرف عید کے دن",
+          "en": "Only on Eid day"
+        },
+        {
+          "ur": "ہاں، مسکرا کر اور مدد کر کے",
+          "en": "Yes, by smiling and helping"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-plan-kindness",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک ایسا مہربان کام سوچیں جو آپ گھر والوں، ایک پڑوسی اور ایک جانور کے لیے کر سکیں۔",
+        "en": "Think of one kind act you could do for your family, one for a neighbour and one for an animal."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any three safe, free or low-cost kind acts. Gently steer away from anything unsafe (approaching unknown dogs, going to houses alone)."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-water-or-help",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج گھر میں کسی کی ایک چھوٹی مدد کریں، یا کسی بڑے کے ساتھ پرندوں کے لیے پانی رکھیں۔",
+        "en": "Today, do one small helpful thing at home, or put out water for birds with an adult."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. No photos or names needed. Praise any effort if the child mentions it."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: اس سے کس کو اچھا لگے گا؟",
+        "en": "Think: who would feel better because of this?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: مہربانی سب کے لیے ہے۔",
+        "en": "Remember: kindness is for everyone."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "مہربانی صرف دوستوں سے کرنی ہے۔",
+        "en": "Kindness is only for friends."
+      },
+      "correction": {
+        "ur": "مہربانی سب کے لیے ہے، جانوروں کے لیے بھی۔",
+        "en": "Kindness is for everyone, including animals."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "مہربانی کے لیے پیسے ضروری ہیں۔",
+        "en": "You need money to be kind."
+      },
+      "correction": {
+        "ur": "مسکراہٹ، سلام اور مدد بھی مہربانی ہے۔",
+        "en": "A smile, a greeting and a helping hand are kindness too."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-kindness-to-friends-only",
+      "remediation_ref": "ISL-G4-AKH-02"
+    },
+    {
+      "signal": "low_score:helping_others",
+      "remediation_ref": "ISL-G4-IBA-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "مہربانی یعنی دوسروں کا خیال رکھنا۔ گھر والے، پڑوسی اور جانور، سب کے ساتھ مہربانی۔ مہربانی کے لیے پیسے ضروری نہیں۔",
+    "en": "Kindness means caring for others. Be kind to family, neighbours and animals. Kindness does not need money."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ اسلام سب کے ساتھ مہربانی سکھاتا ہے۔",
+    "en": "We learned that Islam teaches kindness to everyone."
+  },
+  "parent_notes": {
+    "ur": "بچے کے ساتھ مل کر پرندوں کے لیے پانی رکھیں، یا کسی بزرگ پڑوسی کا حال پوچھیں۔ چھوٹی مہربانی پر بھی تعریف کریں۔",
+    "en": "Put out water for birds together, or visit an elderly neighbour with your child. Praise even small kindnesses."
+  },
+  "mentor_notes": {
+    "ur": "کچھ بچے جانوروں سے ڈرتے ہیں؛ انہیں بتائیں کہ دور سے مہربانی بھی مہربانی ہے۔ پڑوسیوں کے پاس ہمیشہ کسی بڑے کے ساتھ جانے پر زور دیں۔",
+    "en": "Some children are afraid of animals; tell them kindness from a distance still counts. Stress always visiting neighbours with an adult."
+  },
+  "accessibility_notes": {
+    "ur": "تصاویر (پیاسی بلی، بزرگ پڑوسی) اور ان کا متبادل متن ابھی بنانا ہے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر کارڈ کے لیے تین بٹنوں میں سے ایک چنیں۔",
+    "en": "Pictures (the thirsty cat, the elderly neighbour) and their alt text are still to be made. Urdu audio is not yet recorded. Alternative to the sort activity: choose one of three buttons for each card."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "widen the circle step by step: family, then neighbours, then animals; one concrete free action for each",
+    "questioning_strategy": "ask 'who is this for?' then 'how would they feel?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "limits kindness to friends"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "free or no-cost kindnesses; urban and village settings; mixed boy and girl names; never shame a child whose family has little",
+    "misconception_detectors": [
+      "chooses 'only friends' or 'only family'",
+      "thinks kindness needs money"
+    ],
+    "critical_thinking_prompts": [
+      "Why is it kind to give water to a bird that cannot say thank you?"
+    ],
+    "personalization_rules": "if the learner keeps limiting kindness to friends, repeat with neighbour and animal cards before moving on",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: the statement that the Prophet (peace be upon him) taught good treatment of neighbours is given without a hadith citation; add an approved reference or keep it general",
+    "child-safety reviewer: confirm the neighbour example (always with an adult) and the animal examples are safe"
+  ]
+}

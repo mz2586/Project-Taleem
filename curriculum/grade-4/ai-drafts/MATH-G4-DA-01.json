@@ -1,0 +1,358 @@
+{
+  "code": "MATH-G4-DA-01",
+  "description": {
+    "ur": "ایسا تصویری خاکہ پڑھنا جس میں ایک علامت ایک مقررہ تعداد کی جگہ ہو۔",
+    "en": "Read a pictograph where one symbol stands for a fixed number."
+  },
+  "keywords": [
+    "pictograph",
+    "key",
+    "symbol",
+    "data",
+    "count",
+    "multiply"
+  ],
+  "teacher_script": {
+    "ur": "ایک جماعت نے گنا کہ ہر بچے نے اس مہینے کتنی کتابیں پڑھیں۔ انہوں نے نمبر لکھنے کی بجائے کتاب کی چھوٹی تصویریں بنائیں۔ اسے تصویری خاکہ کہتے ہیں۔ آج ہم سیکھیں گے کہ سب سے پہلے کلید پڑھنی ہے، کیونکہ ایک تصویر کئی چیزوں کی جگہ ہو سکتی ہے۔",
+    "en": "A class counted how many books each child read this month. Instead of writing numbers, they drew small book pictures. This is called a pictograph. Today we learn to read the key first, because one picture can stand for many things."
+  },
+  "student_explanation": {
+    "ur": "تصویری خاکہ تصویروں سے گنتی دکھاتا ہے۔ ہر تصویر ایک علامت ہے۔ خاکے کے ساتھ ایک کلید ہوتی ہے۔ کلید بتاتی ہے کہ ایک علامت کتنے کی ہے۔ فرض کریں ایک آم کی تصویر ۲ آموں کی جگہ ہے۔ تو ۳ تصویریں ۶ آم ہیں۔ پہلے کلید پڑھیں۔ پھر علامتیں گنیں۔ پھر علامتوں کو کلید کے عدد سے ضرب دیں۔",
+    "en": "A pictograph shows counts with pictures. Each picture is a symbol. A pictograph comes with a key. The key tells how many one symbol stands for. Say one mango picture stands for 2 mangoes. Then 3 pictures are 6 mangoes. First read the key. Then count the symbols. Then multiply the symbols by the key number."
+  },
+  "interactive_activities": [
+    {
+      "id": "a1-place-symbols",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "کلید: ۱ کتاب کی علامت = ۵ کتابیں۔ رابعہ نے ۱۵ کتابیں پڑھیں۔ اس کی قطار میں صحیح تعداد میں علامتیں رکھیں۔",
+        "en": "Key: 1 book symbol = 5 books. Rabia read 15 books. Put the right number of symbols in her row."
+      },
+      "answer_key": {
+        "symbols": 3
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۵، ۱۰، ۱۵ — کتنی بار گنا؟",
+            "en": "5, 10, 15 — how many counts was that?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-rabia",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "تصویری خاکہ 'اس مہینے پڑھی گئی کتابیں'۔ کلید: ۱ کتاب کی علامت = ۵ کتابیں۔ حنا: ۴ علامتیں۔ عثمان: ۲ علامتیں۔ رابعہ: ۳ علامتیں۔ احمد: ۵ علامتیں۔ رابعہ نے ___ کتابیں پڑھیں۔",
+        "en": "Pictograph 'Books read this month'. Key: 1 book symbol = 5 books. Hina: 4 symbols. Usman: 2 symbols. Rabia: 3 symbols. Ahmed: 5 symbols. Rabia read ___ books."
+      },
+      "answer_key": {
+        "answer": "15"
+      },
+      "accepted_variants": [
+        "15",
+        "۱۵"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۳ علامتیں، ہر ایک ۵ کی۔",
+            "en": "3 symbols, each worth 5."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۳ × ۵ = ۱۵",
+        "en": "3 × 5 = 15"
+      }
+    },
+    {
+      "id": "p6-symbols-needed",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "کلید: ۱ علامت = ۱۰ بچے۔ ۳۰ بچے دکھانے کے لیے کتنی علامتیں چاہییں؟",
+        "en": "Key: 1 symbol = 10 children. How many symbols show 30 children?"
+      },
+      "answer_key": {
+        "answer": "3"
+      },
+      "accepted_variants": [
+        "3",
+        "۳"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۱۰، ۲۰، ۳۰ — کتنی بار؟",
+            "en": "10, 20, 30 — how many times?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-hina",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "تصویری خاکہ 'اس مہینے پڑھی گئی کتابیں'۔ کلید: ۱ کتاب کی علامت = ۵ کتابیں۔ حنا: ۴ علامتیں۔ عثمان: ۲ علامتیں۔ رابعہ: ۳ علامتیں۔ احمد: ۵ علامتیں۔ حنا نے کتنی کتابیں پڑھیں؟",
+        "en": "Pictograph 'Books read this month'. Key: 1 book symbol = 5 books. Hina: 4 symbols. Usman: 2 symbols. Rabia: 3 symbols. Ahmed: 5 symbols. How many books did Hina read?"
+      },
+      "options": [
+        {
+          "ur": "۴",
+          "en": "4"
+        },
+        {
+          "ur": "۹",
+          "en": "9"
+        },
+        {
+          "ur": "۲۰",
+          "en": "20"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-graph-scale-ignored"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کلید دیکھیں: ایک علامت کتنے کی ہے؟",
+            "en": "Look at the key: how many is one symbol worth?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴ × ۵ = ۲۰ کتابیں۔",
+        "en": "4 × 5 = 20 books."
+      }
+    },
+    {
+      "id": "p2-usman",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "تصویری خاکہ 'اس مہینے پڑھی گئی کتابیں'۔ کلید: ۱ کتاب کی علامت = ۵ کتابیں۔ حنا: ۴ علامتیں۔ عثمان: ۲ علامتیں۔ رابعہ: ۳ علامتیں۔ احمد: ۵ علامتیں۔ عثمان نے کتنی کتابیں پڑھیں؟",
+        "en": "Pictograph 'Books read this month'. Key: 1 book symbol = 5 books. Hina: 4 symbols. Usman: 2 symbols. Rabia: 3 symbols. Ahmed: 5 symbols. How many books did Usman read?"
+      },
+      "options": [
+        {
+          "ur": "۱۰",
+          "en": "10"
+        },
+        {
+          "ur": "۲",
+          "en": "2"
+        },
+        {
+          "ur": "۷",
+          "en": "7"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-graph-scale-ignored"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "علامتیں گنیں، پھر کلید کے عدد سے ضرب دیں۔",
+            "en": "Count the symbols, then multiply by the key number."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۲ × ۵ = ۱۰ کتابیں۔",
+        "en": "2 × 5 = 10 books."
+      }
+    },
+    {
+      "id": "p3-most",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "تصویری خاکہ 'اس مہینے پڑھی گئی کتابیں'۔ کلید: ۱ کتاب کی علامت = ۵ کتابیں۔ حنا: ۴ علامتیں۔ عثمان: ۲ علامتیں۔ رابعہ: ۳ علامتیں۔ احمد: ۵ علامتیں۔ سب سے زیادہ کتابیں کس نے پڑھیں؟",
+        "en": "Pictograph 'Books read this month'. Key: 1 book symbol = 5 books. Hina: 4 symbols. Usman: 2 symbols. Rabia: 3 symbols. Ahmed: 5 symbols. Who read the most books?"
+      },
+      "options": [
+        {
+          "ur": "حنا",
+          "en": "Hina"
+        },
+        {
+          "ur": "احمد",
+          "en": "Ahmed"
+        },
+        {
+          "ur": "رابعہ",
+          "en": "Rabia"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کس کی قطار میں سب سے زیادہ علامتیں ہیں؟",
+            "en": "Whose row has the most symbols?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "احمد کی ۵ علامتیں ہیں، یعنی ۲۵ کتابیں۔",
+        "en": "Ahmed has 5 symbols, which is 25 books."
+      }
+    },
+    {
+      "id": "p5-mango-key",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کلید: ۱ علامت = ۲ آم۔ ۴ علامتوں والی قطار ۴ آم دکھاتی ہے۔",
+        "en": "Key: 1 symbol = 2 mangoes. A row with 4 symbols shows 4 mangoes."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-graph-scale-ignored"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر علامت ۱ آم کی ہے یا ۲ کی؟",
+            "en": "Is each symbol worth 1 mango or 2?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴ × ۲ = ۸ آم، ۴ نہیں۔",
+        "en": "4 × 2 = 8 mangoes, not 4."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-ahmed-usman",
+      "type": "fill_blank",
+      "competency": "analysis",
+      "stem": {
+        "ur": "تصویری خاکہ 'اس مہینے پڑھی گئی کتابیں'۔ کلید: ۱ کتاب کی علامت = ۵ کتابیں۔ حنا: ۴ علامتیں۔ عثمان: ۲ علامتیں۔ رابعہ: ۳ علامتیں۔ احمد: ۵ علامتیں۔ احمد نے عثمان سے کتنی زیادہ کتابیں پڑھیں؟",
+        "en": "Pictograph 'Books read this month'. Key: 1 book symbol = 5 books. Hina: 4 symbols. Usman: 2 symbols. Rabia: 3 symbols. Ahmed: 5 symbols. How many more books did Ahmed read than Usman?"
+      },
+      "answer_key": {
+        "answer": "15"
+      },
+      "accepted_variants": [
+        "15",
+        "۱۵"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے دونوں کی کتابیں نکالیں، پھر گھٹائیں۔",
+            "en": "First find each child's books, then subtract."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "احمد ۲۵، عثمان ۱۰۔ ۲۵ − ۱۰ = ۱۵۔",
+        "en": "Ahmed 25, Usman 10. 25 − 10 = 15."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-graph-scale-ignored",
+      "remediation_ref": "MATH-G4-DA-01"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-ML-01",
+      "remediation_ref": "MATH-G4-ML-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پہلے کلید پڑھیں: ایک علامت کتنے کی ہے۔ پھر علامتیں گنیں اور کلید کے عدد سے ضرب دیں۔",
+    "en": "Read the key first: how many one symbol is worth. Then count the symbols and multiply by the key number."
+  },
+  "summary": {
+    "ur": "ہم نے کلید پڑھ کر تصویری خاکہ پڑھنا سیکھا۔",
+    "en": "We learned to read a pictograph by reading its key first."
+  },
+  "parent_notes": {
+    "ur": "گھر کی چیزوں (چمچ، کپ) کی قسمیں گنیں اور ان کی گنتی لکیروں سے لکھیں۔",
+    "en": "count categories of things at home (spoons, cups) and tally them."
+  },
+  "mentor_notes": {
+    "ur": "کلید ہی سب کچھ ہے — ہمیشہ پہلے اسے پڑھیں۔",
+    "en": "the key is everything — always read it first."
+  },
+  "accessibility_notes": {
+    "ur": "تصویری خاکہ ابھی بنانا ہے؛ ہر سوال میں خاکے کا ڈیٹا الفاظ میں بھی لکھا ہے تاکہ تصویر کے بغیر بھی حل ہو سکے۔ خاکے کا متبادل متن کلید، ہر نام اور اس کی علامتوں کی تعداد پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ علامتیں رکھنے کی سرگرمی کا متبادل: علامتوں کی تعداد کا بٹن چنیں؛ گھسیٹنا ضروری نہیں۔ گھر کے کام کا خاکہ کاغذ پر چھاپ کر دینا ہوگا۔",
+    "en": "The pictograph is still to be made; every item also states the data in words so it can be solved without the picture. Its alt text should read the key, each name and its number of symbols. Urdu audio is not yet recorded. Alternative to placing symbols: tap the number of symbols; no dragging is needed. The homework pictograph still has to be printed for offline use."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "key first, then count symbols, then multiply by the key value; always say the key aloud before answering",
+    "questioning_strategy": "ask 'what is one symbol worth?' before 'how many?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "answers with the number of symbols",
+      "adds the key value instead of multiplying"
+    ],
+    "hint_policy": "graduated; two hints max before a worked re-teach of a similar problem; never reveal the answer first",
+    "example_policy": "keys of 2, 5 or 10 with whole symbols only; school and home contexts (books read, mangoes, children in a class); names mixed by gender and region",
+    "misconception_detectors": [
+      "gives the symbol count as the total",
+      "adds the key value to the symbol count"
+    ],
+    "critical_thinking_prompts": [
+      "Why might a pictograph use one symbol for 5 books instead of 1?"
+    ],
+    "personalization_rules": "if multiplying by 2, 5 or 10 is slow, route to MATH-G4-ML-01",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, upset or fear -> stop the lesson and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information",
+      "shame or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the doc's worked example here is an English author specification, not a script; it needs a real bilingual worked example",
+    "subject expert: the shared m-graph-scale-ignored correction imported from §4 talks about bar squares; for pictographs it should say 'read the key: how many one symbol stands for'",
+    "accessibility: the pictograph is described in words inside each stem; check stems are not too long for audio"
+  ]
+}

@@ -1,0 +1,479 @@
+{
+  "code": "URD-G4-GR-01",
+  "title": {
+    "ur": "اسم اور فعل کی پہچان",
+    "en": "Finding nouns and verbs"
+  },
+  "description": {
+    "ur": "جملے میں اسم (نام والے لفظ) اور فعل (کام والے لفظ) پہچاننا۔",
+    "en": "Finding the noun (naming word) and the verb (action word) in a sentence."
+  },
+  "keywords": [
+    "noun",
+    "verb",
+    "ism",
+    "fel",
+    "grammar",
+    "parts of speech"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "اسم",
+        "en": "noun"
+      },
+      "definition": {
+        "ur": "کسی شخص، جانور، جگہ یا چیز کا نام۔",
+        "en": "the name of a person, animal, place or thing."
+      }
+    },
+    {
+      "term": {
+        "ur": "فعل",
+        "en": "verb"
+      },
+      "definition": {
+        "ur": "وہ لفظ جو کسی کام کا کرنا یا ہونا بتائے۔",
+        "en": "a word that tells an action being done or happening."
+      }
+    },
+    {
+      "term": {
+        "ur": "جملہ",
+        "en": "sentence"
+      },
+      "definition": {
+        "ur": "لفظوں کا ایسا مجموعہ جس سے پوری بات سمجھ آئے۔",
+        "en": "a group of words that gives a complete thought."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ہر جملے میں کچھ لفظ نام بتاتے ہیں اور کچھ لفظ کام۔ نام والے لفظ کو اسم کہتے ہیں۔ کام والے لفظ کو فعل کہتے ہیں۔ 'علی گیند پھینکتا ہے' میں علی اور گیند اسم ہیں۔ 'پھینکتا ہے' فعل ہے۔",
+    "en": "In every sentence some words give names and some tell actions. A naming word is called an ism (noun). An action word is called a fel (verb). In 'Ali throws the ball', Ali and ball are nouns. 'Throws' is the verb."
+  },
+  "student_explanation": {
+    "ur": "اسم کسی کا نام ہوتا ہے۔ یہ شخص کا نام ہو سکتا ہے، جیسے زینب۔ جانور کا نام ہو سکتا ہے، جیسے بکری۔ جگہ کا نام ہو سکتا ہے، جیسے پشاور۔ چیز کا نام ہو سکتا ہے، جیسے کرسی۔ فعل کام بتاتا ہے۔ جیسے کھاتا ہے، لکھتی ہے، سو گیا۔ اردو جملے میں فعل اکثر آخر میں آتا ہے۔",
+    "en": "A noun is a name. It can be a person's name, like Zainab. It can be an animal's name, like goat. It can be a place's name, like Peshawar. It can be a thing's name, like chair. A verb tells an action. For example: eats, writes, fell asleep. In an Urdu sentence the verb usually comes at the end."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "'بلی دودھ پیتی ہے۔' اس جملے میں اسم اور فعل بتائیں۔",
+        "en": "'The cat drinks milk.' Find the nouns and the verb."
+      },
+      "steps": [
+        {
+          "ur": "پوچھیں: کس کا نام ہے؟ 'بلی' (جانور) اور 'دودھ' (چیز)۔",
+          "en": "Ask: what is named? 'Cat' (animal) and 'milk' (thing)."
+        },
+        {
+          "ur": "تو بلی اور دودھ اسم ہیں۔",
+          "en": "So cat and milk are nouns."
+        },
+        {
+          "ur": "پوچھیں: کیا کام ہو رہا ہے؟ 'پیتی ہے'۔",
+          "en": "Ask: what action is happening? 'Drinks'."
+        },
+        {
+          "ur": "تو 'پیتی ہے' فعل ہے۔ یہ جملے کے آخر میں ہے۔",
+          "en": "So 'drinks' is the verb. It is at the end of the sentence."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "'احمد کوئٹہ گیا۔' اسم اور فعل الگ کریں۔",
+        "en": "'Ahmed went to Quetta.' Separate the nouns and the verb."
+      },
+      "steps": [
+        {
+          "ur": "احمد: شخص کا نام، اسم۔",
+          "en": "Ahmed: a person's name, noun."
+        },
+        {
+          "ur": "کوئٹہ: جگہ کا نام، اسم۔",
+          "en": "Quetta: a place's name, noun."
+        },
+        {
+          "ur": "گیا: جانے کا کام، فعل۔",
+          "en": "Went: the action of going, verb."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-words",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ان لفظوں کو 'اسم' اور 'فعل' کے خانوں میں رکھیں: طوطا، گاتا ہے، کراچی، سوتی ہے، کتاب، دوڑا۔",
+        "en": "Sort these words into 'noun' and 'verb': parrot, sings, Karachi, sleeps, book, ran."
+      },
+      "answer_key": {
+        "اسم": [
+          "طوطا",
+          "کراچی",
+          "کتاب"
+        ],
+        "فعل": [
+          "گاتا ہے",
+          "سوتی ہے",
+          "دوڑا"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: کیا یہ کسی کا نام ہے یا کوئی کام؟",
+            "en": "Ask: is it a name or an action?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-match",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر لفظ کو 'اسم' یا 'فعل' سے ملائیں: پہاڑ، لکھتی ہے، گائے، ہنسا۔",
+        "en": "Match each word to 'noun' or 'verb': mountain, writes, cow, laughed."
+      },
+      "options": [
+        {
+          "ur": "اسم",
+          "en": "noun"
+        },
+        {
+          "ur": "فعل",
+          "en": "verb"
+        }
+      ],
+      "answer_key": {
+        "pairs": {
+          "پہاڑ": "اسم",
+          "لکھتی ہے": "فعل",
+          "گائے": "اسم",
+          "ہنسا": "فعل"
+        }
+      },
+      "explanation": {
+        "ur": "پہاڑ اور گائے نام ہیں؛ لکھتی ہے اور ہنسا کام ہیں۔",
+        "en": "Mountain and cow are names; writes and laughed are actions."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-verb-cricket",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "'بچے میدان میں کرکٹ کھیلتے ہیں۔' اس جملے میں فعل کون سا ہے؟",
+        "en": "'The children play cricket in the ground.' Which is the verb?"
+      },
+      "options": [
+        {
+          "ur": "میدان",
+          "en": "ground"
+        },
+        {
+          "ur": "کھیلتے ہیں",
+          "en": "play"
+        },
+        {
+          "ur": "بچے",
+          "en": "children"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا لفظ کام بتاتا ہے؟",
+            "en": "Which word tells an action?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'کھیلتے ہیں' کام بتاتا ہے، اس لیے فعل ہے۔",
+        "en": "'Play' tells an action, so it is the verb."
+      }
+    },
+    {
+      "id": "p2-which-noun",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ان میں سے کون سا لفظ اسم ہے؟",
+        "en": "Which of these is a noun?"
+      },
+      "options": [
+        {
+          "ur": "دوڑنا",
+          "en": "to run"
+        },
+        {
+          "ur": "لکھنا",
+          "en": "to write"
+        },
+        {
+          "ur": "کرسی",
+          "en": "chair"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا لفظ کسی چیز کا نام ہے؟",
+            "en": "Which word is the name of a thing?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کرسی ایک چیز کا نام ہے۔",
+        "en": "Chair is the name of a thing."
+      }
+    },
+    {
+      "id": "p3-nouns-roti",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "'امی روٹی پکاتی ہیں۔' اس جملے میں اسم کون سے ہیں؟",
+        "en": "'Ammi cooks roti.' Which words are nouns?"
+      },
+      "options": [
+        {
+          "ur": "امی اور روٹی",
+          "en": "Ammi and roti"
+        },
+        {
+          "ur": "پکاتی ہیں",
+          "en": "cooks"
+        },
+        {
+          "ur": "صرف امی",
+          "en": "only Ammi"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "چیزوں کے نام بھی اسم ہوتے ہیں۔",
+            "en": "Names of things are nouns too."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "امی شخص ہیں اور روٹی چیز؛ دونوں اسم ہیں۔",
+        "en": "Ammi is a person and roti is a thing; both are nouns."
+      }
+    },
+    {
+      "id": "p4-only-people",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اسم صرف انسانوں کے نام ہوتے ہیں۔",
+        "en": "Nouns are only the names of people."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا 'بکری' اور 'لاہور' بھی نام ہیں؟",
+            "en": "Are 'goat' and 'Lahore' names too?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "جانوروں، جگہوں اور چیزوں کے نام بھی اسم ہیں۔",
+        "en": "Names of animals, places and things are nouns too."
+      }
+    },
+    {
+      "id": "p6-verb-place",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "اردو جملے میں فعل عام طور پر کہاں آتا ہے؟",
+        "en": "Where does the verb usually come in an Urdu sentence?"
+      },
+      "options": [
+        {
+          "ur": "آخر میں",
+          "en": "at the end"
+        },
+        {
+          "ur": "شروع میں",
+          "en": "at the start"
+        },
+        {
+          "ur": "جملے میں فعل نہیں ہوتا",
+          "en": "a sentence has no verb"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "جیسے 'زینب کتاب پڑھتی ہے' میں 'پڑھتی ہے' آخر میں ہے۔",
+        "en": "As in 'Zainab reads a book', the verb comes last."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-own-sentence",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک جانور کے بارے میں اپنا جملہ لکھیں۔ پھر بتائیں کہ اس میں اسم کون سے ہیں اور فعل کون سا ہے۔",
+        "en": "Write your own sentence about an animal. Then say which words are nouns and which is the verb."
+      },
+      "answer_key": {
+        "sample_answer": "گھوڑا میدان میں دوڑتا ہے۔ اسم: گھوڑا، میدان۔ فعل: دوڑتا ہے۔"
+      },
+      "mentor_review_guidance": "Check the sentence is correct and that nouns and verb are labelled correctly."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-kitchen",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں پانچ چیزوں کے نام (اسم) کاپی میں لکھیں۔ پھر گھر والوں کے تین کام (فعل) لکھیں، جیسے 'پکاتی ہیں'۔",
+        "en": "Write the names of five things at home (nouns) in your notebook. Then write three actions family members do (verbs), like 'cooks'."
+      },
+      "answer_key": {
+        "sample_answer": "5 nouns + 3 verbs."
+      },
+      "mentor_review_guidance": "No device needed; check the two lists are not mixed."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پوچھیں: کیا یہ لفظ کسی کا نام ہے؟",
+        "en": "Ask: is this word a name?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "پوچھیں: کیا یہ لفظ کوئی کام بتاتا ہے؟ کام والا لفظ اکثر آخر میں ہوتا ہے۔",
+        "en": "Ask: does this word tell an action? The action word is often at the end."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "صرف لوگوں کے نام اسم ہوتے ہیں۔",
+        "en": "Only people's names are nouns."
+      },
+      "correction": {
+        "ur": "جانور، جگہ اور چیز کے نام بھی اسم ہیں۔",
+        "en": "Names of animals, places and things are nouns too."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "'ہے' یا 'تھا' کو چھوڑ کر فعل کا صرف پہلا حصہ لینا، یا ہر آخری لفظ کو فعل سمجھنا۔",
+        "en": "Taking only part of the verb, or calling any last word a verb."
+      },
+      "correction": {
+        "ur": "پورا کام والا حصہ فعل ہے، جیسے 'پڑھتی ہے'۔ پوچھیں: کیا یہ کام بتاتا ہے؟",
+        "en": "The whole action part is the verb, like 'parhti hai'. Ask: does it tell an action?"
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "noun_verb_confused",
+      "remediation_ref": "URD-G4-GR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "اسم = نام (شخص، جانور، جگہ، چیز)۔ فعل = کام (کھاتا ہے، لکھا، سوئے گا)۔ فعل اکثر جملے کے آخر میں۔",
+    "en": "Noun = name (person, animal, place, thing). Verb = action (eats, wrote, will sleep). The verb is often at the end."
+  },
+  "summary": {
+    "ur": "ہم نے جملے میں اسم اور فعل پہچاننا سیکھا۔",
+    "en": "We learned to find nouns and verbs in a sentence."
+  },
+  "parent_notes": {
+    "ur": "گھر کی کسی چیز کی طرف اشارہ کر کے پوچھیں: 'یہ اسم ہے یا فعل؟' پھر کوئی کام کر کے پوچھیں۔",
+    "en": "Point to something at home and ask: 'Is this a noun or a verb?' Then do an action and ask again."
+  },
+  "mentor_notes": {
+    "ur": "کچھ لفظ اسم اور فعل دونوں لگتے ہیں (جیسے 'کھیل' اسم، 'کھیلتا ہے' فعل)؛ اس سطح پر ایسے لفظوں سے بچیں۔ 'ہے' اکیلا فعل ہونے والے جملے (جیسے 'یہ کتاب ہے') ابھی نہ دیں۔",
+    "en": "Some words look like both noun and verb (کھیل noun, کھیلتا ہے verb); avoid them at this level. Do not yet give sentences where 'ہے' alone is the verb (like 'یہ کتاب ہے')."
+  },
+  "accessibility_notes": {
+    "ur": "اسم اور فعل کی رنگ دار تصویر (نام نیلا، کام سبز) ابھی بنانی ہے؛ رنگ کے ساتھ لیبل بھی ہو، صرف رنگ نہیں۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ترتیب والی (گھسیٹنے کی) سرگرمی کا متبادل: ہر لفظ کے لیے 'اسم' یا 'فعل' کا بٹن دبائیں۔",
+    "en": "A colour-coded noun/verb picture (names blue, actions green) is still to be made; it needs labels, not colour alone. Urdu audio is not yet recorded. Alternative to the drag sorting activity: press 'noun' or 'verb' for each word."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "two questions for every word: 'is it a name?' -> اسم; 'is it an action?' -> فعل; start with two-noun sentences",
+    "questioning_strategy": "ask the learner to say why a word is اسم or فعل, not just label it",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "labels every word as اسم",
+      "takes only part of a compound verb"
+    ],
+    "hint_policy": "graduated; two hints max; first ask the name question, then the action question; never label the word for the learner",
+    "example_policy": "simple present/past sentences with clear nouns (people, animals, Pakistani cities, home objects) and one verb at the end",
+    "misconception_detectors": [
+      "thinks only people are nouns",
+      "calls a place or thing a verb"
+    ],
+    "critical_thinking_prompts": [
+      "Can one sentence have three nouns? Make one."
+    ],
+    "personalization_rules": "intro lesson; if the learner is unsure, repeat with more sorting before sentences",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm definitions of اسم and فعل match Grade 4 school wording",
+    "subject expert: matching items use answer_key.pairs; confirm the player format"
+  ]
+}

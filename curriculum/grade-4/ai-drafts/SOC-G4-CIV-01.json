@@ -1,0 +1,462 @@
+{
+  "code": "SOC-G4-CIV-01",
+  "title": {
+    "ur": "ہمارے مددگار",
+    "en": "Our community helpers"
+  },
+  "description": {
+    "ur": "برادری کے مددگاروں کو پہچانیں اور بتائیں کہ ہر ایک کیا کام کرتا ہے۔",
+    "en": "Identify community helpers and say what each one does."
+  },
+  "keywords": [
+    "community helpers",
+    "doctor",
+    "teacher",
+    "police",
+    "firefighter",
+    "sanitation worker",
+    "farmer"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مددگار",
+        "en": "helper"
+      },
+      "definition": {
+        "ur": "وہ شخص جس کا کام دوسروں کی مدد کرنا ہو۔",
+        "en": "a person whose work helps other people."
+      }
+    },
+    {
+      "term": {
+        "ur": "برادری",
+        "en": "community"
+      },
+      "definition": {
+        "ur": "وہ لوگ جو ایک جگہ مل کر رہتے اور کام کرتے ہیں۔",
+        "en": "the people who live and work together in one place."
+      }
+    },
+    {
+      "term": {
+        "ur": "فائر فائٹر",
+        "en": "firefighter"
+      },
+      "definition": {
+        "ur": "وہ مددگار جو آگ بجھاتا اور لوگوں کو بچاتا ہے۔",
+        "en": "a helper who puts out fires and rescues people."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "صبح سے شام تک بہت سے لوگ ہماری مدد کرتے ہیں۔ کوئی ہمیں پڑھاتا ہے، کوئی علاج کرتا ہے۔ کوئی گلی صاف کرتا ہے اور کوئی ہماری حفاظت کرتا ہے۔ یہ سب ہمارے مددگار ہیں۔ آج ہم ہر مددگار کو اس کے کام سے ملائیں گے۔",
+    "en": "From morning to evening many people help us. Someone teaches us, someone treats us when we are ill. Someone cleans the street and someone keeps us safe. These are all our community helpers. Today we will match each helper to their work."
+  },
+  "student_explanation": {
+    "ur": "مددگار وہ لوگ ہیں جو برادری کے کام آتے ہیں۔ ڈاکٹر اور نرس بیماروں کا علاج کرتے ہیں۔ استاد اور استانی ہمیں پڑھاتے ہیں۔ پولیس لوگوں کی حفاظت کرتی ہے۔ فائر فائٹر آگ بجھاتے ہیں۔ صفائی کرنے والے گلیاں صاف رکھتے ہیں۔ کسان ہمارے لیے اناج اگاتے ہیں۔ ڈاکیا خط اور پارسل پہنچاتا ہے۔ ہر مددگار عزت اور شکریے کا حق دار ہے۔",
+    "en": "Helpers are people whose work serves the community. Doctors and nurses treat people who are ill. Teachers help us learn. The police keep people safe. Firefighters put out fires. Sanitation workers keep the streets clean. Farmers grow grain for us. A postman delivers letters and parcels. Every helper deserves respect and thanks."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "گلی میں کوڑا جمع ہو گیا ہے۔ کون سا مددگار اسے صاف کرنے آتا ہے؟",
+        "en": "Rubbish has piled up in the street. Which helper comes to clean it?"
+      },
+      "steps": [
+        {
+          "ur": "مسئلہ دیکھیں: گلی گندی ہے۔",
+          "en": "Look at the problem: the street is dirty."
+        },
+        {
+          "ur": "سوچیں: کس کا کام صفائی ہے؟",
+          "en": "Think: whose job is cleaning?"
+        },
+        {
+          "ur": "صفائی کرنے والا مددگار۔ ہم کوڑا کوڑے دان میں ڈال کر اس کی مدد کر سکتے ہیں۔",
+          "en": "The sanitation worker. We can help them by putting rubbish in the bin."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-helper-tools",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر مددگار کو اس کے اوزار سے ملائیں: ڈاکٹر، استانی، فائر فائٹر، کسان۔",
+        "en": "Match each helper to their tool: doctor, teacher, firefighter, farmer."
+      },
+      "answer_key": {
+        "pairs": {
+          "doctor": "stethoscope",
+          "teacher": "chalk and board",
+          "firefighter": "water hose",
+          "farmer": "plough or hoe"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: یہ اوزار کس کام میں استعمال ہوتا ہے؟",
+            "en": "Think: what job is this tool used for?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p1-helper-job",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر مددگار کو اس کے کام سے ملائیں۔",
+        "en": "Match each helper to their job."
+      },
+      "options": [
+        {
+          "ur": "بیماروں کا علاج",
+          "en": "treats people who are ill"
+        },
+        {
+          "ur": "آگ بجھانا",
+          "en": "puts out fires"
+        },
+        {
+          "ur": "خط پہنچانا",
+          "en": "delivers letters"
+        },
+        {
+          "ur": "اناج اگانا",
+          "en": "grows grain"
+        }
+      ],
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "ڈاکٹر",
+              "en": "doctor"
+            },
+            "right": {
+              "ur": "بیماروں کا علاج",
+              "en": "treats people who are ill"
+            }
+          },
+          {
+            "left": {
+              "ur": "فائر فائٹر",
+              "en": "firefighter"
+            },
+            "right": {
+              "ur": "آگ بجھانا",
+              "en": "puts out fires"
+            }
+          },
+          {
+            "left": {
+              "ur": "ڈاکیا",
+              "en": "postman"
+            },
+            "right": {
+              "ur": "خط پہنچانا",
+              "en": "delivers letters"
+            }
+          },
+          {
+            "left": {
+              "ur": "کسان",
+              "en": "farmer"
+            },
+            "right": {
+              "ur": "اناج اگانا",
+              "en": "grows grain"
+            }
+          }
+        ],
+        "misconception_on_wrong_pair": "m-helper-role-confusion"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر مددگار کے اوزار کے بارے میں سوچیں۔",
+            "en": "Think about each helper's tools."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p2-fire",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کسی جگہ آگ لگ جائے تو کون سا مددگار آتا ہے؟",
+        "en": "If there is a fire, which helper comes?"
+      },
+      "options": [
+        {
+          "ur": "ڈاکیا",
+          "en": "the postman"
+        },
+        {
+          "ur": "فائر فائٹر",
+          "en": "the firefighter"
+        },
+        {
+          "ur": "درزی",
+          "en": "the tailor"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-helper-role-confusion"
+        }
+      },
+      "explanation": {
+        "ur": "فائر فائٹر آگ بجھاتے اور لوگوں کو بچاتے ہیں۔",
+        "en": "Firefighters put out fires and rescue people."
+      }
+    },
+    {
+      "id": "p3-teacher",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "سکول میں ہمیں پڑھنا لکھنا کون سکھاتا ہے؟",
+        "en": "Who teaches us to read and write at school?"
+      },
+      "options": [
+        {
+          "ur": "استاد یا استانی",
+          "en": "a teacher"
+        },
+        {
+          "ur": "نرس",
+          "en": "a nurse"
+        },
+        {
+          "ur": "پولیس",
+          "en": "the police"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-helper-role-confusion"
+        }
+      }
+    },
+    {
+      "id": "p4-police-crops",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پولیس کا کام کھیتوں میں فصل اگانا ہے۔",
+        "en": "The police's job is to grow crops in the fields."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-helper-role-confusion"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "فصل کون اگاتا ہے؟ پولیس کیا کرتی ہے؟",
+            "en": "Who grows crops? What do the police do?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "فصل کسان اگاتے ہیں۔ پولیس لوگوں کی حفاظت کرتی ہے۔",
+        "en": "Farmers grow crops. The police keep people safe."
+      }
+    },
+    {
+      "id": "p5-nurse",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہسپتال میں بیمار کی دیکھ بھال اور دوا دینے میں ڈاکٹر کی مدد کون کرتا ہے؟",
+        "en": "Who helps the doctor care for patients and give medicine in a hospital?"
+      },
+      "options": [
+        {
+          "ur": "کسان",
+          "en": "a farmer"
+        },
+        {
+          "ur": "ڈاکیا",
+          "en": "a postman"
+        },
+        {
+          "ur": "نرس",
+          "en": "a nurse"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-helper-role-confusion"
+        }
+      }
+    },
+    {
+      "id": "p6-respect",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "صفائی کرنے والا مددگار بھی اتنی ہی عزت کا حق دار ہے جتنا ڈاکٹر۔",
+        "en": "A sanitation worker deserves as much respect as a doctor."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "ہر مددگار کا کام برادری کے لیے ضروری ہے۔",
+        "en": "Every helper's work is needed by the community."
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-thank-helper",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج کسی مددگار کو دیکھیں، جیسے دکان دار، صفائی کرنے والا یا استاد۔ گھر میں بتائیں کہ وہ کیا کام کرتا ہے۔ اگر ممکن ہو تو اس کا شکریہ ادا کریں۔",
+        "en": "Today notice a helper, such as a shopkeeper, a sanitation worker or a teacher. At home, say what work they do. If you can, thank them."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any helper with a correct role. Do not ask for names of real people."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: یہ مددگار کون سا اوزار استعمال کرتا ہے؟",
+        "en": "Think: which tool does this helper use?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "سوچیں: یہ مددگار کہاں کام کرتا ہے، ہسپتال، سکول یا کھیت؟",
+        "en": "Think: where does this helper work: a hospital, a school or a field?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "مددگاروں کے کام آپس میں گڈمڈ کرنا۔",
+        "en": "Mixing up community helpers' roles."
+      },
+      "correction": {
+        "ur": "ہر مددگار کو اس کے کام سے ملائیں۔",
+        "en": "Match the helper to their job."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "کچھ کام صرف مرد یا صرف عورتیں کرتی ہیں، جیسے ڈاکٹر صرف مرد۔",
+        "en": "Some jobs are only for men or only for women, for example only men are doctors."
+      },
+      "correction": {
+        "ur": "عورتیں اور مرد دونوں ڈاکٹر، استاد، پولیس اور کسان ہوتے ہیں۔",
+        "en": "Women and men are both doctors, teachers, police officers and farmers."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-helper-role-confusion",
+      "remediation_ref": "SOC-G4-CIV-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "ڈاکٹر اور نرس علاج کرتے ہیں۔ استاد پڑھاتے ہیں۔ پولیس حفاظت کرتی ہے۔ فائر فائٹر آگ بجھاتے ہیں۔ صفائی والے گلیاں صاف رکھتے ہیں۔ کسان اناج اگاتے ہیں۔ ڈاکیا خط پہنچاتا ہے۔",
+    "en": "Doctors and nurses treat us. Teachers teach. Police keep us safe. Firefighters put out fires. Sanitation workers keep streets clean. Farmers grow grain. A postman delivers letters."
+  },
+  "summary": {
+    "ur": "ہم نے برادری کے مددگاروں اور ان کے کاموں کو پہچانا۔",
+    "en": "We identified community helpers and their jobs."
+  },
+  "parent_notes": {
+    "ur": "بازار یا گلی میں کسی مددگار کو دیکھیں تو بچے سے اس کے کام کا نام پوچھیں۔",
+    "en": "When you see a helper in the bazaar or street, ask your child to name their job."
+  },
+  "mentor_notes": {
+    "ur": "تصاویر اور مثالوں میں عورتوں اور مردوں دونوں کو ہر کام میں دکھائیں۔ کسی کام کو چھوٹا نہ کہیں؛ صفائی کرنے والوں کی عزت پر خاص زور دیں۔ ایمرجنسی نمبر صرف تصدیق کے بعد دیں۔",
+    "en": "Show women and men in every role in pictures and examples. Never call any work low; stress respect for sanitation workers. Give emergency numbers only after verification."
+  },
+  "accessibility_notes": {
+    "ur": "مددگاروں اور ان کے اوزاروں کی تصاویر ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن مددگار اور اوزار کا نام بتائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ملانے والی سرگرمی کا متبادل: ہر مددگار کے لیے تین اوزاروں میں سے ایک چنیں۔",
+    "en": "Pictures of helpers and their tools are still to be made; each alt text should name the helper and the tool. Urdu audio is not yet recorded. Alternative to the matching activity: for each helper, choose one of three tools."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "helper -> tool -> place -> job; teach each helper with one clear everyday problem they solve",
+    "questioning_strategy": "ask 'what tool does this helper use?' or 'where do they work?' before 'what is their job?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "mixes up two helpers' roles"
+    ],
+    "hint_policy": "graduated; two hints max; first the tool, then the place of work; never give the helper first",
+    "example_policy": "women and men equally in every role; village and city helpers; no frightening emergency scenes",
+    "misconception_detectors": [
+      "matches a helper to the wrong job",
+      "says a job is only for men or only for women",
+      "calls some helpers less important"
+    ],
+    "critical_thinking_prompts": [
+      "What would happen in our street if nobody collected the rubbish for a week?"
+    ],
+    "personalization_rules": "if role confusion repeats, reteach with the tool-matching activity before more questions",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "describe frightening emergencies (fires, accidents) in detail",
+      "give an emergency phone number that has not been verified"
+    ]
+  },
+  "review_flags": [
+    "child-safety: confirm whether to add emergency numbers (e.g. 1122, 15) and which are valid nationally; draft deliberately gives none",
+    "confirm the helper list and Urdu job names (ڈاکیا، فائر فائٹر، صفائی کرنے والا) are the preferred Grade 4 terms"
+  ]
+}

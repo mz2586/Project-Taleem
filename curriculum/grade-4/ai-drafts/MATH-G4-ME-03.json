@@ -1,0 +1,404 @@
+{
+  "code": "MATH-G4-ME-03",
+  "description": {
+    "ur": "گنجائش کا موازنہ کرنا اور لیٹر اور ملی لیٹر میں بدلنا (۱ لیٹر = ۱۰۰۰ ملی لیٹر)۔",
+    "en": "Compare capacity and convert between litres and millilitres (1 l = 1000 ml)."
+  },
+  "keywords": [
+    "capacity",
+    "litre",
+    "millilitre",
+    "convert",
+    "compare",
+    "liquid"
+  ],
+  "teacher_script": {
+    "ur": "گھر میں پانی بالٹی، جگ اور گلاس میں رکھا جاتا ہے۔ کس میں زیادہ پانی آتا ہے؟ برتن میں جتنا پانی آ سکے، اسے گنجائش کہتے ہیں۔ زیادہ مقدار لیٹر میں ناپتے ہیں اور تھوڑی مقدار ملی لیٹر میں۔ آج ہم سیکھیں گے کہ ایک لیٹر میں ۱۰۰۰ ملی لیٹر ہوتے ہیں۔",
+    "en": "At home we keep water in a bucket, a jug and a glass. Which one holds the most? How much a container can hold is called its capacity. Big amounts are measured in litres and small amounts in millilitres. Today we learn that one litre has 1000 millilitres."
+  },
+  "student_explanation": {
+    "ur": "گنجائش بتاتی ہے کہ برتن میں کتنا پانی یا دودھ آتا ہے۔ تھوڑی مقدار ہم ملی لیٹر میں ناپتے ہیں۔ دوا کا چمچ اور چائے کی پیالی ملی لیٹر میں ناپی جاتی ہے۔ زیادہ مقدار لیٹر میں ناپتے ہیں۔ بالٹی اور پانی کی ٹینکی لیٹر میں ناپی جاتی ہیں۔ ایک لیٹر میں ۱۰۰۰ ملی لیٹر ہوتے ہیں۔ لیٹر کو ملی لیٹر بنانے کے لیے ۱۰۰۰ سے ضرب دیں۔ تو ۳ لیٹر = ۳۰۰۰ ملی لیٹر۔ موازنے سے پہلے دونوں مقداریں ایک ہی اکائی میں لکھیں۔",
+    "en": "Capacity tells how much water or milk a container holds. We measure small amounts in millilitres. A spoon of medicine and a cup of tea are measured in millilitres. We measure big amounts in litres. A bucket and a water tank are measured in litres. One litre has 1000 millilitres. To change litres into millilitres, multiply by 1000. So 3 l = 3000 ml. Before comparing, write both amounts in the same unit."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۳ لیٹر کو ملی لیٹر میں بدلیں۔",
+        "en": "Change 3 l into millilitres."
+      },
+      "steps": [
+        {
+          "ur": "۱ لیٹر = ۱۰۰۰ ملی لیٹر۔",
+          "en": "1 l = 1000 ml."
+        },
+        {
+          "ur": "۳ لیٹر یعنی ۳ × ۱۰۰۰۔",
+          "en": "3 l means 3 × 1000."
+        },
+        {
+          "ur": "۳ × ۱۰۰۰ = ۳۰۰۰۔ تو ۳ لیٹر = ۳۰۰۰ ملی لیٹر۔",
+          "en": "3 × 1000 = 3000. So 3 l = 3000 ml."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ایک بوتل میں ۱ لیٹر پانی ہے۔ ۴ گلاسوں میں ۲۰۰ ملی لیٹر فی گلاس پانی ہے۔ کس میں زیادہ پانی ہے؟",
+        "en": "A bottle holds 1 l of water. 4 glasses hold 200 ml each. Which has more water?"
+      },
+      "steps": [
+        {
+          "ur": "گلاسوں کا پانی جوڑیں: ۴ × ۲۰۰ = ۸۰۰ ملی لیٹر۔",
+          "en": "Add the glasses: 4 × 200 = 800 ml."
+        },
+        {
+          "ur": "بوتل کو ملی لیٹر میں بدلیں: ۱ لیٹر = ۱۰۰۰ ملی لیٹر۔",
+          "en": "Change the bottle into millilitres: 1 l = 1000 ml."
+        },
+        {
+          "ur": "۱۰۰۰ بڑا ہے ۸۰۰ سے۔ تو بوتل میں زیادہ پانی ہے۔",
+          "en": "1000 is more than 800. So the bottle has more water."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-ml-l",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر چیز کو صحیح ڈبے میں رکھیں: 'ملی لیٹر میں ناپیں' یا 'لیٹر میں ناپیں'۔ پانی کی بالٹی، دوا کا چمچ، پانی کی ٹینکی، چائے کی پیالی، پانی کا ڈرم، جوس کا چھوٹا ڈبہ۔",
+        "en": "Put each thing in the right box: 'measure in ml' or 'measure in l'. A bucket of water, a spoon of medicine, a water tank, a cup of tea, a water drum, a small juice box."
+      },
+      "answer_key": {
+        "ml": [
+          "spoon of medicine",
+          "cup of tea",
+          "small juice box"
+        ],
+        "l": [
+          "bucket of water",
+          "water tank",
+          "water drum"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا یہ تھوڑا سا پانی ہے یا بہت سارا؟",
+            "en": "Is this a little liquid or a lot?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p1-l-to-ml",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۲ لیٹر = ___ ملی لیٹر",
+        "en": "2 l = ___ ml"
+      },
+      "answer_key": {
+        "answer": "2000"
+      },
+      "accepted_variants": [
+        "2000",
+        "۲۰۰۰",
+        "2,000",
+        "۲٬۰۰۰"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایک لیٹر میں کتنے ملی لیٹر ہیں؟",
+            "en": "How many millilitres are in one litre?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۲ × ۱۰۰۰ = ۲۰۰۰",
+        "en": "2 × 1000 = 2000"
+      }
+    },
+    {
+      "id": "p2-ml-to-l",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۵۰۰۰ ملی لیٹر = ___ لیٹر",
+        "en": "5000 ml = ___ l"
+      },
+      "answer_key": {
+        "answer": "5"
+      },
+      "accepted_variants": [
+        "5",
+        "۵"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۵۰۰۰ میں ۱۰۰۰ کے کتنے گروپ ہیں؟",
+            "en": "How many groups of 1000 are in 5000?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p3-litre-or-800",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کس میں زیادہ آتا ہے: ۱ لیٹر یا ۸۰۰ ملی لیٹر؟",
+        "en": "Which holds more: 1 l or 800 ml?"
+      },
+      "options": [
+        {
+          "ur": "۱ لیٹر",
+          "en": "1 l"
+        },
+        {
+          "ur": "۸۰۰ ملی لیٹر",
+          "en": "800 ml"
+        },
+        {
+          "ur": "دونوں برابر",
+          "en": "They hold the same"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-unit-mix"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۱ لیٹر کو ملی لیٹر میں بدلیں۔",
+            "en": "Change 1 l into millilitres."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱ لیٹر = ۱۰۰۰ ملی لیٹر، جو ۸۰۰ سے زیادہ ہے۔",
+        "en": "1 l = 1000 ml, which is more than 800 ml."
+      }
+    },
+    {
+      "id": "p4-add-l-ml",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۱ لیٹر + ۵۰۰ ملی لیٹر = ؟",
+        "en": "1 l + 500 ml = ?"
+      },
+      "options": [
+        {
+          "ur": "۵۰۱ ملی لیٹر",
+          "en": "501 ml"
+        },
+        {
+          "ur": "۱۵۰۰ ملی لیٹر",
+          "en": "1500 ml"
+        },
+        {
+          "ur": "۶ لیٹر",
+          "en": "6 l"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-unit-mix"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے ۱ لیٹر کو ملی لیٹر میں بدلیں۔",
+            "en": "First change 1 l into millilitres."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱۰۰۰ + ۵۰۰ = ۱۵۰۰ ملی لیٹر۔",
+        "en": "1000 + 500 = 1500 ml."
+      }
+    },
+    {
+      "id": "p5-bucket-ml",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پانی کی بالٹی ملی لیٹر میں ناپنا سب سے آسان ہے۔",
+        "en": "A bucket of water is best measured in millilitres."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بالٹی میں تھوڑا پانی آتا ہے یا بہت؟",
+            "en": "Does a bucket hold a little water or a lot?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "بالٹی میں بہت پانی آتا ہے، اس لیے لیٹر بہتر ہے۔",
+        "en": "A bucket holds a lot, so litres are better."
+      }
+    },
+    {
+      "id": "p6-lassi-glasses",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک جگ میں ۱ لیٹر لسی ہے۔ ہر گلاس میں ۲۵۰ ملی لیٹر آتی ہے۔ کتنے گلاس بھریں گے؟",
+        "en": "A jug holds 1 l of lassi. Each glass holds 250 ml. How many glasses can be filled?"
+      },
+      "options": [
+        {
+          "ur": "۲۵۰",
+          "en": "250"
+        },
+        {
+          "ur": "۲",
+          "en": "2"
+        },
+        {
+          "ur": "۴",
+          "en": "4"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۱ لیٹر = ۱۰۰۰ ملی لیٹر۔ ۲۵۰ کتنی بار جوڑیں کہ ۱۰۰۰ بنے؟",
+            "en": "1 l = 1000 ml. How many 250s add up to 1000?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۲۵۰ + ۲۵۰ + ۲۵۰ + ۲۵۰ = ۱۰۰۰، اس لیے ۴ گلاس۔",
+        "en": "250 + 250 + 250 + 250 = 1000, so 4 glasses."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-trip-water",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک گھرانے کو سفر کے لیے ۲ لیٹر پانی چاہیے۔ ان کے پاس ۵۰۰ ملی لیٹر کی ۳ بوتلیں ہیں۔ کیا یہ کافی ہے؟ اگر نہیں تو اور کتنا چاہیے؟",
+        "en": "A family needs 2 l of water for a trip. They have 3 bottles of 500 ml. Is that enough? If not, how much more do they need?"
+      },
+      "answer_key": {
+        "answer": "No: 3 × 500 = 1500 ml, and 2 l = 2000 ml, so 500 ml more is needed"
+      },
+      "accepted_variants": [
+        "500 ml",
+        "500",
+        "۵۰۰ ملی لیٹر"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بوتلوں کا کل پانی نکالیں، پھر ۲ لیٹر کو ملی لیٹر میں بدلیں۔",
+            "en": "Find the water in all the bottles, then change 2 l into millilitres."
+          }
+        }
+      ]
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-unit-mix",
+      "remediation_ref": "MATH-G4-ME-03"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-ME-02",
+      "remediation_ref": "MATH-G4-ME-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "۱ لیٹر = ۱۰۰۰ ملی لیٹر۔ لیٹر سے ملی لیٹر: ۱۰۰۰ سے ضرب۔ تھوڑی مقدار ملی لیٹر میں، زیادہ لیٹر میں۔ موازنے سے پہلے ایک ہی اکائی بنائیں۔",
+    "en": "1 l = 1000 ml. Litres to millilitres: multiply by 1000. Small amounts in ml, big amounts in l. Make one unit before comparing."
+  },
+  "summary": {
+    "ur": "ہم نے گنجائش کو لیٹر اور ملی لیٹر میں بدلنا اور موازنہ کرنا سیکھا۔",
+    "en": "We learned to change and compare capacities in litres and millilitres."
+  },
+  "parent_notes": {
+    "ur": "پانی بھرتے وقت بوتلوں کے سائز کا موازنہ کریں۔",
+    "en": "compare bottle sizes while filling water."
+  },
+  "mentor_notes": {
+    "ur": "روزمرہ کی پانی اور جوس کی بوتلوں سے جوڑیں۔",
+    "en": "connect to daily water/juice bottles."
+  },
+  "accessibility_notes": {
+    "ur": "جگ، بوتل اور گلاس کی تصویریں ابھی بنانی ہیں؛ متبادل متن ہر برتن کا نام اور اس کی گنجائش پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر چیز کے لیے 'ملی لیٹر' یا 'لیٹر' کا بٹن چنیں؛ گھسیٹنا ضروری نہیں۔",
+    "en": "The jug, bottle and glass pictures are still to be made; alt text should read each container's name and its capacity. Urdu audio is not yet recorded. Alternative to the sorting activity: tap an 'ml' or 'l' button for each item; no dragging is needed."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "everyday containers first (spoon and cup in ml, bucket and tank in l), then the rule 1 l = 1000 ml, then convert before comparing",
+    "questioning_strategy": "ask 'are both amounts in the same unit?' before 'which holds more?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "treats 800 as more than 1 without converting",
+      "uses 100 instead of 1000"
+    ],
+    "hint_policy": "graduated; two hints max before a worked re-teach of a similar problem; never reveal the answer first",
+    "example_policy": "whole litres and multiples of 100 ml or 250 ml; water, milk, lassi and medicine contexts; no brand names",
+    "misconception_detectors": [
+      "compares or adds l and ml as plain numbers",
+      "carries over 100 from length"
+    ],
+    "critical_thinking_prompts": [
+      "Why does a 1 l bottle hold more than 800 ml when 800 is the bigger number?"
+    ],
+    "personalization_rules": "if unit mixing also shows in mass, route to MATH-G4-ME-02 first",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, upset or fear -> stop the lesson and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information",
+      "shame or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the shared m-unit-mix correction imported from §4 says '1 m = 100 cm'; in this capacity lesson it should say 1 l = 1000 ml",
+    "subject expert: p6 (4 glasses of 250 ml) needs division or repeated addition; confirm it fits before division (Unit 4) is mastered"
+  ]
+}

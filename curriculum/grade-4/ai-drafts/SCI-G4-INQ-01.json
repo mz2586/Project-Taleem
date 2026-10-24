@@ -1,0 +1,386 @@
+{
+  "code": "SCI-G4-INQ-01",
+  "title": {
+    "ur": "دیکھو اور لکھو",
+    "en": "Observe and record"
+  },
+  "description": {
+    "ur": "حواس کی مدد سے ایک آسان مشاہدہ کرنا اور اسے لفظوں، تصویر یا جدول میں لکھنا۔",
+    "en": "Making a simple observation with the senses and recording it in words, a drawing or a table."
+  },
+  "keywords": [
+    "observe",
+    "observation",
+    "record",
+    "senses",
+    "table",
+    "tally",
+    "drawing"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مشاہدہ",
+        "en": "observation"
+      },
+      "definition": {
+        "ur": "حواس سے کسی چیز کو غور سے دیکھنا، سننا یا چھونا اور جاننا کہ کیا ہو رہا ہے۔",
+        "en": "Carefully looking at, listening to or touching something to find out what is happening."
+      }
+    },
+    {
+      "term": {
+        "ur": "ریکارڈ کرنا",
+        "en": "record"
+      },
+      "definition": {
+        "ur": "جو دیکھا اسے لکھنا، بنانا یا نشان لگانا تاکہ بعد میں یاد رہے۔",
+        "en": "Writing, drawing or marking what you noticed so you remember it later."
+      }
+    },
+    {
+      "term": {
+        "ur": "حواس",
+        "en": "senses"
+      },
+      "definition": {
+        "ur": "دیکھنا، سننا، سونگھنا، چھونا اور چکھنا۔",
+        "en": "Seeing, hearing, smelling, touching and tasting."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "سائنسدان سب سے پہلے غور سے دیکھتے ہیں۔ اسے مشاہدہ کہتے ہیں۔ پھر وہ جو دیکھیں اسے لکھ لیتے ہیں، تاکہ بھول نہ جائیں۔ آج تم بھی ایک ننھے سائنسدان بنو گے: دیکھو، سنو، چھوؤ، اور لکھو۔",
+    "en": "Scientists start by looking carefully. That is called observing. Then they record what they notice, so they do not forget. Today you become a young scientist too: look, listen, touch, and record."
+  },
+  "student_explanation": {
+    "ur": "مشاہدہ کا مطلب ہے غور سے دیکھنا۔ ہم آنکھوں، کانوں، ناک اور ہاتھوں سے مشاہدہ کرتے ہیں۔ انجانی چیز کو کبھی نہ چکھو۔ جو تم واقعی دیکھو، وہی لکھو۔ اندازہ اور مشاہدہ الگ ہیں۔ تم لفظ لکھ سکتے ہو یا تصویر بنا سکتے ہو۔ گننے کے لیے لکیریں لگا سکتے ہو۔ ساتھ تاریخ اور وقت بھی لکھو۔",
+    "en": "Observing means looking carefully. We observe with our eyes, ears, nose and hands. Never taste an unknown thing. Write down only what you really notice. A guess and an observation are different. You can write words or draw a picture. You can make tally marks to count. Also write the date and time."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "کھڑکی سے دس منٹ تک پرندے دیکھو اور ریکارڈ کرو۔",
+        "en": "Watch birds from a window for ten minutes and record them."
+      },
+      "steps": [
+        {
+          "ur": "کاپی میں تاریخ اور وقت لکھو۔",
+          "en": "Write the date and time in your copy."
+        },
+        {
+          "ur": "ہر پرندے کے نام کے آگے لکیر لگاؤ: کوا ||| ، چڑیا ||||۔",
+          "en": "Make a tally mark next to each bird's name: crow |||, sparrow ||||."
+        },
+        {
+          "ur": "آخر میں گنو اور لکھو: \"۳ کوے اور ۴ چڑیاں دیکھیں۔\"",
+          "en": "At the end, count and write: 'I saw 3 crows and 4 sparrows.'"
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-obs-or-guess",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کون سا جملہ مشاہدہ ہے، اندازہ نہیں؟",
+        "en": "Which sentence is an observation, not a guess?"
+      },
+      "options": [
+        {
+          "ur": "یہ پتا شاید کل گر جائے گا۔",
+          "en": "This leaf will probably fall tomorrow."
+        },
+        {
+          "ur": "بلی بھوکی ہوگی۔",
+          "en": "The cat must be hungry."
+        },
+        {
+          "ur": "پتے کا رنگ پیلا ہے اور اس پر دو سوراخ ہیں۔",
+          "en": "The leaf is yellow and has two holes in it."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "مشاہدہ وہ ہے جو تم ابھی دیکھ سکتے ہو۔",
+            "en": "An observation is something you can notice right now."
+          }
+        }
+      ]
+    },
+    {
+      "id": "a2-describe-leaf",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کوئی ایک پتا غور سے دیکھو اور اس کے بارے میں تین باتیں لکھو یا بتاؤ: رنگ، شکل اور چھونے میں کیسا ہے۔",
+        "en": "Look closely at one leaf and write or say three things about it: its colour, its shape, and how it feels."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor-graded: credit three specific, observable details (colour, shape, texture); prompt the learner if any detail is a guess rather than an observation."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-senses",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "مشاہدے کے لیے ہم کیا استعمال کرتے ہیں؟",
+        "en": "What do we use to observe?"
+      },
+      "options": [
+        {
+          "ur": "اپنے حواس",
+          "en": "Our senses"
+        },
+        {
+          "ur": "صرف اندازہ",
+          "en": "Only guessing"
+        },
+        {
+          "ur": "صرف کتاب",
+          "en": "Only a book"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-taste",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کسی انجانی چیز کو پہچاننے کے لیے اسے چکھ لینا ٹھیک ہے۔",
+        "en": "It is fine to taste an unknown thing to find out what it is."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "انجانی چیز کبھی نہ چکھو۔ دیکھو، سونگھو (دور سے) اور بڑے سے پوچھو۔",
+        "en": "Never taste an unknown thing. Look, smell from a distance, and ask an adult."
+      }
+    },
+    {
+      "id": "p3-record-how",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مشاہدہ ریکارڈ کرنے کا کون سا طریقہ ٹھیک ہے؟",
+        "en": "Which is a good way to record an observation?"
+      },
+      "options": [
+        {
+          "ur": "بعد میں یاد کر لینا",
+          "en": "Try to remember it later"
+        },
+        {
+          "ur": "تاریخ کے ساتھ لکھنا یا تصویر بنانا",
+          "en": "Write it or draw it with the date"
+        },
+        {
+          "ur": "کسی کو نہ بتانا",
+          "en": "Tell no one"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p4-tally",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "تم نے ایک گھنٹے میں گلی سے گزرتے رکشے گننے ہیں۔ سب سے آسان طریقہ کیا ہے؟",
+        "en": "You must count rickshaws passing your street in an hour. What is the easiest way?"
+      },
+      "options": [
+        {
+          "ur": "ہر رکشے کی پوری تصویر بنانا",
+          "en": "Draw every rickshaw in full"
+        },
+        {
+          "ur": "صرف آخر میں اندازہ لکھنا",
+          "en": "Guess a number at the end"
+        },
+        {
+          "ur": "ہر رکشے پر ایک لکیر لگانا",
+          "en": "Make one tally mark for each rickshaw"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-guess-diff",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "\"آسمان پر کالے بادل ہیں\" ایک مشاہدہ ہے۔",
+        "en": "'There are dark clouds in the sky' is an observation."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-fix-record",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "علی نے لکھا: \"پودا خوش ہے۔\" اسے ایک بہتر مشاہدہ لکھنے میں مدد کرو۔",
+        "en": "Ali wrote: 'The plant is happy.' Help him write a better observation."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Look for an observable statement (e.g. 'the plant has 6 green leaves and one new bud'); credit replacing a feeling word with something seen, counted or measured."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-one-thing-daily",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "تین دن تک روز ایک ہی چیز کا مشاہدہ کرو: کوئی پودا، آسمان یا کھڑکی سے نظر آنے والا درخت۔ ہر دن تاریخ کے ساتھ ایک جملہ لکھو یا تصویر بناؤ۔",
+        "en": "For three days, observe the same thing each day: a plant, the sky, or a tree you can see from a window. Each day, write one sentence or draw a picture with the date."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor-graded: credit three dated records of the same thing; this starts the term project 'My nature diary'."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کیا تم یہ بات ابھی اپنی آنکھ، کان یا ہاتھ سے جان سکتے ہو؟",
+        "en": "Can you find this out right now with your eyes, ears or hands?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "مشاہدہ \"ہے\" بتاتا ہے، اندازہ \"شاید\" یا \"ہوگا\"۔",
+        "en": "An observation says 'is'; a guess says 'maybe' or 'must be'."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "اندازہ اور مشاہدہ ایک ہی چیز ہیں۔",
+        "en": "A guess and an observation are the same."
+      },
+      "correction": {
+        "ur": "مشاہدہ وہ ہے جو تم نے واقعی دیکھا، سنا یا چھوا؛ اندازہ وہ ہے جو تم سوچتے ہو۔",
+        "en": "An observation is what you really saw, heard or touched; a guess is what you think."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "مشاہدہ صرف آنکھوں سے ہوتا ہے۔",
+        "en": "We observe only with our eyes."
+      },
+      "correction": {
+        "ur": "ہم کان، ناک اور ہاتھ سے بھی مشاہدہ کرتے ہیں — مگر انجانی چیز کبھی نہیں چکھتے۔",
+        "en": "We also observe with ears, nose and hands — but we never taste unknown things."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "records guesses as observations twice",
+      "remediation_ref": "SCI-G4-INQ-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "مشاہدہ: حواس سے غور سے دیکھنا۔ صرف وہی لکھو جو واقعی دیکھا۔ لفظ، تصویر یا گنتی کی لکیریں استعمال کرو۔ تاریخ اور وقت لکھو۔ انجانی چیز کبھی نہ چکھو۔",
+    "en": "Observing: noticing carefully with the senses. Record only what you really notice. Use words, drawings or tally marks. Write the date and time. Never taste unknown things."
+  },
+  "summary": {
+    "ur": "ہم نے حواس سے مشاہدہ کرنا اور اسے لکھنا سیکھا۔",
+    "en": "We learned to observe with our senses and to record what we notice."
+  },
+  "parent_notes": {
+    "ur": "بچے کے ساتھ پانچ منٹ کچھ دیکھیں — پرندے، بادل، پودا — اور پوچھیں: تم نے کیا دیکھا؟ اسے لکھنے یا بنانے دیں۔",
+    "en": "Spend five minutes watching something with your child — birds, clouds, a plant — and ask: what did you notice? Let them write or draw it."
+  },
+  "mentor_notes": {
+    "ur": "یہ سبق مینٹر کی جانچ والا ہے: بچے کی تحریر یا تصویر دیکھیں اور اندازے کو مشاہدے سے الگ کرنے میں مدد کریں۔ لکھنے میں کمزور بچوں سے زبانی ریکارڈ قبول کریں۔",
+    "en": "This lesson is mentor-assessed: look at the learner's words or drawing and help separate guesses from observations. Accept spoken records from learners who find writing hard."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ گنتی کی لکیروں والے جدول کی مثال اور اس کا متبادل متن ابھی بنانا ہے۔ نابینا بچے سننے اور چھونے سے مشاہدہ کر کے زبانی ریکارڈ دے سکتے ہیں؛ لکھنے کی بجائے بولنا قبول ہے۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. The example tally table and its alt text are still to be made. Blind learners can observe by hearing and touch and give a spoken record; speaking instead of writing is accepted."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "model one observation aloud, then let the learner do one; always separate 'what I notice' from 'what I think'",
+    "questioning_strategy": "ask 'how do you know? did you see, hear or touch it?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "records a feeling or guess as an observation",
+      "mentions tasting things to find out"
+    ],
+    "hint_policy": "graduated; first ask which sense was used, then the is/maybe test; never rewrite the observation for the learner",
+    "example_policy": "use safe everyday scenes: birds at a window, clouds, a pot plant, rickshaws in the street, ants on the ground",
+    "misconception_detectors": [
+      "mixes guesses with observations",
+      "relies on sight only"
+    ],
+    "critical_thinking_prompts": [
+      "Why should a scientist write down the date and time with an observation?"
+    ],
+    "personalization_rules": "if writing is hard, accept a drawing or a spoken record and pass it to the mentor",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor",
+      "constructed answers (short items) -> mentor marks them; the AI gives feedback but no final grade"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples",
+      "ask for photos of the learner's home or family",
+      "suggest tasting or touching unknown substances"
+    ]
+  },
+  "review_flags": [
+    "mentor lead: confirm the mentor-graded items (p6, challenge, homework) fit the mentor workload",
+    "subject expert: 'smell from a distance' advice in p2 explanation — confirm wording"
+  ]
+}

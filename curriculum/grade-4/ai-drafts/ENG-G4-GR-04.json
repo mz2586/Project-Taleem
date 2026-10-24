@@ -1,0 +1,389 @@
+{
+  "code": "ENG-G4-GR-04",
+  "title": {
+    "ur": "بڑے حروف اور فل اسٹاپ",
+    "en": "Capital Letters and Full Stops"
+  },
+  "description": {
+    "ur": "بچہ جملے کے شروع، ناموں اور I میں بڑا حرف لگاتا ہے، اور جملے کے آخر میں فل اسٹاپ لگاتا ہے۔",
+    "en": "The learner uses capital letters at the start of sentences, for names and for I, and ends sentences with a full stop."
+  },
+  "keywords": [
+    "capital letters",
+    "full stop",
+    "punctuation",
+    "names",
+    "sentences"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "بڑا حرف (capital letter)",
+        "en": "capital letter"
+      },
+      "definition": {
+        "ur": "حرف کی بڑی شکل: A، B، C۔",
+        "en": "The big form of a letter: A, B, C."
+      }
+    },
+    {
+      "term": {
+        "ur": "فل اسٹاپ (full stop)",
+        "en": "full stop"
+      },
+      "definition": {
+        "ur": "جملے کے آخر میں لگنے والا نقطہ: .",
+        "en": "The dot at the end of a sentence: ."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "اردو میں جملہ ۔ پر ختم ہوتا ہے۔ انگریزی میں جملہ ایک نقطے پر ختم ہوتا ہے۔ اسے فل اسٹاپ کہتے ہیں۔ انگریزی میں بڑے حروف بھی ہوتے ہیں۔ آج ہم سیکھیں گے کہ بڑا حرف کہاں لگتا ہے۔",
+    "en": "In Urdu a sentence ends with ۔. In English a sentence ends with a dot. We call it a full stop. English also has capital letters. Today we will learn where capital letters go."
+  },
+  "student_explanation": {
+    "ur": "ہر جملہ بڑے حرف سے شروع ہوتا ہے۔ لوگوں کے نام بڑے حرف سے لکھیں: Sana، Ahmed۔ جگہوں کے نام بھی: Pakistan، Karachi۔ لفظ I ہمیشہ بڑا لکھیں۔ باقی الفاظ چھوٹے حروف میں لکھیں۔ جملے کے آخر میں فل اسٹاپ لگائیں۔ جیسے: Sana and I live in Multan.",
+    "en": "Every sentence starts with a capital letter. Write people's names with a capital: Sana, Ahmed. Names of places too: Pakistan, Karachi. Always write the word I as a capital. Write the other words in small letters. Put a full stop at the end of a sentence. For example: Sana and I live in Multan."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "ٹھیک کریں: my brother and i went to quetta",
+        "en": "Fix it: my brother and i went to quetta"
+      },
+      "steps": [
+        {
+          "ur": "جملے کا پہلا حرف بڑا کریں: My۔",
+          "en": "Make the first letter a capital: My."
+        },
+        {
+          "ur": "i ہمیشہ بڑا: I۔",
+          "en": "i is always a capital: I."
+        },
+        {
+          "ur": "quetta جگہ کا نام ہے: Quetta۔",
+          "en": "quetta is a place name: Quetta."
+        },
+        {
+          "ur": "آخر میں فل اسٹاپ: My brother and I went to Quetta.",
+          "en": "End with a full stop: My brother and I went to Quetta."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-tap-capitals",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "اس جملے میں ان الفاظ پر ٹیپ کریں جو بڑے حرف سے شروع ہونے چاہئیں: yesterday zainab and i saw the river indus",
+        "en": "Tap the words that should start with a capital letter: yesterday zainab and i saw the river indus"
+      },
+      "answer_key": {
+        "capitalise": [
+          "yesterday",
+          "zainab",
+          "i",
+          "indus"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جملے کا پہلا لفظ، نام اور I دیکھیں۔",
+            "en": "Check the first word, the names and I."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-full-stop",
+      "type": "fill_blank",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "جملے کے آخر میں کونسا نشان لگے گا؟ The milk is cold ___",
+        "en": "Which mark ends this sentence? The milk is cold ___"
+      },
+      "answer_key": {
+        "answer": "."
+      },
+      "accepted_variants": [
+        ".",
+        "full stop"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "انگریزی جملہ ایک نقطے پر ختم ہوتا ہے۔",
+            "en": "An English sentence ends with a dot."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-correct-sentence",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کونسا جملہ درست لکھا ہے؟",
+        "en": "Which sentence is written correctly?"
+      },
+      "options": [
+        {
+          "ur": "we live in lahore.",
+          "en": "we live in lahore."
+        },
+        {
+          "ur": "We live in Lahore.",
+          "en": "We live in Lahore."
+        },
+        {
+          "ur": "We Live In Lahore.",
+          "en": "We Live In Lahore."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "2": "m-capitalization-random"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بڑا حرف صرف شروع اور نام پر۔",
+            "en": "Capitals only at the start and for names."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "We شروع میں ہے اور Lahore ایک جگہ کا نام ہے۔",
+        "en": "We starts the sentence and Lahore is a place name."
+      }
+    },
+    {
+      "id": "p2-pakistan",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "لفظ pakistan کو بڑے حرف سے لکھنا چاہیے: Pakistan۔",
+        "en": "The word pakistan should be written with a capital: Pakistan."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "یہ ایک ملک کا نام ہے۔",
+        "en": "It is the name of a country."
+      }
+    },
+    {
+      "id": "p3-i",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "صحیح جملہ چنیں:",
+        "en": "Choose the correct sentence:"
+      },
+      "options": [
+        {
+          "ur": "Ali and i play.",
+          "en": "Ali and i play."
+        },
+        {
+          "ur": "ali and I play.",
+          "en": "ali and I play."
+        },
+        {
+          "ur": "Ali and I play.",
+          "en": "Ali and I play."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "I اور Ali دونوں کو دیکھیں۔",
+            "en": "Check both I and Ali."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-random-caps",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اس جملے میں کونسا بڑا حرف غلط ہے؟ The Cat sleeps on the mat.",
+        "en": "Which capital letter is wrong? The Cat sleeps on the mat."
+      },
+      "options": [
+        {
+          "ur": "Cat",
+          "en": "Cat"
+        },
+        {
+          "ur": "The",
+          "en": "The"
+        },
+        {
+          "ur": "There is no mistake.",
+          "en": "There is no mistake."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "2": "m-capitalization-random"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا cat کسی کا نام ہے؟",
+            "en": "Is cat someone's name?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "cat نام نہیں اور جملے کے شروع میں بھی نہیں۔",
+        "en": "cat is not a name and does not start the sentence."
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-copy-correct",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "یہ جملہ کاپی میں درست بڑے حروف اور فل اسٹاپ کے ساتھ لکھیں: my friend hira lives in sukkur",
+        "en": "Copy this sentence into your notebook with correct capitals and a full stop: my friend hira lives in sukkur"
+      },
+      "answer_key": {
+        "answer": "My friend Hira lives in Sukkur."
+      },
+      "mentor_review_guidance": "Check four things: My, Hira, Sukkur, full stop."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "تین جگہیں دیکھیں: جملے کا شروع، نام، اور لفظ I۔",
+        "en": "Check three places: the start of the sentence, names, and the word I."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "جملے کا آخری لفظ دیکھیں۔ کیا اس کے بعد نقطہ ہے؟",
+        "en": "Look at the last word. Is there a dot after it?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "کہیں بھی بڑے حروف لگا دینا۔",
+        "en": "Random capitals."
+      },
+      "correction": {
+        "ur": "بڑا حرف صرف جملے کے شروع اور ناموں پر۔",
+        "en": "Capital at sentence start + names only."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "اردو کی طرح جملے کے آخر میں ۔ لگانا۔",
+        "en": "Ending an English sentence with the Urdu mark ۔."
+      },
+      "correction": {
+        "ur": "انگریزی میں جملے کے آخر میں نقطہ (.) لگتا ہے۔",
+        "en": "English sentences end with a dot (.)."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-capitalization-random",
+      "remediation_ref": "ENG-G4-GR-04"
+    },
+    {
+      "signal": "misses_prerequisite:ENG-G4-GR-01",
+      "remediation_ref": "ENG-G4-GR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "بڑا حرف: جملے کا شروع، لوگوں اور جگہوں کے نام، اور I۔ آخر میں فل اسٹاپ (.)۔",
+    "en": "Capital letter: start of a sentence, names of people and places, and I. Full stop (.) at the end."
+  },
+  "summary": {
+    "ur": "ہم نے بڑے حروف اور فل اسٹاپ صحیح جگہ لگائے۔",
+    "en": "We put capital letters and full stops in the right places."
+  },
+  "parent_notes": {
+    "ur": "بچے کی کاپی میں دیکھیں کہ ہر جملہ بڑے حرف سے شروع اور نقطے پر ختم ہو رہا ہے۔ انگریزی جاننا ضروری نہیں۔",
+    "en": "Look in your child's notebook: does each sentence start with a big letter and end with a dot? You do not need to know English."
+  },
+  "mentor_notes": {
+    "ur": "بچے اکثر اردو کا ۔ انگریزی جملوں میں لگا دیتے ہیں؛ نرمی سے دونوں کا فرق دکھائیں۔",
+    "en": "Children often use the Urdu ۔ in English sentences; gently show the difference between the two."
+  },
+  "accessibility_notes": {
+    "ur": "ہدایات کی اردو/انگریزی آڈیو ابھی ریکارڈ نہیں ہوئی۔ بڑے اور چھوٹے حروف کی تصویر اور اس کا متبادل متن ابھی بنانا ہے۔ الفاظ پر ٹیپ کرنے کا متبادل: ہر لفظ کے آگے 'بڑا' یا 'چھوٹا' چنیں۔ کم نظر والے بچوں کے لیے حروف بڑے سائز میں دکھائیں۔",
+    "en": "Urdu/English audio for instructions is not yet recorded. The capital/small letters picture and its alt text are still to be made. Alternative to tapping words: choose 'capital' or 'small' next to each word. Show letters in a large size for children with low vision."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "three capital checks (start, names, I) and one end check (full stop) for every sentence",
+    "questioning_strategy": "ask 'is this the first word, a name, or I?' for each capital",
+    "slow_down_signals": [
+      "capitalises common nouns",
+      "two wrong answers in a row",
+      "uses ۔ instead of ."
+    ],
+    "hint_policy": "graduated; two hints max; first the three capital checks, then the end check; never show the corrected sentence first",
+    "example_policy": "Pakistani names of people, cities and rivers (Sana, Multan, Quetta, Indus); short sentences",
+    "misconception_detectors": [
+      "m-capitalization-random",
+      "lower-case i",
+      "Urdu ۔ at the end of English sentences"
+    ],
+    "critical_thinking_prompts": [
+      "Why does Lahore need a capital but city does not?"
+    ],
+    "personalization_rules": "if nouns are not recognised, route back to ENG-G4-GR-01",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)"
+    ]
+  },
+  "review_flags": [
+    "check 'the river indus' item: the answer key capitalises Indus only (not river); confirm house style for 'River Indus'"
+  ]
+}

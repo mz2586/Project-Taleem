@@ -1,0 +1,466 @@
+{
+  "code": "ISL-G4-QUR-04",
+  "title": {
+    "ur": "قرآن مجید کی سکھائی ہوئی اچھائیاں",
+    "en": "Good Values the Qur'an Teaches"
+  },
+  "description": {
+    "ur": "قرآن مجید کی سکھائی ہوئی اچھائیاں، جیسے والدین سے اچھا سلوک، دوسروں کا مذاق نہ اڑانا اور مہربانی، اور انہیں روزمرہ زندگی میں اپنانا۔",
+    "en": "Good values the Qur'an teaches, such as kindness to parents, not mocking others, and kindness to all, and living them every day."
+  },
+  "keywords": [
+    "Qur'an",
+    "values",
+    "kindness",
+    "good conduct",
+    "respect",
+    "not mocking"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "اچھا سلوک",
+        "en": "good treatment"
+      },
+      "definition": {
+        "ur": "کسی سے نرمی اور عزت سے پیش آنا۔",
+        "en": "Treating someone gently and with respect."
+      }
+    },
+    {
+      "term": {
+        "ur": "مذاق اڑانا",
+        "en": "mocking"
+      },
+      "definition": {
+        "ur": "کسی پر ہنس کر اسے دکھی کرنا۔",
+        "en": "Laughing at someone to make them feel bad."
+      }
+    },
+    {
+      "term": {
+        "ur": "عمل",
+        "en": "action"
+      },
+      "definition": {
+        "ur": "جو ہم کرتے ہیں۔",
+        "en": "What we do."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "قرآن مجید ہمیں اچھا انسان بننا سکھاتا ہے۔ یہ والدین سے اچھے سلوک کا حکم دیتا ہے۔ [آیت: سورۃ بنی اسرائیل، آیت ۲۳ — متن اور منظور شدہ ترجمہ عالم فراہم کرے] یہ دوسروں کا مذاق اڑانے سے منع کرتا ہے۔ [آیت: سورۃ الحجرات، آیت ۱۱ — متن اور منظور شدہ ترجمہ عالم فراہم کرے] آج ہم دیکھیں گے کہ یہ اچھائیاں روز کیسے اپنائیں۔",
+    "en": "The Qur'an teaches us to be good people. It tells us to treat our parents well. [Verse: Surah Al-Isra (Bani Isra'il), 23 — text and approved translation to be supplied by a scholar] It tells us not to mock others. [Verse: Surah Al-Hujurat, 11 — text and approved translation to be supplied by a scholar] Today we will see how to live these values every day."
+  },
+  "student_explanation": {
+    "ur": "قرآن مجید ہمیں اچھے کام سکھاتا ہے۔ یہ والدین سے اچھے سلوک کا حکم دیتا ہے۔ یہ دوسروں کا مذاق اڑانے سے منع کرتا ہے۔ یہ ہمیں سچ بولنا اور انصاف کرنا سکھاتا ہے۔ یہ ضرورت مندوں کی مدد کا کہتا ہے۔ قرآن مجید سے محبت صرف پڑھنا نہیں۔ اس کی باتوں پر عمل کرنا بھی محبت ہے۔ ہم سب کے ساتھ اچھا سلوک کرتے ہیں۔",
+    "en": "The Qur'an teaches us good deeds. It tells us to treat our parents well. It tells us not to mock others. It teaches us to be truthful and fair. It asks us to help people in need. Loving the Qur'an is not only reading it. Living by its teachings is love too. We treat everyone well."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "کچھ بچے ایک لڑکے کے پرانے جوتوں پر ہنس رہے ہیں۔ قرآن مجید کی سکھائی ہوئی بات کیا ہے؟",
+        "en": "Some children are laughing at a boy's old shoes. What does the Qur'an's teaching tell us?"
+      },
+      "steps": [
+        {
+          "ur": "یاد کریں: قرآن مجید دوسروں کا مذاق اڑانے سے منع کرتا ہے۔",
+          "en": "Remember: the Qur'an tells us not to mock others."
+        },
+        {
+          "ur": "ہم ہنسی میں شامل نہیں ہوتے۔",
+          "en": "We do not join in the laughing."
+        },
+        {
+          "ur": "ہم لڑکے کو کھیل میں بلاتے ہیں، اور ضرورت ہو تو کسی بڑے کو بتاتے ہیں۔",
+          "en": "We invite the boy to play, and tell an adult if needed."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ابو تھکے ہوئے گھر آئے ہیں۔ والدین سے اچھا سلوک کیسے کریں؟",
+        "en": "Father has come home tired. How can we treat our parents well?"
+      },
+      "steps": [
+        {
+          "ur": "سوچیں: ابو کو کس چیز کی ضرورت ہو سکتی ہے؟",
+          "en": "Think: what might father need?"
+        },
+        {
+          "ur": "انہیں سلام کریں اور پانی کا گلاس دیں۔",
+          "en": "Greet him and bring him a glass of water."
+        },
+        {
+          "ur": "نرمی سے بات کریں اور شور کم کریں تاکہ وہ آرام کر سکیں۔",
+          "en": "Speak softly and keep the noise down so he can rest."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-match-value",
+      "type": "matching",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر صورتِ حال کو اس اچھائی سے ملائیں جو قرآن مجید سکھاتا ہے۔",
+        "en": "Match each situation with the value the Qur'an teaches."
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر صورتِ حال میں سوچیں: کس کے ساتھ کیا ہو رہا ہے؟",
+            "en": "For each one, think: what is happening, and to whom?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "قرآن مجید کی اچھائیاں روز کی زندگی میں کام آتی ہیں۔",
+        "en": "The Qur'an's values apply in everyday life."
+      },
+      "options": [
+        {
+          "ur": "مدد کرنا",
+          "en": "Helping those in need"
+        },
+        {
+          "ur": "انصاف کرنا",
+          "en": "Being fair"
+        },
+        {
+          "ur": "والدین سے اچھا سلوک",
+          "en": "Treating parents well"
+        },
+        {
+          "ur": "مذاق نہ اڑانا",
+          "en": "Not mocking others"
+        }
+      ],
+      "answer_key": {
+        "left": [
+          {
+            "ur": "امی نے کام کہا",
+            "en": "Mother asks for help"
+          },
+          {
+            "ur": "کوئی کسی پر ہنس رہا ہے",
+            "en": "Someone is laughing at another child"
+          },
+          {
+            "ur": "کھیل میں باری بانٹنی ہے",
+            "en": "Turns must be shared in a game"
+          },
+          {
+            "ur": "پڑوسی کو کھانے کی ضرورت ہے",
+            "en": "A neighbour needs food"
+          }
+        ],
+        "pairs": {
+          "0": 2,
+          "1": 3,
+          "2": 1,
+          "3": 0
+        }
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-parents",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "قرآن مجید والدین کے بارے میں کیا سکھاتا ہے؟",
+        "en": "What does the Qur'an teach about parents?"
+      },
+      "options": [
+        {
+          "ur": "ان سے اچھا سلوک کرو",
+          "en": "Treat them well"
+        },
+        {
+          "ur": "ان کی بات نہ سنو",
+          "en": "Do not listen to them"
+        },
+        {
+          "ur": "صرف عید پر ملو",
+          "en": "Meet them only on Eid"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-mocking",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "قرآن مجید دوسروں کا مذاق اڑانے سے منع کرتا ہے۔",
+        "en": "The Qur'an tells us not to mock others."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-love",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "قرآن مجید سے محبت کا ایک طریقہ کیا ہے؟",
+        "en": "What is one way of loving the Qur'an?"
+      },
+      "options": [
+        {
+          "ur": "صرف غلاف خوبصورت رکھنا",
+          "en": "Only keeping a pretty cover"
+        },
+        {
+          "ur": "اس کی سکھائی باتوں پر عمل کرنا",
+          "en": "Living by what it teaches"
+        },
+        {
+          "ur": "اسے کبھی نہ کھولنا",
+          "en": "Never opening it"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p4-everyone",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اچھا سلوک کس کے ساتھ کرنا ہے؟",
+        "en": "Who should we treat well?"
+      },
+      "explanation": {
+        "ur": "ہم سب کے ساتھ اچھا سلوک کرتے ہیں۔",
+        "en": "We treat everyone well."
+      },
+      "options": [
+        {
+          "ur": "صرف اپنے دوستوں کے ساتھ",
+          "en": "Only our friends"
+        },
+        {
+          "ur": "صرف اپنے جیسے لوگوں کے ساتھ",
+          "en": "Only people like us"
+        },
+        {
+          "ur": "سب کے ساتھ",
+          "en": "Everyone"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-kindness-to-friends-only",
+          "1": "m-kindness-to-friends-only"
+        }
+      }
+    },
+    {
+      "id": "p5-fair",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کرکٹ میں ایک ہی بچہ بار بار بیٹنگ کر رہا ہے۔ انصاف کیا ہے؟",
+        "en": "In cricket, the same child keeps batting again and again. What is fair?"
+      },
+      "options": [
+        {
+          "ur": "سب کو باری ملے",
+          "en": "Everyone gets a turn"
+        },
+        {
+          "ur": "جو طاقتور ہو وہی کھیلے",
+          "en": "Whoever is strongest plays"
+        },
+        {
+          "ur": "کھیل بند کر دیں",
+          "en": "Stop the game"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-reading-only",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "قرآن مجید سے محبت کا مطلب صرف پڑھنا ہے، اس کی باتوں پر عمل ضروری نہیں۔",
+        "en": "Loving the Qur'an means only reading it; living by its teachings is not needed."
+      },
+      "explanation": {
+        "ur": "پڑھنا بھی محبت ہے، اور اس کی سکھائی باتوں پر عمل بھی۔",
+        "en": "Reading it is love, and living by its teachings is love too."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-one-value",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ان اچھائیوں میں سے ایک چنیں اور بتائیں کہ آپ اسے اس ہفتے کیسے اپنائیں گے۔",
+        "en": "Choose one of these values and say how you will live it this week."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any safe, realistic plan. Do not ask about family conflicts. Do not attribute any verse wording to the child's answer."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-do-one",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج ان اچھائیوں میں سے ایک پر عمل کریں: والدین یا گھر کے بڑوں کی مدد، کسی کا مذاق نہ اڑانا، یا انصاف سے باری دینا۔",
+        "en": "Today, live one of these values: help your parents or elders at home, do not mock anyone, or share turns fairly."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. Praise any effort the child mentions."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: اس سے دوسرے کو اچھا لگے گا یا برا؟",
+        "en": "Think: would this make the other person feel good or bad?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: والدین سے اچھا سلوک، مذاق نہیں، سچ، انصاف، مدد۔",
+        "en": "Remember: treat parents well, no mocking, truth, fairness, help."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "اچھا سلوک صرف دوستوں کے ساتھ کرنا ہے۔",
+        "en": "Good treatment is only for friends."
+      },
+      "correction": {
+        "ur": "مہربانی سب کے لیے ہے۔",
+        "en": "Kindness is for everyone."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "قرآن مجید سے محبت کا مطلب صرف اسے پڑھنا ہے۔",
+        "en": "Loving the Qur'an only means reading it."
+      },
+      "correction": {
+        "ur": "اس کی سکھائی باتوں پر عمل کرنا بھی محبت ہے۔",
+        "en": "Living by its teachings is love too."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-kindness-to-friends-only",
+      "remediation_ref": "ISL-G4-AKH-02"
+    },
+    {
+      "signal": "low_score:parents",
+      "remediation_ref": "ISL-G4-AKH-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "قرآن مجید سکھاتا ہے: والدین سے اچھا سلوک، دوسروں کا مذاق نہ اڑانا، سچ، انصاف اور ضرورت مندوں کی مدد۔ قرآن مجید سے محبت یعنی ان باتوں پر عمل بھی۔",
+    "en": "The Qur'an teaches: treat parents well, do not mock others, be truthful and fair, help those in need. Loving the Qur'an includes living by these teachings."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ قرآن مجید کی سکھائی اچھائیوں پر عمل کرنا بھی اس سے محبت ہے۔",
+    "en": "We learned that living by the Qur'an's good values is also a way of loving it."
+  },
+  "parent_notes": {
+    "ur": "جب بچہ کسی کا مذاق اڑانے سے رکے یا انصاف سے باری دے تو اس کی تعریف کریں، اور بتائیں کہ یہ اچھی بات ہے۔",
+    "en": "Praise your child when they stop themselves from mocking someone or share turns fairly, and tell them it is a good thing to do."
+  },
+  "mentor_notes": {
+    "ur": "آیات کا متن اور ترجمہ عالم کی منظوری کے بعد ہی شامل ہو۔ تب تک صرف عمومی تعلیم بتائیں۔ مذاق اڑانے کی مثال میں اگر کوئی بچہ اپنے ساتھ ہونے والی بدسلوکی بتائے تو فوراً انسانی سرپرست کو بتائیں۔",
+    "en": "Verse text and translation are added only after scholar approval; until then, describe only the general teaching. If, during the mocking example, a child discloses being bullied, hand to a human safeguarding lead at once."
+  },
+  "accessibility_notes": {
+    "ur": "تصاویر (کرکٹ میں باری، ابو کو پانی دینا) اور ان کا متبادل متن ابھی بنانا ہے؛ تصویر میں قرآنی متن نہ ہو۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ملانے والی سرگرمی کا متبادل: ہر صورتِ حال کے لیے چار بٹنوں میں سے ایک چنیں۔",
+    "en": "Pictures (taking turns at cricket, bringing father water) and their alt text are still to be made; no Qur'anic text in the pictures. Urdu audio is not yet recorded. Alternative to the matching activity: choose one of four buttons for each situation."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "name a few values the Qur'an teaches in general terms, then practise each with an everyday situation; love for the Qur'an includes living by it",
+    "questioning_strategy": "ask 'how would the other person feel?' then 'which value fits?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "child mentions being mocked or bullied"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "describe teachings only in general terms; verse text only from scholar-supplied placeholders; everyday settings (street cricket, home); kindness to everyone including people of other faiths",
+    "misconception_detectors": [
+      "limits good treatment to friends or 'people like us'",
+      "thinks loving the Qur'an is only reading it"
+    ],
+    "critical_thinking_prompts": [
+      "Why do you think the Qur'an tells us not to mock others?"
+    ],
+    "personalization_rules": "if the learner limits kindness to friends, route to ISL-G4-AKH-02; if parents items are missed, route to ISL-G4-AKH-03",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor",
+      "child discloses being bullied or mocked -> stop and hand to a human safeguarding lead"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions",
+      "recite, write, translate or explain the meaning of any verse from memory; use only scholar-supplied text"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: supply the text and approved translation for the Surah Al-Isra (Bani Isra'il), 23 and Surah Al-Hujurat, 11 placeholders in teacher_script (verify both references), or replace them",
+    "scholar: truthfulness, fairness and helping those in need are stated as Qur'anic teachings without specific references; confirm or add approved references",
+    "child-safety reviewer: confirm the mocking example handles possible bullying disclosures safely"
+  ]
+}

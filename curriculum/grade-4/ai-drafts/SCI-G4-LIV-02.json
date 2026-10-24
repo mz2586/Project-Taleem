@@ -1,0 +1,523 @@
+{
+  "code": "SCI-G4-LIV-02",
+  "title": {
+    "ur": "پودے کے حصے اور ان کے کام",
+    "en": "Parts of a plant and their jobs"
+  },
+  "description": {
+    "ur": "پودے کے بڑے حصے — جڑ، تنا، پتے، پھول، پھل اور بیج — اور ہر حصے کا کام۔",
+    "en": "The main parts of a plant — root, stem, leaf, flower, fruit and seed — and the job of each part."
+  },
+  "keywords": [
+    "plant",
+    "root",
+    "stem",
+    "leaf",
+    "flower",
+    "fruit",
+    "seed"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "جڑ",
+        "en": "root"
+      },
+      "definition": {
+        "ur": "پودے کا وہ حصہ جو مٹی کے اندر ہوتا ہے اور پانی لیتا ہے۔",
+        "en": "The part of a plant under the soil that takes in water."
+      }
+    },
+    {
+      "term": {
+        "ur": "تنا",
+        "en": "stem"
+      },
+      "definition": {
+        "ur": "پودے کا وہ حصہ جو اسے کھڑا رکھتا ہے اور پانی اوپر لے جاتا ہے۔",
+        "en": "The part that holds the plant up and carries water upwards."
+      }
+    },
+    {
+      "term": {
+        "ur": "پتا",
+        "en": "leaf"
+      },
+      "definition": {
+        "ur": "پودے کا سبز حصہ جو دھوپ سے پودے کی خوراک بناتا ہے۔",
+        "en": "The green part that makes the plant's food using sunlight."
+      }
+    },
+    {
+      "term": {
+        "ur": "بیج",
+        "en": "seed"
+      },
+      "definition": {
+        "ur": "وہ ننھی چیز جس سے نیا پودا اگتا ہے۔",
+        "en": "The small part that a new plant grows from."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ایک پودا ایک ٹیم کی طرح ہے۔ ہر حصے کا اپنا کام ہے۔ آج ہم جڑ، تنے، پتوں، پھول، پھل اور بیج کو جانیں گے۔ ہر حصے سے ہم پوچھیں گے: تم پودے کے لیے کیا کرتے ہو؟",
+    "en": "A plant is like a team. Every part has its own job. Today we meet the root, stem, leaves, flower, fruit and seed. We will ask each part: what do you do for the plant?"
+  },
+  "student_explanation": {
+    "ur": "جڑ مٹی کے اندر ہوتی ہے۔ یہ مٹی سے پانی لیتی ہے۔ یہ پودے کو مٹی میں مضبوطی سے پکڑے رکھتی ہے۔ تنا پودے کو کھڑا رکھتا ہے۔ تنا پانی کو جڑ سے پتوں تک لے جاتا ہے۔ سبز پتے دھوپ، ہوا اور پانی سے خوراک بناتے ہیں۔ پھول سے بیج بنتے ہیں۔ پھل بیجوں کی حفاظت کرتا ہے۔ بیج سے نیا پودا اگتا ہے۔",
+    "en": "The root is under the soil. It takes in water from the soil. It holds the plant firmly in the ground. The stem holds the plant up. The stem carries water from the root to the leaves. Green leaves make food from sunlight, air and water. Flowers make seeds. The fruit protects the seeds. A new plant grows from a seed."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "گرمی میں ایک پودے کو کئی دن پانی نہ ملے تو کیا ہوگا؟",
+        "en": "What happens if a plant gets no water for many hot days?"
+      },
+      "steps": [
+        {
+          "ur": "جڑ کو مٹی سے پانی نہیں ملے گا۔",
+          "en": "The root will find no water in the soil."
+        },
+        {
+          "ur": "تنا پتوں تک پانی نہیں لے جا سکے گا۔",
+          "en": "The stem will have no water to carry to the leaves."
+        },
+        {
+          "ur": "پتے مرجھا جائیں گے اور خوراک کم بنائیں گے۔",
+          "en": "The leaves will droop and make less food."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ہم گنے کا کون سا حصہ کھاتے ہیں؟",
+        "en": "Which part of sugarcane do we eat?"
+      },
+      "steps": [
+        {
+          "ur": "گنا لمبا، سیدھا اور سخت ہوتا ہے۔",
+          "en": "Sugarcane is long, straight and hard."
+        },
+        {
+          "ur": "یہ پتوں کو اٹھائے رکھتا ہے اور مٹی کے اوپر ہوتا ہے۔",
+          "en": "It holds up the leaves and grows above the soil."
+        },
+        {
+          "ur": "یہ کام تنے کا ہے۔ اس لیے ہم گنے کا تنا کھاتے یا چوستے ہیں۔",
+          "en": "That is the stem's job. So we eat or chew the stem of sugarcane."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-label-plant",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "سرسوں کے پودے کی تصویر پر نام لگاؤ: جڑ، تنا، پتا، پھول۔",
+        "en": "Label the mustard plant picture: root, stem, leaf, flower."
+      },
+      "answer_key": {
+        "labels": {
+          "bottom_under_soil": "root",
+          "upright_middle": "stem",
+          "flat_green": "leaf",
+          "yellow_top": "flower"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جو حصہ مٹی کے نیچے ہے، وہ جڑ ہے۔",
+            "en": "The part under the soil is the root."
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-p3-match-jobs",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر حصے کو اس کے کام سے ملاؤ۔",
+        "en": "Match each part to its job."
+      },
+      "options": [
+        {
+          "ur": "تنا",
+          "en": "Stem"
+        },
+        {
+          "ur": "پھول",
+          "en": "Flower"
+        },
+        {
+          "ur": "پھل",
+          "en": "Fruit"
+        },
+        {
+          "ur": "بیجوں کی حفاظت کرتا ہے",
+          "en": "Protects the seeds"
+        },
+        {
+          "ur": "پودے کو کھڑا رکھتا ہے",
+          "en": "Holds the plant up"
+        },
+        {
+          "ur": "بیج بناتا ہے",
+          "en": "Makes seeds"
+        }
+      ],
+      "answer_key": {
+        "left": [
+          0,
+          1,
+          2
+        ],
+        "right": [
+          3,
+          4,
+          5
+        ],
+        "pairs": {
+          "0": 4,
+          "1": 5,
+          "2": 3
+        }
+      }
+    },
+    {
+      "id": "a-p6-stem-carries",
+      "type": "fill_blank",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "تنا پانی کو جڑ سے ___ تک لے جاتا ہے۔",
+        "en": "The stem carries water from the root to the ___."
+      },
+      "answer_key": {
+        "answer": "leaves"
+      },
+      "accepted_variants": [
+        "leaves",
+        "leaf",
+        "the leaves",
+        "پتوں",
+        "پتے",
+        "پتا"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "خوراک بنانے والے حصے کو پانی چاہیے۔",
+            "en": "The food-making part needs water."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-water-in",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پودے کا کون سا حصہ مٹی سے پانی لیتا ہے؟",
+        "en": "Which part of a plant takes in water from the soil?"
+      },
+      "options": [
+        {
+          "ur": "پتا",
+          "en": "Leaf"
+        },
+        {
+          "ur": "پھول",
+          "en": "Flower"
+        },
+        {
+          "ur": "جڑ",
+          "en": "Root"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا حصہ مٹی کے اندر ہے؟",
+            "en": "Which part is inside the soil?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-food",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پودے کی خوراک کہاں بنتی ہے؟",
+        "en": "Where is a plant's food made?"
+      },
+      "options": [
+        {
+          "ur": "سبز پتوں میں",
+          "en": "In the green leaves"
+        },
+        {
+          "ur": "مٹی میں، جڑ وہاں سے خوراک کھاتی ہے",
+          "en": "In the soil; the root eats it from there"
+        },
+        {
+          "ur": "پھول میں",
+          "en": "In the flower"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کس حصے کو دھوپ سب سے زیادہ ملتی ہے؟",
+            "en": "Which part gets the most sunlight?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پتے دھوپ، ہوا اور پانی سے خوراک بناتے ہیں۔ جڑ مٹی سے پانی لیتی ہے۔",
+        "en": "Leaves make food from sunlight, air and water. The root takes in water from the soil."
+      }
+    },
+    {
+      "id": "p4-carrot",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "گاجر اور مولی پودے کی جڑیں ہیں جنہیں ہم کھاتے ہیں۔",
+        "en": "Carrots and radishes are plant roots that we eat."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "یہ مٹی کے نیچے اگتی ہیں اور جڑ ہیں۔",
+        "en": "They grow under the soil and are roots."
+      }
+    },
+    {
+      "id": "p5-new-plant",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "نیا پودا کس سے اگتا ہے؟",
+        "en": "What does a new plant grow from?"
+      },
+      "options": [
+        {
+          "ur": "پتے سے",
+          "en": "A leaf"
+        },
+        {
+          "ur": "بیج سے",
+          "en": "A seed"
+        },
+        {
+          "ur": "پھول کی پتی سے",
+          "en": "A petal"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p7-roots-hold",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "جڑیں پودے کو مٹی میں مضبوطی سے پکڑے رکھتی ہیں۔",
+        "en": "Roots hold a plant firmly in the soil."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "اسی لیے آندھی میں بھی پودا اپنی جگہ پر رہتا ہے۔",
+        "en": "That is why a plant stays in place even in strong wind."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-no-leaves",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اگر ایک چھوٹے پودے کے سارے پتے توڑ دیے جائیں تو اسے سب سے بڑی مشکل کیا ہوگی؟",
+        "en": "If all the leaves are picked off a small plant, what is its biggest problem?"
+      },
+      "options": [
+        {
+          "ur": "وہ پانی نہیں لے سکے گا",
+          "en": "It cannot take in water"
+        },
+        {
+          "ur": "وہ خوراک نہیں بنا سکے گا",
+          "en": "It cannot make food"
+        },
+        {
+          "ur": "وہ مٹی میں کھڑا نہیں رہ سکے گا",
+          "en": "It cannot stay in the soil"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "خوراک بنانے کا کام پتوں کا ہے۔",
+        "en": "Making food is the leaves' job."
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-kitchen-parts",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کی سبزیوں اور پھلوں کو دیکھو۔ ایک جڑ، ایک پتا اور ایک پھل جو ہم کھاتے ہیں، کا نام بتاؤ۔ کسی بڑے کو بتاؤ یا تصویر بناؤ۔",
+        "en": "Look at vegetables and fruit at home. Name one root, one leaf and one fruit that we eat. Tell an adult or draw them."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept e.g. root: carrot, radish, turnip; leaf: spinach, mustard greens (saag), mint; fruit: mango, tomato, guava. Avoid marking potato or onion as roots (they are a stem and a bulb)."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچو یہ حصہ پودے پر کہاں ہے: مٹی کے نیچے یا اوپر؟",
+        "en": "Think where this part is on the plant: under the soil or above it?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "جڑ پانی لیتی ہے، تنا اٹھاتا ہے، پتا خوراک بناتا ہے۔ اب دوبارہ دیکھو۔",
+        "en": "Root takes in water, stem holds up, leaf makes food. Now look again."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "پودے اپنی خوراک مٹی سے کھاتے ہیں۔",
+        "en": "Plants eat their food from the soil."
+      },
+      "correction": {
+        "ur": "جڑیں مٹی سے پانی لیتی ہیں۔ خوراک سبز پتے دھوپ کی مدد سے خود بناتے ہیں۔",
+        "en": "Roots take in water from the soil. Green leaves make the food themselves, using sunlight."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "مٹی کے نیچے اگنے والی ہر سبزی جڑ ہے۔",
+        "en": "Every vegetable that grows under the soil is a root."
+      },
+      "correction": {
+        "ur": "گاجر اور مولی جڑیں ہیں، مگر آلو دراصل زمین کے نیچے بڑھنے والا تنا ہے۔",
+        "en": "Carrots and radishes are roots, but a potato is really a stem that grows under the ground."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:SCI-G4-LIV-01",
+      "remediation_ref": "SCI-G4-LIV-01"
+    },
+    {
+      "signal": "confuses root and stem jobs twice",
+      "remediation_ref": "SCI-G4-LIV-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "جڑ: پانی لیتی اور پکڑتی ہے۔ تنا: کھڑا رکھتا اور پانی اوپر لے جاتا ہے۔ پتا: خوراک بناتا ہے۔ پھول: بیج بناتا ہے۔ پھل: بیج بچاتا ہے۔ بیج: نیا پودا۔",
+    "en": "Root: takes in water and holds. Stem: holds up and carries water. Leaf: makes food. Flower: makes seeds. Fruit: protects seeds. Seed: a new plant."
+  },
+  "summary": {
+    "ur": "ہم نے پودے کے حصوں کے نام اور ان کے کام سیکھے۔",
+    "en": "We learned the parts of a plant and the job of each part."
+  },
+  "parent_notes": {
+    "ur": "سبزی کاٹتے یا بازار جاتے ہوئے بچے سے پوچھیں: یہ پودے کا کون سا حصہ ہے؟",
+    "en": "While cooking or shopping, ask your child: which part of the plant is this?"
+  },
+  "mentor_notes": {
+    "ur": "بچے اکثر سمجھتے ہیں کہ پودا مٹی \"کھاتا\" ہے۔ پتوں کے خوراک بنانے والے کام پر زور دیں، مگر ضیائی تالیف کا لفظ اس سطح پر ضروری نہیں۔",
+    "en": "Learners often think a plant 'eats' soil. Stress the leaf's food-making job; the word photosynthesis is not needed at this level."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ سرسوں کے پودے کا لیبل والا خاکہ اور اس کا متبادل متن (ہر حصے کا نام اور جگہ) ابھی بنانا ہے۔ لیبل گھسیٹنے کا متبادل: ہر نشان زدہ حصے کے لیے نام چنیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. The labelled mustard-plant diagram and its alt text (each part's name and position) are still to be made. Alternative to dragging labels: choose the name for each marked part."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "plant-as-a-team: name the part, say where it is, then say its job; link every job to what the plant needs",
+    "questioning_strategy": "ask 'where is this part?' before 'what does it do?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says roots eat soil",
+      "mixes up root and stem"
+    ],
+    "hint_policy": "graduated; first point to location (under/above soil), then give the job list; never name the part first",
+    "example_policy": "use local plants and foods: mustard (sarson), wheat, mango, neem, sugarcane, carrot, radish, spinach",
+    "misconception_detectors": [
+      "says plants get food from soil",
+      "calls potato or onion a root"
+    ],
+    "critical_thinking_prompts": [
+      "Why does a plant in a dark room turn yellow and weak?"
+    ],
+    "personalization_rules": "if the learner is unsure what a plant is, route back to SCI-G4-LIV-01",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the level is right — leaves make food from sunlight, air and water, with no mention of minerals or photosynthesis",
+    "subject expert: the potato-is-a-stem correction is accurate but may be too advanced; keep or drop"
+  ]
+}

@@ -1,0 +1,494 @@
+{
+  "code": "URD-G4-LS-01",
+  "title": {
+    "ur": "سن کر سوالوں کے جواب دینا",
+    "en": "Listening and answering questions"
+  },
+  "description": {
+    "ur": "ایک چھوٹی سنی ہوئی کہانی غور سے سن کر اس کے بارے میں سوالوں کے جواب دینا۔",
+    "en": "Listening carefully to a short spoken story and answering questions about it."
+  },
+  "keywords": [
+    "listening",
+    "spoken passage",
+    "comprehension",
+    "who what where when",
+    "attention"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "غور سے سننا",
+        "en": "listening carefully"
+      },
+      "definition": {
+        "ur": "پورا دھیان لگا کر سننا، بیچ میں بات نہ کرنا۔",
+        "en": "listening with full attention, without talking in between."
+      }
+    },
+    {
+      "term": {
+        "ur": "میلہ",
+        "en": "fair"
+      },
+      "definition": {
+        "ur": "وہ جگہ جہاں کھلونے، کھانے اور کھیل ایک ساتھ ہوں۔",
+        "en": "a place with toys, food and games all together."
+      }
+    },
+    {
+      "term": {
+        "ur": "کون، کیا، کہاں، کب",
+        "en": "who, what, where, when"
+      },
+      "definition": {
+        "ur": "سوال کے لفظ جو سنتے وقت دھیان میں رکھیں۔",
+        "en": "question words to keep in mind while listening."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم پڑھیں گے نہیں، سنیں گے۔ میں ایک چھوٹی سی کہانی سناؤں گا۔ سنتے وقت چار باتیں ذہن میں رکھیں: کون، کیا، کہاں اور کب۔ کہانی کو دل میں تصویر کی طرح دیکھیں۔ ضرورت ہو تو کہانی دوبارہ سن سکتے ہیں۔",
+    "en": "Today we will not read, we will listen. I will tell a short story. While listening, keep four things in mind: who, what, where and when. See the story like a picture in your mind. You may listen again if you need to."
+  },
+  "student_explanation": {
+    "ur": "اچھا سننے والا پوری بات دھیان سے سنتا ہے۔ سنتے وقت بات نہ کریں اور ادھر ادھر نہ دیکھیں۔ کہانی کو دل میں تصویر کی طرح بنائیں۔ چار سوال یاد رکھیں: کون، کیا، کہاں، کب۔ گنتی اور قیمت جیسی باتیں خاص دھیان سے سنیں۔ سوال سن کر کہانی کی وہی جگہ یاد کریں۔ جواب کہانی سے دیں، اپنے اندازے سے نہیں۔",
+    "en": "A good listener listens to the whole thing with attention. Do not talk or look around while listening. Make a picture of the story in your mind. Remember four questions: who, what, where, when. Listen extra carefully to numbers and prices. When you hear a question, recall that part of the story. Answer from the story, not from your own guess."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "سوال: 'ولی میلے میں کس کے ساتھ گیا؟' اس کا جواب کیسے ڈھونڈیں؟",
+        "en": "Question: 'Who did Wali go to the fair with?' How do we find the answer?"
+      },
+      "steps": [
+        {
+          "ur": "سوال کا لفظ 'کس کے ساتھ' ہے؛ یعنی ایک شخص۔",
+          "en": "The question word is 'with whom'; so it is a person."
+        },
+        {
+          "ur": "کہانی کا پہلا جملہ یاد کریں: '...ولی اپنے ابو کے ساتھ...'۔",
+          "en": "Recall the first sentence: '...Wali with his father...'."
+        },
+        {
+          "ur": "جواب: ابو کے ساتھ۔",
+          "en": "Answer: with his father."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "سوال: 'وہ جلدی گھر کیوں لوٹ آئے؟'",
+        "en": "Question: 'Why did they come home early?'"
+      },
+      "steps": [
+        {
+          "ur": "'کیوں' کا جواب وجہ ہوتی ہے۔",
+          "en": "The answer to 'why' is a reason."
+        },
+        {
+          "ur": "کہانی کا آخری حصہ یاد کریں: شام کو کالے بادل آ گئے۔",
+          "en": "Recall the last part: dark clouds came in the evening."
+        },
+        {
+          "ur": "'اس لیے' کے بعد بتایا گیا کہ وہ گھر لوٹ آئے۔",
+          "en": "After 'so', we hear they came home."
+        },
+        {
+          "ur": "جواب: کیونکہ آسمان پر کالے بادل آ گئے تھے۔",
+          "en": "Answer: because dark clouds came into the sky."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-tap-picture",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی 'میلے کی سیر' غور سے سنیں۔ کہانی میں ولی نے جو کھلونا لیا، اس کی تصویر پر ٹیپ کریں: غبارہ، سیٹی والا کھلونا، گیند۔",
+        "en": "Listen carefully to the story 'A Trip to the Fair'. Tap the picture of the toy Wali bought: balloon, whistle toy, ball."
+      },
+      "options": [
+        {
+          "ur": "غبارہ",
+          "en": "balloon"
+        },
+        {
+          "ur": "سیٹی والا کھلونا",
+          "en": "whistle toy"
+        },
+        {
+          "ur": "گیند",
+          "en": "ball"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کہانی کا تیسرا جملہ دوبارہ سنیں۔",
+            "en": "Listen to the third sentence again."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-with-whom",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کہانی 'میلے کی سیر' غور سے سنیں۔ ولی میلے میں کس کے ساتھ گیا؟",
+        "en": "Listen carefully to the story 'A Trip to the Fair'. Who did Wali go to the fair with?"
+      },
+      "options": [
+        {
+          "ur": "اپنی امی کے ساتھ",
+          "en": "his mother"
+        },
+        {
+          "ur": "اپنے ابو کے ساتھ",
+          "en": "his father"
+        },
+        {
+          "ur": "اپنے دوست کے ساتھ",
+          "en": "his friend"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-guessing-not-reading"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کہانی کا شروع یاد کریں۔",
+            "en": "Recall the beginning of the story."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کہانی میں تھا: 'ولی اپنے ابو کے ساتھ گاؤں کے میلے میں گیا۔'",
+        "en": "The story said: 'Wali went to the village fair with his father.'"
+      }
+    },
+    {
+      "id": "p2-price",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کہانی 'میلے کی سیر' غور سے سنیں۔ کھلونا کتنے روپے کا تھا؟",
+        "en": "Listen carefully to the story 'A Trip to the Fair'. How many rupees was the toy?"
+      },
+      "options": [
+        {
+          "ur": "پانچ روپے",
+          "en": "five rupees"
+        },
+        {
+          "ur": "بیس روپے",
+          "en": "twenty rupees"
+        },
+        {
+          "ur": "دس روپے",
+          "en": "ten rupees"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "قیمت والی بات خاص دھیان سے سنیں۔",
+            "en": "Listen carefully for the price."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ولی نے 'دس روپے کا' کھلونا لیا۔",
+        "en": "Wali bought a toy 'for ten rupees'."
+      }
+    },
+    {
+      "id": "p3-ate",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کہانی 'میلے کی سیر' غور سے سنیں۔ دونوں نے میلے میں کیا کھایا؟",
+        "en": "Listen carefully to the story 'A Trip to the Fair'. What did they both eat at the fair?"
+      },
+      "options": [
+        {
+          "ur": "جلیبیاں",
+          "en": "jalebis"
+        },
+        {
+          "ur": "سموسے",
+          "en": "samosas"
+        },
+        {
+          "ur": "آئس کریم",
+          "en": "ice cream"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-guessing-not-reading"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'پھر دونوں نے...' والا جملہ یاد کریں۔",
+            "en": "Recall the sentence 'Then they both...'."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کہانی میں 'گرم گرم جلیبیاں' تھیں۔",
+        "en": "The story had 'hot jalebis'."
+      }
+    },
+    {
+      "id": "p4-when",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کہانی 'میلے کی سیر' غور سے سنیں۔ ولی میلے میں اتوار کے دن گیا۔",
+        "en": "Listen carefully to the story 'A Trip to the Fair'. Wali went to the fair on Sunday."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کہانی کے بالکل شروع میں دن بتایا گیا۔",
+            "en": "The day was told at the very start."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کہانی میں 'ہفتے کے دن' تھا۔",
+        "en": "The story said 'on Saturday'."
+      }
+    },
+    {
+      "id": "p5-why-home",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی 'میلے کی سیر' غور سے سنیں۔ وہ جلدی گھر کیوں لوٹ آئے؟",
+        "en": "Listen carefully to the story 'A Trip to the Fair'. Why did they come home early?"
+      },
+      "options": [
+        {
+          "ur": "کیونکہ میلہ بند ہو گیا",
+          "en": "because the fair closed"
+        },
+        {
+          "ur": "کیونکہ آسمان پر کالے بادل آ گئے",
+          "en": "because dark clouds came"
+        },
+        {
+          "ur": "کیونکہ ولی تھک گیا",
+          "en": "because Wali got tired"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'اس لیے' سے پہلے کیا بات تھی؟",
+            "en": "What came before 'so'?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کالے بادلوں کی وجہ سے وہ جلدی لوٹے۔",
+        "en": "They came back early because of the dark clouds."
+      }
+    },
+    {
+      "id": "p6-clay",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کہانی 'میلے کی سیر' غور سے سنیں۔ میلے میں مٹی کے کھلونے تھے۔",
+        "en": "Listen carefully to the story 'A Trip to the Fair'. There were clay toys at the fair."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "کہانی میں 'رنگ برنگے غبارے اور مٹی کے کھلونے' تھے۔",
+        "en": "The story had 'colourful balloons and clay toys'."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-one-more",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی 'میلے کی سیر' غور سے سنیں۔ کہانی میں میلے کی دو چیزیں بتائیں جو ولی نے دیکھیں یا خریدیں۔",
+        "en": "Listen carefully to the story 'A Trip to the Fair'. Name two things at the fair that Wali saw or bought."
+      },
+      "answer_key": {
+        "sample_answer": "غبارے، مٹی کے کھلونے، سیٹی والا کھلونا، جلیبیاں (any two)"
+      },
+      "mentor_review_guidance": "Accept any two items heard in the story; can be said aloud to the mentor."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-family-story",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "گھر کے کسی بڑے سے کوئی چھوٹی سی بات یا قصہ سنیں۔ پھر انہیں بتائیں کہ اس میں کون تھا، کیا ہوا اور کہاں ہوا۔",
+        "en": "Ask an adult at home to tell you a short story or event. Then tell them who was in it, what happened and where."
+      },
+      "answer_key": {
+        "sample_answer": "Learner reports who/what/where of a family story."
+      },
+      "mentor_review_guidance": "No device needed; do not ask the learner to share the family story with the app."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کہانی کا وہ حصہ یاد کریں جہاں یہ بات آئی تھی۔",
+        "en": "Recall the part of the story where this came up."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "کہانی دوبارہ سنیں اور سوال کے لفظ (کون، کیا، کب، کیوں) پر دھیان دیں۔",
+        "en": "Listen again and focus on the question word (who, what, when, why)."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "سوال کا جواب اپنی پسند یا اندازے سے دینا، کہانی سے نہیں۔",
+        "en": "Answering from one's own liking or guess, not from the story."
+      },
+      "correction": {
+        "ur": "جواب متن میں سے دیں — یہاں سنی ہوئی کہانی ہی متن ہے۔",
+        "en": "Answer from the text — here the story you heard is the text."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "پہلی بار سن کر سب کچھ یاد ہونا چاہیے؛ دوبارہ سننا غلط ہے۔",
+        "en": "You must remember everything after one hearing; listening again is wrong."
+      },
+      "correction": {
+        "ur": "دوبارہ سننا اچھی عادت ہے؛ اچھے سننے والے ضرورت ہو تو دوبارہ سنتے ہیں۔",
+        "en": "Listening again is a good habit; good listeners re-listen when needed."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-guessing-not-reading",
+      "remediation_ref": "URD-G4-LS-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "سنتے وقت: خاموش، دھیان، دل میں تصویر۔ کون، کیا، کہاں، کب۔ گنتی اور قیمت پر خاص دھیان۔ جواب کہانی سے۔",
+    "en": "While listening: quiet, attention, a picture in your mind. Who, what, where, when. Extra care for numbers and prices. Answer from the story."
+  },
+  "summary": {
+    "ur": "ہم نے کہانی غور سے سن کر اس کے سوالوں کے جواب دینا سیکھا۔",
+    "en": "We learned to listen carefully to a story and answer questions about it."
+  },
+  "parent_notes": {
+    "ur": "روز ایک چھوٹی سی بات سنائیں اور بچے سے پوچھیں: 'کون تھا؟ کیا ہوا؟' تحمل سے جواب سنیں۔",
+    "en": "Tell your child one small story a day and ask: 'Who was there? What happened?' Listen patiently to the answer."
+  },
+  "mentor_notes": {
+    "ur": "اس سبق کی آڈیو ابھی ریکارڈ نہیں ہوئی، جبکہ یہاں آڈیو ہی سوال کی بنیاد ہے۔ جب تک آڈیو نہ بنے، آپ یہ کہانی صاف اور درمیانی رفتار سے دو بار پڑھ کر سنائیں اور بچے کو متن نہ دکھائیں: «ہفتے کے دن ولی اپنے ابو کے ساتھ گاؤں کے میلے میں گیا۔ میلے میں رنگ برنگے غبارے اور مٹی کے کھلونے تھے۔ ولی نے دس روپے کا ایک سیٹی والا کھلونا لیا۔ پھر دونوں نے گرم گرم جلیبیاں کھائیں۔ شام کو آسمان پر کالے بادل آ گئے، اس لیے وہ جلدی گھر لوٹ آئے۔»",
+    "en": "The audio for this lesson is not yet recorded, yet audio is the stimulus here. Until it exists, read this story aloud twice, clearly and at a steady pace, and do not show the text to the child: «On Saturday Wali went to the village fair with his father. At the fair there were colourful balloons and clay toys. Wali bought a whistle toy for ten rupees. Then they both ate hot jalebis. In the evening dark clouds came into the sky, so they came home early.»"
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ یہ اس سبق کی سب سے ضروری چیز ہے، اور اس کا متن ساتھ رکھنا ہوگا۔ میلے کی تصویر اور تین کھلونوں کی تصاویر ابھی بنانی ہیں، متبادل متن کے ساتھ۔ ٹیپ والی سرگرمی کا متبادل: تین نام سن کر درست نام بولیں یا چنیں۔ جو بچہ سن نہیں سکتا، اس کے لیے مینٹر اشاروں کی زبان میں کہانی یا ایک الگ پڑھنے والا سبق طے کرے؛ یہ سننے کی جانچ اس بچے کے لیے موزوں نہیں۔",
+    "en": "The story's Urdu audio is not yet recorded; it is the most essential asset of this lesson, and it needs a transcript. The fair picture and the three toy pictures are still to be made, with alt text. Alternative to the tap activity: hear three names and say or choose the right one. For a deaf or hard-of-hearing child, the mentor arranges the story in sign language or a separate reading task; this listening check is not suitable for that child."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "listen-for (who/what/where/when) before playing the story; replay allowed; questions follow the story's order",
+    "questioning_strategy": "ask 'what did you hear about...?' and allow a replay before giving a hint",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "answers with things not in the story",
+      "asks for many replays"
+    ],
+    "hint_policy": "graduated; two hints max; first point to the part of the story, then offer a replay; never say the answer",
+    "example_policy": "short spoken stories of 5-6 sentences about markets, fairs, family and weather; one number or price per story",
+    "misconception_detectors": [
+      "chooses common-knowledge options not in the story",
+      "mixes up the day or number"
+    ],
+    "critical_thinking_prompts": [
+      "Which word in the story told you the reason they went home?"
+    ],
+    "personalization_rules": "if the learner struggles even after replays, have the mentor read slowly and check hearing or attention",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer",
+      "show the story's text while asking the listening questions"
+    ]
+  },
+  "review_flags": [
+    "BLOCKER for release: the spoken story audio does not exist; items cannot run without it (interim: mentor reads the script in mentor_notes)",
+    "subject expert: check the story is original and level-appropriate; 'ہفتے کے دن' may be heard as 'weekday' — consider 'ہفتہ کے روز'"
+  ]
+}

@@ -1,0 +1,518 @@
+{
+  "code": "URD-G4-GR-02",
+  "title": {
+    "ur": "مذکر، مؤنث، واحد اور جمع",
+    "en": "Masculine, feminine, singular and plural"
+  },
+  "description": {
+    "ur": "اسم کی جنس (مذکر/مؤنث) اور تعداد (واحد/جمع) پہچان کر جملے میں درست لکھنا۔",
+    "en": "Knowing a noun's gender (masculine/feminine) and number (singular/plural) and using them correctly in sentences."
+  },
+  "keywords": [
+    "gender",
+    "masculine",
+    "feminine",
+    "singular",
+    "plural",
+    "agreement",
+    "grammar"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مذکر",
+        "en": "masculine"
+      },
+      "definition": {
+        "ur": "وہ اسم جس کے ساتھ 'آتا ہے'، 'اچھا' جیسے لفظ آئیں، جیسے لڑکا، بستہ۔",
+        "en": "a noun that takes words like 'aata hai', 'achha', e.g. boy, school bag."
+      }
+    },
+    {
+      "term": {
+        "ur": "مؤنث",
+        "en": "feminine"
+      },
+      "definition": {
+        "ur": "وہ اسم جس کے ساتھ 'آتی ہے'، 'اچھی' جیسے لفظ آئیں، جیسے لڑکی، کتاب۔",
+        "en": "a noun that takes words like 'aati hai', 'achhi', e.g. girl, book."
+      }
+    },
+    {
+      "term": {
+        "ur": "واحد",
+        "en": "singular"
+      },
+      "definition": {
+        "ur": "ایک چیز یا ایک شخص۔",
+        "en": "one thing or one person."
+      }
+    },
+    {
+      "term": {
+        "ur": "جمع",
+        "en": "plural"
+      },
+      "definition": {
+        "ur": "ایک سے زیادہ چیزیں یا لوگ۔",
+        "en": "more than one thing or person."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "اردو میں ہر اسم کی ایک جنس ہوتی ہے: مذکر یا مؤنث۔ چیزوں کی بھی جنس ہوتی ہے، جیسے کتاب مؤنث ہے اور بستہ مذکر۔ اسم ایک ہو تو واحد، زیادہ ہوں تو جمع کہلاتا ہے۔ جنس اور تعداد سے جملے کا فعل بھی بدلتا ہے۔ آئیں دیکھیں کیسے۔",
+    "en": "In Urdu every noun has a gender: masculine or feminine. Things have a gender too: kitaab (book) is feminine and basta (school bag) is masculine. One of something is singular; more than one is plural. Gender and number also change the verb. Let us see how."
+  },
+  "student_explanation": {
+    "ur": "ہر اسم یا مذکر ہوتا ہے یا مؤنث۔ لڑکا مذکر ہے اور لڑکی مؤنث۔ چیزوں کی بھی جنس ہوتی ہے۔ کتاب مؤنث ہے اور بستہ مذکر۔ جنس سے فعل بدلتا ہے: 'لڑکا آتا ہے'، 'لڑکی آتی ہے'۔ واحد ایک ہے اور جمع ایک سے زیادہ۔ جمع کے کئی طریقے ہیں۔ کمرہ سے کمرے، کتاب سے کتابیں، لڑکی سے لڑکیاں۔ کچھ لفظ نہیں بدلتے، جیسے ایک گھر، دو گھر۔",
+    "en": "Every noun is either masculine or feminine. A boy is masculine and a girl is feminine. Things have a gender too. Kitaab (book) is feminine and basta (bag) is masculine. Gender changes the verb: 'larka aata hai', 'larki aati hai'. Singular is one; plural is more than one. There are many ways to make plurals. Kamra becomes kamre, kitaab becomes kitaabein, larki becomes larkiyaan. Some words do not change, like one ghar, two ghar."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "'میری کتاب ___ ہے۔' (نیا / نئی) کون سا لفظ لگے گا؟",
+        "en": "'Meri kitaab ___ hai.' (naya / nayi) Which word fits?"
+      },
+      "steps": [
+        {
+          "ur": "کتاب کی جنس دیکھیں: 'کتاب' مؤنث ہے۔",
+          "en": "Check the gender of kitaab: it is feminine."
+        },
+        {
+          "ur": "مؤنث کے ساتھ 'نئی' آتا ہے، 'نیا' نہیں۔",
+          "en": "Feminine takes 'nayi', not 'naya'."
+        },
+        {
+          "ur": "'میری' بھی مؤنث ہے، اس لیے جوڑ ٹھیک ہے۔",
+          "en": "'Meri' is also feminine, so it matches."
+        },
+        {
+          "ur": "درست جملہ: 'میری کتاب نئی ہے۔'",
+          "en": "Correct sentence: 'Meri kitaab nayi hai.'"
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "'لڑکی' اور 'کمرہ' کی جمع بنائیں اور جملے میں لکھیں۔",
+        "en": "Make plurals of 'larki' and 'kamra' and use them in sentences."
+      },
+      "steps": [
+        {
+          "ur": "'لڑکی' کے آخر میں 'ی' ہے؛ 'اں' لگا کر 'لڑکیاں'۔",
+          "en": "'Larki' ends in 'ی'; add 'اں' to get 'larkiyaan'."
+        },
+        {
+          "ur": "'کمرہ' کے آخر میں 'ہ' ہے؛ 'ے' سے 'کمرے'۔",
+          "en": "'Kamra' ends in 'ہ'; change to 'ے' to get 'kamre'."
+        },
+        {
+          "ur": "جملہ: 'لڑکیاں کمرے صاف کرتی ہیں۔'",
+          "en": "Sentence: 'Larkiyaan kamre saaf karti hain.'"
+        },
+        {
+          "ur": "فعل 'کرتی ہیں' ہے، کیونکہ لڑکیاں مؤنث جمع ہیں۔",
+          "en": "The verb is 'karti hain' because larkiyaan is feminine plural."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-gender",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ان اسموں کو 'مذکر' اور 'مؤنث' کے خانوں میں رکھیں: لڑکا، کرسی، بستہ، روٹی، پانی، کتاب۔",
+        "en": "Sort these nouns into 'masculine' and 'feminine': boy, chair, school bag, roti, water, book."
+      },
+      "answer_key": {
+        "مذکر": [
+          "لڑکا",
+          "بستہ",
+          "پانی"
+        ],
+        "مؤنث": [
+          "کرسی",
+          "روٹی",
+          "کتاب"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر لفظ کے ساتھ 'اچھا' یا 'اچھی' لگا کر بولیں۔",
+            "en": "Say each word with 'achha' or 'achhi'."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-sawal",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "'سوال' کی جمع 'ات' لگا کر: ___",
+        "en": "Plural of 'sawaal' (question) with 'ات': ___"
+      },
+      "answer_key": {
+        "answer": "سوالات"
+      },
+      "accepted_variants": [
+        "سوالات"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "خیال سے خیالات بنتا ہے۔",
+            "en": "Khayaal becomes khayaalaat."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سوال سے سوالات۔ جمع کے کئی طریقے ہیں: اں، یں، ات۔",
+        "en": "Sawaal becomes sawaalaat. Plurals have many forms: اں، یں، ات."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-kitaab",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کون سا جملہ درست ہے؟",
+        "en": "Which sentence is correct?"
+      },
+      "options": [
+        {
+          "ur": "میری کتاب نیا ہے۔",
+          "en": "Meri kitaab naya hai."
+        },
+        {
+          "ur": "میری کتاب نئی ہے۔",
+          "en": "Meri kitaab nayi hai."
+        },
+        {
+          "ur": "میرا کتاب نئی ہے۔",
+          "en": "Mera kitaab nayi hai."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-gender-default-male",
+          "2": "m-gender-default-male"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کتاب مذکر ہے یا مؤنث؟",
+            "en": "Is kitaab masculine or feminine?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کتاب مؤنث ہے، اس لیے 'میری' اور 'نئی'۔",
+        "en": "Kitaab is feminine, so 'meri' and 'nayi'."
+      }
+    },
+    {
+      "id": "p2-kamra",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "'کمرہ' کی جمع کیا ہے؟",
+        "en": "What is the plural of 'kamra' (room)?"
+      },
+      "options": [
+        {
+          "ur": "کمرے",
+          "en": "kamre"
+        },
+        {
+          "ur": "کمرہیں",
+          "en": "kamrahein"
+        },
+        {
+          "ur": "کمرات",
+          "en": "kamraat"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-plural-rule-overgeneralized",
+          "2": "m-plural-rule-overgeneralized"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لڑکا سے لڑکے بنتا ہے۔ کمرہ سے؟",
+            "en": "Larka becomes larke. Kamra becomes?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "آخر کی 'ہ' یا 'ا' والے مذکر اسم 'ے' سے جمع بنتے ہیں۔",
+        "en": "Masculine nouns ending in 'ہ' or 'ا' make plurals with 'ے'."
+      }
+    },
+    {
+      "id": "p3-larki",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "'لڑکی' کی جمع کیا ہے؟",
+        "en": "What is the plural of 'larki' (girl)?"
+      },
+      "options": [
+        {
+          "ur": "لڑکیں",
+          "en": "larkein"
+        },
+        {
+          "ur": "لڑکے",
+          "en": "larke"
+        },
+        {
+          "ur": "لڑکیاں",
+          "en": "larkiyaan"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-plural-rule-overgeneralized"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "آخر میں 'ی' والے مؤنث اسم کے ساتھ 'اں' لگتا ہے۔",
+            "en": "Feminine nouns ending in 'ی' take 'اں'."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "لڑکی سے لڑکیاں، جیسے روٹی سے روٹیاں۔",
+        "en": "Larki becomes larkiyaan, like roti becomes rotiyaan."
+      }
+    },
+    {
+      "id": "p4-paani",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "'پانی' کے آخر میں 'ی' ہے، اس لیے یہ مؤنث ہے۔",
+        "en": "'Paani' ends in 'ی', so it is feminine."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہم 'پانی ٹھنڈا ہے' کہتے ہیں یا 'پانی ٹھنڈی ہے'؟",
+            "en": "Do we say 'paani thanda hai' or 'paani thandi hai'?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پانی مذکر ہے: 'پانی ٹھنڈا ہے'۔ ہاتھی اور دہی بھی مذکر ہیں۔",
+        "en": "Paani is masculine: 'paani thanda hai'. Haathi and dahi are masculine too."
+      }
+    },
+    {
+      "id": "p6-bakriyan",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "'بکریاں کھیت میں ___ ہیں۔' درست لفظ چنیں۔",
+        "en": "'Bakriyaan khet mein ___ hain.' Choose the right word."
+      },
+      "options": [
+        {
+          "ur": "چرتی",
+          "en": "charti"
+        },
+        {
+          "ur": "چرتا",
+          "en": "charta"
+        },
+        {
+          "ur": "چرتے",
+          "en": "charte"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-gender-default-male"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بکریاں مذکر ہیں یا مؤنث؟",
+            "en": "Is bakriyaan masculine or feminine?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "بکریاں مؤنث جمع ہیں: 'بکریاں چرتی ہیں'۔",
+        "en": "Bakriyaan is feminine plural: 'bakriyaan charti hain'."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-change-sentence",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "یہ جملہ جمع میں بدلیں: 'لڑکا کمرے میں کتاب پڑھتا ہے۔' پھر 'لڑکا' کی جگہ 'لڑکی' لگا کر دوبارہ لکھیں۔",
+        "en": "Change to plural: 'The boy reads a book in the room.' Then write it again with 'girl' instead of 'boy'."
+      },
+      "answer_key": {
+        "sample_answer": "لڑکے کمروں میں کتابیں پڑھتے ہیں۔ / لڑکی کمرے میں کتاب پڑھتی ہے۔"
+      },
+      "mentor_review_guidance": "Accept 'لڑکے کمرے میں کتاب پڑھتے ہیں' as correct plural of the subject. Check verb agreement in both."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-home-nouns",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کی چھ چیزوں کے نام لکھیں۔ ہر نام کے سامنے مذکر یا مؤنث لکھیں اور اس کی جمع بھی لکھیں۔",
+        "en": "Write the names of six things at home. Next to each write masculine or feminine, and its plural."
+      },
+      "answer_key": {
+        "sample_answer": "کرسی – مؤنث – کرسیاں؛ پنکھا – مذکر – پنکھے"
+      },
+      "mentor_review_guidance": "Check gender and plural; regional usage may differ, accept standard forms."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "لفظ کے ساتھ 'اچھا' یا 'اچھی' لگا کر بولیں۔ کون سا ٹھیک لگتا ہے؟",
+        "en": "Say the word with 'achha' or 'achhi'. Which sounds right?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "لفظ کا آخری حرف دیکھیں: 'ہ/ا' سے 'ے'، 'ی' سے 'یاں'، باقی کے ساتھ اکثر 'یں'۔",
+        "en": "Look at the last letter: 'ہ/ا' to 'ے', 'ی' to 'یاں', others often 'یں'."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ہر اسم کو مذکر سمجھنا۔",
+        "en": "Treats all nouns as masculine."
+      },
+      "correction": {
+        "ur": "ہر اسم کی جنس الگ ہے — یاد کریں یا نشانی دیکھیں",
+        "en": "Each noun has its own gender — remember it or look for the sign."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "جمع بنانے کا ایک ہی طریقہ ہر اسم پر لگانا۔",
+        "en": "Applies one plural rule to all nouns."
+      },
+      "correction": {
+        "ur": "جمع کے کئی طریقے ہیں (اں/یں/ات)",
+        "en": "There are several ways to make plurals (اں/یں/ات)."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-gender-default-male",
+      "remediation_ref": "URD-G4-GR-02"
+    },
+    {
+      "signal": "misses_prerequisite:URD-G4-GR-01",
+      "remediation_ref": "URD-G4-GR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "مذکر: لڑکا، بستہ، پانی۔ مؤنث: لڑکی، کتاب، روٹی۔ جمع: کمرہ–کمرے، کتاب–کتابیں، لڑکی–لڑکیاں، سوال–سوالات۔ فعل بھی جنس اور تعداد سے بدلتا ہے۔",
+    "en": "Masculine: larka, basta, paani. Feminine: larki, kitaab, roti. Plurals: kamra–kamre, kitaab–kitaabein, larki–larkiyaan, sawaal–sawaalaat. The verb changes with gender and number."
+  },
+  "summary": {
+    "ur": "ہم نے اسم کی جنس اور تعداد پہچان کر درست جملے بنانا سیکھا۔",
+    "en": "We learned to use a noun's gender and number to make correct sentences."
+  },
+  "parent_notes": {
+    "ur": "گھر کی چیزوں کے نام لے کر پوچھیں: 'یہ اچھا ہے یا اچھی؟' اور 'دو ہوں تو کیا کہیں گے؟'",
+    "en": "Name things at home and ask: 'Is it achha or achhi?' and 'What do we say for two?'"
+  },
+  "mentor_notes": {
+    "ur": "کچھ اسموں کی جنس علاقے کے لحاظ سے بدلتی ہے؛ اسکول کی معیاری اردو کو بنیاد بنائیں مگر بچے کو شرمندہ نہ کریں۔ ماضی میں 'نے' والے جملے (لڑکی نے کھانا کھایا) اس سبق میں نہ لائیں۔",
+    "en": "Some nouns' gender varies by region; use standard school Urdu but never shame the child. Keep past-tense 'ne' sentences (larki ne khana khaya) out of this lesson."
+  },
+  "accessibility_notes": {
+    "ur": "مذکر/مؤنث چارٹ کی تصویر ابھی بنانی ہے؛ رنگ کے ساتھ لکھے ہوئے لیبل ہوں، صرف رنگ نہیں۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ یہ سبق آواز سے بہت فائدہ اٹھائے گا ('اچھا/اچھی' سن کر)۔ گھسیٹنے والی سرگرمی کا متبادل: ہر لفظ کے لیے 'مذکر' یا 'مؤنث' کا بٹن۔",
+    "en": "The masculine/feminine chart picture is still to be made; it needs written labels, not colour alone. Urdu audio is not yet recorded; this lesson benefits a lot from hearing 'achha/achhi'. Alternative to the drag activity: a 'masculine' or 'feminine' button for each word."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "gender test with 'achha/achhi', then plural patterns by ending, then verb agreement in present tense",
+    "questioning_strategy": "ask 'masculine or feminine? how do you know?' before any agreement question",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "uses masculine forms for every noun",
+      "adds 'یں' to every noun"
+    ],
+    "hint_policy": "graduated; two hints max; first the achha/achhi test, then the ending pattern; never give the form first",
+    "example_policy": "home, school and farm nouns (کتاب، بستہ، روٹی، بکری، کمرہ); present tense only; no ergative 'ne' sentences",
+    "misconception_detectors": [
+      "masculine agreement with a feminine noun",
+      "one plural ending used for all nouns"
+    ],
+    "critical_thinking_prompts": [
+      "Why is 'paani' masculine even though it ends in 'ی'?"
+    ],
+    "personalization_rules": "if the learner cannot find the noun, route to URD-G4-GR-01",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "subject expert: check gender of example nouns in standard Pakistani school Urdu (بستہ، پانی، دہی، ہاتھی)",
+    "language editor: misconception corrections use the library's Urdu verbatim; confirm wording"
+  ]
+}

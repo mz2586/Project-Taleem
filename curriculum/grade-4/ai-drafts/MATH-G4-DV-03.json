@@ -1,0 +1,487 @@
+{
+  "code": "MATH-G4-DV-03",
+  "description": {
+    "ur": "دو اور تین ہندسی عدد کو ایک ہندسی عدد سے لمبی تقسیم کے طریقے سے تقسیم کرنا، باقی کے ساتھ۔",
+    "en": "Dividing 2- and 3-digit numbers by a 1-digit number with long division, including remainders."
+  },
+  "keywords": [
+    "long division",
+    "dividend",
+    "divisor",
+    "quotient",
+    "remainder",
+    "divide multiply subtract bring down"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "لمبی تقسیم",
+        "en": "long division"
+      },
+      "definition": {
+        "ur": "بڑے عدد کو قدم بہ قدم، بائیں سے تقسیم کرنے کا طریقہ۔",
+        "en": "A step-by-step way to divide a big number, starting from the left."
+      }
+    },
+    {
+      "term": {
+        "ur": "مقسوم/مقسوم علیہ",
+        "en": "dividend/divisor"
+      },
+      "definition": {
+        "ur": "مقسوم وہ عدد ہے جو بانٹا جائے؛ مقسوم علیہ وہ جس سے بانٹیں۔",
+        "en": "The dividend is the number being shared; the divisor is the number we share by."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم بڑے عدد تقسیم کریں گے، جیسے ۸۵ ÷ ۵۔ اس کے لیے ہم چار قدموں کا ایک چکر سیکھیں گے: تقسیم، ضرب، تفریق، نیچے لائیں۔ یہ چکر بار بار چلتا ہے جب تک ہندسے ختم نہ ہوں۔ ہندسوں کو سیدھ میں رکھنا بہت ضروری ہے۔",
+    "en": "Today we divide bigger numbers, like 85 ÷ 5. We learn a cycle of four steps: divide, multiply, subtract, bring down. The cycle repeats until there are no digits left. Keeping the digits lined up is very important."
+  },
+  "student_explanation": {
+    "ur": "لمبی تقسیم بائیں طرف سے شروع ہوتی ہے۔ اس میں چار قدم بار بار آتے ہیں۔ تقسیم: مقسوم علیہ کتنی بار آتا ہے؟ ضرب: مقسوم علیہ کو اس جواب سے ضرب دیں۔ تفریق: دیکھیں کتنا بچا۔ نیچے لائیں: اگلا ہندسہ نیچے لے آئیں۔ پھر چاروں قدم دوبارہ کریں۔ جب کوئی ہندسہ نہ بچے تو آخری بچا ہوا عدد باقی ہے۔ آخر میں ضرب دے کر اور باقی جمع کر کے جانچیں۔",
+    "en": "Long division starts from the left. It repeats four steps. Divide: how many times does the divisor fit? Multiply: the divisor times that answer. Subtract: see how much is left. Bring down: move the next digit down. Then do all four steps again. When no digits are left, what remains is the remainder. Check by multiplying and adding the remainder."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۸۵ ÷ ۵ = ؟",
+        "en": "85 ÷ 5 = ?"
+      },
+      "steps": [
+        {
+          "ur": "تقسیم: ۸ میں ۵ ایک بار۔ اوپر دہائی کی جگہ ۱ لکھیں۔",
+          "en": "Divide: 5 fits into 8 once. Write 1 above the tens."
+        },
+        {
+          "ur": "ضرب: ۱ × ۵ = ۵۔ تفریق: ۸ − ۵ = ۳۔",
+          "en": "Multiply: 1 × 5 = 5. Subtract: 8 − 5 = 3."
+        },
+        {
+          "ur": "نیچے لائیں: ۵ لائیں، ۳۵ بن گیا۔",
+          "en": "Bring down: bring down the 5 to make 35."
+        },
+        {
+          "ur": "تقسیم: ۳۵ میں ۵ سات بار۔ ۷ × ۵ = ۳۵، ۳۵ − ۳۵ = ۰۔ جواب ۱۷۔",
+          "en": "Divide: 5 fits into 35 seven times. 7 × 5 = 35, 35 − 35 = 0. Answer 17."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "۴۳۷ ÷ ۳ = ؟",
+        "en": "437 ÷ 3 = ?"
+      },
+      "steps": [
+        {
+          "ur": "۴ میں ۳ ایک بار: ۱ لکھیں۔ ۴ − ۳ = ۱۔ ۳ نیچے لائیں: ۱۳۔",
+          "en": "3 fits into 4 once: write 1. 4 − 3 = 1. Bring down 3: 13."
+        },
+        {
+          "ur": "۱۳ میں ۳ چار بار: ۴ لکھیں۔ ۱۳ − ۱۲ = ۱۔ ۷ نیچے لائیں: ۱۷۔",
+          "en": "3 fits into 13 four times: write 4. 13 − 12 = 1. Bring down 7: 17."
+        },
+        {
+          "ur": "۱۷ میں ۳ پانچ بار: ۵ لکھیں۔ ۱۷ − ۱۵ = ۲۔ کوئی ہندسہ نہیں بچا۔",
+          "en": "3 fits into 17 five times: write 5. 17 − 15 = 2. No digits are left."
+        },
+        {
+          "ur": "جواب: ۱۴۵ باقی ۲۔ جانچ: ۱۴۵ × ۳ + ۲ = ۴۳۷۔",
+          "en": "Answer: 145 remainder 2. Check: 145 × 3 + 2 = 437."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-order-steps",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "لمبی تقسیم کے چار قدموں کے کارڈ صحیح ترتیب میں گھسیٹیں: تفریق، تقسیم، نیچے لائیں، ضرب۔",
+        "en": "Drag the four long-division step cards into the right order: subtract, divide, bring down, multiply."
+      },
+      "answer_key": {
+        "order": [
+          "divide",
+          "multiply",
+          "subtract",
+          "bring down"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے ہم دیکھتے ہیں مقسوم علیہ کتنی بار آتا ہے۔",
+            "en": "First we see how many times the divisor fits."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-84div6",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۸۴ ÷ ۶ = ___",
+        "en": "84 ÷ 6 = ___"
+      },
+      "answer_key": {
+        "answer": "14"
+      },
+      "accepted_variants": [
+        "14",
+        "۱۴"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۸ میں ۶ ایک بار۔ کتنا بچا؟ اگلا ہندسہ نیچے لائیں۔",
+            "en": "6 fits into 8 once. What is left? Bring down the next digit."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۸ − ۶ = ۲، ۴ نیچے لائیں: ۲۴۔ ۲۴ ÷ ۶ = ۴۔ جواب ۱۴۔",
+        "en": "8 − 6 = 2, bring down 4: 24. 24 ÷ 6 = 4. Answer 14."
+      }
+    },
+    {
+      "id": "p6-412div4",
+      "type": "fill_blank",
+      "competency": "analysis",
+      "stem": {
+        "ur": "۴۱۲ ÷ ۴ = ___",
+        "en": "412 ÷ 4 = ___"
+      },
+      "answer_key": {
+        "answer": "103"
+      },
+      "accepted_variants": [
+        "103",
+        "۱۰۳"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جب ۱ میں ۴ نہ آئے تو جواب میں ۰ لکھیں، پھر اگلا ہندسہ لائیں۔",
+            "en": "When 4 does not fit into 1, write 0 in the answer, then bring down the next digit."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴ میں ۴ ایک بار۔ ۱ میں ۴ صفر بار: ۰ لکھیں۔ ۱۲ میں ۴ تین بار۔ جواب ۱۰۳۔",
+        "en": "4 into 4 once. 4 into 1 zero times: write 0. 4 into 12 three times. Answer 103."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-96div4",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۹۶ ÷ ۴ = ؟",
+        "en": "96 ÷ 4 = ?"
+      },
+      "options": [
+        {
+          "ur": "۳۴",
+          "en": "34"
+        },
+        {
+          "ur": "۲۴",
+          "en": "24"
+        },
+        {
+          "ur": "۳۸۴",
+          "en": "384"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "2": "m-div-bigger-answer"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۹ میں ۴ کتنی بار آتا ہے؟",
+            "en": "How many times does 4 fit into 9?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۹ میں ۴ دو بار، ۱ بچا۔ ۱۶ میں ۴ چار بار۔ جواب ۲۴۔",
+        "en": "4 fits into 9 twice, 1 left. 4 fits into 16 four times. Answer 24."
+      }
+    },
+    {
+      "id": "p3-625div5",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۶۲۵ ÷ ۵ = ؟",
+        "en": "625 ÷ 5 = ?"
+      },
+      "options": [
+        {
+          "ur": "۱۲۵",
+          "en": "125"
+        },
+        {
+          "ur": "۱۰۵",
+          "en": "105"
+        },
+        {
+          "ur": "۱۲ باقی ۵",
+          "en": "12 remainder 5"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر قدم کے بعد اگلا ہندسہ نیچے لانا نہ بھولیں۔",
+            "en": "Do not forget to bring down the next digit after each step."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۶ میں ۵ ایک بار، ۱ بچا۔ ۱۲ میں ۵ دو بار، ۲ بچے۔ ۲۵ میں ۵ پانچ بار۔ جواب ۱۲۵۔",
+        "en": "5 into 6 once, 1 left. 5 into 12 twice, 2 left. 5 into 25 five times. Answer 125."
+      }
+    },
+    {
+      "id": "p4-158div4",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۱۵۸ ÷ ۴ = ؟",
+        "en": "158 ÷ 4 = ?"
+      },
+      "options": [
+        {
+          "ur": "۳۹",
+          "en": "39"
+        },
+        {
+          "ur": "۳۸ باقی ۶",
+          "en": "38 remainder 6"
+        },
+        {
+          "ur": "۳۹ باقی ۲",
+          "en": "39 remainder 2"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-remainder-dropped"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "آخری تفریق کے بعد کیا بچا؟",
+            "en": "What is left after the last subtraction?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴ × ۳۹ = ۱۵۶، ۱۵۸ − ۱۵۶ = ۲۔ جواب ۳۹ باقی ۲۔",
+        "en": "4 × 39 = 156, 158 − 156 = 2. Answer 39 remainder 2."
+      }
+    },
+    {
+      "id": "p5-check-97",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۹۷ ÷ ۶ = ۱۶ باقی ۱ کو جانچنے کے لیے ۱۶ × ۶ + ۱ نکالیں۔ یہ ۹۷ آتا ہے۔",
+        "en": "To check 97 ÷ 6 = 16 remainder 1, work out 16 × 6 + 1. It gives 97."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۱۶ × ۶ کتنے ہیں؟",
+            "en": "What is 16 × 6?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱۶ × ۶ = ۹۶، ۹۶ + ۱ = ۹۷۔ جواب درست ہے۔",
+        "en": "16 × 6 = 96, 96 + 1 = 97. The answer is right."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-share-745",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "۷۴۵ روپے ۵ دوستوں میں برابر بانٹیں۔ ہر ایک کو کتنے ملیں گے؟ اگر ایک دوست اور آ جائے (۶ دوست) تو ہر ایک کو کتنے ملیں گے اور کتنے بچیں گے؟",
+        "en": "Share Rs 745 equally among 5 friends. How much does each get? If one more friend joins (6 friends), how much does each get, and how much is left over?"
+      },
+      "answer_key": {
+        "answer": "Rs 149 each; with 6 friends Rs 124 each, Rs 1 left over"
+      },
+      "accepted_variants": [
+        "149; 124 remainder 1",
+        "۱۴۹؛ ۱۲۴ باقی ۱"
+      ],
+      "mentor_review_guidance": "Credit both quotients and the remainder; note that each friend gets less when more people share.",
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دونوں تقسیمیں الگ الگ کریں اور ضرب سے جانچیں۔",
+            "en": "Do the two divisions separately and check each by multiplying."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-long-division",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "لمبی تقسیم کا ایک سوال حل کریں۔",
+        "en": "one long-division problem."
+      },
+      "answer_key": {
+        "answer": "a correct quotient and remainder with all four steps shown"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "بائیں سے شروع",
+        "en": "Start from the left."
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "تقسیم، ضرب، تفریق، نیچے لائیں",
+        "en": "Divide, multiply, subtract, bring down."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "تقسیم میں بچی ہوئی چیز (باقی) کو چھوڑ دینا۔",
+        "en": "Ignores the remainder in division"
+      },
+      "correction": {
+        "ur": "جو بچ جائے وہ باقی ہے، اسے لکھیں",
+        "en": "What is left over is the remainder; write it."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "جب مقسوم علیہ کسی ہندسے میں نہ آئے تو جواب میں ۰ نہ لکھنا، جس سے ہندسے سیدھ سے ہٹ جاتے ہیں (۴۱۲ ÷ ۴ کو ۱۳ لکھنا)۔",
+        "en": "Skipping the 0 in the answer when the divisor does not fit, so digits slip out of line (writing 13 for 412 ÷ 4)."
+      },
+      "correction": {
+        "ur": "ہر لائے گئے ہندسے کے لیے جواب میں ایک ہندسہ لکھیں، چاہے وہ ۰ ہو۔",
+        "en": "Write one answer digit for every digit you bring down, even if it is 0."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-remainder-dropped",
+      "remediation_ref": "MATH-G4-DV-02"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-DV-02",
+      "remediation_ref": "MATH-G4-DV-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "بائیں سے شروع کریں۔ چکر: تقسیم، ضرب، تفریق، نیچے لائیں۔ مقسوم علیہ نہ آئے تو ۰ لکھیں۔ آخر میں بچا ہوا باقی ہے۔ جانچ: جواب × مقسوم علیہ + باقی۔",
+    "en": "Start from the left. Cycle: divide, multiply, subtract, bring down. If the divisor does not fit, write 0. What is left at the end is the remainder. Check: answer × divisor + remainder."
+  },
+  "summary": {
+    "ur": "ہم نے چار قدموں کے چکر سے لمبی تقسیم کرنا اور جواب جانچنا سیکھا۔",
+    "en": "We learned long division with the four-step cycle, and how to check the answer."
+  },
+  "parent_notes": {
+    "ur": "کسی بل کو چند لوگوں میں برابر تقسیم کریں۔",
+    "en": "split a bill equally among people."
+  },
+  "mentor_notes": {
+    "ur": "چار قدموں کا چکر بار بار مشق مانگتا ہے؛ ہندسے سیدھ میں رکھیں۔",
+    "en": "the four-step cycle needs repetition; keep digits aligned."
+  },
+  "accessibility_notes": {
+    "ur": "لمبی تقسیم کی ترتیب والی تصویر ابھی بنانی ہے؛ متبادل متن ہر قدم کو ترتیب سے پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے کا متبادل: چاروں کارڈوں پر ترتیب سے ٹیپ کریں (۱، ۲، ۳، ۴)۔",
+    "en": "The long-division layout picture is still to be made; alt text should read each step in order. Urdu audio is not yet recorded. Alternative to dragging: tap the four cards in order (1, 2, 3, 4)."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "repeat the cycle divide, multiply, subtract, bring down from the left; one quotient digit per digit brought down; check with answer × divisor + remainder",
+    "questioning_strategy": "at each cycle ask 'how many times does the divisor fit?' and 'what is left?' before bringing down",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "skips a 0 in the quotient",
+      "drops the remainder",
+      "remainder larger than the divisor"
+    ],
+    "hint_policy": "graduated; two hints max (start from the left; the four-step cycle) then a worked re-teach with 85 ÷ 5; never give the answer first",
+    "example_policy": "2- and 3-digit dividends with 1-digit divisors, some exact, some with remainders, one with a 0 in the quotient; money and sharing contexts",
+    "misconception_detectors": [
+      "answers 39 for 158 ÷ 4",
+      "answers 13 for 412 ÷ 4",
+      "multiplies instead of dividing (384 for 96 ÷ 4)"
+    ],
+    "critical_thinking_prompts": [
+      "Why does each friend get less when one more friend joins?"
+    ],
+    "personalization_rules": "if single-step facts with remainders are weak, route to MATH-G4-DV-02",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the doc lists 'alignment errors' without a library id; the draft writes it as a missing quotient zero; confirm the wording",
+    "subject expert: confirm the long-division layout (quotient written above the dividend) matches local practice; the draft does not assume a picture"
+  ]
+}

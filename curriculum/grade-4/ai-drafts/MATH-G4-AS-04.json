@@ -1,0 +1,490 @@
+{
+  "code": "MATH-G4-AS-04",
+  "description": {
+    "ur": "گول کر کے جمع اور تفریق کا اندازہ لگانا اور دیکھنا کہ جواب معقول ہے یا نہیں۔",
+    "en": "Estimating sums and differences by rounding, and checking whether an answer is reasonable."
+  },
+  "keywords": [
+    "estimation",
+    "rounding",
+    "reasonable",
+    "checking",
+    "addition",
+    "subtraction"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "اندازہ",
+        "en": "estimate"
+      },
+      "definition": {
+        "ur": "گول عددوں سے نکالا گیا قریب کا جواب۔",
+        "en": "A close answer worked out with rounded numbers."
+      }
+    },
+    {
+      "term": {
+        "ur": "معقول",
+        "en": "reasonable"
+      },
+      "definition": {
+        "ur": "جو اندازے کے قریب ہو اور سمجھ میں آئے۔",
+        "en": "Close to the estimate, so it makes sense."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "اچھے حساب دان جواب نکالنے سے پہلے اندازہ لگاتے ہیں۔ آج ہم عددوں کو گول کر کے جلدی اندازہ لگائیں گے۔ پھر اصل جواب کا اندازے سے موازنہ کریں گے۔ اگر دونوں بہت دور ہوں تو ہم اپنا حساب دوبارہ دیکھیں گے۔ یہ اپنی غلطی خود پکڑنے کا طریقہ ہے۔",
+    "en": "Good problem-solvers estimate before they work out the answer. Today we round numbers to make a quick estimate. Then we compare the exact answer with the estimate. If they are far apart, we look at our working again. This is a way to catch our own mistakes."
+  },
+  "student_explanation": {
+    "ur": "اندازہ ایک قریب کا جواب ہے، بالکل ٹھیک جواب نہیں۔ اندازہ لگانے کے لیے پہلے ہر عدد کو گول کریں۔ پھر گول عددوں کو جمع یا تفریق کریں۔ یہ ذہن میں جلدی ہو جاتا ہے۔ اب اصل جواب نکالیں۔ کیا وہ اندازے کے قریب ہے؟ اگر ہاں، تو جواب معقول ہے۔ اگر بہت دور ہے تو اپنا حساب دوبارہ جانچیں۔",
+    "en": "An estimate is a close answer, not the exact one. To estimate, first round each number. Then add or subtract the rounded numbers. This is quick to do in your head. Now work out the exact answer. Is it close to your estimate? If yes, the answer is reasonable. If it is far away, check your working again."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۲۹۷ + ۴۰۵ کا اندازہ لگائیں، پھر جانچیں۔",
+        "en": "Estimate 297 + 405, then check."
+      },
+      "steps": [
+        {
+          "ur": "قریب ترین سو تک گول کریں: ۲۹۷ ≈ ۳۰۰، ۴۰۵ ≈ ۴۰۰۔",
+          "en": "Round to the nearest 100: 297 ≈ 300, 405 ≈ 400."
+        },
+        {
+          "ur": "اندازہ: ۳۰۰ + ۴۰۰ = ۷۰۰۔",
+          "en": "Estimate: 300 + 400 = 700."
+        },
+        {
+          "ur": "اصل جواب: ۲۹۷ + ۴۰۵ = ۷۰۲۔",
+          "en": "Exact answer: 297 + 405 = 702."
+        },
+        {
+          "ur": "۷۰۲، ۷۰۰ کے بہت قریب ہے، اس لیے جواب معقول ہے۔",
+          "en": "702 is very close to 700, so the answer is reasonable."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "حرا کہتی ہے ۸۱۲ − ۳۸۹ = ۵۲۳۔ کیا یہ معقول ہے؟",
+        "en": "Hira says 812 − 389 = 523. Is that reasonable?"
+      },
+      "steps": [
+        {
+          "ur": "گول کریں: ۸۱۲ ≈ ۸۰۰، ۳۸۹ ≈ ۴۰۰۔",
+          "en": "Round: 812 ≈ 800, 389 ≈ 400."
+        },
+        {
+          "ur": "اندازہ: ۸۰۰ − ۴۰۰ = ۴۰۰۔",
+          "en": "Estimate: 800 − 400 = 400."
+        },
+        {
+          "ur": "۵۲۳، ۴۰۰ سے کافی دور ہے۔ حساب دوبارہ کریں۔",
+          "en": "523 is quite far from 400. Work it out again."
+        },
+        {
+          "ur": "۸۱۲ − ۳۸۹ = ۴۲۳۔ یہ ۴۰۰ کے قریب ہے، تو یہی درست ہے۔",
+          "en": "812 − 389 = 423. That is close to 400, so this is right."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-reasonable-or-not",
+      "type": "interactive",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہر کارڈ کو \"معقول\" یا \"معقول نہیں\" والے ڈبے میں رکھیں۔ (الف) ۳۹۵ + ۲۱۰ = ۶۰۵ (ب) ۹۰۳ − ۴۹۸ = ۵۰۵ (ج) ۱۵۱۰ + ۲۴۹۰ = ۴۰۰۰",
+        "en": "Put each card in the \"reasonable\" or \"not reasonable\" box. (a) 395 + 210 = 605 (b) 903 − 498 = 505 (c) 1510 + 2490 = 4000"
+      },
+      "answer_key": {
+        "reasonable": [
+          "a",
+          "c"
+        ],
+        "not_reasonable": [
+          "b"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر ایک کا اندازہ گول عددوں سے لگائیں۔",
+            "en": "Estimate each one with rounded numbers."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-round-prices",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "ہر قیمت کو قریب ترین دس تک گول کر کے جمع کریں: ۴۸ روپے + ۷۳ روپے ≈ ___ روپے",
+        "en": "Round each price to the nearest 10 and add: Rs 48 + Rs 73 ≈ Rs ___"
+      },
+      "answer_key": {
+        "answer": "120"
+      },
+      "accepted_variants": [
+        "120",
+        "۱۲۰"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۴۸ ≈ ۵۰۔ ۷۳ کو گول کریں۔",
+            "en": "48 ≈ 50. Now round 73."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۵۰ + ۷۰ = ۱۲۰۔",
+        "en": "50 + 70 = 120."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-estimate-418",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۴۱۸ + ۲۹۱ کا قریب ترین سو تک گول کر کے اندازہ لگائیں۔",
+        "en": "Estimate 418 + 291 by rounding to the nearest 100."
+      },
+      "options": [
+        {
+          "ur": "۶۰۰",
+          "en": "600"
+        },
+        {
+          "ur": "۷۰۰",
+          "en": "700"
+        },
+        {
+          "ur": "۸۰۰",
+          "en": "800"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۴۱۸ کس سو کے قریب ہے؟ ۲۹۱ کس سو کے؟",
+            "en": "Which hundred is 418 near? And 291?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴۰۰ + ۳۰۰ = ۷۰۰۔ اصل جواب ۷۰۹ ہے، جو قریب ہے۔",
+        "en": "400 + 300 = 700. The exact answer is 709, which is close."
+      }
+    },
+    {
+      "id": "p2-estimate-6820",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۶۸۲۰ − ۳۱۹۰ کا قریب ترین سو تک گول کر کے اندازہ لگائیں۔",
+        "en": "Estimate 6820 − 3190 by rounding to the nearest 100."
+      },
+      "options": [
+        {
+          "ur": "۳۶۰۰",
+          "en": "3,600"
+        },
+        {
+          "ur": "۳۷۰۰",
+          "en": "3,700"
+        },
+        {
+          "ur": "۴۰۰۰",
+          "en": "4,000"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۶۸۲۰ ≈ ۶۸۰۰۔ اب ۳۱۹۰ کو گول کریں۔",
+            "en": "6820 ≈ 6800. Now round 3190."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۶۸۰۰ − ۳۲۰۰ = ۳۶۰۰۔ اصل جواب ۳۶۳۰ ہے۔",
+        "en": "6800 − 3200 = 3600. The exact answer is 3630."
+      }
+    },
+    {
+      "id": "p3-which-wrong",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ان میں سے کون سا جواب یقیناً غلط ہے؟",
+        "en": "Which of these answers must be wrong?"
+      },
+      "options": [
+        {
+          "ur": "۵۱۲ + ۲۸۹ = ۸۰۱",
+          "en": "512 + 289 = 801"
+        },
+        {
+          "ur": "۶۴۰ + ۱۷۵ = ۸۱۵",
+          "en": "640 + 175 = 815"
+        },
+        {
+          "ur": "۷۳۰ + ۲۴۸ = ۱۰۷۸",
+          "en": "730 + 248 = 1078"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر ایک کا اندازہ لگائیں: ۷۰۰ + ۲۰۰ کتنے ہیں؟",
+            "en": "Estimate each one: what is 700 + 200?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۷۰۰ + ۲۰۰ = ۹۰۰، اس لیے ۱۰۷۸ بہت بڑا ہے۔ اصل جواب ۹۷۸ ہے۔",
+        "en": "700 + 200 = 900, so 1078 is far too big. The exact answer is 978."
+      }
+    },
+    {
+      "id": "p4-usman",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "عثمان کہتا ہے ۱۹۸۰ + ۲۰۳۰ = ۳۰۱۰۔ اس کا جواب معقول ہے۔",
+        "en": "Usman says 1980 + 2030 = 3010. His answer is reasonable."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دونوں عدد کس ہزار کے قریب ہیں؟",
+            "en": "Which thousand is each number close to?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اندازہ ۲۰۰۰ + ۲۰۰۰ = ۴۰۰۰ ہے۔ ۳۰۱۰ بہت دور ہے۔ اصل جواب ۴۰۱۰ ہے۔",
+        "en": "The estimate is 2000 + 2000 = 4000. 3010 is far away. The exact answer is 4010."
+      }
+    },
+    {
+      "id": "p6-enough-money",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "آپ کے پاس ۵۰۰ روپے ہیں۔ آپ ۱۹۸، ۱۴۷ اور ۲۱۲ روپے کی تین چیزیں خریدنا چاہتے ہیں۔ کیا ۵۰۰ روپے کافی ہیں؟",
+        "en": "You have Rs 500. You want to buy three things costing Rs 198, Rs 147 and Rs 212. Is Rs 500 enough?"
+      },
+      "options": [
+        {
+          "ur": "ہاں، کافی ہیں",
+          "en": "Yes, it is enough"
+        },
+        {
+          "ur": "نہیں، کافی نہیں",
+          "en": "No, it is not enough"
+        },
+        {
+          "ur": "بالکل پورے ہیں",
+          "en": "It is exactly enough"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر قیمت کو قریب ترین دس تک گول کر کے جمع کریں۔",
+            "en": "Round each price to the nearest 10 and add."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۲۰۰ + ۱۵۰ + ۲۱۰ = ۵۶۰، جو ۵۰۰ سے زیادہ ہے۔ اصل کل ۵۵۷ روپے ہے۔",
+        "en": "200 + 150 + 210 = 560, which is more than 500. The exact total is Rs 557."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-rubina",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "روبینہ نے ۳۴۹ + ۲۵۱ کا اندازہ ۳۰۰ + ۳۰۰ = ۶۰۰ لگایا۔ وہ کہتی ہے اصل جواب ۶۰۰ سے ضرور کم ہوگا۔ کیا وہ ٹھیک ہے؟ وجہ بتائیں۔",
+        "en": "Rubina estimated 349 + 251 as 300 + 300 = 600. She says the exact answer must be less than 600. Is she right? Explain."
+      },
+      "answer_key": {
+        "answer": "No. The exact sum is 600: 349 was rounded down by 49 and 251 was rounded up by 49."
+      },
+      "accepted_variants": [
+        "600",
+        "۶۰۰"
+      ],
+      "mentor_review_guidance": "Credit any explanation that one number was rounded down and the other up by the same amount.",
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر عدد گول کرنے میں کتنا اوپر یا نیچے گیا؟",
+            "en": "How far up or down did each number move when rounded?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-shopping-estimate",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "خریداری کے کل کا اندازہ لگائیں، پھر اصل جواب سے جانچیں۔",
+        "en": "estimate a shopping total, then check."
+      },
+      "answer_key": {
+        "answer": "an estimate and an exact total that are close"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "ہر عدد کو گول کریں",
+        "en": "Round each number."
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "اب جوڑیں",
+        "en": "Now add."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "غلط طرف گول کرنا، مثلاً ۴۱۸ کو ۵۰۰ یا ۲۹۱ کو ۲۰۰ بنانا۔",
+        "en": "Rounding the wrong way, e.g. 418 to 500 or 291 to 200."
+      },
+      "correction": {
+        "ur": "صحیح ہندسہ دیکھیں: ۴۱۸ ≈ ۴۰۰ اور ۲۹۱ ≈ ۳۰۰۔",
+        "en": "Look at the right digit: 418 ≈ 400 and 291 ≈ 300."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "یہ سمجھنا کہ اندازہ اور اصل جواب بالکل برابر ہونے چاہییں۔",
+        "en": "Thinking the estimate and the exact answer must be exactly equal."
+      },
+      "correction": {
+        "ur": "اندازہ صرف قریب ہوتا ہے۔ جانچ کے لیے قریب ہونا کافی ہے۔",
+        "en": "An estimate is only close. Close is enough for checking."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:MATH-G4-NB-04",
+      "remediation_ref": "MATH-G4-NB-04"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-AS-03",
+      "remediation_ref": "MATH-G4-AS-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "گول کریں، جمع یا تفریق کریں، اصل جواب سے موازنہ کریں۔ قریب ہو تو معقول، دور ہو تو دوبارہ جانچیں۔",
+    "en": "Round, add or subtract, compare with the exact answer. Close means reasonable; far means check again."
+  },
+  "summary": {
+    "ur": "ہم نے گول کر کے اندازہ لگانا اور جواب کو اندازے سے جانچنا سیکھا۔",
+    "en": "We learned to estimate by rounding and to check answers against the estimate."
+  },
+  "parent_notes": {
+    "ur": "دکاندار کے حساب لگانے سے پہلے کل رقم کا اندازہ لگائیں۔",
+    "en": "guess the total before the shopkeeper adds it up."
+  },
+  "mentor_notes": {
+    "ur": "اندازے کو الگ سبق نہیں، بلکہ اپنا جواب جانچنے کی عادت کے طور پر پیش کریں۔",
+    "en": "frame estimation as a self-check habit, not a separate topic."
+  },
+  "accessibility_notes": {
+    "ur": "جمع/تفریق کارڈوں کی تصویریں ابھی بنانی ہیں؛ متبادل متن ہر کارڈ کا حساب پورا پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ نشان ≈ کو \"تقریباً\" پڑھا جائے۔ گھسیٹنے کا متبادل: ہر کارڈ کے نیچے \"معقول / معقول نہیں\" بٹن۔",
+    "en": "The sum/difference card pictures are still to be made; alt text should read each card's calculation in full. Urdu audio is not yet recorded; the sign ≈ should be read as \"about\". Alternative to dragging: a \"reasonable / not reasonable\" button under each card."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "estimate before calculating: round each number, combine, then compare the exact answer with the estimate as a self-check",
+    "questioning_strategy": "ask 'about how big should the answer be?' before the learner calculates, and 'is your answer close to that?' after",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "rounds in the wrong direction",
+      "treats the estimate as the final answer when an exact answer is asked"
+    ],
+    "hint_policy": "graduated; two hints max (round each number; now add or subtract) then a worked re-teach on a parallel pair; never give the answer first",
+    "example_policy": "3- and 4-digit sums and differences, including one deliberate wrong answer to catch; rupee shopping totals with modest prices",
+    "misconception_detectors": [
+      "rounds 418 to 500 or 291 to 200",
+      "judges a far-off answer (523 for 812 − 389) as reasonable"
+    ],
+    "critical_thinking_prompts": [
+      "When can an estimate be exactly the same as the real answer?"
+    ],
+    "personalization_rules": "if rounding is the weak step, route to MATH-G4-NB-04; if the exact calculation is weak, route to MATH-G4-AS-03",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: 'reasonable' has no fixed cut-off; items use clear-cut cases (off by about 100 or 1000); confirm this is fair for Grade 4",
+    "subject expert: the library has no rounding id, so no distractors are tagged; the two misconceptions are new wording"
+  ]
+}

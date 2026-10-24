@@ -1,0 +1,438 @@
+{
+  "code": "SCI-G4-ENF-02",
+  "title": {
+    "ur": "روشنی اور آواز",
+    "en": "Light and sound"
+  },
+  "description": {
+    "ur": "روشنی اور آواز کو روزمرہ زندگی کی توانائی کے طور پر پہچاننا، اور ان کے ذرائع بتانا۔",
+    "en": "Identifying light and sound as everyday forms of energy, and naming their sources."
+  },
+  "keywords": [
+    "energy",
+    "light",
+    "sound",
+    "source",
+    "vibration",
+    "see",
+    "hear"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "توانائی",
+        "en": "energy"
+      },
+      "definition": {
+        "ur": "کام کرنے کی طاقت؛ روشنی اور آواز توانائی کی شکلیں ہیں۔",
+        "en": "The power to make things happen; light and sound are kinds of energy."
+      }
+    },
+    {
+      "term": {
+        "ur": "ذریعہ",
+        "en": "source"
+      },
+      "definition": {
+        "ur": "وہ چیز جس سے روشنی یا آواز نکلے۔",
+        "en": "The thing that light or sound comes from."
+      }
+    },
+    {
+      "term": {
+        "ur": "تھرتھراہٹ",
+        "en": "vibration"
+      },
+      "definition": {
+        "ur": "بہت تیزی سے آگے پیچھے ہلنا؛ اسی سے آواز بنتی ہے۔",
+        "en": "Shaking back and forth very fast; this is how sound is made."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آنکھیں بند کرو اور سنو۔ کیا سنائی دے رہا ہے؟ اب آنکھیں کھولو: کیا دکھائی دے رہا ہے؟ ہم روشنی سے دیکھتے ہیں اور آواز سے سنتے ہیں۔ آج ہم جانیں گے کہ روشنی اور آواز دونوں توانائی ہیں، اور یہ کہاں سے آتی ہیں۔",
+    "en": "Close your eyes and listen. What can you hear? Now open your eyes: what can you see? We see with light and hear with sound. Today we learn that light and sound are both energy, and where they come from."
+  },
+  "student_explanation": {
+    "ur": "روشنی اور آواز توانائی کی شکلیں ہیں۔ روشنی کی وجہ سے ہم دیکھ سکتے ہیں۔ سورج روشنی کا سب سے بڑا ذریعہ ہے۔ بلب، ٹارچ اور جگنو بھی روشنی دیتے ہیں۔ چاند اپنی روشنی نہیں دیتا۔ وہ سورج کی روشنی لوٹاتا ہے۔ آواز تھرتھراہٹ سے بنتی ہے۔ ڈھول بجاؤ تو اس کی جھلی کانپتی ہے۔ آواز ہوا میں سفر کر کے کان تک پہنچتی ہے۔",
+    "en": "Light and sound are kinds of energy. Light lets us see. The Sun is the biggest source of light. Bulbs, torches and fireflies also give light. The Moon does not make its own light. It reflects sunlight. Sound is made by vibration. When you beat a drum, its skin shakes. Sound travels through the air to our ears."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "اپنی آواز کی تھرتھراہٹ کیسے محسوس کریں؟",
+        "en": "How can you feel your own voice vibrating?"
+      },
+      "steps": [
+        {
+          "ur": "اپنی انگلیاں ہلکے سے گلے پر رکھو۔",
+          "en": "Put your fingers gently on your throat."
+        },
+        {
+          "ur": "\"آآآ\" کی لمبی آواز نکالو۔",
+          "en": "Hum a long 'aaa' sound."
+        },
+        {
+          "ur": "انگلیوں کو کپکپی محسوس ہوگی۔ یہی تھرتھراہٹ آواز بناتی ہے۔",
+          "en": "Your fingers feel a buzz. That vibration makes the sound."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ان میں سے روشنی کا ذریعہ کون ہے: آئینہ یا ٹارچ؟",
+        "en": "Which is a source of light: a mirror or a torch?"
+      },
+      "steps": [
+        {
+          "ur": "اندھیرے کمرے میں ٹارچ جلاؤ تو اس سے روشنی نکلتی ہے۔",
+          "en": "In a dark room a switched-on torch gives out light."
+        },
+        {
+          "ur": "اندھیرے میں آئینہ کچھ روشنی نہیں دیتا؛ وہ صرف آنے والی روشنی لوٹاتا ہے۔",
+          "en": "In the dark a mirror gives no light; it only reflects light that reaches it."
+        },
+        {
+          "ur": "تو ٹارچ ذریعہ ہے، آئینہ نہیں۔",
+          "en": "So the torch is a source; the mirror is not."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-light-sound",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر چیز کو خانے میں رکھو: روشنی کا ذریعہ، آواز کا ذریعہ۔ سورج، ڈھول، جگنو، گھنٹی، ٹارچ، بانسری۔",
+        "en": "Put each thing in a box: source of light, or source of sound. Sun, drum, firefly, bell, torch, flute."
+      },
+      "answer_key": {
+        "light_source": [
+          "sun",
+          "firefly",
+          "torch"
+        ],
+        "sound_source": [
+          "drum",
+          "bell",
+          "flute"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اس سے ہمیں کچھ دکھتا ہے یا سنائی دیتا ہے؟",
+            "en": "Does it help us see, or help us hear?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-biggest-light",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "روشنی کا سب سے بڑا قدرتی ذریعہ کیا ہے؟",
+        "en": "What is the biggest natural source of light?"
+      },
+      "options": [
+        {
+          "ur": "چاند",
+          "en": "The Moon"
+        },
+        {
+          "ur": "سورج",
+          "en": "The Sun"
+        },
+        {
+          "ur": "بلب",
+          "en": "A bulb"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "سورج اپنی روشنی خود دیتا ہے؛ چاند سورج کی روشنی لوٹاتا ہے۔",
+        "en": "The Sun makes its own light; the Moon reflects the Sun's light."
+      }
+    },
+    {
+      "id": "p2-moon",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "چاند اپنی روشنی خود بناتا ہے۔",
+        "en": "The Moon makes its own light."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "چاند پر سورج کی روشنی پڑتی ہے اور وہ ہماری طرف لوٹتی ہے۔",
+        "en": "Sunlight falls on the Moon and bounces back towards us."
+      }
+    },
+    {
+      "id": "p3-sound-made",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "آواز کیسے بنتی ہے؟",
+        "en": "How is sound made?"
+      },
+      "options": [
+        {
+          "ur": "کسی چیز کی تھرتھراہٹ سے",
+          "en": "By something vibrating"
+        },
+        {
+          "ur": "روشنی سے",
+          "en": "By light"
+        },
+        {
+          "ur": "رنگ سے",
+          "en": "By colour"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-see",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اندھیرے کمرے میں ہم کچھ کیوں نہیں دیکھ پاتے؟",
+        "en": "Why can't we see anything in a fully dark room?"
+      },
+      "options": [
+        {
+          "ur": "کیونکہ کمرے میں آواز نہیں",
+          "en": "Because there is no sound"
+        },
+        {
+          "ur": "کیونکہ ہماری آنکھیں بند ہیں",
+          "en": "Because our eyes are closed"
+        },
+        {
+          "ur": "کیونکہ چیزوں سے روشنی ہماری آنکھوں تک نہیں آ رہی",
+          "en": "Because no light is coming from things to our eyes"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-drum",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ڈھول بجانے پر اس کی جھلی کانپتی ہے اور آواز بنتی ہے۔",
+        "en": "When a drum is beaten, its skin shakes and makes sound."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-energy",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "روشنی اور آواز دونوں کیا ہیں؟",
+        "en": "What are light and sound both?"
+      },
+      "options": [
+        {
+          "ur": "ٹھوس",
+          "en": "Solids"
+        },
+        {
+          "ur": "توانائی کی شکلیں",
+          "en": "Kinds of energy"
+        },
+        {
+          "ur": "جاندار",
+          "en": "Living things"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-thunder",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "آسمانی بجلی کی چمک پہلے دکھتی ہے اور گرج بعد میں سنائی دیتی ہے۔ کیوں؟",
+        "en": "We see lightning before we hear the thunder. Why?"
+      },
+      "options": [
+        {
+          "ur": "روشنی آواز سے بہت تیز سفر کرتی ہے",
+          "en": "Light travels much faster than sound"
+        },
+        {
+          "ur": "گرج بعد میں پیدا ہوتی ہے",
+          "en": "The thunder is made later"
+        },
+        {
+          "ur": "کان آنکھوں سے سست ہیں",
+          "en": "Ears are slower than eyes"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "چمک اور گرج ایک ساتھ بنتی ہیں، مگر روشنی بہت تیز پہنچتی ہے۔",
+        "en": "The flash and the thunder happen together, but light arrives much faster."
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-rubber-band",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک ربڑ بینڈ کو خالی ڈبے یا کٹوری کے گرد کھینچ کر چڑھاؤ اور انگلی سے چھیڑو۔ کیا دیکھا اور کیا سنا؟ لکھو یا کسی بڑے کو بتاؤ۔ ربڑ بینڈ کو چہرے سے دور رکھو۔",
+        "en": "Stretch a rubber band round an empty box or bowl and pluck it with a finger. What did you see and hear? Write it or tell an adult. Keep the band away from your face."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Look for: the band shakes (vibrates) and a sound is heard; credit linking the shaking to the sound."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچو: یہ چیز ہمیں دیکھنے میں مدد دیتی ہے یا سننے میں؟",
+        "en": "Think: does this help us see, or help us hear?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "روشنی کا ذریعہ اندھیرے میں بھی روشنی دیتا ہے۔ آواز کا ذریعہ تھرتھراتا ہے۔",
+        "en": "A light source shines even in the dark. A sound source vibrates."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "چاند روشنی کا ذریعہ ہے۔",
+        "en": "The Moon is a source of light."
+      },
+      "correction": {
+        "ur": "چاند صرف سورج کی روشنی لوٹاتا ہے؛ وہ خود روشنی نہیں بناتا۔",
+        "en": "The Moon only reflects sunlight; it does not make light itself."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ہم اس لیے دیکھتے ہیں کہ ہماری آنکھوں سے روشنی نکلتی ہے۔",
+        "en": "We see because light comes out of our eyes."
+      },
+      "correction": {
+        "ur": "روشنی چیزوں سے ہماری آنکھوں میں آتی ہے، تب ہم دیکھتے ہیں۔",
+        "en": "Light comes from things into our eyes; that is how we see."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "calls the Moon a light source twice",
+      "remediation_ref": "SCI-G4-ENF-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "روشنی اور آواز توانائی ہیں۔ روشنی کے ذرائع: سورج، بلب، ٹارچ، جگنو۔ چاند روشنی لوٹاتا ہے۔ آواز تھرتھراہٹ سے بنتی ہے اور ہوا میں سفر کرتی ہے۔",
+    "en": "Light and sound are energy. Light sources: Sun, bulb, torch, firefly. The Moon reflects light. Sound is made by vibration and travels through the air."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ روشنی اور آواز توانائی ہیں اور یہ کہاں سے آتی ہیں۔",
+    "en": "We learned that light and sound are energy, and where they come from."
+  },
+  "parent_notes": {
+    "ur": "رات کو چاند دکھا کر پوچھیں: اس کی روشنی کہاں سے آتی ہے؟ بچے کو یاد دلائیں کہ سورج کو کبھی سیدھا نہ دیکھے۔",
+    "en": "Show the Moon at night and ask: where does its light come from? Remind your child never to look straight at the Sun."
+  },
+  "mentor_notes": {
+    "ur": "سورج کو سیدھا دیکھنے سے آنکھ کو نقصان ہوتا ہے؛ یہ قاعدہ ہر بار دہرائیں۔ بلب کی مثال صرف دیکھنے کے لیے ہے — بچہ سوئچ بورڈ یا تار کو ہاتھ نہ لگائے۔",
+    "en": "Looking straight at the Sun harms the eyes; repeat this rule every time. The bulb is an example to look at only — the learner must not touch switchboards or wires."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ روشنی اور آواز کے ذرائع کی تصویریں اور ان کا متبادل متن ابھی بنانا ہے۔ آوازوں کی ریکارڈنگ (ڈھول، گھنٹی، بانسری) بھی بنانی ہے۔ گھسیٹنے کا متبادل: ہر چیز کے لیے \"روشنی\" یا \"آواز\" کا بٹن دبائیں۔ بہرے بچوں کے لیے آواز کی تھرتھراہٹ چھو کر محسوس کروائیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. Pictures of light and sound sources with alt text, and short sound recordings (drum, bell, flute), are still to be made. Alternative to dragging: tap 'light' or 'sound' for each thing. For deaf learners, let them feel vibrations by touch."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "senses first (see/hear), then the source, then 'energy'; use touch to feel vibration",
+    "questioning_strategy": "ask 'does it help us see or hear?' then 'does it make the light/sound itself?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "calls the Moon or a mirror a light source",
+      "says sound comes from the ear"
+    ],
+    "hint_policy": "graduated; first the senses question, then the source test (shines in the dark / vibrates); never give the group first",
+    "example_policy": "use local sources: the Sun, fireflies on summer nights, dhol at a wedding, school bell, flute, azaan heard from far",
+    "misconception_detectors": [
+      "treats reflectors (Moon, mirror) as sources",
+      "thinks light comes out of eyes"
+    ],
+    "critical_thinking_prompts": [
+      "Why do we see lightning before we hear thunder?"
+    ],
+    "personalization_rules": "if the learner handles sources well, add 'sound travels through air to the ear'",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples",
+      "suggest looking at the Sun, even briefly",
+      "suggest touching switches, sockets or wires"
+    ]
+  },
+  "review_flags": [
+    "subject expert: 'light and sound are energy' is the spine's framing — confirm the Moon/reflection point is in scope",
+    "subject expert: the thunder challenge uses a storm context; confirm it is not frightening and add 'stay indoors in storms' if kept"
+  ]
+}

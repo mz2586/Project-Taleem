@@ -1,0 +1,476 @@
+{
+  "code": "ENG-G4-RD-02",
+  "title": {
+    "ur": "حروف کے جوڑ سے نئے الفاظ پڑھیں",
+    "en": "Read New Words with Letter Patterns"
+  },
+  "description": {
+    "ur": "بچہ sh، ch، th، ee، ai، oa جیسے حروف کے جوڑ پہچان کر نئے انگریزی الفاظ پڑھتا ہے۔",
+    "en": "The learner reads unfamiliar English words by spotting letter patterns such as sh, ch, th, ee, ai and oa."
+  },
+  "keywords": [
+    "decoding",
+    "letter patterns",
+    "digraphs",
+    "vowel teams",
+    "syllables",
+    "phonics"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "حروف کا جوڑ (letter pattern)",
+        "en": "letter pattern"
+      },
+      "definition": {
+        "ur": "دو حروف جو مل کر ایک آواز دیں، جیسے sh۔",
+        "en": "Two letters that make one sound together, like sh."
+      }
+    },
+    {
+      "term": {
+        "ur": "ٹکڑا (chunk)",
+        "en": "chunk"
+      },
+      "definition": {
+        "ur": "لمبے لفظ کا ایک چھوٹا حصہ، جیسے sun-set۔",
+        "en": "A small part of a long word, like sun-set."
+      }
+    },
+    {
+      "term": {
+        "ur": "پڑھنا / کھولنا (decode)",
+        "en": "decode"
+      },
+      "definition": {
+        "ur": "نئے لفظ کی آوازیں نکال کر اسے پڑھنا۔",
+        "en": "Work out a new word from its sounds."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کبھی کوئی نیا لفظ سامنے آتا ہے۔ گھبرانے کی بات نہیں۔ کچھ حروف مل کر ایک ہی آواز دیتے ہیں۔ جیسے s اور h مل کر 'ش' بولتے ہیں۔ آج ہم یہ جوڑ ڈھونڈیں گے اور نئے الفاظ خود پڑھیں گے۔",
+    "en": "Sometimes we meet a new word. There is no need to worry. Some letters work together to make one sound. For example, s and h together say 'sh'. Today we will spot these patterns and read new words on our own."
+  },
+  "student_explanation": {
+    "ur": "کچھ حروف مل کر ایک آواز بناتے ہیں۔ sh کی آواز 'ش' ہے، جیسے ship۔ ch کی آواز 'چ' ہے، جیسے chin۔ ee لمبی 'ای' بولتا ہے، جیسے tree۔ ai اکثر 'اے' بولتا ہے، جیسے rain۔ پہلے لفظ میں جوڑ ڈھونڈیں۔ لمبا لفظ ٹکڑوں میں توڑیں۔ sunset کو sun اور set میں توڑیں۔ پھر ٹکڑے جوڑ کر پڑھیں۔",
+    "en": "Some letters join to make one sound. sh says 'sh', as in ship. ch says 'ch', as in chin. ee says a long 'ee', as in tree. ai often says 'ay', as in rain. First find the pattern in the word. Break a long word into chunks. Break sunset into sun and set. Then join the chunks and read."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "یہ لفظ پڑھیں: sheep",
+        "en": "Read this word: sheep"
+      },
+      "steps": [
+        {
+          "ur": "جوڑ ڈھونڈیں: sh اور ee۔",
+          "en": "Find the patterns: sh and ee."
+        },
+        {
+          "ur": "sh = 'ش'، ee = لمبی 'ای'، p = 'پ'۔",
+          "en": "sh = 'sh', ee = long 'ee', p = 'p'."
+        },
+        {
+          "ur": "تین آوازیں جوڑیں: sh-ee-p = sheep۔",
+          "en": "Join three sounds: sh-ee-p = sheep."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "یہ لمبا لفظ پڑھیں: rainbow",
+        "en": "Read this long word: rainbow"
+      },
+      "steps": [
+        {
+          "ur": "لفظ کو دو ٹکڑوں میں توڑیں: rain اور bow۔",
+          "en": "Break the word into two chunks: rain and bow."
+        },
+        {
+          "ur": "rain میں ai کی آواز 'اے' ہے: r-ai-n۔",
+          "en": "In rain, ai says 'ay': r-ai-n."
+        },
+        {
+          "ur": "bow میں ow کی آواز 'او' ہے۔",
+          "en": "In bow, ow says 'oh'."
+        },
+        {
+          "ur": "اب دونوں ٹکڑے جوڑیں: rainbow۔",
+          "en": "Now join both chunks: rainbow."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-patterns",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "ہر لفظ کو اس کے جوڑ والے ڈبے میں ڈالیں: shop، chair، three، fish، lunch، thin",
+        "en": "Sort each word into the box for its pattern: shop, chair, three, fish, lunch, thin"
+      },
+      "answer_key": {
+        "groups": {
+          "sh": [
+            "shop",
+            "fish"
+          ],
+          "ch": [
+            "chair",
+            "lunch"
+          ],
+          "th": [
+            "three",
+            "thin"
+          ]
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر لفظ میں h سے پہلے والا حرف دیکھیں۔",
+            "en": "Look at the letter just before h in each word."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-blend-chin",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "جوڑیں: ch + i + n = ___",
+        "en": "Join: ch + i + n = ___"
+      },
+      "answer_key": {
+        "answer": "chin"
+      },
+      "accepted_variants": [
+        "chin"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ch کی آواز 'چ' ہے۔",
+            "en": "ch says 'ch'."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-chunks",
+      "type": "ordering",
+      "competency": "application",
+      "stem": {
+        "ur": "ٹکڑوں کو ترتیب دے کر لفظ basket بنائیں: ket ، bas",
+        "en": "Put the chunks in order to make basket: ket, bas"
+      },
+      "answer_key": {
+        "order": [
+          "bas",
+          "ket"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ b سے شروع ہوتا ہے۔",
+            "en": "The word begins with b."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-pattern-word",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر جوڑ کو اس لفظ سے ملائیں جس میں وہ ہے: ee ، sh ، th",
+        "en": "Match each pattern to the word that has it: ee, sh, th"
+      },
+      "answer_key": {
+        "pairs": {
+          "ee": "green",
+          "sh": "dish",
+          "th": "bath"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر لفظ میں دو حروف کا جوڑ ڈھونڈیں۔",
+            "en": "Find the two-letter pattern in each word."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-find-pattern",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "لفظ chick میں کونسا جوڑ ہے؟",
+        "en": "Which letter pattern is in the word chick?"
+      },
+      "options": [
+        {
+          "ur": "sh",
+          "en": "sh"
+        },
+        {
+          "ur": "th",
+          "en": "th"
+        },
+        {
+          "ur": "ch",
+          "en": "ch"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ کا شروع دیکھیں۔",
+            "en": "Look at the start of the word."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "chick کے شروع میں ch ہے، آواز 'چ'۔",
+        "en": "chick starts with ch, which says 'ch'."
+      }
+    },
+    {
+      "id": "p2-same-sound",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کس لفظ میں rain والی ai کی آواز ہے؟",
+        "en": "Which word has the same ai sound as rain?"
+      },
+      "options": [
+        {
+          "ur": "train",
+          "en": "train"
+        },
+        {
+          "ur": "ran",
+          "en": "ran"
+        },
+        {
+          "ur": "ring",
+          "en": "ring"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "a اور i کو ساتھ ساتھ ڈھونڈیں۔",
+            "en": "Look for a and i side by side."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "train میں بھی ai ہے: tr-ai-n۔",
+        "en": "train also has ai: tr-ai-n."
+      }
+    },
+    {
+      "id": "p4-oa-one-sound",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "لفظ boat میں o اور a مل کر ایک آواز بناتے ہیں۔",
+        "en": "In the word boat, o and a make one sound together."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "oa مل کر لمبی 'او' بولتے ہیں: b-oa-t۔",
+        "en": "oa together say a long 'oh': b-oa-t."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-new-word",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "یہ نیا لفظ ٹکڑوں میں پڑھیں: sandwich۔ کونسی تقسیم درست ہے؟",
+        "en": "Read this new word in chunks: sandwich. Which split is right?"
+      },
+      "options": [
+        {
+          "ur": "sa-ndw-ich",
+          "en": "sa-ndw-ich"
+        },
+        {
+          "ur": "s-andwi-ch",
+          "en": "s-andwi-ch"
+        },
+        {
+          "ur": "sand-wich",
+          "en": "sand-wich"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے ایک چھوٹا لفظ ڈھونڈیں جو آپ جانتے ہیں۔",
+            "en": "First look for a small word you already know."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "sand ایک جانا پہچانا لفظ ہے، پھر wich میں ch آتا ہے۔",
+        "en": "sand is a known word, then wich ends with ch."
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-pattern-hunt",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کسی ڈبے، تھیلے یا اخبار پر انگریزی الفاظ دیکھیں۔ sh، ch یا ee والے دو الفاظ اپنی کاپی میں لکھیں۔",
+        "en": "Look for English words on a box, bag or newspaper. Copy two words with sh, ch or ee into your notebook."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any real word containing the pattern; mentor checks the notebook."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "لفظ میں ساتھ ساتھ لکھے دو حروف ڈھونڈیں جو ایک آواز دیتے ہیں۔",
+        "en": "Look for two letters side by side that make one sound."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "لفظ کو ٹکڑوں میں توڑیں اور ہر ٹکڑا الگ پڑھیں۔",
+        "en": "Break the word into chunks and read each chunk on its own."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "sh کو 'س' اور 'ہ' الگ الگ پڑھنا۔",
+        "en": "Reading sh as two separate sounds, /s/ and /h/."
+      },
+      "correction": {
+        "ur": "sh، ch، th میں دو حروف مل کر ایک آواز دیتے ہیں۔",
+        "en": "In sh, ch and th the two letters make one sound."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "لمبے لفظ کو ایک ہی بار میں پڑھنے کی کوشش کرنا۔",
+        "en": "Trying to read a long word all at once."
+      },
+      "correction": {
+        "ur": "لمبا لفظ ٹکڑوں میں توڑیں، پھر جوڑیں۔",
+        "en": "Break a long word into chunks, then join them."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:ENG-G4-RD-01",
+      "remediation_ref": "ENG-G4-RD-01"
+    },
+    {
+      "signal": "reads_digraph_as_two_sounds",
+      "remediation_ref": "ENG-G4-RD-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "sh = 'ش'، ch = 'چ'، ee = لمبی 'ای'، ai = 'اے'، oa = لمبی 'او'۔ لمبا لفظ ٹکڑوں میں پڑھیں۔",
+    "en": "sh = 'sh', ch = 'ch', ee = long 'ee', ai = 'ay', oa = long 'oh'. Read long words in chunks."
+  },
+  "summary": {
+    "ur": "ہم نے حروف کے جوڑ اور ٹکڑے استعمال کر کے نئے الفاظ پڑھے۔",
+    "en": "We used letter patterns and chunks to read new words."
+  },
+  "parent_notes": {
+    "ur": "بچے سے پوچھیں کہ گھر کی چیزوں پر لکھے انگریزی الفاظ میں کونسے جوڑ ہیں۔ صحیح یا غلط کی فکر نہ کریں، کوشش کی تعریف کریں۔",
+    "en": "Ask your child which patterns they can find in English words printed on things at home. Do not worry about right or wrong; praise the effort."
+  },
+  "mentor_notes": {
+    "ur": "اردو بولنے والے بچے th کو اکثر 'ت' یا 'د' بولتے ہیں؛ اسے غلطی نہ گنیں، صرف صحیح آواز دکھائیں۔ ow کی دو آوازیں ہیں (bow، cow)؛ اس سبق میں صرف ایک پر رہیں۔",
+    "en": "Urdu-speaking children often say th as 't' or 'd'; do not count it as a decoding error, just model the sound. ow has two sounds (bow, cow); stay with one in this lesson."
+  },
+  "accessibility_notes": {
+    "ur": "جوڑوں کی آوازوں (sh، ch، th، ee، ai، oa) کی آڈیو ابھی ریکارڈ نہیں ہوئی۔ ڈبوں میں چھانٹنے والی تصویر اور اس کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے والی سرگرمی کا متبادل: ہر لفظ کے آگے اس کا جوڑ چنیں۔ الفاظ بڑے حروف میں دکھائیں اور جوڑ کو رنگ کے ساتھ موٹا بھی کریں تاکہ صرف رنگ پر انحصار نہ ہو۔",
+    "en": "Audio for the pattern sounds (sh, ch, th, ee, ai, oa) is not yet recorded. The sorting-boxes picture and its alt text are still to be made. Alternative to the drag activity: choose the pattern next to each word. Show words in large print and mark patterns in bold as well as colour, so colour is not the only cue."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "spot the pattern, say its one sound, blend; for long words chunk first, then blend chunks",
+    "questioning_strategy": "ask 'which two letters work together here?' before 'what is the word?'",
+    "slow_down_signals": [
+      "reads digraph as two sounds",
+      "two wrong answers in a row",
+      "gives up on long words"
+    ],
+    "hint_policy": "graduated; two hints max; point to the pattern, then to chunking; never say the word first",
+    "example_policy": "real, child-familiar words (ship, chair, rain, boat, sandwich); one pattern focus per item",
+    "misconception_detectors": [
+      "splits sh/ch/th into two sounds",
+      "reads ee or ai as two separate vowels",
+      "ignores the second chunk of a long word"
+    ],
+    "critical_thinking_prompts": [
+      "How did finding a small word you know help you read the long word?"
+    ],
+    "personalization_rules": "if blending CVC words fails, route back to ENG-G4-RD-01 before patterns",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)",
+      "read the reading passage aloud for the learner (reading is the assessed skill)"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the Urdu sound approximations ('ش', 'چ', 'اے', 'او') are acceptable for teaching",
+    "check the sandwich chunking (sand-wich) is the split the programme wants to teach"
+  ]
+}

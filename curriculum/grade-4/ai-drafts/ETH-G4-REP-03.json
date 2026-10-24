@@ -1,0 +1,472 @@
+{
+  "code": "ETH-G4-REP-03",
+  "title": {
+    "ur": "انصاف اور باری لینا",
+    "en": "Fairness and taking turns"
+  },
+  "description": {
+    "ur": "باری کا انتظار کرنا، چیزیں منصفانہ بانٹنا، اور یہ سمجھنا کہ کبھی انصاف کا مطلب ضرورت کے مطابق مدد ہے۔",
+    "en": "Waiting for turns, sharing fairly, and seeing that sometimes fair means giving help to whoever needs it."
+  },
+  "keywords": [
+    "fairness",
+    "taking turns",
+    "queue",
+    "sharing",
+    "equal",
+    "rules",
+    "fair play"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "باری",
+        "en": "turn"
+      },
+      "definition": {
+        "ur": "کسی کام کا میرا وقت، دوسروں کے بعد یا پہلے۔",
+        "en": "my time to do something, before or after others."
+      }
+    },
+    {
+      "term": {
+        "ur": "قطار",
+        "en": "queue / line"
+      },
+      "definition": {
+        "ur": "ایک کے پیچھے ایک کھڑے ہونا۔",
+        "en": "standing one behind another."
+      }
+    },
+    {
+      "term": {
+        "ur": "منصفانہ",
+        "en": "fair"
+      },
+      "definition": {
+        "ur": "ایسا جو سب کے لیے ٹھیک ہو۔",
+        "en": "right for everyone."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم انصاف اور باری لینے کی بات کریں گے۔ پارک کا جھولا ہو، کرکٹ کی بیٹنگ ہو، یا گھر کا ایک فون جس پر سب بہن بھائی سبق پڑھتے ہیں، سب کو باری چاہیے۔ ہم دیکھیں گے کہ جب سب ایک ساتھ چاہیں تو کیا منصفانہ ہے۔",
+    "en": "Today we will talk about fairness and taking turns. Whether it's a swing in the park, batting in cricket, or one family phone that all the siblings use for lessons, everyone needs a turn. We will see what is fair when everyone wants something at the same time."
+  },
+  "student_explanation": {
+    "ur": "انصاف کا مطلب ہے سب کے لیے ٹھیک۔ جب ایک چیز سب چاہیں تو باری لیتے ہیں۔ قطار میں اپنی جگہ پر رہیں۔ آگے نہ گھسیں۔ کھیل کے اصول سب کے لیے ایک ہوں۔ باری کا وقت طے کر لیں، جیسے دس دس منٹ۔ کبھی انصاف کا مطلب برابر ہوتا ہے۔ کبھی انصاف کا مطلب ہے کہ جس کو ضرورت ہو اسے پہلے ملے۔ جیسے زخمی بچے کو پہلے پانی ملے۔ اپنی باری کا صبر سے انتظار کریں۔",
+    "en": "Fairness means right for everyone. When everyone wants one thing, we take turns. Stay in your place in a queue. Don't push in. Game rules should be the same for all. Agree on a turn time, like ten minutes each. Sometimes fair means equal. Sometimes fair means the person who needs it most goes first. For example, a hurt child gets water first. Wait for your turn patiently."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "گھر میں ایک فون ہے۔ ارم اور اس کے دو بھائی تینوں کو اس پر سبق پڑھنا ہے۔ منصفانہ طریقہ کیا ہے؟",
+        "en": "There is one phone at home. Iram and her two brothers all need it for lessons. What is a fair way?"
+      },
+      "steps": [
+        {
+          "ur": "تینوں مل کر بات کرتے ہیں۔ کوئی فون چھینتا نہیں۔",
+          "en": "All three talk together. No one grabs the phone."
+        },
+        {
+          "ur": "وہ باری طے کرتے ہیں: ہر ایک کو بیس منٹ۔",
+          "en": "They agree turns: twenty minutes each."
+        },
+        {
+          "ur": "جس کا ٹیسٹ کل ہے، وہ آج پہلے پڑھتا ہے۔ کل باری بدل جائے گی۔",
+          "en": "Whoever has a test tomorrow goes first today. Tomorrow the order changes."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "پارک میں ایک ہی جھولا ہے اور پانچ بچے انتظار کر رہے ہیں۔ ایک بچہ آدھے گھنٹے سے جھول رہا ہے۔ کیا یہ منصفانہ ہے؟",
+        "en": "There is one swing in the park and five children are waiting. One child has been swinging for half an hour. Is that fair?"
+      },
+      "steps": [
+        {
+          "ur": "نہیں، باقی بچوں کو باری نہیں مل رہی۔",
+          "en": "No, the other children aren't getting a turn."
+        },
+        {
+          "ur": "بچے ادب سے کہتے ہیں: «کیا ہم سب پانچ پانچ منٹ لیں؟»",
+          "en": "The children politely ask, \"Shall we all take five minutes each?\""
+        },
+        {
+          "ur": "سب قطار بناتے ہیں اور باری باری جھولتے ہیں۔",
+          "en": "Everyone forms a queue and swings in turn."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-queue-order",
+      "type": "ordering",
+      "competency": "application",
+      "stem": {
+        "ur": "پانی کے کولر پر بچے اسی ترتیب سے آئے: سارہ، پھر جان، پھر علی۔ ان کی باری کی ترتیب لگائیں۔",
+        "en": "At the water cooler the children arrived in this order: Sara, then John, then Ali. Put their turns in order."
+      },
+      "options": [
+        {
+          "ur": "علی",
+          "en": "Ali"
+        },
+        {
+          "ur": "سارہ",
+          "en": "Sara"
+        },
+        {
+          "ur": "جان",
+          "en": "John"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          2,
+          0
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جو پہلے آیا، اس کی باری پہلے۔",
+            "en": "Whoever came first has the first turn."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-push-in",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کینٹین کی قطار میں ایک بچہ سب سے آگے گھس جاتا ہے۔ کیا یہ منصفانہ ہے؟",
+        "en": "In the canteen queue, a child pushes to the front. Is that fair?"
+      },
+      "options": [
+        {
+          "ur": "ہاں، اسے جلدی ہے",
+          "en": "Yes, he is in a hurry"
+        },
+        {
+          "ur": "ہاں، وہ بڑا ہے",
+          "en": "Yes, he is older"
+        },
+        {
+          "ur": "نہیں، سب کو اپنی باری کا انتظار کرنا چاہیے",
+          "en": "No, everyone should wait for their turn"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p2-same-rules",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کھیل کے اصول سب کھلاڑیوں کے لیے ایک جیسے ہونے چاہییں۔",
+        "en": "Game rules should be the same for every player."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-batting",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "گلی کی کرکٹ میں بیٹ ایک بچے کا ہے۔ وہ کہتا ہے: «بیٹ میرا ہے، اس لیے ہمیشہ میں ہی بیٹنگ کروں گا۔» منصفانہ جواب کون سا ہے؟",
+        "en": "In street cricket, the bat belongs to one boy. He says, \"It's my bat, so I always bat.\" Which reply is fair?"
+      },
+      "options": [
+        {
+          "ur": "«ٹھیک ہے، تم ہی کھیلو۔»",
+          "en": "\"OK, only you play.\""
+        },
+        {
+          "ur": "«بیٹ کا شکریہ! چلو ہر ایک دو اوور بیٹنگ کرے۔»",
+          "en": "\"Thanks for the bat! Let's each bat for two overs.\""
+        },
+        {
+          "ur": "بیٹ چھین لینا",
+          "en": "Grab the bat"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسا طریقہ جو بیٹ والے اور باقی سب کے لیے ٹھیک ہو۔",
+            "en": "A way that's right for the bat's owner and everyone else."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-fair-always-same",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "انصاف کا مطلب ہمیشہ سب کو بالکل ایک جیسا دینا ہے۔",
+        "en": "Fair always means giving everyone exactly the same."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "زخمی بچے کو پانی والی مثال یاد کریں۔",
+            "en": "Remember the example of the hurt child and water."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کبھی جسے زیادہ ضرورت ہو، اسے پہلے ملتا ہے۔",
+        "en": "Sometimes the person who needs it most goes first."
+      }
+    },
+    {
+      "id": "p5-need-first",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کھیل میں ایک بچی گر گئی اور اس کا گھٹنا چھل گیا۔ پانی کی صرف ایک بوتل ہے۔ منصفانہ کیا ہے؟",
+        "en": "During a game, a girl falls and scrapes her knee. There is only one water bottle. What is fair?"
+      },
+      "options": [
+        {
+          "ur": "پہلے اس بچی کو پانی اور بڑے کی مدد ملے",
+          "en": "The girl gets water and an adult's help first"
+        },
+        {
+          "ur": "جو پہلے بوتل پکڑے، وہ پیے",
+          "en": "Whoever grabs the bottle first drinks"
+        },
+        {
+          "ur": "کوئی نہ پیے",
+          "en": "No one drinks"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-my-turn-first",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "منصفانہ کا مطلب کیا ہے؟",
+        "en": "What does fair mean?"
+      },
+      "options": [
+        {
+          "ur": "ہمیشہ میری باری پہلے",
+          "en": "My turn always comes first"
+        },
+        {
+          "ur": "ایسا جو سب کے لیے ٹھیک ہو",
+          "en": "Right for everyone"
+        },
+        {
+          "ur": "جو سب سے تیز ہو، وہ جیتے",
+          "en": "The fastest always wins"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-new-player",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "لُڈو کا کھیل آدھا ہو چکا ہے اور ایک نیا بچہ کھیلنا چاہتا ہے۔ چار سے زیادہ کھلاڑی نہیں ہو سکتے۔ سب سے منصفانہ کیا ہے؟",
+        "en": "A ludo game is half over and a new child wants to join. Only four can play. What is fairest?"
+      },
+      "options": [
+        {
+          "ur": "اسے کہیں «کبھی نہیں»",
+          "en": "Tell him \"never\""
+        },
+        {
+          "ur": "کسی کو زبردستی ہٹا دیں",
+          "en": "Force someone out"
+        },
+        {
+          "ur": "اسے بتائیں کہ اگلا کھیل وہ شروع سے کھیلے گا، اور تب تک وہ پانسہ گننے میں مدد کرے",
+          "en": "Tell him he'll play the next game from the start, and meanwhile he can help count the dice"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسا طریقہ جس میں کوئی باہر نہ رہے اور کھیل بھی خراب نہ ہو۔",
+            "en": "A way where no one is left out and the game isn't spoilt."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-turn-chart",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر والوں کے ساتھ کسی مشترکہ چیز (جیسے ٹی وی، فون یا جھولا) کی باری کا ایک آسان چارٹ کاغذ پر بنائیں۔",
+        "en": "With your family, make a simple paper turn chart for something you share (like the TV, phone or a swing)."
+      },
+      "answer_key": {
+        "guidance": "Paper task at home; no names or photos are entered in the app."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "یہاں کون کون انتظار کر رہا ہے؟",
+        "en": "Who is waiting here?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "کیا سب کو باری مل رہی ہے؟ کیا کسی کو زیادہ ضرورت ہے؟",
+        "en": "Is everyone getting a turn? Does anyone need it more?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "منصفانہ کا مطلب ہے میری باری پہلے یا سب سے بڑا حصہ میرا۔",
+        "en": "Fair means I go first or get the biggest share."
+      },
+      "correction": {
+        "ur": "منصفانہ وہ ہے جو سب کے لیے ٹھیک ہو۔",
+        "en": "Fair is what is right for everyone."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "انصاف کا مطلب ہمیشہ بالکل برابر ہے۔",
+        "en": "Fair always means exactly equal."
+      },
+      "correction": {
+        "ur": "کبھی جسے زیادہ ضرورت ہو، اسے پہلے مدد ملتی ہے۔",
+        "en": "Sometimes the one who needs it most gets help first."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "chooses 'me first' options twice",
+      "remediation_ref": "ETH-G4-REP-03"
+    },
+    {
+      "signal": "misses fair-share items",
+      "remediation_ref": "ETH-G4-HON-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "انصاف = سب کے لیے ٹھیک۔ باری لیں، قطار میں رہیں، اصول سب کے لیے ایک۔ کبھی برابر، کبھی جسے ضرورت ہو پہلے۔",
+    "en": "Fair = right for everyone. Take turns, stay in the queue, same rules for all. Sometimes equal, sometimes the one in need goes first."
+  },
+  "summary": {
+    "ur": "ہم نے باری لینا اور منصفانہ فیصلہ کرنا سیکھا۔",
+    "en": "We learned to take turns and make fair choices."
+  },
+  "parent_notes": {
+    "ur": "اگر گھر میں ایک ہی فون یا ٹی وی ہے تو بچوں کے ساتھ مل کر باری طے کریں۔ بچوں کو خود منصفانہ حل سوچنے دیں۔",
+    "en": "If your home has one phone or TV, agree turns together with the children. Let children suggest fair solutions themselves."
+  },
+  "mentor_notes": {
+    "ur": "«برابر» اور «ضرورت کے مطابق» کا فرق آہستہ سمجھائیں؛ یہ چوتھی جماعت کے لیے نیا خیال ہے۔ ایک فون والی مثال بہت سے گھروں کی حقیقت ہے؛ اسے شرمندگی کے بغیر پیش کریں۔",
+    "en": "Explain the difference between 'equal' and 'by need' slowly; it is a new idea at Grade 4. The one-phone example is real for many homes; present it without any embarrassment."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویریں ابھی بنانی ہیں؛ متبادل متن ہر منظر بیان کرے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ ہر متن آواز میں پڑھا جائے۔ ترتیب والی سرگرمی کا متبادل: «پہلے کس کی باری؟» پوچھ کر ہر قدم پر ایک نام کا بٹن چنیں۔",
+    "en": "Story pictures are still to be made; alt text should describe each scene. Urdu audio is not yet recorded; all text must be read aloud. Alternative to the ordering activity: answer 'whose turn is first?' by tapping a name button, step by step."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "turn-taking stories (one family phone, park swing); define fair as 'right for everyone'; introduce 'sometimes equal, sometimes by need' with the hurt-child example",
+    "questioning_strategy": "ask 'who is waiting?' and 'is everyone getting a turn?'; then 'does anyone need it more?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "chooses 'me first' or 'oldest first'",
+      "thinks fair always means identical"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "everyday sharing (one phone, a swing, a bat, a water cooler, ludo); no costly items; present shared devices without embarrassment",
+    "misconception_detectors": [
+      "thinks fair means me first",
+      "thinks the owner of a thing always goes first",
+      "thinks fair always means exactly the same"
+    ],
+    "critical_thinking_prompts": [
+      "When is it fair for someone to go first?",
+      "How can the owner of a bat and the other players both be treated fairly?"
+    ],
+    "personalization_rules": "if 'me first' options repeat, retell the swing story from a waiting child's view; route to ETH-G4-HON-04 for fair-share basics",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths"
+    ]
+  },
+  "review_flags": [
+    "subject expert: check the 'fair by need' idea (hurt child first) is pitched right for Grade 4",
+    "check the shared-family-phone example matches how learners actually use the app at home"
+  ]
+}

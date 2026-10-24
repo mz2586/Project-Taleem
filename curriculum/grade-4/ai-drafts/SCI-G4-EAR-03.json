@@ -1,0 +1,425 @@
+{
+  "code": "SCI-G4-EAR-03",
+  "title": {
+    "ur": "موسم کا حال اور سال کے موسم",
+    "en": "Weather and seasons"
+  },
+  "description": {
+    "ur": "روزانہ کے موسم کا مشاہدہ کر کے بیان کرنا، اور پاکستان کے سال بھر کے موسموں کو پہچاننا۔",
+    "en": "Describing daily weather by observing it, and recognising Pakistan's seasons through the year."
+  },
+  "keywords": [
+    "weather",
+    "season",
+    "summer",
+    "winter",
+    "monsoon",
+    "rain",
+    "wind",
+    "observe"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "موسم کا حال",
+        "en": "weather"
+      },
+      "definition": {
+        "ur": "آج کی ہوا کیسی ہے: دھوپ، بادل، بارش، ہوا، گرمی یا سردی۔",
+        "en": "What the air is like today: sunny, cloudy, rainy, windy, hot or cold."
+      }
+    },
+    {
+      "term": {
+        "ur": "موسم (رُت)",
+        "en": "season"
+      },
+      "definition": {
+        "ur": "سال کا وہ حصہ جس میں کئی ہفتے تک ملتا جلتا موسم رہتا ہے، جیسے سردیاں۔",
+        "en": "A part of the year with similar weather for many weeks, like winter."
+      }
+    },
+    {
+      "term": {
+        "ur": "مون سون (برسات)",
+        "en": "monsoon"
+      },
+      "definition": {
+        "ur": "گرمیوں کے آخر کا وہ موسم جب پاکستان میں بہت بارشیں ہوتی ہیں۔",
+        "en": "The late-summer season when Pakistan gets a lot of rain."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج باہر کیسا ہے: دھوپ ہے، بادل ہیں یا بارش؟ یہ آج کا موسم کا حال ہے۔ مگر سال بھر میں سردی، گرمی اور برسات کے موسم بھی آتے ہیں۔ آج ہم دونوں میں فرق سیکھیں گے اور موسم کو دیکھ کر لکھنا سیکھیں گے۔",
+    "en": "What is it like outside today: sunny, cloudy or rainy? That is today's weather. But through the year we also have winter, summer and the monsoon. Today we learn the difference between the two, and how to observe and record the weather."
+  },
+  "student_explanation": {
+    "ur": "موسم کا حال بتاتا ہے کہ آج ہوا کیسی ہے۔ آج دھوپ ہو سکتی ہے، کل بارش۔ موسم کا حال روز بدل سکتا ہے۔ سال کے موسم کئی ہفتے چلتے ہیں۔ پاکستان میں گرمیاں، سردیاں، بہار اور خزاں آتی ہیں۔ گرمیوں کے آخر میں مون سون کی بارشیں ہوتی ہیں۔ شمالی پہاڑوں پر سردیوں میں برف پڑتی ہے۔ ہم آنکھوں اور جلد سے موسم دیکھ اور محسوس کر سکتے ہیں۔",
+    "en": "Weather tells us what the air is like today. Today may be sunny, tomorrow rainy. Weather can change every day. Seasons last for many weeks. Pakistan has summer, winter, spring and autumn. Late in summer, the monsoon rains come. In winter, snow falls on the northern mountains. We can see and feel the weather with our eyes and skin."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "آج کے موسم کا حال کیسے لکھیں؟",
+        "en": "How do we record today's weather?"
+      },
+      "steps": [
+        {
+          "ur": "آسمان دیکھو: صاف، کچھ بادل یا پورے بادل؟",
+          "en": "Look at the sky: clear, some clouds, or full cloud?"
+        },
+        {
+          "ur": "محسوس کرو: گرم ہے یا ٹھنڈا؟ ہوا چل رہی ہے؟ پتے ہل رہے ہیں؟",
+          "en": "Feel it: hot or cold? Is it windy? Are leaves moving?"
+        },
+        {
+          "ur": "تاریخ کے ساتھ ایک نشان بناؤ: سورج، بادل، بارش یا ہوا۔",
+          "en": "Draw a symbol with the date: sun, cloud, rain or wind."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "\"آج بارش ہوئی\" موسم کا حال ہے یا سال کا موسم؟",
+        "en": "Is 'it rained today' about weather or about a season?"
+      },
+      "steps": [
+        {
+          "ur": "یہ صرف ایک دن کی بات ہے۔",
+          "en": "It is about one day only."
+        },
+        {
+          "ur": "ایک دن کی ہوا کی حالت موسم کا حال ہے۔",
+          "en": "What the air is like on one day is weather."
+        },
+        {
+          "ur": "اگر کئی ہفتے روز بارش ہو تو وہ برسات کا موسم ہو سکتا ہے۔",
+          "en": "If it rained most days for many weeks, that could be the monsoon season."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-weather-season",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر بات کو صحیح خانے میں رکھو: \"موسم کا حال\" (ایک دن) یا \"سال کا موسم\" (کئی ہفتے)۔ آج دوپہر تیز ہوا چلی؛ سردیاں؛ صبح دھند تھی؛ مون سون؛ آج بادل ہیں؛ گرمیاں۔",
+        "en": "Put each one in the right box: 'weather' (one day) or 'season' (many weeks). Strong wind this afternoon; winter; fog this morning; monsoon; cloudy today; summer."
+      },
+      "answer_key": {
+        "weather": [
+          "strong wind this afternoon",
+          "fog this morning",
+          "cloudy today"
+        ],
+        "season": [
+          "winter",
+          "monsoon",
+          "summer"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھو: یہ ایک دن کی بات ہے یا کئی ہفتوں کی؟",
+            "en": "Ask: is it about one day, or many weeks?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-weather-is",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "موسم کا حال کیا بتاتا ہے؟",
+        "en": "What does weather tell us?"
+      },
+      "options": [
+        {
+          "ur": "سال میں کتنے مہینے ہیں",
+          "en": "How many months are in a year"
+        },
+        {
+          "ur": "آج ہوا کیسی ہے",
+          "en": "What the air is like today"
+        },
+        {
+          "ur": "ہمارا شہر کتنا بڑا ہے",
+          "en": "How big our city is"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p2-monsoon",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پاکستان میں مون سون کی بارشیں عام طور پر کب آتی ہیں؟",
+        "en": "When do the monsoon rains usually come in Pakistan?"
+      },
+      "options": [
+        {
+          "ur": "گرمیوں کے آخر میں",
+          "en": "Late in summer"
+        },
+        {
+          "ur": "سردیوں کے شروع میں",
+          "en": "At the start of winter"
+        },
+        {
+          "ur": "کبھی نہیں",
+          "en": "Never"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-same",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "موسم کا حال اور سال کا موسم ایک ہی چیز ہیں۔",
+        "en": "Weather and season are the same thing."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "موسم کا حال روز بدلتا ہے؛ سال کا موسم کئی ہفتے چلتا ہے۔",
+        "en": "Weather changes day to day; a season lasts many weeks."
+      }
+    },
+    {
+      "id": "p4-snow",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پاکستان میں سردیوں میں برف کہاں زیادہ پڑتی ہے؟",
+        "en": "Where in Pakistan does snow mostly fall in winter?"
+      },
+      "options": [
+        {
+          "ur": "ساحل پر",
+          "en": "On the coast"
+        },
+        {
+          "ur": "صحرا میں",
+          "en": "In the desert"
+        },
+        {
+          "ur": "شمالی پہاڑوں پر",
+          "en": "On the northern mountains"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-windy",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "پیڑوں کے پتے زور سے ہل رہے ہیں اور کپڑے رسی پر اڑ رہے ہیں۔ موسم کا حال کیا ہے؟",
+        "en": "Tree leaves are shaking hard and clothes are flapping on the line. What is the weather?"
+      },
+      "options": [
+        {
+          "ur": "تیز ہوا",
+          "en": "Windy"
+        },
+        {
+          "ur": "دھند",
+          "en": "Foggy"
+        },
+        {
+          "ur": "برف باری",
+          "en": "Snowing"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-everywhere",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک ہی دن پاکستان کے ہر شہر میں موسم کا حال ایک جیسا ہوتا ہے۔",
+        "en": "On any one day, the weather is the same in every city of Pakistan."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "ایک ہی دن کہیں بارش اور کہیں دھوپ ہو سکتی ہے۔",
+        "en": "On the same day it can rain in one place and be sunny in another."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-plan-clothes",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "تمہارے دوست کا خاندان جنوری میں گلگت جا رہا ہے۔ انہیں کیا پہننے کا مشورہ دو گے اور کیوں؟",
+        "en": "Your friend's family is visiting Gilgit in January. What would you advise them to wear, and why?"
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Look for warm clothes (wool, jackets, caps) linked to winter in the northern mountains being cold and possibly snowy."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-weather-week",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک ہفتے تک روز ایک ہی وقت پر آسمان دیکھو اور موسم کا حال نشان سے لکھو (سورج، بادل، بارش، ہوا)۔ آخر میں بتاؤ کون سا موسم سب سے زیادہ رہا۔ بجلی کڑکے تو گھر کے اندر رہو۔",
+        "en": "For one week, look at the sky at the same time each day and record the weather with a symbol (sun, cloud, rain, wind). At the end, say which weather happened most. If there is lightning, stay indoors."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Credit seven dated entries and a correct 'most common' statement. This links to the term project 'My nature diary'."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچو: یہ ایک دن کی بات ہے یا کئی ہفتوں کی؟",
+        "en": "Think: is this about one day, or many weeks?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "آسمان، ہوا اور گرمی سردی — تینوں کو ایک ایک کر کے دیکھو۔",
+        "en": "Check the sky, the wind and how hot or cold it is — one at a time."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "موسم کا حال اور سال کا موسم ایک ہی بات ہے۔",
+        "en": "Weather and season mean the same thing."
+      },
+      "correction": {
+        "ur": "موسم کا حال آج کی بات ہے اور روز بدلتا ہے؛ سال کا موسم کئی ہفتے کا ایک رجحان ہے۔",
+        "en": "Weather is about today and changes daily; a season is a pattern over many weeks."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "پورے پاکستان میں ایک وقت میں ایک جیسا موسم ہوتا ہے۔",
+        "en": "All of Pakistan has the same weather at the same time."
+      },
+      "correction": {
+        "ur": "پہاڑوں، میدانوں، صحرا اور ساحل کا موسم مختلف ہو سکتا ہے۔",
+        "en": "Mountains, plains, desert and coast can have different weather."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "mixes weather and season twice",
+      "remediation_ref": "SCI-G4-EAR-03"
+    },
+    {
+      "signal": "cannot record an observation",
+      "remediation_ref": "SCI-G4-INQ-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "موسم کا حال: آج کی ہوا — دھوپ، بادل، بارش، ہوا، گرمی، سردی؛ روز بدلتا ہے۔ سال کے موسم: گرمیاں، سردیاں، بہار، خزاں؛ گرمیوں کے آخر میں مون سون۔",
+    "en": "Weather: today's air — sunny, cloudy, rainy, windy, hot, cold; changes daily. Seasons: summer, winter, spring, autumn; the monsoon comes late in summer."
+  },
+  "summary": {
+    "ur": "ہم نے موسم کے حال اور سال کے موسموں میں فرق سیکھا اور موسم کو دیکھ کر لکھنا سیکھا۔",
+    "en": "We learned the difference between weather and seasons, and how to observe and record the weather."
+  },
+  "parent_notes": {
+    "ur": "صبح بچے سے پوچھیں: آج موسم کیسا ہے؟ آندھی یا بجلی کڑکنے میں بچے کو گھر کے اندر رکھیں۔",
+    "en": "Each morning ask your child: what is the weather like today? Keep your child indoors during dust storms or lightning."
+  },
+  "mentor_notes": {
+    "ur": "اردو میں \"موسم\" دونوں معنوں میں آتا ہے؛ \"موسم کا حال\" اور \"سال کا موسم\" الگ الگ استعمال کریں۔ موسموں کی وجہ (زمین کا جھکاؤ) اس سطح پر نہیں پڑھانی۔ علاقائی فرق قبول کریں، مثلاً کراچی میں سخت سردی نہیں ہوتی۔",
+    "en": "In Urdu 'موسم' covers both meanings; use 'موسم کا حال' and 'سال کا موسم' consistently. The cause of seasons (Earth's tilt) is not taught at this level. Accept regional differences, e.g. Karachi has no harsh winter."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ موسم کے نشانوں (سورج، بادل، بارش، ہوا) کا چارٹ اور اس کا متبادل متن ابھی بنانا ہے۔ ترتیب دینے والی سرگرمی کا متبادل: ہر بات کے لیے \"ایک دن\" یا \"کئی ہفتے\" کا بٹن دبائیں۔ نابینا بچے موسم کو جلد اور کان سے محسوس کر کے زبانی ریکارڈ کر سکتے ہیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. The weather-symbol chart (sun, cloud, rain, wind) and its alt text are still to be made. Alternative to the sort activity: tap 'one day' or 'many weeks' for each item. Blind learners can record weather by feel and sound, spoken aloud."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "observe-first: sky, wind, hot/cold, then a symbol; then zoom out from one day to many weeks to introduce seasons",
+    "questioning_strategy": "ask 'one day or many weeks?' to separate weather from season",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "treats weather and season as the same",
+      "assumes one weather for the whole country"
+    ],
+    "hint_policy": "graduated; first the time-span question, then the sky/wind/temperature check; never give the label first",
+    "example_policy": "use Pakistani contexts: monsoon rain, fog in Punjab winters, snow in the northern mountains, hot summers in the plains, dust storms",
+    "misconception_detectors": [
+      "merges weather and season",
+      "says one weather for all regions"
+    ],
+    "critical_thinking_prompts": [
+      "Why might it be snowing in one part of Pakistan while it is sunny and warm in another?"
+    ],
+    "personalization_rules": "if the learner struggles to record observations, route to SCI-G4-INQ-01",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor",
+      "learner mentions a flood, storm damage or losing a home -> respond gently and hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples",
+      "describe floods or storms in a frightening way",
+      "suggest going outside during lightning or a storm"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the monsoon timing wording ('late in summer', no month list) and that spring/autumn are named this way in Grade 4 books",
+    "child-safety: monsoon may recall floods for some learners — check tone and the escalation rule"
+  ]
+}

@@ -1,0 +1,490 @@
+{
+  "code": "ETH-G4-RES-04",
+  "title": {
+    "ur": "ادب سے اختلاف",
+    "en": "Disagreeing politely"
+  },
+  "description": {
+    "ur": "الگ رائے کو نرمی سے بتانا، دوسروں کی سننا، اور مل کر حل ڈھونڈنا۔",
+    "en": "Sharing a different opinion calmly, listening to others, and finding a solution together."
+  },
+  "keywords": [
+    "disagree",
+    "opinion",
+    "polite",
+    "calm voice",
+    "listening",
+    "compromise",
+    "I think because"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "رائے",
+        "en": "opinion"
+      },
+      "definition": {
+        "ur": "کسی بات کے بارے میں آپ کا خیال۔",
+        "en": "what you think about something."
+      }
+    },
+    {
+      "term": {
+        "ur": "اختلاف",
+        "en": "disagreement"
+      },
+      "definition": {
+        "ur": "جب دو لوگوں کی رائے الگ ہو۔",
+        "en": "when two people think differently."
+      }
+    },
+    {
+      "term": {
+        "ur": "درمیانی راستہ",
+        "en": "compromise"
+      },
+      "definition": {
+        "ur": "ایسا حل جس میں دونوں کی بات کا کچھ حصہ ہو۔",
+        "en": "a solution with a part of each person's idea."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کیا کبھی آپ کی اور آپ کے دوست کی رائے الگ ہوئی ہے؟ یہ بالکل عام بات ہے۔ الگ رائے رکھنا ٹھیک ہے؛ اہم یہ ہے کہ ہم اسے کیسے کہتے ہیں۔ آج ہم ایک جادوئی جملہ سیکھیں گے: «میرا خیال ہے… کیونکہ…»۔ پھر دیکھیں گے کہ کرکٹ یا لُڈو کے جھگڑے میں بچوں نے کیا کیا۔",
+    "en": "Have you and a friend ever thought differently? That is completely normal. Having a different opinion is fine; what matters is how we say it. Today we will learn a magic sentence: \"I think... because...\". Then we will see what some children did when they couldn't agree on cricket or ludo."
+  },
+  "student_explanation": {
+    "ur": "ہر ایک کی رائے الگ ہو سکتی ہے۔ الگ رائے رکھنا برا نہیں۔ اختلاف کا مطلب لڑائی نہیں۔ نرم آواز میں بات کریں۔ کہیں: «میرا خیال ہے… کیونکہ…»۔ دوسرے کی پوری بات سنیں۔ برے نام نہ رکھیں اور چلّائیں نہیں۔ پھر مل کر درمیانی راستہ ڈھونڈیں۔ بڑوں سے بھی ادب سے اپنی رائے کہی جا سکتی ہے۔ کبھی کبھی ہم مان لیتے ہیں کہ ہماری رائے الگ ہے۔ پھر بھی ہم دوست رہتے ہیں۔",
+    "en": "Everyone can have a different opinion. Having a different opinion is not bad. Disagreeing does not mean fighting. Speak in a calm voice. Say, \"I think... because...\". Listen to the other person's whole idea. Don't call names and don't shout. Then look for a compromise together. You can share your opinion politely with grown-ups too. Sometimes we agree that we think differently. We still stay friends."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "چھٹی میں روی کرکٹ کھیلنا چاہتا ہے، مگر ثنا لُڈو کھیلنا چاہتی ہے۔ دونوں ناراض ہونے لگے ہیں۔ وہ کیا کریں؟",
+        "en": "At break Ravi wants to play cricket, but Sana wants to play ludo. Both are getting cross. What can they do?"
+      },
+      "steps": [
+        {
+          "ur": "روی نرم آواز میں کہتا ہے: «میرا خیال ہے کرکٹ کھیلیں، کیونکہ دھوپ نکلی ہے۔»",
+          "en": "Ravi says calmly, \"I think we should play cricket, because it's sunny.\""
+        },
+        {
+          "ur": "ثنا سنتی ہے، پھر کہتی ہے: «میرا خیال ہے لُڈو، کیونکہ میرا پاؤں دکھ رہا ہے۔»",
+          "en": "Sana listens, then says, \"I think ludo, because my foot hurts.\""
+        },
+        {
+          "ur": "درمیانی راستہ: آج لُڈو، کل کرکٹ۔ دونوں خوش، دوستی بھی قائم۔",
+          "en": "Compromise: ludo today, cricket tomorrow. Both are happy and still friends."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ابو کہتے ہیں کہ آج پارک نہیں جانا۔ جان کو لگتا ہے کہ موسم اچھا ہے۔ وہ ادب سے اپنی رائے کیسے کہے؟",
+        "en": "Abbu says no park today. John thinks the weather is nice. How can he share his opinion politely?"
+      },
+      "steps": [
+        {
+          "ur": "جان پہلے ابو کی وجہ پوچھتا ہے: «ابو، آج کیوں نہیں؟»",
+          "en": "John first asks the reason: \"Abbu, why not today?\""
+        },
+        {
+          "ur": "ابو بتاتے ہیں کہ انہیں دیر سے گھر آنا ہے۔",
+          "en": "Abbu explains he will be home late."
+        },
+        {
+          "ur": "جان نرمی سے کہتا ہے: «کیا ہم کل شام چلیں؟» ابو مان جاتے ہیں۔ اگر نہ مانیں تب بھی جان ادب سے بات ختم کرتا ہے۔",
+          "en": "John says gently, \"Could we go tomorrow evening?\" Abbu agrees. Even if he didn't, John would end politely."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-polite-sort",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر جملے کو رکھیں: «ادب سے اختلاف» یا «بے ادبی»۔",
+        "en": "Sort each sentence: 'polite disagreement' or 'rude'."
+      },
+      "options": [
+        {
+          "ur": "«میرا خیال ہے نیلا رنگ بہتر ہے، کیونکہ یہ صاف نظر آتا ہے۔»",
+          "en": "\"I think blue is better, because it is easy to see.\""
+        },
+        {
+          "ur": "«تم بے وقوف ہو، تمہیں کچھ نہیں پتا!»",
+          "en": "\"You're silly, you know nothing!\""
+        },
+        {
+          "ur": "«تمہاری بات سمجھ آئی۔ میری رائے تھوڑی الگ ہے۔»",
+          "en": "\"I understand your idea. Mine is a bit different.\""
+        },
+        {
+          "ur": "دوسرے کی بات کاٹ کر چلّانا",
+          "en": "Shouting over the other person"
+        }
+      ],
+      "answer_key": {
+        "sort": {
+          "polite": [
+            0,
+            2
+          ],
+          "rude": [
+            1,
+            3
+          ]
+        },
+        "mode": "tap a card, then tap its group (drag also works)"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا اس جملے میں نرمی اور وجہ ہے؟",
+            "en": "Does the sentence have a calm tone and a reason?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-disagree-fight",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اختلاف کرنے کا مطلب لڑائی کرنا ہے۔",
+        "en": "Disagreeing means fighting."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "نرمی سے الگ رائے کہنا لڑائی نہیں۔",
+        "en": "Calmly sharing a different opinion is not fighting."
+      }
+    },
+    {
+      "id": "p2-magic-sentence",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ادب سے اختلاف کا اچھا جملہ کون سا ہے؟",
+        "en": "Which is a good sentence for disagreeing politely?"
+      },
+      "options": [
+        {
+          "ur": "«میرا خیال ہے… کیونکہ…»",
+          "en": "\"I think... because...\""
+        },
+        {
+          "ur": "«چپ کرو!»",
+          "en": "\"Be quiet!\""
+        },
+        {
+          "ur": "«تم ہمیشہ غلط ہوتے ہو۔»",
+          "en": "\"You're always wrong.\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-chart-colour",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کلاس کا چارٹ بنانا ہے۔ عائشہ ہرا رنگ چاہتی ہے، مریم پیلا۔ اچھا حل کیا ہے؟",
+        "en": "The class is making a chart. Ayesha wants green, Mariam wants yellow. What is a good solution?"
+      },
+      "options": [
+        {
+          "ur": "جو زور سے بولے اس کا رنگ",
+          "en": "Whoever shouts loudest wins"
+        },
+        {
+          "ur": "دونوں رنگ استعمال کریں یا پرچی ڈال لیں",
+          "en": "Use both colours or draw a slip"
+        },
+        {
+          "ur": "چارٹ بنانا ہی چھوڑ دیں",
+          "en": "Give up on the chart"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "درمیانی راستہ کیا ہو سکتا ہے؟",
+            "en": "What could a compromise be?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-with-elder",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "آپ کو لگتا ہے کہ نانا جان نے کہانی میں ایک بات غلط بتائی۔ ادب والا طریقہ کون سا ہے؟",
+        "en": "You think Nana ji got one part of a story wrong. Which way is respectful?"
+      },
+      "options": [
+        {
+          "ur": "ڈر کے مارے کبھی کچھ نہ کہنا",
+          "en": "Never say anything out of fear"
+        },
+        {
+          "ur": "«آپ غلط ہیں!» کہہ کر ہنسنا",
+          "en": "Laugh and say \"You're wrong!\""
+        },
+        {
+          "ur": "«نانا جان، مجھے لگا تھا کہ… کیا ایسا ہے؟»",
+          "en": "\"Nana ji, I thought that... is that right?\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-respect-equals-fear"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "احترام ڈر نہیں؛ کیا ادب سے پوچھا جا سکتا ہے؟",
+            "en": "Respect is not fear; can you ask politely?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-listen-first",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اختلاف میں دوسرے کی پوری بات سننا ضروری ہے۔",
+        "en": "When we disagree, it is important to listen to the other person's whole idea."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-say-no-firmly",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک بچہ آپ سے کہتا ہے: «چلو بغیر بتائے نہر پر نہانے چلیں۔» آپ کو یہ غیر محفوظ لگتا ہے۔ آپ کیا کہیں؟",
+        "en": "A child says, \"Let's go swimming in the canal without telling anyone.\" It feels unsafe to you. What do you say?"
+      },
+      "options": [
+        {
+          "ur": "«ٹھیک ہے، چلو۔»",
+          "en": "\"OK, let's go.\""
+        },
+        {
+          "ur": "«نہیں، یہ محفوظ نہیں۔ میں نہیں جاؤں گا۔» اور کسی بڑے کو بتانا",
+          "en": "\"No, it isn't safe. I won't go.\" and tell an adult"
+        },
+        {
+          "ur": "ڈر کر چپ ہو جانا اور ساتھ چل پڑنا",
+          "en": "Go quiet and go along anyway"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "غیر محفوظ بات پر ادب سے مگر صاف «نہیں» کہیں۔",
+        "en": "For unsafe ideas, say a polite but clear \"no\"."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-still-disagree",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "نرمی سے بات کرنے اور سننے کے بعد بھی دو دوستوں کی رائے الگ ہے۔ اب سب سے اچھا کام کیا ہے؟",
+        "en": "After talking calmly and listening, two friends still disagree. What is the best thing now?"
+      },
+      "options": [
+        {
+          "ur": "ہمیشہ کے لیے دوستی ختم کر دینا",
+          "en": "End the friendship forever"
+        },
+        {
+          "ur": "مان لینا کہ رائے الگ ہے اور دوست رہنا",
+          "en": "Agree that they think differently and stay friends"
+        },
+        {
+          "ur": "دوسرے بچوں کو اس کے خلاف کرنا",
+          "en": "Turn other children against the friend"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا الگ رائے کے ساتھ دوستی رہ سکتی ہے؟",
+            "en": "Can friendship continue with different opinions?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-practise-sentence",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں کسی کے ساتھ ایک آسان سوال پر بات کریں، جیسے «سب سے اچھا پھل کون سا ہے؟» دونوں «میرا خیال ہے… کیونکہ…» استعمال کریں۔",
+        "en": "At home, talk with someone about an easy question like \"Which fruit is best?\" Both of you use \"I think... because...\"."
+      },
+      "answer_key": {
+        "guidance": "Talking task at home; nothing is entered in the app."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کیا اس جواب میں نرم آواز اور وجہ ہے؟",
+        "en": "Does this answer use a calm voice and a reason?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "کون سا جواب دوسرے کی بات بھی سنتا ہے؟",
+        "en": "Which answer also listens to the other person?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "اختلاف کا مطلب لڑائی ہے۔",
+        "en": "Disagreeing means fighting."
+      },
+      "correction": {
+        "ur": "نرمی سے الگ رائے کہنا لڑائی نہیں۔",
+        "en": "Calmly sharing a different opinion is not fighting."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "بڑوں سے کبھی اپنی رائے نہیں کہنی چاہیے۔",
+        "en": "We must never share our opinion with grown-ups."
+      },
+      "correction": {
+        "ur": "احترام ڈر نہیں؛ بڑوں سے بھی ادب سے رائے کہی جا سکتی ہے۔",
+        "en": "Respect is not fear; we can share opinions politely with grown-ups too."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-respect-equals-fear",
+      "remediation_ref": "ETH-G4-RES-01"
+    },
+    {
+      "signal": "picks rude options twice",
+      "remediation_ref": "ETH-G4-RES-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "الگ رائے ٹھیک ہے۔ نرم آواز، «میرا خیال ہے… کیونکہ…»، پوری بات سنیں، درمیانی راستہ ڈھونڈیں۔ غیر محفوظ بات پر صاف «نہیں» کہیں۔",
+    "en": "Different opinions are fine. Calm voice, \"I think... because...\", listen fully, find a compromise. Say a clear \"no\" to anything unsafe."
+  },
+  "summary": {
+    "ur": "ہم نے ادب سے اختلاف کرنا، سننا اور درمیانی راستہ ڈھونڈنا سیکھا۔",
+    "en": "We learned to disagree politely, listen, and find a compromise."
+  },
+  "parent_notes": {
+    "ur": "جب بچہ ادب سے اپنی رائے کہے تو سنیں اور وجہ پوچھیں، چاہے آپ آخر میں نہ مانیں۔ اس سے بچہ پر اعتماد بنتا ہے۔",
+    "en": "When your child shares an opinion politely, listen and ask for the reason, even if you don't agree in the end. This builds confidence."
+  },
+  "mentor_notes": {
+    "ur": "«میرا خیال ہے… کیونکہ…» کی مشق زبانی کروائیں۔ بچوں کو یقین دلائیں کہ ادب سے رائے دینا بدتمیزی نہیں۔ نہر والی مثال حفاظتی ہے؛ اسے ڈراؤنا نہ بنائیں۔",
+    "en": "Practise \"I think... because...\" aloud. Reassure learners that a polite opinion is not rudeness. The canal example is a safety one; don't make it frightening."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن منظر بیان کرے (کون ہے، کیا ہو رہا ہے)۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ یہ مضمون سننے پر مبنی ہے، اس لیے ہر کہانی، سوال اور جواب کو آواز میں پڑھا جانا ضروری ہے۔ ترتیب دینے والی سرگرمی کا متبادل: کارڈ کو چھوئیں، پھر گروپ کو چھوئیں؛ یا ہر کارڈ کے لیے دو بٹنوں میں سے ایک چنیں۔",
+    "en": "Story pictures are still to be made; each needs alt text that describes the scene (who is there, what is happening). Urdu audio is not yet recorded; this subject is audio-first, so every story, question and option must be read aloud. Alternative to the sort activity: tap a card, then tap its group; or answer each card with one of two buttons."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "normalise different opinions; teach the sentence frame 'I think... because...'; model listen -> reason -> compromise; include one calm 'say no to unsafe' item",
+    "questioning_strategy": "ask 'what is your reason?' and 'what might the other person think?'; invite the learner to build a compromise",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "equates disagreement with fighting",
+      "thinks children may never speak up to elders"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "playground choices (cricket or ludo), class chart colours, a family outing; keep the canal safety example calm",
+    "misconception_detectors": [
+      "thinks disagreeing means fighting",
+      "thinks respect means never speaking up",
+      "thinks one side must 'win'"
+    ],
+    "critical_thinking_prompts": [
+      "How can two people both be a little bit right?",
+      "How is a polite 'no' different from a rude 'no'?"
+    ],
+    "personalization_rules": "if the learner picks fear-based options with elders, route to ETH-G4-RES-01; give extra sentence-frame practice if rude options are chosen",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths"
+    ]
+  },
+  "review_flags": [
+    "subject expert: check the 'disagree politely with Abbu / Nana ji' examples fit family norms and stay respectful",
+    "SAFEGUARDING REVIEWER: p6 (unsafe canal swim, say no, tell an adult) - check it is calm and not frightening",
+    "language editor: check «درمیانی راستہ» as the child-level word for compromise"
+  ]
+}

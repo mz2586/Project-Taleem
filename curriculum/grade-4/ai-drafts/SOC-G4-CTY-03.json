@@ -1,0 +1,461 @@
+{
+  "code": "SOC-G4-CTY-03",
+  "title": {
+    "ur": "ہمارے رنگا رنگ لوگ",
+    "en": "Our many cultures"
+  },
+  "description": {
+    "ur": "پاکستان کی زبانوں، لباس اور کھانوں کی رنگا رنگی کو احترام سے بیان کریں۔",
+    "en": "Describe the variety of Pakistan's languages, clothes and food with respect."
+  },
+  "keywords": [
+    "culture",
+    "diversity",
+    "languages",
+    "dress",
+    "food",
+    "respect"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ثقافت",
+        "en": "culture"
+      },
+      "definition": {
+        "ur": "لوگوں کے رہنے، بولنے، پہننے اور کھانے کا انداز۔",
+        "en": "the way people live, speak, dress and eat."
+      }
+    },
+    {
+      "term": {
+        "ur": "رنگا رنگی",
+        "en": "diversity"
+      },
+      "definition": {
+        "ur": "بہت سی مختلف چیزوں کا ایک ساتھ ہونا۔",
+        "en": "many different things together."
+      }
+    },
+    {
+      "term": {
+        "ur": "علاقائی زبان",
+        "en": "regional language"
+      },
+      "definition": {
+        "ur": "وہ زبان جو کسی علاقے کے لوگ گھر میں بولتے ہیں۔",
+        "en": "a language people of an area speak at home."
+      }
+    },
+    {
+      "term": {
+        "ur": "احترام",
+        "en": "respect"
+      },
+      "definition": {
+        "ur": "دوسروں کی بات اور طریقے کو عزت دینا۔",
+        "en": "treating other people and their ways kindly and with honour."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "پاکستان ایک بڑے رنگین گلدستے کی طرح ہے۔ یہاں بہت سی زبانیں بولی جاتی ہیں۔ لوگ طرح طرح کے کپڑے پہنتے اور کھانے کھاتے ہیں۔ آج ہم یہ رنگا رنگی دیکھیں گے۔ ہم یہ بھی سیکھیں گے کہ ہر ثقافت کا احترام کیسے کریں۔",
+    "en": "Pakistan is like a big, colourful bunch of flowers. Many languages are spoken here. People wear many kinds of clothes and eat many kinds of food. Today we will look at this variety. We will also learn how to respect every culture."
+  },
+  "student_explanation": {
+    "ur": "پاکستان میں بہت سی زبانیں بولی جاتی ہیں۔ پنجابی، سندھی، پشتو اور بلوچی ان میں سے کچھ ہیں۔ سرائیکی، براہوی، ہندکو اور شینا بھی بولی جاتی ہیں۔ اردو ہم سب کو آپس میں جوڑتی ہے۔ شلوار قمیض ملک بھر میں پہنی جاتی ہے۔ ہر علاقے کے لباس کی اپنی خوبصورتی ہے۔ کھانے بھی طرح طرح کے ہیں۔ مختلف ہونا غلط ہونا نہیں۔ ہم ہر زبان اور طریقے کا احترام کرتے ہیں۔",
+    "en": "Many languages are spoken in Pakistan. Punjabi, Sindhi, Pashto and Balochi are some of them. Saraiki, Brahui, Hindko and Shina are spoken too. Urdu links all of us together. Shalwar kameez is worn all over the country. Each area's clothes have their own beauty. Food comes in many kinds too. Being different is not being wrong. We respect every language and way of life."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "کلاس میں نیا بچہ آیا ہے۔ وہ گھر میں بلوچی بولتا ہے۔ کچھ بچے ہنستے ہیں۔ احترام والا جواب کیا ہے؟",
+        "en": "A new boy joins the class. He speaks Balochi at home. Some children laugh. What is the respectful response?"
+      },
+      "steps": [
+        {
+          "ur": "سوچیں: کیا کسی کی زبان پر ہنسنا اچھا ہے؟ نہیں۔",
+          "en": "Think: is it kind to laugh at someone's language? No."
+        },
+        {
+          "ur": "ہر زبان قیمتی ہے، جیسے ہماری اپنی زبان۔",
+          "en": "Every language is valuable, just like our own."
+        },
+        {
+          "ur": "احترام والا جواب: 'خوش آمدید! ہمیں بلوچی میں سلام کرنا سکھاؤ گے؟'",
+          "en": "A respectful response: 'Welcome! Will you teach us how to greet in Balochi?'"
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "دو دوست ہیں۔ خاندان کی دعوت پر ایک کے گھر سجی بنتی ہے، دوسرے کے گھر بریانی۔ کیا ایک کھانا 'صحیح' اور دوسرا 'غلط' ہے؟",
+        "en": "Two friends: for a family gathering one family cooks sajji, the other cooks biryani. Is one food 'right' and the other 'wrong'?"
+      },
+      "steps": [
+        {
+          "ur": "دونوں گھر اپنے اپنے طریقے سے خوشی مناتے ہیں۔",
+          "en": "Both families celebrate in their own way."
+        },
+        {
+          "ur": "کھانا مختلف ہے، خوشی ایک جیسی ہے۔",
+          "en": "The food is different; the happiness is the same."
+        },
+        {
+          "ur": "تو کوئی کھانا غلط نہیں۔ دونوں دوست ایک دوسرے کا کھانا چکھ سکتے ہیں۔",
+          "en": "So no food is wrong. The friends can taste each other's food."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-kind-unkind",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر جملے کو 'احترام' یا 'بے احترامی' والے ڈبے میں رکھیں۔",
+        "en": "Sort each sentence into the 'respectful' or 'not respectful' box."
+      },
+      "answer_key": {
+        "respectful": [
+          "Asking a friend to teach you a word in their language",
+          "Trying a new food politely",
+          "Saying a classmate's dress looks nice"
+        ],
+        "not_respectful": [
+          "Copying someone's accent to make others laugh",
+          "Saying one language is better than another",
+          "Refusing to sit with someone because they dress differently"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: اگر کوئی آپ کے ساتھ یہ کرے تو آپ کو کیسا لگے گا؟",
+            "en": "Think: how would you feel if someone did this to you?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-language-list",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ان میں سے کون سی پاکستان میں بولی جانے والی زبان ہے؟",
+        "en": "Which of these is a language spoken in Pakistan?"
+      },
+      "options": [
+        {
+          "ur": "پشتو",
+          "en": "Pashto"
+        },
+        {
+          "ur": "سائیکل",
+          "en": "bicycle"
+        },
+        {
+          "ur": "دریا",
+          "en": "river"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "پشتو پاکستان کی کئی زبانوں میں سے ایک ہے۔",
+        "en": "Pashto is one of Pakistan's many languages."
+      }
+    },
+    {
+      "id": "p2-different-wrong",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اگر کسی کا لباس ہم سے مختلف ہو تو وہ غلط ہے۔",
+        "en": "If someone's clothes are different from ours, they are wrong."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا مختلف ہونا اور غلط ہونا ایک بات ہے؟",
+            "en": "Is being different the same as being wrong?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "مختلف ہونا غلط ہونا نہیں۔ ہر لباس کی اپنی خوبصورتی ہے۔",
+        "en": "Being different is not being wrong. Every kind of dress has its own beauty."
+      }
+    },
+    {
+      "id": "p3-respect-action",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "زینب کی دوست سندھی بولتی ہے۔ زینب کیا کرے؟",
+        "en": "Zainab's friend speaks Sindhi. What should Zainab do?"
+      },
+      "options": [
+        {
+          "ur": "اس کی زبان کا مذاق اڑائے",
+          "en": "make fun of her language"
+        },
+        {
+          "ur": "اس سے سندھی کا کوئی لفظ سیکھے",
+          "en": "learn a Sindhi word from her"
+        },
+        {
+          "ur": "اس سے بات کرنا چھوڑ دے",
+          "en": "stop talking to her"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دوستی اور احترام والا کام چنیں۔",
+            "en": "Choose the friendly, respectful action."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-urdu-links",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "اردو مختلف زبانیں بولنے والے لوگوں کو آپس میں جوڑتی ہے۔",
+        "en": "Urdu links people who speak different languages."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p5-shalwar",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کون سا لباس ملک بھر میں بہت پہنا جاتا ہے؟",
+        "en": "Which dress is worn widely all over the country?"
+      },
+      "options": [
+        {
+          "ur": "خلائی سوٹ",
+          "en": "a space suit"
+        },
+        {
+          "ur": "برف کا لباس",
+          "en": "a snow suit"
+        },
+        {
+          "ur": "شلوار قمیض",
+          "en": "shalwar kameez"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p6-best-language",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "احمد کہتا ہے: 'میری زبان سب سے اچھی ہے، باقی سب بری ہیں۔' اس بات میں کیا غلطی ہے؟",
+        "en": "Ahmed says: 'My language is the best; all the others are bad.' What is wrong with this?"
+      },
+      "options": [
+        {
+          "ur": "کچھ غلط نہیں",
+          "en": "nothing is wrong"
+        },
+        {
+          "ur": "صرف اردو اچھی ہے",
+          "en": "only Urdu is good"
+        },
+        {
+          "ur": "ہر زبان قیمتی ہے؛ کوئی بری نہیں",
+          "en": "every language is valuable; none is bad"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "آپ کی زبان آپ کو پیاری ہے۔ دوسروں کو بھی اپنی زبان پیاری ہے۔",
+            "en": "Your language is dear to you. Others love their languages too."
+          }
+        }
+      ]
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-welcome",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک نئی بچی دوسرے علاقے سے آپ کی کلاس میں آئی ہے۔ اسے خوش آمدید کہنے کے دو طریقے بتائیں۔",
+        "en": "A new girl from another area has joined your class. Give two ways to make her feel welcome."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor-graded. Accept any two kind, inclusive actions (greet her, sit with her, ask her to teach a word, share lunch). Do not ask the learner about their own background."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-hello-words",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کے کسی بڑے سے پوچھیں کہ کسی دوسری پاکستانی زبان میں 'شکریہ' یا 'سلام' کیسے کہتے ہیں۔ اگر نہ معلوم ہو تو کوئی بات نہیں؛ اپنی زبان کا لفظ بتا دیں۔",
+        "en": "Ask a grown-up at home how to say 'thank you' or a greeting in another Pakistani language. If nobody knows, that is fine; share the word in your own language."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any word or an honest 'we did not know'. Do not record or comment on the family's language or region."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: کیا یہ بات سب کو عزت دیتی ہے؟",
+        "en": "Think: does this treat everyone with honour?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد رکھیں: مختلف ہونا غلط ہونا نہیں۔",
+        "en": "Remember: being different is not being wrong."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "جو ہم سے مختلف ہے وہ غلط یا عجیب ہے۔",
+        "en": "Whatever is different from us is wrong or strange."
+      },
+      "correction": {
+        "ur": "مختلف ہونا غلط ہونا نہیں۔ ہر ثقافت قابلِ احترام ہے۔",
+        "en": "Being different is not being wrong. Every culture deserves respect."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ایک علاقے کے سب لوگ بالکل ایک جیسے ہوتے ہیں۔",
+        "en": "Everyone from one area is exactly the same."
+      },
+      "correction": {
+        "ur": "ہر علاقے میں لوگ مختلف ہوتے ہیں۔ ہر شخص کو الگ سے جانیں۔",
+        "en": "People in every area are different. Get to know each person for who they are."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:SOC-G4-CTY-01",
+      "remediation_ref": "SOC-G4-CTY-01"
+    },
+    {
+      "signal": "two_wrong_in_a_row",
+      "remediation_ref": "SOC-G4-CTY-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پاکستان میں بہت سی زبانیں، لباس اور کھانے ہیں۔ اردو سب کو جوڑتی ہے۔ مختلف ہونا غلط ہونا نہیں۔ ہم سب کا احترام کرتے ہیں۔",
+    "en": "Pakistan has many languages, clothes and foods. Urdu links everyone. Being different is not being wrong. We respect everyone."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ پاکستان رنگا رنگ ہے اور ہر ثقافت کا احترام ضروری ہے۔",
+    "en": "We learned that Pakistan is full of variety and that every culture deserves respect."
+  },
+  "parent_notes": {
+    "ur": "بچے کو اپنے خاندان کی زبان کا کوئی گیت یا کہاوت سنائیں، اور کسی دوسری زبان کا ایک اچھا لفظ مل کر سیکھیں۔",
+    "en": "Share a song or saying in your family's language, and learn one kind word from another language together."
+  },
+  "mentor_notes": {
+    "ur": "دقیانوسی خیالات سے بچیں: 'سب پنجابی ایسے ہیں' جیسے جملے نہ آنے دیں۔ کسی بچے کو اس کی زبان یا علاقے کی وجہ سے نمایاں نہ کریں۔ لباس اور کھانے کی مثالیں 'بہت سے لوگ' کہہ کر دیں، 'سب' نہیں۔",
+    "en": "Avoid stereotypes: do not allow sentences like 'all people from X are like this'. Never single out a child for their language or area. Give dress and food examples as 'many people', never 'all'."
+  },
+  "accessibility_notes": {
+    "ur": "لباس اور کھانوں کی تصاویر ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن چیز کا نام اور رنگ بتائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ زبانوں کے ناموں کا درست تلفظ ریکارڈ ہونا چاہیے۔ گھسیٹنے والی سرگرمی کا متبادل: ہر جملے کے لیے 'احترام' یا 'بے احترامی' کا بٹن دبائیں۔",
+    "en": "Pictures of clothes and foods are still to be made; each alt text should give the item's name and colours. Urdu audio is not yet recorded; the language names need correct recorded pronunciation. Alternative to the sorting activity: tap a 'respectful' or 'not respectful' button for each sentence."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "celebrate variety with neutral examples from every region, then practise respectful responses in everyday school situations",
+    "questioning_strategy": "ask 'how would you feel?' and 'is different the same as wrong?' before judging an action",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "learner says one group is better or worse"
+    ],
+    "hint_policy": "graduated; two hints max; first ask about feelings, then recall 'different is not wrong'; never give the choice first",
+    "example_policy": "balanced across Punjab, Sindh, Khyber Pakhtunkhwa, Balochistan, Gilgit-Baltistan, Azad Jammu and Kashmir and Islamabad; say 'many people', never 'all people'; no religious or sectarian comparisons",
+    "misconception_detectors": [
+      "calls a different custom wrong or strange",
+      "generalises about everyone from one area",
+      "ranks languages"
+    ],
+    "critical_thinking_prompts": [
+      "What could you learn from a friend whose home language is different from yours?"
+    ],
+    "personalization_rules": "if the learner seems hurt by a remark about their own background, stop the item and escalate to a mentor",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor",
+      "learner reports being teased or excluded for their language, dress or background -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "ask the learner which language, ethnic group or region their family comes from",
+      "stereotype any group"
+    ]
+  },
+  "review_flags": [
+    "child-safety + subject expert: check every language, dress and food example for balance across all regions and for stereotyping",
+    "confirm the list of languages named (Punjabi, Sindhi, Pashto, Balochi, Saraiki, Brahui, Hindko, Shina) is acceptable and consider adding languages of Azad Jammu and Kashmir and Gilgit-Baltistan (e.g. Balti, Kashmiri)",
+    "worked example 2 uses sajji and biryani at a family gathering; check the food examples do not tie one dish to one group"
+  ]
+}

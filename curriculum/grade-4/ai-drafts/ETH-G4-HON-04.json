@@ -1,0 +1,506 @@
+{
+  "code": "ETH-G4-HON-04",
+  "title": {
+    "ur": "انصاف اور وعدہ نبھانا",
+    "en": "Fairness and keeping promises"
+  },
+  "description": {
+    "ur": "منصفانہ برتاؤ اور وعدہ پورا کرنا؛ اور یہ کہ کون سا راز نہیں رکھنا چاہیے۔",
+    "en": "Being fair and keeping promises, and knowing which secrets we should not keep."
+  },
+  "keywords": [
+    "promise",
+    "keeping promises",
+    "fairness",
+    "fair share",
+    "trust",
+    "unsafe secret",
+    "trusted adult"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "وعدہ",
+        "en": "promise"
+      },
+      "definition": {
+        "ur": "یہ کہنا کہ میں یہ کام ضرور کروں گا۔",
+        "en": "saying that I will surely do something."
+      }
+    },
+    {
+      "term": {
+        "ur": "وعدہ نبھانا",
+        "en": "keeping a promise"
+      },
+      "definition": {
+        "ur": "جو کہا وہ کر دکھانا۔",
+        "en": "doing what you said you would do."
+      }
+    },
+    {
+      "term": {
+        "ur": "انصاف",
+        "en": "fairness"
+      },
+      "definition": {
+        "ur": "سب کے ساتھ ٹھیک اور برابر کا سلوک۔",
+        "en": "treating everyone rightly and evenly."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم دو باتیں سیکھیں گے: وعدہ نبھانا اور انصاف کرنا۔ جب ہم وعدہ پورا کرتے ہیں تو لوگ ہماری بات پر بھروسا کرتے ہیں۔ ہم کہانی سنیں گے کہ آنیتا نے چھوٹے بھائی سے مدد کا وعدہ کیا تھا۔ اور ایک بہت ضروری بات بھی سیکھیں گے: ہر راز رکھنا ضروری نہیں۔",
+    "en": "Today we will learn two things: keeping promises and being fair. When we keep a promise, people trust our words. We will hear how Anita promised to help her little brother. We will also learn something very important: not every secret should be kept."
+  },
+  "student_explanation": {
+    "ur": "وعدہ ایک پکی بات ہوتی ہے۔ وعدہ نبھانے سے بھروسا بنتا ہے۔ صرف وہی وعدہ کریں جو پورا کر سکیں۔ اگر وعدہ پورا نہ ہو سکے تو جلدی بتا دیں۔ سچ بتائیں اور معافی مانگیں۔ انصاف کا مطلب ہے سب سے ٹھیک سلوک۔ آم بانٹیں تو سب کو حصہ ملے۔ کچھ راز اچھے ہوتے ہیں، جیسے سالگرہ کا تحفہ۔ جو راز آپ کو پریشان یا غیر محفوظ کرے، وہ کسی بھروسے والے بڑے کو بتائیں۔ ایسا بتانا وعدہ توڑنا نہیں۔",
+    "en": "A promise is a firm word. Keeping promises builds trust. Only make promises you can keep. If you cannot keep a promise, say so early. Tell the truth and say sorry. Fairness means treating everyone rightly. When we share mangoes, everyone gets a share. Some secrets are good, like a birthday surprise. If a secret makes you worried or unsafe, tell a trusted adult. Telling is not breaking a promise."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "آنیتا نے چھوٹے بھائی سے وعدہ کیا: «شام کو تمہارا سبق سمجھاؤں گی۔» شام کو دوستوں نے کرکٹ کے لیے بلایا۔ آنیتا کیا کرے؟",
+        "en": "Anita promised her little brother, \"I will help you with your lesson this evening.\" In the evening, friends call her to play cricket. What should Anita do?"
+      },
+      "steps": [
+        {
+          "ur": "آنیتا یاد کرتی ہے کہ اس نے پکی بات کی تھی۔",
+          "en": "Anita remembers she gave a firm word."
+        },
+        {
+          "ur": "وہ دوستوں سے کہتی ہے: «پہلے بھائی کا سبق، پھر آتی ہوں۔»",
+          "en": "She tells her friends, \"Brother's lesson first, then I will come.\""
+        },
+        {
+          "ur": "وعدہ پورا ہوا، بھائی کا بھروسا بڑھا، اور کھیل بھی ہو گیا۔",
+          "en": "The promise is kept, her brother's trust grows, and she still plays later."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ہرپریت کے پاس ۶ آم ہیں۔ وہ اور اس کے دو کزن ہیں۔ منصفانہ بانٹ کیا ہے؟",
+        "en": "Harpreet has 6 mangoes. There are Harpreet and two cousins. What is a fair share?"
+      },
+      "steps": [
+        {
+          "ur": "کل تین بچے ہیں۔",
+          "en": "There are three children in all."
+        },
+        {
+          "ur": "۶ آم تین برابر حصوں میں: ہر ایک کو ۲۔",
+          "en": "6 mangoes in three equal shares: 2 each."
+        },
+        {
+          "ur": "ہرپریت اپنے لیے زیادہ نہیں رکھتی۔ یہی انصاف ہے۔",
+          "en": "Harpreet does not keep extra for herself. That is fair."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-secret-sort",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر راز کو گروپ میں رکھیں: «رکھ سکتے ہیں» یا «بھروسے والے بڑے کو بتائیں»۔",
+        "en": "Sort each secret: 'OK to keep' or 'tell a trusted adult'."
+      },
+      "options": [
+        {
+          "ur": "امی کی سالگرہ کا سرپرائز تحفہ",
+          "en": "A surprise gift for Ammi's birthday"
+        },
+        {
+          "ur": "کوئی کہے «یہ بات کسی کو مت بتانا» اور آپ کو ڈر لگے",
+          "en": "Someone says \"don't tell anyone\" and it makes you scared"
+        },
+        {
+          "ur": "کزن کے لیے بنایا ہوا سرپرائز کارڈ",
+          "en": "A surprise card you made for a cousin"
+        },
+        {
+          "ur": "کوئی آپ کو چوٹ پہنچائے اور کہے چپ رہنا",
+          "en": "Someone hurts you and says to stay quiet"
+        }
+      ],
+      "answer_key": {
+        "sort": {
+          "ok_to_keep": [
+            0,
+            2
+          ],
+          "tell_trusted_adult": [
+            1,
+            3
+          ]
+        },
+        "mode": "tap a card, then tap its group (drag also works)"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا یہ راز خوشی دیتا ہے یا پریشانی؟",
+            "en": "Does this secret bring happiness, or worry?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-promise-meaning",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "وعدہ نبھانے کا مطلب کیا ہے؟",
+        "en": "What does keeping a promise mean?"
+      },
+      "options": [
+        {
+          "ur": "جو کہا وہ کر دکھانا",
+          "en": "Doing what you said you would do"
+        },
+        {
+          "ur": "وعدہ کر کے بھول جانا",
+          "en": "Promising and then forgetting"
+        },
+        {
+          "ur": "صرف آسان وعدے پورے کرنا",
+          "en": "Keeping only easy promises"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "2": "m-honesty-only-when-easy"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ «نبھانا» پر غور کریں۔",
+            "en": "Think about the word 'keeping'."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-cant-keep",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "جوزف نے دوست سے کہا تھا کہ کل اس کی کتاب لائے گا۔ کل اسکول نہیں جا سکے گا۔ کیا کرے؟",
+        "en": "Joseph told a friend he would bring his book tomorrow. He can't go to school tomorrow. What should he do?"
+      },
+      "options": [
+        {
+          "ur": "کچھ نہ کہے",
+          "en": "Say nothing"
+        },
+        {
+          "ur": "بہانہ بنا دے",
+          "en": "Make up an excuse"
+        },
+        {
+          "ur": "دوست کو جلدی سچ بتا دے اور نیا وقت طے کرے",
+          "en": "Tell his friend the truth early and agree a new time"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "وعدہ پورا نہ ہو سکے تو کیا کرتے ہیں؟",
+            "en": "What do we do if we cannot keep a promise?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-only-promise-can-keep",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہمیں صرف وہی وعدہ کرنا چاہیے جو ہم پورا کر سکیں۔",
+        "en": "We should only make promises we can keep."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-fair-share",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "پانچ دوستوں کے پاس ۱۰ بسکٹ ہیں۔ منصفانہ بانٹ کیا ہے؟",
+        "en": "Five friends have 10 biscuits. What is a fair share?"
+      },
+      "options": [
+        {
+          "ur": "جو پہلے آئے اسے سب سے زیادہ",
+          "en": "The most for whoever comes first"
+        },
+        {
+          "ur": "ہر ایک کو ۲",
+          "en": "2 each"
+        },
+        {
+          "ur": "سب سے بڑے کو آدھے",
+          "en": "Half for the oldest"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۱۰ کو ۵ برابر حصوں میں بانٹیں۔",
+            "en": "Share 10 into 5 equal parts."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-unsafe-secret",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اگر کوئی راز آپ کو ڈرائے یا پریشان کرے تو اسے بھروسے والے بڑے کو بتانا ٹھیک ہے۔",
+        "en": "If a secret makes you scared or worried, it is OK to tell a trusted adult."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "ایسا بتانا وعدہ توڑنا نہیں۔ یہ آپ کا قصور نہیں۔",
+        "en": "Telling is not breaking a promise. It is not your fault."
+      }
+    },
+    {
+      "id": "p6-good-secret",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کون سا راز رکھنا ٹھیک ہے؟",
+        "en": "Which secret is OK to keep?"
+      },
+      "options": [
+        {
+          "ur": "کوئی کہے «میں نے تمہیں جو تکلیف دی، کسی کو مت بتانا»",
+          "en": "Someone says \"don't tell anyone I hurt you\""
+        },
+        {
+          "ur": "ابو کے لیے سرپرائز کیک",
+          "en": "A surprise cake for Abbu"
+        },
+        {
+          "ur": "کوئی اجنبی کہے «ہماری بات گھر پر مت بتانا»",
+          "en": "A stranger says \"don't tell your family we talked\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اچھا راز تھوڑی دیر بعد خوشی سے کھل جاتا ہے۔",
+            "en": "A good secret comes out soon, with happiness."
+          }
+        }
+      ]
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-two-promises",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "سارہ نے ایک سہیلی سے کہا کہ چھٹی میں اس کے ساتھ کھیلے گی، اور دوسری سے بھی یہی کہا۔ اب کیا منصفانہ ہے؟",
+        "en": "Sara told one friend she would play with her at break, and told another friend the same. What is fair now?"
+      },
+      "options": [
+        {
+          "ur": "دونوں سے سچ بولے اور تینوں مل کر کھیلیں",
+          "en": "Tell both the truth and all three play together"
+        },
+        {
+          "ur": "ایک سہیلی کو چپ چاپ چھوڑ دے",
+          "en": "Quietly leave one friend out"
+        },
+        {
+          "ur": "دونوں سے کہے کہ وہ بیمار ہے",
+          "en": "Tell both she is ill"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا راستہ سچا بھی ہے اور سب کے لیے ٹھیک بھی؟",
+            "en": "Which way is honest and right for everyone?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-small-promise",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج گھر میں ایک چھوٹا سا وعدہ کریں جو آپ پورا کر سکیں، جیسے «میں کھانے کے بعد پانی کا جگ بھر دوں گا»۔ پھر اسے پورا کریں۔",
+        "en": "Make one small promise at home that you can keep, like \"I will fill the water jug after dinner\". Then keep it."
+      },
+      "answer_key": {
+        "guidance": "Done at home; no reporting in the app."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "اس بچے نے کیا کہا تھا؟ کیا وہ اپنی بات پوری کر رہا ہے؟",
+        "en": "What did the child say? Are they doing what they said?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "کیا سب کو ٹھیک حصہ مل رہا ہے؟",
+        "en": "Is everyone getting a fair share?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "وعدہ صرف تب نبھانا ہے جب آسان ہو۔",
+        "en": "Keep a promise only when it is easy."
+      },
+      "correction": {
+        "ur": "سچ تب بھی بولتے ہیں جب مشکل ہو؛ وعدہ بھی مشکل وقت میں نبھاتے ہیں۔",
+        "en": "We are honest even when it is hard; we keep promises in hard moments too."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ہر راز رکھنا وعدہ ہے، چاہے وہ ڈرائے۔",
+        "en": "Every secret must be kept, even a scary one."
+      },
+      "correction": {
+        "ur": "جو راز پریشان یا غیر محفوظ کرے، وہ بھروسے والے بڑے کو بتائیں۔ یہ آپ کا قصور نہیں۔",
+        "en": "Tell a trusted adult about any secret that worries you or feels unsafe. It is not your fault."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-honesty-only-when-easy",
+      "remediation_ref": "ETH-G4-HON-01"
+    },
+    {
+      "signal": "wrong on unsafe-secret items",
+      "remediation_ref": "ETH-G4-HON-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "وعدہ نبھائیں؛ نہ نبھا سکیں تو جلدی سچ بتائیں۔ انصاف = سب کو ٹھیک حصہ۔ سرپرائز والا راز ٹھیک ہے؛ ڈرانے والا راز بھروسے والے بڑے کو بتائیں۔",
+    "en": "Keep promises; if you can't, tell the truth early. Fair = everyone gets a right share. Surprise secrets are OK; worrying secrets go to a trusted adult."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ وعدہ نبھانے اور انصاف سے بھروسا بنتا ہے، اور پریشان کرنے والا راز بھروسے والے بڑے کو بتاتے ہیں۔",
+    "en": "We learned that keeping promises and being fair build trust, and that worrying secrets are told to a trusted adult."
+  },
+  "parent_notes": {
+    "ur": "اپنے وعدے بھی بچے کے سامنے نبھائیں۔ بچے کو بتائیں کہ وہ کوئی بھی پریشان کرنے والی بات آپ کو بتا سکتا ہے اور آپ ناراض نہیں ہوں گے۔ «سرپرائز» اور «راز» کا فرق سمجھائیں۔",
+    "en": "Keep your own promises in front of your child. Tell your child they can tell you anything that worries them and you will not be angry. Explain the difference between a surprise and a secret."
+  },
+  "mentor_notes": {
+    "ur": "راز والا حصہ حفاظتی تعلیم ہے: بچے سے کوئی راز نہ پوچھیں۔ اگر کوئی بچہ خود کچھ بتائے تو تسلی دیں، سوال نہ کریں، اور فوراً حفاظتی ذمہ دار کو بتائیں۔",
+    "en": "The secrets part is safeguarding education: never ask a learner for a secret. If a learner discloses something, reassure them, do not question, and report to the safeguarding lead at once."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن منظر بیان کرے (کون ہے، کیا ہو رہا ہے)۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ یہ مضمون سننے پر مبنی ہے، اس لیے ہر کہانی، سوال اور جواب کو آواز میں پڑھا جانا ضروری ہے۔ ترتیب دینے والی سرگرمی کا متبادل: کارڈ کو چھوئیں، پھر گروپ کو چھوئیں؛ یا ہر کارڈ کے لیے دو بٹنوں میں سے ایک چنیں۔",
+    "en": "Story pictures are still to be made; each needs alt text that describes the scene (who is there, what is happening). Urdu audio is not yet recorded; this subject is audio-first, so every story, question and option must be read aloud. Alternative to the sort activity: tap a card, then tap its group; or answer each card with one of two buttons."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "two short made-up stories (Anita's promise, sharing mangoes), then the surprise-vs-unsafe-secret sort; keep the safety message calm and matter-of-fact",
+    "questioning_strategy": "ask 'what did she say she would do?' and 'is everyone getting a fair share?'; for secrets ask 'does it bring happiness or worry?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says every secret must be kept",
+      "learner seems uneasy during the secrets activity"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "everyday promises (help with a lesson, bring a book) and fair sharing (mangoes, biscuits); secrets examples stay general and non-graphic",
+    "misconception_detectors": [
+      "thinks promises only count when easy",
+      "thinks telling a trusted adult about an unsafe secret is breaking a promise",
+      "thinks fair means the first or oldest gets most"
+    ],
+    "critical_thinking_prompts": [
+      "Why is a surprise different from a secret that makes you worried?",
+      "What can you do if you can't keep a promise?"
+    ],
+    "personalization_rules": "if the learner misses unsafe-secret items, repeat the happiness-or-worry test with a new card; never ask about the learner's own secrets",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor",
+      "learner hints at an unsafe secret or someone hurting them -> do not ask any question; say 'thank you for telling, it is not your fault'; hand to safeguarding lead immediately"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths",
+      "ask the learner whether they have any secrets"
+    ]
+  },
+  "review_flags": [
+    "SAFEGUARDING REVIEWER: check the unsafe-secrets activity, p5, p6 and the 'telling is not breaking a promise' wording against safeguarding good practice",
+    "subject expert: this lesson combines fairness, promises and secrets; confirm the scope fits 16 minutes",
+    "language editor: check «راز» vs «سرپرائز» distinction reads naturally in Urdu"
+  ]
+}

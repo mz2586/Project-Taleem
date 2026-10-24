@@ -1,0 +1,495 @@
+{
+  "code": "MATH-G4-ML-01",
+  "description": {
+    "ur": "ضرب کو برابر گروہ اور بار بار جمع کے طور پر سمجھنا اور ۱۰ × ۱۰ تک کے پہاڑے یاد کرنا۔",
+    "en": "Understanding multiplication as equal groups and repeated addition, and recalling facts up to 10 × 10."
+  },
+  "keywords": [
+    "multiplication",
+    "times tables",
+    "equal groups",
+    "repeated addition",
+    "arrays",
+    "skip counting"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ضرب",
+        "en": "multiply"
+      },
+      "definition": {
+        "ur": "برابر گروہوں کو جلدی جوڑنا۔",
+        "en": "Adding equal groups quickly."
+      }
+    },
+    {
+      "term": {
+        "ur": "گنا",
+        "en": "times"
+      },
+      "definition": {
+        "ur": "کوئی عدد کتنی بار لیا گیا ہے۔",
+        "en": "How many times a number is taken."
+      }
+    },
+    {
+      "term": {
+        "ur": "گروہ",
+        "en": "group"
+      },
+      "definition": {
+        "ur": "چیزوں کا ایک ڈھیر یا جھرمٹ۔",
+        "en": "A set of things kept together."
+      }
+    },
+    {
+      "term": {
+        "ur": "پہاڑا",
+        "en": "times-table"
+      },
+      "definition": {
+        "ur": "کسی ایک عدد کی ضربوں کی فہرست۔",
+        "en": "The list of products of one number."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "سوچیں ہمارے پاس ۴ پلیٹیں ہیں اور ہر پلیٹ میں ۶ روٹیاں ہیں۔ کل کتنی روٹیاں ہیں؟ ہم ۶ کو ۴ بار جوڑ سکتے ہیں۔ ضرب یہی کام جلدی کر دیتی ہے۔ آج ہم برابر گروہوں سے ضرب سمجھیں گے اور پہاڑوں کی مشق کریں گے۔",
+    "en": "Imagine we have 4 plates with 6 rotis on each. How many rotis are there in all? We could add 6 four times. Multiplication does the same job quickly. Today we understand multiplication with equal groups and practise our tables."
+  },
+  "student_explanation": {
+    "ur": "ضرب برابر گروہوں کو جلدی جوڑنے کا طریقہ ہے۔ سوچیں ۴ پلیٹیں ہیں اور ہر پلیٹ میں ۶ روٹیاں ہیں۔ ہم جوڑ سکتے ہیں: ۶ + ۶ + ۶ + ۶ = ۲۴۔ یا ضرب کر سکتے ہیں: ۶ × ۴ = ۲۴۔ یہاں ۶ کو ۴ بار جوڑا گیا ہے۔ ترتیب بدلنے سے جواب نہیں بدلتا۔ اس لیے ۴ × ۶ بھی ۲۴ ہے۔ پہاڑے یاد ہوں تو جواب جلدی آتا ہے۔",
+    "en": "Multiplication is a quick way to add equal groups. Think of 4 plates with 6 rotis on each. We can add 6 + 6 + 6 + 6 = 24. Or we can multiply: 6 × 4 = 24. Here 6 is added 4 times. Changing the order does not change the answer. So 4 × 6 is also 24. Knowing your tables makes this fast."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۴ گروہ ہیں، ہر ایک میں ۶۔ کل کتنے؟",
+        "en": "There are 4 groups with 6 in each. How many in all?"
+      },
+      "steps": [
+        {
+          "ur": "ضرب یعنی برابر گروہ: ۴ گروہ، ہر ایک میں ۶۔",
+          "en": "Multiplication means equal groups: 4 groups of 6."
+        },
+        {
+          "ur": "۶ کو ۴ بار جوڑیں: ۶ + ۶ + ۶ + ۶ = ۲۴۔",
+          "en": "Add 6 four times: 6 + 6 + 6 + 6 = 24."
+        },
+        {
+          "ur": "ضرب میں لکھیں: ۶ × ۴ = ۲۴۔",
+          "en": "Write it as multiplication: 6 × 4 = 24."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "۷ گروہ ہیں، ہر ایک میں ۳۔ گن کر بتائیں۔",
+        "en": "There are 7 groups of 3. Skip-count to find the total."
+      },
+      "steps": [
+        {
+          "ur": "۳ کے وقفے سے ۷ بار گنیں: ۳، ۶، ۹، ۱۲، ۱۵، ۱۸، ۲۱۔",
+          "en": "Count in 3s seven times: 3, 6, 9, 12, 15, 18, 21."
+        },
+        {
+          "ur": "تو ۳ × ۷ = ۲۱۔",
+          "en": "So 3 × 7 = 21."
+        },
+        {
+          "ur": "ترتیب بدلیں تو بھی ۷ × ۳ = ۲۱۔",
+          "en": "Swap the order and 7 × 3 is still 21."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-build-array",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "گول دانے گھسیٹ کر ۳ قطاریں بنائیں، ہر قطار میں ۵ دانے۔ پھر کل دانوں کی تعداد لکھیں۔",
+        "en": "Drag counters to make 3 rows with 5 counters in each row. Then type how many counters there are."
+      },
+      "answer_key": {
+        "rows": 3,
+        "per_row": 5,
+        "total": 15
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر قطار میں ۵ ہیں۔ ۵ کے وقفے سے گنیں۔",
+            "en": "Each row has 5. Count in 5s."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-7x8",
+      "type": "fill_blank",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "۷ × ۸ = ___",
+        "en": "7 × 8 = ___"
+      },
+      "answer_key": {
+        "answer": "56"
+      },
+      "accepted_variants": [
+        "56",
+        "۵۶"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۷ × ۷ = ۴۹۔ اس میں ایک ۷ اور جوڑیں۔",
+            "en": "7 × 7 = 49. Add one more 7."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-repeated-addition",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کون سا جوڑ ۶ × ۴ کے برابر ہے؟",
+        "en": "Which repeated addition matches 6 × 4?"
+      },
+      "options": [
+        {
+          "ur": "۶ + ۴",
+          "en": "6 + 4"
+        },
+        {
+          "ur": "۶ + ۶ + ۶ + ۶",
+          "en": "6 + 6 + 6 + 6"
+        },
+        {
+          "ur": "۴ + ۴",
+          "en": "4 + 4"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-mult-add-instead"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۶ کو کتنی بار لینا ہے؟",
+            "en": "How many times do we take 6?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۶ × ۴ کا مطلب ہے ۶ کو ۴ بار جوڑنا۔",
+        "en": "6 × 4 means adding 6 four times."
+      }
+    },
+    {
+      "id": "p2-6x4",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "۶ × ۴ = ؟",
+        "en": "6 × 4 = ?"
+      },
+      "options": [
+        {
+          "ur": "۱۰",
+          "en": "10"
+        },
+        {
+          "ur": "۶۴",
+          "en": "64"
+        },
+        {
+          "ur": "۲۴",
+          "en": "24"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-mult-add-instead"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۶ کے پہاڑے میں چوتھا عدد کیا ہے؟",
+            "en": "What is the fourth number in the table of 6?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۶، ۱۲، ۱۸، ۲۴۔ جواب ۲۴۔",
+        "en": "6, 12, 18, 24. The answer is 24."
+      }
+    },
+    {
+      "id": "p4-9x6",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "۹ × ۶ = ؟",
+        "en": "9 × 6 = ?"
+      },
+      "options": [
+        {
+          "ur": "۵۴",
+          "en": "54"
+        },
+        {
+          "ur": "۱۵",
+          "en": "15"
+        },
+        {
+          "ur": "۴۵",
+          "en": "45"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-mult-add-instead"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۱۰ × ۶ = ۶۰۔ اس میں سے ایک ۶ کم کریں۔",
+            "en": "10 × 6 = 60. Take away one 6."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۶۰ − ۶ = ۵۴۔",
+        "en": "60 − 6 = 54."
+      }
+    },
+    {
+      "id": "p5-order",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۵ × ۳ اور ۳ × ۵ کا جواب ایک ہی ہے۔",
+        "en": "5 × 3 and 3 × 5 have the same answer."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دونوں کو جوڑ کر دیکھیں: ۵ + ۵ + ۵ اور ۳ + ۳ + ۳ + ۳ + ۳۔",
+            "en": "Add both: 5 + 5 + 5 and 3 + 3 + 3 + 3 + 3."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "دونوں کا جواب ۱۵ ہے۔ ترتیب بدلنے سے ضرب کا جواب نہیں بدلتا۔",
+        "en": "Both make 15. Changing the order does not change a product."
+      }
+    },
+    {
+      "id": "p6-egg-boxes",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۵ ڈبے ہیں۔ ہر ڈبے میں ۶ انڈے ہیں۔ کل کتنے انڈے ہیں؟",
+        "en": "There are 5 boxes. Each box has 6 eggs. How many eggs are there?"
+      },
+      "options": [
+        {
+          "ur": "۱۱",
+          "en": "11"
+        },
+        {
+          "ur": "۳۰",
+          "en": "30"
+        },
+        {
+          "ur": "۳۵",
+          "en": "35"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-mult-add-instead"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کتنے گروہ ہیں اور ہر گروہ میں کتنے؟",
+            "en": "How many groups, and how many in each?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۶ کو ۵ بار: ۶ × ۵ = ۳۰۔",
+        "en": "6 five times: 6 × 5 = 30."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-pattern-4s",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "خالی جگہیں بھریں: ۴، ۸، ۱۲، ___، ۲۰، ___۔ یہ کس کا پہاڑا ہے؟",
+        "en": "Fill the gaps: 4, 8, 12, ___, 20, ___. Which table is this?"
+      },
+      "answer_key": {
+        "answer": "16 and 24; the table of 4"
+      },
+      "accepted_variants": [
+        "16, 24",
+        "۱۶، ۲۴"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر قدم پر کتنا بڑھ رہا ہے؟",
+            "en": "How much does it grow at each step?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-skip-6s",
+      "type": "short",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "۶ کے وقفے سے ۶۰ تک گنیں۔",
+        "en": "skip-count in 6s to 60."
+      },
+      "answer_key": {
+        "answer": "6, 12, 18, 24, 30, 36, 42, 48, 54, 60"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "کتنے گروہ؟",
+        "en": "How many groups?"
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "ہر گروہ میں کتنے؟ جوڑیں",
+        "en": "How many in each group? Add them."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ضرب کی جگہ دونوں عدد جوڑ دینا۔",
+        "en": "Adds the two factors instead of multiplying"
+      },
+      "correction": {
+        "ur": "ضرب یعنی بار بار جوڑ: ۶ کو ۴ بار",
+        "en": "Multiply = repeated add: six, four times = 24."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-mult-add-instead",
+      "remediation_ref": "MATH-G4-ML-01"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-AS-01",
+      "remediation_ref": "MATH-G4-AS-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "ضرب = برابر گروہ = بار بار جمع۔ ۶ × ۴ = ۶ + ۶ + ۶ + ۶ = ۲۴۔ ترتیب بدلنے سے جواب نہیں بدلتا۔",
+    "en": "Multiplication = equal groups = repeated addition. 6 × 4 = 6 + 6 + 6 + 6 = 24. Changing the order does not change the answer."
+  },
+  "summary": {
+    "ur": "ہم نے ضرب کو برابر گروہوں سے سمجھا اور پہاڑوں کی مشق کی۔",
+    "en": "We understood multiplication as equal groups and practised our tables."
+  },
+  "parent_notes": {
+    "ur": "چیزوں کو برابر گروہوں میں گنیں (جیسے ٹرے میں انڈے وغیرہ)۔",
+    "en": "count objects in equal groups (eggs in trays, etc.)."
+  },
+  "mentor_notes": {
+    "ur": "پہاڑوں کو صرف رٹوانے کے بجائے برابر گروہوں کے مطلب سے جوڑیں۔",
+    "en": "anchor facts in equal-groups meaning, not rote only."
+  },
+  "accessibility_notes": {
+    "ur": "پلیٹوں اور دانوں کی تصویریں ابھی بنانی ہیں؛ متبادل متن گروہوں کی تعداد اور ہر گروہ میں چیزیں بتائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے کا متبادل: \"قطار بڑھائیں\" اور \"دانہ بڑھائیں\" بٹن، یا قطاروں کی تعداد ٹائپ کریں۔",
+    "en": "The plate and counter pictures are still to be made; alt text should say how many groups and how many in each. Urdu audio is not yet recorded. Alternative to dragging: \"add a row\" and \"add a counter\" buttons, or type the number of rows."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "equal groups and arrays first, then repeated addition, then the multiplication sentence; use skip-counting to reach facts",
+    "questioning_strategy": "ask 'how many groups?' and 'how many in each?' before 'what is the product?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "adds the two factors",
+      "skip-counts by the wrong number"
+    ],
+    "hint_policy": "graduated; two hints max (how many groups; how many in each, then add) then a worked re-teach with counters; never give the answer first",
+    "example_policy": "facts up to 10 × 10 with everyday equal groups (rotis on plates, eggs in boxes, chairs in rows); keep the 'a × b = a added b times' reading consistent",
+    "misconception_detectors": [
+      "answers 10 for 6 × 4",
+      "chooses 6 + 4 as the repeated addition"
+    ],
+    "critical_thinking_prompts": [
+      "Why does 3 rows of 5 give the same total as 5 rows of 3?"
+    ],
+    "personalization_rules": "if repeated addition itself is slow or wrong, route to MATH-G4-AS-01",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the doc reads 6 × 4 as 'six, four times' (6 + 6 + 6 + 6); the draft keeps that reading throughout; confirm it matches the Grade 3 convention learners bring",
+    "check the human worked example has no prompt; the draft's first worked example adds one"
+  ]
+}

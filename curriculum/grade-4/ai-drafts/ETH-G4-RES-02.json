@@ -1,0 +1,497 @@
+{
+  "code": "ETH-G4-RES-02",
+  "title": {
+    "ur": "بڑوں اور استادوں کا احترام",
+    "en": "Respecting elders and teachers"
+  },
+  "description": {
+    "ur": "بڑوں اور استادوں کا احترام کیسے دکھائیں؛ اور یہ کہ احترام کا مطلب کسی غیر محفوظ بات کو ماننا نہیں۔",
+    "en": "How to show respect to elders and teachers, and why respect never means agreeing to something unsafe."
+  },
+  "keywords": [
+    "respect",
+    "elders",
+    "teachers",
+    "polite words",
+    "helping elders",
+    "saying no",
+    "trusted adult"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "بزرگ",
+        "en": "elder"
+      },
+      "definition": {
+        "ur": "ہم سے بہت بڑی عمر کا فرد، جیسے دادا، نانی یا پڑوس کی خالہ۔",
+        "en": "someone much older than us, like a grandparent or an older neighbour."
+      }
+    },
+    {
+      "term": {
+        "ur": "ادب سے",
+        "en": "politely"
+      },
+      "definition": {
+        "ur": "نرم آواز اور اچھے لفظوں سے۔",
+        "en": "with a soft voice and kind words."
+      }
+    },
+    {
+      "term": {
+        "ur": "بھروسے والا بڑا",
+        "en": "trusted adult"
+      },
+      "definition": {
+        "ur": "وہ بڑا جس کے ساتھ آپ محفوظ محسوس کریں۔",
+        "en": "a grown-up you feel safe with."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم بڑوں اور استادوں کے احترام کی بات کریں گے۔ ہمارے بزرگ اور استاد ہمیں بہت کچھ سکھاتے ہیں۔ ہم دیکھیں گے کہ بس میں سنیتا نے ایک بزرگ کے لیے کیا کیا۔ اور ایک ضروری بات بھی سیکھیں گے: احترام کا مطلب کبھی بھی ایسی بات ماننا نہیں جو آپ کو غیر محفوظ کرے۔",
+    "en": "Today we will talk about respecting elders and teachers. Our elders and teachers teach us a lot. We will see what Sunita did for an elderly person on a bus. We will also learn something important: respect never means agreeing to something that makes you unsafe."
+  },
+  "student_explanation": {
+    "ur": "بزرگوں اور استادوں کا احترام ضروری ہے۔ ہم ان سے نرم آواز میں بات کرتے ہیں۔ ہم «آپ» کہتے ہیں۔ ہم ان کی بات دھیان سے سنتے ہیں۔ بس میں بزرگ کو سیٹ دینا احترام ہے۔ دادی کا سامان اٹھانا بھی احترام ہے۔ استاد کا کام وقت پر کرنا بھی احترام ہے۔ احترام ڈر نہیں ہے۔ اگر کوئی بڑا بھی ایسی بات کہے جو غلط یا غیر محفوظ لگے، تو آپ «نہیں» کہہ سکتے ہیں۔ پھر کسی بھروسے والے بڑے کو بتائیں۔ یہ آپ کا قصور نہیں۔",
+    "en": "Respecting elders and teachers matters. We speak to them in a soft voice. We use polite words. We listen to them carefully. Giving an elder your seat on the bus is respect. Carrying Dadi's bag is respect too. Doing your teacher's work on time is respect as well. Respect is not fear. If any adult asks you to do something that feels wrong or unsafe, you can say \"no\". Then tell a trusted adult. It is not your fault."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "بس میں سنیتا بیٹھی ہے۔ ایک بزرگ خاتون چھڑی لے کر چڑھتی ہیں۔ کوئی سیٹ خالی نہیں۔ سنیتا کیا کرے؟",
+        "en": "Sunita is sitting on a bus. An elderly woman with a walking stick gets on. No seats are free. What should Sunita do?"
+      },
+      "steps": [
+        {
+          "ur": "سنیتا دیکھتی ہے کہ خاتون کو کھڑے ہونے میں مشکل ہے۔",
+          "en": "Sunita sees that standing is hard for the woman."
+        },
+        {
+          "ur": "وہ اٹھ کر ادب سے کہتی ہے: «آنٹی، آپ یہاں بیٹھ جائیں۔»",
+          "en": "She stands and says politely, \"Auntie, please sit here.\""
+        },
+        {
+          "ur": "خاتون مسکرا کر شکریہ کہتی ہیں۔ یہ احترام ہے۔",
+          "en": "The woman smiles and says thank you. That is respect."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ایک بڑا شخص، جسے بچہ جانتا ہے، کہتا ہے: «میرے ساتھ چلو، گھر والوں کو مت بتانا۔» بچے کو یہ عجیب لگتا ہے۔ کیا احترام کا مطلب ہے کہ بچہ مان لے؟",
+        "en": "An adult the child knows says, \"Come with me, don't tell your family.\" It feels strange to the child. Does respect mean the child must agree?"
+      },
+      "steps": [
+        {
+          "ur": "نہیں۔ احترام کا مطلب غیر محفوظ بات ماننا نہیں۔",
+          "en": "No. Respect never means agreeing to something unsafe."
+        },
+        {
+          "ur": "بچہ صاف کہہ سکتا ہے: «نہیں، میں گھر والوں سے پوچھوں گا۔»",
+          "en": "The child can say clearly, \"No, I will ask my family.\""
+        },
+        {
+          "ur": "وہ فوراً کسی بھروسے والے بڑے کو بتاتا ہے۔ یہ صحیح کام ہے۔",
+          "en": "The child tells a trusted adult straight away. That is the right thing to do."
+        },
+        {
+          "ur": "بچے کا کوئی قصور نہیں۔",
+          "en": "It is not the child's fault."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-respect-sort",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو رکھیں: «احترام» یا «احترام نہیں»۔",
+        "en": "Sort each card: 'respectful' or 'not respectful'."
+      },
+      "options": [
+        {
+          "ur": "نانا جان کو «آپ» کہہ کر بلانا",
+          "en": "Calling Nana ji with polite words"
+        },
+        {
+          "ur": "استاد کی بات پر منہ بنانا",
+          "en": "Making faces when the teacher speaks"
+        },
+        {
+          "ur": "پڑوس کی بزرگ خالہ کا تھیلا اٹھانا",
+          "en": "Carrying an elderly neighbour's bag"
+        },
+        {
+          "ur": "دادی کی بات کاٹ کر ٹی وی اونچا کرنا",
+          "en": "Cutting Dadi off and turning the TV up"
+        }
+      ],
+      "answer_key": {
+        "sort": {
+          "respectful": [
+            0,
+            2
+          ],
+          "not_respectful": [
+            1,
+            3
+          ]
+        },
+        "mode": "tap a card, then tap its group (drag also works)"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: کیا اِس سے بزرگ یا استاد کو قدر محسوس ہو گی؟",
+            "en": "Ask: would this make the elder or teacher feel valued?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-bus-seat",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "بس میں ایک بزرگ کھڑے ہیں اور آپ بیٹھے ہیں۔ احترام کیسے دکھائیں؟",
+        "en": "An elder is standing on the bus and you are sitting. How do you show respect?"
+      },
+      "options": [
+        {
+          "ur": "کھڑکی سے باہر دیکھتے رہیں",
+          "en": "Keep looking out of the window"
+        },
+        {
+          "ur": "ادب سے اپنی سیٹ پیش کریں",
+          "en": "Politely offer your seat"
+        },
+        {
+          "ur": "کہیں «آپ کہیں اور کھڑے ہو جائیں»",
+          "en": "Say \"stand somewhere else\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p2-fear",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "استاد کا احترام کرنے کا مطلب ہے ان سے ڈرنا۔",
+        "en": "Respecting a teacher means being afraid of them."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-respect-equals-fear"
+        }
+      },
+      "explanation": {
+        "ur": "احترام خیال اور اچھے آداب ہے، ڈر نہیں۔",
+        "en": "Respect is care and good manners, not fear."
+      }
+    },
+    {
+      "id": "p3-teacher-respect",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "استاد کا احترام کیسے دکھاتے ہیں؟",
+        "en": "How do we show respect to a teacher?"
+      },
+      "options": [
+        {
+          "ur": "دھیان سے سن کر اور کام وقت پر کر کے",
+          "en": "By listening carefully and doing work on time"
+        },
+        {
+          "ur": "کلاس میں شور کر کے",
+          "en": "By making noise in class"
+        },
+        {
+          "ur": "سوال پوچھنے سے ڈر کر",
+          "en": "By being too scared to ask questions"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "2": "m-respect-equals-fear"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا احترام میں سوال پوچھنا منع ہے؟",
+            "en": "Does respect stop us from asking questions?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-say-no",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اگر کوئی بڑا ایسی بات کہے جو غیر محفوظ لگے تو «نہیں» کہنا اور بھروسے والے بڑے کو بتانا ٹھیک ہے۔",
+        "en": "If an adult asks you to do something that feels unsafe, it is OK to say no and tell a trusted adult."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "آپ کی حفاظت سب سے پہلے ہے۔ یہ آپ کا قصور نہیں۔",
+        "en": "Your safety comes first. It is not your fault."
+      }
+    },
+    {
+      "id": "p5-polite-words",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "نانی کچھ پوچھ رہی ہیں۔ کون سا جواب ادب والا ہے؟",
+        "en": "Nani is asking you something. Which reply is polite?"
+      },
+      "options": [
+        {
+          "ur": "«کیا ہے؟ ابھی نہیں!»",
+          "en": "\"What? Not now!\""
+        },
+        {
+          "ur": "جواب نہ دینا",
+          "en": "Not answering"
+        },
+        {
+          "ur": "«جی نانی جان، بتائیں؟»",
+          "en": "\"Yes, Nani ji, what is it?\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p6-ask-question",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ماریہ کو استاد کی بات سمجھ نہیں آئی۔ احترام کے ساتھ وہ کیا کر سکتی ہے؟",
+        "en": "Maria did not understand the teacher. What can she do respectfully?"
+      },
+      "options": [
+        {
+          "ur": "ڈر کے مارے چپ رہنا",
+          "en": "Stay quiet out of fear"
+        },
+        {
+          "ur": "ہاتھ اٹھا کر ادب سے پوچھنا «کیا آپ دوبارہ سمجھا سکتے ہیں؟»",
+          "en": "Raise her hand and politely ask, \"Could you explain again?\""
+        },
+        {
+          "ur": "اونچی آواز میں کہنا «یہ بیکار ہے!»",
+          "en": "Say loudly, \"This is useless!\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-respect-equals-fear"
+        }
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-respect-and-safety",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کوئی بڑا جو بچے کو جانتا ہے، اسے کوئی ایسی چیز دیتا ہے اور کہتا ہے «یہ ہمارا راز ہے»۔ بچے کو بے چینی ہوتی ہے۔ سب سے صحیح کام کیا ہے؟",
+        "en": "An adult who knows a child gives the child something and says, \"This is our secret.\" The child feels uneasy. What is the right thing to do?"
+      },
+      "options": [
+        {
+          "ur": "احترام میں راز رکھنا",
+          "en": "Keep the secret out of respect"
+        },
+        {
+          "ur": "کسی بھروسے والے بڑے کو بتانا؛ یہ بچے کا قصور نہیں",
+          "en": "Tell a trusted adult; it is not the child's fault"
+        },
+        {
+          "ur": "خود کو ہی الزام دینا",
+          "en": "Blame themselves"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بے چینی والا راز کس کو بتاتے ہیں؟",
+            "en": "Who do we tell about a secret that feels uneasy?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "احترام کا مطلب غیر محفوظ راز رکھنا نہیں۔ ایک بڑا نہ سنے تو دوسرے بھروسے والے بڑے کو بتائیں۔",
+        "en": "Respect never means keeping an unsafe secret. If one adult doesn't listen, tell another trusted adult."
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-help-elder",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج گھر کے کسی بزرگ کے لیے ایک ادب والا کام کریں، جیسے پانی دینا یا ان کی بات دھیان سے سننا۔",
+        "en": "Do one respectful thing for an elder at home today, like bringing water or listening carefully to them."
+      },
+      "answer_key": {
+        "guidance": "Done at home; children with no elder at home can do it for any family member. No reporting in the app."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کیا اِس سے بزرگ یا استاد کو قدر محسوس ہو گی؟",
+        "en": "Would this make the elder or teacher feel valued?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: احترام ڈر نہیں۔ کیا یہ کام محفوظ بھی ہے؟",
+        "en": "Remember: respect is not fear. Is this choice safe too?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "احترام کا مطلب ہے ڈرنا۔",
+        "en": "Respect means being afraid."
+      },
+      "correction": {
+        "ur": "احترام خیال اور اچھے آداب ہے، ڈر نہیں۔",
+        "en": "Respect is care and good manners, not fear."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "بڑے جو بھی کہیں، ماننا ہی احترام ہے۔",
+        "en": "Respect means doing whatever any adult says."
+      },
+      "correction": {
+        "ur": "غیر محفوظ بات پر «نہیں» کہیں اور بھروسے والے بڑے کو بتائیں۔",
+        "en": "Say no to anything unsafe and tell a trusted adult."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-respect-equals-fear",
+      "remediation_ref": "ETH-G4-RES-01"
+    },
+    {
+      "signal": "wrong on say-no / unsafe-secret items",
+      "remediation_ref": "ETH-G4-HON-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "بزرگوں اور استادوں سے نرم آواز، اچھے لفظ، دھیان سے سننا۔ مدد کریں۔ احترام ڈر نہیں۔ غیر محفوظ بات پر «نہیں» کہیں اور بھروسے والے بڑے کو بتائیں۔",
+    "en": "With elders and teachers: soft voice, polite words, careful listening. Help them. Respect is not fear. Say no to anything unsafe and tell a trusted adult."
+  },
+  "summary": {
+    "ur": "ہم نے بزرگوں اور استادوں کا احترام کرنا سیکھا، اور یہ کہ حفاظت ہمیشہ پہلے ہے۔",
+    "en": "We learned to respect elders and teachers, and that safety always comes first."
+  },
+  "parent_notes": {
+    "ur": "بچے کو بتائیں کہ احترام کا مطلب ہر بات آنکھیں بند کر کے ماننا نہیں۔ اسے یقین دلائیں کہ وہ کسی بھی بڑے کی غیر محفوظ بات آپ کو بتا سکتا ہے اور آپ ناراض نہیں ہوں گے۔",
+    "en": "Tell your child that respect does not mean blindly obeying everything. Assure them they can tell you about any adult's unsafe request and you will not be angry."
+  },
+  "mentor_notes": {
+    "ur": "یہ سبق احترام سکھاتا ہے مگر حفاظتی پیغام بھی رکھتا ہے۔ بچوں سے کسی بڑے کے بارے میں سوال نہ کریں۔ اگر کوئی بچہ کچھ بتائے تو تسلی دیں، سوال نہ کریں، راز رکھنے کا وعدہ نہ کریں، اور فوراً حفاظتی ذمہ دار کو بتائیں۔",
+    "en": "This lesson teaches respect but also carries a safeguarding message. Never ask learners about any adult. If a learner discloses, reassure them, do not question, do not promise secrecy, and report to the safeguarding lead at once."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن منظر بیان کرے (کون ہے، کیا ہو رہا ہے)۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ یہ مضمون سننے پر مبنی ہے، اس لیے ہر کہانی، سوال اور جواب کو آواز میں پڑھا جانا ضروری ہے۔ ترتیب دینے والی سرگرمی کا متبادل: کارڈ کو چھوئیں، پھر گروپ کو چھوئیں؛ یا ہر کارڈ کے لیے دو بٹنوں میں سے ایک چنیں۔",
+    "en": "Story pictures are still to be made; each needs alt text that describes the scene (who is there, what is happening). Urdu audio is not yet recorded; this subject is audio-first, so every story, question and option must be read aloud. Alternative to the sort activity: tap a card, then tap its group; or answer each card with one of two buttons."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "everyday respect first (bus seat, polite words, listening, doing work on time), then a calm, short safety point: respect never means agreeing to anything unsafe; say no and tell a trusted adult",
+    "questioning_strategy": "ask 'how would the elder feel?' for respect items; for the safety item ask 'is this safe?' and 'who could you tell?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says respect means obeying any adult",
+      "learner seems uneasy during the safety example"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "bus, home, classroom and neighbourhood scenes; respectful language; the safety example stays general and non-graphic",
+    "misconception_detectors": [
+      "equates respect with fear",
+      "thinks respect means doing anything an adult says",
+      "thinks asking a teacher a question is disrespectful"
+    ],
+    "critical_thinking_prompts": [
+      "Can you be respectful and still say no? When?",
+      "Why is asking a question a respectful thing to do?"
+    ],
+    "personalization_rules": "if the learner picks 'obey any adult' options, re-teach the second worked example calmly; route to ETH-G4-HON-04 for unsafe secrets",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor",
+      "learner hints that an adult has hurt them or asked them to keep an unsafe secret -> do not question; say it is not their fault; hand to the safeguarding lead immediately"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths",
+      "ask the learner about any particular adult in their life"
+    ]
+  },
+  "review_flags": [
+    "SAFEGUARDING REVIEWER: worked example 2, p4 and the challenge (known adult, 'our secret', say no, tell a trusted adult, not your fault)",
+    "subject expert: check the balance between respect for elders and the say-no message suits families' expectations in Pakistan",
+    "language editor: check «آپ» / «جی نانی جان» politeness forms and «بھروسے والا بڑا» wording"
+  ]
+}

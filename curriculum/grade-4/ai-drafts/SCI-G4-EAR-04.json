@@ -1,0 +1,421 @@
+{
+  "code": "SCI-G4-EAR-04",
+  "title": {
+    "ur": "صاف پانی، صاف ماحول",
+    "en": "Clean water, clean surroundings"
+  },
+  "description": {
+    "ur": "یہ سمجھانا کہ پانی کی حفاظت اور صفائی ہماری صحت اور ماحول کے لیے کیوں ضروری ہے۔",
+    "en": "Explaining why protecting water and keeping clean matters for our health and the environment."
+  },
+  "keywords": [
+    "water",
+    "clean",
+    "germs",
+    "health",
+    "environment",
+    "hand-washing",
+    "save water"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "جراثیم",
+        "en": "germs"
+      },
+      "definition": {
+        "ur": "بہت ننھے جاندار جو آنکھ سے نظر نہیں آتے اور بیمار کر سکتے ہیں۔",
+        "en": "Tiny living things too small to see that can make us ill."
+      }
+    },
+    {
+      "term": {
+        "ur": "ماحول",
+        "en": "environment"
+      },
+      "definition": {
+        "ur": "ہمارے آس پاس کی ہر چیز: ہوا، پانی، زمین، پودے اور جانور۔",
+        "en": "Everything around us: air, water, land, plants and animals."
+      }
+    },
+    {
+      "term": {
+        "ur": "آلودہ",
+        "en": "polluted"
+      },
+      "definition": {
+        "ur": "جس میں گندگی یا نقصان دہ چیزیں مل گئی ہوں۔",
+        "en": "Made dirty by rubbish or harmful things."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ہم روز پانی پیتے ہیں، نہاتے ہیں اور کھانا دھوتے ہیں۔ اگر پانی گندا ہو تو کیا ہوگا؟ آج ہم جانیں گے کہ صاف پانی اور صفائی ہمیں بیماری سے کیسے بچاتے ہیں۔ ہم یہ بھی سیکھیں گے کہ ہم سب پانی کو صاف رکھنے میں کیا کر سکتے ہیں۔",
+    "en": "We drink water, bathe and wash food every day. What happens if the water is dirty? Today we learn how clean water and cleanliness keep us safe from illness. We will also learn what each of us can do to keep water clean."
+  },
+  "student_explanation": {
+    "ur": "سب جانداروں کو صاف پانی چاہیے۔ گندے پانی میں جراثیم ہو سکتے ہیں۔ جراثیم اتنے چھوٹے ہیں کہ دکھتے نہیں۔ یہ پیٹ کی بیماری کر سکتے ہیں۔ اس لیے صاف دکھنے والا پانی بھی ضروری نہیں کہ محفوظ ہو۔ کھانے سے پہلے اور بیت الخلا کے بعد صابن سے ہاتھ دھوؤ۔ نہر یا دریا میں کچرا نہ پھینکو۔ کھڑے پانی میں مچھر انڈے دیتے ہیں۔ نل بند کر کے پانی بچاؤ۔",
+    "en": "All living things need clean water. Dirty water can have germs in it. Germs are too small to see. They can cause stomach illness. So even water that looks clear is not always safe. Wash your hands with soap before eating and after using the toilet. Do not throw rubbish into canals or rivers. Mosquitoes lay eggs in standing water. Save water by turning taps off."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "گلی میں کچرا نالی میں پھینکا جائے تو کیا ہو سکتا ہے؟",
+        "en": "What can happen if rubbish is thrown into the drain in the street?"
+      },
+      "steps": [
+        {
+          "ur": "کچرا نالی کو بند کر دیتا ہے۔",
+          "en": "The rubbish blocks the drain."
+        },
+        {
+          "ur": "بارش میں پانی رک کر گلی میں کھڑا ہو جاتا ہے۔",
+          "en": "When it rains, the water backs up and stands in the street."
+        },
+        {
+          "ur": "کھڑے پانی میں مچھر بڑھتے ہیں اور بدبو اور جراثیم پھیلتے ہیں۔",
+          "en": "Mosquitoes breed in the standing water, and smells and germs spread."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ثنا نے کھیلنے کے بعد صرف پانی سے ہاتھ دھوئے۔ کیا یہ کافی ہے؟",
+        "en": "After playing, Sana washed her hands with water only. Is that enough?"
+      },
+      "steps": [
+        {
+          "ur": "صرف پانی سے کچھ مٹی نکل جاتی ہے۔",
+          "en": "Water alone removes some dirt."
+        },
+        {
+          "ur": "صابن ہاتھوں سے جراثیم اور چکنائی اتارنے میں مدد دیتا ہے۔",
+          "en": "Soap helps lift germs and grease off the hands."
+        },
+        {
+          "ur": "اس لیے صابن سے کم از کم ۲۰ سیکنڈ ہاتھ ملنا بہتر ہے۔",
+          "en": "So rubbing hands with soap for at least 20 seconds is better."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-habits",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر عادت کو خانے میں رکھو: \"پانی اور صحت کی حفاظت\" یا \"نقصان دہ\"۔ صابن سے ہاتھ دھونا، نہر میں کچرا پھینکنا، پانی کا برتن ڈھانپنا، نل کھلا چھوڑنا، کچرا ڈبے میں ڈالنا، پرانے ٹائر میں پانی جمع رہنے دینا۔",
+        "en": "Put each habit in a box: 'protects water and health' or 'harmful'. Washing hands with soap, throwing rubbish in a canal, covering the water pot, leaving the tap running, putting rubbish in the bin, letting water collect in an old tyre."
+      },
+      "answer_key": {
+        "protects": [
+          "washing hands with soap",
+          "covering the water pot",
+          "putting rubbish in the bin"
+        ],
+        "harmful": [
+          "throwing rubbish in a canal",
+          "leaving the tap running",
+          "letting water collect in an old tyre"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچو: اس سے پانی صاف رہے گا اور جراثیم کم ہوں گے؟",
+            "en": "Think: will this keep water clean and germs away?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-clear-safe",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "جو پانی صاف دکھے وہ ہمیشہ پینے کے لیے محفوظ ہوتا ہے۔",
+        "en": "Water that looks clear is always safe to drink."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "جراثیم اتنے چھوٹے ہیں کہ نظر نہیں آتے، اس لیے صاف دکھنے والے پانی میں بھی ہو سکتے ہیں۔",
+        "en": "Germs are too small to see, so they can be in clear-looking water too."
+      }
+    },
+    {
+      "id": "p2-handwash",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کھانے سے پہلے ہاتھ کیسے دھونے چاہئیں؟",
+        "en": "How should we wash our hands before eating?"
+      },
+      "options": [
+        {
+          "ur": "صرف کپڑے سے پونچھ کر",
+          "en": "Just wipe them on cloth"
+        },
+        {
+          "ur": "صرف ایک بار پانی ڈال کر",
+          "en": "Splash them once with water"
+        },
+        {
+          "ur": "صابن اور پانی سے اچھی طرح مل کر",
+          "en": "Rub them well with soap and water"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p3-mosquito",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مچھر کہاں انڈے دیتے ہیں؟",
+        "en": "Where do mosquitoes lay their eggs?"
+      },
+      "options": [
+        {
+          "ur": "کھڑے پانی میں",
+          "en": "In standing water"
+        },
+        {
+          "ur": "خشک ریت میں",
+          "en": "In dry sand"
+        },
+        {
+          "ur": "صاف کپڑوں پر",
+          "en": "On clean clothes"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-canal",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "نہر کو صاف رکھنے کے لیے بچہ کیا کر سکتا ہے؟",
+        "en": "What can a child do to keep a canal clean?"
+      },
+      "options": [
+        {
+          "ur": "اس میں شاپر پھینکنا",
+          "en": "Throw plastic bags in it"
+        },
+        {
+          "ur": "کچرا ڈبے میں ڈالنا",
+          "en": "Put rubbish in the bin"
+        },
+        {
+          "ur": "اس میں نہانا",
+          "en": "Bathe in it"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p5-save-tap",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "دانت برش کرتے ہوئے نل بند رکھنے سے پانی بچتا ہے۔",
+        "en": "Turning the tap off while brushing teeth saves water."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-cover",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پینے کے پانی کا برتن ڈھانپ کر کیوں رکھتے ہیں؟",
+        "en": "Why do we keep the drinking-water pot covered?"
+      },
+      "options": [
+        {
+          "ur": "تاکہ مٹی، مکھیاں اور جراثیم اندر نہ جائیں",
+          "en": "So dust, flies and germs cannot get in"
+        },
+        {
+          "ur": "تاکہ پانی گرم ہو جائے",
+          "en": "So the water gets warm"
+        },
+        {
+          "ur": "تاکہ پانی کا رنگ بدلے",
+          "en": "So the water changes colour"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-poster-idea",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اپنے محلے کے لیے \"پانی بچاؤ، صاف رکھو\" کے تین آسان اصول لکھو، اور ہر اصول کی ایک وجہ۔",
+        "en": "Write three simple 'save water, keep it clean' rules for your neighbourhood, with a reason for each."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Credit three distinct, safe rules (e.g. bins not canals, cover water, fix or close taps, no standing water) each with a health or environment reason."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-water-check",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں دیکھو: کیا پانی کے برتن ڈھکے ہیں؟ کیا کوئی نل ٹپک رہا ہے؟ کیا کہیں پانی کھڑا ہے؟ جو دیکھا وہ لکھو اور کسی بڑے کو بتاؤ۔ خود کچھ ٹھیک کرنے کے لیے اوزار استعمال نہ کرو۔",
+        "en": "Look around your home: are water pots covered? Is any tap dripping? Is water standing anywhere? Write what you found and tell an adult. Do not use tools to fix anything yourself."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Credit an honest record of the three checks and telling an adult; no judgement of the family's home or resources."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچو: کیا اس سے جراثیم کو پانی یا ہاتھوں تک پہنچنے کا راستہ ملتا ہے؟",
+        "en": "Think: does this give germs a way into water or onto hands?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد رکھو: جراثیم نظر نہیں آتے، اور کھڑا پانی مچھروں کا گھر ہے۔",
+        "en": "Remember: germs cannot be seen, and standing water is a home for mosquitoes."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "صاف دکھنے والا پانی ہمیشہ محفوظ ہے۔",
+        "en": "Clear-looking water is always safe."
+      },
+      "correction": {
+        "ur": "جراثیم نظر نہیں آتے؛ پینے کا پانی محفوظ جگہ سے لیں، یا بڑے اسے ابال یا چھان کر صاف کریں۔",
+        "en": "Germs are invisible; drinking water should come from a safe source, or be boiled or filtered by adults."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "صرف پانی سے ہاتھ دھونا کافی ہے۔",
+        "en": "Washing hands with water alone is enough."
+      },
+      "correction": {
+        "ur": "صابن سے ہاتھ ملنے سے جراثیم بہتر طریقے سے نکلتے ہیں۔",
+        "en": "Rubbing hands with soap removes germs much better."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "does not link water to the needs of living things",
+      "remediation_ref": "SCI-G4-LIV-03"
+    },
+    {
+      "signal": "two wrong answers on germs",
+      "remediation_ref": "SCI-G4-EAR-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "صاف پانی صحت کے لیے ضروری ہے۔ جراثیم نظر نہیں آتے۔ صابن سے ہاتھ دھوؤ۔ پانی ڈھانپو۔ کچرا ڈبے میں ڈالو، نہر میں نہیں۔ کھڑا پانی نہ رہنے دو۔ نل بند کرو۔",
+    "en": "Clean water is needed for health. Germs cannot be seen. Wash hands with soap. Cover water. Rubbish goes in the bin, not the canal. Do not leave standing water. Turn taps off."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ صاف پانی اور صفائی ہماری صحت اور ماحول کی حفاظت کرتے ہیں۔",
+    "en": "We learned that clean water and cleanliness protect our health and our environment."
+  },
+  "parent_notes": {
+    "ur": "گھر میں پانی کے برتن ڈھانپنے اور صابن سے ہاتھ دھونے کی عادت مل کر ڈالیں۔ پانی ابالنے کا کام بڑے کریں، بچہ نہیں۔",
+    "en": "Build the habits of covering water pots and washing hands with soap together. Boiling water is an adult's job, not the child's."
+  },
+  "mentor_notes": {
+    "ur": "ہر گھر کے پاس نل یا فلٹر نہیں ہوتا؛ کسی خاندان کو شرمندہ نہ کریں۔ بیماری کی بات خوف کے بغیر کریں اور حل پر زور دیں۔ ڈینگی کا نام لینا اختیاری ہے۔",
+    "en": "Not every home has a tap or filter; never shame a family. Talk about illness without fear and stress what we can do. Naming dengue is optional."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ صاف اور نقصان دہ عادتوں کی تصویریں اور ان کا متبادل متن ابھی بنانا ہے۔ ترتیب دینے والی سرگرمی کا متبادل: ہر عادت کے لیے \"حفاظت\" یا \"نقصان\" کا بٹن دبائیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. Pictures of the helpful and harmful habits, with alt text, are still to be made. Alternative to the sort activity: tap 'protects' or 'harmful' for each habit."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "habits first: link each everyday action to germs, mosquitoes or saving water; keep the tone hopeful and practical",
+    "questioning_strategy": "ask 'does this keep germs out?' or 'does this waste water?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says clear water is always safe",
+      "becomes worried about illness"
+    ],
+    "hint_policy": "graduated; first the germs/waste question, then the habit list; never give the answer first",
+    "example_policy": "use Pakistani contexts: canals and nalas, matka or water cooler, monsoon puddles, old tyres collecting rain, hand-washing before roti",
+    "misconception_detectors": [
+      "trusts water by its look",
+      "thinks water alone cleans hands"
+    ],
+    "critical_thinking_prompts": [
+      "Why can one blocked drain affect a whole street?"
+    ],
+    "personalization_rules": "if the learner cannot say why living things need water, route to SCI-G4-LIV-03",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor",
+      "learner says their family lacks safe water or is often ill -> respond kindly, give no blame, and hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples",
+      "shame or judge a family's home, water supply or income",
+      "describe illness in a frightening way",
+      "tell the learner to boil water themselves"
+    ]
+  },
+  "review_flags": [
+    "health reviewer: confirm the '20 seconds with soap' guidance and the 'boiled or filtered by adults' wording",
+    "equity reviewer: the lesson assumes soap and a covered pot; check it suits homes with very limited water"
+  ]
+}

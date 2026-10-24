@@ -1,0 +1,429 @@
+{
+  "code": "ISL-G4-IBA-01",
+  "title": {
+    "ur": "نماز اور اچھی عادتیں",
+    "en": "Prayer and Good Habits"
+  },
+  "description": {
+    "ur": "نماز کی اہمیت کو آسان انداز میں سمجھنا، اور اس سے جڑی اچھی عادتیں: صفائی، وقت کی پابندی اور سکون۔",
+    "en": "Understanding, in a simple way, why prayer matters, and the good habits that go with it: cleanliness, being on time and calm."
+  },
+  "keywords": [
+    "salah",
+    "prayer",
+    "wudu",
+    "good habits",
+    "punctuality",
+    "ibadat"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "نماز",
+        "en": "salah / prayer"
+      },
+      "definition": {
+        "ur": "اللہ تعالیٰ کی عبادت کا وہ طریقہ جو مسلمان دن میں پانچ بار ادا کرتے ہیں۔",
+        "en": "The way of worshipping Allah that Muslims offer five times a day."
+      }
+    },
+    {
+      "term": {
+        "ur": "وضو",
+        "en": "wudu"
+      },
+      "definition": {
+        "ur": "نماز سے پہلے خاص طریقے سے ہاتھ، منہ اور پاؤں وغیرہ دھونا۔",
+        "en": "Washing the hands, face, feet and more in a special way before prayer."
+      }
+    },
+    {
+      "term": {
+        "ur": "پابندی",
+        "en": "keeping to time"
+      },
+      "definition": {
+        "ur": "کوئی کام ہر بار وقت پر کرنا۔",
+        "en": "Doing something on time, every time."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم نماز کے بارے میں بات کریں گے۔ مسلمان دن میں پانچ بار نماز پڑھتے ہیں۔ نماز میں ہم اللہ تعالیٰ کو یاد کرتے ہیں اور اس کا شکر ادا کرتے ہیں۔ نماز کا طریقہ ہم اپنے گھر والوں اور استاد سے آہستہ آہستہ سیکھتے ہیں۔ ہر کوئی سیکھتے سیکھتے ہی سیکھتا ہے۔",
+    "en": "Today we will talk about prayer. Muslims pray five times a day. In prayer we remember Allah and thank Him. We learn how to pray slowly, from our family and teacher. Everyone learns step by step."
+  },
+  "student_explanation": {
+    "ur": "نماز اسلام کی ایک اہم عبادت ہے۔ مسلمان دن میں پانچ نمازیں پڑھتے ہیں۔ ان کے نام فجر، ظہر، عصر، مغرب اور عشاء ہیں۔ نماز سے پہلے ہم وضو کرتے ہیں۔ نماز ہمیں صاف رہنا سکھاتی ہے۔ یہ ہمیں وقت پر کام کرنا سکھاتی ہے۔ نماز میں ہم سکون سے کھڑے ہوتے ہیں۔ نماز کا طریقہ ہم گھر والوں اور استاد سے سیکھتے ہیں۔",
+    "en": "Prayer is an important act of worship in Islam. Muslims offer five prayers each day. Their names are Fajr, Zuhr, Asr, Maghrib and Isha. Before prayer we make wudu. Prayer teaches us to stay clean. It teaches us to do things on time. In prayer we stand calmly. We learn how to pray from our family and teacher."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "صبح سویرے کون سی نماز ہوتی ہے، اور اس سے کون سی اچھی عادت بنتی ہے؟",
+        "en": "Which prayer comes early in the morning, and what good habit does it build?"
+      },
+      "steps": [
+        {
+          "ur": "دن کی پہلی نماز فجر ہے۔",
+          "en": "The first prayer of the day is Fajr."
+        },
+        {
+          "ur": "فجر کے لیے صبح جلدی اٹھنا ہوتا ہے۔",
+          "en": "For Fajr we wake up early."
+        },
+        {
+          "ur": "یوں جلدی اٹھنے اور وقت پر کام کرنے کی عادت بنتی ہے۔",
+          "en": "So it builds the habit of waking early and being on time."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-order-prayers",
+      "type": "ordering",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پانچ نمازوں کو دن میں ان کی ترتیب سے لگائیں، صبح سے رات تک۔",
+        "en": "Put the five prayers in their order through the day, from morning to night."
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "فجر صبح سویرے ہوتی ہے اور عشاء رات کو۔",
+            "en": "Fajr is early morning; Isha is at night."
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "فجر",
+          "en": "Fajr"
+        },
+        {
+          "ur": "ظہر",
+          "en": "Zuhr"
+        },
+        {
+          "ur": "عصر",
+          "en": "Asr"
+        },
+        {
+          "ur": "مغرب",
+          "en": "Maghrib"
+        },
+        {
+          "ur": "عشاء",
+          "en": "Isha"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-how-many",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "مسلمان دن میں کتنی نمازیں پڑھتے ہیں؟",
+        "en": "How many prayers do Muslims offer each day?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ان کے نام گنیں: فجر، ظہر...",
+            "en": "Count the names: Fajr, Zuhr..."
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "تین",
+          "en": "Three"
+        },
+        {
+          "ur": "پانچ",
+          "en": "Five"
+        },
+        {
+          "ur": "سات",
+          "en": "Seven"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p2-before",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "نماز سے پہلے ہم کیا کرتے ہیں؟",
+        "en": "What do we do before prayer?"
+      },
+      "options": [
+        {
+          "ur": "وضو",
+          "en": "Make wudu"
+        },
+        {
+          "ur": "کھانا",
+          "en": "Eat a meal"
+        },
+        {
+          "ur": "کھیل",
+          "en": "Play a game"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-first",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "دن کی پہلی نماز کون سی ہے؟",
+        "en": "Which is the first prayer of the day?"
+      },
+      "options": [
+        {
+          "ur": "عشاء",
+          "en": "Isha"
+        },
+        {
+          "ur": "مغرب",
+          "en": "Maghrib"
+        },
+        {
+          "ur": "فجر",
+          "en": "Fajr"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p4-remember",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "نماز میں ہم اللہ تعالیٰ کو یاد کرتے ہیں اور اس کا شکر ادا کرتے ہیں۔",
+        "en": "In prayer we remember Allah and thank Him."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p5-habit",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "نماز ہمیں کون سی اچھی عادت سکھاتی ہے؟",
+        "en": "Which good habit does prayer teach us?"
+      },
+      "options": [
+        {
+          "ur": "دیر سے اٹھنا",
+          "en": "Waking up late"
+        },
+        {
+          "ur": "وقت کی پابندی اور صفائی",
+          "en": "Being on time and staying clean"
+        },
+        {
+          "ur": "جلدی جلدی ہر کام کرنا",
+          "en": "Rushing every job"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p6-learn-slowly",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "نماز کا طریقہ ایک ہی دن میں پورا سیکھنا ضروری ہے۔",
+        "en": "We must learn the whole way of praying in a single day."
+      },
+      "explanation": {
+        "ur": "ہم نماز گھر والوں اور استاد سے آہستہ آہستہ سیکھتے ہیں۔",
+        "en": "We learn prayer slowly, from our family and teacher."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-habit-link",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "نماز کی کوئی ایک اچھی عادت بتائیں جو کھیل یا پڑھائی میں بھی کام آتی ہے۔",
+        "en": "Name one good habit from prayer that also helps with play or study."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept being on time, staying clean, being calm or paying attention, with any sensible link. Do not ask whether the child or family prays."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-names",
+      "type": "short",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "گھر کے کسی بڑے کو پانچ نمازوں کے نام ترتیب سے سنائیں۔",
+        "en": "Say the names of the five prayers in order to an elder at home."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. The elder may help; that is encouraged."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سبق میں نمازوں کے نام دوبارہ سنیں۔",
+        "en": "Listen again to the names of the prayers in the lesson."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "سوچیں: صبح سے رات تک کون سی نماز پہلے آتی ہے؟",
+        "en": "Think: from morning to night, which prayer comes first?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "نماز صرف بڑوں کے لیے ہے، بچے اسے نہیں سیکھ سکتے۔",
+        "en": "Prayer is only for grown-ups; children cannot learn it."
+      },
+      "correction": {
+        "ur": "بچے گھر والوں اور استاد سے نماز آہستہ آہستہ اور خوشی سے سیکھتے ہیں۔",
+        "en": "Children learn prayer slowly and happily from their family and teacher."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "نماز بس جلدی جلدی کر لینے کا کام ہے۔",
+        "en": "Prayer is just something to finish quickly."
+      },
+      "correction": {
+        "ur": "نماز سکون اور توجہ سے پڑھی جاتی ہے۔",
+        "en": "Prayer is offered calmly and with attention."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "low_score:prayer_names",
+      "remediation_ref": "ISL-G4-IBA-01"
+    },
+    {
+      "signal": "low_score:cleanliness",
+      "remediation_ref": "ISL-G4-AKH-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پانچ نمازیں: فجر، ظہر، عصر، مغرب، عشاء۔ نماز سے پہلے وضو۔ نماز صفائی، وقت کی پابندی اور سکون سکھاتی ہے۔",
+    "en": "Five prayers: Fajr, Zuhr, Asr, Maghrib, Isha. Wudu comes before prayer. Prayer teaches cleanliness, being on time and calm."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ نماز اہم عبادت ہے اور یہ اچھی عادتیں سکھاتی ہے۔",
+    "en": "We learned that prayer is an important act of worship that builds good habits."
+  },
+  "parent_notes": {
+    "ur": "نماز کا طریقہ اپنے گھر کے طریقے کے مطابق پیار سے سکھائیں۔ زبردستی یا ڈانٹ کے بجائے حوصلہ افزائی کریں۔",
+    "en": "Teach your child to pray the way your family prays, with love. Encourage rather than force or scold."
+  },
+  "mentor_notes": {
+    "ur": "نماز کی تفصیلات (حرکات، الفاظ، اوقات) خاندانوں میں مختلف ہو سکتی ہیں؛ ہمیشہ کہیں 'جیسے آپ کے گھر والے اور استاد سکھائیں'۔ کسی بچے سے یہ نہ پوچھیں کہ وہ یا اس کے گھر والے نماز پڑھتے ہیں یا نہیں۔",
+    "en": "Details of prayer (movements, words, timings) can differ between families; always say 'as your family and teacher show you'. Never ask whether a child or their family prays."
+  },
+  "accessibility_notes": {
+    "ur": "تصاویر (دن کے پانچ اوقات کا خاکہ) اور ان کا متبادل متن ابھی بنانا ہے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ترتیب والی سرگرمی کا متبادل: 'پہلی نماز کون سی؟ اگلی کون سی؟' جیسے بٹن والے سوال۔",
+    "en": "A picture (the five times of day) and its alt text are still to be made. Urdu audio is not yet recorded. Alternative to the ordering activity: button questions such as 'which prayer is first? which comes next?'."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "name the five prayers and wudu, then link prayer to everyday good habits (cleanliness, time, calm); leave the method of prayer to family and teacher",
+    "questioning_strategy": "ask 'which comes first in the day?' and 'what habit does this build?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "child says they do not pray or feels bad about it"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "general, practice common to all Pakistani Muslims only; no movements, words or rulings of salah; never mention punishment for missing prayer",
+    "misconception_detectors": [
+      "thinks prayer is only for adults",
+      "thinks prayer is something to rush"
+    ],
+    "critical_thinking_prompts": [
+      "How can being on time for prayer help you be on time for other things?"
+    ],
+    "personalization_rules": "if a child says they do not know how to pray yet, reassure them that everyone learns step by step and move on",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions",
+      "describe the movements, words or rulings of salah"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: confirm the general statements (five daily prayers, their names, wudu before prayer) are worded acceptably for all Pakistani Muslim learners",
+    "scholar: details of prayer differ between families and schools; the lesson deliberately defers to 'family and teacher'; confirm this is enough",
+    "child-safety reviewer: confirm nothing could make a child who does not yet pray feel shamed"
+  ]
+}

@@ -1,0 +1,481 @@
+{
+  "code": "SCI-G4-LIV-04",
+  "title": {
+    "ur": "جانوروں کی گروہ بندی",
+    "en": "Grouping animals"
+  },
+  "description": {
+    "ur": "جانوروں کو آسان خصوصیات سے گروہوں میں بانٹنا: وہ کہاں رہتے ہیں اور کیا کھاتے ہیں۔",
+    "en": "Sorting animals into groups by simple features: where they live and what they eat."
+  },
+  "keywords": [
+    "animals",
+    "habitat",
+    "land",
+    "water",
+    "plant-eater",
+    "meat-eater",
+    "group"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مسکن",
+        "en": "habitat"
+      },
+      "definition": {
+        "ur": "وہ قدرتی جگہ جہاں کوئی جانور رہتا ہے، جیسے دریا، صحرا یا جنگل۔",
+        "en": "The natural place where an animal lives, like a river, desert or forest."
+      }
+    },
+    {
+      "term": {
+        "ur": "سبزی خور",
+        "en": "plant-eater"
+      },
+      "definition": {
+        "ur": "وہ جانور جو صرف پودے کھاتا ہے۔",
+        "en": "An animal that eats only plants."
+      }
+    },
+    {
+      "term": {
+        "ur": "گوشت خور",
+        "en": "meat-eater"
+      },
+      "definition": {
+        "ur": "وہ جانور جو دوسرے جانور کھاتا ہے۔",
+        "en": "An animal that eats other animals."
+      }
+    },
+    {
+      "term": {
+        "ur": "ہمہ خور",
+        "en": "eats both"
+      },
+      "definition": {
+        "ur": "وہ جانور جو پودے اور جانور دونوں کھاتا ہے۔",
+        "en": "An animal that eats both plants and animals."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "سائنسدان جانوروں کو گروہوں میں رکھتے ہیں تاکہ انہیں سمجھنا آسان ہو۔ آج ہم دو سوال پوچھیں گے۔ یہ جانور کہاں رہتا ہے؟ یہ کیا کھاتا ہے؟ ایک وقت میں ایک ہی سوال سے گروہ بنائیں گے۔",
+    "en": "Scientists put animals in groups to make them easier to understand. Today we ask two questions. Where does this animal live? What does it eat? We sort by one question at a time."
+  },
+  "student_explanation": {
+    "ur": "جانور جہاں رہتا ہے وہ اس کا مسکن ہے۔ کچھ جانور خشکی پر رہتے ہیں، جیسے اونٹ اور بکری۔ کچھ پانی میں رہتے ہیں، جیسے مچھلی۔ مینڈک پانی اور خشکی دونوں پر رہتا ہے۔ ہم جانوروں کو خوراک سے بھی بانٹ سکتے ہیں۔ گائے صرف پودے کھاتی ہے۔ وہ سبزی خور ہے۔ بلی گوشت کھاتی ہے۔ کوا دونوں کھاتا ہے۔",
+    "en": "The place where an animal lives is its habitat. Some animals live on land, like camels and goats. Some live in water, like fish. A frog lives both in water and on land. We can also group animals by food. A cow eats only plants. It is a plant-eater. A cat eats meat. A crow eats both."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "مارخور کو دونوں طرح گروہ میں رکھو۔",
+        "en": "Group the markhor in both ways."
+      },
+      "steps": [
+        {
+          "ur": "مارخور ہمارا قومی جانور ہے۔ یہ شمالی پہاڑوں پر رہتا ہے۔",
+          "en": "The markhor is our national animal. It lives in the northern mountains."
+        },
+        {
+          "ur": "پہاڑ خشکی ہیں، اس لیے یہ خشکی کا جانور ہے۔",
+          "en": "Mountains are land, so it is a land animal."
+        },
+        {
+          "ur": "یہ گھاس اور پتے کھاتا ہے، اس لیے یہ سبزی خور ہے۔",
+          "en": "It eats grass and leaves, so it is a plant-eater."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "مرغی کس خوراک والے گروہ میں جائے گی؟",
+        "en": "Which food group does a hen belong to?"
+      },
+      "steps": [
+        {
+          "ur": "مرغی دانے اور بیج چگتی ہے۔ یہ پودوں سے آتے ہیں۔",
+          "en": "A hen pecks grain and seeds. These come from plants."
+        },
+        {
+          "ur": "مرغی کیڑے اور سنڈیاں بھی کھاتی ہے۔ یہ جانور ہیں۔",
+          "en": "A hen also eats insects and worms. These are animals."
+        },
+        {
+          "ur": "وہ دونوں کھاتی ہے، اس لیے ہمہ خور ہے۔",
+          "en": "It eats both, so it eats both plants and animals."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-habitat",
+      "type": "interactive",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہر جانور کو اس کے مسکن کے خانے میں رکھو: اونٹ، مچھلی، مینڈک، بکری، کچھوا (دریائی)، دریائے سندھ کی ڈولفن۔",
+        "en": "Put each animal in its habitat box: camel, fish, frog, goat, river turtle, Indus river dolphin."
+      },
+      "answer_key": {
+        "land": [
+          "camel",
+          "goat"
+        ],
+        "water": [
+          "fish",
+          "Indus river dolphin"
+        ],
+        "land_and_water": [
+          "frog",
+          "river turtle"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا یہ جانور پانی سے باہر بھی وقت گزارتا ہے؟",
+            "en": "Does this animal also spend time out of the water?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-p5-match-food",
+      "type": "matching",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہر جانور کو اس کی خوراک کے گروہ سے ملاؤ۔",
+        "en": "Match each animal to its food group."
+      },
+      "options": [
+        {
+          "ur": "بکری",
+          "en": "Goat"
+        },
+        {
+          "ur": "بلی",
+          "en": "Cat"
+        },
+        {
+          "ur": "چڑیا",
+          "en": "Sparrow"
+        },
+        {
+          "ur": "ہمہ خور",
+          "en": "Eats both"
+        },
+        {
+          "ur": "سبزی خور",
+          "en": "Plant-eater"
+        },
+        {
+          "ur": "گوشت خور",
+          "en": "Meat-eater"
+        }
+      ],
+      "answer_key": {
+        "left": [
+          0,
+          1,
+          2
+        ],
+        "right": [
+          3,
+          4,
+          5
+        ],
+        "pairs": {
+          "0": 4,
+          "1": 5,
+          "2": 3
+        }
+      },
+      "explanation": {
+        "ur": "چڑیا بیج بھی کھاتی ہے اور چھوٹے کیڑے بھی۔",
+        "en": "A sparrow eats seeds and also small insects."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-camel",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "اونٹ کا مسکن کیا ہے؟",
+        "en": "What is a camel's habitat?"
+      },
+      "options": [
+        {
+          "ur": "دریا",
+          "en": "A river"
+        },
+        {
+          "ur": "صحرا، جیسے تھر",
+          "en": "A desert, like the Thar"
+        },
+        {
+          "ur": "سمندر",
+          "en": "The sea"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p2-plant-eater",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ان میں سے سبزی خور کون ہے؟",
+        "en": "Which of these is a plant-eater?"
+      },
+      "options": [
+        {
+          "ur": "بلی",
+          "en": "Cat"
+        },
+        {
+          "ur": "عقاب",
+          "en": "Eagle"
+        },
+        {
+          "ur": "بھینس",
+          "en": "Buffalo"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا جانور گھاس اور چارا کھاتا ہے؟",
+            "en": "Which animal eats grass and fodder?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-big-meat",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہر بڑا جانور گوشت خور ہوتا ہے۔",
+        "en": "Every big animal is a meat-eater."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "ہاتھی، اونٹ اور بھینس بڑے ہیں مگر صرف پودے کھاتے ہیں۔",
+        "en": "Elephants, camels and buffaloes are big but eat only plants."
+      }
+    },
+    {
+      "id": "p4-crow",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کوا روٹی کے ٹکڑے، دانے اور کیڑے کھاتا ہے۔ وہ کس گروہ میں ہے؟",
+        "en": "A crow eats bits of roti, grain and insects. Which group is it in?"
+      },
+      "options": [
+        {
+          "ur": "ہمہ خور",
+          "en": "Eats both"
+        },
+        {
+          "ur": "سبزی خور",
+          "en": "Plant-eater"
+        },
+        {
+          "ur": "گوشت خور",
+          "en": "Meat-eater"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "روٹی اور دانے پودوں سے ہیں، کیڑے جانور ہیں۔",
+            "en": "Roti and grain come from plants; insects are animals."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-frog",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "مینڈک کس مسکن والے گروہ میں جائے گا؟",
+        "en": "Which habitat group does a frog go in?"
+      },
+      "options": [
+        {
+          "ur": "صرف پانی",
+          "en": "Water only"
+        },
+        {
+          "ur": "صرف خشکی",
+          "en": "Land only"
+        },
+        {
+          "ur": "پانی اور خشکی دونوں",
+          "en": "Both water and land"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-two-ways",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک ایسا جانور بتاؤ جو خشکی پر رہتا ہو اور ہمہ خور ہو۔ اپنی وجہ بتاؤ۔",
+        "en": "Name an animal that lives on land and eats both plants and animals. Give your reason."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept e.g. hen, crow, sparrow, bear, human; the reason must mention both a plant food and an animal food."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-animal-list",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر، گلی یا کھیت میں تین جانور دیکھو یا یاد کرو۔ ہر ایک کے لیے لکھو: کہاں رہتا ہے اور کیا کھاتا ہے۔ جانوروں کے قریب نہ جاؤ اور انہیں نہ چھیڑو۔",
+        "en": "Watch or remember three animals at home, in the street or in a field. For each, write where it lives and what it eats. Do not go close to or disturb the animals."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any three animals with a sensible habitat and diet for each."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پہلے صرف ایک سوال پوچھو: یہ کہاں رہتا ہے، یا یہ کیا کھاتا ہے؟",
+        "en": "First ask just one question: where does it live, or what does it eat?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اس جانور کا ایک دن سوچو: یہ کہاں سوتا ہے اور کیا کھاتا ہے؟",
+        "en": "Picture one day in this animal's life: where does it sleep and what does it eat?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "بڑے اور طاقتور جانور ضرور گوشت کھاتے ہیں۔",
+        "en": "Big, strong animals must eat meat."
+      },
+      "correction": {
+        "ur": "جسامت سے خوراک کا پتا نہیں چلتا۔ اونٹ، بھینس اور ہاتھی بڑے ہیں مگر سبزی خور ہیں۔",
+        "en": "Size does not tell us the diet. Camels, buffaloes and elephants are big but are plant-eaters."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "جو جانور پانی میں رہے وہ مچھلی ہے۔",
+        "en": "Any animal that lives in water is a fish."
+      },
+      "correction": {
+        "ur": "دریائے سندھ کی ڈولفن اور کچھوا پانی میں رہتے ہیں مگر مچھلی نہیں ہیں۔",
+        "en": "The Indus river dolphin and turtles live in water but are not fish."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:SCI-G4-LIV-03",
+      "remediation_ref": "SCI-G4-LIV-03"
+    },
+    {
+      "signal": "mixes habitat and diet groups in one sort",
+      "remediation_ref": "SCI-G4-LIV-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "مسکن سے گروہ: خشکی، پانی، یا دونوں۔ خوراک سے گروہ: سبزی خور، گوشت خور، یا ہمہ خور۔ ایک وقت میں ایک ہی خصوصیت سے بانٹو۔",
+    "en": "Groups by habitat: land, water, or both. Groups by food: plant-eater, meat-eater, or eats both. Sort by one feature at a time."
+  },
+  "summary": {
+    "ur": "ہم نے جانوروں کو مسکن اور خوراک کے لحاظ سے گروہوں میں بانٹنا سیکھا۔",
+    "en": "We learned to group animals by where they live and what they eat."
+  },
+  "parent_notes": {
+    "ur": "آس پاس کے جانور دیکھ کر بچے سے پوچھیں کہ یہ کیا کھاتا ہے اور کہاں رہتا ہے۔",
+    "en": "When you see animals nearby, ask your child what it eats and where it lives."
+  },
+  "mentor_notes": {
+    "ur": "بچے مسکن اور خوراک کی گروہ بندی ملا دیتے ہیں۔ پہلے ایک خصوصیت پر مکمل ترتیب کروائیں، پھر دوسری پر۔",
+    "en": "Learners mix habitat and diet groups. Finish a full sort on one feature before starting the other."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ جانوروں کی تصویریں، تینوں مسکن کے خانے اور ان کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے کا متبادل: ہر جانور کے لیے \"خشکی\"، \"پانی\" یا \"دونوں\" کا بٹن دبائیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. Animal pictures, the three habitat boxes and their alt text are still to be made. Alternative to dragging: tap 'land', 'water' or 'both' for each animal."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "one feature at a time: sort fully by habitat, then re-sort the same animals by diet; show that one animal can be in different groups",
+    "questioning_strategy": "ask 'where does it live?' or 'what does it eat?' before naming a group",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "uses size or colour to decide diet",
+      "puts an animal in two groups of the same sort"
+    ],
+    "hint_policy": "graduated; first picture the animal's day, then list its foods; never name the group first",
+    "example_policy": "use Pakistani animals: markhor, camel in the Thar, buffalo, goat, hen, crow, sparrow, Indus river dolphin, frog after monsoon rain",
+    "misconception_detectors": [
+      "says big animals eat meat",
+      "calls every water animal a fish"
+    ],
+    "critical_thinking_prompts": [
+      "Can an animal be in the 'land' group and the 'eats both' group at the same time? Why?"
+    ],
+    "personalization_rules": "if the learner does not know what animals need, route to SCI-G4-LIV-03",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm Urdu terms مسکن، سبزی خور، گوشت خور، ہمہ خور match the provincial Grade 4 textbooks",
+    "subject expert: river turtles placed in 'land and water' — confirm this grouping suits the species meant"
+  ]
+}

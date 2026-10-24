@@ -1,0 +1,468 @@
+{
+  "code": "SCI-G4-LIV-05",
+  "title": {
+    "ur": "زندگی کا چکر",
+    "en": "Life cycles"
+  },
+  "description": {
+    "ur": "ایک پودے اور ایک کیڑے (تتلی) کی زندگی کے چکر کے مرحلے ترتیب سے بیان کرنا۔",
+    "en": "Describing the stages of a plant's and an insect's (butterfly's) life cycle in order."
+  },
+  "keywords": [
+    "life cycle",
+    "seed",
+    "seedling",
+    "egg",
+    "caterpillar",
+    "pupa",
+    "butterfly"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "زندگی کا چکر",
+        "en": "life cycle"
+      },
+      "definition": {
+        "ur": "وہ مرحلے جن سے ایک جاندار پیدائش سے بڑا ہونے تک گزرتا ہے، اور پھر نئے جاندار آتے ہیں۔",
+        "en": "The stages a living thing goes through from start to grown-up, before new young begin again."
+      }
+    },
+    {
+      "term": {
+        "ur": "ننھا پودا",
+        "en": "seedling"
+      },
+      "definition": {
+        "ur": "بیج سے ابھی ابھی اگا ہوا چھوٹا پودا۔",
+        "en": "A young plant that has just grown from a seed."
+      }
+    },
+    {
+      "term": {
+        "ur": "سنڈی",
+        "en": "caterpillar"
+      },
+      "definition": {
+        "ur": "تتلی کا بچہ جو انڈے سے نکلتا ہے اور پتے کھاتا ہے۔",
+        "en": "A young butterfly that hatches from an egg and eats leaves."
+      }
+    },
+    {
+      "term": {
+        "ur": "پیوپا",
+        "en": "pupa"
+      },
+      "definition": {
+        "ur": "وہ مرحلہ جب سنڈی ایک خول میں بند ہو کر تتلی میں بدلتی ہے۔",
+        "en": "The stage when a caterpillar rests in a case and changes into a butterfly."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کیا تتلی ہمیشہ سے تتلی تھی؟ نہیں! ہر جاندار کی زندگی مرحلوں میں چلتی ہے۔ آج ہم دو چکر دیکھیں گے: ایک بیج کا اور ایک تتلی کا۔ ہم ہر مرحلے کو ترتیب سے رکھیں گے۔",
+    "en": "Was a butterfly always a butterfly? No! Every living thing's life moves in stages. Today we look at two cycles: a seed's and a butterfly's. We will put each stage in order."
+  },
+  "student_explanation": {
+    "ur": "پودے کا چکر بیج سے شروع ہوتا ہے۔ پانی ملنے پر بیج پھوٹتا ہے۔ اس سے ننھا پودا نکلتا ہے۔ ننھا پودا بڑا پودا بنتا ہے۔ بڑے پودے پر پھول آتے ہیں۔ پھولوں سے بیج والے پھل بنتے ہیں۔ تتلی پتے پر انڈا دیتی ہے۔ انڈے سے سنڈی نکلتی ہے۔ سنڈی پیوپا بنتی ہے۔ پیوپا سے تتلی نکلتی ہے۔",
+    "en": "A plant's cycle starts with a seed. With water, the seed sprouts. A seedling comes out of it. The seedling becomes a grown plant. The grown plant has flowers. The flowers make fruits with seeds. A butterfly lays an egg on a leaf. A caterpillar hatches from the egg. The caterpillar becomes a pupa. A butterfly comes out of the pupa."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "آم کی گٹھلی سے نئی گٹھلی تک کا چکر بتاؤ۔",
+        "en": "Tell the cycle from a mango stone to a new mango stone."
+      },
+      "steps": [
+        {
+          "ur": "گٹھلی مٹی میں دبی ہو اور پانی ملے تو پھوٹتی ہے۔",
+          "en": "The stone, buried in soil and given water, sprouts."
+        },
+        {
+          "ur": "ننھا پودا کئی سال میں بڑا درخت بنتا ہے۔",
+          "en": "The seedling grows into a big tree over several years."
+        },
+        {
+          "ur": "درخت پر بور (پھول) آتا ہے، پھر آم بنتے ہیں۔",
+          "en": "The tree flowers, then mangoes form."
+        },
+        {
+          "ur": "ہر آم کے اندر نئی گٹھلی ہوتی ہے۔ چکر پھر شروع ہوتا ہے۔",
+          "en": "Each mango has a new stone inside. The cycle starts again."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "سنڈی اور تتلی ایک ہی جاندار کیسے ہیں؟",
+        "en": "How are a caterpillar and a butterfly the same animal?"
+      },
+      "steps": [
+        {
+          "ur": "تتلی انڈا دیتی ہے؛ انڈے سے سنڈی نکلتی ہے۔",
+          "en": "A butterfly lays an egg; a caterpillar hatches from it."
+        },
+        {
+          "ur": "سنڈی خوب پتے کھا کر بڑی ہوتی ہے، پھر پیوپا بنتی ہے۔",
+          "en": "The caterpillar eats lots of leaves and grows, then becomes a pupa."
+        },
+        {
+          "ur": "پیوپا کے اندر جسم بدلتا ہے اور تتلی نکلتی ہے۔ یہ وہی جاندار ہے۔",
+          "en": "Inside the pupa its body changes and a butterfly comes out. It is the same animal."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-order-butterfly",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "تتلی کے چکر کے کارڈ ترتیب سے رکھو: سنڈی، تتلی، انڈا، پیوپا۔",
+        "en": "Put the butterfly cycle cards in order: caterpillar, butterfly, egg, pupa."
+      },
+      "answer_key": {
+        "order": [
+          "egg",
+          "caterpillar",
+          "pupa",
+          "butterfly"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پتے پر سب سے پہلے کیا ملتا ہے؟",
+            "en": "What is found on the leaf first?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-p1-order-plant",
+      "type": "ordering",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پودے کے چکر کو ترتیب دو۔",
+        "en": "Put the plant's cycle in order."
+      },
+      "options": [
+        {
+          "ur": "پھول والا پودا",
+          "en": "Flowering plant"
+        },
+        {
+          "ur": "بیج",
+          "en": "Seed"
+        },
+        {
+          "ur": "ننھا پودا",
+          "en": "Seedling"
+        },
+        {
+          "ur": "بیج والا پھل",
+          "en": "Fruit with seeds"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          2,
+          0,
+          3
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "چکر بیج سے شروع ہوتا ہے۔",
+            "en": "The cycle starts with a seed."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p2-after-egg",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "تتلی کے انڈے سے کیا نکلتا ہے؟",
+        "en": "What hatches from a butterfly's egg?"
+      },
+      "options": [
+        {
+          "ur": "چھوٹی تتلی",
+          "en": "A tiny butterfly"
+        },
+        {
+          "ur": "سنڈی",
+          "en": "A caterpillar"
+        },
+        {
+          "ur": "پیوپا",
+          "en": "A pupa"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "انڈے سے سنڈی نکلتی ہے، تتلی نہیں۔",
+        "en": "A caterpillar hatches from the egg, not a butterfly."
+      }
+    },
+    {
+      "id": "p3-different-animals",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "سنڈی اور تتلی دو الگ جانور ہیں۔",
+        "en": "A caterpillar and a butterfly are two different animals."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "یہ ایک ہی جاندار کے دو مرحلے ہیں۔",
+        "en": "They are two stages of the same animal."
+      }
+    },
+    {
+      "id": "p4-seed-needs",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "بیج پھوٹنے کے لیے سب سے پہلے کس چیز کی ضرورت ہے؟",
+        "en": "What does a seed need first to sprout?"
+      },
+      "options": [
+        {
+          "ur": "پانی",
+          "en": "Water"
+        },
+        {
+          "ur": "پھول",
+          "en": "A flower"
+        },
+        {
+          "ur": "پھل",
+          "en": "A fruit"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p5-before-butterfly",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "تتلی بننے سے ٹھیک پہلے کون سا مرحلہ آتا ہے؟",
+        "en": "Which stage comes just before the butterfly?"
+      },
+      "options": [
+        {
+          "ur": "انڈا",
+          "en": "Egg"
+        },
+        {
+          "ur": "ننھا پودا",
+          "en": "Seedling"
+        },
+        {
+          "ur": "پیوپا",
+          "en": "Pupa"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p6-cycle-repeats",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "بڑا پودا بیج بناتا ہے، اور ان بیجوں سے نئے پودے اگ سکتے ہیں۔",
+        "en": "A grown plant makes seeds, and new plants can grow from those seeds."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "اسی لیے اسے چکر کہتے ہیں: یہ بار بار چلتا ہے۔",
+        "en": "That is why it is called a cycle: it goes round again."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-why-leaf",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "تتلی اپنے انڈے پتوں پر کیوں دیتی ہے؟",
+        "en": "Why does a butterfly lay its eggs on leaves?"
+      },
+      "options": [
+        {
+          "ur": "کیونکہ پتے سبز ہیں",
+          "en": "Because leaves are green"
+        },
+        {
+          "ur": "تاکہ نکلنے والی سنڈی کو فوراً کھانے کو پتے ملیں",
+          "en": "So the caterpillar that hatches has leaves to eat at once"
+        },
+        {
+          "ur": "کیونکہ پتے ٹھنڈے ہیں",
+          "en": "Because leaves are cool"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-sprout-diary",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک گیلے کپڑے پر چند مونگ یا چنے رکھو اور روز تھوڑا پانی چھڑکو۔ پانچ دن تک روز دیکھو اور جو بدلے اس کی تصویر بناؤ۔",
+        "en": "Put a few moong beans or chickpeas on a wet cloth and sprinkle a little water each day. Look every day for five days and draw what changes."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Credit a dated drawing or note for each day showing the seed coat splitting and a root/shoot appearing. Safe without an adult: water, cloth and dried beans only."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پہلے سوچو: یہ چکر کس چیز سے شروع ہوتا ہے؟",
+        "en": "First think: what does this cycle start with?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "ہر مرحلہ پچھلے سے بڑا یا بدلا ہوا ہوتا ہے۔ سب سے چھوٹا مرحلہ ڈھونڈو۔",
+        "en": "Each stage is bigger or more changed than the one before. Find the smallest stage."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "سنڈی اور تتلی الگ الگ جانور ہیں۔",
+        "en": "A caterpillar and a butterfly are different animals."
+      },
+      "correction": {
+        "ur": "سنڈی تتلی کا بچہ ہے۔ پیوپا کے بعد وہی سنڈی تتلی بن جاتی ہے۔",
+        "en": "A caterpillar is a young butterfly. After the pupa stage, that same caterpillar becomes a butterfly."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "تتلی کے انڈے سے چھوٹی سی تتلی نکلتی ہے۔",
+        "en": "A tiny butterfly hatches from a butterfly's egg."
+      },
+      "correction": {
+        "ur": "انڈے سے سنڈی نکلتی ہے۔ تتلی بعد میں بنتی ہے۔",
+        "en": "A caterpillar hatches from the egg. The butterfly comes later."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:SCI-G4-LIV-02",
+      "remediation_ref": "SCI-G4-LIV-02"
+    },
+    {
+      "signal": "misorders stages twice",
+      "remediation_ref": "SCI-G4-LIV-05"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پودا: بیج ← ننھا پودا ← بڑا پودا ← پھول ← بیج والا پھل۔ تتلی: انڈا ← سنڈی ← پیوپا ← تتلی۔ چکر پھر سے شروع ہوتا ہے۔",
+    "en": "Plant: seed → seedling → grown plant → flower → fruit with seeds. Butterfly: egg → caterpillar → pupa → butterfly. Then the cycle starts again."
+  },
+  "summary": {
+    "ur": "ہم نے پودے اور تتلی کی زندگی کے چکر کے مرحلے ترتیب سے سیکھے۔",
+    "en": "We learned the stages of a plant's and a butterfly's life cycle in order."
+  },
+  "parent_notes": {
+    "ur": "بچے کے ساتھ مونگ یا چنے بھگو کر اگائیں اور روز مل کر دیکھیں کیا بدلا۔",
+    "en": "Sprout some moong or chickpeas with your child and look together each day at what changed."
+  },
+  "mentor_notes": {
+    "ur": "یہ تصور کہ سنڈی اور تتلی ایک ہی جاندار ہیں، بچوں کو حیران کرتا ہے؛ اس پر وقت دیں۔ گھریلو سرگرمی میں بیج کھانے کے لیے نہیں، صرف دیکھنے کے لیے ہیں۔",
+    "en": "The idea that a caterpillar and a butterfly are one animal surprises learners; give it time. In the home activity the seeds are for watching, not eating."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ پودے اور تتلی کے چکر کے خاکے (تیروں کے ساتھ) اور ان کا متبادل متن ابھی بنانا ہے۔ کارڈ گھسیٹنے کا متبادل: \"پہلا، دوسرا، تیسرا، چوتھا\" کے بٹن سے ہر کارڈ کا نمبر چنیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. The plant and butterfly cycle diagrams (with arrows) and their alt text are still to be made. Alternative to dragging cards: choose 'first, second, third, fourth' for each card."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "tell each cycle as a story with one stage per sentence; close the loop to show it repeats",
+    "questioning_strategy": "ask 'what comes next?' after each stage instead of giving the whole order",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "places the butterfly before the caterpillar",
+      "says the egg hatches a butterfly"
+    ],
+    "hint_policy": "graduated; first ask where the cycle starts, then ask for the smallest stage; never give the full order",
+    "example_policy": "use local examples: mango stone, wheat grain, moong sprouts, butterflies in spring gardens",
+    "misconception_detectors": [
+      "treats caterpillar and butterfly as different animals",
+      "breaks the loop (no seeds/eggs at the end)"
+    ],
+    "critical_thinking_prompts": [
+      "Why do we call it a cycle and not a line?"
+    ],
+    "personalization_rules": "if the learner cannot name plant parts (flower, fruit, seed), route to SCI-G4-LIV-02",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm 'پیوپا' is the Urdu term in Grade 4 books (some use کویا or خول)",
+    "subject expert: a mango tree takes years to fruit — check the worked example's 'several years' wording"
+  ]
+}

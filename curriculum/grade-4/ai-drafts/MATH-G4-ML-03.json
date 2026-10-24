@@ -1,0 +1,487 @@
+{
+  "code": "MATH-G4-ML-03",
+  "description": {
+    "ur": "تین ہندسی × ایک ہندسی اور دو ہندسی × دو ہندسی ضرب معیاری طریقے سے۔",
+    "en": "Multiplying 3-digit by 1-digit and 2-digit by 2-digit numbers with the standard method."
+  },
+  "keywords": [
+    "multiplication",
+    "partial products",
+    "placeholder zero",
+    "3-digit by 1-digit",
+    "2-digit by 2-digit",
+    "standard method"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "جزوی حاصل ضرب",
+        "en": "partial product"
+      },
+      "definition": {
+        "ur": "ضرب کا ایک حصہ، جو آخر میں باقی حصوں سے جمع ہوتا ہے۔",
+        "en": "One part of a multiplication, added to the other parts at the end."
+      }
+    },
+    {
+      "term": {
+        "ur": "جگہ رکھنے والا صفر",
+        "en": "placeholder zero"
+      },
+      "definition": {
+        "ur": "دہائی والی سطر میں اکائی کی جگہ لکھا جانے والا ۰۔",
+        "en": "The 0 written in the ones place of the tens row."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم بڑی ضربیں کریں گے۔ تین ہندسی عدد کو ایک ہندسی سے ضرب دینا وہی پرانا طریقہ ہے، بس ایک خانہ زیادہ۔ دو ہندسی کو دو ہندسی سے ضرب دینے کے لیے ہم ضرب کو دو حصوں میں توڑیں گے۔ ایک چھوٹا سا صفر بہت اہم ہوگا، اس پر نظر رکھیں۔",
+    "en": "Today we do bigger multiplications. 3-digit by 1-digit is the same method as before, with one more column. For 2-digit by 2-digit, we break the multiplication into two parts. One small zero will matter a lot, so watch for it."
+  },
+  "student_explanation": {
+    "ur": "بڑی ضرب میں بھی وہی قدم ہوتے ہیں۔ تین ہندسی × ایک ہندسی میں اکائی، دہائی، پھر سو کو ضرب دیں۔ جہاں ضرورت ہو ہاتھ لے جائیں۔ دو ہندسی × دو ہندسی میں دوسرے عدد کو دہائی اور اکائی میں توڑیں۔ ۲۳ × ۱۴ میں پہلے ۲۳ × ۴ = ۹۲ کریں۔ پھر ۲۳ × ۱۰ = ۲۳۰ کریں۔ دہائی والی سطر میں اکائی کی جگہ ۰ لکھیں۔ دونوں سطریں جمع کریں: ۹۲ + ۲۳۰ = ۳۲۲۔",
+    "en": "Bigger multiplications use the same steps. For 3-digit × 1-digit, multiply the ones, tens, then hundreds. Carry when you need to. For 2-digit × 2-digit, break the second number into tens and ones. For 23 × 14, first do 23 × 4 = 92. Then do 23 × 10 = 230. Write a 0 in the ones place of the tens row. Add the two rows: 92 + 230 = 322."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۲۳ × ۱۴ = ؟",
+        "en": "23 × 14 = ?"
+      },
+      "steps": [
+        {
+          "ur": "۱۴ کو توڑیں: ۱۰ اور ۴۔",
+          "en": "Break 14 into 10 and 4."
+        },
+        {
+          "ur": "پہلی سطر: ۲۳ × ۴ = ۹۲۔",
+          "en": "First row: 23 × 4 = 92."
+        },
+        {
+          "ur": "دوسری سطر: اکائی کی جگہ ۰ لکھیں، پھر ۲۳ × ۱ = ۲۳ لکھیں۔ یعنی ۲۳۰۔",
+          "en": "Second row: write 0 in the ones place, then 23 × 1 = 23. That makes 230."
+        },
+        {
+          "ur": "جمع کریں: ۹۲ + ۲۳۰ = ۳۲۲۔",
+          "en": "Add: 92 + 230 = 322."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "۲۴۶ × ۳ = ؟",
+        "en": "246 × 3 = ?"
+      },
+      "steps": [
+        {
+          "ur": "اکائی: ۶ × ۳ = ۱۸۔ ۸ لکھیں، ۱ ہاتھ میں۔",
+          "en": "Ones: 6 × 3 = 18. Write 8, carry 1."
+        },
+        {
+          "ur": "دہائی: ۴ × ۳ = ۱۲، ۱۲ + ۱ = ۱۳۔ ۳ لکھیں، ۱ ہاتھ میں۔",
+          "en": "Tens: 4 × 3 = 12, 12 + 1 = 13. Write 3, carry 1."
+        },
+        {
+          "ur": "سو: ۲ × ۳ = ۶، ۶ + ۱ = ۷۔ جواب ۷۳۸۔",
+          "en": "Hundreds: 2 × 3 = 6, 6 + 1 = 7. Answer 738."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-partial-rows",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "۳۶ × ۲۱ کے لیے دونوں جزوی حاصل ضرب صحیح سطروں میں گھسیٹیں: ۳۶ اور ۷۲۰۔ پھر کل جواب لکھیں۔",
+        "en": "For 36 × 21, drag the two partial products into the right rows: 36 and 720. Then type the total."
+      },
+      "answer_key": {
+        "row1": "36",
+        "row2": "720",
+        "total": "756"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلی سطر اکائی والے ۱ سے، دوسری سطر دہائی والے ۲ سے بنتی ہے۔",
+            "en": "The first row comes from the ones digit 1, the second from the tens digit 2."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-318x4",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۳۱۸ × ۴ = ___",
+        "en": "318 × 4 = ___"
+      },
+      "answer_key": {
+        "answer": "1272"
+      },
+      "accepted_variants": [
+        "1272",
+        "1,272",
+        "۱۲۷۲",
+        "۱٬۲۷۲"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۸ × ۴ = ۳۲۔ ۲ لکھیں اور ۳ ہاتھ میں۔",
+            "en": "8 × 4 = 32. Write 2, carry 3."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱ × ۴ + ۳ = ۷، ۳ × ۴ = ۱۲۔ جواب ۱۲۷۲۔",
+        "en": "1 × 4 + 3 = 7, 3 × 4 = 12. Answer 1272."
+      }
+    },
+    {
+      "id": "p6-chalk",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک اسکول چاک کے ۱۶ ڈبے خریدتا ہے۔ ہر ڈبے میں ۲۴ چاک ہیں۔ کل کتنے چاک؟ ___",
+        "en": "A school buys 16 boxes of chalk. Each box has 24 sticks. How many sticks in all? ___"
+      },
+      "answer_key": {
+        "answer": "384"
+      },
+      "accepted_variants": [
+        "384",
+        "۳۸۴"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۲۴ × ۶ اور ۲۴ × ۱۰ الگ الگ نکالیں۔",
+            "en": "Work out 24 × 6 and 24 × 10 separately."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۲۴ × ۶ = ۱۴۴، ۲۴ × ۱۰ = ۲۴۰۔ ۱۴۴ + ۲۴۰ = ۳۸۴۔",
+        "en": "24 × 6 = 144, 24 × 10 = 240. 144 + 240 = 384."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-124x3",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۱۲۴ × ۳ = ؟",
+        "en": "124 × 3 = ?"
+      },
+      "options": [
+        {
+          "ur": "۳۷۲",
+          "en": "372"
+        },
+        {
+          "ur": "۱۲۷",
+          "en": "127"
+        },
+        {
+          "ur": "۳۶۲",
+          "en": "362"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-mult-add-instead"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اکائی، دہائی، سو، تینوں کو ۳ سے ضرب دیں۔",
+            "en": "Multiply the ones, tens and hundreds each by 3."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴ × ۳ = ۱۲: ۲ لکھیں، ۱ ہاتھ میں۔ ۲ × ۳ + ۱ = ۷۔ ۱ × ۳ = ۳۔ جواب ۳۷۲۔",
+        "en": "4 × 3 = 12: write 2, carry 1. 2 × 3 + 1 = 7. 1 × 3 = 3. Answer 372."
+      }
+    },
+    {
+      "id": "p3-32x15",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۳۲ × ۱۵ = ؟",
+        "en": "32 × 15 = ?"
+      },
+      "options": [
+        {
+          "ur": "۱۹۲",
+          "en": "192"
+        },
+        {
+          "ur": "۴۷۰",
+          "en": "470"
+        },
+        {
+          "ur": "۴۸۰",
+          "en": "480"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-place-value-digit-equals-value"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دوسری سطر ۳۲ × ۱۰ ہے۔ صفر کہاں گیا؟",
+            "en": "The second row is 32 × 10. Where is the zero?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۳۲ × ۵ = ۱۶۰، ۳۲ × ۱۰ = ۳۲۰۔ ۱۶۰ + ۳۲۰ = ۴۸۰۔",
+        "en": "32 × 5 = 160, 32 × 10 = 320. 160 + 320 = 480."
+      }
+    },
+    {
+      "id": "p4-45x12",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۴۵ × ۱۲ = ؟",
+        "en": "45 × 12 = ?"
+      },
+      "options": [
+        {
+          "ur": "۱۳۵",
+          "en": "135"
+        },
+        {
+          "ur": "۵۴۰",
+          "en": "540"
+        },
+        {
+          "ur": "۴۵۰",
+          "en": "450"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-place-value-digit-equals-value"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دو سطریں بنائیں: ۴۵ × ۲ اور ۴۵ × ۱۰۔",
+            "en": "Make two rows: 45 × 2 and 45 × 10."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۹۰ + ۴۵۰ = ۵۴۰۔ صرف ایک سطر لینا یا صفر بھولنا غلط جواب دیتا ہے۔",
+        "en": "90 + 450 = 540. Using only one row, or dropping the zero, gives a wrong answer."
+      }
+    },
+    {
+      "id": "p5-second-row",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "۲۷ × ۱۳ میں دوسری سطر ۲۷ ہونی چاہیے، ۲۷۰ نہیں۔",
+        "en": "In 27 × 13, the second row should be 27, not 270."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-place-value-digit-equals-value"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۱۳ میں ۱ کی قیمت کیا ہے؟",
+            "en": "What is the 1 in 13 worth?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱ کا مطلب ایک دہائی ہے، اس لیے ۲۷ × ۱۰ = ۲۷۰۔ کل ۸۱ + ۲۷۰ = ۳۵۱۔",
+        "en": "The 1 means one ten, so 27 × 10 = 270. Total 81 + 270 = 351."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-hamid-check",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "حامد کہتا ہے ۵۲ × ۱۸ = ۴۶۸۔ اندازے سے جانچیں اور صحیح جواب نکالیں۔ اس نے کیا غلطی کی؟",
+        "en": "Hamid says 52 × 18 = 468. Check with an estimate and find the right answer. What mistake did he make?"
+      },
+      "answer_key": {
+        "answer": "936; he forgot the placeholder zero (416 + 52 instead of 416 + 520)"
+      },
+      "accepted_variants": [
+        "936",
+        "۹۳۶"
+      ],
+      "mentor_review_guidance": "Credit the correct product and any clear description of the missing zero in the tens row.",
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اندازہ: ۵۰ × ۲۰ کتنے ہیں؟",
+            "en": "Estimate: what is 50 × 20?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-2x2",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک دو ہندسی × دو ہندسی سوال حل کریں۔",
+        "en": "one 2-digit × 2-digit problem."
+      },
+      "answer_key": {
+        "answer": "a correct product with both rows shown"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "دو حصوں میں توڑیں",
+        "en": "Break it into two parts."
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "دوسری سطر میں صفر رکھیں",
+        "en": "Put a zero in the second row."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "دوسری سطر میں جگہ رکھنے والا صفر بھول جانا، مثلاً ۲۳ × ۱۴ میں ۲۳۰ کی جگہ ۲۳ لکھنا۔",
+        "en": "Forgetting the placeholder zero in the second row, e.g. writing 23 instead of 230 in 23 × 14."
+      },
+      "correction": {
+        "ur": "۱۴ میں ۱ کا مطلب ایک دہائی ہے۔ دوسری سطر ۲۳ × ۱۰ = ۲۳۰ ہے، پہلے ۰ لکھیں۔",
+        "en": "The 1 in 14 means one ten. The second row is 23 × 10 = 230, so write the 0 first."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ضرب سے پہلے ہاتھ والا عدد جمع کر دینا۔",
+        "en": "Adding the carried number before multiplying."
+      },
+      "correction": {
+        "ur": "پہلے ضرب دیں، پھر ہاتھ والا جمع کریں۔",
+        "en": "Multiply first, then add the carry."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-place-value-digit-equals-value",
+      "remediation_ref": "MATH-G4-NB-02"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-ML-02",
+      "remediation_ref": "MATH-G4-ML-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "تین ہندسی × ایک ہندسی: اکائی، دہائی، سو۔ دو ہندسی × دو ہندسی: دو سطریں، دوسری میں پہلے ۰، پھر جمع۔",
+    "en": "3-digit × 1-digit: ones, tens, hundreds. 2-digit × 2-digit: two rows, a 0 first in the second row, then add."
+  },
+  "summary": {
+    "ur": "ہم نے بڑی ضربیں کیں اور جزوی حاصل ضرب میں صفر کی اہمیت سیکھی۔",
+    "en": "We did bigger multiplications and learned why the zero in a partial product matters."
+  },
+  "parent_notes": {
+    "ur": "ایک ہی قیمت والی کئی چیزوں کی کل قیمت نکالیں۔",
+    "en": "total cost of several same-price items."
+  },
+  "mentor_notes": {
+    "ur": "جگہ رکھنے والا صفر بھول جانا سب سے عام غلطی ہے؛ اسے واضح طور پر دکھائیں۔",
+    "en": "the missing placeholder zero is the top error; make it explicit."
+  },
+  "accessibility_notes": {
+    "ur": "دو سطروں والی ضرب کی تصویر ابھی بنانی ہے؛ متبادل متن ہر سطر اور جگہ رکھنے والے صفر کو الگ پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے کا متبادل: دونوں سطروں کے عدد ٹائپ کریں۔",
+    "en": "The two-row multiplication picture is still to be made; alt text should read each row and say the placeholder zero separately. Urdu audio is not yet recorded. Alternative to dragging: type the number for each row."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "3-digit × 1-digit extends the column method; 2-digit × 2-digit uses two partial products (ones row, then tens row starting with a placeholder zero) and adds them",
+    "questioning_strategy": "ask 'what is the tens digit really worth?' before the second row, and 'does an estimate agree?' after",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "second row written without its zero",
+      "uses only one partial product"
+    ],
+    "hint_policy": "graduated; two hints max (break it into two parts; put a zero in the second row) then a worked re-teach with 23 × 14; never give the answer first",
+    "example_policy": "3-digit × 1-digit with carries; 2-digit × 2-digit up to about 60 × 30; school supplies and classroom contexts",
+    "misconception_detectors": [
+      "answers 192 for 32 × 15 (zero dropped)",
+      "answers 135 for 45 × 12",
+      "answers 127 for 124 × 3"
+    ],
+    "critical_thinking_prompts": [
+      "How does an estimate like 50 × 20 help you spot a missing zero?"
+    ],
+    "personalization_rules": "if single-row products are wrong, route to MATH-G4-ML-02; if the zero is the problem, revisit place value (MATH-G4-NB-02)",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the missing placeholder zero has no library id; the draft tags it m-place-value-digit-equals-value (the doc's revision trigger); confirm or add a new id",
+    "subject expert: confirm the partial-product order (ones row first, then tens row) matches the standard method taught locally"
+  ]
+}

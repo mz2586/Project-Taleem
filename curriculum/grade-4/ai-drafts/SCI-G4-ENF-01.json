@@ -1,0 +1,423 @@
+{
+  "code": "SCI-G4-ENF-01",
+  "title": {
+    "ur": "دھکا اور کھینچ",
+    "en": "Pushes and pulls"
+  },
+  "description": {
+    "ur": "دھکے اور کھینچ کو قوت کے طور پر پہچاننا اور ان کے اثرات بتانا: حرکت شروع کرنا، روکنا، سمت یا شکل بدلنا۔",
+    "en": "Recognising pushes and pulls as forces and their effects: starting, stopping, changing direction or shape."
+  },
+  "keywords": [
+    "force",
+    "push",
+    "pull",
+    "move",
+    "stop",
+    "direction",
+    "shape"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "قوت",
+        "en": "force"
+      },
+      "definition": {
+        "ur": "دھکا یا کھینچ جو کسی چیز پر لگایا جائے۔",
+        "en": "A push or a pull on something."
+      }
+    },
+    {
+      "term": {
+        "ur": "دھکا",
+        "en": "push"
+      },
+      "definition": {
+        "ur": "کسی چیز کو اپنے سے دور لے جانے والی قوت۔",
+        "en": "A force that moves something away from you."
+      }
+    },
+    {
+      "term": {
+        "ur": "کھینچ",
+        "en": "pull"
+      },
+      "definition": {
+        "ur": "کسی چیز کو اپنی طرف لانے والی قوت۔",
+        "en": "A force that brings something towards you."
+      }
+    },
+    {
+      "term": {
+        "ur": "سمت",
+        "en": "direction"
+      },
+      "definition": {
+        "ur": "وہ طرف جدھر کوئی چیز جا رہی ہو۔",
+        "en": "The way something is going."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "دروازہ کھولو تو تم یا دھکا دیتے ہو یا کھینچتے ہو۔ رسہ کشی میں دونوں ٹیمیں کھینچتی ہیں۔ دھکے اور کھینچ کو قوت کہتے ہیں۔ آج ہم دیکھیں گے کہ قوت کسی چیز کے ساتھ کیا کیا کر سکتی ہے۔",
+    "en": "When you open a door, you either push it or pull it. In tug of war both teams pull. Pushes and pulls are called forces. Today we see what a force can do to a thing."
+  },
+  "student_explanation": {
+    "ur": "دھکا یا کھینچ ایک قوت ہے۔ قوت رکی ہوئی چیز کو چلا سکتی ہے۔ گیند کو لات مارو تو وہ چل پڑتی ہے۔ قوت چلتی چیز کو روک بھی سکتی ہے۔ وکٹ کیپر گیند پکڑ کر روکتا ہے۔ قوت سمت بدل سکتی ہے۔ بلا گیند کو دوسری طرف بھیج دیتا ہے۔ قوت شکل بھی بدل سکتی ہے۔ آٹا گوندھنے سے اس کی شکل بدلتی ہے۔",
+    "en": "A push or a pull is a force. A force can make a still thing move. Kick a ball and it starts to roll. A force can also stop a moving thing. A wicketkeeper stops the ball by catching it. A force can change direction. The bat sends the ball the other way. A force can change shape too. Kneading dough changes its shape."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "ریڑھی والا خالی ریڑھی کو بازار میں چلاتا ہے۔ یہ دھکا ہے یا کھینچ، اور اس کا اثر کیا ہے؟",
+        "en": "A cart-seller moves his cart through the bazaar. Is it a push or a pull, and what is its effect?"
+      },
+      "steps": [
+        {
+          "ur": "وہ ریڑھی کو اپنے سے آگے دور لے جاتا ہے۔",
+          "en": "He moves the cart forward, away from himself."
+        },
+        {
+          "ur": "اپنے سے دور لے جانا دھکا ہے۔",
+          "en": "Moving it away from you is a push."
+        },
+        {
+          "ur": "اثر: رکی ہوئی ریڑھی چلنے لگتی ہے۔",
+          "en": "Effect: the still cart starts to move."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-push-pull",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کام کو صحیح خانے میں رکھو: دھکا یا کھینچ۔ کنویں سے بالٹی نکالنا، جھولا آگے بھیجنا، دراز کھولنا، گیند کو لات مارنا، پتنگ کی ڈور اپنی طرف لانا، بند دراز اندر کرنا۔",
+        "en": "Put each action in the right box: push or pull. Lifting a bucket from a well with a rope, sending a swing forward, opening a drawer, kicking a ball, reeling in a kite string, closing a drawer."
+      },
+      "answer_key": {
+        "push": [
+          "sending a swing forward",
+          "kicking a ball",
+          "closing a drawer"
+        ],
+        "pull": [
+          "lifting a bucket from a well with a rope",
+          "opening a drawer",
+          "reeling in a kite string"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "چیز تمہاری طرف آ رہی ہے یا تم سے دور جا رہی ہے؟",
+            "en": "Is the thing coming towards you, or going away from you?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-door",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "دروازہ اپنی طرف کھولنا کیا ہے؟",
+        "en": "Opening a door towards you is a…"
+      },
+      "options": [
+        {
+          "ur": "کھینچ",
+          "en": "Pull"
+        },
+        {
+          "ur": "دھکا",
+          "en": "Push"
+        },
+        {
+          "ur": "قوت نہیں",
+          "en": "Not a force"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-catch",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "فیلڈر چلتی گیند کو پکڑ لے تو قوت کا کیا اثر ہوا؟",
+        "en": "A fielder catches a moving ball. What did the force do?"
+      },
+      "options": [
+        {
+          "ur": "گیند کی شکل بدل دی",
+          "en": "Changed the ball's shape"
+        },
+        {
+          "ur": "گیند کو روک دیا",
+          "en": "Stopped the ball"
+        },
+        {
+          "ur": "گیند کو چلا دیا",
+          "en": "Started the ball moving"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p3-shape",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "قوت کسی چیز کی شکل بھی بدل سکتی ہے، جیسے مٹی کو دبا کر پیالہ بنانا۔",
+        "en": "A force can also change a thing's shape, like pressing clay into a bowl."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-direction",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "بلے باز نے آتی ہوئی گیند کو مارا اور وہ دوسری طرف چلی گئی۔ کیا بدلا؟",
+        "en": "A batter hits a coming ball and it goes the other way. What changed?"
+      },
+      "options": [
+        {
+          "ur": "گیند کا رنگ",
+          "en": "The ball's colour"
+        },
+        {
+          "ur": "گیند کا وزن",
+          "en": "The ball's weight"
+        },
+        {
+          "ur": "گیند کی سمت",
+          "en": "The ball's direction"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-only-move",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "قوت صرف چیزوں کو چلاتی ہے، اور کچھ نہیں کرتی۔",
+        "en": "A force only starts things moving, nothing else."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "قوت چیز کو روک بھی سکتی ہے، سمت اور شکل بھی بدل سکتی ہے۔",
+        "en": "A force can also stop a thing, and change its direction or shape."
+      }
+    },
+    {
+      "id": "p6-tug",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "رسہ کشی میں ٹیمیں کون سی قوت لگاتی ہیں؟",
+        "en": "In tug of war, what force do the teams use?"
+      },
+      "options": [
+        {
+          "ur": "کھینچ",
+          "en": "Pull"
+        },
+        {
+          "ur": "دھکا",
+          "en": "Push"
+        },
+        {
+          "ur": "کوئی قوت نہیں",
+          "en": "No force"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-swing",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "جھولا جھولتے ہوئے دوست پیچھے سے دھکا دیتا ہے۔ اس دھکے کا کیا اثر ہوتا ہے؟",
+        "en": "A friend pushes you on a swing from behind. Which effect does the push have?"
+      },
+      "options": [
+        {
+          "ur": "جھولا تیز ہو جاتا ہے",
+          "en": "The swing goes faster"
+        },
+        {
+          "ur": "جھولے کی رسی چھوٹی ہو جاتی ہے",
+          "en": "The swing's rope gets shorter"
+        },
+        {
+          "ur": "جھولا رنگ بدل لیتا ہے",
+          "en": "The swing changes colour"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "قوت رفتار بھی بدل سکتی ہے: دھکا جھولے کو تیز کر دیتا ہے۔",
+        "en": "A force can change speed too: the push makes the swing go faster."
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-five-forces",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں پانچ کام دیکھو جن میں دھکا یا کھینچ لگتا ہے، جیسے دروازہ یا دراز کھولنا۔ ہر ایک کے آگے \"دھکا\" یا \"کھینچ\" لکھو۔",
+        "en": "Find five actions at home that use a push or a pull, like opening a door or drawer. Write 'push' or 'pull' next to each."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Credit five actions each labelled correctly; accept either label where an action can be done both ways if the learner explains."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "چیز تمہاری طرف آئی یا تم سے دور گئی؟",
+        "en": "Did the thing come towards you or go away from you?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "قوت کے بعد چیز میں کیا بدلا: چلی، رکی، مڑی یا شکل بدلی؟",
+        "en": "After the force, what changed: did it start, stop, turn or change shape?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "قوت صرف چیزوں کو حرکت دیتی ہے۔",
+        "en": "A force only makes things move."
+      },
+      "correction": {
+        "ur": "قوت چیز کو روک سکتی ہے، اس کی سمت، رفتار یا شکل بھی بدل سکتی ہے۔",
+        "en": "A force can also stop a thing, or change its direction, speed or shape."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "صرف بڑی اور زور دار حرکت ہی قوت ہے۔",
+        "en": "Only big, strong actions are forces."
+      },
+      "correction": {
+        "ur": "ہلکا سا دھکا، جیسے بٹن دبانا، بھی قوت ہے۔",
+        "en": "A tiny push, like pressing a button, is a force too."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "mixes up push and pull twice",
+      "remediation_ref": "SCI-G4-ENF-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "دھکا: اپنے سے دور۔ کھینچ: اپنی طرف۔ قوت چیز کو چلا سکتی ہے، روک سکتی ہے، سمت یا رفتار بدل سکتی ہے، اور شکل بدل سکتی ہے۔",
+    "en": "Push: away from you. Pull: towards you. A force can start a thing, stop it, change its direction or speed, and change its shape."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ دھکا اور کھینچ قوتیں ہیں اور ان کے کئی اثر ہوتے ہیں۔",
+    "en": "We learned that pushes and pulls are forces with several effects."
+  },
+  "parent_notes": {
+    "ur": "گھر کے کام کرتے ہوئے (آٹا گوندھنا، بالٹی اٹھانا، دروازہ کھولنا) بچے سے پوچھیں: یہ دھکا ہے یا کھینچ؟",
+    "en": "During chores (kneading dough, lifting a bucket, opening a door) ask your child: push or pull?"
+  },
+  "mentor_notes": {
+    "ur": "اس سطح پر کشش ثقل یا رگڑ کے نام ضروری نہیں۔ ایک ہی کام (دراز کھولنا/بند کرنا) کو دونوں طرف کر کے دکھائیں۔",
+    "en": "Gravity and friction are not needed by name at this level. Show one action both ways (opening/closing a drawer)."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ دھکے اور کھینچ کی تصویریں (تیروں کے ساتھ) اور ان کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے کا متبادل: ہر کام کے لیے \"دھکا\" یا \"کھینچ\" کا بٹن دبائیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. Push and pull pictures (with arrows) and their alt text are still to be made. Alternative to dragging: tap 'push' or 'pull' for each action."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "body-first: the learner mimes the push or pull, then names it, then says the effect",
+    "questioning_strategy": "ask 'towards you or away from you?' before 'push or pull?', then 'what changed?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says a force only starts motion",
+      "mixes push and pull"
+    ],
+    "hint_policy": "graduated; first the direction question, then the list of effects; never name the force first",
+    "example_policy": "use local actions: cricket batting and catching, tug of war, swings, kneading roti dough, pulling a bucket from a well, pushing a cart in the bazaar",
+    "misconception_detectors": [
+      "lists only 'starts moving' as an effect",
+      "thinks small pushes are not forces"
+    ],
+    "critical_thinking_prompts": [
+      "Can the same force start a ball and also change its shape? Think of a soft ball hit by a bat."
+    ],
+    "personalization_rules": "if the learner has mastered push/pull, add speed changes (swing) as an extra effect",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples",
+      "suggest pushing or pulling heavy furniture, people or animals"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the activity treats 'lifting a bucket from a well with a rope' as a pull — confirm this example suits learners with no well",
+    "subject expert: confirm Urdu term کھینچ (vs کھنچاؤ) for pull"
+  ]
+}

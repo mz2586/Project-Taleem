@@ -1,0 +1,515 @@
+{
+  "code": "URD-G4-GR-03",
+  "title": {
+    "ur": "زمانہ: ماضی، حال اور مستقبل",
+    "en": "Tense: past, present and future"
+  },
+  "description": {
+    "ur": "فعل کی نشانیوں سے زمانہ پہچاننا اور جملے کو درست زمانے میں لکھنا۔",
+    "en": "Using verb endings to tell the tense and writing sentences in the right tense."
+  },
+  "keywords": [
+    "tense",
+    "past",
+    "present",
+    "future",
+    "verb endings",
+    "grammar"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "زمانہ",
+        "en": "tense"
+      },
+      "definition": {
+        "ur": "فعل کا وہ روپ جو بتائے کام کب ہوا۔",
+        "en": "the form of a verb that tells when an action happens."
+      }
+    },
+    {
+      "term": {
+        "ur": "زمانۂ ماضی",
+        "en": "past tense"
+      },
+      "definition": {
+        "ur": "جو کام ہو چکا۔",
+        "en": "an action that already happened."
+      }
+    },
+    {
+      "term": {
+        "ur": "زمانۂ حال",
+        "en": "present tense"
+      },
+      "definition": {
+        "ur": "جو کام اب ہوتا ہے یا ہو رہا ہے۔",
+        "en": "an action that happens now or is happening."
+      }
+    },
+    {
+      "term": {
+        "ur": "زمانۂ مستقبل",
+        "en": "future tense"
+      },
+      "definition": {
+        "ur": "جو کام آگے ہوگا۔",
+        "en": "an action that will happen later."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ہر کام کسی وقت ہوتا ہے: پہلے، اب یا بعد میں۔ فعل ہمیں یہ وقت بتاتا ہے۔ اسے زمانہ کہتے ہیں۔ فعل کے آخر کی نشانی دیکھ کر ہم زمانہ پہچانتے ہیں۔ 'گا، گی، گے' سنیں تو سمجھیں کام آگے ہوگا۔",
+    "en": "Every action happens at some time: before, now or later. The verb tells us that time. We call it tense. We find the tense from the sign at the end of the verb. When you hear 'ga, gi, ge', the action will happen later."
+  },
+  "student_explanation": {
+    "ur": "زمانہ بتاتا ہے کہ کام کب ہوا۔ زمانۂ ماضی میں کام ہو چکا ہے۔ جیسے 'میں نے روٹی کھائی'۔ زمانۂ حال میں کام اب ہوتا ہے۔ جیسے 'میں روٹی کھاتا ہوں'۔ زمانۂ مستقبل میں کام آگے ہوگا۔ جیسے 'میں روٹی کھاؤں گا'۔ فعل کے آخر کی نشانی زمانہ بتاتی ہے۔ 'گا، گی، گے' مستقبل کی نشانی ہیں۔ 'تا ہے' اور 'رہا ہے' حال بتاتے ہیں۔",
+    "en": "Tense tells when an action happens. In the past tense, the action is done. For example, 'I ate roti'. In the present tense, the action happens now. For example, 'I eat roti'. In the future tense, the action will happen later. For example, 'I will eat roti'. The sign at the end of the verb tells the tense. 'Ga, gi, ge' are signs of the future. 'Ta hai' and 'raha hai' show the present."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "'بچے صحن میں کھیل رہے ہیں۔' یہ کس زمانے میں ہے؟",
+        "en": "'The children are playing in the courtyard.' Which tense is this?"
+      },
+      "steps": [
+        {
+          "ur": "فعل تلاش کریں: 'کھیل رہے ہیں'۔",
+          "en": "Find the verb: 'khel rahe hain'."
+        },
+        {
+          "ur": "آخر کی نشانی دیکھیں: 'رہے ہیں'۔",
+          "en": "Look at the ending: 'rahe hain'."
+        },
+        {
+          "ur": "'رہے ہیں' بتاتا ہے کام ابھی ہو رہا ہے۔",
+          "en": "'Rahe hain' shows the action is happening now."
+        },
+        {
+          "ur": "زمانہ: حال۔",
+          "en": "Tense: present."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "'کل' کا مطلب گزرا ہوا کل بھی ہے اور آنے والا کل بھی۔ 'کل بارش ہوئی' اور 'کل بارش ہوگی' میں فرق بتائیں۔",
+        "en": "'Kal' means both yesterday and tomorrow. Explain the difference between 'kal baarish hui' and 'kal baarish hogi'."
+      },
+      "steps": [
+        {
+          "ur": "دونوں جملوں میں 'کل' ہے، اس سے زمانہ پتا نہیں چلتا۔",
+          "en": "Both sentences have 'kal', so it does not show the tense."
+        },
+        {
+          "ur": "پہلے جملے کا فعل 'ہوئی' ہے؛ کام ہو چکا: ماضی۔",
+          "en": "The first verb is 'hui'; the action is done: past."
+        },
+        {
+          "ur": "دوسرے جملے کا فعل 'ہوگی' ہے؛ 'گی' مستقبل کی نشانی ہے۔",
+          "en": "The second verb is 'hogi'; 'gi' is the future sign."
+        },
+        {
+          "ur": "نتیجہ: فعل کے آخر کی نشانی زمانہ بتاتی ہے۔",
+          "en": "Result: the verb ending tells the tense."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-tense",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر جملے کو صحیح زمانے کے خانے میں رکھیں: 'امی چائے بنا رہی ہیں۔' 'ہم نے پتنگ اڑائی۔' 'دادا جان کل آئیں گے۔' 'گائے گھاس کھاتی ہے۔' 'بارش رک گئی۔' 'میں خط لکھوں گی۔'",
+        "en": "Put each sentence in the right tense box: 'Ammi is making tea.' 'We flew a kite.' 'Dada Jaan will come tomorrow.' 'The cow eats grass.' 'The rain stopped.' 'I will write a letter.'"
+      },
+      "answer_key": {
+        "ماضی": [
+          "ہم نے پتنگ اڑائی۔",
+          "بارش رک گئی۔"
+        ],
+        "حال": [
+          "امی چائے بنا رہی ہیں۔",
+          "گائے گھاس کھاتی ہے۔"
+        ],
+        "مستقبل": [
+          "دادا جان کل آئیں گے۔",
+          "میں خط لکھوں گی۔"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر فعل کا آخری حصہ دیکھیں۔",
+            "en": "Look at the last part of each verb."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-rain-future",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "زمانۂ مستقبل میں لکھیں: 'کل بارش ___۔'",
+        "en": "Write in the future tense: 'Kal baarish ___.'"
+      },
+      "answer_key": {
+        "answer": "ہوگی"
+      },
+      "accepted_variants": [
+        "ہوگی",
+        "ہو گی"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بارش مؤنث ہے؛ مستقبل کی نشانی 'گی'۔",
+            "en": "Baarish is feminine; the future sign is 'gi'."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'کل بارش ہوگی۔' 'گی' مستقبل بتاتا ہے۔",
+        "en": "'Kal baarish hogi.' 'Gi' shows the future."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-future",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "'زینب کل اسکول جائے گی۔' یہ کس زمانے میں ہے؟",
+        "en": "'Zainab kal school jaaegi.' Which tense is this?"
+      },
+      "options": [
+        {
+          "ur": "ماضی",
+          "en": "past"
+        },
+        {
+          "ur": "حال",
+          "en": "present"
+        },
+        {
+          "ur": "مستقبل",
+          "en": "future"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-tense-marker-ignored"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "فعل کے آخر میں کون سی نشانی ہے؟",
+            "en": "Which sign is at the end of the verb?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'جائے گی' میں 'گی' مستقبل کی نشانی ہے۔",
+        "en": "'Jaaegi' has 'gi', the future sign."
+      }
+    },
+    {
+      "id": "p2-past",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "'احمد نے پتنگ اڑائی۔' یہ کس زمانے میں ہے؟",
+        "en": "'Ahmed ne patang urai.' Which tense is this?"
+      },
+      "options": [
+        {
+          "ur": "ماضی",
+          "en": "past"
+        },
+        {
+          "ur": "حال",
+          "en": "present"
+        },
+        {
+          "ur": "مستقبل",
+          "en": "future"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا کام ہو چکا ہے؟",
+            "en": "Is the action already done?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'اڑائی' بتاتا ہے کام ہو چکا: ماضی۔",
+        "en": "'Urai' shows the action is done: past."
+      }
+    },
+    {
+      "id": "p3-present",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "'بچے صحن میں کھیل رہے ہیں۔' یہ کس زمانے میں ہے؟",
+        "en": "'Bachche sehan mein khel rahe hain.' Which tense is this?"
+      },
+      "options": [
+        {
+          "ur": "مستقبل",
+          "en": "future"
+        },
+        {
+          "ur": "حال",
+          "en": "present"
+        },
+        {
+          "ur": "ماضی",
+          "en": "past"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'رہے ہیں' کیا بتاتا ہے؟",
+            "en": "What does 'rahe hain' show?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'رہے ہیں' کا مطلب کام ابھی ہو رہا ہے۔",
+        "en": "'Rahe hain' means the action is happening now."
+      }
+    },
+    {
+      "id": "p5-kal",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "'کل' کا لفظ ہمیشہ گزرے ہوئے دن کے لیے آتا ہے۔",
+        "en": "The word 'kal' always means the day that has passed."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-tense-marker-ignored"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'کل میں اسکول جاؤں گا' میں کل کب ہے؟",
+            "en": "In 'kal main school jaaunga', when is kal?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کل گزرا ہوا بھی ہو سکتا ہے اور آنے والا بھی؛ فعل کی نشانی بتاتی ہے۔",
+        "en": "Kal can be yesterday or tomorrow; the verb sign tells which."
+      }
+    },
+    {
+      "id": "p6-to-past",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "'میں دودھ پیتا ہوں۔' کو زمانۂ ماضی میں کیسے لکھیں گے؟",
+        "en": "How do we write 'Main doodh peeta hoon' in the past tense?"
+      },
+      "options": [
+        {
+          "ur": "میں دودھ پیوں گا۔",
+          "en": "Main doodh piyunga."
+        },
+        {
+          "ur": "میں نے دودھ پیا۔",
+          "en": "Main ne doodh piya."
+        },
+        {
+          "ur": "میں دودھ پی رہا ہوں۔",
+          "en": "Main doodh pee raha hoon."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-tense-marker-ignored"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا جملہ بتاتا ہے کہ کام ہو چکا؟",
+            "en": "Which sentence shows the action is done?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'پیا' بتاتا ہے کام ہو چکا۔ 'پیوں گا' مستقبل ہے، 'پی رہا ہوں' حال۔",
+        "en": "'Piya' shows it is done. 'Piyunga' is future, 'pee raha hoon' is present."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-three-tenses",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "فعل 'پڑھنا' سے تین جملے لکھیں: ایک ماضی، ایک حال اور ایک مستقبل میں۔",
+        "en": "Write three sentences with the verb 'parhna' (to read): one past, one present, one future."
+      },
+      "answer_key": {
+        "sample_answer": "میں نے کہانی پڑھی۔ میں کہانی پڑھتی ہوں۔ میں کہانی پڑھوں گی۔"
+      },
+      "mentor_review_guidance": "Check each sentence has the right tense sign and agrees with the subject's gender."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-day-tenses",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کاپی میں تین جملے لکھیں: آج صبح آپ نے کیا کیا (ماضی)، ابھی کیا کر رہے ہیں (حال)، اور شام کو کیا کریں گے (مستقبل)۔",
+        "en": "Write three sentences in your notebook: what you did this morning (past), what you are doing now (present), what you will do this evening (future)."
+      },
+      "answer_key": {
+        "sample_answer": "میں نے ناشتہ کیا۔ میں سبق لکھ رہی ہوں۔ میں شام کو کھیلوں گی۔"
+      },
+      "mentor_review_guidance": "Ordinary daily activities only; no personal details needed. Check tense signs."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "فعل تلاش کریں۔ اس کا آخری حصہ کیا ہے؟",
+        "en": "Find the verb. What is its last part?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "'گا، گی، گے' = مستقبل؛ 'رہا ہے، تا ہے' = حال؛ کام ہو چکا = ماضی۔",
+        "en": "'Ga, gi, ge' = future; 'raha hai, ta hai' = present; done = past."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "زمانہ 'کل' یا 'آج' جیسے لفظوں سے پہچاننا اور فعل کی نشانی نظر انداز کرنا۔",
+        "en": "Ignores tense markers (گا/گی/تھا) and goes only by words like 'kal' or 'aaj'."
+      },
+      "correction": {
+        "ur": "فعل کے آخر کی نشانی زمانہ بتاتی ہے",
+        "en": "The sign at the end of the verb tells the tense."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "'کل' ہمیشہ گزرا ہوا دن ہوتا ہے۔",
+        "en": "'Kal' always means yesterday."
+      },
+      "correction": {
+        "ur": "کل گزرا ہوا بھی ہو سکتا ہے اور آنے والا بھی؛ فعل دیکھیں۔",
+        "en": "Kal can be yesterday or tomorrow; look at the verb."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-tense-marker-ignored",
+      "remediation_ref": "URD-G4-GR-03"
+    },
+    {
+      "signal": "misses_prerequisite:URD-G4-GR-02",
+      "remediation_ref": "URD-G4-GR-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "ماضی: کام ہو چکا (کھائی، گیا)۔ حال: اب (کھاتا ہے، کھا رہا ہے)۔ مستقبل: آگے (کھائے گا، جائے گی)۔ 'کل' دونوں طرف؛ فعل دیکھیں۔",
+    "en": "Past: done (khaai, gaya). Present: now (khaata hai, kha raha hai). Future: later (khaaega, jaaegi). 'Kal' goes both ways; look at the verb."
+  },
+  "summary": {
+    "ur": "ہم نے فعل کی نشانی سے ماضی، حال اور مستقبل پہچاننا سیکھا۔",
+    "en": "We learned to tell past, present and future from the verb's ending."
+  },
+  "parent_notes": {
+    "ur": "رات کو بچے سے پوچھیں: 'آج کیا کیا؟ کل کیا کرو گے؟' درست زمانے والے جملوں کی تعریف کریں۔",
+    "en": "At night ask your child: 'What did you do today? What will you do tomorrow?' Praise sentences in the right tense."
+  },
+  "mentor_notes": {
+    "ur": "ماضی میں 'نے' کے ساتھ فعل کی جنس مفعول سے بدلتی ہے (میں نے روٹی کھائی)؛ اس سبق میں اسے صرف مثال کے طور پر لیں، قاعدہ نہ پڑھائیں۔ مقامی زبانوں سے آنے والے بچے 'گا/گی' کو ملا سکتے ہیں؛ GR-02 کی یاد دلائیں۔",
+    "en": "In the past with 'ne', the verb agrees with the object (main ne roti khaai); use it only as an example here, do not teach the rule. Learners from other home languages may mix 'ga/gi'; recall GR-02."
+  },
+  "accessibility_notes": {
+    "ur": "وقت کی لکیر (کل گزرا – آج – کل آنے والا) کی تصویر ابھی بنانی ہے، متبادل متن کے ساتھ۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے والی سرگرمی کا متبادل: ہر جملے کے لیے 'ماضی'، 'حال' یا 'مستقبل' کا بٹن۔",
+    "en": "A timeline picture (yesterday – today – tomorrow) is still to be made, with alt text. Urdu audio is not yet recorded. Alternative to the drag activity: a 'past', 'present' or 'future' button for each sentence."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "find the verb, read its ending, name the tense; contrast the same verb in three tenses; use the 'kal' pair to show time words are not enough",
+    "questioning_strategy": "ask 'which part of the verb told you?' after every answer",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "decides tense from 'kal/aaj' only",
+      "mixes ga/gi with the subject's gender"
+    ],
+    "hint_policy": "graduated; two hints max; first point to the verb ending, then list the signs; never name the tense first",
+    "example_policy": "daily-life sentences (school, meals, weather, chores); keep 'ne' past sentences as examples only",
+    "misconception_detectors": [
+      "ignores the verb ending",
+      "treats 'kal' as always past"
+    ],
+    "critical_thinking_prompts": [
+      "Why can 'kal' be yesterday and tomorrow but the sentence is still clear?"
+    ],
+    "personalization_rules": "for gender agreement errors in tense forms, route to URD-G4-GR-02",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm tense terms (زمانۂ ماضی، حال، مستقبل) and whether Grade 4 also names sub-types (e.g. ماضی مطلق)",
+    "subject expert: past sentences with 'نے' appear as examples only; confirm that is acceptable at this level"
+  ]
+}

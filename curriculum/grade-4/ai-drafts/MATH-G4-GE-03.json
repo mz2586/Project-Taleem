@@ -1,0 +1,433 @@
+{
+  "code": "MATH-G4-GE-03",
+  "description": {
+    "ur": "عام دو ابعادی اشکال (مثلث، مربع، مستطیل، دائرہ) کے نام بتانا اور ان کے ضلع اور کونے بتانا۔",
+    "en": "Name common 2D shapes (triangle, square, rectangle, circle) and state their sides and corners."
+  },
+  "keywords": [
+    "2D shapes",
+    "triangle",
+    "square",
+    "rectangle",
+    "circle",
+    "sides",
+    "corners"
+  ],
+  "teacher_script": {
+    "ur": "اپنے آس پاس دیکھیں: روٹی گول ہے، دروازہ لمبا اور سیدھا ہے۔ ہر شکل کا ایک نام ہوتا ہے۔ آج ہم مثلث، مربع، مستطیل اور دائرہ پہچانیں گے۔ ہم ہر شکل کے ضلع اور کونے گنیں گے، اور دیکھیں گے کہ ضلع برابر ہیں یا نہیں۔",
+    "en": "Look around you: a roti is round, a door is tall and straight. Every shape has a name. Today we learn the triangle, square, rectangle and circle. We count each shape's sides and corners, and check whether the sides are equal."
+  },
+  "student_explanation": {
+    "ur": "مثلث کے ۳ ضلع اور ۳ کونے ہوتے ہیں۔ مستطیل کے ۴ ضلع اور ۴ کونے ہوتے ہیں۔ اس کے آمنے سامنے والے ضلع برابر ہوتے ہیں۔ اس کے چاروں کونے صفحے کے کونے جیسے ہوتے ہیں۔ مربع کے بھی ۴ ضلع اور ۴ ویسے ہی کونے ہوتے ہیں۔ مگر مربع کے چاروں ضلع برابر ہوتے ہیں۔ دائرہ گول ہوتا ہے۔ اس کا نہ کوئی سیدھا ضلع ہے، نہ کونا۔ روٹی دائرہ ہے، اور کیرم بورڈ مربع ہے۔",
+    "en": "A triangle has 3 sides and 3 corners. A rectangle has 4 sides and 4 corners. Its opposite sides are equal. All four corners are like the corner of a page. A square also has 4 sides and 4 corners like that. But all four sides of a square are equal. A circle is round. It has no straight sides and no corners. A roti is a circle, and a carrom board is a square."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "ایک مثلث کے ضلع اور کونے گنیں۔",
+        "en": "Count the sides and corners of a triangle."
+      },
+      "steps": [
+        {
+          "ur": "ایک کونے سے شروع کریں اور اس پر انگلی رکھیں۔",
+          "en": "Start at one corner and put your finger on it."
+        },
+        {
+          "ur": "ہر سیدھے ضلع پر چلتے ہوئے گنیں: ۱، ۲، ۳۔",
+          "en": "Move along each straight side and count: 1, 2, 3."
+        },
+        {
+          "ur": "کونے بھی گنیں: ۱، ۲، ۳۔ مثلث کے ۳ ضلع اور ۳ کونے ہیں۔",
+          "en": "Count the corners too: 1, 2, 3. A triangle has 3 sides and 3 corners."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-match-objects",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر چیز کو اس کی شکل کے نام پر تھپتھپائیں: پلیٹ، کیرم بورڈ، دروازہ، چوکور کاغذ کو کونے سے کونے تک کاٹ کر بنا ہوا ٹکڑا۔",
+        "en": "Tap the shape name for each object: a plate, a carrom board, a door, a square paper cut from corner to corner."
+      },
+      "answer_key": {
+        "plate": "circle",
+        "carrom board": "square",
+        "door": "rectangle",
+        "half of a square paper cut corner to corner": "triangle"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ضلع گنیں۔ پھر دیکھیں کہ وہ برابر ہیں یا نہیں۔",
+            "en": "Count the sides. Then check whether they are equal."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-match-sides",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر شکل کو اس کے ضلعوں کی تعداد سے ملائیں۔",
+        "en": "Match each shape to its number of sides."
+      },
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "مثلث",
+              "en": "triangle"
+            },
+            "right": {
+              "ur": "۳ ضلع",
+              "en": "3 sides"
+            }
+          },
+          {
+            "left": {
+              "ur": "مستطیل",
+              "en": "rectangle"
+            },
+            "right": {
+              "ur": "۴ ضلع",
+              "en": "4 sides"
+            }
+          },
+          {
+            "left": {
+              "ur": "دائرہ",
+              "en": "circle"
+            },
+            "right": {
+              "ur": "کوئی سیدھا ضلع نہیں",
+              "en": "no straight sides"
+            }
+          }
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر شکل کو ذہن میں بنائیں اور ضلع گنیں۔",
+            "en": "Picture each shape and count its sides."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-square-corners",
+      "type": "fill_blank",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "مربع کے ___ کونے ہوتے ہیں۔",
+        "en": "A square has ___ corners."
+      },
+      "answer_key": {
+        "answer": "4"
+      },
+      "accepted_variants": [
+        "4",
+        "۴"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "مربع کے ہر کونے پر انگلی رکھ کر گنیں۔",
+            "en": "Put a finger on each corner of a square and count."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-triangle-sides",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "مثلث کے کتنے ضلع ہوتے ہیں؟",
+        "en": "How many sides does a triangle have?"
+      },
+      "options": [
+        {
+          "ur": "۴",
+          "en": "4"
+        },
+        {
+          "ur": "۳",
+          "en": "3"
+        },
+        {
+          "ur": "۰",
+          "en": "0"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر سیدھی لکیر ایک ضلع ہے۔ گنیں۔",
+            "en": "Each straight edge is a side. Count them."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "مثلث کے ۳ ضلع ہوتے ہیں۔",
+        "en": "A triangle has 3 sides."
+      }
+    },
+    {
+      "id": "p2-no-corners",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کس شکل کا کوئی کونا نہیں ہوتا؟",
+        "en": "Which shape has no corners?"
+      },
+      "options": [
+        {
+          "ur": "دائرہ",
+          "en": "circle"
+        },
+        {
+          "ur": "مربع",
+          "en": "square"
+        },
+        {
+          "ur": "مثلث",
+          "en": "triangle"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کونسی شکل پوری گول ہے؟",
+            "en": "Which shape is round all the way?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "دائرہ گول ہے؛ اس کا کوئی کونا نہیں۔",
+        "en": "A circle is round; it has no corners."
+      }
+    },
+    {
+      "id": "p4-rectangle-equal-sides",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر مستطیل کے چاروں ضلع ہمیشہ برابر ہوتے ہیں۔",
+        "en": "Every rectangle always has 4 equal sides."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-square-rectangle"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دروازہ مستطیل ہے۔ کیا اس کے چاروں ضلع برابر ہیں؟",
+            "en": "A door is a rectangle. Are all four of its sides equal?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "مستطیل کے آمنے سامنے والے ضلع برابر ہوتے ہیں۔ چاروں برابر ہوں تو وہ مربع ہے۔",
+        "en": "A rectangle's opposite sides are equal. If all four are equal, it is a square."
+      }
+    },
+    {
+      "id": "p5-four-equal-sides",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ایک شکل کے ۴ برابر ضلع اور ۴ صفحے جیسے کونے ہیں۔ یہ کیا ہے؟",
+        "en": "A shape has 4 equal sides and 4 corners like a page corner. What is it?"
+      },
+      "options": [
+        {
+          "ur": "مثلث",
+          "en": "triangle"
+        },
+        {
+          "ur": "دائرہ",
+          "en": "circle"
+        },
+        {
+          "ur": "مربع",
+          "en": "square"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا سب ضلع برابر ہیں؟",
+            "en": "Are all the sides equal?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴ برابر ضلع اور ۴ ایسے کونے: مربع۔",
+        "en": "4 equal sides and 4 such corners: a square."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-fold-square",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک چوکور کاغذ کو ایک کونے سے سامنے والے کونے تک موڑ کر کاٹیں۔ کونسی دو شکلیں بنیں گی؟",
+        "en": "Fold a square paper from one corner to the opposite corner and cut along the fold. Which two shapes do you get?"
+      },
+      "options": [
+        {
+          "ur": "دو مستطیل",
+          "en": "two rectangles"
+        },
+        {
+          "ur": "دو مثلث",
+          "en": "two triangles"
+        },
+        {
+          "ur": "دو دائرے",
+          "en": "two circles"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر ٹکڑے کے ضلع گنیں۔",
+            "en": "Count the sides of each piece."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ہر ٹکڑے کے ۳ ضلع اور ۳ کونے ہیں: دو مثلث۔",
+        "en": "Each piece has 3 sides and 3 corners: two triangles."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "چار ضلع والی ہر شکل مربع ہے۔",
+        "en": "Every shape with four sides is a square."
+      },
+      "correction": {
+        "ur": "مربع کے چاروں ضلع برابر ہوتے ہیں۔ صرف آمنے سامنے والے ضلع برابر ہوں تو وہ مستطیل ہے۔",
+        "en": "A square has all four sides equal. If only the opposite sides are equal, it is a rectangle."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "مربع کو ترچھا گھما دیں تو وہ کوئی اور شکل بن جاتا ہے۔",
+        "en": "If you turn a square on its corner, it becomes a different shape."
+      },
+      "correction": {
+        "ur": "گھمانے سے شکل نہیں بدلتی۔ ضلع اور کونے وہی رہتے ہیں۔",
+        "en": "Turning a shape does not change it. The sides and corners stay the same."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-square-rectangle",
+      "remediation_ref": "MATH-G4-GE-03"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-GE-01",
+      "remediation_ref": "MATH-G4-GE-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "مثلث: ۳ ضلع، ۳ کونے۔ مستطیل: ۴ ضلع، آمنے سامنے برابر۔ مربع: ۴ برابر ضلع۔ دائرہ: کوئی سیدھا ضلع یا کونا نہیں۔",
+    "en": "Triangle: 3 sides, 3 corners. Rectangle: 4 sides, opposite sides equal. Square: 4 equal sides. Circle: no straight sides or corners."
+  },
+  "summary": {
+    "ur": "ہم نے چار عام اشکال کے نام اور ان کے ضلع اور کونے سیکھے۔",
+    "en": "We learned the names of four common shapes and their sides and corners."
+  },
+  "parent_notes": {
+    "ur": "روزمرہ چیزوں کی شکلوں کے نام بتائیں (پلیٹ = دائرہ، وغیرہ)۔",
+    "en": "name shapes of everyday objects (plate = circle, etc.)."
+  },
+  "mentor_notes": {
+    "ur": "مربع ایک خاص قسم کا مستطیل ہے — نرمی سے بتائیں، زیادہ رسمی نہ بنائیں۔",
+    "en": "a square is a special rectangle — mention gently, don't over-formalize."
+  },
+  "accessibility_notes": {
+    "ur": "اشکال کی تصویریں ابھی بنانی ہیں؛ ہر شکل کا متبادل متن اس کا نام، ضلعوں کی تعداد اور یہ بتائے کہ ضلع برابر ہیں یا نہیں۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ملانے والے سوال کا متبادل: ہر شکل کے لیے ضلعوں کی تعداد کا بٹن چنیں؛ گھسیٹنا ضروری نہیں۔ نظر کی کمزوری والے بچے کاغذ کی کٹی ہوئی شکلوں کو چھو کر ضلع گن سکتے ہیں۔",
+    "en": "The shape pictures are still to be made; each alt text should give the shape's name, its number of sides, and whether the sides are equal. Urdu audio is not yet recorded. Alternative to the matching item: tap the number of sides for each shape; no dragging is needed. Learners with low vision can count the sides of paper cut-out shapes by touch."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "count sides and corners with a finger, then check whether the sides are equal; everyday objects before drawn shapes",
+    "questioning_strategy": "ask 'how many sides?' then 'are they all equal?' before 'what is it called?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "calls every four-sided shape a square",
+      "renames a shape after it is turned"
+    ],
+    "hint_policy": "graduated; two hints max before a worked re-teach of a similar problem; never reveal the answer first",
+    "example_policy": "triangle, square, rectangle and circle only; household objects (plate, roti, carrom board, door, notebook, window)",
+    "misconception_detectors": [
+      "names a rectangle a square or the reverse",
+      "counts the corners of a circle"
+    ],
+    "critical_thinking_prompts": [
+      "Is a square also a kind of rectangle? What makes it special?"
+    ],
+    "personalization_rules": "if the learner cannot recognise straight sides or corners, route back to MATH-G4-GE-01",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, upset or fear -> stop the lesson and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information",
+      "shame or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: m-square-rectangle is a local id the doc suggests ('add locally if observed'); it is not yet in the §4 library",
+    "subject expert: corners are described as 'like a page corner' because right angles (GE-02) are not a prerequisite here; confirm",
+    "language editor: confirm ضلع (plural used here as ضلع after numbers) and کونا / کونے for corner"
+  ]
+}

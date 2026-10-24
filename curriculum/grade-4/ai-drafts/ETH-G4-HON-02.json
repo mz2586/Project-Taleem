@@ -1,0 +1,517 @@
+{
+  "code": "ETH-G4-HON-02",
+  "title": {
+    "ur": "سچا انتخاب یا جھوٹا انتخاب؟",
+    "en": "Honest or dishonest choice?"
+  },
+  "description": {
+    "ur": "روزمرہ کی صورتوں میں سچے اور جھوٹے انتخاب کو پہچاننا اور وجہ بتانا۔",
+    "en": "Recognise honest and dishonest choices in everyday situations and say why."
+  },
+  "keywords": [
+    "honest choice",
+    "dishonest choice",
+    "cheating",
+    "whole truth",
+    "trust",
+    "everyday situations"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ایماندار",
+        "en": "honest"
+      },
+      "definition": {
+        "ur": "جو سچ بولے اور دھوکا نہ دے۔",
+        "en": "someone who tells the truth and does not cheat."
+      }
+    },
+    {
+      "term": {
+        "ur": "دھوکا",
+        "en": "cheating"
+      },
+      "definition": {
+        "ur": "چالاکی سے غلط فائدہ اٹھانا۔",
+        "en": "using a trick to get something unfairly."
+      }
+    },
+    {
+      "term": {
+        "ur": "پورا سچ",
+        "en": "the whole truth"
+      },
+      "definition": {
+        "ur": "سچ کا کوئی حصہ چھپائے بغیر بتانا۔",
+        "en": "telling the truth without hiding part of it."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "پچھلے سبق میں ہم نے سیکھا کہ سچ سے بھروسا بنتا ہے۔ آج ہم جاسوس بنیں گے اور سچے انتخاب پہچانیں گے۔ میں کچھ چھوٹی صورتیں سناؤں گا۔ ہر صورت پر ہم تین سوال پوچھیں گے: کیا یہ سچ ہے؟ کیا یہ پورا سچ ہے؟ کیا یہ منصفانہ ہے؟",
+    "en": "In the last lesson we learned that truth builds trust. Today we will be detectives and spot honest choices. I will tell some short situations. For each one we will ask three questions: is it true? Is it the whole truth? Is it fair?"
+  },
+  "student_explanation": {
+    "ur": "ہر دن ہم بہت سے انتخاب کرتے ہیں۔ کچھ انتخاب سچے ہوتے ہیں۔ کچھ انتخاب سچے نہیں ہوتے۔ جھوٹ بولنا سچا انتخاب نہیں۔ کھیل میں دھوکا دینا بھی سچا انتخاب نہیں۔ آدھا سچ بتا کر باقی چھپانا بھی ٹھیک نہیں۔ تین سوال پوچھیں۔ کیا یہ سچ ہے؟ کیا یہ پورا سچ ہے؟ کیا یہ منصفانہ ہے؟ تینوں کا جواب ہاں ہو تو انتخاب سچا ہے۔",
+    "en": "Every day we make many choices. Some choices are honest. Some choices are not honest. Telling a lie is not an honest choice. Cheating in a game is not honest either. Telling half the truth and hiding the rest is not right. Ask three questions. Is it true? Is it the whole truth? Is it fair? If all three answers are yes, the choice is honest."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "بلال نے امی سے کہا: «میں نے کمرہ صاف کر دیا»۔ مگر اس نے صرف کھلونے بستر کے نیچے دھکیل دیے۔ کیا یہ سچا انتخاب ہے؟",
+        "en": "Bilal tells Ammi, \"I cleaned my room.\" But he only pushed his toys under the bed. Is this an honest choice?"
+      },
+      "steps": [
+        {
+          "ur": "پہلا سوال: کیا یہ سچ ہے؟ کمرہ صاف نظر آتا ہے، مگر اصل میں صاف نہیں۔",
+          "en": "First question: is it true? The room looks clean, but it is not really clean."
+        },
+        {
+          "ur": "دوسرا سوال: کیا یہ پورا سچ ہے؟ نہیں، بلال نے کھلونوں والی بات چھپائی۔",
+          "en": "Second question: is it the whole truth? No, Bilal hid the part about the toys."
+        },
+        {
+          "ur": "تو یہ سچا انتخاب نہیں۔ سچا انتخاب: «میں نے آدھا کام کیا ہے، باقی ابھی کرتا ہوں۔»",
+          "en": "So it is not an honest choice. An honest choice: \"I did half of it, I will do the rest now.\""
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "لُڈو کھیلتے ہوئے سمرن کی باری پر پانسہ ۲ آیا۔ اس کا بھائی پانی لینے گیا ہے۔ سمرن کیا کرے؟",
+        "en": "Playing ludo, Simran rolls a 2. Her brother has gone to get water. What should Simran do?"
+      },
+      "steps": [
+        {
+          "ur": "سمرن کے پاس دو راستے ہیں: ۲ خانے چلے، یا چپکے سے ۶ خانے چلے۔",
+          "en": "Simran has two choices: move 2 squares, or secretly move 6."
+        },
+        {
+          "ur": "تیسرا سوال: کیا ۶ چلنا منصفانہ ہے؟ نہیں، یہ دھوکا ہے۔",
+          "en": "Third question: is moving 6 fair? No, it is cheating."
+        },
+        {
+          "ur": "سچا انتخاب ۲ خانے چلنا ہے، چاہے کوئی دیکھ رہا ہو یا نہیں۔",
+          "en": "The honest choice is to move 2 squares, whether anyone is watching or not."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-honest-sort",
+      "type": "interactive",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہر کارڈ کو «سچا انتخاب» یا «سچا نہیں» گروپ میں رکھیں۔",
+        "en": "Put each card in 'honest choice' or 'not honest'."
+      },
+      "options": [
+        {
+          "ur": "ٹیسٹ میں ساتھ والے کی کاپی سے نقل کرنا",
+          "en": "Copying from the next child's paper in a test"
+        },
+        {
+          "ur": "ابو کو بتانا کہ فیس والے پیسوں میں سے دس روپے گم ہو گئے",
+          "en": "Telling Abbu that ten rupees of the fee money got lost"
+        },
+        {
+          "ur": "کرکٹ میں آؤٹ ہونے پر مان لینا کہ آؤٹ ہوں",
+          "en": "Accepting you are out when you are out in cricket"
+        },
+        {
+          "ur": "کہنا «میں نے دودھ نہیں گرایا» جب گرایا ہو",
+          "en": "Saying \"I did not spill the milk\" when you did"
+        }
+      ],
+      "answer_key": {
+        "sort": {
+          "honest": [
+            1,
+            2
+          ],
+          "not_honest": [
+            0,
+            3
+          ]
+        },
+        "mode": "tap a card, then tap its group (drag also works)"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "تین سوال یاد کریں: سچ؟ پورا سچ؟ منصفانہ؟",
+            "en": "Remember the three questions: true? whole truth? fair?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-test-copy",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ٹیسٹ میں جوزف کو ایک سوال نہیں آتا۔ استاد کلاس سے باہر گئے ہیں۔ سچا انتخاب کون سا ہے؟",
+        "en": "In a test Joseph does not know one answer. The teacher has stepped out. Which choice is honest?"
+      },
+      "options": [
+        {
+          "ur": "دوست کی کاپی دیکھ لے، کوئی نہیں دیکھ رہا",
+          "en": "Look at a friend's paper, no one is watching"
+        },
+        {
+          "ur": "اپنی سمجھ سے لکھے یا خالی چھوڑ دے",
+          "en": "Write what he understands, or leave it blank"
+        },
+        {
+          "ur": "دوست سے آہستہ سے جواب پوچھ لے",
+          "en": "Quietly ask a friend for the answer"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-honesty-only-when-easy"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا یہ منصفانہ ہے؟",
+            "en": "Is it fair?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اپنا کام خود کرنا سچائی ہے، چاہے کوئی نہ دیکھے۔",
+        "en": "Doing your own work is honest, even when no one watches."
+      }
+    },
+    {
+      "id": "p2-half-truth",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "آدھا سچ بتا کر اہم بات چھپانا بھی پورا سچ ہی ہے۔",
+        "en": "Telling half the truth and hiding the important part is still the whole truth."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "«پورا سچ» کا مطلب یاد کریں۔",
+            "en": "Remember what 'the whole truth' means."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اہم بات چھپانا پورا سچ نہیں۔",
+        "en": "Hiding the important part is not the whole truth."
+      }
+    },
+    {
+      "id": "p3-broken-bat",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "علی سے دوست کا بیٹ ٹوٹ گیا۔ کون سا انتخاب سچا ہے؟",
+        "en": "Ali breaks his friend's bat by accident. Which choice is honest?"
+      },
+      "options": [
+        {
+          "ur": "کہے «یہ پہلے سے ٹوٹا ہوا تھا»",
+          "en": "Say \"it was already broken\""
+        },
+        {
+          "ur": "بیٹ چپکے سے واپس رکھ دے",
+          "en": "Quietly put the bat back"
+        },
+        {
+          "ur": "دوست کو بتائے کہ اس سے ٹوٹ گیا",
+          "en": "Tell his friend that he broke it"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا یہ سچ ہے؟",
+            "en": "Is it true?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-which-dishonest",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ان میں سے کون سا انتخاب سچا نہیں؟",
+        "en": "Which of these choices is NOT honest?"
+      },
+      "options": [
+        {
+          "ur": "کھیل میں اپنی باری کا انتظار کرنا",
+          "en": "Waiting for your turn in a game"
+        },
+        {
+          "ur": "اپنا کام کسی اور کے نام سے دکھانا",
+          "en": "Showing someone else's work as your own"
+        },
+        {
+          "ur": "ملی ہوئی چیز لوٹانا",
+          "en": "Returning something you found"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "کسی اور کا کام اپنا کہنا سچ نہیں۔",
+        "en": "Calling someone else's work your own is not true."
+      }
+    },
+    {
+      "id": "p5-no-one-saw",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اگر کسی نے نہیں دیکھا تو دھوکا دینا ٹھیک ہے۔",
+        "en": "Cheating is fine if no one saw."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-honesty-only-when-easy"
+        }
+      },
+      "explanation": {
+        "ur": "سچا انتخاب ہر وقت سچا ہے، کوئی دیکھے یا نہ دیکھے۔",
+        "en": "An honest choice is honest every time, seen or not."
+      }
+    },
+    {
+      "id": "p6-honest-reply",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "امی پوچھتی ہیں: «ہوم ورک ہو گیا؟» سارا نے آدھا کیا ہے۔ سچا جواب کون سا ہے؟",
+        "en": "Ammi asks, \"Is your homework done?\" Sara has done half. Which reply is honest?"
+      },
+      "options": [
+        {
+          "ur": "«آدھا ہو گیا ہے، باقی ابھی کرتی ہوں۔»",
+          "en": "\"Half is done, I will do the rest now.\""
+        },
+        {
+          "ur": "«ہاں، سارا ہو گیا۔»",
+          "en": "\"Yes, all of it.\""
+        },
+        {
+          "ur": "کوئی جواب نہ دے اور باہر چلی جائے",
+          "en": "Say nothing and go outside"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا جواب پورا سچ ہے؟",
+            "en": "Which reply is the whole truth?"
+          }
+        }
+      ]
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-friend-asks",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "دوست کہتا ہے: «استانی کو مت بتانا کہ میں نے ہوم ورک تمہاری کاپی سے نقل کیا۔» سب سے اچھا جواب کون سا ہے؟",
+        "en": "A friend says, \"Don't tell the teacher I copied my homework from your notebook.\" Which is the best reply?"
+      },
+      "options": [
+        {
+          "ur": "«ٹھیک ہے، اگلی بار بھی نقل کر لینا۔»",
+          "en": "\"Fine, copy again next time too.\""
+        },
+        {
+          "ur": "«میں تمہیں سمجھا دیتا ہوں، تم خود کر لو۔ اور ہمیں سچ بتانا چاہیے۔»",
+          "en": "\"I will explain it to you so you can do it yourself. And we should tell the truth.\""
+        },
+        {
+          "ur": "دوست سے بات کرنا بند کر دے",
+          "en": "Stop talking to the friend"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسا جواب جو سچا بھی ہو اور دوست کی مدد بھی کرے۔",
+            "en": "An answer that is honest and also helps the friend."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-three-questions",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر والوں کو تین سوال سکھائیں: سچ؟ پورا سچ؟ منصفانہ؟ مل کر ایک چھوٹی کہانی سوچیں اور یہ سوال پوچھیں۔",
+        "en": "Teach your family the three questions: true? whole truth? fair? Think of a short made-up story together and ask the questions."
+      },
+      "answer_key": {
+        "guidance": "Talking task at home; uses a made-up story, not real events. Nothing is entered in the app."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کہانی میں کیا ہوا؟ اب پوچھیں: کیا یہ سچ ہے؟",
+        "en": "What happened in the story? Now ask: is it true?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "کیا کوئی بات چھپائی گئی؟ کیا یہ منصفانہ ہے؟",
+        "en": "Was anything hidden? Is it fair?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "اگر کسی نے نہیں دیکھا تو جھوٹ یا دھوکا ٹھیک ہے۔",
+        "en": "A lie or cheating is fine if no one sees."
+      },
+      "correction": {
+        "ur": "سچ تب بھی بولتے ہیں جب مشکل ہو، اور جب کوئی نہ دیکھ رہا ہو۔",
+        "en": "We are honest even when it is hard, and when no one is watching."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "آدھا سچ بھی سچ ہے۔",
+        "en": "Half the truth is still the truth."
+      },
+      "correction": {
+        "ur": "اہم بات چھپانا پورا سچ نہیں؛ پورا سچ بتائیں۔",
+        "en": "Hiding the important part is not the whole truth; tell all of it."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-honesty-only-when-easy",
+      "remediation_ref": "ETH-G4-HON-01"
+    },
+    {
+      "signal": "two wrong answers on honest-choice items",
+      "remediation_ref": "ETH-G4-HON-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "تین سوال: سچ؟ پورا سچ؟ منصفانہ؟ تینوں ہاں ہوں تو انتخاب سچا ہے۔ کوئی دیکھے یا نہ دیکھے، سچ وہی رہتا ہے۔",
+    "en": "Three questions: true? whole truth? fair? If all are yes, the choice is honest. Seen or unseen, honesty stays the same."
+  },
+  "summary": {
+    "ur": "ہم نے تین سوالوں سے سچے اور جھوٹے انتخاب پہچاننا سیکھا۔",
+    "en": "We learned to spot honest and dishonest choices with three questions."
+  },
+  "parent_notes": {
+    "ur": "کہانیوں یا ڈراموں میں کرداروں کے انتخاب پر بچے سے پوچھیں: «کیا یہ سچ تھا؟» بچے کے اپنے کاموں پر پوچھ گچھ نہ کریں۔",
+    "en": "Ask your child about characters' choices in stories or TV: \"Was that honest?\" Do not use it to question your child about their own actions."
+  },
+  "mentor_notes": {
+    "ur": "صورتیں فرضی رکھیں؛ بچے سے اس کی اپنی جھوٹی باتیں نہ پوچھیں۔ «پورا سچ» والی بات پر وقت دیں، بچے اکثر آدھے سچ کو سچ سمجھتے ہیں۔",
+    "en": "Keep situations made-up; never ask a learner about their own lies. Spend time on 'the whole truth': learners often count a half-truth as true."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن منظر بیان کرے (کون ہے، کیا ہو رہا ہے)۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ یہ مضمون سننے پر مبنی ہے، اس لیے ہر کہانی، سوال اور جواب کو آواز میں پڑھا جانا ضروری ہے۔ ترتیب دینے والی سرگرمی کا متبادل: کارڈ کو چھوئیں، پھر گروپ کو چھوئیں؛ یا ہر کارڈ کے لیے دو بٹنوں میں سے ایک چنیں۔",
+    "en": "Story pictures are still to be made; each needs alt text that describes the scene (who is there, what is happening). Urdu audio is not yet recorded; this subject is audio-first, so every story, question and option must be read aloud. Alternative to the sort activity: tap a card, then tap its group; or answer each card with one of two buttons."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "detective framing: hear a short made-up situation, apply the three questions (true? whole truth? fair?) in order, then name the choice",
+    "questioning_strategy": "always ask the three questions one at a time before asking for a verdict; ask 'what would the honest version sound like?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "judges by whether someone was caught",
+      "accepts half-truths as true"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "everyday, low-stakes situations (ludo, cricket, homework, change in rupees); no accusations; names from many communities",
+    "misconception_detectors": [
+      "treats 'no one saw' as making cheating acceptable",
+      "counts a half-truth as the whole truth"
+    ],
+    "critical_thinking_prompts": [
+      "Why is a half-truth not the same as the truth?",
+      "Does being caught or not caught change whether a choice is honest?"
+    ],
+    "personalization_rules": "if the learner misses 'whole truth' items, give one more cleaning-the-room style example before practice; route to ETH-G4-HON-01 on repeated 'no one saw' answers",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths"
+    ]
+  },
+  "review_flags": [
+    "language editor: check «پورا سچ» and «دھوکا» are the right child-level Urdu terms",
+    "subject expert: confirm the three-question test is suitable for Grade 4 and not too formulaic",
+    "check the friend-copying challenge does not read as encouraging 'telling on' a friend harshly"
+  ]
+}

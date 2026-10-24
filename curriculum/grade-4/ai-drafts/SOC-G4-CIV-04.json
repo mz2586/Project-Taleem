@@ -1,0 +1,441 @@
+{
+  "code": "SOC-G4-CIV-04",
+  "title": {
+    "ur": "سب کی جگہوں اور ماحول کا خیال",
+    "en": "Caring for shared spaces and nature"
+  },
+  "description": {
+    "ur": "بیان کریں کہ ہم سکول، پارک، گلی اور ماحول جیسی سانجھی جگہوں کا خیال کیسے رکھتے ہیں۔",
+    "en": "Describe how we look after shared spaces such as the school, park and street, and the natural environment."
+  },
+  "keywords": [
+    "shared spaces",
+    "environment",
+    "litter",
+    "trees",
+    "water",
+    "cleanliness"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "سانجھی جگہ",
+        "en": "shared space"
+      },
+      "definition": {
+        "ur": "وہ جگہ جو بہت سے لوگ مل کر استعمال کرتے ہیں۔",
+        "en": "a place that many people use together."
+      }
+    },
+    {
+      "term": {
+        "ur": "ماحول",
+        "en": "environment"
+      },
+      "definition": {
+        "ur": "ہمارے ارد گرد کی ہوا، پانی، زمین، پودے اور جانور۔",
+        "en": "the air, water, land, plants and animals around us."
+      }
+    },
+    {
+      "term": {
+        "ur": "کوڑے دان",
+        "en": "dustbin"
+      },
+      "definition": {
+        "ur": "کوڑا ڈالنے کا ڈبہ۔",
+        "en": "a container for rubbish."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کچھ جگہیں ہم سب کی ہوتی ہیں۔ سکول، پارک، گلی اور بازار ایسی ہی جگہیں ہیں۔ دریا، درخت اور ہوا بھی ہم سب کے ہیں۔ اگر ہر شخص تھوڑا خیال رکھے تو یہ جگہیں صاف اور خوبصورت رہتی ہیں۔ آج ہم دیکھیں گے کہ ہم کیا کر سکتے ہیں۔",
+    "en": "Some places belong to all of us. The school, park, street and bazaar are such places. Rivers, trees and air belong to all of us too. If everyone takes a little care, these places stay clean and beautiful. Today we will see what we can do."
+  },
+  "student_explanation": {
+    "ur": "سانجھی جگہیں بہت سے لوگ مل کر استعمال کرتے ہیں۔ سکول، پارک اور گلی سانجھی جگہیں ہیں۔ کوڑا ہمیشہ کوڑے دان میں ڈالیں۔ کوڑے دان نہ ہو تو کوڑا ساتھ رکھیں۔ دیواروں اور بینچوں پر نہ لکھیں۔ پودوں اور درختوں کو نہ توڑیں۔ نہر اور دریا میں کچرا نہ پھینکیں۔ درخت لگانے سے ہوا صاف اور سایہ ملتا ہے۔ صاف جگہ سب کو صحت مند رکھتی ہے۔",
+    "en": "Many people use shared spaces together. The school, the park and the street are shared spaces. Always put rubbish in a dustbin. If there is no dustbin, keep the rubbish with you. Do not write on walls or benches. Do not break plants or trees. Do not throw rubbish into canals or rivers. Planting trees gives clean air and shade. A clean place keeps everyone healthy."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "پارک میں بسکٹ کھانے کے بعد ریپر ہاتھ میں ہے۔ قریب کوئی کوڑے دان نہیں۔ کیا کریں؟",
+        "en": "After eating biscuits in the park you have the wrapper in your hand. There is no dustbin nearby. What should you do?"
+      },
+      "steps": [
+        {
+          "ur": "سوچیں: ریپر زمین پر پھینکا تو کیا ہوگا؟ پارک گندا ہوگا۔",
+          "en": "Think: what happens if you drop it? The park gets dirty."
+        },
+        {
+          "ur": "ریپر جیب یا بستے میں رکھ لیں۔",
+          "en": "Put the wrapper in your pocket or bag."
+        },
+        {
+          "ur": "کوڑے دان ملے یا گھر پہنچیں تو اس میں ڈال دیں۔",
+          "en": "Put it in a dustbin when you find one or when you get home."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "سکول کے صحن میں ایک نل ٹپک رہا ہے۔ یہ سب کی چیز ہے۔ اچھا شہری کیا کرے؟",
+        "en": "A tap in the school yard is dripping. It belongs to everyone. What does a good citizen do?"
+      },
+      "steps": [
+        {
+          "ur": "دیکھیں: پانی ضائع ہو رہا ہے۔",
+          "en": "Notice: water is being wasted."
+        },
+        {
+          "ur": "نل ٹھیک سے بند کرنے کی کوشش کریں۔",
+          "en": "Try to close the tap properly."
+        },
+        {
+          "ur": "خراب ہو تو استاد یا استانی کو بتائیں۔",
+          "en": "If it is broken, tell a teacher."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-clean-park",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "پارک کی تصویر میں ہر کچرے پر ٹیپ کریں اور اسے کوڑے دان میں ڈالیں۔ پھر ایک درخت لگانے کی جگہ چنیں۔",
+        "en": "In the park picture, tap each piece of litter to put it in the dustbin. Then choose a spot to plant a tree."
+      },
+      "answer_key": {
+        "litter_items_removed": 5,
+        "tree_spot": "any open soil area, not on the path"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بینچ کے نیچے اور گھاس میں بھی دیکھیں۔",
+            "en": "Look under the bench and in the grass too."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-place-care",
+      "type": "matching",
+      "competency": "application",
+      "stem": {
+        "ur": "ہر جگہ کو اس کے خیال رکھنے کے طریقے سے ملائیں۔",
+        "en": "Match each place to a way of caring for it."
+      },
+      "options": [
+        {
+          "ur": "کاغذ کے ٹکڑے اٹھانا",
+          "en": "pick up paper scraps"
+        },
+        {
+          "ur": "پودے نہ توڑنا",
+          "en": "do not break plants"
+        },
+        {
+          "ur": "کچرا نہ پھینکنا",
+          "en": "do not throw rubbish"
+        }
+      ],
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "کلاس روم",
+              "en": "classroom"
+            },
+            "right": {
+              "ur": "کاغذ کے ٹکڑے اٹھانا",
+              "en": "pick up paper scraps"
+            }
+          },
+          {
+            "left": {
+              "ur": "پارک",
+              "en": "park"
+            },
+            "right": {
+              "ur": "پودے نہ توڑنا",
+              "en": "do not break plants"
+            }
+          },
+          {
+            "left": {
+              "ur": "نہر",
+              "en": "canal"
+            },
+            "right": {
+              "ur": "کچرا نہ پھینکنا",
+              "en": "do not throw rubbish"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-rubbish",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کوڑا کہاں ڈالنا چاہیے؟",
+        "en": "Where should rubbish go?"
+      },
+      "options": [
+        {
+          "ur": "کوڑے دان میں",
+          "en": "in a dustbin"
+        },
+        {
+          "ur": "گلی میں",
+          "en": "in the street"
+        },
+        {
+          "ur": "نہر میں",
+          "en": "in the canal"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-shared",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پارک صرف ایک شخص کی جگہ ہے، اس لیے اس کا خیال رکھنا ضروری نہیں۔",
+        "en": "A park belongs to only one person, so we do not need to care for it."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "پارک سانجھی جگہ ہے۔ سب مل کر اس کا خیال رکھتے ہیں۔",
+        "en": "A park is a shared space. Everyone looks after it together."
+      }
+    },
+    {
+      "id": "p3-trees",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "درخت لگانے سے کیا فائدہ ہوتا ہے؟",
+        "en": "What is a benefit of planting trees?"
+      },
+      "options": [
+        {
+          "ur": "گلی میں شور بڑھتا ہے",
+          "en": "the street gets noisier"
+        },
+        {
+          "ur": "ہوا صاف اور سایہ ملتا ہے",
+          "en": "cleaner air and shade"
+        },
+        {
+          "ur": "زمین زیادہ گرم ہوتی ہے",
+          "en": "the ground gets hotter"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p4-wall",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک دوست سکول کی دیوار پر لکھنا چاہتا ہے۔ آپ کیا کہیں گے؟",
+        "en": "A friend wants to write on the school wall. What will you say?"
+      },
+      "options": [
+        {
+          "ur": "زیادہ بڑا لکھو",
+          "en": "write bigger"
+        },
+        {
+          "ur": "میں بھی لکھوں گا",
+          "en": "I will write too"
+        },
+        {
+          "ur": "یہ سب کی دیوار ہے، کاغذ پر لکھ لو",
+          "en": "this wall is everyone's; write on paper instead"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-river",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "دریا اور نہر میں کچرا پھینکنے سے پانی گندا ہوتا ہے۔",
+        "en": "Throwing rubbish into rivers and canals makes the water dirty."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-class-plan",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "آپ کی گلی یا سکول کو صاف رکھنے کے لیے دو آسان کام بتائیں جو بچے مل کر کر سکتے ہیں۔",
+        "en": "Give two simple things children could do together to keep their street or school clean."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor-graded. Accept safe, age-appropriate ideas (bins, cleaning a classroom, posters, planting). Reject anything unsafe such as handling sharp or dirty waste without a grown-up."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-one-care",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج گھر کے پاس یا گھر میں ایک سانجھی جگہ کا خیال رکھیں، جیسے صحن میں کاغذ اٹھانا یا پودے کو پانی دینا۔ کوئی تیز یا گندی چیز ہاتھ سے نہ اٹھائیں۔",
+        "en": "Today care for one shared space at or near home, such as picking up paper in the yard or watering a plant. Never pick up sharp or dirty things with your hands."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any small, safe act. Do not ask where the learner lives."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: یہ جگہ کون کون استعمال کرتا ہے؟",
+        "en": "Think: who uses this place?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "پوچھیں: اس کام سے جگہ صاف ہوگی یا گندی؟",
+        "en": "Ask: will this make the place cleaner or dirtier?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "سانجھی جگہ صاف رکھنا صرف صفائی کرنے والوں کا کام ہے۔",
+        "en": "Keeping shared places clean is only the sanitation workers' job."
+      },
+      "correction": {
+        "ur": "صفائی والے مدد کرتے ہیں، مگر کچرا نہ پھیلانا ہم سب کی ذمہ داری ہے۔",
+        "en": "Sanitation workers help, but not dropping litter is everyone's responsibility."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ایک چھوٹا ریپر پھینکنے سے کچھ فرق نہیں پڑتا۔",
+        "en": "Dropping one small wrapper makes no difference."
+      },
+      "correction": {
+        "ur": "اگر ہر کوئی ایک ریپر پھینکے تو جگہ بہت گندی ہو جاتی ہے۔",
+        "en": "If everyone drops one wrapper, the place becomes very dirty."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "two_wrong_in_a_row",
+      "remediation_ref": "SOC-G4-CIV-04"
+    },
+    {
+      "signal": "misconception:m-rights-without-responsibility",
+      "remediation_ref": "SOC-G4-CIV-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "سانجھی جگہیں سب کی ہیں۔ کوڑا کوڑے دان میں۔ دیواروں پر نہ لکھیں۔ پودے نہ توڑیں۔ پانی میں کچرا نہ ڈالیں۔ درخت لگائیں۔",
+    "en": "Shared spaces belong to everyone. Rubbish goes in the dustbin. Do not write on walls. Do not break plants. Keep rubbish out of water. Plant trees."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ سانجھی جگہوں اور ماحول کا خیال رکھنا ہم سب کی ذمہ داری ہے۔",
+    "en": "We learned that caring for shared spaces and nature is everyone's responsibility."
+  },
+  "parent_notes": {
+    "ur": "بچے کے ساتھ کوئی پودا یا گملا لگائیں اور مل کر اسے پانی دیں۔",
+    "en": "Plant a seed or small pot with your child and water it together."
+  },
+  "mentor_notes": {
+    "ur": "بچوں کو کبھی ہاتھ سے کانچ، سوئی یا گندا کچرا اٹھانے کو نہ کہیں۔ یہ نہ سمجھیں کہ ہر جگہ کوڑے دان یا صفائی کا نظام موجود ہے؛ 'کوڑا ساتھ رکھیں' کا متبادل سکھائیں۔",
+    "en": "Never ask children to pick up glass, needles or dirty waste by hand. Do not assume every area has dustbins or waste collection; teach 'keep the rubbish with you' as the fallback."
+  },
+  "accessibility_notes": {
+    "ur": "پارک کی تصویر ابھی بنانی ہے؛ متبادل متن ہر کچرے کی جگہ بتائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ٹیپ والی سرگرمی کا متبادل: فہرست میں سے وہ چیزیں چنیں جو کوڑے دان میں جانی چاہئیں۔",
+    "en": "The park picture is still to be made; alt text should give the place of each piece of litter. Urdu audio is not yet recorded. Alternative to the tap activity: choose from a list the items that belong in the dustbin."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "shared spaces belong to everyone, so everyone cares for them; small actions add up; connect to rights and responsibilities",
+    "questioning_strategy": "ask 'who uses this place?' and 'what if everyone did this?' before judging an action",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says cleaning is someone else's job"
+    ],
+    "hint_policy": "graduated; two hints max; first who uses the place, then cleaner-or-dirtier; never give the action first",
+    "example_policy": "school yard, park, street, bazaar, canal, places of worship of any faith; never assume dustbins or services exist; no blame on any community",
+    "misconception_detectors": [
+      "thinks only sanitation workers keep places clean",
+      "thinks one wrapper does not matter",
+      "suggests unsafe cleaning"
+    ],
+    "critical_thinking_prompts": [
+      "What would our park look like in a month if everyone dropped one wrapper a day?"
+    ],
+    "personalization_rules": "if the learner sees cleanliness as someone else's job, revisit the rights-and-responsibilities pairing in SOC-G4-CIV-02",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "encourage the learner to handle sharp, dirty or hazardous waste",
+      "shame any household or community for its surroundings"
+    ]
+  },
+  "review_flags": [
+    "child-safety: confirm the 'never pick up sharp or dirty things' wording in homework and challenge guidance",
+    "language editor: confirm 'سانجھی جگہ' is the best Grade 4 term for 'shared space' (alternative: مشترکہ جگہ)"
+  ]
+}

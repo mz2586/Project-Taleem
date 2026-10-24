@@ -1,0 +1,404 @@
+{
+  "code": "URD-G4-RD-03",
+  "title": {
+    "ur": "عبارت پڑھ کر سوالوں کے جواب",
+    "en": "Answering questions about a passage"
+  },
+  "description": {
+    "ur": "ایک چھوٹی عبارت خود پڑھ کر ایسے سوالوں کے جواب دینا جن کے جواب عبارت میں لکھے ہیں۔",
+    "en": "Reading a short passage yourself and answering questions whose answers are written in it."
+  },
+  "keywords": [
+    "reading comprehension",
+    "literal questions",
+    "passage",
+    "find the answer in the text",
+    "evidence"
+  ],
+  "teacher_script": {
+    "ur": "آج آپ ایک چھوٹی سی عبارت خود پڑھیں گے۔ پہلے پوری عبارت پڑھیں۔ پھر سوال پڑھیں۔ جواب عبارت میں سے تلاش کریں۔ اپنی یاد سے نہیں، متن سے جواب دیں۔",
+    "en": "Today you will read a short passage yourself. Read the whole passage first. Then read the question. Find the answer in the text. Answer from the text, not from memory."
+  },
+  "student_explanation": {
+    "ur": "عبارت چند جملوں کا ایک ٹکڑا ہوتی ہے۔ پہلے پوری عبارت آرام سے پڑھیں۔ پھر سوال غور سے پڑھیں۔ سوال کا اہم لفظ تلاش کریں، جیسے 'کون' یا 'کتنے'۔ یہی لفظ عبارت میں ڈھونڈیں۔ اُس جملے کو دوبارہ پڑھیں۔ جواب اسی جملے میں ہوگا۔ جواب متن میں سے دیں، اپنی یاد سے نہیں۔",
+    "en": "A passage is a short piece of a few sentences. First read the whole passage calmly. Then read the question carefully. Find the key word in the question, like 'who' or 'how many'. Look for that word in the passage. Read that sentence again. The answer will be in that sentence. Answer from the text, not from memory."
+  },
+  "interactive_activities": [
+    {
+      "id": "a1-tap-sentence",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "عبارت 'اتوار کا بازار':\nاتوار کی صبح نور اپنی امی کے ساتھ بازار گئی۔ بازار میں بہت رونق تھی۔ امی نے سبزی والے سے دو کلو آلو اور ایک کلو ٹماٹر لیے۔ نور نے کیلے لینے کو کہا۔ امی نے ایک درجن کیلے خریدے۔ واپسی پر اچانک بارش شروع ہو گئی۔ دونوں ایک دکان کے چھجے کے نیچے کھڑی ہو گئیں۔ بارش رکی تو وہ ہنستی ہوئی گھر پہنچیں۔\n\nاُس جملے پر ٹیپ کریں جو بتاتا ہے کہ امی نے کتنے کیلے خریدے۔",
+        "en": "Passage 'The Sunday Bazaar':\nOn Sunday morning Noor went to the bazaar with her mother. The bazaar was very lively. Ammi bought two kilos of potatoes and one kilo of tomatoes from the vegetable seller. Noor asked for bananas. Ammi bought a dozen bananas. On the way back it suddenly started to rain. They both stood under a shop's awning. When the rain stopped, they reached home laughing.\n\nTap the sentence that tells how many bananas Ammi bought."
+      },
+      "answer_key": {
+        "tap_target": "امی نے ایک درجن کیلے خریدے۔",
+        "correct_state": "only that sentence selected"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'کیلے' کا لفظ عبارت میں تلاش کریں۔",
+            "en": "Look for the word 'bananas' in the passage."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-where-stood",
+      "type": "fill_blank",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "عبارت 'اتوار کا بازار':\nاتوار کی صبح نور اپنی امی کے ساتھ بازار گئی۔ بازار میں بہت رونق تھی۔ امی نے سبزی والے سے دو کلو آلو اور ایک کلو ٹماٹر لیے۔ نور نے کیلے لینے کو کہا۔ امی نے ایک درجن کیلے خریدے۔ واپسی پر اچانک بارش شروع ہو گئی۔ دونوں ایک دکان کے چھجے کے نیچے کھڑی ہو گئیں۔ بارش رکی تو وہ ہنستی ہوئی گھر پہنچیں۔\n\nبارش میں نور اور امی ایک دکان کے ___ کے نیچے کھڑی ہو گئیں۔",
+        "en": "Passage 'The Sunday Bazaar':\nOn Sunday morning Noor went to the bazaar with her mother. The bazaar was very lively. Ammi bought two kilos of potatoes and one kilo of tomatoes from the vegetable seller. Noor asked for bananas. Ammi bought a dozen bananas. On the way back it suddenly started to rain. They both stood under a shop's awning. When the rain stopped, they reached home laughing.\n\nIn the rain, Noor and Ammi stood under a shop's ___."
+      },
+      "answer_key": {
+        "answer": "چھجے"
+      },
+      "accepted_variants": [
+        "چھجے",
+        "چھجا",
+        "چھجّے"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'کھڑی ہو گئیں' والا جملہ دوبارہ پڑھیں۔",
+            "en": "Re-read the sentence with 'stood'."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "متن: 'دونوں ایک دکان کے چھجے کے نیچے کھڑی ہو گئیں۔'",
+        "en": "Text: 'They both stood under a shop's awning.'"
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-who-went",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "عبارت 'اتوار کا بازار':\nاتوار کی صبح نور اپنی امی کے ساتھ بازار گئی۔ بازار میں بہت رونق تھی۔ امی نے سبزی والے سے دو کلو آلو اور ایک کلو ٹماٹر لیے۔ نور نے کیلے لینے کو کہا۔ امی نے ایک درجن کیلے خریدے۔ واپسی پر اچانک بارش شروع ہو گئی۔ دونوں ایک دکان کے چھجے کے نیچے کھڑی ہو گئیں۔ بارش رکی تو وہ ہنستی ہوئی گھر پہنچیں۔\n\nمتن کے مطابق نور کس کے ساتھ بازار گئی؟",
+        "en": "Passage 'The Sunday Bazaar':\nOn Sunday morning Noor went to the bazaar with her mother. The bazaar was very lively. Ammi bought two kilos of potatoes and one kilo of tomatoes from the vegetable seller. Noor asked for bananas. Ammi bought a dozen bananas. On the way back it suddenly started to rain. They both stood under a shop's awning. When the rain stopped, they reached home laughing.\n\nAccording to the text, who did Noor go to the bazaar with?"
+      },
+      "options": [
+        {
+          "ur": "اپنے ابو کے ساتھ",
+          "en": "her father"
+        },
+        {
+          "ur": "اپنی امی کے ساتھ",
+          "en": "her mother"
+        },
+        {
+          "ur": "اپنے بھائی کے ساتھ",
+          "en": "her brother"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-guessing-not-reading"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلا جملہ دوبارہ پڑھیں۔",
+            "en": "Read the first sentence again."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پہلے جملے میں لکھا ہے: 'نور اپنی امی کے ساتھ بازار گئی۔'",
+        "en": "The first sentence says: 'Noor went to the bazaar with her mother.'"
+      }
+    },
+    {
+      "id": "p2-potatoes",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "عبارت 'اتوار کا بازار':\nاتوار کی صبح نور اپنی امی کے ساتھ بازار گئی۔ بازار میں بہت رونق تھی۔ امی نے سبزی والے سے دو کلو آلو اور ایک کلو ٹماٹر لیے۔ نور نے کیلے لینے کو کہا۔ امی نے ایک درجن کیلے خریدے۔ واپسی پر اچانک بارش شروع ہو گئی۔ دونوں ایک دکان کے چھجے کے نیچے کھڑی ہو گئیں۔ بارش رکی تو وہ ہنستی ہوئی گھر پہنچیں۔\n\nمتن کے مطابق امی نے کتنے کلو آلو لیے؟",
+        "en": "Passage 'The Sunday Bazaar':\nOn Sunday morning Noor went to the bazaar with her mother. The bazaar was very lively. Ammi bought two kilos of potatoes and one kilo of tomatoes from the vegetable seller. Noor asked for bananas. Ammi bought a dozen bananas. On the way back it suddenly started to rain. They both stood under a shop's awning. When the rain stopped, they reached home laughing.\n\nAccording to the text, how many kilos of potatoes did Ammi buy?"
+      },
+      "options": [
+        {
+          "ur": "تین کلو",
+          "en": "three kilos"
+        },
+        {
+          "ur": "ایک کلو",
+          "en": "one kilo"
+        },
+        {
+          "ur": "دو کلو",
+          "en": "two kilos"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'آلو' کا لفظ عبارت میں تلاش کریں۔",
+            "en": "Find the word 'potatoes' in the passage."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "عبارت میں 'دو کلو آلو' لکھا ہے۔ ایک کلو ٹماٹر تھے۔",
+        "en": "The passage says 'two kilos of potatoes'. One kilo was tomatoes."
+      }
+    },
+    {
+      "id": "p3-noor-asked",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "عبارت 'اتوار کا بازار':\nاتوار کی صبح نور اپنی امی کے ساتھ بازار گئی۔ بازار میں بہت رونق تھی۔ امی نے سبزی والے سے دو کلو آلو اور ایک کلو ٹماٹر لیے۔ نور نے کیلے لینے کو کہا۔ امی نے ایک درجن کیلے خریدے۔ واپسی پر اچانک بارش شروع ہو گئی۔ دونوں ایک دکان کے چھجے کے نیچے کھڑی ہو گئیں۔ بارش رکی تو وہ ہنستی ہوئی گھر پہنچیں۔\n\nنور نے کیا لینے کو کہا؟",
+        "en": "Passage 'The Sunday Bazaar':\nOn Sunday morning Noor went to the bazaar with her mother. The bazaar was very lively. Ammi bought two kilos of potatoes and one kilo of tomatoes from the vegetable seller. Noor asked for bananas. Ammi bought a dozen bananas. On the way back it suddenly started to rain. They both stood under a shop's awning. When the rain stopped, they reached home laughing.\n\nWhat did Noor ask for?"
+      },
+      "options": [
+        {
+          "ur": "کیلے",
+          "en": "bananas"
+        },
+        {
+          "ur": "آم",
+          "en": "mangoes"
+        },
+        {
+          "ur": "سیب",
+          "en": "apples"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-guessing-not-reading"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'نور نے' سے شروع ہونے والا جملہ پڑھیں۔",
+            "en": "Read the sentence that starts with 'Noor'."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "متن میں ہے: 'نور نے کیلے لینے کو کہا۔'",
+        "en": "The text says: 'Noor asked for bananas.'"
+      }
+    },
+    {
+      "id": "p4-which-sentence",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "عبارت 'اتوار کا بازار':\nاتوار کی صبح نور اپنی امی کے ساتھ بازار گئی۔ بازار میں بہت رونق تھی۔ امی نے سبزی والے سے دو کلو آلو اور ایک کلو ٹماٹر لیے۔ نور نے کیلے لینے کو کہا۔ امی نے ایک درجن کیلے خریدے۔ واپسی پر اچانک بارش شروع ہو گئی۔ دونوں ایک دکان کے چھجے کے نیچے کھڑی ہو گئیں۔ بارش رکی تو وہ ہنستی ہوئی گھر پہنچیں۔\n\nکون سا جملہ بتاتا ہے کہ واپسی پر موسم بدل گیا؟",
+        "en": "Passage 'The Sunday Bazaar':\nOn Sunday morning Noor went to the bazaar with her mother. The bazaar was very lively. Ammi bought two kilos of potatoes and one kilo of tomatoes from the vegetable seller. Noor asked for bananas. Ammi bought a dozen bananas. On the way back it suddenly started to rain. They both stood under a shop's awning. When the rain stopped, they reached home laughing.\n\nWhich sentence tells us the weather changed on the way back?"
+      },
+      "options": [
+        {
+          "ur": "امی نے ایک درجن کیلے خریدے۔",
+          "en": "Ammi bought a dozen bananas."
+        },
+        {
+          "ur": "واپسی پر اچانک بارش شروع ہو گئی۔",
+          "en": "On the way back it suddenly started to rain."
+        },
+        {
+          "ur": "بازار میں بہت رونق تھی۔",
+          "en": "The bazaar was very lively."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'واپسی' کا لفظ تلاش کریں۔",
+            "en": "Look for the words 'way back'."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "بارش شروع ہونا موسم بدلنا ہے۔",
+        "en": "Rain starting means the weather changed."
+      }
+    },
+    {
+      "id": "p5-meat",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "عبارت 'اتوار کا بازار':\nاتوار کی صبح نور اپنی امی کے ساتھ بازار گئی۔ بازار میں بہت رونق تھی۔ امی نے سبزی والے سے دو کلو آلو اور ایک کلو ٹماٹر لیے۔ نور نے کیلے لینے کو کہا۔ امی نے ایک درجن کیلے خریدے۔ واپسی پر اچانک بارش شروع ہو گئی۔ دونوں ایک دکان کے چھجے کے نیچے کھڑی ہو گئیں۔ بارش رکی تو وہ ہنستی ہوئی گھر پہنچیں۔\n\nمتن کے مطابق امی نے گوشت بھی خریدا۔",
+        "en": "Passage 'The Sunday Bazaar':\nOn Sunday morning Noor went to the bazaar with her mother. The bazaar was very lively. Ammi bought two kilos of potatoes and one kilo of tomatoes from the vegetable seller. Noor asked for bananas. Ammi bought a dozen bananas. On the way back it suddenly started to rain. They both stood under a shop's awning. When the rain stopped, they reached home laughing.\n\nAccording to the text, Ammi also bought meat."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-guessing-not-reading"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا 'گوشت' کا لفظ عبارت میں ہے؟",
+            "en": "Is the word 'meat' in the passage?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "عبارت میں گوشت کا ذکر نہیں۔ جواب متن میں سے دیں، اپنی یاد سے نہیں۔",
+        "en": "The passage does not mention meat. Answer from the text, not from memory."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-how-home",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "عبارت 'اتوار کا بازار':\nاتوار کی صبح نور اپنی امی کے ساتھ بازار گئی۔ بازار میں بہت رونق تھی۔ امی نے سبزی والے سے دو کلو آلو اور ایک کلو ٹماٹر لیے۔ نور نے کیلے لینے کو کہا۔ امی نے ایک درجن کیلے خریدے۔ واپسی پر اچانک بارش شروع ہو گئی۔ دونوں ایک دکان کے چھجے کے نیچے کھڑی ہو گئیں۔ بارش رکی تو وہ ہنستی ہوئی گھر پہنچیں۔\n\nبارش رکنے کے بعد نور اور امی کس حال میں گھر پہنچیں؟ عبارت کے لفظوں میں جواب لکھیں۔",
+        "en": "Passage 'The Sunday Bazaar':\nOn Sunday morning Noor went to the bazaar with her mother. The bazaar was very lively. Ammi bought two kilos of potatoes and one kilo of tomatoes from the vegetable seller. Noor asked for bananas. Ammi bought a dozen bananas. On the way back it suddenly started to rain. They both stood under a shop's awning. When the rain stopped, they reached home laughing.\n\nHow were Noor and Ammi when they reached home after the rain stopped? Write the answer using the passage's words."
+      },
+      "answer_key": {
+        "sample_answer": "وہ ہنستی ہوئی گھر پہنچیں۔"
+      },
+      "mentor_review_guidance": "Full credit for 'ہنستی ہوئی' / laughing taken from the last sentence. If the learner writes 'بھیگی ہوئی' (wet), that is not in the text: point back to the last sentence."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-tell-fact",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں کوئی چھوٹی عبارت پڑھیں اور گھر کے کسی فرد کو اس میں سے ایک بات بتائیں۔",
+        "en": "read a short passage at home and tell a family member one fact from it."
+      },
+      "answer_key": {
+        "sample_answer": "The learner reports one fact from the passage they read."
+      },
+      "mentor_review_guidance": "No device needed; accept any passage (schoolbook, newspaper, packet)."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کیا لفظ عبارت میں ہے؟",
+        "en": "Is the word in the passage?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اُس جملے کو دوبارہ پڑھیں",
+        "en": "Read that sentence again"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "یاد یا اندازے سے جواب دینا، متن سے نہیں۔",
+        "en": "Answers comprehension from memory, not the text"
+      },
+      "correction": {
+        "ur": "جواب متن میں سے دیں",
+        "en": "Give the answer from the text"
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-guessing-not-reading",
+      "remediation_ref": "URD-G4-RD-03"
+    },
+    {
+      "signal": "misses_prerequisite:URD-G4-RD-01",
+      "remediation_ref": "URD-G4-RD-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پہلے پوری عبارت، پھر سوال۔ سوال کا اہم لفظ عبارت میں ڈھونڈیں۔ وہ جملہ دوبارہ پڑھیں۔ جواب متن سے، یاد سے نہیں۔",
+    "en": "Whole passage first, then the question. Find the question's key word in the passage. Re-read that sentence. Answer from the text, not memory."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ سوال کا جواب عبارت میں تلاش کر کے دیتے ہیں۔",
+    "en": "We learned to find answers to questions inside the passage."
+  },
+  "parent_notes": {
+    "ur": "اپنے بچے سے چند سطریں بلند آواز سے پڑھوائیں اور پوچھیں کہ کیا ہوا۔",
+    "en": "ask your child to read a few lines aloud and say what happened."
+  },
+  "mentor_notes": {
+    "ur": "سمجھ کر پڑھنے والے سوالوں میں تصدیق کریں کہ بچہ خود پڑھ رہا ہے؛ آڈیو یا کوئی مددگار پڑھائی نہ کرے۔",
+    "en": "for comprehension items, confirm the child actually reads — don't let audio (or a helper) do the reading."
+  },
+  "accessibility_notes": {
+    "ur": "عبارت پر جان بوجھ کر آڈیو نہیں ہے، کیونکہ یہاں پڑھنا ہی جانچا جا رہا ہے۔ ہدایات اور جوابی پیغامات کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ بازار کی تصویر ابھی بنانی ہے؛ متبادل متن: بارش میں دکان کے چھجے کے نیچے ماں بیٹی۔ ٹیپ والی سرگرمی کا متبادل: تین جملوں میں سے درست جملہ چنیں۔ نابینا یا کم نظر بچے کے لیے بڑی لکھائی یا بریل کا فیصلہ مینٹر کرے؛ آڈیو اس جانچ کو بدل دیتی ہے۔",
+    "en": "The passage deliberately has no audio, because reading itself is being measured. Urdu audio for instructions and feedback is not yet recorded. The bazaar picture is still to be made; alt text: mother and daughter under a shop awning in the rain. Alternative to the tap activity: choose the right sentence from three. For a blind or low-vision child the mentor decides on large print or Braille; audio would change what is measured."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "read passage -> read question -> find key word -> re-read sentence -> answer; the learner reads the passage, the AI never reads it aloud",
+    "questioning_strategy": "ask 'which sentence did you find it in?' after every answer",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "answers with facts not in the passage",
+      "answers very fast without scrolling back"
+    ],
+    "hint_policy": "graduated; H1 'کیا لفظ عبارت میں ہے؟', H2 'اُس جملے کو دوبارہ پڑھیں', then re-teach with a parallel passage; never quote the answer sentence first",
+    "example_policy": "original 6-8 sentence passages about everyday Pakistani life; every answer stated explicitly in one sentence",
+    "misconception_detectors": [
+      "picks an option that is common knowledge but not in the text",
+      "cannot point to the sentence holding the answer"
+    ],
+    "critical_thinking_prompts": [
+      "How do you know your answer is in the passage and not just in your head?"
+    ],
+    "personalization_rules": "if the learner struggles to read the passage itself, route to URD-G4-RD-01",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer",
+      "read the passage aloud for the learner (reading is the construct)"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the passage is new original writing; check level, the word 'چھجا' (awning) and the regional naturalness of 'اتوار کا بازار'",
+    "assessment: the passage is repeated in every item stem so each item stands alone; confirm the player shows it once instead"
+  ]
+}

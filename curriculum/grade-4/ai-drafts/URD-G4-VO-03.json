@@ -1,0 +1,596 @@
+{
+  "code": "URD-G4-VO-03",
+  "title": {
+    "ur": "نئے مضمون کے الفاظ جملوں میں",
+    "en": "Using new subject words in sentences"
+  },
+  "description": {
+    "ur": "سائنس، ریاضی اور معاشرتی علوم کے نئے الفاظ کا مطلب سمجھ کر انہیں درست جملوں میں لکھنا۔",
+    "en": "Understanding new words from science, maths and social studies and using them correctly in sentences."
+  },
+  "keywords": [
+    "subject vocabulary",
+    "sentence making",
+    "word meaning",
+    "science words",
+    "map",
+    "measurement"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "جڑ",
+        "en": "root"
+      },
+      "definition": {
+        "ur": "پودے کا وہ حصہ جو زمین کے اندر ہوتا ہے اور پانی چوستا ہے۔",
+        "en": "the part of a plant under the ground that takes in water."
+      }
+    },
+    {
+      "term": {
+        "ur": "نقشہ",
+        "en": "map"
+      },
+      "definition": {
+        "ur": "کسی جگہ کی اوپر سے بنی تصویر جو راستے اور جگہیں دکھائے۔",
+        "en": "a picture of a place from above that shows roads and places."
+      }
+    },
+    {
+      "term": {
+        "ur": "پیمائش",
+        "en": "measurement"
+      },
+      "definition": {
+        "ur": "کسی چیز کی لمبائی، وزن یا مقدار ناپنا۔",
+        "en": "finding how long, how heavy or how much something is."
+      }
+    },
+    {
+      "term": {
+        "ur": "موسم",
+        "en": "weather / season"
+      },
+      "definition": {
+        "ur": "ہوا، دھوپ، سردی، گرمی اور بارش کا حال۔",
+        "en": "how the air, sun, cold, heat and rain are."
+      }
+    },
+    {
+      "term": {
+        "ur": "صفائی",
+        "en": "cleanliness"
+      },
+      "definition": {
+        "ur": "جسم اور چیزوں کو گندگی سے پاک رکھنا۔",
+        "en": "keeping our body and things free of dirt."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "دوسرے مضامین میں ہم نئے لفظ سیکھتے ہیں، جیسے جڑ، نقشہ اور پیمائش۔ کسی لفظ کو سچ مچ جاننے کا مطلب ہے کہ ہم اسے جملے میں ٹھیک لگا سکیں۔ پہلے لفظ کا مطلب سمجھیں گے۔ پھر سوچیں گے کہ یہ لفظ کہاں اور کیسے آتا ہے۔ آخر میں اپنا جملہ بنائیں گے۔",
+    "en": "In other subjects we learn new words, like root, map and measurement. Really knowing a word means we can use it correctly in a sentence. First we understand the word's meaning. Then we think where and how the word is used. Last, we make our own sentence."
+  },
+  "student_explanation": {
+    "ur": "نیا لفظ سیکھنے کے تین قدم ہیں۔ پہلا قدم: لفظ کا مطلب جانیں۔ دوسرا قدم: سوچیں یہ لفظ کس چیز کے بارے میں ہے۔ تیسرا قدم: اپنا جملہ بنائیں۔ جملہ مکمل ہو اور ختمے (۔) پر ختم ہو۔ لفظ کا مطلب جملے میں ٹھیک بیٹھنا چاہیے۔ مثال: 'پودے کی جڑ پانی چوستی ہے۔' یہاں جڑ کا مطلب ٹھیک ہے۔",
+    "en": "Learning a new word has three steps. Step one: know the word's meaning. Step two: think what the word is about. Step three: make your own sentence. The sentence must be complete and end with a full stop (۔). The word's meaning must fit the sentence. Example: 'The plant's root takes in water.' Here root is used correctly."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "لفظ 'نقشہ' سے جملہ بنائیں۔",
+        "en": "Make a sentence with the word 'naqsha' (map)."
+      },
+      "steps": [
+        {
+          "ur": "مطلب: کسی جگہ کی اوپر سے تصویر جو راستے دکھائے۔",
+          "en": "Meaning: a picture of a place from above that shows the way."
+        },
+        {
+          "ur": "سوچیں: نقشہ کس کام آتا ہے؟ راستہ ڈھونڈنے کے۔",
+          "en": "Think: what is a map for? Finding the way."
+        },
+        {
+          "ur": "جملہ: 'ہم نے نقشے میں اپنے شہر کا دریا تلاش کیا۔'",
+          "en": "Sentence: 'We found our city's river on the map.'"
+        },
+        {
+          "ur": "جانچیں: جملہ مکمل ہے اور ۔ پر ختم ہے۔",
+          "en": "Check: the sentence is complete and ends with ۔."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "یہ جملہ درست کریں: 'میں نے پیمائش کھائی۔'",
+        "en": "Correct this sentence: 'I ate a measurement.'"
+      },
+      "steps": [
+        {
+          "ur": "پیمائش کھائی نہیں جاتی؛ یہ ناپنے کا کام ہے۔",
+          "en": "A measurement is not eaten; it is about measuring."
+        },
+        {
+          "ur": "سوچیں: ہم کس چیز کی پیمائش کرتے ہیں؟ لمبائی کی۔",
+          "en": "Think: what do we measure? Length, for example."
+        },
+        {
+          "ur": "درست جملہ: 'میں نے فیتے سے میز کی پیمائش کی۔'",
+          "en": "Correct sentence: 'I measured the table with a tape.'"
+        },
+        {
+          "ur": "اب مطلب جملے میں ٹھیک بیٹھتا ہے۔",
+          "en": "Now the meaning fits the sentence."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-word-to-meaning",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر لفظ کو اس کے مطلب والے کارڈ پر رکھیں: جڑ، نقشہ، پیمائش، صفائی۔",
+        "en": "Place each word on its meaning card: root, map, measurement, cleanliness."
+      },
+      "options": [
+        {
+          "ur": "زمین کے اندر پودے کا حصہ",
+          "en": "the plant's part under the ground"
+        },
+        {
+          "ur": "جگہ کی اوپر سے تصویر",
+          "en": "a picture of a place from above"
+        },
+        {
+          "ur": "لمبائی یا وزن ناپنا",
+          "en": "finding length or weight"
+        },
+        {
+          "ur": "گندگی سے پاک رکھنا",
+          "en": "keeping free of dirt"
+        }
+      ],
+      "answer_key": {
+        "pairs": {
+          "جڑ": 0,
+          "نقشہ": 1,
+          "پیمائش": 2,
+          "صفائی": 3
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے وہ لفظ رکھیں جو آپ کو سب سے آسان لگے۔",
+            "en": "Place the easiest word first."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-match-use",
+      "type": "matching",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر لفظ کو اس کے مضمون سے ملائیں: جڑ، نقشہ، پیمائش۔",
+        "en": "Match each word to its subject: root, map, measurement."
+      },
+      "options": [
+        {
+          "ur": "سائنس",
+          "en": "science"
+        },
+        {
+          "ur": "معاشرتی علوم",
+          "en": "social studies"
+        },
+        {
+          "ur": "ریاضی",
+          "en": "maths"
+        }
+      ],
+      "answer_key": {
+        "pairs": {
+          "جڑ": "سائنس",
+          "نقشہ": "معاشرتی علوم",
+          "پیمائش": "ریاضی"
+        }
+      },
+      "explanation": {
+        "ur": "پودے سائنس میں، نقشے معاشرتی علوم میں اور ناپ ریاضی میں پڑھتے ہیں۔",
+        "en": "Plants are in science, maps in social studies, measuring in maths."
+      }
+    },
+    {
+      "id": "p6-own-sentence",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "لفظ 'صفائی' سے اپنا ایک مکمل جملہ لکھیں۔",
+        "en": "Write one complete sentence of your own with the word 'safaai' (cleanliness)."
+      },
+      "answer_key": {
+        "sample_answer": "کھانے سے پہلے ہاتھوں کی صفائی ضروری ہے۔"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "صفائی کب ضروری ہوتی ہے؟",
+            "en": "When is cleanliness important?"
+          }
+        }
+      ],
+      "rubric": {
+        "criteria": "subject word used with correct meaning in a complete, correct sentence",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "لفظ استعمال ہوا مگر مطلب یا جملہ پوری طرح درست نہیں۔",
+              "en": "The word is used, but the meaning or the sentence is not fully correct."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "لفظ درست مطلب میں، مکمل اور درست جملے میں۔",
+              "en": "The word is used with the right meaning in a complete, correct sentence."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor marks with the rubric. Accept any correct sentence where safaai means cleaning/cleanliness; check agreement (صفائی is مؤنث: 'صفائی کی')."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-root-correct",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کس جملے میں 'جڑ' کا لفظ درست استعمال ہوا ہے؟",
+        "en": "In which sentence is the word 'root' used correctly?"
+      },
+      "options": [
+        {
+          "ur": "جڑ آسمان میں اڑ رہی تھی۔",
+          "en": "The root was flying in the sky."
+        },
+        {
+          "ur": "ہم نے جڑ سے پانی پیا۔",
+          "en": "We drank water from the root."
+        },
+        {
+          "ur": "پودے کی جڑ مٹی سے پانی لیتی ہے۔",
+          "en": "The plant's root takes water from the soil."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جڑ کہاں ہوتی ہے؟",
+            "en": "Where is a root?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "جڑ زمین کے اندر ہوتی ہے اور پانی لیتی ہے۔",
+        "en": "A root is under the ground and takes in water."
+      }
+    },
+    {
+      "id": "p2-fill-map",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "'گاؤں کا راستہ جاننے کے لیے ابو نے ___ دیکھا۔' خالی جگہ کے لیے درست لفظ کون سا ہے؟",
+        "en": "'To know the way to the village, Abbu looked at the ___.' Which word fits?"
+      },
+      "options": [
+        {
+          "ur": "نقشہ",
+          "en": "map"
+        },
+        {
+          "ur": "موسم",
+          "en": "weather"
+        },
+        {
+          "ur": "صفائی",
+          "en": "cleanliness"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "راستہ کس چیز سے پتا چلتا ہے؟",
+            "en": "What shows you the way?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "نقشہ راستے اور جگہیں دکھاتا ہے۔",
+        "en": "A map shows roads and places."
+      }
+    },
+    {
+      "id": "p3-weather",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "'آج ___ ٹھنڈا ہے، اس لیے سب نے سویٹر پہنے ہیں۔' کون سا لفظ لگے گا؟",
+        "en": "'Today the ___ is cold, so everyone is wearing sweaters.' Which word fits?"
+      },
+      "options": [
+        {
+          "ur": "پیمائش",
+          "en": "measurement"
+        },
+        {
+          "ur": "موسم",
+          "en": "weather"
+        },
+        {
+          "ur": "جڑ",
+          "en": "root"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سردی اور گرمی کس لفظ سے بتاتے ہیں؟",
+            "en": "Which word tells about cold and heat?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "موسم ہوا اور سردی گرمی کا حال ہے۔",
+        "en": "Weather is about the air, cold and heat."
+      }
+    },
+    {
+      "id": "p7-measure",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "'درزی نے قمیض سینے سے پہلے کپڑے کی ___ کی۔' کون سا لفظ لگے گا؟",
+        "en": "'Before sewing the shirt, the tailor took the cloth's ___.' Which word fits?"
+      },
+      "options": [
+        {
+          "ur": "جڑ",
+          "en": "root"
+        },
+        {
+          "ur": "نقشہ",
+          "en": "map"
+        },
+        {
+          "ur": "پیمائش",
+          "en": "measurement"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "درزی فیتے سے کیا کرتا ہے؟",
+            "en": "What does a tailor do with a tape?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "درزی کپڑے کی لمبائی ناپتا ہے، یعنی پیمائش کرتا ہے۔",
+        "en": "The tailor measures the cloth's length."
+      }
+    },
+    {
+      "id": "p4-wrong-use",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "'ہم نے صفائی کو فیتے سے ناپا۔' اس جملے میں 'صفائی' کا استعمال درست ہے۔",
+        "en": "'We measured the cleanliness with a tape.' 'Cleanliness' is used correctly here."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "فیتے سے کیا ناپا جاتا ہے؟",
+            "en": "What does a tape measure?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "فیتے سے لمبائی ناپتے ہیں، صفائی نہیں۔ صفائی کی جاتی ہے۔",
+        "en": "A tape measures length, not cleanliness. Cleaning is done, not measured."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-two-words",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک ہی جملے میں 'موسم' اور 'پیمائش' دونوں لفظ استعمال کریں۔",
+        "en": "Use both 'weather' and 'measurement' in one sentence."
+      },
+      "answer_key": {
+        "sample_answer": "ہم نے بارش کے موسم میں بارش کے پانی کی پیمائش کی۔"
+      },
+      "rubric": {
+        "criteria": "subject word used with correct meaning in a complete, correct sentence",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "لفظ استعمال ہوا مگر مطلب یا جملہ پوری طرح درست نہیں۔",
+              "en": "The word is used, but the meaning or the sentence is not fully correct."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "لفظ درست مطلب میں، مکمل اور درست جملے میں۔",
+              "en": "The word is used with the right meaning in a complete, correct sentence."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor marks with the rubric; both words must keep their meanings. Praise creative but sensible sentences."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-subject-words",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "اپنی کسی دوسری کتاب (سائنس، ریاضی یا معاشرتی علوم) سے دو نئے لفظ چنیں۔ ہر لفظ سے اپنا ایک جملہ کاپی میں لکھیں۔",
+        "en": "Pick two new words from another school subject (science, maths or social studies). Write one sentence of your own with each in your notebook."
+      },
+      "answer_key": {
+        "sample_answer": "Two sentences, each using a subject word correctly."
+      },
+      "mentor_review_guidance": "Mentor checks meaning and complete sentence; no device needed."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "اس لفظ کا مطلب کیا ہے؟ پہلے مطلب یاد کریں۔",
+        "en": "What does this word mean? Recall the meaning first."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یہ چیز کہاں ملتی ہے یا کس کام آتی ہے؟ اسی بارے میں جملہ سوچیں۔",
+        "en": "Where is this found or what is it used for? Make a sentence about that."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "نیا لفظ جملے میں کہیں بھی رکھ دینا کافی ہے۔",
+        "en": "Putting the new word anywhere in a sentence is enough."
+      },
+      "correction": {
+        "ur": "لفظ کا مطلب جملے میں ٹھیک بیٹھنا چاہیے۔",
+        "en": "The word's meaning must fit the sentence."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ہر اسم کو مذکر سمجھ کر جملہ بنانا (جیسے 'صفائی کیا')۔",
+        "en": "Treating every noun as masculine when making a sentence (e.g. 'safaai kiya')."
+      },
+      "correction": {
+        "ur": "ہر اسم کی جنس الگ ہے — یاد کریں یا نشانی دیکھیں: 'صفائی کی'۔",
+        "en": "Every noun has its own gender — remember it or look for the sign: 'safaai ki'."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:URD-G4-VO-02",
+      "remediation_ref": "URD-G4-VO-02"
+    },
+    {
+      "signal": "misconception:m-gender-default-male",
+      "remediation_ref": "URD-G4-GR-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "نیا لفظ: مطلب جانیں، سوچیں کس بارے میں ہے، اپنا جملہ بنائیں۔ جملہ مکمل ہو اور ۔ پر ختم ہو۔",
+    "en": "New word: know the meaning, think what it is about, make your own sentence. The sentence is complete and ends with ۔."
+  },
+  "summary": {
+    "ur": "ہم نے دوسرے مضامین کے نئے الفاظ درست جملوں میں لکھنا سیکھا۔",
+    "en": "We learned to use new words from other subjects in correct sentences."
+  },
+  "parent_notes": {
+    "ur": "بچے سے پوچھیں کہ آج کسی کتاب میں کون سا نیا لفظ آیا۔ اس سے اس لفظ کا ایک جملہ زبانی بنوائیں۔",
+    "en": "Ask your child what new word they met in a book today. Ask them to say one sentence with it."
+  },
+  "mentor_notes": {
+    "ur": "p6 اور چیلنج آپ روبرک سے جانچیں۔ مطلب اور جملے کی ساخت دونوں دیکھیں۔ مذکر/مؤنث کی غلطی کو الگ نوٹ کریں، اسے مطلب کی غلطی نہ گنیں۔",
+    "en": "Mark p6 and the challenge with the rubric. Check both meaning and sentence form. Note gender agreement errors separately; do not count them as meaning errors."
+  },
+  "accessibility_notes": {
+    "ur": "ہر لفظ کی تصویر (جڑ، نقشہ، فیتہ) ابھی بنانی ہے، متبادل متن کے ساتھ۔ الفاظ کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے والی سرگرمی کا متبادل: ہر لفظ کے لیے چار مطلبوں میں سے ایک چنیں۔ جو بچہ لکھ نہیں سکتا وہ جملہ زبانی بتائے؛ مینٹر لکھ لے۔",
+    "en": "A picture for each word (root, map, tape measure) is still to be made, with alt text. Urdu audio for the words is not yet recorded. Alternative to the drag activity: choose one of four meanings for each word. A child who cannot write may say the sentence aloud; the mentor writes it down."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "meaning -> where/what for -> own sentence -> check meaning fits and sentence is complete",
+    "questioning_strategy": "ask 'what does the word mean?' and 'does that meaning fit your sentence?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "copies the example sentence",
+      "uses the word with a wrong meaning"
+    ],
+    "hint_policy": "graduated; two hints max; first recall meaning, then suggest a context; never write the learner's sentence",
+    "example_policy": "subject words the learner meets in Grade 4 science, maths and social studies; home and village/city contexts",
+    "misconception_detectors": [
+      "sentence where the word's meaning does not fit",
+      "gender agreement error with the subject noun"
+    ],
+    "critical_thinking_prompts": [
+      "Can you make a sentence where 'root' is not about a plant? Is that a different meaning?"
+    ],
+    "personalization_rules": "if meaning recall is weak, route to URD-G4-VO-02; for gender agreement errors, URD-G4-GR-02",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "constructed sentences (p6, challenge, homework) are marked by a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the five subject words match words actually introduced in the Taleem Grade 4 science/maths/social studies lessons",
+    "mentor team: p6 and the challenge are human-marked with a 2-level rubric"
+  ]
+}

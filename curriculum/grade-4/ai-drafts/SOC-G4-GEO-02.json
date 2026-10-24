@@ -1,0 +1,515 @@
+{
+  "code": "SOC-G4-GEO-02",
+  "title": {
+    "ur": "نقشہ پڑھنا: کلید اور علامتیں",
+    "en": "Reading a map: key and symbols"
+  },
+  "description": {
+    "ur": "سادہ نقشے کی کلید، علامتیں اور سمتیں پڑھ کر جگہیں ڈھونڈیں۔",
+    "en": "Use a simple map's key, symbols and directions to find places."
+  },
+  "keywords": [
+    "map",
+    "key",
+    "legend",
+    "symbol",
+    "compass rose",
+    "directions"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "نقشہ",
+        "en": "map"
+      },
+      "definition": {
+        "ur": "کسی جگہ کی اوپر سے دیکھی ہوئی سادہ تصویر۔",
+        "en": "a simple drawing of a place as seen from above."
+      }
+    },
+    {
+      "term": {
+        "ur": "علامت",
+        "en": "symbol"
+      },
+      "definition": {
+        "ur": "چھوٹا نشان جو کسی چیز کی جگہ بنایا جاتا ہے۔",
+        "en": "a small sign drawn in place of a real thing."
+      }
+    },
+    {
+      "term": {
+        "ur": "کلید",
+        "en": "key"
+      },
+      "definition": {
+        "ur": "نقشے کا خانہ جو بتاتا ہے کہ ہر علامت کا مطلب کیا ہے۔",
+        "en": "the box on a map that tells what each symbol means."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "تصور کریں کہ آپ کسی پرندے کی طرح اوپر سے گاؤں دیکھ رہے ہیں۔ نقشہ ایسی ہی تصویر ہے۔ نقشے پر اصلی چیزوں کی جگہ چھوٹی علامتیں ہوتی ہیں۔ ان کا مطلب کلید میں لکھا ہوتا ہے۔ آج ہم پہلے کلید پڑھیں گے، پھر جگہیں ڈھونڈیں گے۔",
+    "en": "Imagine you are a bird looking down at a village. A map is a picture like that. On a map, small symbols stand for real things. Their meaning is written in the key. Today we will read the key first, then find places."
+  },
+  "student_explanation": {
+    "ur": "نقشہ کسی جگہ کی اوپر سے بنی سادہ تصویر ہے۔ نقشے پر چیزوں کی جگہ علامتیں ہوتی ہیں۔ نیلی لکیر اکثر دریا یا نہر ہوتی ہے۔ کلید بتاتی ہے کہ ہر علامت کا مطلب کیا ہے۔ نقشہ پڑھنے سے پہلے کلید دیکھیں۔ پھر قطب نما کا پھول دیکھیں۔ یہ بتاتا ہے کہ شمال کس طرف ہے۔ اب آپ جگہ ڈھونڈ سکتے ہیں۔ آپ یہ بھی بتا سکتے ہیں کہ وہ کس سمت میں ہے۔",
+    "en": "A map is a simple picture of a place, drawn from above. On a map, symbols stand for things. A blue line is often a river or a canal. The key tells what each symbol means. Look at the key before you read the map. Then look at the compass rose. It shows which way is north. Now you can find a place. You can also say which direction it is in."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "نقشے کی کلید میں ہلال والا گنبد = مسجد، جھنڈے والی عمارت = سکول، H والا ڈبہ = ہسپتال، اور درخت = باغ ہے۔ سکول ڈھونڈیں۔",
+        "en": "The map key says: domed building = mosque, building with a flag = school, box with an H = hospital, tree = park. Find the school."
+      },
+      "steps": [
+        {
+          "ur": "کلید میں سکول کی علامت دیکھیں: جھنڈے والی عمارت۔",
+          "en": "Find the school symbol in the key: a building with a flag."
+        },
+        {
+          "ur": "نقشے پر یہی علامت ڈھونڈیں۔",
+          "en": "Look for the same symbol on the map."
+        },
+        {
+          "ur": "یہ علامت نقشے کے اوپر والے حصے میں ہے۔ تو سکول شمال کی طرف ہے۔",
+          "en": "The symbol is in the top part of the map. So the school is towards the north."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "نقشے پر باغ دریا کے دائیں طرف ہے۔ اوپر شمال ہے۔ باغ دریا سے کس سمت میں ہے؟",
+        "en": "On the map, the park is to the right of the river. North is at the top. Which direction is the park from the river?"
+      },
+      "steps": [
+        {
+          "ur": "قطب نما دیکھیں: اوپر شمال ہے۔",
+          "en": "Check the compass rose: north is at the top."
+        },
+        {
+          "ur": "شمال اوپر ہو تو دائیں طرف مشرق ہوتا ہے۔",
+          "en": "When north is at the top, the right side is east."
+        },
+        {
+          "ur": "تو باغ دریا کے مشرق میں ہے۔",
+          "en": "So the park is east of the river."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-key-match",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "سادہ گاؤں کے نقشے پر کلید دیکھ کر سکول، ہسپتال، دریا اور باغ پر ٹیپ کریں۔",
+        "en": "Use the key on a simple village map and tap the school, the hospital, the river and the park."
+      },
+      "answer_key": {
+        "taps": {
+          "school": "flag-building symbol, top of map",
+          "hospital": "H-box symbol, bottom-left",
+          "river": "blue line running top to bottom through the middle",
+          "park": "tree symbols, right of the river"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے کلید میں علامت دیکھیں، پھر نقشے پر۔",
+            "en": "Look at the symbol in the key first, then on the map."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-symbol-meaning",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر علامت کو اس کے مطلب سے ملائیں (کلید کے مطابق)۔",
+        "en": "Match each symbol to its meaning (from the key)."
+      },
+      "options": [
+        {
+          "ur": "باغ",
+          "en": "park"
+        },
+        {
+          "ur": "دریا",
+          "en": "river"
+        },
+        {
+          "ur": "ہسپتال",
+          "en": "hospital"
+        }
+      ],
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "درخت",
+              "en": "tree"
+            },
+            "right": {
+              "ur": "باغ",
+              "en": "park"
+            }
+          },
+          {
+            "left": {
+              "ur": "نیلی لکیر",
+              "en": "blue line"
+            },
+            "right": {
+              "ur": "دریا",
+              "en": "river"
+            }
+          },
+          {
+            "left": {
+              "ur": "H والا ڈبہ",
+              "en": "box with an H"
+            },
+            "right": {
+              "ur": "ہسپتال",
+              "en": "hospital"
+            }
+          }
+        ],
+        "misconception_on_wrong_pair": "m-map-not-oriented"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر علامت کلید میں دیکھیں۔",
+            "en": "Check each symbol in the key."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-what-key",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "نقشے کی کلید ہمیں کیا بتاتی ہے؟",
+        "en": "What does a map key tell us?"
+      },
+      "options": [
+        {
+          "ur": "ہر علامت کا مطلب",
+          "en": "what each symbol means"
+        },
+        {
+          "ur": "آج کا موسم",
+          "en": "today's weather"
+        },
+        {
+          "ur": "نقشہ بنانے والے کا نام",
+          "en": "the name of the person who drew it"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-map-not-oriented"
+        }
+      },
+      "explanation": {
+        "ur": "کلید علامتوں کا مطلب بتاتی ہے۔",
+        "en": "The key explains the symbols."
+      }
+    },
+    {
+      "id": "p2-blue-line",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کلید میں نیلی لکیر = دریا ہے۔ نقشے پر نیلی لکیر کیا ہے؟",
+        "en": "In the key, blue line = river. What is the blue line on the map?"
+      },
+      "options": [
+        {
+          "ur": "سڑک",
+          "en": "a road"
+        },
+        {
+          "ur": "دریا",
+          "en": "a river"
+        },
+        {
+          "ur": "ریل کی پٹری",
+          "en": "a railway"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-map-not-oriented"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کلید دوبارہ دیکھیں۔",
+            "en": "Look at the key again."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-key-first",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "نقشہ پڑھنے سے پہلے کلید اور قطب نما دیکھنا اچھی عادت ہے۔",
+        "en": "Looking at the key and compass rose before reading a map is a good habit."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-direction-on-map",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "نقشے پر اوپر شمال ہے۔ ہسپتال نقشے کے نیچے والے حصے میں ہے۔ ہسپتال کس طرف ہے؟",
+        "en": "North is at the top of the map. The hospital is in the bottom part of the map. Which way is the hospital?"
+      },
+      "options": [
+        {
+          "ur": "شمال",
+          "en": "north"
+        },
+        {
+          "ur": "مشرق",
+          "en": "east"
+        },
+        {
+          "ur": "جنوب",
+          "en": "south"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-map-not-oriented"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "شمال کی الٹی سمت نیچے ہوتی ہے۔",
+            "en": "The direction opposite north is at the bottom."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-symbols-same",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر نقشے پر علامتوں کے مطلب ہمیشہ ایک جیسے ہوتے ہیں، اس لیے کلید پڑھنے کی ضرورت نہیں۔",
+        "en": "Symbols mean the same thing on every map, so you never need to read the key."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-map-not-oriented"
+        }
+      },
+      "explanation": {
+        "ur": "مختلف نقشوں پر علامتیں مختلف ہو سکتی ہیں۔ ہمیشہ کلید پڑھیں۔",
+        "en": "Symbols can differ between maps. Always read the key."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-route",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "نقشے پر سکول اوپر اور ہسپتال نیچے ہے۔ سکول سے ہسپتال جانے کے لیے کس سمت چلیں گے؟",
+        "en": "On the map the school is at the top and the hospital is at the bottom. Which way do you walk from the school to the hospital?"
+      },
+      "options": [
+        {
+          "ur": "جنوب کی طرف",
+          "en": "south"
+        },
+        {
+          "ur": "شمال کی طرف",
+          "en": "north"
+        },
+        {
+          "ur": "مغرب کی طرف",
+          "en": "west"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-map-not-oriented"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اوپر سے نیچے جانا شمال سے کس طرف جانا ہے؟",
+            "en": "Going from top to bottom is going from north to which way?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-room-map",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کاغذ پر اپنے کمرے یا سکول کے کمرے کا سادہ نقشہ بنائیں۔ تین علامتیں بنائیں اور ایک کلید بنائیں۔ گھر کا پتا نہ لکھیں۔",
+        "en": "Draw a simple map of a room at home or your classroom. Use three symbols and make a key. Do not write your address."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any map with at least three symbols and a matching key. Do not collect home addresses or real locations."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پہلے کلید پڑھیں۔ علامت کا مطلب وہیں لکھا ہے۔",
+        "en": "Read the key first. The symbol's meaning is written there."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "قطب نما دیکھیں: شمال کہاں ہے؟ پھر سمت بتائیں۔",
+        "en": "Check the compass rose: where is north? Then say the direction."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "کلید اور سمتیں دیکھے بغیر نقشہ پڑھنا۔",
+        "en": "Reading a map without looking at the key or the directions."
+      },
+      "correction": {
+        "ur": "پہلے کلید اور سمتیں پڑھیں۔ پھر نقشہ دیکھیں۔",
+        "en": "Read the key and the directions first. Then read the map."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "نقشے پر علامت اصلی چیز کی تصویر کی طرح بڑی یا چھوٹی ہوتی ہے۔",
+        "en": "A symbol on a map shows the real size of the thing."
+      },
+      "correction": {
+        "ur": "علامت صرف نشان ہے۔ چھوٹی علامت بڑی عمارت کو بھی دکھا سکتی ہے۔",
+        "en": "A symbol is just a sign. A small symbol can stand for a big building."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-map-not-oriented",
+      "remediation_ref": "SOC-G4-GEO-01"
+    },
+    {
+      "signal": "misses_prerequisite:SOC-G4-GEO-01",
+      "remediation_ref": "SOC-G4-GEO-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "نقشہ اوپر سے دیکھی گئی تصویر ہے۔ علامتیں چیزوں کی جگہ ہیں۔ کلید علامتوں کا مطلب بتاتی ہے۔ پہلے کلید اور قطب نما پڑھیں۔",
+    "en": "A map is a picture from above. Symbols stand for things. The key tells what symbols mean. Read the key and compass rose first."
+  },
+  "summary": {
+    "ur": "ہم نے کلید، علامتوں اور سمتوں کی مدد سے نقشہ پڑھنا سیکھا۔",
+    "en": "We learned to read a map using its key, symbols and directions."
+  },
+  "parent_notes": {
+    "ur": "بچے کے ساتھ مل کر گھر کے ایک کمرے کا نقشہ بنائیں اور علامتوں کی کلید بنائیں۔",
+    "en": "Draw a map of one room at home together and make a key for the symbols."
+  },
+  "mentor_notes": {
+    "ur": "یہ سبق مدتی منصوبے 'میری برادری کا نقشہ' کی تیاری ہے۔ بچوں سے کبھی گھر کا اصلی پتا یا مقام نہ لیں۔ مثال میں مسجد کے ساتھ ہسپتال، سکول اور باغ بھی رکھیں۔",
+    "en": "This lesson prepares for the term project 'My community map'. Never collect a child's real address or location. Keep the example map varied: a mosque alongside a hospital, school and park."
+  },
+  "accessibility_notes": {
+    "ur": "سادہ گاؤں کا نقشہ اور اس کی کلید ابھی بنانی ہے؛ متبادل متن ہر علامت، اس کا مطلب اور نقشے پر اس کی جگہ بتائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ رنگوں کے علاوہ شکل سے بھی علامتیں الگ ہوں۔ ٹیپ والی سرگرمی کا متبادل: ہر جگہ کے لیے لکھی ہوئی جگہ (اوپر، نیچے، دائیں، بائیں) چنیں۔",
+    "en": "The simple village map and its key are still to be made; alt text should give each symbol, its meaning and where it sits on the map. Urdu audio is not yet recorded. Symbols must differ by shape, not only colour. Alternative to the tap activity: choose each place's written position (top, bottom, left, right)."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "key first, then compass rose, then find; model the routine aloud on a small invented village map",
+    "questioning_strategy": "ask 'what does the key say?' and 'where is north?' before 'where is it?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "guesses a symbol without checking the key"
+    ],
+    "hint_policy": "graduated; two hints max; first send the learner to the key, then to the compass rose; never point at the place first",
+    "example_policy": "invented, generic village or town maps only; never the learner's real neighbourhood",
+    "misconception_detectors": [
+      "guesses symbol meanings without the key",
+      "gives direction without checking north",
+      "thinks symbol size is real size"
+    ],
+    "critical_thinking_prompts": [
+      "Why might two different maps use different symbols for the same thing?"
+    ],
+    "personalization_rules": "if direction errors repeat, route to SOC-G4-GEO-01",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "ask the learner to map or describe their real home location"
+    ]
+  },
+  "review_flags": [
+    "language editor: confirm 'کلید' (vs 'علامات کی فہرست') is the Grade 4 term for map key",
+    "the example key uses an 'H' box for a hospital and a domed building for a mosque; confirm these symbols and that the illustrator draws them as described"
+  ]
+}

@@ -1,0 +1,424 @@
+{
+  "code": "MATH-G4-GE-04",
+  "description": {
+    "ur": "سادہ اشکال اور نمونوں میں ایک یا زیادہ محورِ تناسب پہچاننا۔",
+    "en": "Identify one or more lines of symmetry in simple shapes and patterns."
+  },
+  "keywords": [
+    "symmetry",
+    "line of symmetry",
+    "fold",
+    "match",
+    "shapes",
+    "patterns"
+  ],
+  "teacher_script": {
+    "ur": "ایک کاغذ کو بیچ سے موڑیں۔ کیا دونوں حصے بالکل ایک دوسرے پر آ گئے؟ اگر ہاں، تو موڑ کی لکیر محورِ تناسب ہے۔ آج ہم دیکھیں گے کہ کونسی لکیریں محورِ تناسب ہیں اور کونسی نہیں۔ ہمارا امتحان ہمیشہ یہی ہے: موڑیں اور دیکھیں کہ دونوں حصے بالکل ملتے ہیں یا نہیں۔",
+    "en": "Fold a piece of paper in the middle. Do the two halves sit exactly on top of each other? If yes, the fold line is a line of symmetry. Today we find out which lines are lines of symmetry and which are not. Our test is always the same: fold it and see whether the two halves match exactly."
+  },
+  "student_explanation": {
+    "ur": "ایک شکل کو کسی لکیر پر موڑیں۔ اگر دونوں حصے بالکل ایک دوسرے پر آ جائیں تو وہ لکیر محورِ تناسب ہے۔ ہر لکیر محورِ تناسب نہیں ہوتی۔ دونوں حصے بالکل برابر ہونے چاہییں۔ مستطیل کو لمبائی میں یا چوڑائی میں بیچ سے موڑیں۔ دونوں بار حصے مل جاتے ہیں۔ مگر کونے سے کونے تک موڑنے پر حصے نہیں ملتے۔ اس لیے مستطیل کے ۲ محورِ تناسب ہیں۔ مربع کے ۴ ہیں۔",
+    "en": "Fold a shape along a line. If the two halves fit exactly on each other, that line is a line of symmetry. Not every line is a line of symmetry. Both halves must match exactly. Fold a rectangle in half the long way or the short way. Both times the halves match. But a corner-to-corner fold does not match. So a rectangle has 2 lines of symmetry. A square has 4."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "مربع کے کتنے محورِ تناسب ہیں؟",
+        "en": "How many lines of symmetry does a square have?"
+      },
+      "steps": [
+        {
+          "ur": "اوپر سے نیچے بیچ میں موڑیں: حصے ملتے ہیں۔ (۱)",
+          "en": "Fold down the middle, top to bottom: the halves match. (1)"
+        },
+        {
+          "ur": "دائیں سے بائیں بیچ میں موڑیں: حصے ملتے ہیں۔ (۲)",
+          "en": "Fold across the middle, side to side: the halves match. (2)"
+        },
+        {
+          "ur": "ایک کونے سے سامنے والے کونے تک موڑیں: حصے ملتے ہیں۔ (۳)",
+          "en": "Fold from one corner to the opposite corner: the halves match. (3)"
+        },
+        {
+          "ur": "دوسرے دو کونوں کے بیچ موڑیں: حصے ملتے ہیں۔ (۴)",
+          "en": "Fold between the other two corners: the halves match. (4)"
+        },
+        {
+          "ur": "تو مربع کے ۴ محورِ تناسب ہیں۔",
+          "en": "So a square has 4 lines of symmetry."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "کیا مستطیل (جو مربع نہ ہو) کی کونے سے کونے والی لکیر محورِ تناسب ہے؟",
+        "en": "Is the corner-to-corner line of a rectangle (not a square) a line of symmetry?"
+      },
+      "steps": [
+        {
+          "ur": "کاغذ کا مستطیل لیں اور کونے سے کونے تک موڑیں۔",
+          "en": "Take a paper rectangle and fold it from corner to corner."
+        },
+        {
+          "ur": "دیکھیں: باقی دو کونے ایک دوسرے پر نہیں آتے۔ کچھ حصہ باہر نکلتا ہے۔",
+          "en": "Look: the other two corners do not meet. Part of the paper sticks out."
+        },
+        {
+          "ur": "حصے بالکل نہیں ملے، تو یہ محورِ تناسب نہیں ہے۔",
+          "en": "The halves do not match exactly, so it is not a line of symmetry."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-tap-square-lines",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مربع پر ۶ لکیریں بنی ہیں: بیچ سے کھڑی، بیچ سے لیٹی، دو کونے سے کونے والی، اور دو ایسی جو بیچ سے ہٹ کر ہیں۔ صرف محورِ تناسب والی لکیروں کو تھپتھپائیں۔",
+        "en": "A square has 6 lines drawn on it: one down the middle, one across the middle, two corner to corner, and two that are off-centre. Tap only the lines of symmetry."
+      },
+      "answer_key": {
+        "selected": [
+          "vertical middle",
+          "horizontal middle",
+          "diagonal 1",
+          "diagonal 2"
+        ],
+        "not_selected": [
+          "off-centre 1",
+          "off-centre 2"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر لکیر پر موڑنے کا سوچیں۔ کیا دونوں حصے برابر ہیں؟",
+            "en": "Imagine folding on each line. Are the two halves the same?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-rectangle-count",
+      "type": "fill_blank",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "جو مستطیل مربع نہ ہو، اس کے ___ محورِ تناسب ہوتے ہیں۔",
+        "en": "A rectangle that is not a square has ___ lines of symmetry."
+      },
+      "answer_key": {
+        "answer": "2"
+      },
+      "accepted_variants": [
+        "2",
+        "۲"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کونے سے کونے والی لکیریں کام نہیں کرتیں۔ باقی کتنی ہیں؟",
+            "en": "The corner-to-corner lines do not work. How many are left?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-rectangle-diagonal",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مستطیل (جو مربع نہ ہو) کی کونے سے کونے والی لکیر محورِ تناسب ہے۔",
+        "en": "The corner-to-corner line of a rectangle (not a square) is a line of symmetry."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-symmetry-any-line"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا موڑنے پر دونوں حصے بالکل ملتے ہیں؟",
+            "en": "When you fold it, do the two halves match exactly?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کونے سے کونے موڑیں تو کونے نہیں ملتے، اس لیے یہ محورِ تناسب نہیں۔",
+        "en": "A corner-to-corner fold leaves the corners apart, so it is not a line of symmetry."
+      }
+    },
+    {
+      "id": "p2-square-lines",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مربع کے کتنے محورِ تناسب ہوتے ہیں؟",
+        "en": "How many lines of symmetry does a square have?"
+      },
+      "options": [
+        {
+          "ur": "۲",
+          "en": "2"
+        },
+        {
+          "ur": "۴",
+          "en": "4"
+        },
+        {
+          "ur": "۱",
+          "en": "1"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بیچ والی لکیریں اور کونے سے کونے والی، دونوں آزمائیں۔",
+            "en": "Try the middle lines and the corner-to-corner lines."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۲ بیچ والی اور ۲ کونے سے کونے والی: کل ۴۔",
+        "en": "2 middle lines and 2 corner-to-corner lines: 4 in all."
+      }
+    },
+    {
+      "id": "p3-which-symmetric",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کس چیز کا بیچ میں ایک محورِ تناسب ہے؟",
+        "en": "Which of these has a line of symmetry down the middle?"
+      },
+      "options": [
+        {
+          "ur": "ایسی تتلی جس کے دونوں پر ایک جیسے ہیں",
+          "en": "a butterfly with matching wings"
+        },
+        {
+          "ur": "انگریزی کا بڑا حرف F",
+          "en": "the capital letter F"
+        },
+        {
+          "ur": "ٹیڑھی میڑھی لکیر",
+          "en": "a scribbled line"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کس کا بایاں اور دایاں حصہ ایک جیسا ہے؟",
+            "en": "Which one has a left half and right half that match?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "تتلی کے دونوں پر ایک جیسے ہیں، اس لیے بیچ کی لکیر محورِ تناسب ہے۔",
+        "en": "The butterfly's wings match, so the middle line is a line of symmetry."
+      }
+    },
+    {
+      "id": "p5-circle",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "دائرے کے کتنے محورِ تناسب ہوتے ہیں؟",
+        "en": "How many lines of symmetry does a circle have?"
+      },
+      "options": [
+        {
+          "ur": "صرف ۱",
+          "en": "only 1"
+        },
+        {
+          "ur": "صرف ۲",
+          "en": "only 2"
+        },
+        {
+          "ur": "بہت سارے — مرکز سے گزرنے والی ہر لکیر",
+          "en": "very many — every line through the centre"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "روٹی کو بیچ سے کسی بھی طرف موڑیں تو کیا ہوتا ہے؟",
+            "en": "What happens when you fold a roti through the middle in any direction?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "مرکز سے گزرنے والی ہر لکیر دائرے کو دو برابر حصوں میں بانٹتی ہے۔",
+        "en": "Every line through the centre splits a circle into two matching halves."
+      }
+    },
+    {
+      "id": "p6-halves-do-not-match",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "سارہ نے کاغذ کی ایک شکل موڑی، مگر دونوں حصے نہیں ملے۔ اس سے کیا پتا چلتا ہے؟",
+        "en": "Sara folds a paper shape, but the two halves do not match. What does this tell her?"
+      },
+      "options": [
+        {
+          "ur": "موڑ کی لکیر محورِ تناسب ہے",
+          "en": "the fold line is a line of symmetry"
+        },
+        {
+          "ur": "موڑ کی لکیر محورِ تناسب نہیں ہے",
+          "en": "the fold line is not a line of symmetry"
+        },
+        {
+          "ur": "یہ شکل ضرور دائرہ ہے",
+          "en": "the shape must be a circle"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-symmetry-any-line"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "محورِ تناسب کے لیے دونوں حصے کیسے ہونے چاہییں؟",
+            "en": "For a line of symmetry, how must the two halves be?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "حصے بالکل نہ ملیں تو وہ لکیر محورِ تناسب نہیں۔",
+        "en": "If the halves do not match exactly, the line is not a line of symmetry."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-equal-triangle",
+      "type": "fill_blank",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک مثلث کے تینوں ضلع برابر ہیں۔ اس کے کتنے محورِ تناسب ہیں؟",
+        "en": "A triangle has all three sides equal. How many lines of symmetry does it have?"
+      },
+      "answer_key": {
+        "answer": "3"
+      },
+      "accepted_variants": [
+        "3",
+        "۳"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر کونے سے سامنے والے ضلع کے بیچ تک موڑ کر دیکھیں۔",
+            "en": "Try folding from each corner to the middle of the opposite side."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ہر کونے سے ایک لکیر: کل ۳ محورِ تناسب۔",
+        "en": "One line from each corner: 3 lines of symmetry."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-symmetry-any-line",
+      "remediation_ref": "MATH-G4-GE-04"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-GE-03",
+      "remediation_ref": "MATH-G4-GE-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "محورِ تناسب پر موڑیں تو دونوں حصے بالکل ملتے ہیں۔ ہر لکیر محورِ تناسب نہیں۔ مستطیل: ۲۔ مربع: ۴۔ دائرہ: بہت سارے۔",
+    "en": "Fold on a line of symmetry and the halves match exactly. Not every line is one. Rectangle: 2. Square: 4. Circle: very many."
+  },
+  "summary": {
+    "ur": "ہم نے موڑ کر دیکھنا سیکھا کہ کونسی لکیر محورِ تناسب ہے۔",
+    "en": "We learned to use folding to check whether a line is a line of symmetry."
+  },
+  "parent_notes": {
+    "ur": "مل کر کاغذ کی اشکال موڑیں اور تناسب جانچیں۔",
+    "en": "fold paper shapes to test symmetry together."
+  },
+  "mentor_notes": {
+    "ur": "موڑ کر دیکھنے کا طریقہ 'کوئی بھی لکیر' والی غلط فہمی کو ختم کرتا ہے۔",
+    "en": "the fold-test defeats the \"any line\" misconception."
+  },
+  "accessibility_notes": {
+    "ur": "اشکال اور لکیروں کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن بتائے کہ لکیر کہاں سے کہاں تک ہے اور موڑنے پر حصے ملتے ہیں یا نہیں۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ لکیریں تھپتھپانے کا متبادل: ہر لکیر کے لیے 'ہاں' یا 'نہیں' چنیں۔ کاغذ موڑنے کی سرگرمی ہاتھ سے چھو کر بھی ہو سکتی ہے، اس لیے کم نظر والے بچوں کے لیے بھی مناسب ہے۔",
+    "en": "The shape and line pictures are still to be made; each alt text should say where the line runs and whether the halves match when folded. Urdu audio is not yet recorded. Alternative to tapping lines: choose 'yes' or 'no' for each line. The paper-folding test can be done by touch, so it also suits learners with low vision."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "the fold test for every claim: fold, check that the halves match exactly; contrast a matching fold with a non-matching one",
+    "questioning_strategy": "ask 'if we fold here, do the halves match exactly?' before 'is it a line of symmetry?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "accepts any line through the middle",
+      "counts only one line for a square"
+    ],
+    "hint_policy": "graduated; two hints max before a worked re-teach of a similar problem; never reveal the answer first",
+    "example_policy": "squares, rectangles, circles, an equal-sided triangle, butterflies, leaves and simple patterns; paper folding with scrap paper",
+    "misconception_detectors": [
+      "calls a rectangle's diagonal a line of symmetry",
+      "says halves of different shapes match because they have equal area"
+    ],
+    "critical_thinking_prompts": [
+      "Why does a square have more lines of symmetry than a rectangle?"
+    ],
+    "personalization_rules": "if the learner cannot name the shapes or their sides, route back to MATH-G4-GE-03",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, upset or fear -> stop the lesson and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information",
+      "shame or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "language editor: the spine title uses تناسب and the doc lists توازن/تناسب; Pakistani textbooks may use another term (e.g. تشاکل) — confirm the standard Urdu word",
+    "subject expert: p3 uses the English capital letter F in an Urdu item; replace with an Urdu-friendly picture if preferred",
+    "subject expert: p5 says a circle has 'very many' lines of symmetry; confirm this is acceptable wording for Grade 4"
+  ]
+}

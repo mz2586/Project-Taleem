@@ -1,0 +1,8 @@
+{
+  "code": "MATH-G4-FR-01",
+  "accessibility_notes": {
+    "ur": "دائرے کی تصویر ابھی بنانی ہے؛ اس کا متبادل متن ہو: چار برابر حصوں والا دائرہ، ایک حصہ رنگا ہوا۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ہر سرگرمی تھپتھپا کر چننے سے ہو سکتی ہے؛ گھسیٹنا ضروری نہیں۔ رنگ کے ساتھ حصوں پر لکیریں بھی ہوں تاکہ رنگ نہ پہچاننے والے بچے بھی دیکھ سکیں۔",
+    "en": "The circle image is still to be made; its alt text should read: a circle in four equal parts, one part shaded. Urdu audio is not yet recorded. Every activity works by tapping to choose; no dragging is needed. Shaded parts should also carry a pattern, not colour alone, for colour-blind learners."
+  },
+  "review_flags": ["accessibility specialist: confirm the alt text and the non-colour shading once the image exists"]
+}

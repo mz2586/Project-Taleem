@@ -1,0 +1,439 @@
+{
+  "code": "ISL-G4-QUR-02",
+  "title": {
+    "ur": "قرآن مجید کو سنبھالنا اور توجہ سے سننا",
+    "en": "Handling the Qur'an Carefully and Listening Well"
+  },
+  "description": {
+    "ur": "قرآن مجید کو احتیاط سے اٹھانا، کھولنا اور رکھنا، اور تلاوت کو توجہ سے سننا۔",
+    "en": "Picking up, opening and putting away the Qur'an carefully, and listening to recitation with attention."
+  },
+  "keywords": [
+    "Qur'an",
+    "handling",
+    "listening",
+    "attention",
+    "rehal",
+    "recitation"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "رحل",
+        "en": "rehal / book stand"
+      },
+      "definition": {
+        "ur": "لکڑی کا وہ اسٹینڈ جس پر قرآن مجید رکھ کر پڑھتے ہیں۔",
+        "en": "A wooden stand the Qur'an rests on while reading."
+      }
+    },
+    {
+      "term": {
+        "ur": "تلاوت",
+        "en": "recitation"
+      },
+      "definition": {
+        "ur": "قرآن مجید کو صحیح طریقے سے پڑھنا۔",
+        "en": "Reading the Qur'an aloud in the proper way."
+      }
+    },
+    {
+      "term": {
+        "ur": "توجہ",
+        "en": "attention"
+      },
+      "definition": {
+        "ur": "دھیان سے سننا اور ادھر ادھر نہ دیکھنا۔",
+        "en": "Listening closely without looking around."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم سیکھیں گے کہ قرآن مجید کو احتیاط سے کیسے سنبھالیں۔ ہم یہ بھی سیکھیں گے کہ تلاوت کو توجہ سے کیسے سنیں۔ قرآن مجید میں تلاوت سننے کا ذکر ہے۔ [آیت: سورۃ الاعراف، آیت ۲۰۴ — متن اور منظور شدہ ترجمہ عالم فراہم کرے] آئیں قدم بہ قدم دیکھیں۔",
+    "en": "Today we will learn how to handle the Qur'an carefully. We will also learn how to listen to recitation with attention. The Qur'an speaks about listening when it is recited. [Verse: Surah Al-A'raf, 204 — text and approved translation to be supplied by a scholar] Let us go step by step."
+  },
+  "student_explanation": {
+    "ur": "قرآن مجید کو ہم دونوں ہاتھوں سے آرام سے اٹھاتے ہیں۔ ہم اسے رحل، تکیے یا گود پر رکھتے ہیں۔ ہم صفحے آہستہ پلٹتے ہیں۔ پڑھنے کے بعد اسے بند کر کے واپس رکھتے ہیں۔ تلاوت ہو تو ہم باتیں بند کر دیتے ہیں۔ ہم آرام سے بیٹھ کر دھیان سے سنتے ہیں۔ فون پر تلاوت چلے تو بھی ادب سے سنتے ہیں۔ یہ سب قرآن مجید سے محبت کی نشانی ہے۔",
+    "en": "We lift the Qur'an gently with both hands. We rest it on a rehal, a cushion or our lap. We turn the pages slowly. After reading, we close it and put it back. When there is recitation, we stop talking. We sit calmly and listen closely. If recitation plays on a phone, we listen respectfully too. All of this shows our love for the Qur'an."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "بلال کو الماری سے قرآن مجید نکال کر پڑھنا ہے۔ وہ کیا کرے؟",
+        "en": "Bilal needs to take the Qur'an from the shelf to read. What should he do?"
+      },
+      "steps": [
+        {
+          "ur": "پہلے ہاتھ صاف کرے، اور وضو کرے جیسے گھر والے اور استاد سکھائیں۔",
+          "en": "First he cleans his hands, and makes wudu as his family and teacher show him."
+        },
+        {
+          "ur": "دونوں ہاتھوں سے آرام سے اٹھائے اور رحل یا تکیے پر رکھے۔",
+          "en": "He lifts it gently with both hands and rests it on a rehal or cushion."
+        },
+        {
+          "ur": "صفحے آہستہ پلٹے، اور پڑھ کر بند کر کے واپس اونچی جگہ رکھے۔",
+          "en": "He turns the pages slowly, then closes it and puts it back high up."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "گھر میں تلاوت ہو رہی ہے اور چھوٹے بہن بھائی شور کر رہے ہیں۔ آپ کیا کریں؟",
+        "en": "Recitation is playing at home and the little ones are being noisy. What can you do?"
+      },
+      "steps": [
+        {
+          "ur": "خود خاموش ہو جائیں اور آرام سے بیٹھیں۔",
+          "en": "Become quiet yourself and sit calmly."
+        },
+        {
+          "ur": "بہن بھائیوں کو نرمی سے اشارہ کریں کہ ابھی سنتے ہیں۔",
+          "en": "Gently signal to the little ones that we are listening now."
+        },
+        {
+          "ur": "تلاوت ختم ہونے تک توجہ سے سنیں۔",
+          "en": "Listen with attention until the recitation ends."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-handling-order",
+      "type": "ordering",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "قرآن مجید پڑھنے کے قدموں کو ترتیب سے لگائیں۔",
+        "en": "Put the steps of reading the Qur'an in order."
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے کیا کرتے ہیں: پڑھنا یا ہاتھ صاف کرنا؟",
+            "en": "What comes first: reading or cleaning hands?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "ہاتھ صاف کرنا",
+          "en": "Cleaning hands"
+        },
+        {
+          "ur": "دونوں ہاتھوں سے آرام سے اٹھانا",
+          "en": "Lifting it gently with both hands"
+        },
+        {
+          "ur": "رحل یا تکیے پر رکھ کر پڑھنا",
+          "en": "Resting it on a rehal or cushion to read"
+        },
+        {
+          "ur": "بند کر کے اونچی جگہ واپس رکھنا",
+          "en": "Closing it and putting it back high up"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-lift",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "قرآن مجید کیسے اٹھاتے ہیں؟",
+        "en": "How do we lift the Qur'an?"
+      },
+      "options": [
+        {
+          "ur": "دونوں ہاتھوں سے آرام سے",
+          "en": "Gently, with both hands"
+        },
+        {
+          "ur": "ایک انگلی سے کھینچ کر",
+          "en": "Dragging it with one finger"
+        },
+        {
+          "ur": "جلدی میں پھینک کر",
+          "en": "Tossing it in a hurry"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-rest",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پڑھتے وقت قرآن مجید کہاں رکھتے ہیں؟",
+        "en": "Where do we rest the Qur'an while reading?"
+      },
+      "options": [
+        {
+          "ur": "فرش پر",
+          "en": "On the floor"
+        },
+        {
+          "ur": "رحل، تکیے یا گود پر",
+          "en": "On a rehal, a cushion or our lap"
+        },
+        {
+          "ur": "جوتوں کے اوپر",
+          "en": "On top of shoes"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p3-talk",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "تلاوت ہو رہی ہو تو باتیں جاری رکھنا ٹھیک ہے۔",
+        "en": "It is fine to keep chatting while recitation is going on."
+      },
+      "explanation": {
+        "ur": "تلاوت کے وقت ہم خاموش ہو کر سنتے ہیں۔",
+        "en": "During recitation we become quiet and listen."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p4-phone",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "فون پر تلاوت چل رہی ہے۔ ادب کیا ہے؟",
+        "en": "Recitation is playing on a phone. What is respectful?"
+      },
+      "options": [
+        {
+          "ur": "ساتھ ساتھ کارٹون دیکھنا",
+          "en": "Watching cartoons at the same time"
+        },
+        {
+          "ur": "زور سے ہنسنا",
+          "en": "Laughing loudly"
+        },
+        {
+          "ur": "خاموشی سے سننا",
+          "en": "Listening quietly"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-little-ones",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "تلاوت کے وقت چھوٹا بھائی شور کر رہا ہے۔ آپ کیا کریں؟",
+        "en": "During recitation your little brother is making noise. What do you do?"
+      },
+      "options": [
+        {
+          "ur": "اسے ڈانٹ کر رلا دیں",
+          "en": "Scold him until he cries"
+        },
+        {
+          "ur": "نرمی سے اشارہ کریں کہ ابھی سنتے ہیں",
+          "en": "Gently signal that we are listening now"
+        },
+        {
+          "ur": "خود بھی شور کریں",
+          "en": "Make noise too"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-respect-equals-fear"
+        }
+      }
+    },
+    {
+      "id": "p6-after",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پڑھنے کے بعد قرآن مجید کو بند کر کے صاف اونچی جگہ پر رکھتے ہیں۔",
+        "en": "After reading, we close the Qur'an and put it back in a clean, high place."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-attention",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "توجہ سے سننا اور صرف کان میں آواز آنا، ان میں کیا فرق ہے؟",
+        "en": "What is the difference between listening with attention and just hearing a sound?"
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept answers about the mind being on what is heard, sitting still and not doing other things. No religious ruling is expected."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-quiet-listen",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "اگلی بار گھر یا مسجد سے تلاوت سنیں تو چند لمحے رک کر توجہ سے سنیں۔",
+        "en": "Next time you hear recitation at home or from the masjid, pause for a few moments and listen with attention."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. Do not ask how often the family listens to or reads the Qur'an."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: کیا اس طرح احتیاط ہو رہی ہے؟",
+        "en": "Think: is this being careful?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: دونوں ہاتھ، آہستہ صفحے، تلاوت پر خاموشی۔",
+        "en": "Remember: both hands, slow pages, quiet during recitation."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "تلاوت پس منظر میں چلتی رہے تو باتیں کرنے میں حرج نہیں۔",
+        "en": "If recitation is just playing in the background, chatting is fine."
+      },
+      "correction": {
+        "ur": "تلاوت جب بھی ہو، ہم ادب سے سنتے ہیں۔",
+        "en": "Whenever there is recitation, we listen respectfully."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "دوسروں کو خاموش کرانے کے لیے ڈانٹنا ضروری ہے۔",
+        "en": "You must scold others to make them quiet."
+      },
+      "correction": {
+        "ur": "ہم نرمی سے یاد دلاتے ہیں؛ ادب ڈر سے نہیں سکھایا جاتا۔",
+        "en": "We remind gently; respect is not taught through fear."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "low_score:handling_steps",
+      "remediation_ref": "ISL-G4-QUR-01"
+    },
+    {
+      "signal": "misconception:m-respect-equals-fear",
+      "remediation_ref": "ISL-G4-AKH-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "دونوں ہاتھوں سے اٹھائیں، رحل یا تکیے پر رکھیں، صفحے آہستہ پلٹیں، بند کر کے اونچی جگہ رکھیں۔ تلاوت ہو تو خاموشی سے توجہ کے ساتھ سنیں۔",
+    "en": "Lift with both hands, rest on a rehal or cushion, turn pages slowly, close and put back high. During recitation, listen quietly with attention."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ قرآن مجید کو احتیاط سے سنبھالتے اور توجہ سے سنتے ہیں۔",
+    "en": "We learned to handle the Qur'an carefully and listen with attention."
+  },
+  "parent_notes": {
+    "ur": "تلاوت کے وقت ٹی وی یا فون کی دوسری آوازیں بند کر کے بچے کو توجہ سے سننا سکھائیں۔",
+    "en": "Switch off other TV or phone sounds during recitation to show your child how to listen with attention."
+  },
+  "mentor_notes": {
+    "ur": "قرآن مجید چھونے اور وضو کی تفصیلات 'گھر والوں اور استاد' پر چھوڑیں۔ فون یا ایپ پر قرآن مجید کے احکام کے بارے میں سوال آئے تو عالم یا استاد کی طرف رہنمائی کریں۔",
+    "en": "Leave details of touching the Qur'an and wudu to 'family and teacher'. If questions arise about rulings for the Qur'an on phones or apps, refer them to a scholar or teacher."
+  },
+  "accessibility_notes": {
+    "ur": "تصویر (رحل پر رکھا بند قرآن مجید) اور اس کا متبادل متن ابھی بنانا ہے؛ تصویر میں قرآنی متن نہ ہو۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ تلاوت کی کوئی ریکارڈنگ شامل کرنی ہو تو وہ عالم کی منظوری سے انسانی آواز میں ہو۔ ترتیب والی سرگرمی کا متبادل: 'پہلا قدم کون سا؟' جیسے بٹن والے سوال۔",
+    "en": "A picture (a closed Qur'an resting on a rehal) and its alt text are still to be made; no Qur'anic text in the picture. Urdu audio is not yet recorded. Any recitation recording must be a scholar-approved human recording. Alternative to the ordering activity: button questions such as 'which step comes first?'."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "model the handling routine step by step, then practise listening with attention as a skill (stop, sit, listen)",
+    "questioning_strategy": "ask 'what comes first?' and 'is this being careful?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "mixes up the handling steps"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "rehal, cushion or lap (no expensive items assumed); home and masjid settings; wudu and touching details deferred to family and teacher",
+    "misconception_detectors": [
+      "thinks background recitation does not need attention",
+      "chooses scolding to quieten others"
+    ],
+    "critical_thinking_prompts": [
+      "Why is it easier to understand something when we listen with attention?"
+    ],
+    "personalization_rules": "if the learner struggles with the steps, replay the ordering activity with picture support before the quiz",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions",
+      "recite, write, translate or explain the meaning of any verse from memory; use only scholar-supplied text",
+      "play or generate recitation audio"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: supply the text and approved translation for the Surah Al-A'raf, 204 placeholder in teacher_script (verify the reference), or replace it",
+    "scholar: confirm the handling steps are common practice for all Pakistani Muslims and the phone-recitation line is acceptable without a ruling",
+    "illustration reviewer: no Qur'anic text in any image"
+  ]
+}

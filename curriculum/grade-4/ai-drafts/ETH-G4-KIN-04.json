@@ -1,0 +1,487 @@
+{
+  "code": "ETH-G4-KIN-04",
+  "title": {
+    "ur": "ہمدردی: دوسروں کے احساس کو سمجھنا",
+    "en": "Empathy: noticing how others feel"
+  },
+  "description": {
+    "ur": "چہرے، آواز اور حرکت سے دوسروں کے احساس پہچاننا اور خود کو ان کی جگہ رکھ کر سوچنا۔",
+    "en": "Noticing how others feel from their face, voice and body, and imagining being in their place."
+  },
+  "keywords": [
+    "empathy",
+    "feelings",
+    "noticing",
+    "face clues",
+    "listening",
+    "in their shoes"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ہمدردی",
+        "en": "empathy"
+      },
+      "definition": {
+        "ur": "سمجھنا کہ دوسرا کیسا محسوس کر رہا ہے۔",
+        "en": "understanding how someone else is feeling."
+      }
+    },
+    {
+      "term": {
+        "ur": "احساس",
+        "en": "feeling"
+      },
+      "definition": {
+        "ur": "اندر کی کیفیت، جیسے خوشی، اداسی، ڈر یا غصہ۔",
+        "en": "what we feel inside, like happy, sad, scared or cross."
+      }
+    },
+    {
+      "term": {
+        "ur": "اشارہ",
+        "en": "clue"
+      },
+      "definition": {
+        "ur": "کوئی نشانی جو کچھ بتائے، جیسے آنسو یا مسکراہٹ۔",
+        "en": "a sign that tells us something, like tears or a smile."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم احساس کے جاسوس بنیں گے۔ لوگ ہمیشہ نہیں بتاتے کہ وہ کیسا محسوس کر رہے ہیں۔ لیکن چہرہ، آواز اور جسم اشارے دیتے ہیں۔ ہم اشارے ڈھونڈیں گے، پھر سوچیں گے: اگر میں اس کی جگہ ہوتا تو کیسا لگتا؟",
+    "en": "Today we will be feelings detectives. People do not always say how they feel. But face, voice and body give clues. We will look for clues, then think: if I were in their place, how would I feel?"
+  },
+  "student_explanation": {
+    "ur": "ہمدردی کا مطلب ہے دوسرے کا احساس سمجھنا۔ چہرہ اشارہ دیتا ہے، جیسے آنسو یا مسکراہٹ۔ آواز بھی اشارہ دیتی ہے، جیسے دھیمی یا اونچی آواز۔ جسم بھی بتاتا ہے، جیسے جھکے کندھے۔ کچھ لوگ اداس ہوں تو روتے نہیں۔ وہ بس چپ ہو جاتے ہیں۔ سوچیں: میں اس کی جگہ ہوتا تو کیسا لگتا؟ پھر نرمی سے پوچھیں: «کیا تم ٹھیک ہو؟» دھیان سے سنیں۔ اگر کوئی بہت دکھی یا خطرے میں ہو تو بھروسے والے بڑے کو بتائیں۔",
+    "en": "Empathy means understanding how someone else feels. A face gives clues, like tears or a smile. A voice gives clues too, like a soft or loud voice. A body tells us things, like drooping shoulders. Some people do not cry when they are sad. They just go quiet. Think: if I were in their place, how would I feel? Then ask gently, \"Are you OK?\" Listen carefully. If someone is very upset or in danger, tell a trusted adult."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "کھیل کے بعد سنیل کی ٹیم ہار گئی۔ وہ کچھ نہیں کہہ رہا، سر جھکا کر بیٹھا ہے۔ وہ کیسا محسوس کر رہا ہو گا؟",
+        "en": "After a match, Sunil's team lost. He says nothing and sits with his head down. How might he be feeling?"
+      },
+      "steps": [
+        {
+          "ur": "اشارے ڈھونڈیں: چپ ہے، سر جھکا ہے۔",
+          "en": "Find the clues: he is quiet, his head is down."
+        },
+        {
+          "ur": "اس کی جگہ خود کو رکھیں: ہارنے کے بعد مجھے کیسا لگتا؟ شاید اداس یا مایوس۔",
+          "en": "Put yourself in his place: how would I feel after losing? Maybe sad or let down."
+        },
+        {
+          "ur": "مدد کریں: پاس بیٹھ کر کہیں، «تم نے اچھا کھیلا۔ اگلی بار پھر کوشش کریں گے۔»",
+          "en": "Help: sit beside him and say, \"You played well. We'll try again next time.\""
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "فاطمہ ہنس رہی ہے، مگر اس کی سہیلی ماریہ کی آنکھوں میں آنسو ہیں کیونکہ فاطمہ نے اس کے بالوں کا مذاق اڑایا۔ کیا دونوں ایک جیسا محسوس کر رہی ہیں؟",
+        "en": "Fatima is laughing, but her friend Maria has tears in her eyes because Fatima joked about her hair. Do both feel the same?"
+      },
+      "steps": [
+        {
+          "ur": "فاطمہ کا اشارہ: ہنسی، یعنی وہ مذاق سمجھ رہی ہے۔",
+          "en": "Fatima's clue: laughing; she thinks it is a joke."
+        },
+        {
+          "ur": "ماریہ کا اشارہ: آنسو، یعنی اسے دکھ ہوا۔",
+          "en": "Maria's clue: tears; she is hurt."
+        },
+        {
+          "ur": "ہمدردی کا مطلب ہے دوسرے کے اشارے دیکھنا۔ فاطمہ رک کر معافی مانگ سکتی ہے۔",
+          "en": "Empathy means noticing the other person's clues. Fatima can stop and say sorry."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-clue-match",
+      "type": "matching",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہر اشارے کو اس احساس سے ملائیں جو وہ شاید دکھا رہا ہے۔",
+        "en": "Match each clue to the feeling it might show."
+      },
+      "options": [
+        {
+          "ur": "آنسو اور دھیمی آواز",
+          "en": "Tears and a soft voice"
+        },
+        {
+          "ur": "بڑی مسکراہٹ اور اچھلنا",
+          "en": "A big smile and jumping"
+        },
+        {
+          "ur": "کانپتے ہاتھ اور ماں کے پیچھے چھپنا",
+          "en": "Shaking hands and hiding behind a parent"
+        },
+        {
+          "ur": "مٹھیاں بند اور اونچی آواز",
+          "en": "Clenched fists and a loud voice"
+        }
+      ],
+      "answer_key": {
+        "pairs": {
+          "0": "sad / اداس",
+          "1": "happy / خوش",
+          "2": "scared / ڈرا ہوا",
+          "3": "cross / غصے میں"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: آپ کا چہرہ اور جسم کب ایسا ہوتا ہے؟",
+            "en": "Think: when do your face and body look like this?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-empathy-meaning",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہمدردی کا مطلب کیا ہے؟",
+        "en": "What does empathy mean?"
+      },
+      "options": [
+        {
+          "ur": "صرف اپنے احساس کے بارے میں سوچنا",
+          "en": "Thinking only about your own feelings"
+        },
+        {
+          "ur": "سب کو ہنسانا",
+          "en": "Making everyone laugh"
+        },
+        {
+          "ur": "سمجھنا کہ دوسرا کیسا محسوس کر رہا ہے",
+          "en": "Understanding how someone else feels"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p2-not-crying",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اگر کوئی رو نہیں رہا تو وہ ضرور ٹھیک ہے۔",
+        "en": "If someone isn't crying, they must be fine."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا کچھ لوگ اداس ہو کر بس چپ ہو جاتے ہیں؟",
+            "en": "Do some people just go quiet when they are sad?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کچھ لوگ اداس ہوں تو چپ ہو جاتے ہیں۔ دوسرے اشارے بھی دیکھیں۔",
+        "en": "Some people go quiet when sad. Look at other clues too."
+      }
+    },
+    {
+      "id": "p3-new-school",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "آج نئے اسکول میں ایک بچی کا پہلا دن ہے۔ وہ اپنا بستہ پکڑے دروازے کے پاس کھڑی ہے۔ وہ شاید کیسا محسوس کر رہی ہے؟",
+        "en": "It is a girl's first day at a new school. She stands near the door holding her bag tightly. How might she feel?"
+      },
+      "options": [
+        {
+          "ur": "گھبرائی ہوئی یا شرمیلی",
+          "en": "Nervous or shy"
+        },
+        {
+          "ur": "غصے میں",
+          "en": "Angry"
+        },
+        {
+          "ur": "بہت تھکی ہوئی کیونکہ وہ کھیلی ہے",
+          "en": "Very tired from playing"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "آپ پہلے دن ایسی جگہ ہوتے تو کیسا لگتا؟",
+            "en": "How would you feel on a first day somewhere new?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-respond",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "آپ کا دوست بہت چپ ہے اور کھانا بھی نہیں کھا رہا۔ اچھا پہلا قدم کیا ہے؟",
+        "en": "Your friend is very quiet and isn't eating. What is a good first step?"
+      },
+      "options": [
+        {
+          "ur": "اس کا مذاق اڑانا",
+          "en": "Make fun of him"
+        },
+        {
+          "ur": "نرمی سے پوچھنا «کیا تم ٹھیک ہو؟» اور سننا",
+          "en": "Gently ask \"Are you OK?\" and listen"
+        },
+        {
+          "ur": "سب کو بتانا کہ وہ عجیب ہے",
+          "en": "Tell everyone he is strange"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p5-same-feelings",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک ہی بات پر ہر کوئی ایک جیسا محسوس کرتا ہے۔",
+        "en": "Everyone feels the same about the same thing."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "ایک مذاق کسی کو ہنساتا ہے اور کسی کو دکھ دیتا ہے۔",
+        "en": "One joke can make one person laugh and hurt another."
+      }
+    },
+    {
+      "id": "p6-trusted-adult",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "اگر کوئی دوست بہت زیادہ دکھی لگے یا کہے کہ اسے کوئی تکلیف دے رہا ہے، تو آپ کیا کریں؟",
+        "en": "If a friend seems very, very upset or says someone is hurting them, what should you do?"
+      },
+      "options": [
+        {
+          "ur": "سب کچھ خود ٹھیک کرنے کی کوشش کرنا",
+          "en": "Try to fix it all by yourself"
+        },
+        {
+          "ur": "کچھ نہ کرنا",
+          "en": "Do nothing"
+        },
+        {
+          "ur": "کسی بھروسے والے بڑے کو بتانا",
+          "en": "Tell a trusted adult"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "explanation": {
+        "ur": "بڑی پریشانی میں بڑوں کی مدد چاہیے۔ یہ آپ کا اکیلے کا کام نہیں۔",
+        "en": "Big worries need a grown-up's help. It is not your job alone."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-cricket-clue",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "عمران نے کرکٹ میں چھکا مارا۔ سب تالیاں بجا رہے ہیں، مگر بالر احمد کی آنکھیں نم ہیں۔ عمران ہمدردی کیسے دکھا سکتا ہے؟",
+        "en": "Imran hits a six in cricket. Everyone claps, but the bowler Ahmed has wet eyes. How can Imran show empathy?"
+      },
+      "options": [
+        {
+          "ur": "احمد کے سامنے اور زور سے خوشی منانا",
+          "en": "Celebrate even louder in front of Ahmed"
+        },
+        {
+          "ur": "احمد سے کہنا «اچھی گیند تھی، تم بہت اچھا کر رہے ہو»",
+          "en": "Tell Ahmed \"good ball, you're doing really well\""
+        },
+        {
+          "ur": "احمد کو بتانا کہ وہ رونا بند کرے",
+          "en": "Tell Ahmed to stop crying"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "خوشی کے وقت بھی دوسرے کے اشارے دیکھیں۔",
+            "en": "Even when you are happy, notice the other person's clues."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-feelings-faces",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کاغذ پر چار چہرے بنائیں: خوش، اداس، ڈرا ہوا، غصے میں۔ گھر کے کسی فرد کو دکھا کر پوچھیں کہ وہ کون سا احساس پہچانتے ہیں۔",
+        "en": "Draw four faces on paper: happy, sad, scared, cross. Show someone at home and ask which feeling they can spot."
+      },
+      "answer_key": {
+        "guidance": "Paper-and-pencil game at home; about drawn faces only, not the child's own feelings; nothing is uploaded."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "چہرے، آواز اور جسم میں کیا اشارہ ہے؟",
+        "en": "What clue is in the face, voice or body?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اگر آپ اس کی جگہ ہوتے تو کیسا لگتا؟",
+        "en": "If you were in their place, how would you feel?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "جو رو نہیں رہا وہ ٹھیک ہے۔",
+        "en": "Someone who isn't crying is fine."
+      },
+      "correction": {
+        "ur": "کچھ لوگ اداس ہو کر چپ ہو جاتے ہیں؛ سارے اشارے دیکھیں۔",
+        "en": "Some people go quiet when sad; look at all the clues."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "سب کو وہی محسوس ہوتا ہے جو مجھے ہوتا ہے۔",
+        "en": "Everyone feels what I feel."
+      },
+      "correction": {
+        "ur": "ایک ہی بات پر لوگ مختلف محسوس کر سکتے ہیں۔",
+        "en": "People can feel differently about the same thing."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misreads feeling clues twice",
+      "remediation_ref": "ETH-G4-KIN-04"
+    },
+    {
+      "signal": "misconception:m-kindness-to-friends-only",
+      "remediation_ref": "ETH-G4-KIN-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "ہمدردی = دوسرے کا احساس سمجھنا۔ اشارے: چہرہ، آواز، جسم۔ سوچیں: میں اس کی جگہ ہوتا تو؟ نرمی سے پوچھیں اور سنیں۔ بڑی پریشانی ہو تو بھروسے والے بڑے کو بتائیں۔",
+    "en": "Empathy = understanding another's feelings. Clues: face, voice, body. Think: what if I were in their place? Ask gently and listen. For big worries, tell a trusted adult."
+  },
+  "summary": {
+    "ur": "ہم نے اشاروں سے دوسروں کے احساس پہچاننا اور ہمدردی سے جواب دینا سیکھا۔",
+    "en": "We learned to spot others' feelings from clues and respond with empathy."
+  },
+  "parent_notes": {
+    "ur": "کہانیوں یا روزمرہ میں پوچھیں: «تمہارے خیال میں وہ کیسا محسوس کر رہا ہے؟» بچے کے اپنے احساسات کو بھی نام دیں اور قبول کریں۔",
+    "en": "In stories or daily life ask, \"How do you think he feels?\" Also name and accept your child's own feelings."
+  },
+  "mentor_notes": {
+    "ur": "احساسات پر بات کرتے ہوئے کچھ بچے اپنی باتیں بتا سکتے ہیں۔ بچوں سے ان کے احساس کے بارے میں سوال نہ کریں۔ اگر کوئی بچہ پریشانی کا ذکر کرے تو سنیں، تسلی دیں اور حفاظتی ذمہ دار کو بتائیں۔",
+    "en": "Talking about feelings may lead some learners to share their own. Do not question learners about their feelings. If a learner mentions a worry, listen, reassure, and pass it to the safeguarding lead."
+  },
+  "accessibility_notes": {
+    "ur": "چہروں اور اشاروں کی تصویریں ابھی بنانی ہیں؛ متبادل متن ہر چہرے کا اشارہ بیان کرے (مثلاً «آنکھوں میں آنسو، منہ نیچے»)۔ نابینا بچوں کے لیے آواز کے اشارے (دھیمی، اونچی، کانپتی آواز) کو آڈیو میں نمایاں کریں۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ملانے والی سرگرمی کا متبادل: ہر اشارے کے لیے چار احساس بٹنوں میں سے ایک چنیں۔ کچھ بچوں (مثلاً آٹزم) کے لیے چہرے پڑھنا مشکل ہو سکتا ہے؛ «پوچھنا اور سننا» کو برابر کا درست طریقہ مانیں۔",
+    "en": "Face and clue pictures are still to be made; alt text should describe each face's clues (e.g. 'tears in eyes, mouth turned down'). For blind learners, make voice clues (soft, loud, shaky) clear in the audio. Urdu audio is not yet recorded. Alternative to the matching activity: for each clue tap one of four feeling buttons. Some learners (e.g. autistic children) may find reading faces hard; treat 'ask and listen' as an equally correct strategy."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "feelings-detective: find clues (face, voice, body), imagine being in their place, then respond kindly (ask, listen, help, or tell a trusted adult for big worries)",
+    "questioning_strategy": "ask 'what clue do you notice?' before 'how might they feel?'; accept more than one reasonable feeling",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "learner says they themselves feel sad or scared",
+      "assumes others always feel as they do"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "everyday moments (lost match, first day at school, a joke that hurt); no frightening or graphic scenes; diverse names",
+    "misconception_detectors": [
+      "thinks no tears means no sadness",
+      "assumes everyone feels the same",
+      "thinks they must fix a friend's big problem alone"
+    ],
+    "critical_thinking_prompts": [
+      "Can the same joke make two people feel different? Why?",
+      "What can you do if you can't tell how someone feels?"
+    ],
+    "personalization_rules": "accept 'ask them' as a valid way to find out feelings, especially for learners who find faces hard; if clue-reading is weak, repeat with the matching activity",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor",
+      "learner describes their own strong sadness, fear or being hurt -> respond warmly, do not probe, hand to a human mentor / safeguarding lead"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths",
+      "ask the learner how they are feeling about their home or family"
+    ]
+  },
+  "review_flags": [
+    "SAFEGUARDING REVIEWER: check p6 ('someone is hurting them' -> tell a trusted adult) and mentor disclosure note",
+    "subject expert: matching item uses free-text pair labels in answer_key; confirm the format the player expects",
+    "accessibility reviewer: check the neurodiversity note (asking is as valid as reading faces)"
+  ]
+}

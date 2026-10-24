@@ -1,0 +1,490 @@
+{
+  "code": "MATH-G4-AS-03",
+  "description": {
+    "ur": "روزمرہ کے ایک اور دو قدمی لفظی مسائل میں جمع یا تفریق چن کر حل کرنا۔",
+    "en": "Choosing addition or subtraction for one- and two-step everyday word problems, and solving them."
+  },
+  "keywords": [
+    "word problems",
+    "addition",
+    "subtraction",
+    "two-step",
+    "choose the operation",
+    "reasonableness"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "کل",
+        "en": "total"
+      },
+      "definition": {
+        "ur": "سب کو ملا کر جو بنے۔",
+        "en": "What everything makes when put together."
+      }
+    },
+    {
+      "term": {
+        "ur": "بچا",
+        "en": "left"
+      },
+      "definition": {
+        "ur": "کچھ کم ہونے کے بعد جو رہ جائے۔",
+        "en": "What remains after some is taken away."
+      }
+    },
+    {
+      "term": {
+        "ur": "زیادہ/کم",
+        "en": "more/less"
+      },
+      "definition": {
+        "ur": "دو مقداروں کا فرق بتانے والے لفظ۔",
+        "en": "Words that compare two amounts."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم عددوں والی چھوٹی کہانیاں حل کریں گے۔ ہر کہانی میں پہلے یہ سوچیں کہ کیا ہو رہا ہے۔ چیزیں اکٹھی ہو رہی ہیں یا کم ہو رہی ہیں؟ پھر ہم جمع یا تفریق چنیں گے۔ آخر میں دیکھیں گے کہ جواب سمجھ میں آتا ہے یا نہیں۔",
+    "en": "Today we solve short stories with numbers. In each story, first think about what is happening. Are things being put together, or taken away? Then we choose addition or subtraction. At the end we check if the answer makes sense."
+  },
+  "student_explanation": {
+    "ur": "لفظی مسئلہ عددوں والی ایک چھوٹی کہانی ہوتا ہے۔ پہلے اسے پڑھیں اور سوچیں کہ کیا ہو رہا ہے۔ پوچھیں: مجھے کیا معلوم کرنا ہے؟ کیا چیزیں اکٹھی ہو رہی ہیں؟ تب جمع کریں۔ کیا کچھ کم ہو رہا ہے یا دو چیزوں کا موازنہ ہو رہا ہے؟ تب تفریق کریں۔ کچھ مسئلوں کے دو قدم ہوتے ہیں۔ ایک قدم کریں، پھر اس کا جواب استعمال کریں۔ آخر میں دیکھیں کہ جواب سمجھ میں آتا ہے یا نہیں۔",
+    "en": "A word problem is a short story with numbers. First read it and picture what happens. Ask: what do I need to find? Are things being put together? Then add. Is something taken away, or are two amounts compared? Then subtract. Some problems have two steps. Do one step, then use its answer. Last, check that the answer makes sense."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "ایک دکان میں ۱۲۵۰ کاپیاں تھیں۔ ۴۸۰ بک گئیں۔ کتنی بچیں؟",
+        "en": "A shop had 1250 notebooks. It sold 480. How many are left?"
+      },
+      "steps": [
+        {
+          "ur": "کیا پوچھا گیا ہے؟ کتنی کاپیاں بچیں۔",
+          "en": "What is asked? How many notebooks are left."
+        },
+        {
+          "ur": "کاپیاں کم ہوئیں، اس لیے تفریق: ۱۲۵۰ − ۴۸۰۔",
+          "en": "Notebooks were taken away, so subtract: 1250 − 480."
+        },
+        {
+          "ur": "۱۲۵۰ − ۴۸۰ = ۷۷۰۔",
+          "en": "1250 − 480 = 770."
+        },
+        {
+          "ur": "جانچ: ۷۷۰ + ۴۸۰ = ۱۲۵۰۔ جواب سمجھ میں آتا ہے۔",
+          "en": "Check: 770 + 480 = 1250. The answer makes sense."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "زینب کے گھر والوں نے پیر کو ۱۲۷۵ اور منگل کو ۱۴۶۰ آم توڑے۔ انہوں نے ۱۸۹۰ آم بیچ دیے۔ کتنے آم بچے؟",
+        "en": "Zainab's family picked 1275 mangoes on Monday and 1460 on Tuesday. They sold 1890. How many mangoes are left?"
+      },
+      "steps": [
+        {
+          "ur": "پہلا قدم: کل کتنے آم توڑے؟ ۱۲۷۵ + ۱۴۶۰ = ۲۷۳۵۔",
+          "en": "Step 1: how many were picked in all? 1275 + 1460 = 2735."
+        },
+        {
+          "ur": "دوسرا قدم: کچھ بک گئے، اس لیے تفریق: ۲۷۳۵ − ۱۸۹۰ = ۸۴۵۔",
+          "en": "Step 2: some were sold, so subtract: 2735 − 1890 = 845."
+        },
+        {
+          "ur": "جانچ: ۸۴۵ + ۱۸۹۰ = ۲۷۳۵۔ جواب: ۸۴۵ آم۔",
+          "en": "Check: 845 + 1890 = 2735. Answer: 845 mangoes."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-stories",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کہانی کو \"جمع\" یا \"تفریق\" والے ڈبے میں گھسیٹیں۔ (الف) احمد کے پاس ۱۲۵ ٹکٹ ہیں، اسے ۴۰ اور ملتے ہیں۔ (ب) ۳۰۰ روٹیاں تھیں، ۱۲۰ کھا لی گئیں۔ (ج) دکان الف میں ۴۵۰ انڈے، دکان ب میں ۳۸۰۔ الف میں کتنے زیادہ؟ (د) دو جماعتوں میں ۳۸ اور ۴۲ بچے ہیں۔ کل کتنے؟",
+        "en": "Drag each story into the \"add\" or \"subtract\" box. (a) Ahmed has 125 stamps and gets 40 more. (b) There were 300 rotis; 120 were eaten. (c) Shop A has 450 eggs, shop B has 380. How many more in shop A? (d) Two classes have 38 and 42 children. How many in all?"
+      },
+      "answer_key": {
+        "add": [
+          "a",
+          "d"
+        ],
+        "subtract": [
+          "b",
+          "c"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر کہانی کی تصویر سوچیں: چیزیں ملتی ہیں یا کم ہوتی ہیں یا موازنہ ہوتا ہے؟",
+            "en": "Picture each story: are things joined, taken away, or compared?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-chairs",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک اسکول میں ۱۱۲۰ کرسیاں ہیں۔ ۳۸۵ ہال میں ہیں۔ باقی کمروں میں کتنی ہیں؟ ___",
+        "en": "A school has 1120 chairs. 385 are in the hall. How many are in the other rooms? ___"
+      },
+      "answer_key": {
+        "answer": "735"
+      },
+      "accepted_variants": [
+        "735",
+        "۷۳۵"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کل میں سے ہال والی کرسیاں نکالیں۔",
+            "en": "Take the hall chairs away from the total."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱۱۲۰ − ۳۸۵ = ۷۳۵۔ جانچ: ۷۳۵ + ۳۸۵ = ۱۱۲۰۔",
+        "en": "1120 − 385 = 735. Check: 735 + 385 = 1120."
+      }
+    },
+    {
+      "id": "p6-train",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک ریل گاڑی کے تین ڈبوں میں ۷۲، ۶۸ اور ۸۵ مسافر ہیں۔ کل کتنے مسافر ہیں؟ ___",
+        "en": "A train has three coaches with 72, 68 and 85 passengers. How many passengers are there in all? ___"
+      },
+      "answer_key": {
+        "answer": "225"
+      },
+      "accepted_variants": [
+        "225",
+        "۲۲۵"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے دو عدد جمع کریں، پھر تیسرا۔",
+            "en": "Add two numbers first, then the third."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۷۲ + ۶۸ = ۱۴۰، پھر ۱۴۰ + ۸۵ = ۲۲۵۔",
+        "en": "72 + 68 = 140, then 140 + 85 = 225."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-bus-operation",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ایک بس میں ۴۶ مسافر ہیں۔ ۱۸ اتر جاتے ہیں۔ بس میں کتنے رہ گئے، یہ جاننے کے لیے کیا کریں گے؟",
+        "en": "A bus has 46 passengers. 18 get off. What do we do to find how many are still on the bus?"
+      },
+      "options": [
+        {
+          "ur": "جمع",
+          "en": "add"
+        },
+        {
+          "ur": "تفریق",
+          "en": "subtract"
+        },
+        {
+          "ur": "نہ جمع نہ تفریق",
+          "en": "neither"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "مسافر بڑھے یا کم ہوئے؟",
+            "en": "Did the number of passengers go up or down?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "مسافر کم ہوئے، اس لیے تفریق: ۴۶ − ۱۸ = ۲۸۔",
+        "en": "Passengers got off, so subtract: 46 − 18 = 28."
+      }
+    },
+    {
+      "id": "p3-trees-how-many-more",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "گاؤں الف نے ۲۳۴۰ درخت لگائے۔ گاؤں ب نے ۱۸۷۵ درخت لگائے۔ گاؤں الف نے کتنے زیادہ درخت لگائے؟",
+        "en": "Village A planted 2340 trees. Village B planted 1875 trees. How many more trees did Village A plant?"
+      },
+      "options": [
+        {
+          "ur": "۴۲۱۵",
+          "en": "4,215"
+        },
+        {
+          "ur": "۴۶۵",
+          "en": "465"
+        },
+        {
+          "ur": "۱۵۳۵",
+          "en": "1,535"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "2": "m-borrow-forgotten"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "\"کتنے زیادہ\" کا مطلب ہے دونوں کا فرق۔",
+            "en": "\"How many more\" means the gap between the two."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "موازنہ ہے، اس لیے تفریق: ۲۳۴۰ − ۱۸۷۵ = ۴۶۵۔",
+        "en": "This compares two amounts, so subtract: 2340 − 1875 = 465."
+      }
+    },
+    {
+      "id": "p4-two-step-money",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ثنا کے پاس ۲۵۰۰ روپے تھے۔ اس نے ۱۱۵۰ روپے کے جوتے اور ۳۷۵ روپے کی کتاب خریدی۔ اس کے پاس کتنے روپے بچے؟",
+        "en": "Sana had Rs 2500. She bought shoes for Rs 1150 and a book for Rs 375. How much money is left?"
+      },
+      "options": [
+        {
+          "ur": "۱۳۵۰",
+          "en": "1,350"
+        },
+        {
+          "ur": "۲۱۲۵",
+          "en": "2,125"
+        },
+        {
+          "ur": "۹۷۵",
+          "en": "975"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے دونوں چیزوں کی کل قیمت نکالیں۔",
+            "en": "First find the total cost of both things."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱۱۵۰ + ۳۷۵ = ۱۵۲۵۔ پھر ۲۵۰۰ − ۱۵۲۵ = ۹۷۵۔",
+        "en": "1150 + 375 = 1525. Then 2500 − 1525 = 975."
+      }
+    },
+    {
+      "id": "p5-tank",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ایک ٹینکی میں ۱۰۰۰ لیٹر پانی ہے۔ ۶۴۰ لیٹر استعمال ہو گیا۔ بچا ہوا پانی جاننے کے لیے ہم ۱۰۰۰ + ۶۴۰ جمع کریں گے۔",
+        "en": "A tank holds 1000 litres of water. 640 litres are used. To find what is left, we add 1000 + 640."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "استعمال ہونے سے پانی بڑھتا ہے یا کم ہوتا ہے؟",
+            "en": "Does using water make it more or less?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پانی کم ہوا، اس لیے تفریق: ۱۰۰۰ − ۶۴۰ = ۳۶۰ لیٹر۔",
+        "en": "The water went down, so subtract: 1000 − 640 = 360 litres."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-cricket-target",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک کرکٹ ٹیم نے پہلے میچ میں ۱۸۶ اور دوسرے میں ۲۱۹ رنز بنائے۔ دونوں میچوں کا ہدف ۴۵۰ رنز تھا۔ ہدف تک پہنچنے کے لیے اور کتنے رنز چاہیے تھے؟",
+        "en": "A cricket team scored 186 runs in the first match and 219 in the second. Their target for both matches was 450 runs. How many more runs did they need?"
+      },
+      "answer_key": {
+        "answer": "45"
+      },
+      "accepted_variants": [
+        "45",
+        "۴۵"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے کل رنز نکالیں، پھر ہدف سے موازنہ کریں۔",
+            "en": "First find the total runs, then compare with the target."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-two-step-home",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر والوں کا دیا ہوا روزمرہ کا ایک دو قدمی مسئلہ حل کریں۔",
+        "en": "one everyday two-step problem set at home."
+      },
+      "answer_key": {
+        "answer": "both steps shown and a correct answer"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "کیا پوچھا گیا ہے؟",
+        "en": "What is the question asking?"
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "جوڑنا ہے یا گھٹانا؟",
+        "en": "Do we add or subtract?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "لفظ \"زیادہ\" دیکھ کر ہمیشہ جمع کر دینا۔",
+        "en": "Seeing the word \"more\" and always adding."
+      },
+      "correction": {
+        "ur": "کہانی کا تصور کریں۔ \"کتنے زیادہ\" دو مقداروں کا موازنہ ہے، اس لیے تفریق کریں۔",
+        "en": "Picture the story. \"How many more\" compares two amounts, so subtract."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "دو قدمی مسئلے میں پہلے قدم کے بعد رک جانا۔",
+        "en": "Stopping after the first step of a two-step problem."
+      },
+      "correction": {
+        "ur": "دوبارہ سوال پڑھیں: کیا میں نے وہی بتایا جو پوچھا گیا ہے؟",
+        "en": "Read the question again: have I found what it asks for?"
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-borrow-forgotten",
+      "remediation_ref": "MATH-G4-AS-02"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-AS-01",
+      "remediation_ref": "MATH-G4-AS-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "۱۔ کہانی کا تصور کریں۔ ۲۔ اکٹھا ہو تو جمع، کم ہو یا موازنہ ہو تو تفریق۔ ۳۔ دو قدم ہوں تو پہلے کا جواب دوسرے میں استعمال کریں۔ ۴۔ جانچیں۔",
+    "en": "1. Picture the story. 2. Joining means add; taking away or comparing means subtract. 3. For two steps, use the first answer in the second step. 4. Check."
+  },
+  "summary": {
+    "ur": "ہم نے کہانی سمجھ کر جمع یا تفریق چننا اور دو قدمی مسائل حل کرنا سیکھا۔",
+    "en": "We learned to choose addition or subtraction by picturing the story, and to solve two-step problems."
+  },
+  "parent_notes": {
+    "ur": "گھر کے کام کے دوران ایک آسان سوال پوچھیں: \"کتنے بچے؟\"",
+    "en": "pose a simple \"how many left?\" question during chores."
+  },
+  "mentor_notes": {
+    "ur": "صرف اشارے والے لفظوں پر انحصار سے روکیں؛ بچوں سے کہیں کہ صورتِ حال کا تصور کریں۔",
+    "en": "discourage keyword-matching; ask learners to picture the situation."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کارڈوں کی تصویریں ابھی بنانی ہیں؛ ہر کارڈ کا متبادل متن پوری کہانی پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ کمزور قاری بچوں کے لیے کہانیاں سن سکنا ضروری ہے۔ گھسیٹنے کا متبادل: ہر کہانی کے نیچے \"جمع\" یا \"تفریق\" بٹن چنیں۔",
+    "en": "The story-card pictures are still to be made; each card's alt text should read the whole story. Urdu audio is not yet recorded; weaker readers need to hear the stories. Alternative to dragging: under each story choose an \"add\" or \"subtract\" button."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "picture the situation first (joining, taking away, comparing), then choose the operation, compute, and check by the inverse",
+    "questioning_strategy": "ask 'what is happening in the story?' and 'what do we need to find?' before any calculation",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "adds whenever the word 'more' appears",
+      "stops after the first step"
+    ],
+    "hint_policy": "graduated; two hints max (what is asked; add or subtract) then a worked re-teach on a parallel story; never give the answer first",
+    "example_policy": "everyday Pakistani contexts (bazaar, school, village, cricket, rotis, mangoes); names from across Pakistan and of all genders; no costly items",
+    "misconception_detectors": [
+      "adds for a 'how many more' comparison",
+      "gives the first-step answer to a two-step problem",
+      "flips digits when subtracting"
+    ],
+    "critical_thinking_prompts": [
+      "Can a 'how many more' story be solved by counting on instead of subtracting?"
+    ],
+    "personalization_rules": "if the operation choice is right but the calculation is wrong, route to MATH-G4-AS-01 (adding) or MATH-G4-AS-02 (subtracting)",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the library has no keyword-only id (the doc suggests m-keyword-only 'if observed'); only a digit-flip distractor is tagged (m-borrow-forgotten)",
+    "language editor: check story wording and names (Ahmed, Zainab, Sana, Amna-style names) read naturally in Urdu"
+  ]
+}

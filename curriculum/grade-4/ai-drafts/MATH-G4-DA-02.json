@@ -1,0 +1,428 @@
+{
+  "code": "MATH-G4-DA-02",
+  "description": {
+    "ur": "پیمانے والا سلاخی خاکہ پڑھنا اور گروہوں کا موازنہ کرنا۔",
+    "en": "Read a bar graph with a scale and compare groups."
+  },
+  "keywords": [
+    "bar graph",
+    "scale",
+    "axis",
+    "data",
+    "compare",
+    "most",
+    "least"
+  ],
+  "teacher_script": {
+    "ur": "ایک جماعت سے پوچھا گیا کہ ان کا پسندیدہ پھل کونسا ہے۔ جواب ایک سلاخی خاکے میں دکھائے گئے۔ ہر پھل کی ایک سلاخ ہے؛ جتنی لمبی سلاخ، اتنے زیادہ بچے۔ مگر سلاخ پڑھنے سے پہلے پیمانہ دیکھنا ضروری ہے۔ آج ہم سیکھیں گے کہ ہر خانہ کتنے کا ہے، اور سلاخوں کا موازنہ کیسے کرتے ہیں۔",
+    "en": "A class was asked which fruit they like best. The answers are shown in a bar graph. Each fruit has a bar; the longer the bar, the more children. But before reading a bar, we must check the scale. Today we learn how much each square is worth, and how to compare the bars."
+  },
+  "student_explanation": {
+    "ur": "سلاخی خاکے میں ہر گروہ کی ایک سلاخ ہوتی ہے۔ لمبی سلاخ کا مطلب ہے زیادہ۔ ایک محور پر نمبر لکھے ہوتے ہیں۔ یہ نمبر پیمانہ بناتے ہیں۔ پہلے دیکھیں کہ ہر خانہ کتنے کا ہے۔ ہر خانہ ۲ کا ہو اور سلاخ ۳ خانے اونچی ہو تو قیمت ۶ ہے۔ سلاخ کی چوٹی سے سیدھا محور تک دیکھیں۔ فرق نکالنے کے لیے بڑی قیمت سے چھوٹی گھٹائیں۔",
+    "en": "A bar graph has one bar for each group. A longer bar means more. Numbers are written along one axis. These numbers make the scale. First check how much each square is worth. If each square is 2 and a bar is 3 squares tall, its value is 6. Look straight across from the top of the bar to the axis. To find a difference, subtract the smaller value from the bigger one."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "سلاخی خاکہ 'جماعت کا پسندیدہ پھل'۔ پیمانہ: ہر خانہ = ۲ بچے۔ آم: ۵ خانے۔ کیلا: ۳ خانے۔ امرود: ۴ خانے۔ سیب: ۲ خانے۔ کتنے بچوں نے کیلا چنا؟",
+        "en": "Bar graph 'Our class's favourite fruit'. Scale: each square = 2 children. Mango: 5 squares. Banana: 3 squares. Guava: 4 squares. Apple: 2 squares. How many children chose banana?"
+      },
+      "steps": [
+        {
+          "ur": "پہلے پیمانہ پڑھیں: ہر خانہ = ۲ بچے۔",
+          "en": "First read the scale: each square = 2 children."
+        },
+        {
+          "ur": "کیلے کی سلاخ ۳ خانے اونچی ہے۔",
+          "en": "The banana bar is 3 squares tall."
+        },
+        {
+          "ur": "۳ × ۲ = ۶۔ تو ۶ بچوں نے کیلا چنا۔",
+          "en": "3 × 2 = 6. So 6 children chose banana."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "سلاخی خاکہ 'جماعت کا پسندیدہ پھل'۔ پیمانہ: ہر خانہ = ۲ بچے۔ آم: ۵ خانے۔ کیلا: ۳ خانے۔ امرود: ۴ خانے۔ سیب: ۲ خانے۔ آم اور امرود میں سے کسے زیادہ بچوں نے چنا، اور کتنے زیادہ نے؟",
+        "en": "Bar graph 'Our class's favourite fruit'. Scale: each square = 2 children. Mango: 5 squares. Banana: 3 squares. Guava: 4 squares. Apple: 2 squares. Which did more children choose, mango or guava, and by how many?"
+      },
+      "steps": [
+        {
+          "ur": "آم: ۵ × ۲ = ۱۰ بچے۔",
+          "en": "Mango: 5 × 2 = 10 children."
+        },
+        {
+          "ur": "امرود: ۴ × ۲ = ۸ بچے۔",
+          "en": "Guava: 4 × 2 = 8 children."
+        },
+        {
+          "ur": "۱۰ بڑا ہے ۸ سے، تو آم زیادہ پسند کیا گیا۔",
+          "en": "10 is more than 8, so mango was chosen more."
+        },
+        {
+          "ur": "فرق: ۱۰ − ۸ = ۲ بچے۔",
+          "en": "Difference: 10 − 8 = 2 children."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-draw-guava-bar",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "پیمانہ: ہر خانہ = ۲ بچے۔ ۸ بچوں نے امرود چنا۔ امرود کی سلاخ کو صحیح اونچائی تک بنائیں۔",
+        "en": "Scale: each square = 2 children. 8 children chose guava. Build the guava bar to the right height."
+      },
+      "answer_key": {
+        "bar_squares": 4,
+        "value": 8
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۲، ۴، ۶، ۸ — کتنے خانے ہوئے؟",
+            "en": "2, 4, 6, 8 — how many squares is that?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-mango-vs-banana",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "سلاخی خاکہ 'جماعت کا پسندیدہ پھل'۔ پیمانہ: ہر خانہ = ۲ بچے۔ آم: ۵ خانے۔ کیلا: ۳ خانے۔ امرود: ۴ خانے۔ سیب: ۲ خانے۔ آم چننے والے بچے کیلا چننے والوں سے کتنے زیادہ ہیں؟",
+        "en": "Bar graph 'Our class's favourite fruit'. Scale: each square = 2 children. Mango: 5 squares. Banana: 3 squares. Guava: 4 squares. Apple: 2 squares. How many more children chose mango than banana?"
+      },
+      "answer_key": {
+        "answer": "4"
+      },
+      "accepted_variants": [
+        "4",
+        "۴"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دونوں کی قیمت نکالیں، پھر گھٹائیں۔",
+            "en": "Find both values, then subtract."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "آم ۱۰، کیلا ۶۔ ۱۰ − ۶ = ۴۔",
+        "en": "Mango 10, banana 6. 10 − 6 = 4."
+      }
+    },
+    {
+      "id": "p6-order-fruits",
+      "type": "ordering",
+      "competency": "application",
+      "stem": {
+        "ur": "سلاخی خاکہ 'جماعت کا پسندیدہ پھل'۔ پیمانہ: ہر خانہ = ۲ بچے۔ آم: ۵ خانے۔ کیلا: ۳ خانے۔ امرود: ۴ خانے۔ سیب: ۲ خانے۔ پھلوں کو سب سے زیادہ سے سب سے کم کی ترتیب میں لگائیں۔",
+        "en": "Bar graph 'Our class's favourite fruit'. Scale: each square = 2 children. Mango: 5 squares. Banana: 3 squares. Guava: 4 squares. Apple: 2 squares. Put the fruits in order from most to fewest children."
+      },
+      "options": [
+        {
+          "ur": "کیلا",
+          "en": "banana"
+        },
+        {
+          "ur": "آم",
+          "en": "mango"
+        },
+        {
+          "ur": "سیب",
+          "en": "apple"
+        },
+        {
+          "ur": "امرود",
+          "en": "guava"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          3,
+          0,
+          2
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سلاخوں کی اونچائی کا موازنہ کریں۔",
+            "en": "Compare the heights of the bars."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "آم ۱۰، امرود ۸، کیلا ۶، سیب ۴۔",
+        "en": "Mango 10, guava 8, banana 6, apple 4."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-mango",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "سلاخی خاکہ 'جماعت کا پسندیدہ پھل'۔ پیمانہ: ہر خانہ = ۲ بچے۔ آم: ۵ خانے۔ کیلا: ۳ خانے۔ امرود: ۴ خانے۔ سیب: ۲ خانے۔ کتنے بچوں نے آم چنا؟",
+        "en": "Bar graph 'Our class's favourite fruit'. Scale: each square = 2 children. Mango: 5 squares. Banana: 3 squares. Guava: 4 squares. Apple: 2 squares. How many children chose mango?"
+      },
+      "options": [
+        {
+          "ur": "۵",
+          "en": "5"
+        },
+        {
+          "ur": "۱۰",
+          "en": "10"
+        },
+        {
+          "ur": "۷",
+          "en": "7"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-graph-scale-ignored"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے پیمانہ دیکھیں۔",
+            "en": "Check the scale first."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۵ × ۲ = ۱۰ بچے۔",
+        "en": "5 × 2 = 10 children."
+      }
+    },
+    {
+      "id": "p2-least",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "سلاخی خاکہ 'جماعت کا پسندیدہ پھل'۔ پیمانہ: ہر خانہ = ۲ بچے۔ آم: ۵ خانے۔ کیلا: ۳ خانے۔ امرود: ۴ خانے۔ سیب: ۲ خانے۔ سب سے کم بچوں نے کونسا پھل چنا؟",
+        "en": "Bar graph 'Our class's favourite fruit'. Scale: each square = 2 children. Mango: 5 squares. Banana: 3 squares. Guava: 4 squares. Apple: 2 squares. Which fruit did the fewest children choose?"
+      },
+      "options": [
+        {
+          "ur": "سیب",
+          "en": "apple"
+        },
+        {
+          "ur": "کیلا",
+          "en": "banana"
+        },
+        {
+          "ur": "امرود",
+          "en": "guava"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سب سے چھوٹی سلاخ کونسی ہے؟",
+            "en": "Which bar is the shortest?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سیب کی سلاخ سب سے چھوٹی ہے: ۲ خانے، یعنی ۴ بچے۔",
+        "en": "The apple bar is shortest: 2 squares, which is 4 children."
+      }
+    },
+    {
+      "id": "p4-scale-two",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پیمانہ: ہر خانہ = ۲۔ ۴ خانے اونچی سلاخ ۴ دکھاتی ہے۔",
+        "en": "Scale: each square = 2. A bar 4 squares tall shows 4."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-graph-scale-ignored"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر خانہ ۱ کا ہے یا ۲ کا؟",
+            "en": "Is each square worth 1 or 2?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴ × ۲ = ۸، ۴ نہیں۔",
+        "en": "4 × 2 = 8, not 4."
+      }
+    },
+    {
+      "id": "p5-saba-savings",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک سلاخی خاکہ بچت دکھاتا ہے۔ پیمانہ: ہر خانہ = ۵ روپے۔ صبا کی سلاخ ۶ خانے اونچی ہے۔ اس نے کتنے روپے بچائے؟",
+        "en": "A bar graph shows savings. Scale: each square = 5 rupees. Saba's bar is 6 squares tall. How many rupees did she save?"
+      },
+      "options": [
+        {
+          "ur": "۱۱ روپے",
+          "en": "Rs 11"
+        },
+        {
+          "ur": "۶ روپے",
+          "en": "Rs 6"
+        },
+        {
+          "ur": "۳۰ روپے",
+          "en": "Rs 30"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "1": "m-graph-scale-ignored"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر خانہ ۵ روپے کا ہے۔ ۶ خانے؟",
+            "en": "Each square is 5 rupees. What about 6 squares?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۶ × ۵ = ۳۰ روپے۔",
+        "en": "6 × 5 = 30 rupees."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-total-children",
+      "type": "fill_blank",
+      "competency": "analysis",
+      "stem": {
+        "ur": "سلاخی خاکہ 'جماعت کا پسندیدہ پھل'۔ پیمانہ: ہر خانہ = ۲ بچے۔ آم: ۵ خانے۔ کیلا: ۳ خانے۔ امرود: ۴ خانے۔ سیب: ۲ خانے۔ کل کتنے بچوں سے پوچھا گیا؟ (ہر بچے نے ایک پھل چنا۔)",
+        "en": "Bar graph 'Our class's favourite fruit'. Scale: each square = 2 children. Mango: 5 squares. Banana: 3 squares. Guava: 4 squares. Apple: 2 squares. How many children were asked in all? (Each child chose one fruit.)"
+      },
+      "answer_key": {
+        "answer": "28"
+      },
+      "accepted_variants": [
+        "28",
+        "۲۸"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر پھل کی قیمت نکالیں، پھر سب جوڑیں۔",
+            "en": "Find each fruit's value, then add them all."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱۰ + ۶ + ۸ + ۴ = ۲۸ بچے۔",
+        "en": "10 + 6 + 8 + 4 = 28 children."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-graph-scale-ignored",
+      "remediation_ref": "MATH-G4-DA-01"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-DA-01",
+      "remediation_ref": "MATH-G4-DA-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پہلے پیمانہ دیکھیں: ہر خانہ کتنے کا ہے۔ سلاخ کے خانے گنیں اور پیمانے سے ضرب دیں۔ لمبی سلاخ یعنی زیادہ۔ فرق کے لیے گھٹائیں۔",
+    "en": "Check the scale first: how much each square is worth. Count the bar's squares and multiply by the scale. A longer bar means more. Subtract to find a difference."
+  },
+  "summary": {
+    "ur": "ہم نے پیمانہ دیکھ کر سلاخی خاکہ پڑھنا اور گروہوں کا موازنہ کرنا سیکھا۔",
+    "en": "We learned to read a bar graph using its scale and to compare groups."
+  },
+  "parent_notes": {
+    "ur": "گھر والوں کے پسندیدہ پھل گنیں اور ان کا موازنہ کریں۔",
+    "en": "tally and compare favourite fruits in the family."
+  },
+  "mentor_notes": {
+    "ur": "سلاخ سے پہلے پیمانہ پڑھنا سب سے بڑی غلطی کو روکتا ہے۔",
+    "en": "reading the scale before the bar prevents the top error."
+  },
+  "accessibility_notes": {
+    "ur": "سلاخی خاکہ ابھی بنانا ہے؛ ہر سوال میں ڈیٹا الفاظ میں بھی لکھا ہے تاکہ تصویر کے بغیر بھی حل ہو سکے۔ خاکے کا متبادل متن پیمانہ، ہر پھل کا نام اور اس کی سلاخ کے خانے پڑھے۔ سلاخیں صرف رنگ سے نہیں، نمونے سے بھی الگ ہوں۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ سلاخ بنانے کا متبادل: خانوں کی تعداد کا بٹن چنیں؛ گھسیٹنا ضروری نہیں۔ گھر کے کام کا خاکہ کاغذ پر چھاپ کر دینا ہوگا۔",
+    "en": "The bar graph is still to be made; every item also states the data in words so it can be solved without the picture. Its alt text should read the scale, each fruit's name and its bar's squares. Bars should differ by pattern, not colour alone. Urdu audio is not yet recorded. Alternative to building the bar: tap the number of squares; no dragging is needed. The homework bar graph still has to be printed for offline use."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "scale first, then bar height in squares, then multiply; compare by value, find differences by subtracting",
+    "questioning_strategy": "ask 'how much is one square worth?' before 'how many?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "reads the number of squares as the value",
+      "compares bars by colour or order instead of height"
+    ],
+    "hint_policy": "graduated; two hints max before a worked re-teach of a similar problem; never reveal the answer first",
+    "example_policy": "scales of 2, 5 or 10 with whole squares; class surveys (fruit, games, transport to school) and savings in rupees; no personal data about the learner",
+    "misconception_detectors": [
+      "gives the square count as the value",
+      "adds instead of subtracting to find 'how many more'"
+    ],
+    "critical_thinking_prompts": [
+      "If the scale changed to 1 child per square, how would the mango bar look?"
+    ],
+    "personalization_rules": "if the learner ignores the key on pictographs too, route back to MATH-G4-DA-01",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, upset or fear -> stop the lesson and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information",
+      "shame or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the doc title says 'reading and drawing'; drawing is covered only by the build-a-bar activity — confirm that is enough",
+    "accessibility: the bar graph is described in words inside each stem; check stems are not too long for audio"
+  ]
+}

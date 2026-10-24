@@ -1,0 +1,422 @@
+{
+  "code": "MATH-G4-GE-01",
+  "description": {
+    "ur": "خط، شعاع اور خط پارہ پہچاننا اور ان کے نام بتانا۔",
+    "en": "Identify and name lines, rays and line segments."
+  },
+  "keywords": [
+    "line",
+    "ray",
+    "line segment",
+    "point",
+    "endpoint",
+    "geometry"
+  ],
+  "teacher_script": {
+    "ur": "کاپی پر ایک نقطہ لگائیں۔ اب ایک اور نقطہ لگا کر دونوں کو سیدھا ملائیں۔ یہ خط پارہ ہے، اور اس کے دو سرے ہیں۔ آج ہم تین چیزیں پہچانیں گے: خط پارہ، شعاع اور خط۔ ان کو پہچاننے کا ایک ہی طریقہ ہے: سرے گنیں۔",
+    "en": "Put a dot in your notebook. Now put another dot and join the two with a straight line. This is a line segment, and it has two endpoints. Today we learn to tell apart three things: a line segment, a ray and a line. There is one way to tell them apart: count the endpoints."
+  },
+  "student_explanation": {
+    "ur": "نقطہ ایک جگہ بتاتا ہے۔ دو نقطوں کو سیدھا ملائیں تو خط پارہ بنتا ہے۔ خط پارے کے دو سرے ہوتے ہیں۔ شعاع کا صرف ایک سرا ہوتا ہے۔ دوسری طرف وہ ہمیشہ چلتی رہتی ہے۔ خط کا کوئی سرا نہیں ہوتا۔ وہ دونوں طرف چلتا رہتا ہے۔ تیر کا نشان بتاتا ہے کہ وہ آگے چلتا رہتا ہے۔ پہچاننے کے لیے سرے گنیں۔",
+    "en": "A point shows a place. Join two points with a straight line and you get a line segment. A line segment has two endpoints. A ray has only one endpoint. On the other side it goes on forever. A line has no endpoints. It goes on forever both ways. An arrowhead shows that it keeps going. To tell them apart, count the endpoints."
+  },
+  "interactive_activities": [
+    {
+      "id": "a1-sort-by-endpoints",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر شکل کو صحیح ڈبے میں رکھیں: خط پارہ، شعاع یا خط۔ (الف) دو نقطوں کے بیچ سیدھی لکیر؛ (ب) ایک نقطے سے شروع ہو کر تیر پر ختم؛ (ج) دونوں طرف تیر؛ (د) میز کا ایک کنارہ۔",
+        "en": "Put each figure in the right box: line segment, ray or line. (a) a straight path between two dots; (b) starts at a dot and ends in an arrow; (c) arrows at both ends; (d) one edge of a table."
+      },
+      "answer_key": {
+        "line_segment": [
+          "a",
+          "d"
+        ],
+        "ray": [
+          "b"
+        ],
+        "line": [
+          "c"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر شکل کے سرے گنیں: دو، ایک یا کوئی نہیں؟",
+            "en": "Count each figure's endpoints: two, one or none?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-match-endpoints",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر نام کو اس کے سروں کی تعداد سے ملائیں۔",
+        "en": "Match each name to its number of endpoints."
+      },
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "خط پارہ",
+              "en": "line segment"
+            },
+            "right": {
+              "ur": "۲ سرے",
+              "en": "2 endpoints"
+            }
+          },
+          {
+            "left": {
+              "ur": "شعاع",
+              "en": "ray"
+            },
+            "right": {
+              "ur": "۱ سرا",
+              "en": "1 endpoint"
+            }
+          },
+          {
+            "left": {
+              "ur": "خط",
+              "en": "line"
+            },
+            "right": {
+              "ur": "کوئی سرا نہیں",
+              "en": "no endpoints"
+            }
+          }
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "تیر کا مطلب ہے: یہاں کوئی سرا نہیں۔",
+            "en": "An arrow means: no endpoint here."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-two-endpoints",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ایک شکل کے دو سرے ہیں۔ یہ کیا ہے؟",
+        "en": "A figure has two endpoints. What is it?"
+      },
+      "options": [
+        {
+          "ur": "شعاع",
+          "en": "a ray"
+        },
+        {
+          "ur": "خط پارہ",
+          "en": "a line segment"
+        },
+        {
+          "ur": "خط",
+          "en": "a line"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-ray-segment"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کتنے سرے ہیں؟",
+            "en": "How many endpoints are there?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "دو سرے والی شکل خط پارہ ہے۔",
+        "en": "A figure with two endpoints is a line segment."
+      }
+    },
+    {
+      "id": "p2-no-endpoints",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کس کا کوئی سرا نہیں ہوتا؟",
+        "en": "Which one has no endpoints?"
+      },
+      "options": [
+        {
+          "ur": "خط",
+          "en": "a line"
+        },
+        {
+          "ur": "شعاع",
+          "en": "a ray"
+        },
+        {
+          "ur": "خط پارہ",
+          "en": "a line segment"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کونسی شکل دونوں طرف چلتی رہتی ہے؟",
+            "en": "Which figure keeps going both ways?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "خط دونوں طرف چلتا رہتا ہے، اس کا کوئی سرا نہیں۔",
+        "en": "A line goes on both ways; it has no endpoints."
+      }
+    },
+    {
+      "id": "p3-line-two-ends",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "خط کے دو سرے ہوتے ہیں۔",
+        "en": "A line has two endpoints."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "خط کے دونوں طرف تیر کیوں ہوتے ہیں؟",
+            "en": "Why does a line have arrows at both ends?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "خط کا کوئی سرا نہیں ہوتا۔ دو سرے خط پارے کے ہوتے ہیں۔",
+        "en": "A line has no endpoints. Two endpoints belong to a line segment."
+      }
+    },
+    {
+      "id": "p4-dot-and-arrow",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ایک شکل ایک نقطے سے شروع ہوتی ہے اور دوسری طرف تیر ہے۔ یہ کیا ہے؟",
+        "en": "A figure starts at a dot and has an arrow at the other end. What is it?"
+      },
+      "options": [
+        {
+          "ur": "خط پارہ",
+          "en": "a line segment"
+        },
+        {
+          "ur": "خط",
+          "en": "a line"
+        },
+        {
+          "ur": "شعاع",
+          "en": "a ray"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-ray-segment"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "تیر والی طرف کیا وہ رک جاتی ہے؟",
+            "en": "Does it stop on the arrow side?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ایک سرا اور ایک طرف چلتی رہنا: یہ شعاع ہے۔",
+        "en": "One endpoint and going on one way: this is a ray."
+      }
+    },
+    {
+      "id": "p6-table-edge",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "میز کا ایک سیدھا کنارہ کس کی طرح ہے؟",
+        "en": "One straight edge of a table is most like a..."
+      },
+      "options": [
+        {
+          "ur": "خط",
+          "en": "line"
+        },
+        {
+          "ur": "خط پارہ",
+          "en": "line segment"
+        },
+        {
+          "ur": "شعاع",
+          "en": "ray"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-ray-segment"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا کنارہ کہیں رکتا ہے؟ کتنی جگہ؟",
+            "en": "Does the edge stop anywhere? In how many places?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کنارہ دونوں طرف رک جاتا ہے، اس لیے یہ خط پارہ ہے۔",
+        "en": "The edge stops at both ends, so it is a line segment."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-three-dots",
+      "type": "fill_blank",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کاپی پر ۳ نقطے ہیں جو ایک سیدھ میں نہیں۔ ہر دو نقطوں کو ملائیں۔ کتنے خط پارے بنیں گے؟",
+        "en": "There are 3 dots in a notebook, not in a straight row. Join every pair of dots. How many line segments do you get?"
+      },
+      "answer_key": {
+        "answer": "3"
+      },
+      "accepted_variants": [
+        "3",
+        "۳"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "نقطوں کو الف، ب، ج کہیں۔ الف-ب، پھر اور کون سی جوڑیاں؟",
+            "en": "Call the dots A, B, C. A-B, then which other pairs?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "الف-ب، ب-ج، الف-ج: ۳ خط پارے۔",
+        "en": "A-B, B-C, A-C: 3 line segments."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "شعاع اور خط پارہ ایک ہی ہیں، کیونکہ دونوں ایک نقطے سے شروع ہوتے ہیں۔",
+        "en": "A ray and a line segment are the same, because both start at a point."
+      },
+      "correction": {
+        "ur": "سرے گنیں: خط پارے کے دو سرے ہیں۔ شعاع کا ایک سرا ہے اور وہ آگے چلتی رہتی ہے۔",
+        "en": "Count the endpoints: a line segment has two. A ray has one and keeps going."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "کاپی پر بنا ہوا خط چھوٹا ہے، اس لیے اس کے سرے ہیں۔",
+        "en": "A line drawn in the notebook is short, so it has endpoints."
+      },
+      "correction": {
+        "ur": "تیر بتاتے ہیں کہ خط کبھی نہیں رکتا۔ ہم اس کا صرف ایک حصہ بناتے ہیں۔",
+        "en": "The arrows show that a line never stops. We draw only part of it."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-ray-segment",
+      "remediation_ref": "MATH-G4-GE-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "خط پارہ: ۲ سرے۔ شعاع: ۱ سرا۔ خط: کوئی سرا نہیں۔ تیر کا مطلب ہے کہ وہ آگے چلتا رہتا ہے۔",
+    "en": "Line segment: 2 endpoints. Ray: 1 endpoint. Line: no endpoints. An arrow means it keeps going."
+  },
+  "summary": {
+    "ur": "ہم نے سرے گن کر خط، شعاع اور خط پارہ پہچاننا سیکھا۔",
+    "en": "We learned to tell lines, rays and line segments apart by counting endpoints."
+  },
+  "parent_notes": {
+    "ur": "گھر میں سیدھے کنارے اور کونے دکھائیں۔",
+    "en": "point out straight edges and corners around the house."
+  },
+  "mentor_notes": {
+    "ur": "سرے ہی اصل فرق ہیں — انہیں گنوائیں۔",
+    "en": "endpoints are the distinguishing feature — count them."
+  },
+  "accessibility_notes": {
+    "ur": "خط، شعاع اور خط پارے کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن بتائے کہ کتنے سرے ہیں اور کس طرف تیر ہے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر شکل کے لیے 'خط پارہ'، 'شعاع' یا 'خط' کا بٹن چنیں؛ گھسیٹنا ضروری نہیں۔ نقطے اور تیر موٹے بنیں تاکہ کم نظر والے بچے بھی دیکھ سکیں۔",
+    "en": "The line, ray and segment pictures are still to be made; each alt text should say how many endpoints there are and which side has an arrow. Urdu audio is not yet recorded. Alternative to the sorting activity: tap a 'segment', 'ray' or 'line' button for each figure; no dragging is needed. Dots and arrowheads should be drawn thick for learners with low vision."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "one rule for all three: count the endpoints (2 = segment, 1 = ray, 0 = line); everyday straight edges as segments",
+    "questioning_strategy": "ask 'how many endpoints?' before 'what is it called?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "calls a ray a segment",
+      "thinks a drawn line has ends"
+    ],
+    "hint_policy": "graduated; two hints max before a worked re-teach of a similar problem; never reveal the answer first",
+    "example_policy": "simple drawn figures and straight edges at home (table edge, door edge, ruler); light from a torch as a ray only as a loose picture",
+    "misconception_detectors": [
+      "names a ray as a line segment",
+      "ignores the arrowheads"
+    ],
+    "critical_thinking_prompts": [
+      "Can a line segment ever be longer than a line? Why or why not?"
+    ],
+    "personalization_rules": "this lesson has no prerequisite; repeat it with a fresh set of figures if the learner keeps confusing ray and segment",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, upset or fear -> stop the lesson and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information",
+      "shame or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: m-ray-segment is a local id the doc suggests ('add locally if observed'); it is not yet in the §4 library",
+    "subject expert: the doc's worked example here is an English author specification, not a script; it needs a real bilingual worked example",
+    "language editor: confirm خط / شعاع / خط پارہ / نقطہ and 'سرا / سرے' for endpoint match the NCP Grade 4 Urdu terms"
+  ]
+}

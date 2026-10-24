@@ -1,0 +1,425 @@
+{
+  "code": "SOC-G4-GEO-01",
+  "title": {
+    "ur": "چار سمتیں",
+    "en": "The four directions"
+  },
+  "description": {
+    "ur": "چار بنیادی سمتیں شمال، جنوب، مشرق اور مغرب پہچانیں اور استعمال کریں۔",
+    "en": "Recognise and use the four cardinal directions: north, south, east and west."
+  },
+  "keywords": [
+    "directions",
+    "north",
+    "south",
+    "east",
+    "west",
+    "compass",
+    "sunrise"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "سمت",
+        "en": "direction"
+      },
+      "definition": {
+        "ur": "وہ طرف جدھر کوئی چیز ہو یا ہم جائیں۔",
+        "en": "the way something is, or the way we go."
+      }
+    },
+    {
+      "term": {
+        "ur": "مشرق",
+        "en": "east"
+      },
+      "definition": {
+        "ur": "وہ سمت جدھر سے سورج صبح نکلتا ہے۔",
+        "en": "the direction the sun comes up from in the morning."
+      }
+    },
+    {
+      "term": {
+        "ur": "مغرب",
+        "en": "west"
+      },
+      "definition": {
+        "ur": "وہ سمت جدھر شام کو سورج ڈوبتا ہے۔",
+        "en": "the direction the sun goes down in the evening."
+      }
+    },
+    {
+      "term": {
+        "ur": "قطب نما",
+        "en": "compass"
+      },
+      "definition": {
+        "ur": "ایک آلہ جس کی سوئی شمال کی طرف اشارہ کرتی ہے۔",
+        "en": "a tool whose needle points north."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "اگر کوئی آپ سے راستہ پوچھے تو آپ کیسے بتائیں گے؟ دائیں بائیں تو بدل جاتے ہیں۔ چار سمتیں نہیں بدلتیں: شمال، جنوب، مشرق اور مغرب۔ آج سورج کی مدد سے ہم یہ سمتیں ڈھونڈیں گے۔",
+    "en": "If someone asks you the way, how will you tell them? Left and right change as you turn. The four directions do not change: north, south, east and west. Today we will use the sun to find them."
+  },
+  "student_explanation": {
+    "ur": "چار بنیادی سمتیں ہیں۔ یہ شمال، جنوب، مشرق اور مغرب ہیں۔ سورج صبح مشرق سے نکلتا ہے۔ شام کو سورج مغرب میں ڈوبتا ہے۔ صبح سورج کی طرف منہ کریں۔ اب آپ کا منہ مشرق کی طرف ہے۔ آپ کی پیٹھ کے پیچھے مغرب ہے۔ بائیں ہاتھ کی طرف شمال ہے۔ دائیں ہاتھ کی طرف جنوب ہے۔",
+    "en": "There are four main directions. They are north, south, east and west. The sun comes up in the east in the morning. In the evening the sun goes down in the west. In the morning, face the sun. Now you are facing east. West is behind your back. North is on your left hand. South is on your right hand."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "صبح بلال سورج کی طرف منہ کر کے کھڑا ہے۔ اس کے دائیں طرف کون سی سمت ہے؟",
+        "en": "In the morning Bilal stands facing the sun. Which direction is on his right?"
+      },
+      "steps": [
+        {
+          "ur": "صبح سورج مشرق میں ہوتا ہے۔ تو بلال کا منہ مشرق کی طرف ہے۔",
+          "en": "In the morning the sun is in the east. So Bilal faces east."
+        },
+        {
+          "ur": "مشرق کی طرف منہ ہو تو بائیں طرف شمال ہوتا ہے۔",
+          "en": "Facing east, north is on the left."
+        },
+        {
+          "ur": "تو دائیں طرف جنوب ہے۔",
+          "en": "So south is on his right."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-compass-rose",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "قطب نما کے پھول پر چاروں سمتوں کے نام ان کی جگہ رکھیں۔ اوپر شمال ہے۔",
+        "en": "Drag the four direction names onto the compass rose. North is at the top."
+      },
+      "answer_key": {
+        "placement": {
+          "top": "north",
+          "bottom": "south",
+          "right": "east",
+          "left": "west"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "شمال کے سامنے نیچے کون سی سمت ہوگی؟",
+            "en": "What is opposite north, at the bottom?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-fourth",
+      "type": "fill_blank",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "شمال، جنوب، مشرق اور ___",
+        "en": "North, south, east and ___"
+      },
+      "answer_key": {
+        "answer": "west"
+      },
+      "accepted_variants": [
+        "west",
+        "West",
+        "مغرب"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سورج اسی سمت میں ڈوبتا ہے۔",
+            "en": "The sun goes down in this direction."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-sunrise",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "سورج صبح کس سمت سے نکلتا ہے؟",
+        "en": "Which direction does the sun come up from in the morning?"
+      },
+      "options": [
+        {
+          "ur": "مشرق",
+          "en": "east"
+        },
+        {
+          "ur": "مغرب",
+          "en": "west"
+        },
+        {
+          "ur": "شمال",
+          "en": "north"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "سورج مشرق سے نکلتا اور مغرب میں ڈوبتا ہے۔",
+        "en": "The sun comes up in the east and goes down in the west."
+      }
+    },
+    {
+      "id": "p2-opposite-north",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "شمال کی الٹی سمت کون سی ہے؟",
+        "en": "Which direction is opposite north?"
+      },
+      "options": [
+        {
+          "ur": "مشرق",
+          "en": "east"
+        },
+        {
+          "ur": "جنوب",
+          "en": "south"
+        },
+        {
+          "ur": "مغرب",
+          "en": "west"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "قطب نما پر شمال اوپر ہے۔ نیچے کیا ہے؟",
+            "en": "On the compass rose north is at the top. What is at the bottom?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-sunset",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "شام کو سورج مشرق میں ڈوبتا ہے۔",
+        "en": "In the evening the sun goes down in the east."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "سورج مغرب میں ڈوبتا ہے۔",
+        "en": "The sun goes down in the west."
+      }
+    },
+    {
+      "id": "p4-map-left",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "نقشے پر اوپر شمال ہے۔ بائیں طرف کون سی سمت ہے؟",
+        "en": "On a map, north is at the top. Which direction is on the left?"
+      },
+      "options": [
+        {
+          "ur": "مشرق",
+          "en": "east"
+        },
+        {
+          "ur": "جنوب",
+          "en": "south"
+        },
+        {
+          "ur": "مغرب",
+          "en": "west"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-map-not-oriented"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "یاد کریں: نقشے پر دائیں مشرق ہوتا ہے۔",
+            "en": "Remember: on a map, east is on the right."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-facing-east",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "سارہ کا منہ مشرق کی طرف ہے۔ اس کی پیٹھ کے پیچھے کون سی سمت ہے؟",
+        "en": "Sara is facing east. Which direction is behind her back?"
+      },
+      "options": [
+        {
+          "ur": "مغرب",
+          "en": "west"
+        },
+        {
+          "ur": "شمال",
+          "en": "north"
+        },
+        {
+          "ur": "جنوب",
+          "en": "south"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "مشرق کی الٹی سمت سوچیں۔",
+            "en": "Think of the direction opposite east."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-sun-walk",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "صبح یا شام کسی بڑے کے ساتھ گھر کے صحن یا دروازے پر سورج دیکھیں۔ بتائیں کہ مشرق اور مغرب کس طرف ہیں۔ سورج کی طرف براہِ راست نہ دیکھیں۔",
+        "en": "In the morning or evening, with a grown-up, notice where the sun is from your yard or doorway. Say which way is east and which is west. Never look straight at the sun."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any correct pairing of sunrise side = east, sunset side = west. Do not ask for the home's location."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سورج کو یاد کریں: صبح مشرق، شام مغرب۔",
+        "en": "Remember the sun: morning east, evening west."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "قطب نما کا پھول بنائیں: اوپر شمال، نیچے جنوب، دائیں مشرق، بائیں مغرب۔",
+        "en": "Draw a compass rose: north at top, south at bottom, east on the right, west on the left."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "نقشے پر اوپر کی سمت ہمیشہ آگے کی سمت ہوتی ہے، شمال نہیں۔",
+        "en": "The top of a map just means 'forward', not north."
+      },
+      "correction": {
+        "ur": "پہلے نقشے کا قطب نما دیکھیں۔ عام طور پر اوپر شمال ہوتا ہے۔",
+        "en": "Check the map's compass rose first. Usually north is at the top."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "دائیں اور بائیں بھی سمتوں کی طرح کبھی نہیں بدلتے۔",
+        "en": "Left and right never change, just like north and south."
+      },
+      "correction": {
+        "ur": "گھومیں تو دائیں بائیں بدل جاتے ہیں۔ شمال، جنوب، مشرق، مغرب وہیں رہتے ہیں۔",
+        "en": "When you turn, left and right change. North, south, east and west stay the same."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-map-not-oriented",
+      "remediation_ref": "SOC-G4-GEO-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "چار سمتیں: شمال، جنوب، مشرق، مغرب۔ سورج مشرق سے نکلتا ہے، مغرب میں ڈوبتا ہے۔ نقشے پر عام طور پر اوپر شمال، دائیں مشرق۔",
+    "en": "Four directions: north, south, east, west. The sun rises in the east and sets in the west. On a map, usually north is at the top and east on the right."
+  },
+  "summary": {
+    "ur": "ہم نے چار سمتیں سیکھیں اور سورج سے انہیں ڈھونڈنا سیکھا۔",
+    "en": "We learned the four directions and how to find them using the sun."
+  },
+  "parent_notes": {
+    "ur": "سیر کے دوران بچے سے پوچھیں کہ سورج کس سمت میں ہے اور ہم کس طرف جا رہے ہیں۔",
+    "en": "On a walk, ask your child which direction the sun is in and which way you are going."
+  },
+  "mentor_notes": {
+    "ur": "بچوں کو کبھی سورج کی طرف براہِ راست دیکھنے کو نہ کہیں۔ 'سورج بالکل مشرق سے نکلتا ہے' موسم کے ساتھ تھوڑا بدلتا ہے؛ اس درجے پر 'تقریباً' کافی ہے۔",
+    "en": "Never tell children to look straight at the sun. Sunrise is only roughly due east and shifts with the season; 'roughly east' is enough at this level."
+  },
+  "accessibility_notes": {
+    "ur": "قطب نما کے پھول کی تصویر ابھی بنانی ہے؛ اس کا متبادل متن چاروں سمتوں کی جگہ بتائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ نابینا بچوں کے لیے: جسم سے سمتیں سکھائیں (منہ، پیٹھ، دایاں ہاتھ، بایاں ہاتھ)۔ گھسیٹنے والی سرگرمی کا متبادل: ہر جگہ (اوپر، نیچے، دائیں، بائیں) کے لیے سمت کا نام چنیں۔",
+    "en": "The compass-rose picture is still to be made; its alt text should give the place of each direction. Urdu audio is not yet recorded. For blind learners, teach directions with the body (face, back, right hand, left hand). Alternative to the drag activity: choose the direction name for each position (top, bottom, right, left)."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "anchor on the sun (rises east, sets west), then the body (face east: left is north), then the compass rose and the map",
+    "questioning_strategy": "ask 'where is the sun in the morning?' before asking the target direction",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "swaps east and west"
+    ],
+    "hint_policy": "graduated; two hints max; first recall sunrise and sunset, then draw the compass rose; never give the direction first",
+    "example_policy": "everyday settings: school yard, village path, rooftop, bazaar; never ask where the learner lives",
+    "misconception_detectors": [
+      "swaps east and west",
+      "treats left/right as fixed directions",
+      "ignores the compass rose on a map"
+    ],
+    "critical_thinking_prompts": [
+      "If you turn around, which directions change and which stay the same?"
+    ],
+    "personalization_rules": "if the learner swaps east and west twice, repeat the sunrise/sunset anchor with the body",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "tell the learner to look directly at the sun"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the Urdu terms شمال، جنوب، مشرق، مغرب and 'قطب نما کا پھول' for compass rose",
+    "confirm the simplification 'the sun rises in the east' (roughly; it shifts with the seasons) is acceptable for Grade 4"
+  ]
+}

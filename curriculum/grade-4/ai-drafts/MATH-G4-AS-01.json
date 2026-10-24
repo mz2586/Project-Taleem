@@ -1,0 +1,491 @@
+{
+  "code": "MATH-G4-AS-01",
+  "description": {
+    "ur": "دو چار ہندسی اعداد کو خانوں میں جمع کرنا اور ہاتھ لے جانا۔",
+    "en": "Adding two 4-digit numbers in columns, carrying across places."
+  },
+  "keywords": [
+    "addition",
+    "carrying",
+    "column addition",
+    "sum",
+    "place value",
+    "regrouping"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "جوڑ",
+        "en": "sum"
+      },
+      "definition": {
+        "ur": "جمع کرنے کے بعد ملنے والا جواب۔",
+        "en": "The answer you get when you add."
+      }
+    },
+    {
+      "term": {
+        "ur": "ہاتھ لے جانا",
+        "en": "carry"
+      },
+      "definition": {
+        "ur": "جب کسی خانے کا جوڑ ۱۰ یا زیادہ ہو تو ۱ اگلے خانے میں لے جانا۔",
+        "en": "When a column adds to 10 or more, moving 1 to the next place."
+      }
+    },
+    {
+      "term": {
+        "ur": "جمع",
+        "en": "addition"
+      },
+      "definition": {
+        "ur": "عددوں کو اکٹھا کرنا۔",
+        "en": "Putting numbers together."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم بڑے عدد جمع کریں گے، چار ہندسوں والے۔ ہم ہمیشہ اکائی کے خانے سے شروع کرتے ہیں۔ جب کسی خانے کا جوڑ ۹ سے بڑا ہو جائے تو ہم ایک دہائی اگلے خانے میں لے جاتے ہیں۔ آئیے ایک ایک خانہ کر کے دیکھیں۔",
+    "en": "Today we add big numbers, with four digits. We always start with the ones column. When a column adds up to more than 9, we carry one to the next place. Let us go one column at a time."
+  },
+  "student_explanation": {
+    "ur": "ہم عدد خانوں میں لکھ کر جمع کرتے ہیں۔ اکائی کے نیچے اکائی اور دہائی کے نیچے دہائی لکھیں۔ ہمیشہ اکائی کے خانے سے شروع کریں۔ اس خانے کے ہندسے جوڑیں۔ اگر جوڑ ۱۰ یا زیادہ ہو تو صرف اکائی والا ہندسہ لکھیں۔ ۱ کو اگلے خانے میں لے جائیں۔ اگلے خانے کے جوڑ میں یہ ۱ بھی شامل کریں۔ آخری خانے تک ایسے ہی کرتے جائیں۔",
+    "en": "We add numbers in columns. Write ones under ones and tens under tens. Always start with the ones column. Add the digits in that column. If the sum is 10 or more, write only its ones digit. Carry the 1 to the next column. Add that 1 into the next column too. Keep going to the last column."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۲۴۷۶ + ۱۳۸۵ = ؟",
+        "en": "2476 + 1385 = ?"
+      },
+      "steps": [
+        {
+          "ur": "اکائی: ۶ + ۵ = ۱۱۔ ۱ لکھیں، ۱ لے جائیں۔",
+          "en": "Ones: 6 + 5 = 11. Write 1, carry 1."
+        },
+        {
+          "ur": "دہائی: ۷ + ۸ + ۱ = ۱۶۔ ۶ لکھیں، ۱ لے جائیں۔",
+          "en": "Tens: 7 + 8 + 1 = 16. Write 6, carry 1."
+        },
+        {
+          "ur": "سو: ۴ + ۳ + ۱ = ۸۔ ۸ لکھیں۔",
+          "en": "Hundreds: 4 + 3 + 1 = 8. Write 8."
+        },
+        {
+          "ur": "ہزار: ۲ + ۱ = ۳۔ جواب ۳۸۶۱۔",
+          "en": "Thousands: 2 + 1 = 3. The answer is 3861."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "۵۶۸۷ + ۴۵۲۸ = ؟",
+        "en": "5687 + 4528 = ?"
+      },
+      "steps": [
+        {
+          "ur": "اکائی: ۷ + ۸ = ۱۵۔ ۵ لکھیں، ۱ لے جائیں۔ دہائی: ۸ + ۲ + ۱ = ۱۱۔ ۱ لکھیں، ۱ لے جائیں۔",
+          "en": "Ones: 7 + 8 = 15. Write 5, carry 1. Tens: 8 + 2 + 1 = 11. Write 1, carry 1."
+        },
+        {
+          "ur": "سو: ۶ + ۵ + ۱ = ۱۲۔ ۲ لکھیں، ۱ لے جائیں۔",
+          "en": "Hundreds: 6 + 5 + 1 = 12. Write 2, carry 1."
+        },
+        {
+          "ur": "ہزار: ۵ + ۴ + ۱ = ۱۰۔ ۰ لکھیں اور ۱ نئے خانے، دس ہزار میں لکھیں۔",
+          "en": "Thousands: 5 + 4 + 1 = 10. Write 0 and put the 1 in a new place, ten-thousands."
+        },
+        {
+          "ur": "جواب ۱۰٬۲۱۵ ہے۔ جواب میں ایک ہندسہ بڑھ گیا۔",
+          "en": "The answer is 10,215. The answer has grown a digit."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-place-carries",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "۲۴۷۶ + ۱۳۸۵ میں ہاتھ لے جانے والے ۱ کو صحیح خانوں کے اوپر گھسیٹیں، پھر جواب لکھیں۔",
+        "en": "In 2476 + 1385, drag each carried 1 above the right column, then type the answer."
+      },
+      "answer_key": {
+        "carries": {
+          "tens": 1,
+          "hundreds": 1,
+          "thousands": 0
+        },
+        "answer": "3861"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کس خانے کا جوڑ ۹ سے بڑا ہے؟",
+            "en": "Which columns add to more than 9?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-1604",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۱۶۰۴ + ۲۳۸۵ = ___",
+        "en": "1604 + 2385 = ___"
+      },
+      "answer_key": {
+        "answer": "3989"
+      },
+      "accepted_variants": [
+        "3989",
+        "3,989",
+        "۳۹۸۹",
+        "۳٬۹۸۹"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا کسی خانے کا جوڑ ۹ سے بڑا ہے؟",
+            "en": "Does any column add to more than 9?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "یہاں کوئی ہاتھ لے جانا نہیں: ۳۹۸۹۔",
+        "en": "No carrying is needed here: 3989."
+      }
+    },
+    {
+      "id": "p4-missing-digit",
+      "type": "fill_blank",
+      "competency": "analysis",
+      "stem": {
+        "ur": "خالی جگہ کا ہندسہ بتائیں: ۳۵_۸ + ۱۲۶۴ = ۴۸۳۲",
+        "en": "Find the missing digit: 35_8 + 1264 = 4832"
+      },
+      "answer_key": {
+        "answer": "6"
+      },
+      "accepted_variants": [
+        "6",
+        "۶"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اکائی سے شروع کریں اور ہاتھ لے جانے والا ۱ یاد رکھیں۔",
+            "en": "Start at the ones and remember the carried 1."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۸ + ۴ = ۱۲، ۱ لے گئے۔ دہائی میں ؟ + ۶ + ۱ کا آخری ہندسہ ۳ ہونا چاہیے، تو ؟ = ۶۔",
+        "en": "8 + 4 = 12, carry 1. In the tens, ? + 6 + 1 must end in 3, so ? = 6."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-3458",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۳۴۵۸ + ۲۳۱۷ = ؟",
+        "en": "3458 + 2317 = ?"
+      },
+      "options": [
+        {
+          "ur": "۵۷۶۵",
+          "en": "5,765"
+        },
+        {
+          "ur": "۵۷۷۵",
+          "en": "5,775"
+        },
+        {
+          "ur": "۵۶۷۵",
+          "en": "5,675"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-carry-forgotten"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اکائی: ۸ + ۷ کتنے ہیں؟ کیا ہاتھ لے جانا ہے؟",
+            "en": "Ones: what is 8 + 7? Is there a carry?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۸ + ۷ = ۱۵، ۵ لکھیں، ۱ لے جائیں۔ ۵ + ۱ + ۱ = ۷۔ جواب ۵۷۷۵۔",
+        "en": "8 + 7 = 15, write 5, carry 1. 5 + 1 + 1 = 7. Answer 5775."
+      }
+    },
+    {
+      "id": "p3-4786",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۴۷۸۶ + ۳۶۵۸ = ؟",
+        "en": "4786 + 3658 = ?"
+      },
+      "options": [
+        {
+          "ur": "۷۳۳۴",
+          "en": "7,334"
+        },
+        {
+          "ur": "۸۳۴۴",
+          "en": "8,344"
+        },
+        {
+          "ur": "۸۴۴۴",
+          "en": "8,444"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-carry-forgotten",
+          "1": "m-carry-forgotten"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "یہاں تین خانوں میں ہاتھ لے جانا ہے۔",
+            "en": "Three columns need a carry here."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱۴، ۱۴، ۱۴: ہر بار ۴ لکھیں اور ۱ لے جائیں۔ ہزار: ۴ + ۳ + ۱ = ۸۔ جواب ۸۴۴۴۔",
+        "en": "14, 14, 14: each time write 4 and carry 1. Thousands: 4 + 3 + 1 = 8. Answer 8444."
+      }
+    },
+    {
+      "id": "p5-10000",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "۶۲۵۰ + ۳۷۵۰ = ۱۰٬۰۰۰",
+        "en": "6250 + 3750 = 10,000"
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر خانے میں ہاتھ لے جانا دیکھیں۔",
+            "en": "Watch the carry in every column."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۰ + ۰ = ۰، ۵ + ۵ = ۱۰، ۲ + ۷ + ۱ = ۱۰، ۶ + ۳ + ۱ = ۱۰۔ جواب ۱۰٬۰۰۰ ہے۔",
+        "en": "0 + 0 = 0, 5 + 5 = 10, 2 + 7 + 1 = 10, 6 + 3 + 1 = 10. The answer is 10,000."
+      }
+    },
+    {
+      "id": "p6-library",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک اسکول کی لائبریری میں ۱۳۴۸ اردو اور ۲۵۷۵ انگریزی کتابیں ہیں۔ کل کتنی کتابیں ہیں؟",
+        "en": "A school library has 1348 Urdu books and 2575 English books. How many books are there in all?"
+      },
+      "options": [
+        {
+          "ur": "۳۹۲۳",
+          "en": "3,923"
+        },
+        {
+          "ur": "۳۸۱۳",
+          "en": "3,813"
+        },
+        {
+          "ur": "۳۹۳۳",
+          "en": "3,933"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-carry-forgotten"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دونوں عدد خانوں میں لکھیں اور اکائی سے شروع کریں۔",
+            "en": "Write both numbers in columns and start at the ones."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۸ + ۵ = ۱۳، ۴ + ۷ + ۱ = ۱۲، ۳ + ۵ + ۱ = ۹، ۱ + ۲ = ۳۔ جواب ۳۹۲۳۔",
+        "en": "8 + 5 = 13, 4 + 7 + 1 = 12, 3 + 5 + 1 = 9, 1 + 2 = 3. Answer 3923."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-bus-km",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک بس نے ایک مہینے ۲۸۶۵ کلومیٹر اور اگلے مہینے ۳۹۴۷ کلومیٹر سفر کیا۔ کیا کل سفر ۷۰۰۰ کلومیٹر سے زیادہ تھا؟ جمع کر کے بتائیں۔",
+        "en": "A bus travelled 2865 km one month and 3947 km the next month. Was the total more than 7000 km? Add to find out."
+      },
+      "answer_key": {
+        "answer": "6812 km; no, it is less than 7000"
+      },
+      "accepted_variants": [
+        "6812",
+        "6,812",
+        "۶۸۱۲"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے جمع کریں، پھر ۷۰۰۰ سے موازنہ کریں۔",
+            "en": "Add first, then compare with 7000."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-two-prices",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "دو تین ہندسی قیمتیں جمع کریں۔",
+        "en": "add two 3-digit prices."
+      },
+      "answer_key": {
+        "answer": "a correct column sum"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "کہاں سے شروع کریں؟",
+        "en": "Where do you start?"
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "۹ سے بڑا ہو تو ایک لے جائیں",
+        "en": "If it is more than 9, carry one."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "خانوں میں جمع کرتے وقت ہاتھ لے جانا بھول جانا۔",
+        "en": "Forgets to carry in column addition"
+      },
+      "correction": {
+        "ur": "جب جوڑ ۹ سے بڑا ہو تو اگلی جگہ ایک لے جائیں",
+        "en": "When a column adds past 9, carry one to the next place."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-carry-forgotten",
+      "remediation_ref": "MATH-G4-AS-01"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-NB-02",
+      "remediation_ref": "MATH-G4-NB-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "اکائی سے شروع کریں۔ جوڑ ۱۰ یا زیادہ ہو تو اکائی لکھیں اور ۱ اگلے خانے میں لے جائیں۔ آخری خانے کا ہاتھ نیا خانہ بناتا ہے۔",
+    "en": "Start at the ones. If a column makes 10 or more, write the ones digit and carry 1 to the next column. A carry out of the last column makes a new place."
+  },
+  "summary": {
+    "ur": "ہم نے چار ہندسی عدد خانوں میں جمع کرنا اور ہاتھ لے جانا سیکھا۔",
+    "en": "We learned to add 4-digit numbers in columns and carry."
+  },
+  "parent_notes": {
+    "ur": "بچے کے ساتھ مل کر سودے کی دو قیمتیں جمع کریں۔",
+    "en": "add two grocery prices together with your child."
+  },
+  "mentor_notes": {
+    "ur": "سب سے بڑے خانے سے آگے نئے خانے میں ہاتھ لے جانا (جواب میں ایک ہندسہ بڑھ جاتا ہے) ایک مثال سے دکھائیں۔",
+    "en": "the carry into a new highest place (sum grows a digit) needs an example."
+  },
+  "accessibility_notes": {
+    "ur": "خانوں والی جمع کی تصویر ابھی بنانی ہے؛ متبادل متن ہر خانہ اور ہاتھ لے جانے والا ہندسہ ترتیب سے پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے کا متبادل: ہر خانے کے لیے \"ہاتھ ہے / نہیں\" بٹن چنیں۔",
+    "en": "The column-addition picture is still to be made; alt text should read each column and each carried digit in order. Urdu audio is not yet recorded. Alternative to dragging: for each column choose a \"carry / no carry\" button."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "column addition from the ones; say each column sum aloud and decide 'write and carry' before moving left",
+    "questioning_strategy": "ask 'what is this column's sum?' then 'is it more than 9?' before the learner writes",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "answer is short by exactly 10, 100 or 1000",
+      "starts from the left column"
+    ],
+    "hint_policy": "graduated; two hints max (where to start; more than 9 means carry) then a worked re-teach with 2476 + 1385; never give the answer first",
+    "example_policy": "4-digit sums with 0 to 3 carries and one that grows a fifth digit; rupee prices, books, kilometres",
+    "misconception_detectors": [
+      "column digit written without carrying (e.g. 5765 for 3458 + 2317)",
+      "carried 1 written but not added"
+    ],
+    "critical_thinking_prompts": [
+      "How can the sum of two 4-digit numbers have five digits?"
+    ],
+    "personalization_rules": "if the learner misaligns digits, revisit place value in MATH-G4-NB-02",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: carry terminology ہاتھ لے جانا vs لے جانا; confirm which form the steps should use",
+    "check the human worked example has no prompt; the draft's first worked example adds the prompt 2476 + 1385"
+  ]
+}

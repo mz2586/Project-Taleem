@@ -1,0 +1,511 @@
+{
+  "code": "URD-G4-VO-02",
+  "title": {
+    "ur": "مترادف اور متضاد الفاظ",
+    "en": "Words that mean the same and the opposite"
+  },
+  "description": {
+    "ur": "ہم معنی (مترادف) اور الٹ معنی (متضاد) الفاظ پہچاننا اور جملوں میں استعمال کرنا۔",
+    "en": "Recognising synonyms (same meaning) and antonyms (opposite meaning) and using them in sentences."
+  },
+  "keywords": [
+    "synonyms",
+    "antonyms",
+    "vocabulary",
+    "word pairs",
+    "word meaning"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مترادف",
+        "en": "synonym"
+      },
+      "definition": {
+        "ur": "وہ لفظ جس کا مطلب کسی دوسرے لفظ جیسا ہو، جیسے گھر اور مکان۔",
+        "en": "a word with the same meaning as another, like ghar and makaan."
+      }
+    },
+    {
+      "term": {
+        "ur": "متضاد",
+        "en": "antonym"
+      },
+      "definition": {
+        "ur": "وہ لفظ جس کا مطلب الٹ ہو، جیسے دن اور رات۔",
+        "en": "a word with the opposite meaning, like day and night."
+      }
+    },
+    {
+      "term": {
+        "ur": "ہم معنی",
+        "en": "same meaning"
+      },
+      "definition": {
+        "ur": "ایک جیسے مطلب والے۔",
+        "en": "having the same meaning."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کچھ لفظ جوڑوں میں رہتے ہیں۔ کچھ جوڑوں کا مطلب ایک جیسا ہوتا ہے، جیسے گھر اور مکان۔ انہیں مترادف کہتے ہیں۔ کچھ جوڑوں کا مطلب الٹ ہوتا ہے، جیسے گرم اور ٹھنڈا۔ انہیں متضاد کہتے ہیں۔",
+    "en": "Some words live in pairs. Some pairs mean the same, like ghar and makaan (house). We call them synonyms. Some pairs mean the opposite, like hot and cold. We call them antonyms."
+  },
+  "student_explanation": {
+    "ur": "مترادف لفظوں کا مطلب ایک جیسا ہوتا ہے۔ جیسے سورج اور آفتاب۔ متضاد لفظوں کا مطلب الٹ ہوتا ہے۔ جیسے سچ اور جھوٹ۔ مترادف لفظ جملے میں ایک دوسرے کی جگہ آ سکتے ہیں۔ جملے کا مطلب وہی رہتا ہے۔ متضاد لفظ لگانے سے جملے کا مطلب الٹ جاتا ہے۔ کبھی 'نا' یا 'بے' لگا کر بھی متضاد بنتا ہے۔ جیسے خوش اور ناخوش۔ مگر ہر لفظ کے ساتھ ایسا نہیں ہوتا۔",
+    "en": "Synonyms have the same meaning. For example, sun and aaftaab. Antonyms have opposite meanings. For example, truth and lie. A synonym can take another word's place in a sentence. The meaning stays the same. An antonym turns the meaning around. Sometimes adding 'naa' or 'be' makes an antonym. For example, khush and naakhush. But this does not work for every word."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "'ہمارا مکان گلی کے آخر میں ہے۔' 'مکان' کی جگہ مترادف لفظ لگائیں۔",
+        "en": "'Our makaan is at the end of the lane.' Replace 'makaan' with a synonym."
+      },
+      "steps": [
+        {
+          "ur": "'مکان' کا مطلب ہے رہنے کی جگہ۔",
+          "en": "'Makaan' means a place to live."
+        },
+        {
+          "ur": "اسی مطلب کا لفظ: 'گھر'۔",
+          "en": "A word with the same meaning: 'ghar'."
+        },
+        {
+          "ur": "نیا جملہ: 'ہمارا گھر گلی کے آخر میں ہے۔'",
+          "en": "New sentence: 'Our ghar is at the end of the lane.'"
+        },
+        {
+          "ur": "مطلب وہی رہا، اس لیے یہ مترادف ہے۔",
+          "en": "The meaning stayed the same, so it is a synonym."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "'یہ سوال آسان ہے۔' 'آسان' کا متضاد لگا کر جملہ لکھیں۔",
+        "en": "'This question is easy.' Write the sentence with the antonym of 'easy'."
+      },
+      "steps": [
+        {
+          "ur": "'آسان' کا الٹ کیا ہے؟ 'مشکل'۔",
+          "en": "What is the opposite of 'easy'? 'Difficult'."
+        },
+        {
+          "ur": "نیا جملہ: 'یہ سوال مشکل ہے۔'",
+          "en": "New sentence: 'This question is difficult.'"
+        },
+        {
+          "ur": "مطلب الٹ گیا، اس لیے یہ متضاد ہے۔",
+          "en": "The meaning turned around, so it is an antonym."
+        },
+        {
+          "ur": "'ناآسان' کہنا درست نہیں؛ یہاں 'نا' کام نہیں کرتا۔",
+          "en": "Saying 'naa-aasaan' is wrong; 'naa' does not work here."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-pairs",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر جوڑے کو 'مترادف' یا 'متضاد' کے خانے میں رکھیں: دن–رات، پانی–آب، نیا–پرانا، راستہ–راہ، دور–قریب۔",
+        "en": "Sort each pair into 'synonym' or 'antonym': day–night, paani–aab (water), new–old, raasta–raah (path), far–near."
+      },
+      "answer_key": {
+        "synonym": [
+          "پانی–آب",
+          "راستہ–راہ"
+        ],
+        "antonym": [
+          "دن–رات",
+          "نیا–پرانا",
+          "دور–قریب"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: کیا دونوں کا مطلب ایک ہے یا الٹ؟",
+            "en": "Ask: do both mean the same, or the opposite?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-match-ant",
+      "type": "matching",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر لفظ کو اس کے متضاد سے ملائیں: سچ، اونچا، خوشی، آسان۔",
+        "en": "Match each word to its antonym: truth, high, joy, easy."
+      },
+      "options": [
+        {
+          "ur": "جھوٹ",
+          "en": "lie"
+        },
+        {
+          "ur": "مشکل",
+          "en": "difficult"
+        },
+        {
+          "ur": "غم",
+          "en": "sorrow"
+        },
+        {
+          "ur": "نیچا",
+          "en": "low"
+        }
+      ],
+      "answer_key": {
+        "pairs": {
+          "سچ": "جھوٹ",
+          "اونچا": "نیچا",
+          "خوشی": "غم",
+          "آسان": "مشکل"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر لفظ کا الٹ سوچیں۔",
+            "en": "Think of each word's opposite."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سچ–جھوٹ، اونچا–نیچا، خوشی–غم، آسان–مشکل۔",
+        "en": "truth–lie, high–low, joy–sorrow, easy–difficult."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-syn-sun",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "'سورج' کا مترادف کون سا ہے؟",
+        "en": "Which is a synonym of 'suraj' (sun)?"
+      },
+      "options": [
+        {
+          "ur": "چاند",
+          "en": "moon"
+        },
+        {
+          "ur": "آفتاب",
+          "en": "aaftaab (sun)"
+        },
+        {
+          "ur": "رات",
+          "en": "night"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "مترادف کا مطلب ایک جیسا ہوتا ہے۔",
+            "en": "A synonym has the same meaning."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "آفتاب بھی سورج کو کہتے ہیں۔",
+        "en": "Aaftaab is another word for the sun."
+      }
+    },
+    {
+      "id": "p2-ant-hot",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "'گرم' کا متضاد کون سا ہے؟",
+        "en": "Which is the antonym of 'garam' (hot)?"
+      },
+      "options": [
+        {
+          "ur": "ناگرم",
+          "en": "naa-garam"
+        },
+        {
+          "ur": "تیز",
+          "en": "sharp/fast"
+        },
+        {
+          "ur": "ٹھنڈا",
+          "en": "cold"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "گرمی کا الٹ کیا ہوتا ہے؟",
+            "en": "What is the opposite of heat?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "گرم کا الٹ ٹھنڈا ہے۔ 'ناگرم' کوئی لفظ نہیں۔",
+        "en": "The opposite of hot is cold. 'Naa-garam' is not a word."
+      }
+    },
+    {
+      "id": "p4-replace-syn",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "'میرا دوست بہت ہنس مکھ ہے۔' 'دوست' کی جگہ کون سا لفظ لگائیں کہ مطلب وہی رہے؟",
+        "en": "'My friend is very cheerful.' Which word can replace 'dost' (friend) and keep the meaning?"
+      },
+      "options": [
+        {
+          "ur": "ساتھی",
+          "en": "saathi (companion)"
+        },
+        {
+          "ur": "دشمن",
+          "en": "enemy"
+        },
+        {
+          "ur": "استاد",
+          "en": "teacher"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسا لفظ چنیں جو دوست جیسا ہو۔",
+            "en": "Choose a word that is like 'friend'."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ساتھی اور دوست ہم معنی ہیں۔ دشمن متضاد ہے۔",
+        "en": "Saathi and dost mean the same. Enemy is the opposite."
+      }
+    },
+    {
+      "id": "p5-naa-rule",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہر لفظ سے پہلے 'نا' لگا دیں تو اس کا متضاد بن جاتا ہے۔",
+        "en": "Putting 'naa' before any word always makes its antonym."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'ناٹھنڈا' یا 'نادن' کہتے ہیں؟",
+            "en": "Do we say 'naa-thanda' or 'naa-din'?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "خوش–ناخوش درست ہے، مگر گرم–ٹھنڈا اور دن–رات میں 'نا' نہیں لگتا۔",
+        "en": "Khush–naakhush works, but hot–cold and day–night do not use 'naa'."
+      }
+    },
+    {
+      "id": "p6-ant-sentence",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "'دکان ہمارے گھر سے دور ہے۔' 'دور' کا متضاد لگائیں تو جملہ کیا ہوگا؟",
+        "en": "'The shop is far from our house.' What is the sentence with the antonym of 'far'?"
+      },
+      "options": [
+        {
+          "ur": "دکان ہمارے گھر سے بہت دور ہے۔",
+          "en": "The shop is very far from our house."
+        },
+        {
+          "ur": "دکان ہمارے گھر سے قریب ہے۔",
+          "en": "The shop is near our house."
+        },
+        {
+          "ur": "دکان ہمارے گھر سے نادور ہے۔",
+          "en": "The shop is naa-door from our house."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دور کا الٹ کیا ہے؟",
+            "en": "What is the opposite of far?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "دور کا متضاد قریب (یا نزدیک) ہے۔",
+        "en": "The antonym of far is near (qareeb or nazdeek)."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-two-sentences",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "'نیا' لفظ سے ایک جملہ لکھیں۔ پھر اسی جملے میں 'نیا' کی جگہ اس کا متضاد لگا کر دوسرا جملہ لکھیں۔",
+        "en": "Write a sentence with 'naya' (new). Then write it again with the antonym of 'naya' in its place."
+      },
+      "answer_key": {
+        "sample_answer": "میرا بستہ نیا ہے۔ / میرا بستہ پرانا ہے۔"
+      },
+      "mentor_review_guidance": "Both sentences must be correct Urdu; the second uses پرانا (or پرانی/پرانے agreeing with the noun). Accept نئی/نئے forms."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-pairs-home",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں چیزیں دیکھ کر متضاد کے تین جوڑے کاپی میں لکھیں، جیسے 'بھرا گلاس – خالی گلاس'۔",
+        "en": "Look at things at home and write three antonym pairs in your notebook, like 'full glass – empty glass'."
+      },
+      "answer_key": {
+        "sample_answer": "بھرا–خالی، صاف–گندا، روشن–اندھیرا"
+      },
+      "mentor_review_guidance": "Check each pair is a true opposite."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کیا دونوں لفظوں کا مطلب ایک ہے یا الٹ؟",
+        "en": "Do the two words mean the same or the opposite?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "لفظ کو جملے میں رکھ کر دیکھیں: مطلب وہی رہا یا الٹ گیا؟",
+        "en": "Put the word in a sentence: did the meaning stay or turn around?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ہر لفظ کا متضاد 'نا' یا 'بے' لگا کر بنتا ہے۔",
+        "en": "Every word's antonym is made by adding 'naa' or 'be'."
+      },
+      "correction": {
+        "ur": "کچھ لفظوں میں یہ کام کرتا ہے (خوش–ناخوش)، مگر اکثر الگ لفظ ہوتا ہے (گرم–ٹھنڈا)۔",
+        "en": "It works for some words (khush–naakhush), but often the antonym is a different word (hot–cold)."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "مترادف اور متضاد کو آپس میں ملا دینا۔",
+        "en": "Mixing up synonyms and antonyms."
+      },
+      "correction": {
+        "ur": "مترادف = ایک جیسا مطلب؛ متضاد = الٹ مطلب۔",
+        "en": "Synonym = same meaning; antonym = opposite meaning."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:URD-G4-VO-01",
+      "remediation_ref": "URD-G4-VO-01"
+    },
+    {
+      "signal": "mixes_synonym_and_antonym",
+      "remediation_ref": "URD-G4-VO-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "مترادف: گھر–مکان، سورج–آفتاب، پانی–آب۔ متضاد: دن–رات، گرم–ٹھنڈا، دور–قریب۔ 'نا' ہر جگہ نہیں لگتا۔",
+    "en": "Synonyms: ghar–makaan, suraj–aaftaab, paani–aab. Antonyms: day–night, hot–cold, far–near. 'Naa' does not work everywhere."
+  },
+  "summary": {
+    "ur": "ہم نے ہم معنی اور الٹ معنی لفظ پہچاننا اور جملوں میں لگانا سیکھا۔",
+    "en": "We learned to spot same-meaning and opposite-meaning words and use them in sentences."
+  },
+  "parent_notes": {
+    "ur": "کھانے یا کام کے وقت 'الٹ بتاؤ' کھیل کھیلیں: آپ 'بڑا' کہیں، بچہ 'چھوٹا' کہے۔ پھر باری بدل لیں۔",
+    "en": "Play 'say the opposite' during meals or chores: you say 'big', your child says 'small'. Then swap turns."
+  },
+  "mentor_notes": {
+    "ur": "کچھ جوڑے سیاق سے بدلتے ہیں (ہلکا: وزن میں بھاری کا الٹ، رنگ میں گہرا کا الٹ)؛ اگر بچہ وجہ بتا دے تو قبول کریں۔ مذکر/مؤنث شکل (نیا/نئی) کی غلطی پر نرمی سے GR-02 کی یاد دلائیں۔",
+    "en": "Some pairs depend on context (halka is the opposite of heavy for weight, of dark for colour); accept if the learner explains. For gender forms (نیا/نئی), gently recall GR-02."
+  },
+  "accessibility_notes": {
+    "ur": "جوڑوں کی تصاویر (دن/رات، بھرا/خالی گلاس) ابھی بنانی ہیں، متبادل متن کے ساتھ۔ الفاظ کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ترتیب والی (گھسیٹنے کی) سرگرمی کا متبادل: ہر جوڑے کے لیے 'مترادف' یا 'متضاد' کا بٹن دبائیں۔ ملانے والے سوال کا متبادل: ہر لفظ کے لیے تین میں سے ایک چنیں۔",
+    "en": "Pictures for the pairs (day/night, full/empty glass) are still to be made, with alt text. Urdu audio for the words is not yet recorded. Alternative to the drag sorting activity: press 'synonym' or 'antonym' for each pair. Alternative to the matching item: choose one of three for each word."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "pairs first, then substitution test in a sentence: same meaning -> synonym, reversed meaning -> antonym",
+    "questioning_strategy": "ask 'did the meaning stay or turn around?' after each substitution",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "forms antonyms with naa/be for every word",
+      "calls an antonym a synonym"
+    ],
+    "hint_policy": "graduated; two hints max; first ask same-or-opposite, then suggest the sentence test; never give the pair word first",
+    "example_policy": "common everyday words; avoid rare Persian/Arabic synonyms beyond aaftaab/aab; sentences from home, school and bazaar",
+    "misconception_detectors": [
+      "writes naa-/be- forms that are not words",
+      "swaps the two categories"
+    ],
+    "critical_thinking_prompts": [
+      "Why can 'ghar' replace 'makaan' but 'dushman' cannot replace 'dost'?"
+    ],
+    "personalization_rules": "if meaning from context is weak, route to URD-G4-VO-01",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "language editor: confirm the synonym pairs (سورج–آفتاب، پانی–آب، راستہ–راہ، دوست–ساتھی) are taught as synonyms at Grade 4",
+    "subject expert: confirm the terms مترادف / متضاد (with ہم معنی as a gloss) are standard in Grade 4"
+  ]
+}

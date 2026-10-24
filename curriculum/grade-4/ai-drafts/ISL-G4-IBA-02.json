@@ -1,0 +1,462 @@
+{
+  "code": "ISL-G4-IBA-02",
+  "title": {
+    "ur": "مہربانی اور صدقہ",
+    "en": "Kindness and Charity"
+  },
+  "description": {
+    "ur": "صدقہ اور دوسروں کی مدد کو سمجھنا: پیسے سے بھی، وقت سے بھی اور اچھے کام سے بھی۔",
+    "en": "Understanding charity and helping others: with money, with time and with good deeds."
+  },
+  "keywords": [
+    "charity",
+    "sadaqah",
+    "helping others",
+    "sharing",
+    "kindness",
+    "ibadat"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "صدقہ",
+        "en": "sadaqah / charity"
+      },
+      "definition": {
+        "ur": "اللہ تعالیٰ کو خوش کرنے کے لیے کسی کی مدد کرنا یا کچھ دینا۔",
+        "en": "Helping someone or giving something to please Allah."
+      }
+    },
+    {
+      "term": {
+        "ur": "ضرورت مند",
+        "en": "someone in need"
+      },
+      "definition": {
+        "ur": "جس کے پاس کسی ضروری چیز کی کمی ہو۔",
+        "en": "Someone who is missing something they need."
+      }
+    },
+    {
+      "term": {
+        "ur": "بانٹنا",
+        "en": "sharing"
+      },
+      "definition": {
+        "ur": "اپنی چیز میں سے دوسروں کو بھی دینا۔",
+        "en": "Giving others some of what we have."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم صدقے کی بات کریں گے۔ صدقہ یعنی دوسروں کی مدد کرنا۔ صدقہ صرف پیسوں سے نہیں ہوتا۔ ہمارا دین سکھاتا ہے کہ ایک اچھی مسکراہٹ بھی نیکی ہے۔ آئیں دیکھیں ہم کیسے مدد کر سکتے ہیں۔",
+    "en": "Today we will talk about charity, called sadaqah. Sadaqah means helping others. Sadaqah is not only money. Our religion teaches that even a kind smile is a good deed. Let us see how we can help."
+  },
+  "student_explanation": {
+    "ur": "اسلام ہمیں دوسروں کی مدد کرنا سکھاتا ہے۔ مدد کے لیے کچھ دینے کو صدقہ کہتے ہیں۔ صدقہ پیسوں سے بھی ہوتا ہے۔ کھانا بانٹنا بھی صدقہ ہے۔ کسی کا بوجھ اٹھانا بھی مدد ہے۔ راستے سے پتھر ہٹانا بھی اچھا کام ہے۔ ہم مدد کر کے کسی کو شرمندہ نہیں کرتے۔ ہم دکھاوا بھی نہیں کرتے۔ تھوڑی سی مدد بھی بہت قیمتی ہے۔",
+    "en": "Islam teaches us to help others. Giving to help someone is called sadaqah. Sadaqah can be money. Sharing food is sadaqah too. Carrying someone's load is also help. Moving a stone off the path is a good deed. When we help, we never make anyone feel small. We do not show off either. Even a little help is very precious."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "حسن کے پاس دو روٹیاں ہیں۔ اس کا دوست آج کھانا نہیں لایا۔",
+        "en": "Hassan has two rotis. His friend has not brought any food today."
+      },
+      "steps": [
+        {
+          "ur": "سوچیں: دوست کو بھوک لگی ہے۔",
+          "en": "Think: the friend is hungry."
+        },
+        {
+          "ur": "حسن ایک روٹی دوست کے ساتھ بانٹ لیتا ہے۔",
+          "en": "Hassan shares one roti with his friend."
+        },
+        {
+          "ur": "وہ یہ بات سب کو نہیں بتاتا، تاکہ دوست شرمندہ نہ ہو۔",
+          "en": "He does not tell everyone, so his friend does not feel embarrassed."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "مریم کے پاس پیسے نہیں ہیں۔ وہ کیسے مدد کرے؟",
+        "en": "Maryam has no money. How can she help?"
+      },
+      "steps": [
+        {
+          "ur": "مدد صرف پیسوں سے نہیں ہوتی۔",
+          "en": "Help is not only money."
+        },
+        {
+          "ur": "مریم اپنی پرانی مگر اچھی کتابیں کسی چھوٹے بچے کو دے سکتی ہے۔",
+          "en": "Maryam can give her old but good books to a younger child."
+        },
+        {
+          "ur": "وہ امی کے ساتھ پڑوسی کے بچے کو پڑھنے میں مدد بھی کر سکتی ہے۔",
+          "en": "She can also help a neighbour's child with reading, alongside her mother."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-ways-to-help",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو چھو کر بتائیں: یہ مدد پیسوں سے ہے، چیز سے ہے یا کام سے؟",
+        "en": "Tap each card: is this help with money, with a thing, or with an action?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: کیا دیا گیا؟ پیسہ، چیز یا محنت؟",
+            "en": "Ask: what was given? Money, a thing, or effort?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "ضرورت مند کو کچھ روپے دینا",
+          "en": "Giving a few rupees to someone in need"
+        },
+        {
+          "ur": "کھانا بانٹنا",
+          "en": "Sharing food"
+        },
+        {
+          "ur": "بزرگ کا تھیلا اٹھانا",
+          "en": "Carrying an elder's bag"
+        },
+        {
+          "ur": "پرانے کپڑے صاف کر کے دینا",
+          "en": "Washing and giving old clothes"
+        },
+        {
+          "ur": "راستے سے پتھر ہٹانا",
+          "en": "Moving a stone off the path"
+        }
+      ],
+      "answer_key": {
+        "mode": "sort",
+        "groups": {
+          "money": [
+            0
+          ],
+          "thing": [
+            1,
+            3
+          ],
+          "action": [
+            2,
+            4
+          ]
+        }
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-what-is",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "صدقہ کیا ہے؟",
+        "en": "What is sadaqah?"
+      },
+      "options": [
+        {
+          "ur": "صرف اپنے لیے چیزیں جمع کرنا",
+          "en": "Collecting things only for ourselves"
+        },
+        {
+          "ur": "اللہ تعالیٰ کو خوش کرنے کے لیے دوسروں کی مدد کرنا",
+          "en": "Helping others to please Allah"
+        },
+        {
+          "ur": "مدد کر کے سب کو بتانا",
+          "en": "Helping and then telling everyone"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p2-only-money",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "صدقہ صرف پیسوں سے ہو سکتا ہے۔",
+        "en": "Sadaqah can only be money."
+      },
+      "explanation": {
+        "ur": "کھانا بانٹنا، مدد کرنا اور راستہ صاف کرنا بھی نیکی ہے۔",
+        "en": "Sharing food, helping and clearing a path are good deeds too."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p3-someone-else",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "گلی میں ایک بزرگ کا سامان گر گیا ہے۔ کئی لوگ گزر رہے ہیں۔ آپ کیا کریں؟",
+        "en": "An elder has dropped their shopping in the street. Many people are walking past. What do you do?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا مدد کرنا صرف دوسروں کا کام ہے؟",
+            "en": "Is helping only other people's job?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ہم میں سے ہر ایک مدد کر سکتا ہے۔",
+        "en": "Each of us can help."
+      },
+      "options": [
+        {
+          "ur": "سوچیں کوئی اور مدد کر دے گا",
+          "en": "Think someone else will help"
+        },
+        {
+          "ur": "ہنس کر چلے جائیں",
+          "en": "Laugh and walk on"
+        },
+        {
+          "ur": "سامان اٹھانے میں مدد کریں",
+          "en": "Help pick up the shopping"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-responsibility-someone-else"
+        }
+      }
+    },
+    {
+      "id": "p4-no-shame",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مدد کرتے وقت کون سی بات اچھی ہے؟",
+        "en": "Which is a good way to help?"
+      },
+      "options": [
+        {
+          "ur": "چپکے سے مدد کرنا تاکہ کوئی شرمندہ نہ ہو",
+          "en": "Helping quietly so nobody feels embarrassed"
+        },
+        {
+          "ur": "سب کو بتانا کہ ہم نے مدد کی",
+          "en": "Telling everyone that we helped"
+        },
+        {
+          "ur": "مدد کر کے احسان جتانا",
+          "en": "Helping and then reminding them of it"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p5-smile",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہمارا دین سکھاتا ہے کہ اچھی مسکراہٹ بھی نیکی ہے۔",
+        "en": "Our religion teaches that a kind smile is also a good deed."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-little",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "علی کے پاس صرف ایک بسکٹ ہے۔ کیا آدھا بانٹنا بھی مدد ہے؟",
+        "en": "Ali has only one biscuit. Is sharing half of it real help?"
+      },
+      "options": [
+        {
+          "ur": "نہیں، بہت تھوڑا ہے",
+          "en": "No, it is too little"
+        },
+        {
+          "ur": "ہاں، تھوڑی مدد بھی قیمتی ہے",
+          "en": "Yes, even a little help is precious"
+        },
+        {
+          "ur": "صرف اگر کوئی دیکھے",
+          "en": "Only if someone sees"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-free-help",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "تین ایسے طریقے سوچیں جن سے پیسے خرچ کیے بغیر کسی کی مدد ہو سکے۔",
+        "en": "Think of three ways to help someone without spending any money."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any safe help (sharing, carrying, teaching, cleaning, a kind word). Never compare what families can give."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-share",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج گھر میں کسی کے ساتھ کوئی چیز بانٹیں یا کسی کام میں ہاتھ بٹائیں۔",
+        "en": "Today, share something with someone at home or help with a job."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. Do not ask what the family gives or owns."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: اس سے کس کی ضرورت پوری ہو گی؟",
+        "en": "Think: whose need would this meet?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: مدد پیسے سے بھی ہے، چیز سے بھی، کام سے بھی۔",
+        "en": "Remember: help can be money, a thing or an action."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "کوئی اور مدد کر دے گا۔",
+        "en": "Someone else will help."
+      },
+      "correction": {
+        "ur": "ہم میں سے ہر ایک کا حصہ ہے؛ ہم خود بھی مدد کرتے ہیں۔",
+        "en": "Each of us has a share; we help too."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "صدقہ صرف امیر لوگ کر سکتے ہیں۔",
+        "en": "Only rich people can give charity."
+      },
+      "correction": {
+        "ur": "ہر کوئی مدد کر سکتا ہے، مسکراہٹ اور محنت سے بھی۔",
+        "en": "Everyone can help, even with a smile or effort."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-responsibility-someone-else",
+      "remediation_ref": "ISL-G4-IBA-02"
+    },
+    {
+      "signal": "misconception:m-kindness-to-friends-only",
+      "remediation_ref": "ISL-G4-AKH-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "صدقہ یعنی اللہ تعالیٰ کو خوش کرنے کے لیے مدد کرنا۔ مدد پیسے، چیز یا کام سے ہو سکتی ہے۔ دکھاوا نہیں، کسی کو شرمندہ نہیں کرنا۔",
+    "en": "Sadaqah means helping to please Allah. Help can be money, a thing or an action. No showing off, and never make anyone feel small."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ صدقہ اور مدد ہر کوئی کر سکتا ہے۔",
+    "en": "We learned that everyone can give charity and help."
+  },
+  "parent_notes": {
+    "ur": "بچے کو گھر میں کسی سے کوئی چیز بانٹنے کا موقع دیں، اور اس کی نیت کی تعریف کریں، چیز کی قیمت کی نہیں۔",
+    "en": "Give your child a chance to share something at home, and praise the intention, not the value of the gift."
+  },
+  "mentor_notes": {
+    "ur": "کچھ بچے خود ضرورت مند گھروں سے ہیں؛ کبھی 'غریب' کو مثال بنا کر شرمندہ نہ کریں، اور مدد لینے والے کی عزت پر زور دیں۔ زکوٰۃ کی تفصیلات اس سبق میں شامل نہیں۔",
+    "en": "Some learners come from families in need themselves; never use 'the poor' in a way that shames, and stress the dignity of the person helped. Zakat details are deliberately left out of this lesson."
+  },
+  "accessibility_notes": {
+    "ur": "تصاویر (روٹی بانٹنا، راستے سے پتھر ہٹانا) اور ان کا متبادل متن ابھی بنانا ہے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر کارڈ کے لیے 'پیسہ'، 'چیز' یا 'کام' کا بٹن چنیں۔",
+    "en": "Pictures (sharing roti, moving a stone off a path) and their alt text are still to be made. Urdu audio is not yet recorded. Alternative to the sort activity: choose a 'money', 'thing' or 'action' button for each card."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "define sadaqah simply, then show three kinds of help (money, a thing, an action) and two manners of giving (quietly, without shaming)",
+    "questioning_strategy": "ask 'whose need does this meet?' and 'how would they feel?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "child says their family cannot give anything"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "mostly free help; never single out poverty; dignity of the person helped; Pakistani street and home settings",
+    "misconception_detectors": [
+      "says someone else will help",
+      "thinks charity is only money or only for the rich"
+    ],
+    "critical_thinking_prompts": [
+      "Why is it kinder to help quietly than to tell everyone?"
+    ],
+    "personalization_rules": "if a child says they have nothing to give, show the action cards and praise their ideas",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: the teachings that a smile and removing harm from the path are good deeds are described without hadith citations; confirm or add approved references",
+    "scholar: confirm the child-level definition of sadaqah and that leaving out zakat details is acceptable",
+    "child-safety reviewer: confirm no item shames children from families in need"
+  ]
+}

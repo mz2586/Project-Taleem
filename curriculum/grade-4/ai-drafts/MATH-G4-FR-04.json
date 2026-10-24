@@ -1,0 +1,430 @@
+{
+  "code": "MATH-G4-FR-04",
+  "description": {
+    "ur": "ایک جیسے نیچے کے نمبر والی دو کسروں کا، اور سادہ اکائی کسروں کا موازنہ کرنا۔",
+    "en": "Compare two fractions with the same bottom number, and compare simple unit fractions."
+  },
+  "keywords": [
+    "compare fractions",
+    "greater than",
+    "less than",
+    "same denominator",
+    "unit fraction"
+  ],
+  "teacher_script": {
+    "ur": "دو بچے ایک جیسی روٹیوں سے کھا رہے ہیں۔ کس نے زیادہ کھایا؟ یہ جاننے کے لیے ہم کسروں کا موازنہ کریں گے۔ آج دو آسان طریقے سیکھیں گے۔ اگر نیچے کا نمبر ایک جیسا ہو تو اوپر کے نمبر دیکھیں۔ اگر اوپر کا نمبر ۱ ہو تو یاد رکھیں: زیادہ حصے مطلب چھوٹے حصے۔",
+    "en": "Two children are eating from rotis of the same size. Who ate more? To find out, we compare fractions. Today we learn two easy ways. If the bottom numbers are the same, look at the top numbers. If the top numbers are 1, remember: more parts means smaller parts."
+  },
+  "student_explanation": {
+    "ur": "دو کسروں کا موازنہ کرنے کے دو آسان طریقے ہیں۔ پہلا: نیچے کا نمبر ایک جیسا ہو تو اوپر کے نمبر دیکھیں۔ جس کا اوپر کا نمبر بڑا ہو، وہ کسر بڑی ہے۔ اس لیے ۳/۵ کی کسر ۲/۵ سے بڑی ہے۔ دوسرا: اوپر کا نمبر ۱ ہو تو نیچے کا نمبر دیکھیں۔ زیادہ حصے مطلب چھوٹے حصے۔ اس لیے ۱/۲ کی کسر ۱/۴ سے بڑی ہے۔ نشان > کا مطلب ہے 'سے بڑا'۔ نشان < کا مطلب ہے 'سے چھوٹا'۔",
+    "en": "There are two easy ways to compare two fractions. First: if the bottom numbers are the same, look at the tops. The fraction with the bigger top is bigger. So 3/5 is bigger than 2/5. Second: if the top numbers are 1, look at the bottoms. More parts means smaller parts. So 1/2 is bigger than 1/4. The sign > means 'bigger than'. The sign < means 'smaller than'."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۳/۸ اور ۵/۸ میں سے کونسی کسر بڑی ہے؟",
+        "en": "Which is bigger: 3/8 or 5/8?"
+      },
+      "steps": [
+        {
+          "ur": "نیچے کا نمبر دونوں میں ۸ ہے۔ حصے ایک جیسے ہیں۔",
+          "en": "Both bottom numbers are 8. The parts are the same size."
+        },
+        {
+          "ur": "اب اوپر دیکھیں: ۳ اور ۵۔ ۵ بڑا ہے۔",
+          "en": "Now look at the tops: 3 and 5. 5 is bigger."
+        },
+        {
+          "ur": "تو ۵/۸ > ۳/۸۔",
+          "en": "So 5/8 > 3/8."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "۱/۳ اور ۱/۵ میں سے کونسی کسر بڑی ہے؟",
+        "en": "Which is bigger: 1/3 or 1/5?"
+      },
+      "steps": [
+        {
+          "ur": "دونوں کا اوپر کا نمبر ۱ ہے۔ ہر ایک میں ایک ہی حصہ ہے۔",
+          "en": "Both top numbers are 1. Each is just one part."
+        },
+        {
+          "ur": "روٹی کے ۳ حصے کریں تو ہر ٹکڑا بڑا ہوتا ہے۔ ۵ حصے کریں تو ہر ٹکڑا چھوٹا۔",
+          "en": "Cut a roti into 3 parts and each piece is big. Cut it into 5 and each piece is smaller."
+        },
+        {
+          "ur": "تو ۱/۳ > ۱/۵۔",
+          "en": "So 1/3 > 1/5."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-tap-bigger-bar",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "دو برابر لمبی پٹیاں ہیں۔ ایک پر ۱/۳ رنگا ہے، دوسری پر ۱/۶۔ بڑی کسر والی پٹی کو تھپتھپائیں۔",
+        "en": "Two bars are the same length. One has 1/3 shaded, the other 1/6. Tap the bar with the bigger fraction."
+      },
+      "answer_key": {
+        "selected": "1/3"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کس پٹی کے ٹکڑے زیادہ اور چھوٹے ہیں؟",
+            "en": "Which bar has more, smaller pieces?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-order-ninths",
+      "type": "ordering",
+      "competency": "application",
+      "stem": {
+        "ur": "ان کسروں کو چھوٹی سے بڑی کی ترتیب میں لگائیں: ۴/۹، ۱/۹، ۷/۹، ۲/۹",
+        "en": "Put these fractions in order from smallest to biggest: 4/9, 1/9, 7/9, 2/9"
+      },
+      "options": [
+        {
+          "ur": "۴/۹",
+          "en": "4/9"
+        },
+        {
+          "ur": "۱/۹",
+          "en": "1/9"
+        },
+        {
+          "ur": "۷/۹",
+          "en": "7/9"
+        },
+        {
+          "ur": "۲/۹",
+          "en": "2/9"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          3,
+          0,
+          2
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "نیچے کا نمبر سب میں ۹ ہے۔ اوپر کے نمبر ترتیب دیں۔",
+            "en": "All the bottoms are 9. Put the tops in order."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱/۹، ۲/۹، ۴/۹، ۷/۹",
+        "en": "1/9, 2/9, 4/9, 7/9"
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-sevenths",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "خالی جگہ میں صحیح نشان چنیں: ۳/۷ ___ ۵/۷",
+        "en": "Choose the right sign: 3/7 ___ 5/7"
+      },
+      "options": [
+        {
+          "ur": ">",
+          "en": ">"
+        },
+        {
+          "ur": "<",
+          "en": "<"
+        },
+        {
+          "ur": "=",
+          "en": "="
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "نیچے کا نمبر ایک جیسا ہے۔ اوپر کے نمبر دیکھیں۔",
+            "en": "The bottom numbers are the same. Look at the tops."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۳ چھوٹا ہے ۵ سے، اس لیے ۳/۷ < ۵/۷۔",
+        "en": "3 is smaller than 5, so 3/7 < 5/7."
+      }
+    },
+    {
+      "id": "p2-third-or-eighth",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کونسی کسر بڑی ہے: ۱/۳ یا ۱/۸؟",
+        "en": "Which fraction is bigger: 1/3 or 1/8?"
+      },
+      "options": [
+        {
+          "ur": "۱/۳",
+          "en": "1/3"
+        },
+        {
+          "ur": "۱/۸",
+          "en": "1/8"
+        },
+        {
+          "ur": "دونوں برابر ہیں",
+          "en": "They are equal"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-bigger-denominator-is-bigger"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایک روٹی کے ۸ ٹکڑے بڑے ہوں گے یا چھوٹے؟",
+            "en": "Would 8 pieces of one roti be big or small?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "زیادہ حصے مطلب چھوٹے حصے۔ اس لیے ۱/۳ بڑا ہے۔",
+        "en": "More parts means smaller parts. So 1/3 is bigger."
+      }
+    },
+    {
+      "id": "p3-fifth-quarter",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۱/۵ > ۱/۴",
+        "en": "1/5 > 1/4"
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-bigger-denominator-is-bigger"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۵ ٹکڑے بڑے ہیں یا ۴ ٹکڑے؟",
+            "en": "Are 5 pieces bigger, or 4 pieces?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پانچواں حصہ چوتھائی سے چھوٹا ہے، اس لیے ۱/۵ < ۱/۴۔",
+        "en": "A fifth is smaller than a quarter, so 1/5 < 1/4."
+      }
+    },
+    {
+      "id": "p5-who-ate-more",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "بلال نے ایک روٹی کا ۲/۴ کھایا۔ زینب نے اتنی ہی بڑی روٹی کا ۳/۴ کھایا۔ کس نے زیادہ کھایا؟",
+        "en": "Bilal ate 2/4 of a roti. Zainab ate 3/4 of a roti of the same size. Who ate more?"
+      },
+      "options": [
+        {
+          "ur": "بلال",
+          "en": "Bilal"
+        },
+        {
+          "ur": "دونوں نے برابر",
+          "en": "Both ate the same"
+        },
+        {
+          "ur": "زینب",
+          "en": "Zainab"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دونوں روٹیوں کے ۴ حصے ہیں۔ کس نے زیادہ حصے کھائے؟",
+            "en": "Both rotis have 4 parts. Who ate more parts?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۳/۴ > ۲/۴، اس لیے زینب نے زیادہ کھایا۔",
+        "en": "3/4 > 2/4, so Zainab ate more."
+      }
+    },
+    {
+      "id": "p6-sixth-half",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "صحیح نشان چنیں: ۱/۶ ___ ۱/۲",
+        "en": "Choose the right sign: 1/6 ___ 1/2"
+      },
+      "options": [
+        {
+          "ur": "<",
+          "en": "<"
+        },
+        {
+          "ur": ">",
+          "en": ">"
+        },
+        {
+          "ur": "=",
+          "en": "="
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-bigger-denominator-is-bigger"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "آدھی روٹی بڑی ہے یا چھٹا حصہ؟",
+            "en": "Is half a roti bigger, or one sixth?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "چھٹا حصہ آدھے سے چھوٹا ہے: ۱/۶ < ۱/۲۔",
+        "en": "One sixth is smaller than one half: 1/6 < 1/2."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-smaller-than-fifth",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "نیچے ایک ایسا نمبر لکھیں کہ ۱/___ کی کسر ۱/۵ سے چھوٹی ہو۔ بتائیں کیوں۔",
+        "en": "Write a bottom number so that 1/___ is smaller than 1/5. Explain why."
+      },
+      "answer_key": {
+        "answer": "any whole number greater than 5 (e.g. 6, 8, 10): more parts means smaller parts"
+      },
+      "accepted_variants": [
+        "6",
+        "7",
+        "8",
+        "9",
+        "10"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کسر چھوٹی کرنی ہے تو حصے زیادہ ہوں گے یا کم؟",
+            "en": "To make the fraction smaller, do you need more parts or fewer?"
+          }
+        }
+      ]
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-bigger-denominator-is-bigger",
+      "remediation_ref": "MATH-G4-FR-01"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-FR-02",
+      "remediation_ref": "MATH-G4-FR-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "نیچے کا نمبر ایک جیسا ہو تو بڑا اوپر والا نمبر بڑی کسر ہے۔ اوپر کا نمبر ۱ ہو تو زیادہ حصے مطلب چھوٹے حصے۔ > یعنی 'سے بڑا'، < یعنی 'سے چھوٹا'۔",
+    "en": "Same bottom number: the bigger top is the bigger fraction. Top number 1: more parts means smaller parts. > means 'bigger than', < means 'smaller than'."
+  },
+  "summary": {
+    "ur": "ہم نے ایک جیسے نیچے والی کسروں اور اکائی کسروں کا موازنہ سیکھا۔",
+    "en": "We learned to compare fractions with the same bottom number, and unit fractions."
+  },
+  "parent_notes": {
+    "ur": "روٹی کا ۲/۴ یا ۳/۴ — کس نے زیادہ کھایا؟",
+    "en": "who ate more — 2/4 or 3/4 of the roti?"
+  },
+  "mentor_notes": {
+    "ur": "ایک جیسے نیچے کے نمبر والی صورت کو اکائی کسر والی صورت سے الگ رکھ کر سکھائیں۔",
+    "en": "separate the same-denominator case from the unit-fraction case."
+  },
+  "accessibility_notes": {
+    "ur": "کسر کی پٹیاں ابھی بنانی ہیں؛ متبادل متن بتائے کہ پٹی کے کتنے برابر حصے ہیں اور کتنے رنگے ہیں۔ رنگ کے ساتھ لکیروں کا نمونہ بھی ہو۔ > اور < کے نشان آڈیو میں 'سے بڑا' اور 'سے چھوٹا' پڑھے جائیں۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ترتیب والے سوال کا متبادل: ہر کسر کے لیے نمبر ۱ سے ۴ چنیں؛ گھسیٹنا ضروری نہیں۔",
+    "en": "The fraction bars are still to be made; alt text should say how many equal parts each bar has and how many are shaded. Shading should carry a pattern, not colour alone. Audio should read > and < as 'bigger than' and 'smaller than'. Urdu audio is not yet recorded. Alternative to the ordering item: choose a position 1 to 4 for each fraction; no dragging is needed."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "first decide which case it is (same bottom, or top = 1), then apply that case's rule; check with equal-length fraction bars",
+    "questioning_strategy": "ask 'are the bottom numbers the same?' before 'which is bigger?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "picks the bigger bottom number as the bigger fraction",
+      "mixes up > and <"
+    ],
+    "hint_policy": "graduated; two hints max before a worked re-teach of a similar problem; never reveal the answer first",
+    "example_policy": "same-denominator pairs up to tenths and unit fractions halves to tenths; equal-sized wholes (roti, ribbon, paper strip)",
+    "misconception_detectors": [
+      "chooses the fraction with the larger denominator in unit-fraction pairs",
+      "reads > as < or the reverse"
+    ],
+    "critical_thinking_prompts": [
+      "Why does cutting a roti into more pieces make each piece smaller?"
+    ],
+    "personalization_rules": "if the unit-fraction case fails, route to MATH-G4-FR-01; if top/bottom meaning fails, route to MATH-G4-FR-02",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, upset or fear -> stop the lesson and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information",
+      "shame or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: comparing is only fair for wholes of the same size; every item says so or uses equal bars — confirm",
+    "language editor: check the Urdu reading of > and < ('سے بڑا' / 'سے چھوٹا') and gender agreement with کسر"
+  ]
+}

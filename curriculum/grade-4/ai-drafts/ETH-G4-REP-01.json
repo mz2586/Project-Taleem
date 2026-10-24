@@ -1,0 +1,442 @@
+{
+  "code": "ETH-G4-REP-01",
+  "title": {
+    "ur": "میری ذمہ داری",
+    "en": "My responsibilities"
+  },
+  "description": {
+    "ur": "ذاتی ذمہ داری کیا ہے: گھر کے چھوٹے کام اور اسکول کا کام خود پورا کرنا۔",
+    "en": "What personal responsibility is: doing small jobs at home and our own schoolwork."
+  },
+  "keywords": [
+    "responsibility",
+    "chores",
+    "schoolwork",
+    "my share",
+    "on time",
+    "home"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ذمہ داری",
+        "en": "responsibility"
+      },
+      "definition": {
+        "ur": "وہ کام جو میرا ہے اور مجھے پورا کرنا ہے۔",
+        "en": "a job that is mine to do and finish."
+      }
+    },
+    {
+      "term": {
+        "ur": "گھر کا کام",
+        "en": "chore"
+      },
+      "definition": {
+        "ur": "گھر کا چھوٹا کام، جیسے کپڑے تہہ کرنا یا پودوں کو پانی دینا۔",
+        "en": "a small job at home, like folding clothes or watering plants."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم ذمہ داری کے بارے میں بات کریں گے۔ ذمہ داری کا مطلب ہے اپنا حصہ خود پورا کرنا۔ گھر میں سب کا کوئی نہ کوئی کام ہوتا ہے، لڑکوں کا بھی اور لڑکیوں کا بھی۔ ہم عمر اور نادیہ کی کہانی سنیں گے، جو دونوں سوچ رہے تھے کہ «کوئی اور کر دے گا»۔",
+    "en": "Today we will talk about responsibility. Responsibility means doing your own share. At home everyone has a job, boys and girls alike. We will hear about Umar and Nadia, who both thought \"someone else will do it\"."
+  },
+  "student_explanation": {
+    "ur": "ذمہ داری کا مطلب ہے اپنا کام خود کرنا۔ گھر میں ہر ایک کا حصہ ہوتا ہے۔ اپنا بستہ جگہ پر رکھنا ذمہ داری ہے۔ برتن اٹھانا یا پودوں کو پانی دینا بھی ذمہ داری ہے۔ ہوم ورک وقت پر کرنا ذمہ داری ہے۔ صبح کا بستہ رات کو تیار کرنا بھی۔ اگر سب سوچیں «کوئی اور کرے گا» تو کام رہ جاتا ہے۔ ہر ایک کا اپنا حصہ ہے۔ چھوٹے کام بھی اہم ہیں۔",
+    "en": "Responsibility means doing your own work. At home everyone has a share. Putting your school bag in its place is responsibility. Clearing plates or watering plants is too. Doing homework on time is responsibility. So is packing your bag the night before. If everyone thinks \"someone else will do it\", the job is left undone. Each of us has a share. Small jobs matter too."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "کھانے کے بعد عمر اور نادیہ دونوں سوچتے ہیں کہ دسترخوان کوئی اور سمیٹ دے گا۔ کیا ہوتا ہے؟",
+        "en": "After dinner, Umar and Nadia each think someone else will clear the dastarkhwan. What happens?"
+      },
+      "steps": [
+        {
+          "ur": "دونوں ٹی وی کے پاس چلے جاتے ہیں۔ برتن وہیں پڑے رہتے ہیں۔",
+          "en": "Both go to the TV. The plates stay where they are."
+        },
+        {
+          "ur": "امی تھکی ہوئی ہیں اور اکیلی سب سمیٹتی ہیں۔",
+          "en": "Ammi is tired and clears everything alone."
+        },
+        {
+          "ur": "اگلے دن دونوں اپنا حصہ لیتے ہیں: عمر برتن اٹھاتا ہے، نادیہ دسترخوان جھاڑتی ہے۔ کام جلدی ختم۔",
+          "en": "The next day each takes a share: Umar carries plates, Nadia shakes out the cloth. The job is done fast."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-whose-job",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو رکھیں: «ذمہ داری» یا «ذمہ داری نہیں»۔",
+        "en": "Sort each card: 'responsible' or 'not responsible'."
+      },
+      "options": [
+        {
+          "ur": "رات کو اگلے دن کا بستہ تیار کرنا",
+          "en": "Packing tomorrow's school bag at night"
+        },
+        {
+          "ur": "جوتے راستے میں چھوڑ دینا",
+          "en": "Leaving shoes in the doorway"
+        },
+        {
+          "ur": "استعمال کے بعد پنسلیں ڈبے میں رکھنا",
+          "en": "Putting pencils back in the box after use"
+        },
+        {
+          "ur": "ہوم ورک کسی اور سے کروانا",
+          "en": "Getting someone else to do your homework"
+        }
+      ],
+      "answer_key": {
+        "sort": {
+          "responsible": [
+            0,
+            2
+          ],
+          "not_responsible": [
+            1,
+            3
+          ]
+        },
+        "mode": "tap a card, then tap its group (drag also works)"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: کیا میں اپنا حصہ خود کر رہا ہوں؟",
+            "en": "Ask: am I doing my own share?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-meaning",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ذمہ داری کا مطلب کیا ہے؟",
+        "en": "What does responsibility mean?"
+      },
+      "options": [
+        {
+          "ur": "اپنا کام خود پورا کرنا",
+          "en": "Doing your own work and finishing it"
+        },
+        {
+          "ur": "سب کام دوسروں پر چھوڑنا",
+          "en": "Leaving all jobs to others"
+        },
+        {
+          "ur": "صرف وہ کام کرنا جو مزے کا ہو",
+          "en": "Doing only fun jobs"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-responsibility-someone-else"
+        }
+      }
+    },
+    {
+      "id": "p2-someone-else",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اگر میں نہ کروں تو کوئی اور کر دے گا، اس لیے مجھے فکر نہیں کرنی۔",
+        "en": "If I don't do it, someone else will, so I don't need to worry."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-responsibility-someone-else"
+        }
+      },
+      "explanation": {
+        "ur": "ہر ایک کا اپنا حصہ ہے۔",
+        "en": "Each of us has a share of responsibility."
+      }
+    },
+    {
+      "id": "p3-homework",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "سمرن کھیلنا چاہتی ہے مگر ہوم ورک ابھی باقی ہے۔ ذمہ دار انتخاب کون سا ہے؟",
+        "en": "Simran wants to play but her homework isn't done. Which choice is responsible?"
+      },
+      "options": [
+        {
+          "ur": "ہوم ورک بھول جائے",
+          "en": "Forget the homework"
+        },
+        {
+          "ur": "پہلے ہوم ورک کرے، پھر کھیلے",
+          "en": "Do homework first, then play"
+        },
+        {
+          "ur": "کل کسی دوست سے نقل کر لے",
+          "en": "Copy from a friend tomorrow"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p4-boys-girls",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "گھر کے کام کس کی ذمہ داری ہیں؟",
+        "en": "Whose responsibility are jobs at home?"
+      },
+      "options": [
+        {
+          "ur": "صرف امی کی",
+          "en": "Only Ammi's"
+        },
+        {
+          "ur": "صرف لڑکیوں کی",
+          "en": "Only girls'"
+        },
+        {
+          "ur": "گھر کے سب افراد کی، لڑکوں اور لڑکیوں دونوں کی",
+          "en": "Everyone at home, boys and girls both"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-responsibility-someone-else"
+        }
+      }
+    },
+    {
+      "id": "p5-small-jobs",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "چھوٹے کام، جیسے بستہ جگہ پر رکھنا، بھی ذمہ داری ہیں۔",
+        "en": "Small jobs, like putting your bag away, are also responsibility."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-plant",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کلاس نے ایک پودا لگایا ہے۔ اس ہفتے پانی دینے کی باری بلال کی ہے۔ وہ کیا کرے؟",
+        "en": "The class planted a plant. This week it is Bilal's turn to water it. What should he do?"
+      },
+      "options": [
+        {
+          "ur": "روز یاد سے پانی دے",
+          "en": "Remember to water it every day"
+        },
+        {
+          "ur": "سوچے کہ کوئی اور دے دے گا",
+          "en": "Think someone else will do it"
+        },
+        {
+          "ur": "صرف تب دے جب استاد کہیں",
+          "en": "Water it only when the teacher says"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-responsibility-someone-else"
+        }
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-forgot",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ڈینیئل کی باری تھی کہ وہ صبح مرغیوں کو دانہ ڈالے، مگر وہ بھول گیا۔ اب ذمہ دار کام کیا ہے؟",
+        "en": "It was Daniel's turn to feed the hens in the morning, but he forgot. What is the responsible thing now?"
+      },
+      "options": [
+        {
+          "ur": "کسی کو نہ بتائے",
+          "en": "Tell no one"
+        },
+        {
+          "ur": "ابھی دانہ ڈالے، سچ بتائے، اور یاد رکھنے کا طریقہ سوچے",
+          "en": "Feed them now, tell the truth, and think of a way to remember"
+        },
+        {
+          "ur": "چھوٹی بہن پر الزام لگا دے",
+          "en": "Blame his little sister"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بھولنے کے بعد بھی ذمہ داری کیسے پوری کی جا سکتی ہے؟",
+            "en": "How can you still meet a responsibility after forgetting?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-my-job",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر والوں سے بات کر کے اس ہفتے کے لیے اپنا ایک چھوٹا کام چنیں اور روز کریں۔",
+        "en": "Talk with your family, choose one small job for yourself this week, and do it every day."
+      },
+      "answer_key": {
+        "guidance": "Done at home; any safe small job counts. No reporting in the app."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "یہ کام کس کا ہے؟",
+        "en": "Whose job is this?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اگر سب «کوئی اور کرے گا» سوچیں تو کیا ہو گا؟",
+        "en": "What happens if everyone thinks \"someone else will do it\"?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "«کوئی اور کر دے گا۔»",
+        "en": "\"Someone else will do it.\""
+      },
+      "correction": {
+        "ur": "ہر ایک کا اپنا حصہ ہے۔",
+        "en": "Each of us has a share of responsibility."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "گھر کے کام صرف امی یا لڑکیوں کے ہیں۔",
+        "en": "Home jobs are only for mothers or girls."
+      },
+      "correction": {
+        "ur": "گھر کے کام سب کی ذمہ داری ہیں۔",
+        "en": "Home jobs are everyone's responsibility."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-responsibility-someone-else",
+      "remediation_ref": "ETH-G4-REP-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "ذمہ داری = اپنا کام خود کرنا۔ گھر کے کام اور ہوم ورک۔ ہر ایک کا حصہ ہے؛ «کوئی اور کرے گا» نہیں۔ چھوٹے کام بھی اہم ہیں۔",
+    "en": "Responsibility = doing your own work. Home jobs and homework. Everyone has a share; not \"someone else will\". Small jobs matter too."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ گھر اور اسکول میں ہر ایک کا اپنا حصہ ہے اور ہمیں اسے پورا کرنا ہے۔",
+    "en": "We learned that everyone has a share at home and school, and we should do ours."
+  },
+  "parent_notes": {
+    "ur": "بچے کو عمر کے مطابق ایک محفوظ چھوٹا کام دیں اور پورا کرنے پر شاباش دیں۔ لڑکوں اور لڑکیوں کو ایک جیسے کام دیں۔",
+    "en": "Give your child one safe, age-right small job and praise them when they do it. Give boys and girls the same kinds of jobs."
+  },
+  "mentor_notes": {
+    "ur": "کچھ بچوں پر گھر میں بہت زیادہ کام ہوتا ہے؛ سبق کو «اور زیادہ کام» کا دباؤ نہ بنائیں۔ چھوٹی، محفوظ ذمہ داریوں پر زور دیں (چولہا، چاقو یا بھاری چیزیں نہیں)۔",
+    "en": "Some children already carry heavy work at home; don't turn this lesson into pressure for more. Stress small, safe jobs (no stove, knives or heavy loads)."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن منظر بیان کرے (کون ہے، کیا ہو رہا ہے)۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ یہ مضمون سننے پر مبنی ہے، اس لیے ہر کہانی، سوال اور جواب کو آواز میں پڑھا جانا ضروری ہے۔ ترتیب دینے والی سرگرمی کا متبادل: کارڈ کو چھوئیں، پھر گروپ کو چھوئیں؛ یا ہر کارڈ کے لیے دو بٹنوں میں سے ایک چنیں۔",
+    "en": "Story pictures are still to be made; each needs alt text that describes the scene (who is there, what is happening). Urdu audio is not yet recorded; this subject is audio-first, so every story, question and option must be read aloud. Alternative to the sort activity: tap a card, then tap its group; or answer each card with one of two buttons."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "define responsibility as 'my own share'; one home story (clearing the dastarkhwan) showing what happens when everyone says 'someone else will'; sort responsible actions",
+    "questioning_strategy": "ask 'whose job is this?' and 'what if everyone thought someone else would do it?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "repeats 'someone else will do it'",
+      "assigns chores only to girls or mothers"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "small, safe jobs (bags, plates, plants, hens, homework); boys and girls share jobs equally; no stove, knives or heavy loads",
+    "misconception_detectors": [
+      "believes someone else will do it",
+      "thinks home jobs belong only to mothers or girls"
+    ],
+    "critical_thinking_prompts": [
+      "What happens to a job when everyone waits for someone else?",
+      "Why do small jobs matter?"
+    ],
+    "personalization_rules": "if the learner repeats 'someone else will', retell the dastarkhwan story from Ammi's view; never imply the learner's home is unfair",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor",
+      "learner says they must do heavy or unsafe work at home, or are kept from school -> do not probe; hand to a human mentor / safeguarding lead"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths"
+    ]
+  },
+  "review_flags": [
+    "subject expert: ★ exemplar code with no human content yet; review as the model lesson for unit 4",
+    "SAFEGUARDING REVIEWER: check the mentor note and escalation about children who already do heavy or unsafe work at home",
+    "language editor: check «دسترخوان» and «گھر کا کام» (chore) are the usual child-level words"
+  ]
+}

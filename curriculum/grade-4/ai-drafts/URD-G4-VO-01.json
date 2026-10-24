@@ -1,0 +1,512 @@
+{
+  "code": "URD-G4-VO-01",
+  "title": {
+    "ur": "جملے سے لفظ کا مطلب سمجھنا",
+    "en": "Finding a word's meaning from the sentence"
+  },
+  "description": {
+    "ur": "جملے کے باقی لفظوں کی مدد سے کسی نئے لفظ کا مطلب سمجھنا۔",
+    "en": "Working out a new word's meaning from the other words in the sentence."
+  },
+  "keywords": [
+    "context clues",
+    "word meaning",
+    "vocabulary",
+    "inference",
+    "clue words"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مطلب (معنی)",
+        "en": "meaning"
+      },
+      "definition": {
+        "ur": "کسی لفظ سے جو بات سمجھ آتی ہے۔",
+        "en": "what a word tells us."
+      }
+    },
+    {
+      "term": {
+        "ur": "اشارہ",
+        "en": "clue"
+      },
+      "definition": {
+        "ur": "جملے کا وہ حصہ جو مطلب سمجھنے میں مدد دے۔",
+        "en": "the part of a sentence that helps us find the meaning."
+      }
+    },
+    {
+      "term": {
+        "ur": "اندازہ",
+        "en": "guess (from clues)"
+      },
+      "definition": {
+        "ur": "اشاروں کی مدد سے سوچ کر جواب نکالنا۔",
+        "en": "thinking out an answer with the help of clues."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کبھی جملے میں کوئی ایسا لفظ آتا ہے جس کا مطلب ہمیں نہیں آتا۔ ہم فوراً لغت نہیں ڈھونڈیں گے۔ پہلے پورا جملہ پڑھیں گے۔ جملے کے باقی لفظ ہمیں اشارہ دیتے ہیں۔ پھر ہم اندازہ لگا کر دیکھیں گے کہ مطلب جملے میں ٹھیک بیٹھتا ہے یا نہیں۔",
+    "en": "Sometimes a sentence has a word we do not know. We will not run to a dictionary at once. First we read the whole sentence. The other words in the sentence give us clues. Then we guess and check whether the meaning fits the sentence."
+  },
+  "student_explanation": {
+    "ur": "نیا لفظ آئے تو گھبرائیں نہیں۔ پورا جملہ غور سے پڑھیں۔ نئے لفظ سے پہلے اور بعد کے لفظ دیکھیں۔ 'کیونکہ'، 'اس لیے' اور 'یعنی' جیسے لفظ اشارہ دیتے ہیں۔ اب مطلب کا اندازہ لگائیں۔ اپنا مطلب نئے لفظ کی جگہ رکھ کر جملہ پڑھیں۔ جملہ ٹھیک لگے تو اندازہ درست ہے۔",
+    "en": "Do not worry when a new word comes. Read the whole sentence carefully. Look at the words before and after the new word. Words like 'because', 'so' and 'that is' give clues. Now guess the meaning. Put your meaning in place of the new word and read again. If the sentence makes sense, your guess is right."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "دھوپ بہت تیز تھی، اس لیے کسان درخت کے سائے میں بیٹھ گیا۔ 'سایہ' کا مطلب کیا ہے؟",
+        "en": "The sun was very strong, so the farmer sat in the tree's 'saaya'. What does 'saaya' mean?"
+      },
+      "steps": [
+        {
+          "ur": "اشارے دیکھیں: 'تیز دھوپ' اور 'درخت'۔",
+          "en": "Find the clues: 'strong sun' and 'tree'."
+        },
+        {
+          "ur": "کسان دھوپ سے بچنا چاہتا تھا۔",
+          "en": "The farmer wanted to get away from the sun."
+        },
+        {
+          "ur": "اندازہ: درخت کے نیچے کی ٹھنڈی جگہ جہاں دھوپ نہ آئے۔",
+          "en": "Guess: the cool place under a tree where sunlight does not reach."
+        },
+        {
+          "ur": "جانچیں: 'کسان درخت کے نیچے ٹھنڈی جگہ میں بیٹھ گیا' ٹھیک لگتا ہے۔",
+          "en": "Check: 'the farmer sat in the cool place under the tree' makes sense."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "سارا دن کام کر کے ابو نڈھال ہو گئے اور لیٹتے ہی سو گئے۔ 'نڈھال' کا مطلب کیا ہے؟",
+        "en": "After working all day, Abbu became 'nidhaal' and fell asleep as soon as he lay down. What does 'nidhaal' mean?"
+      },
+      "steps": [
+        {
+          "ur": "اشارہ: 'سارا دن کام کر کے'۔",
+          "en": "Clue: 'after working all day'."
+        },
+        {
+          "ur": "دوسرا اشارہ: 'لیٹتے ہی سو گئے'۔",
+          "en": "Second clue: 'fell asleep as soon as he lay down'."
+        },
+        {
+          "ur": "اندازہ: بہت زیادہ تھکا ہوا۔",
+          "en": "Guess: very, very tired."
+        },
+        {
+          "ur": "جانچیں: 'ابو بہت تھک گئے اور سو گئے' ٹھیک لگتا ہے۔",
+          "en": "Check: 'Abbu got very tired and fell asleep' makes sense."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-tap-clue",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "جملہ: 'بازار میں اتنا ہجوم تھا کہ ہر طرف لوگ ہی لوگ تھے۔' اس حصے پر ٹیپ کریں جو 'ہجوم' کا مطلب بتاتا ہے، پھر مطلب چنیں۔",
+        "en": "Sentence: 'There was such a crowd (hujoom) in the bazaar that there were people everywhere.' Tap the part that explains 'hujoom', then choose its meaning."
+      },
+      "options": [
+        {
+          "ur": "بہت سے لوگ ایک جگہ",
+          "en": "many people in one place"
+        },
+        {
+          "ur": "خالی جگہ",
+          "en": "an empty place"
+        },
+        {
+          "ur": "بہت شور",
+          "en": "a lot of noise"
+        }
+      ],
+      "answer_key": {
+        "tap_target": "ہر طرف لوگ ہی لوگ تھے",
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'کہ' کے بعد والا حصہ پڑھیں۔",
+            "en": "Read the part after 'that' (کہ)."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-gadla",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "نہر کا پانی گدلا تھا، کیونکہ اس میں مٹی ملی ہوئی تھی۔ 'گدلا' کا مطلب کیا ہے؟",
+        "en": "The canal water was 'gadla' because it had mud mixed in it. What does 'gadla' mean?"
+      },
+      "options": [
+        {
+          "ur": "مٹی والا، میلا",
+          "en": "muddy, dirty"
+        },
+        {
+          "ur": "ٹھنڈا",
+          "en": "cold"
+        },
+        {
+          "ur": "میٹھا",
+          "en": "sweet"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-guessing-not-reading"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'کیونکہ' کے بعد کیا لکھا ہے؟",
+            "en": "What comes after 'because'?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اشارہ 'مٹی ملی ہوئی تھی' ہے، اس لیے گدلا یعنی میلا۔",
+        "en": "The clue is 'had mud mixed in', so gadla means muddy."
+      }
+    },
+    {
+      "id": "p2-madham",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "سلمیٰ کی آواز اتنی مدھم تھی کہ پیچھے بیٹھے بچے سن نہ سکے۔ 'مدھم' کا مطلب کیا ہے؟",
+        "en": "Salma's voice was so 'madham' that the children at the back could not hear. What does 'madham' mean?"
+      },
+      "options": [
+        {
+          "ur": "بہت اونچی",
+          "en": "very loud"
+        },
+        {
+          "ur": "ہلکی اور دھیمی",
+          "en": "soft and low"
+        },
+        {
+          "ur": "خوب صورت",
+          "en": "beautiful"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بچے سن کیوں نہ سکے؟",
+            "en": "Why could the children not hear?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "آواز سنائی نہ دی، اس لیے وہ ہلکی تھی۔",
+        "en": "The voice could not be heard, so it was soft."
+      }
+    },
+    {
+      "id": "p3-mosla-dhaar",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "بادل گرجے اور موسلا دھار بارش شروع ہو گئی؛ چند منٹ میں گلیاں پانی سے بھر گئیں۔ 'موسلا دھار' کا مطلب کیا ہے؟",
+        "en": "Clouds thundered and 'musla-dhaar' rain began; in a few minutes the lanes filled with water. What does 'musla-dhaar' mean?"
+      },
+      "options": [
+        {
+          "ur": "ہلکی پھوار",
+          "en": "light drizzle"
+        },
+        {
+          "ur": "بہت کم",
+          "en": "very little"
+        },
+        {
+          "ur": "بہت زور کی",
+          "en": "very heavy"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "چند منٹ میں گلیاں بھر گئیں۔ بارش کیسی ہوگی؟",
+            "en": "The lanes filled in minutes. What kind of rain was it?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اتنی جلدی گلیاں بھر گئیں، تو بارش بہت زور کی تھی۔",
+        "en": "The lanes filled so fast, so the rain was very heavy."
+      }
+    },
+    {
+      "id": "p4-which-clue",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "'سارا دن کام کر کے ابو نڈھال ہو گئے۔' کون سا حصہ 'نڈھال' سمجھنے میں سب سے زیادہ مدد دیتا ہے؟",
+        "en": "'After working all day, Abbu became nidhaal.' Which part helps most to understand 'nidhaal'?"
+      },
+      "options": [
+        {
+          "ur": "ابو",
+          "en": "Abbu"
+        },
+        {
+          "ur": "سارا دن کام کر کے",
+          "en": "after working all day"
+        },
+        {
+          "ur": "ہو گئے",
+          "en": "became"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا حصہ بتاتا ہے کہ ابو کو کیا ہوا ہوگا؟",
+            "en": "Which part tells what probably happened to Abbu?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سارا دن کام کرنے سے آدمی تھک جاتا ہے؛ یہی اشارہ ہے۔",
+        "en": "Working all day makes a person tired; that is the clue."
+      }
+    },
+    {
+      "id": "p5-only-word",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "نئے لفظ کا مطلب جاننے کے لیے صرف وہی ایک لفظ دیکھنا کافی ہے۔",
+        "en": "To find a new word's meaning, looking only at that word is enough."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اشارے کہاں ملتے ہیں؟",
+            "en": "Where do we find the clues?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اشارے جملے کے باقی لفظوں میں ہوتے ہیں۔",
+        "en": "Clues are in the other words of the sentence."
+      }
+    },
+    {
+      "id": "p6-thithur",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ننھی بلی سردی میں ٹھٹھر رہی تھی، اس لیے نور نے اسے گرم کپڑے میں لپیٹ دیا۔ 'ٹھٹھرنا' کا مطلب کیا ہے؟",
+        "en": "The little cat was 'thithurna' in the cold, so Noor wrapped it in a warm cloth. What does 'thithurna' mean?"
+      },
+      "options": [
+        {
+          "ur": "خوشی سے کھیلنا",
+          "en": "playing happily"
+        },
+        {
+          "ur": "زور سے بھاگنا",
+          "en": "running fast"
+        },
+        {
+          "ur": "سردی سے کانپنا",
+          "en": "shivering from cold"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "نور نے بلی کو گرم کپڑا کیوں دیا؟",
+            "en": "Why did Noor give the cat a warm cloth?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سردی اور گرم کپڑا اشارے ہیں: بلی سردی سے کانپ رہی تھی۔",
+        "en": "Cold and warm cloth are the clues: the cat was shivering."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-sunsaan",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "رات کو بازار سنسان تھا؛ نہ کوئی دکان کھلی تھی، نہ کوئی آدمی نظر آتا تھا۔ 'سنسان' کا مطلب لکھیں اور بتائیں کون سے لفظوں نے مدد دی۔",
+        "en": "At night the bazaar was 'sunsaan'; no shop was open and no person could be seen. Write what 'sunsaan' means and which words helped."
+      },
+      "answer_key": {
+        "sample_answer": "سنسان یعنی خالی اور خاموش؛ اشارے: 'نہ کوئی دکان کھلی تھی'، 'نہ کوئی آدمی'۔"
+      },
+      "mentor_review_guidance": "Full credit: a meaning like empty/quiet plus at least one quoted clue. Accept 'خالی' alone for partial credit."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-new-word",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں بات چیت، ریڈیو یا کسی بورڈ پر ایک نیا لفظ سنیں یا پڑھیں۔ وہ جملہ کاپی میں لکھیں اور اندازے سے مطلب لکھیں۔ پھر کسی بڑے سے پوچھ کر جانچیں۔",
+        "en": "At home, hear or read one new word (in conversation, on the radio or on a sign). Write the sentence and your guessed meaning in your notebook. Then check with an adult."
+      },
+      "answer_key": {
+        "sample_answer": "A sentence, the new word underlined, a guessed meaning."
+      },
+      "mentor_review_guidance": "Value the clue-based guess even if the meaning is not exact."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پورا جملہ دوبارہ پڑھیں۔ نئے لفظ کے آس پاس کیا لکھا ہے؟",
+        "en": "Read the whole sentence again. What is written around the new word?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اپنا مطلب نئے لفظ کی جگہ رکھ کر پڑھیں۔ کیا جملہ ٹھیک لگتا ہے؟",
+        "en": "Put your meaning in place of the new word. Does the sentence make sense?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "مطلب کا اندازہ صرف لفظ کی آواز یا شکل سے لگانا۔",
+        "en": "Guessing the meaning only from how the word sounds or looks."
+      },
+      "correction": {
+        "ur": "جواب متن میں سے دیں: جملے کے اشارے دیکھیں۔",
+        "en": "Answer from the text: look at the sentence's clues."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "جو مطلب پہلے ذہن میں آئے وہی درست ہے، جانچنے کی ضرورت نہیں۔",
+        "en": "The first meaning that comes to mind is right; no need to check."
+      },
+      "correction": {
+        "ur": "مطلب کو لفظ کی جگہ رکھ کر جملہ دوبارہ پڑھیں۔",
+        "en": "Put the meaning in the word's place and re-read the sentence."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-guessing-not-reading",
+      "remediation_ref": "URD-G4-VO-01"
+    },
+    {
+      "signal": "misses_prerequisite:URD-G4-RD-01",
+      "remediation_ref": "URD-G4-RD-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پورا جملہ پڑھیں۔ اشارے تلاش کریں (کیونکہ، اس لیے، یعنی)۔ اندازہ لگائیں۔ مطلب لفظ کی جگہ رکھ کر جانچیں۔",
+    "en": "Read the whole sentence. Find clues (because, so, that is). Guess. Check by putting the meaning in the word's place."
+  },
+  "summary": {
+    "ur": "ہم نے جملے کے اشاروں سے نئے لفظ کا مطلب نکالنا سیکھا۔",
+    "en": "We learned to find a new word's meaning from clues in the sentence."
+  },
+  "parent_notes": {
+    "ur": "جب بچہ کسی لفظ کا مطلب پوچھے تو پہلے کہیں: 'جملہ دوبارہ پڑھو، تمہارا کیا خیال ہے؟' پھر مطلب بتائیں۔",
+    "en": "When your child asks a word's meaning, first say: 'read the sentence again, what do you think?' Then tell them."
+  },
+  "mentor_notes": {
+    "ur": "بچوں سے اشارہ والا حصہ اونچی آواز میں پڑھوائیں؛ اس سے پتا چلتا ہے کہ اندازہ متن سے ہے یا یاد سے۔ مقامی بولیوں کے مترادف قبول کریں اگر مطلب درست ہو۔",
+    "en": "Ask learners to read the clue part aloud; it shows whether the guess comes from the text or from memory. Accept regional-language equivalents if the meaning is right."
+  },
+  "accessibility_notes": {
+    "ur": "مثالوں کی تصاویر (دھوپ میں درخت کا سایہ، بارش میں گلی) ابھی بنانی ہیں، متبادل متن کے ساتھ۔ جملوں کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ٹیپ والی سرگرمی کا متبادل: تین حصوں میں سے اشارے والا حصہ چنیں۔",
+    "en": "Example pictures (tree shade in sun, lane in rain) are still to be made, with alt text. Urdu audio for the sentences is not yet recorded. Alternative to the tap activity: choose the clue part from three listed parts."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "clue -> guess -> substitute -> check; always make the learner point to the clue words",
+    "questioning_strategy": "ask 'which words helped you?' after every answer, right or wrong",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "answers instantly without re-reading",
+      "gives a meaning with no clue"
+    ],
+    "hint_policy": "graduated; two hints max; first send back to the sentence, then suggest substitution; never state the meaning first",
+    "example_policy": "one unfamiliar word per sentence, everyday Pakistani settings (canal, bazaar, rain, home), the clue always inside the sentence",
+    "misconception_detectors": [
+      "chooses a meaning that fits the word's sound but not the sentence",
+      "cannot name any clue word"
+    ],
+    "critical_thinking_prompts": [
+      "Can a sentence have two clues? Which one is stronger?"
+    ],
+    "personalization_rules": "if the learner cannot read the sentence fluently, return to URD-G4-RD-01 before clue work",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "language editor: check the target words (گدلا، مدھم، موسلا دھار، نڈھال، ٹھٹھرنا، سنسان، ہجوم) are at a suitable Grade 4 level",
+    "subject expert: misconception tag m-guessing-not-reading is reused for meaning-from-memory guesses; confirm that use"
+  ]
+}

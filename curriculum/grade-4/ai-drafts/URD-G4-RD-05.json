@@ -1,0 +1,515 @@
+{
+  "code": "URD-G4-RD-05",
+  "title": {
+    "ur": "عبارت سے اندازہ لگانا",
+    "en": "Making a simple inference"
+  },
+  "description": {
+    "ur": "عبارت کے اشاروں اور اپنی سمجھ کو ملا کر وہ بات جاننا جو صاف لکھی نہیں۔",
+    "en": "Joining clues in the text with what you know to work out something not written directly."
+  },
+  "keywords": [
+    "inference",
+    "clues",
+    "reading between the lines",
+    "evidence",
+    "reading comprehension"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "اندازہ لگانا",
+        "en": "to infer"
+      },
+      "definition": {
+        "ur": "اشاروں سے وہ بات سمجھنا جو صاف نہیں لکھی۔",
+        "en": "to work out something not written directly, from clues."
+      }
+    },
+    {
+      "term": {
+        "ur": "اشارہ",
+        "en": "clue"
+      },
+      "definition": {
+        "ur": "عبارت کا وہ لفظ یا جملہ جو ہمیں سوچنے میں مدد دے۔",
+        "en": "a word or sentence in the text that helps us think."
+      }
+    },
+    {
+      "term": {
+        "ur": "ثبوت",
+        "en": "evidence"
+      },
+      "definition": {
+        "ur": "وہ جملہ جو بتائے کہ ہمارا اندازہ کیوں درست ہے۔",
+        "en": "the sentence that shows why our inference is right."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کبھی عبارت ہر بات صاف نہیں بتاتی۔ وہ ہمیں اشارے دیتی ہے۔ ہم اشارے اور اپنی سمجھ ملا کر اندازہ لگاتے ہیں۔ اچھا اندازہ ہمیشہ عبارت کے کسی اشارے پر کھڑا ہوتا ہے۔ آج ہم جاسوس بن کر اشارے ڈھونڈیں گے۔",
+    "en": "Sometimes a passage does not say everything directly. It gives us clues. We join the clues with what we know to make an inference. A good inference always stands on a clue from the text. Today we will be detectives and look for clues."
+  },
+  "student_explanation": {
+    "ur": "اندازہ وہ بات ہے جو عبارت میں صاف نہیں لکھی۔ پہلے عبارت غور سے پڑھیں۔ پھر اشارے تلاش کریں۔ اب سوچیں: یہ اشارے کیا بتاتے ہیں۔ اشارہ اور اپنی سمجھ ملائیں۔ یوں اندازہ بنتا ہے۔ اپنے اندازے کا ثبوت عبارت سے دیں۔ بغیر اشارے کے بات صرف تکا ہوتی ہے۔",
+    "en": "An inference is something the passage does not say directly. First read the passage carefully. Then look for clues. Now think about what the clues tell you. Join the clue with what you know. That makes an inference. Give proof for your inference from the text. Without a clue, it is only a guess."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "عائشہ نے چھتری کھولی اور جوتے ہاتھ میں اٹھا کر گلی پار کی۔ باہر موسم کیسا ہوگا؟",
+        "en": "Ayesha opened her umbrella and crossed the lane holding her shoes in her hand. What is the weather like outside?"
+      },
+      "steps": [
+        {
+          "ur": "اشارہ ۱: اس نے چھتری کھولی۔",
+          "en": "Clue 1: she opened an umbrella."
+        },
+        {
+          "ur": "اشارہ ۲: جوتے ہاتھ میں اٹھائے، یعنی زمین پر پانی ہے۔",
+          "en": "Clue 2: she carried her shoes, so there is water on the ground."
+        },
+        {
+          "ur": "اپنی سمجھ: بارش میں چھتری کھولتے ہیں۔",
+          "en": "What I know: we open umbrellas in rain."
+        },
+        {
+          "ur": "اندازہ: باہر بارش ہو رہی ہے۔",
+          "en": "Inference: it is raining outside."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "عبارت 'آج کا دن': ابو بار بار گھڑی کیوں دیکھ رہے تھے؟",
+        "en": "Passage 'Today': why did Abbu keep looking at the clock?"
+      },
+      "steps": [
+        {
+          "ur": "اشارہ: وہ دروازے کی طرف بھی جھانک رہے تھے۔",
+          "en": "Clue: he was also peeping towards the door."
+        },
+        {
+          "ur": "اشارہ: بریانی بنی تھی اور نئی چادر بچھی تھی۔",
+          "en": "Clue: biryani was cooked and a new sheet was spread."
+        },
+        {
+          "ur": "اپنی سمجھ: مہمان کا انتظار ہو تو یوں کرتے ہیں۔",
+          "en": "What I know: people do this when waiting for a guest."
+        },
+        {
+          "ur": "اندازہ: ابو کسی کے آنے کا انتظار کر رہے تھے۔ ثبوت: پھر گھنٹی بجی اور نانی آئیں۔",
+          "en": "Inference: Abbu was waiting for someone. Proof: then the bell rang and Nani came."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-tap-clues",
+      "type": "interactive",
+      "competency": "analysis",
+      "stem": {
+        "ur": "عبارت 'آج کا دن':\nسلمیٰ اسکول سے گھر آئی تو باورچی خانے سے بریانی کی خوشبو آ رہی تھی۔ امی نے بیٹھک میں نئی چادر بچھائی ہوئی تھی۔ ابو بار بار گھڑی دیکھ رہے تھے اور دروازے کی طرف جھانک رہے تھے۔ اتنے میں دروازے کی گھنٹی بجی۔ سلمیٰ دوڑ کر گئی اور خوشی سے بولی: \"نانی آ گئیں!\" نانی کے ہاتھ میں ایک بڑا سا تھیلا تھا۔\n\nاُن حصوں پر ٹیپ کریں جو بتاتے ہیں کہ گھر میں کوئی خاص مہمان آنے والا تھا۔",
+        "en": "Passage 'Today':\nWhen Salma came home from school, the smell of biryani was coming from the kitchen. Ammi had spread a new sheet in the sitting room. Abbu kept looking at the clock and peeping towards the door. Just then the doorbell rang. Salma ran to it and said happily, \"Nani has come!\" Nani had a big bag in her hand.\n\nTap the parts that show a special guest was expected at home."
+      },
+      "answer_key": {
+        "tap_targets": [
+          "بریانی کی خوشبو",
+          "نئی چادر بچھائی ہوئی تھی",
+          "بار بار گھڑی دیکھ رہے تھے",
+          "دروازے کی طرف جھانک رہے تھے"
+        ],
+        "correct_state": "at least two of the four clue parts selected; no unrelated part selected"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "گھر والے کیا کیا تیاری کر رہے تھے؟",
+            "en": "What were the family getting ready?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-bag",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "عبارت 'آج کا دن':\nسلمیٰ اسکول سے گھر آئی تو باورچی خانے سے بریانی کی خوشبو آ رہی تھی۔ امی نے بیٹھک میں نئی چادر بچھائی ہوئی تھی۔ ابو بار بار گھڑی دیکھ رہے تھے اور دروازے کی طرف جھانک رہے تھے۔ اتنے میں دروازے کی گھنٹی بجی۔ سلمیٰ دوڑ کر گئی اور خوشی سے بولی: \"نانی آ گئیں!\" نانی کے ہاتھ میں ایک بڑا سا تھیلا تھا۔\n\nنانی کے تھیلے میں کیا ہو سکتا ہے؟ اپنا اندازہ لکھیں اور بتائیں کیوں۔",
+        "en": "Passage 'Today':\nWhen Salma came home from school, the smell of biryani was coming from the kitchen. Ammi had spread a new sheet in the sitting room. Abbu kept looking at the clock and peeping towards the door. Just then the doorbell rang. Salma ran to it and said happily, \"Nani has come!\" Nani had a big bag in her hand.\n\nWhat might be in Nani's bag? Write your inference and say why."
+      },
+      "answer_key": {
+        "sample_answer": "e.g. 'بچوں کے لیے تحفے یا کھانے کی چیزیں، کیونکہ وہ مہمان بن کر آئیں اور تھیلا بڑا تھا۔'"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "نانی کیوں آئی ہیں؟ مہمان کیا لاتے ہیں؟",
+            "en": "Why has Nani come? What do visitors bring?"
+          }
+        }
+      ],
+      "rubric": {
+        "criteria": "inference supported by a clue from the text",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "اندازہ لکھا مگر عبارت سے کوئی اشارہ نہیں دیا۔",
+              "en": "Gives an inference but no clue from the text."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "درست اندازہ اور عبارت سے کم از کم ایک اشارہ۔",
+              "en": "A sensible inference and at least one clue from the text."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor marks with the rubric: any reasonable, kind inference with a reason from the text (big bag, visiting). Many answers are right."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-why-special",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "عبارت 'آج کا دن':\nسلمیٰ اسکول سے گھر آئی تو باورچی خانے سے بریانی کی خوشبو آ رہی تھی۔ امی نے بیٹھک میں نئی چادر بچھائی ہوئی تھی۔ ابو بار بار گھڑی دیکھ رہے تھے اور دروازے کی طرف جھانک رہے تھے۔ اتنے میں دروازے کی گھنٹی بجی۔ سلمیٰ دوڑ کر گئی اور خوشی سے بولی: \"نانی آ گئیں!\" نانی کے ہاتھ میں ایک بڑا سا تھیلا تھا۔\n\nامی نے بریانی کیوں بنائی ہوگی؟",
+        "en": "Passage 'Today':\nWhen Salma came home from school, the smell of biryani was coming from the kitchen. Ammi had spread a new sheet in the sitting room. Abbu kept looking at the clock and peeping towards the door. Just then the doorbell rang. Salma ran to it and said happily, \"Nani has come!\" Nani had a big bag in her hand.\n\nWhy had Ammi probably made biryani?"
+      },
+      "options": [
+        {
+          "ur": "کیونکہ گھر میں کوئی مہمان آنے والا تھا",
+          "en": "because a guest was coming"
+        },
+        {
+          "ur": "کیونکہ سلمیٰ بیمار تھی",
+          "en": "because Salma was ill"
+        },
+        {
+          "ur": "کیونکہ بازار بند تھا",
+          "en": "because the bazaar was closed"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-guessing-not-reading"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "آخر میں کون آیا؟",
+            "en": "Who came at the end?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "نئی چادر، انتظار اور پھر نانی کا آنا بتاتا ہے کہ مہمان کے لیے تیاری تھی۔",
+        "en": "The new sheet, the waiting and Nani's arrival show it was for a guest."
+      }
+    },
+    {
+      "id": "p2-salma-feels",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "عبارت 'آج کا دن':\nسلمیٰ اسکول سے گھر آئی تو باورچی خانے سے بریانی کی خوشبو آ رہی تھی۔ امی نے بیٹھک میں نئی چادر بچھائی ہوئی تھی۔ ابو بار بار گھڑی دیکھ رہے تھے اور دروازے کی طرف جھانک رہے تھے۔ اتنے میں دروازے کی گھنٹی بجی۔ سلمیٰ دوڑ کر گئی اور خوشی سے بولی: \"نانی آ گئیں!\" نانی کے ہاتھ میں ایک بڑا سا تھیلا تھا۔\n\nسلمیٰ نانی کے بارے میں کیسا محسوس کرتی ہے؟",
+        "en": "Passage 'Today':\nWhen Salma came home from school, the smell of biryani was coming from the kitchen. Ammi had spread a new sheet in the sitting room. Abbu kept looking at the clock and peeping towards the door. Just then the doorbell rang. Salma ran to it and said happily, \"Nani has come!\" Nani had a big bag in her hand.\n\nHow does Salma feel about Nani?"
+      },
+      "options": [
+        {
+          "ur": "وہ نانی سے ڈرتی ہے",
+          "en": "she is afraid of Nani"
+        },
+        {
+          "ur": "وہ نانی سے مل کر خوش ہوتی ہے",
+          "en": "she is happy to see Nani"
+        },
+        {
+          "ur": "اسے کوئی فرق نہیں پڑتا",
+          "en": "she does not care"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سلمیٰ کیسے دروازے تک گئی اور کیسے بولی؟",
+            "en": "How did Salma go to the door and how did she speak?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "وہ دوڑ کر گئی اور خوشی سے بولی؛ یہی اشارے ہیں۔",
+        "en": "She ran and spoke happily; those are the clues."
+      }
+    },
+    {
+      "id": "p3-which-clue",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "عبارت 'آج کا دن':\nسلمیٰ اسکول سے گھر آئی تو باورچی خانے سے بریانی کی خوشبو آ رہی تھی۔ امی نے بیٹھک میں نئی چادر بچھائی ہوئی تھی۔ ابو بار بار گھڑی دیکھ رہے تھے اور دروازے کی طرف جھانک رہے تھے۔ اتنے میں دروازے کی گھنٹی بجی۔ سلمیٰ دوڑ کر گئی اور خوشی سے بولی: \"نانی آ گئیں!\" نانی کے ہاتھ میں ایک بڑا سا تھیلا تھا۔\n\nکون سا جملہ سب سے اچھا ثبوت ہے کہ ابو کسی کا انتظار کر رہے تھے؟",
+        "en": "Passage 'Today':\nWhen Salma came home from school, the smell of biryani was coming from the kitchen. Ammi had spread a new sheet in the sitting room. Abbu kept looking at the clock and peeping towards the door. Just then the doorbell rang. Salma ran to it and said happily, \"Nani has come!\" Nani had a big bag in her hand.\n\nWhich sentence is the best proof that Abbu was waiting for someone?"
+      },
+      "options": [
+        {
+          "ur": "سلمیٰ اسکول سے گھر آئی۔",
+          "en": "Salma came home from school."
+        },
+        {
+          "ur": "نانی کے ہاتھ میں ایک بڑا سا تھیلا تھا۔",
+          "en": "Nani had a big bag in her hand."
+        },
+        {
+          "ur": "ابو بار بار گھڑی دیکھ رہے تھے اور دروازے کی طرف جھانک رہے تھے۔",
+          "en": "Abbu kept looking at the clock and peeping towards the door."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ابو والا جملہ تلاش کریں۔",
+            "en": "Find the sentence about Abbu."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "گھڑی دیکھنا اور دروازہ تکنا انتظار کی نشانی ہے۔",
+        "en": "Watching the clock and the door are signs of waiting."
+      }
+    },
+    {
+      "id": "p4-written",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "عبارت 'آج کا دن':\nسلمیٰ اسکول سے گھر آئی تو باورچی خانے سے بریانی کی خوشبو آ رہی تھی۔ امی نے بیٹھک میں نئی چادر بچھائی ہوئی تھی۔ ابو بار بار گھڑی دیکھ رہے تھے اور دروازے کی طرف جھانک رہے تھے۔ اتنے میں دروازے کی گھنٹی بجی۔ سلمیٰ دوڑ کر گئی اور خوشی سے بولی: \"نانی آ گئیں!\" نانی کے ہاتھ میں ایک بڑا سا تھیلا تھا۔\n\nعبارت میں صاف لکھا ہے کہ 'ابو نانی کا انتظار کر رہے تھے'۔",
+        "en": "Passage 'Today':\nWhen Salma came home from school, the smell of biryani was coming from the kitchen. Ammi had spread a new sheet in the sitting room. Abbu kept looking at the clock and peeping towards the door. Just then the doorbell rang. Salma ran to it and said happily, \"Nani has come!\" Nani had a big bag in her hand.\n\nThe passage says directly that 'Abbu was waiting for Nani'."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا یہ الفاظ عبارت میں ہیں؟",
+            "en": "Are these words in the passage?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "یہ لکھا نہیں؛ ہم نے اشاروں سے اندازہ لگایا ہے۔",
+        "en": "It is not written; we inferred it from clues."
+      }
+    },
+    {
+      "id": "p5-guess-ok",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اچھا اندازہ ہمیشہ عبارت کے کسی اشارے پر ہوتا ہے۔",
+        "en": "A good inference always rests on a clue in the text."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "اشارہ نہ ہو تو وہ صرف تکا ہے۔",
+        "en": "Without a clue it is only a guess."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-new-passage",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "یہ پڑھیں: 'حسن نے کھڑکی سے باہر دیکھا۔ پتے زور زور سے ہل رہے تھے۔ اس نے اپنی پتنگ اٹھائی اور مسکرا دیا۔' حسن کیا کرنے والا ہے؟ اپنا اندازہ اور دو اشارے لکھیں۔",
+        "en": "Read: 'Hassan looked out of the window. The leaves were shaking hard. He picked up his kite and smiled.' What is Hassan about to do? Write your inference and two clues."
+      },
+      "answer_key": {
+        "sample_answer": "وہ پتنگ اڑانے جا رہا ہے؛ اشارے: تیز ہوا (پتے ہل رہے تھے)، پتنگ اٹھائی اور مسکرایا۔"
+      },
+      "rubric": {
+        "criteria": "inference supported by a clue from the text",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "اندازہ لکھا مگر عبارت سے کوئی اشارہ نہیں دیا۔",
+              "en": "Gives an inference but no clue from the text."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "درست اندازہ اور عبارت سے کم از کم ایک اشارہ۔",
+              "en": "A sensible inference and at least one clue from the text."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor marks with the rubric; full credit needs the inference plus at least one clue (two for excellent)."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-clue-game",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "گھر میں 'اشارے کا کھیل' کھیلیں: کوئی بڑا دو اشارے دے (جیسے 'یہ پیلا ہے اور بندر کو پسند ہے')۔ آپ اندازہ لگائیں۔ پھر آپ اشارے دیں۔",
+        "en": "Play a 'clue game' at home: an adult gives two clues (e.g. 'it is yellow and monkeys like it'). You infer. Then you give clues."
+      },
+      "answer_key": {
+        "sample_answer": "The learner reports one round of the game."
+      },
+      "mentor_review_guidance": "No device needed; any family member can play."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "عبارت میں کون سے لفظ اس سوال کے بارے میں کچھ بتاتے ہیں؟",
+        "en": "Which words in the passage say something about this question?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اشارہ اور اپنی سمجھ ملائیں: ایسا عام طور پر کب ہوتا ہے؟",
+        "en": "Join the clue with what you know: when does this usually happen?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "اندازہ یعنی اپنی مرضی کی کوئی بھی بات کہہ دینا۔",
+        "en": "An inference means saying anything you like."
+      },
+      "correction": {
+        "ur": "جواب متن میں سے دیں: اندازہ کسی اشارے پر ہو۔",
+        "en": "Answer from the text: an inference must rest on a clue."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "جو بات عبارت میں لکھی نہیں، اس کا جواب دیا ہی نہیں جا سکتا۔",
+        "en": "If something is not written, it cannot be answered."
+      },
+      "correction": {
+        "ur": "اشارے جوڑ کر وہ بات بھی سمجھی جا سکتی ہے جو صاف نہیں لکھی۔",
+        "en": "By joining clues we can understand things not written directly."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:URD-G4-RD-04",
+      "remediation_ref": "URD-G4-RD-04"
+    },
+    {
+      "signal": "misconception:m-guessing-not-reading",
+      "remediation_ref": "URD-G4-RD-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "اندازہ = اشارہ + اپنی سمجھ۔ ہر اندازے کا ثبوت عبارت سے۔ بغیر اشارے کے بات تکا ہے۔",
+    "en": "Inference = clue + what I know. Every inference needs proof from the text. Without a clue it is a guess."
+  },
+  "summary": {
+    "ur": "ہم نے عبارت کے اشاروں سے وہ بات سمجھنا سیکھا جو صاف نہیں لکھی۔",
+    "en": "We learned to use clues to understand what a passage does not say directly."
+  },
+  "parent_notes": {
+    "ur": "کہانی میں رک کر پوچھیں: 'تمہارے خیال میں اب کیا ہوگا؟ کیوں؟' 'کیوں' کا جواب سب سے اہم ہے۔",
+    "en": "Pause in a story and ask: 'What do you think will happen? Why?' The 'why' matters most."
+  },
+  "mentor_notes": {
+    "ur": "p6 اور چیلنج میں کئی جواب درست ہو سکتے ہیں؛ روبرک سے دیکھیں کہ اشارہ دیا گیا یا نہیں۔ سادہ جواب بھی درست ہو سکتا ہے اگر اس کی وجہ عبارت سے دی ہو۔ عبارت بچہ خود پڑھے۔",
+    "en": "In p6 and the challenge many answers can be right; use the rubric to check a clue was given. Even a plain answer can be right if it has a reason. The child reads the passage."
+  },
+  "accessibility_notes": {
+    "ur": "عبارت پر آڈیو جان بوجھ کر نہیں، کیونکہ پڑھنا جانچا جا رہا ہے۔ ہدایات کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھر کے منظر کی تصویر ابھی بنانی ہے؛ متبادل متن: دروازے پر نانی، بیٹھک میں تیاری۔ ٹیپ والی سرگرمی کا متبادل: پانچ جملوں میں سے اشارے والے جملے چنیں۔ جو بچہ لکھ نہیں سکتا، وہ p6 کا جواب مینٹر کو زبانی بتا سکتا ہے۔",
+    "en": "The passage deliberately has no audio, because reading is being measured. Urdu audio for instructions is not yet recorded. The home-scene picture is still to be made; alt text: Nani at the door, preparations in the sitting room. Alternative to the tap activity: choose the clue sentences from five. A child who cannot write can tell the mentor the p6 answer aloud."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "clue + what I know = inference; always ask for the proof sentence; model with a non-text example first (umbrella)",
+    "questioning_strategy": "after any inference ask 'which words in the passage tell you that?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "gives inferences with no clue",
+      "only copies sentences without inferring"
+    ],
+    "hint_policy": "graduated; two hints max; first point to the relevant part of the text, then ask what usually happens; never state the inference first",
+    "example_policy": "warm, safe family and school situations; clues placed in 2-3 separate sentences",
+    "misconception_detectors": [
+      "answers with an idea unrelated to any clue",
+      "refuses because 'it is not written'"
+    ],
+    "critical_thinking_prompts": [
+      "Could there be a different inference from the same clues? Which is more likely?"
+    ],
+    "personalization_rules": "if the learner cannot find literal facts, route to URD-G4-RD-03; if main idea is weak, URD-G4-RD-04",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "constructed answers (p6, challenge) are marked by a human mentor using the rubric"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer",
+      "read the passage aloud for the learner (reading is the construct)"
+    ]
+  },
+  "review_flags": [
+    "mentor team: p6 and the challenge are open answers; confirm the 2-level rubric is enough",
+    "subject expert: check the passage is culturally natural across regions (biryani, بیٹھک, Nani's visit)"
+  ]
+}

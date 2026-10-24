@@ -1,0 +1,440 @@
+{
+  "code": "ETH-G4-HON-01",
+  "title": {
+    "ur": "سچ کیوں ضروری ہے؟",
+    "en": "Why honesty matters"
+  },
+  "description": {
+    "ur": "سچائی سے بھروسا بنتا ہے۔ بچہ سیکھتا ہے کہ سچ کیوں ضروری ہے اور روزمرہ زندگی میں سچ کیسے بولا جاتا ہے۔",
+    "en": "Honesty builds trust. The learner explains why honesty matters and how to be truthful in everyday life."
+  },
+  "keywords": [
+    "honesty",
+    "truth",
+    "trust",
+    "mistake",
+    "brave",
+    "everyday choices"
+  ],
+  "teacher_script": {
+    "ur": "آج ہم سچائی کے بارے میں بات کریں گے۔ میں آپ کو روی کی ایک چھوٹی سی کہانی سناؤں گا جسے کلاس میں ایک پنسل باکس ملا۔ ہم سوچیں گے کہ روی کیا کر سکتا ہے۔ ہر بار ہم ایک سوال پوچھیں گے: کیا اِس سے بھروسا بنتا ہے؟ یاد رکھیں، یہاں کوئی غلط سوچ شرمندگی کی بات نہیں۔",
+    "en": "Today we will talk about honesty. I will tell you a short story about Ravi, who found a pencil box in class. We will think about what Ravi could do. Each time we will ask one question: does this build trust? Remember, no idea here is something to be ashamed of."
+  },
+  "student_explanation": {
+    "ur": "سچائی کا مطلب ہے سچ بولنا۔ جب ہم سچ بولتے ہیں تو لوگ ہم پر بھروسا کرتے ہیں۔ بھروسا ایک مضبوط پل کی طرح ہے۔ جھوٹ اس پل کو کمزور کر دیتا ہے۔ کبھی کبھی سچ بولنا مشکل لگتا ہے۔ غلطی ہو جائے تو سچ بتانا بہادری ہے۔ سچ نرمی سے بھی بولا جا سکتا ہے۔ ہر کوئی غلطی کرتا ہے۔ ہر کوئی سچ بولنا سیکھ سکتا ہے۔",
+    "en": "Honesty means telling the truth. When we tell the truth, people trust us. Trust is like a strong bridge. A lie makes that bridge weak. Sometimes telling the truth feels hard. Owning up to a mistake is brave. We can tell the truth gently, too. Everyone makes mistakes. Everyone can learn to be truthful."
+  },
+  "interactive_activities": [
+    {
+      "id": "a1-trust-sort",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو صحیح گروپ میں رکھیں: «بھروسا بنتا ہے» یا «بھروسا ٹوٹتا ہے»۔",
+        "en": "Put each card in the right group: 'builds trust' or 'breaks trust'."
+      },
+      "options": [
+        {
+          "ur": "ملا ہوا پنسل باکس استانی کو دے دینا",
+          "en": "Giving a found pencil box to the teacher"
+        },
+        {
+          "ur": "ٹوٹے ہوئے کپ کا الزام چھوٹے بھائی پر لگانا",
+          "en": "Blaming a little brother for a broken cup"
+        },
+        {
+          "ur": "امی کو بتانا کہ ہوم ورک ابھی باقی ہے",
+          "en": "Telling Ammi that homework is not finished yet"
+        },
+        {
+          "ur": "کھیل میں چپکے سے اپنے نمبر بڑھا لینا",
+          "en": "Secretly adding extra points to your score in a game"
+        }
+      ],
+      "answer_key": {
+        "sort": {
+          "builds_trust": [
+            0,
+            2
+          ],
+          "breaks_trust": [
+            1,
+            3
+          ]
+        },
+        "mode": "tap a card, then tap its group (drag also works)"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر کارڈ پر پوچھیں: کیا اِس سے بھروسا بنتا ہے؟",
+            "en": "For each card ask: does this build trust?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-found-box",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "روی کو بینچ کے نیچے ایک پنسل باکس ملا۔ اس پر ایک ہم جماعت کا نام لکھا ہے۔ سچا اور ایماندار کام کون سا ہے؟",
+        "en": "Ravi finds a pencil box under a bench. A classmate's name is on it. Which choice is honest?"
+      },
+      "options": [
+        {
+          "ur": "کسی نے نہیں دیکھا، اس لیے رکھ لے",
+          "en": "Keep it, because no one saw"
+        },
+        {
+          "ur": "اسے مالک یا استانی کو دے دے",
+          "en": "Give it to its owner or the teacher"
+        },
+        {
+          "ur": "وہیں چھوڑ دے اور کسی کو نہ بتائے",
+          "en": "Leave it there and tell no one"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-honesty-only-when-easy"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "چیز کس کی ہے؟",
+            "en": "Whose thing is it?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "چیز اس کے مالک کو لوٹانا سچائی ہے، چاہے کسی نے نہ دیکھا ہو۔",
+        "en": "Returning a thing to its owner is honest, even if no one saw."
+      }
+    },
+    {
+      "id": "p2-truth-trust",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "سچ بولنے سے لوگ ہم پر بھروسا کرتے ہیں۔",
+        "en": "Telling the truth helps people trust us."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "جی ہاں۔ سچ بولنے سے بھروسا بنتا ہے۔",
+        "en": "Yes. Telling the truth builds trust."
+      }
+    },
+    {
+      "id": "p3-spilled-water",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "عائشہ سے غلطی سے بھائی کی کاپی پر پانی گر گیا۔ ایک سچی دوست کیا کرے گی؟",
+        "en": "Ayesha spills water on her brother's notebook by mistake. What would an honest friend do?"
+      },
+      "options": [
+        {
+          "ur": "کہے کہ بلی نے گرایا",
+          "en": "Say the cat did it"
+        },
+        {
+          "ur": "کاپی چھپا دے",
+          "en": "Hide the notebook"
+        },
+        {
+          "ur": "بھائی کو بتائے اور کاپی سکھانے میں مدد کرے",
+          "en": "Tell her brother and help dry the notebook"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا اِس سے بھروسا بنتا ہے؟",
+            "en": "Does this build trust?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سچ بتانا اور مدد کرنا بہادری ہے۔",
+        "en": "Telling the truth and helping is brave."
+      }
+    },
+    {
+      "id": "p4-only-when-easy",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہمیں صرف تب سچ بولنا چاہیے جب سچ بولنا آسان ہو۔",
+        "en": "We only need to tell the truth when it is easy."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-honesty-only-when-easy"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: کیا مشکل وقت میں بھی بھروسا ضروری ہے؟",
+            "en": "Think: does trust matter in hard moments too?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سچ تب بھی بولتے ہیں جب مشکل ہو۔",
+        "en": "We are honest even when it is hard."
+      }
+    },
+    {
+      "id": "p5-extra-change",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "دکان دار نے ڈینیئل کو بیس روپے زیادہ واپس کر دیے۔ ایماندار کام کیا ہے؟",
+        "en": "The shopkeeper gives Daniel 20 rupees too much change. What is the honest thing to do?"
+      },
+      "options": [
+        {
+          "ur": "زائد بیس روپے واپس کر دے",
+          "en": "Give back the extra 20 rupees"
+        },
+        {
+          "ur": "رکھ لے، غلطی تو دکان دار کی ہے",
+          "en": "Keep it, it was the shopkeeper's mistake"
+        },
+        {
+          "ur": "ان پیسوں سے ٹافیاں خرید لے",
+          "en": "Buy sweets with the money"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-honesty-only-when-easy"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "وہ بیس روپے اصل میں کس کے ہیں؟",
+            "en": "Whose 20 rupees are they really?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-trust-meaning",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "«بھروسا» کا مطلب کیا ہے؟",
+        "en": "What does 'trust' mean?"
+      },
+      "options": [
+        {
+          "ur": "کسی سے ڈرنا",
+          "en": "Being afraid of someone"
+        },
+        {
+          "ur": "یقین ہونا کہ کوئی سچ بولے گا اور اپنی بات پوری کرے گا",
+          "en": "Believing someone will tell the truth and do what they say"
+        },
+        {
+          "ur": "کھیل جیتنا",
+          "en": "Winning a game"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "بھروسا یقین ہے کہ کوئی سچا ہے۔",
+        "en": "Trust is believing someone is truthful."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-honest-and-kind",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "زارا کی سہیلی اپنی ڈرائنگ دکھاتی ہے۔ زارا کو رنگ اچھے لگتے ہیں، مگر شکل تھوڑی عجیب لگتی ہے۔ کون سا جواب سچا بھی ہے اور نرم بھی؟",
+        "en": "Zara's friend shows her a drawing. Zara likes the colours, but the shape looks a bit odd. Which answer is both honest and kind?"
+      },
+      "options": [
+        {
+          "ur": "«یہ دنیا کی سب سے اچھی ڈرائنگ ہے!»",
+          "en": "\"It is the best drawing in the world!\""
+        },
+        {
+          "ur": "«یہ بہت بری ہے۔»",
+          "en": "\"It is really bad.\""
+        },
+        {
+          "ur": "«مجھے تمہارے رنگ بہت اچھے لگے۔ شکل ایک بار پھر بنا کر دیکھو؟»",
+          "en": "\"I really like your colours. Maybe try the shape once more?\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسا جواب ڈھونڈیں جو سچ ہو اور دل بھی نہ دکھائے۔",
+            "en": "Look for an answer that is true and does not hurt."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سچ نرمی سے بولا جا سکتا ہے۔",
+        "en": "The truth can be told gently."
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-tell-family",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کے کسی فرد کو آج کی ایک سچی بات بتائیں جو آپ نے کی۔",
+        "en": "tell a family member about one honest thing you did today."
+      },
+      "answer_key": {
+        "guidance": "Done at home by talking, no writing needed. Nothing is entered in the app; the mentor may only ask 'did you get to talk with someone?' and never asks what was said."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کیا اِس سے بھروسا بنتا ہے؟",
+        "en": "Does this build trust?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "سچ کون سا ہے؟",
+        "en": "Which one is the truth?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "سچ صرف تب بولنا چاہیے جب آسان ہو۔",
+        "en": "Be honest only when convenient"
+      },
+      "correction": {
+        "ur": "سچ تب بھی بولتے ہیں جب مشکل ہو۔",
+        "en": "be honest even when it's hard"
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-honesty-only-when-easy",
+      "remediation_ref": "ETH-G4-HON-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "سچائی = سچ بولنا۔ سچ سے بھروسا بنتا ہے۔ غلطی ہو جائے تو سچ بتانا بہادری ہے۔ سچ نرمی سے بولیں۔",
+    "en": "Honesty = telling the truth. Truth builds trust. Owning up to a mistake is brave. Tell the truth gently."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ سچ بولنے سے بھروسا بنتا ہے، چاہے سچ بولنا مشکل ہو۔",
+    "en": "We learned that telling the truth builds trust, even when it is hard."
+  },
+  "parent_notes": {
+    "ur": "بچے کی سچائی کی دل سے تعریف کریں — خاص طور پر جب وہ اپنی غلطی مانے۔",
+    "en": "praise honesty warmly — especially when your child admits a mistake."
+  },
+  "mentor_notes": {
+    "ur": "ہر صورتِ حال نرم اور بغیر شرمندگی کے رکھیں؛ سچائی کی تعریف کریں، کبھی پوچھ گچھ نہ کریں۔",
+    "en": "keep every situation gentle + non-shaming; celebrate honesty, never interrogate."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن منظر بیان کرے (کون ہے، کیا ہو رہا ہے)۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ یہ مضمون سننے پر مبنی ہے، اس لیے ہر کہانی، سوال اور جواب کو آواز میں پڑھا جانا ضروری ہے۔ ترتیب دینے والی سرگرمی کا متبادل: کارڈ کو چھوئیں، پھر گروپ کو چھوئیں؛ یا ہر کارڈ کے لیے دو بٹنوں میں سے ایک چنیں۔",
+    "en": "Story pictures are still to be made; each needs alt text that describes the scene (who is there, what is happening). Urdu audio is not yet recorded; this subject is audio-first, so every story, question and option must be read aloud. Alternative to the sort activity: tap a card, then tap its group; or answer each card with one of two buttons."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "story first (Ravi and the found pencil box), then the one value question 'does this build trust?'; contrast a truthful and an untruthful choice; end on 'owning up is brave'",
+    "questioning_strategy": "ask 'what could Ravi do?' and 'does this build trust?' before asking which choice is honest; accept any honest choice warmly",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "picks the 'no one saw' option",
+      "goes quiet after a mistake story"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "gentle, familiar, low-stakes situations only (found things, small spills, extra change in rupees); never situations where a child is accused; use names from many communities",
+    "misconception_detectors": [
+      "chooses honesty only when no one is watching",
+      "thinks a kind lie is always better than a gentle truth"
+    ],
+    "critical_thinking_prompts": [
+      "Why does a lie make trust weaker, even if no one finds out?",
+      "How can you tell the truth and still be kind?"
+    ],
+    "personalization_rules": "if the learner picks 'no one saw' options, repeat the trust-bridge idea with a new gentle story before moving on",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths"
+    ]
+  },
+  "review_flags": [
+    "subject expert: human fields (hints H1/H2 Urdu, misconception, homework, parent and teacher notes in English) are from §3; check the AI translations on the missing side",
+    "language editor: check Urdu wording of 'trust bridge' metaphor and the title",
+    "check the story names (Ravi, Ayesha, Daniel, Zara) read as inclusive across communities"
+  ]
+}

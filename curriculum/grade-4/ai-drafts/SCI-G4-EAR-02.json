@@ -1,0 +1,439 @@
+{
+  "code": "SCI-G4-EAR-02",
+  "title": {
+    "ur": "سورج، چاند اور ستارے",
+    "en": "The Sun, the Moon and the stars"
+  },
+  "description": {
+    "ur": "سورج، چاند اور ستاروں کو پہچاننا اور ان کے بارے میں آسان حقائق بتانا۔",
+    "en": "Identifying the Sun, the Moon and the stars and giving simple facts about each."
+  },
+  "keywords": [
+    "Sun",
+    "Moon",
+    "stars",
+    "star",
+    "reflect",
+    "crescent",
+    "sky"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ستارہ",
+        "en": "star"
+      },
+      "definition": {
+        "ur": "گرم گیسوں کا بہت بڑا گولا جو اپنی روشنی خود دیتا ہے۔ سورج بھی ستارہ ہے۔",
+        "en": "A huge ball of hot gas that makes its own light. The Sun is a star."
+      }
+    },
+    {
+      "term": {
+        "ur": "ہلال",
+        "en": "crescent moon"
+      },
+      "definition": {
+        "ur": "چاند کی پتلی، کمان جیسی شکل، جیسے نئے مہینے کا چاند۔",
+        "en": "The thin, curved shape of the Moon, like the new month's moon."
+      }
+    },
+    {
+      "term": {
+        "ur": "لوٹانا (منعکس کرنا)",
+        "en": "reflect"
+      },
+      "definition": {
+        "ur": "روشنی کا کسی چیز سے ٹکرا کر واپس آنا۔",
+        "en": "Light bouncing back off something."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "دن میں آسمان پر سورج چمکتا ہے۔ رات کو چاند اور بہت سے ستارے نظر آتے ہیں۔ یہ سب کیا ہیں؟ آج ہم ان تینوں کے بارے میں سچے اور آسان حقائق سیکھیں گے۔",
+    "en": "In the day the Sun shines in the sky. At night we see the Moon and many stars. What are they all? Today we learn true and simple facts about all three."
+  },
+  "student_explanation": {
+    "ur": "سورج ایک ستارہ ہے۔ یہ ہم سے سب سے قریب ستارہ ہے۔ سورج بہت گرم ہے اور زمین سے بہت بڑا ہے۔ یہ ہمیں روشنی اور گرمی دیتا ہے۔ چاند زمین کے گرد چکر لگاتا ہے۔ چاند اپنی روشنی نہیں دیتا۔ وہ سورج کی روشنی لوٹاتا ہے۔ ستارے بھی سورج جیسے ہیں۔ وہ بہت دور ہیں، اس لیے چھوٹے لگتے ہیں۔ سورج کو کبھی سیدھا نہ دیکھو۔",
+    "en": "The Sun is a star. It is the star closest to us. The Sun is very hot and much bigger than the Earth. It gives us light and heat. The Moon goes round the Earth. The Moon does not make its own light. It reflects the Sun's light. Stars are like the Sun. They are very far away, so they look small. Never look straight at the Sun."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "دن کے وقت ستارے کیوں نظر نہیں آتے؟",
+        "en": "Why can't we see stars in the daytime?"
+      },
+      "steps": [
+        {
+          "ur": "ستارے دن میں بھی آسمان میں موجود ہوتے ہیں۔",
+          "en": "The stars are still in the sky during the day."
+        },
+        {
+          "ur": "دن میں سورج کی روشنی بہت تیز ہوتی ہے۔",
+          "en": "In the day, the Sun's light is very bright."
+        },
+        {
+          "ur": "یہ تیز روشنی دور کے ستاروں کی مدھم روشنی کو چھپا دیتی ہے۔",
+          "en": "This bright light hides the faint light of the faraway stars."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "چاند کی شکل مہینے بھر کیوں بدلتی دکھائی دیتی ہے؟",
+        "en": "Why does the Moon's shape seem to change through the month?"
+      },
+      "steps": [
+        {
+          "ur": "چاند کا آدھا حصہ ہمیشہ سورج سے روشن رہتا ہے۔",
+          "en": "Half of the Moon is always lit by the Sun."
+        },
+        {
+          "ur": "چاند زمین کے گرد گھومتا ہے، تو ہمیں روشن حصہ کبھی کم، کبھی زیادہ دکھتا ہے۔",
+          "en": "As the Moon goes round the Earth, we see more or less of the lit half."
+        },
+        {
+          "ur": "اسی لیے کبھی پتلا ہلال، کبھی پورا چاند دکھتا ہے۔ چاند خود نہیں بدلتا۔",
+          "en": "That is why we see a thin crescent sometimes and a full moon at other times. The Moon itself does not change."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-facts",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر بات کو صحیح خانے میں رکھو: سورج، چاند یا ستارے۔ \"ہم سے سب سے قریب ستارہ\"، \"زمین کے گرد چکر لگاتا ہے\"، \"بہت دور ہونے سے چھوٹے لگتے ہیں\"، \"اپنی روشنی نہیں دیتا\"۔",
+        "en": "Put each fact in the right box: Sun, Moon or stars. 'The star closest to us', 'Goes round the Earth', 'Look small because they are very far away', 'Does not make its own light'."
+      },
+      "answer_key": {
+        "sun": [
+          "the star closest to us"
+        ],
+        "moon": [
+          "goes round the Earth",
+          "does not make its own light"
+        ],
+        "stars": [
+          "look small because they are very far away"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سی چیز اپنی روشنی نہیں دیتی؟",
+            "en": "Which one does not make its own light?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-sun-is",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "سورج کیا ہے؟",
+        "en": "What is the Sun?"
+      },
+      "options": [
+        {
+          "ur": "ایک سیارہ",
+          "en": "A planet"
+        },
+        {
+          "ur": "ایک ستارہ",
+          "en": "A star"
+        },
+        {
+          "ur": "ایک چاند",
+          "en": "A moon"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p2-moon-light",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "چاند کی روشنی دراصل سورج کی روشنی ہے جو چاند سے لوٹتی ہے۔",
+        "en": "Moonlight is really sunlight bouncing off the Moon."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-stars-small",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ستارے چھوٹے کیوں لگتے ہیں؟",
+        "en": "Why do stars look small?"
+      },
+      "options": [
+        {
+          "ur": "کیونکہ وہ بہت چھوٹے ہیں",
+          "en": "Because they are tiny"
+        },
+        {
+          "ur": "کیونکہ وہ صرف رات کو بنتے ہیں",
+          "en": "Because they are made only at night"
+        },
+        {
+          "ur": "کیونکہ وہ بہت دور ہیں",
+          "en": "Because they are very far away"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p4-moon-orbits",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "چاند کس کے گرد چکر لگاتا ہے؟",
+        "en": "What does the Moon go round?"
+      },
+      "options": [
+        {
+          "ur": "زمین",
+          "en": "The Earth"
+        },
+        {
+          "ur": "ستارے",
+          "en": "The stars"
+        },
+        {
+          "ur": "بادل",
+          "en": "The clouds"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p5-stars-day",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ستارے صرف رات کو آسمان میں ہوتے ہیں۔",
+        "en": "Stars are in the sky only at night."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "ستارے دن میں بھی ہوتے ہیں؛ سورج کی تیز روشنی انہیں چھپا دیتی ہے۔",
+        "en": "Stars are there in the day too; the bright sunlight hides them."
+      }
+    },
+    {
+      "id": "p6-safety",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "سورج کو دیکھنے کا محفوظ طریقہ کیا ہے؟",
+        "en": "What is the safe way to look at the Sun?"
+      },
+      "options": [
+        {
+          "ur": "تھوڑی دیر کے لیے سیدھا دیکھنا",
+          "en": "Look straight at it for a short time"
+        },
+        {
+          "ur": "اسے کبھی سیدھا نہ دیکھنا",
+          "en": "Never look straight at it"
+        },
+        {
+          "ur": "دوپہر کو سیدھا دیکھنا",
+          "en": "Look straight at it at midday"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-sun-bigger",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "سورج زمین سے بہت بڑا ہے، پھر بھی آسمان میں ایک چھوٹی تھالی جیسا کیوں لگتا ہے؟",
+        "en": "The Sun is much bigger than the Earth, so why does it look like a small plate in the sky?"
+      },
+      "options": [
+        {
+          "ur": "کیونکہ وہ ہم سے بہت دور ہے",
+          "en": "Because it is very far from us"
+        },
+        {
+          "ur": "کیونکہ وہ صبح چھوٹا ہو جاتا ہے",
+          "en": "Because it shrinks in the morning"
+        },
+        {
+          "ur": "کیونکہ بادل اسے چھوٹا کرتے ہیں",
+          "en": "Because clouds make it smaller"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "دور کی چیزیں چھوٹی دکھتی ہیں۔ سورج ہم سے بہت دور ہے۔",
+        "en": "Faraway things look small. The Sun is very far from us."
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-moon-diary",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک ہفتے تک ہر رات گھر کے صحن یا کھڑکی سے چاند دیکھو (اگر نظر آئے)۔ ہر رات اس کی شکل کی تصویر بناؤ۔ کسی بڑے کے ساتھ دیکھو، اکیلے باہر نہ جاؤ۔",
+        "en": "For one week, look at the Moon each night from your courtyard or window (if you can see it). Draw its shape each night. Look with an adult; do not go out alone."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Credit dated drawings that show the shape changing gradually; accept 'not visible' entries on cloudy nights."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچو: کون اپنی روشنی خود دیتا ہے اور کون لوٹاتا ہے؟",
+        "en": "Think: which one makes its own light and which one reflects it?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "سورج اور ستارے ایک ہی قسم کے ہیں۔ چاند زمین کا ساتھی ہے۔",
+        "en": "The Sun and the stars are the same kind of thing. The Moon is the Earth's partner."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "چاند اپنی روشنی خود دیتا ہے۔",
+        "en": "The Moon makes its own light."
+      },
+      "correction": {
+        "ur": "چاند سورج کی روشنی لوٹاتا ہے۔",
+        "en": "The Moon reflects the Sun's light."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "سورج ستارہ نہیں، ستارے چھوٹے ٹمٹماتے نقطے ہیں۔",
+        "en": "The Sun is not a star; stars are tiny twinkling dots."
+      },
+      "correction": {
+        "ur": "سورج بھی ستارہ ہے۔ دوسرے ستارے بہت دور ہیں، اس لیے نقطے لگتے ہیں۔",
+        "en": "The Sun is a star too. Other stars are very far away, so they look like dots."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:SCI-G4-EAR-01",
+      "remediation_ref": "SCI-G4-EAR-01"
+    },
+    {
+      "signal": "calls the Moon a light source",
+      "remediation_ref": "SCI-G4-ENF-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "سورج: سب سے قریب ستارہ، بہت گرم، زمین سے بہت بڑا۔ چاند: زمین کے گرد گھومتا ہے، سورج کی روشنی لوٹاتا ہے۔ ستارے: دور کے سورج۔ سورج کو کبھی سیدھا نہ دیکھو۔",
+    "en": "Sun: the closest star, very hot, much bigger than the Earth. Moon: goes round the Earth, reflects sunlight. Stars: faraway suns. Never look straight at the Sun."
+  },
+  "summary": {
+    "ur": "ہم نے سورج، چاند اور ستاروں کے بارے میں آسان حقائق سیکھے۔",
+    "en": "We learned simple facts about the Sun, the Moon and the stars."
+  },
+  "parent_notes": {
+    "ur": "نئے مہینے کا چاند دیکھتے وقت بچے کو ساتھ رکھیں اور پوچھیں: چاند کی روشنی کہاں سے آتی ہے؟",
+    "en": "When looking for the new month's moon, take your child along and ask: where does the Moon's light come from?"
+  },
+  "mentor_notes": {
+    "ur": "ہلال کی مثال روزمرہ زندگی سے جڑی ہے؛ اسے مذہبی بحث نہ بنائیں، صرف شکل کی بات کریں۔ چاند کی شکلوں کی تفصیل اس سطح پر آسان رکھیں۔",
+    "en": "The crescent example links to daily life; keep it about the shape, not a religious discussion. Keep the Moon-phase explanation simple at this level."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ سورج، زمین اور چاند کا خاکہ، چاند کی شکلوں کی تصویریں اور ان کا متبادل متن ابھی بنانا ہے۔ ترتیب دینے والی سرگرمی کا متبادل: ہر بات کے لیے \"سورج\"، \"چاند\" یا \"ستارے\" کا بٹن دبائیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. The Sun-Earth-Moon diagram, Moon-shape pictures and their alt text are still to be made. Alternative to the sort activity: tap 'Sun', 'Moon' or 'stars' for each fact."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "contrast the three objects: makes own light (Sun, stars) vs reflects (Moon); distance explains size; repeat the Sun-safety rule",
+    "questioning_strategy": "ask 'does it make its own light?' and 'is it near or far?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "calls the Moon a light source",
+      "says stars disappear in the day"
+    ],
+    "hint_policy": "graduated; first the own-light question, then distance; never give the fact first",
+    "example_policy": "use familiar sky moments: the new crescent, a full moon in a village sky, stars on a power-cut night",
+    "misconception_detectors": [
+      "thinks the Moon makes light",
+      "thinks the Sun is not a star",
+      "thinks stars exist only at night"
+    ],
+    "critical_thinking_prompts": [
+      "If the Sun is a star, why is it so much brighter than the others?"
+    ],
+    "personalization_rules": "if the learner confuses light sources, route to SCI-G4-ENF-02",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples",
+      "suggest looking at the Sun, even through glass or sunglasses",
+      "turn the crescent example into a religious ruling or debate"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm 'ball of hot gas' for stars is acceptable at Grade 4",
+    "religious-sensitivity reviewer: the new-month crescent (ہلال) is used only as a shape example — confirm wording"
+  ]
+}

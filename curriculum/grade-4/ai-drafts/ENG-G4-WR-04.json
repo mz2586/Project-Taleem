@@ -1,0 +1,471 @@
+{
+  "code": "ENG-G4-WR-04",
+  "title": {
+    "ur": "مختصر نوٹ یا پیغام لکھیں",
+    "en": "Write a Short Note"
+  },
+  "description": {
+    "ur": "بچہ ایک مختصر انگریزی نوٹ لکھتا ہے جس میں مخاطب، پیغام اور اختتام ہو۔",
+    "en": "The learner writes a short English note with a greeting, a clear message and a closing."
+  },
+  "keywords": [
+    "note",
+    "message",
+    "greeting",
+    "closing",
+    "purpose",
+    "writing"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مخاطب (greeting)",
+        "en": "greeting"
+      },
+      "definition": {
+        "ur": "نوٹ کا پہلا حصہ: Dear Bilal,",
+        "en": "The first part of a note: Dear Bilal,"
+      }
+    },
+    {
+      "term": {
+        "ur": "پیغام (message)",
+        "en": "message"
+      },
+      "definition": {
+        "ur": "وہ بات جو آپ بتانا چاہتے ہیں: کیا، کب، کہاں۔",
+        "en": "What you want to say: what, when, where."
+      }
+    },
+    {
+      "term": {
+        "ur": "اختتام (closing)",
+        "en": "closing"
+      },
+      "definition": {
+        "ur": "نوٹ کا آخری حصہ: From, Sana",
+        "en": "The last part of a note: From, Sana"
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کبھی ہمیں کسی کو چھوٹی سی بات بتانی ہوتی ہے۔ ہم ایک نوٹ لکھتے ہیں۔ نوٹ کے تین حصے ہوتے ہیں۔ پہلے مخاطب، پھر پیغام، آخر میں اختتام۔ آج ہم ایک نمونہ نوٹ پڑھیں گے اور اپنا نوٹ لکھیں گے۔",
+    "en": "Sometimes we need to tell someone a small thing. We write a note. A note has three parts. First the greeting, then the message, and last the closing. Today we will read a model note and write our own."
+  },
+  "student_explanation": {
+    "ur": "نوٹ مختصر ہوتا ہے۔ یہ Dear اور نام سے شروع ہوتا ہے۔ نام کے بعد کوما لگائیں: Dear Bilal,۔ پھر پیغام لکھیں۔ پیغام بتائے کیا کرنا ہے اور کب۔ دو یا تین جملے کافی ہیں۔ شکریہ لکھنا اچھا ہے۔ آخر میں From اور اپنا نام لکھیں۔ کسی نوٹ میں اپنا پتا یا فون نمبر نہ لکھیں۔",
+    "en": "A note is short. It starts with Dear and a name. Put a comma after the name: Dear Bilal,. Then write the message. The message says what to do and when. Two or three sentences are enough. Saying thank you is polite. At the end write From and your name. Never write your address or phone number in a note."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "نمونہ نوٹ پڑھیں: Dear Bilal, Please bring your English book to school tomorrow. We will read the new story together. Thank you. From, Sana اس کے حصے پہچانیں۔",
+        "en": "Read the model note: Dear Bilal, Please bring your English book to school tomorrow. We will read the new story together. Thank you. From, Sana Name its parts."
+      },
+      "steps": [
+        {
+          "ur": "مخاطب: Dear Bilal,",
+          "en": "Greeting: Dear Bilal,"
+        },
+        {
+          "ur": "پیغام: کیا؟ انگریزی کی کتاب لانا۔ کب؟ tomorrow۔",
+          "en": "Message: what? bring the English book. when? tomorrow."
+        },
+        {
+          "ur": "شکریہ: Thank you.",
+          "en": "Thanks: Thank you."
+        },
+        {
+          "ur": "اختتام: From, Sana",
+          "en": "Closing: From, Sana"
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ہدایت: اپنی دوست Hira کو بتائیں کہ جمعہ کو کھیل کا میدان بند ہے۔ نوٹ کا منصوبہ بنائیں۔",
+        "en": "Task: tell your friend Hira that the playground is closed on Friday. Plan the note."
+      },
+      "steps": [
+        {
+          "ur": "مخاطب: Dear Hira,",
+          "en": "Greeting: Dear Hira,"
+        },
+        {
+          "ur": "پیغام: The playground is closed on Friday.",
+          "en": "Message: The playground is closed on Friday."
+        },
+        {
+          "ur": "ایک اور جملہ: Let us play in the yard.",
+          "en": "One more sentence: Let us play in the yard."
+        },
+        {
+          "ur": "اختتام: From, اور ایک نام۔",
+          "en": "Closing: From, and a name."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-order-note",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "نوٹ کے حصے ترتیب سے رکھیں: From, Ahmed ، Dear Ali, ، Please come to my house at 4 o'clock to play.",
+        "en": "Put the parts of the note in order: From, Ahmed / Dear Ali, / Please come to my house at 4 o'clock to play."
+      },
+      "answer_key": {
+        "order": [
+          "Dear Ali,",
+          "Please come to my house at 4 o'clock to play.",
+          "From, Ahmed"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "نوٹ Dear سے شروع ہوتا ہے۔",
+            "en": "A note starts with Dear."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-closing",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "اختتام مکمل کریں: ___, Sana",
+        "en": "Complete the closing: ___, Sana"
+      },
+      "answer_key": {
+        "answer": "From"
+      },
+      "accepted_variants": [
+        "From",
+        "from",
+        "Love",
+        "Thanks"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "نمونے والے نوٹ کا آخری حصہ دیکھیں۔",
+            "en": "Look at the last part of the model note."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-greeting",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "نوٹ کا درست مخاطب کونسا ہے؟",
+        "en": "Which is a correct greeting for a note?"
+      },
+      "options": [
+        {
+          "ur": "Dear Fatima,",
+          "en": "Dear Fatima,"
+        },
+        {
+          "ur": "fatima dear",
+          "en": "fatima dear"
+        },
+        {
+          "ur": "From Fatima",
+          "en": "From Fatima"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "مخاطب Dear سے شروع ہوتا ہے۔",
+            "en": "A greeting starts with Dear."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-message-when",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "نمونے والے نوٹ میں بلال کو کتاب کب لانی ہے؟",
+        "en": "In the model note, when must Bilal bring the book?"
+      },
+      "options": [
+        {
+          "ur": "today",
+          "en": "today"
+        },
+        {
+          "ur": "next week",
+          "en": "next week"
+        },
+        {
+          "ur": "tomorrow",
+          "en": "tomorrow"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پیغام والا جملہ پڑھیں۔",
+            "en": "Read the message sentence."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-missing",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اس نوٹ میں کیا غائب ہے؟ Dear Uncle, Thank you for the storybook. I read it every night.",
+        "en": "What is missing from this note? Dear Uncle, Thank you for the storybook. I read it every night."
+      },
+      "options": [
+        {
+          "ur": "the greeting",
+          "en": "the greeting"
+        },
+        {
+          "ur": "the closing",
+          "en": "the closing"
+        },
+        {
+          "ur": "the message",
+          "en": "the message"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "نوٹ کا آخر دیکھیں۔",
+            "en": "Look at the end of the note."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-address",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "نوٹ میں اپنا گھر کا پتا لکھنا ضروری ہے۔",
+        "en": "You must write your home address in a note."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "نہیں؛ مخاطب، پیغام اور اختتام کافی ہیں۔",
+        "en": "No; a greeting, a message and a closing are enough."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-write-note",
+      "type": "long",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اپنی ہم جماعت Zara کو نوٹ لکھیں: کل اسکول میں سب اپنے رنگ لائیں گے۔ مخاطب، دو جملوں کا پیغام اور اختتام لکھیں۔",
+        "en": "Write a note to your classmate Zara: tomorrow everyone will bring their colours to school. Include a greeting, a two-sentence message and a closing."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "greeting, clear message (what + when), closing, correct sentences",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "ایک یا دو حصے موجود؛ پیغام واضح نہیں۔",
+              "en": "One or two parts present; the message is unclear."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "تینوں حصے، مگر 'کب' غائب یا کچھ جملے ادھورے۔",
+              "en": "All three parts, but 'when' missing or some sentences incomplete."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "تینوں حصے، واضح پیغام (کیا + کب)، درست جملے۔",
+              "en": "All three parts, clear message (what + when), correct sentences."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor-marked. The closing may use any first name; no surnames, addresses or numbers."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-family-note",
+      "type": "long",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں کسی کے لیے شکریے کا ایک مختصر انگریزی نوٹ لکھیں، جیسے کھانے کے لیے۔",
+        "en": "Write a short English thank-you note for someone at home, for example for a meal."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "thank-you note with all three parts",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "نوٹ ہے مگر ایک حصہ غائب۔",
+              "en": "Note written but one part missing."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "مخاطب، شکریہ کا پیغام اور اختتام۔",
+              "en": "Greeting, thank-you message and closing."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "The note stays at home; the mentor only hears about it or sees the notebook."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "نوٹ کے تین حصے یاد کریں: مخاطب، پیغام، اختتام۔",
+        "en": "Remember the three parts: greeting, message, closing."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "پیغام میں 'کیا' اور 'کب' دونوں بتائیں۔",
+        "en": "In the message, say both 'what' and 'when'."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "نوٹ کو لمبی کہانی بنا دینا۔",
+        "en": "Turning a note into a long story."
+      },
+      "correction": {
+        "ur": "نوٹ مختصر ہو: دو تین جملوں میں اصل بات۔",
+        "en": "A note is short: the main point in two or three sentences."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "اختتام یا مخاطب بھول جانا۔",
+        "en": "Forgetting the greeting or the closing."
+      },
+      "correction": {
+        "ur": "Dear سے شروع کریں، From اور نام پر ختم کریں۔",
+        "en": "Start with Dear, end with From and a name."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:ENG-G4-WR-03",
+      "remediation_ref": "ENG-G4-WR-03"
+    },
+    {
+      "signal": "incomplete_sentences_in_message",
+      "remediation_ref": "ENG-G4-WR-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "نوٹ = Dear + نام، + پیغام (کیا، کب) + From، نام۔ مختصر رکھیں؛ پتا یا فون نمبر نہیں۔",
+    "en": "Note = Dear + name, + message (what, when) + From, name. Keep it short; no address or phone number."
+  },
+  "summary": {
+    "ur": "ہم نے مخاطب، پیغام اور اختتام والا مختصر نوٹ لکھا۔",
+    "en": "We wrote a short note with a greeting, a message and a closing."
+  },
+  "parent_notes": {
+    "ur": "گھر میں بچے کو کسی کے لیے چھوٹا نوٹ لکھنے دیں، جیسے شکریہ۔ نوٹ کی تعریف کریں، چاہے غلطیاں ہوں۔",
+    "en": "At home, let your child write a small note for someone, like a thank-you. Praise the note even if it has mistakes."
+  },
+  "mentor_notes": {
+    "ur": "بچوں کو یاد دلائیں کہ نوٹ میں پتا، فون نمبر یا خاندانی معلومات نہ لکھیں۔ تمام مثالوں میں فرضی نام ہیں۔",
+    "en": "Remind children not to put addresses, phone numbers or family details in notes. All examples use made-up names."
+  },
+  "accessibility_notes": {
+    "ur": "نمونہ نوٹ پڑھنے کے لیے ہے، اس پر آڈیو نہیں؛ ہدایات کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ نوٹ کے تین حصوں کی تصویر اور اس کا متبادل متن ابھی بنانا ہے۔ گھسیٹ کر ترتیب دینے کا متبادل: ہر حصے کے آگے ۱، ۲ یا ۳ چنیں۔ لکھ نہ سکنے والا بچہ نوٹ زبانی بول کر مینٹر کو لکھوا سکتا ہے۔",
+    "en": "The model note is for reading, so it has no audio; Urdu audio for instructions is not yet recorded. The three-part note picture and its alt text are still to be made. Alternative to drag ordering: choose 1, 2 or 3 next to each part. A child who cannot write may dictate the note to the mentor."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "read a model, label greeting/message/closing, plan what + when, then write",
+    "questioning_strategy": "ask 'who is it for? what must they know? when?' before writing",
+    "slow_down_signals": [
+      "writes a long story",
+      "forgets greeting or closing",
+      "two wrong answers in a row"
+    ],
+    "hint_policy": "graduated; two hints max; first the three parts, then what + when; never write the note for the learner",
+    "example_policy": "made-up first names only; school and home purposes (bring a book, playground closed, thank you)",
+    "misconception_detectors": [
+      "no greeting",
+      "no closing",
+      "message without what or when"
+    ],
+    "critical_thinking_prompts": [
+      "What would Bilal not know if the note left out 'tomorrow'?"
+    ],
+    "personalization_rules": "if paragraph or sentence skills block the note, route to ENG-G4-WR-03 or ENG-G4-WR-02",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)",
+      "ask the learner to write their real address, phone number or family details"
+    ]
+  },
+  "review_flags": [
+    "child safety: confirm the 'never write your address or phone number' rule is worded as the programme wants",
+    "mentor-mediated: confirm rubric levels for c1 and homework"
+  ]
+}

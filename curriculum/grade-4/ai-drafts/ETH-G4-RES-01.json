@@ -1,0 +1,457 @@
+{
+  "code": "ETH-G4-RES-01",
+  "title": {
+    "ur": "احترام اور اچھے آداب",
+    "en": "Respect and good manners"
+  },
+  "description": {
+    "ur": "احترام کیا ہے: اچھے طریقے سے ملنا، دھیان سے سننا، اور «مہربانی» و «شکریہ» کہنا۔",
+    "en": "What respect is: greeting nicely, listening carefully, and saying please and thank you."
+  },
+  "keywords": [
+    "respect",
+    "good manners",
+    "greeting",
+    "listening",
+    "please",
+    "thank you",
+    "taking turns to speak"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "احترام",
+        "en": "respect"
+      },
+      "definition": {
+        "ur": "دوسروں کی قدر کرنا اور ان سے اچھا سلوک کرنا۔",
+        "en": "valuing others and treating them well."
+      }
+    },
+    {
+      "term": {
+        "ur": "آداب",
+        "en": "manners"
+      },
+      "definition": {
+        "ur": "بات کرنے اور ملنے کے اچھے طریقے۔",
+        "en": "good ways of speaking and meeting people."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم احترام اور اچھے آداب کی بات کریں گے۔ احترام کا مطلب ڈرنا نہیں؛ احترام کا مطلب ہے دوسروں کی قدر کرنا۔ ہم تین آسان آداب سیکھیں گے: اچھے طریقے سے ملنا، دھیان سے سننا، اور «مہربانی» و «شکریہ» کہنا۔ پھر دیکھیں گے کہ دانیال نے بازار میں دکان دار سے کیسے بات کی۔",
+    "en": "Today we will talk about respect and good manners. Respect does not mean being afraid; it means valuing others. We will learn three easy manners: greeting nicely, listening carefully, and saying please and thank you. Then we will see how Danyal spoke to a shopkeeper in the bazaar."
+  },
+  "student_explanation": {
+    "ur": "احترام کا مطلب ہے دوسروں کی قدر کرنا۔ احترام ڈر نہیں ہے۔ اچھے آداب احترام دکھاتے ہیں۔ ملتے وقت مسکرا کر سلام یا «صبح بخیر» کہیں۔ آپ اپنے گھر والا طریقہ بھی استعمال کر سکتے ہیں۔ کوئی بات کرے تو دھیان سے سنیں۔ بیچ میں نہ بولیں، اپنی باری کا انتظار کریں۔ کچھ مانگیں تو «مہربانی» کہیں۔ کچھ ملے تو «شکریہ» کہیں۔ اچھے آداب سے سب کو اچھا لگتا ہے۔",
+    "en": "Respect means valuing other people. Respect is not fear. Good manners show respect. When you meet someone, smile and greet them, like \"Good morning\". You can use your own family's greeting too. When someone speaks, listen carefully. Don't interrupt; wait for your turn. Say \"please\" when you ask for something. Say \"thank you\" when you get something. Good manners make everyone feel good."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "دانیال امی کے کہنے پر بازار سے آدھا کلو ٹماٹر لینے جاتا ہے۔ وہ دکان دار سے کیسے بات کرے؟",
+        "en": "Danyal goes to the bazaar for half a kilo of tomatoes for Ammi. How should he speak to the shopkeeper?"
+      },
+      "steps": [
+        {
+          "ur": "ملنا: «سلام انکل!»",
+          "en": "Greet: \"Hello, Uncle!\""
+        },
+        {
+          "ur": "مانگنا: «مہربانی کر کے آدھا کلو ٹماٹر دے دیں۔»",
+          "en": "Ask: \"Half a kilo of tomatoes, please.\""
+        },
+        {
+          "ur": "دکان دار بات کرے تو دھیان سے سنے۔ آخر میں: «شکریہ!»",
+          "en": "Listen carefully when the shopkeeper speaks. At the end: \"Thank you!\""
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-manners-sort",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو «اچھے آداب» یا «آداب نہیں» گروپ میں رکھیں۔",
+        "en": "Put each card in 'good manners' or 'not good manners'."
+      },
+      "options": [
+        {
+          "ur": "استاد بول رہے ہوں تو بیچ میں بولنا",
+          "en": "Talking while the teacher is speaking"
+        },
+        {
+          "ur": "پانی ملنے پر «شکریہ» کہنا",
+          "en": "Saying \"thank you\" when given water"
+        },
+        {
+          "ur": "ملنے پر مسکرا کر سلام کرنا",
+          "en": "Smiling and greeting when you meet"
+        },
+        {
+          "ur": "«پینسل دو!» چلا کر کہنا",
+          "en": "Shouting \"Give me the pencil!\""
+        }
+      ],
+      "answer_key": {
+        "sort": {
+          "good_manners": [
+            1,
+            2
+          ],
+          "not_good_manners": [
+            0,
+            3
+          ]
+        },
+        "mode": "tap a card, then tap its group (drag also works)"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: کیا اِس سے دوسرے کو اچھا لگے گا؟",
+            "en": "Ask: would this make the other person feel good?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-respect-meaning",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "احترام کا مطلب کیا ہے؟",
+        "en": "What does respect mean?"
+      },
+      "options": [
+        {
+          "ur": "دوسروں سے ڈرنا",
+          "en": "Being afraid of others"
+        },
+        {
+          "ur": "دوسروں کی قدر کرنا اور اچھا سلوک کرنا",
+          "en": "Valuing others and treating them well"
+        },
+        {
+          "ur": "ہمیشہ چپ رہنا",
+          "en": "Always staying silent"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-respect-equals-fear"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا احترام اور ڈر ایک ہیں؟",
+            "en": "Are respect and fear the same?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-respect-fear",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "احترام کا مطلب ہے ڈرنا۔",
+        "en": "Respect means being afraid."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-respect-equals-fear"
+        }
+      },
+      "explanation": {
+        "ur": "احترام خیال اور اچھے آداب ہے، ڈر نہیں۔",
+        "en": "Respect is care and good manners, not fear."
+      }
+    },
+    {
+      "id": "p3-ask-nicely",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "سارہ کو بہن سے ربڑ چاہیے۔ اچھے آداب والا طریقہ کون سا ہے؟",
+        "en": "Sara needs an eraser from her sister. Which way shows good manners?"
+      },
+      "options": [
+        {
+          "ur": "«مہربانی کر کے اپنا ربڑ دے دو؟»",
+          "en": "\"Can I have your eraser, please?\""
+        },
+        {
+          "ur": "ربڑ چھین لینا",
+          "en": "Grab the eraser"
+        },
+        {
+          "ur": "«ربڑ دو، جلدی!»",
+          "en": "\"Eraser, now!\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-listening",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "دھیان سے سننا کیسا لگتا ہے؟",
+        "en": "What does listening carefully look like?"
+      },
+      "options": [
+        {
+          "ur": "بولنے والے کی طرف منہ نہ کرنا اور کھیلتے رہنا",
+          "en": "Looking away and playing"
+        },
+        {
+          "ur": "بیچ میں اپنی بات شروع کر دینا",
+          "en": "Starting your own story in the middle"
+        },
+        {
+          "ur": "بولنے والے کی طرف دیکھنا اور بات ختم ہونے دینا",
+          "en": "Facing the speaker and letting them finish"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سننے میں آنکھیں اور صبر دونوں کام آتے ہیں۔",
+            "en": "Listening uses your eyes and patience."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-thank-you",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کسی سے کچھ ملے تو «شکریہ» کہنا اچھے آداب ہیں۔",
+        "en": "Saying \"thank you\" when someone gives you something is good manners."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-respect-everyone",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اچھے آداب کس کے ساتھ دکھانے چاہییں؟",
+        "en": "Who should we show good manners to?"
+      },
+      "options": [
+        {
+          "ur": "صرف امیر لوگوں کے ساتھ",
+          "en": "Only rich people"
+        },
+        {
+          "ur": "سب کے ساتھ: صفائی والے، دکان دار، دوست اور گھر والے",
+          "en": "Everyone: cleaners, shopkeepers, friends and family"
+        },
+        {
+          "ur": "صرف بڑوں کے ساتھ",
+          "en": "Only grown-ups"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "ہر انسان احترام کا حق دار ہے۔",
+        "en": "Every person deserves respect."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-two-talking",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "علی اور زینب دونوں ایک ساتھ استاد کو اپنی بات بتانا چاہتے ہیں۔ سب سے اچھے آداب کون سے ہیں؟",
+        "en": "Ali and Zainab both want to tell the teacher something at the same time. What shows the best manners?"
+      },
+      "options": [
+        {
+          "ur": "جو زور سے بولے وہ پہلے",
+          "en": "Whoever is louder goes first"
+        },
+        {
+          "ur": "ایک بات کرے، دوسرا سنے اور اپنی باری کا انتظار کرے",
+          "en": "One speaks, the other listens and waits for a turn"
+        },
+        {
+          "ur": "دونوں ناراض ہو کر چلے جائیں",
+          "en": "Both walk away cross"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سننا اور باری کا انتظار احترام ہے۔",
+            "en": "Listening and waiting your turn is respect."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-magic-words",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج گھر میں «مہربانی» اور «شکریہ» کم از کم تین تین بار استعمال کریں۔",
+        "en": "Use \"please\" and \"thank you\" at least three times each at home today."
+      },
+      "answer_key": {
+        "guidance": "Done at home; no reporting in the app."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کیا اِس سے دوسرے کو اچھا اور قدر والا محسوس ہو گا؟",
+        "en": "Would this make the other person feel good and valued?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "تین آداب یاد کریں: ملنا، سننا، مہربانی/شکریہ۔",
+        "en": "Remember the three manners: greet, listen, please/thank you."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "احترام کا مطلب ہے ڈرنا۔",
+        "en": "Respect means being afraid."
+      },
+      "correction": {
+        "ur": "احترام خیال اور اچھے آداب ہے، ڈر نہیں۔",
+        "en": "Respect is care and good manners, not fear."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "احترام صرف بڑوں یا امیروں کا ہوتا ہے۔",
+        "en": "Only grown-ups or rich people deserve respect."
+      },
+      "correction": {
+        "ur": "ہر انسان احترام کا حق دار ہے۔",
+        "en": "Every person deserves respect."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-respect-equals-fear",
+      "remediation_ref": "ETH-G4-RES-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "احترام = قدر کرنا، ڈرنا نہیں۔ تین آداب: اچھے طریقے سے ملنا، دھیان سے سننا، «مہربانی» اور «شکریہ»۔ سب کا احترام کریں۔",
+    "en": "Respect = valuing people, not fear. Three manners: greet nicely, listen carefully, please and thank you. Respect everyone."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ احترام ڈر نہیں، بلکہ اچھے آداب سے دوسروں کی قدر کرنا ہے۔",
+    "en": "We learned that respect is not fear but valuing others through good manners."
+  },
+  "parent_notes": {
+    "ur": "گھر میں خود «مہربانی» اور «شکریہ» کہیں، بچے سے بھی۔ بچے جو دیکھتے ہیں وہی سیکھتے ہیں۔",
+    "en": "Say \"please\" and \"thank you\" at home yourself, to your child too. Children learn what they see."
+  },
+  "mentor_notes": {
+    "ur": "سلام کے طریقے مختلف گھروں میں مختلف ہیں؛ ہر طریقہ قبول کریں۔ «احترام ڈر نہیں» والی بات پر زور دیں۔",
+    "en": "Greetings differ between families; accept every form. Stress that respect is not fear."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن منظر بیان کرے (کون ہے، کیا ہو رہا ہے)۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ یہ مضمون سننے پر مبنی ہے، اس لیے ہر کہانی، سوال اور جواب کو آواز میں پڑھا جانا ضروری ہے۔ ترتیب دینے والی سرگرمی کا متبادل: کارڈ کو چھوئیں، پھر گروپ کو چھوئیں؛ یا ہر کارڈ کے لیے دو بٹنوں میں سے ایک چنیں۔",
+    "en": "Story pictures are still to be made; each needs alt text that describes the scene (who is there, what is happening). Urdu audio is not yet recorded; this subject is audio-first, so every story, question and option must be read aloud. Alternative to the sort activity: tap a card, then tap its group; or answer each card with one of two buttons."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "define respect as valuing people (not fear), then model three manners (greet, listen, please/thank you) in a bazaar story; practise with everyday cards",
+    "questioning_strategy": "ask 'how would the other person feel?' and 'which manner could help here?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "equates respect with fear",
+      "limits respect to certain people"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "bazaar, classroom and home moments; accept any family greeting; show respect to cleaners, shopkeepers and children equally",
+    "misconception_detectors": [
+      "thinks respect means fear",
+      "thinks only elders or rich people deserve respect"
+    ],
+    "critical_thinking_prompts": [
+      "Why is respect different from fear?",
+      "How can you show respect without saying any words?"
+    ],
+    "personalization_rules": "if the learner chooses fear options, use one extra example contrasting a kind elder and a frightened child before practice",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths"
+    ]
+  },
+  "review_flags": [
+    "language editor: greetings («سلام انکل»، «صبح بخیر») are meant to be faith-neutral; confirm they suit every community",
+    "subject expert: ★ exemplar code with no human content yet; review as the model lesson for unit 3"
+  ]
+}

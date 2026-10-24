@@ -1,0 +1,385 @@
+{
+  "code": "MATH-G4-ME-01",
+  "description": {
+    "ur": "لمبائی ناپنا اور میٹر اور سینٹی میٹر میں بدلنا (۱ میٹر = ۱۰۰ سینٹی میٹر)۔",
+    "en": "Measure length and convert between metres and centimetres (1 m = 100 cm)."
+  },
+  "keywords": [
+    "length",
+    "metre",
+    "centimetre",
+    "measure",
+    "convert",
+    "units"
+  ],
+  "teacher_script": {
+    "ur": "اپنی پنسل دیکھیں اور پھر کمرے کی دیوار دیکھیں۔ دونوں کی لمبائی ہے، مگر ایک چھوٹی ہے اور ایک بہت بڑی۔ چھوٹی چیزیں ہم سینٹی میٹر میں ناپتے ہیں اور بڑی چیزیں میٹر میں۔ آج ہم سیکھیں گے کہ ایک میٹر میں ۱۰۰ سینٹی میٹر ہوتے ہیں۔ پھر ہم میٹر کو سینٹی میٹر میں اور سینٹی میٹر کو میٹر میں بدلیں گے۔",
+    "en": "Look at your pencil, then look at a wall of the room. Both have a length, but one is short and one is very long. We measure small things in centimetres and big things in metres. Today we learn that one metre has 100 centimetres. Then we change metres into centimetres, and centimetres into metres."
+  },
+  "student_explanation": {
+    "ur": "لمبائی بتاتی ہے کہ کوئی چیز کتنی لمبی ہے۔ چھوٹی چیزیں ہم سینٹی میٹر میں ناپتے ہیں۔ پنسل اور کاپی سینٹی میٹر میں ناپی جاتی ہیں۔ بڑی چیزیں میٹر میں ناپتے ہیں۔ کمرہ اور کپڑا میٹر میں ناپے جاتے ہیں۔ ایک میٹر میں ۱۰۰ سینٹی میٹر ہوتے ہیں۔ میٹر کو سینٹی میٹر بنانے کے لیے ۱۰۰ سے ضرب دیں۔ ۳۰۰ سینٹی میٹر میں ۱۰۰ کے تین گروپ ہیں۔ یعنی ۳۰۰ سینٹی میٹر = ۳ میٹر۔ جوڑنے سے پہلے دونوں لمبائیاں ایک ہی اکائی میں لکھیں۔",
+    "en": "Length tells how long something is. We measure small things in centimetres. A pencil and a notebook are measured in centimetres. We measure big things in metres. A room and a piece of cloth are measured in metres. One metre has 100 centimetres. To change metres into centimetres, multiply by 100. 300 centimetres has three groups of 100. So 300 cm = 3 m. Before adding, write both lengths in the same unit."
+  },
+  "interactive_activities": [
+    {
+      "id": "a1-sort-cm-m",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر چیز کو صحیح ڈبے میں رکھیں: 'سینٹی میٹر میں ناپیں' یا 'میٹر میں ناپیں'۔ پنسل، ربڑ، کمرے کی لمبائی، شلوار قمیض کا کپڑا، کاپی، گھر کے سامنے والی گلی۔",
+        "en": "Put each thing in the right box: 'measure in cm' or 'measure in m'. A pencil, an eraser, the length of a room, cloth for a shalwar kameez, a notebook, the street outside the house."
+      },
+      "answer_key": {
+        "cm": [
+          "pencil",
+          "eraser",
+          "notebook"
+        ],
+        "m": [
+          "room length",
+          "cloth for a shalwar kameez",
+          "street"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا یہ چیز آپ کے ہاتھ میں آ جاتی ہے؟",
+            "en": "Does this thing fit in your hand?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p1-m-to-cm",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۳ میٹر = ___ سینٹی میٹر",
+        "en": "3 m = ___ cm"
+      },
+      "answer_key": {
+        "answer": "300"
+      },
+      "accepted_variants": [
+        "300",
+        "۳۰۰"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایک میٹر میں کتنے سینٹی میٹر ہیں؟",
+            "en": "How many centimetres are in one metre?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۳ × ۱۰۰ = ۳۰۰",
+        "en": "3 × 100 = 300"
+      }
+    },
+    {
+      "id": "p2-cm-to-m",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۵۰۰ سینٹی میٹر = ___ میٹر",
+        "en": "500 cm = ___ m"
+      },
+      "answer_key": {
+        "answer": "5"
+      },
+      "accepted_variants": [
+        "5",
+        "۵"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۵۰۰ میں ۱۰۰ کے کتنے گروپ ہیں؟",
+            "en": "How many groups of 100 are in 500?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p3-pencil-unit",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پنسل کی لمبائی کس اکائی میں ناپیں گے؟",
+        "en": "Which unit would you use for the length of a pencil?"
+      },
+      "options": [
+        {
+          "ur": "میٹر",
+          "en": "metres"
+        },
+        {
+          "ur": "سینٹی میٹر",
+          "en": "centimetres"
+        },
+        {
+          "ur": "لیٹر",
+          "en": "litres"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پنسل چھوٹی چیز ہے یا بڑی؟",
+            "en": "Is a pencil a small thing or a big thing?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پنسل چھوٹی ہے، اس لیے سینٹی میٹر۔ لیٹر لمبائی نہیں ناپتا۔",
+        "en": "A pencil is small, so centimetres. Litres do not measure length."
+      }
+    },
+    {
+      "id": "p4-add-m-cm",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۱ میٹر + ۵۰ سینٹی میٹر = ؟",
+        "en": "1 m + 50 cm = ?"
+      },
+      "options": [
+        {
+          "ur": "۵۱ سینٹی میٹر",
+          "en": "51 cm"
+        },
+        {
+          "ur": "۶۰ سینٹی میٹر",
+          "en": "60 cm"
+        },
+        {
+          "ur": "۱۵۰ سینٹی میٹر",
+          "en": "150 cm"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-unit-mix"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے ۱ میٹر کو سینٹی میٹر میں بدلیں۔",
+            "en": "First change 1 m into centimetres."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱ میٹر = ۱۰۰ سینٹی میٹر۔ ۱۰۰ + ۵۰ = ۱۵۰ سینٹی میٹر۔",
+        "en": "1 m = 100 cm. 100 + 50 = 150 cm."
+      }
+    },
+    {
+      "id": "p5-compare",
+      "type": "true_false",
+      "competency": "application",
+      "stem": {
+        "ur": "۲ میٹر کی رسی ۱۵۰ سینٹی میٹر کی رسی سے لمبی ہے۔",
+        "en": "A 2 m rope is longer than a 150 cm rope."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-unit-mix"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۲ میٹر کتنے سینٹی میٹر ہیں؟",
+            "en": "How many centimetres is 2 m?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۲ میٹر = ۲۰۰ سینٹی میٹر، جو ۱۵۰ سے زیادہ ہے۔",
+        "en": "2 m = 200 cm, which is more than 150 cm."
+      }
+    },
+    {
+      "id": "p6-tailor",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک درزن کے پاس ۴ میٹر کپڑا ہے۔ وہ ۱۲۰ سینٹی میٹر کپڑا استعمال کرتی ہے۔ کتنا کپڑا بچا؟",
+        "en": "A tailor has 4 m of cloth. She uses 120 cm. How much cloth is left?"
+      },
+      "options": [
+        {
+          "ur": "۲۸۰ سینٹی میٹر",
+          "en": "280 cm"
+        },
+        {
+          "ur": "۱۱۶ سینٹی میٹر",
+          "en": "116 cm"
+        },
+        {
+          "ur": "۳ میٹر",
+          "en": "3 m"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-unit-mix"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۴ میٹر کو سینٹی میٹر میں بدلیں، پھر گھٹائیں۔",
+            "en": "Change 4 m into centimetres, then subtract."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴ میٹر = ۴۰۰ سینٹی میٹر۔ ۴۰۰ − ۱۲۰ = ۲۸۰ سینٹی میٹر۔",
+        "en": "4 m = 400 cm. 400 − 120 = 280 cm."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-order-lengths",
+      "type": "ordering",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ان لمبائیوں کو سب سے چھوٹی سے سب سے لمبی کی ترتیب میں لگائیں: ۲ میٹر، ۱۵۰ سینٹی میٹر، ۳ میٹر، ۹۰ سینٹی میٹر",
+        "en": "Put these lengths in order from shortest to longest: 2 m, 150 cm, 3 m, 90 cm"
+      },
+      "options": [
+        {
+          "ur": "۲ میٹر",
+          "en": "2 m"
+        },
+        {
+          "ur": "۱۵۰ سینٹی میٹر",
+          "en": "150 cm"
+        },
+        {
+          "ur": "۳ میٹر",
+          "en": "3 m"
+        },
+        {
+          "ur": "۹۰ سینٹی میٹر",
+          "en": "90 cm"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          3,
+          1,
+          0,
+          2
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سب کو سینٹی میٹر میں بدل کر دیکھیں۔",
+            "en": "Change them all into centimetres first."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۹۰، ۱۵۰، ۲۰۰، ۳۰۰ سینٹی میٹر",
+        "en": "90 cm, 150 cm, 200 cm, 300 cm"
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-unit-mix",
+      "remediation_ref": "MATH-G4-ME-01"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-ML-01",
+      "remediation_ref": "MATH-G4-ML-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "۱ میٹر = ۱۰۰ سینٹی میٹر۔ میٹر سے سینٹی میٹر: ۱۰۰ سے ضرب۔ چھوٹی چیزیں سینٹی میٹر میں، بڑی میٹر میں۔ جوڑنے سے پہلے ایک ہی اکائی بنائیں۔",
+    "en": "1 m = 100 cm. Metres to centimetres: multiply by 100. Small things in cm, big things in m. Make one unit before adding."
+  },
+  "summary": {
+    "ur": "ہم نے لمبائی کو میٹر اور سینٹی میٹر میں بدلنا سیکھا۔",
+    "en": "We learned to change lengths between metres and centimetres."
+  },
+  "parent_notes": {
+    "ur": "اپنے بچے کا قد سینٹی میٹر اور میٹر میں ناپیں۔",
+    "en": "measure your child's height in cm and m."
+  },
+  "mentor_notes": {
+    "ur": "جوڑنے سے پہلے ہمیشہ ایک ہی اکائی میں بدلیں۔",
+    "en": "always convert to one unit before adding."
+  },
+  "accessibility_notes": {
+    "ur": "فیتے اور چیزوں کی تصویریں ابھی بنانی ہیں؛ متبادل متن ہر چیز کا نام اور اس کی لمبائی پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر چیز کے لیے 'سینٹی میٹر' یا 'میٹر' کا بٹن چنیں؛ گھسیٹنا ضروری نہیں۔ جن گھروں میں فیتہ نہیں، وہاں دھاگے اور فٹے سے ناپنا کافی ہے۔",
+    "en": "The measuring-tape and object pictures are still to be made; alt text should read each object's name and its length. Urdu audio is not yet recorded. Alternative to the sorting activity: tap a 'cm' or 'm' button for each object; no dragging is needed. Homes without a measuring tape can use a string and a school ruler."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "benchmark first (a fingertip is about 1 cm wide, a big step is about 1 m), then the rule 1 m = 100 cm, then convert before comparing or adding",
+    "questioning_strategy": "ask 'are both lengths in the same unit?' before any comparison or sum",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "adds metres and centimetres as plain numbers",
+      "multiplies by 10 instead of 100"
+    ],
+    "hint_policy": "graduated; two hints max before a worked re-teach of a similar problem; never reveal the answer first",
+    "example_policy": "whole metres and multiples of 10 cm; cloth, rope, rooms, pencils, cricket bats; no costly instruments",
+    "misconception_detectors": [
+      "adds or compares m and cm without converting",
+      "uses litres or kilograms for length"
+    ],
+    "critical_thinking_prompts": [
+      "Why is 2 m longer than 150 cm even though 150 is a bigger number than 2?"
+    ],
+    "personalization_rules": "if multiplying by 100 is the obstacle, route to MATH-G4-ML-01",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, upset or fear -> stop the lesson and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information",
+      "shame or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the doc's worked-example script for this lesson is Urdu-only; it needs an English side and a second worked example (the brief asks for 2 at this difficulty)",
+    "subject expert: the benchmark 'fingertip about 1 cm, big step about 1 m' in the teaching strategy is approximate; confirm wording"
+  ]
+}

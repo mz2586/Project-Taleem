@@ -1,0 +1,493 @@
+{
+  "code": "URD-G4-RD-01",
+  "title": {
+    "ur": "روانی سے بلند آواز میں پڑھنا",
+    "en": "Reading aloud smoothly"
+  },
+  "description": {
+    "ur": "ایک چھوٹی اردو کہانی کو درست الفاظ اور اچھے انداز سے بلند آواز میں پڑھنا۔",
+    "en": "Reading a short Urdu story aloud with correct words and good expression."
+  },
+  "keywords": [
+    "reading aloud",
+    "fluency",
+    "expression",
+    "punctuation pauses",
+    "accuracy"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "روانی",
+        "en": "fluency"
+      },
+      "definition": {
+        "ur": "رک رک کر نہیں، آرام سے بہتے ہوئے پڑھنا۔",
+        "en": "reading smoothly, not in stops and starts."
+      }
+    },
+    {
+      "term": {
+        "ur": "ختمہ (۔)",
+        "en": "full stop (۔)"
+      },
+      "definition": {
+        "ur": "جملے کے آخر کا نشان؛ یہاں تھوڑا رکتے ہیں۔",
+        "en": "the mark at the end of a sentence; we pause here."
+      }
+    },
+    {
+      "term": {
+        "ur": "انداز",
+        "en": "expression"
+      },
+      "definition": {
+        "ur": "آواز میں خوشی، سوال یا حیرت دکھانا۔",
+        "en": "showing joy, a question or surprise in your voice."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم ایک چھوٹی سی کہانی بلند آواز سے پڑھیں گے۔ اچھا پڑھنے والا ہر لفظ صاف اور پورا بولتا ہے۔ وہ ختمے پر تھوڑا رکتا ہے۔ سوال ہو تو آواز سوال جیسی ہوتی ہے، اور خوشی کی بات خوشی سے پڑھی جاتی ہے۔ پہلے کہانی دل میں پڑھیں، پھر بلند آواز سے۔",
+    "en": "Today we will read a short story aloud. A good reader says every word clearly and fully. A good reader pauses a little at a full stop. A question sounds like a question, and happy words are read happily. First read the story silently, then aloud."
+  },
+  "student_explanation": {
+    "ur": "بلند آواز سے پڑھنا ایک ہنر ہے۔ پہلے عبارت دل میں پڑھیں۔ مشکل لفظ کو ٹکڑوں میں توڑ کر بولیں۔ ہر لفظ صاف اور پورا بولیں۔ ختمہ (۔) آئے تو تھوڑا رکیں۔ سکتہ (،) آئے تو ذرا سا رکیں۔ سوالیہ نشان پر آواز سوال جیسی ہو۔ ندائیہ نشان (!) پر خوشی یا جوش دکھائیں۔ نہ بہت تیز پڑھیں، نہ بہت آہستہ۔",
+    "en": "Reading aloud is a skill. First read the passage silently. Break a hard word into parts and say it. Say every word clearly and fully. At a full stop (۔), pause a little. At a comma (،), pause very briefly. At a question mark, make your voice ask. At an exclamation mark (!), show joy or excitement. Do not read too fast or too slowly."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "یہ جملہ کیسے پڑھیں؟ زینب نے خوشی سے کہا: \"دیکھو! ہماری کشتی چل پڑی!\"",
+        "en": "How do we read this? Zainab said happily, \"Look! Our boat is moving!\""
+      },
+      "steps": [
+        {
+          "ur": "'زینب نے خوشی سے کہا' عام آواز میں پڑھیں۔",
+          "en": "Read 'Zainab said happily' in a normal voice."
+        },
+        {
+          "ur": "رابطے کے نشان (:) پر ذرا رکیں۔",
+          "en": "Pause briefly at the colon (:)."
+        },
+        {
+          "ur": "'دیکھو!' جوش سے پڑھیں۔",
+          "en": "Read 'Look!' with excitement."
+        },
+        {
+          "ur": "باقی جملہ خوشی کی آواز میں پڑھیں، پھر رکیں۔",
+          "en": "Read the rest in a happy voice, then pause."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "یہ جملہ کیسے پڑھیں؟ احمد نے پوچھا: \"یہ کہاں تک جائے گی؟\"",
+        "en": "How do we read this? Ahmed asked, \"How far will it go?\""
+      },
+      "steps": [
+        {
+          "ur": "آخر میں سوالیہ نشان (؟) ہے، یعنی یہ سوال ہے۔",
+          "en": "There is a question mark (؟) at the end, so it is a question."
+        },
+        {
+          "ur": "'کہاں' سوال پوچھنے والا لفظ ہے۔",
+          "en": "'Where/how far' (کہاں) is a question word."
+        },
+        {
+          "ur": "آخر میں آواز سوال پوچھنے کے انداز میں رکھیں۔",
+          "en": "At the end, make your voice sound like you are asking."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-tap-pauses",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی 'کاغذ کی کشتی':\nصبح خوب بارش ہوئی۔ گلی میں پانی جمع ہو گیا۔ احمد نے کاغذ کی ایک کشتی بنائی۔ اس کی بہن زینب نے کشتی پانی میں چھوڑ دی۔ کشتی آہستہ آہستہ تیرنے لگی۔ زینب نے خوشی سے کہا: \"دیکھو! ہماری کشتی چل پڑی!\" احمد نے پوچھا: \"یہ کہاں تک جائے گی؟\"\n\nکہانی میں ہر اس نشان پر ٹیپ کریں جہاں رکنا چاہیے۔",
+        "en": "Story 'The Paper Boat':\nIt rained hard in the morning. Water collected in the lane. Ahmed made a paper boat. His sister Zainab set the boat on the water. The boat began to float slowly. Zainab said happily, \"Look! Our boat is moving!\" Ahmed asked, \"How far will it go?\"\n\nTap every mark in the story where you should pause."
+      },
+      "answer_key": {
+        "tap_targets": [
+          "every ۔ (full stop)",
+          "every : (colon)",
+          "every ! (exclamation)",
+          "every ؟ (question mark)"
+        ],
+        "correct_state": "all pause marks selected, no words selected"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جملوں کے آخر کو دیکھیں۔",
+            "en": "Look at the ends of the sentences."
+          }
+        }
+      ]
+    },
+    {
+      "id": "a2-read-aloud",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کہانی 'کاغذ کی کشتی':\nصبح خوب بارش ہوئی۔ گلی میں پانی جمع ہو گیا۔ احمد نے کاغذ کی ایک کشتی بنائی۔ اس کی بہن زینب نے کشتی پانی میں چھوڑ دی۔ کشتی آہستہ آہستہ تیرنے لگی۔ زینب نے خوشی سے کہا: \"دیکھو! ہماری کشتی چل پڑی!\" احمد نے پوچھا: \"یہ کہاں تک جائے گی؟\"\n\nیہ کہانی کسی بڑے یا مینٹر کو بلند آواز سے پڑھ کر سنائیں۔",
+        "en": "Story 'The Paper Boat':\nIt rained hard in the morning. Water collected in the lane. Ahmed made a paper boat. His sister Zainab set the boat on the water. The boat began to float slowly. Zainab said happily, \"Look! Our boat is moving!\" Ahmed asked, \"How far will it go?\"\n\nRead this story aloud to an adult or your mentor."
+      },
+      "answer_key": {
+        "sample_answer": "Learner reads all seven sentences, pausing at ۔ and showing a question and excitement in the last two."
+      },
+      "mentor_review_guidance": "Mentor listens live: count words misread, note whether the learner pauses at marks and changes voice for ! and ؟. Praise effort first."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-full-stop",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پڑھتے ہوئے ختمہ (۔) آئے تو کیا کریں؟",
+        "en": "When you reach a full stop (۔) while reading, what do you do?"
+      },
+      "options": [
+        {
+          "ur": "تھوڑا رک جائیں",
+          "en": "Pause a little"
+        },
+        {
+          "ur": "اور تیز پڑھیں",
+          "en": "Read faster"
+        },
+        {
+          "ur": "پڑھنا بالکل چھوڑ دیں",
+          "en": "Stop reading completely"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ختمہ جملہ ختم ہونے کا نشان ہے۔",
+            "en": "A full stop marks the end of a sentence."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ختمے پر جملہ ختم ہوتا ہے، اس لیے تھوڑا رکتے ہیں۔",
+        "en": "A sentence ends at a full stop, so we pause a little."
+      }
+    },
+    {
+      "id": "p2-excited",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی 'کاغذ کی کشتی':\nصبح خوب بارش ہوئی۔ گلی میں پانی جمع ہو گیا۔ احمد نے کاغذ کی ایک کشتی بنائی۔ اس کی بہن زینب نے کشتی پانی میں چھوڑ دی۔ کشتی آہستہ آہستہ تیرنے لگی۔ زینب نے خوشی سے کہا: \"دیکھو! ہماری کشتی چل پڑی!\" احمد نے پوچھا: \"یہ کہاں تک جائے گی؟\"\n\nکون سا جملہ خوشی اور جوش سے پڑھنا چاہیے؟",
+        "en": "Story 'The Paper Boat':\nIt rained hard in the morning. Water collected in the lane. Ahmed made a paper boat. His sister Zainab set the boat on the water. The boat began to float slowly. Zainab said happily, \"Look! Our boat is moving!\" Ahmed asked, \"How far will it go?\"\n\nWhich sentence should be read with joy and excitement?"
+      },
+      "options": [
+        {
+          "ur": "گلی میں پانی جمع ہو گیا۔",
+          "en": "Water collected in the lane."
+        },
+        {
+          "ur": "دیکھو! ہماری کشتی چل پڑی!",
+          "en": "Look! Our boat is moving!"
+        },
+        {
+          "ur": "احمد نے کاغذ کی ایک کشتی بنائی۔",
+          "en": "Ahmed made a paper boat."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ندائیہ نشان (!) تلاش کریں۔",
+            "en": "Look for the exclamation mark (!)."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اس جملے میں ! ہے اور زینب خوش ہے۔",
+        "en": "This sentence has ! and Zainab is happy."
+      }
+    },
+    {
+      "id": "p3-question-voice",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی 'کاغذ کی کشتی':\nصبح خوب بارش ہوئی۔ گلی میں پانی جمع ہو گیا۔ احمد نے کاغذ کی ایک کشتی بنائی۔ اس کی بہن زینب نے کشتی پانی میں چھوڑ دی۔ کشتی آہستہ آہستہ تیرنے لگی۔ زینب نے خوشی سے کہا: \"دیکھو! ہماری کشتی چل پڑی!\" احمد نے پوچھا: \"یہ کہاں تک جائے گی؟\"\n\nکون سا جملہ سوال کے انداز میں پڑھا جائے گا؟",
+        "en": "Story 'The Paper Boat':\nIt rained hard in the morning. Water collected in the lane. Ahmed made a paper boat. His sister Zainab set the boat on the water. The boat began to float slowly. Zainab said happily, \"Look! Our boat is moving!\" Ahmed asked, \"How far will it go?\"\n\nWhich sentence is read in a questioning voice?"
+      },
+      "options": [
+        {
+          "ur": "کشتی آہستہ آہستہ تیرنے لگی۔",
+          "en": "The boat began to float slowly."
+        },
+        {
+          "ur": "صبح خوب بارش ہوئی۔",
+          "en": "It rained hard in the morning."
+        },
+        {
+          "ur": "یہ کہاں تک جائے گی؟",
+          "en": "How far will it go?"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کس جملے کے آخر میں ؟ ہے؟",
+            "en": "Which sentence ends with ؟?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "آخر میں ؟ ہے اور 'کہاں' سوالیہ لفظ ہے۔",
+        "en": "It ends with ؟ and has the question word 'kahan'."
+      }
+    },
+    {
+      "id": "p4-fast",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اچھا پڑھنے والا جتنا تیز ہو سکے، اتنا تیز پڑھتا ہے۔",
+        "en": "A good reader reads as fast as possible."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سننے والے کو ہر لفظ سمجھ آنا چاہیے۔",
+            "en": "The listener must understand every word."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اچھا پڑھنا صاف اور درست پڑھنا ہے۔ رفتار درمیانی ہو۔",
+        "en": "Good reading is clear and correct. The speed should be steady."
+      }
+    },
+    {
+      "id": "p5-hard-word",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "پڑھتے ہوئے کوئی مشکل لفظ آ جائے تو کیا کرنا بہتر ہے؟",
+        "en": "If you meet a hard word while reading, what is best?"
+      },
+      "options": [
+        {
+          "ur": "اسے چھوڑ کر آگے بڑھ جائیں",
+          "en": "Skip it and move on"
+        },
+        {
+          "ur": "اسے ٹکڑوں میں توڑ کر آہستہ پڑھیں",
+          "en": "Break it into parts and read it slowly"
+        },
+        {
+          "ur": "اندازے سے کوئی بھی لفظ بول دیں",
+          "en": "Say any word you guess"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لمبا لفظ چھوٹے حصوں سے بنتا ہے۔",
+            "en": "A long word is made of small parts."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ٹکڑوں میں پڑھنے سے لفظ درست بولا جاتا ہے۔",
+        "en": "Reading in parts helps you say the word correctly."
+      }
+    },
+    {
+      "id": "p6-comma",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "سکتے (،) پر ختمے (۔) سے کم رکتے ہیں۔",
+        "en": "At a comma (،) we pause less than at a full stop (۔)."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "سکتہ چھوٹا وقفہ ہے، ختمہ بڑا۔",
+        "en": "A comma is a short pause; a full stop is a longer one."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-read-twice",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کہانی 'کاغذ کی کشتی':\nصبح خوب بارش ہوئی۔ گلی میں پانی جمع ہو گیا۔ احمد نے کاغذ کی ایک کشتی بنائی۔ اس کی بہن زینب نے کشتی پانی میں چھوڑ دی۔ کشتی آہستہ آہستہ تیرنے لگی۔ زینب نے خوشی سے کہا: \"دیکھو! ہماری کشتی چل پڑی!\" احمد نے پوچھا: \"یہ کہاں تک جائے گی؟\"\n\nکہانی دو بار بلند آواز سے پڑھیں۔ دوسری بار آپ نے کیا بہتر کیا؟ ایک بات لکھیں یا بتائیں۔",
+        "en": "Story 'The Paper Boat':\nIt rained hard in the morning. Water collected in the lane. Ahmed made a paper boat. His sister Zainab set the boat on the water. The boat began to float slowly. Zainab said happily, \"Look! Our boat is moving!\" Ahmed asked, \"How far will it go?\"\n\nRead the story aloud twice. What did you do better the second time? Write or say one thing."
+      },
+      "answer_key": {
+        "sample_answer": "e.g. 'دوسری بار میں ختمے پر رکا/رکی' or 'میں نے سوال کو سوال کی طرح پڑھا۔'"
+      },
+      "mentor_review_guidance": "Accept any honest, specific improvement (pausing, fewer mistakes, more expression). Praise self-checking."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-read-at-home",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں کسی بڑے کو کوئی چھوٹی کہانی یا یہی کہانی بلند آواز سے پڑھ کر سنائیں۔ ان سے پوچھیں کہ کون سا جملہ سب سے اچھا پڑھا۔",
+        "en": "At home, read a short story (or this one) aloud to an adult. Ask them which sentence you read best."
+      },
+      "answer_key": {
+        "sample_answer": "Learner reports which sentence the family member liked."
+      },
+      "mentor_review_guidance": "No device needed. Do not ask who the family member is; accept any reply."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "جملے کے آخر میں کون سا نشان ہے؟ اسے دیکھیں۔",
+        "en": "Which mark is at the end of the sentence? Look at it."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "نشان بتاتا ہے کہ رکنا ہے، سوال پوچھنا ہے یا خوشی دکھانی ہے۔",
+        "en": "The mark tells you to pause, to ask, or to show joy."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "تیز پڑھنا ہی اچھا پڑھنا ہے۔",
+        "en": "Reading fast is the same as reading well."
+      },
+      "correction": {
+        "ur": "اچھا پڑھنا صاف اور درست پڑھنا ہے۔ رفتار درمیانی رکھیں۔",
+        "en": "Good reading is clear and correct. Keep a steady speed."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "نشانات (۔ ، ؟ !) پر دھیان دینے کی ضرورت نہیں۔",
+        "en": "Punctuation marks (۔ ، ؟ !) can be ignored when reading aloud."
+      },
+      "correction": {
+        "ur": "نشان بتاتے ہیں کہاں رکنا ہے اور آواز کیسی ہو۔",
+        "en": "Marks tell us where to pause and how our voice should sound."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "pauses_missed_or_many_words_misread",
+      "remediation_ref": "URD-G4-RD-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پہلے دل میں پڑھیں۔ ۔ پر رکیں، ، پر ذرا رکیں۔ ؟ پر سوال کی آواز، ! پر خوشی یا جوش۔ مشکل لفظ ٹکڑوں میں۔",
+    "en": "Read silently first. Pause at ۔, pause briefly at ،. Ask with ؟, show feeling with !. Break hard words into parts."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ صاف، درست اور اچھے انداز سے بلند آواز میں کیسے پڑھتے ہیں۔",
+    "en": "We learned to read aloud clearly, correctly and with expression."
+  },
+  "parent_notes": {
+    "ur": "روز چند منٹ اپنے بچے کو بلند آواز سے پڑھتے سنیں۔ غلطی پر ڈانٹیں نہیں، صرف لفظ دوبارہ پڑھوائیں۔ اچھے انداز کی تعریف کریں۔",
+    "en": "Listen to your child read aloud for a few minutes daily. Do not scold mistakes; just ask them to re-read the word. Praise good expression."
+  },
+  "mentor_notes": {
+    "ur": "زبانی حصہ آپ براہِ راست سنیں؛ ابھی ریکارڈنگ کا نظام نہیں ہے۔ غلط پڑھے گئے الفاظ گنیں اور دیکھیں کہ بچہ نشانات پر رکتا ہے یا نہیں۔ زیادہ غلطیاں ہوں تو URD-G4-RD-02 کی طرف لے جائیں۔",
+    "en": "Listen to the oral part live; there is no recording feature yet. Count misread words and watch for pauses at marks. If many words are misread, move on to URD-G4-RD-02 decoding support."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویر ابھی بنانی ہے؛ اس کا متبادل متن: بارش کے بعد گلی میں کاغذ کی کشتی اور دو بچے۔ ہدایات کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ٹیپ والی سرگرمی کا متبادل: بچہ ہر جملہ پڑھ کر بتائے کہ آخر میں کون سا نشان ہے۔ جو بچہ بول نہیں سکتا، وہ نشانات چن کر یا اشاروں سے روانی دکھا سکتا ہے؛ مینٹر فیصلہ کرے۔",
+    "en": "The story picture is still to be made; alt text: two children and a paper boat in a lane after rain. Urdu audio for instructions is not yet recorded. Alternative to the tap activity: the child reads each sentence and says which mark ends it. A child who cannot speak can show fluency by choosing marks or signing; the mentor decides."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "model one sentence, then learner reads; focus on accuracy first, then pauses at marks, then expression",
+    "questioning_strategy": "ask 'what mark ends this sentence?' and 'how should your voice sound here?' before correcting",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "skips words or guesses words",
+      "reads without pausing at any mark"
+    ],
+    "hint_policy": "graduated; two hints max; first point to the mark, then explain what the mark asks; never read the item answer for the learner",
+    "example_policy": "short original passages of 5-8 sentences about everyday Pakistani life (rain, home, bazaar); include at least one ؟ and one !",
+    "misconception_detectors": [
+      "chooses 'read faster' as good reading",
+      "ignores ؟ and ! when choosing how to read"
+    ],
+    "critical_thinking_prompts": [
+      "Why does a question sound different from a normal sentence?"
+    ],
+    "personalization_rules": "if the learner misreads many words, offer decoding help (break words into parts) before expression work",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "the oral read-aloud is judged by a human mentor, not the AI"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm punctuation names used here (ختمہ، سکتہ، سوالیہ نشان، ندائیہ نشان، رابطہ) match the Grade 4 school terms",
+    "mentor team: the oral part has no recording feature yet; confirm the live mentor check is workable"
+  ]
+}

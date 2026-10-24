@@ -1,0 +1,518 @@
+{
+  "code": "SOC-G4-GEO-03",
+  "title": {
+    "ur": "پہاڑ، دریا اور میدان",
+    "en": "Mountains, rivers and plains"
+  },
+  "description": {
+    "ur": "پاکستان کی بڑی طبعی خصوصیات پہچانیں: شمال کے پہاڑ، دریائے سندھ اور زرخیز میدان۔",
+    "en": "Identify Pakistan's major physical features: the northern mountains, the River Indus and the fertile plains."
+  },
+  "keywords": [
+    "physical features",
+    "mountains",
+    "rivers",
+    "plains",
+    "Indus",
+    "K2",
+    "desert"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "پہاڑ",
+        "en": "mountain"
+      },
+      "definition": {
+        "ur": "زمین کا بہت اونچا اٹھا ہوا حصہ۔",
+        "en": "a very high part of the land."
+      }
+    },
+    {
+      "term": {
+        "ur": "دریا",
+        "en": "river"
+      },
+      "definition": {
+        "ur": "پانی کا بڑا بہاؤ جو اونچی جگہ سے نیچی جگہ کی طرف بہتا ہے۔",
+        "en": "a large flow of water moving from high land to low land."
+      }
+    },
+    {
+      "term": {
+        "ur": "میدان",
+        "en": "plain"
+      },
+      "definition": {
+        "ur": "زمین کا بڑا ہموار اور سیدھا حصہ۔",
+        "en": "a large, flat stretch of land."
+      }
+    },
+    {
+      "term": {
+        "ur": "صحرا",
+        "en": "desert"
+      },
+      "definition": {
+        "ur": "بہت خشک جگہ جہاں بارش بہت کم ہوتی ہے۔",
+        "en": "a very dry place with very little rain."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "پاکستان کی زمین ایک جیسی نہیں ہے۔ شمال میں بہت اونچے پہاڑ ہیں۔ وہاں سے دریا نکل کر نیچے بہتے ہیں۔ پھر بڑے ہموار میدان آتے ہیں۔ آج ہم نقشے پر یہ سب ڈھونڈیں گے۔",
+    "en": "Pakistan's land is not all the same. In the north there are very high mountains. Rivers start there and flow down. Then come wide, flat plains. Today we will find all of these on the map."
+  },
+  "student_explanation": {
+    "ur": "پاکستان کے شمال میں اونچے پہاڑ ہیں۔ ہمالیہ، قراقرم اور ہندوکش ان پہاڑوں کے سلسلے ہیں۔ دنیا کی دوسری سب سے اونچی چوٹی کے ٹو قراقرم میں ہے۔ دریا پہاڑوں سے نکل کر نیچے بہتے ہیں۔ دریائے سندھ پاکستان کا سب سے لمبا دریا ہے۔ یہ شمال سے جنوب کی طرف بہتا ہے۔ آخر میں یہ بحیرۂ عرب میں گرتا ہے۔ پنجاب اور سندھ میں بڑے ہموار میدان ہیں۔ یہاں بہت کھیتی باڑی ہوتی ہے۔",
+    "en": "There are high mountains in the north of Pakistan. The Himalaya, Karakoram and Hindu Kush are mountain ranges there. K2, the world's second-highest peak, is in the Karakoram. Rivers start in the mountains and flow down. The Indus is Pakistan's longest river. It flows from north to south. At the end it reaches the Arabian Sea. Punjab and Sindh have wide, flat plains. A lot of farming happens there."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "نقشے پر بھورا رنگ = پہاڑ، نیلی لکیر = دریا، سبز = میدان۔ دریائے سندھ کس سمت میں بہتا ہے؟",
+        "en": "On the map, brown = mountains, blue line = river, green = plains. Which way does the Indus flow?"
+      },
+      "steps": [
+        {
+          "ur": "کلید دیکھیں: نیلی لکیر دریا ہے۔",
+          "en": "Check the key: the blue line is a river."
+        },
+        {
+          "ur": "لکیر اوپر بھورے پہاڑوں سے شروع ہوتی ہے۔",
+          "en": "The line starts at the top, in the brown mountains."
+        },
+        {
+          "ur": "یہ نیچے سبز میدانوں سے گزر کر سمندر تک جاتی ہے۔",
+          "en": "It goes down through the green plains to the sea."
+        },
+        {
+          "ur": "اوپر شمال ہے، نیچے جنوب۔ تو سندھ شمال سے جنوب بہتا ہے۔",
+          "en": "Top is north, bottom is south. So the Indus flows north to south."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "کسان کو گندم بونے کے لیے ہموار زمین اور پانی چاہیے۔ پہاڑ اچھے ہیں یا میدان؟",
+        "en": "A farmer needs flat land and water to sow wheat. Are mountains or plains better?"
+      },
+      "steps": [
+        {
+          "ur": "پہاڑ اونچے اور ڈھلوان والے ہیں۔ وہاں کھیت بنانا مشکل ہے۔",
+          "en": "Mountains are high and steep. Making fields there is hard."
+        },
+        {
+          "ur": "میدان ہموار ہیں اور دریا قریب ہیں۔",
+          "en": "Plains are flat and rivers are nearby."
+        },
+        {
+          "ur": "تو میدان کھیتی کے لیے بہتر ہیں۔",
+          "en": "So plains are better for farming."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-feature-label",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پاکستان کے سادہ نقشے پر تین لیبل رکھیں: 'پہاڑ'، 'دریائے سندھ'، 'میدان'۔",
+        "en": "On a simple map of Pakistan, drag three labels: 'mountains', 'River Indus', 'plains'."
+      },
+      "answer_key": {
+        "placement": {
+          "mountains": "brown area in the far north",
+          "River Indus": "blue line from the north to the Arabian Sea in the south",
+          "plains": "green flat area along the river in Punjab and Sindh"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اونچے پہاڑ نقشے کے سب سے اوپر ہیں۔",
+            "en": "The high mountains are at the very top of the map."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-feature-match",
+      "type": "matching",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر خصوصیت کو اس کی پہچان سے ملائیں۔",
+        "en": "Match each feature to its description."
+      },
+      "options": [
+        {
+          "ur": "بہت اونچی زمین",
+          "en": "very high land"
+        },
+        {
+          "ur": "بہتا ہوا پانی",
+          "en": "flowing water"
+        },
+        {
+          "ur": "ہموار زمین",
+          "en": "flat land"
+        },
+        {
+          "ur": "بہت خشک زمین",
+          "en": "very dry land"
+        }
+      ],
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "پہاڑ",
+              "en": "mountain"
+            },
+            "right": {
+              "ur": "بہت اونچی زمین",
+              "en": "very high land"
+            }
+          },
+          {
+            "left": {
+              "ur": "دریا",
+              "en": "river"
+            },
+            "right": {
+              "ur": "بہتا ہوا پانی",
+              "en": "flowing water"
+            }
+          },
+          {
+            "left": {
+              "ur": "میدان",
+              "en": "plain"
+            },
+            "right": {
+              "ur": "ہموار زمین",
+              "en": "flat land"
+            }
+          },
+          {
+            "left": {
+              "ur": "صحرا",
+              "en": "desert"
+            },
+            "right": {
+              "ur": "بہت خشک زمین",
+              "en": "very dry land"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-where-mountains",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پاکستان کے سب سے اونچے پہاڑ کس حصے میں ہیں؟",
+        "en": "In which part of Pakistan are the highest mountains?"
+      },
+      "options": [
+        {
+          "ur": "شمال",
+          "en": "the north"
+        },
+        {
+          "ur": "جنوب",
+          "en": "the south"
+        },
+        {
+          "ur": "سمندر کے کنارے",
+          "en": "by the sea"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "ہمالیہ، قراقرم اور ہندوکش شمال میں ہیں۔",
+        "en": "The Himalaya, Karakoram and Hindu Kush are in the north."
+      }
+    },
+    {
+      "id": "p2-longest-river",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پاکستان کا سب سے لمبا دریا کون سا ہے؟",
+        "en": "Which is Pakistan's longest river?"
+      },
+      "options": [
+        {
+          "ur": "دریائے راوی",
+          "en": "the Ravi"
+        },
+        {
+          "ur": "دریائے سندھ",
+          "en": "the Indus"
+        },
+        {
+          "ur": "دریائے جہلم",
+          "en": "the Jhelum"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p3-plain-flat",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "میدان زمین کا ہموار اور سیدھا حصہ ہوتا ہے۔",
+        "en": "A plain is a flat, level stretch of land."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-indus-end",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "دریائے سندھ آخر میں کہاں جا کر گرتا ہے؟",
+        "en": "Where does the Indus finally flow into?"
+      },
+      "options": [
+        {
+          "ur": "ایک پہاڑ میں",
+          "en": "into a mountain"
+        },
+        {
+          "ur": "ایک صحرا میں",
+          "en": "into a desert"
+        },
+        {
+          "ur": "بحیرۂ عرب میں",
+          "en": "into the Arabian Sea"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دریا نیچی جگہ کی طرف بہتا ہے۔ سب سے نیچی جگہ کون سی ہے؟",
+            "en": "A river flows to lower land. What is the lowest place?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-farming-mountains",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پاکستان میں زیادہ تر کھیتی اونچے پہاڑوں کی چوٹیوں پر ہوتی ہے۔",
+        "en": "Most farming in Pakistan happens on high mountain tops."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کھیت کے لیے ہموار زمین اور پانی چاہیے۔",
+            "en": "Fields need flat land and water."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "زیادہ کھیتی پنجاب اور سندھ کے ہموار میدانوں میں ہوتی ہے۔",
+        "en": "Most farming happens on the flat plains of Punjab and Sindh."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-why-north-south",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "دریائے سندھ شمال سے جنوب کیوں بہتا ہے؟",
+        "en": "Why does the Indus flow from north to south?"
+      },
+      "options": [
+        {
+          "ur": "کیونکہ شمال میں زمین اونچی ہے اور جنوب میں نیچی",
+          "en": "because the land is high in the north and low in the south"
+        },
+        {
+          "ur": "کیونکہ ہوا اسے دھکیلتی ہے",
+          "en": "because the wind pushes it"
+        },
+        {
+          "ur": "کیونکہ سمندر اسے کھینچتا ہے",
+          "en": "because the sea pulls it"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پانی ہمیشہ اونچی جگہ سے کہاں جاتا ہے؟",
+            "en": "Where does water always go from a high place?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-water-slope",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک تھالی کو ایک طرف سے تھوڑا اونچا کریں اور ایک چمچ پانی ڈالیں۔ دیکھیں پانی کس طرف بہتا ہے۔ گھر کے کسی بڑے کو بتائیں کہ دریا بھی ایسے ہی بہتے ہیں۔",
+        "en": "Tilt a plate a little and pour in one spoon of water. Watch which way it flows. Tell a grown-up that rivers flow the same way, from high to low."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept 'water flows from the high side to the low side'. Uses only a plate and a spoon of water; any home can do it."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "نقشے پر رنگ اور کلید دیکھیں: بھورا، نیلا، سبز۔",
+        "en": "Look at the colours and the key: brown, blue, green."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: پہاڑ شمال میں، دریا اوپر سے نیچے، میدان دریا کے ساتھ۔",
+        "en": "Remember: mountains in the north, rivers flow from high to low, plains beside the river."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "نقشے پر دریا نیچے سے اوپر بہتا ہے کیونکہ اوپر سمندر ہے۔",
+        "en": "On the map the river flows upward because the sea is at the top."
+      },
+      "correction": {
+        "ur": "پہلے نقشے کی کلید اور سمتیں دیکھیں۔ دریائے سندھ شمال کے پہاڑوں سے جنوب میں سمندر کی طرف بہتا ہے۔",
+        "en": "Read the key and directions first. The Indus flows from the northern mountains south to the sea."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "سارا پاکستان پہاڑی ہے یا سارا میدانی۔",
+        "en": "All of Pakistan is mountains, or all of it is plains."
+      },
+      "correction": {
+        "ur": "پاکستان میں پہاڑ، دریا، میدان، صحرا اور سمندری ساحل سب ہیں۔",
+        "en": "Pakistan has mountains, rivers, plains, deserts and a coast."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-map-not-oriented",
+      "remediation_ref": "SOC-G4-GEO-02"
+    },
+    {
+      "signal": "misses_prerequisite:SOC-G4-GEO-02",
+      "remediation_ref": "SOC-G4-GEO-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "شمال میں پہاڑ: ہمالیہ، قراقرم، ہندوکش۔ کے ٹو قراقرم میں ہے۔ دریائے سندھ سب سے لمبا دریا ہے، شمال سے جنوب بہہ کر بحیرۂ عرب میں گرتا ہے۔ پنجاب اور سندھ میں ہموار میدان ہیں۔",
+    "en": "Mountains in the north: Himalaya, Karakoram, Hindu Kush. K2 is in the Karakoram. The Indus is the longest river; it flows north to south into the Arabian Sea. Punjab and Sindh have flat plains."
+  },
+  "summary": {
+    "ur": "ہم نے پاکستان کے پہاڑ، دریا اور میدان پہچانے اور نقشے پر ڈھونڈے۔",
+    "en": "We identified Pakistan's mountains, rivers and plains and found them on the map."
+  },
+  "parent_notes": {
+    "ur": "بچے سے بات کریں کہ آپ کا آٹا یا چاول کہاں اگتا ہے: پہاڑوں پر یا میدانوں میں؟",
+    "en": "Talk with your child about where flour or rice is grown: on mountains or on plains?"
+  },
+  "mentor_notes": {
+    "ur": "طبعی خصوصیات کو تمام علاقوں سے جوڑیں: شمال کے پہاڑ، بلوچستان کا سطح مرتفع، تھر کا صحرا اور ساحل۔ پانی کی تقسیم یا ڈیموں پر سیاسی بحث سے گریز کریں۔",
+    "en": "Link physical features to every region: northern mountains, the Balochistan plateau, the Thar desert and the coast. Avoid political discussion of water sharing or dams."
+  },
+  "accessibility_notes": {
+    "ur": "طبعی نقشہ ابھی بنانا ہے؛ متبادل متن بتائے کہ پہاڑ شمال میں، دریائے سندھ شمال سے جنوب تک، اور میدان دریا کے ساتھ ہیں۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ رنگوں کے ساتھ ابھری ساخت یا نمونے بھی ہوں۔ گھسیٹنے والی سرگرمی کا متبادل: ہر لیبل کے لیے جگہ (شمال، شمال سے جنوب، دریا کے ساتھ) چنیں۔",
+    "en": "The physical map is still to be made; alt text should say mountains are in the north, the Indus runs from north to south, and plains lie along the river. Urdu audio is not yet recorded. Use patterns as well as colours. Alternative to the drag activity: choose a position for each label (north, north to south, along the river)."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "high to low: mountains in the north, rivers flowing down, plains along the rivers; read the physical map key first",
+    "questioning_strategy": "ask 'is this land high, flat or dry?' before naming the feature",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "reads the river direction backwards"
+    ],
+    "hint_policy": "graduated; two hints max; first point to the key colours, then to high-to-low; never name the feature first",
+    "example_policy": "stable facts only (three northern ranges, K2 in the Karakoram, Indus longest river flowing to the Arabian Sea, plains in Punjab and Sindh); no statistics or heights",
+    "misconception_detectors": [
+      "thinks rivers flow toward the top of the map",
+      "confuses plain with desert",
+      "thinks all of Pakistan is one kind of land"
+    ],
+    "critical_thinking_prompts": [
+      "Why do you think many cities and farms are near rivers?"
+    ],
+    "personalization_rules": "if the learner mis-reads directions on the map, route to SOC-G4-GEO-02",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "discuss water disputes, dams or borders"
+    ]
+  },
+  "review_flags": [
+    "subject expert: verify 'K2 is the world's second-highest peak, in the Karakoram' and 'the Indus is Pakistan's longest river' (both believed correct)",
+    "confirm that naming Himalaya, Karakoram and Hindu Kush is right for Grade 4 and the Urdu spellings (ہمالیہ، قراقرم، ہندوکش، بحیرۂ عرب)"
+  ]
+}

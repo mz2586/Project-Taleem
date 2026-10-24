@@ -1,0 +1,455 @@
+{
+  "code": "ISL-G4-IBA-03",
+  "title": {
+    "ur": "عبادت کی جگہوں اور وقتوں کا احترام",
+    "en": "Respecting Places and Times of Worship"
+  },
+  "description": {
+    "ur": "مسجد کا ادب، اذان اور عبادت کے خاص وقتوں کا احترام، اور دوسروں کی عبادت گاہوں کی عزت۔",
+    "en": "Good manners in the masjid, respect for the adhan and special times of worship, and respect for others' places of worship."
+  },
+  "keywords": [
+    "masjid",
+    "adhan",
+    "respect",
+    "Jumu'ah",
+    "Ramadan",
+    "places of worship"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مسجد",
+        "en": "masjid / mosque"
+      },
+      "definition": {
+        "ur": "وہ جگہ جہاں مسلمان مل کر نماز پڑھتے ہیں۔",
+        "en": "The place where Muslims pray together."
+      }
+    },
+    {
+      "term": {
+        "ur": "اذان",
+        "en": "adhan"
+      },
+      "definition": {
+        "ur": "نماز کا بلاوا، جو مسجد سے دیا جاتا ہے۔",
+        "en": "The call to prayer, given from the masjid."
+      }
+    },
+    {
+      "term": {
+        "ur": "احترام",
+        "en": "respect"
+      },
+      "definition": {
+        "ur": "کسی جگہ یا چیز کی عزت کرنا اور اس کا خیال رکھنا۔",
+        "en": "Honouring a place or thing and taking care of it."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم سیکھیں گے کہ عبادت کی جگہوں اور وقتوں کا احترام کیسے کرتے ہیں۔ مسجد اللہ تعالیٰ کا گھر کہلاتی ہے۔ وہاں ہم صاف ستھرے اور خاموش رہتے ہیں۔ اذان نماز کا بلاوا ہے۔ ہم دوسرے مذاہب کی عبادت گاہوں کا بھی احترام کرتے ہیں۔",
+    "en": "Today we will learn how to respect places and times of worship. The masjid is called the house of Allah. There we stay clean and quiet. The adhan is the call to prayer. We also respect the places of worship of other faiths."
+  },
+  "student_explanation": {
+    "ur": "مسجد میں مسلمان مل کر نماز پڑھتے ہیں۔ ہم مسجد میں صاف کپڑوں میں جاتے ہیں۔ جوتے ترتیب سے رکھتے ہیں۔ ہم وہاں نہیں دوڑتے اور شور نہیں کرتے۔ اذان نماز کا بلاوا ہے۔ اذان ہو تو ہم توجہ سے سنتے ہیں۔ جمعہ کا دن اور رمضان کا مہینہ خاص ہیں۔ ہم دوسروں کی عبادت گاہوں کا بھی احترام کرتے ہیں۔",
+    "en": "In the masjid, Muslims pray together. We go to the masjid in clean clothes. We place our shoes neatly. We do not run or make noise there. The adhan is the call to prayer. When the adhan is called, we listen with attention. Friday and the month of Ramadan are special times. We also respect other people's places of worship."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "یوسف ابو کے ساتھ مسجد جا رہا ہے۔ وہ کن باتوں کا خیال رکھے؟",
+        "en": "Yusuf is going to the masjid with his father. What should he keep in mind?"
+      },
+      "steps": [
+        {
+          "ur": "پہلے وضو کرے اور صاف کپڑے پہنے، جیسے گھر والے سکھائیں۔",
+          "en": "First he makes wudu and wears clean clothes, as his family shows him."
+        },
+        {
+          "ur": "دروازے پر جوتے اتار کر ترتیب سے رکھے۔",
+          "en": "At the door he takes off his shoes and places them neatly."
+        },
+        {
+          "ur": "اندر آہستہ چلے اور خاموش رہے، تاکہ کسی کی نماز میں خلل نہ ہو۔",
+          "en": "Inside he walks slowly and stays quiet, so nobody's prayer is disturbed."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "سلمیٰ اور اس کی سہیلیاں صحن میں کھیل رہی ہیں۔ اذان شروع ہو گئی۔",
+        "en": "Salma and her friends are playing in the courtyard. The adhan begins."
+      },
+      "steps": [
+        {
+          "ur": "اذان نماز کا بلاوا ہے۔",
+          "en": "The adhan is the call to prayer."
+        },
+        {
+          "ur": "وہ شور والا کھیل روک دیتی ہیں اور توجہ سے سنتی ہیں۔",
+          "en": "They pause their noisy game and listen with attention."
+        },
+        {
+          "ur": "اذان کے بعد وہ نماز کی تیاری کر سکتی ہیں، جیسے گھر والے سکھائیں۔",
+          "en": "After the adhan they can get ready for prayer, as their family shows them."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-masjid-manners",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو چھو کر بتائیں: مسجد میں یہ کام اچھا ہے یا نہیں؟",
+        "en": "Tap each card: is this good manners in the masjid or not?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: کیا اس سے نماز پڑھنے والوں کو آسانی ہوگی؟",
+            "en": "Think: would this make it easier for people praying?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "جوتے ترتیب سے رکھنا",
+          "en": "Placing shoes neatly"
+        },
+        {
+          "ur": "صفوں کے بیچ دوڑنا",
+          "en": "Running between the rows"
+        },
+        {
+          "ur": "خاموشی سے بیٹھنا",
+          "en": "Sitting quietly"
+        },
+        {
+          "ur": "زور زور سے باتیں کرنا",
+          "en": "Talking loudly"
+        },
+        {
+          "ur": "صاف کپڑے پہن کر جانا",
+          "en": "Going in clean clothes"
+        }
+      ],
+      "answer_key": {
+        "mode": "sort",
+        "groups": {
+          "good_manners": [
+            0,
+            2,
+            4
+          ],
+          "not_good_manners": [
+            1,
+            3
+          ]
+        }
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-adhan",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "اذان کیا ہے؟",
+        "en": "What is the adhan?"
+      },
+      "options": [
+        {
+          "ur": "نماز کا بلاوا",
+          "en": "The call to prayer"
+        },
+        {
+          "ur": "ایک کھیل",
+          "en": "A game"
+        },
+        {
+          "ur": "بازار کا اعلان",
+          "en": "A bazaar announcement"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-in-masjid",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "مسجد میں ایک چھوٹا بچہ دوڑ رہا ہے۔ اسے نرمی سے کیا بتائیں؟",
+        "en": "A little child is running in the masjid. What can you tell them gently?"
+      },
+      "explanation": {
+        "ur": "نرمی سے سمجھانا بھی ادب ہے۔",
+        "en": "Explaining gently is good manners too."
+      },
+      "options": [
+        {
+          "ur": "اور تیز دوڑو",
+          "en": "Run faster"
+        },
+        {
+          "ur": "یہاں آہستہ چلتے ہیں تاکہ لوگ سکون سے نماز پڑھیں",
+          "en": "Here we walk slowly so people can pray in peace"
+        },
+        {
+          "ur": "زور سے ڈانٹیں",
+          "en": "Shout at them"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "2": "m-respect-equals-fear"
+        }
+      }
+    },
+    {
+      "id": "p3-listen",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اذان ہو رہی ہو تو ہم شور روک کر توجہ سے سنتے ہیں۔",
+        "en": "When the adhan is being called, we stop the noise and listen."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-special",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ان میں سے کون سا خاص مہینہ ہے جس میں مسلمان روزے رکھتے ہیں؟",
+        "en": "Which of these is the special month in which Muslims fast?"
+      },
+      "options": [
+        {
+          "ur": "سردیوں کی چھٹیاں",
+          "en": "The winter holidays"
+        },
+        {
+          "ur": "ہر ہفتے کا اتوار",
+          "en": "Every Sunday"
+        },
+        {
+          "ur": "رمضان",
+          "en": "Ramadan"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-other-faiths",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "دوسرے مذاہب کی عبادت گاہوں کا مذاق اڑانا ٹھیک ہے۔",
+        "en": "It is fine to make fun of other faiths' places of worship."
+      },
+      "explanation": {
+        "ur": "ہم سب کی عبادت گاہوں کا احترام کرتے ہیں۔",
+        "en": "We respect everyone's places of worship."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p6-shoes",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "مسجد کے دروازے پر بہت سے جوتے بکھرے ہیں۔ آپ کیا کریں گے؟",
+        "en": "Many shoes are scattered at the masjid door. What will you do?"
+      },
+      "options": [
+        {
+          "ur": "اپنے جوتے بھی پھینک دیں",
+          "en": "Toss our shoes there too"
+        },
+        {
+          "ur": "اپنے جوتے ترتیب سے رکھیں",
+          "en": "Place our own shoes neatly"
+        },
+        {
+          "ur": "دوسروں کے جوتے چھپا دیں",
+          "en": "Hide other people's shoes"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-responsibility-someone-else"
+        }
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-why-quiet",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "مسجد میں خاموش رہنا دوسروں کے لیے مہربانی کیوں ہے؟",
+        "en": "Why is staying quiet in the masjid a kindness to others?"
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept answers about letting others pray calmly and with attention. Do not ask whether the child goes to a masjid; many girls and children pray at home."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-listen-adhan",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "اگلی بار اذان سنیں تو کھیل روک کر خاموشی سے سنیں۔ پھر گھر کے کسی بڑے کو بتائیں۔",
+        "en": "Next time you hear the adhan, pause your game and listen quietly. Then tell an elder at home."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. Some homes may not hear an adhan; any quiet, respectful moment counts."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: کیا اس سے نماز پڑھنے والوں کو سکون ملے گا؟",
+        "en": "Think: would this help people pray in peace?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: مسجد میں صاف، خاموش اور ترتیب سے۔",
+        "en": "Remember: in the masjid we are clean, quiet and tidy."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "احترام صرف اپنی عبادت گاہ کا ہوتا ہے۔",
+        "en": "Respect is only for our own place of worship."
+      },
+      "correction": {
+        "ur": "ہم دوسرے مذاہب کی عبادت گاہوں کا بھی احترام کرتے ہیں۔",
+        "en": "We respect the places of worship of other faiths too."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "مسجد میں ادب سکھانے کے لیے ڈانٹنا ضروری ہے۔",
+        "en": "To teach masjid manners you must scold."
+      },
+      "correction": {
+        "ur": "ادب نرمی سے سکھایا جاتا ہے، ڈر سے نہیں۔",
+        "en": "Manners are taught gently, not through fear."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-respect-equals-fear",
+      "remediation_ref": "ISL-G4-AKH-03"
+    },
+    {
+      "signal": "low_score:masjid_manners",
+      "remediation_ref": "ISL-G4-IBA-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "مسجد میں: صاف کپڑے، جوتے ترتیب سے، خاموشی، نہ دوڑنا۔ اذان نماز کا بلاوا ہے، اسے توجہ سے سنتے ہیں۔ جمعہ اور رمضان خاص ہیں۔ سب کی عبادت گاہوں کا احترام۔",
+    "en": "In the masjid: clean clothes, neat shoes, quiet, no running. The adhan is the call to prayer; we listen with attention. Friday and Ramadan are special. Respect everyone's places of worship."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ عبادت کی جگہوں اور وقتوں کا احترام کیسے کرتے ہیں۔",
+    "en": "We learned how to respect places and times of worship."
+  },
+  "parent_notes": {
+    "ur": "اذان کے وقت گھر میں آواز کم کر کے بچے کو احترام کا عملی نمونہ دکھائیں۔ مسجد کے آداب اپنے گھر کے طریقے کے مطابق سکھائیں۔",
+    "en": "Lower the volume at home during the adhan to show your child respect in practice. Teach masjid manners the way your family does."
+  },
+  "mentor_notes": {
+    "ur": "بہت سی بچیاں اور بچے گھر پر نماز پڑھتے ہیں؛ کسی بچے سے یہ نہ پوچھیں کہ وہ مسجد جاتا ہے یا نہیں۔ مسجد میں داخلے کی تفصیلات خاندانوں میں مختلف ہو سکتی ہیں؛ 'جیسے آپ کے گھر والے سکھائیں' کہیں۔ دوسرے مذاہب کا ذکر ہمیشہ عزت سے کریں۔",
+    "en": "Many girls and boys pray at home; never ask whether a child goes to the masjid. Details of entering the masjid can differ between families; say 'as your family shows you'. Always mention other faiths with respect."
+  },
+  "accessibility_notes": {
+    "ur": "تصاویر (مسجد کا دروازہ اور ترتیب سے رکھے جوتے) اور ان کا متبادل متن ابھی بنانا ہے؛ تصویر میں کسی شخص کا چہرہ ضروری نہیں۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ اذان کی کوئی ریکارڈنگ شامل کرنی ہو تو وہ عالم کی منظوری سے انسانی آواز میں ہو۔ چھانٹنے والی سرگرمی کا متبادل: ہر کارڈ کے لیے 'اچھا' یا 'اچھا نہیں' کا بٹن چنیں۔",
+    "en": "Pictures (a masjid door with neatly placed shoes) and their alt text are still to be made; no faces are needed. Urdu audio is not yet recorded. If an adhan recording is ever added, it must be a scholar-approved human recording. Alternative to the sort activity: choose a 'good manners' or 'not good manners' button for each card."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "masjid manners as kindness to people praying; the adhan as a call we listen to; Friday and Ramadan as special times; close with respect for other faiths",
+    "questioning_strategy": "ask 'would this help people pray in peace?' before asking which choice is correct",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "child says they never go to a masjid"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "general practice common to all Pakistani Muslims; no rulings on entering, sitting or praying; mention churches, mandirs and gurdwaras only respectfully",
+    "misconception_detectors": [
+      "thinks respect is only for our own place of worship",
+      "chooses scolding as the way to teach manners"
+    ],
+    "critical_thinking_prompts": [
+      "How would you like visitors to behave in a place that is special to you?"
+    ],
+    "personalization_rules": "if the child prays at home, show that the same manners (clean, quiet, calm) apply at home too",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions",
+      "recite or write out the adhan"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: confirm the masjid manners listed are common to all Pakistani Muslims and that 'house of Allah' is acceptable wording",
+    "scholar: confirm 'listen to the adhan with attention' is phrased without a ruling; the adhan text is deliberately not included",
+    "child-safety and inclusion reviewer: confirm the respectful mention of other faiths' places of worship"
+  ]
+}

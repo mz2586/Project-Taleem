@@ -1,0 +1,470 @@
+{
+  "code": "SOC-G4-ECO-03",
+  "title": {
+    "ur": "خرید و فروخت اور بچت",
+    "en": "Buying, selling and saving"
+  },
+  "description": {
+    "ur": "سادہ خرید و فروخت (قیمت، ادائیگی، بقایا) اور تھوڑی تھوڑی بچت کو سمجھیں۔",
+    "en": "Understand simple buying and selling (price, paying, change) and saving a little at a time."
+  },
+  "keywords": [
+    "buying",
+    "selling",
+    "price",
+    "change",
+    "saving",
+    "rupees",
+    "gullak"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "قیمت",
+        "en": "price"
+      },
+      "definition": {
+        "ur": "کسی چیز کو خریدنے کے لیے دی جانے والی رقم۔",
+        "en": "the money you pay to buy something."
+      }
+    },
+    {
+      "term": {
+        "ur": "بقایا",
+        "en": "change"
+      },
+      "definition": {
+        "ur": "جو پیسے دکان دار زیادہ رقم دینے پر واپس کرتا ہے۔",
+        "en": "the money the shopkeeper gives back when you pay more than the price."
+      }
+    },
+    {
+      "term": {
+        "ur": "بچت",
+        "en": "saving"
+      },
+      "definition": {
+        "ur": "پیسے فوراً خرچ کرنے کی بجائے بعد کے لیے رکھنا۔",
+        "en": "keeping money for later instead of spending it at once."
+      }
+    },
+    {
+      "term": {
+        "ur": "گُلّک",
+        "en": "money box (gullak)"
+      },
+      "definition": {
+        "ur": "پیسے جمع کرنے کا چھوٹا ڈبہ۔",
+        "en": "a small box for keeping saved coins."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "بازار میں دکان دار چیزیں بیچتا ہے اور گاہک خریدتا ہے۔ گاہک قیمت دیتا ہے اور دکان دار چیز دیتا ہے۔ اگر گاہک زیادہ پیسے دے تو دکان دار بقایا واپس کرتا ہے۔ آج ہم یہ بھی سیکھیں گے کہ تھوڑے تھوڑے پیسے بچا کر کسی بڑے کام کے لیے کیسے جمع کرتے ہیں۔",
+    "en": "In the bazaar the shopkeeper sells and the customer buys. The customer pays the price and the shopkeeper gives the item. If the customer pays more, the shopkeeper gives back change. Today we will also learn how saving a little at a time builds up money for something bigger."
+  },
+  "student_explanation": {
+    "ur": "دکان دار چیزیں بیچتا ہے۔ گاہک چیزیں خریدتا ہے۔ ہر چیز کی ایک قیمت ہوتی ہے۔ گاہک قیمت دے کر چیز لیتا ہے۔ زیادہ پیسے دیں تو دکان دار بقایا واپس کرتا ہے۔ ہمیشہ بقایا گن کر لیں۔ بچت کا مطلب ہے کچھ پیسے بعد کے لیے رکھنا۔ تھوڑی تھوڑی بچت مل کر بڑی رقم بن جاتی ہے۔ بچت مشکل وقت یا ضرورت کی چیز کے کام آتی ہے۔",
+    "en": "A shopkeeper sells things. A customer buys things. Every item has a price. The customer pays the price and takes the item. If you pay more, the shopkeeper gives back change. Always count your change. Saving means keeping some money for later. Small savings add up to a bigger amount. Savings help in hard times or for something we need."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "ایک پنسل کی قیمت ۳۰ روپے ہے۔ عائشہ ۵۰ روپے کا نوٹ دیتی ہے۔ اسے کتنا بقایا ملے گا؟",
+        "en": "A pencil costs Rs 30. Ayesha pays with a Rs 50 note. How much change should she get?"
+      },
+      "steps": [
+        {
+          "ur": "دی گئی رقم: ۵۰ روپے۔ قیمت: ۳۰ روپے۔",
+          "en": "Money paid: Rs 50. Price: Rs 30."
+        },
+        {
+          "ur": "بقایا = دی گئی رقم − قیمت۔",
+          "en": "Change = money paid − price."
+        },
+        {
+          "ur": "۵۰ − ۳۰ = ۲۰۔ عائشہ کو ۲۰ روپے بقایا ملے گا۔",
+          "en": "50 − 30 = 20. Ayesha should get Rs 20 change."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "یوسف ہر ہفتے اپنی گلک میں ۱۰ روپے ڈالتا ہے۔ ۴ ہفتوں بعد کتنے روپے جمع ہوں گے؟",
+        "en": "Yusuf puts Rs 10 in his gullak every week. How much will he have saved after 4 weeks?"
+      },
+      "steps": [
+        {
+          "ur": "ہر ہفتے: ۱۰ روپے۔ ہفتے: ۴۔",
+          "en": "Each week: Rs 10. Weeks: 4."
+        },
+        {
+          "ur": "۱۰ + ۱۰ + ۱۰ + ۱۰ = ۴۰۔",
+          "en": "10 + 10 + 10 + 10 = 40."
+        },
+        {
+          "ur": "یوسف کے پاس ۴۰ روپے جمع ہوں گے۔ تھوڑی بچت مل کر بڑھ گئی۔",
+          "en": "Yusuf will have Rs 40. Small savings added up."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-shop-roleplay",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "کھیل کی دکان: ایک کاپی کی قیمت ۴۰ روپے ہے۔ گاہک نے ۱۰۰ روپے دیے۔ صحیح بقایا بنانے کے لیے سکے اور نوٹ ٹیپ کریں۔",
+        "en": "Play shop: a notebook costs Rs 40. The customer paid Rs 100. Tap coins and notes to make the correct change."
+      },
+      "answer_key": {
+        "change_total_rupees": 60,
+        "accept_any_combination_totalling": 60
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۴۰ سے ۱۰۰ تک گنیں: ۵۰، ۶۰ ...",
+            "en": "Count up from 40 to 100: 50, 60 ..."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-save-weeks",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "زینب ہر ہفتے ۵ روپے بچاتی ہے۔ ۳ ہفتوں میں ___ روپے بچیں گے۔",
+        "en": "Zainab saves Rs 5 each week. In 3 weeks she saves Rs ___."
+      },
+      "answer_key": {
+        "answer": "15"
+      },
+      "accepted_variants": [
+        "15",
+        "۱۵"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۵ + ۵ + ۵",
+            "en": "5 + 5 + 5"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-who-sells",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "بازار میں چیزیں کون بیچتا ہے؟",
+        "en": "Who sells things in the bazaar?"
+      },
+      "options": [
+        {
+          "ur": "گاہک",
+          "en": "the customer"
+        },
+        {
+          "ur": "دکان دار",
+          "en": "the shopkeeper"
+        },
+        {
+          "ur": "ڈاکیا",
+          "en": "the postman"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p2-change",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک کیلے کی قیمت ۱۵ روپے ہے۔ آپ ۲۰ روپے دیتے ہیں۔ بقایا کتنا ہوگا؟",
+        "en": "A banana costs Rs 15. You pay Rs 20. How much change?"
+      },
+      "options": [
+        {
+          "ur": "۵ روپے",
+          "en": "Rs 5"
+        },
+        {
+          "ur": "۱۵ روپے",
+          "en": "Rs 15"
+        },
+        {
+          "ur": "۳۵ روپے",
+          "en": "Rs 35"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دی گئی رقم میں سے قیمت گھٹائیں۔",
+            "en": "Take the price away from the money paid."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۲۰ − ۱۵ = ۵۔",
+        "en": "20 − 15 = 5."
+      }
+    },
+    {
+      "id": "p3-saving-meaning",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "بچت کا مطلب ہے سارے پیسے فوراً خرچ کر دینا۔",
+        "en": "Saving means spending all your money at once."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "بچت کا مطلب ہے کچھ پیسے بعد کے لیے رکھنا۔",
+        "en": "Saving means keeping some money for later."
+      }
+    },
+    {
+      "id": "p5-count-change",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "بقایا لیتے وقت پیسے گن لینا اچھی عادت ہے۔",
+        "en": "Counting your change is a good habit."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-why-save",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "بچت کا ایک فائدہ کیا ہے؟",
+        "en": "What is one benefit of saving?"
+      },
+      "options": [
+        {
+          "ur": "پیسے جلدی ختم ہوتے ہیں",
+          "en": "money runs out faster"
+        },
+        {
+          "ur": "کوئی فائدہ نہیں",
+          "en": "there is no benefit"
+        },
+        {
+          "ur": "ضرورت کے وقت پیسے موجود ہوتے ہیں",
+          "en": "money is there when it is needed"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: بعد میں ضرورت پڑے تو بچت کیا کرے گی؟",
+            "en": "Think: if a need comes later, what will savings do?"
+          }
+        }
+      ]
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-need-first",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہادی کے پاس ۵۰ روپے ہیں۔ اسے سکول کی کاپی چاہیے (۴۰ روپے) اور ایک ٹافی بھی اچھی لگتی ہے (۲۰ روپے)۔ سب سے سمجھ دار فیصلہ کون سا ہے؟",
+        "en": "Hadi has Rs 50. He needs a school notebook (Rs 40) and would like a toffee (Rs 20). Which is the wisest choice?"
+      },
+      "options": [
+        {
+          "ur": "کاپی خریدے اور ۱۰ روپے بچا لے",
+          "en": "buy the notebook and save Rs 10"
+        },
+        {
+          "ur": "دو ٹافیاں خریدے",
+          "en": "buy two toffees"
+        },
+        {
+          "ur": "ٹافی خریدے اور کاپی چھوڑ دے",
+          "en": "buy the toffee and skip the notebook"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "2": "m-want-labelled-need"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے ضرورت، پھر خواہش۔ کیا دونوں کے لیے پیسے کافی ہیں؟",
+            "en": "Needs first, then wants. Is there enough for both?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-play-shop",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں کسی کے ساتھ کاغذ کے نوٹوں سے دکان کا کھیل کھیلیں۔ ایک چیز 'بیچیں' اور بقایا گن کر دیں۔ اصلی پیسوں کی ضرورت نہیں۔",
+        "en": "Play shop at home with someone using paper notes. 'Sell' one item and count out the change. No real money is needed."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any correct change calculation the learner describes. Do not ask about real household money."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پہلے لکھیں: کتنے پیسے دیے اور قیمت کیا ہے؟",
+        "en": "First write: how much was paid, and what is the price?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "بقایا = دی گئی رقم − قیمت۔ قیمت سے اوپر گن کر بھی دیکھیں۔",
+        "en": "Change = money paid − price. You can also count up from the price."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "بقایا قیمت اور دی گئی رقم کو جمع کر کے نکلتا ہے۔",
+        "en": "Change is found by adding the price and the money paid."
+      },
+      "correction": {
+        "ur": "بقایا نکالنے کے لیے دی گئی رقم میں سے قیمت گھٹائیں۔",
+        "en": "To find change, take the price away from the money paid."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "بچت صرف بڑی رقم سے ہوتی ہے؛ تھوڑے پیسے بچانے کا فائدہ نہیں۔",
+        "en": "Saving only works with big amounts; saving a little is pointless."
+      },
+      "correction": {
+        "ur": "تھوڑی تھوڑی بچت ہر ہفتے مل کر بڑی رقم بن جاتی ہے۔",
+        "en": "Small savings each week add up to a bigger amount."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-want-labelled-need",
+      "remediation_ref": "SOC-G4-ECO-01"
+    },
+    {
+      "signal": "misses_prerequisite:SOC-G4-ECO-02",
+      "remediation_ref": "SOC-G4-ECO-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "دکان دار بیچتا ہے، گاہک خریدتا ہے۔ بقایا = دی گئی رقم − قیمت۔ بقایا گن کر لیں۔ تھوڑی تھوڑی بچت بڑی رقم بنتی ہے۔ پہلے ضرورت، پھر خواہش۔",
+    "en": "Shopkeepers sell, customers buy. Change = money paid − price. Count your change. Small savings add up. Needs first, then wants."
+  },
+  "summary": {
+    "ur": "ہم نے خرید و فروخت، بقایا اور بچت کو سمجھا۔",
+    "en": "We learned about buying, selling, change and saving."
+  },
+  "parent_notes": {
+    "ur": "بچے کو کاغذ کے نوٹوں یا بٹنوں سے دکان کا کھیل کھلائیں۔ اصلی پیسے یا گھر کی آمدنی کی بات ضروری نہیں۔",
+    "en": "Play shop with paper notes or buttons. There is no need to use real money or talk about household income."
+  },
+  "mentor_notes": {
+    "ur": "یہ نہ سمجھیں کہ ہر بچے کے پاس جیب خرچ یا گلک ہے؛ مثالیں کرداروں کے ذریعے دیں۔ قرض، سود یا بینک کی تفصیل اس سبق میں نہیں۔ حساب کے لیے اردو ہندسے استعمال کریں۔",
+    "en": "Do not assume every child has pocket money or a gullak; use characters in examples. No loans, interest or banking detail in this lesson. Use Urdu numerals in Urdu text."
+  },
+  "accessibility_notes": {
+    "ur": "سکوں اور نوٹوں کی تصاویر ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن اس کی رقم بتائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ٹیپ والی سرگرمی کا متبادل: صحیح بقایا تین جوابوں میں سے چنیں۔",
+    "en": "Pictures of coins and notes are still to be made; each alt text should state its value. Urdu audio is not yet recorded. Alternative to the tap activity: choose the correct change from three answers."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "role-play a bazaar stall: price, pay, change; then saving as small regular amounts that add up; needs before wants",
+    "questioning_strategy": "ask 'how much was paid and what is the price?' before 'what is the change?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "adds instead of subtracting for change"
+    ],
+    "hint_policy": "graduated; two hints max; first list the two amounts, then the change rule or count-up; never give the change first",
+    "example_policy": "small, round rupee amounts with fictional characters; never the learner's own money; no loans, interest or banks",
+    "misconception_detectors": [
+      "adds price and payment for change",
+      "thinks small savings do not matter",
+      "spends on a want before a need"
+    ],
+    "critical_thinking_prompts": [
+      "If you saved Rs 5 every week, how many weeks until you could buy a Rs 30 storybook?"
+    ],
+    "personalization_rules": "if arithmetic for change is the barrier, offer the count-up-from-price method before more items",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "ask how much money the learner or family has, earns or spends",
+      "encourage the learner to handle or carry money without a grown-up"
+    ]
+  },
+  "review_flags": [
+    "check every price and change sum (30/50/20, 15/20/5, 40/100/60, 10×4=40, 5×3=15, 40+20>50) and that the Rs amounts are realistic for current prices",
+    "Urdu math uses ۔ after '۵۰ − ۳۰ = ۲۰'; confirm numerals and the minus sign render correctly right-to-left",
+    "child-safety: confirm money examples stay neutral and do not shame learners without pocket money"
+  ]
+}

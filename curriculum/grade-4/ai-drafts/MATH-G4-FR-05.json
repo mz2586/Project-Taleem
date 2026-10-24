@@ -1,0 +1,399 @@
+{
+  "code": "MATH-G4-FR-05",
+  "description": {
+    "ur": "ایک جیسے نیچے کے نمبر والی (یکساں) کسروں کو جمع اور تفریق کرنا۔",
+    "en": "Add and subtract fractions that have the same bottom number (like fractions)."
+  },
+  "keywords": [
+    "like fractions",
+    "add fractions",
+    "subtract fractions",
+    "same denominator",
+    "numerator"
+  ],
+  "teacher_script": {
+    "ur": "امی نے ایک روٹی کے ۴ برابر حصے کیے۔ آپ نے پہلے ۱ حصہ کھایا، پھر ۲ حصے اور۔ آپ نے کل کتنی روٹی کھائی؟ آج ہم یکساں کسروں کو جمع اور تفریق کریں گے۔ یاد رکھیں: صرف اوپر کے نمبر جوڑیں یا گھٹائیں۔ نیچے کا نمبر وہی رہتا ہے، کیونکہ حصوں کا سائز نہیں بدلتا۔",
+    "en": "Ammi cut a roti into 4 equal parts. You ate 1 part first, then 2 more. How much roti did you eat in all? Today we add and subtract like fractions. Remember: add or subtract only the top numbers. The bottom number stays the same, because the size of the parts does not change."
+  },
+  "student_explanation": {
+    "ur": "یکساں کسروں کا نیچے کا نمبر ایک جیسا ہوتا ہے۔ انہیں جوڑنا آسان ہے۔ صرف اوپر کے نمبر جوڑیں۔ نیچے کا نمبر وہی رہتا ہے۔ ایک روٹی کے ۴ برابر حصے ہیں۔ آپ نے ۱ حصہ کھایا، پھر ۲ حصے اور کھائے۔ یعنی ۱/۴ + ۲/۴ = ۳/۴۔ تفریق بھی اسی طرح ہوتی ہے۔ ۴/۵ میں سے ۱/۵ نکالیں تو ۳/۵ بچتا ہے۔ نیچے کے نمبر کبھی نہ جوڑیں۔",
+    "en": "Like fractions have the same bottom number. They are easy to add. Add only the top numbers. The bottom number stays the same. A roti has 4 equal parts. You eat 1 part, then 2 more parts. So 1/4 + 2/4 = 3/4. Subtraction works the same way. Take 1/5 away from 4/5 and 3/5 is left. Never add the bottom numbers."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۲/۶ + ۳/۶ = ?",
+        "en": "2/6 + 3/6 = ?"
+      },
+      "steps": [
+        {
+          "ur": "نیچے کا نمبر دونوں میں ۶ ہے۔ یہ یکساں کسریں ہیں۔",
+          "en": "Both bottom numbers are 6. These are like fractions."
+        },
+        {
+          "ur": "اوپر جوڑیں: ۲ + ۳ = ۵۔",
+          "en": "Add the tops: 2 + 3 = 5."
+        },
+        {
+          "ur": "نیچے کا نمبر ۶ ہی رہتا ہے۔ جواب: ۵/۶۔",
+          "en": "The bottom stays 6. Answer: 5/6."
+        },
+        {
+          "ur": "پٹی سے جانچیں: ۶ میں سے ۵ حصے رنگے ہیں، ۱۲ میں سے نہیں۔",
+          "en": "Check with a bar: 5 of 6 parts are shaded, not parts of 12."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "امی کے پاس ۷/۸ کیک تھا۔ گھر والوں نے ۴/۸ کھا لیا۔ کتنا بچا؟",
+        "en": "Ammi had 7/8 of a cake. The family ate 4/8. How much is left?"
+      },
+      "steps": [
+        {
+          "ur": "یہ تفریق ہے، اور نیچے کا نمبر دونوں میں ۸ ہے۔",
+          "en": "This is subtraction, and both bottom numbers are 8."
+        },
+        {
+          "ur": "اوپر گھٹائیں: ۷ − ۴ = ۳۔",
+          "en": "Subtract the tops: 7 − 4 = 3."
+        },
+        {
+          "ur": "نیچے کا نمبر ۸ ہی رہتا ہے۔ ۳/۸ کیک بچا۔",
+          "en": "The bottom stays 8. 3/8 of the cake is left."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-shade-and-add",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "پٹی کے ۵ برابر حصے ہیں۔ پہلے ۲/۵ رنگیں، پھر ۱/۵ اور رنگیں۔ اب کل کتنی پٹی رنگی ہے؟ جواب چنیں۔",
+        "en": "The bar has 5 equal parts. Shade 2/5, then shade 1/5 more. How much of the bar is shaded now? Choose the answer."
+      },
+      "answer_key": {
+        "total_parts": 5,
+        "shaded_parts": 3,
+        "answer": "3/5"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "رنگے ہوئے حصے گنیں۔ کیا کل حصے بدلے؟",
+            "en": "Count the shaded parts. Did the total number of parts change?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-add-sevenths",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۳/۷ + ۲/۷ = ___/۷",
+        "en": "3/7 + 2/7 = ___/7"
+      },
+      "answer_key": {
+        "answer": "5"
+      },
+      "accepted_variants": [
+        "5",
+        "۵"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "صرف اوپر کے نمبر جوڑیں۔",
+            "en": "Add only the top numbers."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-missing-part",
+      "type": "fill_blank",
+      "competency": "analysis",
+      "stem": {
+        "ur": "۹/۱۰ − ___/۱۰ = ۴/۱۰",
+        "en": "9/10 − ___/10 = 4/10"
+      },
+      "answer_key": {
+        "answer": "5"
+      },
+      "accepted_variants": [
+        "5",
+        "۵"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۹ میں سے کتنا نکالیں کہ ۴ بچے؟",
+            "en": "What do you take from 9 to leave 4?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-add-fifths",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۱/۵ + ۲/۵ = ?",
+        "en": "1/5 + 2/5 = ?"
+      },
+      "options": [
+        {
+          "ur": "۳/۱۰",
+          "en": "3/10"
+        },
+        {
+          "ur": "۳/۵",
+          "en": "3/5"
+        },
+        {
+          "ur": "۲/۵",
+          "en": "2/5"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-fraction-add-denominators"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا نیچے کا نمبر بدلتا ہے؟",
+            "en": "Does the bottom number change?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اوپر جوڑیں: ۱ + ۲ = ۳۔ نیچے ۵ ہی رہے گا: ۳/۵۔",
+        "en": "Add the tops: 1 + 2 = 3. The bottom stays 5: 3/5."
+      }
+    },
+    {
+      "id": "p3-subtract-sixths",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۵/۶ − ۲/۶ = ?",
+        "en": "5/6 − 2/6 = ?"
+      },
+      "options": [
+        {
+          "ur": "۳/۶",
+          "en": "3/6"
+        },
+        {
+          "ur": "۳/۰",
+          "en": "3/0"
+        },
+        {
+          "ur": "۷/۶",
+          "en": "7/6"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-fraction-add-denominators"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "تفریق میں بھی نیچے کا نمبر وہی رہتا ہے۔",
+            "en": "In subtraction too, the bottom number stays the same."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۵ − ۲ = ۳، نیچے ۶ رہا: ۳/۶۔",
+        "en": "5 − 2 = 3, and the bottom stays 6: 3/6."
+      }
+    },
+    {
+      "id": "p4-eighths-sixteenths",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۲/۸ + ۳/۸ = ۵/۱۶",
+        "en": "2/8 + 3/8 = 5/16"
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-fraction-add-denominators"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "حصوں کا سائز بدلا یا نہیں؟",
+            "en": "Did the size of the parts change?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "نیچے کا نمبر ۸ ہی رہتا ہے: ۲/۸ + ۳/۸ = ۵/۸۔",
+        "en": "The bottom stays 8: 2/8 + 3/8 = 5/8."
+      }
+    },
+    {
+      "id": "p5-kashif-walks",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کاشف نے صبح راستے کا ۲/۱۰ حصہ چلا اور شام کو ۵/۱۰۔ اس نے کل کتنا راستہ چلا؟",
+        "en": "Kashif walked 2/10 of the path in the morning and 5/10 in the evening. How much of the path did he walk in all?"
+      },
+      "options": [
+        {
+          "ur": "۷/۲۰",
+          "en": "7/20"
+        },
+        {
+          "ur": "۳/۱۰",
+          "en": "3/10"
+        },
+        {
+          "ur": "۷/۱۰",
+          "en": "7/10"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-fraction-add-denominators"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کل معلوم کرنا ہے، تو جوڑیں یا گھٹائیں؟",
+            "en": "You need the total: add or subtract?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۲ + ۵ = ۷، نیچے ۱۰ رہا: ۷/۱۰۔",
+        "en": "2 + 5 = 7, the bottom stays 10: 7/10."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-water-tank",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پانی کی ٹینکی ۳/۸ بھری ہے۔ ابو نے ۴/۸ اور بھر دی۔ ٹینکی پوری بھرنے کے لیے اور کتنا پانی چاہیے؟",
+        "en": "A water tank is 3/8 full. Abbu fills 4/8 more. How much more is needed to fill the tank completely?"
+      },
+      "answer_key": {
+        "answer": "1/8"
+      },
+      "accepted_variants": [
+        "1/8",
+        "۱/۸"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے جوڑیں کہ کتنی بھری ہے۔ پوری ٹینکی ۸/۸ ہے۔",
+            "en": "First add to find how full it is. A full tank is 8/8."
+          }
+        }
+      ]
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-fraction-add-denominators",
+      "remediation_ref": "MATH-G4-FR-05"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-FR-02",
+      "remediation_ref": "MATH-G4-FR-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "یکساں کسروں کا نیچے کا نمبر ایک جیسا ہوتا ہے۔ اوپر جوڑیں یا گھٹائیں؛ نیچے کا نمبر وہی رہے۔ ۱/۴ + ۲/۴ = ۳/۴۔",
+    "en": "Like fractions have the same bottom number. Add or subtract the tops; the bottom stays the same. 1/4 + 2/4 = 3/4."
+  },
+  "summary": {
+    "ur": "ہم نے یکساں کسروں کو جمع اور تفریق کرنا سیکھا۔",
+    "en": "We learned to add and subtract like fractions."
+  },
+  "parent_notes": {
+    "ur": "ایک ہی چیز کے حصے ملائیں (روٹی کا ۱/۴ + ۱/۴)۔",
+    "en": "combine parts of the same whole (1/4 + 1/4 of a roti)."
+  },
+  "mentor_notes": {
+    "ur": "'نیچے کے نمبر بھی جوڑ دو' والی غلطی تقریباً ہر بچہ کرتا ہے؛ اسے پہلے سے روکیں۔",
+    "en": "the \"add the bottoms too\" error is near-universal; pre-empt it."
+  },
+  "accessibility_notes": {
+    "ur": "کسر کی پٹیاں اور روٹی کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن بتائے کہ کل کتنے برابر حصے ہیں اور کتنے رنگے ہیں۔ رنگے حصوں پر رنگ کے ساتھ لکیروں کا نمونہ بھی ہو تاکہ رنگ نہ پہچاننے والے بچے بھی دیکھ سکیں۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ہر سرگرمی تھپتھپا کر یا جواب چن کر ہو سکتی ہے؛ گھسیٹنا ضروری نہیں۔",
+    "en": "The fraction bars and roti pictures are still to be made; each alt text should say how many equal parts there are in all and how many are shaded. Shaded parts should carry a pattern, not colour alone, for colour-blind learners. Urdu audio is not yet recorded. Every activity works by tapping or choosing an answer; no dragging is needed."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "shade the parts on one bar so the learner sees the part size never changes; then state: add or subtract the tops, keep the bottom",
+    "questioning_strategy": "ask 'does the size of each part change?' before asking for the answer",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "adds or subtracts the bottom numbers",
+      "confuses adding with subtracting in word problems"
+    ],
+    "hint_policy": "graduated; two hints max before a worked re-teach of a similar problem; never reveal the answer first",
+    "example_policy": "like fractions with bottoms up to 10, answers no bigger than one whole; roti, cake, water tank and walking contexts",
+    "misconception_detectors": [
+      "adds the denominators (1/4 + 2/4 -> 3/8)",
+      "subtracts the denominators (5/6 - 2/6 -> 3/0)"
+    ],
+    "critical_thinking_prompts": [
+      "If each part stays the same size, why would the bottom number change?"
+    ],
+    "personalization_rules": "if comparing like fractions is shaky, route to MATH-G4-FR-04; if top/bottom meaning is shaky, route to MATH-G4-FR-02",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, upset or fear -> stop the lesson and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information",
+      "shame or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: p3 distractor 3/0 shows the subtract-the-bottoms error; confirm a zero denominator is acceptable as a distractor for Grade 4",
+    "subject expert: answers are left unsimplified (3/6, 4/10); confirm simplifying is out of scope"
+  ]
+}

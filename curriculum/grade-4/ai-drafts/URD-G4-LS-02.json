@@ -1,0 +1,548 @@
+{
+  "code": "URD-G4-LS-02",
+  "title": {
+    "ur": "کہانی اپنے لفظوں میں سنانا",
+    "en": "Retelling a story in your own words"
+  },
+  "description": {
+    "ur": "ایک چھوٹی کہانی سن یا پڑھ کر اسے شروع، بیچ اور آخر کے ساتھ اپنے لفظوں میں سنانا۔",
+    "en": "Hearing or reading a short story and retelling it in your own words with a beginning, middle and end."
+  },
+  "keywords": [
+    "retelling",
+    "own words",
+    "beginning middle end",
+    "sequence",
+    "speaking"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "دوبارہ سنانا",
+        "en": "retell"
+      },
+      "definition": {
+        "ur": "سنی ہوئی کہانی کسی اور کو سنانا۔",
+        "en": "telling a story you heard to someone else."
+      }
+    },
+    {
+      "term": {
+        "ur": "اپنے لفظوں میں",
+        "en": "in your own words"
+      },
+      "definition": {
+        "ur": "کہانی کے جملے رٹنے کے بجائے اپنی زبان میں بتانا۔",
+        "en": "telling it your own way instead of repeating the exact sentences."
+      }
+    },
+    {
+      "term": {
+        "ur": "شروع، بیچ، آخر",
+        "en": "beginning, middle, end"
+      },
+      "definition": {
+        "ur": "کہانی کے تین حصے: کیا مسئلہ ہوا، کیا کیا، کیسے ختم ہوئی۔",
+        "en": "a story's three parts: the problem, what was done, how it ended."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کیا آپ نے کبھی کسی کو کوئی واقعہ سنایا ہے؟ آج ہم ایک کہانی سنیں گے اور پھر اسے اپنے لفظوں میں سنائیں گے۔ کہانی کے تین حصے ہوتے ہیں: شروع، بیچ اور آخر۔ ہمیں ہر جملہ یاد نہیں رکھنا، بس اہم باتیں ترتیب سے بتانی ہیں۔",
+    "en": "Have you ever told someone about something that happened? Today we will hear a story and then tell it in our own words. A story has three parts: beginning, middle and end. We do not need to remember every sentence, just the important events in order."
+  },
+  "student_explanation": {
+    "ur": "کہانی دوبارہ سنانا ایک ہنر ہے۔ پہلے کہانی غور سے سنیں یا پڑھیں۔ پھر تین حصے سوچیں۔ شروع میں کون تھا اور کیا مسئلہ ہوا۔ بیچ میں انہوں نے کیا کیا۔ آخر میں کہانی کیسے ختم ہوئی۔ ہر جملہ رٹنے کی ضرورت نہیں۔ اپنے آسان لفظ استعمال کریں۔ 'پہلے'، 'پھر' اور 'آخر میں' سے ترتیب دکھائیں۔ کوئی نئی بات اپنی طرف سے نہ جوڑیں۔",
+    "en": "Retelling a story is a skill. First listen to or read the story carefully. Then think of three parts. At the beginning, who was there and what was the problem. In the middle, what they did. At the end, how the story finished. You do not need to memorise every sentence. Use your own simple words. Show the order with 'first', 'then' and 'finally'. Do not add new events of your own."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "کہانی 'چاندنی کہاں گئی؟' کے تین حصے نکالیں:\nگل خان کی ایک سفید بکری تھی، جس کا نام چاندنی تھا۔ ایک شام چاندنی کھیت سے گھر نہیں آئی۔ گل خان پریشان ہو گیا۔ اس کی بیٹی مینا لالٹین لے کر اس کے ساتھ ڈھونڈنے نکلی۔ دونوں نے کھیت اور نہر کا کنارا دیکھا۔ اچانک مینا کو جھاڑیوں کے پیچھے سے گھنٹی کی آواز آئی۔ وہاں چاندنی بیٹھی تھی، اور اس کے پاس ایک ننھا سا بچہ تھا۔ سب خوشی خوشی گھر لوٹ آئے۔",
+        "en": "Find the three parts of 'Where did Chandni go?':\nGul Khan had a white goat named Chandni. One evening Chandni did not come home from the field. Gul Khan was worried. His daughter Meena took a lantern and went out with him to look. They searched the field and the canal bank. Suddenly Meena heard a bell from behind the bushes. Chandni was sitting there, and beside her was a tiny baby goat. Everyone came home happily."
+      },
+      "steps": [
+        {
+          "ur": "شروع: گل خان کی بکری چاندنی ایک شام گھر نہیں آئی۔",
+          "en": "Beginning: Gul Khan's goat Chandni did not come home one evening."
+        },
+        {
+          "ur": "بیچ: گل خان اور مینا لالٹین لے کر کھیت اور نہر پر ڈھونڈتے رہے۔",
+          "en": "Middle: Gul Khan and Meena searched the field and canal with a lantern."
+        },
+        {
+          "ur": "آخر: گھنٹی کی آواز سے چاندنی ملی، ساتھ ننھا بچہ بھی تھا۔",
+          "en": "End: they found Chandni by her bell, with a tiny baby goat."
+        },
+        {
+          "ur": "یہی تین باتیں جوڑ کر سنائیں۔",
+          "en": "Join these three points to retell."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "اپنے لفظوں میں سنانا: کون سا انداز بہتر ہے؟",
+        "en": "Retelling in your own words: which way is better?"
+      },
+      "steps": [
+        {
+          "ur": "رٹا ہوا: 'گل خان کی ایک سفید بکری تھی، جس کا نام چاندنی تھا...' (کہانی کے بالکل وہی جملے)۔",
+          "en": "Memorised: the exact sentences of the story."
+        },
+        {
+          "ur": "اپنے لفظوں میں: 'ایک کسان کی بکری کھو گئی۔ وہ اور اس کی بیٹی اسے ڈھونڈنے نکلے...'",
+          "en": "Own words: 'A farmer's goat got lost. He and his daughter went to look for it...'"
+        },
+        {
+          "ur": "دوسرا انداز بہتر ہے، کیونکہ اس میں سمجھ دکھتی ہے۔",
+          "en": "The second is better because it shows understanding."
+        },
+        {
+          "ur": "دونوں میں ترتیب وہی ہونی چاہیے۔",
+          "en": "Both must keep the same order."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-order",
+      "type": "ordering",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی 'چاندنی کہاں گئی؟':\nگل خان کی ایک سفید بکری تھی، جس کا نام چاندنی تھا۔ ایک شام چاندنی کھیت سے گھر نہیں آئی۔ گل خان پریشان ہو گیا۔ اس کی بیٹی مینا لالٹین لے کر اس کے ساتھ ڈھونڈنے نکلی۔ دونوں نے کھیت اور نہر کا کنارا دیکھا۔ اچانک مینا کو جھاڑیوں کے پیچھے سے گھنٹی کی آواز آئی۔ وہاں چاندنی بیٹھی تھی، اور اس کے پاس ایک ننھا سا بچہ تھا۔ سب خوشی خوشی گھر لوٹ آئے۔\n\nکہانی کے واقعات ترتیب سے لگائیں۔",
+        "en": "Story 'Where did Chandni go?':\nGul Khan had a white goat named Chandni. One evening Chandni did not come home from the field. Gul Khan was worried. His daughter Meena took a lantern and went out with him to look. They searched the field and the canal bank. Suddenly Meena heard a bell from behind the bushes. Chandni was sitting there, and beside her was a tiny baby goat. Everyone came home happily.\n\nPut the story's events in order."
+      },
+      "options": [
+        {
+          "ur": "جھاڑیوں کے پیچھے گھنٹی کی آواز آئی",
+          "en": "a bell was heard behind the bushes"
+        },
+        {
+          "ur": "چاندنی گھر نہیں آئی",
+          "en": "Chandni did not come home"
+        },
+        {
+          "ur": "سب خوشی خوشی گھر لوٹ آئے",
+          "en": "everyone came home happily"
+        },
+        {
+          "ur": "مینا لالٹین لے کر نکلی",
+          "en": "Meena went out with a lantern"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          3,
+          0,
+          2
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "مسئلہ سب سے پہلے آتا ہے۔",
+            "en": "The problem comes first."
+          }
+        }
+      ]
+    },
+    {
+      "id": "a2-retell",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کہانی 'چاندنی کہاں گئی؟':\nگل خان کی ایک سفید بکری تھی، جس کا نام چاندنی تھا۔ ایک شام چاندنی کھیت سے گھر نہیں آئی۔ گل خان پریشان ہو گیا۔ اس کی بیٹی مینا لالٹین لے کر اس کے ساتھ ڈھونڈنے نکلی۔ دونوں نے کھیت اور نہر کا کنارا دیکھا۔ اچانک مینا کو جھاڑیوں کے پیچھے سے گھنٹی کی آواز آئی۔ وہاں چاندنی بیٹھی تھی، اور اس کے پاس ایک ننھا سا بچہ تھا۔ سب خوشی خوشی گھر لوٹ آئے۔\n\nیہ کہانی مینٹر یا گھر کے کسی بڑے کو اپنے لفظوں میں زبانی سنائیں۔",
+        "en": "Story 'Where did Chandni go?':\nGul Khan had a white goat named Chandni. One evening Chandni did not come home from the field. Gul Khan was worried. His daughter Meena took a lantern and went out with him to look. They searched the field and the canal bank. Suddenly Meena heard a bell from behind the bushes. Chandni was sitting there, and beside her was a tiny baby goat. Everyone came home happily.\n\nRetell this story aloud in your own words to your mentor or an adult."
+      },
+      "answer_key": {
+        "sample_answer": "ایک دن گل خان کی بکری چاندنی گم ہو گئی۔ وہ اور مینا اسے ڈھونڈنے نکلے۔ آخر جھاڑیوں کے پیچھے وہ اپنے بچے کے ساتھ ملی، اور سب خوش ہو گئے۔"
+      },
+      "rubric": {
+        "criteria": "oral retelling: beginning-middle-end, own words, correct order, no invented events",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "صرف ایک دو باتیں، یا ترتیب الجھی ہوئی۔",
+              "en": "Only one or two points, or the order is mixed up."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "شروع، بیچ اور آخر ہیں مگر زیادہ تر کہانی کے لفظ رٹے ہوئے یا ایک اہم بات رہ گئی۔",
+              "en": "Beginning, middle and end are there, but mostly memorised wording or one key event missing."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "اپنے لفظوں میں، صحیح ترتیب سے، شروع، بیچ اور آخر کے ساتھ؛ کوئی نئی بات نہیں جوڑی۔",
+              "en": "In own words, in order, with beginning, middle and end; nothing invented."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor listens live and marks with the 3-level retelling rubric. No recording feature yet."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-best-retell",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کہانی 'چاندنی کہاں گئی؟':\nگل خان کی ایک سفید بکری تھی، جس کا نام چاندنی تھا۔ ایک شام چاندنی کھیت سے گھر نہیں آئی۔ گل خان پریشان ہو گیا۔ اس کی بیٹی مینا لالٹین لے کر اس کے ساتھ ڈھونڈنے نکلی۔ دونوں نے کھیت اور نہر کا کنارا دیکھا۔ اچانک مینا کو جھاڑیوں کے پیچھے سے گھنٹی کی آواز آئی۔ وہاں چاندنی بیٹھی تھی، اور اس کے پاس ایک ننھا سا بچہ تھا۔ سب خوشی خوشی گھر لوٹ آئے۔\n\nکون سا دوبارہ سنانا سب سے اچھا ہے؟",
+        "en": "Story 'Where did Chandni go?':\nGul Khan had a white goat named Chandni. One evening Chandni did not come home from the field. Gul Khan was worried. His daughter Meena took a lantern and went out with him to look. They searched the field and the canal bank. Suddenly Meena heard a bell from behind the bushes. Chandni was sitting there, and beside her was a tiny baby goat. Everyone came home happily.\n\nWhich retelling is best?"
+      },
+      "options": [
+        {
+          "ur": "گل خان کی ایک سفید بکری تھی۔",
+          "en": "Gul Khan had a white goat."
+        },
+        {
+          "ur": "بکری گم ہوئی، گل خان اور مینا نے ڈھونڈا، اور وہ اپنے ننھے بچے کے ساتھ ملی۔",
+          "en": "The goat got lost, Gul Khan and Meena searched, and she was found with her baby."
+        },
+        {
+          "ur": "بکری کو بھیڑیا لے گیا اور پھر پولیس آئی۔",
+          "en": "A wolf took the goat and then the police came."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "2": "m-guessing-not-reading"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کس میں شروع، بیچ اور آخر تینوں ہیں؟",
+            "en": "Which one has a beginning, middle and end?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "دوسرا جواب مکمل اور ترتیب سے ہے؛ تیسرے میں نئی باتیں جوڑی گئی ہیں۔",
+        "en": "The second is complete and in order; the third adds things not in the story."
+      }
+    },
+    {
+      "id": "p2-problem",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی 'چاندنی کہاں گئی؟':\nگل خان کی ایک سفید بکری تھی، جس کا نام چاندنی تھا۔ ایک شام چاندنی کھیت سے گھر نہیں آئی۔ گل خان پریشان ہو گیا۔ اس کی بیٹی مینا لالٹین لے کر اس کے ساتھ ڈھونڈنے نکلی۔ دونوں نے کھیت اور نہر کا کنارا دیکھا۔ اچانک مینا کو جھاڑیوں کے پیچھے سے گھنٹی کی آواز آئی۔ وہاں چاندنی بیٹھی تھی، اور اس کے پاس ایک ننھا سا بچہ تھا۔ سب خوشی خوشی گھر لوٹ آئے۔\n\nکہانی کے شروع میں کیا مسئلہ ہوا؟",
+        "en": "Story 'Where did Chandni go?':\nGul Khan had a white goat named Chandni. One evening Chandni did not come home from the field. Gul Khan was worried. His daughter Meena took a lantern and went out with him to look. They searched the field and the canal bank. Suddenly Meena heard a bell from behind the bushes. Chandni was sitting there, and beside her was a tiny baby goat. Everyone came home happily.\n\nWhat was the problem at the beginning?"
+      },
+      "options": [
+        {
+          "ur": "چاندنی شام کو گھر نہیں آئی",
+          "en": "Chandni did not come home in the evening"
+        },
+        {
+          "ur": "لالٹین ٹوٹ گئی",
+          "en": "the lantern broke"
+        },
+        {
+          "ur": "نہر میں پانی نہیں تھا",
+          "en": "the canal had no water"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "کہانی کا مسئلہ بکری کا گم ہونا تھا۔",
+        "en": "The story's problem was the lost goat."
+      }
+    },
+    {
+      "id": "p3-ending",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی 'چاندنی کہاں گئی؟':\nگل خان کی ایک سفید بکری تھی، جس کا نام چاندنی تھا۔ ایک شام چاندنی کھیت سے گھر نہیں آئی۔ گل خان پریشان ہو گیا۔ اس کی بیٹی مینا لالٹین لے کر اس کے ساتھ ڈھونڈنے نکلی۔ دونوں نے کھیت اور نہر کا کنارا دیکھا۔ اچانک مینا کو جھاڑیوں کے پیچھے سے گھنٹی کی آواز آئی۔ وہاں چاندنی بیٹھی تھی، اور اس کے پاس ایک ننھا سا بچہ تھا۔ سب خوشی خوشی گھر لوٹ آئے۔\n\nکہانی کیسے ختم ہوئی؟",
+        "en": "Story 'Where did Chandni go?':\nGul Khan had a white goat named Chandni. One evening Chandni did not come home from the field. Gul Khan was worried. His daughter Meena took a lantern and went out with him to look. They searched the field and the canal bank. Suddenly Meena heard a bell from behind the bushes. Chandni was sitting there, and beside her was a tiny baby goat. Everyone came home happily.\n\nHow did the story end?"
+      },
+      "options": [
+        {
+          "ur": "چاندنی کبھی نہیں ملی",
+          "en": "Chandni was never found"
+        },
+        {
+          "ur": "مینا راستہ بھول گئی",
+          "en": "Meena got lost"
+        },
+        {
+          "ur": "چاندنی اپنے بچے کے ساتھ ملی اور سب خوش ہو گئے",
+          "en": "Chandni was found with her baby and everyone was happy"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "explanation": {
+        "ur": "آخر میں چاندنی ننھے بچے کے ساتھ ملی۔",
+        "en": "At the end Chandni was found with a tiny baby goat."
+      }
+    },
+    {
+      "id": "p4-memorise",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اچھی طرح دوبارہ سنانے کے لیے کہانی کا ہر جملہ رٹنا ضروری ہے۔",
+        "en": "To retell well, you must memorise every sentence."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'اپنے لفظوں میں' کا کیا مطلب ہے؟",
+            "en": "What does 'in your own words' mean?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اہم باتیں ترتیب سے اپنے لفظوں میں بتانا کافی ہے۔",
+        "en": "Telling the key events in order in your own words is enough."
+      }
+    },
+    {
+      "id": "p5-add",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی سناتے وقت اپنی طرف سے نئے واقعات جوڑ دینا ٹھیک ہے۔",
+        "en": "When retelling, it is fine to add new events of your own."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "دوبارہ سنانے میں وہی بتاتے ہیں جو کہانی میں تھا۔",
+        "en": "A retelling tells only what was in the story."
+      }
+    },
+    {
+      "id": "p6-middle",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی 'چاندنی کہاں گئی؟':\nگل خان کی ایک سفید بکری تھی، جس کا نام چاندنی تھا۔ ایک شام چاندنی کھیت سے گھر نہیں آئی۔ گل خان پریشان ہو گیا۔ اس کی بیٹی مینا لالٹین لے کر اس کے ساتھ ڈھونڈنے نکلی۔ دونوں نے کھیت اور نہر کا کنارا دیکھا۔ اچانک مینا کو جھاڑیوں کے پیچھے سے گھنٹی کی آواز آئی۔ وہاں چاندنی بیٹھی تھی، اور اس کے پاس ایک ننھا سا بچہ تھا۔ سب خوشی خوشی گھر لوٹ آئے۔\n\nکہانی کے بیچ میں گل خان اور مینا نے کیا کیا؟",
+        "en": "Story 'Where did Chandni go?':\nGul Khan had a white goat named Chandni. One evening Chandni did not come home from the field. Gul Khan was worried. His daughter Meena took a lantern and went out with him to look. They searched the field and the canal bank. Suddenly Meena heard a bell from behind the bushes. Chandni was sitting there, and beside her was a tiny baby goat. Everyone came home happily.\n\nIn the middle, what did Gul Khan and Meena do?"
+      },
+      "options": [
+        {
+          "ur": "سو گئے",
+          "en": "went to sleep"
+        },
+        {
+          "ur": "لالٹین لے کر کھیت اور نہر پر ڈھونڈا",
+          "en": "searched the field and canal with a lantern"
+        },
+        {
+          "ur": "بازار گئے",
+          "en": "went to the bazaar"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "بیچ کے حصے میں تلاش ہوئی۔",
+        "en": "The middle part is the search."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-meena-view",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کہانی 'چاندنی کہاں گئی؟':\nگل خان کی ایک سفید بکری تھی، جس کا نام چاندنی تھا۔ ایک شام چاندنی کھیت سے گھر نہیں آئی۔ گل خان پریشان ہو گیا۔ اس کی بیٹی مینا لالٹین لے کر اس کے ساتھ ڈھونڈنے نکلی۔ دونوں نے کھیت اور نہر کا کنارا دیکھا۔ اچانک مینا کو جھاڑیوں کے پیچھے سے گھنٹی کی آواز آئی۔ وہاں چاندنی بیٹھی تھی، اور اس کے پاس ایک ننھا سا بچہ تھا۔ سب خوشی خوشی گھر لوٹ آئے۔\n\nیہ کہانی مینا بن کر سنائیں: 'اس شام میں...' سے شروع کریں۔",
+        "en": "Story 'Where did Chandni go?':\nGul Khan had a white goat named Chandni. One evening Chandni did not come home from the field. Gul Khan was worried. His daughter Meena took a lantern and went out with him to look. They searched the field and the canal bank. Suddenly Meena heard a bell from behind the bushes. Chandni was sitting there, and beside her was a tiny baby goat. Everyone came home happily.\n\nRetell the story as Meena: start with 'That evening I...'."
+      },
+      "answer_key": {
+        "sample_answer": "اس شام ہماری بکری چاندنی گھر نہیں آئی۔ میں لالٹین لے کر ابو کے ساتھ نکلی..."
+      },
+      "rubric": {
+        "criteria": "oral retelling: beginning-middle-end, own words, correct order, no invented events",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "صرف ایک دو باتیں، یا ترتیب الجھی ہوئی۔",
+              "en": "Only one or two points, or the order is mixed up."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "شروع، بیچ اور آخر ہیں مگر زیادہ تر کہانی کے لفظ رٹے ہوئے یا ایک اہم بات رہ گئی۔",
+              "en": "Beginning, middle and end are there, but mostly memorised wording or one key event missing."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "اپنے لفظوں میں، صحیح ترتیب سے، شروع، بیچ اور آخر کے ساتھ؛ کوئی نئی بات نہیں جوڑی۔",
+              "en": "In own words, in order, with beginning, middle and end; nothing invented."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor marks with the rubric; check the change to first person keeps events and order."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-retell-home",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "گھر میں کسی کو کوئی کہانی (اسکول کی یا یہی) شروع، بیچ اور آخر کے ساتھ اپنے لفظوں میں سنائیں۔",
+        "en": "At home, retell a story (from school or this one) to someone, with a beginning, middle and end, in your own words."
+      },
+      "answer_key": {
+        "sample_answer": "Learner says who they told and which story."
+      },
+      "mentor_review_guidance": "No device needed; do not ask who the listener is by name."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کہانی کا مسئلہ کیا تھا؟ وہیں سے شروع کریں۔",
+        "en": "What was the story's problem? Start there."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "'پہلے...، پھر...، آخر میں...' سے تینوں حصے جوڑیں۔",
+        "en": "Join the three parts with 'first..., then..., finally...'."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "دوبارہ سنانا یعنی کہانی لفظ بہ لفظ رٹ کر بولنا۔",
+        "en": "Retelling means repeating the story word for word."
+      },
+      "correction": {
+        "ur": "اہم باتیں ترتیب سے اپنے لفظوں میں بتائیں۔",
+        "en": "Tell the key events in order in your own words."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "کہانی میں اپنی طرف سے نئی باتیں جوڑ دینا۔",
+        "en": "Adding new events of your own to the story."
+      },
+      "correction": {
+        "ur": "جواب متن میں سے دیں: وہی بتائیں جو کہانی میں تھا۔",
+        "en": "Answer from the text: tell only what was in the story."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:URD-G4-LS-01",
+      "remediation_ref": "URD-G4-LS-01"
+    },
+    {
+      "signal": "events_out_of_order",
+      "remediation_ref": "URD-G4-RD-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "دوبارہ سنانا: شروع (مسئلہ)، بیچ (کیا کیا)، آخر (کیسے ختم ہوئی)۔ اپنے لفظ، صحیح ترتیب، کوئی نئی بات نہیں۔",
+    "en": "Retelling: beginning (problem), middle (what was done), end (how it finished). Own words, right order, nothing new added."
+  },
+  "summary": {
+    "ur": "ہم نے کہانی کو شروع، بیچ اور آخر کے ساتھ اپنے لفظوں میں سنانا سیکھا۔",
+    "en": "We learned to retell a story in our own words with a beginning, middle and end."
+  },
+  "parent_notes": {
+    "ur": "سونے سے پہلے بچے سے دن کی کوئی کہانی سنیں۔ پوچھیں: 'پھر کیا ہوا؟' اور 'آخر میں کیا ہوا؟'",
+    "en": "Before bed, ask your child to tell you a story from the day. Ask: 'Then what happened?' and 'What happened in the end?'"
+  },
+  "mentor_notes": {
+    "ur": "زبانی سنانا آپ براہِ راست سنیں اور روبرک سے جانچیں؛ ریکارڈنگ کا نظام ابھی نہیں۔ کہانی بچہ پڑھ سکتا ہے یا آپ سنا سکتے ہیں؛ یہاں جانچ سنانے کی ہے، پڑھنے کی نہیں۔ مقامی زبان کے الفاظ آ جائیں تو قبول کریں۔",
+    "en": "Listen to the oral retelling live and mark with the rubric; there is no recording feature yet. The child may read the story or you may read it aloud; this checks retelling, not reading. Accept regional-language words if they slip in."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ تب تک مینٹر یا بچہ کہانی پڑھ سکتا ہے۔ تین حصوں والی تصویری پٹی (گم شدہ بکری، تلاش، ملاپ) ابھی بنانی ہے، متبادل متن کے ساتھ۔ ترتیب والی (گھسیٹنے کی) سرگرمی کا متبادل: ہر واقعے کے لیے ۱ سے ۴ نمبر چنیں۔ جو بچہ بول نہیں سکتا، وہ لکھ کر، تصویریں ترتیب دے کر یا اشاروں سے کہانی سنا سکتا ہے؛ مینٹر طے کرے۔",
+    "en": "The story's Urdu audio is not yet recorded; until then the mentor or child can read it. A three-panel picture strip (lost goat, search, reunion) is still to be made, with alt text. Alternative to the drag ordering activity: choose 1 to 4 for each event. A child who cannot speak may retell by writing, ordering pictures, or signing; the mentor decides."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "find beginning (problem), middle (actions), end (resolution); retell using sequence words; compare memorised vs own-words versions",
+    "questioning_strategy": "ask 'what happened first? then? in the end?' and 'can you say that another way?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "repeats the text word for word",
+      "adds events not in the story"
+    ],
+    "hint_policy": "graduated; two hints max; first ask for the problem, then the ending; never retell the story for the learner",
+    "example_policy": "original short stories from village and city family life with a gentle problem and happy ending",
+    "misconception_detectors": [
+      "invents events",
+      "events out of order"
+    ],
+    "critical_thinking_prompts": [
+      "Would the story change if Meena had not heard the bell?"
+    ],
+    "personalization_rules": "if the learner cannot answer literal questions about the story, route to URD-G4-LS-01",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "oral retellings are marked by a human mentor using the rubric"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the story is original but resembles common 'lost animal' tales; confirm it reads as original and level-appropriate",
+    "mentor team: oral rubric (3 levels) is applied live with no recording; confirm workable"
+  ]
+}

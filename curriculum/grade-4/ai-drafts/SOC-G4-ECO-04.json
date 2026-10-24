@@ -1,0 +1,502 @@
+{
+  "code": "SOC-G4-ECO-04",
+  "title": {
+    "ur": "وسائل کو احتیاط سے استعمال کریں",
+    "en": "Using resources carefully"
+  },
+  "description": {
+    "ur": "بتائیں کہ پانی، بجلی، کھانا اور کاغذ جیسے وسائل کو ضائع کیے بغیر کیسے استعمال کرتے ہیں۔",
+    "en": "Explain how to use resources such as water, electricity, food and paper without wasting them."
+  },
+  "keywords": [
+    "resources",
+    "waste",
+    "water",
+    "electricity",
+    "food",
+    "reuse",
+    "saving"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "وسائل",
+        "en": "resources"
+      },
+      "definition": {
+        "ur": "وہ چیزیں جو ہم استعمال کرتے ہیں، جیسے پانی، بجلی، کھانا اور کاغذ۔",
+        "en": "the things we use, such as water, electricity, food and paper."
+      }
+    },
+    {
+      "term": {
+        "ur": "ضائع کرنا",
+        "en": "to waste"
+      },
+      "definition": {
+        "ur": "کسی چیز کو بلا ضرورت خرچ یا خراب کرنا۔",
+        "en": "to use up or spoil something without need."
+      }
+    },
+    {
+      "term": {
+        "ur": "دوبارہ استعمال",
+        "en": "reuse"
+      },
+      "definition": {
+        "ur": "ایک چیز کو پھینکنے کی بجائے پھر سے کام میں لانا۔",
+        "en": "using something again instead of throwing it away."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "پانی، بجلی، کھانا اور کاغذ ہمارے وسائل ہیں۔ یہ محنت سے ملتے ہیں اور ہمیشہ کافی نہیں ہوتے۔ اگر ہم انہیں ضائع کریں تو دوسروں کے لیے کم بچتے ہیں۔ آج ہم دیکھیں گے کہ چھوٹی عادتوں سے ہم وسائل کیسے بچا سکتے ہیں۔",
+    "en": "Water, electricity, food and paper are our resources. They take hard work to get and there is not always enough. If we waste them, less is left for others. Today we will see how small habits help us save resources."
+  },
+  "student_explanation": {
+    "ur": "وسائل وہ چیزیں ہیں جو ہم روز استعمال کرتے ہیں۔ پانی، بجلی، کھانا اور کاغذ وسائل ہیں۔ دانت صاف کرتے وقت نل بند رکھیں۔ کمرے سے نکلتے وقت بتی اور پنکھا بند کریں۔ پلیٹ میں اتنا کھانا لیں جتنا کھا سکیں۔ بچی ہوئی روٹی ضائع نہ کریں۔ کاپی کے دونوں طرف لکھیں۔ پرانی بوتل یا ڈبہ دوبارہ استعمال کریں۔ وسائل بچانے سے سب کے لیے کافی رہتا ہے۔",
+    "en": "Resources are things we use every day. Water, electricity, food and paper are resources. Turn off the tap while brushing your teeth. Switch off the light and fan when leaving a room. Take only as much food as you can eat. Do not waste leftover roti. Write on both sides of the page. Reuse an old bottle or box. Saving resources leaves enough for everyone."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "نمرہ دانت صاف کرتے وقت نل کھلا چھوڑ دیتی ہے۔ وہ پانی کیسے بچا سکتی ہے؟",
+        "en": "Nimra leaves the tap running while brushing her teeth. How can she save water?"
+      },
+      "steps": [
+        {
+          "ur": "دیکھیں: پانی بہہ رہا ہے مگر استعمال نہیں ہو رہا۔",
+          "en": "Notice: water is flowing but not being used."
+        },
+        {
+          "ur": "حل: برش کرتے وقت نل بند کرے۔",
+          "en": "Fix: turn off the tap while brushing."
+        },
+        {
+          "ur": "کلی کے لیے گلاس یا لوٹے میں پانی لے۔",
+          "en": "Use a cup or lota of water for rinsing."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "دعوت کے بعد بہت سا کھانا بچ گیا۔ اسے ضائع ہونے سے کیسے بچائیں؟",
+        "en": "After a family meal there is a lot of food left. How can it be kept from going to waste?"
+      },
+      "steps": [
+        {
+          "ur": "صاف بچا ہوا کھانا ڈھک کر رکھیں۔",
+          "en": "Cover and keep the clean leftover food."
+        },
+        {
+          "ur": "اگلے کھانے میں استعمال کریں یا پڑوسیوں سے بانٹیں۔",
+          "en": "Use it at the next meal or share it with neighbours."
+        },
+        {
+          "ur": "اگلی بار پلیٹ میں تھوڑا تھوڑا لیں۔",
+          "en": "Next time, take small helpings."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-spot-waste",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کی تصویر میں وسائل ضائع ہونے کی چار جگہیں ڈھونڈ کر ٹیپ کریں۔",
+        "en": "In the house picture, find and tap four places where resources are being wasted."
+      },
+      "answer_key": {
+        "waste_spots": [
+          "tap running with nobody using it",
+          "fan on in an empty room",
+          "plate with lots of thrown-away food",
+          "paper written on one side only, in the bin"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "خالی کمرے اور نل کو غور سے دیکھیں۔",
+            "en": "Look carefully at the empty room and the tap."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-resource-habit",
+      "type": "matching",
+      "competency": "application",
+      "stem": {
+        "ur": "ہر وسیلے کو اسے بچانے کی عادت سے ملائیں۔",
+        "en": "Match each resource to a habit that saves it."
+      },
+      "options": [
+        {
+          "ur": "نل بند کرنا",
+          "en": "close the tap"
+        },
+        {
+          "ur": "بتی بند کرنا",
+          "en": "switch off the light"
+        },
+        {
+          "ur": "دونوں طرف لکھنا",
+          "en": "write on both sides"
+        },
+        {
+          "ur": "تھوڑا تھوڑا لینا",
+          "en": "take small helpings"
+        }
+      ],
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "پانی",
+              "en": "water"
+            },
+            "right": {
+              "ur": "نل بند کرنا",
+              "en": "close the tap"
+            }
+          },
+          {
+            "left": {
+              "ur": "بجلی",
+              "en": "electricity"
+            },
+            "right": {
+              "ur": "بتی بند کرنا",
+              "en": "switch off the light"
+            }
+          },
+          {
+            "left": {
+              "ur": "کاغذ",
+              "en": "paper"
+            },
+            "right": {
+              "ur": "دونوں طرف لکھنا",
+              "en": "write on both sides"
+            }
+          },
+          {
+            "left": {
+              "ur": "کھانا",
+              "en": "food"
+            },
+            "right": {
+              "ur": "تھوڑا تھوڑا لینا",
+              "en": "take small helpings"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-brushing",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "دانت صاف کرتے وقت پانی کیسے بچائیں؟",
+        "en": "How can you save water while brushing your teeth?"
+      },
+      "options": [
+        {
+          "ur": "نل بند رکھیں",
+          "en": "keep the tap off"
+        },
+        {
+          "ur": "نل پورا کھول دیں",
+          "en": "open the tap fully"
+        },
+        {
+          "ur": "دو بار برش کریں",
+          "en": "brush twice"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-fan-empty",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "خالی کمرے میں پنکھا چلتا چھوڑ دینا بجلی کا ضیاع ہے۔",
+        "en": "Leaving a fan on in an empty room wastes electricity."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-paper",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کاغذ بچانے کا ایک طریقہ کیا ہے؟",
+        "en": "What is one way to save paper?"
+      },
+      "options": [
+        {
+          "ur": "ایک لفظ لکھ کر صفحہ پھاڑ دیں",
+          "en": "write one word and tear out the page"
+        },
+        {
+          "ur": "صفحے کے دونوں طرف لکھیں",
+          "en": "write on both sides of the page"
+        },
+        {
+          "ur": "نئی کاپی روز لیں",
+          "en": "use a new notebook every day"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p4-food",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کھانا ضائع نہ ہو، اس کے لیے کیا کریں؟",
+        "en": "What should you do so that food is not wasted?"
+      },
+      "options": [
+        {
+          "ur": "پلیٹ بھر کر آدھا چھوڑ دیں",
+          "en": "fill the plate and leave half"
+        },
+        {
+          "ur": "بچی روٹی پھینک دیں",
+          "en": "throw away leftover roti"
+        },
+        {
+          "ur": "اتنا لیں جتنا کھا سکیں",
+          "en": "take only as much as you can eat"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسا کام چنیں جس کے بعد پلیٹ میں کچھ نہ بچے۔",
+            "en": "Choose the action that leaves nothing on the plate."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-plenty",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اگر ہمارے گھر میں پانی آ رہا ہے تو اسے بچانے کی ضرورت نہیں۔",
+        "en": "If water reaches our home, there is no need to save it."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا ہر جگہ اور ہر وقت پانی کافی ہوتا ہے؟",
+            "en": "Is there always enough water everywhere?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "وسائل ہمیشہ کافی نہیں ہوتے۔ بچانے سے سب کے لیے رہتا ہے۔",
+        "en": "Resources are not always enough. Saving leaves some for everyone."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-reuse",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پرانی پلاسٹک کی بوتل کا سب سے اچھا استعمال کون سا ہے؟",
+        "en": "What is the best use of an old plastic bottle?"
+      },
+      "options": [
+        {
+          "ur": "نہر میں پھینک دیں",
+          "en": "throw it into the canal"
+        },
+        {
+          "ur": "اس میں پودا لگائیں یا پانی بھریں",
+          "en": "grow a plant in it or refill it with water"
+        },
+        {
+          "ur": "اسے جلا دیں",
+          "en": "burn it"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسا طریقہ جو بوتل کو پھر سے کام میں لائے اور ماحول کو نقصان نہ دے۔",
+            "en": "A way that puts the bottle to use again and does not harm nature."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-waste-watch",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج گھر میں ایک ایسی جگہ دیکھیں جہاں کوئی وسیلہ ضائع ہو سکتا ہے، جیسے نل یا بتی۔ گھر کے کسی بڑے کو ایک بچت کا طریقہ بتائیں۔",
+        "en": "Today notice one place at home where a resource could be wasted, such as a tap or a light. Tell a grown-up one way to save it."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any sensible saving habit. Do not ask about bills, income or what appliances the home has."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: کیا یہ چیز استعمال ہو رہی ہے یا بس ضائع ہو رہی ہے؟",
+        "en": "Think: is this being used, or just wasted?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "چار عادتیں یاد کریں: نل بند، بتی بند، تھوڑا کھانا، کاغذ کے دونوں طرف۔",
+        "en": "Remember four habits: tap off, light off, small helpings, both sides of paper."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "اگر کوئی چیز ہمارے پاس کافی ہے تو اسے بچانے کی ضرورت نہیں۔",
+        "en": "If we have enough of something, there is no need to save it."
+      },
+      "correction": {
+        "ur": "وسائل محنت سے ملتے ہیں اور سب کے لیے ہمیشہ کافی نہیں ہوتے۔ احتیاط سب کے کام آتی ہے۔",
+        "en": "Resources take hard work to get and are not always enough for everyone. Care helps everyone."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ایک بچے کی بچت سے کوئی فرق نہیں پڑتا۔",
+        "en": "One child's saving makes no difference."
+      },
+      "correction": {
+        "ur": "اگر ہر کوئی تھوڑا بچائے تو بہت زیادہ بچ جاتا ہے۔",
+        "en": "If everyone saves a little, a lot is saved."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:SOC-G4-ECO-01",
+      "remediation_ref": "SOC-G4-ECO-01"
+    },
+    {
+      "signal": "two_wrong_in_a_row",
+      "remediation_ref": "SOC-G4-ECO-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "وسائل: پانی، بجلی، کھانا، کاغذ۔ نل بند رکھیں، بتی اور پنکھا بند کریں، اتنا کھانا لیں جتنا کھا سکیں، کاغذ کے دونوں طرف لکھیں، چیزیں دوبارہ استعمال کریں۔",
+    "en": "Resources: water, electricity, food, paper. Keep the tap off, switch off lights and fans, take only what you can eat, write on both sides, reuse things."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ وسائل کو احتیاط سے استعمال کر کے ضائع ہونے سے بچاتے ہیں۔",
+    "en": "We learned to use resources carefully so they are not wasted."
+  },
+  "parent_notes": {
+    "ur": "گھر سے نکلتے وقت بچے کو بتیاں اور پنکھے بند کرنے کی ذمہ داری دیں۔",
+    "en": "Give your child the job of switching off lights and fans when you leave the house."
+  },
+  "mentor_notes": {
+    "ur": "یہ نہ سمجھیں کہ ہر گھر میں نلکا، بجلی یا پنکھا ہے؛ ہینڈ پمپ، کنواں یا مٹکا بھی مثال میں شامل کریں۔ بچے کو گھر کے بلوں یا آمدنی کا نہ پوچھیں اور کمی کو شرمندگی نہ بنائیں۔",
+    "en": "Do not assume every home has piped water, electricity or a fan; include hand pumps, wells or a clay matka in examples. Never ask about bills or income, and never make scarcity a source of shame."
+  },
+  "accessibility_notes": {
+    "ur": "گھر کی تصویر ابھی بنانی ہے؛ متبادل متن ضیاع کی ہر جگہ بیان کرے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ٹیپ والی سرگرمی کا متبادل: لکھی ہوئی فہرست میں سے ضیاع والی چیزیں چنیں۔",
+    "en": "The house picture is still to be made; alt text should describe each waste spot. Urdu audio is not yet recorded. Alternative to the tap activity: choose the wasteful items from a written list."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "spot the waste, name the resource, choose the saving habit; link to needs (water and food are needs) and to caring for shared spaces",
+    "questioning_strategy": "ask 'is this being used or just wasted?' before 'how can we save it?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "thinks having enough means waste is fine"
+    ],
+    "hint_policy": "graduated; two hints max; first used-or-wasted, then recall the four habits; never give the habit first",
+    "example_policy": "habits that work in any home (tap, light, food, paper, reuse); include homes without piped water or electricity; no bills or income",
+    "misconception_detectors": [
+      "thinks plenty means no need to save",
+      "thinks one person's saving does not matter",
+      "suggests burning or dumping waste"
+    ],
+    "critical_thinking_prompts": [
+      "Where in your school could water or paper be saved, and how?"
+    ],
+    "personalization_rules": "if the learner cannot tell needs from wants in resource examples, route to SOC-G4-ECO-01",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "ask about the learner's home bills, income or appliances",
+      "shame a household for having little or using a lot"
+    ]
+  },
+  "review_flags": [
+    "child-safety: confirm examples do not assume piped water, electricity or fans at home; mentor note asks for hand-pump and matka alternatives",
+    "worked example 2 suggests sharing leftovers with neighbours; confirm this is appropriate in all communities"
+  ]
+}

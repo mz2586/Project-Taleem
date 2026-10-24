@@ -1,0 +1,471 @@
+{
+  "code": "ENG-G4-RD-03",
+  "title": {
+    "ur": "پڑھیں اور جواب دیں",
+    "en": "Read and Answer"
+  },
+  "description": {
+    "ur": "بچہ ایک مختصر انگریزی عبارت خود پڑھ کر ایسے سوالوں کے جواب دیتا ہے جن کا جواب عبارت میں لکھا ہے۔",
+    "en": "The learner reads a short English passage and answers questions whose answers are stated in the text."
+  },
+  "keywords": [
+    "reading comprehension",
+    "literal questions",
+    "question words",
+    "passage",
+    "who what where when"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "عبارت (passage)",
+        "en": "passage"
+      },
+      "definition": {
+        "ur": "چند جملوں کا ایک چھوٹا ٹکڑا جو ہم پڑھتے ہیں۔",
+        "en": "A short piece of writing made of a few sentences."
+      }
+    },
+    {
+      "term": {
+        "ur": "سوالیہ لفظ (question word)",
+        "en": "question word"
+      },
+      "definition": {
+        "ur": "Who = کون، What = کیا، Where = کہاں، When = کب۔",
+        "en": "Who asks for a person, What for a thing, Where for a place, When for a time."
+      }
+    },
+    {
+      "term": {
+        "ur": "ثبوت (clue in the text)",
+        "en": "evidence"
+      },
+      "definition": {
+        "ur": "عبارت کا وہ جملہ جس میں جواب لکھا ہے۔",
+        "en": "The sentence in the passage where the answer is written."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج آپ ایک چھوٹی کہانی خود پڑھیں گے۔ میں اسے آپ کو پڑھ کر نہیں سناؤں گا۔ پھر سوال آئیں گے۔ ہر جواب کہانی میں لکھا ہوا ہے۔ ہم سوالیہ لفظ دیکھ کر جواب ڈھونڈیں گے۔",
+    "en": "Today you will read a short story by yourself. I will not read it to you. Then there will be questions. Every answer is written in the story. We will use the question word to find the answer."
+  },
+  "student_explanation": {
+    "ur": "پہلے پوری عبارت آرام سے پڑھیں۔ پھر سوال پڑھیں۔ سوالیہ لفظ پر دھیان دیں۔ Who کسی شخص کا پوچھتا ہے۔ Where جگہ کا پوچھتا ہے۔ When وقت کا پوچھتا ہے۔ What کسی چیز یا کام کا پوچھتا ہے۔ اب عبارت میں واپس جائیں۔ وہ جملہ ڈھونڈیں جس میں جواب ہے۔ جواب عبارت سے لیں، اپنے اندازے سے نہیں۔",
+    "en": "First read the whole passage calmly. Then read the question. Look at the question word. Who asks about a person. Where asks about a place. When asks about a time. What asks about a thing or an action. Now go back to the passage. Find the sentence that holds the answer. Take the answer from the passage, not from a guess."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "عبارت پڑھیں: It rained in the morning. Hina and her brother Bilal stayed at home. Their grandmother made hot tea and parathas. After the rain, the sky was blue. Hina saw a rainbow over the field. Bilal ran outside to look at the ducks in a puddle. سوال: Who made tea?",
+        "en": "Read the passage: It rained in the morning. Hina and her brother Bilal stayed at home. Their grandmother made hot tea and parathas. After the rain, the sky was blue. Hina saw a rainbow over the field. Bilal ran outside to look at the ducks in a puddle. Question: Who made tea?"
+      },
+      "steps": [
+        {
+          "ur": "سوالیہ لفظ Who ہے، یعنی ایک شخص۔",
+          "en": "The question word is Who, so the answer is a person."
+        },
+        {
+          "ur": "لفظ tea والا جملہ ڈھونڈیں۔",
+          "en": "Find the sentence with the word tea."
+        },
+        {
+          "ur": "جملہ: Their grandmother made hot tea and parathas.",
+          "en": "The sentence: Their grandmother made hot tea and parathas."
+        },
+        {
+          "ur": "جواب: grandmother (دادی یا نانی)۔",
+          "en": "Answer: their grandmother."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "اسی عبارت سے: Where were the ducks?",
+        "en": "From the same passage: Where were the ducks?"
+      },
+      "steps": [
+        {
+          "ur": "Where جگہ کا پوچھتا ہے۔",
+          "en": "Where asks for a place."
+        },
+        {
+          "ur": "لفظ ducks والا جملہ ڈھونڈیں۔",
+          "en": "Find the sentence with the word ducks."
+        },
+        {
+          "ur": "جملے کے آخر میں ہے: in a puddle۔",
+          "en": "The end of the sentence says: in a puddle."
+        },
+        {
+          "ur": "جواب: in a puddle (پانی کے چھوٹے گڑھے میں)۔",
+          "en": "Answer: in a puddle."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-tap-evidence",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "عبارت پڑھیں: It rained in the morning. Hina and her brother Bilal stayed at home. Their grandmother made hot tea and parathas. After the rain, the sky was blue. Hina saw a rainbow over the field. Bilal ran outside to look at the ducks in a puddle. اس جملے پر ٹیپ کریں جو بتاتا ہے کہ ہینا نے کیا دیکھا۔",
+        "en": "Read the passage: It rained in the morning. Hina and her brother Bilal stayed at home. Their grandmother made hot tea and parathas. After the rain, the sky was blue. Hina saw a rainbow over the field. Bilal ran outside to look at the ducks in a puddle. Tap the sentence that tells what Hina saw."
+      },
+      "answer_key": {
+        "correct_sentence": "Hina saw a rainbow over the field."
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ saw والا جملہ ڈھونڈیں۔",
+            "en": "Look for the sentence with the word saw."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-rainbow",
+      "type": "fill_blank",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اسی عبارت سے خالی جگہ پُر کریں: Hina saw a ___ over the field.",
+        "en": "From the same passage, fill the gap: Hina saw a ___ over the field."
+      },
+      "answer_key": {
+        "answer": "rainbow"
+      },
+      "accepted_variants": [
+        "rainbow",
+        "Rainbow"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ field سے پہلے والا جملہ دوبارہ پڑھیں۔",
+            "en": "Read again the sentence ending in field."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-what-made",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اسی عبارت سے مختصر جواب لکھیں: What did grandmother make?",
+        "en": "From the same passage, write a short answer: What did grandmother make?"
+      },
+      "answer_key": {
+        "answer": "tea and parathas"
+      },
+      "accepted_variants": [
+        "tea and parathas",
+        "hot tea and parathas",
+        "She made hot tea and parathas."
+      ],
+      "mentor_review_guidance": "Accept any answer naming both tea and parathas; one item only earns partial credit.",
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ made والا جملہ دیکھیں۔",
+            "en": "Look at the sentence with the word made."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-when-rain",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "عبارت: It rained in the morning. Hina and her brother Bilal stayed at home. Their grandmother made hot tea and parathas. After the rain, the sky was blue. Hina saw a rainbow over the field. Bilal ran outside to look at the ducks in a puddle. When did it rain?",
+        "en": "Passage: It rained in the morning. Hina and her brother Bilal stayed at home. Their grandmother made hot tea and parathas. After the rain, the sky was blue. Hina saw a rainbow over the field. Bilal ran outside to look at the ducks in a puddle. When did it rain?"
+      },
+      "options": [
+        {
+          "ur": "at night",
+          "en": "at night"
+        },
+        {
+          "ur": "in the morning",
+          "en": "in the morning"
+        },
+        {
+          "ur": "in the evening",
+          "en": "in the evening"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "When وقت کا پوچھتا ہے۔ پہلا جملہ دیکھیں۔",
+            "en": "When asks for a time. Look at the first sentence."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پہلا جملہ: It rained in the morning.",
+        "en": "The first sentence says: It rained in the morning."
+      }
+    },
+    {
+      "id": "p2-who-home",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اسی عبارت سے: Who stayed at home?",
+        "en": "From the same passage: Who stayed at home?"
+      },
+      "options": [
+        {
+          "ur": "Hina and Bilal",
+          "en": "Hina and Bilal"
+        },
+        {
+          "ur": "the ducks",
+          "en": "the ducks"
+        },
+        {
+          "ur": "grandmother and Hina",
+          "en": "grandmother and Hina"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ home والا جملہ ڈھونڈیں۔",
+            "en": "Find the sentence with the word home."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-sky",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اسی عبارت سے: What colour was the sky after the rain?",
+        "en": "From the same passage: What colour was the sky after the rain?"
+      },
+      "options": [
+        {
+          "ur": "grey",
+          "en": "grey"
+        },
+        {
+          "ur": "green",
+          "en": "green"
+        },
+        {
+          "ur": "blue",
+          "en": "blue"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ sky ڈھونڈیں۔",
+            "en": "Find the word sky."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "عبارت میں لکھا ہے: the sky was blue۔",
+        "en": "The passage says: the sky was blue."
+      }
+    },
+    {
+      "id": "p5-bilal-rainbow",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اسی عبارت سے: بلال نے قوس قزح (rainbow) دیکھی۔",
+        "en": "From the same passage: Bilal saw the rainbow."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "عبارت کہتی ہے Hina saw a rainbow؛ بلال بطخیں دیکھنے گیا۔",
+        "en": "The passage says Hina saw the rainbow; Bilal went to look at the ducks."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-question-match",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اسی عبارت کے لیے اپنا ایک Where والا سوال لکھیں اور اس کا جواب بھی لکھیں۔",
+        "en": "Write your own Where question about the same passage, and write its answer."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "question uses Where correctly and the answer is found in the passage",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "سوال یا جواب میں سے ایک درست۔",
+              "en": "Either the question or the answer is correct."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "سوال Where سے ہے اور جواب عبارت میں موجود ہے۔",
+              "en": "The question uses Where and its answer is in the passage."
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-read-and-tell",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "عبارت دوبارہ خود پڑھیں۔ گھر میں کسی کو اردو میں بتائیں کہ بارش کے بعد کیا ہوا۔",
+        "en": "Read the passage again by yourself. Tell someone at home in Urdu what happened after the rain."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Retelling in Urdu is fine; the English reading is the practice."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوالیہ لفظ دیکھیں: کون، کیا، کہاں یا کب؟",
+        "en": "Look at the question word: who, what, where or when?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "سوال کا ایک خاص لفظ عبارت میں ڈھونڈیں اور وہ جملہ دوبارہ پڑھیں۔",
+        "en": "Find a key word from the question in the passage and read that sentence again."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "جواب عبارت کی بجائے اپنے تجربے سے دینا۔",
+        "en": "Answering from own experience instead of the passage."
+      },
+      "correction": {
+        "ur": "جواب ہمیشہ عبارت کے جملے میں ڈھونڈیں۔",
+        "en": "Always find the answer in a sentence of the passage."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "سوالیہ لفظ کو نظر انداز کرنا، جیسے Where کے جواب میں شخص کا نام۔",
+        "en": "Ignoring the question word, e.g. giving a person for a Where question."
+      },
+      "correction": {
+        "ur": "Where کا جواب جگہ، Who کا جواب شخص ہوتا ہے۔",
+        "en": "A Where answer is a place; a Who answer is a person."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:ENG-G4-RD-01",
+      "remediation_ref": "ENG-G4-RD-01"
+    },
+    {
+      "signal": "two_literal_questions_wrong",
+      "remediation_ref": "ENG-G4-RD-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "Who = شخص، What = چیز یا کام، Where = جگہ، When = وقت۔ جواب عبارت میں ڈھونڈیں۔",
+    "en": "Who = person, What = thing or action, Where = place, When = time. Find the answer in the passage."
+  },
+  "summary": {
+    "ur": "ہم نے عبارت خود پڑھی اور سوالیہ لفظ کی مدد سے جواب ڈھونڈے۔",
+    "en": "We read a passage by ourselves and used question words to find answers."
+  },
+  "parent_notes": {
+    "ur": "بچے سے پوچھیں: کہانی میں کون تھا؟ کہاں ہوا؟ اردو میں جواب دینا بھی ٹھیک ہے۔",
+    "en": "Ask your child: Who was in the story? Where did it happen? Answering in Urdu is fine."
+  },
+  "mentor_notes": {
+    "ur": "عبارت بچے کو پڑھ کر نہ سنائیں؛ یہ پڑھنے کی جانچ ہے۔ مختصر جواب والے سوال میں ہجے کی معمولی غلطی پر جواب درست مانیں۔",
+    "en": "Do not read the passage to the child; this checks reading. In the short-answer item, accept the answer despite small spelling slips."
+  },
+  "accessibility_notes": {
+    "ur": "عبارت پر جان بوجھ کر آڈیو نہیں ہے، کیونکہ بچے کا پڑھنا جانچا جا رہا ہے۔ ہدایات اور سوالیہ الفاظ کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ عبارت بڑے حروف اور کھلی سطروں میں دکھائیں۔ جملے پر ٹیپ کرنے کا متبادل: تین جملوں میں سے صحیح جملہ چنیں۔ کم نظر والے بچے کے لیے متن بڑا کرنے کی سہولت ہو۔",
+    "en": "The passage deliberately has no audio, because the child's reading is assessed. Urdu audio for instructions and question words is not yet recorded. Show the passage in large print with wide line spacing. Alternative to tapping a sentence: choose the right sentence from three. Allow text enlargement for children with low vision."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "read first, then question; name the question word; locate the key word; read that sentence again",
+    "questioning_strategy": "ask 'which question word is this? what kind of answer does it want?' before 'what is the answer?'",
+    "slow_down_signals": [
+      "answers without looking back at the passage",
+      "two wrong answers in a row",
+      "gives a person for a where-question"
+    ],
+    "hint_policy": "graduated; two hints max; first the question word, then the key word to find; never quote the answer sentence first",
+    "example_policy": "original short passages in Pakistani home and village contexts (rain, grandparents, parathas, ducks)",
+    "misconception_detectors": [
+      "answers from own experience",
+      "mismatches answer type to question word",
+      "copies the wrong sentence"
+    ],
+    "critical_thinking_prompts": [
+      "Which sentence proves your answer?"
+    ],
+    "personalization_rules": "if the learner cannot decode the passage, route back to ENG-G4-RD-01",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)",
+      "read the reading passage aloud for the learner (reading is the assessed skill)"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the passage length (6 sentences) and words (parathas, puddle) suit Grade 4 ESL readers",
+    "translation: grandmother is rendered as دادی یا نانی; confirm the preferred child-facing form"
+  ]
+}

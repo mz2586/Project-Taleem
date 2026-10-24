@@ -1,0 +1,474 @@
+{
+  "code": "ENG-G4-LS-03",
+  "title": {
+    "ur": "کسی جانے پہچانے موضوع پر بولیں",
+    "en": "Talk About Something You Know"
+  },
+  "description": {
+    "ur": "بچہ کسی جانے پہچانے موضوع پر تین سے چار صاف اور پورے انگریزی جملے بولتا ہے۔",
+    "en": "The learner speaks three or four clear, complete English sentences on a familiar topic."
+  },
+  "keywords": [
+    "speaking",
+    "familiar topic",
+    "sentence frames",
+    "clear speech",
+    "reasons",
+    "because"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "موضوع (topic)",
+        "en": "topic"
+      },
+      "definition": {
+        "ur": "وہ چیز جس کے بارے میں ہم بات کرتے ہیں۔",
+        "en": "The thing we are talking about."
+      }
+    },
+    {
+      "term": {
+        "ur": "وجہ (reason)",
+        "en": "reason"
+      },
+      "definition": {
+        "ur": "کسی بات کا 'کیوں': because۔",
+        "en": "The 'why' of something: because."
+      }
+    },
+    {
+      "term": {
+        "ur": "صاف بولنا (speak clearly)",
+        "en": "speak clearly"
+      },
+      "definition": {
+        "ur": "آہستہ، اونچا اور صاف آواز میں بولنا۔",
+        "en": "Speak slowly, loudly enough and clearly."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج آپ کسی ایسی چیز کے بارے میں بولیں گے جو آپ اچھی طرح جانتے ہیں۔ جیسے آپ کا پسندیدہ کھانا یا کھیل۔ ہم ایک آسان ڈھانچہ استعمال کریں گے۔ پہلے موضوع بتائیں، پھر ایک دو باتیں، پھر ایک وجہ۔ آہستہ اور صاف بولیں۔",
+    "en": "Today you will talk about something you know well. For example, your favourite food or game. We will use a simple frame. First name the topic, then one or two facts, then a reason. Speak slowly and clearly."
+  },
+  "student_explanation": {
+    "ur": "پہلے اپنا موضوع چنیں۔ پہلا جملہ موضوع بتائے: My favourite food is daal۔ پھر ایک دو باتیں بتائیں: It is yellow and hot۔ پھر وجہ بتائیں: I like it because it is tasty۔ ہر بات پورے جملے میں کہیں۔ ایک لفظ کا جواب نہ دیں۔ آہستہ اور صاف بولیں۔ سننے والے کی طرف دیکھیں۔",
+    "en": "First choose your topic. The first sentence names it: My favourite food is daal. Then give one or two facts: It is yellow and hot. Then give a reason: I like it because it is tasty. Say each idea as a full sentence. Do not answer with just one word. Speak slowly and clearly. Look at your listener."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "موضوع: My Favourite Game۔ تین جملے بولیں۔",
+        "en": "Topic: My Favourite Game. Say three sentences."
+      },
+      "steps": [
+        {
+          "ur": "موضوع کا جملہ: My favourite game is cricket.",
+          "en": "Topic sentence: My favourite game is cricket."
+        },
+        {
+          "ur": "ایک بات: I play it with my cousins in the street.",
+          "en": "A fact: I play it with my cousins in the street."
+        },
+        {
+          "ur": "وجہ: I like it because it is fun.",
+          "en": "A reason: I like it because it is fun."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ایک لفظ والے جواب کو پورا جملہ بنائیں۔ سوال: What is your favourite fruit? جواب: 'Banana.'",
+        "en": "Turn a one-word answer into a sentence. Question: What is your favourite fruit? Answer: 'Banana.'"
+      },
+      "steps": [
+        {
+          "ur": "سوال کے الفاظ استعمال کریں: My favourite fruit is...",
+          "en": "Use the question's words: My favourite fruit is..."
+        },
+        {
+          "ur": "پورا جملہ: My favourite fruit is banana.",
+          "en": "Full sentence: My favourite fruit is banana."
+        },
+        {
+          "ur": "وجہ جوڑیں: I like it because it is soft and sweet.",
+          "en": "Add a reason: I like it because it is soft and sweet."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-order-talk",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "چھوٹی تقریر کے جملے ترتیب دیں: I like it because it is cool. ، My favourite season is winter. ، We drink hot tea in winter.",
+        "en": "Order the sentences of a short talk: I like it because it is cool. / My favourite season is winter. / We drink hot tea in winter."
+      },
+      "answer_key": {
+        "order": [
+          "My favourite season is winter.",
+          "We drink hot tea in winter.",
+          "I like it because it is cool."
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "موضوع والا جملہ پہلے آتا ہے۔",
+            "en": "The topic sentence comes first."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-frame",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "جملہ مکمل کریں: I like mangoes ___ they are sweet.",
+        "en": "Complete the sentence: I like mangoes ___ they are sweet."
+      },
+      "answer_key": {
+        "answer": "because"
+      },
+      "accepted_variants": [
+        "because"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "وجہ بتانے والا لفظ۔",
+            "en": "The word that gives a reason."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-speak-three",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "ان میں سے ایک موضوع پر مینٹر کو تین جملے سنائیں: My Favourite Food، A Rainy Day، My Favourite Game۔",
+        "en": "Say three sentences to your mentor on one topic: My Favourite Food, A Rainy Day, My Favourite Game."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "three clear, complete, on-topic spoken sentences including a reason",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "ایک دو جملے یا ایک لفظ والے جواب۔",
+              "en": "One or two sentences, or one-word answers."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "تین جملے، مگر وجہ نہیں یا کچھ غیر واضح۔",
+              "en": "Three sentences, but no reason or some unclear speech."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "تین صاف، پورے جملے، موضوع پر، وجہ کے ساتھ۔",
+              "en": "Three clear, complete sentences on topic, with a reason."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Oral, mentor-assessed live. Do not mark down pronunciation that is understandable."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-full-answer",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "سوال: What is your favourite colour? سب سے اچھا جواب کونسا ہے؟",
+        "en": "Question: What is your favourite colour? Which is the best answer?"
+      },
+      "options": [
+        {
+          "ur": "Blue.",
+          "en": "Blue."
+        },
+        {
+          "ur": "My favourite colour is blue.",
+          "en": "My favourite colour is blue."
+        },
+        {
+          "ur": "Colour blue my favourite.",
+          "en": "Colour blue my favourite."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "2": "m-l1-word-order"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پورا جملہ اور درست ترتیب۔",
+            "en": "A full sentence in the right order."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-reason",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کونسا جملہ وجہ بتاتا ہے؟",
+        "en": "Which sentence gives a reason?"
+      },
+      "options": [
+        {
+          "ur": "I like rain because it makes the air cool.",
+          "en": "I like rain because it makes the air cool."
+        },
+        {
+          "ur": "It is raining.",
+          "en": "It is raining."
+        },
+        {
+          "ur": "Rain is water.",
+          "en": "Rain is water."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "because والا جملہ ڈھونڈیں۔",
+            "en": "Find the sentence with because."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-on-topic",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "'My School Bag' پر بات میں کونسا جملہ موضوع سے ہٹ کر ہے؟",
+        "en": "In a talk on 'My School Bag', which sentence is off topic?"
+      },
+      "options": [
+        {
+          "ur": "My bag is green.",
+          "en": "My bag is green."
+        },
+        {
+          "ur": "It has two pockets.",
+          "en": "It has two pockets."
+        },
+        {
+          "ur": "My uncle has a shop.",
+          "en": "My uncle has a shop."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کونسا جملہ بیگ کے بارے میں نہیں؟",
+            "en": "Which sentence is not about the bag?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-speak-fast",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "اچھا بولنے کے لیے بہت تیز بولنا چاہیے۔",
+        "en": "To speak well, you should speak very fast."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "آہستہ اور صاف بولیں تاکہ سننے والا سمجھے۔",
+        "en": "Speak slowly and clearly so the listener understands."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-four-sentences",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کسی جانے پہچانے موضوع پر چار جملے بولیں اور آخر میں ایک سوال پوچھیں، جیسے 'What is your favourite food?'",
+        "en": "Say four sentences on a familiar topic and end by asking your listener a question, like 'What is your favourite food?'"
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "four clear sentences plus a correctly formed question",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "چار جملے مگر سوال نہیں یا سوال غلط۔",
+              "en": "Four sentences but no question, or the question is unclear."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "چار صاف جملے اور درست سوال۔",
+              "en": "Four clear sentences and a correct question."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Oral, mentor-assessed. The question must not ask for personal details."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-tell-family",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں کسی کو اپنے پسندیدہ کھانے کے بارے میں تین انگریزی جملے سنائیں۔",
+        "en": "Tell someone at home three English sentences about your favourite food."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Oral; the listener only needs to listen and praise."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پہلا جملہ ایسے شروع کریں: My favourite ___ is ___.",
+        "en": "Start your first sentence like this: My favourite ___ is ___."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اب ایک بات اور ایک وجہ جوڑیں: It is ___. I like it because ___.",
+        "en": "Now add a fact and a reason: It is ___. I like it because ___."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ایک لفظ کا جواب کافی سمجھنا۔",
+        "en": "Thinking a one-word answer is enough."
+      },
+      "correction": {
+        "ur": "سوال کے الفاظ لے کر پورا جملہ بنائیں۔",
+        "en": "Use the question's words to make a full sentence."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "اردو ترتیب میں بولنا: 'Colour blue my favourite.'",
+        "en": "Applies Urdu word order to English."
+      },
+      "correction": {
+        "ur": "انگریزی فاعل–فعل–مفعول ہے: My favourite colour is blue.",
+        "en": "English is subject–verb–object: My favourite colour is blue."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:ENG-G4-LS-02",
+      "remediation_ref": "ENG-G4-LS-02"
+    },
+    {
+      "signal": "misconception:m-l1-word-order",
+      "remediation_ref": "ENG-G4-GR-05"
+    }
+  ],
+  "revision_notes": {
+    "ur": "موضوع کا جملہ + ایک دو باتیں + because والی وجہ۔ پورے جملے، آہستہ اور صاف۔",
+    "en": "Topic sentence + one or two facts + a reason with because. Full sentences, slow and clear."
+  },
+  "summary": {
+    "ur": "ہم نے ایک جانے پہچانے موضوع پر صاف اور پورے جملے بولے۔",
+    "en": "We spoke clear, complete sentences about a familiar topic."
+  },
+  "parent_notes": {
+    "ur": "بچے کی انگریزی بات توجہ سے سنیں اور شاباش دیں۔ آپ اردو میں سوال پوچھ سکتے ہیں: 'یہ تمہیں کیوں پسند ہے؟'",
+    "en": "Listen carefully when your child speaks English and praise them. You can ask in Urdu: 'Why do you like it?'"
+  },
+  "mentor_notes": {
+    "ur": "بولنا آپ جانچیں۔ تلفظ کی بجائے صاف بات، پورے جملے اور وجہ پر دھیان دیں۔ شرمیلے بچے کو پہلے آپ کے ساتھ مل کر بولنے دیں۔",
+    "en": "You assess speaking. Focus on clarity, full sentences and a reason rather than accent. Let a shy child first speak together with you."
+  },
+  "accessibility_notes": {
+    "ur": "ہدایات اور نمونہ جملوں کی اردو/انگریزی آڈیو ابھی ریکارڈ نہیں ہوئی۔ جملوں کے ڈھانچے (My favourite ___ is ___) کا کارڈ اور اس کا متبادل متن ابھی بنانا ہے۔ گھسیٹ کر ترتیب دینے کا متبادل: ہر جملے کے آگے ۱، ۲ یا ۳ چنیں۔ بولنے میں مشکل والا بچہ جملے لکھ کر، اشاروں سے یا کسی مددگار آلے سے پیش کر سکتا ہے؛ مینٹر فیصلہ کرے۔",
+    "en": "Urdu/English audio for instructions and model sentences is not yet recorded. The sentence-frame card (My favourite ___ is ___) and its alt text are still to be made. Alternative to drag ordering: choose 1, 2 or 3 next to each sentence. A child with speech difficulty may present the sentences in writing, by sign or with an assistive device; the mentor decides."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "topic sentence, fact, reason (because); sentence frames first, then free speech",
+    "questioning_strategy": "ask 'what is your topic? tell me one thing about it. why do you like it?'",
+    "slow_down_signals": [
+      "one-word answers",
+      "long silence or reluctance",
+      "Urdu word order"
+    ],
+    "hint_policy": "graduated; two hints max; first the topic frame, then fact and reason frames; never speak the learner's sentences for them",
+    "example_policy": "safe familiar topics (food, games, seasons, school bag); never topics that need personal or family details",
+    "misconception_detectors": [
+      "one-word answers",
+      "m-l1-word-order",
+      "off-topic sentences"
+    ],
+    "critical_thinking_prompts": [
+      "Can you give a second reason using because?"
+    ],
+    "personalization_rules": "if a learner is shy or upset, lower the demand (one sentence) and involve the mentor; never pressure",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)",
+      "ask the learner about their home, family members, address or other personal details as a speaking topic"
+    ]
+  },
+  "review_flags": [
+    "mentor-mediated: confirm rubric levels for the oral items p6 and c1",
+    "inclusion: check topics (favourite food/game) work for all children, including those with disabilities or less food variety"
+  ]
+}

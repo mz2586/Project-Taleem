@@ -1,0 +1,420 @@
+{
+  "code": "MATH-G4-ME-02",
+  "description": {
+    "ur": "وزن کا موازنہ کرنا اور کلوگرام اور گرام میں بدلنا (۱ کلوگرام = ۱۰۰۰ گرام)۔",
+    "en": "Compare mass and convert between kilograms and grams (1 kg = 1000 g)."
+  },
+  "keywords": [
+    "mass",
+    "weight",
+    "kilogram",
+    "gram",
+    "convert",
+    "compare"
+  ],
+  "teacher_script": {
+    "ur": "بازار میں دکاندار آٹا، چاول اور آلو تول کر دیتا ہے۔ بھاری چیزیں کلوگرام میں تولی جاتی ہیں اور ہلکی چیزیں گرام میں۔ آج ہم سیکھیں گے کہ ایک کلوگرام میں ۱۰۰۰ گرام ہوتے ہیں۔ پھر ہم وزن بدلیں گے اور دیکھیں گے کہ کونسی چیز زیادہ بھاری ہے۔",
+    "en": "At the bazaar the shopkeeper weighs flour, rice and potatoes. Heavy things are weighed in kilograms and light things in grams. Today we learn that one kilogram has 1000 grams. Then we will change masses and find which thing is heavier."
+  },
+  "student_explanation": {
+    "ur": "وزن بتاتا ہے کہ کوئی چیز کتنی بھاری ہے۔ ہلکی چیزیں ہم گرام میں تولتے ہیں۔ نمک یا مصالحے کا چھوٹا پیکٹ گرام میں ہوتا ہے۔ بھاری چیزیں کلوگرام میں تولتے ہیں۔ آٹا اور آلو کلوگرام میں تولے جاتے ہیں۔ ایک کلوگرام میں ۱۰۰۰ گرام ہوتے ہیں۔ کلوگرام کو گرام بنانے کے لیے ۱۰۰۰ سے ضرب دیں۔ تو ۲ کلوگرام = ۲۰۰۰ گرام۔ موازنے سے پہلے دونوں وزن ایک ہی اکائی میں لکھیں۔",
+    "en": "Mass tells how heavy something is. We weigh light things in grams. A small packet of salt or spice is in grams. We weigh heavy things in kilograms. Flour and potatoes are weighed in kilograms. One kilogram has 1000 grams. To change kilograms into grams, multiply by 1000. So 2 kg = 2000 g. Before comparing, write both masses in the same unit."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۲ کلوگرام کو گرام میں بدلیں۔",
+        "en": "Change 2 kg into grams."
+      },
+      "steps": [
+        {
+          "ur": "۱ کلوگرام = ۱۰۰۰ گرام۔",
+          "en": "1 kg = 1000 g."
+        },
+        {
+          "ur": "۲ کلوگرام یعنی ۲ × ۱۰۰۰۔",
+          "en": "2 kg means 2 × 1000."
+        },
+        {
+          "ur": "۲ × ۱۰۰۰ = ۲۰۰۰۔ تو ۲ کلوگرام = ۲۰۰۰ گرام۔",
+          "en": "2 × 1000 = 2000. So 2 kg = 2000 g."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "کونسا زیادہ بھاری ہے: ۱۵۰۰ گرام یا ۱ کلوگرام؟",
+        "en": "Which is heavier: 1500 g or 1 kg?"
+      },
+      "steps": [
+        {
+          "ur": "ایک ہی اکائی بنائیں: ۱ کلوگرام = ۱۰۰۰ گرام۔",
+          "en": "Make one unit: 1 kg = 1000 g."
+        },
+        {
+          "ur": "اب موازنہ کریں: ۱۵۰۰ گرام اور ۱۰۰۰ گرام۔",
+          "en": "Now compare: 1500 g and 1000 g."
+        },
+        {
+          "ur": "۱۵۰۰ بڑا ہے ۱۰۰۰ سے۔ تو ۱۵۰۰ گرام زیادہ بھاری ہے۔",
+          "en": "1500 is more than 1000. So 1500 g is heavier."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-g-kg",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر چیز کو صحیح ڈبے میں رکھیں: 'گرام میں تولیں' یا 'کلوگرام میں تولیں'۔ آٹے کا تھیلا، ایک انڈا، چاول کی بوری، ایک چمچ چینی، تربوز، ایک پنسل۔",
+        "en": "Put each thing in the right box: 'weigh in g' or 'weigh in kg'. A bag of flour, an egg, a sack of rice, a spoon of sugar, a watermelon, a pencil."
+      },
+      "answer_key": {
+        "g": [
+          "egg",
+          "spoon of sugar",
+          "pencil"
+        ],
+        "kg": [
+          "bag of flour",
+          "sack of rice",
+          "watermelon"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا اسے ایک ہاتھ سے آرام سے اٹھا سکتے ہیں؟",
+            "en": "Can you lift it easily with one hand?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p1-kg-to-g",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۳ کلوگرام = ___ گرام",
+        "en": "3 kg = ___ g"
+      },
+      "answer_key": {
+        "answer": "3000"
+      },
+      "accepted_variants": [
+        "3000",
+        "۳۰۰۰",
+        "3,000",
+        "۳٬۰۰۰"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایک کلوگرام میں کتنے گرام ہیں؟",
+            "en": "How many grams are in one kilogram?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۳ × ۱۰۰۰ = ۳۰۰۰",
+        "en": "3 × 1000 = 3000"
+      }
+    },
+    {
+      "id": "p2-g-to-kg",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۴۰۰۰ گرام = ___ کلوگرام",
+        "en": "4000 g = ___ kg"
+      },
+      "answer_key": {
+        "answer": "4"
+      },
+      "accepted_variants": [
+        "4",
+        "۴"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۴۰۰۰ میں ۱۰۰۰ کے کتنے گروپ ہیں؟",
+            "en": "How many groups of 1000 are in 4000?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p3-potatoes-onions",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کونسا زیادہ بھاری ہے: ۱ کلوگرام آلو یا ۹۰۰ گرام پیاز؟",
+        "en": "Which is heavier: 1 kg of potatoes or 900 g of onions?"
+      },
+      "options": [
+        {
+          "ur": "۹۰۰ گرام پیاز",
+          "en": "900 g of onions"
+        },
+        {
+          "ur": "۱ کلوگرام آلو",
+          "en": "1 kg of potatoes"
+        },
+        {
+          "ur": "دونوں برابر",
+          "en": "They weigh the same"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-unit-mix"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۱ کلوگرام کو گرام میں بدلیں۔",
+            "en": "Change 1 kg into grams."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱ کلوگرام = ۱۰۰۰ گرام، جو ۹۰۰ گرام سے زیادہ ہے۔",
+        "en": "1 kg = 1000 g, which is more than 900 g."
+      }
+    },
+    {
+      "id": "p4-add-kg-g",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۲ کلوگرام + ۵۰۰ گرام = ؟",
+        "en": "2 kg + 500 g = ?"
+      },
+      "options": [
+        {
+          "ur": "۲۵۰۰ گرام",
+          "en": "2500 g"
+        },
+        {
+          "ur": "۵۰۲ گرام",
+          "en": "502 g"
+        },
+        {
+          "ur": "۷ کلوگرام",
+          "en": "7 kg"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-unit-mix"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے ۲ کلوگرام کو گرام میں بدلیں۔",
+            "en": "First change 2 kg into grams."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۲۰۰۰ + ۵۰۰ = ۲۵۰۰ گرام۔",
+        "en": "2000 + 500 = 2500 g."
+      }
+    },
+    {
+      "id": "p5-kg-100g",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "۱ کلوگرام = ۱۰۰ گرام",
+        "en": "1 kg = 100 g"
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لمبائی میں ۱۰۰ تھا۔ وزن میں کتنا ہے؟",
+            "en": "Length used 100. What does mass use?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱ کلوگرام = ۱۰۰۰ گرام۔",
+        "en": "1 kg = 1000 g."
+      }
+    },
+    {
+      "id": "p6-sugar-kheer",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "امی نے ۱ کلوگرام چینی خریدی۔ انہوں نے کھیر میں ۲۵۰ گرام ڈالی۔ کتنی چینی بچی؟",
+        "en": "Ammi buys 1 kg of sugar. She uses 250 g for kheer. How much sugar is left?"
+      },
+      "options": [
+        {
+          "ur": "۲۴۹ گرام",
+          "en": "249 g"
+        },
+        {
+          "ur": "۱۲۵۰ گرام",
+          "en": "1250 g"
+        },
+        {
+          "ur": "۷۵۰ گرام",
+          "en": "750 g"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-unit-mix"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۱ کلوگرام کو گرام میں بدلیں، پھر گھٹائیں۔",
+            "en": "Change 1 kg into grams, then subtract."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱۰۰۰ − ۲۵۰ = ۷۵۰ گرام۔",
+        "en": "1000 − 250 = 750 g."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-balance",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "دکاندار ترازو کے ایک پلڑے میں ۵۰۰ گرام، ۲۵۰ گرام اور ۲۵۰ گرام کے باٹ رکھتا ہے۔ دوسرے پلڑے میں ۱ کلوگرام چاول ہیں۔ کیا ترازو برابر ہو گا؟",
+        "en": "A shopkeeper puts 500 g, 250 g and 250 g weights on one side of a balance. The other side has 1 kg of rice. Will the balance be level?"
+      },
+      "options": [
+        {
+          "ur": "نہیں، باٹ زیادہ بھاری ہیں",
+          "en": "No, the weights are heavier"
+        },
+        {
+          "ur": "ہاں، دونوں طرف ۱۰۰۰ گرام ہے",
+          "en": "Yes, both sides have 1000 g"
+        },
+        {
+          "ur": "نہیں، چاول زیادہ بھاری ہیں",
+          "en": "No, the rice is heavier"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "باٹوں کو جوڑیں، پھر ۱ کلوگرام کو گرام میں بدلیں۔",
+            "en": "Add the weights, then change 1 kg into grams."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۵۰۰ + ۲۵۰ + ۲۵۰ = ۱۰۰۰ گرام = ۱ کلوگرام۔",
+        "en": "500 + 250 + 250 = 1000 g = 1 kg."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-unit-mix",
+      "remediation_ref": "MATH-G4-ME-02"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-ME-01",
+      "remediation_ref": "MATH-G4-ME-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "۱ کلوگرام = ۱۰۰۰ گرام۔ کلوگرام سے گرام: ۱۰۰۰ سے ضرب۔ ہلکی چیزیں گرام میں، بھاری کلوگرام میں۔ موازنے سے پہلے ایک ہی اکائی بنائیں۔",
+    "en": "1 kg = 1000 g. Kilograms to grams: multiply by 1000. Light things in g, heavy things in kg. Make one unit before comparing."
+  },
+  "summary": {
+    "ur": "ہم نے وزن کو کلوگرام اور گرام میں بدلنا اور موازنہ کرنا سیکھا۔",
+    "en": "We learned to change and compare masses in kilograms and grams."
+  },
+  "parent_notes": {
+    "ur": "سودے کے پیکٹوں کے وزن کا موازنہ کریں۔",
+    "en": "compare weights of grocery packets."
+  },
+  "mentor_notes": {
+    "ur": "بچوں کو ان مقداروں سے جوڑیں جو وہ خریداری میں دیکھتے ہیں۔",
+    "en": "relate to shopping quantities children see."
+  },
+  "accessibility_notes": {
+    "ur": "ترازو اور سودے کی تصویریں ابھی بنانی ہیں؛ متبادل متن ہر چیز کا نام اور اس کا وزن پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر چیز کے لیے 'گرام' یا 'کلوگرام' کا بٹن چنیں؛ گھسیٹنا ضروری نہیں۔",
+    "en": "The balance and grocery pictures are still to be made; alt text should read each item's name and its mass. Urdu audio is not yet recorded. Alternative to the sorting activity: tap a 'g' or 'kg' button for each item; no dragging is needed."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "everyday benchmarks first (a bag of flour in kg, a spice packet in g), then the rule 1 kg = 1000 g, then convert before comparing",
+    "questioning_strategy": "ask 'are both masses in the same unit?' before 'which is heavier?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "treats 900 as more than 1 without converting",
+      "uses 100 instead of 1000"
+    ],
+    "hint_policy": "graduated; two hints max before a worked re-teach of a similar problem; never reveal the answer first",
+    "example_policy": "whole kilograms and multiples of 50 g or 250 g; bazaar and kitchen contexts (atta, rice, sugar, potatoes); no brand names",
+    "misconception_detectors": [
+      "compares or adds kg and g as plain numbers",
+      "carries over 1 m = 100 cm and uses 100 for mass"
+    ],
+    "critical_thinking_prompts": [
+      "Why can 1 kg be heavier than 900 g when 900 is the bigger number?"
+    ],
+    "personalization_rules": "if the learner mixes units in length too, route to MATH-G4-ME-01 first",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, upset or fear -> stop the lesson and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information",
+      "shame or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the shared m-unit-mix correction imported from §4 says '1 m = 100 cm'; in this mass lesson it should say 1 kg = 1000 g",
+    "language editor: 'وزن' is used for mass, as in the doc; confirm, and confirm 'کلو' (colloquial, used in the human hint) vs 'کلوگرام'"
+  ]
+}

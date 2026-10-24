@@ -1,0 +1,458 @@
+{
+  "code": "MATH-G4-GE-02",
+  "description": {
+    "ur": "قائمہ، حادہ اور منفرجہ زاویے پہچاننا۔",
+    "en": "Recognise right, acute and obtuse angles."
+  },
+  "keywords": [
+    "angle",
+    "right angle",
+    "acute angle",
+    "obtuse angle",
+    "ray",
+    "vertex"
+  ],
+  "teacher_script": {
+    "ur": "اپنی کاپی کا ایک کونا دیکھیں۔ یہ ایک خاص زاویہ ہے جسے قائمہ زاویہ کہتے ہیں۔ آج ہم اسی کونے سے دوسرے زاویوں کا موازنہ کریں گے۔ جو اس سے کم کھلا ہو وہ حادہ ہے، اور جو زیادہ کھلا ہو وہ منفرجہ۔ یاد رکھیں: زاویہ کھلاؤ سے ناپتے ہیں، بازوؤں کی لمبائی سے نہیں۔",
+    "en": "Look at one corner of your notebook. It is a special angle called a right angle. Today we compare other angles with this corner. One that opens less is acute, and one that opens more is obtuse. Remember: an angle is the opening, not the length of its arms."
+  },
+  "student_explanation": {
+    "ur": "دو شعاعیں ایک نقطے سے نکلیں تو زاویہ بنتا ہے۔ زاویہ ان کے بیچ کا کھلاؤ ہے۔ کاپی کے صفحے کا کونا قائمہ زاویہ ہے۔ یہ ۹۰ درجے کا ہوتا ہے۔ جو زاویہ اس کونے سے کم کھلا ہو، وہ حادہ ہے۔ جو زاویہ اس کونے سے زیادہ کھلا ہو، وہ منفرجہ ہے۔ بازو لمبے ہوں یا چھوٹے، زاویہ نہیں بدلتا۔ کاغذ کا کونا رکھ کر موازنہ کریں۔",
+    "en": "When two rays start from one point, they make an angle. The angle is the opening between them. The corner of a notebook page is a right angle. It measures 90 degrees. An angle that opens less than that corner is acute. An angle that opens more than that corner is obtuse. Long arms or short arms do not change the angle. Hold a paper corner against it to compare."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۳ بجے گھڑی کی سوئیاں کونسا زاویہ بناتی ہیں؟",
+        "en": "At 3 o'clock, what angle do the clock hands make?"
+      },
+      "steps": [
+        {
+          "ur": "بڑی سوئی ۱۲ پر ہے، چھوٹی سوئی ۳ پر۔",
+          "en": "The long hand is on 12 and the short hand is on 3."
+        },
+        {
+          "ur": "کاغذ کا کونا سوئیوں کے بیچ رکھیں۔",
+          "en": "Put a paper corner between the hands."
+        },
+        {
+          "ur": "کونا بالکل فٹ آتا ہے۔ تو یہ قائمہ زاویہ ہے۔",
+          "en": "The corner fits exactly. So it is a right angle."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "۲ بجے اور ۵ بجے سوئیوں کے زاویے کیسے ہیں؟",
+        "en": "What kind of angle do the hands make at 2 o'clock and at 5 o'clock?"
+      },
+      "steps": [
+        {
+          "ur": "۲ بجے: کاغذ کا کونا رکھیں۔ کھلاؤ کونے سے کم ہے۔",
+          "en": "At 2 o'clock: hold the paper corner there. The opening is less than the corner."
+        },
+        {
+          "ur": "تو ۲ بجے کا زاویہ حادہ ہے۔",
+          "en": "So the angle at 2 o'clock is acute."
+        },
+        {
+          "ur": "۵ بجے: کھلاؤ کونے سے زیادہ ہے۔",
+          "en": "At 5 o'clock: the opening is more than the corner."
+        },
+        {
+          "ur": "تو ۵ بجے کا زاویہ منفرجہ ہے۔",
+          "en": "So the angle at 5 o'clock is obtuse."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-angles",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر زاویے کو صحیح ڈبے میں رکھیں: قائمہ، حادہ یا منفرجہ۔ زاویے: ۹۰ درجے، ۴۰ درجے، ۱۳۰ درجے، ۲۰ درجے، ۱۶۰ درجے، اور لمبے بازوؤں والا ۹۰ درجے۔",
+        "en": "Put each angle in the right box: right, acute or obtuse. Angles: 90°, 40°, 130°, 20°, 160°, and a 90° angle with long arms."
+      },
+      "answer_key": {
+        "right": [
+          "90",
+          "90 long arms"
+        ],
+        "acute": [
+          "40",
+          "20"
+        ],
+        "obtuse": [
+          "130",
+          "160"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر زاویے پر کاغذ کا کونا رکھ کر دیکھیں۔",
+            "en": "Hold the paper corner against each angle."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-match-angle-names",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر زاویے کو اس کی پہچان سے ملائیں۔",
+        "en": "Match each angle to how we recognise it."
+      },
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "قائمہ",
+              "en": "right"
+            },
+            "right": {
+              "ur": "صفحے کے کونے جتنا کھلا",
+              "en": "opens exactly like a page corner"
+            }
+          },
+          {
+            "left": {
+              "ur": "حادہ",
+              "en": "acute"
+            },
+            "right": {
+              "ur": "صفحے کے کونے سے کم کھلا",
+              "en": "opens less than a page corner"
+            }
+          },
+          {
+            "left": {
+              "ur": "منفرجہ",
+              "en": "obtuse"
+            },
+            "right": {
+              "ur": "صفحے کے کونے سے زیادہ کھلا",
+              "en": "opens more than a page corner"
+            }
+          }
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر ایک کا موازنہ صفحے کے کونے سے کریں۔",
+            "en": "Compare each one with a page corner."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-less-than-corner",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ایک زاویہ صفحے کے کونے سے کم کھلا ہے۔ یہ کونسا زاویہ ہے؟",
+        "en": "An angle opens less than a page corner. What kind of angle is it?"
+      },
+      "options": [
+        {
+          "ur": "منفرجہ",
+          "en": "obtuse"
+        },
+        {
+          "ur": "حادہ",
+          "en": "acute"
+        },
+        {
+          "ur": "قائمہ",
+          "en": "right"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کم کھلا یعنی کونے سے چھوٹا۔",
+            "en": "Opens less means smaller than the corner."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "قائمہ زاویے سے کم کھلا زاویہ حادہ ہے۔",
+        "en": "An angle that opens less than a right angle is acute."
+      }
+    },
+    {
+      "id": "p2-door-corner",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "دروازے کا کونا کونسا زاویہ ہے؟",
+        "en": "The corner of a door is which kind of angle?"
+      },
+      "options": [
+        {
+          "ur": "قائمہ",
+          "en": "right"
+        },
+        {
+          "ur": "حادہ",
+          "en": "acute"
+        },
+        {
+          "ur": "منفرجہ",
+          "en": "obtuse"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا کاغذ کا کونا اس میں بالکل فٹ آتا ہے؟",
+            "en": "Does a paper corner fit it exactly?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "دروازے کا کونا صفحے کے کونے جیسا ہے: قائمہ۔",
+        "en": "A door corner is like a page corner: right."
+      }
+    },
+    {
+      "id": "p3-long-arms",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "لمبے بازوؤں والا زاویہ ہمیشہ بڑا ہوتا ہے۔",
+        "en": "An angle with longer arms is always bigger."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-right-angle-size"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کھلاؤ دیکھیں، لمبائی نہیں۔",
+            "en": "Look at the opening, not the length."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "زاویہ کھلاؤ سے ناپتے ہیں۔ بازو بڑھانے سے کھلاؤ نہیں بدلتا۔",
+        "en": "An angle is measured by its opening. Longer arms do not change the opening."
+      }
+    },
+    {
+      "id": "p4-which-obtuse",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کونسا زاویہ منفرجہ ہے؟",
+        "en": "Which angle is obtuse?"
+      },
+      "options": [
+        {
+          "ur": "۴۵ درجے",
+          "en": "45°"
+        },
+        {
+          "ur": "۹۰ درجے",
+          "en": "90°"
+        },
+        {
+          "ur": "۱۲۰ درجے",
+          "en": "120°"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "منفرجہ زاویہ ۹۰ درجے سے زیادہ کھلا ہوتا ہے۔",
+            "en": "An obtuse angle opens more than 90°."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱۲۰ درجے، ۹۰ درجے سے زیادہ ہے، اس لیے منفرجہ۔",
+        "en": "120° is more than 90°, so it is obtuse."
+      }
+    },
+    {
+      "id": "p5-arms-trick",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک زاویہ ۳۰ درجے کا ہے اور اس کے بازو لمبے ہیں۔ دوسرا ۶۰ درجے کا ہے اور اس کے بازو چھوٹے ہیں۔ کونسا زاویہ بڑا ہے؟",
+        "en": "One angle is 30° with long arms. Another is 60° with short arms. Which angle is bigger?"
+      },
+      "options": [
+        {
+          "ur": "لمبے بازوؤں والا ۳۰ درجے کا",
+          "en": "the 30° angle with long arms"
+        },
+        {
+          "ur": "چھوٹے بازوؤں والا ۶۰ درجے کا",
+          "en": "the 60° angle with short arms"
+        },
+        {
+          "ur": "دونوں برابر",
+          "en": "they are equal"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-right-angle-size"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کس کا کھلاؤ زیادہ ہے؟",
+            "en": "Which one has the wider opening?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۶۰ درجے کا کھلاؤ زیادہ ہے، چاہے بازو چھوٹے ہوں۔",
+        "en": "60° is the wider opening, even with short arms."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-nine-oclock",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "۹ بجے گھڑی کی سوئیاں کونسا زاویہ بناتی ہیں؟",
+        "en": "At 9 o'clock, what kind of angle do the clock hands make?"
+      },
+      "options": [
+        {
+          "ur": "حادہ",
+          "en": "acute"
+        },
+        {
+          "ur": "منفرجہ",
+          "en": "obtuse"
+        },
+        {
+          "ur": "قائمہ",
+          "en": "right"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۳ بجے کا زاویہ یاد کریں۔ ۹ بجے سوئیاں دوسری طرف ہیں۔",
+            "en": "Remember the angle at 3 o'clock. At 9 the hands point the other way."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۹ بجے بڑی سوئی ۱۲ پر اور چھوٹی ۹ پر ہے؛ کونا بالکل فٹ آتا ہے: قائمہ۔",
+        "en": "At 9 the long hand is on 12 and the short hand on 9; a page corner fits exactly: right."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-right-angle-size",
+      "remediation_ref": "MATH-G4-GE-02"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-GE-01",
+      "remediation_ref": "MATH-G4-GE-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "قائمہ: صفحے کے کونے جتنا (۹۰ درجے)۔ حادہ: اس سے کم کھلا۔ منفرجہ: اس سے زیادہ کھلا۔ بازوؤں کی لمبائی سے زاویہ نہیں بدلتا۔",
+    "en": "Right: like a page corner (90°). Acute: opens less. Obtuse: opens more. The length of the arms does not change the angle."
+  },
+  "summary": {
+    "ur": "ہم نے صفحے کے کونے سے موازنہ کر کے قائمہ، حادہ اور منفرجہ زاویے پہچاننا سیکھا۔",
+    "en": "We learned to recognise right, acute and obtuse angles by comparing with a page corner."
+  },
+  "parent_notes": {
+    "ur": "دروازے اور کھڑکی کے کونوں میں قائمہ زاویے ڈھونڈیں۔",
+    "en": "spot right angles in door and window corners."
+  },
+  "mentor_notes": {
+    "ur": "زاویے کا سائز بازو کی لمبائی نہیں؛ موازنے کے لیے کاغذ کا کونا استعمال کریں۔",
+    "en": "angle size ≠ arm length; use a paper-corner comparator."
+  },
+  "accessibility_notes": {
+    "ur": "زاویوں اور گھڑی کی تصویریں ابھی بنانی ہیں؛ ہر زاویے کا متبادل متن بتائے کہ وہ صفحے کے کونے سے کم، برابر یا زیادہ کھلا ہے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر زاویے کے لیے 'قائمہ'، 'حادہ' یا 'منفرجہ' کا بٹن چنیں؛ گھسیٹنا ضروری نہیں۔ کاغذ کا کونا ہر بچے کے پاس ہوتا ہے؛ کوئی آلہ ضروری نہیں۔",
+    "en": "The angle and clock pictures are still to be made; each angle's alt text should say whether it opens less than, the same as, or more than a page corner. Urdu audio is not yet recorded. Alternative to the sorting activity: tap a 'right', 'acute' or 'obtuse' button for each angle; no dragging is needed. Every child has a paper corner; no protractor is needed."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "the page corner is the reference: same = right, less open = acute, more open = obtuse; vary arm lengths on purpose",
+    "questioning_strategy": "ask 'is it more or less open than the page corner?' before asking for the name",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "judges by arm length",
+      "mixes up the names acute and obtuse"
+    ],
+    "hint_policy": "graduated; two hints max before a worked re-teach of a similar problem; never reveal the answer first",
+    "example_policy": "angles at home (door, window, book, clock hands at whole hours); degrees only as 90 for a right angle and simple whole numbers",
+    "misconception_detectors": [
+      "calls a long-armed acute angle bigger",
+      "calls every angle that is not right 'acute'"
+    ],
+    "critical_thinking_prompts": [
+      "If you make the arms of an angle twice as long, does the angle change?"
+    ],
+    "personalization_rules": "if the learner cannot name a ray or a point, route back to MATH-G4-GE-01",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, upset or fear -> stop the lesson and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information",
+      "shame or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the lesson names 90° and uses degree values (20°–160°) in items; confirm degrees are in scope for Grade 4 or replace them with pictures",
+    "language editor: confirm قائمہ / حادہ / منفرجہ and 'کھلاؤ' for the opening of an angle"
+  ]
+}

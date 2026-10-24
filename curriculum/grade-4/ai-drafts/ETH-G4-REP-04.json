@@ -1,0 +1,479 @@
+{
+  "code": "ETH-G4-REP-04",
+  "title": {
+    "ur": "اپنے محلے کی مدد",
+    "en": "Helping our community"
+  },
+  "description": {
+    "ur": "گھر والوں کی اجازت سے محلے اور برادری کی محفوظ اور چھوٹی چھوٹی مدد کرنا۔",
+    "en": "Helping the neighbourhood and community in small, safe ways, with a family grown-up's permission."
+  },
+  "keywords": [
+    "community",
+    "neighbourhood",
+    "helping",
+    "neighbours",
+    "sharing",
+    "permission",
+    "safety"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "محلہ",
+        "en": "neighbourhood"
+      },
+      "definition": {
+        "ur": "ہمارے گھر کے آس پاس کے گھر اور لوگ۔",
+        "en": "the homes and people around where we live."
+      }
+    },
+    {
+      "term": {
+        "ur": "برادری",
+        "en": "community"
+      },
+      "definition": {
+        "ur": "وہ لوگ جو ایک جگہ مل کر رہتے ہیں اور ایک دوسرے کی مدد کرتے ہیں۔",
+        "en": "people who live in one place and help each other."
+      }
+    },
+    {
+      "term": {
+        "ur": "اجازت",
+        "en": "permission"
+      },
+      "definition": {
+        "ur": "کسی بڑے کا «ہاں، تم کر سکتے ہو» کہنا۔",
+        "en": "a grown-up saying \"yes, you may\"."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ہمارا محلہ ایک بڑے گھر کی طرح ہے۔ جب سب ایک دوسرے کی مدد کرتے ہیں تو سب کی زندگی آسان ہوتی ہے۔ آج ہم دیکھیں گے کہ بچے کیسے محفوظ طریقے سے مدد کر سکتے ہیں، ہمیشہ گھر کے کسی بڑے کی اجازت سے۔ ہم پڑوس کی بزرگ خالہ اور بارش کے بعد کی ایک کہانی سنیں گے۔",
+    "en": "Our neighbourhood is like one big home. When everyone helps each other, life is easier for all. Today we will see how children can help safely, always with a family grown-up's permission. We will hear a story about an elderly neighbour and a rainy day."
+  },
+  "student_explanation": {
+    "ur": "محلہ اور برادری ہمارے ارد گرد کے لوگ ہیں۔ جب ہم مدد کرتے ہیں تو سب کو فائدہ ہوتا ہے۔ بچے چھوٹی مدد کر سکتے ہیں۔ پڑوس کی بزرگ خالہ کا تھیلا اٹھا سکتے ہیں۔ پرانی کتابیں چھوٹے بچوں کو دے سکتے ہیں۔ گلی کی صفائی میں بڑوں کے ساتھ حصہ لے سکتے ہیں۔ مدد سے پہلے ہمیشہ گھر کے کسی بڑے سے اجازت لیں۔ کسی اجنبی کے ساتھ کہیں نہ جائیں۔ چھوٹی مدد بھی بڑی بات ہے۔",
+    "en": "Our neighbourhood and community are the people around us. When we help, everyone benefits. Children can help in small ways. We can carry an elderly neighbour's bag. We can give old books to younger children. We can join a street clean-up with grown-ups. Always ask a family grown-up for permission before helping. Never go anywhere with a stranger. Small help is a big thing too."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "پڑوس کی بزرگ خالہ سبزی کا بھاری تھیلا لے کر آ رہی ہیں۔ حمزہ گھر کے دروازے پر ہے۔ وہ کیسے مدد کرے؟",
+        "en": "An elderly neighbour is coming home with a heavy bag of vegetables. Hamza is at his front door. How can he help?"
+      },
+      "steps": [
+        {
+          "ur": "حمزہ پہلے امی کو بتاتا ہے: «میں خالہ کا تھیلا اٹھا دوں؟» امی ہاں کہتی ہیں۔",
+          "en": "Hamza first tells Ammi, \"Shall I carry Khala's bag?\" Ammi says yes."
+        },
+        {
+          "ur": "وہ ادب سے کہتا ہے: «خالہ، میں تھیلا اٹھا دیتا ہوں۔»",
+          "en": "He says politely, \"Khala, let me carry the bag.\""
+        },
+        {
+          "ur": "وہ تھیلا دروازے تک پہنچاتا ہے اور واپس گھر آ جاتا ہے۔",
+          "en": "He takes the bag to her door and comes back home."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "بارش کے بعد گلی میں پانی اور پتے جمع ہیں۔ محلے کے بڑے صفائی کر رہے ہیں۔ بچے کیسے مدد کر سکتے ہیں؟",
+        "en": "After rain, water and leaves have collected in the street. Grown-ups in the neighbourhood are cleaning up. How can children help?"
+      },
+      "steps": [
+        {
+          "ur": "بچے گھر والوں کے ساتھ باہر آتے ہیں، اکیلے نہیں۔",
+          "en": "Children come out with their family, not alone."
+        },
+        {
+          "ur": "وہ جھاڑو سے اپنے دروازے کے سامنے کے پتے سمیٹتے ہیں۔",
+          "en": "They sweep the leaves in front of their own door."
+        },
+        {
+          "ur": "بجلی کے تاروں اور گہرے پانی سے دور رہتے ہیں۔ صفائی کے بعد ہاتھ دھوتے ہیں۔",
+          "en": "They stay away from electric wires and deep water. They wash their hands afterwards."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-safe-help",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "ہر کارڈ کو رکھیں: «محفوظ مدد» یا «پہلے بڑے سے پوچھیں / نہ کریں»۔",
+        "en": "Sort each card: 'safe help' or 'ask a grown-up first / don't'."
+      },
+      "options": [
+        {
+          "ur": "اپنی پرانی کتابیں گھر والوں کے ذریعے چھوٹے بچوں کو دینا",
+          "en": "Giving your old books to younger children through your family"
+        },
+        {
+          "ur": "کسی اجنبی کی گاڑی تک اس کا سامان لے جانا",
+          "en": "Carrying a stranger's things to their car"
+        },
+        {
+          "ur": "بڑوں کے ساتھ گلی کی صفائی میں حصہ لینا",
+          "en": "Joining a street clean-up with grown-ups"
+        },
+        {
+          "ur": "اکیلے گہرے پانی میں گری چیز نکالنا",
+          "en": "Fetching something from deep water alone"
+        }
+      ],
+      "answer_key": {
+        "sort": {
+          "safe_help": [
+            0,
+            2
+          ],
+          "ask_first_or_dont": [
+            1,
+            3
+          ]
+        },
+        "mode": "tap a card, then tap its group (drag also works)"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: کیا یہ محفوظ ہے؟ کیا گھر کا بڑا جانتا ہے؟",
+            "en": "Ask: is it safe? Does a family grown-up know?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-community-meaning",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "برادری کیا ہے؟",
+        "en": "What is a community?"
+      },
+      "options": [
+        {
+          "ur": "وہ لوگ جو ایک جگہ مل کر رہتے اور ایک دوسرے کی مدد کرتے ہیں",
+          "en": "People who live in one place and help each other"
+        },
+        {
+          "ur": "صرف میرا اپنا کمرہ",
+          "en": "Only my own room"
+        },
+        {
+          "ur": "ایک کھیل کا نام",
+          "en": "The name of a game"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-permission",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "محلے میں مدد سے پہلے گھر کے کسی بڑے سے اجازت لینی چاہیے۔",
+        "en": "We should ask a family grown-up for permission before helping in the neighbourhood."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-stranger",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک اجنبی کہتا ہے: «میری مدد کرو، میرے ساتھ گلی کے آخر تک چلو۔» آپ کیا کریں؟",
+        "en": "A stranger says, \"Help me, come with me to the end of the street.\" What should you do?"
+      },
+      "options": [
+        {
+          "ur": "فوراً ساتھ چلے جائیں، مدد اچھی بات ہے",
+          "en": "Go straight away, helping is good"
+        },
+        {
+          "ur": "«نہیں» کہیں، ساتھ نہ جائیں، اور گھر کے بڑے کو بتائیں",
+          "en": "Say \"no\", don't go, and tell a family grown-up"
+        },
+        {
+          "ur": "کسی کو بتائے بغیر تھوڑی دور چلے جائیں",
+          "en": "Go a little way without telling anyone"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "بچے اجنبیوں کے ساتھ کہیں نہیں جاتے۔ بڑوں کی مدد بڑے کرتے ہیں۔",
+        "en": "Children never go anywhere with strangers. Grown-ups help grown-ups."
+      }
+    },
+    {
+      "id": "p4-someone-else",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "محلے کی مدد بڑوں کا کام ہے، بچوں کا اس میں کوئی حصہ نہیں۔",
+        "en": "Helping the community is only for grown-ups; children have no share."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-responsibility-someone-else"
+        }
+      },
+      "explanation": {
+        "ur": "ہر ایک کا اپنا حصہ ہے، بچوں کا بھی۔",
+        "en": "Each of us has a share, children too."
+      }
+    },
+    {
+      "id": "p5-old-books",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "نئی جماعت میں جانے کے بعد آپ کی پرانی کتابیں اچھی حالت میں ہیں۔ برادری کی مدد کیسے کریں؟",
+        "en": "After moving up a class, your old books are in good condition. How can you help the community?"
+      },
+      "options": [
+        {
+          "ur": "پھاڑ کر پھینک دیں",
+          "en": "Tear them up and throw them away"
+        },
+        {
+          "ur": "الماری میں ہمیشہ بند رکھیں",
+          "en": "Lock them in a cupboard forever"
+        },
+        {
+          "ur": "گھر والوں کی مدد سے کسی چھوٹے بچے کو دے دیں",
+          "en": "With your family's help, give them to a younger child"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p6-small-help",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ان میں سے کون سی بات سچ ہے؟",
+        "en": "Which of these is true?"
+      },
+      "options": [
+        {
+          "ur": "صرف بڑی مدد گنی جاتی ہے",
+          "en": "Only big help counts"
+        },
+        {
+          "ur": "چھوٹی مدد بھی بڑا فرق ڈالتی ہے",
+          "en": "Small help makes a big difference too"
+        },
+        {
+          "ur": "مدد کے لیے پیسے ہونا ضروری ہے",
+          "en": "You need money to help"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-responsibility-someone-else"
+        }
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-everyone-waits",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "گلی کا کوڑے دان بھر گیا ہے۔ ہر گھر سوچتا ہے کہ کوئی اور شکایت کر دے گا۔ ایک بچہ کیا کر سکتا ہے؟",
+        "en": "The street bin is full. Every household thinks someone else will report it. What can a child do?"
+      },
+      "options": [
+        {
+          "ur": "گھر کے بڑے کو بتائے تاکہ وہ متعلقہ جگہ اطلاع دیں",
+          "en": "Tell a family grown-up so they can report it to the right place"
+        },
+        {
+          "ur": "کوڑا وہیں ڈالتا رہے",
+          "en": "Keep dumping rubbish there"
+        },
+        {
+          "ur": "خود کوڑے دان خالی کرنے کی کوشش کرے",
+          "en": "Try to empty the bin himself"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-responsibility-someone-else"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا راستہ ذمہ دار بھی ہے اور محفوظ بھی؟",
+            "en": "Which way is both responsible and safe?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-helper-idea",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر والوں کے ساتھ مل کر محلے کی ایک چھوٹی، محفوظ مدد سوچیں جو آپ ان کے ساتھ کر سکیں۔ اگر وہ اجازت دیں تو کریں۔",
+        "en": "With your family, think of one small, safe way to help your neighbourhood that you can do together. If they say yes, do it."
+      },
+      "answer_key": {
+        "guidance": "Done at home with a family grown-up; nothing is entered in the app; no names of neighbours are needed."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "اس کہانی میں کس کو مدد چاہیے؟",
+        "en": "In this story, who needs help?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "کیا یہ مدد محفوظ ہے، اور کیا گھر کا بڑا جانتا ہے؟",
+        "en": "Is this help safe, and does a family grown-up know?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "«کوئی اور مدد کر دے گا۔»",
+        "en": "\"Someone else will help.\""
+      },
+      "correction": {
+        "ur": "ہر ایک کا اپنا حصہ ہے، بچوں کا بھی۔",
+        "en": "Each of us has a share of responsibility, children too."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "مدد کرنے کا مطلب ہے کسی کے بھی ساتھ کہیں بھی چلے جانا۔",
+        "en": "Helping means going anywhere with anyone."
+      },
+      "correction": {
+        "ur": "مدد ہمیشہ محفوظ اور گھر کے بڑے کی اجازت سے؛ اجنبی کے ساتھ کبھی نہیں۔",
+        "en": "Help is always safe and with a family grown-up's permission; never with a stranger."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-responsibility-someone-else",
+      "remediation_ref": "ETH-G4-REP-01"
+    },
+    {
+      "signal": "chooses unsafe help options (stranger, deep water)",
+      "remediation_ref": "ETH-G4-REP-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "محلہ اور برادری = ارد گرد کے لوگ۔ چھوٹی مدد بھی اہم۔ ہمیشہ گھر کے بڑے کی اجازت۔ اجنبی کے ساتھ کہیں نہ جائیں۔ ہر ایک کا اپنا حصہ ہے۔",
+    "en": "Neighbourhood and community = people around us. Small help matters. Always ask a family grown-up. Never go anywhere with a stranger. Everyone has a share."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ بچے بھی گھر والوں کی اجازت سے محلے کی محفوظ مدد کر سکتے ہیں۔",
+    "en": "We learned that children can help their community safely, with a family grown-up's permission."
+  },
+  "parent_notes": {
+    "ur": "بچے کے ساتھ مل کر محلے کی کوئی چھوٹی مدد کریں، جیسے پرانی کتابیں دینا۔ بچے کو یاد دلائیں کہ وہ کسی اجنبی کے ساتھ کہیں نہ جائے، چاہے وہ مدد مانگے۔",
+    "en": "Do a small neighbourhood kindness together, like passing on old books. Remind your child never to go anywhere with a stranger, even one asking for help."
+  },
+  "mentor_notes": {
+    "ur": "مدد ہمیشہ محفوظ، چھوٹی اور بڑوں کی اجازت سے ہو؛ بچوں پر پیسے یا وقت کا دباؤ نہ ڈالیں۔ اجنبی والی بات کو پرسکون رکھیں تاکہ بچے خوفزدہ نہ ہوں۔",
+    "en": "Help must always be safe, small and with grown-ups' permission; never pressure children for money or time. Keep the stranger message calm so children are not frightened."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن منظر بیان کرے (کون ہے، کیا ہو رہا ہے)۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ یہ مضمون سننے پر مبنی ہے، اس لیے ہر کہانی، سوال اور جواب کو آواز میں پڑھا جانا ضروری ہے۔ ترتیب دینے والی سرگرمی کا متبادل: کارڈ کو چھوئیں، پھر گروپ کو چھوئیں؛ یا ہر کارڈ کے لیے دو بٹنوں میں سے ایک چنیں۔",
+    "en": "Story pictures are still to be made; each needs alt text that describes the scene (who is there, what is happening). Urdu audio is not yet recorded; this subject is audio-first, so every story, question and option must be read aloud. Alternative to the sort activity: tap a card, then tap its group; or answer each card with one of two buttons."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "community as 'one big home'; two stories (elderly neighbour's bag, after-rain clean-up with family); rule: small, safe help, always with a family grown-up's permission, never with strangers",
+    "questioning_strategy": "ask 'who needs help?' then 'is it safe?' and 'does a grown-up know?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "would go with a stranger to help",
+      "says helping is only for grown-ups"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "neighbourhood, street, rain clean-up with family, passing on books; no money needed; calm stranger-safety message",
+    "misconception_detectors": [
+      "thinks community help is someone else's job",
+      "thinks helping means going with anyone",
+      "thinks only big or costly help counts"
+    ],
+    "critical_thinking_prompts": [
+      "Why do we ask a family grown-up before helping?",
+      "What small help could make a big difference in a street?"
+    ],
+    "personalization_rules": "if the learner picks stranger or deep-water options, repeat the 'is it safe? does a grown-up know?' check calmly; route to ETH-G4-REP-01 for 'someone else will'",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths",
+      "ask the learner where they live or about their neighbours"
+    ]
+  },
+  "review_flags": [
+    "SAFEGUARDING REVIEWER: check the stranger item (p3), permission rule and after-rain safety (wires, deep water) are calm and accurate",
+    "subject expert: check 'report a full bin to the right place' fits local reality without naming specific authorities",
+    "language editor: check «برادری» does not read as a caste/clan term here; «محلہ والے» may be safer"
+  ]
+}

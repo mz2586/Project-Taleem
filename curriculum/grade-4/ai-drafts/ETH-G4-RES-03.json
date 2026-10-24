@@ -1,0 +1,473 @@
+{
+  "code": "ETH-G4-RES-03",
+  "title": {
+    "ur": "فرق کا احترام",
+    "en": "Respecting differences"
+  },
+  "description": {
+    "ur": "زبان، لباس، کھانے، تہوار اور صلاحیت کے فرق کا احترام اور سب کو شامل کرنا۔",
+    "en": "Respecting differences in language, clothes, food, festivals and abilities, and including everyone."
+  },
+  "keywords": [
+    "differences",
+    "inclusion",
+    "languages",
+    "abilities",
+    "respect",
+    "belonging",
+    "Pakistan"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "فرق",
+        "en": "difference"
+      },
+      "definition": {
+        "ur": "وہ بات جو ایک کو دوسرے سے الگ بناتی ہے۔",
+        "en": "something that makes one person not the same as another."
+      }
+    },
+    {
+      "term": {
+        "ur": "شمولیت",
+        "en": "inclusion"
+      },
+      "definition": {
+        "ur": "سب کو ساتھ رکھنا تاکہ کوئی اکیلا نہ ہو۔",
+        "en": "keeping everyone together so no one is left out."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "پاکستان میں بہت سی زبانیں بولی جاتی ہیں، بہت سے کھانے بنتے ہیں، اور لوگ مختلف تہوار مناتے ہیں۔ کچھ بچے چشمہ پہنتے ہیں، کچھ وہیل چیئر استعمال کرتے ہیں۔ آج ہم سیکھیں گے کہ فرق غلط نہیں ہوتا۔ ہم ایک کہانی سنیں گے کہ کلاس نے نئے دوست ولی کو کیسے شامل کیا۔",
+    "en": "In Pakistan many languages are spoken, many foods are cooked, and people celebrate different festivals. Some children wear glasses, some use a wheelchair. Today we will learn that being different is not wrong. We will hear how a class included a new friend, Wali."
+  },
+  "student_explanation": {
+    "ur": "ہر انسان کچھ نہ کچھ مختلف ہے۔ کوئی پنجابی بولتا ہے، کوئی سندھی، پشتو یا بلوچی۔ کسی کا کھانا الگ ہے۔ کسی کے گھر الگ تہوار منایا جاتا ہے۔ کوئی وہیل چیئر پر آتا ہے۔ کوئی اشاروں کی زبان میں بات کرتا ہے۔ فرق غلط یا عجیب نہیں۔ کسی کے فرق پر مذاق نہ اڑائیں۔ سب کو کھیل میں شامل کریں۔ مدد سے پہلے پوچھیں: «کیا تمہیں مدد چاہیے؟»",
+    "en": "Everyone is different in some way. One person speaks Punjabi, another Sindhi, Pashto or Balochi. Someone's food is different. Someone's family celebrates a different festival. Someone comes to school in a wheelchair. Someone talks in sign language. Being different is not wrong or strange. Never make fun of a difference. Include everyone in games. Before helping, ask, \"Would you like some help?\""
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "ولی نیا ہے اور پشتو زیادہ بولتا ہے۔ کچھ بچے اس کے لہجے پر ہنستے ہیں۔ آمنہ کیا کر سکتی ہے؟",
+        "en": "Wali is new and mostly speaks Pashto. Some children laugh at his accent. What could Amna do?"
+      },
+      "steps": [
+        {
+          "ur": "آمنہ سوچتی ہے: ہنسی سے ولی کو کیسا لگ رہا ہو گا؟",
+          "en": "Amna thinks: how does the laughing make Wali feel?"
+        },
+        {
+          "ur": "وہ کہتی ہے: «ولی دو زبانیں بولتا ہے، یہ تو کمال ہے!»",
+          "en": "She says, \"Wali speaks two languages, that's amazing!\""
+        },
+        {
+          "ur": "وہ ولی سے پشتو میں ایک لفظ سیکھتی ہے اور اسے اپنے ساتھ کھیل میں بلاتی ہے۔",
+          "en": "She learns one Pashto word from Wali and invites him to play."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "کلاس کی بچی جیا وہیل چیئر استعمال کرتی ہے۔ سب باہر کھیلنے جا رہے ہیں۔ اسے شامل کیسے کریں؟",
+        "en": "Jiya in class uses a wheelchair. Everyone is going out to play. How can we include her?"
+      },
+      "steps": [
+        {
+          "ur": "پہلے جیا سے پوچھیں: «تم کون سا کھیل کھیلنا چاہو گی؟»",
+          "en": "First ask Jiya, \"Which game would you like to play?\""
+        },
+        {
+          "ur": "ایسا کھیل چنیں جس میں سب حصہ لے سکیں، جیسے گیند پھینکنا یا پہیلیاں۔",
+          "en": "Choose a game everyone can join, like throwing a ball or riddles."
+        },
+        {
+          "ur": "ضرورت ہو تو راستہ صاف کریں۔ بغیر پوچھے وہیل چیئر نہ دھکیلیں۔",
+          "en": "Clear the path if needed. Don't push her wheelchair without asking."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-inclusion-sort",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو رکھیں: «فرق کا احترام» یا «احترام نہیں»۔",
+        "en": "Sort each card: 'respects difference' or 'does not respect'."
+      },
+      "options": [
+        {
+          "ur": "کسی کے لہجے کی نقل اتار کر ہنسنا",
+          "en": "Copying someone's accent to laugh at them"
+        },
+        {
+          "ur": "دوست سے اس کی زبان کا ایک لفظ سیکھنا",
+          "en": "Learning a word in a friend's language"
+        },
+        {
+          "ur": "کہنا «تمہارا کھانا عجیب ہے، دور رکھو»",
+          "en": "Saying \"your food is weird, keep it away\""
+        },
+        {
+          "ur": "وہیل چیئر والے دوست سے پوچھنا کہ وہ کیا کھیلنا چاہتا ہے",
+          "en": "Asking a friend in a wheelchair what he wants to play"
+        }
+      ],
+      "answer_key": {
+        "sort": {
+          "respects_difference": [
+            1,
+            3
+          ],
+          "does_not_respect": [
+            0,
+            2
+          ]
+        },
+        "mode": "tap a card, then tap its group (drag also works)"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: کیا اِس سے سب کو اپنا پن محسوس ہو گا؟",
+            "en": "Ask: would this help everyone feel they belong?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-different-wrong",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "جو ہم سے مختلف ہے، وہ غلط ہے۔",
+        "en": "Someone who is different from us is wrong."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "فرق غلط یا عجیب نہیں۔",
+        "en": "Being different is not wrong or strange."
+      }
+    },
+    {
+      "id": "p2-languages",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پاکستان میں بچے کون کون سی زبانیں بولتے ہیں؟",
+        "en": "Which languages do children in Pakistan speak?"
+      },
+      "options": [
+        {
+          "ur": "صرف ایک زبان",
+          "en": "Only one language"
+        },
+        {
+          "ur": "بہت سی زبانیں، جیسے اردو، پنجابی، سندھی، پشتو، بلوچی، سرائیکی",
+          "en": "Many languages, like Urdu, Punjabi, Sindhi, Pashto, Balochi, Saraiki"
+        },
+        {
+          "ur": "کوئی زبان نہیں",
+          "en": "No language"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p3-ask-first",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کلاس میں ایک بچہ بیساکھی سے چلتا ہے اور اس کی کتاب گر گئی۔ سب سے احترام والا کام کیا ہے؟",
+        "en": "A boy in class walks with a crutch and his book falls. What is the most respectful thing to do?"
+      },
+      "options": [
+        {
+          "ur": "پوچھنا «کیا میں اٹھا دوں؟» اور پھر مدد کرنا",
+          "en": "Ask \"Shall I pick it up?\" and then help"
+        },
+        {
+          "ur": "ہنسنا",
+          "en": "Laugh"
+        },
+        {
+          "ur": "اسے اکیلا چھوڑ دینا کیونکہ وہ مختلف ہے",
+          "en": "Leave him alone because he is different"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "مدد سے پہلے کیا کرتے ہیں؟",
+            "en": "What do we do before helping?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-lunch-food",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "زارا کا دوپہر کا کھانا باقی بچوں سے مختلف ہے۔ ایک بچہ کہتا ہے «یہ کیا عجیب چیز ہے؟» اچھا جواب کون سا ہے؟",
+        "en": "Zara's lunch is different from the others'. A child says, \"What is that weird thing?\" Which reply is respectful?"
+      },
+      "options": [
+        {
+          "ur": "«ہاں، بہت عجیب ہے!»",
+          "en": "\"Yes, really weird!\""
+        },
+        {
+          "ur": "زارا کا کھانا چھپا دینا",
+          "en": "Hide Zara's lunch"
+        },
+        {
+          "ur": "«یہ زارا کے گھر کا کھانا ہے۔ زارا، اس کا نام کیا ہے؟»",
+          "en": "\"That's food from Zara's home. Zara, what's it called?\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-festivals",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مختلف گھروں میں مختلف تہوار منائے جاتے ہیں، اور ہم سب کا احترام کرتے ہیں۔",
+        "en": "Different families celebrate different festivals, and we respect them all."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-team-pick",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ٹیم بناتے ہوئے ایک بچی ہمیشہ آخر میں رہ جاتی ہے کیونکہ وہ آہستہ دوڑتی ہے۔ منصفانہ اور شامل کرنے والا طریقہ کیا ہے؟",
+        "en": "When teams are picked, one girl is always left till last because she runs slowly. What is a fair, including way?"
+      },
+      "options": [
+        {
+          "ur": "اسے کھیلنے ہی نہ دیں",
+          "en": "Don't let her play at all"
+        },
+        {
+          "ur": "باری باری کپتان بدلیں یا پرچی سے ٹیمیں بنائیں",
+          "en": "Take turns being captain or pick teams by drawing slips"
+        },
+        {
+          "ur": "ہمیشہ اسے آخر میں ہی چنیں",
+          "en": "Always pick her last"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسا طریقہ جس میں کوئی ہمیشہ آخری نہ رہے۔",
+            "en": "A way where no one is always last."
+          }
+        }
+      ]
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-hearing",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "سنی کانوں سے کم سنتا ہے اور سماعتی آلہ لگاتا ہے۔ کلاس کیسے یقینی بنائے کہ وہ شامل ہے؟",
+        "en": "Sunny has trouble hearing and wears a hearing aid. How can the class make sure he is included?"
+      },
+      "options": [
+        {
+          "ur": "بات کرتے ہوئے اس کی طرف منہ کرنا اور صاف بولنا",
+          "en": "Face him when talking and speak clearly"
+        },
+        {
+          "ur": "اس کے پیچھے سے چلا کر بلانا",
+          "en": "Shout at him from behind"
+        },
+        {
+          "ur": "اس سے بات ہی نہ کرنا",
+          "en": "Not talk to him at all"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سنی کو بات سمجھنے میں کیا مدد کرے گا؟",
+            "en": "What would help Sunny follow what we say?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-new-word",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں کسی سے کسی اور زبان (مثلاً پنجابی، سندھی، پشتو، بلوچی، سرائیکی یا انگریزی) میں «شکریہ» کہنا سیکھیں۔",
+        "en": "At home, learn how to say \"thank you\" in another language (for example Punjabi, Sindhi, Pashto, Balochi, Saraiki or English) from someone."
+      },
+      "answer_key": {
+        "guidance": "Talking task at home; any language counts. Nothing is entered in the app."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کیا اِس سے کسی کو اکیلا یا عجیب محسوس ہو گا؟",
+        "en": "Would this make anyone feel alone or strange?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: فرق غلط نہیں؛ مدد سے پہلے پوچھیں۔",
+        "en": "Remember: different is not wrong; ask before helping."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "جو مختلف ہے وہ غلط یا عجیب ہے۔",
+        "en": "Different means wrong or strange."
+      },
+      "correction": {
+        "ur": "فرق غلط نہیں؛ ہر انسان احترام کا حق دار ہے۔",
+        "en": "Different is not wrong; every person deserves respect."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "معذوری والے بچے کے لیے سب کچھ بغیر پوچھے کر دینا چاہیے۔",
+        "en": "We should do everything for a child with a disability without asking."
+      },
+      "correction": {
+        "ur": "پہلے پوچھیں کہ کیا مدد چاہیے؛ وہ بہت کچھ خود کر سکتے ہیں۔",
+        "en": "Ask first what help they want; they can do many things themselves."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "chooses mocking or excluding options",
+      "remediation_ref": "ETH-G4-RES-01"
+    },
+    {
+      "signal": "excludes children from games",
+      "remediation_ref": "ETH-G4-KIN-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "ہر کوئی کچھ مختلف ہے: زبان، کھانا، تہوار، صلاحیت۔ فرق غلط نہیں۔ مذاق نہ اڑائیں، سب کو شامل کریں، مدد سے پہلے پوچھیں۔",
+    "en": "Everyone is different somehow: language, food, festivals, abilities. Different is not wrong. Don't mock, include everyone, ask before helping."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ فرق کا احترام کریں اور سب کو شامل کریں۔",
+    "en": "We learned to respect differences and include everyone."
+  },
+  "parent_notes": {
+    "ur": "بچے کو بتائیں کہ پاکستان میں بہت سی زبانیں اور رواج ہیں اور سب قابلِ احترام ہیں۔ دوسروں کے بارے میں بات کرتے ہوئے خود بھی احترام والے لفظ استعمال کریں۔",
+    "en": "Tell your child that Pakistan has many languages and customs, and all deserve respect. Use respectful words yourself when talking about others."
+  },
+  "mentor_notes": {
+    "ur": "مثالوں میں کسی گروہ یا عقیدے کا موازنہ نہ کریں۔ تہواروں کا ذکر عمومی رکھیں۔ اگر کلاس میں معذوری والا بچہ ہو تو اسے مثال کے طور پر نہ بلائیں۔",
+    "en": "Never compare groups or faiths in examples. Keep festivals general. If a learner with a disability is present, never single them out as the example."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویریں ابھی بنانی ہیں؛ وہیل چیئر، بیساکھی اور سماعتی آلے والے بچوں کو باعزت اور سرگرم دکھائیں، متبادل متن بھی ایسا ہو۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ ہر متن آواز میں پڑھا جائے۔ ترتیب دینے والی سرگرمی کا متبادل: ہر کارڈ کے لیے دو بٹنوں میں سے ایک چنیں۔",
+    "en": "Story pictures are still to be made; show children with a wheelchair, crutch or hearing aid with dignity and as active, and write alt text the same way. Urdu audio is not yet recorded; all text must be read aloud. Alternative to the sort activity: answer each card with one of two buttons."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "show the many differences in Pakistan (languages, food, festivals, abilities) as normal and good; two inclusion stories; rule: never mock, include everyone, ask before helping",
+    "questioning_strategy": "ask 'how would they feel?' and 'how could everyone join in?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "calls a difference strange or wrong",
+      "suggests leaving someone out"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "classroom and playground; languages of Pakistan; disability shown with dignity; festivals kept general; no comparison of faiths or groups",
+    "misconception_detectors": [
+      "thinks different means wrong",
+      "thinks helping means doing everything without asking"
+    ],
+    "critical_thinking_prompts": [
+      "Why is it good that a class has children who speak different languages?",
+      "Why should we ask before helping?"
+    ],
+    "personalization_rules": "if the learner chooses excluding options, route to ETH-G4-KIN-03 (including others); keep the tone warm",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths",
+      "ask the learner about their own language, ethnicity, faith or disability"
+    ]
+  },
+  "review_flags": [
+    "subject expert: check the list of Pakistani languages and that the festival mention stays faith-neutral",
+    "accessibility/inclusion reviewer: check disability examples (wheelchair, crutch, hearing aid, sign language) are respectful",
+    "language editor: check «شمولیت» is suitable or replace with a simpler phrase"
+  ]
+}

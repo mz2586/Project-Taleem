@@ -1,0 +1,427 @@
+{
+  "code": "SCI-G4-INQ-02",
+  "title": {
+    "ur": "ترتیب دو اور موازنہ کرو",
+    "en": "Sort and compare"
+  },
+  "description": {
+    "ur": "چیزوں کو کسی ایک نظر آنے والی خصوصیت سے گروہوں میں بانٹنا اور ان کا موازنہ کرنا۔",
+    "en": "Sorting things into groups by one observable property and comparing them."
+  },
+  "keywords": [
+    "sort",
+    "compare",
+    "property",
+    "group",
+    "size",
+    "colour",
+    "shape",
+    "texture"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "خصوصیت",
+        "en": "property"
+      },
+      "definition": {
+        "ur": "کسی چیز کی وہ بات جو ہم دیکھ یا جانچ سکیں، جیسے رنگ، سائز یا سختی۔",
+        "en": "Something about a thing that we can see or test, like colour, size or hardness."
+      }
+    },
+    {
+      "term": {
+        "ur": "ترتیب دینا",
+        "en": "sort"
+      },
+      "definition": {
+        "ur": "چیزوں کو ایک خصوصیت کے لحاظ سے الگ الگ گروہوں میں رکھنا۔",
+        "en": "Putting things into separate groups by one property."
+      }
+    },
+    {
+      "term": {
+        "ur": "موازنہ",
+        "en": "compare"
+      },
+      "definition": {
+        "ur": "دو یا زیادہ چیزوں کو دیکھ کر بتانا کہ ان میں کیا ایک جیسا اور کیا مختلف ہے۔",
+        "en": "Looking at two or more things to say what is the same and what is different."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "بازار میں دکاندار سبزیوں کو الگ الگ ٹوکریوں میں رکھتا ہے۔ سائنسدان بھی چیزوں کو گروہوں میں رکھتے ہیں۔ آج ہم سیکھیں گے کہ ایک وقت میں ایک ہی خصوصیت چن کر کیسے ترتیب دیں، اور دو چیزوں کا موازنہ کیسے کریں۔",
+    "en": "In the bazaar a shopkeeper keeps vegetables in separate baskets. Scientists put things into groups too. Today we learn to sort by choosing one property at a time, and how to compare two things."
+  },
+  "student_explanation": {
+    "ur": "ترتیب دینے سے پہلے ایک خصوصیت چنو۔ یہ رنگ، سائز، شکل یا سختی ہو سکتی ہے۔ پھر ہر چیز کو اسی خصوصیت سے دیکھو۔ ایک وقت میں صرف ایک خصوصیت استعمال کرو۔ ورنہ گروہ الجھ جاتے ہیں۔ موازنہ میں دیکھو کیا ایک جیسا ہے اور کیا مختلف۔ \"لمبا\"، \"بھاری\" یا \"نرم\" جیسے لفظ استعمال کرو۔ ایک ہی چیز کئی طرح سے ترتیب دی جا سکتی ہے۔",
+    "en": "Before you sort, choose one property. It can be colour, size, shape or hardness. Then look at each thing for that property. Use only one property at a time. Otherwise the groups get mixed up. When comparing, look for what is the same and what is different. Use words like 'longer', 'heavier' or 'softer'. The same things can be sorted in many ways."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "صحن سے جمع کیے پتوں کو ترتیب دو۔",
+        "en": "Sort leaves collected from the courtyard."
+      },
+      "steps": [
+        {
+          "ur": "ایک خصوصیت چنو: شکل۔",
+          "en": "Choose one property: shape."
+        },
+        {
+          "ur": "دو گروہ بناؤ: لمبے پتلے پتے اور گول چوڑے پتے۔",
+          "en": "Make two groups: long thin leaves and round wide leaves."
+        },
+        {
+          "ur": "ہر پتا دیکھ کر صحیح گروہ میں رکھو۔ رنگ پر دھیان نہ دو۔",
+          "en": "Look at each leaf and put it in the right group. Ignore colour for now."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "دو پنسلوں کا موازنہ کرو۔",
+        "en": "Compare two pencils."
+      },
+      "steps": [
+        {
+          "ur": "دونوں کو ایک ہی جگہ سے شروع کر کے ساتھ رکھو۔",
+          "en": "Line them up side by side from the same starting point."
+        },
+        {
+          "ur": "دیکھو کون سی آگے تک جاتی ہے: وہ لمبی ہے۔",
+          "en": "See which one reaches further: that one is longer."
+        },
+        {
+          "ur": "ایک جیسی بات بھی بتاؤ: دونوں لکڑی کی ہیں۔",
+          "en": "Say one thing that is the same too: both are made of wood."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-buttons",
+      "type": "interactive",
+      "competency": "analysis",
+      "stem": {
+        "ur": "بٹنوں کو ان کے سوراخوں کی تعداد سے ترتیب دو: دو سوراخ یا چار سوراخ۔ (سرخ ۲، نیلا ۴، سبز ۴، پیلا ۲، کالا ۲، سفید ۴)",
+        "en": "Sort the buttons by number of holes: two holes or four holes. (red 2, blue 4, green 4, yellow 2, black 2, white 4)"
+      },
+      "answer_key": {
+        "two_holes": [
+          "red",
+          "yellow",
+          "black"
+        ],
+        "four_holes": [
+          "blue",
+          "green",
+          "white"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "رنگ کو بھول جاؤ؛ صرف سوراخ گنو۔",
+            "en": "Forget the colour; count only the holes."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-one-property",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اچھی ترتیب کے لیے کیا ضروری ہے؟",
+        "en": "What is needed for a good sort?"
+      },
+      "options": [
+        {
+          "ur": "ایک وقت میں ایک خصوصیت",
+          "en": "One property at a time"
+        },
+        {
+          "ur": "ایک ساتھ کئی خصوصیات",
+          "en": "Many properties at once"
+        },
+        {
+          "ur": "کوئی خصوصیت نہیں",
+          "en": "No property at all"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-which-property",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کسی نے مالٹا، گیند اور ٹماٹر ایک گروہ میں رکھے اور کتاب الگ رکھی۔ کس خصوصیت سے ترتیب دی؟",
+        "en": "Someone put an orange, a ball and a tomato in one group, and a book apart. Which property did they use?"
+      },
+      "options": [
+        {
+          "ur": "رنگ",
+          "en": "Colour"
+        },
+        {
+          "ur": "شکل (گول)",
+          "en": "Shape (round)"
+        },
+        {
+          "ur": "وزن",
+          "en": "Weight"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p3-many-ways",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ایک ہی چیزوں کو مختلف خصوصیات سے مختلف طریقوں سے ترتیب دیا جا سکتا ہے۔",
+        "en": "The same things can be sorted in different ways by different properties."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-compare-word",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اینٹ اور اسفنج کا موازنہ کرنے کے لیے کون سا جملہ ٹھیک ہے؟",
+        "en": "Which sentence correctly compares a brick and a sponge?"
+      },
+      "options": [
+        {
+          "ur": "اینٹ اچھی ہے",
+          "en": "The brick is nice"
+        },
+        {
+          "ur": "اسفنج پیلا ہے",
+          "en": "The sponge is yellow"
+        },
+        {
+          "ur": "اسفنج اینٹ سے زیادہ نرم ہے",
+          "en": "The sponge is softer than the brick"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "موازنہ میں دونوں چیزوں کا ذکر ہوتا ہے۔",
+            "en": "A comparison mentions both things."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-fair-length",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "دو رسیوں کی لمبائی کا صحیح موازنہ کیسے کریں گے؟",
+        "en": "How do you fairly compare the lengths of two ropes?"
+      },
+      "options": [
+        {
+          "ur": "دونوں کو سیدھا کر کے ایک ہی جگہ سے ساتھ رکھیں",
+          "en": "Straighten both and line them up from the same point"
+        },
+        {
+          "ur": "ایک کو گول لپیٹ کر دوسری سے ملائیں",
+          "en": "Coil one up and hold it next to the other"
+        },
+        {
+          "ur": "صرف دیکھ کر اندازہ لگائیں",
+          "en": "Just guess by looking"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-mixed",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "\"سرخ چیزیں\" اور \"بڑی چیزیں\" دو گروہ بنانا ایک اچھی ترتیب ہے۔",
+        "en": "Making the groups 'red things' and 'big things' is a good sort."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "یہ دو مختلف خصوصیات ہیں؛ ایک بڑی سرخ چیز دونوں گروہوں میں جا سکتی ہے۔",
+        "en": "These are two different properties; a big red thing could go in both groups."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-two-sorts",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "یہ چیزیں دو مختلف طریقوں سے ترتیب دو: چمچ، پتا، پتھر، روئی، پلاسٹک کی بوتل، اون۔ ہر بار خصوصیت کا نام بتاؤ۔",
+        "en": "Sort these things in two different ways: spoon, leaf, stone, cotton, plastic bottle, wool. Name the property each time."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Credit two valid sorts each with a named property (e.g. hard/soft: spoon, stone, bottle vs cotton, wool, leaf; living-origin vs not)."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-kitchen-sort",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر سے دس محفوظ چیزیں جمع کرو (جیسے چمچ، کپڑا، ڈھکن، پتا)۔ ایک خصوصیت چن کر انہیں ترتیب دو۔ پھر دوسری خصوصیت سے دوبارہ ترتیب دو۔ دونوں ترتیبیں لکھو۔ چھری یا شیشے کی چیزیں نہ لو۔",
+        "en": "Collect ten safe things at home (like spoons, cloth, lids, leaves). Choose one property and sort them. Then sort them again by a different property. Write down both sorts. Do not use knives or glass items."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Credit two sorts each with a named property and every item placed consistently."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پہلے صرف ایک خصوصیت کا نام بولو۔",
+        "en": "First say the name of just one property."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اب ہر چیز سے وہی ایک سوال پوچھو، جیسے: \"کیا یہ گول ہے؟\"",
+        "en": "Now ask every thing the same one question, like: 'Is it round?'"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ایک ترتیب میں کئی خصوصیات ملا سکتے ہیں۔",
+        "en": "You can mix several properties in one sort."
+      },
+      "correction": {
+        "ur": "ایک وقت میں ایک خصوصیت؛ ورنہ ایک چیز دو گروہوں میں جا سکتی ہے۔",
+        "en": "One property at a time; otherwise one thing could fit two groups."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "چیزوں کو ترتیب دینے کا صرف ایک صحیح طریقہ ہوتا ہے۔",
+        "en": "There is only one right way to sort things."
+      },
+      "correction": {
+        "ur": "ایک ہی چیزیں رنگ، شکل، سائز یا سختی سے مختلف طرح ترتیب دی جا سکتی ہیں۔",
+        "en": "The same things can be sorted differently by colour, shape, size or hardness."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:SCI-G4-INQ-01",
+      "remediation_ref": "SCI-G4-INQ-01"
+    },
+    {
+      "signal": "cannot name material properties",
+      "remediation_ref": "SCI-G4-MAT-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "ترتیب: ایک خصوصیت چنو، ہر چیز اسی سے دیکھو۔ موازنہ: ایک جیسا اور مختلف بتاؤ، \"زیادہ لمبا/بھاری/نرم\" جیسے لفظوں سے۔ ایک ہی چیزیں کئی طرح ترتیب دی جا سکتی ہیں۔",
+    "en": "Sorting: choose one property and check each thing for it. Comparing: say what is the same and what is different, with words like 'longer/heavier/softer'. The same things can be sorted many ways."
+  },
+  "summary": {
+    "ur": "ہم نے ایک خصوصیت سے ترتیب دینا اور چیزوں کا موازنہ کرنا سیکھا۔",
+    "en": "We learned to sort by one property and to compare things."
+  },
+  "parent_notes": {
+    "ur": "کپڑے تہہ کرتے یا برتن رکھتے وقت بچے سے کہیں کہ انہیں کسی ایک خصوصیت سے ترتیب دے، جیسے رنگ یا سائز۔",
+    "en": "When folding clothes or putting dishes away, ask your child to sort them by one property, like colour or size."
+  },
+  "mentor_notes": {
+    "ur": "بچے ایک ترتیب میں دو خصوصیات ملا دیتے ہیں؛ ہر بار \"تمہاری خصوصیت کیا ہے؟\" پوچھیں۔ صحیح ترتیب کئی ہو سکتی ہیں — اس لیے مختصر جوابات میں وجہ دیکھیں۔",
+    "en": "Learners mix two properties in one sort; ask 'what is your property?' every time. Many sorts can be right — so in short answers look at the reason."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ بٹنوں کی تصویریں (سوراخوں کے ساتھ) اور ان کا متبادل متن ابھی بنانا ہے؛ متبادل متن میں ہر بٹن کا رنگ اور سوراخوں کی تعداد ہو۔ گھسیٹنے کا متبادل: ہر بٹن کے لیے \"دو سوراخ\" یا \"چار سوراخ\" کا بٹن دبائیں۔ رنگ نہ پہچاننے والے بچوں کے لیے یہ سرگرمی رنگ پر منحصر نہیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. Button pictures (showing holes) and their alt text are still to be made; the alt text should give each button's colour and number of holes. Alternative to dragging: tap 'two holes' or 'four holes' for each button. The activity does not depend on colour, so it suits colour-blind learners."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "name the property first, ask the same yes/no question of every item, then show a second sort of the same items",
+    "questioning_strategy": "ask 'what is your property?' before 'which group?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "mixes two properties in one sort",
+      "says there is only one right sort"
+    ],
+    "hint_policy": "graduated; first ask for the property name, then the yes/no question; never place items for the learner",
+    "example_policy": "use home and bazaar items: buttons, leaves, vegetables, spoons, bangles, pebbles",
+    "misconception_detectors": [
+      "mixes properties within one sort",
+      "compares without naming both things"
+    ],
+    "critical_thinking_prompts": [
+      "Can you sort the same six things in a way nobody else has thought of?"
+    ],
+    "personalization_rules": "if the learner cannot name properties, route to SCI-G4-MAT-01; if they cannot observe details, route to SCI-G4-INQ-01",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples"
+    ]
+  },
+  "review_flags": [
+    "subject expert: short items accept many correct sorts — confirm mentor guidance is clear enough",
+    "language editor: confirm Urdu خصوصیت / ترتیب دینا / موازنہ are the house terms"
+  ]
+}

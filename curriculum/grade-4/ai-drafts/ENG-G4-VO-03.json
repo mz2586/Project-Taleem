@@ -1,0 +1,472 @@
+{
+  "code": "ENG-G4-VO-03",
+  "title": {
+    "ur": "آس پاس کے الفاظ سے مطلب سمجھیں",
+    "en": "Use the Sentence to Find the Meaning"
+  },
+  "description": {
+    "ur": "بچہ کسی نئے انگریزی لفظ کا مطلب جملے کے آس پاس کے الفاظ سے سمجھتا ہے۔",
+    "en": "The learner works out the meaning of a new English word from the words around it."
+  },
+  "keywords": [
+    "context clues",
+    "word meaning",
+    "new words",
+    "vocabulary",
+    "inference"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "سیاق و سباق (context)",
+        "en": "context"
+      },
+      "definition": {
+        "ur": "کسی لفظ کے آس پاس کے الفاظ اور جملے۔",
+        "en": "The words and sentences around a word."
+      }
+    },
+    {
+      "term": {
+        "ur": "اشارہ (clue)",
+        "en": "clue"
+      },
+      "definition": {
+        "ur": "وہ لفظ جو نئے لفظ کا مطلب سمجھنے میں مدد کرے۔",
+        "en": "A word that helps us understand a new word."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "پڑھتے ہوئے ہمیں نئے الفاظ ملتے ہیں۔ ہر بار لغت پاس نہیں ہوتی۔ مگر جملہ خود بھی مدد کرتا ہے۔ نئے لفظ کے آس پاس اشارے ہوتے ہیں۔ آج ہم یہ اشارے ڈھونڈ کر مطلب سمجھیں گے۔",
+    "en": "When we read, we meet new words. We do not always have a dictionary. But the sentence itself can help. There are clues around the new word. Today we will find these clues and work out the meaning."
+  },
+  "student_explanation": {
+    "ur": "نیا لفظ دیکھ کر رکیں نہیں۔ پورا جملہ پڑھیں۔ پھر اگلا جملہ بھی پڑھیں۔ دیکھیں کہ کونسے الفاظ مدد کرتے ہیں۔ so اور because اکثر اشارہ دیتے ہیں۔ پھر مطلب کا اندازہ لگائیں۔ اپنا مطلب نئے لفظ کی جگہ رکھ کر پڑھیں۔ اگر جملہ سمجھ آئے تو اندازہ ٹھیک ہے۔",
+    "en": "Do not stop at a new word. Read the whole sentence. Then read the next sentence too. See which words help. so and because often give a clue. Then guess the meaning. Put your meaning in place of the new word and read again. If the sentence makes sense, your guess is good."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "The road was so narrow that only one bicycle could pass. narrow کا مطلب کیا ہے؟",
+        "en": "The road was so narrow that only one bicycle could pass. What does narrow mean?"
+      },
+      "steps": [
+        {
+          "ur": "اشارہ: only one bicycle could pass۔",
+          "en": "Clue: only one bicycle could pass."
+        },
+        {
+          "ur": "صرف ایک سائیکل گزر سکتی تھی، تو سڑک کم چوڑی تھی۔",
+          "en": "Only one bicycle could fit, so the road had little space across."
+        },
+        {
+          "ur": "مطلب: تنگ، کم چوڑا۔",
+          "en": "Meaning: not wide."
+        },
+        {
+          "ur": "جانچیں: The road was so not-wide... مطلب بنتا ہے۔",
+          "en": "Check: 'The road was so not wide that...' makes sense."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "Bilal was famished. He had not eaten all day, and he ate three rotis. famished کا مطلب؟",
+        "en": "Bilal was famished. He had not eaten all day, and he ate three rotis. What does famished mean?"
+      },
+      "steps": [
+        {
+          "ur": "اگلا جملہ پڑھیں: had not eaten all day۔",
+          "en": "Read the next sentence: had not eaten all day."
+        },
+        {
+          "ur": "اور ate three rotis، یعنی بہت کھایا۔",
+          "en": "And ate three rotis, so he ate a lot."
+        },
+        {
+          "ur": "مطلب: بہت بھوکا۔",
+          "en": "Meaning: very hungry."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-tap-clue",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پڑھیں: The glass was fragile, so mother wrapped it in a soft cloth. ان الفاظ پر ٹیپ کریں جو fragile کا مطلب سمجھاتے ہیں۔",
+        "en": "Read: The glass was fragile, so mother wrapped it in a soft cloth. Tap the words that help explain fragile."
+      },
+      "answer_key": {
+        "clues": [
+          "glass",
+          "wrapped it in a soft cloth"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ماں نے گلاس کو کپڑے میں کیوں لپیٹا؟",
+            "en": "Why did mother wrap the glass in cloth?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-fragile",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "The glass was fragile, so mother wrapped it in a soft cloth. fragile کا مطلب کیا ہے؟",
+        "en": "The glass was fragile, so mother wrapped it in a soft cloth. What does fragile mean?"
+      },
+      "options": [
+        {
+          "ur": "very heavy",
+          "en": "very heavy"
+        },
+        {
+          "ur": "easy to break",
+          "en": "easy to break"
+        },
+        {
+          "ur": "very cheap",
+          "en": "very cheap"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "so کے بعد والا حصہ پڑھیں۔",
+            "en": "Read the part after so."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "نرم کپڑے میں لپیٹا تاکہ ٹوٹے نہیں۔",
+        "en": "It was wrapped in soft cloth so it would not break."
+      }
+    },
+    {
+      "id": "p2-chilly",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "It was chilly, so Sara put on her sweater. chilly کا مطلب؟",
+        "en": "It was chilly, so Sara put on her sweater. What does chilly mean?"
+      },
+      "options": [
+        {
+          "ur": "cold",
+          "en": "cold"
+        },
+        {
+          "ur": "sunny",
+          "en": "sunny"
+        },
+        {
+          "ur": "noisy",
+          "en": "noisy"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سویٹر کب پہنتے ہیں؟",
+            "en": "When do we wear a sweater?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-enormous",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "The elephant was enormous. It was bigger than the bus. enormous کا مطلب؟",
+        "en": "The elephant was enormous. It was bigger than the bus. What does enormous mean?"
+      },
+      "options": [
+        {
+          "ur": "tiny",
+          "en": "tiny"
+        },
+        {
+          "ur": "hungry",
+          "en": "hungry"
+        },
+        {
+          "ur": "very big",
+          "en": "very big"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دوسرا جملہ موازنہ کرتا ہے۔",
+            "en": "The second sentence compares sizes."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-silent",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "The class was silent. Nobody said a word. silent کا مطلب؟",
+        "en": "The class was silent. Nobody said a word. What does silent mean?"
+      },
+      "options": [
+        {
+          "ur": "very quiet",
+          "en": "very quiet"
+        },
+        {
+          "ur": "very happy",
+          "en": "very happy"
+        },
+        {
+          "ur": "very late",
+          "en": "very late"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "Nobody said a word پر دھیان دیں۔",
+            "en": "Look at 'Nobody said a word'."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-check-meaning",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اندازہ جانچنے کے لیے اپنا مطلب نئے لفظ کی جگہ رکھ کر جملہ دوبارہ پڑھتے ہیں۔",
+        "en": "To check a guess, we put our meaning in place of the new word and read the sentence again."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "اگر جملہ سمجھ آئے تو اندازہ ٹھیک ہے۔",
+        "en": "If the sentence makes sense, the guess is good."
+      }
+    },
+    {
+      "id": "p6-clue-word",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "Asad was exhausted because he walked ten kilometres. کونسا حصہ exhausted کا اشارہ ہے؟",
+        "en": "Asad was exhausted because he walked ten kilometres. Which part is the clue for exhausted?"
+      },
+      "options": [
+        {
+          "ur": "Asad was",
+          "en": "Asad was"
+        },
+        {
+          "ur": "because he walked ten kilometres",
+          "en": "because he walked ten kilometres"
+        },
+        {
+          "ur": "ten",
+          "en": "ten"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "because وجہ بتاتا ہے۔",
+            "en": "because gives the reason."
+          }
+        }
+      ]
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-own-clue",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "لفظ damp کا مطلب ہے 'تھوڑا گیلا'۔ ایک انگریزی جملہ لکھیں جس میں damp کا اشارہ بھی ہو۔",
+        "en": "The word damp means 'a little wet'. Write one English sentence that uses damp and gives a clue to its meaning."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "sentence uses damp correctly and contains a context clue",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "damp درست استعمال، مگر اشارہ نہیں۔",
+              "en": "damp used correctly, but no clue."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "damp درست اور اشارہ موجود (جیسے after the rain)۔",
+              "en": "damp used correctly with a clue (e.g. after the rain)."
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-new-word",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اپنی کسی کتاب میں ایک نیا انگریزی لفظ ڈھونڈیں۔ جملے سے اس کا مطلب اندازہ کریں اور کاپی میں لکھیں۔",
+        "en": "Find one new English word in any book you have. Guess its meaning from the sentence and write it in your notebook."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor checks whether the guess fits the sentence, not whether it is a dictionary definition."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "نئے لفظ سے پہلے اور بعد والے الفاظ پڑھیں۔",
+        "en": "Read the words before and after the new word."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "so یا because ڈھونڈیں؛ یہ اکثر مطلب کی طرف اشارہ کرتے ہیں۔",
+        "en": "Look for so or because; they often point to the meaning."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "نیا لفظ دیکھ کر پڑھنا چھوڑ دینا۔",
+        "en": "Stopping reading as soon as a new word appears."
+      },
+      "correction": {
+        "ur": "پورا جملہ اور اگلا جملہ پڑھیں؛ اشارے آگے بھی ہوتے ہیں۔",
+        "en": "Read the whole sentence and the next one; clues often come later."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "لفظ کی شکل سے مطلب کا تکّا لگانا، جملے سے نہیں۔",
+        "en": "Guessing from how the word looks, not from the sentence."
+      },
+      "correction": {
+        "ur": "اپنا مطلب جملے میں رکھ کر جانچیں۔",
+        "en": "Test your meaning by putting it into the sentence."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:ENG-G4-VO-02",
+      "remediation_ref": "ENG-G4-VO-02"
+    },
+    {
+      "signal": "cannot_find_clue_in_text",
+      "remediation_ref": "ENG-G4-RD-05"
+    }
+  ],
+  "revision_notes": {
+    "ur": "نیا لفظ؟ پورا جملہ پڑھیں، اشارہ ڈھونڈیں (so، because)، مطلب سوچیں، جملے میں رکھ کر جانچیں۔",
+    "en": "New word? Read the whole sentence, find the clue (so, because), think of a meaning, test it in the sentence."
+  },
+  "summary": {
+    "ur": "ہم نے جملے کے اشاروں سے نئے الفاظ کا مطلب سمجھا۔",
+    "en": "We used clues in the sentence to work out the meaning of new words."
+  },
+  "parent_notes": {
+    "ur": "بچے سے پوچھیں: 'تمہیں یہ مطلب کیسے سمجھ آیا؟' جواب اردو میں ہو تب بھی ٹھیک ہے۔",
+    "en": "Ask your child: 'How did you work out that meaning?' An answer in Urdu is fine."
+  },
+  "mentor_notes": {
+    "ur": "مقصد لغت والا مطلب رٹنا نہیں، اشارہ ڈھونڈنا ہے۔ 'easy to break' کی جگہ 'ٹوٹنے والا' جیسا اردو جواب بھی قبول کریں۔",
+    "en": "The goal is finding the clue, not memorising a dictionary definition. Accept an Urdu answer like 'ٹوٹنے والا' for 'easy to break'."
+  },
+  "accessibility_notes": {
+    "ur": "ہدایات اور جملوں کی اردو/انگریزی آڈیو ابھی ریکارڈ نہیں ہوئی۔ الفاظ پر ٹیپ کرنے کا متبادل: تین حصوں میں سے صحیح اشارہ چنیں۔ متن بڑے حروف میں ہو اور نیا لفظ موٹا لکھا ہو۔",
+    "en": "Urdu/English audio for instructions and sentences is not yet recorded. Alternative to tapping words: choose the right clue from three parts. Show text in large print with the new word in bold."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "read the whole sentence and the next; find the clue; propose a meaning; test it by substitution",
+    "questioning_strategy": "ask 'which words helped you?' before 'what does it mean?'",
+    "slow_down_signals": [
+      "stops at the new word",
+      "guesses from word shape",
+      "two wrong answers in a row"
+    ],
+    "hint_policy": "graduated; two hints max; first read around the word, then point at so/because; never give the meaning first",
+    "example_policy": "one unfamiliar word per item with a clear nearby clue; everyday Pakistani contexts (rotis, sweaters, buses)",
+    "misconception_detectors": [
+      "ignores clue words",
+      "chooses a meaning that does not fit the sentence"
+    ],
+    "critical_thinking_prompts": [
+      "What would happen to the sentence if fragile meant 'heavy'?"
+    ],
+    "personalization_rules": "if the learner cannot find any clue, route to ENG-G4-RD-05 inference practice; if base words are unknown, ENG-G4-VO-02",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm target words (fragile, chilly, enormous, famished, exhausted, damp) are a fair Grade 4 stretch",
+    "check 'ten kilometres' walking is a neutral, non-distressing context"
+  ]
+}

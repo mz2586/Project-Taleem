@@ -1,0 +1,377 @@
+{
+  "code": "MATH-G4-NB-02",
+  "description": {
+    "ur": "ہر ہندسے کی قیمت اس کی جگہ سے بنتی ہے، ایک لاکھ تک۔",
+    "en": "Each digit's value comes from its place, in numbers up to 100,000."
+  },
+  "keywords": [
+    "place value",
+    "digit",
+    "ten-thousands",
+    "thousands",
+    "hundreds",
+    "tens",
+    "ones"
+  ],
+  "teacher_script": {
+    "ur": "آج ہم ہندسوں کی جگہ دیکھیں گے۔ ایک ہی ہندسہ مختلف جگہ پر مختلف قیمت رکھتا ہے۔ ہم دائیں سے گنیں گے: اکائی، دہائی، سو، ہزار، دس ہزار۔ پھر ہر ہندسے سے پوچھیں گے: تمہاری قیمت کیا ہے؟",
+    "en": "Today we look at where digits sit. The same digit has a different value in a different place. We count from the right: ones, tens, hundreds, thousands, ten-thousands. Then we ask each digit: what are you worth?"
+  },
+  "student_explanation": {
+    "ur": "ہر ہندسے کا ایک گھر ہوتا ہے۔ دائیں طرف پہلا گھر اکائی کا ہے۔ اس کے بعد دہائی، پھر سو آتا ہے۔ پھر ہزار اور دس ہزار آتے ہیں۔ ۴۷٬۳۰۵ میں ۷ ہزار کے گھر میں ہے۔ اس لیے اس کی قیمت سات ہزار ہے۔ گھر بدلے تو قیمت بدل جاتی ہے۔",
+    "en": "Every digit has a home. The first home on the right is ones. Next come tens, then hundreds. Then come thousands and ten-thousands. In 47,305 the 7 is in the thousands home. So its value is seven thousand. Change the home and the value changes."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۶۲٬۴۸۱ میں ۲ کی قیمت کیا ہے؟",
+        "en": "What is the value of the 2 in 62,481?"
+      },
+      "steps": [
+        {
+          "ur": "دائیں سے گنیں: ۱ اکائی، ۸ دہائی، ۴ سو۔",
+          "en": "Count from the right: 1 is ones, 8 is tens, 4 is hundreds."
+        },
+        {
+          "ur": "۲ اگلے گھر میں ہے، یعنی ہزار۔",
+          "en": "The 2 is in the next home: thousands."
+        },
+        {
+          "ur": "تو ۲ کی قیمت دو ہزار ہے، یعنی ۲۰۰۰۔",
+          "en": "So the 2 is worth two thousand: 2,000."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "۳۵٬۰۰۹ کو جگہ کے حساب سے کھولیں۔",
+        "en": "Break 35,009 into its places."
+      },
+      "steps": [
+        {
+          "ur": "۳ دس ہزار کے گھر میں ہے: ۳۰٬۰۰۰۔",
+          "en": "3 is in ten-thousands: 30,000."
+        },
+        {
+          "ur": "۵ ہزار کے گھر میں ہے: ۵۰۰۰۔",
+          "en": "5 is in thousands: 5,000."
+        },
+        {
+          "ur": "سو اور دہائی میں صفر ہے۔ صفر خالی گھر بتاتا ہے۔",
+          "en": "Hundreds and tens hold zero. A zero shows an empty home."
+        },
+        {
+          "ur": "۹ اکائی میں ہے۔ تو ۳۰٬۰۰۰ + ۵۰۰۰ + ۹۔",
+          "en": "9 is in ones. So 30,000 + 5,000 + 9."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-place-chart",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۵۸٬۲۱۴ کے ہر ہندسے کو جگہ کے چارٹ میں صحیح گھر میں رکھیں۔",
+        "en": "Drag each digit of 58,214 into its home on the place-value chart."
+      },
+      "answer_key": {
+        "placement": {
+          "ten_thousands": "5",
+          "thousands": "8",
+          "hundreds": "2",
+          "tens": "1",
+          "ones": "4"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "آخری ہندسہ اکائی کے گھر میں جاتا ہے۔",
+            "en": "The last digit goes in the ones home."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-expanded",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۶۳٬۰۴۷ = ۶۰٬۰۰۰ + ۳۰۰۰ + ___ + ۷",
+        "en": "63,047 = 60,000 + 3,000 + ___ + 7"
+      },
+      "answer_key": {
+        "answer": "40"
+      },
+      "accepted_variants": [
+        "۴۰",
+        "40"
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-value-of-7",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۴۷٬۳۰۵ میں ۷ کی قیمت کیا ہے؟",
+        "en": "What is the value of the 7 in 47,305?"
+      },
+      "options": [
+        {
+          "ur": "۷۰۰۰",
+          "en": "7,000"
+        },
+        {
+          "ur": "۷",
+          "en": "7"
+        },
+        {
+          "ur": "۷۰۰",
+          "en": "700"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-place-value-digit-equals-value"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دائیں سے گھر گنیں۔",
+            "en": "Count the homes from the right."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۷ ہزار کے گھر میں ہے، اس لیے سات ہزار۔",
+        "en": "The 7 is in the thousands home, so it is seven thousand."
+      }
+    },
+    {
+      "id": "p2-which-place",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "۹۱٬۶۴۲ میں ۹ کس گھر میں ہے؟",
+        "en": "In 91,642, which place is the 9 in?"
+      },
+      "options": [
+        {
+          "ur": "دس ہزار",
+          "en": "ten-thousands"
+        },
+        {
+          "ur": "ہزار",
+          "en": "thousands"
+        },
+        {
+          "ur": "اکائی",
+          "en": "ones"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-zero-holds-place",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۲۰٬۵۰۸ میں سو کے گھر میں کونسا ہندسہ ہے؟",
+        "en": "In 20,508, which digit is in the hundreds place?"
+      },
+      "options": [
+        {
+          "ur": "۵",
+          "en": "5"
+        },
+        {
+          "ur": "۰",
+          "en": "0"
+        },
+        {
+          "ur": "۸",
+          "en": "8"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اکائی، دہائی، پھر سو گنیں۔",
+            "en": "Count ones, tens, then hundreds."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-compare-fives",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "۵۵٬۰۰۰ میں دونوں ۵ کی قیمت ایک جیسی ہے۔",
+        "en": "In 55,000 both 5s have the same value."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "ایک ۵ پچاس ہزار ہے، دوسرا پانچ ہزار۔",
+        "en": "One 5 is fifty thousand, the other is five thousand."
+      }
+    },
+    {
+      "id": "p6-underlined",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۸۴٬۲۶۹ میں ۶ کی قیمت کیا ہے؟",
+        "en": "What is the value of the 6 in 84,269?"
+      },
+      "options": [
+        {
+          "ur": "۶۰",
+          "en": "60"
+        },
+        {
+          "ur": "۶۰۰",
+          "en": "600"
+        },
+        {
+          "ur": "۶",
+          "en": "6"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "2": "m-place-value-digit-equals-value"
+        }
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-build-number",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہندسے ۳، ۰، ۸، ۱، ۶ ایک ایک بار استعمال کریں۔ سب سے بڑا عدد بنائیں۔",
+        "en": "Use the digits 3, 0, 8, 1, 6 once each. Make the largest number you can."
+      },
+      "answer_key": {
+        "answer": "86310"
+      },
+      "accepted_variants": [
+        "86310",
+        "86,310",
+        "۸۶٬۳۱۰"
+      ]
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ہندسے کی قیمت ہمیشہ ہندسہ ہی ہوتی ہے، جگہ سے فرق نہیں پڑتا۔",
+        "en": "A digit is always worth just itself; its place does not matter."
+      },
+      "correction": {
+        "ur": "جگہ قیمت بتاتی ہے: ہزار کے گھر میں ۷ کا مطلب سات ہزار ہے۔",
+        "en": "The place gives the value: a 7 in the thousands home means seven thousand."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "صفر کی کوئی ضرورت نہیں، اسے چھوڑ سکتے ہیں۔",
+        "en": "A zero means nothing, so it can be left out."
+      },
+      "correction": {
+        "ur": "صفر خالی گھر کو سنبھالتا ہے۔ ۲۰۵ اور ۲۵ الگ عدد ہیں۔",
+        "en": "A zero holds an empty home. 205 and 25 are different numbers."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-place-value-digit-equals-value",
+      "remediation_ref": "MATH-G4-NB-01"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-NB-01",
+      "remediation_ref": "MATH-G4-NB-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "دائیں سے گھر: اکائی، دہائی، سو، ہزار، دس ہزار۔ ہندسے کی قیمت اس کے گھر سے بنتی ہے۔ صفر خالی گھر سنبھالتا ہے۔",
+    "en": "Homes from the right: ones, tens, hundreds, thousands, ten-thousands. A digit's value comes from its home. A zero holds an empty home."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ ہندسے کی جگہ اس کی قیمت بتاتی ہے۔",
+    "en": "We learned that a digit's place tells its value."
+  },
+  "accessibility_notes": {
+    "ur": "جگہ کا چارٹ ابھی بنانا ہے؛ اس کا متبادل متن ہر خانے کا نام اور ہندسہ پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے والی سرگرمی کا متبادل: ہر ہندسے کے لیے گھر کا نام چنیں۔",
+    "en": "The place-value chart is still to be made; its alt text should read each column name and digit. Urdu audio is not yet recorded. Alternative to the drag activity: choose the place name for each digit."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "place-value chart first, then expanded form; always name the place before the value",
+    "questioning_strategy": "ask 'which home is this digit in?' before 'what is it worth?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "reads the digit instead of its value"
+    ],
+    "hint_policy": "graduated; two hints max; point to counting homes from the right; never give the value first",
+    "example_policy": "use five-digit numbers with at least one zero; Pakistani contexts (prices in rupees, school roll numbers)",
+    "misconception_detectors": [
+      "answers the digit itself as its value",
+      "drops or ignores a zero placeholder"
+    ],
+    "critical_thinking_prompts": [
+      "Why are the two 5s in 55,000 worth different amounts?"
+    ],
+    "personalization_rules": "if the learner misses the ones/tens/hundreds step, route back to MATH-G4-NB-01",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress -> stop and hand to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer",
+      "claim to be a human teacher",
+      "ask for personal information"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm Urdu place names (اکائی، دہائی، سو، ہزار، دس ہزار) match the NCP Grade 4 terms",
+    "language editor: confirm Urdu numerals are the house style for learner-facing Urdu text"
+  ],
+  "parent_notes": {
+    "ur": "موتیوں یا ماچس کی تیلیوں سے دس دس کے گٹھے بنا کر عدد بنائیں۔",
+    "en": "build numbers with beads/matchsticks in groups of ten."
+  },
+  "mentor_notes": {
+    "ur": "صفر بطور جگہ رکھنے والا (۲۳٬۴۰۵) بچوں کو الجھاتا ہے، اس پر وقت دیں۔",
+    "en": "the zero-as-placeholder case (۲۳٬۴۰۵) trips learners — dwell on it."
+  }
+}

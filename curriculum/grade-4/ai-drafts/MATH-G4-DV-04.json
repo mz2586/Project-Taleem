@@ -1,0 +1,501 @@
+{
+  "code": "MATH-G4-DV-04",
+  "description": {
+    "ur": "تقسیم کے لفظی مسائل حل کرنا اور کہانی کے مطابق باقی کا فیصلہ کرنا۔",
+    "en": "Solving division word problems and deciding what the remainder means in the story."
+  },
+  "keywords": [
+    "division",
+    "word problems",
+    "remainder",
+    "round up",
+    "sharing",
+    "grouping"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "فی کس",
+        "en": "per person"
+      },
+      "definition": {
+        "ur": "ہر ایک آدمی کے لیے۔",
+        "en": "For each person."
+      }
+    },
+    {
+      "term": {
+        "ur": "گروہ بندی",
+        "en": "grouping"
+      },
+      "definition": {
+        "ur": "چیزوں کو برابر گروہوں میں بانٹنا۔",
+        "en": "Putting things into equal groups."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم تقسیم کی کہانیاں حل کریں گے۔ ہر کہانی میں پہلے دیکھیں گے: بانٹنا ہے یا گروہ بنانے ہیں؟ پھر تقسیم کریں گے۔ آخر میں سب سے اہم سوال: باقی کا کیا کریں؟ کبھی ایک اور گروہ چاہیے، کبھی باقی بس بچ جاتا ہے۔",
+    "en": "Today we solve division stories. In each story we first ask: are we sharing, or making groups? Then we divide. Last comes the most important question: what do we do with the remainder? Sometimes we need one more group; sometimes the remainder is just left over."
+  },
+  "student_explanation": {
+    "ur": "تقسیم کی کہانیاں بانٹنے یا گروہ بنانے کے بارے میں ہوتی ہیں۔ بانٹنے میں پوچھا جاتا ہے کہ ہر ایک کو کتنا ملے گا۔ گروہ بنانے میں پوچھا جاتا ہے کہ کتنے گروہ بنیں گے۔ جواب کے لیے تقسیم کریں۔ پھر باقی کے بارے میں سوچیں۔ کبھی بچی ہوئی چیزوں کے لیے ایک اور گروہ چاہیے۔ ۲۵ بچوں کے لیے ۴ ۴ والے ۷ بینچ چاہییں، ۶ نہیں۔ کبھی بچی ہوئی چیزیں الگ رہ جاتی ہیں۔ کہانی سے فیصلہ کریں۔",
+    "en": "Division stories are about sharing or grouping. Sharing asks how much each one gets. Grouping asks how many groups we can make. Divide to find the answer. Then think about the remainder. Sometimes the leftovers need one more group. 25 children need 7 benches of 4, not 6. Sometimes the leftovers just stay aside. Let the story decide."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۲۵ بچے ہیں۔ ایک بینچ پر ۴ بچے بیٹھتے ہیں۔ کتنے بینچ چاہییں؟",
+        "en": "There are 25 children. 4 children sit on each bench. How many benches are needed?"
+      },
+      "steps": [
+        {
+          "ur": "یہ گروہ بنانا ہے: ۲۵ ÷ ۴۔",
+          "en": "This is grouping: 25 ÷ 4."
+        },
+        {
+          "ur": "۴ × ۶ = ۲۴، تو ۲۵ ÷ ۴ = ۶ باقی ۱۔",
+          "en": "4 × 6 = 24, so 25 ÷ 4 = 6 remainder 1."
+        },
+        {
+          "ur": "باقی ۱ بچے کو بھی بیٹھنا ہے، اس لیے ایک اور بینچ۔",
+          "en": "The 1 child left over also needs a seat, so one more bench."
+        },
+        {
+          "ur": "جواب: ۷ بینچ۔",
+          "en": "Answer: 7 benches."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ایک دکاندار ۵۰ کیلے تھیلیوں میں ڈالتا ہے، ہر تھیلی میں ۶۔ کتنی تھیلیاں بھریں گی اور کتنے کیلے بچیں گے؟",
+        "en": "A shopkeeper packs 50 bananas into bags of 6. How many bags are filled, and how many bananas are left?"
+      },
+      "steps": [
+        {
+          "ur": "۵۰ ÷ ۶: ۶ × ۸ = ۴۸، تو ۸ باقی ۲۔",
+          "en": "50 ÷ 6: 6 × 8 = 48, so 8 remainder 2."
+        },
+        {
+          "ur": "سوال \"بھری ہوئی\" تھیلیوں کا ہے، اس لیے ۸ تھیلیاں۔",
+          "en": "The question asks for full bags, so 8 bags."
+        },
+        {
+          "ur": "۲ کیلے بچ جاتے ہیں۔ یہاں ایک اور تھیلی نہیں گنتے۔",
+          "en": "2 bananas are left over. Here we do not count another bag."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-round-up-or-leftover",
+      "type": "interactive",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہر کہانی کو \"ایک اور بڑھائیں\" یا \"باقی بچ جائے\" والے ڈبے میں رکھیں۔ (الف) ۲۹ لوگ، ایک رکشے میں ۴: کتنے رکشے؟ (ب) ۲۹ ٹافیاں ۴ بچوں میں: ہر ایک کو کتنی؟ (ج) ۵۰ کتابیں، ایک شیلف پر ۶: کتنی شیلفیں چاہییں؟",
+        "en": "Put each story in the \"add one more\" or \"leave the remainder\" box. (a) 29 people, 4 per rickshaw: how many rickshaws? (b) 29 sweets among 4 children: how many each? (c) 50 books, 6 per shelf: how many shelves are needed?"
+      },
+      "answer_key": {
+        "add_one_more": [
+          "a",
+          "c"
+        ],
+        "leave_remainder": [
+          "b"
+        ],
+        "answers": {
+          "a": 8,
+          "b": 7,
+          "c": 9
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: کیا بچے ہوئے لوگ یا چیزیں بھی کہیں جانی ہیں؟",
+            "en": "Think: do the leftover people or things still need a place?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-egg-trays",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۸۴ انڈے ٹرے میں رکھے جاتے ہیں، ہر ٹرے میں ۶۔ کتنی ٹرے بھریں گی؟ ___",
+        "en": "84 eggs are packed in trays of 6. How many trays are filled? ___"
+      },
+      "answer_key": {
+        "answer": "14"
+      },
+      "accepted_variants": [
+        "14",
+        "۱۴"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لمبی تقسیم کریں: ۸۴ ÷ ۶۔",
+            "en": "Use long division: 84 ÷ 6."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۸۴ ÷ ۶ = ۱۴، کچھ نہیں بچا۔",
+        "en": "84 ÷ 6 = 14, nothing left over."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-vans",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۳۰ بچے سیر پر جا رہے ہیں۔ ایک وین میں ۸ بچے بیٹھتے ہیں۔ کتنی وینیں چاہییں؟",
+        "en": "30 children go on a trip. Each van holds 8. How many vans are needed?"
+      },
+      "options": [
+        {
+          "ur": "۳",
+          "en": "3"
+        },
+        {
+          "ur": "۴",
+          "en": "4"
+        },
+        {
+          "ur": "۲۴۰",
+          "en": "240"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-remainder-dropped",
+          "2": "m-div-bigger-answer"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۳۰ ÷ ۸ کیا ہے؟ بچے ہوئے بچوں کا کیا ہوگا؟",
+            "en": "What is 30 ÷ 8? What happens to the children left over?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۳۰ ÷ ۸ = ۳ باقی ۶۔ ۶ بچوں کو بھی وین چاہیے، اس لیے ۴ وینیں۔",
+        "en": "30 ÷ 8 = 3 remainder 6. The 6 children also need a van, so 4 vans."
+      }
+    },
+    {
+      "id": "p2-pencils-each",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک استاد ۴۷ پنسلیں ۵ گروہوں میں برابر بانٹتی ہیں۔ ہر گروہ کو کتنی پنسلیں ملیں گی؟",
+        "en": "A teacher shares 47 pencils equally among 5 groups. How many pencils does each group get?"
+      },
+      "options": [
+        {
+          "ur": "۹",
+          "en": "9"
+        },
+        {
+          "ur": "۱۰",
+          "en": "10"
+        },
+        {
+          "ur": "۴۲",
+          "en": "42"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۵ × ۹ کتنے ہیں؟ کیا ہر گروہ کو ۱۰ مل سکتی ہیں؟",
+            "en": "What is 5 × 9? Can every group get 10?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴۷ ÷ ۵ = ۹ باقی ۲۔ ہر گروہ کو ۹ ملتی ہیں اور ۲ بچ جاتی ہیں۔",
+        "en": "47 ÷ 5 = 9 remainder 2. Each group gets 9 and 2 are left over."
+      }
+    },
+    {
+      "id": "p4-mango-boxes",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "۵۲ آم ڈبوں میں رکھنے ہیں، ہر ڈبے میں ۸۔ کتنے ڈبے پورے بھریں گے اور کتنے آم بچیں گے؟",
+        "en": "52 mangoes are packed in boxes of 8. How many boxes are filled, and how many mangoes are left?"
+      },
+      "options": [
+        {
+          "ur": "۶ ڈبے، ۴ آم بچے",
+          "en": "6 boxes, 4 left"
+        },
+        {
+          "ur": "۷ ڈبے، ۰ بچے",
+          "en": "7 boxes, 0 left"
+        },
+        {
+          "ur": "۶ ڈبے، ۰ بچے",
+          "en": "6 boxes, 0 left"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "2": "m-remainder-dropped"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۸ × ۶ = ۴۸۔ ۵۲ میں سے کتنے بچے؟",
+            "en": "8 × 6 = 48. How many are left from 52?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۵۲ ÷ ۸ = ۶ باقی ۴: ۶ پورے ڈبے اور ۴ آم بچے۔",
+        "en": "52 ÷ 8 = 6 remainder 4: 6 full boxes and 4 mangoes left."
+      }
+    },
+    {
+      "id": "p5-share-90",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۹۰ روپے ۶ دوستوں میں برابر بانٹیں تو ہر ایک کو ۱۵ روپے ملیں گے۔",
+        "en": "Rs 90 is shared equally among 6 friends. Each friend gets Rs 15."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۶ × ۱۵ کتنے ہیں؟",
+            "en": "What is 6 × 15?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۶ × ۱۵ = ۹۰، اس لیے ہر ایک کو ۱۵ روپے۔",
+        "en": "6 × 15 = 90, so each gets Rs 15."
+      }
+    },
+    {
+      "id": "p6-rope",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۹۶ میٹر لمبی رسی کو ۸ برابر ٹکڑوں میں کاٹا جاتا ہے۔ ہر ٹکڑا کتنا لمبا ہے؟",
+        "en": "A rope 96 m long is cut into 8 equal pieces. How long is each piece?"
+      },
+      "options": [
+        {
+          "ur": "۱۰۴ میٹر",
+          "en": "104 m"
+        },
+        {
+          "ur": "۷۶۸ میٹر",
+          "en": "768 m"
+        },
+        {
+          "ur": "۱۲ میٹر",
+          "en": "12 m"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "1": "m-div-bigger-answer"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ٹکڑے کرنے سے ہر ٹکڑا پوری رسی سے بڑا ہوگا یا چھوٹا؟",
+            "en": "Will each piece be longer or shorter than the whole rope?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۹۶ ÷ ۸ = ۱۲، ہر ٹکڑا ۱۲ میٹر۔",
+        "en": "96 ÷ 8 = 12, so each piece is 12 m."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-pencils-money",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک پنسل ۹ روپے کی ہے۔ ۲۰۰ روپے میں کتنی پنسلیں آئیں گی اور کتنے روپے بچیں گے؟",
+        "en": "A pencil costs Rs 9. How many pencils can you buy with Rs 200, and how much money is left?"
+      },
+      "answer_key": {
+        "answer": "22 pencils, Rs 2 left"
+      },
+      "accepted_variants": [
+        "22 pencils, Rs 2 left",
+        "۲۲ پنسلیں، ۲ روپے بچے"
+      ],
+      "mentor_review_guidance": "Here the remainder is money left over; it does not buy another pencil.",
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۹ × ۲۰ = ۱۸۰۔ باقی ۲۰ روپے میں کتنی اور آئیں گی؟",
+            "en": "9 × 20 = 180. How many more can the other Rs 20 buy?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-grouping-home",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کی چیزوں سے گروہ بندی کا ایک مسئلہ حل کریں۔",
+        "en": "one grouping problem from home."
+      },
+      "answer_key": {
+        "answer": "a grouping story with the remainder explained"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "بانٹنا ہے یا گروہ بنانا؟",
+        "en": "Are we sharing or making groups?"
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "باقی کا کیا کریں؟",
+        "en": "What should we do with the remainder?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "یہ سمجھنا کہ تقسیم سے جواب بڑا ہو جاتا ہے۔",
+        "en": "Thinks dividing makes the answer bigger"
+      },
+      "correction": {
+        "ur": "تقسیم یعنی برابر بانٹنا؛ نتیجہ چھوٹا ہوتا ہے",
+        "en": "Dividing shares equally; the result is smaller."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "تقسیم میں بچی ہوئی چیز (باقی) کو چھوڑ دینا۔",
+        "en": "Ignores the remainder in division"
+      },
+      "correction": {
+        "ur": "جو بچ جائے وہ باقی ہے، اسے لکھیں",
+        "en": "What is left over is the remainder; write it."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-remainder-dropped",
+      "remediation_ref": "MATH-G4-DV-02"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-DV-03",
+      "remediation_ref": "MATH-G4-DV-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "بانٹنا: ہر ایک کو کتنا؟ گروہ بنانا: کتنے گروہ؟ تقسیم کریں، پھر کہانی دیکھیں: بچے ہوئے کو جگہ چاہیے تو ایک اور بڑھائیں، ورنہ باقی بچ جاتا ہے۔",
+    "en": "Sharing: how much each? Grouping: how many groups? Divide, then read the story: if the leftovers need a place, add one more; otherwise the remainder is left over."
+  },
+  "summary": {
+    "ur": "ہم نے تقسیم کے مسئلے حل کیے اور کہانی کے مطابق باقی کا فیصلہ کرنا سیکھا۔",
+    "en": "We solved division stories and learned to decide what the remainder means."
+  },
+  "parent_notes": {
+    "ur": "۲۵ لوگوں کے لیے، اگر ہر گاڑی میں ۴ بیٹھیں، کتنی گاڑیاں چاہییں؟",
+    "en": "how many cars for 25 people, 4 each?"
+  },
+  "mentor_notes": {
+    "ur": "باقی کا فیصلہ کہانی کرتی ہے؛ \"ایک اور بڑھائیں\" اور \"بچ جائے\" دونوں صورتوں پر بات کریں۔",
+    "en": "context decides the remainder — discuss both \"round up\" and \"left over\"."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کارڈوں کی تصویریں ابھی بنانی ہیں؛ ہر کارڈ کا متبادل متن پوری کہانی پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ کہانیاں سن سکنا ضروری ہے۔ گھسیٹنے کا متبادل: ہر کہانی کے نیچے \"ایک اور بڑھائیں\" یا \"باقی بچ جائے\" بٹن۔",
+    "en": "The story-card pictures are still to be made; each card's alt text should read the whole story. Urdu audio is not yet recorded; learners need to hear the stories. Alternative to dragging: an \"add one more\" or \"leave the remainder\" button under each story."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "decide sharing or grouping, divide, then interpret the remainder from the story (add one more group, or leave it over)",
+    "questioning_strategy": "after dividing, always ask 'what happens to the ones left over in this story?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "ignores the remainder when an extra group is needed",
+      "multiplies instead of dividing"
+    ],
+    "hint_policy": "graduated; two hints max (sharing or grouping; what to do with the remainder) then a worked re-teach with the 25 children on benches; never give the answer first",
+    "example_policy": "pairs of stories with the same division but different remainder meanings; transport, packing, sharing money; rickshaws and vans as well as cars",
+    "misconception_detectors": [
+      "answers 3 vans for 30 children in vans of 8",
+      "answers 768 m for 96 m cut into 8 pieces"
+    ],
+    "critical_thinking_prompts": [
+      "Why do 29 people need 8 rickshaws, but 29 sweets give each of 4 children only 7?"
+    ],
+    "personalization_rules": "if the division itself is wrong, route to MATH-G4-DV-03; if the remainder is dropped, route to MATH-G4-DV-02",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "inclusion: the human parent note uses cars; the draft's items use vans and rickshaws so families without a car are not left out; the reviewer may want to adjust the parent note",
+    "subject expert: the rickshaw item assumes 4 passengers each; confirm this is a realistic, safe number to show children"
+  ]
+}

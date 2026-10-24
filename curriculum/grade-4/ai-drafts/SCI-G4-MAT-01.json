@@ -1,0 +1,433 @@
+{
+  "code": "SCI-G4-MAT-01",
+  "title": {
+    "ur": "چیزیں کس سے بنی ہیں؟",
+    "en": "What things are made of"
+  },
+  "description": {
+    "ur": "مادوں کو ان کی خصوصیات سے گروہوں میں بانٹنا: سخت یا نرم، شفاف یا غیر شفاف۔",
+    "en": "Sorting materials by their properties: hard or soft, transparent or opaque."
+  },
+  "keywords": [
+    "material",
+    "property",
+    "hard",
+    "soft",
+    "transparent",
+    "opaque",
+    "sort"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مادہ",
+        "en": "material"
+      },
+      "definition": {
+        "ur": "وہ چیز جس سے کوئی شے بنی ہو، جیسے لکڑی، شیشہ یا روئی۔",
+        "en": "What an object is made of, like wood, glass or cotton."
+      }
+    },
+    {
+      "term": {
+        "ur": "شفاف",
+        "en": "transparent"
+      },
+      "definition": {
+        "ur": "جس کے پار صاف دکھائی دے، جیسے کھڑکی کا شیشہ۔",
+        "en": "You can see clearly through it, like window glass."
+      }
+    },
+    {
+      "term": {
+        "ur": "غیر شفاف",
+        "en": "opaque"
+      },
+      "definition": {
+        "ur": "جس کے پار بالکل دکھائی نہ دے، جیسے لکڑی کا دروازہ۔",
+        "en": "You cannot see through it at all, like a wooden door."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "تمہاری چارپائی، گلاس اور تکیہ مختلف مادوں سے بنے ہیں۔ ہر مادے کی اپنی خصوصیات ہوتی ہیں۔ آج ہم دو آسان جانچ کریں گے۔ انگلی سے دباؤ: سخت ہے یا نرم؟ آنکھ سے دیکھو: آر پار دکھتا ہے یا نہیں؟",
+    "en": "Your charpai, glass and pillow are made of different materials. Each material has its own properties. Today we do two easy tests. Press with a finger: is it hard or soft? Look with your eyes: can you see through it or not?"
+  },
+  "student_explanation": {
+    "ur": "ہر چیز کسی مادے سے بنی ہے۔ لکڑی، پتھر اور لوہا سخت ہیں۔ دبانے پر یہ شکل نہیں بدلتے۔ روئی، اون اور اسفنج نرم ہیں۔ دبانے پر یہ دب جاتے ہیں۔ شیشہ اور صاف پلاسٹک شفاف ہیں۔ ان کے پار صاف دکھتا ہے۔ لکڑی اور اینٹ غیر شفاف ہیں۔ کچھ چیزیں تھوڑی سی روشنی گزارتی ہیں، جیسے پتلا کاغذ۔",
+    "en": "Everything is made of a material. Wood, stone and iron are hard. They do not change shape when pressed. Cotton, wool and sponge are soft. They squash when pressed. Glass and clear plastic are transparent. You can see clearly through them. Wood and brick are opaque. Some things let a little light through, like thin paper."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "پانی کی صاف پلاسٹک بوتل کو دونوں خصوصیات سے جانچو۔",
+        "en": "Test a clear plastic water bottle for both properties."
+      },
+      "steps": [
+        {
+          "ur": "انگلی سے دباؤ: بوتل تھوڑی دبتی ہے، مگر روئی جتنی نہیں۔",
+          "en": "Press with a finger: the bottle squashes a little, but not like cotton."
+        },
+        {
+          "ur": "بوتل کے پار دیکھو: دوسری طرف کی چیزیں صاف دکھتی ہیں۔",
+          "en": "Look through the bottle: things on the other side are clear."
+        },
+        {
+          "ur": "تو یہ شفاف ہے۔ سخت اور نرم کے بیچ میں ہے۔",
+          "en": "So it is transparent. It is between hard and soft."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-see-through",
+      "type": "interactive",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہر چیز کو صحیح خانے میں رکھو: شفاف یا غیر شفاف۔ کھڑکی کا شیشہ، اینٹ، صاف پلاسٹک کا ڈبہ، لکڑی کا تختہ، پانی کا صاف گلاس، مٹی کا گھڑا۔",
+        "en": "Put each thing in the right box: transparent or opaque. Window glass, brick, clear plastic box, wooden board, clear glass of water, clay pot."
+      },
+      "answer_key": {
+        "transparent": [
+          "window glass",
+          "clear plastic box",
+          "clear glass of water"
+        ],
+        "opaque": [
+          "brick",
+          "wooden board",
+          "clay pot"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچو: کیا اس کے پیچھے رکھی چیز تمہیں دکھے گی؟",
+            "en": "Think: could you see a thing placed behind it?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-p5-match-props",
+      "type": "matching",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہر چیز کو اس کی خصوصیت سے ملاؤ۔",
+        "en": "Match each thing to its property."
+      },
+      "options": [
+        {
+          "ur": "تکیہ",
+          "en": "Pillow"
+        },
+        {
+          "ur": "لوہے کی چابی",
+          "en": "Iron key"
+        },
+        {
+          "ur": "صاف پانی",
+          "en": "Clear water"
+        },
+        {
+          "ur": "سخت",
+          "en": "Hard"
+        },
+        {
+          "ur": "شفاف",
+          "en": "Transparent"
+        },
+        {
+          "ur": "نرم",
+          "en": "Soft"
+        }
+      ],
+      "answer_key": {
+        "left": [
+          0,
+          1,
+          2
+        ],
+        "right": [
+          3,
+          4,
+          5
+        ],
+        "pairs": {
+          "0": 5,
+          "1": 3,
+          "2": 4
+        }
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-hard",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ان میں سے کون سا مادہ سخت ہے؟",
+        "en": "Which of these materials is hard?"
+      },
+      "options": [
+        {
+          "ur": "روئی",
+          "en": "Cotton"
+        },
+        {
+          "ur": "پتھر",
+          "en": "Stone"
+        },
+        {
+          "ur": "اون",
+          "en": "Wool"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p2-transparent",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ان میں سے کون سی چیز شفاف ہے؟",
+        "en": "Which of these is transparent?"
+      },
+      "options": [
+        {
+          "ur": "کھڑکی کا شیشہ",
+          "en": "Window glass"
+        },
+        {
+          "ur": "لکڑی کا دروازہ",
+          "en": "Wooden door"
+        },
+        {
+          "ur": "اینٹ کی دیوار",
+          "en": "Brick wall"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-coloured-glass",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "رنگین شیشہ شفاف نہیں ہو سکتا، کیونکہ شفاف کا مطلب بے رنگ ہے۔",
+        "en": "Coloured glass cannot be transparent, because transparent means colourless."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "سبز بوتل کے پار بھی دیکھا جا سکتا ہے۔ شفاف کا مطلب ہے آر پار دکھنا، بے رنگ ہونا نہیں۔",
+        "en": "You can see through a green bottle too. Transparent means see-through, not colourless."
+      }
+    },
+    {
+      "id": "p4-soft-test",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کیسے پتا چلے گا کہ کوئی چیز نرم ہے؟",
+        "en": "How can you find out if something is soft?"
+      },
+      "options": [
+        {
+          "ur": "اسے سونگھ کر",
+          "en": "Smell it"
+        },
+        {
+          "ur": "اس کا رنگ دیکھ کر",
+          "en": "Look at its colour"
+        },
+        {
+          "ur": "انگلی سے آہستہ دبا کر",
+          "en": "Press it gently with a finger"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "نرم چیز دبانے پر کیا کرتی ہے؟",
+            "en": "What does a soft thing do when pressed?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-opaque",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "گتے کا ڈبہ کیسا ہے؟",
+        "en": "What is a cardboard box like?"
+      },
+      "options": [
+        {
+          "ur": "شفاف",
+          "en": "Transparent"
+        },
+        {
+          "ur": "غیر شفاف",
+          "en": "Opaque"
+        },
+        {
+          "ur": "نرم اور شفاف",
+          "en": "Soft and transparent"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-two-properties",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک ایسی چیز بتاؤ جو سخت اور شفاف ہو، اور ایک ایسی جو نرم اور غیر شفاف ہو۔",
+        "en": "Name one thing that is hard and transparent, and one that is soft and opaque."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept e.g. hard + transparent: window glass, glass jar; soft + opaque: pillow, wool sweater, cotton quilt (razai)."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-home-sort",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں چھ چیزیں ڈھونڈو۔ انگلی سے دبا کر اور آر پار دیکھ کر جانچو۔ ایک جدول بناؤ: سخت/نرم اور شفاف/غیر شفاف۔ ٹوٹنے والی یا تیز چیزوں کو ہاتھ نہ لگاؤ۔",
+        "en": "Find six things at home. Test them by pressing and by looking through. Make a table: hard/soft and transparent/opaque. Do not touch anything breakable or sharp."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Check that each of the six things has two properties recorded and that the tests used are pressing and looking."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کون سی جانچ کرنی ہے: دبانا یا آر پار دیکھنا؟",
+        "en": "Which test is needed: pressing, or looking through?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اس چیز کو ذہن میں دباؤ یا اس کے پیچھے ہاتھ رکھ کر سوچو۔",
+        "en": "Picture pressing it, or picture your hand behind it."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "شفاف کا مطلب بے رنگ ہے۔",
+        "en": "Transparent means colourless."
+      },
+      "correction": {
+        "ur": "رنگین شیشہ بھی شفاف ہو سکتا ہے۔ شفاف کا مطلب ہے کہ اس کے پار صاف دکھے۔",
+        "en": "Coloured glass can be transparent too. Transparent means you can see clearly through it."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ہر چیز یا تو بالکل شفاف ہے یا بالکل غیر شفاف۔",
+        "en": "Everything is either fully transparent or fully opaque."
+      },
+      "correction": {
+        "ur": "کچھ چیزیں، جیسے پتلا کاغذ یا دھندلا شیشہ، تھوڑی روشنی گزارتی ہیں مگر صاف نہیں دکھاتیں۔",
+        "en": "Some things, like thin paper or frosted glass, let some light through but do not show things clearly."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "mixes up transparent and opaque twice",
+      "remediation_ref": "SCI-G4-MAT-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "سخت: دبانے پر شکل نہیں بدلتا۔ نرم: دب جاتا ہے۔ شفاف: آر پار صاف دکھتا ہے۔ غیر شفاف: آر پار نہیں دکھتا۔",
+    "en": "Hard: keeps its shape when pressed. Soft: squashes. Transparent: you see clearly through it. Opaque: you cannot see through it."
+  },
+  "summary": {
+    "ur": "ہم نے مادوں کو سخت/نرم اور شفاف/غیر شفاف کے لحاظ سے بانٹا۔",
+    "en": "We sorted materials as hard or soft, and transparent or opaque."
+  },
+  "parent_notes": {
+    "ur": "گھر کی چیزیں اٹھا کر بچے سے پوچھیں: یہ سخت ہے یا نرم؟ اس کے پار دکھتا ہے؟ شیشے کی چیزیں بچہ خود نہ اٹھائے۔",
+    "en": "Hold up things at home and ask: hard or soft? Can you see through it? Let your child not handle glass items alone."
+  },
+  "mentor_notes": {
+    "ur": "بچے \"شفاف\" کو \"بے رنگ\" سمجھتے ہیں؛ رنگین بوتل کی مثال دیں۔ نیم شفاف کا نام ضروری نہیں، مگر یہ بتائیں کہ کچھ چیزیں بیچ میں ہوتی ہیں۔",
+    "en": "Learners confuse transparent with colourless; use a coloured bottle. The word translucent is not needed, but say some things are in between."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ چیزوں کی تصویریں اور ان کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے کا متبادل: ہر چیز کے لیے \"شفاف\" یا \"غیر شفاف\" کا بٹن دبائیں۔ آر پار دیکھنے والی جانچ نابینا بچوں کے لیے زبانی بیان سے بدلی جائے۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. Pictures of the objects and their alt text are still to be made. Alternative to dragging: tap 'transparent' or 'opaque' for each thing. For blind learners, replace the look-through test with a spoken description."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "two tests only (press, look through); name the test before the property; use one property at a time",
+    "questioning_strategy": "ask 'which test tells us this?' before asking for the property",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says coloured means opaque",
+      "guesses by colour or size"
+    ],
+    "hint_policy": "graduated; first name the test, then ask the learner to picture doing it; never give the property first",
+    "example_policy": "use household items: charpai, steel glass, clay pot (ghara), razai, window glass, clear plastic bottle, brick",
+    "misconception_detectors": [
+      "treats transparent as colourless",
+      "forces in-between materials into one group"
+    ],
+    "critical_thinking_prompts": [
+      "Why are windows made of a transparent material and not of wood?"
+    ],
+    "personalization_rules": "for learners who sort well, add the in-between group (thin paper, frosted glass)",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples",
+      "ask the learner to break, scratch or cut any material"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm Urdu terms شفاف / غیر شفاف (and whether نیم شفاف should be introduced)",
+    "child-safety: home sort mentions glass; confirm the 'do not touch breakable or sharp things' line is enough"
+  ]
+}

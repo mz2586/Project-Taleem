@@ -1,0 +1,488 @@
+{
+  "code": "ENG-G4-GR-02",
+  "title": {
+    "ur": "ایک اور زیادہ، اور a / an / the",
+    "en": "One or Many, and a / an / the"
+  },
+  "description": {
+    "ur": "بچہ اسم کی واحد اور جمع صحیح بناتا ہے اور a، an اور the صحیح جگہ استعمال کرتا ہے۔",
+    "en": "The learner forms singular and plural nouns correctly and uses a, an and the in the right places."
+  },
+  "keywords": [
+    "singular",
+    "plural",
+    "articles",
+    "a an the",
+    "irregular plurals",
+    "grammar"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "واحد (singular)",
+        "en": "singular"
+      },
+      "definition": {
+        "ur": "ایک چیز: one book۔",
+        "en": "Just one: one book."
+      }
+    },
+    {
+      "term": {
+        "ur": "جمع (plural)",
+        "en": "plural"
+      },
+      "definition": {
+        "ur": "ایک سے زیادہ: two books۔",
+        "en": "More than one: two books."
+      }
+    },
+    {
+      "term": {
+        "ur": "آرٹیکل (article)",
+        "en": "article"
+      },
+      "definition": {
+        "ur": "اسم سے پہلے آنے والے چھوٹے الفاظ: a، an، the۔",
+        "en": "Small words before a noun: a, an, the."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ایک کتاب کو book کہتے ہیں۔ دو کتابوں کو books کہتے ہیں۔ آج ہم جمع بنانا سیکھیں گے۔ کچھ الفاظ اپنی شکل بدل لیتے ہیں۔ ہم a، an اور the کا استعمال بھی سیکھیں گے۔",
+    "en": "One book is a book. Two of them are books. Today we will learn to make plurals. Some words change their shape. We will also learn how to use a, an and the."
+  },
+  "student_explanation": {
+    "ur": "زیادہ تر الفاظ میں s لگا کر جمع بنتی ہے: book سے books۔ کچھ الفاظ s، sh، ch یا x پر ختم ہوتے ہیں۔ ان میں es لگتا ہے: box سے boxes۔ کچھ الفاظ بدل جاتے ہیں: child سے children۔ foot سے feet بنتا ہے۔ حرفِ علت کی آواز سے پہلے an لگائیں: an apple۔ باقی آوازوں سے پہلے a لگائیں: a mango۔ کسی خاص چیز کے لیے the لگائیں: the sun۔",
+    "en": "Most words add s to make a plural: book becomes books. Some words end in s, sh, ch or x. They add es: box becomes boxes. Some words change: child becomes children. foot becomes feet. Use an before a vowel sound: an apple. Use a before other sounds: a mango. Use the for one particular thing: the sun."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "ان کی جمع بنائیں: cat، bus، man",
+        "en": "Make these plural: cat, bus, man"
+      },
+      "steps": [
+        {
+          "ur": "cat عام لفظ ہے، s لگائیں: cats۔",
+          "en": "cat is a regular word, so add s: cats."
+        },
+        {
+          "ur": "bus کے آخر میں s ہے، es لگائیں: buses۔",
+          "en": "bus ends in s, so add es: buses."
+        },
+        {
+          "ur": "man بدل جاتا ہے: men۔",
+          "en": "man changes: men."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "صحیح آرٹیکل لگائیں: ___ orange اور ___ banana",
+        "en": "Use the right article: ___ orange and ___ banana"
+      },
+      "steps": [
+        {
+          "ur": "orange کی پہلی آواز o ہے، جو حرفِ علت ہے۔",
+          "en": "orange starts with the vowel sound o."
+        },
+        {
+          "ur": "حرفِ علت کی آواز سے پہلے an: an orange۔",
+          "en": "Before a vowel sound use an: an orange."
+        },
+        {
+          "ur": "banana کی پہلی آواز b ہے: a banana۔",
+          "en": "banana starts with the sound b: a banana."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-a-or-an",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "ہر لفظ کو 'a' یا 'an' والے ڈبے میں ڈالیں: egg، cup، umbrella، goat، ink، rabbit",
+        "en": "Sort each word into the 'a' box or the 'an' box: egg, cup, umbrella, goat, ink, rabbit"
+      },
+      "answer_key": {
+        "groups": {
+          "a": [
+            "cup",
+            "goat",
+            "rabbit"
+          ],
+          "an": [
+            "egg",
+            "umbrella",
+            "ink"
+          ]
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ بلند آواز سے بولیں اور پہلی آواز سنیں۔",
+            "en": "Say the word aloud and listen to its first sound."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-the-sun",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "خالی جگہ پُر کریں: ___ sun is hot today.",
+        "en": "Fill the gap: ___ sun is hot today."
+      },
+      "answer_key": {
+        "answer": "The"
+      },
+      "accepted_variants": [
+        "The",
+        "the"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سورج ایک ہی ہے، ایک خاص چیز۔",
+            "en": "There is only one sun, one particular thing."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-an-apple",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "صحیح لفظ چنیں: I ate ___ apple.",
+        "en": "Choose the right word: I ate ___ apple."
+      },
+      "options": [
+        {
+          "ur": "a",
+          "en": "a"
+        },
+        {
+          "ur": "an",
+          "en": "an"
+        },
+        {
+          "ur": "two",
+          "en": "two"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-article-a-an"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "apple کی پہلی آواز کیا ہے؟",
+            "en": "What is the first sound of apple?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "apple حرفِ علت کی آواز سے شروع ہوتا ہے، اس لیے an۔",
+        "en": "apple begins with a vowel sound, so we use an."
+      }
+    },
+    {
+      "id": "p2-children",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "child کی جمع کیا ہے؟",
+        "en": "What is the plural of child?"
+      },
+      "options": [
+        {
+          "ur": "childs",
+          "en": "childs"
+        },
+        {
+          "ur": "childes",
+          "en": "childes"
+        },
+        {
+          "ur": "children",
+          "en": "children"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-plural-add-s-always"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "یہ لفظ s نہیں لیتا، بدل جاتا ہے۔",
+            "en": "This word does not take s; it changes."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "child سے children بنتا ہے۔",
+        "en": "child becomes children."
+      }
+    },
+    {
+      "id": "p3-boxes",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "صحیح جمع چنیں: one box, two ___",
+        "en": "Choose the right plural: one box, two ___"
+      },
+      "options": [
+        {
+          "ur": "boxes",
+          "en": "boxes"
+        },
+        {
+          "ur": "boxs",
+          "en": "boxs"
+        },
+        {
+          "ur": "box",
+          "en": "box"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "x پر ختم ہونے والے لفظ میں کیا لگتا ہے؟",
+            "en": "What do words ending in x add?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-feet",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "صحیح جملہ چنیں:",
+        "en": "Choose the correct sentence:"
+      },
+      "options": [
+        {
+          "ur": "My foots are cold.",
+          "en": "My foots are cold."
+        },
+        {
+          "ur": "My feets are cold.",
+          "en": "My feets are cold."
+        },
+        {
+          "ur": "My feet are cold.",
+          "en": "My feet are cold."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-plural-add-s-always"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "foot کی جمع s سے نہیں بنتی۔",
+            "en": "The plural of foot is not made with s."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-a-umbrella",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "جملہ درست ہے: Take a umbrella.",
+        "en": "This sentence is correct: Take a umbrella."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-article-a-an"
+        }
+      },
+      "explanation": {
+        "ur": "umbrella حرفِ علت کی آواز سے شروع ہوتا ہے: an umbrella۔",
+        "en": "umbrella begins with a vowel sound: an umbrella."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-fix-sentence",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "دو غلطیاں ٹھیک کر کے جملہ دوبارہ لکھیں: I saw a elephant and three mouses.",
+        "en": "Fix the two mistakes and write the sentence again: I saw a elephant and three mouses."
+      },
+      "answer_key": {
+        "answer": "I saw an elephant and three mice."
+      },
+      "accepted_variants": [
+        "I saw an elephant and three mice.",
+        "I saw an elephant and three mice"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "elephant کی پہلی آواز سنیں، اور mouse کی جمع یاد کریں۔",
+            "en": "Listen to the first sound of elephant, and remember the plural of mouse."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-count-things",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کی تین چیزیں گنیں اور انگریزی میں جمع کے ساتھ لکھیں، جیسے two cups، four spoons۔",
+        "en": "Count three kinds of things at home and write them in English with plurals, like two cups, four spoons."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor checks the -s/-es endings and any irregular plural."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "لفظ کی پہلی آواز سنیں: کیا وہ a، e، i، o یا u جیسی ہے؟",
+        "en": "Listen to the first sound: is it like a, e, i, o or u?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "جمع کے لیے لفظ کا آخری حرف دیکھیں، یا سوچیں کہ کیا یہ بدلنے والا لفظ ہے۔",
+        "en": "For a plural, look at the last letter, or think whether it is a word that changes."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "حرفِ علت کی آواز سے پہلے بھی a لگانا۔",
+        "en": "Uses \"a\" before a vowel sound."
+      },
+      "correction": {
+        "ur": "حرفِ علت کی آواز سے پہلے an لگائیں: an apple۔",
+        "en": "Use \"an\" before a vowel sound: an apple."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ہر جمع میں s لگانا۔",
+        "en": "Adds -s to every plural."
+      },
+      "correction": {
+        "ur": "کچھ جمع بدل جاتی ہیں: child سے children، foot سے feet۔",
+        "en": "Irregular plurals change: child→children, foot→feet."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-article-a-an",
+      "remediation_ref": "ENG-G4-GR-02"
+    },
+    {
+      "signal": "misses_prerequisite:ENG-G4-GR-01",
+      "remediation_ref": "ENG-G4-GR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "جمع: s (books)، es (boxes)، بدلنے والے (children، feet، men، mice)۔ a + عام آواز، an + حرفِ علت کی آواز، the + خاص چیز۔",
+    "en": "Plurals: s (books), es (boxes), changing words (children, feet, men, mice). a + consonant sound, an + vowel sound, the + one particular thing."
+  },
+  "summary": {
+    "ur": "ہم نے واحد اور جمع بنائی اور a، an، the صحیح استعمال کیے۔",
+    "en": "We made singular and plural nouns and used a, an and the correctly."
+  },
+  "parent_notes": {
+    "ur": "گنتی کا کھیل کھیلیں: 'ایک انڈا' پر بچہ کہے an egg، 'تین انڈے' پر three eggs۔",
+    "en": "Play a counting game: for 'one egg' your child says an egg, for 'three eggs' they say three eggs."
+  },
+  "mentor_notes": {
+    "ur": "a/an کا اصول حرف پر نہیں آواز پر ہے؛ اس سبق میں صرف سیدھے الفاظ دیے گئے ہیں۔ an hour یا a uniform جیسی مثالیں بعد کے لیے رکھیں۔",
+    "en": "The a/an rule depends on sound, not spelling; this lesson uses only straightforward words. Keep cases like an hour or a uniform for later."
+  },
+  "accessibility_notes": {
+    "ur": "الفاظ کی آواز سننا a/an کے لیے ضروری ہے، مگر انگریزی آڈیو ابھی ریکارڈ نہیں ہوئی۔ چیزوں کی تصویریں اور ان کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے والی سرگرمی کا متبادل: ہر لفظ کے آگے 'a' یا 'an' چنیں۔ سننے میں مشکل والا بچہ پہلا حرف دیکھ کر بھی یہ کر سکتا ہے، کیونکہ یہاں تمام الفاظ سیدھے ہیں۔",
+    "en": "Hearing words matters for a/an, but English audio is not yet recorded. Pictures of the objects and their alt text are still to be made. Alternative to the drag activity: choose 'a' or 'an' next to each word. A child with hearing difficulty can use the first letter here, since all words in this lesson are regular."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "plural rules in three steps (s, es, changing words); articles by first sound; the for one particular thing",
+    "questioning_strategy": "ask 'what is the first sound?' and 'what is the last letter?' before the answer",
+    "slow_down_signals": [
+      "uses a before vowel sounds",
+      "adds s to irregular nouns",
+      "two wrong answers in a row"
+    ],
+    "hint_policy": "graduated; two hints max; first sound/last letter, then the rule; never give the form first",
+    "example_policy": "everyday nouns from home and bazaar (egg, mango, goat, umbrella, box, bus); avoid sound-spelling exceptions in this lesson",
+    "misconception_detectors": [
+      "m-article-a-an",
+      "m-plural-add-s-always"
+    ],
+    "critical_thinking_prompts": [
+      "Why do we say an egg but a goat?"
+    ],
+    "personalization_rules": "if nouns are not recognised, route back to ENG-G4-GR-01",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the Urdu term for articles (آرٹیکل) and for vowel sounds (حرفِ علت) used with Grade 4 learners",
+    "check that sound-spelling exceptions (an hour, a uniform) are deliberately left out of this lesson"
+  ]
+}

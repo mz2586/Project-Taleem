@@ -1,0 +1,410 @@
+{
+  "code": "SCI-G4-EAR-01",
+  "title": {
+    "ur": "دن اور رات",
+    "en": "Day and night"
+  },
+  "description": {
+    "ur": "آسان انداز میں بیان کرنا کہ زمین اپنے محور پر گھومتی ہے، اس لیے دن اور رات ہوتے ہیں۔",
+    "en": "Describing simply that the Earth spins on its axis, and that this causes day and night."
+  },
+  "keywords": [
+    "day",
+    "night",
+    "Earth",
+    "spin",
+    "rotation",
+    "Sun",
+    "sunrise",
+    "sunset"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "گردش",
+        "en": "spin (rotation)"
+      },
+      "definition": {
+        "ur": "کسی چیز کا اپنی جگہ پر لٹو کی طرح گھومنا۔",
+        "en": "Something turning round on the spot, like a top."
+      }
+    },
+    {
+      "term": {
+        "ur": "محور",
+        "en": "axis"
+      },
+      "definition": {
+        "ur": "وہ سیدھی خیالی لکیر جس کے گرد زمین گھومتی ہے۔",
+        "en": "The straight, imaginary line the Earth spins around."
+      }
+    },
+    {
+      "term": {
+        "ur": "طلوع",
+        "en": "sunrise"
+      },
+      "definition": {
+        "ur": "صبح کے وقت سورج کا مشرق میں نظر آنا۔",
+        "en": "When the Sun appears in the east in the morning."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "صبح سورج نکلتا ہے اور شام کو چھپ جاتا ہے۔ لگتا ہے سورج آسمان میں چل رہا ہے۔ مگر اصل میں ہماری زمین لٹو کی طرح گھوم رہی ہے۔ آج ہم دیکھیں گے کہ زمین کے گھومنے سے دن اور رات کیسے بنتے ہیں۔",
+    "en": "In the morning the Sun rises and in the evening it sets. It looks as if the Sun walks across the sky. But really our Earth is spinning like a top. Today we see how the Earth's spin makes day and night."
+  },
+  "student_explanation": {
+    "ur": "زمین ایک بڑی گیند کی طرح گول ہے۔ زمین اپنے محور پر گھومتی رہتی ہے۔ ایک پورا چکر تقریباً ۲۴ گھنٹے میں ہوتا ہے۔ زمین کا جو حصہ سورج کی طرف ہو، وہاں دن ہوتا ہے۔ جو حصہ سورج سے دوسری طرف ہو، وہاں رات ہوتی ہے۔ زمین گھومتی ہے تو ہم دن سے رات میں جاتے ہیں۔ سورج ہمیں چلتا ہوا لگتا ہے۔ اصل میں زمین گھوم رہی ہے۔",
+    "en": "The Earth is round like a big ball. The Earth keeps spinning on its axis. One full spin takes about 24 hours. The side of the Earth facing the Sun has day. The side facing away from the Sun has night. As the Earth spins, we move from day into night. The Sun seems to move across the sky. Really, the Earth is spinning."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "جب پاکستان میں دوپہر ہو تو زمین کی دوسری طرف کیا ہوگا؟",
+        "en": "When it is midday in Pakistan, what is it like on the other side of the Earth?"
+      },
+      "steps": [
+        {
+          "ur": "دوپہر کو پاکستان والا حصہ سورج کی طرف ہے۔",
+          "en": "At midday, Pakistan's side is facing the Sun."
+        },
+        {
+          "ur": "زمین کی دوسری طرف کا حصہ سورج سے دور ہے۔",
+          "en": "The far side of the Earth is facing away from the Sun."
+        },
+        {
+          "ur": "اس لیے وہاں رات ہوگی۔ ایک ہی وقت میں کہیں دن، کہیں رات ہوتی ہے۔",
+          "en": "So it is night there. At the same moment it is day in some places and night in others."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-tap-day-side",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "تصویر میں سورج بائیں طرف ہے اور زمین دائیں طرف۔ زمین کے اس آدھے حصے کو چھوؤ جہاں دن ہے۔",
+        "en": "In the picture the Sun is on the left and the Earth on the right. Tap the half of the Earth that has day."
+      },
+      "answer_key": {
+        "tap": "left_half_facing_sun"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دن اس طرف ہوتا ہے جہاں سورج کی روشنی پڑے۔",
+            "en": "Day is on the side where sunlight falls."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-cause",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "دن اور رات کیوں ہوتے ہیں؟",
+        "en": "Why do we have day and night?"
+      },
+      "options": [
+        {
+          "ur": "سورج زمین کے گرد چکر لگاتا ہے",
+          "en": "The Sun goes round the Earth"
+        },
+        {
+          "ur": "بادل سورج کو ڈھانپ لیتے ہیں",
+          "en": "Clouds cover the Sun"
+        },
+        {
+          "ur": "زمین اپنے محور پر گھومتی ہے",
+          "en": "The Earth spins on its axis"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-sun-moves-round-earth"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون گھوم رہا ہے: سورج یا زمین؟",
+            "en": "Who is spinning: the Sun or the Earth?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-one-spin",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "زمین کا ایک پورا چکر تقریباً کتنی دیر میں ہوتا ہے؟",
+        "en": "About how long does one full spin of the Earth take?"
+      },
+      "options": [
+        {
+          "ur": "تقریباً ۲۴ گھنٹے",
+          "en": "About 24 hours"
+        },
+        {
+          "ur": "ایک ہفتہ",
+          "en": "One week"
+        },
+        {
+          "ur": "ایک سال",
+          "en": "One year"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-sun-moves",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "سورج صبح سے شام تک آسمان میں چلتا ہے، اسی لیے دن رات ہوتے ہیں۔",
+        "en": "The Sun travels across the sky from morning to evening, and that is what makes day and night."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-sun-moves-round-earth"
+        }
+      },
+      "explanation": {
+        "ur": "سورج چلتا ہوا لگتا ہے، مگر اصل میں زمین گھوم رہی ہے۔",
+        "en": "The Sun only seems to move; really the Earth is spinning."
+      }
+    },
+    {
+      "id": "p4-night-side",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "زمین کے جس حصے میں رات ہے، وہ کس طرف ہے؟",
+        "en": "The part of the Earth having night is facing…"
+      },
+      "options": [
+        {
+          "ur": "سورج کی طرف",
+          "en": "towards the Sun"
+        },
+        {
+          "ur": "سورج سے دوسری طرف",
+          "en": "away from the Sun"
+        },
+        {
+          "ur": "چاند کی طرف ہمیشہ",
+          "en": "always towards the Moon"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p5-same-time",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "جب ہمارے ہاں رات ہو تو دنیا کے کسی اور حصے میں دن ہو سکتا ہے۔",
+        "en": "When it is night here, it can be day in another part of the world."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-sunrise",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "سورج صبح کس طرف سے نکلتا دکھائی دیتا ہے؟",
+        "en": "In which direction does the Sun appear to rise in the morning?"
+      },
+      "options": [
+        {
+          "ur": "مشرق",
+          "en": "East"
+        },
+        {
+          "ur": "مغرب",
+          "en": "West"
+        },
+        {
+          "ur": "شمال",
+          "en": "North"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-explain-friend",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک دوست کہتا ہے: \"سورج رات کو سو جاتا ہے۔\" تم اسے دو جملوں میں سائنس سے کیسے سمجھاؤ گے؟",
+        "en": "A friend says: 'The Sun goes to sleep at night.' How would you explain the science to them in two sentences?"
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Look for: the Sun is still shining; the Earth spins so our side turns away from the Sun, giving night. Credit kind, correct wording.",
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "رات کو سورج کہاں ہوتا ہے؟ کیا وہ چمکنا بند کر دیتا ہے؟",
+            "en": "Where is the Sun at night? Does it stop shining?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-spin-model",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک گیند یا مالٹے پر قلم سے چھوٹا سا نشان لگاؤ: یہ \"تمہارا گھر\" ہے۔ دن میں کھڑکی کے پاس دھوپ کی طرف اسے آہستہ گھماؤ۔ دیکھو نشان کب روشنی میں آتا ہے اور کب سائے میں جاتا ہے۔ کسی بڑے کو سمجھاؤ۔",
+        "en": "Draw a small mark on a ball or an orange with a pen: this is 'your home'. In the daytime, by a sunny window, turn it slowly. Watch when the mark is in the light and when it goes into shadow. Explain it to an adult."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Credit an explanation that links 'mark in light' to day and 'mark in shadow' to night caused by turning. Safe: ball/orange and pen only; no lamp, candle or socket."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچو: جو حصہ سورج کی طرف ہے وہاں کیا ہے؟",
+        "en": "Think: what is it like on the side facing the Sun?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد رکھو: سورج اپنی جگہ پر ہے، زمین لٹو کی طرح گھوم رہی ہے۔",
+        "en": "Remember: the Sun stays in place; the Earth spins like a top."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "سورج زمین کے گرد گھومتا ہے، اسی سے دن اور رات ہوتے ہیں۔",
+        "en": "The Sun moves around the Earth, causing day and night."
+      },
+      "correction": {
+        "ur": "زمین گھومتی ہے؛ سورج صرف چلتا ہوا دکھائی دیتا ہے۔",
+        "en": "The Earth rotates; the Sun only appears to move."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "رات کو سورج بجھ جاتا ہے یا سو جاتا ہے۔",
+        "en": "At night the Sun switches off or goes to sleep."
+      },
+      "correction": {
+        "ur": "سورج ہر وقت چمکتا ہے۔ رات کو ہمارا حصہ سورج سے دوسری طرف ہوتا ہے۔",
+        "en": "The Sun always shines. At night our side of the Earth faces away from it."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-sun-moves-round-earth",
+      "remediation_ref": "SCI-G4-EAR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "زمین گول ہے اور اپنے محور پر گھومتی ہے؛ ایک چکر تقریباً ۲۴ گھنٹے کا۔ سورج کی طرف: دن۔ دوسری طرف: رات۔ سورج صرف چلتا ہوا لگتا ہے۔",
+    "en": "The Earth is round and spins on its axis; one spin takes about 24 hours. Facing the Sun: day. Facing away: night. The Sun only seems to move."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ زمین کے گھومنے سے دن اور رات ہوتے ہیں۔",
+    "en": "We learned that the Earth's spin causes day and night."
+  },
+  "parent_notes": {
+    "ur": "گیند یا مالٹے کو دھوپ میں گھما کر بچے کے ساتھ دن رات کا کھیل کریں۔ موم بتی یا بجلی کا لیمپ استعمال نہ کریں۔",
+    "en": "Play the day-and-night game with your child by turning a ball or orange in sunlight. Do not use a candle or a plug-in lamp."
+  },
+  "mentor_notes": {
+    "ur": "m-sun-moves-round-earth سب سے اہم غلط فہمی ہے۔ \"سورج نکلتا ہے\" روزمرہ زبان ہے؛ ساتھ کہیں \"نکلتا ہوا دکھائی دیتا ہے\"۔ زمین کا سورج کے گرد سالانہ چکر اس سبق میں نہیں۔",
+    "en": "m-sun-moves-round-earth is the key misconception. 'The Sun rises' is everyday language; add 'appears to rise'. The Earth's yearly orbit of the Sun is not part of this lesson."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ سورج اور آدھی روشن زمین کا خاکہ اور اس کا متبادل متن ابھی بنانا ہے۔ چھونے والی سرگرمی کا متبادل: \"سورج والی طرف\" یا \"دوسری طرف\" کا بٹن دبائیں۔ نابینا بچوں کے لیے گیند گھمانے والی سرگرمی میں گرم دھوپ کو چھو کر محسوس کرنا شامل کریں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. The diagram of the Sun and a half-lit Earth, with alt text, is still to be made. Alternative to the tap activity: press 'side facing the Sun' or 'side facing away'. For blind learners, the ball-turning activity can use the feel of warm sunlight."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "model first: a ball turning in sunlight; then link 'facing the Sun' to day; always say the Sun 'appears' to move",
+    "questioning_strategy": "ask 'which side is facing the Sun?' before 'is it day or night there?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says the Sun goes round the Earth",
+      "says the Sun switches off at night"
+    ],
+    "hint_policy": "graduated; first the facing question, then the spinning-top picture; never give the answer first",
+    "example_policy": "use familiar models: a lattu (spinning top), a ball or orange in sunlight; Pakistani times like Fajr and Maghrib for sunrise/sunset",
+    "misconception_detectors": [
+      "explains day/night by the Sun moving",
+      "says night is when clouds cover the Sun"
+    ],
+    "critical_thinking_prompts": [
+      "If the Earth stopped spinning, what would happen to day and night where you live?"
+    ],
+    "personalization_rules": "if the learner holds the Sun-moves idea after two items, repeat the ball model before new questions",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples",
+      "suggest using a candle, oil lamp or plug-in lamp for the model"
+    ]
+  },
+  "review_flags": [
+    "subject expert: 'about 24 hours' for one spin is kept approximate on purpose — confirm",
+    "subject expert: confirm Urdu terms محور and گردش are used in Grade 4 books"
+  ]
+}

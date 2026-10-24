@@ -1,0 +1,490 @@
+{
+  "code": "MATH-G4-AS-02",
+  "description": {
+    "ur": "چار ہندسی اعداد کی تفریق ادھار لے کر، صفر کے پار بھی۔",
+    "en": "Subtracting 4-digit numbers with borrowing, including across a zero."
+  },
+  "keywords": [
+    "subtraction",
+    "borrowing",
+    "regrouping",
+    "difference",
+    "zero",
+    "check by adding"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "تفریق",
+        "en": "subtraction"
+      },
+      "definition": {
+        "ur": "ایک عدد میں سے دوسرا عدد کم کرنا۔",
+        "en": "Taking one number away from another."
+      }
+    },
+    {
+      "term": {
+        "ur": "ادھار لینا",
+        "en": "borrow"
+      },
+      "definition": {
+        "ur": "اگلے خانے سے ۱ لینا، جو اس خانے میں ۱۰ بنتا ہے۔",
+        "en": "Taking 1 from the next place; it becomes 10 in this place."
+      }
+    },
+    {
+      "term": {
+        "ur": "باقی",
+        "en": "difference"
+      },
+      "definition": {
+        "ur": "تفریق کے بعد ملنے والا جواب۔",
+        "en": "The answer you get when you subtract."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم چار ہندسی عدد گھٹائیں گے۔ ہر خانے میں ہم اوپر والے ہندسے سے نیچے والا گھٹاتے ہیں۔ اگر اوپر کا ہندسہ چھوٹا ہو تو ہندسے الٹتے نہیں۔ ہم اگلے خانے سے ادھار لیتے ہیں۔ صفر آ جائے تو بھی پریشان نہ ہوں، ہم مل کر حل کریں گے۔",
+    "en": "Today we subtract 4-digit numbers. In each column we take the bottom digit from the top digit. If the top digit is smaller, we do not swap the digits. We borrow from the next column. If we meet a zero, do not worry; we will solve it together."
+  },
+  "student_explanation": {
+    "ur": "ہم خانوں میں تفریق کرتے ہیں اور اکائی سے شروع کرتے ہیں۔ بڑا عدد اوپر لکھیں۔ ہر خانے میں اوپر والے ہندسے سے نیچے والا گھٹائیں۔ کبھی اوپر کا ہندسہ چھوٹا ہوتا ہے۔ تب بائیں طرف کے اگلے خانے سے ۱ ادھار لیں۔ یہ ۱ اس خانے میں ۱۰ کے برابر ہے۔ اگر اگلے خانے میں ۰ ہو تو ایک خانہ اور بائیں جائیں۔ آخر میں جواب کو واپس جمع کر کے جانچیں۔",
+    "en": "We subtract in columns, starting with the ones. Write the bigger number on top. In each column, take the bottom digit from the top digit. Sometimes the top digit is too small. Then borrow 1 from the next column on the left. That 1 is worth 10 in this column. If the next column holds 0, go one more column left. Check your answer by adding back."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۵۳۴۲ − ۲۷۱۸ = ؟",
+        "en": "5342 − 2718 = ?"
+      },
+      "steps": [
+        {
+          "ur": "اکائی: ۲ سے ۸ نہیں گھٹتا۔ دہائی سے ادھار لیں: ۱۲ − ۸ = ۴۔",
+          "en": "Ones: 2 is less than 8. Borrow from the tens: 12 − 8 = 4."
+        },
+        {
+          "ur": "دہائی: ۴ اب ۳ ہے۔ ۳ − ۱ = ۲۔",
+          "en": "Tens: the 4 is now 3. 3 − 1 = 2."
+        },
+        {
+          "ur": "سو: ۳ سے ۷ نہیں گھٹتا۔ ہزار سے ادھار لیں: ۱۳ − ۷ = ۶۔",
+          "en": "Hundreds: 3 is less than 7. Borrow from the thousands: 13 − 7 = 6."
+        },
+        {
+          "ur": "ہزار: ۵ اب ۴ ہے۔ ۴ − ۲ = ۲۔ جواب ۲۶۲۴۔ جانچ: ۲۶۲۴ + ۲۷۱۸ = ۵۳۴۲۔",
+          "en": "Thousands: the 5 is now 4. 4 − 2 = 2. Answer 2624. Check: 2624 + 2718 = 5342."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "۴۰۰۵ − ۱۲۳۸ = ؟ (صفر کے پار ادھار)",
+        "en": "4005 − 1238 = ? (borrowing across zeros)"
+      },
+      "steps": [
+        {
+          "ur": "اکائی میں ۵ سے ۸ نہیں گھٹتا۔ دہائی اور سو میں ۰ ہے۔",
+          "en": "In the ones, 5 is less than 8. The tens and hundreds hold 0."
+        },
+        {
+          "ur": "ہزار سے ۱ لیں: ۴ بنتا ہے ۳، سو بنتا ہے ۱۰۔",
+          "en": "Borrow 1 from the thousands: 4 becomes 3, the hundreds become 10."
+        },
+        {
+          "ur": "سو سے ۱ دہائی کو دیں: سو ۹، دہائی ۱۰۔ دہائی سے ۱ اکائی کو دیں: دہائی ۹، اکائی ۱۵۔",
+          "en": "Pass 1 from hundreds to tens: hundreds 9, tens 10. Pass 1 from tens to ones: tens 9, ones 15."
+        },
+        {
+          "ur": "اب گھٹائیں: ۱۵ − ۸ = ۷، ۹ − ۳ = ۶، ۹ − ۲ = ۷، ۳ − ۱ = ۲۔ جواب ۲۷۶۷۔",
+          "en": "Now subtract: 15 − 8 = 7, 9 − 3 = 6, 9 − 2 = 7, 3 − 1 = 2. Answer 2767."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-borrow-across-zero",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "۴۰۰۵ − ۱۲۳۸ میں پہلے کس خانے سے ادھار لینا ہوگا؟ اس خانے پر ٹیپ کریں۔ پھر اوپر والے عدد کے نئے ہندسے لکھیں۔",
+        "en": "In 4005 − 1238, which column must you borrow from first? Tap it. Then type the new top digits."
+      },
+      "answer_key": {
+        "tap": "thousands",
+        "regrouped_top": {
+          "thousands": 3,
+          "hundreds": 9,
+          "tens": 9,
+          "ones": 15
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دہائی اور سو میں کچھ ہے؟ اگر نہیں تو اور بائیں جائیں۔",
+            "en": "Is there anything in the tens or hundreds? If not, go further left."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-7000",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۷۰۰۰ − ۲۴۵۶ = ___",
+        "en": "7000 − 2456 = ___"
+      },
+      "answer_key": {
+        "answer": "4544"
+      },
+      "accepted_variants": [
+        "4544",
+        "4,544",
+        "۴۵۴۴",
+        "۴٬۵۴۴"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "تینوں صفر کے پار ادھار لینا ہوگا۔ ہزار سے شروع کریں۔",
+            "en": "You must borrow across all three zeros. Start from the thousands."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۷۰۰۰ کو ۶، ۹، ۹، ۱۰ سمجھیں۔ ۱۰ − ۶ = ۴، ۹ − ۵ = ۴، ۹ − ۴ = ۵، ۶ − ۲ = ۴۔ جواب ۴۵۴۴۔",
+        "en": "Think of 7000 as 6, 9, 9, 10. 10 − 6 = 4, 9 − 5 = 4, 9 − 4 = 5, 6 − 2 = 4. Answer 4544."
+      }
+    },
+    {
+      "id": "p6-missing-digit",
+      "type": "fill_blank",
+      "competency": "analysis",
+      "stem": {
+        "ur": "خالی جگہ کا ہندسہ بتائیں: ۸_۲۱ − ۳۴۵۶ = ۴۸۶۵",
+        "en": "Find the missing digit: 8_21 − 3456 = 4865"
+      },
+      "answer_key": {
+        "answer": "3"
+      },
+      "accepted_variants": [
+        "3",
+        "۳"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جمع سے جانچیں: ۴۸۶۵ + ۳۴۵۶ کتنے ہیں؟",
+            "en": "Check by adding: what is 4865 + 3456?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴۸۶۵ + ۳۴۵۶ = ۸۳۲۱، اس لیے خالی جگہ پر ۳ ہے۔",
+        "en": "4865 + 3456 = 8321, so the missing digit is 3."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-6352",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۶۳۵۲ − ۲۸۱۷ = ؟",
+        "en": "6352 − 2817 = ?"
+      },
+      "options": [
+        {
+          "ur": "۴۵۴۵",
+          "en": "4,545"
+        },
+        {
+          "ur": "۳۵۳۵",
+          "en": "3,535"
+        },
+        {
+          "ur": "۳۵۴۵",
+          "en": "3,545"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-borrow-forgotten"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اکائی: کیا ۲ سے ۷ گھٹ سکتا ہے؟",
+            "en": "Ones: can you take 7 from 2?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱۲ − ۷ = ۵، ۴ − ۱ = ۳، ۱۳ − ۸ = ۵، ۵ − ۲ = ۳۔ جواب ۳۵۳۵۔",
+        "en": "12 − 7 = 5, 4 − 1 = 3, 13 − 8 = 5, 5 − 2 = 3. Answer 3535."
+      }
+    },
+    {
+      "id": "p3-3804",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۳۸۰۴ − ۱۵۶۹ = ؟",
+        "en": "3804 − 1569 = ?"
+      },
+      "options": [
+        {
+          "ur": "۲۲۳۵",
+          "en": "2,235"
+        },
+        {
+          "ur": "۲۳۶۵",
+          "en": "2,365"
+        },
+        {
+          "ur": "۲۳۳۵",
+          "en": "2,335"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-borrow-forgotten"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دہائی میں ۰ ہے۔ ادھار کہاں سے لیں گے؟",
+            "en": "The tens hold 0. Where will you borrow from?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سو سے ادھار: ۸ بنتا ہے ۷، دہائی ۹، اکائی ۱۴۔ ۱۴ − ۹ = ۵، ۹ − ۶ = ۳، ۷ − ۵ = ۲، ۳ − ۱ = ۲۔",
+        "en": "Borrow from hundreds: 8 becomes 7, tens 9, ones 14. 14 − 9 = 5, 9 − 6 = 3, 7 − 5 = 2, 3 − 1 = 2."
+      }
+    },
+    {
+      "id": "p4-check-by-adding",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۵۰۰۰ − ۱۸۷۵ = ۳۱۲۵ کو جانچنے کے لیے ہم ۳۱۲۵ + ۱۸۷۵ جمع کر سکتے ہیں۔",
+        "en": "To check 5000 − 1875 = 3125, we can add 3125 + 1875."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جواب میں گھٹایا ہوا عدد جمع کریں تو کیا ملتا ہے؟",
+            "en": "If you add back the number taken away, what do you get?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۳۱۲۵ + ۱۸۷۵ = ۵۰۰۰، اس لیے جواب درست ہے اور یہ طریقہ کام کرتا ہے۔",
+        "en": "3125 + 1875 = 5000, so the answer is right and the check works."
+      }
+    },
+    {
+      "id": "p5-change",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "آمنہ ۱۳۶۵ روپے کا اسکول بیگ خریدتی ہے اور ۵۰۰۰ روپے کا نوٹ دیتی ہے۔ اسے کتنے روپے واپس ملیں گے؟",
+        "en": "Amna buys a school bag for Rs 1365. She pays with a Rs 5000 note. How much change does she get?"
+      },
+      "options": [
+        {
+          "ur": "۴۳۶۵",
+          "en": "4,365"
+        },
+        {
+          "ur": "۳۷۳۵",
+          "en": "3,735"
+        },
+        {
+          "ur": "۳۶۳۵",
+          "en": "3,635"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-borrow-forgotten"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۵۰۰۰ میں تین صفر ہیں۔ ہزار سے ادھار لیں۔",
+            "en": "5000 has three zeros. Borrow from the thousands."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۵۰۰۰ − ۱۳۶۵ = ۳۶۳۵۔ جانچ: ۳۶۳۵ + ۱۳۶۵ = ۵۰۰۰۔",
+        "en": "5000 − 1365 = 3635. Check: 3635 + 1365 = 5000."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-6030",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "خالی جگہ بھریں: ۶۰_۰ − ۲۷۴۸ = ۳۲۸۲۔ اپنا جواب جمع سے جانچیں۔",
+        "en": "Fill the box: 60_0 − 2748 = 3282. Check your answer by adding."
+      },
+      "answer_key": {
+        "answer": "3"
+      },
+      "accepted_variants": [
+        "3",
+        "۳"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۳۲۸۲ + ۲۷۴۸ جمع کریں۔",
+            "en": "Add 3282 + 2748."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-change",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کسی خریداری کے لیے دیے گئے نوٹ سے بقایا رقم نکالیں۔",
+        "en": "find change from a note for a purchase."
+      },
+      "answer_key": {
+        "answer": "a correct subtraction"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "کیا اوپر کا ہندسہ کافی ہے؟",
+        "en": "Is the top digit big enough?"
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "اگلی جگہ سے ادھار لیں",
+        "en": "Borrow from the next place."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ہر خانے میں بڑے ہندسے سے چھوٹا گھٹا دینا، چاہے بڑا ہندسہ نیچے ہو۔",
+        "en": "Subtracts smaller-from-larger per column regardless of order"
+      },
+      "correction": {
+        "ur": "چھوٹے سے بڑا نہیں گھٹتا؛ اوپر والے سے ادھار لیں",
+        "en": "Borrow from the next column instead of flipping the digits."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-borrow-forgotten",
+      "remediation_ref": "MATH-G4-AS-02"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-AS-01",
+      "remediation_ref": "MATH-G4-AS-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "اکائی سے شروع کریں۔ اوپر کا ہندسہ چھوٹا ہو تو اگلے خانے سے ۱ ادھار لیں، وہ ۱۰ بنتا ہے۔ صفر ہو تو اور بائیں جائیں۔ جمع کر کے جانچیں۔",
+    "en": "Start at the ones. If the top digit is smaller, borrow 1 from the next column; it becomes 10. If that column is 0, go further left. Check by adding."
+  },
+  "summary": {
+    "ur": "ہم نے ادھار لے کر، صفر کے پار بھی، چار ہندسی تفریق کرنا سیکھا۔",
+    "en": "We learned to subtract 4-digit numbers by borrowing, even across zeros."
+  },
+  "parent_notes": {
+    "ur": "دکان پر مل کر بقایا رقم کا حساب لگائیں۔",
+    "en": "work out change together at a shop."
+  },
+  "mentor_notes": {
+    "ur": "صفر کے پار ادھار لینا سب سے مشکل ہے؛ اسے دو بار کر کے دکھائیں۔",
+    "en": "borrow-across-zero is the hardest case; model it twice."
+  },
+  "accessibility_notes": {
+    "ur": "ادھار دکھانے والی خانوں کی تصویر ابھی بنانی ہے؛ متبادل متن ہر خانے کا پرانا اور نیا ہندسہ پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ٹیپ سرگرمی کا متبادل: \"ہزار، سو، دہائی\" میں سے ایک بٹن چنیں۔",
+    "en": "The column picture showing the borrowing is still to be made; alt text should read each column's old and new digit. Urdu audio is not yet recorded. Alternative to the tap activity: choose one button from \"thousands, hundreds, tens\"."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "column subtraction from the ones; when the top digit is smaller, borrow from the next column (walking left across zeros); always check by adding back",
+    "questioning_strategy": "ask 'is the top digit big enough?' in every column before the learner subtracts",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "answer shows digit flipping (e.g. 4545 for 6352 − 2817)",
+      "stalls at a zero"
+    ],
+    "hint_policy": "graduated; two hints max (is the top digit enough; borrow from the next place) then a worked re-teach across a zero; never give the answer first",
+    "example_policy": "4-digit subtractions with one or two borrows and with zeros in the top number (4005, 7000, 5000); change in rupees",
+    "misconception_detectors": [
+      "subtracts the smaller digit from the larger in each column",
+      "borrows but does not reduce the lending column"
+    ],
+    "critical_thinking_prompts": [
+      "Why does adding the answer to the number taken away give the starting number?"
+    ],
+    "personalization_rules": "if addition slips appear while checking, route to MATH-G4-AS-01",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "terminology: the doc vocabulary uses باقی for 'difference', but DV-02 uses باقی for 'remainder'; فرق may be the clearer term for difference here",
+    "subject expert: confirm the borrow-across-zero wording (passing 1 from hundreds to tens to ones) matches classroom practice"
+  ]
+}

@@ -1,0 +1,508 @@
+{
+  "code": "SOC-G4-GEO-04",
+  "title": {
+    "ur": "موسم اور علاقے",
+    "en": "Weather, seasons and regions"
+  },
+  "description": {
+    "ur": "سادہ طریقے سے سمجھیں کہ پاکستان کے مختلف علاقوں میں موسم کیسا ہوتا ہے اور لوگ اس کے مطابق کیسے رہتے ہیں۔",
+    "en": "Simply relate the weather and seasons to different regions of Pakistan and to how people live there."
+  },
+  "keywords": [
+    "weather",
+    "season",
+    "summer",
+    "winter",
+    "monsoon",
+    "region",
+    "climate"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "موسم",
+        "en": "weather / season"
+      },
+      "definition": {
+        "ur": "گرمی، سردی، بارش یا ہوا جو کسی وقت ہو۔",
+        "en": "the heat, cold, rain or wind at a certain time."
+      }
+    },
+    {
+      "term": {
+        "ur": "مون سون",
+        "en": "monsoon"
+      },
+      "definition": {
+        "ur": "گرمیوں کی وہ بارشیں جو کئی ہفتے تک ہوتی ہیں۔",
+        "en": "the summer rains that come for several weeks."
+      }
+    },
+    {
+      "term": {
+        "ur": "علاقہ",
+        "en": "region"
+      },
+      "definition": {
+        "ur": "زمین کا ایک حصہ جس کی کچھ باتیں ملتی جلتی ہوں۔",
+        "en": "a part of the land with some things in common."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کیا آپ کے یہاں آج گرمی ہے یا سردی؟ پاکستان میں ایک ہی دن مختلف جگہوں پر مختلف موسم ہو سکتا ہے۔ پہاڑوں پر برف ہو سکتی ہے اور میدانوں میں دھوپ۔ آج ہم دیکھیں گے کہ جگہ موسم کو کیسے بدلتی ہے۔ ہم یہ بھی دیکھیں گے کہ لوگ موسم کے مطابق کیا کرتے ہیں۔",
+    "en": "Is it hot or cold where you are today? In Pakistan, different places can have different weather on the same day. There can be snow on the mountains and sunshine on the plains. Today we will see how place changes the weather. We will also see what people do to suit the weather."
+  },
+  "student_explanation": {
+    "ur": "پاکستان میں گرمی اور سردی دونوں موسم آتے ہیں۔ شمال کے پہاڑوں پر سردیوں میں برف پڑتی ہے۔ وہاں لوگ موٹے گرم کپڑے پہنتے ہیں۔ پنجاب اور سندھ کے میدانوں میں گرمیاں بہت گرم ہوتی ہیں۔ وہاں لوگ ہلکے کپڑے پہنتے اور پانی زیادہ پیتے ہیں۔ سمندر کے کنارے ہوا میں نمی رہتی ہے۔ گرمیوں میں مون سون کی بارشیں آتی ہیں۔ یہ بارشیں کھیتوں کو پانی دیتی ہیں۔ جگہ بدلے تو موسم بھی بدل جاتا ہے۔",
+    "en": "Pakistan has both hot and cold seasons. In winter, snow falls on the northern mountains. People there wear thick, warm clothes. Summers are very hot on the plains of Punjab and Sindh. People there wear light clothes and drink more water. By the sea, the air stays damp. In summer the monsoon rains come. These rains give water to the fields. When the place changes, the weather changes too."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "ایک خاندان سردیوں میں شمال کے پہاڑوں میں رشتہ داروں سے ملنے جا رہا ہے۔ وہ کیسے کپڑے ساتھ لے جائیں؟",
+        "en": "A family is visiting relatives in the northern mountains in winter. What clothes should they pack?"
+      },
+      "steps": [
+        {
+          "ur": "جگہ: شمال کے پہاڑ۔ وقت: سردیاں۔",
+          "en": "Place: the northern mountains. Time: winter."
+        },
+        {
+          "ur": "پہاڑوں پر سردیوں میں بہت ٹھنڈ ہوتی ہے اور برف پڑ سکتی ہے۔",
+          "en": "In winter the mountains are very cold and it may snow."
+        },
+        {
+          "ur": "تو وہ سویٹر، شال اور گرم ٹوپی لے جائیں۔",
+          "en": "So they should pack sweaters, shawls and warm caps."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "جون میں میدانی علاقے کے ایک گاؤں میں بہت گرمی ہے۔ بچے دوپہر میں کیا احتیاط کریں؟",
+        "en": "In June it is very hot in a village on the plains. What care should children take at midday?"
+      },
+      "steps": [
+        {
+          "ur": "جگہ: میدان۔ وقت: گرمیاں، دوپہر۔",
+          "en": "Place: the plains. Time: summer, midday."
+        },
+        {
+          "ur": "دوپہر کو دھوپ سب سے تیز ہوتی ہے۔",
+          "en": "The sun is strongest at midday."
+        },
+        {
+          "ur": "بچے سائے میں رہیں، پانی پئیں اور سر ڈھانپیں۔",
+          "en": "Children should stay in the shade, drink water and cover their heads."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-region-weather-sort",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر تصویر کارڈ کو صحیح علاقے سے ملائیں: 'شمال کے پہاڑ (سردیاں)'، 'میدان (گرمیاں)'، 'سمندر کا کنارہ'۔",
+        "en": "Match each picture card to the right place: 'northern mountains (winter)', 'plains (summer)', 'seaside'."
+      },
+      "answer_key": {
+        "northern_mountains_winter": [
+          "snow on roofs",
+          "thick woollen shawl"
+        ],
+        "plains_summer": [
+          "hand fan and shade under a tree",
+          "drinking extra water"
+        ],
+        "seaside": [
+          "sea breeze and damp air",
+          "fishing boats"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: برف کہاں پڑتی ہے؟",
+            "en": "Think: where does snow fall?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-match-region",
+      "type": "matching",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر علاقے کو اس کے موسم کی پہچان سے ملائیں۔",
+        "en": "Match each region to a sign of its weather."
+      },
+      "options": [
+        {
+          "ur": "سردیوں میں برف",
+          "en": "snow in winter"
+        },
+        {
+          "ur": "بہت گرم گرمیاں",
+          "en": "very hot summers"
+        },
+        {
+          "ur": "نم ہوا",
+          "en": "damp air"
+        }
+      ],
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "شمال کے پہاڑ",
+              "en": "northern mountains"
+            },
+            "right": {
+              "ur": "سردیوں میں برف",
+              "en": "snow in winter"
+            }
+          },
+          {
+            "left": {
+              "ur": "پنجاب اور سندھ کے میدان",
+              "en": "plains of Punjab and Sindh"
+            },
+            "right": {
+              "ur": "بہت گرم گرمیاں",
+              "en": "very hot summers"
+            }
+          },
+          {
+            "left": {
+              "ur": "سمندر کا کنارہ",
+              "en": "seaside"
+            },
+            "right": {
+              "ur": "نم ہوا",
+              "en": "damp air"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-snow-where",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پاکستان میں سردیوں میں برف زیادہ کہاں پڑتی ہے؟",
+        "en": "Where in Pakistan does snow mostly fall in winter?"
+      },
+      "options": [
+        {
+          "ur": "شمال کے پہاڑوں پر",
+          "en": "on the northern mountains"
+        },
+        {
+          "ur": "سمندر کے کنارے",
+          "en": "by the sea"
+        },
+        {
+          "ur": "سندھ کے میدانوں میں",
+          "en": "on the plains of Sindh"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-hot-clothes",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "بہت گرم دن میں کون سے کپڑے بہتر ہیں؟",
+        "en": "Which clothes are better on a very hot day?"
+      },
+      "options": [
+        {
+          "ur": "موٹا سویٹر",
+          "en": "a thick sweater"
+        },
+        {
+          "ur": "ہلکے سوتی کپڑے",
+          "en": "light cotton clothes"
+        },
+        {
+          "ur": "اونی شال",
+          "en": "a woollen shawl"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسے کپڑے چنیں جن میں ہوا آ سکے۔",
+            "en": "Choose clothes that let air through."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-monsoon",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "مون سون کی بارشیں گرمیوں میں آتی ہیں۔",
+        "en": "The monsoon rains come in summer."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "مون سون گرمیوں کی بارشیں ہیں جو کھیتوں کو پانی دیتی ہیں۔",
+        "en": "The monsoon is the summer rain that waters the fields."
+      }
+    },
+    {
+      "id": "p4-same-everywhere",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ایک ہی دن پورے پاکستان میں موسم بالکل ایک جیسا ہوتا ہے۔",
+        "en": "On any one day the weather is exactly the same all over Pakistan."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہاڑوں اور میدانوں کا ایک ہی دن کا موسم سوچیں۔",
+            "en": "Think of the mountains and the plains on the same day."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "جگہ بدلے تو موسم بدل جاتا ہے۔",
+        "en": "When the place changes, the weather changes."
+      }
+    },
+    {
+      "id": "p5-why-cold",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پہاڑوں پر میدانوں سے زیادہ ٹھنڈ کیوں ہوتی ہے؟",
+        "en": "Why is it colder on the mountains than on the plains?"
+      },
+      "options": [
+        {
+          "ur": "کیونکہ وہاں لوگ کم ہیں",
+          "en": "because fewer people live there"
+        },
+        {
+          "ur": "کیونکہ وہاں دریا ہیں",
+          "en": "because there are rivers"
+        },
+        {
+          "ur": "کیونکہ وہ بہت اونچے ہیں",
+          "en": "because they are very high"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہاڑ اور میدان میں سب سے بڑا فرق کیا ہے؟",
+            "en": "What is the biggest difference between a mountain and a plain?"
+          }
+        }
+      ]
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-roofs",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "برف والے علاقوں میں کئی گھروں کی چھتیں ڈھلوان والی ہوتی ہیں۔ اس کی ایک وجہ کیا ہو سکتی ہے؟",
+        "en": "In snowy areas many houses have sloping roofs. What could be one reason?"
+      },
+      "options": [
+        {
+          "ur": "برف اور بارش نیچے پھسل جائے",
+          "en": "so snow and rain slide off"
+        },
+        {
+          "ur": "گھر بڑا لگے",
+          "en": "so the house looks bigger"
+        },
+        {
+          "ur": "پرندے نہ بیٹھیں",
+          "en": "so birds cannot sit"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: چپٹی چھت پر بہت سی برف جمع ہو جائے تو کیا ہوگا؟",
+            "en": "Think: what happens if lots of snow piles up on a flat roof?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-weather-diary",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "تین دن تک ایک لفظ میں آج کا موسم لکھیں یا بنائیں: دھوپ، بادل، بارش، ہوا یا ٹھنڈ۔ گھر کے کسی بڑے سے پوچھیں کہ آج کون سے کپڑے مناسب ہیں۔",
+        "en": "For three days, write or draw today's weather in one word: sunny, cloudy, rainy, windy or cold. Ask a grown-up which clothes suit today."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any three entries. Do not ask the learner to name their town or region."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پہلے جگہ سوچیں: پہاڑ، میدان یا سمندر کا کنارہ؟",
+        "en": "First think of the place: mountains, plains or seaside?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "پھر وقت سوچیں: گرمیاں یا سردیاں؟ اونچی جگہ ٹھنڈی ہوتی ہے۔",
+        "en": "Then think of the time: summer or winter? High places are colder."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "پورے ملک میں ہر وقت موسم ایک جیسا ہوتا ہے۔",
+        "en": "The weather is the same all over the country at all times."
+      },
+      "correction": {
+        "ur": "پہاڑ، میدان اور ساحل کا موسم ایک ہی دن مختلف ہو سکتا ہے۔",
+        "en": "Mountains, plains and the coast can have different weather on the same day."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "پہاڑ سورج کے قریب ہیں اس لیے وہاں زیادہ گرمی ہوگی۔",
+        "en": "Mountains are closer to the sun, so they must be hotter."
+      },
+      "correction": {
+        "ur": "اونچی جگہیں زیادہ ٹھنڈی ہوتی ہیں۔ اسی لیے پہاڑوں پر برف پڑتی ہے۔",
+        "en": "High places are colder. That is why snow falls on mountains."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:SOC-G4-GEO-03",
+      "remediation_ref": "SOC-G4-GEO-03"
+    },
+    {
+      "signal": "two_wrong_in_a_row",
+      "remediation_ref": "SOC-G4-GEO-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "شمال کے پہاڑ: سردیوں میں برف، گرم کپڑے۔ پنجاب اور سندھ کے میدان: گرم گرمیاں، ہلکے کپڑے۔ ساحل: نم ہوا۔ گرمیوں میں مون سون کی بارشیں۔",
+    "en": "Northern mountains: snow in winter, warm clothes. Plains of Punjab and Sindh: hot summers, light clothes. Coast: damp air. Monsoon rains in summer."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ جگہ کے ساتھ موسم بدلتا ہے اور لوگ موسم کے مطابق رہتے ہیں۔",
+    "en": "We learned that weather changes with place and that people live to suit the weather."
+  },
+  "parent_notes": {
+    "ur": "بچے کے ساتھ آسمان دیکھ کر آج کے موسم پر بات کریں اور پوچھیں کہ کون سے کپڑے مناسب ہیں۔",
+    "en": "Look at the sky with your child, talk about today's weather and ask which clothes suit it."
+  },
+  "mentor_notes": {
+    "ur": "موسم کو خوفناک نہ بنائیں؛ سیلاب یا طوفان کی تصاویر اور تفصیل نہ دیں۔ گرمی اور سردی میں حفاظت کی سادہ باتیں سکھائیں۔ درجۂ حرارت کے اعداد نہ دیں جب تک تصدیق نہ ہو۔",
+    "en": "Keep weather non-frightening; no flood or storm images or details. Teach simple heat and cold safety. Do not give temperature figures unless verified."
+  },
+  "accessibility_notes": {
+    "ur": "موسم کے تصویری کارڈ ابھی بنانے ہیں؛ ہر کارڈ کا متبادل متن منظر بیان کرے (مثلاً 'چھتوں پر برف')۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ملانے والی سرگرمی کا متبادل: ہر کارڈ کے لیے تین علاقوں میں سے ایک بٹن دبائیں۔",
+    "en": "Weather picture cards are still to be made; each alt text should describe the scene (for example 'snow on roofs'). Urdu audio is not yet recorded. Alternative to the matching activity: tap one of three region buttons for each card."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "place first, then season, then what people do; connect to the physical features learned in SOC-G4-GEO-03",
+    "questioning_strategy": "ask 'which place?' and 'which season?' before asking about clothes or weather",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "thinks mountains are hotter"
+    ],
+    "hint_policy": "graduated; two hints max; first ask about the place, then the season and height; never give the region first",
+    "example_policy": "broad, stable patterns only (snowy northern winters, hot plains summers, damp coast, summer monsoon); no temperatures, records or disasters",
+    "misconception_detectors": [
+      "assumes the same weather everywhere",
+      "thinks higher means hotter",
+      "confuses monsoon season with winter"
+    ],
+    "critical_thinking_prompts": [
+      "How might a child's day in the mountains in winter differ from a child's day on the plains in summer?"
+    ],
+    "personalization_rules": "if the learner cannot place mountains or plains, route to SOC-G4-GEO-03",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor",
+      "learner mentions being affected by a flood, storm or extreme heat -> respond gently and hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "describe floods, storms or other disasters in frightening detail"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the regional weather generalisations (snowy northern winters, very hot summers on the Punjab and Sindh plains, damp coastal air, summer monsoon) are accurate and not over-simplified",
+    "worked example 2 says 'June' is very hot on the plains; confirm or remove the month",
+    "consider adding a Balochistan example (e.g. cold winters in upland areas) for regional balance once verified"
+  ]
+}

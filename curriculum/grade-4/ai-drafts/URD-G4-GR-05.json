@@ -1,0 +1,636 @@
+{
+  "code": "URD-G4-GR-05",
+  "title": {
+    "ur": "جملہ سازی: درست سادہ جملے بنانا",
+    "en": "Sentence building: making correct simple sentences"
+  },
+  "description": {
+    "ur": "فاعل، مفعول اور فعل کو درست ترتیب سے رکھ کر سادہ اور درست جملے بنانا۔",
+    "en": "Making correct simple sentences by putting the subject, object and verb in the right order."
+  },
+  "keywords": [
+    "sentence building",
+    "word order",
+    "subject",
+    "object",
+    "verb",
+    "agreement"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "فاعل",
+        "en": "subject (doer)"
+      },
+      "definition": {
+        "ur": "جملے میں کام کرنے والا، جیسے 'بلال پانی پیتا ہے' میں بلال۔",
+        "en": "the one doing the action, like Bilal in 'Bilal drinks water'."
+      }
+    },
+    {
+      "term": {
+        "ur": "مفعول",
+        "en": "object"
+      },
+      "definition": {
+        "ur": "جس پر کام ہو، جیسے اسی جملے میں پانی۔",
+        "en": "what the action is done to, like water in the same sentence."
+      }
+    },
+    {
+      "term": {
+        "ur": "جملہ سازی",
+        "en": "sentence building"
+      },
+      "definition": {
+        "ur": "لفظوں کو جوڑ کر درست جملہ بنانا۔",
+        "en": "joining words to make a correct sentence."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آپ نے اسم، فعل، جنس، زمانہ اور نشان سیکھ لیے ہیں۔ آج ہم ان سب کو جوڑ کر جملے بنائیں گے۔ اردو کے سادہ جملے میں پہلے کام کرنے والا آتا ہے۔ پھر وہ چیز جس پر کام ہو، اور آخر میں فعل۔ آئیں، ٹکڑے جوڑ کر جملے بنائیں۔",
+    "en": "You have learned nouns, verbs, gender, tense and marks. Today we will join them all to build sentences. In a simple Urdu sentence the doer comes first. Then comes the thing the action is done to, and the verb comes last. Let us join pieces to make sentences."
+  },
+  "student_explanation": {
+    "ur": "جملہ پوری بات بتاتا ہے۔ سادہ جملے کے تین حصے ہیں۔ فاعل کام کرنے والا ہے۔ مفعول وہ ہے جس پر کام ہو۔ فعل کام بتاتا ہے۔ اردو میں ترتیب یہ ہے: فاعل، مفعول، فعل۔ جیسے 'فاطمہ آم کھاتی ہے'۔ فعل فاعل کی جنس اور تعداد سے ملتا ہے۔ جملے کے آخر میں ختمہ یا سوالیہ نشان لگائیں۔",
+    "en": "A sentence gives a complete thought. A simple sentence has three parts. The subject is the doer. The object is what the action is done to. The verb tells the action. In Urdu the order is subject, object, verb. For example, 'Fatima aam khaati hai' (Fatima eats a mango). The verb matches the subject's gender and number. End the sentence with a full stop or a question mark."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "ان لفظوں سے جملہ بنائیں: کھاتی ہے، فاطمہ، آم",
+        "en": "Make a sentence from: khaati hai, Fatima, aam"
+      },
+      "steps": [
+        {
+          "ur": "فاعل کون ہے؟ فاطمہ (کام کرنے والی)۔",
+          "en": "Who is the subject? Fatima (the doer)."
+        },
+        {
+          "ur": "مفعول کیا ہے؟ آم (جس پر کام ہو)۔",
+          "en": "What is the object? Aam (mango)."
+        },
+        {
+          "ur": "فعل آخر میں: کھاتی ہے۔",
+          "en": "Verb at the end: khaati hai."
+        },
+        {
+          "ur": "جملہ: 'فاطمہ آم کھاتی ہے۔' فاطمہ مؤنث ہے، اس لیے 'کھاتی'۔",
+          "en": "Sentence: 'Fatima aam khaati hai.' Fatima is feminine, so 'khaati'."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "یہ جملہ درست کریں: 'لڑکے کرکٹ کھیلتا ہے'",
+        "en": "Correct this sentence: 'Larke cricket khelta hai'"
+      },
+      "steps": [
+        {
+          "ur": "فاعل 'لڑکے' جمع ہے۔",
+          "en": "The subject 'larke' is plural."
+        },
+        {
+          "ur": "جمع مذکر کے ساتھ 'کھیلتے ہیں' آتا ہے۔",
+          "en": "Masculine plural takes 'khelte hain'."
+        },
+        {
+          "ur": "آخر میں ختمہ نہیں تھا؛ لگائیں۔",
+          "en": "There was no full stop; add one."
+        },
+        {
+          "ur": "درست جملہ: 'لڑکے کرکٹ کھیلتے ہیں۔'",
+          "en": "Correct sentence: 'Larke cricket khelte hain.'"
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-build",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "لفظوں کو صحیح ترتیب میں رکھ کر جملہ بنائیں: 'دیتا ہے'، 'کسان'، 'پانی'، 'کھیت کو'",
+        "en": "Put the words in order to make a sentence: 'deta hai', 'kisaan', 'paani', 'khet ko'"
+      },
+      "options": [
+        {
+          "ur": "دیتا ہے",
+          "en": "deta hai (gives)"
+        },
+        {
+          "ur": "کسان",
+          "en": "kisaan (farmer)"
+        },
+        {
+          "ur": "پانی",
+          "en": "paani (water)"
+        },
+        {
+          "ur": "کھیت کو",
+          "en": "khet ko (to the field)"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          3,
+          2,
+          0
+        ],
+        "sentence": "کسان کھیت کو پانی دیتا ہے۔"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کام کرنے والے سے شروع کریں، فعل آخر میں رکھیں۔",
+            "en": "Start with the doer; put the verb last."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p1-order",
+      "type": "ordering",
+      "competency": "application",
+      "stem": {
+        "ur": "درست جملہ بنائیں: 'پڑھتی ہے'، 'زینب'، 'کہانی'",
+        "en": "Make a correct sentence: 'parhti hai', 'Zainab', 'kahaani'"
+      },
+      "options": [
+        {
+          "ur": "پڑھتی ہے",
+          "en": "parhti hai"
+        },
+        {
+          "ur": "زینب",
+          "en": "Zainab"
+        },
+        {
+          "ur": "کہانی",
+          "en": "kahaani"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          2,
+          0
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "فاعل، مفعول، فعل۔",
+            "en": "Subject, object, verb."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "زینب کہانی پڑھتی ہے۔",
+        "en": "Zainab kahaani parhti hai."
+      }
+    },
+    {
+      "id": "p4-agree",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "'بچے پارک میں فٹ بال ___ ہیں۔' (کھیلنا)",
+        "en": "'Bachche park mein football ___ hain.' (khelna)"
+      },
+      "answer_key": {
+        "answer": "کھیلتے"
+      },
+      "accepted_variants": [
+        "کھیلتے",
+        "کھیل رہے"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'بچے' مذکر جمع ہے۔",
+            "en": "'Bachche' is masculine plural."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "بچے کھیلتے ہیں۔ 'کھیل رہے ہیں' بھی درست ہے۔",
+        "en": "Bachche khelte hain. 'Khel rahe hain' is also correct."
+      }
+    },
+    {
+      "id": "p6-make",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "ان لفظوں سے ایک درست جملہ لکھیں: 'دادی'، 'چائے'، 'بنانا'",
+        "en": "Write one correct sentence with: 'Daadi', 'chai', 'banaana' (to make)"
+      },
+      "answer_key": {
+        "sample_answer": "دادی چائے بناتی ہیں۔"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دادی مؤنث ہیں؛ فعل آخر میں رکھیں۔",
+            "en": "Daadi is feminine; put the verb last."
+          }
+        }
+      ],
+      "rubric": {
+        "criteria": "simple sentence: subject-object-verb order, agreement, end mark",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "جملہ ادھورا ہے یا ترتیب الجھی ہے۔",
+              "en": "The sentence is incomplete or the order is mixed up."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "جملہ مکمل ہے، مگر فعل کی جنس/تعداد یا آخری نشان میں ایک غلطی ہے۔",
+              "en": "The sentence is complete but has one error in verb agreement or the end mark."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "جملہ مکمل، درست ترتیب، درست فعل اور درست نشان کے ساتھ۔",
+              "en": "Complete sentence with correct order, correct verb and correct end mark."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor marks with the rubric. Accept any tense if agreement is right (دادی چائے بنائیں گی / دادی نے چائے بنائی). Respectful plural 'بناتی ہیں' and 'بناتی ہے' both acceptable."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p2-correct-one",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کون سا جملہ درست ہے؟",
+        "en": "Which sentence is correct?"
+      },
+      "options": [
+        {
+          "ur": "لڑکیاں گانا گاتا ہے۔",
+          "en": "Larkiyaan gaana gaata hai."
+        },
+        {
+          "ur": "گانا لڑکیاں ہیں گاتی۔",
+          "en": "Gaana larkiyaan hain gaati."
+        },
+        {
+          "ur": "لڑکیاں گانا گاتی ہیں۔",
+          "en": "Larkiyaan gaana gaati hain."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-gender-default-male"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "فاعل 'لڑکیاں' مؤنث جمع ہے۔",
+            "en": "The subject 'larkiyaan' is feminine plural."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "درست ترتیب اور 'گاتی ہیں' مؤنث جمع کے ساتھ۔",
+        "en": "Correct order, and 'gaati hain' goes with feminine plural."
+      }
+    },
+    {
+      "id": "p3-order-tf",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "'کتاب پڑھتا ہے علی۔' سادہ اردو جملے کی درست ترتیب ہے۔",
+        "en": "'Kitaab parhta hai Ali.' is the correct order for a simple Urdu sentence."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "فاعل کہاں آنا چاہیے؟",
+            "en": "Where should the subject come?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "درست ترتیب: 'علی کتاب پڑھتا ہے۔'",
+        "en": "Correct order: 'Ali kitaab parhta hai.'"
+      }
+    },
+    {
+      "id": "p7-subject",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "'بلال پانی پیتا ہے۔' اس جملے میں فاعل کون ہے؟",
+        "en": "'Bilal paani peeta hai.' Who is the subject?"
+      },
+      "options": [
+        {
+          "ur": "پانی",
+          "en": "paani (water)"
+        },
+        {
+          "ur": "بلال",
+          "en": "Bilal"
+        },
+        {
+          "ur": "پیتا ہے",
+          "en": "peeta hai (drinks)"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کام کون کر رہا ہے؟",
+            "en": "Who is doing the action?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "بلال کام کرنے والا ہے، اس لیے فاعل۔ پانی مفعول ہے۔",
+        "en": "Bilal is the doer, so the subject. Water is the object."
+      }
+    },
+    {
+      "id": "p8-agree-future",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کون سا جملہ درست ہے؟",
+        "en": "Which sentence is correct?"
+      },
+      "options": [
+        {
+          "ur": "کل زینب خط لکھیں گے۔",
+          "en": "Kal Zainab khat likhenge."
+        },
+        {
+          "ur": "کل زینب خط لکھے گا۔",
+          "en": "Kal Zainab khat likhega."
+        },
+        {
+          "ur": "کل زینب خط لکھے گی۔",
+          "en": "Kal Zainab khat likhegi."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "1": "m-gender-default-male"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "زینب ایک لڑکی ہے؛ مستقبل کی کون سی نشانی لگے گی؟",
+            "en": "Zainab is a girl; which future sign fits?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "مؤنث واحد کے ساتھ 'لکھے گی'۔",
+        "en": "Feminine singular takes 'likhegi'."
+      }
+    },
+    {
+      "id": "p5-end-mark",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کس جملے کا آخری نشان درست ہے؟",
+        "en": "Which sentence has the right end mark?"
+      },
+      "options": [
+        {
+          "ur": "کیا تم نے کھانا کھا لیا؟",
+          "en": "Kya tum ne khaana kha liya?"
+        },
+        {
+          "ur": "کیا تم نے کھانا کھا لیا۔",
+          "en": "Kya tum ne khaana kha liya."
+        },
+        {
+          "ur": "امی کھانا پکاتی ہیں؟",
+          "en": "Ammi khaana pakaati hain?"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'کیا' سے شروع ہونے والا جملہ سوال ہوتا ہے۔",
+            "en": "A sentence starting with 'kya' is a question."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سوال کے آخر میں ؟ آتا ہے؛ سادہ بات کے آخر میں ۔",
+        "en": "A question ends with ؟; a statement ends with ۔."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-bazaar",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "'ہمارا بازار' پر تین سادہ جملے لکھیں۔ ایک جملہ سوال ہو۔",
+        "en": "Write three simple sentences about 'our bazaar'. One must be a question."
+      },
+      "answer_key": {
+        "sample_answer": "بازار میں بہت سی دکانیں ہیں۔ پھل والا تازہ آم بیچتا ہے۔ کیا آپ نے بازار کا سموسہ کھایا ہے؟"
+      },
+      "rubric": {
+        "criteria": "simple sentence: subject-object-verb order, agreement, end mark",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "جملہ ادھورا ہے یا ترتیب الجھی ہے۔",
+              "en": "The sentence is incomplete or the order is mixed up."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "جملہ مکمل ہے، مگر فعل کی جنس/تعداد یا آخری نشان میں ایک غلطی ہے۔",
+              "en": "The sentence is complete but has one error in verb agreement or the end mark."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "جملہ مکمل، درست ترتیب، درست فعل اور درست نشان کے ساتھ۔",
+              "en": "Complete sentence with correct order, correct verb and correct end mark."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor marks each sentence with the rubric (max 9). Check one sentence ends with ؟. No real shop names or addresses needed."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-family-sentences",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں ہونے والے تین کاموں پر تین جملے لکھیں، جیسے 'ابو سبزی لاتے ہیں۔' ہر جملے میں فاعل، مفعول اور فعل کے نیچے لکیر لگائیں۔",
+        "en": "Write three sentences about three jobs done at home, like 'Abbu brings vegetables.' Underline the subject, object and verb in each."
+      },
+      "answer_key": {
+        "sample_answer": "امی کپڑے دھوتی ہیں۔ (امی = فاعل، کپڑے = مفعول، دھوتی ہیں = فعل)"
+      },
+      "mentor_review_guidance": "Check order, agreement and end mark; underlining may be imperfect, praise attempts."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کام کون کر رہا ہے؟ اسی سے جملہ شروع کریں۔",
+        "en": "Who is doing the action? Start the sentence with that."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "فعل آخر میں رکھیں اور دیکھیں فاعل مذکر ہے یا مؤنث، واحد ہے یا جمع۔",
+        "en": "Put the verb last and check if the subject is masculine or feminine, singular or plural."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "لفظ کسی بھی ترتیب میں رکھ دیں تو جملہ بن جاتا ہے۔",
+        "en": "Words in any order make a sentence."
+      },
+      "correction": {
+        "ur": "سادہ اردو جملے میں ترتیب فاعل، مفعول، فعل ہے۔",
+        "en": "A simple Urdu sentence goes subject, object, verb."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ہر فاعل کے ساتھ مذکر فعل لگانا (جیسے 'لڑکیاں گاتا ہے')۔",
+        "en": "Treats all nouns as masculine when choosing the verb (e.g. 'larkiyaan gaata hai')."
+      },
+      "correction": {
+        "ur": "ہر اسم کی جنس الگ ہے — یاد کریں یا نشانی دیکھیں",
+        "en": "Each noun has its own gender — remember it or look for the sign."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-gender-default-male",
+      "remediation_ref": "URD-G4-GR-02"
+    },
+    {
+      "signal": "misconception:m-tense-marker-ignored",
+      "remediation_ref": "URD-G4-GR-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "سادہ جملہ: فاعل + مفعول + فعل۔ فعل فاعل سے ملتا ہے (لڑکا کھاتا ہے، لڑکیاں کھاتی ہیں)۔ آخر میں ۔ یا ؟",
+    "en": "Simple sentence: subject + object + verb. The verb matches the subject (larka khaata hai, larkiyaan khaati hain). End with ۔ or ؟."
+  },
+  "summary": {
+    "ur": "ہم نے فاعل، مفعول اور فعل کو جوڑ کر درست سادہ جملے بنانا سیکھا۔",
+    "en": "We learned to join subject, object and verb into correct simple sentences."
+  },
+  "parent_notes": {
+    "ur": "بچے کو تین لفظ دیں (جیسے 'بلی، دودھ، پینا') اور جملہ بنوائیں۔ پھر بچہ آپ کو تین لفظ دے۔",
+    "en": "Give your child three words (like 'cat, milk, drink') and ask for a sentence. Then let your child give you three words."
+  },
+  "mentor_notes": {
+    "ur": "p6، چیلنج اور گھر کا کام روبرک سے جانچیں۔ ماضی میں 'نے' والے جملوں میں فعل مفعول سے ملتا ہے (دادی نے چائے بنائی)؛ اگر بچہ ایسا درست لکھے تو پورے نمبر دیں، مگر قاعدہ ابھی نہ پڑھائیں۔",
+    "en": "Mark p6, the challenge and homework with the rubric. In past 'ne' sentences the verb agrees with the object (daadi ne chai banaai); give full marks if correct, but do not teach that rule yet."
+  },
+  "accessibility_notes": {
+    "ur": "فاعل–مفعول–فعل کے تین ڈبوں والی تصویر ابھی بنانی ہے، متبادل متن کے ساتھ۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ترتیب والی (گھسیٹنے کی) سرگرمی کا متبادل: ہر لفظ پر ۱، ۲، ۳، ۴ کا نمبر چنیں۔ جو بچہ لکھ نہیں سکتا وہ جملہ زبانی بنائے؛ مینٹر روبرک سے جانچے۔",
+    "en": "A three-box subject–object–verb picture is still to be made, with alt text. Urdu audio is not yet recorded. Alternative to the drag ordering activity: choose number 1, 2, 3, 4 for each word. A child who cannot write may build the sentence aloud; the mentor marks with the rubric."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "find the doer, then the object, put the verb last, then check agreement and the end mark; build from given words before free sentences",
+    "questioning_strategy": "ask 'who is doing it?', 'what is it done to?', 'does the verb match?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "verb not at the end",
+      "masculine verb with a feminine or plural subject"
+    ],
+    "hint_policy": "graduated; two hints max; first the doer question, then the agreement check; never write the learner's sentence",
+    "example_policy": "family, farm and bazaar actions; present and future tense; past with 'ne' only if the learner offers it",
+    "misconception_detectors": [
+      "word order not subject-object-verb",
+      "agreement errors",
+      "no end mark"
+    ],
+    "critical_thinking_prompts": [
+      "Can you change one word so the sentence becomes a question?"
+    ],
+    "personalization_rules": "for agreement errors route to URD-G4-GR-02; for tense errors URD-G4-GR-03; for end marks URD-G4-GR-04",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "constructed sentences (p6, challenge, homework) are marked by a human mentor using the rubric"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the terms فاعل / مفعول are introduced at Grade 4 (or replace with 'کام کرنے والا' only)",
+    "mentor team: 3-level rubric applies per sentence; confirm scoring of the 3-sentence challenge (max 9)"
+  ]
+}

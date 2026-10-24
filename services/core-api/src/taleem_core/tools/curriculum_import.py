@@ -45,6 +45,7 @@ from ..contexts.curriculum_studio.domain.content import (
 )
 from ..contexts.curriculum_studio.domain.lesson import Lesson
 from ..contexts.curriculum_studio.domain.workflow import WorkflowState
+from .curriculum_ai_drafts import AI_FIELD_TAG, AI_TAGS, AIDraft
 from .curriculum_content import AuthoredContent, Bilingual
 from .curriculum_spine import Objective, Spine
 
@@ -55,6 +56,10 @@ NOTE_TAG = "provenance-note:"
 PROVENANCE_NOTE = (
     "authored-original project content imported verbatim; provisional, pending the 5-stage "
     "human review; not reviewed curriculum"
+)
+AI_DRAFT_NOTE = (
+    "fields tagged ai-drafted-field were written by an AI model as a first draft, never "
+    "human-reviewed; a subject author must rewrite or confirm them before review"
 )
 
 FIXTURE_CODE = "MATH-G4-FR-01"
@@ -215,7 +220,10 @@ def fixture_fields(fixture: Lesson) -> dict[str, Any]:
 
 
 def content_manifest(
-    spine: Spine, contents: Mapping[str, AuthoredContent], fixture: Lesson | None
+    spine: Spine,
+    contents: Mapping[str, AuthoredContent],
+    fixture: Lesson | None,
+    drafts: Mapping[str, AIDraft] | None = None,
 ) -> dict[str, Any]:
     """Per objective: the import sources and a fingerprint of every field that would be imported.
 
@@ -223,13 +231,15 @@ def content_manifest(
     """
     manifest: dict[str, Any] = {}
     for o in spine.objectives:
-        values, sources, _not = _planned(o, contents, fixture)
+        values, sources, _not, ai = _planned(o, contents, fixture, drafts or {})
         if values:
             manifest[o.code] = {
                 "sources": sources,
-                "status": PROVISIONAL_TAGS[1],
+                "status": PROVISIONAL_TAGS[1] if len(ai) < len(values) else AI_TAGS[1],
                 "fields": {name: fingerprint(values[name]) for name in sorted(values)},
             }
+            if ai:
+                manifest[o.code]["ai_drafted_fields"] = sorted(ai)
     return manifest
 
 
@@ -245,6 +255,7 @@ class ImportEntry:
     unchanged: list[str] = field(default_factory=list)  # already equal to the import
     author_edited: list[str] = field(default_factory=list)  # kept: an author changed it
     not_imported: list[tuple[str, str]] = field(default_factory=list)
+    ai_drafted: list[str] = field(default_factory=list)  # fields whose value is an AI draft
     one_language: dict[str, str] = field(default_factory=dict)  # field -> "English only" etc.
     skipped_state: str = ""  # non-draft lesson: nothing touched
 
@@ -267,8 +278,14 @@ class ImportResult:
 
 
 def _planned(
-    o: Objective, contents: Mapping[str, AuthoredContent], fixture: Lesson | None
-) -> tuple[dict[str, Any], list[str], list[tuple[str, str]]]:
+    o: Objective,
+    contents: Mapping[str, AuthoredContent],
+    fixture: Lesson | None,
+    drafts: Mapping[str, AIDraft],
+) -> tuple[dict[str, Any], list[str], list[tuple[str, str]], set[str]]:
+    """(values, sources, not imported, AI-drafted field names). Human text always wins: the
+    documents first, then the FR-01 fixture; an AI draft fills only the fields still empty, plus
+    the missing language of a human text field written in one language only."""
     values: dict[str, Any] = {}
     sources: list[str] = []
     not_imported: list[tuple[str, str]] = []
@@ -282,20 +299,48 @@ def _planned(
             values.setdefault(name, value)  # the doc section's own text wins where both exist
         sources.append(f"{FIXTURE_SOURCE} (build_fractions_lesson)")
         not_imported += list(FIXTURE_NOT_IMPORTED)
-    return values, sources, not_imported
+    ai: set[str] = set()
+    d = drafts.get(o.code)
+    if d is not None:
+        for name, value in d.values.items():
+            if name not in values:
+                values[name] = value
+                ai.add(name)
+            elif isinstance(value, LocalizedText) and isinstance(values[name], LocalizedText):
+                # A human text written in one language only: the draft supplies the missing side.
+                merged = copy.deepcopy(values[name])
+                for loc, text in value.text.items():
+                    if not merged.has(loc):
+                        merged.text[loc] = text
+                if merged != values[name]:
+                    values[name] = merged
+                    ai.add(name)
+        if ai:
+            sources.append(f"{d.source} (AI draft)")
+    return values, sources, not_imported, ai
 
 
-def _retag(tags: list[str], sources: list[str], hashes: dict[str, str]) -> list[str]:
+def _retag(
+    tags: list[str], sources: list[str], hashes: dict[str, str], ai_fields: list[str]
+) -> list[str]:
     keep = [
         t
         for t in tags
-        if not t.startswith((HASH_TAG, SOURCE_TAG, NOTE_TAG)) and t not in PROVISIONAL_TAGS
+        if not t.startswith((HASH_TAG, SOURCE_TAG, NOTE_TAG, AI_FIELD_TAG))
+        and t not in PROVISIONAL_TAGS
+        and t not in AI_TAGS
     ]
+    ai = (
+        list(AI_TAGS) + [f"{NOTE_TAG}{AI_DRAFT_NOTE}"] + [f"{AI_FIELD_TAG}{n}" for n in ai_fields]
+        if ai_fields
+        else []
+    )
     return (
         keep
         + list(PROVISIONAL_TAGS)
         + [f"{SOURCE_TAG}{s}" for s in sources]
         + [f"{NOTE_TAG}{PROVENANCE_NOTE}"]
+        + ai
         + [f"{HASH_TAG}{name}={digest}" for name, digest in sorted(hashes.items())]
     )
 
@@ -307,6 +352,7 @@ def import_authored(
     baseline: Callable[[Objective], Lesson],
     lesson_ids: Mapping[str, str],
     fixture: Lesson | None = None,
+    drafts: Mapping[str, AIDraft] | None = None,
 ) -> ImportResult:
     """Write authored content into the matching drafts (non-destructive, idempotent).
 
@@ -315,7 +361,7 @@ def import_authored(
     """
     result = ImportResult()
     for o in spine.objectives:
-        values, sources, not_imported = _planned(o, contents, fixture)
+        values, sources, not_imported, ai = _planned(o, contents, fixture, drafts or {})
         if not values:
             continue
         lesson = service.get(lesson_ids[o.code])
@@ -349,7 +395,12 @@ def import_authored(
                 entry.imported.append(name)
                 changed = True
             hashes[name] = new_fp
-        tags = _retag(lesson.metadata.tags, sources, hashes) if entry.current else None
+        entry.ai_drafted = sorted(ai & set(entry.current))
+        tags = (
+            _retag(lesson.metadata.tags, sources, hashes, entry.ai_drafted)
+            if entry.current
+            else None
+        )
         if tags is not None and tags != lesson.metadata.tags:
             lesson.metadata.tags = tags
             changed = True

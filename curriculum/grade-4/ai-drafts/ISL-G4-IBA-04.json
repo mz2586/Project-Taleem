@@ -1,0 +1,462 @@
+{
+  "code": "ISL-G4-IBA-04",
+  "title": {
+    "ur": "شکر اور اچھا رویہ",
+    "en": "Gratitude and Good Conduct"
+  },
+  "description": {
+    "ur": "اللہ تعالیٰ کی نعمتوں کا شکر ادا کرنا، اور ان نعمتوں کو اچھے رویے سے استعمال کرنا۔",
+    "en": "Thanking Allah for His blessings, and using those blessings with good conduct."
+  },
+  "keywords": [
+    "gratitude",
+    "shukr",
+    "blessings",
+    "good conduct",
+    "not wasting",
+    "ibadat"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "شکر",
+        "en": "gratitude"
+      },
+      "definition": {
+        "ur": "نعمت پر دل سے خوش ہونا اور اللہ تعالیٰ کا شکریہ ادا کرنا۔",
+        "en": "Being truly glad for a blessing and thanking Allah."
+      }
+    },
+    {
+      "term": {
+        "ur": "نعمت",
+        "en": "blessing"
+      },
+      "definition": {
+        "ur": "اللہ تعالیٰ کی دی ہوئی اچھی چیز۔",
+        "en": "A good thing Allah has given."
+      }
+    },
+    {
+      "term": {
+        "ur": "ضائع کرنا",
+        "en": "wasting"
+      },
+      "definition": {
+        "ur": "کسی چیز کو بلا ضرورت خراب یا ختم کر دینا۔",
+        "en": "Spoiling or using up something for no need."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم شکر کی بات کریں گے۔ ہماری آنکھیں، پانی، کھانا اور گھر والے، سب اللہ تعالیٰ کی نعمتیں ہیں۔ قرآن مجید میں شکر کرنے کا ذکر ہے۔ [آیت: سورۃ ابراہیم، آیت ۷ — متن اور منظور شدہ ترجمہ عالم فراہم کرے] شکر زبان سے بھی ہوتا ہے اور عمل سے بھی۔",
+    "en": "Today we will talk about gratitude. Our eyes, water, food and family are all blessings from Allah. The Qur'an speaks about being grateful. [Verse: Surah Ibrahim, 7 — text and approved translation to be supplied by a scholar] We show gratitude with our words and with our actions."
+  },
+  "student_explanation": {
+    "ur": "اللہ تعالیٰ نے ہمیں بہت سی نعمتیں دی ہیں۔ آنکھیں، ہاتھ، پانی اور روٹی سب نعمتیں ہیں۔ ہم ان پر اللہ تعالیٰ کا شکر ادا کرتے ہیں۔ کھانا ملے تو ہم شکر کے کلمات کہتے ہیں۔ یہ کلمات ہم گھر والوں سے سیکھتے ہیں۔ شکر عمل سے بھی ہوتا ہے۔ ہم کھانا ضائع نہیں کرتے۔ ہم اپنی چیزوں کا خیال رکھتے ہیں۔ ہم اپنی نعمتیں دوسروں کے ساتھ بانٹتے ہیں۔",
+    "en": "Allah has given us many blessings. Eyes, hands, water and roti are all blessings. We thank Allah for them. When we get food, we say words of thanks. We learn these words from our family. Gratitude is also shown by actions. We do not waste food. We take care of our things. We share our blessings with others."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "رات کے کھانے میں دال اور روٹی ہے۔ عثمان کو آج آلو کھانے تھے۔ شکر کیا کہتا ہے؟",
+        "en": "Dinner is daal and roti. Usman wanted potatoes today. What does gratitude say?"
+      },
+      "steps": [
+        {
+          "ur": "سوچیں: دال روٹی بھی اللہ تعالیٰ کی نعمت ہے۔",
+          "en": "Think: daal and roti are a blessing from Allah too."
+        },
+        {
+          "ur": "بنانے والے نے محنت کی ہے۔",
+          "en": "Someone worked hard to cook it."
+        },
+        {
+          "ur": "عثمان شکر ادا کرتا ہے، کھانے والے کا شکریہ کہتا ہے، اور کھانا ضائع نہیں کرتا۔",
+          "en": "Usman gives thanks, thanks the cook, and does not waste the food."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "نور کو نئی پنسل ملی ہے۔ وہ شکر عمل سے کیسے دکھائے؟",
+        "en": "Noor got a new pencil. How can she show gratitude through her actions?"
+      },
+      "steps": [
+        {
+          "ur": "شکر صرف زبان سے نہیں، عمل سے بھی ہوتا ہے۔",
+          "en": "Gratitude is not only words; it is also actions."
+        },
+        {
+          "ur": "نور پنسل کا خیال رکھتی ہے اور اسے گم نہیں کرتی۔",
+          "en": "Noor takes care of the pencil and does not lose it."
+        },
+        {
+          "ur": "جس دوست کے پاس پنسل نہ ہو، وہ اسے اپنی پرانی پنسل دے دیتی ہے۔",
+          "en": "She gives her old pencil to a friend who has none."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-words-or-actions",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو چھو کر بتائیں: یہ شکر زبان سے ہے یا عمل سے؟",
+        "en": "Tap each card: is this gratitude in words or in actions?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: یہ کچھ کہنا ہے یا کچھ کرنا؟",
+            "en": "Ask: is this saying something or doing something?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "کھانا ملنے پر شکر کے کلمات کہنا",
+          "en": "Saying words of thanks for food"
+        },
+        {
+          "ur": "پلیٹ میں کھانا نہ چھوڑنا",
+          "en": "Not leaving food on the plate"
+        },
+        {
+          "ur": "اپنی کتابوں کا خیال رکھنا",
+          "en": "Taking care of our books"
+        },
+        {
+          "ur": "امی کو کہنا: شکریہ، کھانا مزے کا تھا",
+          "en": "Telling mother: thank you, the food was tasty"
+        },
+        {
+          "ur": "کھلونا بھائی کے ساتھ بانٹنا",
+          "en": "Sharing a toy with a brother"
+        }
+      ],
+      "answer_key": {
+        "mode": "sort",
+        "groups": {
+          "words": [
+            0,
+            3
+          ],
+          "actions": [
+            1,
+            2,
+            4
+          ]
+        }
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-blessing",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ان میں سے کون سی چیز اللہ تعالیٰ کی نعمت ہے؟",
+        "en": "Which of these is a blessing from Allah?"
+      },
+      "options": [
+        {
+          "ur": "پانی",
+          "en": "Water"
+        },
+        {
+          "ur": "کچرا",
+          "en": "Rubbish"
+        },
+        {
+          "ur": "شور",
+          "en": "Noise"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-waste",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "علی کی پلیٹ میں زیادہ کھانا ہے اور اسے بھوک نہیں۔ شکر کا طریقہ کیا ہے؟",
+        "en": "Ali has more food on his plate than he can eat. What is the grateful thing to do?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا کھانا ضائع کرنا شکر ہے؟",
+            "en": "Is wasting food grateful?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کھانا ضائع نہ کرنا عمل سے شکر ہے۔",
+        "en": "Not wasting food is gratitude in action."
+      },
+      "options": [
+        {
+          "ur": "بچا کھانا پھینک دے",
+          "en": "Throw the leftover food away"
+        },
+        {
+          "ur": "آئندہ کم لے، اور بچا کھانا سنبھال کر رکھ دے",
+          "en": "Take less next time, and save the leftover food"
+        },
+        {
+          "ur": "کھانا زمین پر گرا دے",
+          "en": "Drop the food on the floor"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p3-actions",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "شکر صرف زبان سے ہوتا ہے، عمل سے نہیں۔",
+        "en": "Gratitude is only in words, not in actions."
+      },
+      "explanation": {
+        "ur": "ہم زبان سے بھی شکر کرتے ہیں اور عمل سے بھی۔",
+        "en": "We are grateful in words and in actions."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p4-small",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "شکر کب کرنا چاہیے؟",
+        "en": "When should we be grateful?"
+      },
+      "options": [
+        {
+          "ur": "صرف جب بہت بڑی چیز ملے",
+          "en": "Only when we get something very big"
+        },
+        {
+          "ur": "صرف عید پر",
+          "en": "Only on Eid"
+        },
+        {
+          "ur": "چھوٹی بڑی ہر نعمت پر",
+          "en": "For every blessing, small or big"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-share",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اپنی نعمت دوسروں کے ساتھ بانٹنا بھی شکر کا ایک طریقہ ہے۔",
+        "en": "Sharing our blessings with others is also a way of being grateful."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-book",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "سارہ کو بڑی بہن کی پرانی کتاب ملی ہے۔ وہ کیا کرے؟",
+        "en": "Sara has been given her elder sister's old book. What should she do?"
+      },
+      "explanation": {
+        "ur": "پرانی چیز بھی نعمت ہے۔",
+        "en": "An old thing is a blessing too."
+      },
+      "options": [
+        {
+          "ur": "شکریہ کہے اور کتاب کا خیال رکھے",
+          "en": "Say thank you and take care of the book"
+        },
+        {
+          "ur": "کہے: مجھے نئی کتاب چاہیے",
+          "en": "Say: I want a new book"
+        },
+        {
+          "ur": "کتاب پھاڑ دے",
+          "en": "Tear the book"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-free-blessings",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایسی تین نعمتیں بتائیں جو پیسوں سے نہیں خریدی جاتیں۔",
+        "en": "Name three blessings that cannot be bought with money."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept answers like eyes, rain, sunlight, family love, friends, health. Never compare children's possessions."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-thank-three",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج سونے سے پہلے تین نعمتوں کے بارے میں سوچیں اور ان پر شکر ادا کریں، جیسے آپ کے گھر والے سکھائیں۔",
+        "en": "Before sleeping today, think of three blessings and give thanks for them, as your family teaches you."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. The child does not need to share the list."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: کیا اس سے نعمت کا خیال رکھا جا رہا ہے؟",
+        "en": "Think: is this taking care of a blessing?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: شکر زبان سے بھی اور عمل سے بھی۔",
+        "en": "Remember: gratitude is in words and in actions."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "شکر صرف بڑی چیز ملنے پر ہوتا ہے۔",
+        "en": "We only give thanks for big things."
+      },
+      "correction": {
+        "ur": "ہم چھوٹی بڑی ہر نعمت پر شکر کرتے ہیں۔",
+        "en": "We give thanks for every blessing, small or big."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "شکر کا مطلب صرف کچھ الفاظ کہنا ہے۔",
+        "en": "Gratitude means only saying some words."
+      },
+      "correction": {
+        "ur": "نعمت کا خیال رکھنا اور ضائع نہ کرنا بھی شکر ہے۔",
+        "en": "Taking care of a blessing and not wasting it is gratitude too."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "low_score:gratitude",
+      "remediation_ref": "ISL-G4-AKH-04"
+    },
+    {
+      "signal": "low_score:sharing",
+      "remediation_ref": "ISL-G4-IBA-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پانی، کھانا، آنکھیں اور گھر والے اللہ تعالیٰ کی نعمتیں ہیں۔ شکر زبان سے اور عمل سے: ضائع نہ کرنا، خیال رکھنا، بانٹنا۔",
+    "en": "Water, food, eyes and family are blessings from Allah. Gratitude in words and actions: do not waste, take care, share."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ شکر زبان اور عمل دونوں سے ادا کیا جاتا ہے۔",
+    "en": "We learned that gratitude is shown in words and in actions."
+  },
+  "parent_notes": {
+    "ur": "کھانے کے وقت شکر کے کلمات اپنے گھر کے طریقے سے سکھائیں۔ کھانا ضائع نہ کرنے میں خود مثال بنیں۔",
+    "en": "Teach the words of thanks at mealtimes the way your family says them. Set the example of not wasting food."
+  },
+  "mentor_notes": {
+    "ur": "شکر کے کلمات کا عربی متن اس سبق میں جان بوجھ کر نہیں دیا گیا؛ بچہ انہیں گھر والوں اور استاد سے سیکھے۔ نعمتوں کی مثالیں ایسی رکھیں جو ہر بچے کے پاس ہوں۔",
+    "en": "The Arabic words of thanks are deliberately not written in this lesson; the child learns them from family and teacher. Use examples of blessings that every child has."
+  },
+  "accessibility_notes": {
+    "ur": "تصاویر (دال روٹی، کتاب) اور ان کا متبادل متن ابھی بنانا ہے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر کارڈ کے لیے 'زبان' یا 'عمل' کا بٹن چنیں۔",
+    "en": "Pictures (daal and roti, a book) and their alt text are still to be made. Urdu audio is not yet recorded. Alternative to the sort activity: choose a 'words' or 'actions' button for each card."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "list everyday blessings every child has, then show gratitude in words and in actions (not wasting, caring, sharing)",
+    "questioning_strategy": "ask 'is this a blessing?' then 'is this saying or doing?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "child compares what they have with others"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "blessings every child shares (water, eyes, rain, family love); simple food like daal and roti; never compare wealth",
+    "misconception_detectors": [
+      "thinks thanks is only for big gifts",
+      "thinks gratitude is only words"
+    ],
+    "critical_thinking_prompts": [
+      "How is not wasting food a way of saying thank you to Allah and to the cook?"
+    ],
+    "personalization_rules": "if the child mentions not having something, turn gently to blessings they do have and praise their ideas",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions",
+      "write the Arabic words of thanks (e.g. the words said after eating)"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: supply the text and approved translation for the Surah Ibrahim, 7 placeholder in teacher_script, or replace it",
+    "scholar: the 'words of thanks' (e.g. Alhamdulillah) are only named, not written; confirm how the published lesson should present them",
+    "child-safety reviewer: confirm the dinner example cannot shame children with little food at home"
+  ]
+}

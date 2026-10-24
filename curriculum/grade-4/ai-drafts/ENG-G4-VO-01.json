@@ -1,0 +1,459 @@
+{
+  "code": "ENG-G4-VO-01",
+  "title": {
+    "ur": "روزمرہ کے انگریزی الفاظ",
+    "en": "Everyday English Words"
+  },
+  "description": {
+    "ur": "بچہ عام استعمال ہونے والے انگریزی الفاظ اور کھانے اور گھر کے موضوع کے الفاظ پہچانتا اور استعمال کرتا ہے۔",
+    "en": "The learner recognises and uses high-frequency English words and theme words about food and home."
+  },
+  "keywords": [
+    "high-frequency words",
+    "sight words",
+    "theme words",
+    "food",
+    "home",
+    "vocabulary"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "عام لفظ (high-frequency word)",
+        "en": "high-frequency word"
+      },
+      "definition": {
+        "ur": "وہ لفظ جو بہت بار آتا ہے، جیسے the، is، was۔",
+        "en": "A word we see very often, like the, is, was."
+      }
+    },
+    {
+      "term": {
+        "ur": "موضوع کا لفظ (theme word)",
+        "en": "theme word"
+      },
+      "definition": {
+        "ur": "ایک موضوع کے الفاظ، جیسے کھانا: rice، milk۔",
+        "en": "Words about one topic, like food: rice, milk."
+      }
+    },
+    {
+      "term": {
+        "ur": "پہچاننا (recognise)",
+        "en": "recognise"
+      },
+      "definition": {
+        "ur": "لفظ کو دیکھتے ہی جان لینا۔",
+        "en": "Know a word as soon as you see it."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کچھ انگریزی الفاظ ہر جگہ نظر آتے ہیں، جیسے the، is اور was۔ انہیں دیکھتے ہی پہچاننا چاہیے۔ آج ہم کچھ ایسے الفاظ یاد کریں گے۔ ہم کھانے اور گھر کے الفاظ بھی سیکھیں گے۔ پھر انہیں جملوں میں استعمال کریں گے۔",
+    "en": "Some English words are everywhere, like the, is and was. We should know them as soon as we see them. Today we will learn some of these words. We will also learn words for food and home. Then we will use them in sentences."
+  },
+  "student_explanation": {
+    "ur": "کچھ الفاظ ہر جملے میں آتے ہیں۔ the، is، was، they، have ایسے ہی الفاظ ہیں۔ ان میں سے کچھ آواز ملا کر نہیں پڑھے جاتے۔ انہیں پورا دیکھ کر یاد کریں۔ کھانے کے الفاظ بھی سیکھیں: rice، milk، egg، bread۔ گھر کے الفاظ: door، bed، cup۔ ہر نیا لفظ ایک جملے میں بولیں۔ جیسے: I have a cup of milk.",
+    "en": "Some words come in almost every sentence. the, is, was, they and have are such words. Some of them cannot be sounded out. Learn them by looking at the whole word. Learn food words too: rice, milk, egg, bread. Home words: door, bed, cup. Say each new word in a sentence. For example: I have a cup of milk."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "خالی جگہ پُر کریں: ___ are my friends.",
+        "en": "Fill the gap: ___ are my friends."
+      },
+      "steps": [
+        {
+          "ur": "جملہ کئی لوگوں کی بات کر رہا ہے: friends۔",
+          "en": "The sentence is about more than one person: friends."
+        },
+        {
+          "ur": "کئی لوگوں کے لیے they آتا ہے۔",
+          "en": "For more than one person we use they."
+        },
+        {
+          "ur": "بڑا حرف لگائیں: They are my friends.",
+          "en": "Use a capital letter: They are my friends."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "بازار میں کیا ملتا ہے؟ صحیح لفظ چنیں: I buy ___ for breakfast. (eggs / doors)",
+        "en": "What do we get at the bazaar? Choose: I buy ___ for breakfast. (eggs / doors)"
+      },
+      "steps": [
+        {
+          "ur": "breakfast کا مطلب ہے ناشتہ۔",
+          "en": "breakfast means the morning meal."
+        },
+        {
+          "ur": "ناشتے میں انڈے کھائے جاتے ہیں، دروازے نہیں۔",
+          "en": "We eat eggs at breakfast, not doors."
+        },
+        {
+          "ur": "جواب: I buy eggs for breakfast.",
+          "en": "Answer: I buy eggs for breakfast."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-food-home-sort",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "الفاظ کو دو ڈبوں میں ڈالیں، کھانا یا گھر: rice، bed، milk، door، bread، chair",
+        "en": "Sort the words into two boxes, food or home: rice, bed, milk, door, bread, chair"
+      },
+      "answer_key": {
+        "groups": {
+          "food": [
+            "rice",
+            "milk",
+            "bread"
+          ],
+          "home": [
+            "bed",
+            "door",
+            "chair"
+          ]
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: کیا یہ کھایا جا سکتا ہے؟",
+            "en": "Think: can you eat it?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p1-word-meaning",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "انگریزی لفظ کو اس کے اردو معنی سے ملائیں: milk ، egg ، door ، bread",
+        "en": "Match each English word to its meaning: milk, egg, door, bread"
+      },
+      "answer_key": {
+        "pairs": {
+          "milk": "دودھ",
+          "egg": "انڈا",
+          "door": "دروازہ",
+          "bread": "روٹی / ڈبل روٹی"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جو لفظ پکا معلوم ہو، اس سے شروع کریں۔",
+            "en": "Start with the word you are sure of."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-the",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "خالی جگہ پُر کریں: Please close ___ door.",
+        "en": "Fill the gap: Please close ___ door."
+      },
+      "answer_key": {
+        "answer": "the"
+      },
+      "accepted_variants": [
+        "the"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایک خاص دروازے کی بات ہو رہی ہے۔",
+            "en": "We mean one particular door."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p2-was",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "صحیح لفظ چنیں: Yesterday the tea ___ hot.",
+        "en": "Choose the right word: Yesterday the tea ___ hot."
+      },
+      "options": [
+        {
+          "ur": "is",
+          "en": "is"
+        },
+        {
+          "ur": "have",
+          "en": "have"
+        },
+        {
+          "ur": "was",
+          "en": "was"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "Yesterday گزرا ہوا وقت ہے۔",
+            "en": "Yesterday is time that has passed."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "گزرے وقت کے لیے was آتا ہے۔",
+        "en": "For time that has passed we use was."
+      }
+    },
+    {
+      "id": "p3-have",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "صحیح لفظ چنیں: We ___ two goats.",
+        "en": "Choose the right word: We ___ two goats."
+      },
+      "options": [
+        {
+          "ur": "have",
+          "en": "have"
+        },
+        {
+          "ur": "the",
+          "en": "the"
+        },
+        {
+          "ur": "was",
+          "en": "was"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کونسا لفظ 'رکھنا' کا مطلب دیتا ہے؟",
+            "en": "Which word means 'own'?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-odd-one",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کونسا لفظ کھانے کا نہیں ہے؟",
+        "en": "Which word is NOT a food?"
+      },
+      "options": [
+        {
+          "ur": "rice",
+          "en": "rice"
+        },
+        {
+          "ur": "bed",
+          "en": "bed"
+        },
+        {
+          "ur": "egg",
+          "en": "egg"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "bed کا مطلب ہے بستر، یہ کھایا نہیں جاتا۔",
+        "en": "bed is something we sleep on, not eat."
+      }
+    },
+    {
+      "id": "p6-they",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "جملہ درست ہے: They is my cousins.",
+        "en": "This sentence is correct: They is my cousins."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "they کے ساتھ are آتا ہے: They are my cousins.",
+        "en": "With they we use are: They are my cousins."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-two-sentences",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کھانے کے دو الفاظ چنیں اور ہر ایک سے ایک جملہ لکھیں۔ have یا is ضرور استعمال کریں۔",
+        "en": "Choose two food words and write one sentence with each. Use have or is."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "correct use of a theme word and a high-frequency word",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "ایک جملہ درست، یا لفظ صحیح مگر جملہ ادھورا۔",
+              "en": "One correct sentence, or right word but incomplete sentence."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "دونوں جملے درست اور بامعنی۔",
+              "en": "Both sentences correct and meaningful."
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-kitchen-words",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "باورچی خانے کی تین چیزوں کے انگریزی نام اپنی کاپی میں لکھیں، جیسے cup۔",
+        "en": "Write the English names of three things in the kitchen in your notebook, like cup."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Any correct kitchen word is fine (cup, pot, plate, spoon, rice); spelling is checked gently."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "جملہ پورا پڑھیں اور سوچیں کہ کس کی بات ہو رہی ہے۔",
+        "en": "Read the whole sentence and think about who or what it is about."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "ہر لفظ خالی جگہ میں رکھ کر پڑھیں۔ کونسا ٹھیک لگتا ہے؟",
+        "en": "Try each word in the gap and read it. Which one sounds right?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "the، said، was جیسے الفاظ کو آواز ملا کر پڑھنے کی کوشش کرنا۔",
+        "en": "Trying to sound out words like the, said and was letter by letter."
+      },
+      "correction": {
+        "ur": "یہ الفاظ پورے دیکھ کر یاد کیے جاتے ہیں۔",
+        "en": "These words are learned by sight, as whole words."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "they کے ساتھ is لگانا۔",
+        "en": "Using is with they."
+      },
+      "correction": {
+        "ur": "they کے ساتھ are آتا ہے، گزرے وقت میں were۔",
+        "en": "they goes with are, and with were for the past."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:ENG-G4-RD-01",
+      "remediation_ref": "ENG-G4-RD-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "عام الفاظ: the، is، was، they، have۔ کھانا: rice، milk، egg، bread۔ گھر: door، bed، cup۔ ہر لفظ جملے میں بولیں۔",
+    "en": "Common words: the, is, was, they, have. Food: rice, milk, egg, bread. Home: door, bed, cup. Say each word in a sentence."
+  },
+  "summary": {
+    "ur": "ہم نے عام اور روزمرہ کے انگریزی الفاظ پہچانے اور جملوں میں استعمال کیے۔",
+    "en": "We recognised common, everyday English words and used them in sentences."
+  },
+  "parent_notes": {
+    "ur": "کھانا بناتے یا کھاتے وقت بچے سے چیزوں کے انگریزی نام پوچھیں۔ آپ اردو نام بولیں، بچہ انگریزی بتائے۔",
+    "en": "While cooking or eating, ask your child the English names of things. You say the Urdu name; your child says the English one."
+  },
+  "mentor_notes": {
+    "ur": "بغیر آواز ملائے پڑھے جانے والے الفاظ (the، said، was) کو کارڈز پر لکھ کر روز دو منٹ دہرائیں۔ is/are کی غلطی یہاں صرف نوٹ کریں، تفصیل گرامر کے سبق میں آئے گی۔",
+    "en": "Write the sight words (the, said, was) on cards and revise them for two minutes daily. Only note is/are errors here; grammar lessons cover them in detail."
+  },
+  "accessibility_notes": {
+    "ur": "الفاظ کی اردو/انگریزی آڈیو ابھی ریکارڈ نہیں ہوئی۔ کھانا/گھر کی تصویریں اور ان کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے والی سرگرمی کا متبادل: ہر لفظ کے آگے 'کھانا' یا 'گھر' چنیں۔ ملانے والے سوال کے لیے بھی ٹیپ کر کے جوڑا چننے کا طریقہ ہو۔",
+    "en": "Urdu/English audio for the words is not yet recorded. The food/home pictures and their alt text are still to be made. Alternative to the drag activity: choose 'food' or 'home' next to each word. The matching item also needs a tap-to-pair option."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "show the whole word, say it, use it in a short sentence; group theme words by topic",
+    "questioning_strategy": "ask 'what does this word mean?' then 'can you say it in a sentence?'",
+    "slow_down_signals": [
+      "sounds out sight words letter by letter",
+      "two wrong answers in a row",
+      "mixes up is/are/was"
+    ],
+    "hint_policy": "graduated; two hints max; first re-read the sentence, then try each option; never give the word first",
+    "example_policy": "everyday Pakistani home and bazaar contexts (roti, rice, milk, eggs, goats); no costly items",
+    "misconception_detectors": [
+      "uses is with they",
+      "chooses a word by sound not meaning",
+      "confuses was and is with time words"
+    ],
+    "critical_thinking_prompts": [
+      "Why does 'Yesterday the tea is hot' sound wrong?"
+    ],
+    "personalization_rules": "if the learner cannot read the theme words at all, route back to ENG-G4-RD-01",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the high-frequency word list (the, is, was, they, have, said) matches the programme's sight-word list",
+    "language editor: 'bread' is given as روٹی / ڈبل روٹی; confirm the preferred Urdu gloss"
+  ]
+}

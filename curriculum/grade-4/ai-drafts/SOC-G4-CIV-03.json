@@ -1,0 +1,472 @@
+{
+  "code": "SOC-G4-CIV-03",
+  "title": {
+    "ur": "اصول جو سب کو محفوظ رکھیں",
+    "en": "Rules that keep us safe and fair"
+  },
+  "description": {
+    "ur": "بتائیں کہ گھر، سکول، سڑک اور کھیل کے اصول سب کو محفوظ اور انصاف سے کیسے رکھتے ہیں۔",
+    "en": "Explain how rules at home, at school, on the road and in games keep everyone safe and treated fairly."
+  },
+  "keywords": [
+    "rules",
+    "safety",
+    "fairness",
+    "road safety",
+    "taking turns",
+    "zebra crossing"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "اصول",
+        "en": "rule"
+      },
+      "definition": {
+        "ur": "وہ بات جو سب کو ماننی ہوتی ہے تاکہ کام ٹھیک چلے۔",
+        "en": "something everyone follows so that things go well."
+      }
+    },
+    {
+      "term": {
+        "ur": "حفاظت",
+        "en": "safety"
+      },
+      "definition": {
+        "ur": "چوٹ اور خطرے سے بچا رہنا۔",
+        "en": "being kept from harm and danger."
+      }
+    },
+    {
+      "term": {
+        "ur": "انصاف",
+        "en": "fairness"
+      },
+      "definition": {
+        "ur": "سب کے لیے ایک جیسا اصول اور برابر موقع۔",
+        "en": "the same rule and an equal chance for everyone."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "سوچیں اگر کرکٹ میں کوئی اصول نہ ہو تو کیا ہوگا؟ ہر کوئی جب چاہے بیٹنگ کرے گا اور جھگڑا ہوگا۔ اصول کھیل کو منصفانہ بناتے ہیں۔ سڑک کے اصول ہمیں چوٹ سے بچاتے ہیں۔ آج ہم دیکھیں گے کہ اصول ہماری مدد کیسے کرتے ہیں۔",
+    "en": "Imagine cricket with no rules. Everyone would bat whenever they liked and there would be quarrels. Rules make the game fair. Road rules keep us from getting hurt. Today we will see how rules help us."
+  },
+  "student_explanation": {
+    "ur": "اصول ہمیں محفوظ رکھتے ہیں۔ اصول ہمیں انصاف بھی دیتے ہیں۔ سڑک پار کرنے سے پہلے دونوں طرف دیکھیں۔ زیبرا کراسنگ سے سڑک پار کریں۔ لال بتی پر گاڑیاں رکتی ہیں۔ کھیل میں سب کی باری آتی ہے۔ کلاس میں ہاتھ اٹھا کر بات کرتے ہیں۔ اس طرح سب کو بولنے کا موقع ملتا ہے۔ اچھا اصول سب کے لیے ایک جیسا ہوتا ہے۔",
+    "en": "Rules keep us safe. Rules also keep things fair. Before crossing a road, look both ways. Cross at the zebra crossing. At a red light, vehicles stop. In a game, everyone gets a turn. In class, we raise a hand to speak. That way everyone gets a chance to talk. A good rule is the same for everyone."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "فاطمہ کو سڑک پار کرنی ہے۔ وہ کون سے اصول مانے؟",
+        "en": "Fatima needs to cross the road. Which rules should she follow?"
+      },
+      "steps": [
+        {
+          "ur": "زیبرا کراسنگ ڈھونڈیں یا کسی بڑے کے ساتھ پار کریں۔",
+          "en": "Find a zebra crossing, or cross with a grown-up."
+        },
+        {
+          "ur": "رکیں اور دائیں بائیں دیکھیں۔",
+          "en": "Stop and look right and left."
+        },
+        {
+          "ur": "گاڑی نہ آ رہی ہو تو سیدھا چل کر پار کریں، دوڑیں نہیں۔",
+          "en": "When no vehicle is coming, walk straight across; do not run."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "کھیل میں ایک بچہ کہتا ہے: 'میں تین بار باری لوں گا، باقی ایک بار۔' کیا یہ اصول منصفانہ ہے؟",
+        "en": "In a game a child says: 'I will take three turns, everyone else gets one.' Is this rule fair?"
+      },
+      "steps": [
+        {
+          "ur": "سوال پوچھیں: کیا یہ اصول سب کے لیے ایک جیسا ہے؟",
+          "en": "Ask: is this rule the same for everyone?"
+        },
+        {
+          "ur": "نہیں، ایک بچے کو زیادہ باریاں ملتی ہیں۔",
+          "en": "No, one child gets more turns."
+        },
+        {
+          "ur": "منصفانہ اصول: سب کو برابر باریاں۔",
+          "en": "A fair rule: everyone gets the same number of turns."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-safe-fair-sort",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر اصول کو 'حفاظت کا اصول' یا 'انصاف کا اصول' والے ڈبے میں رکھیں۔",
+        "en": "Sort each rule into the 'safety rule' or 'fairness rule' box."
+      },
+      "answer_key": {
+        "safety": [
+          "Look both ways before crossing",
+          "Do not touch electric wires",
+          "Walk, do not run, on the stairs"
+        ],
+        "fairness": [
+          "Everyone gets a turn to bat",
+          "Raise your hand to speak in class",
+          "Share the swing in the park"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: یہ اصول چوٹ سے بچاتا ہے یا سب کو برابر موقع دیتا ہے؟",
+            "en": "Think: does this rule stop people getting hurt, or give everyone an equal chance?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-cross-steps",
+      "type": "ordering",
+      "competency": "application",
+      "stem": {
+        "ur": "سڑک پار کرنے کے قدم ترتیب سے لگائیں۔",
+        "en": "Put the steps for crossing a road in order."
+      },
+      "options": [
+        {
+          "ur": "زیبرا کراسنگ پر رکیں",
+          "en": "stop at the zebra crossing"
+        },
+        {
+          "ur": "دائیں بائیں دیکھیں",
+          "en": "look right and left"
+        },
+        {
+          "ur": "سیدھا چل کر پار کریں",
+          "en": "walk straight across"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          "stop at the zebra crossing",
+          "look right and left",
+          "walk straight across"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے رکنا، پھر دیکھنا۔",
+            "en": "First stop, then look."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-before-cross",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "سڑک پار کرنے سے پہلے کیا کرنا چاہیے؟",
+        "en": "What should you do before crossing a road?"
+      },
+      "options": [
+        {
+          "ur": "دوڑ کر پار کرنا",
+          "en": "run across"
+        },
+        {
+          "ur": "آنکھیں بند کرنا",
+          "en": "close your eyes"
+        },
+        {
+          "ur": "رک کر دونوں طرف دیکھنا",
+          "en": "stop and look both ways"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p2-red-light",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "لال بتی پر گاڑیوں کو رکنا ہوتا ہے۔",
+        "en": "At a red light, vehicles must stop."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-why-turns",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کھیل میں باری کا اصول کیوں ہوتا ہے؟",
+        "en": "Why do games have a rule about turns?"
+      },
+      "options": [
+        {
+          "ur": "تاکہ سب کو برابر موقع ملے",
+          "en": "so everyone gets an equal chance"
+        },
+        {
+          "ur": "تاکہ کھیل جلدی ختم ہو",
+          "en": "so the game ends quickly"
+        },
+        {
+          "ur": "تاکہ ایک ہی بچہ جیتے",
+          "en": "so one child always wins"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "انصاف کا مطلب یاد کریں۔",
+            "en": "Remember what fairness means."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-hand-up",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کلاس میں ہاتھ اٹھا کر بولنے کا اصول کس کام آتا ہے؟",
+        "en": "How does the 'raise your hand to speak' rule help in class?"
+      },
+      "options": [
+        {
+          "ur": "استاد کو تھکاتا ہے",
+          "en": "it tires the teacher"
+        },
+        {
+          "ur": "سب کو باری باری بولنے کا موقع ملتا ہے",
+          "en": "everyone gets a turn to speak"
+        },
+        {
+          "ur": "کوئی نہیں بولتا",
+          "en": "nobody speaks"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p5-rule-for-some",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اچھا اصول کچھ لوگوں کے لیے ہوتا ہے اور کچھ کے لیے نہیں۔",
+        "en": "A good rule applies to some people but not others."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا منصفانہ اصول سب کے لیے ایک جیسا ہوتا ہے؟",
+            "en": "Is a fair rule the same for everyone?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اچھا اصول سب کے لیے ایک جیسا ہوتا ہے۔",
+        "en": "A good rule is the same for everyone."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-new-rule",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پارک کے ایک جھولے پر بچے لڑتے ہیں۔ کون سا نیا اصول سب سے منصفانہ ہوگا؟",
+        "en": "Children quarrel over one swing in the park. Which new rule would be fairest?"
+      },
+      "options": [
+        {
+          "ur": "سب سے بڑا بچہ ہمیشہ جھولے",
+          "en": "the biggest child always swings"
+        },
+        {
+          "ur": "جو پہلے آئے وہ سارا دن جھولے",
+          "en": "whoever comes first swings all day"
+        },
+        {
+          "ur": "ہر بچہ باری باری دس دس جھولے لے",
+          "en": "each child takes ten swings in turn"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسا اصول چنیں جو ہر بچے کو برابر موقع دے۔",
+            "en": "Choose the rule that gives every child an equal chance."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-home-rule",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "گھر کا ایک اصول سوچیں، جیسے 'کھانے سے پہلے ہاتھ دھونا'۔ گھر کے کسی بڑے کو بتائیں کہ یہ اصول حفاظت کے لیے ہے یا انصاف کے لیے۔",
+        "en": "Think of one home rule, such as 'wash hands before eating'. Tell a grown-up whether it is for safety or for fairness."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any home rule with a sensible reason. Do not ask about family discipline."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: یہ اصول کس چیز سے بچاتا ہے؟",
+        "en": "Think: what does this rule protect us from?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "پوچھیں: کیا یہ اصول سب کو برابر موقع دیتا ہے؟",
+        "en": "Ask: does this rule give everyone an equal chance?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "اصول صرف سزا دینے کے لیے بنتے ہیں۔",
+        "en": "Rules are made only to punish people."
+      },
+      "correction": {
+        "ur": "اصول ہمیں محفوظ رکھنے اور سب کو برابر موقع دینے کے لیے ہوتے ہیں۔",
+        "en": "Rules are there to keep us safe and give everyone a fair chance."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "اگر کوئی نہ دیکھ رہا ہو تو اصول توڑنا ٹھیک ہے۔",
+        "en": "It is fine to break a rule if nobody is watching."
+      },
+      "correction": {
+        "ur": "سڑک کا خطرہ دیکھنے والے سے نہیں بدلتا۔ اصول ہر وقت ہماری حفاظت کرتے ہیں۔",
+        "en": "The danger on a road does not change when nobody watches. Rules protect us all the time."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:SOC-G4-CIV-02",
+      "remediation_ref": "SOC-G4-CIV-02"
+    },
+    {
+      "signal": "two_wrong_in_a_row",
+      "remediation_ref": "SOC-G4-CIV-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "اصول حفاظت اور انصاف کے لیے ہیں۔ سڑک: رکیں، دونوں طرف دیکھیں، زیبرا کراسنگ سے چل کر پار کریں۔ کھیل اور کلاس: سب کی باری۔ اچھا اصول سب کے لیے ایک جیسا۔",
+    "en": "Rules are for safety and fairness. Road: stop, look both ways, walk across at the zebra crossing. Games and class: everyone gets a turn. A good rule is the same for everyone."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ اصول ہمیں محفوظ رکھتے ہیں اور سب کے ساتھ انصاف کرتے ہیں۔",
+    "en": "We learned that rules keep us safe and keep things fair for everyone."
+  },
+  "parent_notes": {
+    "ur": "بچے کے ساتھ باہر جاتے ہوئے سڑک پار کرنے کے قدم مل کر دہرائیں۔",
+    "en": "When you go out together, practise the road-crossing steps with your child."
+  },
+  "mentor_notes": {
+    "ur": "حادثات کی ڈرانے والی تفصیل نہ دیں؛ مثبت انداز میں حفاظت سکھائیں۔ دیہات میں زیبرا کراسنگ یا بتیاں کم ہو سکتی ہیں؛ وہاں 'کسی بڑے کے ساتھ پار کریں' پر زور دیں۔ ٹریفک کے بائیں یا دائیں چلنے کی بات نہ کریں جب تک تصدیق نہ ہو۔",
+    "en": "Do not give frightening accident details; teach safety positively. Villages may have no zebra crossings or lights; there, stress crossing with a grown-up. Do not state which side traffic drives on unless verified."
+  },
+  "accessibility_notes": {
+    "ur": "سڑک، زیبرا کراسنگ اور ٹریفک بتی کی تصاویر ابھی بنانی ہیں؛ متبادل متن ہر منظر بیان کرے اور بتی کا رنگ لفظوں میں بتائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ رنگ نہ پہچان سکنے والے بچوں کو بتی کی جگہ (اوپر لال) بھی بتائیں۔ چھانٹنے والی سرگرمی کا متبادل: ہر اصول کے لیے 'حفاظت' یا 'انصاف' کا بٹن دبائیں۔",
+    "en": "Pictures of the road, zebra crossing and traffic light are still to be made; alt text should describe each scene and say the light colour in words. Urdu audio is not yet recorded. For children who cannot tell colours apart, also give the light position (red at the top). Alternative to the sorting activity: tap a 'safety' or 'fairness' button for each rule."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "two questions for every rule: does it keep us safe, and is it the same for everyone? Use home, school, road and game examples",
+    "questioning_strategy": "ask 'what could go wrong without this rule?' before 'why do we have it?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says rules are only punishments"
+    ],
+    "hint_policy": "graduated; two hints max; first ask what the rule protects from, then whether it is the same for all; never give the reason first",
+    "example_policy": "road safety, school, home and game rules in village and city settings; no accident scenes; no laws or politics",
+    "misconception_detectors": [
+      "thinks rules exist only to punish",
+      "accepts a rule that favours one person",
+      "thinks rules matter only when watched"
+    ],
+    "critical_thinking_prompts": [
+      "Can you invent a fair rule for sharing one cricket bat among six friends?"
+    ],
+    "personalization_rules": "if the learner struggles with fairness, route back to SOC-G4-CIV-02 rights-and-responsibilities pairs",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "describe road accidents or injuries in detail"
+    ]
+  },
+  "review_flags": [
+    "child-safety + subject expert: confirm road-safety steps (stop, look both ways, cross at a zebra crossing, walk not run) and the advice for roads without crossings",
+    "draft deliberately avoids saying which side of the road traffic uses; add only if verified"
+  ]
+}

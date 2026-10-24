@@ -1,0 +1,470 @@
+{
+  "code": "ISL-G4-AKH-03",
+  "title": {
+    "ur": "والدین اور بڑوں کا ادب",
+    "en": "Respecting Parents and Elders"
+  },
+  "description": {
+    "ur": "والدین اور بڑوں کا ادب کرنا: پیار، خیال اور اچھے آداب، ڈر نہیں۔",
+    "en": "Respecting parents and elders: love, care and good manners, not fear."
+  },
+  "keywords": [
+    "respect",
+    "parents",
+    "elders",
+    "good manners",
+    "adab",
+    "akhlaq"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ادب",
+        "en": "respect / good manners"
+      },
+      "definition": {
+        "ur": "بڑوں سے پیار اور تمیز سے پیش آنا۔",
+        "en": "Treating elders with love and good manners."
+      }
+    },
+    {
+      "term": {
+        "ur": "والدین",
+        "en": "parents"
+      },
+      "definition": {
+        "ur": "ماں اور باپ۔",
+        "en": "Mother and father."
+      }
+    },
+    {
+      "term": {
+        "ur": "بزرگ",
+        "en": "elder"
+      },
+      "definition": {
+        "ur": "عمر میں ہم سے بڑا شخص، جیسے دادا، نانی یا استاد۔",
+        "en": "Someone older than us, like a grandparent or a teacher."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم ادب کی بات کریں گے۔ قرآن مجید اور ہمارے نبی ﷺ نے والدین سے اچھا سلوک سکھایا ہے۔ [آیت: سورۃ بنی اسرائیل، آیت ۲۳ — متن اور منظور شدہ ترجمہ عالم فراہم کرے] ادب کا مطلب ڈرنا نہیں ہے۔ ادب پیار، خیال اور اچھے آداب کا نام ہے۔",
+    "en": "Today we will talk about respect. The Qur'an and our Prophet (peace be upon him) teach us to treat our parents well. [Verse: Surah Al-Isra (Bani Isra'il), 23 — text and approved translation to be supplied by a scholar] Respect does not mean being afraid. Respect means love, care and good manners."
+  },
+  "student_explanation": {
+    "ur": "اسلام ہمیں والدین کا ادب سکھاتا ہے۔ ہم دادا دادی، نانا نانی اور استاد کا بھی ادب کرتے ہیں۔ ادب کا مطلب ڈرنا نہیں ہے۔ ادب یعنی پیار اور تمیز سے بات کرنا۔ بڑے بات کریں تو ہم غور سے سنتے ہیں۔ ہم نرم آواز میں جواب دیتے ہیں۔ ہم گھر کے کاموں میں ہاتھ بٹاتے ہیں۔ بزرگ آئیں تو انہیں جگہ دیتے ہیں۔ جو بڑے ہماری دیکھ بھال کرتے ہیں، وہ ہمارے ادب کے حق دار ہیں۔",
+    "en": "Islam teaches us to respect our parents. We also respect grandparents and teachers. Respect does not mean being afraid. Respect means speaking with love and good manners. When elders speak, we listen carefully. We answer in a soft voice. We help with work at home. When an elder arrives, we offer them a seat. Every elder who cares for us deserves our respect."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "عائشہ کھیل رہی ہے۔ امی اسے بلاتی ہیں۔ وہ ادب سے کیسے جواب دے؟",
+        "en": "Ayesha is playing. Her mother calls her. How can she answer respectfully?"
+      },
+      "steps": [
+        {
+          "ur": "عائشہ کھیل روک کر نرمی سے کہتی ہے: جی امی۔",
+          "en": "Ayesha stops playing and says softly: Yes, Ammi."
+        },
+        {
+          "ur": "وہ امی کی بات غور سے سنتی ہے۔",
+          "en": "She listens carefully to her mother."
+        },
+        {
+          "ur": "اگر کھیل ختم کرنے میں ایک منٹ چاہیے، تو وہ تمیز سے پوچھ لیتی ہے۔",
+          "en": "If she needs a minute to finish, she asks politely."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "بس میں ایک بزرگ کھڑے ہیں۔ عمر بیٹھا ہے۔ ادب کیا کہتا ہے؟",
+        "en": "An elderly man is standing on the bus. Umar is sitting. What does respect tell him?"
+      },
+      "steps": [
+        {
+          "ur": "سوچیں: بزرگ کو کھڑے ہونے میں زیادہ تھکن ہوتی ہے۔",
+          "en": "Think: standing is more tiring for an elder."
+        },
+        {
+          "ur": "عمر اٹھ کر ادب سے کہتا ہے: انکل، آپ بیٹھ جائیں۔",
+          "en": "Umar stands and says politely: Uncle, please sit here."
+        },
+        {
+          "ur": "یہ پیار اور خیال ہے، ڈر نہیں۔",
+          "en": "This is love and care, not fear."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-respectful-or-not",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ چھو کر بتائیں: یہ ادب ہے یا ادب نہیں؟",
+        "en": "Tap each card: is this respectful or not respectful?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: کیا اس سے بڑوں کو اچھا لگے گا؟",
+            "en": "Think: would this make the elder feel cared for?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "بڑوں کی بات غور سے سننا",
+          "en": "Listening carefully when elders speak"
+        },
+        {
+          "ur": "بڑوں کی بات کاٹ کر زور سے بولنا",
+          "en": "Interrupting elders and speaking loudly"
+        },
+        {
+          "ur": "دادی کا سامان اٹھانے میں مدد کرنا",
+          "en": "Helping grandmother carry her things"
+        },
+        {
+          "ur": "مہمان بزرگ کو جگہ دینا",
+          "en": "Offering a seat to an elderly guest"
+        }
+      ],
+      "answer_key": {
+        "mode": "sort",
+        "groups": {
+          "respectful": [
+            0,
+            2,
+            3
+          ],
+          "not_respectful": [
+            1
+          ]
+        }
+      }
+    },
+    {
+      "id": "p6-seat",
+      "type": "fill_blank",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "بزرگ مہمان آئیں تو ہم انہیں ___ دیتے ہیں۔",
+        "en": "When an elderly guest arrives, we offer them a ___."
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "وہ کھڑے ہیں، انہیں کیا چاہیے؟",
+            "en": "They are standing. What do they need?"
+          }
+        }
+      ],
+      "answer_key": {
+        "answer": "seat"
+      },
+      "accepted_variants": [
+        "جگہ",
+        "کرسی",
+        "seat",
+        "chair",
+        "place"
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-meaning",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ادب کا کیا مطلب ہے؟",
+        "en": "What does respect mean?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا ادب کا تعلق ڈر سے ہے یا پیار سے؟",
+            "en": "Is respect about fear or about care?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ادب پیار اور اچھے آداب کا نام ہے، ڈر کا نہیں۔",
+        "en": "Respect is care and good manners, not fear."
+      },
+      "options": [
+        {
+          "ur": "بڑوں سے ڈرنا",
+          "en": "Being afraid of elders"
+        },
+        {
+          "ur": "پیار، خیال اور اچھے آداب",
+          "en": "Love, care and good manners"
+        },
+        {
+          "ur": "خاموش رہ کر کچھ نہ کہنا",
+          "en": "Staying silent and never speaking"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-respect-equals-fear"
+        }
+      }
+    },
+    {
+      "id": "p2-elder-speaks",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "دادا جان کچھ بتا رہے ہیں۔ ادب والا بچہ کیا کرے گا؟",
+        "en": "Grandfather is telling something. What will a respectful child do?"
+      },
+      "options": [
+        {
+          "ur": "غور سے سنے گا",
+          "en": "Listen carefully"
+        },
+        {
+          "ur": "بیچ میں بول پڑے گا",
+          "en": "Talk over him"
+        },
+        {
+          "ur": "اٹھ کر چلا جائے گا",
+          "en": "Get up and walk away"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-fear",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "بڑوں کا ادب کرنے کا مطلب ہے ان سے ڈرنا۔",
+        "en": "Respecting elders means being afraid of them."
+      },
+      "explanation": {
+        "ur": "ادب پیار اور خیال ہے، ڈر نہیں۔",
+        "en": "Respect is love and care, not fear."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-respect-equals-fear"
+        }
+      }
+    },
+    {
+      "id": "p4-disagree",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "امی نے کہا ابھی ٹی وی بند کرو۔ بلال اور دیکھنا چاہتا ہے۔ ادب سے کیا کہے؟",
+        "en": "Mother says to switch off the TV now. Bilal wants to watch more. What can he say respectfully?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "آواز نرم ہو یا سخت؟",
+            "en": "Should the voice be soft or harsh?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ہم بڑوں سے اختلاف بھی نرمی اور تمیز سے کرتے ہیں۔",
+        "en": "Even when we disagree, we speak softly and politely."
+      },
+      "options": [
+        {
+          "ur": "چیخ کر کہے: نہیں!",
+          "en": "Shout: No!"
+        },
+        {
+          "ur": "منہ بنا کر چپ ہو جائے",
+          "en": "Sulk and say nothing"
+        },
+        {
+          "ur": "نرمی سے پوچھے: امی، کیا پانچ منٹ اور مل سکتے ہیں؟",
+          "en": "Ask softly: Ammi, may I have five more minutes?"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-teachers-too",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہم والدین کے ساتھ ساتھ دادا دادی اور استاد کا بھی ادب کرتے ہیں۔",
+        "en": "As well as parents, we also respect grandparents and teachers."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-why-respect",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "آپ کے خیال میں اسلام والدین کے ادب پر اتنا زور کیوں دیتا ہے؟ ایک یا دو جملے کہیں۔",
+        "en": "Why do you think Islam puts so much weight on respecting parents? Say one or two sentences."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept reasons about care, love and the effort parents or carers make. Do not ask about the child's own family situation; some children live with grandparents, one parent or other carers."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-help-elder",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج گھر کے کسی بڑے کے لیے ایک کام ادب سے کریں، جیسے پانی دینا یا سامان اٹھانا۔",
+        "en": "Today, do one thing respectfully for an elder at home, like bringing water or carrying something."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. Do not ask who the elder is or about the family."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: اس سے بڑوں کو پیار محسوس ہوگا یا نہیں؟",
+        "en": "Think: would the elder feel cared for?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: ادب پیار اور تمیز ہے، ڈر نہیں۔",
+        "en": "Remember: respect is care and good manners, not fear."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ادب کا مطلب ہے بڑوں سے ڈرنا۔",
+        "en": "Respect means being afraid of elders."
+      },
+      "correction": {
+        "ur": "ادب پیار، خیال اور اچھے آداب کا نام ہے، ڈر کا نہیں۔",
+        "en": "Respect is care and good manners, not fear."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ادب صرف ماں باپ کا ہوتا ہے۔",
+        "en": "Respect is only for parents."
+      },
+      "correction": {
+        "ur": "ہم دادا دادی، استاد اور سب بزرگوں کا ادب کرتے ہیں۔",
+        "en": "We respect grandparents, teachers and all elders."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-respect-equals-fear",
+      "remediation_ref": "ISL-G4-AKH-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "ادب یعنی پیار، خیال اور اچھے آداب۔ بڑوں کی بات غور سے سنیں، نرمی سے جواب دیں، ان کی مدد کریں۔ ادب ڈر نہیں ہے۔",
+    "en": "Respect means love, care and good manners. Listen to elders, answer softly, help them. Respect is not fear."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ والدین اور بڑوں کا ادب پیار اور اچھے آداب سے ہوتا ہے۔",
+    "en": "We learned that we respect parents and elders with love and good manners."
+  },
+  "parent_notes": {
+    "ur": "بچے سے نرمی سے بات کریں؛ بچے ادب وہی سیکھتے ہیں جو دیکھتے ہیں۔ جب بچہ تمیز سے بات کرے تو اس کی تعریف کریں۔",
+    "en": "Speak gently with your child; children learn respect from what they see. Praise them when they speak politely."
+  },
+  "mentor_notes": {
+    "ur": "کچھ بچے والدین کے بغیر، دادا دادی یا کسی رشتے دار کے ساتھ رہتے ہیں؛ 'جو بڑے آپ کی دیکھ بھال کرتے ہیں' کہیں۔ ادب کو کبھی ڈر یا خاموشی سے نہ جوڑیں۔ اگر بچہ کسی بڑے سے ڈر کا ذکر کرے تو فوراً انسانی سرپرست کو بتائیں۔",
+    "en": "Some children live without parents, with grandparents or relatives; say 'the elders who care for you'. Never link respect to fear or silence. If a child mentions being afraid of an adult, hand to a human safeguarding lead at once."
+  },
+  "accessibility_notes": {
+    "ur": "تصاویر (بس میں بزرگ، امی بلا رہی ہیں) اور ان کا متبادل متن ابھی بنانا ہے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر کارڈ کے لیے 'ادب' یا 'ادب نہیں' کا بٹن چنیں۔",
+    "en": "Pictures (the elder on the bus, mother calling) and their alt text are still to be made. Urdu audio is not yet recorded. Alternative to the sort activity: choose a 'respectful' or 'not respectful' button for each card."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "define respect as care and good manners first, then show three everyday actions: listening, soft speech, helping",
+    "questioning_strategy": "ask 'would the elder feel cared for?' before asking which choice is respectful",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "equates respect with fear or silence"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "home, bus and guest situations; include grandparents and carers; never suggest a child must obey an adult who is hurting them",
+    "misconception_detectors": [
+      "chooses 'being afraid of elders'",
+      "thinks respect means never asking a question"
+    ],
+    "critical_thinking_prompts": [
+      "How can you disagree with an elder and still be respectful?"
+    ],
+    "personalization_rules": "if the learner picks the fear option, revisit the definition with the bus example before new items",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor",
+      "child says they are scared of an adult at home -> stop and hand to a human safeguarding lead immediately"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: supply the text and approved translation for the Surah Al-Isra (Bani Isra'il), 23 placeholder in teacher_script, or replace it",
+    "scholar: confirm the general statement that the Prophet (peace be upon him) taught good treatment of parents needs no specific hadith citation here",
+    "child-safety reviewer: confirm respect is never framed as unconditional obedience or fear"
+  ]
+}

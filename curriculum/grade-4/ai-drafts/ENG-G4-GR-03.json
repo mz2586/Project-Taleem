@@ -1,0 +1,447 @@
+{
+  "code": "ENG-G4-GR-03",
+  "title": {
+    "ur": "آج، کل اور آنے والا کل",
+    "en": "Today, Yesterday and Tomorrow"
+  },
+  "description": {
+    "ur": "بچہ وقت کے لفظ کے مطابق فعل کی حال، ماضی اور مستقبل کی سادہ شکل صحیح استعمال کرتا ہے۔",
+    "en": "The learner uses the simple present, past and future verb forms correctly to match a time word."
+  },
+  "keywords": [
+    "simple present",
+    "simple past",
+    "simple future",
+    "tense",
+    "time words",
+    "verbs"
+  ],
+  "teacher_script": {
+    "ur": "ہر جملہ بتاتا ہے کہ کام کب ہوا۔ آج کا کام حال ہے۔ گزرے ہوئے کل کا کام ماضی ہے۔ آنے والے کل کا کام مستقبل ہے۔ آج ہم وقت کا لفظ دیکھ کر فعل کی صحیح شکل چنیں گے۔",
+    "en": "Every sentence tells us when something happens. What happens today is the present. What happened yesterday is the past. What will happen tomorrow is the future. Today we will look at the time word and choose the right verb form."
+  },
+  "student_explanation": {
+    "ur": "پہلے وقت کا لفظ ڈھونڈیں۔ today یا every day حال بتاتے ہیں۔ حال میں: I play۔ he یا she کے ساتھ s لگتا ہے: She plays۔ yesterday ماضی بتاتا ہے۔ ماضی میں اکثر ed لگتا ہے: I played۔ tomorrow مستقبل بتاتا ہے۔ مستقبل میں will لگتا ہے: I will play۔ فعل کی شکل وقت کے لفظ سے ملنی چاہیے۔",
+    "en": "First find the time word. today or every day shows the present. Present: I play. With he or she we add s: She plays. yesterday shows the past. The past often adds ed: I played. tomorrow shows the future. The future uses will: I will play. The verb form must match the time word."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "ایک ہی فعل play کو تین وقتوں میں بولیں۔",
+        "en": "Say the verb play in three times."
+      },
+      "steps": [
+        {
+          "ur": "آج میں کھیلتا ہوں — *I play today* (حال)۔ کل میں نے کھیلا — *I played yesterday* (ماضی)۔ کل میں کھیلوں گا — *I will play tomorrow* (مستقبل)۔",
+          "en": "Today I play — *I play today* (present). Yesterday I played — *I played yesterday* (past). Tomorrow I will play — *I will play tomorrow* (future)."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-time-sort",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "ہر جملے کو حال، ماضی یا مستقبل والے ڈبے میں ڈالیں: I walked to school. ، I will help Ammi. ، I drink milk every day.",
+        "en": "Sort each sentence into the present, past or future box: I walked to school. / I will help Ammi. / I drink milk every day."
+      },
+      "answer_key": {
+        "groups": {
+          "present": [
+            "I drink milk every day."
+          ],
+          "past": [
+            "I walked to school."
+          ],
+          "future": [
+            "I will help Ammi."
+          ]
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر جملے میں ed، will یا every day ڈھونڈیں۔",
+            "en": "Look for ed, will or every day in each sentence."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-will",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "خالی جگہ پُر کریں: Tomorrow it ___ rain.",
+        "en": "Fill the gap: Tomorrow it ___ rain."
+      },
+      "answer_key": {
+        "answer": "will"
+      },
+      "accepted_variants": [
+        "will"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "مستقبل کا مددگار لفظ کونسا ہے؟",
+            "en": "Which helping word shows the future?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-yesterday",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "صحیح فعل چنیں: Yesterday I ___ cricket.",
+        "en": "Choose the right verb: Yesterday I ___ cricket."
+      },
+      "options": [
+        {
+          "ur": "play",
+          "en": "play"
+        },
+        {
+          "ur": "played",
+          "en": "played"
+        },
+        {
+          "ur": "will play",
+          "en": "will play"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-tense-time-mismatch",
+          "2": "m-tense-time-mismatch"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کونسا وقت؟ (کب)",
+            "en": "Which time? (When?)"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "yesterday ماضی ہے، اس لیے played۔",
+        "en": "yesterday is the past, so played."
+      }
+    },
+    {
+      "id": "p2-tomorrow",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "صحیح فعل چنیں: Tomorrow we ___ our grandparents.",
+        "en": "Choose the right verb: Tomorrow we ___ our grandparents."
+      },
+      "options": [
+        {
+          "ur": "will visit",
+          "en": "will visit"
+        },
+        {
+          "ur": "visited",
+          "en": "visited"
+        },
+        {
+          "ur": "visits",
+          "en": "visits"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-tense-time-mismatch"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کونسا وقت؟ (کب)",
+            "en": "Which time? (When?)"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "tomorrow مستقبل ہے، اس لیے will visit۔",
+        "en": "tomorrow is the future, so will visit."
+      }
+    },
+    {
+      "id": "p3-every-day",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "صحیح فعل چنیں: She ___ to school every day.",
+        "en": "Choose the right verb: She ___ to school every day."
+      },
+      "options": [
+        {
+          "ur": "walked",
+          "en": "walked"
+        },
+        {
+          "ur": "will walk",
+          "en": "will walk"
+        },
+        {
+          "ur": "walks",
+          "en": "walks"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-tense-time-mismatch"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "every day حال بتاتا ہے، اور she کے ساتھ s لگتا ہے۔",
+            "en": "every day shows the present, and she adds s."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-today",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "صحیح فعل چنیں: Today Ali ___ his homework.",
+        "en": "Choose the right verb: Today Ali ___ his homework."
+      },
+      "options": [
+        {
+          "ur": "does",
+          "en": "does"
+        },
+        {
+          "ur": "did",
+          "en": "did"
+        },
+        {
+          "ur": "will does",
+          "en": "will does"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-tense-time-mismatch"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اُس وقت کی فعل کی شکل",
+            "en": "The verb form for that time."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-fix-tense",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اس جملے کو ٹھیک کریں: Yesterday my mother cooks rice. صحیح جملہ کونسا ہے؟",
+        "en": "Fix the tense: Yesterday my mother cooks rice. Which sentence is correct?"
+      },
+      "options": [
+        {
+          "ur": "Yesterday my mother will cook rice.",
+          "en": "Yesterday my mother will cook rice."
+        },
+        {
+          "ur": "Yesterday my mother cooked rice.",
+          "en": "Yesterday my mother cooked rice."
+        },
+        {
+          "ur": "Yesterday my mother cook rice.",
+          "en": "Yesterday my mother cook rice."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-tense-time-mismatch"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "وقت کا لفظ دیکھیں: yesterday۔",
+            "en": "Look at the time word: yesterday."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "yesterday کے ساتھ ماضی: cooked۔",
+        "en": "With yesterday we use the past: cooked."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-three-times",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "فعل help سے تین جملے لکھیں: ایک today، ایک yesterday اور ایک tomorrow کے ساتھ۔",
+        "en": "Write three sentences with the verb help: one with today, one with yesterday and one with tomorrow."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "each sentence's verb form matches its time word",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "ایک جملے میں فعل وقت سے ملتا ہے۔",
+              "en": "One sentence has a verb matching its time word."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "دو جملوں میں فعل وقت سے ملتا ہے۔",
+              "en": "Two sentences have matching verb forms."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "تینوں جملے درست: help، helped، will help۔",
+              "en": "All three correct: help, helped, will help."
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-say-three",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کے کسی فرد کو آج، کل (گزرا) اور کل (آنے والا) کے بارے میں ایک ایک جملہ بولیں۔",
+        "en": "say one sentence about today, yesterday, and tomorrow to a family member."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Oral at home; the family member only listens."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کونسا وقت؟ (کب)",
+        "en": "Which time? (When?)"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اُس وقت کی فعل کی شکل",
+        "en": "The verb form for that time."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "فعل کی شکل وقت کے لفظ سے نہیں ملتی۔",
+        "en": "Verb form doesn't match the time word"
+      },
+      "correction": {
+        "ur": "فعل کی شکل کو وقت کے لفظ سے ملائیں۔",
+        "en": "match the form to the time word"
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-tense-time-mismatch",
+      "remediation_ref": "ENG-G4-GR-03"
+    },
+    {
+      "signal": "misses_prerequisite:ENG-G4-GR-02",
+      "remediation_ref": "ENG-G4-GR-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "today / every day → حال (play، plays)۔ yesterday → ماضی (played)۔ tomorrow → مستقبل (will play)۔",
+    "en": "today / every day → present (play, plays). yesterday → past (played). tomorrow → future (will play)."
+  },
+  "summary": {
+    "ur": "ہم نے وقت کا لفظ دیکھ کر فعل کی حال، ماضی اور مستقبل کی شکل چنی۔",
+    "en": "We looked at the time word and chose the present, past or future verb form."
+  },
+  "parent_notes": {
+    "ur": "آپ کو انگریزی آنا ضروری نہیں — بس بچے سے 'today / yesterday / tomorrow' والے جملے بلوائیں۔",
+    "en": "you don't need English — just ask your child to say \"today / yesterday / tomorrow\" sentences."
+  },
+  "mentor_notes": {
+    "ur": "وقت کو ہمیشہ وقت کے لفظ سے جوڑیں؛ تصحیح کو آمنے سامنے بھی پکا کریں۔",
+    "en": "anchor tense to a time word; reinforce the correction in person."
+  },
+  "accessibility_notes": {
+    "ur": "ہدایات اور مثالوں کی اردو/انگریزی آڈیو ابھی ریکارڈ نہیں ہوئی۔ وقت کی لکیر (کل، آج، آنے والا کل) کی تصویر اور اس کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے والی سرگرمی کا متبادل: ہر جملے کے آگے 'حال'، 'ماضی' یا 'مستقبل' چنیں۔",
+    "en": "Urdu/English audio for instructions and examples is not yet recorded. The timeline picture (yesterday, today, tomorrow) and its alt text are still to be made. Alternative to the drag activity: choose 'present', 'past' or 'future' next to each sentence."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "anchor every verb to its time word; model play / played / will play before new verbs",
+    "questioning_strategy": "ask 'which time? (when?)' before 'which verb form?'",
+    "slow_down_signals": [
+      "verb form does not match the time word",
+      "two wrong answers in a row",
+      "drops the s with he/she"
+    ],
+    "hint_policy": "graduated; H1 'which time? (when?)', H2 'the verb form for that time', then re-teach with play/played/will play; never give the form first",
+    "example_policy": "regular verbs (play, walk, cook, help, visit) with clear time words; Pakistani home contexts",
+    "misconception_detectors": [
+      "m-tense-time-mismatch",
+      "adds will to a past time word",
+      "uses base form after he/she in the present"
+    ],
+    "critical_thinking_prompts": [
+      "Which word in the sentence told you it was the past?"
+    ],
+    "personalization_rules": "if the learner confuses singular/plural subjects, route back to ENG-G4-GR-02",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)"
+    ]
+  },
+  "review_flags": [
+    "human exemplar fields (worked example, hints, misconception, homework, notes) come from ENGLISH.md §3; check the AI translations of the one-language fields",
+    "the human worked example has a single step; consider adding a second worked example for a 'developing' lesson",
+    "irregular past forms (did, went) appear only once (p4); confirm that is acceptable at this stage"
+  ]
+}

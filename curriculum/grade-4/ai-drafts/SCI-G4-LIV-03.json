@@ -1,0 +1,436 @@
+{
+  "code": "SCI-G4-LIV-03",
+  "title": {
+    "ur": "پودوں اور جانوروں کی ضروریات",
+    "en": "What plants and animals need"
+  },
+  "description": {
+    "ur": "زندہ رہنے کے لیے پودوں اور جانوروں کو کیا چاہیے: ہوا، پانی، خوراک، روشنی اور رہنے کی جگہ۔",
+    "en": "What plants and animals need to stay alive: air, water, food, light and a place to live."
+  },
+  "keywords": [
+    "needs",
+    "air",
+    "water",
+    "food",
+    "sunlight",
+    "shelter",
+    "plants",
+    "animals"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ضرورت",
+        "en": "need"
+      },
+      "definition": {
+        "ur": "وہ چیز جس کے بغیر کوئی جاندار زندہ نہیں رہ سکتا۔",
+        "en": "Something a living thing cannot stay alive without."
+      }
+    },
+    {
+      "term": {
+        "ur": "خوراک",
+        "en": "food"
+      },
+      "definition": {
+        "ur": "وہ چیز جو جاندار کو بڑھنے اور کام کرنے کی طاقت دیتی ہے۔",
+        "en": "What gives a living thing the energy to grow and act."
+      }
+    },
+    {
+      "term": {
+        "ur": "پناہ گاہ",
+        "en": "shelter"
+      },
+      "definition": {
+        "ur": "وہ محفوظ جگہ جہاں جانور رہتا اور آرام کرتا ہے۔",
+        "en": "A safe place where an animal lives and rests."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "تمہیں روز کن چیزوں کی ضرورت ہوتی ہے؟ پانی، کھانا، سانس کے لیے ہوا اور ایک گھر۔ پودوں اور جانوروں کی بھی ضرورتیں ہیں۔ آج ہم دیکھیں گے کہ ان کی ضرورتیں کتنی ملتی جلتی ہیں اور کہاں فرق ہے۔",
+    "en": "What do you need every day? Water, food, air to breathe and a home. Plants and animals have needs too. Today we see how alike their needs are, and where they differ."
+  },
+  "student_explanation": {
+    "ur": "ہر جاندار کو پانی چاہیے۔ ہر جاندار کو ہوا بھی چاہیے۔ پودوں کو دھوپ چاہیے۔ دھوپ سے پتے خوراک بناتے ہیں۔ پودے کو بڑھنے کے لیے جگہ اور مٹی چاہیے۔ جانور اپنی خوراک خود نہیں بناتے۔ وہ پودے یا دوسرے جانور کھاتے ہیں۔ جانوروں کو محفوظ پناہ گاہ بھی چاہیے۔ مچھلی پانی میں گلپھڑوں سے سانس لیتی ہے۔",
+    "en": "Every living thing needs water. Every living thing needs air too. Plants need sunlight. With sunlight, leaves make food. A plant needs space and soil to grow. Animals cannot make their own food. They eat plants or other animals. Animals also need a safe shelter. A fish breathes in water with its gills."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "بکری کی ضرورتیں کیا ہیں؟",
+        "en": "What does a goat need?"
+      },
+      "steps": [
+        {
+          "ur": "بکری گھاس اور پتے کھاتی ہے: یہ اس کی خوراک ہے۔",
+          "en": "A goat eats grass and leaves: that is its food."
+        },
+        {
+          "ur": "اسے پینے کے لیے پانی اور سانس کے لیے ہوا چاہیے۔",
+          "en": "It needs water to drink and air to breathe."
+        },
+        {
+          "ur": "اسے دھوپ، بارش اور سردی سے بچنے کو باڑہ چاہیے۔",
+          "en": "It needs a shed to shelter from hot sun, rain and cold."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ایک گملا مہینے بھر اندھیری الماری میں رہے تو پودا کیسا ہوگا؟",
+        "en": "A pot plant stays in a dark cupboard for a month. How will it look?"
+      },
+      "steps": [
+        {
+          "ur": "الماری میں دھوپ نہیں پہنچتی۔",
+          "en": "No sunlight reaches the cupboard."
+        },
+        {
+          "ur": "دھوپ کے بغیر پتے خوراک نہیں بنا سکتے۔",
+          "en": "Without sunlight the leaves cannot make food."
+        },
+        {
+          "ur": "پودا پیلا اور کمزور ہو جائے گا۔",
+          "en": "The plant will turn yellow and weak."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-needs",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ضرورتوں کو ترتیب دو: کون سی صرف پودوں کی، کون سی صرف جانوروں کی اور کون سی دونوں کی؟ پانی، ہوا، دھوپ سے خود خوراک بنانا، دوسروں کو کھا کر خوراک لینا۔",
+        "en": "Sort the needs: which are for plants only, animals only, or both? Water, air, making food from sunlight, getting food by eating others."
+      },
+      "answer_key": {
+        "both": [
+          "water",
+          "air"
+        ],
+        "plants_only": [
+          "making food from sunlight"
+        ],
+        "animals_only": [
+          "getting food by eating others"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا کوئی جاندار پانی کے بغیر رہ سکتا ہے؟",
+            "en": "Can any living thing live without water?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-both-need",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پودوں اور جانوروں دونوں کو کس چیز کی ضرورت ہے؟",
+        "en": "What do both plants and animals need?"
+      },
+      "options": [
+        {
+          "ur": "پانی",
+          "en": "Water"
+        },
+        {
+          "ur": "باڑہ",
+          "en": "A shed"
+        },
+        {
+          "ur": "گوشت",
+          "en": "Meat"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-plant-food",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پودے کو خوراک کیسے ملتی ہے؟",
+        "en": "How does a plant get its food?"
+      },
+      "options": [
+        {
+          "ur": "مٹی کھا کر",
+          "en": "By eating soil"
+        },
+        {
+          "ur": "دوسرے پودے کھا کر",
+          "en": "By eating other plants"
+        },
+        {
+          "ur": "دھوپ کی مدد سے پتوں میں خود بنا کر",
+          "en": "By making it in its leaves using sunlight"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پچھلے سبق میں پتوں کا کام کیا تھا؟",
+            "en": "What was the leaves' job in the last lesson?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-plants-air",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پودوں کو ہوا کی ضرورت نہیں ہوتی۔",
+        "en": "Plants do not need air."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "پودوں کو بھی ہوا چاہیے، جانوروں کی طرح۔",
+        "en": "Plants need air too, just like animals."
+      }
+    },
+    {
+      "id": "p4-dark-plant",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک پودا پیلا اور کمزور ہو رہا ہے، حالانکہ اسے پانی مل رہا ہے۔ سب سے زیادہ کس چیز کی کمی ہو سکتی ہے؟",
+        "en": "A plant is turning yellow and weak, though it gets water. What is it most likely missing?"
+      },
+      "options": [
+        {
+          "ur": "مٹی کا رنگ",
+          "en": "Soil colour"
+        },
+        {
+          "ur": "دھوپ",
+          "en": "Sunlight"
+        },
+        {
+          "ur": "آواز",
+          "en": "Sound"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پتوں کو خوراک بنانے کے لیے کیا چاہیے؟",
+            "en": "What do leaves need to make food?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-fish-air",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مچھلی پانی میں رہ کر بھی اپنے گلپھڑوں سے سانس لیتی ہے۔",
+        "en": "A fish breathes with its gills while living in water."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p6-shelter",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "چڑیا کی پناہ گاہ کیا ہے؟",
+        "en": "What is a sparrow's shelter?"
+      },
+      "options": [
+        {
+          "ur": "گھونسلا",
+          "en": "Its nest"
+        },
+        {
+          "ur": "دانہ",
+          "en": "Grain"
+        },
+        {
+          "ur": "بادل",
+          "en": "A cloud"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-new-pet",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "گھر میں ایک خرگوش پالنا ہے۔ اس کی چار ضرورتیں لکھو یا بتاؤ، اور ہر ایک کے ساتھ وجہ۔",
+        "en": "A family wants to keep a rabbit. Say or write four things it needs, with a reason for each."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Look for food (grass, vegetables), clean water, air, and a safe clean shelter; credit one sensible reason per need."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-plant-check",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر یا گلی کا کوئی پودا دیکھو۔ کیا اسے دھوپ، پانی اور جگہ مل رہی ہے؟ اپنی کاپی میں ہاں یا نہیں لکھو۔ پودے کو توڑنا نہیں۔",
+        "en": "Look at one plant at home or in your street. Is it getting sunlight, water and space? Write yes or no for each in your copy. Do not pull the plant."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any observed plant; check the learner recorded each of the three needs."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچو: تمہیں زندہ رہنے کے لیے کیا چاہیے؟ کیا اس جاندار کو بھی یہی چاہیے؟",
+        "en": "Think: what do you need to live? Does this living thing need the same?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد رکھو: پودا خوراک بناتا ہے، جانور خوراک ڈھونڈتا ہے۔",
+        "en": "Remember: a plant makes food, an animal finds food."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "پودوں کو صرف پانی چاہیے، اور کچھ نہیں۔",
+        "en": "Plants need only water, nothing else."
+      },
+      "correction": {
+        "ur": "پودوں کو پانی کے ساتھ ہوا، دھوپ اور بڑھنے کی جگہ بھی چاہیے۔",
+        "en": "Plants need air, sunlight and space to grow as well as water."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "پودے جاندار نہیں، اس لیے ان کی کوئی ضرورت نہیں۔",
+        "en": "Plants are not living, so they have no needs."
+      },
+      "correction": {
+        "ur": "پودے بڑھتے ہیں اور انہیں پانی اور روشنی چاہیے، اس لیے وہ جاندار ہیں۔",
+        "en": "Plants grow and need water and light, so they are living."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-plants-not-living",
+      "remediation_ref": "SCI-G4-LIV-01"
+    },
+    {
+      "signal": "misses_prerequisite:SCI-G4-LIV-01",
+      "remediation_ref": "SCI-G4-LIV-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "سب جانداروں کو پانی اور ہوا چاہیے۔ پودوں کو دھوپ اور جگہ چاہیے؛ وہ خود خوراک بناتے ہیں۔ جانوروں کو خوراک ڈھونڈنی پڑتی ہے اور پناہ گاہ چاہیے۔",
+    "en": "All living things need water and air. Plants need sunlight and space; they make their own food. Animals must find food and need shelter."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ پودوں اور جانوروں کو زندہ رہنے کے لیے کیا چاہیے۔",
+    "en": "We learned what plants and animals need to stay alive."
+  },
+  "parent_notes": {
+    "ur": "گھر کے پودوں کو پانی دیتے یا مرغیوں کو دانہ ڈالتے وقت بچے سے پوچھیں کہ انہیں اور کیا چاہیے۔",
+    "en": "When watering plants or feeding hens, ask your child what else they need."
+  },
+  "mentor_notes": {
+    "ur": "بچوں کو یاد دلائیں کہ پودوں کو بھی ہوا چاہیے۔ \"پودے خوراک بناتے ہیں\" کو پچھلے سبق کے پتوں کے کام سے جوڑیں۔",
+    "en": "Remind learners that plants need air too. Link 'plants make food' to the leaf's job from the last lesson."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ پودے اور جانور کی ضرورتوں والا خاکہ اور اس کا متبادل متن ابھی بنانا ہے۔ ترتیب دینے والی سرگرمی کا متبادل: ہر ضرورت کے لیے \"پودا\"، \"جانور\" یا \"دونوں\" کا بٹن دبائیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. The plant-and-animal needs picture and its alt text are still to be made. Alternative to the sort activity: tap 'plant', 'animal' or 'both' for each need."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "start from the learner's own needs, then compare plants and animals side by side; stress what is shared (water, air) and what differs (making vs finding food)",
+    "questioning_strategy": "ask 'do you need this too?' before asking about a plant or animal",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says plants need only water",
+      "says plants eat soil"
+    ],
+    "hint_policy": "graduated; first compare with the learner's own needs, then point to the leaf's job; never give the answer first",
+    "example_policy": "use local animals and plants: goat, buffalo, hen, sparrow, fish in a canal, tulsi or money plant in a pot",
+    "misconception_detectors": [
+      "leaves air or sunlight out of a plant's needs",
+      "says plants are not living"
+    ],
+    "critical_thinking_prompts": [
+      "Why might a plant on a dark staircase grow towards the window?"
+    ],
+    "personalization_rules": "if the learner doubts plants are living, route to SCI-G4-LIV-01 before continuing",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm 'plants need air' is acceptable without explaining which gases",
+    "subject expert: the dark-cupboard example is a thought experiment only; check no learner is asked to harm a plant"
+  ]
+}

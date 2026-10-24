@@ -1,0 +1,550 @@
+{
+  "code": "URD-G4-WR-01",
+  "title": {
+    "ur": "صاف اور درست اردو لکھائی",
+    "en": "Neat, correct Urdu handwriting"
+  },
+  "description": {
+    "ur": "اردو حروف کی درست شکلیں، صحیح نقطے اور جوڑ کے ساتھ صاف لفظ لکھنا۔",
+    "en": "Writing Urdu words neatly with correct letter shapes, dots and joins."
+  },
+  "keywords": [
+    "handwriting",
+    "letter forms",
+    "joining letters",
+    "dots",
+    "non-joining letters",
+    "neatness"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "حرف",
+        "en": "letter"
+      },
+      "definition": {
+        "ur": "لکھائی کی سب سے چھوٹی اکائی، جیسے ب، ج، س۔",
+        "en": "the smallest unit of writing, like ب، ج، س."
+      }
+    },
+    {
+      "term": {
+        "ur": "جوڑ",
+        "en": "join"
+      },
+      "definition": {
+        "ur": "دو حروف کا آپس میں مل کر لکھا جانا۔",
+        "en": "two letters written connected to each other."
+      }
+    },
+    {
+      "term": {
+        "ur": "نقطہ",
+        "en": "dot"
+      },
+      "definition": {
+        "ur": "حرف کے اوپر یا نیچے کا چھوٹا نشان جو اسے دوسرے حرف سے الگ کرے۔",
+        "en": "a small mark above or below a letter that makes it different from another."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم صاف اور خوب صورت لکھائی کی مشق کریں گے۔ اردو دائیں سے بائیں لکھی جاتی ہے۔ لفظ میں حرف آپس میں جڑتے ہیں، اور جگہ کے لحاظ سے ان کی شکل بدلتی ہے۔ کچھ حروف اپنے بعد والے حرف سے نہیں جڑتے۔ آئیں، دیکھیں کون سے۔",
+    "en": "Today we will practise neat, beautiful handwriting. Urdu is written from right to left. Letters join each other in a word, and their shape changes with their place. Some letters do not join the letter after them. Let us see which ones."
+  },
+  "student_explanation": {
+    "ur": "اردو دائیں سے بائیں لکھتے ہیں۔ لفظ میں حروف آپس میں جڑتے ہیں۔ حرف کی شکل اس کی جگہ سے بدلتی ہے۔ شروع، بیچ اور آخر میں شکل الگ ہو سکتی ہے۔ کچھ حروف اگلے حرف سے نہیں جڑتے۔ یہ ہیں: ا، د، ڈ، ذ، ر، ڑ، ز، ژ، و۔ پہلے حرف کا جسم لکھیں، پھر نقطے لگائیں۔ لکیر پر لکھیں اور لفظوں کے بیچ جگہ چھوڑیں۔",
+    "en": "We write Urdu from right to left. Letters join each other in a word. A letter's shape changes with its place. The shape can differ at the start, middle and end. Some letters do not join the next letter. They are: ا، د، ڈ، ذ، ر، ڑ، ز، ژ، و. Write the letter's body first, then add the dots. Write on the line and leave space between words."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "'ب + ا + ت' کو جوڑ کر لفظ لکھیں۔",
+        "en": "Join 'ب + ا + ت' into a word."
+      },
+      "steps": [
+        {
+          "ur": "'ب' شروع میں ہے، اس کی چھوٹی شکل 'بـ' لکھیں۔",
+          "en": "'ب' is at the start; write its short form 'بـ'."
+        },
+        {
+          "ur": "'ا' ب سے جڑتا ہے: 'با'۔",
+          "en": "'ا' joins to ب: 'با'."
+        },
+        {
+          "ur": "'ا' اگلے حرف سے نہیں جڑتا، اس لیے 'ت' الگ پوری شکل میں۔",
+          "en": "'ا' does not join the next letter, so 'ت' is written in full on its own."
+        },
+        {
+          "ur": "آخر میں نقطے لگائیں: 'بات'۔",
+          "en": "Add the dots last: 'بات'."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "'م + چ + ھ + ل + ی' کو جوڑ کر لکھیں۔",
+        "en": "Join 'م + چ + ھ + ل + ی'."
+      },
+      "steps": [
+        {
+          "ur": "'م' کی شروع والی شکل: 'مـ'۔",
+          "en": "Start form of 'م': 'مـ'."
+        },
+        {
+          "ur": "'چ' بیچ میں ہے: 'ـچـ'، اور 'ھ' اس سے جڑتی ہے۔",
+          "en": "'چ' is in the middle: 'ـچـ', and 'ھ' joins it."
+        },
+        {
+          "ur": "'ل' بیچ میں اور 'ی' آخر میں: 'ـلی'۔",
+          "en": "'ل' in the middle and 'ی' at the end: 'ـلی'."
+        },
+        {
+          "ur": "لفظ: 'مچھلی'۔ چ کے تین نقطے آخر میں لگائیں۔",
+          "en": "Word: 'مچھلی'. Add چ's three dots last."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-form",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "لفظ 'بعد' میں 'ع' بیچ میں ہے۔ 'ع' کی درست شکل پر ٹیپ کریں۔",
+        "en": "In the word 'بعد', 'ع' is in the middle. Tap the correct shape of 'ع'."
+      },
+      "options": [
+        {
+          "ur": "ع (الگ)",
+          "en": "ع (alone)"
+        },
+        {
+          "ur": "ـعـ (بیچ والی)",
+          "en": "ـعـ (middle)"
+        },
+        {
+          "ur": "عـ (شروع والی)",
+          "en": "عـ (start)"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'ع' کے دونوں طرف حرف ہیں۔",
+            "en": "There are letters on both sides of 'ع'."
+          }
+        }
+      ]
+    },
+    {
+      "id": "a2-copy",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کاپی میں یہ پانچ لفظ صاف لکھیں: بات، مچھلی، دروازہ، کتاب، پھول۔",
+        "en": "Copy these five words neatly in your notebook: بات، مچھلی، دروازہ، کتاب، پھول."
+      },
+      "answer_key": {
+        "sample_answer": "Five words written neatly with correct joins and dots."
+      },
+      "rubric": {
+        "criteria": "neat, correctly formed and joined Urdu writing",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "کچھ حروف کی شکل یا نقطے غلط ہیں، یا حروف ٹھیک نہیں جڑے۔",
+              "en": "Some letter shapes or dots are wrong, or letters are not joined correctly."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "زیادہ تر حروف درست، مگر سائز یا لکیر پر لکھنا ایک جیسا نہیں۔",
+              "en": "Most letters correct, but size or keeping on the line is uneven."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "سب حروف درست جڑے، نقطے صحیح جگہ، لکیر پر صاف لکھائی اور لفظوں میں مناسب فاصلہ۔",
+              "en": "All letters joined correctly, dots in place, neat on the line, with clear spaces between words."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor looks at the notebook (in person) and marks with the neatness rubric. Check non-joiners in دروازہ."
+    },
+    {
+      "id": "p6-join-naak",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "جوڑ کر لکھیں: ن + ا + ک = ___",
+        "en": "Join and write: ن + ا + ک = ___"
+      },
+      "answer_key": {
+        "answer": "ناک"
+      },
+      "accepted_variants": [
+        "ناک"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'ا' کے بعد 'ک' الگ لکھا جائے گا۔",
+            "en": "After 'ا', 'ک' is written apart."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "نا + ک = ناک",
+        "en": "نا + ک = ناک"
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-nonjoiner",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کون سا حرف اپنے بعد والے حرف سے نہیں جڑتا؟",
+        "en": "Which letter does not join the letter after it?"
+      },
+      "options": [
+        {
+          "ur": "ب",
+          "en": "ب"
+        },
+        {
+          "ur": "د",
+          "en": "د"
+        },
+        {
+          "ur": "م",
+          "en": "م"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ 'دل' میں 'د' اور 'ل' جڑے ہیں یا الگ؟",
+            "en": "In 'دل', are 'د' and 'ل' joined or separate?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'د' اگلے حرف سے نہیں جڑتا؛ ب اور م جڑتے ہیں۔",
+        "en": "'د' does not join the next letter; ب and م do."
+      }
+    },
+    {
+      "id": "p2-join-baat",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "'ب + ا + ت' کو جوڑیں تو درست لفظ کون سا ہے؟",
+        "en": "Joining 'ب + ا + ت', which is the correct word?"
+      },
+      "options": [
+        {
+          "ur": "بات",
+          "en": "بات"
+        },
+        {
+          "ur": "ب ات",
+          "en": "ب ات"
+        },
+        {
+          "ur": "باات",
+          "en": "باات"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-letter-form-position"
+        }
+      },
+      "explanation": {
+        "ur": "ب اور ا جڑتے ہیں؛ ا کے بعد ت الگ آتا ہے: بات۔",
+        "en": "ب and ا join; after ا, ت stands apart: بات."
+      }
+    },
+    {
+      "id": "p3-dots-pe",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "'پ' کے نیچے کتنے نقطے ہیں؟",
+        "en": "How many dots are under 'پ'?"
+      },
+      "options": [
+        {
+          "ur": "ایک",
+          "en": "one"
+        },
+        {
+          "ur": "دو",
+          "en": "two"
+        },
+        {
+          "ur": "تین",
+          "en": "three"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "explanation": {
+        "ur": "پ کے نیچے تین نقطے ہیں؛ ب کے نیچے ایک۔",
+        "en": "پ has three dots below; ب has one."
+      }
+    },
+    {
+      "id": "p4-he-same",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "'ہ' کی شکل لفظ کے شروع، بیچ اور آخر میں ایک جیسی رہتی ہے۔",
+        "en": "The shape of 'ہ' stays the same at the start, middle and end of a word."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-letter-form-position"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'ہوا'، 'شہر' اور 'گناہ' میں ہ کو دیکھیں۔",
+            "en": "Look at ہ in 'ہوا', 'شہر' and 'گناہ'."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "حرف کی شکل اُس کی جگہ سے بدلتی ہے۔",
+        "en": "A letter's shape changes with its place."
+      }
+    },
+    {
+      "id": "p5-kaaf-start",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "لفظ 'کتاب' میں 'ک' کس شکل میں ہے؟",
+        "en": "In 'کتاب', which form is 'ک' in?"
+      },
+      "options": [
+        {
+          "ur": "آخر والی",
+          "en": "end form"
+        },
+        {
+          "ur": "شروع والی",
+          "en": "start form"
+        },
+        {
+          "ur": "الگ",
+          "en": "alone"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'ک' لفظ میں کہاں ہے؟",
+            "en": "Where is 'ک' in the word?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'ک' پہلا حرف ہے اور اگلے حرف سے جڑا ہے: شروع والی شکل۔",
+        "en": "'ک' is first and joined to the next: start form."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-sentence",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کاپی میں یہ جملہ تین بار صاف لکھیں: 'ہمارا گاؤں بہت سرسبز ہے۔' ہر بار پچھلی بار سے بہتر لکھنے کی کوشش کریں۔",
+        "en": "Write this sentence neatly three times in your notebook: 'Our village is very green.' Try to write better each time."
+      },
+      "answer_key": {
+        "sample_answer": "Three neat copies with correct joins (ہمارا: م+ا non-join; گاؤں: ؤ and ں)."
+      },
+      "rubric": {
+        "criteria": "neat, correctly formed and joined Urdu writing",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "کچھ حروف کی شکل یا نقطے غلط ہیں، یا حروف ٹھیک نہیں جڑے۔",
+              "en": "Some letter shapes or dots are wrong, or letters are not joined correctly."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "زیادہ تر حروف درست، مگر سائز یا لکیر پر لکھنا ایک جیسا نہیں۔",
+              "en": "Most letters correct, but size or keeping on the line is uneven."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "سب حروف درست جڑے، نقطے صحیح جگہ، لکیر پر صاف لکھائی اور لفظوں میں مناسب فاصلہ۔",
+              "en": "All letters joined correctly, dots in place, neat on the line, with clear spaces between words."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor marks the best copy with the neatness rubric and praises improvement between copies."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-five-words",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں پانچ چیزوں کے نام کاپی میں صاف لکھیں۔ کسی بڑے سے کہیں کہ وہ دیکھے کہ نقطے صحیح جگہ ہیں۔",
+        "en": "At home, write the names of five things neatly in your notebook. Ask an adult to check the dots are in the right places."
+      },
+      "answer_key": {
+        "sample_answer": "Five neatly written words."
+      },
+      "mentor_review_guidance": "Pencil and notebook only; no device needed."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "یہ حرف لفظ میں کہاں ہے: شروع، بیچ یا آخر؟",
+        "en": "Where is this letter in the word: start, middle or end?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: ا، د، ڈ، ذ، ر، ڑ، ز، ژ، و اگلے حرف سے نہیں جڑتے۔",
+        "en": "Remember: ا، د، ڈ، ذ، ر، ڑ، ز، ژ، و do not join the next letter."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ہر حرف ہر جگہ ایک ہی شکل میں لکھا جاتا ہے۔",
+        "en": "Wrong letter form by position (initial/medial/final)"
+      },
+      "correction": {
+        "ur": "حرف کی شکل اُس کی جگہ سے بدلتی ہے",
+        "en": "A letter's shape changes with its place."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ہر حرف کو اگلے حرف سے جوڑنا، 'ا' اور 'د' کو بھی۔",
+        "en": "Joining every letter to the next, even 'ا' and 'د'."
+      },
+      "correction": {
+        "ur": "ا، د، ڈ، ذ، ر، ڑ، ز، ژ، و اگلے حرف سے نہیں جڑتے۔",
+        "en": "ا، د، ڈ، ذ، ر، ڑ، ز، ژ، و do not join the next letter."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-letter-form-position",
+      "remediation_ref": "URD-G4-WR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "دائیں سے بائیں لکھیں۔ حرف کی شکل جگہ سے بدلتی ہے۔ ا، د، ڈ، ذ، ر، ڑ، ز، ژ، و نہیں جڑتے۔ پہلے جسم، پھر نقطے۔ لکیر پر، لفظوں میں فاصلہ۔",
+    "en": "Write right to left. A letter's shape changes with its place. ا، د، ڈ، ذ، ر، ڑ، ز، ژ، و do not join. Body first, then dots. On the line, with spaces between words."
+  },
+  "summary": {
+    "ur": "ہم نے حروف کی شکلیں، جوڑ اور نقطے درست رکھ کر صاف لکھنا سیکھا۔",
+    "en": "We learned to write neatly with correct letter shapes, joins and dots."
+  },
+  "parent_notes": {
+    "ur": "روز پانچ منٹ بچے کو کاپی میں چند لفظ صاف لکھنے دیں۔ جلدی نہ کرائیں؛ صاف لکھائی کی تعریف کریں۔",
+    "en": "Give your child five minutes a day to write a few words neatly in a notebook. Do not rush them; praise neat writing."
+  },
+  "mentor_notes": {
+    "ur": "لکھائی کی جانچ آپ کاپی دیکھ کر کریں؛ ایپ ابھی ہاتھ کی لکھائی نہیں پڑھ سکتی۔ بائیں ہاتھ سے لکھنے والے بچے کو روکیں نہیں؛ کاپی کا زاویہ بدلنے میں مدد کریں۔ پنسل کی پکڑ دیکھیں۔",
+    "en": "Check handwriting by looking at the notebook; the app cannot read handwriting yet. Do not stop a left-handed child; help them angle the notebook. Watch the pencil grip."
+  },
+  "accessibility_notes": {
+    "ur": "ہر حرف کی چار شکلوں والا چارٹ اور لکھنے کی سمت دکھانے والی تصویر ابھی بنانی ہے، متبادل متن کے ساتھ۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ٹیپ والی سرگرمی کا متبادل: مینٹر تینوں شکلیں دکھا کر بچے سے پوچھے۔ جس بچے کو ہاتھ سے لکھنے میں جسمانی مشکل ہو، اس کے لیے مینٹر بڑی لکیروں، موٹی پنسل یا شکلیں پہچاننے والے سوالوں کا فیصلہ کرے۔",
+    "en": "A chart of each letter's four forms and a writing-direction picture are still to be made, with alt text. Urdu audio is not yet recorded. Alternative to the tap activity: the mentor shows the three shapes and asks. For a child with a physical difficulty in handwriting, the mentor decides on wide lines, a thick pencil, or shape-recognition questions instead."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "position -> form; teach the nine non-joining letters as one group; body first, dots last",
+    "questioning_strategy": "ask 'where is this letter in the word?' before 'which shape?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "joins non-joining letters",
+      "puts dots in the wrong place or number"
+    ],
+    "hint_policy": "graduated; two hints max; first ask the letter's position, then recall the non-joiner list; never type the joined word for the learner",
+    "example_policy": "short familiar words with one or two non-joiners (بات، دروازہ، ناک، مچھلی)",
+    "misconception_detectors": [
+      "same shape used in every position",
+      "non-joiner joined to the next letter"
+    ],
+    "critical_thinking_prompts": [
+      "Why do you think some letters never join the next one?"
+    ],
+    "personalization_rules": "intro lesson; repeat sorting and shape-choice items before copying",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "handwriting is judged by a human mentor from the notebook, not by the AI"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the non-joiner list and the names شروع/بیچ/آخر/الگ (or ابتدائی/درمیانی/آخری/مفرد) used at Grade 4",
+    "design: letter forms with tatweel (ـعـ) must render correctly in the app's Urdu font; check on a low-end phone"
+  ]
+}

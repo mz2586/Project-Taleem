@@ -207,8 +207,8 @@ compare, order, and round whole numbers up to 100,000 using place value.*
 - **Misconceptions:** `m-place-value-digit-equals-value`.
 - **Hint ladder:** H1 "دائیں سے شروع کریں — start from the right"; H2 "ہر خانے کا نام لیں — name each
   place"; H3 re-teach with ۲۰۰۵.
-- **Homework:** write three household numbers (page number, house number, a price) in words.
-- **Parent note:** "بچے سے گھر کے نمبر پڑھوائیں — ask your child to read the house/page numbers aloud."
+- **Homework:** write three numbers from a book or a price label (a page number, a price, a date) in words.
+- **Parent note:** "بچے سے کتاب کے صفحہ نمبر اور قیمتیں پڑھوائیں — ask your child to read page numbers and prices aloud."
 - **Teacher note:** watch for reading the wrong place; use the place-value mat.
 
 #### L1.2 — Place value to 100,000 (MATH-G4-NB-02)
@@ -246,7 +246,7 @@ compare, order, and round whole numbers up to 100,000 using place value.*
 - **Revision triggers:** `m-bigger-number-more-digits-always`; wrong on rounding (NB-04).
 - **Misconceptions:** `m-bigger-number-more-digits-always`.
 - **Hint ladder:** H1 "پہلے ہندسے گنیں — count digits first"; H2 "پھر بائیں سے موازنہ"; H3 re-teach.
-- **Homework:** order four family members' ages / four prices.
+- **Homework:** order four prices from a shop or a price list, smallest first.
 - **Parent note:** compare quantities while shopping ("which is more?").
 - **Teacher note:** stress digit-count before left-to-right comparison.
 

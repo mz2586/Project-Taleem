@@ -1,0 +1,516 @@
+{
+  "code": "URD-G4-RD-04",
+  "title": {
+    "ur": "مرکزی خیال اور واقعات کی ترتیب",
+    "en": "Main idea and order of events"
+  },
+  "description": {
+    "ur": "عبارت پڑھ کر اس کا مرکزی خیال بتانا اور واقعات کو صحیح ترتیب میں رکھنا۔",
+    "en": "Reading a passage, saying its main idea and putting its events in the right order."
+  },
+  "keywords": [
+    "main idea",
+    "sequence",
+    "order of events",
+    "time words",
+    "reading comprehension"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مرکزی خیال",
+        "en": "main idea"
+      },
+      "definition": {
+        "ur": "پوری عبارت کس بارے میں ہے، ایک جملے میں۔",
+        "en": "what the whole passage is about, in one sentence."
+      }
+    },
+    {
+      "term": {
+        "ur": "ترتیب",
+        "en": "order (sequence)"
+      },
+      "definition": {
+        "ur": "کون سی بات پہلے ہوئی اور کون سی بعد میں۔",
+        "en": "which thing happened first and which came later."
+      }
+    },
+    {
+      "term": {
+        "ur": "واقعہ",
+        "en": "event"
+      },
+      "definition": {
+        "ur": "کوئی بات جو کہانی میں ہوئی۔",
+        "en": "something that happens in a story."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ہر عبارت کسی ایک بڑی بات کے بارے میں ہوتی ہے۔ اسے مرکزی خیال کہتے ہیں۔ عبارت میں باتیں ایک ترتیب سے ہوتی ہیں۔ 'پہلے'، 'پھر'، 'اس کے بعد' اور 'آخر میں' جیسے لفظ ترتیب بتاتے ہیں۔ آئیں، بلال کے پودے کی عبارت پڑھیں۔",
+    "en": "Every passage is about one big thing. We call it the main idea. Things in a passage happen in an order. Words like 'first', 'then', 'after that' and 'finally' show the order. Let us read the passage about Bilal's plant."
+  },
+  "student_explanation": {
+    "ur": "مرکزی خیال پوری عبارت کی بڑی بات ہے۔ یہ کسی ایک جملے کی چھوٹی بات نہیں ہوتی۔ خود سے پوچھیں: یہ عبارت زیادہ تر کس بارے میں ہے۔ ترتیب بتاتی ہے کہ کیا پہلے ہوا اور کیا بعد میں۔ وقت بتانے والے لفظ تلاش کریں۔ جیسے پہلے، پھر، اس کے بعد، آخر میں۔ ان لفظوں سے واقعات کو ترتیب دیں۔",
+    "en": "The main idea is the big point of the whole passage. It is not a small detail from one sentence. Ask yourself what the passage is mostly about. Order tells what happened first and what came later. Look for time words. For example: first, then, after that, finally. Use these words to put the events in order."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "عبارت 'بلال کا پودا' کا مرکزی خیال کیا ہے؟",
+        "en": "What is the main idea of 'Bilal's Plant'?"
+      },
+      "steps": [
+        {
+          "ur": "ہر جملہ دیکھیں: پودا لیا، گڑھا کھودا، مٹی ڈالی، پانی دیا، روز دیکھا۔",
+          "en": "Look at each sentence: took a plant, dug, added soil, watered, checked daily."
+        },
+        {
+          "ur": "یہ سب باتیں ایک ہی کام کے بارے میں ہیں۔",
+          "en": "All of these are about one job."
+        },
+        {
+          "ur": "مرکزی خیال: بلال نے اسکول میں پودا لگایا اور اس کا خیال رکھا۔",
+          "en": "Main idea: Bilal planted a plant at school and looked after it."
+        },
+        {
+          "ur": "'مالی بابا کے پاس پودا تھا' صرف ایک چھوٹی بات ہے۔",
+          "en": "'Mali Baba had a plant' is only a small detail."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "دادی نے آٹا گوندھا، پیڑے بنائے، توے پر روٹی ڈالی اور گرم روٹی چنگیر میں رکھی۔ یہ کام کس ترتیب سے ہوئے؟",
+        "en": "Dadi kneaded dough, made dough balls, put the roti on the griddle and placed the hot roti in the basket. In what order did this happen?"
+      },
+      "steps": [
+        {
+          "ur": "پہلے: آٹا گوندھا۔",
+          "en": "First: kneaded the dough."
+        },
+        {
+          "ur": "پھر: پیڑے بنائے۔",
+          "en": "Then: made dough balls."
+        },
+        {
+          "ur": "اس کے بعد: توے پر روٹی ڈالی۔",
+          "en": "After that: put the roti on the griddle."
+        },
+        {
+          "ur": "آخر میں: گرم روٹی چنگیر میں رکھی۔ مرکزی خیال: دادی نے روٹی پکائی۔",
+          "en": "Finally: placed the hot roti in the basket. Main idea: Dadi cooked roti."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-order-events",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "عبارت 'بلال کا پودا':\nبلال کے اسکول میں پودے لگانے کا دن تھا۔ پہلے بلال نے مالی بابا سے نیم کا ایک چھوٹا پودا لیا۔ پھر اس نے کیاری میں ایک گڑھا کھودا۔ اس کے بعد اس نے پودا گڑھے میں رکھ کر اوپر مٹی ڈالی۔ آخر میں اس نے پودے کو پانی دیا۔ اب بلال ہر روز چھٹی کے وقت پودے کو دیکھنے جاتا ہے۔ ایک مہینے بعد پودے پر نئے پتے نکل آئے۔\n\nواقعات کو اسی ترتیب سے رکھیں جیسے عبارت میں ہوئے۔",
+        "en": "Passage 'Bilal's Plant':\nIt was tree-planting day at Bilal's school. First Bilal took a small neem plant from Mali Baba, the gardener. Then he dug a hole in the flower bed. After that he placed the plant in the hole and put soil on top. Finally he watered the plant. Now Bilal goes to see the plant every day at home time. After a month, new leaves came out on the plant.\n\nPut the events in the order they happened in the passage."
+      },
+      "options": [
+        {
+          "ur": "پودے کو پانی دیا",
+          "en": "watered the plant"
+        },
+        {
+          "ur": "گڑھا کھودا",
+          "en": "dug a hole"
+        },
+        {
+          "ur": "مالی بابا سے پودا لیا",
+          "en": "took a plant from Mali Baba"
+        },
+        {
+          "ur": "پودا رکھ کر مٹی ڈالی",
+          "en": "placed the plant and added soil"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          2,
+          1,
+          3,
+          0
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'پہلے' والا جملہ تلاش کریں۔",
+            "en": "Find the sentence with 'first'."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-order",
+      "type": "ordering",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "عبارت 'بلال کا پودا':\nبلال کے اسکول میں پودے لگانے کا دن تھا۔ پہلے بلال نے مالی بابا سے نیم کا ایک چھوٹا پودا لیا۔ پھر اس نے کیاری میں ایک گڑھا کھودا۔ اس کے بعد اس نے پودا گڑھے میں رکھ کر اوپر مٹی ڈالی۔ آخر میں اس نے پودے کو پانی دیا۔ اب بلال ہر روز چھٹی کے وقت پودے کو دیکھنے جاتا ہے۔ ایک مہینے بعد پودے پر نئے پتے نکل آئے۔\n\nیہ باتیں ترتیب سے لگائیں۔",
+        "en": "Passage 'Bilal's Plant':\nIt was tree-planting day at Bilal's school. First Bilal took a small neem plant from Mali Baba, the gardener. Then he dug a hole in the flower bed. After that he placed the plant in the hole and put soil on top. Finally he watered the plant. Now Bilal goes to see the plant every day at home time. After a month, new leaves came out on the plant.\n\nPut these in order."
+      },
+      "options": [
+        {
+          "ur": "نئے پتے نکل آئے",
+          "en": "new leaves came out"
+        },
+        {
+          "ur": "پودے کو پانی دیا",
+          "en": "watered the plant"
+        },
+        {
+          "ur": "ہر روز پودا دیکھنے جاتا ہے",
+          "en": "goes to see the plant every day"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          2,
+          0
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سب سے آخری بات 'ایک مہینے بعد' ہوئی۔",
+            "en": "The very last thing happened 'after a month'."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پانی دیا، پھر روز دیکھا، پھر مہینے بعد پتے نکلے۔",
+        "en": "Watered, then checked daily, then leaves came after a month."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-main-idea",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "عبارت 'بلال کا پودا':\nبلال کے اسکول میں پودے لگانے کا دن تھا۔ پہلے بلال نے مالی بابا سے نیم کا ایک چھوٹا پودا لیا۔ پھر اس نے کیاری میں ایک گڑھا کھودا۔ اس کے بعد اس نے پودا گڑھے میں رکھ کر اوپر مٹی ڈالی۔ آخر میں اس نے پودے کو پانی دیا۔ اب بلال ہر روز چھٹی کے وقت پودے کو دیکھنے جاتا ہے۔ ایک مہینے بعد پودے پر نئے پتے نکل آئے۔\n\nاس عبارت کا مرکزی خیال کیا ہے؟",
+        "en": "Passage 'Bilal's Plant':\nIt was tree-planting day at Bilal's school. First Bilal took a small neem plant from Mali Baba, the gardener. Then he dug a hole in the flower bed. After that he placed the plant in the hole and put soil on top. Finally he watered the plant. Now Bilal goes to see the plant every day at home time. After a month, new leaves came out on the plant.\n\nWhat is the main idea of this passage?"
+      },
+      "options": [
+        {
+          "ur": "مالی بابا کے پاس بہت سے پودے تھے۔",
+          "en": "Mali Baba had many plants."
+        },
+        {
+          "ur": "پودے کو پانی کی ضرورت ہوتی ہے۔",
+          "en": "Plants need water."
+        },
+        {
+          "ur": "بلال نے اسکول میں پودا لگایا اور اس کا خیال رکھا۔",
+          "en": "Bilal planted a plant at school and looked after it."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-guessing-not-reading"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا جواب پوری عبارت کی بات کرتا ہے؟",
+            "en": "Which answer covers the whole passage?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "باقی دو جواب چھوٹی باتیں ہیں؛ پوری عبارت بلال کے پودا لگانے کے بارے میں ہے۔",
+        "en": "The other two are small details; the whole passage is about Bilal planting."
+      }
+    },
+    {
+      "id": "p2-first",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "عبارت 'بلال کا پودا':\nبلال کے اسکول میں پودے لگانے کا دن تھا۔ پہلے بلال نے مالی بابا سے نیم کا ایک چھوٹا پودا لیا۔ پھر اس نے کیاری میں ایک گڑھا کھودا۔ اس کے بعد اس نے پودا گڑھے میں رکھ کر اوپر مٹی ڈالی۔ آخر میں اس نے پودے کو پانی دیا۔ اب بلال ہر روز چھٹی کے وقت پودے کو دیکھنے جاتا ہے۔ ایک مہینے بعد پودے پر نئے پتے نکل آئے۔\n\nبلال نے سب سے پہلے کیا کیا؟",
+        "en": "Passage 'Bilal's Plant':\nIt was tree-planting day at Bilal's school. First Bilal took a small neem plant from Mali Baba, the gardener. Then he dug a hole in the flower bed. After that he placed the plant in the hole and put soil on top. Finally he watered the plant. Now Bilal goes to see the plant every day at home time. After a month, new leaves came out on the plant.\n\nWhat did Bilal do first of all?"
+      },
+      "options": [
+        {
+          "ur": "پودا لیا",
+          "en": "took a plant"
+        },
+        {
+          "ur": "گڑھا کھودا",
+          "en": "dug a hole"
+        },
+        {
+          "ur": "پانی دیا",
+          "en": "watered it"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ 'پہلے' تلاش کریں۔",
+            "en": "Find the word 'first'."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'پہلے بلال نے مالی بابا سے ... پودا لیا۔'",
+        "en": "'First Bilal took a ... plant from Mali Baba.'"
+      }
+    },
+    {
+      "id": "p3-after-soil",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "عبارت 'بلال کا پودا':\nبلال کے اسکول میں پودے لگانے کا دن تھا۔ پہلے بلال نے مالی بابا سے نیم کا ایک چھوٹا پودا لیا۔ پھر اس نے کیاری میں ایک گڑھا کھودا۔ اس کے بعد اس نے پودا گڑھے میں رکھ کر اوپر مٹی ڈالی۔ آخر میں اس نے پودے کو پانی دیا۔ اب بلال ہر روز چھٹی کے وقت پودے کو دیکھنے جاتا ہے۔ ایک مہینے بعد پودے پر نئے پتے نکل آئے۔\n\nمٹی ڈالنے کے بعد بلال نے کیا کیا؟",
+        "en": "Passage 'Bilal's Plant':\nIt was tree-planting day at Bilal's school. First Bilal took a small neem plant from Mali Baba, the gardener. Then he dug a hole in the flower bed. After that he placed the plant in the hole and put soil on top. Finally he watered the plant. Now Bilal goes to see the plant every day at home time. After a month, new leaves came out on the plant.\n\nWhat did Bilal do after putting in the soil?"
+      },
+      "options": [
+        {
+          "ur": "گڑھا کھودا",
+          "en": "dug a hole"
+        },
+        {
+          "ur": "پودے کو پانی دیا",
+          "en": "watered the plant"
+        },
+        {
+          "ur": "مالی بابا سے پودا لیا",
+          "en": "took a plant from Mali Baba"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "'آخر میں' والا جملہ پڑھیں۔",
+            "en": "Read the sentence with 'finally'."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "مٹی کے بعد 'آخر میں اس نے پودے کو پانی دیا۔'",
+        "en": "After the soil: 'Finally he watered the plant.'"
+      }
+    },
+    {
+      "id": "p5-detail-main",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کسی ایک جملے کی چھوٹی بات ہی مرکزی خیال ہوتی ہے۔",
+        "en": "A small detail from one sentence is the main idea."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "مرکزی خیال پوری عبارت کی بات ہے یا ایک جملے کی؟",
+            "en": "Is the main idea about the whole passage or one sentence?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "مرکزی خیال پوری عبارت کی بڑی بات ہے۔",
+        "en": "The main idea is the big point of the whole passage."
+      }
+    },
+    {
+      "id": "p6-time-word",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ان میں سے کون سا لفظ ترتیب بتاتا ہے؟",
+        "en": "Which of these words shows order?"
+      },
+      "options": [
+        {
+          "ur": "خوب صورت",
+          "en": "beautiful"
+        },
+        {
+          "ur": "نیم",
+          "en": "neem"
+        },
+        {
+          "ur": "اس کے بعد",
+          "en": "after that"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "explanation": {
+        "ur": "'اس کے بعد' بتاتا ہے کہ اگلا کام کون سا تھا۔",
+        "en": "'After that' tells which job came next."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-own-main-idea",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "یہ عبارت پڑھیں: 'صبح سے آسمان پر بادل تھے۔ دوپہر کو ہوا تیز ہو گئی۔ شام کو زور کی بارش ہوئی۔ رات کو موسم ٹھنڈا ہو گیا۔' اس کا مرکزی خیال اپنے لفظوں میں ایک جملے میں لکھیں۔",
+        "en": "Read: 'There were clouds from the morning. In the afternoon the wind grew strong. In the evening it rained hard. At night the weather turned cool.' Write its main idea in one sentence in your own words."
+      },
+      "answer_key": {
+        "sample_answer": "سارا دن موسم بدلتا رہا اور آخر بارش ہوئی۔"
+      },
+      "mentor_review_guidance": "Full credit: one sentence about the whole day's weather changing. Partial: only one event (e.g. 'بارش ہوئی')."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-three-steps",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں کوئی کام دیکھیں، جیسے چائے بنانا یا کپڑے دھونا۔ اس کے تین مرحلے 'پہلے، پھر، آخر میں' سے کاپی میں لکھیں۔",
+        "en": "At home, watch a job like making tea or washing clothes. Write its three steps in your notebook using 'first, then, finally'."
+      },
+      "answer_key": {
+        "sample_answer": "پہلے پانی ابالا، پھر پتی ڈالی، آخر میں دودھ ڈالا۔"
+      },
+      "mentor_review_guidance": "Check that the three steps are in a sensible order and use time words."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پوری عبارت زیادہ تر کس بارے میں ہے؟",
+        "en": "What is the whole passage mostly about?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "وقت بتانے والے لفظ تلاش کریں: پہلے، پھر، اس کے بعد، آخر میں۔",
+        "en": "Find the time words: first, then, after that, finally."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "کسی ایک دلچسپ تفصیل کو مرکزی خیال سمجھنا۔",
+        "en": "Taking one interesting detail as the main idea."
+      },
+      "correction": {
+        "ur": "مرکزی خیال وہ بات ہے جو پوری عبارت میں چلتی ہے۔",
+        "en": "The main idea is the point that runs through the whole passage."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ترتیب کا اندازہ اپنی یاد سے لگانا، عبارت کے وقت والے لفظوں سے نہیں۔",
+        "en": "Guessing the order from memory, not from the passage's time words."
+      },
+      "correction": {
+        "ur": "جواب متن میں سے دیں: 'پہلے'، 'پھر'، 'آخر میں' دیکھیں۔",
+        "en": "Answer from the text: look for 'first', 'then', 'finally'."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:URD-G4-RD-03",
+      "remediation_ref": "URD-G4-RD-03"
+    },
+    {
+      "signal": "misconception:m-guessing-not-reading",
+      "remediation_ref": "URD-G4-RD-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "مرکزی خیال = پوری عبارت کی بڑی بات۔ ترتیب = پہلے، پھر، اس کے بعد، آخر میں۔ ایک چھوٹی تفصیل مرکزی خیال نہیں۔",
+    "en": "Main idea = the big point of the whole passage. Order = first, then, after that, finally. One small detail is not the main idea."
+  },
+  "summary": {
+    "ur": "ہم نے عبارت کا مرکزی خیال پہچاننا اور واقعات کو ترتیب دینا سیکھا۔",
+    "en": "We learned to find a passage's main idea and put events in order."
+  },
+  "parent_notes": {
+    "ur": "کہانی سننے یا پڑھنے کے بعد بچے سے پوچھیں: 'پہلے کیا ہوا؟ پھر کیا ہوا؟' اور 'یہ کہانی کس بارے میں تھی؟'",
+    "en": "After a story, ask your child: 'What happened first? What happened next?' and 'What was the story about?'"
+  },
+  "mentor_notes": {
+    "ur": "کمزور بچے اکثر پہلا یا آخری جملہ مرکزی خیال سمجھ لیتے ہیں۔ ان سے پوچھیں کہ کیا یہ بات ہر جملے میں ہے۔ عبارت بچہ خود پڑھے؛ آڈیو نہ دیں۔",
+    "en": "Struggling learners often take the first or last sentence as the main idea. Ask whether that point is in every sentence. The child reads the passage; give no audio."
+  },
+  "accessibility_notes": {
+    "ur": "عبارت پر آڈیو جان بوجھ کر نہیں، کیونکہ پڑھنا جانچا جا رہا ہے۔ ہدایات کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ پودا لگانے کے چار مراحل کی تصویر ابھی بنانی ہے، ہر مرحلے کے متبادل متن کے ساتھ۔ ترتیب والی (گھسیٹنے کی) سرگرمی کا متبادل: ہر واقعے کے سامنے ۱، ۲، ۳، ۴ چنیں۔",
+    "en": "The passage deliberately has no audio, because reading is being measured. Urdu audio for instructions is not yet recorded. A four-step planting picture is still to be made, with alt text for each step. Alternative to the drag ordering activity: choose 1, 2, 3, 4 next to each event."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "read the whole passage, list what each sentence says, then name the one big point; sequence by time words",
+    "questioning_strategy": "ask 'is this in every part of the passage, or only one sentence?' for main idea; 'which word tells you it came next?' for order",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "always picks the first sentence as main idea",
+      "orders events by their position in the options"
+    ],
+    "hint_policy": "graduated; two hints max; first ask what the whole passage is about, then point to time words; never state the main idea first",
+    "example_policy": "original 6-8 sentence passages with clear time words, about school, home and village/city life",
+    "misconception_detectors": [
+      "chooses a single detail as the main idea",
+      "ignores time words when ordering"
+    ],
+    "critical_thinking_prompts": [
+      "If you had to give this passage a new title, what would it be and why?"
+    ],
+    "personalization_rules": "if literal recall is weak, route back to URD-G4-RD-03 before main-idea work",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer",
+      "read the passage aloud for the learner (reading is the construct)"
+    ]
+  },
+  "review_flags": [
+    "subject expert: check that 'مرکزی خیال' and 'ترتیب' are the terms used in Grade 4 Urdu classes",
+    "assessment: passage repeated in each stem so items stand alone; confirm the player shows it once"
+  ]
+}

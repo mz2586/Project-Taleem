@@ -1,0 +1,450 @@
+{
+  "code": "ISL-G4-SIR-01",
+  "title": {
+    "ur": "صادق اور امین: سچائی کا سبق",
+    "en": "Truthful and Trustworthy: A Lesson in Honesty"
+  },
+  "description": {
+    "ur": "حضرت محمد ﷺ کی سچائی اور امانت داری کا ایک عام واقعہ سننا اور اس کا سبق اپنے الفاظ میں سنانا۔",
+    "en": "Hearing a well-known account of the Prophet's truthfulness and trustworthiness, and retelling its lesson in our own words."
+  },
+  "keywords": [
+    "seerah",
+    "truthfulness",
+    "trustworthiness",
+    "al-Amin",
+    "retelling",
+    "moral lesson"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "سیرت",
+        "en": "seerah"
+      },
+      "definition": {
+        "ur": "حضرت محمد ﷺ کی زندگی اور آپ ﷺ کے طریقے۔",
+        "en": "The life and ways of Prophet Muhammad (peace be upon him)."
+      }
+    },
+    {
+      "term": {
+        "ur": "امانت",
+        "en": "something entrusted"
+      },
+      "definition": {
+        "ur": "وہ چیز جو کوئی سنبھالنے کے لیے ہمیں دے۔",
+        "en": "Something a person gives us to keep safe."
+      }
+    },
+    {
+      "term": {
+        "ur": "امین",
+        "en": "trustworthy"
+      },
+      "definition": {
+        "ur": "وہ شخص جس پر سب بھروسا کریں۔",
+        "en": "A person everyone can trust."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم سیرت سے ایک سچا سبق سنیں گے۔ مکہ کے لوگ حضرت محمد ﷺ پر بہت بھروسا کرتے تھے۔ وہ آپ ﷺ کو صادق اور امین کہتے تھے۔ غور سے سنیں، کیونکہ آخر میں آپ یہ کہانی اپنے الفاظ میں سنائیں گے۔",
+    "en": "Today we will hear a true lesson from the seerah. The people of Makkah trusted Prophet Muhammad (peace be upon him) greatly. They called him Sadiq and Amin. Listen carefully, because at the end you will retell this story in your own words."
+  },
+  "student_explanation": {
+    "ur": "حضرت محمد ﷺ مکہ میں رہتے تھے۔ آپ ﷺ ہمیشہ سچ بولتے تھے۔ اس لیے لوگ آپ ﷺ کو صادق کہتے تھے۔ لوگ اپنی قیمتی چیزیں آپ ﷺ کے پاس رکھواتے تھے۔ اس لیے وہ آپ ﷺ کو امین بھی کہتے تھے۔ کچھ لوگ آپ ﷺ کی بات نہیں مانتے تھے۔ پھر بھی وہ اپنی امانتیں آپ ﷺ ہی کے پاس رکھتے تھے۔ جب آپ ﷺ مدینہ گئے تو سب کی امانتیں واپس کروائیں۔ سبق یہ ہے: سچے اور امانت دار بنیں۔",
+    "en": "Prophet Muhammad (peace be upon him) lived in Makkah. He always told the truth. So people called him Sadiq, the truthful one. People left their precious things with him for safekeeping. So they also called him Amin, the trustworthy one. Some people did not accept his message. Even so, they kept their valuables with him. When he left for Madinah, he made sure everything was returned. The lesson is: be truthful and trustworthy."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "اس کہانی کو تین حصوں میں کیسے سنائیں؟",
+        "en": "How can we retell this story in three parts?"
+      },
+      "steps": [
+        {
+          "ur": "شروع: لوگ آپ ﷺ کو سچا اور امانت دار جانتے تھے۔",
+          "en": "Beginning: people knew him as truthful and trustworthy."
+        },
+        {
+          "ur": "درمیان: جو لوگ آپ ﷺ کی بات نہیں مانتے تھے، وہ بھی آپ ﷺ کے پاس امانتیں رکھتے تھے۔",
+          "en": "Middle: even people who did not accept his message left their valuables with him."
+        },
+        {
+          "ur": "آخر: مدینہ جاتے وقت آپ ﷺ نے سب کی امانتیں واپس کروائیں۔",
+          "en": "End: when he left for Madinah, he made sure every trust was returned."
+        },
+        {
+          "ur": "سبق: سچائی اور امانت داری سے سب کا بھروسا ملتا ہے۔",
+          "en": "Lesson: truthfulness and trustworthiness earn everyone's trust."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-story-order",
+      "type": "ordering",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی کے حصوں کو صحیح ترتیب میں لگائیں۔",
+        "en": "Put the parts of the story in the right order."
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے سچائی آئی، پھر بھروسا۔",
+            "en": "First came truthfulness, then trust."
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "آپ ﷺ ہمیشہ سچ بولتے تھے",
+          "en": "He always told the truth"
+        },
+        {
+          "ur": "لوگ اپنی قیمتی چیزیں آپ ﷺ کے پاس رکھواتے تھے",
+          "en": "People left their precious things with him"
+        },
+        {
+          "ur": "بات نہ ماننے والے بھی آپ ﷺ پر بھروسا کرتے تھے",
+          "en": "Even those who did not accept his message trusted him"
+        },
+        {
+          "ur": "مدینہ جاتے وقت آپ ﷺ نے سب امانتیں واپس کروائیں",
+          "en": "When leaving for Madinah, he had every trust returned"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-sadiq",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "مکہ کے لوگ آپ ﷺ کو 'صادق' کیوں کہتے تھے؟",
+        "en": "Why did the people of Makkah call him 'Sadiq'?"
+      },
+      "options": [
+        {
+          "ur": "کیونکہ آپ ﷺ ہمیشہ سچ بولتے تھے",
+          "en": "Because he always told the truth"
+        },
+        {
+          "ur": "کیونکہ آپ ﷺ بہت امیر تھے",
+          "en": "Because he was very rich"
+        },
+        {
+          "ur": "کیونکہ آپ ﷺ بہت تیز دوڑتے تھے",
+          "en": "Because he ran very fast"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-amin",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "'امین' کا کیا مطلب ہے؟",
+        "en": "What does 'Amin' mean?"
+      },
+      "options": [
+        {
+          "ur": "بہادر",
+          "en": "Brave"
+        },
+        {
+          "ur": "امانت دار، جس پر بھروسا ہو",
+          "en": "Trustworthy, someone you can rely on"
+        },
+        {
+          "ur": "ہوشیار",
+          "en": "Clever"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p3-even-opponents",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "جو لوگ آپ ﷺ کی بات نہیں مانتے تھے، وہ بھی اپنی امانتیں آپ ﷺ کے پاس رکھتے تھے۔",
+        "en": "Even people who did not accept his message kept their valuables with him."
+      },
+      "explanation": {
+        "ur": "سچائی کی وجہ سے سب آپ ﷺ پر بھروسا کرتے تھے۔",
+        "en": "Because of his truthfulness, everyone trusted him."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-returned",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "مدینہ جاتے وقت آپ ﷺ نے لوگوں کی امانتوں کا کیا کیا؟",
+        "en": "When leaving for Madinah, what did he do with people's valuables?"
+      },
+      "options": [
+        {
+          "ur": "ساتھ لے گئے",
+          "en": "Took them along"
+        },
+        {
+          "ur": "چھوڑ دیں",
+          "en": "Left them behind"
+        },
+        {
+          "ur": "سب کو واپس کروائیں",
+          "en": "Had them all returned to their owners"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-lesson",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اس کہانی کا سبق کیا ہے؟",
+        "en": "What is the lesson of this story?"
+      },
+      "options": [
+        {
+          "ur": "سچ صرف دوستوں سے بولیں",
+          "en": "Tell the truth only to friends"
+        },
+        {
+          "ur": "سچے اور امانت دار بنیں، سب کے ساتھ",
+          "en": "Be truthful and trustworthy with everyone"
+        },
+        {
+          "ur": "صرف آسان وقت میں سچ بولیں",
+          "en": "Tell the truth only when it is easy"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-kindness-to-friends-only",
+          "2": "m-honesty-only-when-easy"
+        }
+      }
+    },
+    {
+      "id": "p6-today",
+      "type": "true_false",
+      "competency": "application",
+      "stem": {
+        "ur": "دوست کی کتاب ادھار لیں تو اسے سنبھال کر وقت پر واپس کرنا امانت داری ہے۔",
+        "en": "Borrowing a friend's book and returning it safely and on time is being trustworthy."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-oral-retell",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اپنے مینٹور کو یہ کہانی اپنے الفاظ میں سنائیں: شروع، درمیان، آخر، اور سبق۔",
+        "en": "Retell this story to your mentor in your own words: beginning, middle, end and the lesson."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor-mediated oral item. Listen without interrupting; prompt with 'what happened next?'. Accept simple wording. Gently correct any added details that are not in the lesson; do not add new details yourself.",
+      "rubric": {
+        "criteria": "oral retelling, mentor-assessed: sequence of the story and the lesson about truthfulness and trustworthiness",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "بچہ کہانی کا ایک حصہ بتاتا ہے، سبق ابھی واضح نہیں۔",
+              "en": "The child tells one part of the story; the lesson is not yet clear."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "بچہ کہانی ترتیب سے بتاتا ہے اور سبق کا نام لیتا ہے۔",
+              "en": "The child tells the story in order and names the lesson."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "بچہ کہانی ترتیب سے بتاتا ہے اور سبق کو اپنی زندگی کی ایک مثال سے جوڑتا ہے۔",
+              "en": "The child tells the story in order and links the lesson to an everyday example."
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-retell-home",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کے کسی بڑے کو یہ کہانی سنائیں اور بتائیں کہ آپ نے کیا سیکھا۔",
+        "en": "Tell this story to an elder at home and say what you learned."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. The elder may add to the story; the mentor should not grade family additions."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کہانی میں لوگ آپ ﷺ پر بھروسا کیوں کرتے تھے؟",
+        "en": "In the story, why did people trust him?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "دو لفظ یاد کریں: صادق یعنی سچا، امین یعنی امانت دار۔",
+        "en": "Remember two words: Sadiq means truthful, Amin means trustworthy."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "سچائی صرف اپنوں کے ساتھ ضروری ہے۔",
+        "en": "Honesty matters only with our own people."
+      },
+      "correction": {
+        "ur": "آپ ﷺ نے ان لوگوں کی امانتیں بھی واپس کیں جو آپ ﷺ سے اختلاف رکھتے تھے۔",
+        "en": "He returned the valuables even of people who disagreed with him."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "سچ تب بولنا ہے جب آسان ہو۔",
+        "en": "We only need to be honest when it is easy."
+      },
+      "correction": {
+        "ur": "سچ تب بھی بولتے ہیں جب مشکل ہو۔",
+        "en": "We are honest even when it is hard."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-honesty-only-when-easy",
+      "remediation_ref": "ISL-G4-AKH-01"
+    },
+    {
+      "signal": "low_score:story_sequence",
+      "remediation_ref": "ISL-G4-SIR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "لوگ آپ ﷺ کو صادق (سچا) اور امین (امانت دار) کہتے تھے۔ مخالف بھی امانتیں آپ ﷺ کے پاس رکھتے تھے۔ مدینہ جاتے وقت سب امانتیں واپس ہوئیں۔",
+    "en": "People called him Sadiq (truthful) and Amin (trustworthy). Even opponents kept valuables with him. When he left for Madinah, every trust was returned."
+  },
+  "summary": {
+    "ur": "ہم نے سیرت سے سیکھا کہ سچائی اور امانت داری سے بھروسا ملتا ہے۔",
+    "en": "We learned from the seerah that truthfulness and trustworthiness earn trust."
+  },
+  "parent_notes": {
+    "ur": "بچے سے یہ کہانی سنیں اور تعریف کریں۔ اگر آپ کو اس واقعے کے بارے میں مزید معلوم ہو تو پیار سے بتائیں۔",
+    "en": "Listen to your child retell this story and praise them. If you know more about this account, share it with them warmly."
+  },
+  "mentor_notes": {
+    "ur": "زبانی سنانے کا جائزہ آپ لیں گے۔ بچے کو روکیں نہیں؛ 'پھر کیا ہوا؟' سے مدد کریں۔ اپنی طرف سے کوئی نئی تفصیل نہ جوڑیں؛ واقعات کی تفصیل عالم کی منظوری سے ہی دی جائے۔",
+    "en": "You assess the oral retelling. Do not interrupt; help with 'what happened next?'. Do not add new story details; any further details must come from scholar-approved material."
+  },
+  "accessibility_notes": {
+    "ur": "کسی تصویر میں حضرت محمد ﷺ، آپ ﷺ کے گھر والوں یا صحابہ کی شکل یا جسم نہ دکھایا جائے؛ صرف جگہیں اور چیزیں دکھائی جائیں۔ مکہ کا سادہ منظر اور اس کا متبادل متن ابھی بنانا ہے۔ کہانی کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ترتیب والی سرگرمی کا متبادل: 'پہلے کیا ہوا؟' جیسے بٹن والے سوال۔ زبانی جائزہ بولنے میں مشکل والے بچوں کے لیے اشاروں یا تصویری کارڈوں سے بھی ہو سکتا ہے۔",
+    "en": "No picture may show the Prophet (peace be upon him), his family or the companions, in face or body; show only places and objects. A simple Makkah scene and its alt text are still to be made. Urdu audio of the story is not yet recorded. Alternative to the ordering activity: button questions such as 'what happened first?'. Children who find speaking hard may retell using picture cards or gestures."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "tell the account in three short parts (beginning, middle, end), name the lesson, then link it to returning borrowed things today",
+    "questioning_strategy": "ask 'what happened next?' and 'why did people trust him?'; save 'what is the lesson?' for last",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "mixes up the order of the story"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "tell only the details in this lesson, which a scholar must confirm; everyday links use borrowed books, pencils and change from the bazaar",
+    "misconception_detectors": [
+      "thinks honesty is only for our own people",
+      "picks 'only when easy'"
+    ],
+    "critical_thinking_prompts": [
+      "Why would people who disagreed with him still trust him with their things?"
+    ],
+    "personalization_rules": "if the learner struggles with the honesty idea itself, route to ISL-G4-AKH-01 before the retelling",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions",
+      "add story details, dialogue or quotations that are not in the approved lesson text"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: verify the account (the titles Sadiq and Amin; opponents keeping valuables with him; trusts returned when he left for Madinah) is accurate and suitably sourced",
+    "scholar: the lesson does not name who returned the trusts on his behalf; decide whether to add it",
+    "illustration reviewer: no depiction of the Prophet (peace be upon him), his family or companions"
+  ]
+}

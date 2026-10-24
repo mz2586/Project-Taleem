@@ -1,0 +1,378 @@
+{
+  "code": "SOC-G4-ECO-01",
+  "title": {
+    "ur": "ضرورت اور خواہش",
+    "en": "Needs and wants"
+  },
+  "description": {
+    "ur": "ضرورت (جس کے بغیر جینا یا سیکھنا مشکل ہو) اور خواہش (جو اچھی لگے مگر لازمی نہ ہو) میں فرق کریں۔",
+    "en": "Tell a need (something required to live or learn) from a want (something nice to have)."
+  },
+  "keywords": [
+    "needs",
+    "wants",
+    "choices",
+    "food",
+    "water",
+    "shelter",
+    "education"
+  ],
+  "teacher_script": {
+    "ur": "آج ہم دو لفظ سیکھیں گے: ضرورت اور خواہش۔ ضرورت وہ ہے جس کے بغیر گزارہ مشکل ہو۔ خواہش وہ ہے جو اچھی لگتی ہے مگر لازمی نہیں۔ ہر چیز کو دیکھ کر ہم ایک سوال پوچھیں گے: کیا اس کے بغیر گزارہ ہو سکتا ہے؟",
+    "en": "Today we learn two words: need and want. A need is something we cannot manage without. A want is something we like but do not have to have. For each thing we will ask one question: can we manage without it?"
+  },
+  "student_explanation": {
+    "ur": "کچھ چیزیں ہماری ضرورت ہیں۔ ان کے بغیر جینا یا سیکھنا مشکل ہے۔ پانی، کھانا، کپڑے اور گھر ضرورتیں ہیں۔ تعلیم بھی ضرورت ہے۔ کچھ چیزیں ہماری خواہش ہیں۔ یہ اچھی لگتی ہیں مگر ان کے بغیر گزارہ ہو جاتا ہے۔ کھلونا اور مٹھائی خواہشیں ہیں۔ کسی چیز کو بہت چاہنا اسے ضرورت نہیں بناتا۔ پہلے ضرورتیں پوری کی جاتی ہیں، پھر خواہشیں۔",
+    "en": "Some things are our needs. Without them it is hard to live or learn. Water, food, clothes and a home are needs. Education is a need too. Some things are our wants. We like them, but we can manage without them. A toy and sweets are wants. Wanting something a lot does not make it a need. Needs come first, then wants."
+  },
+  "interactive_activities": [
+    {
+      "id": "a1-sort-need-want",
+      "type": "interactive",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہر چیز کو 'ضرورت' یا 'خواہش' کے ڈبے میں رکھیں: پانی، روٹی، کھلونا، مٹھائی، سردیوں کا سویٹر، کہانیوں کی کتاب۔",
+        "en": "Sort each item into the 'need' or 'want' box: water, roti, a toy, sweets, a winter sweater, a storybook."
+      },
+      "answer_key": {
+        "need": [
+          "water",
+          "roti",
+          "winter sweater"
+        ],
+        "want": [
+          "toy",
+          "sweets",
+          "storybook"
+        ],
+        "misconception_on_error": "m-want-labelled-need"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا اِس کے بغیر گزارہ ہو سکتا ہے؟",
+            "en": "Can we manage without this?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-which-need",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ان میں سے ضرورت کون سی ہے؟",
+        "en": "Which of these is a NEED?"
+      },
+      "options": [
+        {
+          "ur": "پینے کا صاف پانی",
+          "en": "clean drinking water"
+        },
+        {
+          "ur": "نیا کھلونا",
+          "en": "a new toy"
+        },
+        {
+          "ur": "مٹھائی",
+          "en": "sweets"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-want-labelled-need",
+          "2": "m-want-labelled-need"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا اِس کے بغیر گزارہ ہو سکتا ہے؟",
+            "en": "Can we manage without this?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پانی کے بغیر جینا ممکن نہیں، اس لیے یہ ضرورت ہے۔",
+        "en": "We cannot live without water, so it is a need."
+      }
+    },
+    {
+      "id": "p2-sweets",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "مٹھائی ضرورت ہے۔",
+        "en": "Sweets are a need."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-want-labelled-need"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "زندہ رہنے یا سیکھنے کے لیے لازمی؟",
+            "en": "Essential for living or learning?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "مٹھائی اچھی لگتی ہے مگر اس کے بغیر گزارہ ہو جاتا ہے۔ یہ خواہش ہے۔",
+        "en": "Sweets are nice, but we can manage without them. They are a want."
+      }
+    },
+    {
+      "id": "p3-which-want",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ان میں سے خواہش کون سی ہے؟",
+        "en": "Which of these is a WANT?"
+      },
+      "options": [
+        {
+          "ur": "روٹی",
+          "en": "roti"
+        },
+        {
+          "ur": "سکول جانا",
+          "en": "going to school"
+        },
+        {
+          "ur": "نئی پتنگ",
+          "en": "a new kite"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سی چیز اچھی لگتی ہے مگر لازمی نہیں؟",
+            "en": "Which one is nice but not essential?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-education",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "تعلیم ایک ضرورت ہے۔",
+        "en": "Education is a need."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "سیکھنے کے لیے تعلیم لازمی ہے، اس لیے یہ ضرورت ہے۔",
+        "en": "Education is essential for learning, so it is a need."
+      }
+    },
+    {
+      "id": "p5-strong-want",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "حمزہ کہتا ہے: 'مجھے یہ کرکٹ بیٹ بہت چاہیے، اس لیے یہ میری ضرورت ہے۔' کیا یہ درست ہے؟",
+        "en": "Hamza says: 'I really want this cricket bat, so it is my need.' Is he right?"
+      },
+      "options": [
+        {
+          "ur": "ہاں، جو بہت چاہیے وہ ضرورت ہے",
+          "en": "yes, what you want a lot is a need"
+        },
+        {
+          "ur": "نہیں، بہت چاہنا اسے ضرورت نہیں بناتا",
+          "en": "no, wanting it a lot does not make it a need"
+        },
+        {
+          "ur": "ہاں، کھیل کی ہر چیز ضرورت ہے",
+          "en": "yes, everything for games is a need"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-want-labelled-need",
+          "2": "m-want-labelled-need"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا بیٹ کے بغیر جینا یا سیکھنا ممکن ہے؟",
+            "en": "Can he live and learn without the bat?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-winter",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "سخت سردی میں کون سی چیز ضرورت ہے؟",
+        "en": "In very cold winter, which is a need?"
+      },
+      "options": [
+        {
+          "ur": "گرم کپڑے",
+          "en": "warm clothes"
+        },
+        {
+          "ur": "رنگین غبارہ",
+          "en": "a coloured balloon"
+        },
+        {
+          "ur": "کھلونا گاڑی",
+          "en": "a toy car"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-want-labelled-need",
+          "2": "m-want-labelled-need"
+        }
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کیا اِس کے بغیر گزارہ ہو سکتا ہے؟",
+        "en": "Can we manage without this?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "زندہ رہنے/سیکھنے کے لیے لازمی؟",
+        "en": "Essential for living/learning?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "کسی شدید خواہش کو ضرورت کہہ دینا",
+        "en": "A strong want is called a need"
+      },
+      "correction": {
+        "ur": "ضرورت وہ ہے جو جینے/سیکھنے کے لیے لازمی ہو",
+        "en": "a need is essential to live/learn"
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-need-want-home",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کے کسی فرد کو گھر کی ایک ضرورت اور ایک خواہش کا نام بتائیں۔",
+        "en": "name one need and one want at home to a family member."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any need/want pair that is classified correctly. Items must be neutral; do not ask about what the family owns or can afford."
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-want-labelled-need",
+      "remediation_ref": "SOC-G4-ECO-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "ضرورت: جس کے بغیر جینا یا سیکھنا مشکل ہو (پانی، کھانا، کپڑے، گھر، تعلیم)۔ خواہش: جو اچھی لگے مگر لازمی نہ ہو (کھلونا، مٹھائی)۔ بہت چاہنا خواہش کو ضرورت نہیں بناتا۔",
+    "en": "Need: hard to live or learn without (water, food, clothes, home, education). Want: nice but not essential (toy, sweets). Wanting something a lot does not make it a need."
+  },
+  "summary": {
+    "ur": "ہم نے ضرورت اور خواہش میں فرق کرنا سیکھا۔",
+    "en": "We learned to tell needs from wants."
+  },
+  "parent_notes": {
+    "ur": "سادہ سودا سلف کی فہرست بناتے ہوئے ضرورت اور خواہش کی بات کریں۔",
+    "en": "talk about needs vs wants while planning a simple shopping list."
+  },
+  "mentor_notes": {
+    "ur": "مثالیں غیر جانب دار اور سب کو شامل کرنے والی رکھیں؛ کوئی ایسی بات نہ ہو جس سے کسی بچے کو اپنے حالات پر شرمندگی ہو۔",
+    "en": "keep examples neutral + inclusive; avoid anything that could shame a child's circumstances."
+  },
+  "accessibility_notes": {
+    "ur": "چیزوں کی تصاویر (پانی، روٹی، کھلونا، مٹھائی، سویٹر، کتاب) ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن چیز کا نام بتائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے والی سرگرمی کا متبادل: ہر چیز کے لیے 'ضرورت' یا 'خواہش' کا بٹن دبائیں۔",
+    "en": "Item pictures (water, roti, toy, sweets, sweater, book) are still to be made; each alt text should name the item. Urdu audio is not yet recorded. Alternative to the drag activity: tap a 'need' or 'want' button for each item."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "one test question for every item: 'can we manage without it?'; contrast water with a toy; needs before wants",
+    "questioning_strategy": "ask 'can we manage without this?' then 'is it essential to live or learn?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "labels a strong want as a need"
+    ],
+    "hint_policy": "graduated; H1 'can we manage without it?', H2 'essential to live/learn?', H3 re-teach water vs toy; never give the label first",
+    "example_policy": "neutral, universal items only (water, roti, clothes, toy, sweets, kite); no family-income references",
+    "misconception_detectors": [
+      "labels a strong want as a need",
+      "labels every item a child likes as a need"
+    ],
+    "critical_thinking_prompts": [
+      "Can something be a need in one situation and a want in another, like a sweater in summer and in winter?"
+    ],
+    "personalization_rules": "after two misconception hits, re-teach water vs toy before the next item",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "ask what the learner's family owns, buys or can afford",
+      "suggest that any family's choices are wrong"
+    ]
+  },
+  "review_flags": [
+    "human fields (hints, misconception, homework, parent and mentor notes) are kept verbatim on their authored side; the Urdu or English side of each is an AI translation to check",
+    "'storybook' is sorted as a want while education is a need; confirm the subject expert agrees, or replace it with a clearer want",
+    "the winter sweater is a need only in cold weather; confirm this context-dependent item is suitable for an intro lesson"
+  ]
+}

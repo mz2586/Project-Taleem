@@ -1,0 +1,428 @@
+{
+  "code": "ISL-G4-QUR-01",
+  "title": {
+    "ur": "قرآن مجید سے محبت اور ادب",
+    "en": "Loving and Respecting the Qur'an"
+  },
+  "description": {
+    "ur": "قرآن مجید سے محبت اور اس کے ادب کے آسان طریقے جاننا۔",
+    "en": "Learning simple ways to show love and respect (adab) for the Qur'an."
+  },
+  "keywords": [
+    "Qur'an",
+    "respect",
+    "adab",
+    "love",
+    "care",
+    "Islamiat"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "قرآن مجید",
+        "en": "the Qur'an"
+      },
+      "definition": {
+        "ur": "اللہ تعالیٰ کی کتاب، جو حضرت محمد ﷺ پر نازل ہوئی۔",
+        "en": "The book of Allah, revealed to Prophet Muhammad (peace be upon him)."
+      }
+    },
+    {
+      "term": {
+        "ur": "ادب",
+        "en": "respect / adab"
+      },
+      "definition": {
+        "ur": "کسی چیز کی عزت کرنا اور اسے پیار سے سنبھالنا۔",
+        "en": "Honouring something and caring for it lovingly."
+      }
+    },
+    {
+      "term": {
+        "ur": "غلاف",
+        "en": "cover"
+      },
+      "definition": {
+        "ur": "کپڑے کا وہ کور جس میں قرآن مجید رکھا جاتا ہے۔",
+        "en": "The cloth cover the Qur'an is kept in."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم قرآن مجید کی بات کریں گے۔ قرآن مجید اللہ تعالیٰ کی کتاب ہے۔ مسلمان اس سے بہت محبت کرتے ہیں۔ محبت ہو تو ہم اس چیز کا ادب بھی کرتے ہیں۔ آئیں، ادب کے کچھ آسان طریقے سیکھیں۔",
+    "en": "Today we will talk about the Qur'an. The Qur'an is the book of Allah. Muslims love it very much. When we love something, we also treat it with respect. Let us learn some simple ways to show respect."
+  },
+  "student_explanation": {
+    "ur": "قرآن مجید اللہ تعالیٰ کی کتاب ہے۔ یہ حضرت محمد ﷺ پر نازل ہوئی۔ مسلمان قرآن مجید سے محبت کرتے ہیں۔ ہم اسے صاف ہاتھوں سے چھوتے ہیں۔ ہم اسے صاف اور اونچی جگہ پر رکھتے ہیں۔ اکثر گھروں میں اسے غلاف میں رکھا جاتا ہے۔ جب قرآن مجید پڑھا جائے تو ہم خاموشی سے سنتے ہیں۔ ہم اسے پڑھنا استاد سے سیکھتے ہیں۔",
+    "en": "The Qur'an is the book of Allah. It was revealed to Prophet Muhammad (peace be upon him). Muslims love the Qur'an. We touch it with clean hands. We keep it in a clean, high place. Many homes keep it in a cloth cover. When the Qur'an is recited, we listen quietly. We learn to read it from a teacher."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "عائشہ قرآن مجید پڑھنے بیٹھ رہی ہے۔ وہ ادب کیسے دکھائے؟",
+        "en": "Ayesha is sitting down to read the Qur'an. How can she show respect?"
+      },
+      "steps": [
+        {
+          "ur": "پہلے ہاتھ صاف کرے، اور وضو کرے جیسے گھر والے اور استاد سکھائیں۔",
+          "en": "First she cleans her hands, and makes wudu as her family and teacher show her."
+        },
+        {
+          "ur": "وہ صاف جگہ پر آرام سے بیٹھتی ہے۔",
+          "en": "She sits calmly in a clean place."
+        },
+        {
+          "ur": "پڑھنے کے بعد قرآن مجید کو غلاف میں رکھ کر اونچی جگہ پر رکھ دیتی ہے۔",
+          "en": "After reading, she puts the Qur'an in its cover and back in a high place."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-respect-or-not",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر کارڈ چھو کر بتائیں: یہ قرآن مجید کا ادب ہے یا نہیں؟",
+        "en": "Tap each card: is this respect for the Qur'an or not?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: کیا ہم اپنی سب سے پیاری چیز کے ساتھ ایسا کریں گے؟",
+            "en": "Think: would we treat our most precious thing this way?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "صاف ہاتھوں سے پکڑنا",
+          "en": "Holding it with clean hands"
+        },
+        {
+          "ur": "اونچی اور صاف جگہ پر رکھنا",
+          "en": "Keeping it in a high, clean place"
+        },
+        {
+          "ur": "فرش پر کھلا چھوڑ دینا",
+          "en": "Leaving it open on the floor"
+        },
+        {
+          "ur": "پڑھائی کے وقت خاموشی سے سننا",
+          "en": "Listening quietly when it is recited"
+        },
+        {
+          "ur": "اس کے اوپر دوسری چیزیں رکھنا",
+          "en": "Putting other things on top of it"
+        }
+      ],
+      "answer_key": {
+        "mode": "sort",
+        "groups": {
+          "respect": [
+            0,
+            1,
+            3
+          ],
+          "not_respect": [
+            2,
+            4
+          ]
+        }
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-whose-book",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "قرآن مجید کس کی کتاب ہے؟",
+        "en": "Whose book is the Qur'an?"
+      },
+      "options": [
+        {
+          "ur": "اللہ تعالیٰ کی",
+          "en": "Allah's"
+        },
+        {
+          "ur": "ایک کہانی نویس کی",
+          "en": "A storywriter's"
+        },
+        {
+          "ur": "اسکول کی",
+          "en": "The school's"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-where-keep",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "قرآن مجید کہاں رکھنا چاہیے؟",
+        "en": "Where should the Qur'an be kept?"
+      },
+      "options": [
+        {
+          "ur": "فرش پر",
+          "en": "On the floor"
+        },
+        {
+          "ur": "جوتوں کے پاس",
+          "en": "Next to the shoes"
+        },
+        {
+          "ur": "صاف اور اونچی جگہ پر",
+          "en": "In a clean, high place"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p3-listen",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "جب قرآن مجید پڑھا جائے تو ہم خاموشی سے سنتے ہیں۔",
+        "en": "When the Qur'an is recited, we listen quietly."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-hands",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "قرآن مجید چھونے سے پہلے ہم کیا کرتے ہیں؟",
+        "en": "What do we do before touching the Qur'an?"
+      },
+      "options": [
+        {
+          "ur": "کھیلتے ہیں",
+          "en": "Play"
+        },
+        {
+          "ur": "ہاتھ صاف کرتے ہیں، جیسے گھر والے سکھائیں",
+          "en": "Clean our hands, as our family shows us"
+        },
+        {
+          "ur": "کھانا کھاتے ہیں",
+          "en": "Eat a meal"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p5-fear",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "قرآن مجید کا ادب ڈر کی وجہ سے کیا جاتا ہے۔",
+        "en": "We respect the Qur'an because we are afraid."
+      },
+      "explanation": {
+        "ur": "ہم قرآن مجید کا ادب محبت کی وجہ سے کرتے ہیں۔",
+        "en": "We respect the Qur'an out of love."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-respect-equals-fear"
+        }
+      }
+    },
+    {
+      "id": "p6-revealed",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "قرآن مجید کس پر نازل ہوا؟",
+        "en": "To whom was the Qur'an revealed?"
+      },
+      "options": [
+        {
+          "ur": "حضرت محمد ﷺ پر",
+          "en": "Prophet Muhammad (peace be upon him)"
+        },
+        {
+          "ur": "ایک بادشاہ پر",
+          "en": "A king"
+        },
+        {
+          "ur": "ایک استاد پر",
+          "en": "A teacher"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-why-love",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "آپ کے خیال میں ادب اور محبت ساتھ ساتھ کیوں چلتے ہیں؟",
+        "en": "Why do you think respect and love go together?"
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any answer linking care for something to loving it. Do not ask whether the family has a Qur'an at home or how often they read."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-show-elder",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کے کسی بڑے سے پوچھیں کہ قرآن مجید کو ادب سے کیسے رکھتے ہیں، اور ان سے سیکھیں۔",
+        "en": "Ask an elder at home how the Qur'an is kept respectfully, and learn from them."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. Family practice may differ in details; that is fine."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: ہم اپنی سب سے قیمتی چیز کو کیسے رکھتے ہیں؟",
+        "en": "Think: how do we keep our most precious thing?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: صاف ہاتھ، صاف اونچی جگہ، خاموشی سے سننا۔",
+        "en": "Remember: clean hands, a clean high place, listening quietly."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "قرآن مجید کا ادب ڈر کی وجہ سے ہوتا ہے۔",
+        "en": "We respect the Qur'an out of fear."
+      },
+      "correction": {
+        "ur": "ادب محبت اور خیال کا نام ہے، ڈر کا نہیں۔",
+        "en": "Respect is care and love, not fear."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ادب صرف قرآن مجید کو رکھنے کا نام ہے۔",
+        "en": "Respect is only about where we keep the Qur'an."
+      },
+      "correction": {
+        "ur": "ادب میں توجہ سے سننا اور استاد سے سیکھنا بھی شامل ہے۔",
+        "en": "Respect also means listening with attention and learning from a teacher."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-respect-equals-fear",
+      "remediation_ref": "ISL-G4-AKH-03"
+    },
+    {
+      "signal": "low_score:handling",
+      "remediation_ref": "ISL-G4-QUR-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "قرآن مجید اللہ تعالیٰ کی کتاب ہے، جو حضرت محمد ﷺ پر نازل ہوئی۔ ادب: صاف ہاتھ، صاف اونچی جگہ، غلاف، خاموشی سے سننا، استاد سے سیکھنا۔",
+    "en": "The Qur'an is Allah's book, revealed to Prophet Muhammad (peace be upon him). Respect: clean hands, a clean high place, a cover, quiet listening, learning from a teacher."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ قرآن مجید سے محبت اور ادب کیسے کرتے ہیں۔",
+    "en": "We learned how to love and respect the Qur'an."
+  },
+  "parent_notes": {
+    "ur": "قرآن مجید کو ادب سے رکھنے کا اپنے گھر کا طریقہ پیار سے سکھائیں۔ پڑھائی کے وقت خود بھی خاموشی سے سنیں۔",
+    "en": "Teach your family's way of keeping the Qur'an respectfully, with love. Listen quietly yourself when it is recited."
+  },
+  "mentor_notes": {
+    "ur": "قرآن مجید کو چھونے اور وضو کی تفصیلات خاندانوں میں مختلف ہو سکتی ہیں؛ ہمیشہ 'جیسے آپ کے گھر والے اور استاد سکھائیں' کہیں۔ کسی بچے سے یہ نہ پوچھیں کہ گھر میں قرآن مجید ہے یا نہیں۔",
+    "en": "Details of touching the Qur'an and wudu can differ between families; always say 'as your family and teacher show you'. Never ask a child whether there is a Qur'an at home."
+  },
+  "accessibility_notes": {
+    "ur": "تصویر (غلاف میں قرآن مجید اونچی جگہ پر) اور اس کا متبادل متن ابھی بنانا ہے؛ تصویر میں قرآنی متن نہ لکھا جائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر کارڈ کے لیے 'ادب' یا 'ادب نہیں' کا بٹن چنیں۔",
+    "en": "A picture (the Qur'an in its cover on a high shelf) and its alt text are still to be made; no Qur'anic text may appear in the picture. Urdu audio is not yet recorded. Alternative to the sort activity: choose a 'respect' or 'not respect' button for each card."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "start from love: we take care of what we love; then three simple acts of respect (clean hands, a clean high place, quiet listening)",
+    "questioning_strategy": "ask 'how do we treat something precious?' before asking which choice is respectful",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "links respect to fear"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "practice common to all Pakistani Muslims; wudu and touching details deferred to family and teacher; no Qur'anic text",
+    "misconception_detectors": [
+      "chooses respect out of fear",
+      "thinks respect is only about storage"
+    ],
+    "critical_thinking_prompts": [
+      "How do the ways we care for the Qur'an show that we love it?"
+    ],
+    "personalization_rules": "if the learner links respect to fear, route to ISL-G4-AKH-03 for the meaning of adab",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions",
+      "recite, write, translate or explain the meaning of any verse from memory; use only scholar-supplied text"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: confirm the acts of respect listed are common to all Pakistani Muslims and that touching and wudu are rightly deferred to 'family and teacher'",
+    "scholar: confirm the child-level statement that the Qur'an is the book of Allah revealed to Prophet Muhammad (peace be upon him)",
+    "illustration reviewer: no Qur'anic text in any image"
+  ]
+}

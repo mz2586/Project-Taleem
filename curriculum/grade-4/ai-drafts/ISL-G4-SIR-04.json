@@ -1,0 +1,475 @@
+{
+  "code": "ISL-G4-SIR-04",
+  "title": {
+    "ur": "معاف کرنے کا سبق",
+    "en": "A Lesson in Forgiveness"
+  },
+  "description": {
+    "ur": "سیرت سے معاف کرنے کا سبق سننا اور سنانا، اور روزمرہ زندگی میں معافی مانگنا اور معاف کرنا۔",
+    "en": "Hearing and retelling a lesson about forgiveness from the seerah, and saying sorry and forgiving in daily life."
+  },
+  "keywords": [
+    "seerah",
+    "forgiveness",
+    "mercy",
+    "Makkah",
+    "saying sorry",
+    "retelling"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "معاف کرنا",
+        "en": "to forgive"
+      },
+      "definition": {
+        "ur": "کسی کی غلطی پر دل میں غصہ نہ رکھنا۔",
+        "en": "To stop holding anger in your heart about someone's mistake."
+      }
+    },
+    {
+      "term": {
+        "ur": "معافی مانگنا",
+        "en": "to say sorry"
+      },
+      "definition": {
+        "ur": "اپنی غلطی مان کر کہنا کہ مجھے افسوس ہے۔",
+        "en": "To own your mistake and say you are sorry."
+      }
+    },
+    {
+      "term": {
+        "ur": "رحم دلی",
+        "en": "mercy"
+      },
+      "definition": {
+        "ur": "سزا دے سکنے کے باوجود نرمی کرنا۔",
+        "en": "Being gentle even when you could punish."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم معاف کرنے کا سبق سنیں گے۔ معاف کرنا ایک بہت بڑی خوبی ہے۔ حضرت محمد ﷺ ان لوگوں کو بھی معاف کر دیتے تھے جنہوں نے آپ ﷺ کو تکلیف دی۔ غور سے سنیں، پھر یہ کہانی اپنے مینٹور کو سنائیں۔",
+    "en": "Today we will hear a lesson about forgiveness. Forgiving is a very great quality. Prophet Muhammad (peace be upon him) forgave even people who had hurt him. Listen carefully, then retell the story to your mentor."
+  },
+  "student_explanation": {
+    "ur": "مکہ کے کچھ لوگوں نے برسوں آپ ﷺ کو تکلیف دی۔ آپ ﷺ کو مکہ چھوڑ کر مدینہ جانا پڑا۔ کئی سال بعد آپ ﷺ مکہ واپس آئے۔ وہ لوگ پریشان تھے کہ اب کیا ہوگا۔ آپ ﷺ چاہتے تو سزا دے سکتے تھے۔ مگر آپ ﷺ نے سب کو معاف کر دیا۔ یہ رحم دلی تھی۔ ہم بھی دوسروں کو معاف کرتے ہیں۔ غلطی ہو جائے تو ہم معافی بھی مانگتے ہیں۔",
+    "en": "Some people in Makkah caused him trouble for many years. He had to leave Makkah and move to Madinah. Many years later, he came back to Makkah. Those people were worried about what would happen. He could have punished them. Instead, he forgave them all. That was mercy. We forgive others too. When we make a mistake, we say sorry."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "اس کہانی کو تین حصوں میں کیسے سنائیں؟",
+        "en": "How can we retell this story in three parts?"
+      },
+      "steps": [
+        {
+          "ur": "شروع: مکہ کے کچھ لوگوں نے آپ ﷺ کو برسوں تکلیف دی۔",
+          "en": "Beginning: some people in Makkah caused him trouble for years."
+        },
+        {
+          "ur": "درمیان: کئی سال بعد آپ ﷺ مکہ واپس آئے اور وہ لوگ پریشان تھے۔",
+          "en": "Middle: years later he came back to Makkah, and they were worried."
+        },
+        {
+          "ur": "آخر: آپ ﷺ نے سزا کے بجائے سب کو معاف کر دیا۔",
+          "en": "End: instead of punishing them, he forgave them all."
+        },
+        {
+          "ur": "سبق: معاف کرنا بڑی خوبی ہے۔",
+          "en": "Lesson: forgiving is a great quality."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "چھوٹے بھائی سے غلطی سے احمد کا کھلونا ٹوٹ گیا۔ بھائی نے معافی مانگی۔",
+        "en": "Ahmed's little brother broke his toy by accident. The brother said sorry."
+      },
+      "steps": [
+        {
+          "ur": "احمد کو افسوس ہے، یہ ٹھیک ہے۔",
+          "en": "Ahmed feels sad, and that is okay."
+        },
+        {
+          "ur": "وہ سوچتا ہے: بھائی نے جان بوجھ کر نہیں کیا اور معافی مانگ لی۔",
+          "en": "He thinks: his brother did not mean it, and he said sorry."
+        },
+        {
+          "ur": "احمد کہتا ہے: کوئی بات نہیں، میں نے معاف کیا۔ آؤ مل کر جوڑتے ہیں۔",
+          "en": "Ahmed says: It's okay, I forgive you. Let's fix it together."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sorry-steps",
+      "type": "ordering",
+      "competency": "application",
+      "stem": {
+        "ur": "غلطی کے بعد معافی کے قدموں کو ترتیب سے لگائیں۔",
+        "en": "Put the steps of making up after a mistake in order."
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے اپنی غلطی ماننی ہوتی ہے۔",
+            "en": "First we have to own the mistake."
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "غلطی مان لینا",
+          "en": "Owning the mistake"
+        },
+        {
+          "ur": "نرمی سے معافی مانگنا",
+          "en": "Saying sorry gently"
+        },
+        {
+          "ur": "دوسرا شخص معاف کر دیتا ہے",
+          "en": "The other person forgives"
+        },
+        {
+          "ur": "مل کر دوبارہ دوستی سے رہنا",
+          "en": "Being friends again together"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          0,
+          1,
+          2,
+          3
+        ]
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-meaning",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "معاف کرنے کا کیا مطلب ہے؟",
+        "en": "What does forgiving mean?"
+      },
+      "options": [
+        {
+          "ur": "دل میں غصہ رکھنا",
+          "en": "Keeping anger in your heart"
+        },
+        {
+          "ur": "بدلہ لینا",
+          "en": "Getting even"
+        },
+        {
+          "ur": "غلطی پر غصہ دل سے نکال دینا",
+          "en": "Letting go of anger about a mistake"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p2-return",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "مکہ واپس آ کر آپ ﷺ نے ان لوگوں کے ساتھ کیا کیا جنہوں نے تکلیف دی تھی؟",
+        "en": "When he came back to Makkah, what did he do about the people who had caused him trouble?"
+      },
+      "options": [
+        {
+          "ur": "سب کو معاف کر دیا",
+          "en": "Forgave them all"
+        },
+        {
+          "ur": "سب کو سزا دی",
+          "en": "Punished them all"
+        },
+        {
+          "ur": "ان سے بات نہیں کی",
+          "en": "Refused to speak to them"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-could-punish",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "آپ ﷺ سزا دے سکتے تھے، پھر بھی آپ ﷺ نے معاف کیا۔",
+        "en": "He could have punished them, yet he chose to forgive."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-lesson",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اس کہانی کا سبق کیا ہے؟",
+        "en": "What is the lesson of this story?"
+      },
+      "options": [
+        {
+          "ur": "صرف دوستوں کو معاف کرو",
+          "en": "Forgive only your friends"
+        },
+        {
+          "ur": "معاف کرنا بڑی خوبی ہے",
+          "en": "Forgiving is a great quality"
+        },
+        {
+          "ur": "کبھی معافی نہ مانگو",
+          "en": "Never say sorry"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-kindness-to-friends-only"
+        }
+      }
+    },
+    {
+      "id": "p5-say-sorry",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "زینب نے غلطی سے سہیلی کی کاپی پر سیاہی گرا دی۔ اب وہ کیا کرے؟",
+        "en": "Zainab spilt ink on her friend's notebook by accident. What should she do now?"
+      },
+      "options": [
+        {
+          "ur": "چھپا دے کہ کسی کو پتہ نہ چلے",
+          "en": "Hide it so nobody finds out"
+        },
+        {
+          "ur": "سہیلی کو الزام دے",
+          "en": "Blame her friend"
+        },
+        {
+          "ur": "غلطی مان کر معافی مانگے",
+          "en": "Own the mistake and say sorry"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-honesty-only-when-easy"
+        }
+      }
+    },
+    {
+      "id": "p6-safety",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "معاف کرنے کا مطلب ہے کہ اگر کوئی بار بار تکلیف دے تو کسی بڑے کو نہ بتائیں۔",
+        "en": "Forgiving means that if someone keeps hurting us, we should not tell an adult."
+      },
+      "explanation": {
+        "ur": "ہم معاف کرتے ہیں، مگر کوئی بار بار تکلیف دے تو کسی بھروسے والے بڑے کو ضرور بتاتے ہیں۔",
+        "en": "We forgive, but if someone keeps hurting us, we always tell an adult we trust."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-oral-retell",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اپنے مینٹور کو یہ کہانی اپنے الفاظ میں سنائیں، اور بتائیں کہ معاف کرنا مشکل کیوں ہو سکتا ہے۔",
+        "en": "Retell this story to your mentor in your own words, and say why forgiving can be hard."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor-mediated oral item. Do not ask the child about anyone who has hurt them. If the child raises ongoing harm, stop and follow safeguarding. Gently correct added details; do not add new ones yourself.",
+      "rubric": {
+        "criteria": "oral retelling, mentor-assessed: sequence of the story and the lesson about forgiveness",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "بچہ کہانی کا ایک حصہ بتاتا ہے، سبق ابھی واضح نہیں۔",
+              "en": "The child tells one part of the story; the lesson is not yet clear."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "بچہ کہانی ترتیب سے بتاتا ہے اور سبق کا نام لیتا ہے۔",
+              "en": "The child tells the story in order and names the lesson."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "بچہ کہانی ترتیب سے بتاتا ہے اور سبق کو اپنی زندگی کی ایک مثال سے جوڑتا ہے۔",
+              "en": "The child tells the story in order and links the lesson to an everyday example."
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-sorry-forgive",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "اگر آج کسی سے چھوٹی غلطی ہو جائے تو نرمی سے معاف کریں، یا اپنی غلطی پر معافی مانگیں۔",
+        "en": "If someone makes a small mistake today, forgive them gently; or say sorry for a mistake of your own."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. Do not ask who was involved."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: آپ ﷺ نے غصہ رکھا یا معاف کیا؟",
+        "en": "Think: did he hold on to anger, or forgive?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: معاف کرنا یعنی دل سے غصہ نکال دینا۔",
+        "en": "Remember: forgiving means letting the anger go."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "معاف کرنے کا مطلب ہے بار بار کی تکلیف بھی چپ چاپ سہنا۔",
+        "en": "Forgiving means quietly putting up with being hurt again and again."
+      },
+      "correction": {
+        "ur": "ہم معاف کرتے ہیں، مگر بار بار تکلیف ہو تو کسی بھروسے والے بڑے کو بتاتے ہیں۔",
+        "en": "We forgive, but if we are hurt again and again, we tell an adult we trust."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "معافی مانگنا کمزوری ہے۔",
+        "en": "Saying sorry is weak."
+      },
+      "correction": {
+        "ur": "غلطی مان کر معافی مانگنا بہادری ہے۔",
+        "en": "Owning a mistake and saying sorry is brave."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "low_score:story_sequence",
+      "remediation_ref": "ISL-G4-SIR-04"
+    },
+    {
+      "signal": "misconception:m-honesty-only-when-easy",
+      "remediation_ref": "ISL-G4-AKH-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "مکہ کے کچھ لوگوں نے آپ ﷺ کو تکلیف دی۔ برسوں بعد آپ ﷺ واپس آئے اور سب کو معاف کر دیا۔ ہم معاف بھی کرتے ہیں اور معافی بھی مانگتے ہیں۔",
+    "en": "Some people in Makkah caused him trouble. Years later he returned and forgave them all. We forgive others, and we say sorry too."
+  },
+  "summary": {
+    "ur": "ہم نے سیرت سے سیکھا کہ معاف کرنا بڑی خوبی ہے۔",
+    "en": "We learned from the seerah that forgiving is a great quality."
+  },
+  "parent_notes": {
+    "ur": "گھر میں بہن بھائیوں کو معافی مانگنا اور معاف کرنا سکھائیں، اور جب آپ سے غلطی ہو تو خود بھی معافی مانگ کر مثال بنیں۔",
+    "en": "Help siblings say sorry and forgive at home, and set the example by saying sorry when you make a mistake."
+  },
+  "mentor_notes": {
+    "ur": "واقعہ نرمی سے سنائیں؛ جنگ یا لڑائی کا ذکر نہ کریں۔ واضح کریں کہ معاف کرنا بار بار کی تکلیف یا نقصان کو چھپانا نہیں ہے؛ کوئی بچہ ایسی بات بتائے تو فوراً انسانی سرپرست کو بتائیں۔",
+    "en": "Tell the account gently; leave out any mention of battles or fighting. Make clear that forgiving never means hiding repeated harm; if a child discloses anything like that, hand to a human safeguarding lead at once."
+  },
+  "accessibility_notes": {
+    "ur": "کسی تصویر میں حضرت محمد ﷺ، آپ ﷺ کے گھر والوں یا صحابہ کی شکل یا جسم نہ دکھایا جائے؛ صرف جگہیں اور چیزیں دکھائی جائیں۔ مکہ کے پرسکون منظر کا خاکہ اور اس کا متبادل متن ابھی بنانا ہے۔ کہانی کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ترتیب والی سرگرمی کا متبادل: 'پہلا قدم کون سا؟' جیسے بٹن والے سوال۔ زبانی جائزہ تصویری کارڈوں یا اشاروں سے بھی ہو سکتا ہے۔",
+    "en": "No picture may show the Prophet (peace be upon him), his family or the companions, in face or body; show only places and objects. A calm Makkah scene sketch and its alt text are still to be made. Urdu audio of the story is not yet recorded. Alternative to the ordering activity: button questions such as 'which step comes first?'. The oral check may also be done with picture cards or gestures."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "tell the return to Makkah gently in three parts, name mercy and forgiveness, then practise saying sorry and forgiving in small everyday mistakes",
+    "questioning_strategy": "ask 'what could he have done?' then 'what did he choose?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "child mentions someone who keeps hurting them"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "no battles or fighting; small accidental mistakes among siblings and friends; forgiveness never means hiding repeated harm",
+    "misconception_detectors": [
+      "thinks forgiving means putting up with repeated harm",
+      "thinks saying sorry is weak"
+    ],
+    "critical_thinking_prompts": [
+      "Why might forgiving someone make your own heart feel lighter?"
+    ],
+    "personalization_rules": "if the child raises a real ongoing conflict, do not advise; stop and hand to a human",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor",
+      "child discloses repeated harm by anyone -> stop and hand to a human safeguarding lead immediately"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions",
+      "describe battles, armies or fighting",
+      "tell a child to forgive a specific person who is hurting them",
+      "add story details, dialogue or quotations that are not in the approved lesson text"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: verify the gentle telling of his general forgiveness on returning to Makkah is accurate and suitably sourced; his words on that day are deliberately not quoted",
+    "child-safety reviewer: confirm forgiveness is never framed as hiding harm, and that no battle or fighting is implied",
+    "illustration reviewer: no depiction of the Prophet (peace be upon him) or the companions"
+  ]
+}

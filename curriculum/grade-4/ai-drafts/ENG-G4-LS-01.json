@@ -1,0 +1,392 @@
+{
+  "code": "ENG-G4-LS-01",
+  "title": {
+    "ur": "سنیں اور جواب دیں",
+    "en": "Listen and Answer"
+  },
+  "description": {
+    "ur": "بچہ ایک مختصر انگریزی کہانی سن کر اس کے بارے میں آسان سوالوں کے جواب دیتا ہے۔",
+    "en": "The learner listens to a short spoken English passage and answers simple questions about it."
+  },
+  "keywords": [
+    "listening",
+    "comprehension",
+    "spoken passage",
+    "question words",
+    "key words"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "سننا (listen)",
+        "en": "listen"
+      },
+      "definition": {
+        "ur": "دھیان سے کانوں سے سمجھنا۔",
+        "en": "Pay attention with your ears to understand."
+      }
+    },
+    {
+      "term": {
+        "ur": "اہم لفظ (key word)",
+        "en": "key word"
+      },
+      "definition": {
+        "ur": "وہ لفظ جو جواب کے لیے ضروری ہو: نام، جگہ، وقت۔",
+        "en": "A word you need for the answer: a name, a place, a time."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج آپ ایک چھوٹی انگریزی کہانی سنیں گے۔ اسے پڑھنا نہیں، صرف سننا ہے۔ پہلے سوال سن لیں۔ پھر کہانی سنتے ہوئے اہم الفاظ پر دھیان دیں: کون، کہاں، کیا۔ آپ کہانی دو بار سن سکتے ہیں۔",
+    "en": "Today you will listen to a short English story. You will not read it; you will only listen. First hear the questions. Then listen to the story for the key words: who, where, what. You may listen to the story twice."
+  },
+  "student_explanation": {
+    "ur": "سننے سے پہلے سوال جان لیں۔ اس سے پتا چلے گا کہ کیا ڈھونڈنا ہے۔ کہانی سنتے وقت پرسکون رہیں۔ ہر لفظ سمجھنا ضروری نہیں۔ نام، جگہ اور چیزوں کے نام پکڑیں۔ Who کا جواب ایک شخص ہے۔ Where کا جواب ایک جگہ ہے۔ دوسری بار سن کر اپنا جواب جانچیں۔",
+    "en": "Know the questions before you listen. Then you know what to listen for. Stay calm while you listen. You do not need every word. Catch names, places and things. A Who answer is a person. A Where answer is a place. Listen a second time to check your answer."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "مثال کے طور پر یہ چھوٹا ٹکڑا سنیں: 'Sadia has a small goat. The goat eats grass in the field.' سوال: What does the goat eat?",
+        "en": "As an example, listen to this short part: 'Sadia has a small goat. The goat eats grass in the field.' Question: What does the goat eat?"
+      },
+      "steps": [
+        {
+          "ur": "سوال میں eat ہے، تو کھانے والی چیز سنیں۔",
+          "en": "The question has eat, so listen for a food."
+        },
+        {
+          "ur": "ٹکڑے میں سنائی دیا: eats grass۔",
+          "en": "The part says: eats grass."
+        },
+        {
+          "ur": "جواب: grass (گھاس)۔",
+          "en": "Answer: grass."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-listen-who",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی 'At the Bazaar' سنیں۔ Who goes to the bazaar with Ayaan?",
+        "en": "Listen to the story 'At the Bazaar'. Who goes to the bazaar with Ayaan?"
+      },
+      "options": [
+        {
+          "ur": "his sister and his father",
+          "en": "his sister and his father"
+        },
+        {
+          "ur": "his teacher",
+          "en": "his teacher"
+        },
+        {
+          "ur": "his friend Ali",
+          "en": "his friend Ali"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کہانی کے دوسرے جملے کو دھیان سے سنیں۔",
+            "en": "Listen carefully to the second sentence of the story."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-day",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی سنیں: What day is it?",
+        "en": "Listen to the story: What day is it?"
+      },
+      "options": [
+        {
+          "ur": "Monday",
+          "en": "Monday"
+        },
+        {
+          "ur": "Friday",
+          "en": "Friday"
+        },
+        {
+          "ur": "Sunday",
+          "en": "Sunday"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کہانی کا پہلا جملہ دوبارہ سنیں۔",
+            "en": "Listen again to the first sentence."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-buy",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی سنیں: Which fruit is very heavy?",
+        "en": "Listen to the story: Which fruit is very heavy?"
+      },
+      "options": [
+        {
+          "ur": "the apples",
+          "en": "the apples"
+        },
+        {
+          "ur": "the bananas",
+          "en": "the bananas"
+        },
+        {
+          "ur": "the watermelon",
+          "en": "the watermelon"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "heavy لفظ کب آتا ہے؟",
+            "en": "When do you hear the word heavy?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-rain",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی سنیں: What happens on the way home?",
+        "en": "Listen to the story: What happens on the way home?"
+      },
+      "options": [
+        {
+          "ur": "It starts to rain.",
+          "en": "It starts to rain."
+        },
+        {
+          "ur": "They lose the bananas.",
+          "en": "They lose the bananas."
+        },
+        {
+          "ur": "They meet a friend.",
+          "en": "They meet a friend."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "on the way home کے بعد سنیں۔",
+            "en": "Listen after 'on the way home'."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-where-wait",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی سنیں: Where do they wait?",
+        "en": "Listen to the story: Where do they wait?"
+      },
+      "options": [
+        {
+          "ur": "under a tree",
+          "en": "under a tree"
+        },
+        {
+          "ur": "in the car",
+          "en": "in the car"
+        },
+        {
+          "ur": "under the roof of a shop",
+          "en": "under the roof of a shop"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "Where جگہ کا پوچھتا ہے۔",
+            "en": "Where asks for a place."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-eat",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کہانی سنیں: گھر پہنچ کر وہ تربوز کھاتے ہیں۔",
+        "en": "Listen to the story: At home they eat the watermelon."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کہانی کا آخری جملہ سنیں۔",
+            "en": "Listen to the last sentence."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-listen-home",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "گھر میں کوئی آپ کو اردو یا انگریزی میں ایک چھوٹی کہانی سنائے۔ بتائیں: کہانی میں کون تھا اور کہاں گیا؟",
+        "en": "Ask someone at home to tell you a short story in Urdu or English. Then say: who was in it and where did they go?"
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "The skill practised is listening for who and where; the story language does not matter."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوال کا اہم لفظ یاد رکھیں اور کہانی میں اسے سنیں۔",
+        "en": "Remember the key word in the question and listen for it in the story."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "کہانی دوبارہ سنیں اور اس جملے پر رکیں جہاں وہ لفظ آئے۔",
+        "en": "Listen again and stop at the sentence where that word comes."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ہر لفظ سمجھ نہ آئے تو ہار مان لینا۔",
+        "en": "Giving up when not every word is understood."
+      },
+      "correction": {
+        "ur": "صرف اہم الفاظ (نام، جگہ، چیز) پکڑیں؛ باقی بعد میں سمجھ آ جائے گا۔",
+        "en": "Catch only the key words (names, places, things); the rest can come later."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "جواب کہانی کی بجائے اپنے اندازے سے دینا۔",
+        "en": "Answering from a guess instead of the story."
+      },
+      "correction": {
+        "ur": "دوبارہ سن کر جواب کہانی سے جانچیں۔",
+        "en": "Listen again and check the answer against the story."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "two_or_more_wrong_after_second_listen",
+      "remediation_ref": "ENG-G4-LS-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پہلے سوال، پھر سنیں۔ اہم الفاظ پکڑیں: کون، کہاں، کیا۔ دوسری بار سن کر جانچیں۔",
+    "en": "Questions first, then listen. Catch key words: who, where, what. Listen again to check."
+  },
+  "summary": {
+    "ur": "ہم نے انگریزی کہانی سن کر اہم الفاظ پکڑے اور سوالوں کے جواب دیے۔",
+    "en": "We listened to an English story, caught key words and answered questions."
+  },
+  "parent_notes": {
+    "ur": "روز بچے کو کوئی چھوٹی کہانی سنائیں اور پوچھیں: کون تھا؟ کہاں گیا؟ یہ اردو میں بھی ہو سکتا ہے۔",
+    "en": "Tell your child a short story each day and ask: Who was in it? Where did they go? This can be in Urdu."
+  },
+  "mentor_notes": {
+    "ur": "آڈیو ریکارڈ ہونے تک یہ کہانی آپ آہستہ اور صاف دو بار پڑھ کر سنائیں؛ بچے کو متن نہ دکھائیں۔ کہانی کا متن: Today is Friday. Ayaan and his sister Mariam go to the bazaar with their father. They buy apples, bananas and a big watermelon. The watermelon is very heavy. On the way home, it starts to rain. They wait under the roof of a shop. When the rain stops, they walk home and eat the watermelon.",
+    "en": "Until the audio is recorded, read this story aloud slowly and clearly, twice; do not show the text to the child. Story script: Today is Friday. Ayaan and his sister Mariam go to the bazaar with their father. They buy apples, bananas and a big watermelon. The watermelon is very heavy. On the way home, it starts to rain. They wait under the roof of a shop. When the rain stops, they walk home and eat the watermelon."
+  },
+  "accessibility_notes": {
+    "ur": "اس سبق میں آڈیو ہی اصل محرک ہے، مگر کہانی 'At the Bazaar' اور ہدایات کی آڈیو ابھی ریکارڈ نہیں ہوئی؛ تب تک مینٹر کہانی پڑھ کر سنائے۔ بازار کی تصویر اور اس کا متبادل متن ابھی بنانا ہے۔ سننے میں مشکل والے بچے کے لیے مینٹر قریب بیٹھ کر آہستہ پڑھے، یا اشاروں کی زبان میں متبادل پر مینٹر فیصلہ کرے۔",
+    "en": "Audio is the stimulus in this lesson, but the 'At the Bazaar' story and the instruction audio are not yet recorded; until then the mentor reads the story aloud. The bazaar picture and its alt text are still to be made. For a child with hearing difficulty, the mentor sits close and reads slowly, or decides on a sign-language alternative."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "preview the questions, listen for key words, listen again to check",
+    "questioning_strategy": "ask 'what word in the question will you listen for?' before playing the story",
+    "slow_down_signals": [
+      "asks to see the text",
+      "two wrong answers in a row",
+      "answers before the story ends"
+    ],
+    "hint_policy": "graduated; two hints max; first the key word to listen for, then replay the relevant sentence; never say the answer or show the script",
+    "example_policy": "original short spoken stories in Pakistani everyday settings (bazaar, rain, fruit)",
+    "misconception_detectors": [
+      "answers from guess not story",
+      "confuses who and where answers"
+    ],
+    "critical_thinking_prompts": [
+      "Why did they wait under the shop roof?"
+    ],
+    "personalization_rules": "allow a second listen by default; offer a third listen of one sentence only after two wrong answers",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "no audio and no mentor available -> pause the lesson rather than show the script"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)",
+      "show the listening script as text to the learner before they answer (listening is the assessed skill)"
+    ]
+  },
+  "review_flags": [
+    "audio: the story 'At the Bazaar' (script in mentor_notes) must be recorded before release; until then a mentor reads it",
+    "check that no practice item text gives away its answer without listening",
+    "subject expert: confirm the story speed and length suit Grade 4 listeners"
+  ]
+}

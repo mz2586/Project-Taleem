@@ -1,0 +1,469 @@
+{
+  "code": "ETH-G4-KIN-01",
+  "title": {
+    "ur": "مہربانی اور مدد",
+    "en": "Kindness and helping others"
+  },
+  "description": {
+    "ur": "مہربانی کیا ہے اور ہم چھوٹے چھوٹے کاموں سے دوسروں کی مدد کیسے کر سکتے ہیں۔",
+    "en": "What kindness is and how small actions help other people."
+  },
+  "keywords": [
+    "kindness",
+    "helping",
+    "sharing",
+    "kind words",
+    "everyone",
+    "small actions"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مہربانی",
+        "en": "kindness"
+      },
+      "definition": {
+        "ur": "دوسروں کا خیال رکھنا اور ان سے اچھا سلوک کرنا۔",
+        "en": "caring about others and treating them well."
+      }
+    },
+    {
+      "term": {
+        "ur": "مدد",
+        "en": "help"
+      },
+      "definition": {
+        "ur": "کسی کا کام آسان کرنا۔",
+        "en": "making a job easier for someone."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم مہربانی کے بارے میں بات کریں گے۔ مہربانی کے لیے پیسے نہیں چاہییں، صرف اچھا دل اور تھوڑا سا وقت۔ ایک کہانی سنیں: اسکول کے راستے میں ایک چھوٹے بچے کی کتابیں گر گئیں۔ ہم سوچیں گے کہ مینا کیا کر سکتی ہے۔",
+    "en": "Today we will talk about kindness. Kindness does not need money, only a good heart and a little time. Listen to a story: on the way to school, a small child's books fall down. We will think about what Meena could do."
+  },
+  "student_explanation": {
+    "ur": "مہربانی کا مطلب ہے دوسروں کا خیال رکھنا۔ مہربانی بڑے کاموں سے نہیں، چھوٹے کاموں سے شروع ہوتی ہے۔ گری ہوئی کتابیں اٹھانا مہربانی ہے۔ اپنی روٹی بانٹنا مہربانی ہے۔ «شکریہ» اور «کوئی بات نہیں» کہنا بھی مہربانی ہے۔ مہربانی سب کے لیے ہوتی ہے۔ دوستوں کے لیے بھی، نئے بچوں کے لیے بھی۔ جانوروں کے ساتھ بھی مہربانی کرتے ہیں۔ مہربانی سے دوسروں کا دل خوش ہوتا ہے، اور ہمارا بھی۔",
+    "en": "Kindness means caring about others. Kindness starts with small actions, not big ones. Picking up fallen books is kind. Sharing your roti is kind. Saying \"thank you\" and \"never mind\" is kind too. Kindness is for everyone. It is for friends and for new children too. We are kind to animals as well. Kindness makes others happy, and us too."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "اسکول کے راستے میں ایک چھوٹے بچے کی کتابیں کیچڑ کے پاس گر گئیں۔ وہ رونے لگا۔ مینا کیا کر سکتی ہے؟",
+        "en": "On the way to school, a small child's books fall near some mud. He starts to cry. What could Meena do?"
+      },
+      "steps": [
+        {
+          "ur": "مینا دیکھتی ہے کہ بچے کو مدد چاہیے۔",
+          "en": "Meena notices that the child needs help."
+        },
+        {
+          "ur": "وہ نرمی سے کہتی ہے: «فکر نہ کرو، میں مدد کرتی ہوں۔»",
+          "en": "She says gently, \"Don't worry, I will help.\""
+        },
+        {
+          "ur": "دونوں مل کر کتابیں اٹھاتے ہیں۔ بچہ مسکرا دیتا ہے۔ یہی مہربانی ہے۔",
+          "en": "Together they pick up the books. The child smiles. That is kindness."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-kind-sort",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو «مہربانی» یا «مہربانی نہیں» گروپ میں رکھیں۔",
+        "en": "Put each card in 'kind' or 'not kind'."
+      },
+      "options": [
+        {
+          "ur": "نئی بچی کو اپنے ساتھ بیٹھنے کو کہنا",
+          "en": "Asking a new girl to sit with you"
+        },
+        {
+          "ur": "کسی کے گرنے پر ہنسنا",
+          "en": "Laughing when someone falls"
+        },
+        {
+          "ur": "دادی کا تھیلا اٹھانے میں مدد کرنا",
+          "en": "Helping Dadi carry her bag"
+        },
+        {
+          "ur": "بلی کو پتھر مارنا",
+          "en": "Throwing a stone at a cat"
+        }
+      ],
+      "answer_key": {
+        "sort": {
+          "kind": [
+            0,
+            2
+          ],
+          "not_kind": [
+            1,
+            3
+          ]
+        },
+        "mode": "tap a card, then tap its group (drag also works)"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: کیا اِس سے کسی کا دل خوش ہو گا؟",
+            "en": "Ask: will this make someone feel better?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-kindness-meaning",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "مہربانی کا مطلب کیا ہے؟",
+        "en": "What does kindness mean?"
+      },
+      "options": [
+        {
+          "ur": "صرف اپنا خیال رکھنا",
+          "en": "Caring only about yourself"
+        },
+        {
+          "ur": "دوسروں کا خیال رکھنا اور اچھا سلوک کرنا",
+          "en": "Caring about others and treating them well"
+        },
+        {
+          "ur": "مہنگے تحفے دینا",
+          "en": "Giving expensive gifts"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ «خیال» یاد کریں۔",
+            "en": "Remember the word 'caring'."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-friends-only",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مہربانی صرف اپنے دوستوں کے ساتھ کرنی چاہیے۔",
+        "en": "We should be kind only to our friends."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-kindness-to-friends-only"
+        }
+      },
+      "explanation": {
+        "ur": "مہربانی سب کے لیے ہے، جانوروں کے لیے بھی۔",
+        "en": "Kindness is for everyone, animals too."
+      }
+    },
+    {
+      "id": "p3-lunch",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کلاس میں روی آج کھانا نہیں لایا۔ بلال کے پاس دو روٹیاں ہیں۔ مہربان کام کیا ہے؟",
+        "en": "In class, Ravi did not bring lunch today. Bilal has two rotis. What is the kind thing to do?"
+      },
+      "options": [
+        {
+          "ur": "ایک روٹی روی کو پیش کرے",
+          "en": "Offer one roti to Ravi"
+        },
+        {
+          "ur": "روی کا مذاق اڑائے",
+          "en": "Make fun of Ravi"
+        },
+        {
+          "ur": "روی سے چھپ کر کھائے",
+          "en": "Hide and eat"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "آپ روی کی جگہ ہوتے تو کیا چاہتے؟",
+            "en": "If you were Ravi, what would you want?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-kindness-money",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مہربانی کے لیے پیسے ہونا ضروری ہے۔",
+        "en": "You need money to be kind."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "اچھی بات، مدد اور مسکراہٹ مفت ہیں۔",
+        "en": "Kind words, help and a smile are free."
+      }
+    },
+    {
+      "id": "p5-new-child",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کلاس میں ایک نیا بچہ اکیلا بیٹھا ہے۔ وہ کسی کو نہیں جانتا۔ مہربان کام کیا ہے؟",
+        "en": "A new child sits alone in class. He doesn't know anyone. What is kind?"
+      },
+      "options": [
+        {
+          "ur": "اسے نظر انداز کرنا، وہ دوست نہیں ہے",
+          "en": "Ignore him, he is not a friend"
+        },
+        {
+          "ur": "دور سے اسے دیکھ کر ہنسنا",
+          "en": "Look at him from far and laugh"
+        },
+        {
+          "ur": "«ہیلو» کہہ کر اپنا نام بتانا اور ساتھ کھیلنے کو کہنا",
+          "en": "Say hello, tell him your name and ask him to play"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-kindness-to-friends-only"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا مہربانی صرف دوستوں کے لیے ہے؟",
+            "en": "Is kindness only for friends?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-kind-words",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ان میں سے مہربان الفاظ کون سے ہیں؟",
+        "en": "Which of these are kind words?"
+      },
+      "options": [
+        {
+          "ur": "«تم کبھی ٹھیک نہیں کر سکتے۔»",
+          "en": "\"You can never do it right.\""
+        },
+        {
+          "ur": "«کوئی بات نہیں، دوبارہ کوشش کرو۔»",
+          "en": "\"Never mind, try again.\""
+        },
+        {
+          "ur": "«ہٹو یہاں سے!»",
+          "en": "\"Get out of here!\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-kind-to-unkind",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "زارا کی ایک ہم جماعت کل اس سے ناراض تھی۔ آج اس کی پنسل ٹوٹ گئی۔ زارا کے پاس دو پنسلیں ہیں۔ سب سے مہربان کام کون سا ہے؟",
+        "en": "Yesterday a classmate was cross with Zara. Today the classmate's pencil breaks. Zara has two pencils. Which is the kindest choice?"
+      },
+      "options": [
+        {
+          "ur": "ایک پنسل اسے دے دے",
+          "en": "Lend her one pencil"
+        },
+        {
+          "ur": "کہے «اچھا ہوا!»",
+          "en": "Say \"serves you right!\""
+        },
+        {
+          "ur": "کچھ نہ کرے، وہ دوست نہیں",
+          "en": "Do nothing, she is not a friend"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "2": "m-kindness-to-friends-only"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا مہربانی صرف ان کے لیے ہے جو ہم سے اچھے ہوں؟",
+            "en": "Is kindness only for people who are nice to us?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-one-kind-act",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج گھر میں کسی کے لیے ایک چھوٹا سا مہربان کام کریں، جیسے پانی پلانا یا چیزیں سمیٹنا۔",
+        "en": "Do one small kind act for someone at home today, like bringing water or tidying up."
+      },
+      "answer_key": {
+        "guidance": "Done at home; no reporting in the app."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کہانی میں کس کو مدد چاہیے تھی؟",
+        "en": "In the story, who needed help?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "کون سا کام کسی کا دل خوش کرے گا؟",
+        "en": "Which action would make someone feel better?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "مہربانی صرف دوستوں کے لیے ہے۔",
+        "en": "Kindness is only for friends."
+      },
+      "correction": {
+        "ur": "مہربانی سب کے لیے ہے، جانوروں کے لیے بھی۔",
+        "en": "Kindness is for everyone, including animals."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "مہربانی کے لیے پیسے یا بڑے کام چاہییں۔",
+        "en": "Kindness needs money or big actions."
+      },
+      "correction": {
+        "ur": "چھوٹے کام اور اچھی بات بھی بڑی مہربانی ہیں۔",
+        "en": "Small actions and kind words are real kindness too."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-kindness-to-friends-only",
+      "remediation_ref": "ETH-G4-KIN-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "مہربانی = دوسروں کا خیال۔ چھوٹے کام، اچھی بات، بانٹنا۔ مہربانی سب کے لیے، جانوروں کے لیے بھی۔",
+    "en": "Kindness = caring about others. Small actions, kind words, sharing. Kindness is for everyone, animals too."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ چھوٹے چھوٹے کاموں سے سب کے ساتھ مہربانی کی جا سکتی ہے۔",
+    "en": "We learned that small actions let us be kind to everyone."
+  },
+  "parent_notes": {
+    "ur": "جب بچہ کوئی مہربان کام کرے تو اسے نام لے کر سراہیں: «تم نے بھائی کی مدد کی، یہ مہربانی تھی۔»",
+    "en": "When your child does something kind, name it: \"You helped your brother, that was kind.\""
+  },
+  "mentor_notes": {
+    "ur": "مہربانی کو مہنگی چیزوں سے نہ جوڑیں؛ ہر گھر کے بچے کے پاس مہربانی کا موقع ہے۔ جانوروں والی مثالوں میں آوارہ جانوروں کو نہ چھونے کا ذکر رکھیں۔",
+    "en": "Never link kindness to money or things; every child can be kind. In animal examples keep the reminder not to touch unknown or stray animals."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن منظر بیان کرے (کون ہے، کیا ہو رہا ہے)۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ یہ مضمون سننے پر مبنی ہے، اس لیے ہر کہانی، سوال اور جواب کو آواز میں پڑھا جانا ضروری ہے۔ ترتیب دینے والی سرگرمی کا متبادل: کارڈ کو چھوئیں، پھر گروپ کو چھوئیں؛ یا ہر کارڈ کے لیے دو بٹنوں میں سے ایک چنیں۔",
+    "en": "Story pictures are still to be made; each needs alt text that describes the scene (who is there, what is happening). Urdu audio is not yet recorded; this subject is audio-first, so every story, question and option must be read aloud. Alternative to the sort activity: tap a card, then tap its group; or answer each card with one of two buttons."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "short story (Meena helps a small child), then sort kind vs not-kind actions; stress small, free actions and kindness to everyone",
+    "questioning_strategy": "ask 'who needs help here?' then 'what small thing could you do?'; ask 'how would they feel?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "limits kindness to friends",
+      "links kindness to money"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "free everyday acts (sharing roti, picking up books, kind words, helping elders); names from many communities; no costly gifts",
+    "misconception_detectors": [
+      "thinks kindness is only for friends",
+      "thinks kindness needs money",
+      "is kind only to people who are nice back"
+    ],
+    "critical_thinking_prompts": [
+      "Can you be kind to someone who was not kind to you? Why?",
+      "What kind thing costs nothing at all?"
+    ],
+    "personalization_rules": "if the learner picks friends-only options, give one more 'new child' example before practice",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths"
+    ]
+  },
+  "review_flags": [
+    "language editor: p5 uses «ہیلو» as a neutral greeting; confirm it reads naturally, or pick another greeting every community uses",
+    "subject expert: ★ exemplar code with no human content yet; review as the model lesson for unit 2"
+  ]
+}

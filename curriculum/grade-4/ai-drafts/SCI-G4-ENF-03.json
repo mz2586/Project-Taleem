@@ -1,0 +1,433 @@
+{
+  "code": "SCI-G4-ENF-03",
+  "title": {
+    "ur": "سائے کیسے بنتے ہیں",
+    "en": "How shadows form"
+  },
+  "description": {
+    "ur": "یہ بیان کرنا کہ جب کوئی چیز روشنی کا راستہ روکے تو سایہ بنتا ہے، اور سائے کی جگہ اور لمبائی کیوں بدلتی ہے۔",
+    "en": "Describing how a shadow forms when an object blocks light, and why a shadow's position and length change."
+  },
+  "keywords": [
+    "shadow",
+    "light",
+    "block",
+    "opaque",
+    "sun",
+    "length",
+    "direction"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "سایہ",
+        "en": "shadow"
+      },
+      "definition": {
+        "ur": "وہ اندھیری جگہ جو کسی چیز کے روشنی روکنے سے بنتی ہے۔",
+        "en": "The dark area made when an object blocks light."
+      }
+    },
+    {
+      "term": {
+        "ur": "روکنا",
+        "en": "block"
+      },
+      "definition": {
+        "ur": "روشنی کو آگے جانے سے روک دینا۔",
+        "en": "To stop light from going on."
+      }
+    },
+    {
+      "term": {
+        "ur": "غیر شفاف",
+        "en": "opaque"
+      },
+      "definition": {
+        "ur": "وہ چیز جس کے پار روشنی نہ جائے؛ ایسی چیز گہرا سایہ بناتی ہے۔",
+        "en": "A thing light cannot pass through; it makes a dark shadow."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "دھوپ میں کھڑے ہو تو زمین پر تمہارا ایک سیاہ ساتھی بن جاتا ہے۔ یہ تمہارا سایہ ہے۔ سایہ کیسے بنتا ہے؟ آج ہم تین چیزیں دیکھیں گے: روشنی، روکنے والی چیز، اور وہ جگہ جہاں سایہ پڑتا ہے۔",
+    "en": "Stand in the sunshine and a dark partner appears on the ground. That is your shadow. How is it made? Today we look at three things: the light, the thing that blocks it, and the place where the shadow falls."
+  },
+  "student_explanation": {
+    "ur": "روشنی سیدھی لکیروں میں چلتی ہے۔ کوئی غیر شفاف چیز راستے میں آئے تو روشنی رک جاتی ہے۔ چیز کے پیچھے روشنی نہیں پہنچتی۔ وہاں اندھیری جگہ بنتی ہے۔ یہی سایہ ہے۔ سایہ ہمیشہ روشنی کی مخالف طرف بنتا ہے۔ صبح اور شام کو سائے لمبے ہوتے ہیں۔ دوپہر کے قریب سائے چھوٹے ہوتے ہیں۔ صاف شیشہ تقریباً کوئی سایہ نہیں بناتا۔",
+    "en": "Light travels in straight lines. If an opaque thing is in the way, the light is blocked. Light cannot reach the space behind the thing. A dark area forms there. That is a shadow. A shadow is always on the side away from the light. In the morning and evening shadows are long. Near midday shadows are short. Clear glass makes almost no shadow."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "صبح سورج مشرق میں ہے۔ درخت کا سایہ کس طرف ہوگا؟",
+        "en": "In the morning the Sun is in the east. Which way will a tree's shadow point?"
+      },
+      "steps": [
+        {
+          "ur": "روشنی مشرق سے آ رہی ہے۔",
+          "en": "The light is coming from the east."
+        },
+        {
+          "ur": "درخت روشنی روکتا ہے، اس لیے پیچھے اندھیرا بنتا ہے۔",
+          "en": "The tree blocks the light, so there is a dark area behind it."
+        },
+        {
+          "ur": "پیچھے کا مطلب روشنی کی مخالف طرف: سایہ مغرب کی طرف ہوگا۔",
+          "en": "Behind means away from the light: the shadow points west."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ٹارچ کو ہاتھ کے قریب لاؤ تو دیوار پر ہاتھ کا سایہ کیسا ہو جائے گا؟",
+        "en": "If a torch comes closer to your hand, what happens to the hand's shadow on the wall?"
+      },
+      "steps": [
+        {
+          "ur": "روشنی قریب ہو تو ہاتھ روشنی کا بڑا حصہ روکتا ہے۔",
+          "en": "With the light close, the hand blocks a bigger part of the light."
+        },
+        {
+          "ur": "اس لیے دیوار پر زیادہ جگہ اندھیری رہتی ہے۔",
+          "en": "So more of the wall stays dark."
+        },
+        {
+          "ur": "سایہ بڑا ہو جاتا ہے۔",
+          "en": "The shadow gets bigger."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-tap-shadow",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "تصویر میں سورج بائیں طرف ہے اور ایک کھمبا بیچ میں ہے۔ اس جگہ کو چھوؤ جہاں سایہ پڑے گا: بائیں، دائیں یا کھمبے کے اوپر۔",
+        "en": "In the picture the Sun is on the left and a pole stands in the middle. Tap where the shadow will fall: left, right, or on top of the pole."
+      },
+      "answer_key": {
+        "tap": "right"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سایہ روشنی کی طرف بنتا ہے یا اس کی مخالف طرف؟",
+            "en": "Does the shadow form towards the light or away from it?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a-p5-straight",
+      "type": "fill_blank",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "روشنی ___ لکیروں میں چلتی ہے، اس لیے سایہ بنتا ہے۔",
+        "en": "Light travels in ___ lines, so shadows form."
+      },
+      "answer_key": {
+        "answer": "straight"
+      },
+      "accepted_variants": [
+        "straight",
+        "سیدھی"
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-what-needed",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "سایہ بننے کے لیے کیا چاہیے؟",
+        "en": "What is needed for a shadow to form?"
+      },
+      "options": [
+        {
+          "ur": "روشنی اور اسے روکنے والی چیز",
+          "en": "Light and something that blocks it"
+        },
+        {
+          "ur": "صرف اندھیرا",
+          "en": "Only darkness"
+        },
+        {
+          "ur": "پانی اور ہوا",
+          "en": "Water and air"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-side",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "سایہ ہمیشہ روشنی کی طرف بنتا ہے۔",
+        "en": "A shadow always forms on the same side as the light."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "سایہ روشنی کی مخالف طرف بنتا ہے۔",
+        "en": "A shadow forms on the side away from the light."
+      }
+    },
+    {
+      "id": "p3-noon",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "دن کے کس وقت سائے سب سے چھوٹے ہوتے ہیں؟",
+        "en": "At what time of day are shadows shortest?"
+      },
+      "options": [
+        {
+          "ur": "صبح سویرے",
+          "en": "Early morning"
+        },
+        {
+          "ur": "شام کو",
+          "en": "Evening"
+        },
+        {
+          "ur": "دوپہر کے قریب",
+          "en": "Around midday"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دوپہر کو سورج آسمان میں کہاں ہوتا ہے؟",
+            "en": "Where is the Sun in the sky at midday?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-best-shadow",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ان میں سے کون سب سے گہرا سایہ بنائے گا؟",
+        "en": "Which will make the darkest shadow?"
+      },
+      "options": [
+        {
+          "ur": "صاف شیشے کا گلاس",
+          "en": "A clear glass"
+        },
+        {
+          "ur": "لکڑی کا تختہ",
+          "en": "A wooden board"
+        },
+        {
+          "ur": "صاف پلاسٹک کی تھیلی",
+          "en": "A clear plastic bag"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سی چیز روشنی کو بالکل نہیں گزرنے دیتی؟",
+            "en": "Which thing lets no light through at all?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-evening",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "شام کو سورج نیچا ہوتا ہے، اس لیے سائے لمبے ہوتے ہیں۔",
+        "en": "In the evening the Sun is low, so shadows are long."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-cloudy",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "بادل والے دن سائے دھندلے یا غائب کیوں ہو جاتے ہیں؟",
+        "en": "Why are shadows faint or missing on a cloudy day?"
+      },
+      "options": [
+        {
+          "ur": "کیونکہ بادل سورج کی سیدھی روشنی روک کر اسے پھیلا دیتے ہیں",
+          "en": "Because clouds block the direct sunlight and spread it out"
+        },
+        {
+          "ur": "کیونکہ چیزیں شفاف ہو جاتی ہیں",
+          "en": "Because things become transparent"
+        },
+        {
+          "ur": "کیونکہ سورج ختم ہو جاتا ہے",
+          "en": "Because the Sun is gone"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-shadow-stick",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "دھوپ والی جگہ پر ایک لکڑی یا بوتل سیدھی کھڑی کرو۔ صبح، دوپہر اور شام اس کے سائے کے سرے پر کنکر رکھو۔ دیکھو سایہ کیسے بدلا اور لکھو۔ سورج کو سیدھا نہ دیکھنا۔",
+        "en": "Stand a stick or bottle upright in a sunny spot. In the morning, at midday and in the evening, put a pebble at the tip of its shadow. Write how the shadow changed. Never look straight at the Sun."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Look for: the shadow moved (west in the morning to east in the evening) and was shortest near midday. Safe: stick, bottle and pebbles only."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پہلے دیکھو روشنی کہاں سے آ رہی ہے۔",
+        "en": "First find where the light is coming from."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "روکنے والی چیز کے پیچھے، روشنی سے دور، اندھیرا ہوگا۔",
+        "en": "Behind the blocking thing, away from the light, it will be dark."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "سایہ کسی چیز کا عکس ہے، جیسے آئینے میں۔",
+        "en": "A shadow is a reflection, like in a mirror."
+      },
+      "correction": {
+        "ur": "سایہ وہ جگہ ہے جہاں روشنی نہیں پہنچی۔ اس میں رنگ یا چہرہ نہیں ہوتا۔",
+        "en": "A shadow is a place the light did not reach. It has no colours or face."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "سایہ ہمیشہ ایک ہی جگہ اور ایک ہی لمبائی کا رہتا ہے۔",
+        "en": "A shadow always stays in the same place and length."
+      },
+      "correction": {
+        "ur": "روشنی کی جگہ بدلے تو سایہ بھی بدلتا ہے؛ دن بھر سورج کی جگہ بدلنے سے سایہ چلتا ہے۔",
+        "en": "When the light moves, the shadow changes; as the Sun's position changes through the day, shadows move."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:SCI-G4-ENF-02",
+      "remediation_ref": "SCI-G4-ENF-02"
+    },
+    {
+      "signal": "does not know which materials block light",
+      "remediation_ref": "SCI-G4-MAT-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "روشنی سیدھی چلتی ہے۔ غیر شفاف چیز روشنی روکے تو پیچھے سایہ بنتا ہے۔ سایہ روشنی کی مخالف طرف ہوتا ہے۔ صبح شام لمبا، دوپہر کو چھوٹا۔",
+    "en": "Light travels straight. When an opaque thing blocks light, a shadow forms behind it. A shadow is on the side away from the light. Long in morning and evening, short at midday."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ روشنی رکنے سے سایہ بنتا ہے اور دن بھر سایہ کیوں بدلتا ہے۔",
+    "en": "We learned that blocked light makes a shadow, and why shadows change through the day."
+  },
+  "parent_notes": {
+    "ur": "صبح اور شام بچے کے ساتھ دھوپ میں اپنے سائے دیکھیں اور ان کی لمبائی کا موازنہ کریں۔",
+    "en": "In the morning and evening, look at your shadows together in the sun and compare their lengths."
+  },
+  "mentor_notes": {
+    "ur": "\"سورج حرکت کرتا ہے\" کہنے کی بجائے \"سورج کی جگہ بدلتی دکھائی دیتی ہے\" کہیں، تاکہ m-sun-moves-round-earth مضبوط نہ ہو۔ ٹارچ والی مثال بیٹری والی ٹارچ کی ہے۔",
+    "en": "Say 'the Sun's position seems to change' rather than 'the Sun moves', so m-sun-moves-round-earth is not reinforced. The torch example means a battery torch."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ سورج، چیز اور سائے کا خاکہ اور اس کا متبادل متن ابھی بنانا ہے۔ چھونے والی سرگرمی کا متبادل: \"بائیں\"، \"دائیں\" یا \"اوپر\" کا بٹن دبائیں۔ کم نظر بچوں کے لیے سائے کی دیواری مثال زبانی بیان کریں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. The Sun-object-shadow diagram and its alt text are still to be made. Alternative to the tap activity: press a 'left', 'right' or 'on top' button. For low-vision learners, describe the shadow example in words."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "three-part model every time: light source, blocking object, screen/ground; then predict the shadow side and size",
+    "questioning_strategy": "ask 'where is the light?' before 'where is the shadow?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "puts the shadow on the light's side",
+      "calls a shadow a reflection"
+    ],
+    "hint_policy": "graduated; first locate the light, then the blocker; never give the shadow's side first",
+    "example_policy": "use courtyard and street examples: trees, electricity poles, a charpai, a cricket stump, a battery torch at night",
+    "misconception_detectors": [
+      "places shadow towards the light",
+      "thinks shadows never move"
+    ],
+    "critical_thinking_prompts": [
+      "Why is your shadow long when you walk home in the evening?"
+    ],
+    "personalization_rules": "if the learner is unsure which materials block light, route to SCI-G4-MAT-01",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples",
+      "suggest looking at the Sun",
+      "suggest using candles, lamps with flames or wall-socket lamps for shadow play"
+    ]
+  },
+  "review_flags": [
+    "subject expert: east/west shadow directions assume learners know the cardinal directions — check this is taught earlier",
+    "subject expert: 'shadows shortest near midday' is kept general on purpose (no zero-shadow claim)"
+  ]
+}

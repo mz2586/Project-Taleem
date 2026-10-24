@@ -1,0 +1,488 @@
+{
+  "code": "ENG-G4-RD-05",
+  "title": {
+    "ur": "اشاروں سے اندازہ لگائیں",
+    "en": "Read the Clues and Work It Out"
+  },
+  "description": {
+    "ur": "بچہ عبارت کے اشاروں اور اپنی معلومات کو ملا کر ایسی بات کا اندازہ لگاتا ہے جو صاف لکھی نہیں ہوتی۔",
+    "en": "The learner combines clues in a text with what they already know to work out something that is not written directly."
+  },
+  "keywords": [
+    "inference",
+    "clues",
+    "reading between the lines",
+    "evidence",
+    "reading comprehension"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "اندازہ (inference)",
+        "en": "inference"
+      },
+      "definition": {
+        "ur": "وہ بات جو اشاروں سے سمجھ آئے مگر لکھی نہ ہو۔",
+        "en": "Something we work out from clues that is not written."
+      }
+    },
+    {
+      "term": {
+        "ur": "اشارہ (clue)",
+        "en": "clue"
+      },
+      "definition": {
+        "ur": "عبارت کا لفظ یا جملہ جو مدد کرے۔",
+        "en": "A word or sentence in the text that helps us."
+      }
+    },
+    {
+      "term": {
+        "ur": "ثبوت (evidence)",
+        "en": "evidence"
+      },
+      "definition": {
+        "ur": "وہ اشارہ جو بتائے کہ ہمارا اندازہ کیوں درست ہے۔",
+        "en": "The clue that shows why our idea is right."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کبھی لکھنے والا ہر بات صاف نہیں لکھتا۔ وہ ہمیں اشارے دیتا ہے۔ ہم ایک جاسوس کی طرح اشارے جمع کرتے ہیں۔ پھر اپنی معلومات سے ملا کر اندازہ لگاتے ہیں۔ آج آپ ہر اندازے کے ساتھ اس کا ثبوت بھی بتائیں گے۔",
+    "en": "Sometimes a writer does not say everything directly. The writer gives us clues. Like a detective, we collect the clues. Then we join them with what we know and work something out. Today you will give the clue for every idea you have."
+  },
+  "student_explanation": {
+    "ur": "اندازہ وہ بات ہے جو لکھی نہیں ہوتی۔ مگر اشارے ہمیں اس تک لے جاتے ہیں۔ پہلے عبارت غور سے پڑھیں۔ پھر اشارے والے الفاظ ڈھونڈیں۔ اب سوچیں کہ آپ ان کے بارے میں کیا جانتے ہیں۔ اشارہ اور معلومات مل کر اندازہ بناتے ہیں۔ ہر اندازے کا ثبوت عبارت میں ہونا چاہیے۔ بغیر اشارے کا اندازہ صرف تکّا ہے۔",
+    "en": "An inference is something not written in the text. But clues lead us to it. First read the text carefully. Then find the clue words. Now think about what you know about them. Clue plus what you know makes an inference. Every inference needs evidence in the text. An idea with no clue is just a guess."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "پڑھیں: Usman came in. His shirt was wet. He shook his umbrella at the door. باہر موسم کیسا ہے؟",
+        "en": "Read: Usman came in. His shirt was wet. He shook his umbrella at the door. What is the weather like outside?"
+      },
+      "steps": [
+        {
+          "ur": "اشارے: shirt was wet اور umbrella۔",
+          "en": "Clues: shirt was wet, and umbrella."
+        },
+        {
+          "ur": "ہم جانتے ہیں: چھتری بارش میں استعمال ہوتی ہے۔",
+          "en": "We know: an umbrella is used in rain."
+        },
+        {
+          "ur": "اندازہ: باہر بارش ہو رہی ہے۔",
+          "en": "Inference: it is raining outside."
+        },
+        {
+          "ur": "عبارت میں 'rain' کہیں نہیں لکھا، پھر بھی ثبوت موجود ہے۔",
+          "en": "The word 'rain' is not written, but the evidence is there."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "پڑھیں: Nadia yawned and rubbed her eyes. She closed her book and put it down. نادیہ کیسا محسوس کر رہی ہے؟",
+        "en": "Read: Nadia yawned and rubbed her eyes. She closed her book and put it down. How does Nadia feel?"
+      },
+      "steps": [
+        {
+          "ur": "اشارے: yawned اور rubbed her eyes۔",
+          "en": "Clues: yawned and rubbed her eyes."
+        },
+        {
+          "ur": "ہم جانتے ہیں: تھکے ہوئے لوگ جمائی لیتے ہیں۔",
+          "en": "We know: tired people yawn."
+        },
+        {
+          "ur": "اندازہ: نادیہ تھکی ہوئی یا نیند میں ہے۔",
+          "en": "Inference: Nadia is tired or sleepy."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-tap-clues",
+      "type": "interactive",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پڑھیں: The shopkeeper smiled. His shelves were empty. He counted a big pile of money. ان دو الفاظ کے گروہوں پر ٹیپ کریں جو بتاتے ہیں کہ دکان کا دن اچھا گزرا۔",
+        "en": "Read: The shopkeeper smiled. His shelves were empty. He counted a big pile of money. Tap the two phrases that show the shop had a good day."
+      },
+      "answer_key": {
+        "clues": [
+          "shelves were empty",
+          "a big pile of money"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کونسے الفاظ بتاتے ہیں کہ سامان بک گیا؟",
+            "en": "Which words show that things were sold?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-why",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پڑھیں: Ali's cat waited by the empty bowl and meowed again and again. بلی کیا چاہتی ہے؟ اپنا ثبوت بھی لکھیں۔",
+        "en": "Read: Ali's cat waited by the empty bowl and meowed again and again. What does the cat want? Write your clue too."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "sensible inference supported by a clue from the text",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "درست اندازہ مگر ثبوت نہیں، یا ثبوت مگر اندازہ مبہم۔",
+              "en": "Sensible inference but no clue, or a clue with an unclear inference."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "درست اندازہ (کھانا) اور ثبوت (empty bowl / meowed)۔",
+              "en": "Sensible inference (food) with a clue (empty bowl / meowed)."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor-marked. Accept 'food', 'milk', 'to eat' with any matching clue."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-shopkeeper",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پڑھیں: The shopkeeper smiled. His shelves were empty. He counted a big pile of money. سب سے اچھا اندازہ کونسا ہے؟",
+        "en": "Read: The shopkeeper smiled. His shelves were empty. He counted a big pile of money. What is the best inference?"
+      },
+      "options": [
+        {
+          "ur": "He sold almost everything.",
+          "en": "He sold almost everything."
+        },
+        {
+          "ur": "He smiled.",
+          "en": "He smiled."
+        },
+        {
+          "ur": "He wants a new shop.",
+          "en": "He wants a new shop."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسا جواب چنیں جو لکھا ہوا نہ ہو مگر اشاروں سے نکلے۔",
+            "en": "Choose an answer that is not written but comes from the clues."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'He smiled' لکھا ہوا ہے؛ نئی دکان کا کوئی اشارہ نہیں۔",
+        "en": "'He smiled' is written already; there is no clue about a new shop."
+      }
+    },
+    {
+      "id": "p2-cricket",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پڑھیں: Saima held the bat. The ball flew over the wall. Her team cheered loudly. ٹیم کیوں خوش ہوئی؟",
+        "en": "Read: Saima held the bat. The ball flew over the wall. Her team cheered loudly. Why did the team cheer?"
+      },
+      "options": [
+        {
+          "ur": "The ball was lost.",
+          "en": "The ball was lost."
+        },
+        {
+          "ur": "Saima hit a very good shot.",
+          "en": "Saima hit a very good shot."
+        },
+        {
+          "ur": "It was time to go home.",
+          "en": "It was time to go home."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "گیند دیوار کے اوپر سے کیوں گئی؟",
+            "en": "Why did the ball go over the wall?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-hungry",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پڑھیں: Hamza ran into the kitchen. He ate two rotis quickly and asked for one more. حمزہ کیسا تھا؟",
+        "en": "Read: Hamza ran into the kitchen. He ate two rotis quickly and asked for one more. How was Hamza feeling?"
+      },
+      "options": [
+        {
+          "ur": "sleepy",
+          "en": "sleepy"
+        },
+        {
+          "ur": "angry",
+          "en": "angry"
+        },
+        {
+          "ur": "very hungry",
+          "en": "very hungry"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اشارہ: جلدی کھایا اور اور مانگا۔",
+            "en": "Clue: he ate quickly and wanted more."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-written-or-inferred",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "Usman والی عبارت میں لفظ rain لکھا ہوا ہے۔",
+        "en": "In the Usman text, the word rain is written."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "rain لکھا نہیں؛ ہم نے wet اور umbrella سے اندازہ لگایا۔",
+        "en": "rain is not written; we inferred it from wet and umbrella."
+      }
+    },
+    {
+      "id": "p5-best-evidence",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پڑھیں: Grandfather put on his warm shawl and sat near the fire. کونسا اشارہ بتاتا ہے کہ موسم ٹھنڈا ہے؟",
+        "en": "Read: Grandfather put on his warm shawl and sat near the fire. Which clue shows it is cold?"
+      },
+      "options": [
+        {
+          "ur": "Grandfather",
+          "en": "Grandfather"
+        },
+        {
+          "ur": "warm shawl",
+          "en": "warm shawl"
+        },
+        {
+          "ur": "sat",
+          "en": "sat"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کونسی چیز سردی میں پہنی جاتی ہے؟",
+            "en": "Which thing do we wear in cold weather?"
+          }
+        }
+      ]
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-write-clues",
+      "type": "long",
+      "competency": "analysis",
+      "stem": {
+        "ur": "دو یا تین انگریزی جملے لکھیں جن میں 'گرمی ہے' صاف نہ لکھا ہو، مگر اشارے ہوں۔ جیسے پسینہ یا پنکھا۔",
+        "en": "Write two or three English sentences that show it is hot without saying 'hot'. Use clues like sweat or a fan."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "sentences give clear clues for heat without stating it",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "ایک جملہ، یا 'hot' صاف لکھ دیا۔",
+              "en": "One sentence, or 'hot' was written directly."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "دو جملے، ایک واضح اشارہ۔",
+              "en": "Two sentences with one clear clue."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "دو یا تین جملے، کئی اشارے، 'hot' نہیں لکھا۔",
+              "en": "Two or three sentences, several clues, 'hot' not written."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor-marked; grammar slips are not penalised here, only the inference design."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-guess-game",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "گھر میں 'اندازہ لگاؤ' کھیل کھیلیں: کوئی دو اشارے دے، آپ بتائیں وہ کس چیز کی بات کر رہا ہے۔",
+        "en": "Play a guessing game at home: someone gives you two clues and you say what they are talking about."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Clues can be in Urdu; the point is joining clues to work something out."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "عبارت میں وہ الفاظ ڈھونڈیں جو کسی چیز کی طرف اشارہ کرتے ہیں۔",
+        "en": "Find the words in the text that point to something."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "سوچیں: آپ ان اشاروں کے بارے میں کیا جانتے ہیں؟ دونوں کو ملائیں۔",
+        "en": "Think: what do you already know about these clues? Join the two."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "لکھی ہوئی بات کو ہی اندازہ سمجھنا۔",
+        "en": "Thinking an inference is something the text already says."
+      },
+      "correction": {
+        "ur": "اندازہ لکھا نہیں ہوتا؛ وہ اشاروں سے نکلتا ہے۔",
+        "en": "An inference is not written; it comes from the clues."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "بغیر اشارے کے اپنی مرضی کا اندازہ لگانا۔",
+        "en": "Making a guess with no clue from the text."
+      },
+      "correction": {
+        "ur": "ہر اندازے کے لیے عبارت سے ثبوت دکھائیں۔",
+        "en": "Show evidence from the text for every inference."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:ENG-G4-RD-04",
+      "remediation_ref": "ENG-G4-RD-04"
+    },
+    {
+      "signal": "cannot_answer_literal_questions",
+      "remediation_ref": "ENG-G4-RD-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "اشارہ + میری معلومات = اندازہ۔ ہر اندازے کا ثبوت عبارت میں دکھائیں۔",
+    "en": "Clue + what I know = inference. Show the evidence in the text for every inference."
+  },
+  "summary": {
+    "ur": "ہم نے اشاروں اور اپنی معلومات سے وہ باتیں سمجھیں جو لکھی نہیں تھیں۔",
+    "en": "We used clues and what we know to understand things that were not written."
+  },
+  "parent_notes": {
+    "ur": "روزمرہ میں پوچھیں: 'تمہیں کیسے پتا چلا؟' جیسے بادل دیکھ کر بارش کا اندازہ۔ یہ اردو میں بھی ہو سکتا ہے۔",
+    "en": "In daily life ask: 'How do you know?' For example, guessing rain from dark clouds. This can be done in Urdu."
+  },
+  "mentor_notes": {
+    "ur": "یہ سبق مینٹر کی جانچ والا ہے۔ ہر جواب کے ساتھ 'آپ کو کیسے پتا؟' پوچھیں۔ ثبوت والا جواب ایک لفظ کا بھی ہو تو قبول کریں۔",
+    "en": "This lesson is mentor-assessed. Ask 'How do you know?' after every answer. Accept even a one-word clue as evidence."
+  },
+  "accessibility_notes": {
+    "ur": "پڑھنے والے متن پر آڈیو نہیں، کیونکہ پڑھنا جانچا جا رہا ہے۔ ہدایات کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ الفاظ پر ٹیپ کرنے کا متبادل: تین الفاظ کے گروہوں میں سے دو صحیح چنیں۔ لکھ نہ سکنے والا بچہ مختصر اور لمبے جواب مینٹر کو زبانی بتا سکتا ہے۔",
+    "en": "The reading texts have no audio, because reading is assessed. Urdu audio for instructions is not yet recorded. Alternative to tapping phrases: choose the two right phrases from a list of three. A child who cannot write may give the short and long answers orally to the mentor."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "clue + what I know = inference; always ask for the evidence after every answer",
+    "questioning_strategy": "ask 'which words gave you the idea?' and 'is this written, or did you work it out?'",
+    "slow_down_signals": [
+      "picks the option that repeats the text",
+      "picks an option with no clue",
+      "two wrong answers in a row"
+    ],
+    "hint_policy": "graduated; two hints max; first point to the clue words, then ask what the learner knows about them; never state the inference first",
+    "example_policy": "short original texts with two clear clues each, in everyday Pakistani contexts (rain, cricket, rotis, shawl in winter)",
+    "misconception_detectors": [
+      "chooses a stated fact as the inference",
+      "chooses an unsupported guess",
+      "cannot name a clue"
+    ],
+    "critical_thinking_prompts": [
+      "How do you know? Which words told you?"
+    ],
+    "personalization_rules": "if literal answers fail, route to ENG-G4-RD-03 before inference",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)",
+      "read the reading passage aloud for the learner (reading is the assessed skill)"
+    ]
+  },
+  "review_flags": [
+    "mentor-mediated: confirm the rubric levels for the short and long items fit mentor marking time",
+    "subject expert: confirm 'sat near the fire' in a winter context is acceptable and not a safety concern"
+  ]
+}

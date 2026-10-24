@@ -1,0 +1,516 @@
+{
+  "code": "MATH-G4-NB-03",
+  "description": {
+    "ur": "ایک لاکھ تک کے اعداد کا >، <، = سے موازنہ کرنا اور انہیں ترتیب دینا۔",
+    "en": "Comparing and ordering numbers up to 100,000 using >, < and =."
+  },
+  "keywords": [
+    "compare",
+    "order",
+    "greater than",
+    "less than",
+    "equal",
+    "place value"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "بڑا",
+        "en": "greater"
+      },
+      "definition": {
+        "ur": "جس کی قیمت زیادہ ہو۔",
+        "en": "Worth more."
+      }
+    },
+    {
+      "term": {
+        "ur": "چھوٹا",
+        "en": "less"
+      },
+      "definition": {
+        "ur": "جس کی قیمت کم ہو۔",
+        "en": "Worth less."
+      }
+    },
+    {
+      "term": {
+        "ur": "برابر",
+        "en": "equal"
+      },
+      "definition": {
+        "ur": "دونوں کی قیمت ایک جیسی ہو۔",
+        "en": "Worth the same."
+      }
+    },
+    {
+      "term": {
+        "ur": "ترتیب",
+        "en": "order"
+      },
+      "definition": {
+        "ur": "چھوٹے سے بڑے یا بڑے سے چھوٹے کی قطار۔",
+        "en": "A line from smallest to greatest, or greatest to smallest."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم دیکھیں گے کہ دو عددوں میں کون سا بڑا ہے۔ اس کے دو آسان قدم ہیں۔ پہلے ہندسے گنیں۔ اگر ہندسے برابر ہوں تو بائیں طرف سے ایک ایک خانہ ملائیں۔ آخر میں ہم >، < یا = کا نشان لگائیں گے۔",
+    "en": "Today we find out which of two numbers is greater. There are two easy steps. First, count the digits. If the digit counts are equal, match the places one by one from the left. Then we write the sign >, < or =."
+  },
+  "student_explanation": {
+    "ur": "دو عدد کا موازنہ کرنے کے لیے پہلے ان کے ہندسے گنیں۔ جس عدد کے ہندسے زیادہ ہوں، وہ بڑا ہے۔ اگر ہندسے برابر ہوں تو بائیں سے دیکھیں۔ پہلے ہندسوں کا موازنہ کریں۔ اگر وہ ایک جیسے ہوں تو اگلے خانے پر جائیں۔ جو پہلا خانہ مختلف ہو، وہی فیصلہ کرتا ہے۔ نشان > کا مطلب ہے بڑا۔ نشان < کا مطلب ہے چھوٹا۔ نشان = کا مطلب ہے برابر۔",
+    "en": "To compare two numbers, first count their digits. The number with more digits is greater. If the digit counts are equal, start from the left. Compare the first digits. If they are the same, move one place right. The first place that is different decides. The sign > means greater than. The sign < means less than. The sign = means equal to."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۹٬۸۷۶ اور ۱۰٬۰۰۱ میں کون سا بڑا ہے؟",
+        "en": "Which is greater, 9,876 or 10,001?"
+      },
+      "steps": [
+        {
+          "ur": "ہندسے گنیں: ۹٬۸۷۶ میں ۴ ہندسے، ۱۰٬۰۰۱ میں ۵ ہندسے۔",
+          "en": "Count digits: 9,876 has 4 digits, 10,001 has 5."
+        },
+        {
+          "ur": "۵ ہندسے ۴ سے زیادہ ہیں۔",
+          "en": "5 digits is more than 4."
+        },
+        {
+          "ur": "اس لیے ۱۰٬۰۰۱ > ۹٬۸۷۶۔ پہلا ہندسہ ۹ ہونے سے فرق نہیں پڑتا۔",
+          "en": "So 10,001 > 9,876. The first digit being 9 does not matter."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "۴۵٬۶۷۸ اور ۴۵٬۶۰۹ کا موازنہ کریں۔",
+        "en": "Compare 45,678 and 45,609."
+      },
+      "steps": [
+        {
+          "ur": "دونوں میں ۵ ہندسے ہیں، تو بائیں سے دیکھیں۔",
+          "en": "Both have 5 digits, so start from the left."
+        },
+        {
+          "ur": "۴ اور ۴ برابر، ۵ اور ۵ برابر، ۶ اور ۶ برابر۔",
+          "en": "4 and 4 match, 5 and 5 match, 6 and 6 match."
+        },
+        {
+          "ur": "دہائی میں ۷ اور ۰ ہیں۔ ۷ بڑا ہے۔",
+          "en": "In the tens, we have 7 and 0. 7 is greater."
+        },
+        {
+          "ur": "اس لیے ۴۵٬۶۷۸ > ۴۵٬۶۰۹۔",
+          "en": "So 45,678 > 45,609."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-order-three",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "ان کارڈوں کو چھوٹے سے بڑے کی ترتیب میں گھسیٹیں: ۳۸٬۲۰۵، ۹٬۹۹۹، ۳۸٬۰۵۲۔",
+        "en": "Drag these cards into order from smallest to greatest: 38,205, 9,999, 38,052."
+      },
+      "answer_key": {
+        "order": [
+          "9,999",
+          "38,052",
+          "38,205"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سب سے کم ہندسوں والا عدد کون سا ہے؟",
+            "en": "Which number has the fewest digits?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-order-4056",
+      "type": "ordering",
+      "competency": "application",
+      "stem": {
+        "ur": "چھوٹے سے بڑے کی ترتیب میں لگائیں۔",
+        "en": "Put these in order from smallest to greatest."
+      },
+      "options": [
+        {
+          "ur": "۴۵۶۰",
+          "en": "4,560"
+        },
+        {
+          "ur": "۴۵٬۶۰۰",
+          "en": "45,600"
+        },
+        {
+          "ur": "۴۰۵۶",
+          "en": "4,056"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          2,
+          0,
+          1
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے دیکھیں کس کے ہندسے زیادہ ہیں۔",
+            "en": "First see which number has more digits."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴٬۰۵۶ < ۴٬۵۶۰ < ۴۵٬۶۰۰",
+        "en": "4,056 < 4,560 < 45,600"
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-sign-7450",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "صحیح نشان چنیں: ۷۴۵۰ ___ ۷۴۰۵",
+        "en": "Choose the right sign: 7450 ___ 7405"
+      },
+      "options": [
+        {
+          "ur": ">",
+          "en": ">"
+        },
+        {
+          "ur": "<",
+          "en": "<"
+        },
+        {
+          "ur": "=",
+          "en": "="
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بائیں سے دیکھیں: پہلا مختلف خانہ کون سا ہے؟",
+            "en": "Look from the left: which place is the first to differ?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "دہائی میں ۵ اور ۰ ہیں، ۵ بڑا ہے، اس لیے ۷۴۵۰ > ۷۴۰۵۔",
+        "en": "In the tens we have 5 and 0; 5 is greater, so 7450 > 7405."
+      }
+    },
+    {
+      "id": "p2-more-digits",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کون سا عدد بڑا ہے؟",
+        "en": "Which number is greater?"
+      },
+      "options": [
+        {
+          "ur": "۹۸۷۶",
+          "en": "9,876"
+        },
+        {
+          "ur": "۱۰٬۰۰۱",
+          "en": "10,001"
+        },
+        {
+          "ur": "۱۰۰۰",
+          "en": "1,000"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-bigger-number-more-digits-always"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے ہندسے گنیں۔",
+            "en": "Count the digits first."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱۰٬۰۰۱ میں ۵ ہندسے ہیں، ۹٬۸۷۶ میں ۴۔ زیادہ ہندسے والا بڑا ہے۔",
+        "en": "10,001 has 5 digits and 9,876 has 4. More digits means greater."
+      }
+    },
+    {
+      "id": "p3-sign-60300",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "صحیح نشان چنیں: ۶۰٬۳۰۰ ___ ۶۰٬۰۳۰",
+        "en": "Choose the right sign: 60,300 ___ 60,030"
+      },
+      "options": [
+        {
+          "ur": "<",
+          "en": "<"
+        },
+        {
+          "ur": "=",
+          "en": "="
+        },
+        {
+          "ur": ">",
+          "en": ">"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سو کے خانے میں دونوں کے ہندسے دیکھیں۔",
+            "en": "Look at the hundreds digit of each number."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سو کے خانے میں ۳ اور ۰ ہیں، اس لیے ۶۰٬۳۰۰ بڑا ہے۔",
+        "en": "The hundreds digits are 3 and 0, so 60,300 is greater."
+      }
+    },
+    {
+      "id": "p4-52000",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۵۲٬۰۰۰ < ۲۵٬۰۰۰",
+        "en": "52,000 < 25,000"
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دس ہزار کے خانے میں ۵ اور ۲ کا موازنہ کریں۔",
+            "en": "Compare 5 and 2 in the ten-thousands place."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۵۲٬۰۰۰ بڑا ہے، اس لیے صحیح نشان > ہے۔",
+        "en": "52,000 is greater, so the right sign is >."
+      }
+    },
+    {
+      "id": "p6-smallest",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ان میں سب سے چھوٹا عدد کون سا ہے؟",
+        "en": "Which of these is the smallest?"
+      },
+      "options": [
+        {
+          "ur": "۸۲٬۰۰۱",
+          "en": "82,001"
+        },
+        {
+          "ur": "۹۹۹۹",
+          "en": "9,999"
+        },
+        {
+          "ur": "۸۱٬۹۹۹",
+          "en": "81,999"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "2": "m-bigger-number-more-digits-always"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہندسے گنیں۔ کم ہندسے والا چھوٹا ہے۔",
+            "en": "Count the digits. Fewer digits means smaller."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۹٬۹۹۹ میں صرف ۴ ہندسے ہیں، اس لیے یہ سب سے چھوٹا ہے۔",
+        "en": "9,999 has only 4 digits, so it is the smallest."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-smallest-five-digit",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہندسے ۵، ۰، ۷، ۲، ۹ ایک ایک بار استعمال کریں۔ سب سے چھوٹا پانچ ہندسی عدد بنائیں۔",
+        "en": "Use the digits 5, 0, 7, 2, 9 once each. Make the smallest 5-digit number."
+      },
+      "answer_key": {
+        "answer": "20579"
+      },
+      "accepted_variants": [
+        "20579",
+        "20,579",
+        "۲۰۵۷۹",
+        "۲۰٬۵۷۹"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا عدد ۰ سے شروع ہو سکتا ہے؟",
+            "en": "Can a 5-digit number start with 0?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-order-four",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کسی دکان یا قیمتوں کی فہرست سے چار قیمتیں چھوٹی سے بڑی ترتیب میں لکھیں۔",
+        "en": "order four prices from a shop or a price list, smallest first."
+      },
+      "answer_key": {
+        "answer": "four numbers in the correct order"
+      },
+      "mentor_review_guidance": "Accept prices instead of ages; nothing is entered in the app."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "پہلے ہندسے گنیں",
+        "en": "count digits first"
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "پھر بائیں سے موازنہ",
+        "en": "then compare from the left"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "زیادہ ہندسے ہمیشہ بڑا عدد بناتے ہیں، خانوں کو دیکھے بغیر۔",
+        "en": "More digits always means bigger (ignoring leading zeros/place)"
+      },
+      "correction": {
+        "ur": "پہلے ہندسوں کی تعداد گنیں، پھر بائیں سے موازنہ کریں",
+        "en": "Compare digit-count first, then left to right."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-bigger-number-more-digits-always",
+      "remediation_ref": "MATH-G4-NB-02"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-NB-02",
+      "remediation_ref": "MATH-G4-NB-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "۱۔ ہندسے گنیں: زیادہ ہندسے، بڑا عدد۔ ۲۔ برابر ہندسے ہوں تو بائیں سے پہلا مختلف خانہ دیکھیں۔ ۳۔ > بڑا، < چھوٹا، = برابر۔",
+    "en": "1. Count digits: more digits, greater number. 2. Same digit count: find the first different place from the left. 3. > greater, < less, = equal."
+  },
+  "summary": {
+    "ur": "ہم نے ہندسے گن کر اور بائیں سے خانے ملا کر عددوں کا موازنہ اور ترتیب سیکھی۔",
+    "en": "We learned to compare and order numbers by counting digits and matching places from the left."
+  },
+  "parent_notes": {
+    "ur": "خریداری کے وقت چیزوں کی مقدار کا موازنہ کریں (\"کون سا زیادہ ہے؟\")۔",
+    "en": "compare quantities while shopping (\"which is more?\")."
+  },
+  "mentor_notes": {
+    "ur": "بائیں سے دائیں موازنے سے پہلے ہندسوں کی گنتی پر زور دیں۔",
+    "en": "stress digit-count before left-to-right comparison."
+  },
+  "accessibility_notes": {
+    "ur": "عدد کارڈ اور جگہ کی قیمت کا چارٹ ابھی بنانے ہیں؛ متبادل متن ہر عدد اور نشان کو پورا پڑھے (مثلاً \"بڑا ہے\")۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے کا متبادل: سب سے چھوٹے عدد پر پہلے، پھر اگلے پر ٹیپ کریں۔",
+    "en": "The number cards and place-value chart are still to be made; alt text should read each number and say the sign in words (e.g. \"is greater than\"). Urdu audio is not yet recorded. Alternative to dragging: tap the smallest number first, then the next."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "two-step rule: count digits first; if equal, compare place by place from the left until one differs",
+    "questioning_strategy": "ask 'how many digits does each have?' before 'which is greater?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "judges by the first digit alone",
+      "mixes up > and <"
+    ],
+    "hint_policy": "graduated; two hints max (count digits first; then compare from the left) then a worked re-teach; never give the answer first",
+    "example_policy": "pairs with different digit counts where the shorter number starts with a big digit (9,876 vs 10,001), and pairs that differ only in a middle place; prices in rupees, village populations kept fictional",
+    "misconception_detectors": [
+      "picks 9,876 over 10,001",
+      "picks 81,999 as smallest over 9,999"
+    ],
+    "critical_thinking_prompts": [
+      "Why does 9,999 lose to 10,000 even though 9 is bigger than 1?"
+    ],
+    "personalization_rules": "if the learner cannot name the place of a digit, route back to MATH-G4-NB-02",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: m-bigger-number-more-digits-always is worded as 'more digits always means bigger', but its correction (count digits first) targets the opposite error of judging by the first digit; the draft tags that first-digit error with this id; confirm",
+    "rendering: check that > and < are not mirrored by bidi inside Urdu (RTL) text"
+  ]
+}

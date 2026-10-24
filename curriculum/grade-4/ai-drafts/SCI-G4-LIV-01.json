@@ -1,0 +1,416 @@
+{
+  "code": "SCI-G4-LIV-01",
+  "title": {
+    "ur": "جاندار اور بے جان",
+    "en": "Living and non-living things"
+  },
+  "description": {
+    "ur": "جاندار اور بے جان چیزوں کو ان کی نشانیوں سے پہچاننا: بڑھنا، کھانا پینا، حرکت اور ردِعمل۔",
+    "en": "Telling living from non-living things by their signs: growing, needing food and water, moving and responding."
+  },
+  "keywords": [
+    "living",
+    "non-living",
+    "grow",
+    "need",
+    "characteristics",
+    "plants",
+    "animals"
+  ],
+  "teacher_script": {
+    "ur": "آج ہم ایک سوال کا جواب ڈھونڈیں گے: کیا یہ چیز جاندار ہے؟ اپنے آس پاس دیکھو: پودا، بلی، پتھر، کرسی۔ ہر چیز سے ہم تین سوال پوچھیں گے۔ کیا یہ بڑھتی ہے؟ کیا اسے کھانا اور پانی چاہیے؟ کیا یہ حرکت کرتی یا ردِعمل دکھاتی ہے؟",
+    "en": "Today we answer one question: is this thing living? Look around you: a plant, a cat, a stone, a chair. We will ask each thing three questions. Does it grow? Does it need food and water? Does it move or respond?"
+  },
+  "student_explanation": {
+    "ur": "جاندار چیزیں بڑھتی ہیں۔ انہیں خوراک اور پانی چاہیے۔ وہ حرکت کرتی ہیں۔ وہ اپنے آس پاس کی چیزوں پر ردِعمل دکھاتی ہیں۔ پودا بھی جاندار ہے۔ وہ آہستہ بڑھتا ہے اور روشنی کی طرف مڑتا ہے۔ پتھر نہیں بڑھتا اور نہ کھاتا ہے۔ اس لیے پتھر بے جان ہے۔ گاڑی چلتی ہے، پھر بھی بے جان ہے۔",
+    "en": "Living things grow. They need food and water. They move. They respond to things around them. A plant is living too. It grows slowly and turns towards light. A stone does not grow or eat. So a stone is non-living. A car moves, but it is still non-living."
+  },
+  "interactive_activities": [
+    {
+      "id": "a1-sort-living",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر چیز کو صحیح ٹوکری میں ڈالو: جاندار یا بے جان۔ نیم کا درخت، بکری، پتھر، کرسی، مرغی، گاڑی۔",
+        "en": "Put each thing in the right basket: living or non-living. Neem tree, goat, stone, chair, hen, car."
+      },
+      "answer_key": {
+        "living": [
+          "neem tree",
+          "goat",
+          "hen"
+        ],
+        "non_living": [
+          "stone",
+          "chair",
+          "car"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر چیز سے پوچھو: کیا یہ بڑھتی ہے؟",
+            "en": "Ask each thing: does it grow?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-plant",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "گلاب کا پودا کیا ہے؟",
+        "en": "What is a rose plant?"
+      },
+      "options": [
+        {
+          "ur": "بے جان، کیونکہ یہ چلتا نہیں",
+          "en": "Non-living, because it does not walk"
+        },
+        {
+          "ur": "جاندار",
+          "en": "Living"
+        },
+        {
+          "ur": "نہ جاندار نہ بے جان",
+          "en": "Neither living nor non-living"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-plants-not-living"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا پودا بڑھتا ہے اور پانی مانگتا ہے؟",
+            "en": "Does a plant grow and need water?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پودا بڑھتا ہے اور اسے پانی اور روشنی چاہیے، اس لیے جاندار ہے۔",
+        "en": "A plant grows and needs water and light, so it is living."
+      }
+    },
+    {
+      "id": "p2-not-living",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ان میں سے کون سی چیز جاندار نہیں ہے؟",
+        "en": "Which of these is NOT living?"
+      },
+      "options": [
+        {
+          "ur": "کتا",
+          "en": "Dog"
+        },
+        {
+          "ur": "آم کا درخت",
+          "en": "Mango tree"
+        },
+        {
+          "ur": "کرسی",
+          "en": "Chair"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سی چیز کبھی نہیں بڑھتی؟",
+            "en": "Which one never grows?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "کرسی نہ بڑھتی ہے نہ کھاتی ہے۔",
+        "en": "A chair does not grow or eat."
+      }
+    },
+    {
+      "id": "p3-river",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "دریا بہتا ہے، اس لیے دریا جاندار ہے۔",
+        "en": "A river flows, so a river is living."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-moving-means-living"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا دریا کھاتا ہے یا بچے دیتا ہے؟",
+            "en": "Does a river eat, or have young ones?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "حرکت کافی نہیں۔ دریا نہ کھاتا ہے نہ بڑھتا ہے۔",
+        "en": "Moving is not enough. A river does not eat or grow."
+      }
+    },
+    {
+      "id": "p4-stone",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پتھر بے جان کیوں ہے؟",
+        "en": "Why is a stone non-living?"
+      },
+      "options": [
+        {
+          "ur": "یہ نہ بڑھتا ہے نہ کھاتا ہے",
+          "en": "It does not grow or eat"
+        },
+        {
+          "ur": "یہ سخت ہے",
+          "en": "It is hard"
+        },
+        {
+          "ur": "یہ سرمئی ہے",
+          "en": "It is grey"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "جاندار ہونے کی نشانی بڑھنا اور خوراک کی ضرورت ہے، رنگ یا سختی نہیں۔",
+        "en": "Signs of life are growing and needing food, not colour or hardness."
+      }
+    },
+    {
+      "id": "p5-water",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پانی کیا ہے؟",
+        "en": "What is water?"
+      },
+      "options": [
+        {
+          "ur": "جاندار، کیونکہ یہ بہتا ہے",
+          "en": "Living, because it flows"
+        },
+        {
+          "ur": "جاندار، کیونکہ ہمیں اس کی ضرورت ہے",
+          "en": "Living, because we need it"
+        },
+        {
+          "ur": "بے جان",
+          "en": "Non-living"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-moving-means-living"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جانداروں کو پانی چاہیے، مگر کیا پانی خود بڑھتا ہے؟",
+            "en": "Living things need water, but does water itself grow?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-hen",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "مرغی جاندار ہے کیونکہ یہ کھاتی، بڑھتی اور انڈے دیتی ہے۔",
+        "en": "A hen is living because it eats, grows and lays eggs."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "مرغی میں جاندار کی ساری نشانیاں ہیں۔",
+        "en": "A hen shows all the signs of a living thing."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-car",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "گاڑی حرکت کرتی ہے اور اسے پیٹرول چاہیے۔ پھر بھی وہ بے جان کیوں ہے؟",
+        "en": "A car moves and needs petrol. Why is it still non-living?"
+      },
+      "options": [
+        {
+          "ur": "کیونکہ وہ دھات کی ہے",
+          "en": "Because it is made of metal"
+        },
+        {
+          "ur": "کیونکہ وہ خود نہیں بڑھتی اور اپنے جیسی نئی گاڑی نہیں بناتی",
+          "en": "Because it does not grow and cannot make new cars like itself"
+        },
+        {
+          "ur": "کیونکہ وہ تیز چلتی ہے",
+          "en": "Because it goes fast"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "2": "m-moving-means-living"
+        }
+      },
+      "explanation": {
+        "ur": "جاندار بڑھتے ہیں اور اپنے جیسے بچے پیدا کرتے ہیں۔ گاڑی یہ نہیں کرتی۔",
+        "en": "Living things grow and have young like themselves. A car does neither."
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-find-four",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں دو جاندار اور دو بے جان چیزیں ڈھونڈو اور گھر کے کسی بڑے کو بتاؤ۔",
+        "en": "at home, find two living and two non-living things and tell a family member."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any two living (plants, animals, people) and two non-living things; the learner should give one reason for each."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کیا یہ بڑھتا ہے؟",
+        "en": "Does it grow?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "کیا یہ کھاتا/پیتا ہے؟",
+        "en": "Does it eat or drink?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "جو چیز حرکت کرے وہ جاندار ہے",
+        "en": "Anything that moves is living"
+      },
+      "correction": {
+        "ur": "جاندار بڑھتے بھی ہیں اور انہیں خوراک بھی چاہیے",
+        "en": "living things also grow + need food"
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-moving-means-living",
+      "remediation_ref": "SCI-G4-LIV-01"
+    },
+    {
+      "signal": "misconception:m-plants-not-living",
+      "remediation_ref": "SCI-G4-LIV-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "جاندار بڑھتے ہیں، خوراک اور پانی لیتے ہیں، حرکت کرتے ہیں اور ردِعمل دکھاتے ہیں۔ پودے بھی جاندار ہیں۔ صرف حرکت سے کوئی چیز جاندار نہیں بنتی۔",
+    "en": "Living things grow, take in food and water, move and respond. Plants are living too. Moving alone does not make a thing living."
+  },
+  "summary": {
+    "ur": "ہم نے نشانیوں سے جاندار اور بے جان چیزوں میں فرق کرنا سیکھا۔",
+    "en": "We learned to tell living from non-living things by their signs."
+  },
+  "parent_notes": {
+    "ur": "گھر میں پودوں اور جانوروں کو چیزوں سے الگ کر کے دکھائیں۔",
+    "en": "point out plants/animals vs objects around the house."
+  },
+  "mentor_notes": {
+    "ur": "\"حرکت = جاندار\" والی غلط فہمی (گاڑی، دریا) سب سے اہم ہے — اس پر ضرور بات کریں۔",
+    "en": "the \"moving = living\" misconception (cars, rivers) is the key one — address it."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ جاندار اور بے جان چیزوں کی تصویریں اور ان کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے والی سرگرمی کا متبادل: ہر چیز کے لیے \"جاندار\" یا \"بے جان\" کا بٹن دبائیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. Pictures of the living and non-living things, with alt text, are still to be made. Alternative to the drag activity: tap a \"living\" or \"non-living\" button for each thing."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "start from familiar things at home; test every thing against the same signs (grows, needs food/water, moves/responds)",
+    "questioning_strategy": "ask 'does it grow?' and 'does it need food or water?' before asking 'is it living?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "calls a car, river or cloud living",
+      "calls a plant non-living"
+    ],
+    "hint_policy": "graduated; H1 'does it grow?', H2 'does it eat or drink?', then re-teach plant vs stone; never give the answer first",
+    "example_policy": "use everyday Pakistani things: neem and mango trees, goats, hens, stones, charpai, rickshaw",
+    "misconception_detectors": [
+      "calls any moving thing living",
+      "says plants are not living because they do not walk"
+    ],
+    "critical_thinking_prompts": [
+      "A car moves and needs petrol. What sign of life is missing?"
+    ],
+    "personalization_rules": "if the learner keeps calling moving things living, repeat the river and car examples before new items",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the human worked example says living things 'move'; plants move only slowly (turning to light) — confirm this wording is acceptable",
+    "language editor: Urdu translations of the English-only human fields (misconception, homework, notes) are AI-written; human English kept verbatim"
+  ]
+}

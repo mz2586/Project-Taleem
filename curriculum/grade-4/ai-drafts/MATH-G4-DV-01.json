@@ -1,0 +1,467 @@
+{
+  "code": "MATH-G4-DV-01",
+  "description": {
+    "ur": "تقسیم کو برابر بانٹنے اور برابر گروہ بنانے کے طور پر سمجھنا اور ضرب سے جوڑنا۔",
+    "en": "Understanding division as equal sharing and equal grouping, and linking it to multiplication."
+  },
+  "keywords": [
+    "division",
+    "sharing",
+    "grouping",
+    "equal groups",
+    "inverse",
+    "fact families"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "تقسیم",
+        "en": "divide"
+      },
+      "definition": {
+        "ur": "کسی تعداد کو برابر حصوں یا گروہوں میں بانٹنا۔",
+        "en": "Splitting an amount into equal shares or groups."
+      }
+    },
+    {
+      "term": {
+        "ur": "برابر بانٹنا",
+        "en": "share equally"
+      },
+      "definition": {
+        "ur": "ہر ایک کو بالکل ایک جتنا دینا۔",
+        "en": "Giving everyone exactly the same amount."
+      }
+    },
+    {
+      "term": {
+        "ur": "الٹ عمل",
+        "en": "inverse"
+      },
+      "definition": {
+        "ur": "وہ عمل جو دوسرے عمل کو واپس کر دے، جیسے ضرب اور تقسیم۔",
+        "en": "An operation that undoes another, like multiplication and division."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "سوچیں آپ کے پاس ۱۲ ٹافیاں ہیں اور ۴ دوست۔ سب کو برابر کیسے دیں؟ ہم ایک ایک ٹافی باری باری دیں گے۔ آج ہم اسی برابر بانٹنے کو تقسیم کہیں گے۔ اور دیکھیں گے کہ تقسیم اور ضرب آپس میں کیسے جڑے ہیں۔",
+    "en": "Imagine you have 12 sweets and 4 friends. How can everyone get the same? We give one sweet at a time, in turns. Today we call this equal sharing division. We will also see how division and multiplication are linked."
+  },
+  "student_explanation": {
+    "ur": "تقسیم کا مطلب ہے برابر بانٹنا۔ ۱۲ ٹافیاں ۴ بچوں میں بانٹیں۔ ہر بچے کو باری باری ایک ایک ٹافی دیں۔ ہر بچے کو ۳ ٹافیاں ملتی ہیں۔ ہم لکھتے ہیں: ۱۲ ÷ ۴ = ۳۔ تقسیم کا مطلب گروہ بنانا بھی ہے۔ ۱۲ میں سے ۴ ۴ کے کتنے گروہ بنیں گے؟ ۳ گروہ بنیں گے۔ ضرب، تقسیم کا الٹ عمل ہے: ۴ × ۳ = ۱۲۔",
+    "en": "Division means sharing equally. Share 12 sweets among 4 children. Give each child one sweet at a time, in turns. Each child gets 3 sweets. We write 12 ÷ 4 = 3. Division can also mean making groups. How many groups of 4 can we make from 12? We can make 3 groups. Multiplication is the inverse of division: 4 × 3 = 12."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۱۲ ٹافیاں ۴ بچوں میں برابر بانٹیں۔ ہر ایک کو کتنی ملیں گی؟",
+        "en": "Share 12 sweets equally among 4 children. How many does each get?"
+      },
+      "steps": [
+        {
+          "ur": "ہر بچے کو ایک ایک ٹافی دیں: ۴ ٹافیاں گئیں، ۸ بچیں۔",
+          "en": "Give each child one sweet: 4 are given, 8 are left."
+        },
+        {
+          "ur": "دوبارہ ایک ایک دیں: ۴ بچیں۔ پھر ایک ایک: کچھ نہیں بچا۔",
+          "en": "Give one each again: 4 are left. Once more: none are left."
+        },
+        {
+          "ur": "ہر بچے کو ۳ ملیں۔ ۱۲ ÷ ۴ = ۳۔ جواب ۱۲ سے چھوٹا ہے۔",
+          "en": "Each child got 3. 12 ÷ 4 = 3. The answer is smaller than 12."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "۳۰ انڈے ٹرے میں رکھنے ہیں، ہر ٹرے میں ۶۔ کتنی ٹرے لگیں گی؟",
+        "en": "30 eggs go into trays of 6. How many trays are needed?"
+      },
+      "steps": [
+        {
+          "ur": "یہ گروہ بنانا ہے: ۳۰ میں ۶ ۶ کے کتنے گروہ؟",
+          "en": "This is grouping: how many groups of 6 are in 30?"
+        },
+        {
+          "ur": "۶ کے پہاڑے میں ۳۰ تلاش کریں: ۶ × ۵ = ۳۰۔",
+          "en": "Find 30 in the table of 6: 6 × 5 = 30."
+        },
+        {
+          "ur": "اس لیے ۳۰ ÷ ۶ = ۵۔ ۵ ٹرے لگیں گی۔",
+          "en": "So 30 ÷ 6 = 5. We need 5 trays."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-share-15",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۱۵ دانے ۳ پلیٹوں میں گھسیٹیں تاکہ ہر پلیٹ میں برابر ہوں۔ ہر پلیٹ میں کتنے آئے؟",
+        "en": "Drag 15 counters onto 3 plates so every plate has the same. How many are on each plate?"
+      },
+      "answer_key": {
+        "plates": 3,
+        "each": 5
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر پلیٹ پر ایک ایک دانہ باری باری رکھیں۔",
+            "en": "Put one counter on each plate in turn."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-18div3",
+      "type": "fill_blank",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "۱۸ ÷ ۳ = ___",
+        "en": "18 ÷ 3 = ___"
+      },
+      "answer_key": {
+        "answer": "6"
+      },
+      "accepted_variants": [
+        "6",
+        "۶"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۳ کے پہاڑے میں ۱۸ کہاں آتا ہے؟",
+            "en": "Where does 18 come in the table of 3?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-fact-family",
+      "type": "fill_blank",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۸ × ۷ = ۵۶، تو ۵۶ ÷ ۸ = ___",
+        "en": "8 × 7 = 56, so 56 ÷ 8 = ___"
+      },
+      "answer_key": {
+        "answer": "7"
+      },
+      "accepted_variants": [
+        "7",
+        "۷"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ضرب کا جملہ الٹا پڑھیں۔",
+            "en": "Read the multiplication backwards."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-12div4",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۱۲ ÷ ۴ = ؟",
+        "en": "12 ÷ 4 = ?"
+      },
+      "options": [
+        {
+          "ur": "۳",
+          "en": "3"
+        },
+        {
+          "ur": "۴۸",
+          "en": "48"
+        },
+        {
+          "ur": "۸",
+          "en": "8"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-div-bigger-answer"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۱۲ چیزیں ۴ لوگوں میں بانٹیں۔",
+            "en": "Share 12 things among 4 people."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ہر ایک کو ۳ ملتے ہیں، کیونکہ ۴ × ۳ = ۱۲۔",
+        "en": "Each gets 3, because 4 × 3 = 12."
+      }
+    },
+    {
+      "id": "p2-matching-multiplication",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کون سی ضرب ۲۰ ÷ ۵ = ۴ سے ملتی ہے؟",
+        "en": "Which multiplication matches 20 ÷ 5 = 4?"
+      },
+      "options": [
+        {
+          "ur": "۲۰ × ۵ = ۱۰۰",
+          "en": "20 × 5 = 100"
+        },
+        {
+          "ur": "۵ × ۴ = ۲۰",
+          "en": "5 × 4 = 20"
+        },
+        {
+          "ur": "۵ + ۴ = ۹",
+          "en": "5 + 4 = 9"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-div-bigger-answer"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سی ضرب ۲۰ پر ختم ہوتی ہے؟",
+            "en": "Which multiplication ends at 20?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۵ × ۴ = ۲۰، اس لیے ۲۰ ÷ ۵ = ۴۔",
+        "en": "5 × 4 = 20, so 20 ÷ 5 = 4."
+      }
+    },
+    {
+      "id": "p4-rotis-more",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۲۴ روٹیاں ۶ لوگوں میں برابر بانٹیں تو ہر ایک کو ۲۴ سے زیادہ روٹیاں ملیں گی۔",
+        "en": "If 24 rotis are shared equally among 6 people, each person gets more than 24."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-div-bigger-answer"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بانٹنے سے ہر ایک کا حصہ کل سے بڑا ہوتا ہے یا چھوٹا؟",
+            "en": "When we share, is each part bigger or smaller than the whole?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ہر ایک کو ۴ ملتی ہیں: ۲۴ ÷ ۶ = ۴۔ بانٹنے سے حصہ چھوٹا ہوتا ہے۔",
+        "en": "Each gets 4: 24 ÷ 6 = 4. Sharing makes each part smaller."
+      }
+    },
+    {
+      "id": "p5-lines-of-5",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۳۵ بچے ۵ ۵ کی قطاروں میں کھڑے ہوتے ہیں۔ کتنی قطاریں بنیں گی؟",
+        "en": "35 children stand in lines of 5. How many lines are there?"
+      },
+      "options": [
+        {
+          "ur": "۴۰",
+          "en": "40"
+        },
+        {
+          "ur": "۳۰",
+          "en": "30"
+        },
+        {
+          "ur": "۷",
+          "en": "7"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۳۵ میں ۵ ۵ کے کتنے گروہ ہیں؟",
+            "en": "How many groups of 5 are in 35?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۵ × ۷ = ۳۵، اس لیے ۷ قطاریں۔",
+        "en": "5 × 7 = 35, so 7 lines."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-two-facts",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "۶ × ۹ = ۵۴ سے تقسیم کے دو جملے بنائیں۔",
+        "en": "Write two division facts from 6 × 9 = 54."
+      },
+      "answer_key": {
+        "answer": "54 ÷ 6 = 9 and 54 ÷ 9 = 6"
+      },
+      "accepted_variants": [
+        "54 ÷ 6 = 9, 54 ÷ 9 = 6",
+        "۵۴ ÷ ۶ = ۹، ۵۴ ÷ ۹ = ۶"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۵۴ کو ۶ گروہوں میں بانٹیں، پھر ۹ گروہوں میں۔",
+            "en": "Share 54 into 6 groups, then into 9 groups."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-share-at-home",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "گھر کی کچھ چیزیں برابر بانٹیں اور تقسیم کا جملہ لکھیں۔",
+        "en": "share objects at home equally and write the division."
+      },
+      "answer_key": {
+        "answer": "a correct division sentence for the sharing"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "کتنے میں بانٹنا ہے؟",
+        "en": "Among how many are we sharing?"
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "برابر گروہ بنائیں",
+        "en": "Make equal groups."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "یہ سمجھنا کہ تقسیم سے جواب بڑا ہو جاتا ہے۔",
+        "en": "Thinks dividing makes the answer bigger"
+      },
+      "correction": {
+        "ur": "تقسیم یعنی برابر بانٹنا؛ نتیجہ چھوٹا ہوتا ہے",
+        "en": "Dividing shares equally; the result is smaller."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-div-bigger-answer",
+      "remediation_ref": "MATH-G4-DV-01"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-ML-01",
+      "remediation_ref": "MATH-G4-ML-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "تقسیم = برابر بانٹنا یا برابر گروہ بنانا۔ ۱۲ ÷ ۴ = ۳ کیونکہ ۴ × ۳ = ۱۲۔ بانٹنے سے حصہ چھوٹا ہوتا ہے۔",
+    "en": "Division = sharing equally or making equal groups. 12 ÷ 4 = 3 because 4 × 3 = 12. Sharing makes each part smaller."
+  },
+  "summary": {
+    "ur": "ہم نے تقسیم کو برابر بانٹنا اور گروہ بنانا سمجھا اور اسے ضرب سے جوڑا۔",
+    "en": "We understood division as equal sharing and grouping, and linked it to multiplication."
+  },
+  "parent_notes": {
+    "ur": "کھانے کی چیزیں برابر بانٹیں اور پوچھیں: \"ہر ایک کو کتنی ملیں؟\"",
+    "en": "share snacks equally and ask \"how many each?\""
+  },
+  "mentor_notes": {
+    "ur": "÷ کو فوراً × سے جوڑیں (حقائق کے خاندان)۔",
+    "en": "link ÷ to × immediately (fact families)."
+  },
+  "accessibility_notes": {
+    "ur": "ٹافیوں، پلیٹوں اور دانوں کی تصویریں ابھی بنانی ہیں؛ متبادل متن ہر پلیٹ پر دانوں کی تعداد بتائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے کا متبادل: ہر پلیٹ کے نیچے \"ایک دانہ رکھیں\" بٹن دبائیں۔",
+    "en": "The sweets, plates and counters pictures are still to be made; alt text should say how many counters are on each plate. Urdu audio is not yet recorded. Alternative to dragging: press an \"add one counter\" button under each plate."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "act out sharing one at a time, then grouping, then write the division and its matching multiplication (fact family)",
+    "questioning_strategy": "ask 'how many shares (or groups)?' and 'is each share bigger or smaller than the whole?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "multiplies instead of dividing",
+      "subtracts once instead of sharing"
+    ],
+    "hint_policy": "graduated; two hints max (among how many; make equal groups) then a worked re-teach with counters; never give the answer first",
+    "example_policy": "division facts within the 10 × 10 tables; sharing food and classroom items fairly; no remainders yet",
+    "misconception_detectors": [
+      "answers 48 for 12 ÷ 4",
+      "says each person gets more than the whole"
+    ],
+    "critical_thinking_prompts": [
+      "Why is 12 ÷ 4 smaller than 12, but 4 × 3 bigger than 4?"
+    ],
+    "personalization_rules": "if multiplication facts are shaky, route to MATH-G4-ML-01 before more division",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "language editor: 'حقائق کے خاندان' for 'fact families' is a literal translation; confirm the term used in Pakistani classrooms",
+    "check the human worked example has no prompt; the draft's first worked example adds one"
+  ]
+}

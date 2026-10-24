@@ -1,0 +1,504 @@
+{
+  "code": "ETH-G4-HON-03",
+  "title": {
+    "ur": "غلطی ماننا اور سدھارنا",
+    "en": "Owning up and making it right"
+  },
+  "description": {
+    "ur": "غلطی ماننا، معافی مانگنا اور جو ہو سکے اسے ٹھیک کرنا۔",
+    "en": "Admitting a mistake, saying sorry, and fixing what we can."
+  },
+  "keywords": [
+    "mistake",
+    "admit",
+    "sorry",
+    "making amends",
+    "fix",
+    "learn",
+    "brave"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "غلطی ماننا",
+        "en": "owning up"
+      },
+      "definition": {
+        "ur": "سچ سچ بتانا کہ غلطی مجھ سے ہوئی۔",
+        "en": "saying truthfully that I made the mistake."
+      }
+    },
+    {
+      "term": {
+        "ur": "معافی مانگنا",
+        "en": "saying sorry"
+      },
+      "definition": {
+        "ur": "دل سے کہنا کہ مجھے افسوس ہے۔",
+        "en": "saying from the heart that I feel sorry."
+      }
+    },
+    {
+      "term": {
+        "ur": "تلافی کرنا",
+        "en": "making amends"
+      },
+      "definition": {
+        "ur": "نقصان کو جتنا ہو سکے ٹھیک کرنا۔",
+        "en": "fixing the harm as much as we can."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ہر انسان سے غلطی ہوتی ہے، بڑوں سے بھی۔ آج ہم سیکھیں گے کہ غلطی کے بعد کیا کرنا ہے۔ ایک کہانی سنیں: گلی میں کرکٹ کھیلتے ہوئے گیند پڑوسی کے گملے پر لگی اور گملا ٹوٹ گیا۔ ہم چار قدم سیکھیں گے: رکنا، سچ بتانا، معافی مانگنا، اور ٹھیک کرنا۔",
+    "en": "Everyone makes mistakes, even grown-ups. Today we will learn what to do after a mistake. Listen to a story: while playing cricket in the street, the ball hit a neighbour's flowerpot and it broke. We will learn four steps: stop, tell the truth, say sorry, and make it right."
+  },
+  "student_explanation": {
+    "ur": "غلطی سب سے ہوتی ہے۔ غلطی ایک کام ہے، آپ کی پہچان نہیں۔ غلطی کے بعد پہلے رک جائیں۔ پھر سچ بتائیں کہ کیا ہوا۔ پھر دل سے معافی مانگیں۔ پھر جو ہو سکے ٹھیک کریں۔ اسے تلافی کرنا کہتے ہیں۔ آخر میں سوچیں کہ اگلی بار کیا کریں گے۔ اگر بتانا ڈراؤنا لگے تو کسی بھروسے والے بڑے سے بات کریں۔",
+    "en": "Everyone makes mistakes. A mistake is something you did, not who you are. After a mistake, first stop. Then tell the truth about what happened. Then say sorry from the heart. Then fix what you can. This is called making amends. Last, think about what you will do next time. If telling feels scary, talk to a trusted adult you feel safe with."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "گلی میں کرکٹ کھیلتے ہوئے حمزہ کی گیند خالہ جی کے گملے پر لگی اور گملا ٹوٹ گیا۔ حمزہ کیا کرے؟",
+        "en": "Playing cricket in the street, Hamza's ball hits Khala ji's flowerpot and it breaks. What should Hamza do?"
+      },
+      "steps": [
+        {
+          "ur": "رکنا: حمزہ بھاگتا نہیں، رک جاتا ہے۔",
+          "en": "Stop: Hamza does not run away. He stops."
+        },
+        {
+          "ur": "سچ بتانا: وہ خالہ جی سے کہتا ہے، «گیند میری تھی۔»",
+          "en": "Tell the truth: he tells Khala ji, \"It was my ball.\""
+        },
+        {
+          "ur": "معافی مانگنا: «مجھے بہت افسوس ہے۔»",
+          "en": "Say sorry: \"I am really sorry.\""
+        },
+        {
+          "ur": "ٹھیک کرنا: وہ گھر والوں کے ساتھ مٹی سمیٹتا ہے اور پودا نئے برتن میں لگانے میں مدد کرتا ہے۔",
+          "en": "Make it right: with his family's help he gathers the soil and helps replant the plant in a new pot."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "مریم نے غصے میں چھوٹی بہن سے کہا، «تم کچھ نہیں جانتی!» بہن اداس ہو گئی۔ مریم کیسے تلافی کرے؟",
+        "en": "Mariam, feeling cross, tells her little sister, \"You don't know anything!\" Her sister becomes sad. How can Mariam make amends?"
+      },
+      "steps": [
+        {
+          "ur": "غلطی ماننا: مریم سمجھتی ہے کہ اس کے لفظوں سے دل دکھا۔",
+          "en": "Owning up: Mariam sees that her words hurt."
+        },
+        {
+          "ur": "معافی: «سوری، مجھے یہ نہیں کہنا چاہیے تھا۔»",
+          "en": "Sorry: \"Sorry, I should not have said that.\""
+        },
+        {
+          "ur": "تلافی: وہ بہن کے ساتھ اس کا پسندیدہ کھیل کھیلتی ہے اور کوئی اچھی بات کہتی ہے۔",
+          "en": "Amends: she plays her sister's favourite game and says something kind."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-order-steps",
+      "type": "ordering",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "غلطی کے بعد کے قدم صحیح ترتیب میں لگائیں۔",
+        "en": "Put the steps after a mistake in the right order."
+      },
+      "options": [
+        {
+          "ur": "معافی مانگنا",
+          "en": "Say sorry"
+        },
+        {
+          "ur": "رکنا",
+          "en": "Stop"
+        },
+        {
+          "ur": "ٹھیک کرنا",
+          "en": "Make it right"
+        },
+        {
+          "ur": "سچ بتانا",
+          "en": "Tell the truth"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          3,
+          0,
+          2
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سب سے پہلے بھاگنا نہیں، رکنا ہے۔",
+            "en": "The very first thing is not to run, but to stop."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-after-mistake",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "غلطی ہو جائے تو سب سے پہلے کیا کرنا اچھا ہے؟",
+        "en": "After a mistake, what is a good first thing to do?"
+      },
+      "options": [
+        {
+          "ur": "بھاگ جانا",
+          "en": "Run away"
+        },
+        {
+          "ur": "رک کر سچ بتانا",
+          "en": "Stop and tell the truth"
+        },
+        {
+          "ur": "کسی اور کا نام لینا",
+          "en": "Name someone else"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "چار قدموں میں پہلا قدم یاد کریں۔",
+            "en": "Remember the first of the four steps."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-mistake-identity",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "غلطی کرنے کا مطلب ہے کہ میں برا بچہ ہوں۔",
+        "en": "Making a mistake means I am a bad child."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "غلطی ایک کام ہے، آپ کی پہچان نہیں۔",
+        "en": "A mistake is something you did, not who you are."
+      }
+    },
+    {
+      "id": "p3-amends",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ڈینیئل نے دوست کی کتاب کا صفحہ پھاڑ دیا۔ اچھی تلافی کون سی ہے؟",
+        "en": "Daniel tears a page of his friend's book. Which is a good way to make amends?"
+      },
+      "options": [
+        {
+          "ur": "معافی مانگے اور ٹیپ سے صفحہ جوڑنے میں مدد کرے",
+          "en": "Say sorry and help tape the page"
+        },
+        {
+          "ur": "کتاب چپکے سے واپس رکھ دے",
+          "en": "Quietly put the book back"
+        },
+        {
+          "ur": "کہے «پرانی کتاب تھی، کوئی بات نہیں»",
+          "en": "Say \"it was an old book, never mind\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "تلافی = جو ہو سکے ٹھیک کرنا۔",
+            "en": "Making amends = fixing what we can."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-sorry-enough",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "معافی مانگنے کے بعد اگر کچھ ٹھیک کر سکتے ہیں تو کرنا بھی اچھا ہے۔",
+        "en": "After saying sorry, it is good to also fix what we can."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "معافی کے ساتھ تلافی بھروسا واپس لاتی ہے۔",
+        "en": "Sorry plus making amends brings trust back."
+      }
+    },
+    {
+      "id": "p5-real-sorry",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ان میں سے دل سے معافی کون سی ہے؟",
+        "en": "Which of these is a sorry from the heart?"
+      },
+      "options": [
+        {
+          "ur": "«سوری… لیکن تمہاری اپنی غلطی تھی۔»",
+          "en": "\"Sorry... but it was your own fault.\""
+        },
+        {
+          "ur": "منہ بنا کر «اچھا، سوری!»",
+          "en": "Rolling eyes: \"Fine, sorry!\""
+        },
+        {
+          "ur": "«مجھے افسوس ہے کہ میری وجہ سے تمہارا دل دکھا۔»",
+          "en": "\"I am sorry that I hurt your feelings.\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا جواب الزام نہیں لگاتا؟",
+            "en": "Which reply does not blame the other person?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-scared-to-tell",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "اگر کسی بچے کو غلطی بتانا بہت ڈراؤنا لگے تو وہ کیا کر سکتا ہے؟",
+        "en": "If a child feels very scared to tell about a mistake, what can they do?"
+      },
+      "options": [
+        {
+          "ur": "ہمیشہ کے لیے چھپا لے",
+          "en": "Hide it forever"
+        },
+        {
+          "ur": "کسی بھروسے والے بڑے سے بات کرے جس کے ساتھ وہ محفوظ محسوس کرے",
+          "en": "Talk to a trusted adult they feel safe with"
+        },
+        {
+          "ur": "کسی اور پر الزام لگا دے",
+          "en": "Blame someone else"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "بھروسے والا بڑا مدد کر سکتا ہے۔ ڈرنا آپ کا قصور نہیں۔",
+        "en": "A trusted adult can help. Feeling scared is not your fault."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-cant-fix",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "سنیتا سے نانی کا پرانا کپ ٹوٹ گیا۔ کپ جوڑا نہیں جا سکتا۔ وہ کیسے تلافی کر سکتی ہے؟",
+        "en": "Sunita breaks Nani's old cup. It cannot be fixed. How can she still make amends?"
+      },
+      "options": [
+        {
+          "ur": "کچھ نہیں ہو سکتا، تو کچھ نہ کرے",
+          "en": "Nothing can be done, so do nothing"
+        },
+        {
+          "ur": "سچ بتائے، معافی مانگے، ٹکڑے احتیاط سے سمیٹنے میں کسی بڑے کی مدد کرے اور نانی کے لیے کوئی اچھا کام کرے",
+          "en": "Tell the truth, say sorry, help an adult clear the pieces safely, and do something kind for Nani"
+        },
+        {
+          "ur": "نیا کپ لانے کا جھوٹا وعدہ کر دے",
+          "en": "Make a promise she cannot keep to buy a new cup"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جب چیز ٹھیک نہ ہو سکے تو بھروسا کیسے ٹھیک ہو؟",
+            "en": "When the thing can't be fixed, how can trust be fixed?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ٹوٹی چیز نہ جڑے تب بھی سچ، معافی اور مہربانی سے رشتہ ٹھیک ہوتا ہے۔ ٹوٹا شیشہ بڑے سمیٹیں۔",
+        "en": "Even if the thing can't be fixed, truth, sorry and kindness mend the relationship. Adults handle broken pieces."
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-four-steps",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر والوں کو چار قدم سکھائیں: رکنا، سچ بتانا، معافی مانگنا، ٹھیک کرنا۔ ہر قدم کے لیے ایک اشارہ بنائیں۔",
+        "en": "Teach your family the four steps: stop, tell the truth, say sorry, make it right. Make up a hand sign for each step."
+      },
+      "answer_key": {
+        "guidance": "Talking/acting task at home; no real mistakes need to be shared. Nothing is entered in the app."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کہانی میں غلطی کے بعد پہلا قدم کیا تھا؟",
+        "en": "In the story, what was the first step after the mistake?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "معافی کے بعد کیا ہم کچھ ٹھیک بھی کر سکتے ہیں؟",
+        "en": "After sorry, can we fix something too?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "غلطی ماننے کا مطلب ہے میں برا ہوں۔",
+        "en": "Owning up means I am bad."
+      },
+      "correction": {
+        "ur": "غلطی ایک کام ہے، پہچان نہیں۔ غلطی ماننا بہادری ہے۔",
+        "en": "A mistake is something you did, not who you are. Owning up is brave."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "غلطی چھپانا آسان ہے، اس لیے ٹھیک ہے۔",
+        "en": "Hiding a mistake is easier, so it is fine."
+      },
+      "correction": {
+        "ur": "سچ تب بھی بولتے ہیں جب مشکل ہو۔",
+        "en": "We are honest even when it is hard."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-honesty-only-when-easy",
+      "remediation_ref": "ETH-G4-HON-01"
+    },
+    {
+      "signal": "ordering activity wrong twice",
+      "remediation_ref": "ETH-G4-HON-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "چار قدم: رکنا، سچ بتانا، معافی مانگنا، ٹھیک کرنا۔ غلطی کام ہے، پہچان نہیں۔ ڈر لگے تو بھروسے والے بڑے سے بات کریں۔",
+    "en": "Four steps: stop, tell the truth, say sorry, make it right. A mistake is something you did, not who you are. If scared, talk to a trusted adult."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ غلطی مان کر، معافی مانگ کر اور تلافی کر کے بھروسا واپس آتا ہے۔",
+    "en": "We learned that owning up, saying sorry and making amends bring trust back."
+  },
+  "parent_notes": {
+    "ur": "جب بچہ غلطی مانے تو پہلے اس کی سچائی کی تعریف کریں، پھر مل کر ٹھیک کرنے کا طریقہ سوچیں۔ سزا کے ڈر سے بچے سچ چھپانے لگتے ہیں۔",
+    "en": "When your child owns up, first praise the honesty, then work out together how to fix it. Fear of punishment teaches children to hide the truth."
+  },
+  "mentor_notes": {
+    "ur": "بچوں سے ان کی اپنی غلطیاں نہ پوچھیں؛ فرضی کہانیاں استعمال کریں۔ «بھروسے والا بڑا» والی سطر حفاظتی ہے: اگر کوئی بچہ گھر یا اسکول میں ڈر کا ذکر کرے تو سوال نہ کریں، تسلی دیں اور حفاظتی ذمہ دار کو بتائیں۔",
+    "en": "Never ask learners about their own mistakes; use made-up stories. The 'trusted adult' line is a safeguarding line: if a learner mentions fear at home or school, do not question them; reassure them and pass it to the safeguarding lead."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویریں ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن منظر بیان کرے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ یہ مضمون سننے پر مبنی ہے، ہر متن آواز میں پڑھا جائے۔ ترتیب والی سرگرمی کا متبادل: «پہلے کون سا؟» پوچھ کر ہر بار چار میں سے ایک بٹن چنیں۔",
+    "en": "Story pictures are still to be made; each needs alt text describing the scene. Urdu audio is not yet recorded; this subject is audio-first, so all text must be read aloud. Alternative to the ordering activity: answer 'which comes first?' by tapping one of the buttons, step by step."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "one gentle made-up story (cricket ball and flowerpot), then the four steps stop - tell - sorry - make it right; separate the mistake from the child's identity",
+    "questioning_strategy": "ask 'what could Hamza do first?' then 'and next?'; ask what a sorry from the heart sounds like",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says making a mistake means being bad",
+      "learner seems upset after a mistake story"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "small, accidental, fixable mistakes (spills, torn pages, flowerpot) and one hurtful-words example; never punishment scenes; adults handle broken glass",
+    "misconception_detectors": [
+      "thinks a mistake makes a person bad",
+      "treats 'sorry' with blame as a real apology",
+      "thinks nothing can be done if an object can't be fixed"
+    ],
+    "critical_thinking_prompts": [
+      "How can you make amends when a thing can't be fixed?",
+      "Why is owning up braver than hiding?"
+    ],
+    "personalization_rules": "if the learner chooses 'hide it' twice, return to ETH-G4-HON-01's trust idea; if they seem anxious, slow down and repeat that mistakes are normal",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor",
+      "learner says they are afraid of being hurt for a mistake -> stop, reassure it is not their fault, hand to safeguarding lead immediately"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths"
+    ]
+  },
+  "review_flags": [
+    "SAFEGUARDING REVIEWER: check the 'trusted adult you feel safe with' line and item p6 follow safeguarding good practice",
+    "language editor: check «تلافی کرنا» is understood by Grade 4 children, or suggest a simpler phrase",
+    "subject expert: check the broken-cup challenge (adult clears broken pieces) is safe and realistic"
+  ]
+}

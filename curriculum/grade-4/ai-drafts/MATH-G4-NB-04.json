@@ -1,0 +1,484 @@
+{
+  "code": "MATH-G4-NB-04",
+  "description": {
+    "ur": "اعداد کو قریب ترین دس اور قریب ترین سو تک گول کرنا۔",
+    "en": "Rounding whole numbers to the nearest 10 and the nearest 100."
+  },
+  "keywords": [
+    "rounding",
+    "nearest ten",
+    "nearest hundred",
+    "number line",
+    "round up",
+    "round down"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "قریب ترین",
+        "en": "nearest"
+      },
+      "definition": {
+        "ur": "جو سب سے کم فاصلے پر ہو۔",
+        "en": "The one that is closest."
+      }
+    },
+    {
+      "term": {
+        "ur": "گول کرنا",
+        "en": "rounding"
+      },
+      "definition": {
+        "ur": "کسی عدد کو اس کے قریب کے آسان عدد میں بدلنا۔",
+        "en": "Changing a number to a nearby, easier number."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کبھی ہمیں بالکل ٹھیک عدد نہیں، بلکہ قریب کا آسان عدد چاہیے۔ اسے گول کرنا کہتے ہیں۔ آج ہم قریب ترین دس اور قریب ترین سو تک گول کریں گے۔ اصل سوال یہ ہے: کون سا ہندسہ دیکھنا ہے؟ چلیں عددی لکیر پر دیکھتے ہیں۔",
+    "en": "Sometimes we do not need the exact number, just a nearby easy one. This is called rounding. Today we round to the nearest 10 and the nearest 100. The key question is: which digit do we look at? Let us see it on a number line."
+  },
+  "student_explanation": {
+    "ur": "گول کرنے سے ہمیں قریب کا آسان عدد ملتا ہے۔ قریب ترین دس تک گول کرنے کے لیے اکائی کا ہندسہ دیکھیں۔ اگر وہ ۵ یا زیادہ ہو تو اوپر جائیں۔ اگر ۵ سے کم ہو تو نیچے جائیں۔ اس طرح ۴۷ بن جاتا ہے ۵۰۔ قریب ترین سو تک گول کرنے کے لیے دہائی کا ہندسہ دیکھیں۔ اس طرح ۳۴۰ بن جاتا ہے ۳۰۰۔ ٹھیک ۵ ہو تو ہم اوپر جاتے ہیں۔ اس لیے ۶۵ بن جاتا ہے ۷۰۔",
+    "en": "Rounding gives us a nearby, easy number. To round to the nearest 10, look at the ones digit. If it is 5 or more, round up. If it is less than 5, round down. So 47 becomes 50. To round to the nearest 100, look at the tens digit. So 340 becomes 300. If the digit is exactly 5, we round up. So 65 becomes 70."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۲۶۸ کو قریب ترین سو تک گول کریں۔",
+        "en": "Round 268 to the nearest 100."
+      },
+      "steps": [
+        {
+          "ur": "۲۶۸ دو سو اور تین سو کے درمیان ہے۔",
+          "en": "268 is between 200 and 300."
+        },
+        {
+          "ur": "سو تک گول کرنا ہے، تو دہائی کا ہندسہ دیکھیں: ۶۔",
+          "en": "We round to 100, so look at the tens digit: 6."
+        },
+        {
+          "ur": "۶، ۵ یا زیادہ ہے، اس لیے اوپر جائیں۔",
+          "en": "6 is 5 or more, so round up."
+        },
+        {
+          "ur": "جواب: ۳۰۰۔",
+          "en": "Answer: 300."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "۷۳۵ کو قریب ترین دس تک گول کریں۔",
+        "en": "Round 735 to the nearest 10."
+      },
+      "steps": [
+        {
+          "ur": "۷۳۵ سات سو تیس اور سات سو چالیس کے درمیان ہے۔",
+          "en": "735 is between 730 and 740."
+        },
+        {
+          "ur": "دس تک گول کرنا ہے، تو اکائی دیکھیں: ۵۔",
+          "en": "We round to 10, so look at the ones digit: 5."
+        },
+        {
+          "ur": "ٹھیک ۵ ہو تو اوپر جاتے ہیں۔ جواب: ۷۴۰۔",
+          "en": "Exactly 5 rounds up. Answer: 740."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-number-line-86",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۸۰ سے ۹۰ کی عددی لکیر پر ۸۶ دکھایا گیا ہے۔ اس دس پر ٹیپ کریں جس کے ۸۶ زیادہ قریب ہے۔",
+        "en": "A number line from 80 to 90 shows 86. Tap the ten that 86 is closer to."
+      },
+      "answer_key": {
+        "tap": "90",
+        "rounded": 90
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۸۶ سے ۸۰ تک کتنے قدم ہیں؟ ۹۰ تک کتنے؟",
+            "en": "How many steps from 86 to 80? And to 90?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-1382-to-100",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۱۳۸۲ کو قریب ترین سو تک گول کریں: ___",
+        "en": "Round 1382 to the nearest 100: ___"
+      },
+      "answer_key": {
+        "answer": "1400"
+      },
+      "accepted_variants": [
+        "1400",
+        "1,400",
+        "۱۴۰۰",
+        "۱٬۴۰۰"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دہائی کا ہندسہ ۸ ہے۔ اوپر یا نیچے؟",
+            "en": "The tens digit is 8. Up or down?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱۳۸۲، ۱۳۰۰ اور ۱۴۰۰ کے درمیان ہے؛ دہائی ۸ ہے، اس لیے ۱۴۰۰۔",
+        "en": "1382 is between 1300 and 1400; the tens digit is 8, so 1400."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-47-to-10",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۴۷ کو قریب ترین دس تک گول کریں۔",
+        "en": "Round 47 to the nearest 10."
+      },
+      "options": [
+        {
+          "ur": "۴۰",
+          "en": "40"
+        },
+        {
+          "ur": "۵۰",
+          "en": "50"
+        },
+        {
+          "ur": "۶۰",
+          "en": "60"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اکائی کا ہندسہ کیا ہے؟",
+            "en": "What is the ones digit?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اکائی ۷ ہے، ۵ یا زیادہ، اس لیے ۵۰۔",
+        "en": "The ones digit is 7, which is 5 or more, so 50."
+      }
+    },
+    {
+      "id": "p2-340-to-100",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۳۴۰ کو قریب ترین سو تک گول کریں۔",
+        "en": "Round 340 to the nearest 100."
+      },
+      "options": [
+        {
+          "ur": "۴۰۰",
+          "en": "400"
+        },
+        {
+          "ur": "۳۴۰",
+          "en": "340"
+        },
+        {
+          "ur": "۳۰۰",
+          "en": "300"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سو تک گول کرنے کے لیے کون سا ہندسہ دیکھتے ہیں؟",
+            "en": "Which digit do we look at to round to 100?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "دہائی ۴ ہے، ۵ سے کم، اس لیے ۳۰۰۔",
+        "en": "The tens digit is 4, less than 5, so 300."
+      }
+    },
+    {
+      "id": "p3-65-exactly-5",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۶۵ کو قریب ترین دس تک گول کریں۔",
+        "en": "Round 65 to the nearest 10."
+      },
+      "options": [
+        {
+          "ur": "۷۰",
+          "en": "70"
+        },
+        {
+          "ur": "۶۰",
+          "en": "60"
+        },
+        {
+          "ur": "۶۵",
+          "en": "65"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جب ہندسہ ٹھیک ۵ ہو تو ہم کیا کرتے ہیں؟",
+            "en": "What do we do when the digit is exactly 5?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ٹھیک ۵ ہو تو اوپر جاتے ہیں: ۷۰۔",
+        "en": "Exactly 5 rounds up: 70."
+      }
+    },
+    {
+      "id": "p5-523-to-10",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "۵۲۳ کو قریب ترین دس تک گول کریں تو ۵۰۰ آتا ہے۔",
+        "en": "523 rounded to the nearest 10 is 500."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دس تک گول کرنے کے لیے اکائی دیکھیں۔",
+            "en": "To round to 10, look at the ones digit."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اکائی ۳ ہے، اس لیے ۵۲۰۔ ۵۰۰ تو قریب ترین سو ہے۔",
+        "en": "The ones digit is 3, so 520. 500 is the nearest hundred instead."
+      }
+    },
+    {
+      "id": "p6-2951-to-100",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۲۹۵۱ کو قریب ترین سو تک گول کریں۔",
+        "en": "Round 2951 to the nearest 100."
+      },
+      "options": [
+        {
+          "ur": "۲۹۰۰",
+          "en": "2,900"
+        },
+        {
+          "ur": "۳۰۰۰",
+          "en": "3,000"
+        },
+        {
+          "ur": "۲۹۵۰",
+          "en": "2,950"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دہائی ۵ ہے۔ ۵ کا اصول یاد کریں۔",
+            "en": "The tens digit is 5. Remember the rule for 5."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "دہائی ۵ ہے، اس لیے اوپر: ۳۰۰۰۔ ۲۹۵۰ تو دس تک گول کرنے سے آتا ہے۔",
+        "en": "The tens digit is 5, so round up: 3000. 2950 is what rounding to 10 gives."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-rounds-to-70",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک عدد قریب ترین دس تک گول ہو کر ۷۰ بنتا ہے۔ وہ سب سے چھوٹا کون سا ہو سکتا ہے؟ سب سے بڑا کون سا؟",
+        "en": "A whole number rounds to 70 when rounded to the nearest 10. What is the smallest it could be? The largest?"
+      },
+      "answer_key": {
+        "answer": "smallest 65, largest 74"
+      },
+      "accepted_variants": [
+        "65 and 74",
+        "65, 74",
+        "۶۵ اور ۷۴"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۶۴ اور ۷۵ کو گول کر کے دیکھیں۔",
+            "en": "Try rounding 64 and 75."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-round-prices",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "تین قیمتوں کو قریب ترین دس تک گول کریں۔",
+        "en": "round three prices to the nearest 10."
+      },
+      "answer_key": {
+        "answer": "three correctly rounded prices"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "کونسا ہندسہ دیکھنا ہے؟",
+        "en": "Which digit do you need to look at?"
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "۵ یا زیادہ تو اوپر",
+        "en": "5 or more, round up"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "غلط ہندسہ دیکھنا، مثلاً سو تک گول کرتے وقت اکائی دیکھنا۔",
+        "en": "Looking at the wrong digit, e.g. the ones digit when rounding to the nearest 100."
+      },
+      "correction": {
+        "ur": "دس تک گول کرنے کے لیے اکائی دیکھیں۔ سو تک گول کرنے کے لیے دہائی دیکھیں۔",
+        "en": "To round to 10, look at the ones. To round to 100, look at the tens."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ٹھیک ۵ ہو تو نیچے گول کرنا، کیونکہ وہ درمیان میں ہے۔",
+        "en": "Rounding an exact 5 down because it is in the middle."
+      },
+      "correction": {
+        "ur": "ہمارا اصول ہے: ٹھیک ۵ ہو تو اوپر جائیں۔ ۶۵ بنتا ہے ۷۰۔",
+        "en": "Our rule is: exactly 5 rounds up. 65 becomes 70."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:MATH-G4-NB-03",
+      "remediation_ref": "MATH-G4-NB-03"
+    },
+    {
+      "signal": "rounds-using-wrong-place",
+      "remediation_ref": "MATH-G4-NB-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "دس تک: اکائی دیکھیں۔ سو تک: دہائی دیکھیں۔ ۵ یا زیادہ تو اوپر، ۵ سے کم تو نیچے۔",
+    "en": "To 10: look at the ones. To 100: look at the tens. 5 or more rounds up; less than 5 rounds down."
+  },
+  "summary": {
+    "ur": "ہم نے صحیح ہندسہ دیکھ کر قریب ترین دس اور سو تک گول کرنا سیکھا۔",
+    "en": "We learned to round to the nearest 10 and 100 by looking at the right digit."
+  },
+  "parent_notes": {
+    "ur": "قیمتوں کو گول کر کے خریداری کا اندازاً کل نکالیں۔",
+    "en": "estimate the shopping total by rounding."
+  },
+  "mentor_notes": {
+    "ur": "\"بالکل ۵\" والا اصول (اوپر گول کریں) ایک واضح مثال سے دکھائیں۔",
+    "en": "the \"exactly 5\" convention (round up) needs an explicit example."
+  },
+  "accessibility_notes": {
+    "ur": "عددی لکیر کی تصویر ابھی بنانی ہے؛ اس کا متبادل متن سرے کے دونوں عدد اور نشان والا عدد پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ٹیپ سرگرمی کا متبادل: دو بٹنوں \"۸۰\" اور \"۹۰\" میں سے ایک چنیں۔",
+    "en": "The number-line picture is still to be made; its alt text should read both end numbers and the marked number. Urdu audio is not yet recorded. Alternative to the tap activity: choose between two buttons, \"80\" and \"90\"."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "number line first (which ten or hundred is closer?), then the rule: look at the digit one place to the right; 5 or more rounds up",
+    "questioning_strategy": "ask 'which two tens (or hundreds) is it between?' then 'which digit decides?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "uses the ones digit when rounding to 100",
+      "rounds an exact 5 down"
+    ],
+    "hint_policy": "graduated; two hints max (which digit to look at; 5 or more rounds up) then a worked re-teach with 268; never give the answer first",
+    "example_policy": "2- to 4-digit numbers, including exact-5 cases and numbers that cross a hundred (2951); prices in rupees",
+    "misconception_detectors": [
+      "answers 500 for 523 to the nearest 10",
+      "answers 2950 for 2951 to the nearest 100",
+      "answers 60 for 65"
+    ],
+    "critical_thinking_prompts": [
+      "Why can two different numbers round to the same answer?"
+    ],
+    "personalization_rules": "if the learner cannot place the number between two tens or hundreds, return to the number line and MATH-G4-NB-03",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the misconception library has no rounding id (the doc suggests m-round-wrong-place 'if observed'); items are untagged and the two misconceptions are new wording",
+    "subject expert: confirm 'exactly 5 rounds up' matches the convention taught in Pakistani Grade 4 classrooms"
+  ]
+}

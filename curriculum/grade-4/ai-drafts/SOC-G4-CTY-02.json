@@ -1,0 +1,537 @@
+{
+  "code": "SOC-G4-CTY-02",
+  "title": {
+    "ur": "پاکستان کے صوبے اور دارالحکومت",
+    "en": "Pakistan's provinces and capital"
+  },
+  "description": {
+    "ur": "پاکستان کے چار صوبوں، ان کے صدر مقام اور وفاقی دارالحکومت اسلام آباد کو نقشے پر پہچانیں۔",
+    "en": "Name Pakistan's four provinces, their capital cities and the federal capital Islamabad, and find them on a map."
+  },
+  "keywords": [
+    "provinces",
+    "capital",
+    "Islamabad",
+    "Punjab",
+    "Sindh",
+    "Khyber Pakhtunkhwa",
+    "Balochistan",
+    "map"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "صوبہ",
+        "en": "province"
+      },
+      "definition": {
+        "ur": "ملک کا ایک بڑا حصہ جس کی اپنی حکومت ہوتی ہے۔",
+        "en": "a big part of a country that has its own government."
+      }
+    },
+    {
+      "term": {
+        "ur": "صدر مقام",
+        "en": "provincial capital"
+      },
+      "definition": {
+        "ur": "صوبے کا وہ شہر جہاں سے صوبہ چلایا جاتا ہے۔",
+        "en": "the city from which a province is run."
+      }
+    },
+    {
+      "term": {
+        "ur": "دارالحکومت",
+        "en": "capital"
+      },
+      "definition": {
+        "ur": "ملک کا وہ شہر جہاں سے پورا ملک چلایا جاتا ہے۔ پاکستان کا دارالحکومت اسلام آباد ہے۔",
+        "en": "the city from which the whole country is run. Pakistan's capital is Islamabad."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم پاکستان کا نقشہ کھولیں گے۔ پاکستان کے چار صوبے ہیں۔ ہر صوبے کا ایک صدر مقام ہے۔ ملک کا دارالحکومت اسلام آباد ہے۔ ہم ہر صوبہ نقشے پر ڈھونڈیں گے اور اس کا شہر یاد کریں گے۔",
+    "en": "Today we open the map of Pakistan. Pakistan has four provinces. Each province has a capital city. The country's capital is Islamabad. We will find each province on the map and remember its city."
+  },
+  "student_explanation": {
+    "ur": "پاکستان کے چار صوبے ہیں۔ پنجاب کا صدر مقام لاہور ہے۔ سندھ کا صدر مقام کراچی ہے۔ خیبر پختونخوا کا صدر مقام پشاور ہے۔ بلوچستان کا صدر مقام کوئٹہ ہے۔ رقبے میں بلوچستان سب سے بڑا صوبہ ہے۔ پاکستان کا دارالحکومت اسلام آباد ہے۔ گلگت بلتستان اور آزاد جموں و کشمیر بھی ہمارے نقشے پر ہیں، جن کے صدر مقام گلگت اور مظفرآباد ہیں۔ ہر علاقہ اپنی جگہ اہم اور قابلِ احترام ہے۔",
+    "en": "Pakistan has four provinces. Punjab's capital is Lahore. Sindh's capital is Karachi. The capital of Khyber Pakhtunkhwa is Peshawar. Balochistan's capital is Quetta. By area, Balochistan is the largest province. Pakistan's capital is Islamabad. Gilgit-Baltistan and Azad Jammu and Kashmir are also on our map, with capitals Gilgit and Muzaffarabad. Every area matters and deserves respect."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "سندھ کا صدر مقام کون سا شہر ہے؟",
+        "en": "Which city is the capital of Sindh?"
+      },
+      "steps": [
+        {
+          "ur": "نقشے پر سندھ ڈھونڈیں۔ یہ جنوب میں سمندر کے کنارے ہے۔",
+          "en": "Find Sindh on the map. It is in the south, by the sea."
+        },
+        {
+          "ur": "سندھ کے اندر صدر مقام والا نشان دیکھیں۔",
+          "en": "Look for the capital-city mark inside Sindh."
+        },
+        {
+          "ur": "یہ نشان کراچی پر ہے۔ تو سندھ کا صدر مقام کراچی ہے۔",
+          "en": "The mark is on Karachi. So Sindh's capital is Karachi."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ایک بچہ کہتا ہے: 'لاہور پاکستان کا دارالحکومت ہے۔' کیا یہ درست ہے؟",
+        "en": "A boy says: 'Lahore is the capital of Pakistan.' Is he right?"
+      },
+      "steps": [
+        {
+          "ur": "لاہور پنجاب کا صدر مقام ہے، یعنی صوبے کا شہر۔",
+          "en": "Lahore is the capital of Punjab, a province's city."
+        },
+        {
+          "ur": "پورے ملک کا دارالحکومت الگ شہر ہے۔",
+          "en": "The capital of the whole country is a different city."
+        },
+        {
+          "ur": "وہ شہر اسلام آباد ہے۔ تو بچے کی بات درست نہیں۔",
+          "en": "That city is Islamabad. So the boy is not right."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-map-place",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "خالی نقشے پر ہر صوبے کا نام اس کی جگہ پر رکھیں: پنجاب، سندھ، خیبر پختونخوا، بلوچستان۔ پھر اسلام آباد کا ستارہ رکھیں۔",
+        "en": "On the blank map, drag each province name to its place: Punjab, Sindh, Khyber Pakhtunkhwa, Balochistan. Then place the star for Islamabad."
+      },
+      "answer_key": {
+        "placement": {
+          "Balochistan": "large south-west region",
+          "Sindh": "south-east region on the Arabian Sea coast",
+          "Punjab": "east-central region",
+          "Khyber Pakhtunkhwa": "north-west region",
+          "Islamabad": "star in the north, beside the Punjab–Khyber Pakhtunkhwa border area"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سب سے بڑا حصہ بلوچستان ہے۔ پہلے اسے رکھیں۔",
+            "en": "The biggest part is Balochistan. Place it first."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-match-capitals",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر صوبے کو اس کے صدر مقام سے ملائیں۔",
+        "en": "Match each province to its capital."
+      },
+      "options": [
+        {
+          "ur": "لاہور",
+          "en": "Lahore"
+        },
+        {
+          "ur": "کراچی",
+          "en": "Karachi"
+        },
+        {
+          "ur": "پشاور",
+          "en": "Peshawar"
+        },
+        {
+          "ur": "کوئٹہ",
+          "en": "Quetta"
+        }
+      ],
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "پنجاب",
+              "en": "Punjab"
+            },
+            "right": {
+              "ur": "لاہور",
+              "en": "Lahore"
+            }
+          },
+          {
+            "left": {
+              "ur": "سندھ",
+              "en": "Sindh"
+            },
+            "right": {
+              "ur": "کراچی",
+              "en": "Karachi"
+            }
+          },
+          {
+            "left": {
+              "ur": "خیبر پختونخوا",
+              "en": "Khyber Pakhtunkhwa"
+            },
+            "right": {
+              "ur": "پشاور",
+              "en": "Peshawar"
+            }
+          },
+          {
+            "left": {
+              "ur": "بلوچستان",
+              "en": "Balochistan"
+            },
+            "right": {
+              "ur": "کوئٹہ",
+              "en": "Quetta"
+            }
+          }
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے وہ جوڑا بنائیں جو آپ کو یقینی آتا ہو۔",
+            "en": "Make the pair you are surest of first."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-count",
+      "type": "fill_blank",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پاکستان کے ___ صوبے ہیں۔",
+        "en": "Pakistan has ___ provinces."
+      },
+      "answer_key": {
+        "answer": "4"
+      },
+      "accepted_variants": [
+        "4",
+        "۴",
+        "four",
+        "چار"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "صوبوں کے نام گنیں: پنجاب، سندھ ...",
+            "en": "Count the province names: Punjab, Sindh ..."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پنجاب، سندھ، خیبر پختونخوا اور بلوچستان: چار صوبے۔",
+        "en": "Punjab, Sindh, Khyber Pakhtunkhwa and Balochistan: four provinces."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-capital-pk",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پاکستان کا دارالحکومت کون سا شہر ہے؟",
+        "en": "Which city is the capital of Pakistan?"
+      },
+      "options": [
+        {
+          "ur": "لاہور",
+          "en": "Lahore"
+        },
+        {
+          "ur": "کراچی",
+          "en": "Karachi"
+        },
+        {
+          "ur": "اسلام آباد",
+          "en": "Islamabad"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ملک کا شہر صوبے کے شہر سے الگ ہے۔",
+            "en": "The country's city is different from a province's city."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اسلام آباد پورے ملک کا دارالحکومت ہے۔",
+        "en": "Islamabad is the capital of the whole country."
+      }
+    },
+    {
+      "id": "p3-quetta",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کوئٹہ کس صوبے کا صدر مقام ہے؟",
+        "en": "Quetta is the capital of which province?"
+      },
+      "options": [
+        {
+          "ur": "بلوچستان",
+          "en": "Balochistan"
+        },
+        {
+          "ur": "سندھ",
+          "en": "Sindh"
+        },
+        {
+          "ur": "پنجاب",
+          "en": "Punjab"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "کوئٹہ بلوچستان کا صدر مقام ہے۔",
+        "en": "Quetta is the capital of Balochistan."
+      }
+    },
+    {
+      "id": "p5-largest",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "رقبے میں بلوچستان پاکستان کا سب سے بڑا صوبہ ہے۔",
+        "en": "By area, Balochistan is Pakistan's largest province."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "نقشے پر بلوچستان سب سے زیادہ جگہ لیتا ہے۔",
+        "en": "On the map, Balochistan covers the most land."
+      }
+    },
+    {
+      "id": "p6-coast",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "نقشے پر کون سا صوبہ جنوب میں سمندر کے کنارے ہے اور اس کا صدر مقام کراچی ہے؟",
+        "en": "On the map, which province is in the south by the sea and has Karachi as its capital?"
+      },
+      "options": [
+        {
+          "ur": "خیبر پختونخوا",
+          "en": "Khyber Pakhtunkhwa"
+        },
+        {
+          "ur": "سندھ",
+          "en": "Sindh"
+        },
+        {
+          "ur": "پنجاب",
+          "en": "Punjab"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-map-not-oriented"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کراچی سمندر کے کنارے کا بڑا شہر ہے۔",
+            "en": "Karachi is a big city by the sea."
+          }
+        }
+      ]
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-north-west",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "نقشے پر اوپر شمال ہے۔ پشاور والا صوبہ اسلام آباد سے کس طرف ہے؟",
+        "en": "North is at the top of the map. Which way from Islamabad is the province with Peshawar?"
+      },
+      "options": [
+        {
+          "ur": "مغرب کی طرف",
+          "en": "towards the west"
+        },
+        {
+          "ur": "جنوب کی طرف",
+          "en": "towards the south"
+        },
+        {
+          "ur": "مشرق کی طرف",
+          "en": "towards the east"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "2": "m-map-not-oriented"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "نقشے پر بائیں طرف مغرب ہوتا ہے۔",
+            "en": "On a map, west is on the left."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-tell-capitals",
+      "type": "short",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "گھر میں کسی بڑے کو چاروں صوبوں کے نام اور ان کے صدر مقام بتائیں۔ پھر ملک کا دارالحکومت بتائیں۔",
+        "en": "Tell a grown-up at home the names of the four provinces and their capitals. Then tell them the country's capital."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor checks orally later: four correct province-capital pairs plus Islamabad. Do not ask where the child or family lives."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "صوبہ اور شہر الگ چیزیں ہیں۔ پہلے صوبہ پہچانیں، پھر اس کا شہر۔",
+        "en": "A province and a city are different. First find the province, then its city."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "نقشے پر صدر مقام والا نشان دیکھیں۔",
+        "en": "Look for the capital-city mark on the map."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "لاہور یا کراچی پاکستان کا دارالحکومت ہے کیونکہ یہ بڑے شہر ہیں۔",
+        "en": "Lahore or Karachi is Pakistan's capital because they are big cities."
+      },
+      "correction": {
+        "ur": "بڑا شہر ہونا دارالحکومت ہونا نہیں۔ پاکستان کا دارالحکومت اسلام آباد ہے۔",
+        "en": "Being big does not make a city the capital. Pakistan's capital is Islamabad."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "نقشہ کسی بھی طرف سے پڑھ لیں، فرق نہیں پڑتا۔",
+        "en": "You can read the map from any side; it makes no difference."
+      },
+      "correction": {
+        "ur": "پہلے نقشے کی سمتیں اور کلید پڑھیں۔ عام طور پر اوپر شمال ہوتا ہے۔",
+        "en": "Read the map's directions and key first. Usually north is at the top."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-map-not-oriented",
+      "remediation_ref": "SOC-G4-GEO-01"
+    },
+    {
+      "signal": "two_wrong_in_a_row",
+      "remediation_ref": "SOC-G4-CTY-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پنجاب–لاہور، سندھ–کراچی، خیبر پختونخوا–پشاور، بلوچستان–کوئٹہ۔ دارالحکومت: اسلام آباد۔ گلگت بلتستان–گلگت، آزاد جموں و کشمیر–مظفرآباد۔",
+    "en": "Punjab–Lahore, Sindh–Karachi, Khyber Pakhtunkhwa–Peshawar, Balochistan–Quetta. Capital: Islamabad. Gilgit-Baltistan–Gilgit, Azad Jammu and Kashmir–Muzaffarabad."
+  },
+  "summary": {
+    "ur": "ہم نے چار صوبے، ان کے صدر مقام اور دارالحکومت اسلام آباد نقشے پر پہچانے۔",
+    "en": "We found the four provinces, their capitals and the capital Islamabad on the map."
+  },
+  "parent_notes": {
+    "ur": "خبروں یا موسم کے حال میں کسی شہر کا نام آئے تو بچے سے پوچھیں کہ یہ کس صوبے میں ہے۔",
+    "en": "When a city is named in the news or weather report, ask your child which province it is in."
+  },
+  "mentor_notes": {
+    "ur": "سب علاقوں کو برابر احترام سے پیش کریں؛ کسی صوبے کو بہتر یا کم تر نہ کہیں۔ سرحدوں یا سیاسی حیثیت پر بحث نہ کریں۔ بچے سے اس کا اپنا شہر یا پتا نہ پوچھیں۔",
+    "en": "Present every area with equal respect; never call one province better or lesser. Do not discuss borders or political status. Do not ask the child for their own city or address."
+  },
+  "accessibility_notes": {
+    "ur": "صوبوں کا سادہ نقشہ ابھی بنانا ہے؛ اس کا متبادل متن ہر صوبے کی سمت اور صدر مقام پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے والی سرگرمی کا متبادل: ہر صوبے کے لیے سمت (شمال مغرب، جنوب مغرب وغیرہ) کی فہرست میں سے چنیں۔",
+    "en": "A simple province map is still to be made; its alt text should read each province's direction and capital. Urdu audio is not yet recorded. Alternative to the drag activity: for each province, choose its direction (north-west, south-west and so on) from a list."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "map first: find the province, then its capital mark; keep 'province capital' and 'country capital' clearly separate",
+    "questioning_strategy": "ask 'which province is this?' before 'what is its capital?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "names a big city as the national capital"
+    ],
+    "hint_policy": "graduated; two hints max; first separate province from city, then point to the map mark; never give the city first",
+    "example_policy": "only stable facts: four provinces, their capitals, Islamabad, Gilgit-Baltistan and Azad Jammu and Kashmir with their capitals; no borders, disputes or politics",
+    "misconception_detectors": [
+      "says Lahore or Karachi is the national capital",
+      "swaps two province capitals",
+      "reads the map without checking north"
+    ],
+    "critical_thinking_prompts": [
+      "Why might a country choose one city to be its capital?"
+    ],
+    "personalization_rules": "if the learner misplaces provinces by direction, route to SOC-G4-GEO-01 for cardinal directions",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "discuss borders, territorial claims or the political status of any area",
+      "ask which city or province the learner lives in"
+    ]
+  },
+  "review_flags": [
+    "subject expert + child-safety: confirm how Gilgit-Baltistan and Azad Jammu and Kashmir should be described for Grade 4 (draft calls them areas on our map with capitals Gilgit and Muzaffarabad, not provinces)",
+    "confirm the province-direction descriptions in the map answer key match the map that will be drawn",
+    "confirm 'صدر مقام' vs 'دارالحکومت' usage matches the provincial textbook terms"
+  ]
+}

@@ -1,0 +1,462 @@
+{
+  "code": "ISL-G4-AKH-04",
+  "title": {
+    "ur": "صفائی اور شکر",
+    "en": "Cleanliness and Thankfulness"
+  },
+  "description": {
+    "ur": "اپنے جسم، کپڑوں اور اردگرد کو صاف رکھنا، اور اللہ تعالیٰ اور لوگوں کا شکر ادا کرنا۔",
+    "en": "Keeping our body, clothes and surroundings clean, and thanking Allah and people."
+  },
+  "keywords": [
+    "cleanliness",
+    "gratitude",
+    "thankfulness",
+    "hygiene",
+    "shukr",
+    "akhlaq"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "صفائی",
+        "en": "cleanliness"
+      },
+      "definition": {
+        "ur": "جسم، کپڑے اور جگہ کو صاف ستھرا رکھنا۔",
+        "en": "Keeping our body, clothes and places clean."
+      }
+    },
+    {
+      "term": {
+        "ur": "شکر",
+        "en": "thankfulness"
+      },
+      "definition": {
+        "ur": "کسی نعمت یا مدد پر دل سے خوش ہو کر شکریہ کہنا۔",
+        "en": "Feeling glad for a gift or help, and saying thank you."
+      }
+    },
+    {
+      "term": {
+        "ur": "نعمت",
+        "en": "blessing"
+      },
+      "definition": {
+        "ur": "اللہ تعالیٰ کی دی ہوئی اچھی چیز، جیسے پانی اور کھانا۔",
+        "en": "A good thing Allah has given us, like water and food."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم دو اچھی عادتیں سیکھیں گے: صفائی اور شکر۔ اسلام میں صفائی کو بہت اہمیت دی گئی ہے۔ [حدیث: صفائی اور ایمان کے بارے میں — حوالہ، متن اور منظور شدہ ترجمہ عالم فراہم کرے] شکر یعنی اللہ تعالیٰ کی نعمتوں پر خوش ہونا۔ ہم مدد کرنے والے لوگوں کا بھی شکریہ ادا کرتے ہیں۔",
+    "en": "Today we will learn two good habits: cleanliness and thankfulness. Islam gives cleanliness great importance. [Hadith: on cleanliness and faith — reference, text and approved translation to be supplied by a scholar] Thankfulness means being glad for Allah's blessings. We also thank the people who help us."
+  },
+  "student_explanation": {
+    "ur": "اسلام ہمیں صاف ستھرا رہنا سکھاتا ہے۔ ہم کھانے سے پہلے اور بعد ہاتھ دھوتے ہیں۔ ہم دانت صاف کرتے ہیں اور نہاتے ہیں۔ ہم کچرا کوڑے دان میں ڈالتے ہیں۔ ہم پانی ضائع نہیں کرتے۔ پانی، کھانا اور گھر اللہ تعالیٰ کی نعمتیں ہیں۔ نعمت پر خوش ہونا شکر ہے۔ ہم مدد کرنے والوں کو شکریہ بھی کہتے ہیں۔",
+    "en": "Islam teaches us to stay clean. We wash our hands before and after eating. We brush our teeth and take a bath. We put rubbish in the bin. We do not waste water. Water, food and home are blessings from Allah. Being glad for a blessing is thankfulness. We also say thank you to people who help us."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "سارہ کھیل کر آئی ہے اور روٹی کھانے لگی ہے۔ پہلے کیا کرے؟",
+        "en": "Sara has come in from playing and is about to eat roti. What should she do first?"
+      },
+      "steps": [
+        {
+          "ur": "کھیلنے سے ہاتھوں پر مٹی لگ جاتی ہے۔",
+          "en": "Playing leaves dirt on our hands."
+        },
+        {
+          "ur": "سارہ صابن سے ہاتھ دھوتی ہے، اور نل کھلا نہیں چھوڑتی۔",
+          "en": "Sara washes her hands with soap and does not leave the tap running."
+        },
+        {
+          "ur": "صاف ہاتھوں سے کھانا کھاتی ہے اور کھانے پر شکر ادا کرتی ہے۔",
+          "en": "She eats with clean hands and is thankful for the food."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "سبزی والے انکل نے احمد کا تھیلا اٹھانے میں مدد کی۔ احمد کیا کرے؟",
+        "en": "The vegetable seller helped Ahmed lift his bag. What should Ahmed do?"
+      },
+      "steps": [
+        {
+          "ur": "سوچیں: انکل نے احمد کی مدد کی۔",
+          "en": "Think: the seller helped Ahmed."
+        },
+        {
+          "ur": "مدد ملنے پر شکریہ کہنا اچھا اخلاق ہے۔",
+          "en": "Saying thank you for help is good character."
+        },
+        {
+          "ur": "احمد مسکرا کر کہتا ہے: شکریہ انکل۔",
+          "en": "Ahmed smiles and says: Thank you, uncle."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-clean-or-thankful",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو چھو کر صحیح ٹوکری میں رکھیں: 'صفائی' یا 'شکر'۔",
+        "en": "Tap each card and put it in the right basket: 'cleanliness' or 'thankfulness'."
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا یہ کام چیز کو صاف کرتا ہے، یا کسی کا شکریہ ہے؟",
+            "en": "Does this make something clean, or is it saying thanks?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "کھانے سے پہلے ہاتھ دھونا",
+          "en": "Washing hands before eating"
+        },
+        {
+          "ur": "مدد کرنے والے کو شکریہ کہنا",
+          "en": "Saying thank you to a helper"
+        },
+        {
+          "ur": "کچرا کوڑے دان میں ڈالنا",
+          "en": "Putting rubbish in the bin"
+        },
+        {
+          "ur": "بارش اور پانی کی نعمت پر خوش ہونا",
+          "en": "Being glad for the blessing of rain and water"
+        }
+      ],
+      "answer_key": {
+        "mode": "sort",
+        "groups": {
+          "cleanliness": [
+            0,
+            2
+          ],
+          "thankfulness": [
+            1,
+            3
+          ]
+        }
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-before-eating",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کھانے سے پہلے ہم کیا کرتے ہیں؟",
+        "en": "What do we do before eating?"
+      },
+      "options": [
+        {
+          "ur": "ہاتھ دھوتے ہیں",
+          "en": "Wash our hands"
+        },
+        {
+          "ur": "جوتے پہنتے ہیں",
+          "en": "Put on our shoes"
+        },
+        {
+          "ur": "کچھ نہیں",
+          "en": "Nothing"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-rubbish",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "پارک میں بسکٹ کھانے کے بعد ریپر کہاں ڈالیں؟",
+        "en": "Where should the biscuit wrapper go after eating in the park?"
+      },
+      "explanation": {
+        "ur": "جگہ صاف رکھنا ہم سب کی ذمہ داری ہے۔",
+        "en": "Keeping places clean is everyone's job."
+      },
+      "options": [
+        {
+          "ur": "زمین پر",
+          "en": "On the ground"
+        },
+        {
+          "ur": "نالی میں",
+          "en": "In the drain"
+        },
+        {
+          "ur": "کوڑے دان میں، یا گھر لا کر",
+          "en": "In a bin, or bring it home"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-responsibility-someone-else"
+        }
+      }
+    },
+    {
+      "id": "p3-water-blessing",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پانی اللہ تعالیٰ کی نعمت ہے، اس لیے ہمیں اسے ضائع نہیں کرنا چاہیے۔",
+        "en": "Water is a blessing from Allah, so we should not waste it."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-thank-people",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "بہن نے آپ کا بستہ ٹھیک کر دیا۔ آپ کیا کہیں گے؟",
+        "en": "Your sister fixed your school bag. What will you say?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کسی نے مدد کی تو کیا کہتے ہیں؟",
+            "en": "What do we say when someone helps us?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "کچھ نہیں، یہ اس کا کام ہے",
+          "en": "Nothing, it is her job"
+        },
+        {
+          "ur": "شکریہ!",
+          "en": "Thank you!"
+        },
+        {
+          "ur": "اور بھی ٹھیک کرو",
+          "en": "Fix more things"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-responsibility-someone-else"
+        }
+      }
+    },
+    {
+      "id": "p5-only-thank-allah",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہمیں صرف اللہ تعالیٰ کا شکر کرنا ہے، لوگوں کو شکریہ کہنے کی ضرورت نہیں۔",
+        "en": "We only need to thank Allah; there is no need to thank people."
+      },
+      "explanation": {
+        "ur": "ہم اللہ تعالیٰ کا شکر بھی کرتے ہیں اور لوگوں کا شکریہ بھی۔",
+        "en": "We thank Allah and we also thank people."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p6-tap",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "وضو یا ہاتھ دھونے کے بعد نل کا کیا کریں؟",
+        "en": "What should we do with the tap after washing?"
+      },
+      "explanation": {
+        "ur": "پانی بچانا بھی نعمت کا شکر ہے۔",
+        "en": "Saving water is also a way of being thankful."
+      },
+      "options": [
+        {
+          "ur": "کھلا چھوڑ دیں",
+          "en": "Leave it running"
+        },
+        {
+          "ur": "آدھا کھلا رکھیں",
+          "en": "Leave it half open"
+        },
+        {
+          "ur": "اچھی طرح بند کر دیں",
+          "en": "Turn it off properly"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-three-blessings",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "تین ایسی نعمتیں بتائیں جن کے لیے آپ شکر گزار ہیں، اور بتائیں کہ ایک کا خیال کیسے رکھیں گے۔",
+        "en": "Name three blessings you are thankful for, and say how you will take care of one of them."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any blessings, including free ones (eyes, rain, friends, family). Never compare what different children have. Do not ask about the child's home or possessions."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-clean-corner",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج گھر کی ایک چھوٹی جگہ صاف کریں، جیسے اپنا بستہ یا جوتوں کی جگہ۔",
+        "en": "Today, tidy one small place at home, like your school bag or the shoe corner."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. No photos. Praise any effort the child mentions."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: اس سے چیز صاف ہوتی ہے، یا کسی کا شکریہ ادا ہوتا ہے؟",
+        "en": "Think: does this make something clean, or thank someone?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: ہاتھ دھونا صفائی ہے، شکریہ کہنا شکر ہے۔",
+        "en": "Remember: washing hands is cleanliness; saying thank you is thankfulness."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "گلی صاف کرنا کسی اور کا کام ہے۔",
+        "en": "Keeping the street clean is someone else's job."
+      },
+      "correction": {
+        "ur": "ہم میں سے ہر ایک کا حصہ ہے؛ ہم اپنا کچرا خود سنبھالتے ہیں۔",
+        "en": "Each of us has a share of responsibility; we look after our own rubbish."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "شکر صرف بڑی چیز ملنے پر ہوتا ہے۔",
+        "en": "We only give thanks for big gifts."
+      },
+      "correction": {
+        "ur": "پانی، روٹی اور مسکراہٹ جیسی چھوٹی نعمتوں پر بھی شکر کرتے ہیں۔",
+        "en": "We are thankful for small blessings too, like water, roti and a smile."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-responsibility-someone-else",
+      "remediation_ref": "ISL-G4-AKH-04"
+    },
+    {
+      "signal": "low_score:gratitude",
+      "remediation_ref": "ISL-G4-IBA-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "صفائی: ہاتھ دھونا، دانت صاف کرنا، کچرا کوڑے دان میں، پانی ضائع نہ کرنا۔ شکر: اللہ تعالیٰ کی نعمتوں پر خوش ہونا اور لوگوں کو شکریہ کہنا۔",
+    "en": "Cleanliness: wash hands, brush teeth, rubbish in the bin, do not waste water. Thankfulness: be glad for Allah's blessings and thank people."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ صفائی اور شکر دونوں اچھی عادتیں ہیں۔",
+    "en": "We learned that cleanliness and thankfulness are both good habits."
+  },
+  "parent_notes": {
+    "ur": "کھانے سے پہلے مل کر ہاتھ دھوئیں، اور گھر میں ایک دوسرے کو شکریہ کہنے کی عادت ڈالیں۔",
+    "en": "Wash hands together before meals, and make saying thank you to each other a family habit."
+  },
+  "mentor_notes": {
+    "ur": "کچھ گھروں میں صابن یا بہتا پانی نہیں ہوتا؛ 'جو آپ کے پاس ہو اس سے' کہیں اور کسی بچے کو شرمندہ نہ کریں۔",
+    "en": "Some homes have no soap or running water; say 'with what you have' and never make a child feel ashamed."
+  },
+  "accessibility_notes": {
+    "ur": "تصاویر (ہاتھ دھونا، کوڑے دان، سبزی والا) اور ان کا متبادل متن ابھی بنانا ہے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر کارڈ کے لیے 'صفائی' یا 'شکر' کا بٹن چنیں۔",
+    "en": "Pictures (hand washing, a bin, the vegetable seller) and their alt text are still to be made. Urdu audio is not yet recorded. Alternative to the sort activity: choose a 'cleanliness' or 'thankfulness' button for each card."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "teach cleanliness through daily routines, then gratitude to Allah for blessings and thanks to people; link saving water to both",
+    "questioning_strategy": "ask 'what does this do?' then 'is it cleaning or thanking?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says cleaning is someone else's job"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "no-cost routines; assume no running water or soap may be available; never compare homes",
+    "misconception_detectors": [
+      "chooses 'someone else will clean'",
+      "thanks only for big gifts"
+    ],
+    "critical_thinking_prompts": [
+      "Why is not wasting water a way of saying thank you?"
+    ],
+    "personalization_rules": "if the learner mixes up the two habits, repeat the sort with two new cards before the quiz",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: supply the reference, text and approved translation for the hadith placeholder on cleanliness and faith, or remove it",
+    "scholar: the teaching that thanking people is part of thanking Allah is described without a citation; confirm or add an approved reference",
+    "child-safety reviewer: confirm hygiene examples do not shame children whose homes lack soap or running water"
+  ]
+}

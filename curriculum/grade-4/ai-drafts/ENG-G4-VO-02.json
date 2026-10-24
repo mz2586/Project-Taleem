@@ -1,0 +1,459 @@
+{
+  "code": "ENG-G4-VO-02",
+  "title": {
+    "ur": "ہم معنی اور متضاد الفاظ",
+    "en": "Same and Opposite Words"
+  },
+  "description": {
+    "ur": "بچہ عام انگریزی الفاظ کے ہم معنی (synonyms) اور متضاد (antonyms) الفاظ پہچانتا اور جملوں میں استعمال کرتا ہے۔",
+    "en": "The learner recognises and uses synonyms and antonyms of common English words in sentences."
+  },
+  "keywords": [
+    "synonyms",
+    "antonyms",
+    "opposites",
+    "word meaning",
+    "vocabulary"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ہم معنی لفظ (synonym)",
+        "en": "synonym"
+      },
+      "definition": {
+        "ur": "ایسا لفظ جس کا مطلب تقریباً ایک جیسا ہو: big اور large۔",
+        "en": "A word with nearly the same meaning: big and large."
+      }
+    },
+    {
+      "term": {
+        "ur": "متضاد لفظ (antonym)",
+        "en": "antonym"
+      },
+      "definition": {
+        "ur": "الٹے مطلب والا لفظ: hot اور cold۔",
+        "en": "A word with the opposite meaning: hot and cold."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کچھ الفاظ کا مطلب تقریباً ایک جیسا ہوتا ہے، جیسے big اور large۔ انہیں ہم معنی الفاظ کہتے ہیں۔ کچھ الفاظ ایک دوسرے کے الٹ ہوتے ہیں، جیسے hot اور cold۔ انہیں متضاد الفاظ کہتے ہیں۔ آج ہم دونوں قسم کے جوڑے بنائیں گے اور جملوں میں بولیں گے۔",
+    "en": "Some words mean nearly the same thing, like big and large. We call them synonyms. Some words are opposites, like hot and cold. We call them antonyms. Today we will make both kinds of pairs and use them in sentences."
+  },
+  "student_explanation": {
+    "ur": "ہم معنی لفظ کا مطلب تقریباً ایک جیسا ہوتا ہے۔ big اور large ہم معنی ہیں۔ happy اور glad بھی ہم معنی ہیں۔ متضاد لفظ کا مطلب الٹ ہوتا ہے۔ hot کا متضاد cold ہے۔ full کا متضاد empty ہے۔ جانچنے کا آسان طریقہ ہے۔ جملے میں ایک لفظ کی جگہ دوسرا رکھیں۔ مطلب وہی رہے تو ہم معنی ہیں۔ مطلب الٹ جائے تو متضاد ہیں۔",
+    "en": "A synonym means nearly the same thing. big and large are synonyms. happy and glad are synonyms too. An antonym means the opposite. The antonym of hot is cold. The antonym of full is empty. There is an easy test. Put one word in place of the other in a sentence. If the meaning stays, they are synonyms. If the meaning flips, they are antonyms."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "The jug is full. اس جملے میں full کا متضاد لگائیں۔",
+        "en": "The jug is full. Use the antonym of full in this sentence."
+      },
+      "steps": [
+        {
+          "ur": "full کا مطلب ہے بھرا ہوا۔",
+          "en": "full means it holds as much as it can."
+        },
+        {
+          "ur": "اس کا الٹ ہے خالی: empty۔",
+          "en": "Its opposite is empty."
+        },
+        {
+          "ur": "نیا جملہ: The jug is empty.",
+          "en": "New sentence: The jug is empty."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "Ayesha is happy today. happy کا ہم معنی لفظ چنیں: glad یا sad۔",
+        "en": "Ayesha is happy today. Choose a synonym for happy: glad or sad."
+      },
+      "steps": [
+        {
+          "ur": "دونوں لفظ جملے میں رکھ کر دیکھیں۔",
+          "en": "Try both words in the sentence."
+        },
+        {
+          "ur": "Ayesha is sad today. مطلب الٹ گیا، تو sad متضاد ہے۔",
+          "en": "Ayesha is sad today. The meaning flipped, so sad is an antonym."
+        },
+        {
+          "ur": "Ayesha is glad today. مطلب وہی رہا۔",
+          "en": "Ayesha is glad today. The meaning stayed the same."
+        },
+        {
+          "ur": "جواب: glad۔",
+          "en": "Answer: glad."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-pair-sort",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "جوڑوں کو دو ڈبوں میں ڈالیں، ہم معنی یا متضاد: big–large ، up–down ، fast–quick ، old–new ، small–little ، open–close",
+        "en": "Sort the pairs into two boxes, synonyms or antonyms: big–large, up–down, fast–quick, old–new, small–little, open–close"
+      },
+      "answer_key": {
+        "groups": {
+          "synonyms": [
+            "big–large",
+            "fast–quick",
+            "small–little"
+          ],
+          "antonyms": [
+            "up–down",
+            "old–new",
+            "open–close"
+          ]
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "جوڑے کو جملے میں آزمائیں: مطلب وہی رہا یا الٹ گیا؟",
+            "en": "Try the pair in a sentence: did the meaning stay or flip?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p1-antonym-match",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر لفظ کو اس کے متضاد سے ملائیں: hot ، up ، full ، old",
+        "en": "Match each word to its antonym: hot, up, full, old"
+      },
+      "answer_key": {
+        "pairs": {
+          "hot": "cold",
+          "up": "down",
+          "full": "empty",
+          "old": "new"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر لفظ کا الٹ سوچیں۔",
+            "en": "Think of the opposite of each word."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-begin",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "ہم معنی لفظ لکھیں: begin = s___t",
+        "en": "Write the synonym: begin = s___t"
+      },
+      "answer_key": {
+        "answer": "start"
+      },
+      "accepted_variants": [
+        "start"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کلاس شروع ہوتی ہے: the class will ...",
+            "en": "Think of what a class does at 8 o'clock."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p2-synonym-big",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "big کا ہم معنی لفظ کونسا ہے؟",
+        "en": "Which word is a synonym of big?"
+      },
+      "options": [
+        {
+          "ur": "small",
+          "en": "small"
+        },
+        {
+          "ur": "large",
+          "en": "large"
+        },
+        {
+          "ur": "tall",
+          "en": "tall"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسا لفظ ڈھونڈیں جس کا مطلب بھی 'بڑا' ہو۔",
+            "en": "Find a word that also means 'of great size'."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "small متضاد ہے؛ tall کا مطلب لمبا ہے۔",
+        "en": "small is the opposite; tall means high, not big."
+      }
+    },
+    {
+      "id": "p3-antonym-in-sentence",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "خالی جگہ میں متضاد لفظ لگائیں: The tea is hot, but the water is ___.",
+        "en": "Fill the gap with an antonym: The tea is hot, but the water is ___."
+      },
+      "options": [
+        {
+          "ur": "warm",
+          "en": "warm"
+        },
+        {
+          "ur": "hot",
+          "en": "hot"
+        },
+        {
+          "ur": "cold",
+          "en": "cold"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "but بتاتا ہے کہ اگلی بات الٹ ہے۔",
+            "en": "but tells us the next part is the opposite."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-synonym-quick",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "The boy is fast. fast کی جگہ کونسا لفظ رکھیں تو مطلب وہی رہے؟",
+        "en": "The boy is fast. Which word can replace fast and keep the meaning?"
+      },
+      "options": [
+        {
+          "ur": "quick",
+          "en": "quick"
+        },
+        {
+          "ur": "slow",
+          "en": "slow"
+        },
+        {
+          "ur": "late",
+          "en": "late"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر لفظ جملے میں رکھ کر پڑھیں۔",
+            "en": "Read the sentence with each word."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-open-close",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "open اور close ہم معنی الفاظ ہیں۔",
+        "en": "open and close are synonyms."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "ان کا مطلب الٹ ہے، اس لیے یہ متضاد ہیں۔",
+        "en": "They mean opposite things, so they are antonyms."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-flip-sentence",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "اس جملے کے دو الفاظ ان کے متضاد سے بدلیں: The small shop opens early.",
+        "en": "Change two words in this sentence to their antonyms: The small shop opens early."
+      },
+      "answer_key": {
+        "answer": "The big shop closes late."
+      },
+      "accepted_variants": [
+        "The big shop closes late.",
+        "The large shop closes late.",
+        "The big shop opens late.",
+        "The small shop closes late.",
+        "The big shop closes early."
+      ],
+      "mentor_review_guidance": "Accept any two correct antonym swaps (small→big/large, opens→closes, early→late).",
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "small، opens اور early کے الٹ سوچیں۔",
+            "en": "Think of the opposites of small, opens and early."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-opposites-at-home",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں دو الٹ چیزیں ڈھونڈیں، جیسے hot چائے اور cold پانی۔ دونوں کے لیے ایک ایک انگریزی جملہ بولیں۔",
+        "en": "Find two opposite things at home, like hot tea and cold water. Say one English sentence about each."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Oral at home; the mentor may ask the child to repeat one sentence next session."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: کیا دونوں لفظ ایک جیسی بات کہتے ہیں یا الٹ؟",
+        "en": "Think: do the two words say the same thing or the opposite?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "ایک لفظ کو جملے میں دوسرے کی جگہ رکھ کر پڑھیں۔",
+        "en": "Put one word in place of the other in a sentence and read it."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ہم معنی اور متضاد کو آپس میں ملا دینا۔",
+        "en": "Mixing up synonyms and antonyms."
+      },
+      "correction": {
+        "ur": "ہم معنی = ایک جیسا مطلب، متضاد = الٹ مطلب۔",
+        "en": "Synonym = same meaning; antonym = opposite meaning."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "ایک ہی موضوع کے لفظ کو ہم معنی سمجھنا، جیسے big اور tall۔",
+        "en": "Thinking related words are synonyms, like big and tall."
+      },
+      "correction": {
+        "ur": "جملے میں بدل کر دیکھیں؛ مطلب بدلے تو ہم معنی نہیں۔",
+        "en": "Swap them in a sentence; if the meaning changes, they are not synonyms."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:ENG-G4-VO-01",
+      "remediation_ref": "ENG-G4-VO-01"
+    },
+    {
+      "signal": "confuses_synonym_and_antonym",
+      "remediation_ref": "ENG-G4-VO-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "ہم معنی: big–large، happy–glad، fast–quick۔ متضاد: hot–cold، full–empty، open–close۔ جملے میں بدل کر جانچیں۔",
+    "en": "Synonyms: big–large, happy–glad, fast–quick. Antonyms: hot–cold, full–empty, open–close. Test by swapping in a sentence."
+  },
+  "summary": {
+    "ur": "ہم نے ہم معنی اور متضاد الفاظ پہچانے اور جملوں میں استعمال کیے۔",
+    "en": "We recognised synonyms and antonyms and used them in sentences."
+  },
+  "parent_notes": {
+    "ur": "الٹ لفظوں کا کھیل کھیلیں: آپ اردو میں 'گرم' کہیں، بچہ انگریزی میں الٹ بتائے: cold۔",
+    "en": "Play an opposites game: you say 'garam' in Urdu, your child says the English opposite: cold."
+  },
+  "mentor_notes": {
+    "ur": "big/tall اور small/short جیسی الجھن عام ہے؛ جملے میں بدل کر جانچنے کا طریقہ بار بار کروائیں۔",
+    "en": "Confusions like big/tall and small/short are common; practise the swap-in-a-sentence test repeatedly."
+  },
+  "accessibility_notes": {
+    "ur": "الفاظ کی اردو/انگریزی آڈیو ابھی ریکارڈ نہیں ہوئی۔ الٹ چیزوں (گرم/ٹھنڈا، بھرا/خالی) کی تصویریں اور ان کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے والی سرگرمی کا متبادل: ہر جوڑے کے آگے 'ہم معنی' یا 'متضاد' چنیں۔ ملانے والے سوال میں ٹیپ کر کے جوڑا بنانے کا طریقہ بھی ہو۔",
+    "en": "Urdu/English audio for the words is not yet recorded. Pictures of opposites (hot/cold, full/empty) and their alt text are still to be made. Alternative to the drag activity: choose 'synonym' or 'antonym' next to each pair. The matching item also needs a tap-to-pair option."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "teach the swap test: replace the word in a sentence and check if the meaning stays or flips",
+    "questioning_strategy": "ask 'same or opposite?' before naming the pair type",
+    "slow_down_signals": [
+      "calls antonyms synonyms",
+      "two wrong answers in a row",
+      "picks a related but different word"
+    ],
+    "hint_policy": "graduated; two hints max; first ask same-or-opposite, then the swap test; never give the pair word first",
+    "example_policy": "high-frequency adjective and verb pairs in home, bazaar and weather contexts",
+    "misconception_detectors": [
+      "swaps the labels synonym/antonym",
+      "treats topic-related words as synonyms"
+    ],
+    "critical_thinking_prompts": [
+      "Is 'big' and 'tall' a synonym pair? Test it in a sentence."
+    ],
+    "personalization_rules": "if the learner does not know the base words, route back to ENG-G4-VO-01",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the Urdu terms ہم معنی and متضاد are the ones Pakistani Grade 4 classes use",
+    "check the challenge item's accepted variants cover all two-swap answers the marker should accept"
+  ]
+}

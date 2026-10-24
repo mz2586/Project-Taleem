@@ -1,0 +1,477 @@
+{
+  "code": "ENG-G4-RD-04",
+  "title": {
+    "ur": "مرکزی خیال اور ترتیب",
+    "en": "Main Idea and Order of Events"
+  },
+  "description": {
+    "ur": "بچہ مختصر انگریزی عبارت کا مرکزی خیال پہچانتا ہے اور واقعات کو صحیح ترتیب میں رکھتا ہے۔",
+    "en": "The learner identifies the main idea of a short English passage and puts its events in the right order."
+  },
+  "keywords": [
+    "main idea",
+    "sequence",
+    "first next then",
+    "order of events",
+    "reading comprehension"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "مرکزی خیال (main idea)",
+        "en": "main idea"
+      },
+      "definition": {
+        "ur": "عبارت زیادہ تر کس بارے میں ہے۔",
+        "en": "What the whole passage is mostly about."
+      }
+    },
+    {
+      "term": {
+        "ur": "ترتیب (sequence)",
+        "en": "sequence"
+      },
+      "definition": {
+        "ur": "کام جس ترتیب سے ہوئے: پہلے، پھر، آخر میں۔",
+        "en": "The order in which things happen: first, then, at last."
+      }
+    },
+    {
+      "term": {
+        "ur": "ترتیب کے الفاظ (sequence words)",
+        "en": "sequence words"
+      },
+      "definition": {
+        "ur": "First، Next، Then، At last۔",
+        "en": "First, Next, Then, At last."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ہر کہانی کسی ایک بڑی بات کے بارے میں ہوتی ہے۔ اسے مرکزی خیال کہتے ہیں۔ کہانی میں کام ایک ترتیب سے ہوتے ہیں۔ First، Next، Then اور At last ہمیں یہ ترتیب بتاتے ہیں۔ آج آپ عبارت خود پڑھیں گے اور یہ دونوں چیزیں ڈھونڈیں گے۔",
+    "en": "Every story is about one big thing. We call it the main idea. Things in a story happen in an order. First, Next, Then and At last show us that order. Today you will read a passage yourself and find both."
+  },
+  "student_explanation": {
+    "ur": "مرکزی خیال پوری عبارت کی بڑی بات ہے۔ خود سے پوچھیں: یہ زیادہ تر کس بارے میں ہے؟ ایک چھوٹی تفصیل مرکزی خیال نہیں ہوتی۔ ترتیب کے لیے خاص الفاظ دیکھیں۔ First سب سے پہلے آتا ہے۔ Next اور Then بیچ میں آتے ہیں۔ At last سب سے آخر میں آتا ہے۔ یہ الفاظ واقعات کو ترتیب میں رکھنے میں مدد دیتے ہیں۔",
+    "en": "The main idea is the big point of the whole passage. Ask yourself: what is this mostly about? One small detail is not the main idea. For order, look for special words. First comes at the start. Next and Then come in the middle. At last comes at the very end. These words help you put events in order."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "عبارت پڑھیں: Amna made a paper boat. First, she took an old page from her notebook. Next, she folded it in half. Then, she folded the corners to make a boat. At last, she put the boat in the rain water outside her door. The boat floated, and Amna clapped. مرکزی خیال کیا ہے؟",
+        "en": "Read the passage: Amna made a paper boat. First, she took an old page from her notebook. Next, she folded it in half. Then, she folded the corners to make a boat. At last, she put the boat in the rain water outside her door. The boat floated, and Amna clapped. What is the main idea?"
+      },
+      "steps": [
+        {
+          "ur": "ہر جملہ کشتی بنانے یا چلانے کے بارے میں ہے۔",
+          "en": "Every sentence is about making or sailing the boat."
+        },
+        {
+          "ur": "'Amna clapped' صرف ایک تفصیل ہے۔",
+          "en": "'Amna clapped' is only one detail."
+        },
+        {
+          "ur": "مرکزی خیال: آمنہ نے کاغذ کی کشتی بنائی اور چلائی۔",
+          "en": "Main idea: Amna made a paper boat and sailed it."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "اسی عبارت سے: کاغذ کو آدھا موڑنے کے بعد آمنہ نے کیا کیا؟",
+        "en": "From the same passage: What did Amna do after folding the page in half?"
+      },
+      "steps": [
+        {
+          "ur": "folded it in half والا جملہ Next سے شروع ہوتا ہے۔",
+          "en": "The sentence 'folded it in half' starts with Next."
+        },
+        {
+          "ur": "اس کے بعد Then والا جملہ آتا ہے۔",
+          "en": "After it comes the sentence with Then."
+        },
+        {
+          "ur": "جواب: اس نے کونے موڑ کر کشتی بنائی۔",
+          "en": "Answer: she folded the corners to make a boat."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-order-boat",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کشتی بنانے کے کاموں کو ترتیب سے رکھیں: folded it in half ، took an old page ، put the boat in the water ، folded the corners",
+        "en": "Put the boat-making steps in order: folded it in half, took an old page, put the boat in the water, folded the corners"
+      },
+      "answer_key": {
+        "order": [
+          "took an old page",
+          "folded it in half",
+          "folded the corners",
+          "put the boat in the water"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "عبارت میں First والا جملہ پہلے آتا ہے۔",
+            "en": "In the passage the First sentence comes first."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-sequence-words",
+      "type": "ordering",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ترتیب کے الفاظ کو صحیح ترتیب میں رکھیں: Then ، At last ، First ، Next",
+        "en": "Put the sequence words in order: Then, At last, First, Next"
+      },
+      "answer_key": {
+        "order": [
+          "First",
+          "Next",
+          "Then",
+          "At last"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سا لفظ شروع میں آتا ہے؟",
+            "en": "Which word comes at the start?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-main-boat",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "عبارت: Amna made a paper boat. First, she took an old page from her notebook. Next, she folded it in half. Then, she folded the corners to make a boat. At last, she put the boat in the rain water outside her door. The boat floated, and Amna clapped. یہ عبارت زیادہ تر کس بارے میں ہے؟",
+        "en": "Passage: Amna made a paper boat. First, she took an old page from her notebook. Next, she folded it in half. Then, she folded the corners to make a boat. At last, she put the boat in the rain water outside her door. The boat floated, and Amna clapped. What is this passage mostly about?"
+      },
+      "options": [
+        {
+          "ur": "Amna's notebook",
+          "en": "Amna's notebook"
+        },
+        {
+          "ur": "Amna making a paper boat",
+          "en": "Amna making a paper boat"
+        },
+        {
+          "ur": "a rainy school day",
+          "en": "a rainy school day"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "وہ جواب چنیں جو ہر جملے پر لاگو ہو۔",
+            "en": "Choose the answer that fits every sentence."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "notebook صرف ایک تفصیل ہے؛ ساری عبارت کشتی کے بارے میں ہے۔",
+        "en": "The notebook is one detail; the whole passage is about the boat."
+      }
+    },
+    {
+      "id": "p2-first-step",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اسی عبارت سے: What did Amna do first?",
+        "en": "From the same passage: What did Amna do first?"
+      },
+      "options": [
+        {
+          "ur": "She took an old page.",
+          "en": "She took an old page."
+        },
+        {
+          "ur": "She clapped.",
+          "en": "She clapped."
+        },
+        {
+          "ur": "She folded the corners.",
+          "en": "She folded the corners."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ First ڈھونڈیں۔",
+            "en": "Find the word First."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-last-step",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اسی عبارت سے: Which step came at last?",
+        "en": "From the same passage: Which step came at last?"
+      },
+      "options": [
+        {
+          "ur": "She folded it in half.",
+          "en": "She folded it in half."
+        },
+        {
+          "ur": "She took a page.",
+          "en": "She took a page."
+        },
+        {
+          "ur": "She put the boat in the rain water.",
+          "en": "She put the boat in the rain water."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "At last والا جملہ دیکھیں۔",
+            "en": "Look at the sentence with At last."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-main-garden",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "نئی عبارت: Our school has a small garden. We grow tomatoes and mint in it. Every morning, two children water the plants. In spring, the garden is full of flowers. مرکزی خیال کیا ہے؟",
+        "en": "New passage: Our school has a small garden. We grow tomatoes and mint in it. Every morning, two children water the plants. In spring, the garden is full of flowers. What is the main idea?"
+      },
+      "options": [
+        {
+          "ur": "Children water plants.",
+          "en": "Children water plants."
+        },
+        {
+          "ur": "Mint smells nice.",
+          "en": "Mint smells nice."
+        },
+        {
+          "ur": "Our school has a small garden.",
+          "en": "Our school has a small garden."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلا جملہ اکثر بڑی بات بتاتا ہے۔",
+            "en": "The first sentence often gives the big point."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "باقی سب جملے باغ کی تفصیل ہیں۔",
+        "en": "All the other sentences give details about the garden."
+      }
+    },
+    {
+      "id": "p5-detail-not-main",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "'Amna clapped' اس عبارت کا مرکزی خیال ہے۔",
+        "en": "'Amna clapped' is the main idea of the boat passage."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "یہ صرف آخری تفصیل ہے، پوری عبارت کی بڑی بات نہیں۔",
+        "en": "It is only the last detail, not the big point of the whole passage."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-own-sequence",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہاتھ دھونے کے تین کام First، Then اور At last استعمال کر کے انگریزی میں لکھیں۔",
+        "en": "Write three steps for washing your hands in English, using First, Then and At last."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "steps are in a sensible order and use the three sequence words",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "ترتیب درست مگر ایک لفظ غائب، یا الفاظ درست مگر ترتیب الٹی۔",
+              "en": "Order is sensible but a word is missing, or words used but order is wrong."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "تینوں الفاظ اور درست ترتیب۔",
+              "en": "All three words used and the order is sensible."
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-tell-steps",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "گھر میں چائے یا روٹی بنتے دیکھیں۔ کسی بڑے کو بتائیں کہ پہلے کیا ہوا، پھر کیا، اور آخر میں کیا۔",
+        "en": "Watch tea or roti being made at home. Tell an adult what happened first, then, and at last."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Telling can be in Urdu with the English words First, Then, At last."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: ہر جملہ کس ایک بات کے بارے میں ہے؟",
+        "en": "Think: what one thing is every sentence about?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "ترتیب کے الفاظ First، Next، Then، At last پر انگلی رکھیں۔",
+        "en": "Put your finger on the sequence words First, Next, Then, At last."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ایک دلچسپ تفصیل کو مرکزی خیال سمجھنا۔",
+        "en": "Choosing an interesting detail as the main idea."
+      },
+      "correction": {
+        "ur": "مرکزی خیال وہ ہے جو تقریباً ہر جملے پر لاگو ہو۔",
+        "en": "The main idea is what fits almost every sentence."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "واقعات کو اس ترتیب میں رکھنا جس میں وہ یاد آئیں۔",
+        "en": "Ordering events in the order they are remembered."
+      },
+      "correction": {
+        "ur": "عبارت میں ترتیب کے الفاظ دیکھ کر ترتیب لگائیں۔",
+        "en": "Use the sequence words in the passage to order events."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:ENG-G4-RD-03",
+      "remediation_ref": "ENG-G4-RD-03"
+    },
+    {
+      "signal": "chooses_detail_as_main_idea",
+      "remediation_ref": "ENG-G4-RD-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "مرکزی خیال = پوری عبارت کی بڑی بات۔ ترتیب: First، Next، Then، At last۔",
+    "en": "Main idea = the big point of the whole passage. Order: First, Next, Then, At last."
+  },
+  "summary": {
+    "ur": "ہم نے عبارت کا مرکزی خیال ڈھونڈا اور واقعات کو ترتیب دی۔",
+    "en": "We found the main idea of a passage and put its events in order."
+  },
+  "parent_notes": {
+    "ur": "کوئی کام کرتے ہوئے بچے سے پوچھیں: پہلے کیا کیا؟ پھر کیا؟ آخر میں کیا؟",
+    "en": "While doing a task together, ask: What did we do first? Then? At last?"
+  },
+  "mentor_notes": {
+    "ur": "بچے کو عبارت خود پڑھنے دیں۔ مرکزی خیال کے لیے یہ سوال سکھائیں: 'کیا یہ ہر جملے پر لاگو ہوتا ہے؟'",
+    "en": "Let the child read the passage alone. For main idea, teach the test question: 'Does it fit every sentence?'"
+  },
+  "accessibility_notes": {
+    "ur": "عبارتوں پر جان بوجھ کر آڈیو نہیں، کیونکہ پڑھنا جانچا جا رہا ہے۔ ہدایات کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ کشتی بنانے کے مراحل کی تصویر اور اس کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے والی ترتیب کا متبادل: ہر قدم کے آگے ۱، ۲، ۳، ۴ نمبر چنیں۔",
+    "en": "The passages deliberately have no audio, because reading is assessed. Urdu audio for instructions is not yet recorded. The boat-making steps picture and its alt text are still to be made. Alternative to the drag ordering: choose a number 1, 2, 3, 4 next to each step."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "main idea: test each option against every sentence; sequence: anchor on sequence words",
+    "questioning_strategy": "ask 'does this fit every sentence?' and 'which word tells you it came first?'",
+    "slow_down_signals": [
+      "picks a detail as main idea",
+      "two wrong answers in a row",
+      "orders by memory, not text"
+    ],
+    "hint_policy": "graduated; two hints max; first the 'fits every sentence' test, then point at sequence words; never state the main idea first",
+    "example_policy": "original procedural and descriptive passages in Pakistani home and school contexts (paper boat in rain, school garden)",
+    "misconception_detectors": [
+      "chooses a vivid detail as the main idea",
+      "reverses Next and Then steps",
+      "ignores sequence words"
+    ],
+    "critical_thinking_prompts": [
+      "Why is 'Amna clapped' not the main idea?"
+    ],
+    "personalization_rules": "if literal recall of the passage fails, route back to ENG-G4-RD-03",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)",
+      "read the reading passage aloud for the learner (reading is the assessed skill)"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm a paper-boat-in-rainwater activity is safe and familiar (no flood or drain imagery intended)",
+    "check the main-idea distractors are clearly a detail and an off-topic option"
+  ]
+}

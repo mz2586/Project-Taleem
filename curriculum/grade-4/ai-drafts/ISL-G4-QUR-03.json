@@ -1,0 +1,447 @@
+{
+  "code": "ISL-G4-QUR-03",
+  "title": {
+    "ur": "تلاوت کی اچھی عادتیں",
+    "en": "Good Habits for Reading the Qur'an"
+  },
+  "description": {
+    "ur": "تلاوت سے جڑی اچھی عادتیں: استاد سے سیکھنا، روز تھوڑا پڑھنا، آہستہ اور صاف پڑھنا، اور صبر سے سیکھنا۔",
+    "en": "Good habits linked to reciting the Qur'an: learning from a teacher, a little every day, reading slowly and clearly, and learning patiently."
+  },
+  "keywords": [
+    "recitation",
+    "tilawat",
+    "good habits",
+    "teacher",
+    "regular practice",
+    "patience"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "تلاوت",
+        "en": "recitation"
+      },
+      "definition": {
+        "ur": "قرآن مجید کو صحیح طریقے سے پڑھنا۔",
+        "en": "Reading the Qur'an aloud in the proper way."
+      }
+    },
+    {
+      "term": {
+        "ur": "قاری / استاد",
+        "en": "Qur'an teacher"
+      },
+      "definition": {
+        "ur": "وہ شخص جو قرآن مجید صحیح پڑھنا سکھاتا ہے۔",
+        "en": "A person who teaches how to read the Qur'an correctly."
+      }
+    },
+    {
+      "term": {
+        "ur": "باقاعدگی",
+        "en": "regularity"
+      },
+      "definition": {
+        "ur": "کوئی کام روز تھوڑا تھوڑا کرنا۔",
+        "en": "Doing something a little every day."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم تلاوت کی اچھی عادتیں سیکھیں گے۔ قرآن مجید پڑھنا ہم ایک استاد سے سیکھتے ہیں۔ تلاوت سے پہلے کچھ کلمات پڑھے جاتے ہیں۔ [تعوذ اور تسمیہ: متن عالم یا استاد فراہم کرے] یہ کلمات اپنے استاد سے سیکھیں۔ آئیں دیکھیں کون سی عادتیں مدد کرتی ہیں۔",
+    "en": "Today we will learn good habits for reciting the Qur'an. We learn to read the Qur'an from a teacher. Some words are said before recitation begins. [Ta'awwudh and Tasmiyah: text to be supplied by a scholar or teacher] Learn these words from your teacher. Let us see which habits help."
+  },
+  "student_explanation": {
+    "ur": "قرآن مجید پڑھنا ہم استاد سے سیکھتے ہیں۔ استاد ہمیں صحیح پڑھنا سکھاتے ہیں۔ ہم صاف جگہ پر آرام سے بیٹھتے ہیں۔ ہم آہستہ اور صاف آواز میں پڑھتے ہیں۔ روز تھوڑا پڑھنا اچھی عادت ہے۔ غلطی ہو تو استاد پیار سے بتاتے ہیں۔ ہم شکریہ کہہ کر دوبارہ پڑھتے ہیں۔ سیکھنے میں وقت لگتا ہے، اس لیے ہم صبر کرتے ہیں۔",
+    "en": "We learn to read the Qur'an from a teacher. The teacher shows us how to read correctly. We sit calmly in a clean place. We read slowly and in a clear voice. Reading a little every day is a good habit. If we make a mistake, the teacher kindly corrects us. We say thank you and read it again. Learning takes time, so we are patient."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "حمزہ ایک دن بہت سارا پڑھتا ہے، پھر ہفتہ بھر نہیں پڑھتا۔ بہتر عادت کیا ہے؟",
+        "en": "Hamza reads a lot one day, then nothing for a week. What is a better habit?"
+      },
+      "steps": [
+        {
+          "ur": "سوچیں: روز تھوڑا پڑھنے سے یاد رہتا ہے۔",
+          "en": "Think: reading a little every day helps us remember."
+        },
+        {
+          "ur": "حمزہ روز ایک ہی وقت پر تھوڑا سا پڑھنے کا فیصلہ کرتا ہے۔",
+          "en": "Hamza decides to read a little at the same time every day."
+        },
+        {
+          "ur": "یوں باقاعدگی کی اچھی عادت بنتی ہے۔",
+          "en": "This builds the good habit of regularity."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "فاطمہ سے پڑھتے ہوئے غلطی ہوئی اور استاد نے بتایا۔ وہ کیا کرے؟",
+        "en": "Fatima made a mistake while reading and her teacher corrected her. What should she do?"
+      },
+      "steps": [
+        {
+          "ur": "غلطی سیکھنے کا حصہ ہے، شرمندہ ہونے کی بات نہیں۔",
+          "en": "Mistakes are part of learning, nothing to be ashamed of."
+        },
+        {
+          "ur": "فاطمہ غور سے سنتی ہے اور شکریہ کہتی ہے۔",
+          "en": "Fatima listens carefully and says thank you."
+        },
+        {
+          "ur": "وہ آہستہ آہستہ دوبارہ پڑھتی ہے۔",
+          "en": "She reads it again, slowly."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-good-habit",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ چھو کر بتائیں: یہ تلاوت کی اچھی عادت ہے یا نہیں؟",
+        "en": "Tap each card: is this a good recitation habit or not?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: کیا اس سے صحیح پڑھنا آسان ہوگا؟",
+            "en": "Think: would this make it easier to read correctly?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "استاد سے سیکھنا",
+          "en": "Learning from a teacher"
+        },
+        {
+          "ur": "بہت جلدی جلدی پڑھنا",
+          "en": "Reading very fast"
+        },
+        {
+          "ur": "روز تھوڑا پڑھنا",
+          "en": "Reading a little every day"
+        },
+        {
+          "ur": "غلطی بتانے پر ناراض ہونا",
+          "en": "Getting upset when corrected"
+        },
+        {
+          "ur": "آہستہ اور صاف پڑھنا",
+          "en": "Reading slowly and clearly"
+        }
+      ],
+      "answer_key": {
+        "mode": "sort",
+        "groups": {
+          "good_habit": [
+            0,
+            2,
+            4
+          ],
+          "not_good_habit": [
+            1,
+            3
+          ]
+        }
+      }
+    },
+    {
+      "id": "p6-patience",
+      "type": "fill_blank",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "سیکھنے میں وقت لگتا ہے، اس لیے ہم ___ کرتے ہیں۔",
+        "en": "Learning takes time, so we are ___."
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "یہ لفظ ہم نے صبر والے سبق میں سیکھا تھا۔",
+            "en": "We learned this word in the lesson on patience."
+          }
+        }
+      ],
+      "answer_key": {
+        "answer": "patient"
+      },
+      "accepted_variants": [
+        "صبر",
+        "patient",
+        "patience"
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-from-whom",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "قرآن مجید پڑھنا ہم کس سے سیکھتے ہیں؟",
+        "en": "Who do we learn to read the Qur'an from?"
+      },
+      "options": [
+        {
+          "ur": "ایک استاد سے",
+          "en": "A teacher"
+        },
+        {
+          "ur": "صرف خود اندازے سے",
+          "en": "Only by guessing on our own"
+        },
+        {
+          "ur": "کسی کارٹون سے",
+          "en": "A cartoon"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-speed",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "تلاوت کیسے کرنی چاہیے؟",
+        "en": "How should we recite?"
+      },
+      "options": [
+        {
+          "ur": "بہت تیز",
+          "en": "Very fast"
+        },
+        {
+          "ur": "آہستہ اور صاف",
+          "en": "Slowly and clearly"
+        },
+        {
+          "ur": "بغیر دیکھے اندازے سے",
+          "en": "Guessing without looking"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p3-daily",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "روز تھوڑا پڑھنا، کبھی کبھار بہت سارا پڑھنے سے بہتر عادت ہے۔",
+        "en": "Reading a little every day is a better habit than reading a lot only now and then."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-mistake",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "استاد نے پڑھائی میں غلطی بتائی۔ اچھی عادت کیا ہے؟",
+        "en": "The teacher points out a mistake in your reading. What is the good habit?"
+      },
+      "options": [
+        {
+          "ur": "ناراض ہو کر کتاب بند کر دینا",
+          "en": "Getting upset and closing the book"
+        },
+        {
+          "ur": "کہنا کہ میں کبھی نہیں سیکھ سکتا",
+          "en": "Saying I can never learn"
+        },
+        {
+          "ur": "شکریہ کہہ کر دوبارہ پڑھنا",
+          "en": "Saying thank you and reading again"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-ashamed",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "غلطی کرنا شرم کی بات ہے، اس لیے ہمیں پڑھنا چھوڑ دینا چاہیے۔",
+        "en": "Making mistakes is shameful, so we should stop reading."
+      },
+      "explanation": {
+        "ur": "غلطی سیکھنے کا حصہ ہے؛ ہم صبر سے سیکھتے رہتے ہیں۔",
+        "en": "Mistakes are part of learning; we keep learning patiently."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-plan",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک آسان منصوبہ بنائیں: آپ ہر روز کس وقت تھوڑا سا سیکھنے یا دہرانے کی کوشش کریں گے؟",
+        "en": "Make a simple plan: at what time each day will you try to learn or revise a little?"
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any realistic time. The plan may be for listening, revising with a teacher or reading. Never ask whether the child currently reads or has a teacher; some children have no access yet."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-ask-teacher",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کے کسی بڑے یا اپنے استاد سے پوچھیں کہ تلاوت سے پہلے کون سے کلمات پڑھے جاتے ہیں، اور ان سے سیکھیں۔",
+        "en": "Ask an elder at home or your teacher which words are said before recitation, and learn them from them."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. The words are learned from a human; the app does not test them."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: کیا اس سے صحیح پڑھنا سیکھنے میں مدد ملے گی؟",
+        "en": "Think: would this help you learn to read correctly?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: استاد سے، روز تھوڑا، آہستہ اور صاف، صبر سے۔",
+        "en": "Remember: from a teacher, a little daily, slowly and clearly, patiently."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "تیز پڑھنا اچھا پڑھنا ہے۔",
+        "en": "Reading fast means reading well."
+      },
+      "correction": {
+        "ur": "تلاوت آہستہ اور صاف کی جاتی ہے۔",
+        "en": "Recitation is done slowly and clearly."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "غلطی کا مطلب ہے کہ میں سیکھ نہیں سکتا۔",
+        "en": "A mistake means I cannot learn."
+      },
+      "correction": {
+        "ur": "غلطی سیکھنے کا حصہ ہے؛ صبر سے سب سیکھ جاتے ہیں۔",
+        "en": "Mistakes are part of learning; with patience everyone learns."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "low_score:patience",
+      "remediation_ref": "ISL-G4-SIR-02"
+    },
+    {
+      "signal": "low_score:respect_for_quran",
+      "remediation_ref": "ISL-G4-QUR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "تلاوت کی اچھی عادتیں: استاد سے سیکھنا، صاف جگہ پر بیٹھنا، آہستہ اور صاف پڑھنا، روز تھوڑا پڑھنا، غلطی پر شکریہ کہہ کر دوبارہ پڑھنا، صبر کرنا۔",
+    "en": "Good recitation habits: learn from a teacher, sit in a clean place, read slowly and clearly, a little every day, thank the teacher and try again after a mistake, be patient."
+  },
+  "summary": {
+    "ur": "ہم نے تلاوت سے جڑی اچھی عادتیں سیکھیں۔",
+    "en": "We learned good habits linked to reciting the Qur'an."
+  },
+  "parent_notes": {
+    "ur": "بچے کے لیے روز تلاوت سیکھنے یا سننے کا ایک چھوٹا سا وقت مقرر کریں۔ غلطی پر ڈانٹنے کے بجائے حوصلہ دیں۔",
+    "en": "Set a short daily time for your child to learn or listen to recitation. Encourage rather than scold after mistakes."
+  },
+  "mentor_notes": {
+    "ur": "یہ سبق تلاوت نہیں سکھاتا اور نہ اس کا جائزہ لیتا ہے؛ تلاوت انسانی استاد سکھاتا ہے۔ تعوذ اور تسمیہ کا متن عالم یا استاد فراہم کرے۔ کچھ بچوں کے پاس ابھی استاد نہیں؛ انہیں کبھی شرمندہ نہ کریں۔",
+    "en": "This lesson does not teach or assess recitation; recitation is taught by a human teacher. The text of the ta'awwudh and tasmiyah is supplied by a scholar or teacher. Some children have no teacher yet; never make them feel ashamed."
+  },
+  "accessibility_notes": {
+    "ur": "تصویر (استاد اور طالب علم، چہروں کے بغیر یا سادہ خاکہ) اور اس کا متبادل متن ابھی بنانا ہے؛ تصویر میں قرآنی متن نہ ہو۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر کارڈ کے لیے 'اچھی عادت' یا 'اچھی عادت نہیں' کا بٹن چنیں۔",
+    "en": "A picture (a teacher and pupil, a simple sketch) and its alt text are still to be made; no Qur'anic text in the picture. Urdu audio is not yet recorded. Alternative to the sort activity: choose a 'good habit' or 'not a good habit' button for each card."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "present recitation as a skill learned from a human teacher; build four habits (a teacher, a little daily, slow and clear, patience with mistakes)",
+    "questioning_strategy": "ask 'would this help you learn correctly?' before asking which habit is good",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "child says they cannot read the Qur'an yet"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "no recitation content, no tajweed rules, no Arabic text; everyday routines; children without a teacher are never singled out",
+    "misconception_detectors": [
+      "thinks fast reading is good reading",
+      "thinks mistakes mean they cannot learn"
+    ],
+    "critical_thinking_prompts": [
+      "Why does a little every day help more than a lot once a week?"
+    ],
+    "personalization_rules": "if the learner is discouraged by mistakes, route to ISL-G4-SIR-02 (patience) and praise effort",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions",
+      "recite, write, translate or explain the meaning of any verse from memory; use only scholar-supplied text",
+      "teach or assess recitation or tajweed",
+      "play or generate recitation audio"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: supply the text for the ta'awwudh and tasmiyah placeholder in teacher_script, or decide they stay teacher-taught only",
+    "scholar: confirm the habits listed are general and acceptable across all Pakistani Muslim families",
+    "child-safety reviewer: confirm nothing shames children who cannot yet read the Qur'an or have no teacher"
+  ]
+}

@@ -1,0 +1,493 @@
+{
+  "code": "ENG-G4-WR-02",
+  "title": {
+    "ur": "پورے اور درست جملے لکھیں",
+    "en": "Write Whole, Correct Sentences"
+  },
+  "description": {
+    "ur": "بچہ ایسے پورے انگریزی جملے لکھتا ہے جن میں فاعل اور فعل ہو، بڑا حرف ہو اور فل اسٹاپ ہو۔",
+    "en": "The learner writes complete English sentences with a subject and a verb, a capital letter and a full stop."
+  },
+  "keywords": [
+    "complete sentence",
+    "sentence fragment",
+    "subject",
+    "verb",
+    "capital letter",
+    "full stop"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "پورا جملہ (complete sentence)",
+        "en": "complete sentence"
+      },
+      "definition": {
+        "ur": "وہ جملہ جو بتائے کون اور کیا کرتا ہے، اور پوری بات کہے۔",
+        "en": "A sentence that says who and what they do, and makes full sense."
+      }
+    },
+    {
+      "term": {
+        "ur": "ادھورا جملہ (fragment)",
+        "en": "fragment"
+      },
+      "definition": {
+        "ur": "الفاظ کا گروہ جس میں کوئی حصہ غائب ہو: The big dog.",
+        "en": "A group of words with a part missing: The big dog."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "'The big dog.' سن کر ہم پوچھتے ہیں: کتے نے کیا کیا؟ یہ بات ادھوری ہے۔ پورا جملہ بتاتا ہے کون اور کیا کرتا ہے۔ آج ہم پورے جملے لکھیں گے۔ ہر جملے کو ایک چھوٹی جانچ سے گزاریں گے۔",
+    "en": "When we hear 'The big dog.' we ask: what did the dog do? The idea is not finished. A complete sentence tells who and what they do. Today we will write complete sentences. We will put each one through a small check."
+  },
+  "student_explanation": {
+    "ur": "پورے جملے میں دو حصے ضروری ہیں۔ ایک حصہ بتاتا ہے کون۔ دوسرا بتاتا ہے کیا کرتا ہے۔ The big dog ادھورا ہے۔ The big dog barks پورا ہے۔ لکھنے کے بعد چار چیزیں جانچیں۔ کیا کون اور کیا کرتا ہے موجود ہیں؟ کیا بڑا حرف شروع میں ہے؟ کیا فل اسٹاپ آخر میں ہے؟ کیا بات سمجھ آتی ہے؟",
+    "en": "A complete sentence needs two parts. One part tells who. The other tells what they do. The big dog is a fragment. The big dog barks is complete. After writing, check four things. Are who and what they do both there? Is there a capital at the start? Is there a full stop at the end? Does it make sense?"
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "اسے پورا جملہ بنائیں: my little brother",
+        "en": "Make this a complete sentence: my little brother"
+      },
+      "steps": [
+        {
+          "ur": "کون؟ my little brother — یہ موجود ہے۔",
+          "en": "Who? my little brother — this part is there."
+        },
+        {
+          "ur": "کیا کرتا ہے؟ یہ غائب ہے۔ ایک کام جوڑیں: drinks milk۔",
+          "en": "What does he do? This is missing. Add an action: drinks milk."
+        },
+        {
+          "ur": "بڑا حرف اور فل اسٹاپ: My little brother drinks milk.",
+          "en": "Capital and full stop: My little brother drinks milk."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "جانچیں اور ٹھیک کریں: rides a bicycle to school",
+        "en": "Check and fix: rides a bicycle to school"
+      },
+      "steps": [
+        {
+          "ur": "کیا کرتا ہے؟ rides a bicycle — موجود ہے۔",
+          "en": "What do they do? rides a bicycle — this is there."
+        },
+        {
+          "ur": "کون؟ غائب ہے۔ ایک فاعل جوڑیں: Ayesha۔",
+          "en": "Who? Missing. Add a subject: Ayesha."
+        },
+        {
+          "ur": "جملہ: Ayesha rides a bicycle to school.",
+          "en": "Sentence: Ayesha rides a bicycle to school."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-complete",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر لفظوں کے گروہ کو 'پورا' یا 'ادھورا' ڈبے میں ڈالیں: The sun shines. ، A red ball. ، We eat dinner. ، Under the tree.",
+        "en": "Sort each group of words into 'complete' or 'fragment': The sun shines. / A red ball. / We eat dinner. / Under the tree."
+      },
+      "answer_key": {
+        "groups": {
+          "complete": [
+            "The sun shines.",
+            "We eat dinner."
+          ],
+          "fragment": [
+            "A red ball.",
+            "Under the tree."
+          ]
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر گروہ میں کام کرنے والا لفظ (فعل) ڈھونڈیں۔",
+            "en": "Look for the doing word (verb) in each group."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-build",
+      "type": "ordering",
+      "competency": "application",
+      "stem": {
+        "ur": "الفاظ کو ترتیب دے کر پورا جملہ بنائیں: the floor / sweeps / Usman",
+        "en": "Order the words to make a complete sentence: the floor / sweeps / Usman"
+      },
+      "answer_key": {
+        "order": [
+          "Usman",
+          "sweeps",
+          "the floor."
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون؟ کیا کرتا ہے؟ کس چیز کو؟",
+            "en": "Who? Does what? To what?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-finish",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "اسے پورا جملہ بنا کر لکھیں: My grandmother ___",
+        "en": "Finish and write the complete sentence: My grandmother ___"
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "complete sentence with verb, capital letter and full stop",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "فعل جوڑا مگر فل اسٹاپ یا معنی میں کمی۔",
+              "en": "Added a verb, but the full stop or meaning is missing."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "پورا، بامعنی جملہ، بڑا حرف اور فل اسٹاپ کے ساتھ۔",
+              "en": "Complete, sensible sentence with capital and full stop."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor-marked; any sensible action is fine (tells stories, waters the plants)."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-complete",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کونسا پورا جملہ ہے؟",
+        "en": "Which one is a complete sentence?"
+      },
+      "options": [
+        {
+          "ur": "The hot tea.",
+          "en": "The hot tea."
+        },
+        {
+          "ur": "My aunt makes hot tea.",
+          "en": "My aunt makes hot tea."
+        },
+        {
+          "ur": "makes hot tea",
+          "en": "makes hot tea"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون اور کیا کرتا ہے، دونوں ڈھونڈیں۔",
+            "en": "Find both who and what they do."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "My aunt (کون) + makes hot tea (کیا کرتی ہے)۔",
+        "en": "My aunt (who) + makes hot tea (what she does)."
+      }
+    },
+    {
+      "id": "p2-missing-part",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "'Plays in the park.' میں کیا غائب ہے؟",
+        "en": "What is missing in 'Plays in the park.'?"
+      },
+      "options": [
+        {
+          "ur": "who",
+          "en": "who"
+        },
+        {
+          "ur": "what they do",
+          "en": "what they do"
+        },
+        {
+          "ur": "nothing",
+          "en": "nothing"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون کھیلتا ہے؟",
+            "en": "Who plays?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-written-correctly",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کونسا جملہ درست لکھا ہے؟",
+        "en": "Which sentence is written correctly?"
+      },
+      "options": [
+        {
+          "ur": "the baby sleeps",
+          "en": "the baby sleeps"
+        },
+        {
+          "ur": "The baby sleeps.",
+          "en": "The baby sleeps."
+        },
+        {
+          "ur": "the Baby sleeps.",
+          "en": "the Baby sleeps."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "2": "m-capitalization-random"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بڑا حرف اور فل اسٹاپ دیکھیں۔",
+            "en": "Check the capital and the full stop."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-fragment",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "'A big green tree.' ایک پورا جملہ ہے۔",
+        "en": "'A big green tree.' is a complete sentence."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "اس میں فعل نہیں؛ درخت کچھ کرتا یا ہوتا نہیں دکھایا گیا۔",
+        "en": "It has no verb; it does not say what the tree does or is."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-three-about-rain",
+      "type": "long",
+      "competency": "analysis",
+      "stem": {
+        "ur": "بارش والے دن کے بارے میں تین پورے جملے لکھیں۔ ہر جملہ چار نکاتی جانچ سے گزاریں۔",
+        "en": "Write three complete sentences about a rainy day. Put each through the four-point check."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "three complete sentences: who + action, capital, full stop, sense",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "ایک جملہ پورا اور درست۔",
+              "en": "One sentence is complete and correct."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "دو جملے پورے اور درست۔",
+              "en": "Two sentences are complete and correct."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "تینوں جملے پورے، بامعنی، بڑے حرف اور فل اسٹاپ کے ساتھ۔",
+              "en": "All three complete, sensible, with capitals and full stops."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor-marked; spelling slips are noted but do not lower the level."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-my-day",
+      "type": "long",
+      "competency": "application",
+      "stem": {
+        "ur": "اپنی کاپی میں اپنے پسندیدہ کھیل کے بارے میں دو پورے جملے لکھیں۔",
+        "en": "Write two complete sentences in your notebook about your favourite game."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "two complete sentences",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "ایک پورا جملہ۔",
+              "en": "One complete sentence."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "دو پورے، درست جملے۔",
+              "en": "Two complete, correct sentences."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor checks the notebook next session."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پوچھیں: کون؟ اور وہ کیا کرتا ہے؟ دونوں جواب جملے میں ہیں؟",
+        "en": "Ask: Who? And what do they do? Are both answers in the sentence?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "شروع کا بڑا حرف اور آخر کا فل اسٹاپ دیکھیں۔",
+        "en": "Check the capital at the start and the full stop at the end."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "صفت والے الفاظ (A red ball.) کو پورا جملہ سمجھنا۔",
+        "en": "Thinking a describing phrase (A red ball.) is a sentence."
+      },
+      "correction": {
+        "ur": "پورے جملے میں فعل ضروری ہے: The red ball rolls.",
+        "en": "A sentence needs a verb: The red ball rolls."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "انگریزی میں اردو ترتیب سے لکھنا۔",
+        "en": "Applies Urdu word order to English."
+      },
+      "correction": {
+        "ur": "انگریزی فاعل–فعل–مفعول ہے۔",
+        "en": "English is subject–verb–object."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:ENG-G4-GR-05",
+      "remediation_ref": "ENG-G4-GR-05"
+    },
+    {
+      "signal": "misconception:m-l1-word-order",
+      "remediation_ref": "ENG-G4-GR-05"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پورا جملہ = کون + کیا کرتا ہے۔ بڑا حرف شروع میں، فل اسٹاپ آخر میں، بات سمجھ آئے۔",
+    "en": "Complete sentence = who + what they do. Capital at the start, full stop at the end, and it makes sense."
+  },
+  "summary": {
+    "ur": "ہم نے پورے جملے لکھے اور چار نکاتی جانچ سے انہیں پرکھا۔",
+    "en": "We wrote complete sentences and checked them with a four-point check."
+  },
+  "parent_notes": {
+    "ur": "بچہ جب بھی کاپی میں جملہ لکھے، اس سے پوچھیں: 'کس نے کیا کیا؟' انگریزی جاننا ضروری نہیں۔",
+    "en": "Whenever your child writes a sentence, ask: 'Who did what?' You do not need to know English."
+  },
+  "mentor_notes": {
+    "ur": "لکھے ہوئے جملے آپ جانچیں۔ ہر غلطی پر چار نکاتی جانچ میں سے صرف ایک نکتے کی طرف اشارہ کریں۔",
+    "en": "You mark the written sentences. For each error, point to just one item from the four-point check."
+  },
+  "accessibility_notes": {
+    "ur": "ہدایات کی اردو/انگریزی آڈیو ابھی ریکارڈ نہیں ہوئی۔ چار نکاتی جانچ کا چارٹ اور اس کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے والی سرگرمی کا متبادل: ہر گروہ کے آگے 'پورا' یا 'ادھورا' چنیں۔ لکھ نہ سکنے والا بچہ جملے زبانی بول کر مینٹر کو لکھوا سکتا ہے۔",
+    "en": "Urdu/English audio for instructions is not yet recorded. The four-point check chart and its alt text are still to be made. Alternative to the drag activity: choose 'complete' or 'fragment' next to each group. A child who cannot write may say the sentences for the mentor to write down."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "who + what they do; then the four-point check (parts, capital, full stop, sense) after every sentence",
+    "questioning_strategy": "ask 'who? what do they do?' before the learner writes",
+    "slow_down_signals": [
+      "writes noun phrases as sentences",
+      "two wrong answers in a row",
+      "drops full stops"
+    ],
+    "hint_policy": "graduated; two hints max; first the who/what question, then the capital/full-stop check; never write the sentence for the learner",
+    "example_policy": "home, weather and play contexts (aunt makes tea, rainy day, favourite game)",
+    "misconception_detectors": [
+      "fragment accepted as a sentence",
+      "m-l1-word-order",
+      "missing capital or full stop"
+    ],
+    "critical_thinking_prompts": [
+      "Why is 'A big green tree.' not a complete sentence?"
+    ],
+    "personalization_rules": "if word order errors persist, route back to ENG-G4-GR-05; if letters/spelling block writing, ENG-G4-WR-01",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)"
+    ]
+  },
+  "review_flags": [
+    "mentor-mediated: confirm rubric levels for p6, c1 and homework",
+    "check that 'bicycle' and 'favourite game' contexts are inclusive (e.g. for a child with a disability, the game can be any game)"
+  ]
+}

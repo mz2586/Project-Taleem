@@ -1,0 +1,502 @@
+{
+  "code": "SOC-G4-CIV-02",
+  "title": {
+    "ur": "حق اور ذمہ داری",
+    "en": "Rights and responsibilities"
+  },
+  "description": {
+    "ur": "بچوں کے سادہ حقوق اور ان کے ساتھ جڑی ذمہ داریاں بیان کریں۔",
+    "en": "Describe simple rights of children and the responsibilities that go with them."
+  },
+  "keywords": [
+    "rights",
+    "responsibilities",
+    "education",
+    "health",
+    "safety",
+    "fairness"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "حق",
+        "en": "right"
+      },
+      "definition": {
+        "ur": "وہ چیز جو ہر بچے کو ملنی چاہیے، جیسے تعلیم اور حفاظت۔",
+        "en": "something every child should have, such as education and safety."
+      }
+    },
+    {
+      "term": {
+        "ur": "ذمہ داری",
+        "en": "responsibility"
+      },
+      "definition": {
+        "ur": "وہ کام جو ہمیں خود اچھی طرح کرنا چاہیے۔",
+        "en": "a job we should do well ourselves."
+      }
+    },
+    {
+      "term": {
+        "ur": "انصاف",
+        "en": "fairness"
+      },
+      "definition": {
+        "ur": "سب کے ساتھ برابر اور ٹھیک برتاؤ۔",
+        "en": "treating everyone equally and rightly."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ہر بچے کے کچھ حق ہوتے ہیں۔ جیسے تعلیم کا حق اور محفوظ رہنے کا حق۔ ہر حق کے ساتھ ایک ذمہ داری بھی آتی ہے۔ آج ہم حق اور ذمہ داری کے جوڑے بنائیں گے۔",
+    "en": "Every child has some rights. For example, the right to education and the right to be safe. Each right also comes with a responsibility. Today we will make pairs of rights and responsibilities."
+  },
+  "student_explanation": {
+    "ur": "ہر بچے کو تعلیم کا حق ہے۔ اس کی ذمہ داری ہے کہ وہ دل لگا کر سیکھے۔ ہر بچے کو صحت کا حق ہے۔ اس کی ذمہ داری ہے کہ وہ صاف ستھرا رہے۔ ہر بچے کو کھیلنے کا حق ہے۔ اس کی ذمہ داری ہے کہ دوسروں کو بھی کھیلنے دے۔ ہر بچے کو اپنی بات کہنے کا حق ہے۔ اس کی ذمہ داری ہے کہ دوسروں کی بات بھی سنے۔ ہر حق کے ساتھ ایک ذمہ داری ہوتی ہے۔",
+    "en": "Every child has the right to education. Their responsibility is to learn with care. Every child has the right to health. Their responsibility is to keep clean. Every child has the right to play. Their responsibility is to let others play too. Every child has the right to speak. Their responsibility is to listen to others too. Every right comes with a responsibility."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "علی کہتا ہے: 'مجھے کھیلنے کا حق ہے، اس لیے میں گیند کسی کو نہیں دوں گا۔' اس میں کیا کمی ہے؟",
+        "en": "Ali says: 'I have the right to play, so I won't give the ball to anyone.' What is missing?"
+      },
+      "steps": [
+        {
+          "ur": "حق پہچانیں: کھیلنے کا حق۔",
+          "en": "Name the right: the right to play."
+        },
+        {
+          "ur": "اس کی ذمہ داری سوچیں: دوسروں کو بھی کھیلنے دینا۔",
+          "en": "Think of its responsibility: letting others play too."
+        },
+        {
+          "ur": "علی نے حق لیا مگر ذمہ داری بھول گیا۔ اسے باری باری گیند دینی چاہیے۔",
+          "en": "Ali took the right but forgot the responsibility. He should share the ball in turns."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "تعلیم کے حق کے ساتھ کون سی ذمہ داری ہے؟",
+        "en": "Which responsibility goes with the right to education?"
+      },
+      "steps": [
+        {
+          "ur": "حق: سکول جانا اور سیکھنا۔",
+          "en": "Right: to go to school and learn."
+        },
+        {
+          "ur": "ذمہ داری: وقت پر آنا، دھیان دینا اور کتابوں کا خیال رکھنا۔",
+          "en": "Responsibility: come on time, pay attention and look after books."
+        },
+        {
+          "ur": "تو دل لگا کر سیکھنا تعلیم کی ذمہ داری ہے۔",
+          "en": "So learning with care is the responsibility that goes with education."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-pair-cards",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر حق کے کارڈ کو اس کی ذمہ داری کے کارڈ سے جوڑیں۔",
+        "en": "Pair each right card with its responsibility card."
+      },
+      "answer_key": {
+        "pairs": {
+          "right to education": "learn with care and look after books",
+          "right to health": "keep clean and eat sensibly",
+          "right to play": "let others play and share",
+          "right to speak": "listen when others speak"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: یہ حق ٹھیک سے ملے، اس کے لیے میں خود کیا کروں؟",
+            "en": "Think: what should I do myself so this right works well?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-match-pairs",
+      "type": "matching",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر حق کو اس کی ذمہ داری سے ملائیں۔",
+        "en": "Match each right to its responsibility."
+      },
+      "options": [
+        {
+          "ur": "صاف ستھرا رہنا",
+          "en": "keep clean"
+        },
+        {
+          "ur": "دوسروں کو کھیلنے دینا",
+          "en": "let others play"
+        },
+        {
+          "ur": "حفاظتی اصول ماننا",
+          "en": "follow safety rules"
+        }
+      ],
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "صحت کا حق",
+              "en": "right to health"
+            },
+            "right": {
+              "ur": "صاف ستھرا رہنا",
+              "en": "keep clean"
+            }
+          },
+          {
+            "left": {
+              "ur": "کھیلنے کا حق",
+              "en": "right to play"
+            },
+            "right": {
+              "ur": "دوسروں کو کھیلنے دینا",
+              "en": "let others play"
+            }
+          },
+          {
+            "left": {
+              "ur": "حفاظت کا حق",
+              "en": "right to be safe"
+            },
+            "right": {
+              "ur": "حفاظتی اصول ماننا",
+              "en": "follow safety rules"
+            }
+          }
+        ],
+        "misconception_on_wrong_pair": "m-rights-without-responsibility"
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-edu-resp",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "تعلیم کے حق کے ساتھ کون سی ذمہ داری جڑی ہے؟",
+        "en": "Which responsibility goes with the right to education?"
+      },
+      "options": [
+        {
+          "ur": "دھیان سے سیکھنا",
+          "en": "learning carefully"
+        },
+        {
+          "ur": "کتابیں پھاڑنا",
+          "en": "tearing books"
+        },
+        {
+          "ur": "کلاس میں شور کرنا",
+          "en": "making noise in class"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسا کام چنیں جو سیکھنے میں مدد دے۔",
+            "en": "Choose the action that helps learning."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-no-resp",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "حق صرف لینے کے لیے ہیں؛ ان کے ساتھ کوئی ذمہ داری نہیں ہوتی۔",
+        "en": "Rights are only for taking; no responsibility comes with them."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-rights-without-responsibility"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کھیلنے کے حق کے ساتھ دوسروں کے لیے کیا کرنا ہے؟",
+            "en": "With the right to play, what must we do for others?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ہر حق کے ساتھ ایک ذمہ داری ہوتی ہے۔",
+        "en": "Every right comes with a responsibility."
+      }
+    },
+    {
+      "id": "p3-speak",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اپنی بات کہنے کے حق کے ساتھ ذمہ داری کیا ہے؟",
+        "en": "What is the responsibility that goes with the right to speak?"
+      },
+      "options": [
+        {
+          "ur": "سب سے زور سے بولنا",
+          "en": "speaking the loudest"
+        },
+        {
+          "ur": "دوسروں کی بات بھی سننا",
+          "en": "listening to others too"
+        },
+        {
+          "ur": "کسی کو بولنے نہ دینا",
+          "en": "letting nobody else speak"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-rights-without-responsibility",
+          "2": "m-rights-without-responsibility"
+        }
+      }
+    },
+    {
+      "id": "p5-sana",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ثنا کو صاف پانی کا حق ہے۔ اس کی ذمہ داری کیا ہو سکتی ہے؟",
+        "en": "Sana has the right to clean water. What could her responsibility be?"
+      },
+      "options": [
+        {
+          "ur": "نل کھلا چھوڑ دینا",
+          "en": "leaving the tap running"
+        },
+        {
+          "ur": "پانی میں کچرا ڈالنا",
+          "en": "throwing rubbish in the water"
+        },
+        {
+          "ur": "پانی ضائع نہ کرنا اور صاف رکھنا",
+          "en": "not wasting water and keeping it clean"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-rights-without-responsibility"
+        }
+      }
+    },
+    {
+      "id": "p6-every-child",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "حفاظت کا حق ہر بچے کا ہے، چاہے وہ لڑکا ہو یا لڑکی۔",
+        "en": "The right to be safe belongs to every child, whether a boy or a girl."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-library",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "سکول کی لائبریری سے کتاب لینا سب بچوں کا حق ہے۔ اگر کوئی کتاب واپس نہ کرے تو کیا ہوگا؟",
+        "en": "Borrowing books from the school library is every child's right. What happens if someone does not return a book?"
+      },
+      "options": [
+        {
+          "ur": "کچھ نہیں ہوگا",
+          "en": "nothing will happen"
+        },
+        {
+          "ur": "دوسرے بچوں کو وہ کتاب نہیں ملے گی",
+          "en": "other children will not get that book"
+        },
+        {
+          "ur": "لائبریری بڑی ہو جائے گی",
+          "en": "the library will get bigger"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-rights-without-responsibility"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: ایک بچہ ذمہ داری بھولے تو دوسروں کے حق کا کیا ہوگا؟",
+            "en": "Think: if one child forgets a responsibility, what happens to others' rights?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-one-pair",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں ایک حق اور اس کی ذمہ داری کا جوڑا سوچیں، جیسے 'کھانا ملنا' اور 'کھانا ضائع نہ کرنا'۔ کسی بڑے کو بتائیں۔",
+        "en": "At home, think of one right and its responsibility, such as 'getting food' and 'not wasting food'. Tell a grown-up."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any sensible right-responsibility pair. Do not ask about the family's circumstances."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پہلے حق کا نام لیں۔ پھر سوچیں: اسے ٹھیک رکھنے کے لیے میں کیا کروں؟",
+        "en": "Name the right first. Then think: what do I do to keep it working?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد رکھیں: ہر حق کے ساتھ ایک ذمہ داری ہوتی ہے۔",
+        "en": "Remember: every right comes with a responsibility."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "حق ہیں مگر ان کے ساتھ کوئی ذمہ داری نہیں۔",
+        "en": "Rights without matching responsibility."
+      },
+      "correction": {
+        "ur": "ہر حق کے ساتھ ایک ذمہ داری ہوتی ہے۔",
+        "en": "Every right has a responsibility."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "حق صرف بڑوں کے ہوتے ہیں، بچوں کے نہیں۔",
+        "en": "Only grown-ups have rights, not children."
+      },
+      "correction": {
+        "ur": "بچوں کے بھی حق ہیں، جیسے تعلیم، صحت، حفاظت اور کھیل۔",
+        "en": "Children have rights too, such as education, health, safety and play."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-rights-without-responsibility",
+      "remediation_ref": "SOC-G4-CIV-02"
+    },
+    {
+      "signal": "misses_prerequisite:SOC-G4-CIV-01",
+      "remediation_ref": "SOC-G4-CIV-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "تعلیم–دل لگا کر سیکھنا۔ صحت–صاف رہنا۔ کھیل–دوسروں کو کھیلنے دینا۔ بات کہنا–دوسروں کو سننا۔ ہر حق کے ساتھ ذمہ داری۔",
+    "en": "Education – learn with care. Health – keep clean. Play – let others play. Speaking – listen to others. Every right has a responsibility."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ بچوں کے حق ہیں اور ہر حق کے ساتھ ایک ذمہ داری ہے۔",
+    "en": "We learned that children have rights and that every right comes with a responsibility."
+  },
+  "parent_notes": {
+    "ur": "گھر کے کسی چھوٹے کام میں بچے کو ذمہ داری دیں اور اس کے حق، جیسے کھیلنے کے وقت، کا بھی خیال رکھیں۔",
+    "en": "Give your child a small responsibility at home, and also respect their rights, such as time to play."
+  },
+  "mentor_notes": {
+    "ur": "حقوق کو سیاسی یا قانونی بحث نہ بنائیں؛ روزمرہ مثالوں تک رکھیں۔ اگر کوئی بچہ اشارہ دے کہ اس کا کوئی حق، جیسے حفاظت، پورا نہیں ہو رہا تو فوراً حفاظتی طریقۂ کار پر عمل کریں۔",
+    "en": "Keep rights in everyday examples, not political or legal debate. If a child signals that a right such as safety is not being met, follow the safeguarding procedure at once."
+  },
+  "accessibility_notes": {
+    "ur": "حق اور ذمہ داری کے کارڈوں کی تصاویر ابھی بنانی ہیں؛ ہر کارڈ کا متبادل متن اس کا لکھا ہوا جملہ پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ جوڑنے والی سرگرمی کا متبادل: ہر حق کے لیے تین ذمہ داریوں میں سے ایک چنیں۔",
+    "en": "Pictures for the right and responsibility cards are still to be made; each alt text should read the card's sentence. Urdu audio is not yet recorded. Alternative to the pairing activity: for each right, choose one of three responsibilities."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "always teach a right and its responsibility as a pair, using school and home examples",
+    "questioning_strategy": "ask 'what is the right here?' then 'what must I do so it works for everyone?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "names a right without a responsibility"
+    ],
+    "hint_policy": "graduated; two hints max; first name the right, then ask what the learner must do; never give the responsibility first",
+    "example_policy": "everyday rights (education, health, play, safety, being heard); no laws, politics or court cases",
+    "misconception_detectors": [
+      "claims a right while ignoring others' rights",
+      "thinks only adults have rights",
+      "thinks responsibilities are punishments"
+    ],
+    "critical_thinking_prompts": [
+      "If one child forgets a responsibility, whose right is affected?"
+    ],
+    "personalization_rules": "if the learner repeats rights-without-responsibility, redo the card-pairing activity",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor",
+      "learner signals they are unsafe, hurt or denied food, schooling or care -> stop and follow the safeguarding route to a human"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "discuss laws, politics or court cases",
+      "suggest the learner's family is failing them"
+    ]
+  },
+  "review_flags": [
+    "child-safety: confirm the safeguarding escalation wording for a learner who discloses an unmet right",
+    "subject expert: confirm the right/responsibility pairs and that 'right to speak' is phrased suitably for Grade 4"
+  ]
+}

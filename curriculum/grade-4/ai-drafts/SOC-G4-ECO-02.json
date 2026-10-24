@@ -1,0 +1,519 @@
+{
+  "code": "SOC-G4-ECO-02",
+  "title": {
+    "ur": "کام، چیزیں اور خدمات",
+    "en": "Jobs, goods and services"
+  },
+  "description": {
+    "ur": "عام پیشوں کو پہچانیں اور بتائیں کہ ہر ایک کون سی چیزیں (اشیاء) یا خدمات دیتا ہے۔",
+    "en": "Describe common jobs and whether each provides goods or services."
+  },
+  "keywords": [
+    "jobs",
+    "goods",
+    "services",
+    "farmer",
+    "tailor",
+    "shopkeeper",
+    "work"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "پیشہ",
+        "en": "job / occupation"
+      },
+      "definition": {
+        "ur": "وہ کام جو کوئی روزی کمانے کے لیے کرتا ہے۔",
+        "en": "the work someone does to earn a living."
+      }
+    },
+    {
+      "term": {
+        "ur": "اشیاء",
+        "en": "goods"
+      },
+      "definition": {
+        "ur": "وہ چیزیں جنہیں ہم چھو سکتے، خرید سکتے یا استعمال کر سکتے ہیں، جیسے گندم یا کرسی۔",
+        "en": "things we can touch, buy or use, such as wheat or a chair."
+      }
+    },
+    {
+      "term": {
+        "ur": "خدمت",
+        "en": "service"
+      },
+      "definition": {
+        "ur": "وہ کام جو کوئی ہمارے لیے کرتا ہے، جیسے پڑھانا یا بال کاٹنا۔",
+        "en": "work someone does for us, such as teaching or cutting hair."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ہمارے ارد گرد لوگ طرح طرح کے کام کرتے ہیں۔ کچھ لوگ چیزیں بناتے یا اگاتے ہیں۔ انہیں اشیاء کہتے ہیں۔ کچھ لوگ ہمارے لیے کوئی کام کرتے ہیں۔ اسے خدمت کہتے ہیں۔ آج ہم ہر پیشے کو دیکھ کر پوچھیں گے: یہ چیز دیتا ہے یا خدمت؟",
+    "en": "People around us do many kinds of work. Some people make or grow things. These are called goods. Some people do a job for us. That is called a service. Today, for each job, we will ask: does it give a thing or a service?"
+  },
+  "student_explanation": {
+    "ur": "لوگ روزی کمانے کے لیے کام کرتے ہیں۔ کچھ لوگ چیزیں بناتے یا اگاتے ہیں۔ ان چیزوں کو اشیاء کہتے ہیں۔ کسان گندم اگاتا ہے۔ بڑھئی کرسی بناتا ہے۔ کچھ لوگ ہمارے لیے کوئی کام کرتے ہیں۔ اس کام کو خدمت کہتے ہیں۔ استاد پڑھاتا ہے اور حجام بال کاٹتا ہے۔ اشیاء کو ہم چھو سکتے ہیں، خدمت ایک کام ہے۔",
+    "en": "People work to earn a living. Some people make or grow things. These things are called goods. A farmer grows wheat. A carpenter makes a chair. Some people do a job for us. That job is called a service. A teacher teaches and a barber cuts hair. We can touch goods; a service is an action."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "نان بائی تندور پر روٹی بناتا ہے۔ وہ اشیاء دیتا ہے یا خدمت؟",
+        "en": "A naanbai bakes roti in a tandoor. Does he provide goods or a service?"
+      },
+      "steps": [
+        {
+          "ur": "سوچیں: کام کے بعد ہاتھ میں کچھ آتا ہے؟",
+          "en": "Think: after the work, do we hold something in our hands?"
+        },
+        {
+          "ur": "ہاں، گرم روٹی۔ اسے چھو سکتے ہیں اور کھا سکتے ہیں۔",
+          "en": "Yes, a hot roti. We can touch it and eat it."
+        },
+        {
+          "ur": "تو نان بائی اشیاء دیتا ہے۔",
+          "en": "So the naanbai provides goods."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ایک درزی خاتون پرانی قمیض کی سلائی ٹھیک کرتی ہیں۔ یہ اشیاء ہیں یا خدمت؟",
+        "en": "A woman tailor mends the stitching on an old shirt. Is this goods or a service?"
+      },
+      "steps": [
+        {
+          "ur": "قمیض پہلے سے گاہک کی ہے۔",
+          "en": "The shirt already belongs to the customer."
+        },
+        {
+          "ur": "درزی نے نئی چیز نہیں دی، ایک کام کیا ہے۔",
+          "en": "The tailor has not given a new thing; she has done a job."
+        },
+        {
+          "ur": "تو یہ خدمت ہے۔",
+          "en": "So this is a service."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-goods-services-sort",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو 'اشیاء' یا 'خدمت' کے ڈبے میں رکھیں: کسان کی گندم، بڑھئی کی کرسی، استاد کا پڑھانا، حجام کا بال کاٹنا، کمہار کا گھڑا، رکشے والے کا سفر کروانا۔",
+        "en": "Sort each card into 'goods' or 'service': the farmer's wheat, the carpenter's chair, the teacher's teaching, the barber's haircut, the potter's clay pot, the rickshaw driver's ride."
+      },
+      "answer_key": {
+        "goods": [
+          "farmer's wheat",
+          "carpenter's chair",
+          "potter's clay pot"
+        ],
+        "service": [
+          "teaching",
+          "haircut",
+          "rickshaw ride"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: کیا میں اسے ہاتھ میں پکڑ سکتا ہوں؟",
+            "en": "Ask: can I hold it in my hand?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p1-job-provides",
+      "type": "matching",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر پیشے کو اس کی دی ہوئی چیز یا خدمت سے ملائیں۔",
+        "en": "Match each job to what it provides."
+      },
+      "options": [
+        {
+          "ur": "گندم اور سبزیاں",
+          "en": "wheat and vegetables"
+        },
+        {
+          "ur": "کپڑے سینا",
+          "en": "stitching clothes"
+        },
+        {
+          "ur": "علاج",
+          "en": "treatment"
+        },
+        {
+          "ur": "لکڑی کا فرنیچر",
+          "en": "wooden furniture"
+        }
+      ],
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "کسان",
+              "en": "farmer"
+            },
+            "right": {
+              "ur": "گندم اور سبزیاں",
+              "en": "wheat and vegetables"
+            }
+          },
+          {
+            "left": {
+              "ur": "درزی",
+              "en": "tailor"
+            },
+            "right": {
+              "ur": "کپڑے سینا",
+              "en": "stitching clothes"
+            }
+          },
+          {
+            "left": {
+              "ur": "ڈاکٹر",
+              "en": "doctor"
+            },
+            "right": {
+              "ur": "علاج",
+              "en": "treatment"
+            }
+          },
+          {
+            "left": {
+              "ur": "بڑھئی",
+              "en": "carpenter"
+            },
+            "right": {
+              "ur": "لکڑی کا فرنیچر",
+              "en": "wooden furniture"
+            }
+          }
+        ],
+        "misconception_on_wrong_pair": "m-helper-role-confusion"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر پیشے کا اوزار سوچیں۔",
+            "en": "Think of each job's tool."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p2-goods",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ان میں سے کون سی اشیاء ہیں؟",
+        "en": "Which of these is goods?"
+      },
+      "options": [
+        {
+          "ur": "بال کاٹنا",
+          "en": "a haircut"
+        },
+        {
+          "ur": "کمہار کا گھڑا",
+          "en": "a potter's clay pot"
+        },
+        {
+          "ur": "سبق پڑھانا",
+          "en": "teaching a lesson"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کس چیز کو ہاتھ میں پکڑ سکتے ہیں؟",
+            "en": "Which one can you hold?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-service",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ان میں سے خدمت کون سی ہے؟",
+        "en": "Which of these is a service?"
+      },
+      "options": [
+        {
+          "ur": "رکشے والا آپ کو بازار لے جاتا ہے",
+          "en": "a rickshaw driver takes you to the bazaar"
+        },
+        {
+          "ur": "کسان کے آلو",
+          "en": "a farmer's potatoes"
+        },
+        {
+          "ur": "بڑھئی کی میز",
+          "en": "a carpenter's table"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-teacher-goods",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "استاد کا پڑھانا اشیاء ہے کیونکہ کلاس میں کتابیں ہوتی ہیں۔",
+        "en": "A teacher's teaching is goods because there are books in class."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "استاد ہمیں کیا دیتا ہے: کوئی چیز یا کوئی کام؟",
+            "en": "What does a teacher give us: a thing or an action?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پڑھانا ایک کام ہے، اس لیے یہ خدمت ہے۔",
+        "en": "Teaching is an action, so it is a service."
+      }
+    },
+    {
+      "id": "p5-shopkeeper",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "دکان دار کیا کرتا ہے؟",
+        "en": "What does a shopkeeper do?"
+      },
+      "options": [
+        {
+          "ur": "گندم اگاتا ہے",
+          "en": "grows wheat"
+        },
+        {
+          "ur": "آگ بجھاتا ہے",
+          "en": "puts out fires"
+        },
+        {
+          "ur": "چیزیں بیچتا ہے",
+          "en": "sells goods"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-helper-role-confusion"
+        }
+      }
+    },
+    {
+      "id": "p6-women-jobs",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "عورتیں اور مرد دونوں کسان، درزی، استاد اور ڈاکٹر ہو سکتے ہیں۔",
+        "en": "Women and men can both be farmers, tailors, teachers and doctors."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-roti-chain",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "روٹی تک پہنچنے میں کون کون کام کرتا ہے؟ صحیح ترتیب چنیں۔",
+        "en": "Who works so that roti reaches us? Choose the right order."
+      },
+      "options": [
+        {
+          "ur": "کسان گندم اگاتا ہے ← چکی والا آٹا پیستا ہے ← نان بائی روٹی بناتا ہے",
+          "en": "farmer grows wheat → miller grinds flour → naanbai bakes roti"
+        },
+        {
+          "ur": "نان بائی روٹی بناتا ہے ← کسان گندم اگاتا ہے ← چکی والا آٹا پیستا ہے",
+          "en": "naanbai bakes roti → farmer grows wheat → miller grinds flour"
+        },
+        {
+          "ur": "چکی والا آٹا پیستا ہے ← نان بائی روٹی بناتا ہے ← کسان گندم اگاتا ہے",
+          "en": "miller grinds flour → naanbai bakes roti → farmer grows wheat"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے کیا چاہیے: گندم، آٹا یا روٹی؟",
+            "en": "What comes first: wheat, flour or roti?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-two-jobs",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کے کسی بڑے سے دو پیشوں کے بارے میں بات کریں جو آپ نے دیکھے ہیں۔ بتائیں کہ ہر ایک اشیاء دیتا ہے یا خدمت۔",
+        "en": "Talk with a grown-up about two jobs you have seen. Say whether each gives goods or a service."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any two jobs with a correct goods/service label. Do not ask what the learner's own family members do for work."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پوچھیں: کیا کام کے بعد ہاتھ میں کوئی چیز آتی ہے؟",
+        "en": "Ask: after the work, is there a thing to hold?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "چیز ہو تو اشیاء، صرف کام ہو تو خدمت۔",
+        "en": "If there is a thing, it is goods; if it is only an action, it is a service."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "مددگاروں اور پیشوں کے کام گڈمڈ کرنا۔",
+        "en": "Confusing community helpers' roles."
+      },
+      "correction": {
+        "ur": "ہر پیشے کو اس کے کام سے ملائیں۔",
+        "en": "Match the helper to their job."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "خدمت والے کام اصلی کام نہیں ہوتے کیونکہ ان سے کوئی چیز نہیں بنتی۔",
+        "en": "Service jobs are not real work because nothing is made."
+      },
+      "correction": {
+        "ur": "خدمت بھی اہم کام ہے۔ علاج، پڑھائی اور سفر سب کی ضرورت ہیں۔",
+        "en": "Services are important work too. Treatment, teaching and travel are needed by everyone."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-helper-role-confusion",
+      "remediation_ref": "SOC-G4-CIV-01"
+    },
+    {
+      "signal": "misses_prerequisite:SOC-G4-ECO-01",
+      "remediation_ref": "SOC-G4-ECO-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "اشیاء: وہ چیزیں جنہیں چھو سکتے ہیں (گندم، کرسی، گھڑا)۔ خدمت: وہ کام جو کوئی ہمارے لیے کرتا ہے (پڑھانا، علاج، بال کاٹنا)۔ ہر کام قابلِ عزت ہے۔",
+    "en": "Goods: things we can touch (wheat, chair, pot). Services: work someone does for us (teaching, treatment, haircut). All work deserves respect."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ لوگ کام کر کے اشیاء یا خدمات دیتے ہیں۔",
+    "en": "We learned that people's work provides goods or services."
+  },
+  "parent_notes": {
+    "ur": "بازار میں بچے سے پوچھیں کہ کون سی دکان چیزیں بیچتی ہے اور کون سی خدمت دیتی ہے۔",
+    "en": "In the bazaar, ask your child which shops sell goods and which give a service."
+  },
+  "mentor_notes": {
+    "ur": "بچے سے اس کے گھر والوں کے پیشے نہ پوچھیں۔ ہر پیشے میں عورتیں اور مرد دونوں دکھائیں۔ کسی کام کو چھوٹا یا بڑا نہ کہیں۔",
+    "en": "Do not ask about the child's family's jobs. Show women and men in every job. Never call any job low or high."
+  },
+  "accessibility_notes": {
+    "ur": "پیشوں اور اشیاء کے کارڈوں کی تصاویر ابھی بنانی ہیں؛ ہر کارڈ کا متبادل متن پیشہ اور کام بیان کرے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر کارڈ کے لیے 'اشیاء' یا 'خدمت' کا بٹن دبائیں۔",
+    "en": "Pictures for the job and goods cards are still to be made; each alt text should describe the job and the work. Urdu audio is not yet recorded. Alternative to the sorting activity: tap a 'goods' or 'service' button for each card."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "one test per job: 'is there a thing to hold afterwards?' goods if yes, service if it is only an action; link jobs into simple chains (wheat to roti)",
+    "questioning_strategy": "ask 'what do we get from this job?' before 'goods or service?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "labels a service as goods because objects are nearby"
+    ],
+    "hint_policy": "graduated; two hints max; first the hold-it test, then the rule; never give the label first",
+    "example_policy": "everyday Pakistani jobs (farmer, naanbai, tailor, carpenter, potter, barber, rickshaw driver, teacher, doctor); women and men in every role",
+    "misconception_detectors": [
+      "confuses helper roles",
+      "calls a service goods",
+      "thinks service jobs are not real work"
+    ],
+    "critical_thinking_prompts": [
+      "Which jobs had to happen before your roti reached the table?"
+    ],
+    "personalization_rules": "if helper-role confusion appears, route to SOC-G4-CIV-01",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "ask what the learner's parents or family members do for work",
+      "rank jobs as better or worse"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm 'اشیاء' and 'خدمات' are the Grade 4 Urdu terms for goods and services",
+    "challenge item uses '←' arrows inside Urdu text; check the arrow direction renders correctly right-to-left"
+  ]
+}

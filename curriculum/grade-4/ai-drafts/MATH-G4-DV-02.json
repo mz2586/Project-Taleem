@@ -1,0 +1,462 @@
+{
+  "code": "MATH-G4-DV-02",
+  "description": {
+    "ur": "پہاڑوں کی مدد سے تقسیم کرنا اور بچ جانے والے حصے کو باقی کے طور پر لکھنا۔",
+    "en": "Dividing within known facts and writing what is left over as a remainder."
+  },
+  "keywords": [
+    "division",
+    "remainder",
+    "left over",
+    "exact division",
+    "division facts",
+    "sharing"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "باقی",
+        "en": "remainder"
+      },
+      "definition": {
+        "ur": "برابر بانٹنے کے بعد جو بچ جائے۔",
+        "en": "What is left over after sharing equally."
+      }
+    },
+    {
+      "term": {
+        "ur": "پورا",
+        "en": "exact"
+      },
+      "definition": {
+        "ur": "جب بانٹنے کے بعد کچھ نہ بچے۔",
+        "en": "When nothing is left after sharing."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کبھی چیزیں بالکل برابر نہیں بٹتیں۔ کچھ بچ جاتا ہے۔ آج ہم اس بچے ہوئے حصے کو نام دیں گے: باقی۔ ہم ہمیشہ پوچھیں گے، \"برابر بانٹنے کے بعد کیا بچا؟\" اور باقی کو جواب میں لکھنا نہیں بھولیں گے۔",
+    "en": "Sometimes things do not share out exactly. Something is left over. Today we give that left-over part a name: the remainder. We will always ask, \"What is left after sharing equally?\" And we will never forget to write the remainder in the answer."
+  },
+  "student_explanation": {
+    "ur": "کبھی چیزیں بالکل برابر نہیں بٹتیں۔ ۱۳ روٹیاں ۴ لوگوں میں بانٹیں۔ ہر ایک کو ۳ روٹیاں ملتی ہیں۔ اس میں ۱۲ روٹیاں لگ جاتی ہیں۔ ایک روٹی بچ جاتی ہے۔ بچے ہوئے حصے کو باقی کہتے ہیں۔ ہم لکھتے ہیں: ۱۳ ÷ ۴ = ۳ باقی ۱۔ باقی ہمیشہ اس عدد سے چھوٹا ہوتا ہے جس سے تقسیم کرتے ہیں۔ اگر کچھ نہ بچے تو تقسیم پوری ہے۔",
+    "en": "Sometimes things do not share out exactly. Share 13 rotis among 4 people. Each person gets 3 rotis. That uses 12 rotis. One roti is left over. The left-over part is called the remainder. We write 13 ÷ 4 = 3 remainder 1. The remainder is always smaller than the number we divide by. If nothing is left, the division is exact."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۱۳ ÷ ۴ = ؟",
+        "en": "13 ÷ 4 = ?"
+      },
+      "steps": [
+        {
+          "ur": "۴ کے پہاڑے میں ۱۳ سے چھوٹا سب سے بڑا عدد: ۴ × ۳ = ۱۲۔",
+          "en": "The biggest number in the table of 4 not more than 13: 4 × 3 = 12."
+        },
+        {
+          "ur": "ہر ایک کو ۳ ملے۔ بچا: ۱۳ − ۱۲ = ۱۔",
+          "en": "Each gets 3. Left over: 13 − 12 = 1."
+        },
+        {
+          "ur": "۱، ۴ سے چھوٹا ہے، تو ٹھیک ہے۔ جواب: ۳ باقی ۱۔",
+          "en": "1 is less than 4, so that is fine. Answer: 3 remainder 1."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "۲۹ ÷ ۵ = ؟",
+        "en": "29 ÷ 5 = ?"
+      },
+      "steps": [
+        {
+          "ur": "۵ × ۵ = ۲۵ اور ۵ × ۶ = ۳۰۔ ۳۰ بہت زیادہ ہے۔",
+          "en": "5 × 5 = 25 and 5 × 6 = 30. 30 is too many."
+        },
+        {
+          "ur": "تو ہر ایک کو ۵۔ بچا: ۲۹ − ۲۵ = ۴۔",
+          "en": "So 5 each. Left over: 29 − 25 = 4."
+        },
+        {
+          "ur": "جواب: ۵ باقی ۴۔ جانچ: ۵ × ۵ + ۴ = ۲۹۔",
+          "en": "Answer: 5 remainder 4. Check: 5 × 5 + 4 = 29."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-marbles-cups",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "۱۷ کنچے ۵ پیالوں میں برابر گھسیٹیں۔ ہر پیالے میں کتنے آئے اور کتنے بچ گئے؟",
+        "en": "Drag 17 marbles equally into 5 cups. How many are in each cup, and how many are left over?"
+      },
+      "answer_key": {
+        "each": 3,
+        "left_over": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر پیالے میں ایک ایک ڈالتے جائیں جب تک سب کو برابر نہ مل سکے۔",
+            "en": "Keep putting one in each cup until you cannot give every cup one more."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-19div3",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۱۹ ÷ ۳ = ۶ باقی ___",
+        "en": "19 ÷ 3 = 6 remainder ___"
+      },
+      "answer_key": {
+        "answer": "1"
+      },
+      "accepted_variants": [
+        "1",
+        "۱"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۳ × ۶ کتنے ہیں؟",
+            "en": "What is 3 × 6?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۱۹ − ۱۸ = ۱۔",
+        "en": "19 − 18 = 1."
+      }
+    },
+    {
+      "id": "p6-sweets-left",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "۴۵ ٹافیاں ۶ بچوں میں برابر بانٹی جائیں تو ہر ایک کو ۷ ملتی ہیں۔ کتنی بچیں گی؟ ___",
+        "en": "45 sweets are shared equally among 6 children. Each gets 7. How many are left over? ___"
+      },
+      "answer_key": {
+        "answer": "3"
+      },
+      "accepted_variants": [
+        "3",
+        "۳"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۶ بچوں کو ۷ ۷ دینے میں کتنی ٹافیاں لگیں؟",
+            "en": "How many sweets does giving 7 each to 6 children use?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۶ × ۷ = ۴۲، ۴۵ − ۴۲ = ۳۔",
+        "en": "6 × 7 = 42, 45 − 42 = 3."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-22div5",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۲۲ ÷ ۵ = ؟",
+        "en": "22 ÷ 5 = ?"
+      },
+      "options": [
+        {
+          "ur": "۴",
+          "en": "4"
+        },
+        {
+          "ur": "۳ باقی ۷",
+          "en": "3 remainder 7"
+        },
+        {
+          "ur": "۴ باقی ۲",
+          "en": "4 remainder 2"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-remainder-dropped"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۵ × ۴ = ۲۰۔ کتنے بچے؟",
+            "en": "5 × 4 = 20. How many are left?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۲۲ − ۲۰ = ۲، اس لیے ۴ باقی ۲۔ ۷ باقی نہیں ہو سکتا کیونکہ وہ ۵ سے بڑا ہے۔",
+        "en": "22 − 20 = 2, so 4 remainder 2. 7 cannot be a remainder because it is more than 5."
+      }
+    },
+    {
+      "id": "p2-24div6",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "۲۴ ÷ ۶ = ؟",
+        "en": "24 ÷ 6 = ?"
+      },
+      "options": [
+        {
+          "ur": "۴",
+          "en": "4"
+        },
+        {
+          "ur": "۴ باقی ۱",
+          "en": "4 remainder 1"
+        },
+        {
+          "ur": "۳ باقی ۶",
+          "en": "3 remainder 6"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۶ کے پہاڑے میں ۲۴ ہے؟",
+            "en": "Is 24 in the table of 6?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۶ × ۴ = ۲۴، کچھ نہیں بچا۔ یہ پوری تقسیم ہے۔",
+        "en": "6 × 4 = 24, nothing is left. This division is exact."
+      }
+    },
+    {
+      "id": "p4-remainder-too-big",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "۲۶ ÷ ۴ کا جواب \"۵ باقی ۶\" درست ہے۔",
+        "en": "For 26 ÷ 4, the answer \"5 remainder 6\" is correct."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا باقی ۴ سے بڑا ہو سکتا ہے؟",
+            "en": "Can a remainder be bigger than 4?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۶ میں ایک اور ۴ آ سکتا ہے۔ صحیح جواب ۶ باقی ۲ ہے۔",
+        "en": "Another 4 fits into 6. The right answer is 6 remainder 2."
+      }
+    },
+    {
+      "id": "p5-38div7",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "۳۸ ÷ ۷ = ؟",
+        "en": "38 ÷ 7 = ?"
+      },
+      "options": [
+        {
+          "ur": "۵",
+          "en": "5"
+        },
+        {
+          "ur": "۵ باقی ۳",
+          "en": "5 remainder 3"
+        },
+        {
+          "ur": "۴ باقی ۱۰",
+          "en": "4 remainder 10"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-remainder-dropped"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۷ کے پہاڑے میں ۳۸ سے پہلے کون سا عدد آتا ہے؟",
+            "en": "Which number in the table of 7 comes just before 38?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۷ × ۵ = ۳۵، ۳۸ − ۳۵ = ۳۔ جواب ۵ باقی ۳۔",
+        "en": "7 × 5 = 35, 38 − 35 = 3. Answer 5 remainder 3."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-mystery-number",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "۲۰ اور ۳۰ کے درمیان وہ عدد بتائیں جسے ۴ سے تقسیم کریں تو باقی ۱ بچے، اور ۳ سے تقسیم کریں تو بھی باقی ۱ بچے۔",
+        "en": "Find the number between 20 and 30 that leaves remainder 1 when divided by 4, and also remainder 1 when divided by 3."
+      },
+      "answer_key": {
+        "answer": "25"
+      },
+      "accepted_variants": [
+        "25",
+        "۲۵"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے وہ عدد لکھیں جو ۴ سے تقسیم پر ۱ بچاتے ہیں: ۲۱، ۲۵، ۲۹۔",
+            "en": "First list numbers that leave 1 when divided by 4: 21, 25, 29."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-leftover-problems",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "بچ جانے والی چیزوں کے ساتھ بانٹنے کے دو مسئلے حل کریں۔",
+        "en": "two share-with-leftover problems."
+      },
+      "answer_key": {
+        "answer": "two divisions with correct remainders"
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "برابر بانٹنے کے بعد کیا بچا؟",
+        "en": "What is left after sharing equally?"
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "بچا ہوا باقی ہے",
+        "en": "What is left over is the remainder."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "تقسیم میں بچی ہوئی چیز (باقی) کو چھوڑ دینا۔",
+        "en": "Ignores the remainder in division"
+      },
+      "correction": {
+        "ur": "جو بچ جائے وہ باقی ہے، اسے لکھیں",
+        "en": "What is left over is the remainder; write it."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-remainder-dropped",
+      "remediation_ref": "MATH-G4-DV-02"
+    },
+    {
+      "signal": "misses_prerequisite:MATH-G4-DV-01",
+      "remediation_ref": "MATH-G4-DV-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "برابر بانٹیں، جو بچے وہ باقی ہے۔ باقی ہمیشہ تقسیم کرنے والے عدد سے چھوٹا ہوتا ہے۔ کچھ نہ بچے تو تقسیم پوری ہے۔",
+    "en": "Share equally; what is left is the remainder. The remainder is always smaller than the number you divide by. If nothing is left, the division is exact."
+  },
+  "summary": {
+    "ur": "ہم نے تقسیم میں باقی پہچاننا اور لکھنا سیکھا۔",
+    "en": "We learned to find and write the remainder in a division."
+  },
+  "parent_notes": {
+    "ur": "اگر ۴ لوگوں کے لیے ۱۳ روٹیاں ہوں تو ہر ایک کو کتنی ملیں گی اور کتنی بچیں گی؟",
+    "en": "if 13 rotis for 4 people, how many each and how many left?"
+  },
+  "mentor_notes": {
+    "ur": "بچے اکثر باقی چھوڑ دیتے ہیں؛ \"کیا بچا؟\" کا سوال واضح طور پر پوچھیں۔",
+    "en": "the remainder is often dropped; make \"what is left?\" explicit."
+  },
+  "accessibility_notes": {
+    "ur": "روٹیوں اور پیالوں کی تصویریں ابھی بنانی ہیں؛ متبادل متن ہر پیالے کی تعداد اور بچی ہوئی چیزیں بتائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے کا متبادل: \"ہر پیالے میں\" اور \"بچے\" کے خانوں میں عدد ٹائپ کریں۔",
+    "en": "The rotis and cups pictures are still to be made; alt text should say how many are in each cup and how many are left over. Urdu audio is not yet recorded. Alternative to dragging: type numbers into the \"in each cup\" and \"left over\" boxes."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "share out in turns until not everyone can get one more; name what is left as the remainder; check with divisor × answer + remainder",
+    "questioning_strategy": "always ask 'what is left after sharing equally?' and 'is the remainder smaller than the number of shares?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "drops the remainder",
+      "gives a remainder bigger than the divisor"
+    ],
+    "hint_policy": "graduated; two hints max (what is left after sharing; the leftover is the remainder) then a worked re-teach with 13 ÷ 4; never give the answer first",
+    "example_policy": "dividends up to about 50 within the 10 × 10 tables, mixing exact and remainder cases; rotis, sweets, marbles",
+    "misconception_detectors": [
+      "answers 4 for 22 ÷ 5",
+      "accepts 5 remainder 6 for 26 ÷ 4"
+    ],
+    "critical_thinking_prompts": [
+      "Why can the remainder never be as big as the number you divide by?"
+    ],
+    "personalization_rules": "if the learner cannot find the nearest table fact, route to MATH-G4-DV-01 and the tables in MATH-G4-ML-01",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "terminology: باقی means 'remainder' here but the AS-02 doc vocabulary also uses باقی for 'difference'; align the two lessons",
+    "subject expert: confirm the answer format '3 باقی 1' / '3 remainder 1' is the house style (vs 'ب ۱' or 'R1')"
+  ]
+}

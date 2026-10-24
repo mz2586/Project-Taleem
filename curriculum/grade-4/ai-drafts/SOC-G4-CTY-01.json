@@ -1,0 +1,444 @@
+{
+  "code": "SOC-G4-CTY-01",
+  "title": {
+    "ur": "ہمارے قومی نشان",
+    "en": "Our national symbols"
+  },
+  "description": {
+    "ur": "پاکستان کے قومی نشان پہچانیں: قومی پرچم، قومی ترانہ اور قومی زبان اردو۔",
+    "en": "Recognise Pakistan's national symbols: the national flag, the national anthem and Urdu, the national language."
+  },
+  "keywords": [
+    "national symbols",
+    "flag",
+    "national anthem",
+    "national language",
+    "Urdu",
+    "Pakistan"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "قومی نشان",
+        "en": "national symbol"
+      },
+      "definition": {
+        "ur": "ایسی چیز جو پورے ملک کی پہچان ہو۔",
+        "en": "something that stands for the whole country."
+      }
+    },
+    {
+      "term": {
+        "ur": "پرچم",
+        "en": "flag"
+      },
+      "definition": {
+        "ur": "کپڑے کا ٹکڑا جس کے رنگ اور نشان ملک کو ظاہر کرتے ہیں۔",
+        "en": "a piece of cloth whose colours and shapes stand for a country."
+      }
+    },
+    {
+      "term": {
+        "ur": "قومی ترانہ",
+        "en": "national anthem"
+      },
+      "definition": {
+        "ur": "ملک کا خاص گیت جو احترام سے کھڑے ہو کر سنا جاتا ہے۔",
+        "en": "the country's special song, heard while standing respectfully."
+      }
+    },
+    {
+      "term": {
+        "ur": "قومی زبان",
+        "en": "national language"
+      },
+      "definition": {
+        "ur": "وہ زبان جو پورے ملک کو آپس میں جوڑتی ہے۔ پاکستان کی قومی زبان اردو ہے۔",
+        "en": "the language that links the whole country. Pakistan's national language is Urdu."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "السلام علیکم! ہر ملک کی کچھ خاص نشانیاں ہوتی ہیں۔ انہیں قومی نشان کہتے ہیں۔ آج ہم پاکستان کے تین قومی نشان پہچانیں گے: پرچم، ترانہ اور قومی زبان۔ یہ نشان پورے ملک کے سب لوگوں کے ہیں۔ آئیے پہلے پرچم کو غور سے دیکھیں۔",
+    "en": "Assalam-o-alaikum! Every country has some special signs. We call them national symbols. Today we will recognise three of Pakistan's national symbols: the flag, the anthem and the national language. These symbols belong to all the people of the whole country. Let us look carefully at the flag first."
+  },
+  "student_explanation": {
+    "ur": "قومی نشان پورے ملک کی پہچان ہوتے ہیں۔ پاکستان کا پرچم سبز اور سفید ہے۔ سبز حصہ بڑا ہے۔ سفید پٹی جھنڈے کے ڈنڈے کی طرف ہوتی ہے۔ سبز حصے پر سفید چاند اور ستارہ ہے۔ ہمارے قومی ترانے کو قومی ترانہ کہتے ہیں۔ ترانہ بجے تو ہم خاموشی سے سیدھے کھڑے ہوتے ہیں۔ پاکستان کی قومی زبان اردو ہے۔ اردو مختلف علاقوں کے لوگوں کو آپس میں جوڑتی ہے۔",
+    "en": "National symbols stand for the whole country. Pakistan's flag is green and white. The green part is bigger. The white stripe is on the side of the flagpole. A white crescent moon and a star sit on the green part. Our national song is called the national anthem. When the anthem plays, we stand still and quiet. Pakistan's national language is Urdu. Urdu links people from different areas."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "ایک بچی نے تین چیزیں دیکھیں: سبز سفید جھنڈا، کرکٹ کا بلا اور ایک گیند۔ ان میں قومی نشان کون سا ہے؟",
+        "en": "A girl sees three things: a green and white flag, a cricket bat and a ball. Which one is a national symbol?"
+      },
+      "steps": [
+        {
+          "ur": "پوچھیں: کیا یہ چیز پورے ملک کی پہچان ہے؟",
+          "en": "Ask: does this thing stand for the whole country?"
+        },
+        {
+          "ur": "بلا اور گیند کھیل کی چیزیں ہیں۔ یہ ہر جگہ ملتی ہیں۔",
+          "en": "The bat and ball are things for a game. They are found everywhere."
+        },
+        {
+          "ur": "سبز سفید جھنڈا چاند ستارے والا ہے۔ یہ پاکستان کا پرچم ہے۔",
+          "en": "The green and white flag has a crescent and star. It is Pakistan's flag."
+        },
+        {
+          "ur": "تو قومی نشان پرچم ہے۔",
+          "en": "So the national symbol is the flag."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-flag-parts",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پرچم کی تصویر پر ہر حصے کو اس کے نام سے ملائیں: سبز حصہ، سفید پٹی، چاند، ستارہ۔",
+        "en": "On the flag picture, tap each part and match it to its name: green part, white stripe, crescent, star."
+      },
+      "answer_key": {
+        "labels": {
+          "green_field": "green part (larger, on the fly side)",
+          "white_stripe": "white stripe (next to the flagpole)",
+          "crescent": "white crescent on the green part",
+          "star": "white five-pointed star on the green part"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سفید پٹی ڈنڈے کے ساتھ ہوتی ہے۔",
+            "en": "The white stripe is next to the flagpole."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-which-flag",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پاکستان کے پرچم کے رنگ کون سے ہیں؟",
+        "en": "What are the colours of Pakistan's flag?"
+      },
+      "options": [
+        {
+          "ur": "سبز اور سفید",
+          "en": "green and white"
+        },
+        {
+          "ur": "لال اور سفید",
+          "en": "red and white"
+        },
+        {
+          "ur": "نیلا اور پیلا",
+          "en": "blue and yellow"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پرچم پر چاند ستارہ سفید ہے۔ باقی حصہ کس رنگ کا ہے؟",
+            "en": "The crescent and star are white. What colour is the rest?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "پرچم کا بڑا حصہ سبز اور پٹی سفید ہے۔",
+        "en": "The big part of the flag is green and the stripe is white."
+      }
+    },
+    {
+      "id": "p2-language",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پاکستان کی قومی زبان کون سی ہے؟",
+        "en": "What is Pakistan's national language?"
+      },
+      "options": [
+        {
+          "ur": "انگریزی",
+          "en": "English"
+        },
+        {
+          "ur": "اردو",
+          "en": "Urdu"
+        },
+        {
+          "ur": "عربی",
+          "en": "Arabic"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "یہ وہ زبان ہے جس میں یہ سبق بھی لکھا ہے۔",
+            "en": "It is the language this lesson is also written in."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "اردو قومی زبان ہے۔ یہ ملک کے لوگوں کو آپس میں جوڑتی ہے۔",
+        "en": "Urdu is the national language. It links people across the country."
+      }
+    },
+    {
+      "id": "p3-anthem-stand",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "قومی ترانہ بجے تو ہم کھیلتے رہتے ہیں۔",
+        "en": "When the national anthem plays, we keep on playing."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ترانے کے احترام میں ہم کیا کرتے ہیں؟",
+            "en": "What do we do to show respect for the anthem?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ترانہ بجے تو ہم خاموشی سے سیدھے کھڑے ہوتے ہیں۔",
+        "en": "When the anthem plays, we stand still and quiet."
+      }
+    },
+    {
+      "id": "p4-crescent",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "پاکستان کے پرچم کے سبز حصے پر کیا بنا ہے؟",
+        "en": "What is on the green part of Pakistan's flag?"
+      },
+      "options": [
+        {
+          "ur": "ایک درخت",
+          "en": "a tree"
+        },
+        {
+          "ur": "ایک پھول",
+          "en": "a flower"
+        },
+        {
+          "ur": "چاند اور ستارہ",
+          "en": "a crescent and a star"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "explanation": {
+        "ur": "سبز حصے پر سفید چاند اور ستارہ ہے۔",
+        "en": "A white crescent and star are on the green part."
+      }
+    },
+    {
+      "id": "p5-symbols-belong",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "قومی نشان ملک کے سب لوگوں کے ہیں، ہر صوبے اور علاقے کے۔",
+        "en": "National symbols belong to all the people of the country, in every province and area."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "قومی نشان پورے ملک کی پہچان ہیں۔",
+        "en": "National symbols stand for the whole country."
+      }
+    },
+    {
+      "id": "p6-what-is-symbol",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ان میں سے کون سا قومی نشان ہے؟",
+        "en": "Which of these is a national symbol?"
+      },
+      "options": [
+        {
+          "ur": "سکول کا بستہ",
+          "en": "a school bag"
+        },
+        {
+          "ur": "قومی ترانہ",
+          "en": "the national anthem"
+        },
+        {
+          "ur": "سائیکل",
+          "en": "a bicycle"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون سی چیز پورے ملک کی پہچان ہے؟",
+            "en": "Which one stands for the whole country?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-draw-flag",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کاغذ پر پاکستان کا پرچم بنائیں۔ گھر کے کسی بڑے کو بتائیں کہ سبز حصہ، سفید پٹی، چاند اور ستارہ کہاں ہیں۔",
+        "en": "Draw Pakistan's flag on paper. Show a grown-up at home where the green part, white stripe, crescent and star are."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any drawing with a larger green part, a white stripe on the flagpole side, and a crescent and star on the green. Pencil-only drawings are fine; do not require colours."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: کیا یہ چیز پورے ملک کی پہچان ہے؟",
+        "en": "Think: does this stand for the whole country?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "تین قومی نشان یاد کریں: پرچم، ترانہ، اردو زبان۔",
+        "en": "Remember the three national symbols: the flag, the anthem, the Urdu language."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "قومی زبان کا مطلب ہے کہ باقی زبانیں ضروری نہیں۔",
+        "en": "Having a national language means the other languages do not matter."
+      },
+      "correction": {
+        "ur": "اردو سب کو جوڑتی ہے۔ ساتھ ہی پاکستان کی ہر علاقائی زبان قیمتی ہے۔",
+        "en": "Urdu links everyone. At the same time every regional language of Pakistan is valuable."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "سفید پٹی پرچم کے دائیں کنارے پر ہوتی ہے۔",
+        "en": "The white stripe is on the far edge of the flag, away from the pole."
+      },
+      "correction": {
+        "ur": "سفید پٹی ڈنڈے کی طرف ہوتی ہے۔ سبز حصہ اس کے بعد آتا ہے۔",
+        "en": "The white stripe is on the flagpole side. The green part comes after it."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "two_wrong_in_a_row",
+      "remediation_ref": "SOC-G4-CTY-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "تین قومی نشان: سبز سفید پرچم جس پر چاند ستارہ ہے، قومی ترانہ، اور قومی زبان اردو۔ ترانے پر خاموش کھڑے ہوں۔",
+    "en": "Three national symbols: the green and white flag with a crescent and star, the national anthem, and Urdu, the national language. Stand quietly for the anthem."
+  },
+  "summary": {
+    "ur": "ہم نے پاکستان کے پرچم، قومی ترانے اور قومی زبان کو پہچانا۔",
+    "en": "We recognised Pakistan's flag, national anthem and national language."
+  },
+  "parent_notes": {
+    "ur": "بچے کے ساتھ کسی عمارت یا کتاب پر لگا پرچم دیکھیں اور اس کے حصوں کے نام پوچھیں۔",
+    "en": "Look at a flag on a building or in a book together and ask your child to name its parts."
+  },
+  "mentor_notes": {
+    "ur": "ترانے کو صرف احترام کے نشان کے طور پر پڑھائیں؛ بچے سے گانے یا یاد کرنے کا امتحان نہ لیں۔ علاقائی زبانوں کو کم تر نہ دکھائیں۔",
+    "en": "Teach the anthem only as a symbol of respect; do not test the child on singing or memorising it. Never present regional languages as lesser."
+  },
+  "accessibility_notes": {
+    "ur": "پرچم کی صاف تصویر ابھی بنانی ہے؛ اس کا متبادل متن یہ بتائے: بائیں طرف سفید پٹی، باقی سبز، سبز پر سفید چاند اور پانچ کونوں والا ستارہ۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ رنگ نہ پہچان سکنے والے بچوں کے لیے حصوں کے نام بھی لکھے ہوں۔ ٹیپ والی سرگرمی کا متبادل: ہر حصے کے لیے نام کی فہرست میں سے چنیں۔",
+    "en": "A clear flag picture is still to be made; its alt text should say: white stripe on the flagpole side, the rest green, a white crescent and five-pointed star on the green. Urdu audio is not yet recorded. Label the parts in words for children who cannot tell colours apart. Alternative to the tap activity: choose each part's name from a list."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "show the flag, name each part, then contrast a national symbol with everyday objects; anthem taught as respect, not performance",
+    "questioning_strategy": "ask 'does this stand for the whole country?' before naming the symbol",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "confuses a national symbol with an everyday object"
+    ],
+    "hint_policy": "graduated; two hints max; first point to 'whole country', then list the three symbols; never give the answer first",
+    "example_policy": "neutral, everyday settings (school assembly, a flag on a building); no political events, leaders or parties",
+    "misconception_detectors": [
+      "chooses an everyday object as a national symbol",
+      "places the white stripe away from the flagpole",
+      "says regional languages are not important"
+    ],
+    "critical_thinking_prompts": [
+      "Why do you think a whole country needs symbols that everyone shares?"
+    ],
+    "personalization_rules": "if the learner struggles with the flag parts, repeat the tap activity with spoken part names",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "sing or recite the anthem lyrics as a test",
+      "describe any flag-related political event or dispute"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the flag description (white stripe at the hoist, green field, white crescent and five-pointed star) and the Urdu part names",
+    "anthem: lesson deliberately gives no lyrics, author or dates; confirm this is acceptable or add verified facts",
+    "language editor: confirm 'قومی ترانہ' and the vocabulary definitions read naturally for Grade 4"
+  ]
+}

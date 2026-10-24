@@ -1,0 +1,488 @@
+{
+  "code": "ENG-G4-GR-05",
+  "title": {
+    "ur": "درست سادہ جملے بنائیں",
+    "en": "Build Correct Simple Sentences"
+  },
+  "description": {
+    "ur": "بچہ انگریزی کی ترتیب (فاعل + فعل + مفعول) میں درست سادہ جملے بناتا ہے۔",
+    "en": "The learner builds correct simple English sentences in subject–verb–object order."
+  },
+  "keywords": [
+    "simple sentence",
+    "word order",
+    "subject",
+    "verb",
+    "object",
+    "grammar"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "فاعل (subject)",
+        "en": "subject"
+      },
+      "definition": {
+        "ur": "جو کام کرتا ہے: Sara۔",
+        "en": "Who or what does the action: Sara."
+      }
+    },
+    {
+      "term": {
+        "ur": "فعل (verb)",
+        "en": "verb"
+      },
+      "definition": {
+        "ur": "کام: reads۔",
+        "en": "The action: reads."
+      }
+    },
+    {
+      "term": {
+        "ur": "مفعول (object)",
+        "en": "object"
+      },
+      "definition": {
+        "ur": "جس پر کام ہوتا ہے: a book۔",
+        "en": "What the action is done to: a book."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "اردو میں ہم کہتے ہیں: سارہ کتاب پڑھتی ہے۔ یہاں فعل آخر میں ہے۔ انگریزی میں فعل بیچ میں آتا ہے: Sara reads a book۔ آج ہم انگریزی کی ترتیب سے جملے بنائیں گے۔ ہم بڑا حرف اور فل اسٹاپ بھی یاد رکھیں گے۔",
+    "en": "In Urdu we say: Sara kitab parhti hai. The verb comes at the end. In English the verb comes in the middle: Sara reads a book. Today we will build sentences in English order. We will also remember capital letters and full stops."
+  },
+  "student_explanation": {
+    "ur": "انگریزی جملے کی ایک ترتیب ہے۔ پہلے فاعل آتا ہے، یعنی کون۔ پھر فعل آتا ہے، یعنی کیا کرتا ہے۔ پھر مفعول آتا ہے، یعنی کس چیز کو۔ Sara reads a book. اردو میں فعل آخر میں ہوتا ہے۔ انگریزی میں فعل فاعل کے فوراً بعد آتا ہے۔ جملہ بڑے حرف سے شروع کریں۔ آخر میں فل اسٹاپ لگائیں۔",
+    "en": "An English sentence has an order. First comes the subject: who. Then comes the verb: what they do. Then comes the object: what they do it to. Sara reads a book. In Urdu the verb comes at the end. In English the verb comes right after the subject. Start the sentence with a capital letter. Put a full stop at the end."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "ان الفاظ سے جملہ بنائیں: milk / drinks / the goat",
+        "en": "Build a sentence from: milk / drinks / the goat"
+      },
+      "steps": [
+        {
+          "ur": "کون؟ the goat — یہ فاعل ہے۔",
+          "en": "Who? the goat — this is the subject."
+        },
+        {
+          "ur": "کیا کرتی ہے؟ drinks — یہ فعل ہے۔",
+          "en": "What does it do? drinks — this is the verb."
+        },
+        {
+          "ur": "کیا پیتی ہے؟ milk — یہ مفعول ہے۔",
+          "en": "Drinks what? milk — this is the object."
+        },
+        {
+          "ur": "جملہ: The goat drinks milk.",
+          "en": "Sentence: The goat drinks milk."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ٹھیک کریں: Hamza the ball kicks.",
+        "en": "Fix it: Hamza the ball kicks."
+      },
+      "steps": [
+        {
+          "ur": "یہ اردو کی ترتیب ہے، فعل آخر میں ہے۔",
+          "en": "This is Urdu order; the verb is at the end."
+        },
+        {
+          "ur": "فعل kicks کو فاعل Hamza کے بعد لائیں۔",
+          "en": "Move the verb kicks right after the subject Hamza."
+        },
+        {
+          "ur": "جملہ: Hamza kicks the ball.",
+          "en": "Sentence: Hamza kicks the ball."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-word-cards",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "لفظوں کے کارڈ ترتیب سے رکھیں: rice / cooks / my father",
+        "en": "Put the word cards in order: rice / cooks / my father"
+      },
+      "answer_key": {
+        "order": [
+          "My father",
+          "cooks",
+          "rice."
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے سوچیں: کون کام کر رہا ہے؟",
+            "en": "First think: who is doing the action?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-order-words",
+      "type": "ordering",
+      "competency": "application",
+      "stem": {
+        "ur": "الفاظ کو ترتیب دیں: a letter / writes / Nida",
+        "en": "Put the words in order: a letter / writes / Nida"
+      },
+      "answer_key": {
+        "order": [
+          "Nida",
+          "writes",
+          "a letter."
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون؟ کیا کرتی ہے؟ کیا؟",
+            "en": "Who? Does what? What?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-write-one",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "ان الفاظ سے اپنا ایک جملہ لکھیں: the cat / eats / ___",
+        "en": "Write your own sentence: the cat / eats / ___"
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "subject–verb–object order, capital letter and full stop",
+        "max_score": 2,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "ترتیب درست مگر بڑا حرف یا فل اسٹاپ غائب۔",
+              "en": "Order is correct but the capital or full stop is missing."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "ترتیب، بڑا حرف اور فل اسٹاپ سب درست۔",
+              "en": "Order, capital letter and full stop are all correct."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor-marked. Accept any sensible object (fish, milk, rice)."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-correct-order",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کونسا جملہ درست ہے؟",
+        "en": "Which sentence is correct?"
+      },
+      "options": [
+        {
+          "ur": "Bilal a kite flies.",
+          "en": "Bilal a kite flies."
+        },
+        {
+          "ur": "Bilal flies a kite.",
+          "en": "Bilal flies a kite."
+        },
+        {
+          "ur": "Flies Bilal a kite.",
+          "en": "Flies Bilal a kite."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-l1-word-order"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "فعل فاعل کے فوراً بعد آتا ہے۔",
+            "en": "The verb comes right after the subject."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "Bilal (فاعل) + flies (فعل) + a kite (مفعول)۔",
+        "en": "Bilal (subject) + flies (verb) + a kite (object)."
+      }
+    },
+    {
+      "id": "p3-find-verb-place",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "Sara reads a book. اس جملے میں فعل کہاں ہے؟",
+        "en": "Sara reads a book. Where is the verb?"
+      },
+      "options": [
+        {
+          "ur": "at the end",
+          "en": "at the end"
+        },
+        {
+          "ur": "at the start",
+          "en": "at the start"
+        },
+        {
+          "ur": "right after the subject",
+          "en": "right after the subject"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "reads کس لفظ کے بعد ہے؟",
+            "en": "Which word comes just before reads?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-full-sentence",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کونسا جملہ درست لکھا ہے؟",
+        "en": "Which sentence is written correctly?"
+      },
+      "options": [
+        {
+          "ur": "The children play cricket.",
+          "en": "The children play cricket."
+        },
+        {
+          "ur": "the children play cricket",
+          "en": "the children play cricket"
+        },
+        {
+          "ur": "The children cricket play.",
+          "en": "The children cricket play."
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "2": "m-l1-word-order"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ترتیب، بڑا حرف اور فل اسٹاپ تینوں دیکھیں۔",
+            "en": "Check the order, the capital and the full stop."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-urdu-order",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "جملہ درست ہے: My mother tea makes.",
+        "en": "This sentence is correct: My mother tea makes."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-l1-word-order"
+        }
+      },
+      "explanation": {
+        "ur": "درست ترتیب: My mother makes tea.",
+        "en": "Correct order: My mother makes tea."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-three-sentences",
+      "type": "long",
+      "competency": "analysis",
+      "stem": {
+        "ur": "بازار کے بارے میں تین سادہ جملے لکھیں۔ ہر جملے میں فاعل، فعل اور مفعول ہو۔",
+        "en": "Write three simple sentences about a bazaar. Each must have a subject, a verb and an object."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "three subject–verb–object sentences with capitals and full stops",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "ایک جملہ درست ترتیب میں۔",
+              "en": "One sentence in correct order."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "دو جملے درست ترتیب میں۔",
+              "en": "Two sentences in correct order."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "تینوں جملے درست ترتیب، بڑے حرف اور فل اسٹاپ کے ساتھ۔",
+              "en": "All three in correct order, with capitals and full stops."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor-marked; example: The man sells mangoes. Do not penalise small spelling slips."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-say-sentences",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں تین کام دیکھیں اور ہر ایک پر انگریزی جملہ بولیں، جیسے: My sister sweeps the floor.",
+        "en": "Watch three jobs being done at home and say an English sentence about each, like: My sister sweeps the floor."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Oral; a family member listens. The mentor may ask for one sentence next time."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: کون؟ کیا کرتا ہے؟ کس چیز کو؟",
+        "en": "Think: Who? Does what? To what?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "فعل کو فاعل کے فوراً بعد رکھیں، آخر میں نہیں۔",
+        "en": "Put the verb right after the subject, not at the end."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "انگریزی میں اردو کی ترتیب لگانا (فعل آخر میں)۔",
+        "en": "Applies Urdu word order to English."
+      },
+      "correction": {
+        "ur": "انگریزی فاعل–فعل–مفعول ہے: Sara reads a book.",
+        "en": "English is subject–verb–object: Sara reads a book."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "بڑا حرف یا فل اسٹاپ بھول جانا۔",
+        "en": "Forgetting the capital letter or full stop."
+      },
+      "correction": {
+        "ur": "ہر جملہ بڑے حرف سے شروع، نقطے پر ختم۔",
+        "en": "Every sentence starts with a capital and ends with a full stop."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-l1-word-order",
+      "remediation_ref": "ENG-G4-GR-05"
+    },
+    {
+      "signal": "misses_prerequisite:ENG-G4-GR-04",
+      "remediation_ref": "ENG-G4-GR-04"
+    }
+  ],
+  "revision_notes": {
+    "ur": "فاعل + فعل + مفعول: Sara reads a book. فعل فاعل کے بعد۔ بڑا حرف اور فل اسٹاپ۔",
+    "en": "Subject + verb + object: Sara reads a book. Verb after the subject. Capital letter and full stop."
+  },
+  "summary": {
+    "ur": "ہم نے انگریزی ترتیب میں درست سادہ جملے بنائے۔",
+    "en": "We built correct simple sentences in English word order."
+  },
+  "parent_notes": {
+    "ur": "بچہ جو بھی انگریزی جملہ بولے، اس کی تعریف کریں۔ آپ کو غلطی ٹھیک کرنے کی ضرورت نہیں۔",
+    "en": "Praise every English sentence your child says. You do not need to correct mistakes."
+  },
+  "mentor_notes": {
+    "ur": "اردو کی ترتیب سب سے عام غلطی ہے؛ کارڈز ہاتھ سے ترتیب دلوانا بہت مدد کرتا ہے۔ لکھے جملے آپ جانچیں گے۔",
+    "en": "Urdu word order is the most common error; having children arrange paper word cards by hand helps a lot. You will mark the written sentences."
+  },
+  "accessibility_notes": {
+    "ur": "ہدایات اور مثالوں کی اردو/انگریزی آڈیو ابھی ریکارڈ نہیں ہوئی۔ لفظوں کے کارڈز کی تصویر اور اس کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے والی سرگرمی کا متبادل: ہر خانے (پہلا، دوسرا، تیسرا) کے لیے لفظ چنیں۔ لکھ نہ سکنے والا بچہ جملے زبانی بول سکتا ہے۔",
+    "en": "Urdu/English audio for instructions and examples is not yet recorded. The word-card picture and its alt text are still to be made. Alternative to the drag activity: choose the word for each slot (first, second, third). A child who cannot write may say the sentences aloud."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "who / does what / to what; contrast with Urdu order once, then practise English order",
+    "questioning_strategy": "ask 'who is doing it? what are they doing?' before building the sentence",
+    "slow_down_signals": [
+      "puts the verb last",
+      "two wrong answers in a row",
+      "drops the capital or full stop"
+    ],
+    "hint_policy": "graduated; two hints max; first the three questions, then 'verb after the subject'; never give the full sentence first",
+    "example_policy": "home, school and bazaar actions (cooks rice, flies a kite, sells mangoes); present simple only",
+    "misconception_detectors": [
+      "m-l1-word-order",
+      "missing capital letter",
+      "missing full stop"
+    ],
+    "critical_thinking_prompts": [
+      "Why does 'Bilal a kite flies' sound like Urdu?"
+    ],
+    "personalization_rules": "route to the weakest prerequisite: capitals → ENG-G4-GR-04, tense → ENG-G4-GR-03",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)"
+    ]
+  },
+  "review_flags": [
+    "mentor-mediated: confirm rubric levels for p6 and c1 fit the 'constructed (mentor)' assessment",
+    "subject expert: confirm the Urdu terms فاعل، فعل، مفعول suit Grade 4 learners"
+  ]
+}

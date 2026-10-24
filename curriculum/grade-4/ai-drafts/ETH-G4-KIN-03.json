@@ -1,0 +1,520 @@
+{
+  "code": "ETH-G4-KIN-03",
+  "title": {
+    "ur": "سب کو شامل کریں، کسی کو نہ ستائیں",
+    "en": "Include others, stop bullying"
+  },
+  "description": {
+    "ur": "دوسروں کو کھیل میں شامل کرنا، ستانا (بُلیئنگ) پہچاننا، اور بھروسے والے بڑے کو بتانا۔",
+    "en": "Including others, recognising bullying, and telling a trusted adult."
+  },
+  "keywords": [
+    "including others",
+    "bullying",
+    "teasing",
+    "left out",
+    "trusted adult",
+    "upstander",
+    "not your fault"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "شامل کرنا",
+        "en": "to include"
+      },
+      "definition": {
+        "ur": "کسی کو اپنے کھیل یا کام میں بلانا۔",
+        "en": "inviting someone into your game or work."
+      }
+    },
+    {
+      "term": {
+        "ur": "ستانا (بُلیئنگ)",
+        "en": "bullying"
+      },
+      "definition": {
+        "ur": "کسی کو جان بوجھ کر بار بار تکلیف دینا: باتوں سے، ہاتھ سے، یا الگ کر کے۔",
+        "en": "hurting someone on purpose again and again: with words, hands, or by leaving them out."
+      }
+    },
+    {
+      "term": {
+        "ur": "بھروسے والا بڑا",
+        "en": "trusted adult"
+      },
+      "definition": {
+        "ur": "وہ بڑا جس کے ساتھ آپ محفوظ محسوس کریں، جیسے گھر کا کوئی فرد، استاد یا مینٹور۔",
+        "en": "a grown-up you feel safe with, like a family member, a teacher or your mentor."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج کا سبق سب کو شامل کرنے اور کسی کو نہ ستانے کے بارے میں ہے۔ ہم یہ سیکھیں گے کہ ستانا کیا ہوتا ہے اور اگر ایسا ہو تو کیا کرنا ہے۔ ایک بات شروع میں ہی یاد رکھیں: اگر کسی کو ستایا جائے تو یہ کبھی اس کا قصور نہیں۔ آپ کو یہاں اپنی کوئی بات بتانے کی ضرورت نہیں؛ ہم فرضی کہانی سے سیکھیں گے۔",
+    "en": "Today's lesson is about including everyone and not bullying anyone. We will learn what bullying is and what to do if it happens. Remember one thing from the start: if someone is bullied, it is never their fault. You do not need to share anything about yourself here; we will learn from a made-up story."
+  },
+  "student_explanation": {
+    "ur": "شامل کرنا مہربانی ہے۔ کھیل میں سب کو باری دیں۔ کسی کو اکیلا نہ چھوڑیں۔ ستانا یہ ہے کہ کوئی کسی کو جان بوجھ کر بار بار تکلیف دے۔ یہ برے نام رکھ کر بھی ہوتا ہے۔ دھکا دے کر یا الگ کر کے بھی ہوتا ہے۔ فون پر بری باتیں بھیجنا بھی ستانا ہے۔ جسے ستایا جائے، یہ اس کا قصور نہیں۔ ستانے میں شامل نہ ہوں۔ اس بچے کے دوست بنیں۔ کسی بھروسے والے بڑے کو بتائیں۔ بتانا چغلی نہیں، یہ حفاظت ہے۔",
+    "en": "Including others is kind. Give everyone a turn in games. Do not leave anyone alone. Bullying is when someone hurts another person on purpose, again and again. It can be calling bad names. It can be pushing or leaving someone out. Sending mean messages on a phone is bullying too. If someone is bullied, it is not their fault. Do not join in. Be a friend to that child. Tell a trusted adult. Telling is not tattling. It keeps people safe."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "چھٹی کے وقت کرکٹ ہو رہی ہے۔ نئی بچی آسیہ دیکھ رہی ہے۔ ایک لڑکا کہتا ہے: «لڑکیاں نہیں کھیل سکتیں۔» ثمر کیا کر سکتی ہے؟",
+        "en": "At break there is a cricket game. A new girl, Asiya, is watching. A boy says, \"Girls can't play.\" What could Samar do?"
+      },
+      "steps": [
+        {
+          "ur": "ثمر سوچتی ہے: آسیہ کیسا محسوس کر رہی ہو گی؟ شاید اکیلی اور اداس۔",
+          "en": "Samar thinks: how might Asiya feel? Maybe alone and sad."
+        },
+        {
+          "ur": "ثمر کہتی ہے: «سب کھیل سکتے ہیں۔ آسیہ، ہماری ٹیم میں آ جاؤ!»",
+          "en": "Samar says, \"Everyone can play. Asiya, join our team!\""
+        },
+        {
+          "ur": "سب کو باری ملتی ہے۔ شامل کرنے سے کھیل اور اچھا ہو جاتا ہے۔",
+          "en": "Everyone gets a turn. Including others makes the game better."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "کلاس کے کچھ بچے روز ایک بچے کو چشمے کی وجہ سے برے نام سے پکارتے ہیں۔ وہ بچہ اداس رہتا ہے۔ آپ کیا کر سکتے ہیں؟",
+        "en": "Some children call a boy a bad name every day because of his glasses. He looks sad. What could you do?"
+      },
+      "steps": [
+        {
+          "ur": "یہ بار بار جان بوجھ کر تکلیف دینا ہے، یعنی ستانا۔",
+          "en": "This is hurting on purpose, again and again: bullying."
+        },
+        {
+          "ur": "ہنسی میں شامل نہ ہوں۔ اس بچے کے ساتھ بیٹھیں اور اچھی بات کریں۔",
+          "en": "Don't join the laughing. Sit with him and say something kind."
+        },
+        {
+          "ur": "کسی بھروسے والے بڑے کو بتائیں، جیسے استاد یا گھر کا کوئی فرد۔",
+          "en": "Tell a trusted adult, such as a teacher or someone at home."
+        },
+        {
+          "ur": "یاد رکھیں: اس بچے کا کوئی قصور نہیں۔",
+          "en": "Remember: it is not that boy's fault."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-include-or-hurt",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو رکھیں: «شامل کرنا» یا «ستانا»۔",
+        "en": "Sort each card: 'including' or 'bullying'."
+      },
+      "options": [
+        {
+          "ur": "نئے بچے کو کھیل میں بلانا",
+          "en": "Inviting a new child into the game"
+        },
+        {
+          "ur": "روز کسی کو برے نام سے پکارنا",
+          "en": "Calling someone a bad name every day"
+        },
+        {
+          "ur": "سب کو باری باری بیٹنگ دینا",
+          "en": "Giving everyone a turn to bat"
+        },
+        {
+          "ur": "سب سے کہنا «اس سے بات مت کرو»",
+          "en": "Telling everyone \"don't talk to her\""
+        }
+      ],
+      "answer_key": {
+        "sort": {
+          "including": [
+            0,
+            2
+          ],
+          "bullying": [
+            1,
+            3
+          ]
+        },
+        "mode": "tap a card, then tap its group (drag also works)"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: کیا اِس سے کوئی اکیلا یا دکھی ہوتا ہے؟",
+            "en": "Ask: does this make someone feel alone or hurt?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-what-is-bullying",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ستانا (بُلیئنگ) کیا ہے؟",
+        "en": "What is bullying?"
+      },
+      "options": [
+        {
+          "ur": "کسی کو جان بوجھ کر بار بار تکلیف دینا",
+          "en": "Hurting someone on purpose, again and again"
+        },
+        {
+          "ur": "کھیل میں ایک بار غلطی سے ٹکر ہو جانا",
+          "en": "Bumping into someone once by accident in a game"
+        },
+        {
+          "ur": "دوست سے کسی بات پر الگ رائے رکھنا",
+          "en": "Having a different opinion from a friend"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دو باتیں یاد کریں: جان بوجھ کر، اور بار بار۔",
+            "en": "Remember two things: on purpose, and again and again."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p2-their-fault",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اگر کسی کو ستایا جائے تو ضرور اس نے کچھ غلط کیا ہو گا۔",
+        "en": "If someone is bullied, they must have done something wrong."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "جسے ستایا جائے، یہ کبھی اس کا قصور نہیں۔",
+        "en": "It is never the fault of the person who is bullied."
+      }
+    },
+    {
+      "id": "p3-who-to-tell",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "اگر آپ دیکھیں کہ کسی کو ستایا جا رہا ہے تو کس کو بتائیں؟",
+        "en": "If you see someone being bullied, who should you tell?"
+      },
+      "options": [
+        {
+          "ur": "کسی کو نہیں",
+          "en": "No one"
+        },
+        {
+          "ur": "صرف ستانے والے بچوں کو",
+          "en": "Only the children doing it"
+        },
+        {
+          "ur": "کسی بھروسے والے بڑے کو، جیسے استاد، گھر کا فرد یا مینٹور",
+          "en": "A trusted adult, like a teacher, a family member or your mentor"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون مدد کر سکتا ہے اور محفوظ رکھ سکتا ہے؟",
+            "en": "Who can help and keep people safe?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-telling-tattling",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ستانے کے بارے میں بڑے کو بتانا چغلی ہے۔",
+        "en": "Telling an adult about bullying is tattling."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "بتانا حفاظت ہے، چغلی نہیں۔",
+        "en": "Telling keeps people safe; it is not tattling."
+      }
+    },
+    {
+      "id": "p5-left-out",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "گروپ ایک بچی سے کہتا ہے: «تم ہمارے ساتھ نہیں کھیل سکتیں، تم مختلف بولتی ہو۔» شامل کرنے والا جواب کیا ہے؟",
+        "en": "A group tells a girl, \"You can't play with us, you speak differently.\" Which reply includes her?"
+      },
+      "options": [
+        {
+          "ur": "«ہاں، تم جاؤ۔»",
+          "en": "\"Yes, go away.\""
+        },
+        {
+          "ur": "«سب کھیل سکتے ہیں۔ آؤ، ہمارے ساتھ کھیلو!»",
+          "en": "\"Everyone can play. Come, play with us!\""
+        },
+        {
+          "ur": "چپ چاپ دیکھتے رہنا اور ہنسنا",
+          "en": "Watch quietly and laugh"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-kindness-to-friends-only"
+        }
+      }
+    },
+    {
+      "id": "p6-phone-message",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کوئی فون پر کسی بچے کے بارے میں بری بات بھیجتا ہے اور کہتا ہے «آگے بھیجو»۔ آپ کیا کریں؟",
+        "en": "Someone sends a mean message about a child on a phone and says \"forward it\". What should you do?"
+      },
+      "options": [
+        {
+          "ur": "آگے نہ بھیجیں اور کسی بھروسے والے بڑے کو دکھائیں",
+          "en": "Don't forward it, and show a trusted adult"
+        },
+        {
+          "ur": "سب کو آگے بھیج دیں",
+          "en": "Forward it to everyone"
+        },
+        {
+          "ur": "اس پر ہنسنے والا نشان بھیج دیں",
+          "en": "Send a laughing face"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا اِس سے کسی کو تکلیف ہو گی؟",
+            "en": "Would this hurt someone?"
+          }
+        }
+      ]
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-worried-to-tell",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک بچے کو ڈر ہے کہ اگر وہ بتائے گا تو ستانے والے اور زیادہ تنگ کریں گے۔ سب سے اچھا مشورہ کون سا ہے؟",
+        "en": "A child is afraid that if he tells, the bullies will be meaner. Which is the best advice?"
+      },
+      "options": [
+        {
+          "ur": "«چپ رہو، خود ٹھیک ہو جائے گا۔»",
+          "en": "\"Stay quiet, it will go away.\""
+        },
+        {
+          "ur": "«کسی بھروسے والے بڑے کو بتاؤ؛ وہ تمہیں محفوظ رکھنے میں مدد کرے گا۔ تمہارا قصور نہیں۔»",
+          "en": "\"Tell a trusted adult; they will help keep you safe. It is not your fault.\""
+        },
+        {
+          "ur": "«تم بھی انہیں تنگ کرو۔»",
+          "en": "\"Be mean back to them.\""
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کون مدد کر سکتا ہے؟ کیا ستایا جانا اس بچے کا قصور ہے؟",
+            "en": "Who can help? Is being bullied that child's fault?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "بھروسے والا بڑا مدد کرتا ہے۔ ایک بڑے نے نہ سنا تو کسی دوسرے بھروسے والے بڑے کو بتائیں۔",
+        "en": "A trusted adult helps. If one adult doesn't listen, tell another trusted adult."
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-trusted-adults",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں سوچیں کہ آپ کے دو بھروسے والے بڑے کون ہیں جنہیں آپ کوئی پریشانی بتا سکتے ہیں۔ یہ اپنے دل میں یاد رکھیں؛ کہیں لکھنے کی ضرورت نہیں۔",
+        "en": "At home, think of two trusted adults you could tell if something worried you. Keep them in your mind; you do not need to write them anywhere."
+      },
+      "answer_key": {
+        "guidance": "Private reflection only. Nothing is entered in the app and the mentor never asks who the adults are."
+      }
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کہانی میں کون اکیلا یا دکھی تھا؟",
+        "en": "In the story, who felt alone or hurt?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "کیا یہ جان بوجھ کر اور بار بار ہو رہا ہے؟ کون مدد کر سکتا ہے؟",
+        "en": "Is it on purpose and again and again? Who can help?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "جسے ستایا جائے، اس کا اپنا قصور ہے۔",
+        "en": "If someone is bullied, it is their own fault."
+      },
+      "correction": {
+        "ur": "ستایا جانا کبھی اس بچے کا قصور نہیں۔",
+        "en": "Being bullied is never that child's fault."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "بڑے کو بتانا چغلی ہے۔",
+        "en": "Telling an adult is tattling."
+      },
+      "correction": {
+        "ur": "بتانا حفاظت ہے۔ بھروسے والا بڑا مدد کرتا ہے۔",
+        "en": "Telling keeps people safe. A trusted adult helps."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "صرف اپنے دوستوں کو کھیل میں شامل کرنا چاہیے۔",
+        "en": "We should include only our friends."
+      },
+      "correction": {
+        "ur": "مہربانی سب کے لیے ہے؛ سب کو شامل کریں۔",
+        "en": "Kindness is for everyone; include everyone."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-kindness-to-friends-only",
+      "remediation_ref": "ETH-G4-KIN-01"
+    },
+    {
+      "signal": "says bullying is the victim's fault or telling is tattling",
+      "remediation_ref": "ETH-G4-KIN-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "سب کو شامل کریں۔ ستانا = جان بوجھ کر، بار بار تکلیف دینا۔ ستانے میں شامل نہ ہوں، دوست بنیں، بھروسے والے بڑے کو بتائیں۔ یہ کبھی ستائے جانے والے کا قصور نہیں۔",
+    "en": "Include everyone. Bullying = hurting on purpose, again and again. Don't join in, be a friend, tell a trusted adult. It is never the bullied child's fault."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ سب کو شامل کرنا ہے، ستانا پہچاننا ہے، اور بھروسے والے بڑے کو بتانا ہے۔",
+    "en": "We learned to include everyone, to recognise bullying, and to tell a trusted adult."
+  },
+  "parent_notes": {
+    "ur": "بچے کو بتائیں کہ وہ کوئی بھی پریشانی آپ کو بتا سکتا ہے اور آپ پہلے سنیں گے، ڈانٹیں گے نہیں۔ اگر بچہ ستائے جانے کا ذکر کرے تو اسے یقین دلائیں کہ یہ اس کا قصور نہیں اور اسکول یا مینٹور سے بات کریں۔",
+    "en": "Tell your child they can bring any worry to you and you will listen first, not scold. If your child mentions bullying, reassure them it is not their fault and speak to the school or mentor."
+  },
+  "mentor_notes": {
+    "ur": "یہ حفاظتی سبق ہے۔ بچوں سے نہ پوچھیں کہ کیا انہیں ستایا گیا ہے۔ اگر کوئی بچہ خود بتائے تو سکون سے سنیں، «بتانے کا شکریہ، یہ تمہارا قصور نہیں» کہیں، سوال نہ کریں، وعدہ نہ کریں کہ کسی کو نہیں بتائیں گے، اور فوراً حفاظتی ذمہ دار کو اطلاع دیں۔",
+    "en": "This is a safeguarding lesson. Do not ask learners whether they are bullied. If a learner discloses, listen calmly, say 'thank you for telling me, it is not your fault', do not question, do not promise to keep it secret, and report to the safeguarding lead at once."
+  },
+  "accessibility_notes": {
+    "ur": "کہانی کی تصویریں ابھی بنانی ہیں؛ متبادل متن منظر بیان کرے بغیر کسی بچے کو مضحکہ خیز دکھائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ ہر متن آواز میں پڑھا جائے۔ ترتیب دینے والی سرگرمی کا متبادل: ہر کارڈ کے لیے «شامل کرنا» یا «ستانا» بٹن چنیں۔ چشمے والی مثال میں معذوری یا فرق کو مذاق کا نشانہ نہ بنائیں۔",
+    "en": "Story pictures are still to be made; alt text should describe the scene without showing any child as a figure of fun. Urdu audio is not yet recorded; all text must be read aloud. Alternative to the sort activity: for each card tap 'including' or 'bullying'. In the glasses example, never present difference or disability as the joke."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "made-up stories only; teach including first, then define bullying (on purpose + again and again + words/hands/leaving out/phone), then the three actions: don't join in, be a friend, tell a trusted adult; repeat 'never your fault'",
+    "questioning_strategy": "ask 'how might they feel?' and 'who could help?'; never ask 'has this happened to you?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says the bullied child deserved it",
+      "learner becomes quiet, upset or mentions their own experience"
+    ],
+    "hint_policy": "graduated; two hints max; first point the learner back to the story and the value question, then narrow the choice; never give the answer first",
+    "example_policy": "gentle, non-graphic school and street examples; no physical violence detail; diverse names; differences (glasses, language, gender) shown as fine, never as the joke",
+    "misconception_detectors": [
+      "blames the bullied child",
+      "thinks telling an adult is tattling",
+      "confuses a one-off accident or a disagreement with bullying"
+    ],
+    "critical_thinking_prompts": [
+      "Why is telling an adult different from tattling?",
+      "What could you do if the first adult you tell does not help?"
+    ],
+    "personalization_rules": "if the learner blames the victim or calls telling tattling, re-teach with the second worked example before practice; route to ETH-G4-KIN-01 if they limit inclusion to friends",
+    "escalation_rules": [
+      "any sign of distress -> stop the lesson gently and hand to a human mentor",
+      "learner mentions being hurt, unsafe, bullied or scared at home or school -> do not question further; say calmly that it is not their fault and that they did the right thing by speaking; hand to a human mentor / safeguarding lead at once",
+      "repeated confusion after remediation -> mentor",
+      "learner says they are being bullied or hurt -> stop the lesson, thank them, say it is not their fault, do not question, hand to the safeguarding lead immediately"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human",
+      "ask for personal information (name, address, school, family details, photos)",
+      "ask the learner to share personal experiences, secrets or anything that happened to them",
+      "shame, blame, scold or label the learner",
+      "use religious scripture, religious instruction or compare faiths",
+      "ask the learner whether they are bullied or who is bullying them",
+      "promise the learner that what they say will be kept secret"
+    ]
+  },
+  "review_flags": [
+    "SAFEGUARDING REVIEWER: whole lesson (bullying definition, 'never your fault', 'telling is not tattling', no in-app disclosure, mentor disclosure procedure, homework is private)",
+    "language editor: choose the child-level Urdu term for bullying («ستانا» with «بُلیئنگ» in brackets is a placeholder)",
+    "subject expert: confirm online/phone bullying example is right for Grade 4 learners on shared family phones"
+  ]
+}

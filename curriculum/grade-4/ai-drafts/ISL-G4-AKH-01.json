@@ -1,0 +1,485 @@
+{
+  "code": "ISL-G4-AKH-01",
+  "title": {
+    "ur": "سچ بولنا اچھا اخلاق ہے",
+    "en": "Honesty Is Good Character"
+  },
+  "description": {
+    "ur": "سچائی اور امانت داری کو اچھے اخلاق کے طور پر سمجھنا، اور روزمرہ زندگی میں سچ بولنا۔",
+    "en": "Understanding honesty and trustworthiness as good character, and telling the truth in everyday life."
+  },
+  "keywords": [
+    "honesty",
+    "truthfulness",
+    "trust",
+    "trustworthiness",
+    "good character",
+    "akhlaq"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "سچائی",
+        "en": "honesty / truth"
+      },
+      "definition": {
+        "ur": "جو بات واقعی ہوئی ہو، وہی کہنا۔",
+        "en": "Saying what really happened."
+      }
+    },
+    {
+      "term": {
+        "ur": "بھروسا",
+        "en": "trust"
+      },
+      "definition": {
+        "ur": "جب لوگ یقین کریں کہ آپ سچ کہیں گے۔",
+        "en": "When people believe you will tell the truth."
+      }
+    },
+    {
+      "term": {
+        "ur": "امانت داری",
+        "en": "trustworthiness"
+      },
+      "definition": {
+        "ur": "کسی کی چیز سنبھال کر رکھنا اور ٹھیک ٹھیک واپس کرنا۔",
+        "en": "Keeping someone's thing safe and giving it back properly."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "السلام علیکم! آج ہم سچائی کے بارے میں بات کریں گے۔ اسلام ہمیں سچ بولنا سکھاتا ہے۔ سچ بولنے سے لوگ ہم پر بھروسا کرتے ہیں۔ غلطی ہو جائے تو سچ بتانا بہادری ہے۔ آئیں، کچھ آسان مثالیں دیکھیں۔",
+    "en": "Assalamu alaikum! Today we will talk about honesty. Islam teaches us to tell the truth. When we tell the truth, people trust us. Telling the truth after a mistake is brave. Let us look at some simple examples."
+  },
+  "student_explanation": {
+    "ur": "سچ بولنا اچھا اخلاق ہے۔ اسلام ہمیں ہمیشہ سچ بولنا سکھاتا ہے۔ مکہ کے لوگ حضرت محمد ﷺ کو صادق اور امین کہتے تھے۔ صادق کا مطلب ہے سچا۔ امین کا مطلب ہے امانت دار۔ سچ بولنے سے بھروسا بنتا ہے۔ کبھی سچ بولنا مشکل لگتا ہے۔ پھر بھی ہم سچ بولتے ہیں۔ غلطی مان لینا بہادری ہے۔",
+    "en": "Telling the truth is good character. Islam teaches us to always be truthful. The people of Makkah called Prophet Muhammad (peace be upon him) Sadiq and Amin. Sadiq means truthful. Amin means trustworthy. Honesty builds trust. Sometimes the truth feels hard to say. We still tell the truth. Owning up to a mistake is brave."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "کھیلتے ہوئے علی سے امی کا گلاس ٹوٹ گیا۔ اب علی کیا کرے؟",
+        "en": "While playing, Ali broke his mother's glass. What should Ali do now?"
+      },
+      "steps": [
+        {
+          "ur": "پہلے سوچیں: سچ کیا ہے؟ گلاس علی سے ٹوٹا۔",
+          "en": "First think: what is the truth? Ali broke the glass."
+        },
+        {
+          "ur": "سچ بتانے سے امی کا بھروسا قائم رہتا ہے۔",
+          "en": "Telling the truth keeps his mother's trust."
+        },
+        {
+          "ur": "علی نرمی سے کہتا ہے: مجھ سے گلاس ٹوٹ گیا، معاف کیجیے۔",
+          "en": "Ali says gently: I broke the glass, I am sorry."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "بازار میں دکاندار نے فاطمہ کو ۱۰ روپے زیادہ واپس کر دیے۔ وہ کیا کرے؟",
+        "en": "At the bazaar, the shopkeeper gave Fatima 10 rupees too much change. What should she do?"
+      },
+      "steps": [
+        {
+          "ur": "یہ ۱۰ روپے فاطمہ کے نہیں، دکاندار کے ہیں۔",
+          "en": "These 10 rupees are not Fatima's. They belong to the shopkeeper."
+        },
+        {
+          "ur": "امانت داری یہ ہے کہ دوسرے کی چیز واپس کریں۔",
+          "en": "Being trustworthy means giving back what belongs to others."
+        },
+        {
+          "ur": "فاطمہ پیسے واپس کرتی ہے۔ دکاندار اس پر بھروسا کرتا ہے۔",
+          "en": "Fatima gives the money back. The shopkeeper now trusts her."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-honest",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ کو چھو کر صحیح ٹوکری میں رکھیں: 'سچا کام' یا 'سچا کام نہیں'۔",
+        "en": "Tap each card and put it in the right basket: 'honest' or 'not honest'."
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پوچھیں: کیا اس سے بھروسا بنتا ہے؟",
+            "en": "Ask: does this build trust?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "ملی ہوئی پنسل استاد کو دے دینا",
+          "en": "Giving a found pencil to the teacher"
+        },
+        {
+          "ur": "کام نہ کیا ہو اور کہنا 'کر لیا'",
+          "en": "Saying 'I did it' when the work is not done"
+        },
+        {
+          "ur": "گرا ہوا پانی اپنی غلطی مان کر صاف کرنا",
+          "en": "Owning up to spilt water and wiping it up"
+        },
+        {
+          "ur": "دکاندار کو زیادہ ملے پیسے واپس کرنا",
+          "en": "Giving extra change back to the shopkeeper"
+        }
+      ],
+      "answer_key": {
+        "mode": "sort",
+        "groups": {
+          "honest": [
+            0,
+            2,
+            3
+          ],
+          "not_honest": [
+            1
+          ]
+        }
+      }
+    },
+    {
+      "id": "p6-brave",
+      "type": "fill_blank",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "غلطی ہو جائے تو سچ بتانا ___ ہے۔",
+        "en": "Telling the truth after a mistake is ___."
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "یہ لفظ ڈر کا الٹ ہے۔",
+            "en": "This word is the opposite of being scared."
+          }
+        }
+      ],
+      "answer_key": {
+        "answer": "brave"
+      },
+      "accepted_variants": [
+        "بہادری",
+        "brave",
+        "بہادر",
+        "courageous"
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-found-pencil",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "بلال کو کسی کی پنسل ملی۔ سچا اور امانت دار بچہ کیا کرے گا؟",
+        "en": "Bilal found someone's pencil. What will an honest, trustworthy child do?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "یہ پنسل کس کی ہے؟",
+            "en": "Whose pencil is it?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "دوسرے کی چیز واپس کرنا امانت داری ہے۔",
+        "en": "Giving back someone else's thing is being trustworthy."
+      },
+      "options": [
+        {
+          "ur": "چپکے سے رکھ لے گا",
+          "en": "Keep it quietly"
+        },
+        {
+          "ur": "مالک کو یا استاد کو دے دے گا",
+          "en": "Give it to its owner or the teacher"
+        },
+        {
+          "ur": "پھینک دے گا",
+          "en": "Throw it away"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p2-when-truth",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "سچ کب بولنا چاہیے؟",
+        "en": "When should we tell the truth?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا سچائی کا کوئی وقت مقرر ہے؟",
+            "en": "Does honesty have only certain times?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سچ تب بھی بولتے ہیں جب مشکل ہو۔",
+        "en": "We are honest even when it is hard."
+      },
+      "options": [
+        {
+          "ur": "صرف جب آسان ہو",
+          "en": "Only when it is easy"
+        },
+        {
+          "ur": "صرف جب کوئی دیکھ رہا ہو",
+          "en": "Only when someone is watching"
+        },
+        {
+          "ur": "ہمیشہ، مشکل ہو تب بھی",
+          "en": "Always, even when it is hard"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2,
+        "option_misconceptions": {
+          "0": "m-honesty-only-when-easy"
+        }
+      }
+    },
+    {
+      "id": "p3-amin",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "مکہ کے لوگ حضرت محمد ﷺ کو امین کہتے تھے، یعنی امانت دار۔",
+        "en": "The people of Makkah called Prophet Muhammad (peace be upon him) Amin, which means trustworthy."
+      },
+      "explanation": {
+        "ur": "جی ہاں، لوگ آپ ﷺ پر بہت بھروسا کرتے تھے۔",
+        "en": "Yes, people trusted him greatly."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-builds",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "سچ بولنے سے کیا بنتا ہے؟",
+        "en": "What does telling the truth build?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لوگ سچے بچے کے بارے میں کیا محسوس کرتے ہیں؟",
+            "en": "How do people feel about an honest child?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "بھروسا",
+          "en": "Trust"
+        },
+        {
+          "ur": "ڈر",
+          "en": "Fear"
+        },
+        {
+          "ur": "غصہ",
+          "en": "Anger"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p5-small-lie",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "غلطی چھوٹی ہو تو جھوٹ بولنے میں کوئی حرج نہیں۔",
+        "en": "If a mistake is small, telling a lie about it is fine."
+      },
+      "explanation": {
+        "ur": "چھوٹی بات ہو یا بڑی، ہم سچ بولتے ہیں۔",
+        "en": "Small thing or big thing, we tell the truth."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-honesty-only-when-easy"
+        }
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-kind-reply",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ایک دوست کہتا ہے: 'تھوڑا سا جھوٹ چلتا ہے۔' آپ اسے نرمی سے کیا کہیں گے؟",
+        "en": "A friend says: 'A tiny lie is okay.' What would you gently tell them?"
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any kind, respectful reply that links honesty to trust or to doing what is right even when it is hard. Praise the idea, not the wording. Never ask about real lies the child or family told."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-tell-family",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج گھر کے کسی بڑے کو بتائیں کہ آپ نے ایک سچی بات کب کہی۔",
+        "en": "Today, tell an elder at home about one time you told the truth."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit or upload. If the child mentions it next lesson, praise warmly. Do not ask for details about family members."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "کیا اِس سے بھروسا بنتا ہے؟",
+        "en": "Does this build trust?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "سوچیں: ان میں سچ کون سا ہے؟",
+        "en": "Think: which of these is the truth?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "سچ صرف تب بولنا ہے جب آسان ہو۔",
+        "en": "We only need to be honest when it is easy."
+      },
+      "correction": {
+        "ur": "سچ تب بھی بولتے ہیں جب مشکل ہو۔",
+        "en": "We are honest even when it is hard."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "چھوٹا سا جھوٹ کوئی بات نہیں۔",
+        "en": "A small lie does not matter."
+      },
+      "correction": {
+        "ur": "چھوٹا جھوٹ بھی بھروسا کمزور کرتا ہے۔",
+        "en": "Even a small lie weakens trust."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-honesty-only-when-easy",
+      "remediation_ref": "ISL-G4-AKH-01"
+    },
+    {
+      "signal": "low_score:story_context",
+      "remediation_ref": "ISL-G4-SIR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "سچ بولنا اچھا اخلاق ہے۔ سچ سے بھروسا بنتا ہے۔ امانت داری یعنی دوسرے کی چیز واپس کرنا۔ غلطی ماننا بہادری ہے۔",
+    "en": "Telling the truth is good character. Honesty builds trust. Trustworthiness means giving back what belongs to others. Owning a mistake is brave."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ سچائی اور امانت داری اچھے اخلاق ہیں۔",
+    "en": "We learned that honesty and trustworthiness are good character."
+  },
+  "parent_notes": {
+    "ur": "جب بچہ سچ بولے، خاص طور پر غلطی مانے، تو پیار سے تعریف کریں۔ غصہ نہ کریں، تاکہ وہ اگلی بار بھی سچ بتائے۔",
+    "en": "Praise your child warmly for honesty, especially when they admit a mistake. Stay calm, so they feel safe to tell the truth next time."
+  },
+  "mentor_notes": {
+    "ur": "ہر صورتِ حال نرم اور بغیر شرمندگی کے رکھیں۔ سچائی کو سراہیں، کبھی تفتیش نہ کریں۔ یہ سبق ETH-G4-HON-01 کے نمونے کے مطابق ہے۔",
+    "en": "Keep every situation gentle and non-shaming; celebrate honesty, never interrogate. This lesson mirrors the ETH-G4-HON-01 exemplar at the character level."
+  },
+  "accessibility_notes": {
+    "ur": "تصاویر ابھی بنانی ہیں (ٹوٹا گلاس، بازار)، اور ان کا متبادل متن بھی۔ کسی تصویر میں نبی ﷺ یا صحابہ کی شکل نہ ہو۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر کارڈ کے لیے 'سچا' یا 'سچا نہیں' کا بٹن چنیں۔",
+    "en": "Pictures (the broken glass, the bazaar) and their alt text are still to be made. No picture may show the Prophet (peace be upon him) or the companions. Urdu audio is not yet recorded. Alternative to the sort activity: choose an 'honest' or 'not honest' button for each card."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "start from a familiar home or bazaar situation, name the truthful choice, then link it to trust and to the Prophet's title al-Amin",
+    "questioning_strategy": "ask 'does this build trust?' before 'which choice is honest?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "chooses the option where nobody finds out"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "gentle, low-stakes situations only (found pencil, extra change, a spill); never accusatory; Pakistani home and bazaar contexts",
+    "misconception_detectors": [
+      "picks 'only when easy' or 'only when watched'",
+      "says a small lie is fine"
+    ],
+    "critical_thinking_prompts": [
+      "Why would the shopkeeper trust Fatima more after she returned the money?"
+    ],
+    "personalization_rules": "if the learner struggles with the al-Amin story, route to ISL-G4-SIR-01; otherwise repeat with a new gentle situation",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: confirm the titles Sadiq and Amin and their child-level meanings are stated accurately",
+    "check this lesson stays consistent with the ETH-G4-HON-01 exemplar (vocabulary, misconception m-honesty-only-when-easy, homework)",
+    "child-safety reviewer: confirm no scenario could make a child feel accused or shamed"
+  ]
+}

@@ -1,0 +1,529 @@
+{
+  "code": "URD-G4-RD-02",
+  "title": {
+    "ur": "نئے لفظ ٹکڑوں میں پڑھنا",
+    "en": "Reading new words in parts"
+  },
+  "description": {
+    "ur": "حروف کی آوازوں اور لفظ کے ٹکڑوں کی مدد سے نئے اور مشکل لفظ پڑھنا۔",
+    "en": "Reading new and hard words using letter sounds and word parts."
+  },
+  "keywords": [
+    "decoding",
+    "syllables",
+    "letter sounds",
+    "do-chashmi he",
+    "noon ghunna",
+    "word parts"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ٹکڑا (ہجا)",
+        "en": "part (syllable)"
+      },
+      "definition": {
+        "ur": "لفظ کا وہ چھوٹا حصہ جو ایک ساتھ بولا جاتا ہے۔",
+        "en": "a small part of a word that is said together."
+      }
+    },
+    {
+      "term": {
+        "ur": "دو چشمی ھ",
+        "en": "do-chashmi he (ھ)"
+      },
+      "definition": {
+        "ur": "یہ ھ اپنے سے پہلے حرف کے ساتھ مل کر ایک آواز بناتی ہے، جیسے کھ، بھ۔",
+        "en": "this ھ joins the letter before it to make one sound, like kh, bh."
+      }
+    },
+    {
+      "term": {
+        "ur": "نون غنہ (ں)",
+        "en": "noon ghunna (ں)"
+      },
+      "definition": {
+        "ur": "بغیر نقطے کا نون؛ اس کی آواز ناک سے نکلتی ہے، جیسے ماں۔",
+        "en": "the noon without a dot; its sound comes through the nose, as in maan."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "کبھی کبھی ہمیں ایسا لفظ ملتا ہے جو ہم نے پہلے نہیں پڑھا۔ گھبرانے کی ضرورت نہیں۔ ہم لفظ کو چھوٹے ٹکڑوں میں توڑیں گے۔ ہر ٹکڑے کی آواز بولیں گے، پھر سب ٹکڑے جوڑ دیں گے۔ آئیں، لفظ 'کھلاڑی' سے شروع کریں۔",
+    "en": "Sometimes we meet a word we have never read before. There is no need to worry. We will break the word into small parts. We will say each part's sound, then join the parts. Let us start with the word 'khilaari' (player)."
+  },
+  "student_explanation": {
+    "ur": "لمبا لفظ چھوٹے ٹکڑوں سے بنتا ہے۔ پہلے لفظ کو ٹکڑوں میں توڑیں۔ ہر ٹکڑا آہستہ بولیں۔ پھر سب ٹکڑے جوڑ کر پورا لفظ بولیں۔ دو چشمی ھ پہلے حرف سے مل کر ایک آواز بناتی ہے۔ جیسے 'کھ' ایک آواز ہے۔ نون غنہ (ں) کی آواز ناک سے نکلتی ہے۔ آخر میں دیکھیں کہ لفظ جملے میں ٹھیک لگتا ہے۔",
+    "en": "A long word is made of small parts. First break the word into parts. Say each part slowly. Then join the parts and say the whole word. Do-chashmi he (ھ) joins the letter before it into one sound. For example, 'کھ' (kh) is one sound. Noon ghunna (ں) is a sound through the nose. Last, check that the word makes sense in the sentence."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "لفظ 'کھلاڑی' پڑھیں۔",
+        "en": "Read the word 'کھلاڑی' (player)."
+      },
+      "steps": [
+        {
+          "ur": "ٹکڑے کریں: کھِ + لا + ڑی۔",
+          "en": "Break it: khi + laa + ri."
+        },
+        {
+          "ur": "'کھ' ایک آواز ہے، کیونکہ اس میں دو چشمی ھ ہے۔",
+          "en": "'کھ' is one sound because it has do-chashmi he."
+        },
+        {
+          "ur": "ہر ٹکڑا بولیں: کھِ ... لا ... ڑی۔",
+          "en": "Say each part: khi ... laa ... ri."
+        },
+        {
+          "ur": "جوڑ کر بولیں: کھلاڑی۔",
+          "en": "Join them: khilaari."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "لفظ 'دوپہر' پڑھیں۔",
+        "en": "Read the word 'دوپہر' (afternoon)."
+      },
+      "steps": [
+        {
+          "ur": "یہ دو چھوٹے لفظوں سے بنا ہے: دو + پہر۔",
+          "en": "It is made of two small words: do + pahar."
+        },
+        {
+          "ur": "پہلے 'دو' پڑھیں، پھر 'پہر'۔",
+          "en": "First read 'do', then 'pahar'."
+        },
+        {
+          "ur": "ملا کر بولیں: دوپہر۔",
+          "en": "Say them together: dopahar."
+        },
+        {
+          "ur": "جملے میں جانچیں: 'ہم دوپہر کو کھانا کھاتے ہیں۔' ٹھیک لگتا ہے۔",
+          "en": "Check in a sentence: 'We eat lunch in the afternoon.' It makes sense."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-split-word",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "لفظ 'تربوز' کو ٹکڑوں میں توڑیں: ٹکڑوں کو صحیح ترتیب میں رکھیں۔",
+        "en": "Break the word 'تربوز' (watermelon) into parts: put the parts in the right order."
+      },
+      "options": [
+        {
+          "ur": "بوز",
+          "en": "booz"
+        },
+        {
+          "ur": "تر",
+          "en": "tar"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          0
+        ],
+        "correct_state": "تر + بوز"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اردو دائیں سے بائیں پڑھی جاتی ہے۔ پہلا ٹکڑا دائیں طرف ہے۔",
+            "en": "Urdu is read right to left. The first part is on the right."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-order-parts",
+      "type": "ordering",
+      "competency": "application",
+      "stem": {
+        "ur": "لفظ 'ٹماٹر' کے ٹکڑے صحیح ترتیب میں رکھیں۔",
+        "en": "Put the parts of 'ٹماٹر' (tomato) in order."
+      },
+      "options": [
+        {
+          "ur": "ٹر",
+          "en": "tar"
+        },
+        {
+          "ur": "ٹ",
+          "en": "ta"
+        },
+        {
+          "ur": "ما",
+          "en": "maa"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          2,
+          0
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے ٹکڑے سے شروع کریں: ٹَ۔",
+            "en": "Start with the first part: ta."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ٹَ + ما + ٹر = ٹماٹر",
+        "en": "ta + maa + tar = tamaatar"
+      }
+    },
+    {
+      "id": "p6-compound",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "'کتاب' + 'خانہ' = ___",
+        "en": "'کتاب' (book) + 'خانہ' (house) = ___"
+      },
+      "answer_key": {
+        "answer": "کتب خانہ"
+      },
+      "accepted_variants": [
+        "کتب خانہ",
+        "کتاب خانہ"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دونوں لفظ ملا کر لکھیں؛ لائبریری کو یہی کہتے ہیں۔",
+            "en": "Join the two words; this is the word for a library."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "لائبریری کو کتب خانہ کہتے ہیں۔ 'کتاب خانہ' بھی بولا جاتا ہے۔",
+        "en": "A library is 'kutub khana'; 'kitaab khana' is also used."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-split-mosafir",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "لفظ 'مسافر' کے صحیح ٹکڑے کون سے ہیں؟",
+        "en": "Which are the correct parts of 'مسافر' (traveller)?"
+      },
+      "options": [
+        {
+          "ur": "مُ + سا + فر",
+          "en": "mu + saa + fir"
+        },
+        {
+          "ur": "مس + اف + ر",
+          "en": "mus + af + r"
+        },
+        {
+          "ur": "م + سافر + ا",
+          "en": "m + saafir + a"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر ٹکڑا ایسے بولیں جیسے ہم بولتے ہیں۔",
+            "en": "Say each part the way we say it aloud."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "مُ ... سا ... فر، ملا کر مسافر۔",
+        "en": "mu ... saa ... fir, together musaafir."
+      }
+    },
+    {
+      "id": "p2-do-chashmi",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کس لفظ میں دو چشمی ھ ہے جو پہلے حرف سے مل کر ایک آواز بناتی ہے؟",
+        "en": "Which word has a do-chashmi he that joins the letter before it into one sound?"
+      },
+      "options": [
+        {
+          "ur": "ہرن",
+          "en": "hiran (deer)"
+        },
+        {
+          "ur": "گھر",
+          "en": "ghar (home)"
+        },
+        {
+          "ur": "ہوا",
+          "en": "hawa (air)"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ھ کی شکل دو آنکھوں جیسی ہوتی ہے۔",
+            "en": "The ھ looks like two eyes."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'گھر' میں گھ ایک آواز ہے۔ 'ہرن' اور 'ہوا' میں ہ الگ حرف ہے۔",
+        "en": "In 'ghar', 'gh' is one sound. In 'hiran' and 'hawa', ہ is its own letter."
+      }
+    },
+    {
+      "id": "p3-noon-ghunna",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "کس لفظ کے آخر میں نون غنہ (ں) ہے؟",
+        "en": "Which word ends with noon ghunna (ں)?"
+      },
+      "options": [
+        {
+          "ur": "دن",
+          "en": "din (day)"
+        },
+        {
+          "ur": "کان",
+          "en": "kaan (ear)"
+        },
+        {
+          "ur": "کہاں",
+          "en": "kahaan (where)"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "نون غنہ پر نقطہ نہیں ہوتا۔",
+            "en": "Noon ghunna has no dot."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'کہاں' کے آخر میں ں ہے، اس کی آواز ناک سے نکلتی ہے۔",
+        "en": "'Kahaan' ends in ں, a nasal sound."
+      }
+    },
+    {
+      "id": "p7-aspirate-one",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "لفظ 'بھائی' میں 'بھ' ایک ہی آواز ہے۔",
+        "en": "In the word 'بھائی' (brother), 'بھ' is one sound."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "دو چشمی ھ 'ب' سے مل کر ایک آواز 'بھ' بناتی ہے۔",
+        "en": "Do-chashmi he joins ب to make the one sound 'bh'."
+      }
+    },
+    {
+      "id": "p5-join-check",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "نیا لفظ پڑھنے کے بعد دیکھنا چاہیے کہ وہ جملے میں ٹھیک لگتا ہے یا نہیں۔",
+        "en": "After reading a new word, we should check it makes sense in the sentence."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "جملہ بتاتا ہے کہ ہم نے لفظ ٹھیک پڑھا یا نہیں۔",
+        "en": "The sentence tells us whether we read the word right."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-new-word",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "لفظ 'بارہ سنگھا' پڑھیں۔ اس کے ٹکڑے لکھیں اور بتائیں کہ 'سنگھا' میں کون سی دو چشمی ھ والی آواز ہے۔",
+        "en": "Read 'بارہ سنگھا' (swamp deer). Write its parts and say which do-chashmi he sound is in 'سنگھا'."
+      },
+      "answer_key": {
+        "sample_answer": "با + رہ + سن + گھا؛ آواز 'گھ'۔"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے 'بارہ' پڑھیں، جیسے گنتی میں ۱۲۔",
+            "en": "First read 'baara', like the number 12."
+          }
+        }
+      ],
+      "mentor_review_guidance": "Accept any sensible split; key point is that گھ is one sound and the ں/ن is nasal."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-find-words",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں کسی اخبار، ڈبے یا کتاب پر دو مشکل لفظ تلاش کریں۔ ہر لفظ کو ٹکڑوں میں توڑ کر کاپی میں لکھیں۔",
+        "en": "At home, find two hard words on a newspaper, box or book. Write each word broken into parts in your notebook."
+      },
+      "answer_key": {
+        "sample_answer": "Two words written as parts, e.g. 'دوا + خانہ'."
+      },
+      "mentor_review_guidance": "Check the split is sayable; spelling of the whole word should match the source."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "لفظ کو ٹکڑوں میں توڑیں۔ پہلا ٹکڑا کیا ہے؟",
+        "en": "Break the word into parts. What is the first part?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "کیا لفظ میں ھ یا ں ہے؟ اس کی آواز یاد کریں۔",
+        "en": "Does the word have ھ or ں? Remember its sound."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "حرف کی شکل بدل جائے تو وہ نیا حرف بن جاتا ہے۔",
+        "en": "When a letter changes shape in a word, it becomes a new letter."
+      },
+      "correction": {
+        "ur": "حرف کی شکل اُس کی جگہ سے بدلتی ہے؛ آواز وہی رہتی ہے۔",
+        "en": "A letter's shape changes with its place; its sound stays the same."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "دو چشمی ھ کی الگ آواز 'ہ' بولنی ہے۔",
+        "en": "Do-chashmi he (ھ) is said as a separate 'h' sound."
+      },
+      "correction": {
+        "ur": "ھ پہلے حرف سے مل کر ایک آواز بنتی ہے: کھ، بھ، گھ۔",
+        "en": "ھ joins the letter before it into one sound: kh, bh, gh."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-letter-form-position",
+      "remediation_ref": "URD-G4-WR-01"
+    },
+    {
+      "signal": "misses_prerequisite:URD-G4-RD-01",
+      "remediation_ref": "URD-G4-RD-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "نیا لفظ: ٹکڑے کریں، ہر ٹکڑا بولیں، جوڑیں، جملے میں جانچیں۔ ھ پہلے حرف سے مل کر ایک آواز۔ ں ناک کی آواز۔",
+    "en": "New word: split, say each part, join, check in the sentence. ھ joins the letter before into one sound. ں is a nasal sound."
+  },
+  "summary": {
+    "ur": "ہم نے نئے لفظ ٹکڑوں میں توڑ کر پڑھنا سیکھا۔",
+    "en": "We learned to read new words by breaking them into parts."
+  },
+  "parent_notes": {
+    "ur": "دکان کے بورڈ یا ڈبوں پر لکھے لفظ بچے سے پڑھوائیں۔ اگر اٹکے تو کہیں: 'ٹکڑوں میں پڑھو'۔ خود پورا لفظ نہ بتائیں۔",
+    "en": "Ask your child to read words on shop signs or boxes. If stuck, say 'read it in parts'. Do not say the whole word for them."
+  },
+  "mentor_notes": {
+    "ur": "دو چشمی ھ اور ہ کا فرق اکثر الجھاتا ہے؛ کھ/کہ کے جوڑے (کھانا، کہنا) سے مشق کرائیں۔",
+    "en": "ھ vs ہ often confuses; practise pairs like کھانا / کہنا."
+  },
+  "accessibility_notes": {
+    "ur": "ٹکڑوں کو رنگوں سے دکھانے والی تصویر ابھی بنانی ہے؛ متبادل متن ہر ٹکڑا الگ پڑھے۔ لفظوں کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ترتیب والی (گھسیٹنے کی) سرگرمی کا متبادل: ہر ٹکڑے پر ۱، ۲ نمبر چنیں۔",
+    "en": "The colour-coded word-parts picture is still to be made; alt text should read each part separately. Urdu audio for the words is not yet recorded. Alternative to the drag ordering activity: choose 1, 2 for each part."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "split -> say -> join -> check in sentence; teach ھ and ں as sound patterns with short familiar words first",
+    "questioning_strategy": "ask 'what is the first part?' and 'does it make sense in the sentence?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "says ھ as a separate h",
+      "guesses a whole word from its first letter"
+    ],
+    "hint_policy": "graduated; two hints max; first ask for the split, then point to ھ/ں; never say the whole word first",
+    "example_policy": "everyday words from home, bazaar and school (ٹماٹر، کھلاڑی، دوپہر، تربوز)",
+    "misconception_detectors": [
+      "treats a changed letter shape as a different letter",
+      "pronounces ھ as a separate h"
+    ],
+    "critical_thinking_prompts": [
+      "Why does 'کھانا' sound different from 'کہانی'?"
+    ],
+    "personalization_rules": "if letter shapes confuse the learner, route to URD-G4-WR-01 for joined letter forms",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer"
+    ]
+  },
+  "review_flags": [
+    "language editor: confirm the syllable splits (مُ+سا+فر، کھِ+لا+ڑی، ٹَ+ما+ٹر) follow school practice",
+    "subject expert: 'بارہ سنگھا' in the challenge; confirm it is suitable or swap for a more common word"
+  ]
+}

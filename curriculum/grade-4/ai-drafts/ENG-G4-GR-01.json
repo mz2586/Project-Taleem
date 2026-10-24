@@ -1,0 +1,385 @@
+{
+  "code": "ENG-G4-GR-01",
+  "title": {
+    "ur": "اسم، فعل اور صفت",
+    "en": "Naming, Doing and Describing Words"
+  },
+  "description": {
+    "ur": "بچہ انگریزی جملوں میں اسم (noun)، فعل (verb) اور صفت (adjective) پہچانتا ہے۔",
+    "en": "The learner identifies nouns, verbs and adjectives in English sentences."
+  },
+  "keywords": [
+    "nouns",
+    "verbs",
+    "adjectives",
+    "parts of speech",
+    "grammar"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "اسم (noun)",
+        "en": "noun"
+      },
+      "definition": {
+        "ur": "کسی شخص، جگہ، جانور یا چیز کا نام: Ali، school، cat۔",
+        "en": "A naming word for a person, place, animal or thing: Ali, school, cat."
+      }
+    },
+    {
+      "term": {
+        "ur": "فعل (verb)",
+        "en": "verb"
+      },
+      "definition": {
+        "ur": "کام بتانے والا لفظ: run، eat، read۔",
+        "en": "A doing word: run, eat, read."
+      }
+    },
+    {
+      "term": {
+        "ur": "صفت (adjective)",
+        "en": "adjective"
+      },
+      "definition": {
+        "ur": "اسم کے بارے میں بتانے والا لفظ: big، red، happy۔",
+        "en": "A describing word that tells about a noun: big, red, happy."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ہر لفظ جملے میں ایک کام کرتا ہے۔ کچھ الفاظ نام بتاتے ہیں۔ کچھ کام بتاتے ہیں۔ کچھ کسی چیز کی خوبی بتاتے ہیں۔ آج ہم ان تینوں کو پہچانیں گے: اسم، فعل اور صفت۔",
+    "en": "Every word has a job in a sentence. Some words name things. Some words tell an action. Some words describe a thing. Today we will spot all three: nouns, verbs and adjectives."
+  },
+  "student_explanation": {
+    "ur": "اسم نام بتاتا ہے۔ Ali، school اور cat اسم ہیں۔ فعل کام بتاتا ہے۔ run، eat اور read فعل ہیں۔ صفت اسم کی خوبی بتاتی ہے۔ big، red اور happy صفت ہیں۔ یہ جملہ دیکھیں: The small cat drinks milk. cat اور milk اسم ہیں۔ drinks فعل ہے۔ small صفت ہے۔",
+    "en": "A noun names something. Ali, school and cat are nouns. A verb tells an action. run, eat and read are verbs. An adjective describes a noun. big, red and happy are adjectives. Look at this sentence: The small cat drinks milk. cat and milk are nouns. drinks is the verb. small is an adjective."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "The tall boy kicks the ball. اس جملے میں اسم، فعل اور صفت ڈھونڈیں۔",
+        "en": "The tall boy kicks the ball. Find the nouns, the verb and the adjective."
+      },
+      "steps": [
+        {
+          "ur": "کون یا کیا؟ boy اور ball نام ہیں، یعنی اسم۔",
+          "en": "Who or what? boy and ball are names, so they are nouns."
+        },
+        {
+          "ur": "کیا کام ہو رہا ہے؟ kicks، یعنی فعل۔",
+          "en": "What action is happening? kicks, so it is the verb."
+        },
+        {
+          "ur": "boy کیسا ہے؟ tall، یعنی صفت۔",
+          "en": "What is the boy like? tall, so it is an adjective."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-sort-words",
+      "type": "interactive",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "الفاظ کو تین ڈبوں میں ڈالیں، اسم، فعل یا صفت: mango، jump، sweet، teacher، write، green",
+        "en": "Sort the words into three boxes, noun, verb or adjective: mango, jump, sweet, teacher, write, green"
+      },
+      "answer_key": {
+        "groups": {
+          "noun": [
+            "mango",
+            "teacher"
+          ],
+          "verb": [
+            "jump",
+            "write"
+          ],
+          "adjective": [
+            "sweet",
+            "green"
+          ]
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا آپ یہ کام کر سکتے ہیں؟ تو وہ فعل ہے۔",
+            "en": "Can you do it as an action? Then it is a verb."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-match-type",
+      "type": "matching",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ہر لفظ کو اس کی قسم سے ملائیں: Lahore ، clap ، happy",
+        "en": "Match each word to its type: Lahore, clap, happy"
+      },
+      "answer_key": {
+        "pairs": {
+          "Lahore": "noun",
+          "clap": "verb",
+          "happy": "adjective"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "نام، کام یا خوبی؟",
+            "en": "A name, an action or a describing word?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-noun",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "اس جملے میں اسم کونسا ہے؟ The bird sings.",
+        "en": "Which word is a noun? The bird sings."
+      },
+      "options": [
+        {
+          "ur": "sings",
+          "en": "sings"
+        },
+        {
+          "ur": "bird",
+          "en": "bird"
+        },
+        {
+          "ur": "The",
+          "en": "The"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کس کا نام ہے؟",
+            "en": "Which word is a name?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "bird ایک جانور کا نام ہے۔",
+        "en": "bird is the name of an animal."
+      }
+    },
+    {
+      "id": "p2-verb",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "اس جملے میں فعل کونسا ہے؟ Mariam reads a book.",
+        "en": "Which word is the verb? Mariam reads a book."
+      },
+      "options": [
+        {
+          "ur": "reads",
+          "en": "reads"
+        },
+        {
+          "ur": "Mariam",
+          "en": "Mariam"
+        },
+        {
+          "ur": "book",
+          "en": "book"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "مریم کیا کر رہی ہے؟",
+            "en": "What is Mariam doing?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-adjective",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "اس جملے میں صفت کونسی ہے؟ We ate a sweet mango.",
+        "en": "Which word is the adjective? We ate a sweet mango."
+      },
+      "options": [
+        {
+          "ur": "ate",
+          "en": "ate"
+        },
+        {
+          "ur": "mango",
+          "en": "mango"
+        },
+        {
+          "ur": "sweet",
+          "en": "sweet"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "آم کیسا تھا؟",
+            "en": "What was the mango like?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p4-run-noun",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "لفظ run ایک اسم ہے۔",
+        "en": "The word run is a noun."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "run ایک کام ہے، اس لیے یہ فعل ہے۔",
+        "en": "run is an action, so it is a verb."
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-three-words",
+      "type": "short",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "گھر میں ایک اسم، ایک فعل اور ایک صفت انگریزی میں ڈھونڈیں اور کاپی میں لکھیں، جیسے cup، drink، hot۔",
+        "en": "At home, find one noun, one verb and one adjective in English and write them down, like cup, drink, hot."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor checks each word is the right type; spelling is checked gently."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "لفظ سے پوچھیں: کیا تم نام ہو، کام ہو یا خوبی؟",
+        "en": "Ask the word: are you a name, an action or a describing word?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "فعل کے لیے 'میں ___ کر سکتا/سکتی ہوں' میں رکھ کر دیکھیں۔",
+        "en": "For a verb, try it in 'I can ___'."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ہر وہ لفظ جو کسی چیز سے متعلق ہو، اسم سمجھنا (جیسے sweet)۔",
+        "en": "Thinking every word about a thing is a noun (e.g. sweet)."
+      },
+      "correction": {
+        "ur": "sweet چیز کا نام نہیں، اس کی خوبی ہے؛ یہ صفت ہے۔",
+        "en": "sweet is not the name of a thing but describes it; it is an adjective."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "صرف لوگوں کے نام کو اسم سمجھنا۔",
+        "en": "Thinking only people's names are nouns."
+      },
+      "correction": {
+        "ur": "جگہ، جانور اور چیز کے نام بھی اسم ہیں۔",
+        "en": "Names of places, animals and things are nouns too."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "two_word_types_confused",
+      "remediation_ref": "ENG-G4-GR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "اسم = نام، فعل = کام، صفت = خوبی۔ The small cat drinks milk.",
+    "en": "Noun = naming word, verb = doing word, adjective = describing word. The small cat drinks milk."
+  },
+  "summary": {
+    "ur": "ہم نے جملوں میں اسم، فعل اور صفت پہچانے۔",
+    "en": "We spotted nouns, verbs and adjectives in sentences."
+  },
+  "parent_notes": {
+    "ur": "بچے سے کسی چیز کا انگریزی نام اور اس کی ایک خوبی پوچھیں، جیسے 'red apple'۔",
+    "en": "Ask your child for the English name of a thing and one word to describe it, like 'red apple'."
+  },
+  "mentor_notes": {
+    "ur": "بچوں کو اردو گرامر کے الفاظ اسم، فعل، صفت پہلے سے معلوم ہو سکتے ہیں؛ انہیں انگریزی سے جوڑیں۔",
+    "en": "Children may already know the Urdu grammar terms اسم، فعل، صفت; link them to the English terms."
+  },
+  "accessibility_notes": {
+    "ur": "الفاظ اور ہدایات کی اردو/انگریزی آڈیو ابھی ریکارڈ نہیں ہوئی۔ تین ڈبوں کی تصویر اور اس کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے والی سرگرمی کا متبادل: ہر لفظ کے آگے 'اسم'، 'فعل' یا 'صفت' چنیں۔ ڈبوں کو صرف رنگ سے نہیں، نام سے بھی پہچانا جائے۔",
+    "en": "Urdu/English audio for words and instructions is not yet recorded. The three-box picture and its alt text are still to be made. Alternative to the drag activity: choose 'noun', 'verb' or 'adjective' next to each word. Boxes must be labelled by name, not by colour alone."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "one question per word: name, action or description; always inside a short sentence",
+    "questioning_strategy": "ask 'what is its job in this sentence?' before naming the type",
+    "slow_down_signals": [
+      "labels adjectives as nouns",
+      "two wrong answers in a row"
+    ],
+    "hint_policy": "graduated; two hints max; first the 'name/action/description' question, then the 'I can ___' test; never label the word first",
+    "example_policy": "short sentences with one of each type; Pakistani contexts (mango, Lahore, cricket ball, teacher)",
+    "misconception_detectors": [
+      "calls describing words nouns",
+      "thinks only people are nouns"
+    ],
+    "critical_thinking_prompts": [
+      "Can the same word be a noun in one sentence and a verb in another? (e.g. a drink / drink)"
+    ],
+    "personalization_rules": "link to the Urdu terms اسم، فعل، صفت when the learner knows them",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the Urdu grammar terms اسم، فعل، صفت are used in the learners' Urdu lessons"
+  ]
+}

@@ -1,0 +1,508 @@
+{
+  "code": "MATH-G4-NB-01",
+  "description": {
+    "ur": "دس ہزار تک کے اعداد کو بلند آواز سے پڑھنا اور ہندسوں میں لکھنا۔",
+    "en": "Reading numbers up to 10,000 aloud and writing them in figures."
+  },
+  "keywords": [
+    "reading numbers",
+    "writing numbers",
+    "number names",
+    "numerals",
+    "thousands",
+    "place value"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "ہندسہ",
+        "en": "digit"
+      },
+      "definition": {
+        "ur": "۰ سے ۹ تک کی کوئی ایک علامت۔",
+        "en": "One of the symbols 0 to 9."
+      }
+    },
+    {
+      "term": {
+        "ur": "عدد",
+        "en": "number"
+      },
+      "definition": {
+        "ur": "ایک یا زیادہ ہندسوں سے لکھی گئی گنتی۔",
+        "en": "A count written with one or more digits."
+      }
+    },
+    {
+      "term": {
+        "ur": "ہزار",
+        "en": "thousand"
+      },
+      "definition": {
+        "ur": "دس سو مل کر ایک ہزار بنتے ہیں۔",
+        "en": "Ten hundreds make one thousand."
+      }
+    },
+    {
+      "term": {
+        "ur": "سو",
+        "en": "hundred"
+      },
+      "definition": {
+        "ur": "دس دہائیاں مل کر ایک سو بنتی ہیں۔",
+        "en": "Ten tens make one hundred."
+      }
+    },
+    {
+      "term": {
+        "ur": "دہائی",
+        "en": "ten"
+      },
+      "definition": {
+        "ur": "دس اکائیاں مل کر ایک دہائی بنتی ہیں۔",
+        "en": "Ten ones make one ten."
+      }
+    },
+    {
+      "term": {
+        "ur": "اکائی",
+        "en": "one"
+      },
+      "definition": {
+        "ur": "سب سے دائیں والا خانہ، اکیلی چیزوں کا۔",
+        "en": "The place on the far right, for single things."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم دس ہزار تک کے عدد پڑھیں گے اور لکھیں گے۔ ہر ہندسہ ایک خانے میں بیٹھتا ہے: اکائی، دہائی، سو اور ہزار۔ ہم خانے دائیں طرف سے پہچانیں گے۔ پھر عدد کو بائیں طرف سے، ہزار سے شروع کر کے، بلند آواز میں بولیں گے۔ آپ یہ آسانی سے سیکھ لیں گے۔",
+    "en": "Today we will read and write numbers up to 10,000. Each digit sits in a place: ones, tens, hundreds and thousands. We find the places from the right. Then we say the number aloud from the left, starting with the thousands. You will pick this up quickly."
+  },
+  "student_explanation": {
+    "ur": "دس ہزار سے چھوٹے عدد میں زیادہ سے زیادہ چار ہندسے ہوتے ہیں۔ ہر ہندسہ ایک خانے میں ہوتا ہے۔ خانے دائیں سے پہچانیں: اکائی، دہائی، سو، ہزار۔ پھر عدد بائیں سے بولیں۔ ۳۴۵۶ کو دیکھیں۔ ہم کہتے ہیں: تین ہزار چار سو چھپن۔ صفر کا مطلب ہے خالی خانہ۔ صفر کو بولا نہیں جاتا۔ اس لیے ۲۰۰۵ کو دو ہزار پانچ کہتے ہیں۔",
+    "en": "Numbers below 10,000 have up to four digits. Each digit sits in a place. Find the places from the right: ones, tens, hundreds, thousands. Then say the number from the left. Look at 3456. We say three thousand four hundred fifty-six. A zero means an empty place. We do not say the zero. So 2005 is two thousand and five."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "۲۰۰۵ کو کیسے پڑھیں گے؟",
+        "en": "How do we read 2005?"
+      },
+      "steps": [
+        {
+          "ur": "دائیں سے خانے: ۵ اکائی، ۰ دہائی، ۰ سو، ۲ ہزار۔",
+          "en": "Places from the right: 5 ones, 0 tens, 0 hundreds, 2 thousands."
+        },
+        {
+          "ur": "دہائی اور سو کے خانے خالی ہیں، انہیں نہیں بولتے۔",
+          "en": "The tens and hundreds are empty, so we do not say them."
+        },
+        {
+          "ur": "بائیں سے بولیں: دو ہزار پانچ۔",
+          "en": "Say it from the left: two thousand and five."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "آٹھ ہزار چھ سو کو ہندسوں میں لکھیں۔",
+        "en": "Write eight thousand six hundred in figures."
+      },
+      "steps": [
+        {
+          "ur": "ہزار کے خانے میں ۸ لکھیں۔",
+          "en": "Put 8 in the thousands place."
+        },
+        {
+          "ur": "سو کے خانے میں ۶ لکھیں۔",
+          "en": "Put 6 in the hundreds place."
+        },
+        {
+          "ur": "دہائی اور اکائی خالی ہیں، وہاں ۰ لکھیں۔",
+          "en": "Tens and ones are empty, so write 0 in each."
+        },
+        {
+          "ur": "جواب: ۸۶۰۰۔",
+          "en": "Answer: 8600."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-match-words",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر لفظی نام کو اس کے صحیح عدد پر گھسیٹیں: چھ ہزار بیالیس، چھ ہزار چار سو دو، چھ ہزار چار سو بیس۔ عدد: ۶۰۴۲، ۶۴۰۲، ۶۴۲۰۔",
+        "en": "Drag each number name onto its figures: six thousand forty-two, six thousand four hundred two, six thousand four hundred twenty. Figures: 6042, 6402, 6420."
+      },
+      "answer_key": {
+        "pairs": {
+          "six thousand forty-two": "6042",
+          "six thousand four hundred two": "6402",
+          "six thousand four hundred twenty": "6420"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر عدد میں دیکھیں کہ سو کے خانے میں کیا ہے۔",
+            "en": "Look at what is in the hundreds place of each number."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-one-thousand",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "ایک ہزار کو ہندسوں میں لکھیں: ___",
+        "en": "Write one thousand in figures: ___"
+      },
+      "answer_key": {
+        "answer": "1000"
+      },
+      "accepted_variants": [
+        "1000",
+        "1,000",
+        "۱۰۰۰",
+        "۱٬۰۰۰"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہزار کے بعد تین خانے خالی ہیں۔",
+            "en": "After the thousand, three places are empty."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-7308",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "سات ہزار تین سو آٹھ = ___",
+        "en": "Seven thousand three hundred eight = ___"
+      },
+      "answer_key": {
+        "answer": "7308"
+      },
+      "accepted_variants": [
+        "7308",
+        "7,308",
+        "۷۳۰۸",
+        "۷٬۳۰۸"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "دہائی کا خانہ خالی ہے، وہاں کیا لکھیں گے؟",
+            "en": "The tens place is empty. What goes there?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۷ ہزار، ۳ سو، ۰ دہائی، ۸ اکائی: ۷۳۰۸۔",
+        "en": "7 thousands, 3 hundreds, 0 tens, 8 ones: 7308."
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-four-thousand-twenty",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "چار ہزار بیس کو ہندسوں میں کیسے لکھیں گے؟",
+        "en": "Which shows four thousand and twenty in figures?"
+      },
+      "options": [
+        {
+          "ur": "۴۰۲۰",
+          "en": "4,020"
+        },
+        {
+          "ur": "۴۲۰۰",
+          "en": "4,200"
+        },
+        {
+          "ur": "۴۲۰",
+          "en": "420"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-place-value-digit-equals-value",
+          "2": "m-place-value-digit-equals-value"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "بیس دہائی کے خانے میں جاتا ہے۔",
+            "en": "Twenty goes in the tens place."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۴ ہزار، ۰ سو، ۲ دہائی، ۰ اکائی: ۴۰۲۰۔",
+        "en": "4 thousands, 0 hundreds, 2 tens, 0 ones: 4020."
+      }
+    },
+    {
+      "id": "p2-read-3456",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۳۴۵۶ کو کیسے پڑھیں گے؟",
+        "en": "How do we read 3456?"
+      },
+      "options": [
+        {
+          "ur": "تین سو پینتالیس اور چھ",
+          "en": "three hundred forty-five and six"
+        },
+        {
+          "ur": "چونتیس چھپن",
+          "en": "thirty-four fifty-six"
+        },
+        {
+          "ur": "تین ہزار چار سو چھپن",
+          "en": "three thousand four hundred fifty-six"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلے ۳ کا خانہ پہچانیں۔",
+            "en": "First find the place of the 3."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۳ ہزار کے خانے میں ہے، ۴ سو کے خانے میں، اور ۵۶ چھپن ہے۔",
+        "en": "The 3 is in thousands, the 4 in hundreds, and 56 is fifty-six."
+      }
+    },
+    {
+      "id": "p4-read-9999",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۹۹۹۹ کو کیسے پڑھیں گے؟",
+        "en": "How do we read 9999?"
+      },
+      "options": [
+        {
+          "ur": "نو سو ننانوے",
+          "en": "nine hundred ninety-nine"
+        },
+        {
+          "ur": "نو ہزار نو سو ننانوے",
+          "en": "nine thousand nine hundred ninety-nine"
+        },
+        {
+          "ur": "نو ہزار نو سو نو",
+          "en": "nine thousand nine hundred nine"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کتنے ہندسے ہیں؟ چار ہندسے ہوں تو ہزار سے شروع کریں۔",
+            "en": "How many digits? With four digits, start with thousands."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-2005-false",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "۲۰۰۵ کو \"دو سو پانچ\" پڑھتے ہیں۔",
+        "en": "2005 is read as \"two hundred five\"."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1,
+        "option_misconceptions": {
+          "0": "m-place-value-digit-equals-value"
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "۲ کس خانے میں ہے؟",
+            "en": "Which place is the 2 in?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "۲ ہزار کے خانے میں ہے، اس لیے دو ہزار پانچ۔",
+        "en": "The 2 is in the thousands place, so it is two thousand and five."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-largest-4-digit",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "سب سے بڑا چار ہندسی عدد ہندسوں میں اور لفظوں میں لکھیں۔",
+        "en": "Write the largest 4-digit number in figures and in words."
+      },
+      "answer_key": {
+        "answer": "9999 (nine thousand nine hundred ninety-nine)"
+      },
+      "accepted_variants": [
+        "9999",
+        "9,999",
+        "۹۹۹۹"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر خانے میں سب سے بڑا ہندسہ کون سا ہو سکتا ہے؟",
+            "en": "What is the biggest digit each place can hold?"
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-household-numbers",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "کتاب یا قیمت کی پرچی سے تین نمبر لفظوں میں لکھیں (صفحہ نمبر، کوئی قیمت، کوئی تاریخ)۔",
+        "en": "write three numbers from a book or a price label (a page number, a price, a date) in words."
+      },
+      "answer_key": {
+        "answer": "any three numbers written correctly in words"
+      },
+      "mentor_review_guidance": "Check place names and zeros; the numbers are not entered in the app."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "hint-ladder:H1",
+      "hint": {
+        "ur": "دائیں سے شروع کریں",
+        "en": "start from the right"
+      }
+    },
+    {
+      "trigger": "hint-ladder:H2",
+      "hint": {
+        "ur": "ہر خانے کا نام لیں",
+        "en": "name each place"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "ہندسے کی قیمت ہندسہ ہی ہے، خانے سے کوئی فرق نہیں پڑتا۔",
+        "en": "A digit's value equals the digit, ignoring its column"
+      },
+      "correction": {
+        "ur": "ہر ہندسے کی جگہ اس کی قیمت بتاتی ہے",
+        "en": "The place of a digit tells its value; the 3 here means three hundred."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misconception:m-place-value-digit-equals-value",
+      "remediation_ref": "MATH-G4-NB-01"
+    },
+    {
+      "signal": "repeated-confusion",
+      "remediation_ref": "MATH-G4-NB-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "خانے دائیں سے: اکائی، دہائی، سو، ہزار۔ عدد بائیں سے بولیں۔ صفر خالی خانہ ہے، اسے نہیں بولتے۔",
+    "en": "Places from the right: ones, tens, hundreds, thousands. Say the number from the left. A zero is an empty place and is not said."
+  },
+  "summary": {
+    "ur": "ہم نے دس ہزار تک کے عدد پڑھنا اور ہندسوں میں لکھنا سیکھا۔",
+    "en": "We learned to read numbers up to 10,000 and write them in figures."
+  },
+  "parent_notes": {
+    "ur": "بچے سے کتاب کے صفحہ نمبر اور قیمتیں پڑھوائیں",
+    "en": "ask your child to read page numbers and prices aloud."
+  },
+  "mentor_notes": {
+    "ur": "دیکھیں کہ بچہ غلط خانہ تو نہیں پڑھ رہا؛ جگہ کی قیمت والی چٹائی استعمال کریں۔",
+    "en": "watch for reading the wrong place; use the place-value mat."
+  },
+  "accessibility_notes": {
+    "ur": "جگہ کی قیمت کا چارٹ اور لفظ/عدد کارڈ ابھی بنانے ہیں؛ ان کے متبادل متن میں ہر خانے کا نام اور ہندسہ پڑھا جائے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ عدد کے ناموں کی صاف آواز بہت ضروری ہے۔ گھسیٹنے والی سرگرمی کا متبادل: ہر لفظی نام کے لیے تین عدد میں سے ایک پر ٹیپ کریں۔",
+    "en": "The place-value chart and word/number cards are still to be made; their alt text should read each place name and digit. Urdu audio is not yet recorded; clear spoken number names are essential here. Alternative to the drag activity: for each number name, tap one of three figures."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "name the places from the right, then say the number from the left; treat zero as an empty place that is not spoken",
+    "questioning_strategy": "ask 'which place is this digit in?' before 'how do we say it?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "reads digits one by one instead of the number name",
+      "drops or adds a zero when writing"
+    ],
+    "hint_policy": "graduated; two hints max (start from the right; name each place) then a worked re-teach with 2005; never give the answer first",
+    "example_policy": "four-digit numbers, at least one with internal zeros; everyday Pakistani contexts (book page numbers, prices in rupees)",
+    "misconception_detectors": [
+      "writes 4200 or 420 for four thousand and twenty",
+      "reads 2005 as two hundred five"
+    ],
+    "critical_thinking_prompts": [
+      "Why do 6042 and 6402 sound different when they use the same digits?"
+    ],
+    "personalization_rules": "if the learner misreads three-digit numbers, slow down and rebuild from hundreds before thousands",
+    "escalation_rules": [
+      "repeated confusion after a worked re-teach and one more miss -> mentor",
+      "any sign of distress, fear or upset -> stop the lesson and hand to a human",
+      "learner says something about their safety or home situation -> hand to a human mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details)",
+      "shame, rush or compare the learner with other children"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the doc's worked-example script says 'we read the number from the right'; the draft says places are found from the right but the number is said from the left; confirm wording",
+    "language editor: check Urdu number names (چھپن، بیالیس، ننانوے، چونتیس) and whether 'دو ہزار پانچ' or 'دو ہزار اور پانچ' is house style"
+  ]
+}

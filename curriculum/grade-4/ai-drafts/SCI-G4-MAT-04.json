@@ -1,0 +1,476 @@
+{
+  "code": "SCI-G4-MAT-04",
+  "title": {
+    "ur": "صحیح کام کے لیے صحیح مادہ",
+    "en": "The right material for the job"
+  },
+  "description": {
+    "ur": "کسی مادے کو اس کی خصوصیات کی بنا پر اس کے استعمال سے ملانا۔",
+    "en": "Matching a material to a use because of its properties."
+  },
+  "keywords": [
+    "material",
+    "use",
+    "property",
+    "waterproof",
+    "strong",
+    "transparent",
+    "warm"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "واٹر پروف",
+        "en": "waterproof"
+      },
+      "definition": {
+        "ur": "وہ مادہ جس میں سے پانی نہ گزرے، جیسے ربڑ یا پلاسٹک۔",
+        "en": "A material that does not let water through, like rubber or plastic."
+      }
+    },
+    {
+      "term": {
+        "ur": "مضبوط",
+        "en": "strong"
+      },
+      "definition": {
+        "ur": "جو آسانی سے نہ ٹوٹے اور وزن سہہ لے۔",
+        "en": "Does not break easily and can hold weight."
+      }
+    },
+    {
+      "term": {
+        "ur": "استعمال",
+        "en": "use"
+      },
+      "definition": {
+        "ur": "وہ کام جس کے لیے کوئی چیز بنائی جاتی ہے۔",
+        "en": "The job something is made for."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "سوچو اگر کھڑکی لکڑی کی ہو، یا چھتری کاغذ کی! ہم ہر چیز اس مادے سے بناتے ہیں جس کی خصوصیات اس کام کے لیے ٹھیک ہوں۔ آج ہم ہر چیز سے پوچھیں گے: اس کام کے لیے کیا خصوصیت چاہیے؟",
+    "en": "Imagine a window made of wood, or an umbrella made of paper! We make each thing from a material whose properties suit the job. Today we ask of every object: what property does this job need?"
+  },
+  "student_explanation": {
+    "ur": "ہر کام کے لیے خاص خصوصیت چاہیے۔ کھڑکی میں روشنی آنی چاہیے۔ اس لیے کھڑکی میں شیشہ لگاتے ہیں۔ چپل کو نرم اور واٹر پروف ہونا چاہیے۔ اس لیے چپل ربڑ کی ہوتی ہے۔ کرسی کو وزن سہارنا ہے۔ اس لیے وہ لکڑی یا لوہے کی ہوتی ہے۔ سردیوں کے سویٹر اون کے ہوتے ہیں، کیونکہ اون گرم رکھتی ہے۔ پہلے کام سوچو، پھر مادہ چنو۔",
+    "en": "Every job needs a special property. A window must let light in. So windows have glass. A slipper must be soft and waterproof. So slippers are made of rubber. A chair must hold weight. So it is made of wood or iron. Winter sweaters are made of wool, because wool keeps us warm. Think of the job first, then choose the material."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "بارش کے لیے چھتری کس مادے کی ہونی چاہیے: سوتی کپڑا، کاغذ یا پلاسٹک لگا کپڑا؟",
+        "en": "What should a rain umbrella be made of: cotton cloth, paper or plastic-coated cloth?"
+      },
+      "steps": [
+        {
+          "ur": "چھتری کا کام ہمیں بارش سے سوکھا رکھنا ہے۔",
+          "en": "An umbrella's job is to keep us dry in the rain."
+        },
+        {
+          "ur": "اس کے لیے مادہ واٹر پروف ہونا چاہیے۔",
+          "en": "For that the material must be waterproof."
+        },
+        {
+          "ur": "کاغذ گیلا ہو کر پھٹ جاتا ہے، سوتی کپڑا پانی جذب کرتا ہے۔ پلاسٹک لگا کپڑا ٹھیک ہے۔",
+          "en": "Paper tears when wet, cotton soaks up water. Plastic-coated cloth is right."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "ہانڈی دھات کی کیوں بناتے ہیں، پلاسٹک کی کیوں نہیں؟",
+        "en": "Why are cooking pots made of metal and not plastic?"
+      },
+      "steps": [
+        {
+          "ur": "ہانڈی کا کام چولہے کی گرمی کھانے تک پہنچانا ہے۔",
+          "en": "A pot's job is to pass the stove's heat to the food."
+        },
+        {
+          "ur": "دھات میں سے گرمی آسانی سے گزرتی ہے، اور دھات تیز گرمی میں نہیں پگھلتی۔",
+          "en": "Heat passes through metal easily, and metal does not melt on a cooking fire."
+        },
+        {
+          "ur": "پلاسٹک گرمی سے پگھل سکتا ہے۔ اس لیے ہانڈی دھات کی ہوتی ہے۔",
+          "en": "Plastic can melt with heat. So the pot is metal."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-match-use",
+      "type": "interactive",
+      "competency": "analysis",
+      "stem": {
+        "ur": "ہر چیز کو اس کے مادے سے ملاؤ۔",
+        "en": "Match each object to its material."
+      },
+      "options": [
+        {
+          "ur": "کھڑکی",
+          "en": "Window"
+        },
+        {
+          "ur": "چپل",
+          "en": "Slipper"
+        },
+        {
+          "ur": "سردی کا سویٹر",
+          "en": "Winter sweater"
+        },
+        {
+          "ur": "چارپائی کا ڈھانچہ",
+          "en": "Charpai frame"
+        },
+        {
+          "ur": "اون",
+          "en": "Wool"
+        },
+        {
+          "ur": "لکڑی",
+          "en": "Wood"
+        },
+        {
+          "ur": "شیشہ",
+          "en": "Glass"
+        },
+        {
+          "ur": "ربڑ",
+          "en": "Rubber"
+        }
+      ],
+      "answer_key": {
+        "left": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "right": [
+          4,
+          5,
+          6,
+          7
+        ],
+        "pairs": {
+          "0": 6,
+          "1": 7,
+          "2": 4,
+          "3": 5
+        }
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر چیز کے لیے پوچھو: اس کا کام کیا ہے؟",
+            "en": "For each object ask: what is its job?"
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-window",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کھڑکی میں شیشہ کیوں لگاتے ہیں؟",
+        "en": "Why do windows have glass?"
+      },
+      "options": [
+        {
+          "ur": "کیونکہ شیشہ نرم ہے",
+          "en": "Because glass is soft"
+        },
+        {
+          "ur": "کیونکہ شیشہ شفاف ہے اور روشنی آنے دیتا ہے",
+          "en": "Because glass is transparent and lets light in"
+        },
+        {
+          "ur": "کیونکہ شیشہ گرم رکھتا ہے",
+          "en": "Because glass keeps us warm"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p2-raincoat",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "برساتی (رین کوٹ) کے لیے سب سے اچھا مادہ کون سا ہے؟",
+        "en": "Which is the best material for a raincoat?"
+      },
+      "options": [
+        {
+          "ur": "پلاسٹک",
+          "en": "Plastic"
+        },
+        {
+          "ur": "اون",
+          "en": "Wool"
+        },
+        {
+          "ur": "کاغذ",
+          "en": "Paper"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "برساتی کو کس چیز سے بچانا ہے؟",
+            "en": "What must a raincoat keep out?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p3-paper-chair",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کاغذ کی کرسی اچھی رہے گی کیونکہ کاغذ ہلکا ہے۔",
+        "en": "A paper chair would be good because paper is light."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "کرسی کو وزن سہارنا ہے۔ کاغذ مضبوط نہیں۔",
+        "en": "A chair must hold weight. Paper is not strong."
+      }
+    },
+    {
+      "id": "p4-wool",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "سردیوں میں اون کے کپڑے کیوں پہنتے ہیں؟",
+        "en": "Why do we wear wool in winter?"
+      },
+      "options": [
+        {
+          "ur": "اون شفاف ہے",
+          "en": "Wool is transparent"
+        },
+        {
+          "ur": "اون واٹر پروف ہے",
+          "en": "Wool is waterproof"
+        },
+        {
+          "ur": "اون ہمیں گرم رکھتی ہے",
+          "en": "Wool keeps us warm"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p5-ship",
+      "type": "true_false",
+      "competency": "analysis",
+      "stem": {
+        "ur": "لوہے کا بڑا جہاز بھاری ہے، پھر بھی پانی پر تیرتا ہے۔",
+        "en": "A big iron ship is heavy, yet it floats on water."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0,
+        "option_misconceptions": {
+          "1": "m-heavier-always-sinks"
+        }
+      },
+      "explanation": {
+        "ur": "ڈوبنا یا تیرنا صرف وزن پر نہیں، مادے اور شکل پر بھی منحصر ہے۔",
+        "en": "Sinking or floating depends on the material and shape, not just weight."
+      }
+    },
+    {
+      "id": "p6-cricket-bat",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کرکٹ کا بلا لکڑی کا کیوں ہوتا ہے، اسفنج کا کیوں نہیں؟",
+        "en": "Why is a cricket bat made of wood and not sponge?"
+      },
+      "options": [
+        {
+          "ur": "لکڑی سخت اور مضبوط ہے، گیند کو زور سے مارتی ہے",
+          "en": "Wood is hard and strong, so it hits the ball hard"
+        },
+        {
+          "ur": "لکڑی شفاف ہے",
+          "en": "Wood is transparent"
+        },
+        {
+          "ur": "لکڑی نرم ہے",
+          "en": "Wood is soft"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-design-bag",
+      "type": "short",
+      "competency": "analysis",
+      "stem": {
+        "ur": "تمہیں برسات میں اسکول کا بستہ بنانا ہے۔ کون سا مادہ چنو گے اور کیوں؟ دو خصوصیات بتاؤ۔",
+        "en": "You must make a school bag for the monsoon. Which material would you choose and why? Give two properties."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Look for a waterproof material (plastic, rubber-coated cloth) plus a second property such as strong or light; credit any sensible pair with reasons."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-three-objects",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر کی تین چیزیں چنو۔ ہر ایک کے لیے لکھو: کس مادے سے بنی ہے اور وہ مادہ اس کام کے لیے کیوں ٹھیک ہے۔",
+        "en": "Choose three objects at home. For each, write what material it is made of and why that material suits its job."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Credit a correct material and a property-based reason for each object."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "پہلے سوچو: اس چیز کا کام کیا ہے؟",
+        "en": "First think: what is this object's job?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اب سوچو اس کام کے لیے کون سی خصوصیت چاہیے: سخت، نرم، شفاف، واٹر پروف یا گرم؟",
+        "en": "Now think which property the job needs: hard, soft, transparent, waterproof or warm?"
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "مادہ اس کی خوبصورتی یا رنگ دیکھ کر چنا جاتا ہے۔",
+        "en": "A material is chosen for its looks or colour."
+      },
+      "correction": {
+        "ur": "مادہ اس کی خصوصیات دیکھ کر چنا جاتا ہے: کیا وہ کام ٹھیک کرے گا؟",
+        "en": "A material is chosen for its properties: will it do the job well?"
+      }
+    },
+    {
+      "misconception": {
+        "ur": "بھاری چیزیں ہمیشہ ڈوبتی ہیں۔",
+        "en": "Heavier things always sink."
+      },
+      "correction": {
+        "ur": "یہ مادے اور شکل پر منحصر ہے، صرف وزن پر نہیں۔",
+        "en": "It depends on the material and shape, not just weight."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:SCI-G4-MAT-01",
+      "remediation_ref": "SCI-G4-MAT-01"
+    },
+    {
+      "signal": "misconception:m-heavier-always-sinks",
+      "remediation_ref": "SCI-G4-INQ-03"
+    }
+  ],
+  "revision_notes": {
+    "ur": "پہلے کام، پھر خصوصیت، پھر مادہ۔ شیشہ: شفاف۔ ربڑ اور پلاسٹک: واٹر پروف۔ لکڑی اور لوہا: سخت اور مضبوط۔ اون: گرم۔",
+    "en": "First the job, then the property, then the material. Glass: transparent. Rubber and plastic: waterproof. Wood and iron: hard and strong. Wool: warm."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ ہر کام کے لیے مادہ اس کی خصوصیات دیکھ کر چنا جاتا ہے۔",
+    "en": "We learned that the material for each job is chosen by its properties."
+  },
+  "parent_notes": {
+    "ur": "گھر کی کوئی چیز دکھا کر پوچھیں: یہ اس مادے سے کیوں بنی ہے؟",
+    "en": "Point to something at home and ask: why is it made of this material?"
+  },
+  "mentor_notes": {
+    "ur": "ہانڈی والی مثال صرف بات چیت کے لیے ہے؛ بچہ چولہے کے پاس کوئی تجربہ نہ کرے۔ جہاز والی مثال m-heavier-always-sinks کو کھولتی ہے۔",
+    "en": "The cooking-pot example is for discussion only; the learner must not test anything near a stove. The ship example opens m-heavier-always-sinks."
+  },
+  "accessibility_notes": {
+    "ur": "اردو آڈیو ابھی ریکارڈ نہیں ہوئی؛ سائنس آڈیو پر چلتی ہے، اس لیے یہ پہلی ضرورت ہے۔ چیزوں اور مادوں کی تصویریں اور ان کا متبادل متن ابھی بنانا ہے۔ ملانے والی سرگرمی کا متبادل: ہر چیز کے نیچے چار بٹنوں میں سے مادہ چنیں۔",
+    "en": "Urdu audio is not yet recorded; Science is audio-first, so this is the first need. Pictures of the objects and materials, with alt text, are still to be made. Alternative to the matching activity: choose the material from four buttons under each object."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "job -> property -> material chain for every object; contrast a good and a silly material for the same job",
+    "questioning_strategy": "ask 'what must this object do?' before 'what is it made of?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "chooses by colour or looks",
+      "names a material without a property"
+    ],
+    "hint_policy": "graduated; first ask for the job, then the property; never name the material first",
+    "example_policy": "use local objects: charpai, rubber chappal, steel glass, clay ghara, wool shawl, cricket bat, plastic raincoat for the monsoon",
+    "misconception_detectors": [
+      "chooses materials by appearance",
+      "says heavy things always sink"
+    ],
+    "critical_thinking_prompts": [
+      "Why would a paper umbrella be a bad idea in the monsoon?"
+    ],
+    "personalization_rules": "if the learner cannot name basic properties, route to SCI-G4-MAT-01",
+    "escalation_rules": [
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "learner describes doing something unsafe (fire, wall-socket electricity, sharp tools, tasting unknown things) -> give the safety rule kindly and tell a mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human or a human teacher",
+      "ask for personal information (name, address, school, phone, photos, location)",
+      "suggest any activity with fire, wall-socket electricity, sharp tools or tasting unknown substances",
+      "use frightening, violent, political or sectarian examples",
+      "ask the learner to heat, burn or melt any material to test it"
+    ]
+  },
+  "review_flags": [
+    "subject expert: the iron-ship item touches floating (m-heavier-always-sinks) — confirm it belongs here or move it to INQ-03",
+    "subject expert: check the cooking-pot worked example is acceptable as discussion only (no stove use)"
+  ]
+}

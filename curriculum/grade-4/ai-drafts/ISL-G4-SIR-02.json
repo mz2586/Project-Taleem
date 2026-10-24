@@ -1,0 +1,478 @@
+{
+  "code": "ISL-G4-SIR-02",
+  "title": {
+    "ur": "صبر کا سبق",
+    "en": "A Lesson in Patience"
+  },
+  "description": {
+    "ur": "سیرت کے ایک واقعے سے صبر کا سبق سننا اور اپنے الفاظ میں سنانا، اور روزمرہ زندگی میں صبر کرنا۔",
+    "en": "Hearing a lesson about patience from the seerah, retelling it in our own words, and being patient in daily life."
+  },
+  "keywords": [
+    "seerah",
+    "patience",
+    "sabr",
+    "Taif",
+    "retelling",
+    "moral lesson"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "صبر",
+        "en": "patience"
+      },
+      "definition": {
+        "ur": "مشکل وقت میں پرسکون رہنا اور غصہ یا جلدی نہ کرنا۔",
+        "en": "Staying calm in hard times, without anger or rushing."
+      }
+    },
+    {
+      "term": {
+        "ur": "دعا",
+        "en": "du'a / prayer for someone"
+      },
+      "definition": {
+        "ur": "اللہ تعالیٰ سے کسی بھلائی کا سوال کرنا۔",
+        "en": "Asking Allah for something good."
+      }
+    },
+    {
+      "term": {
+        "ur": "بھلائی",
+        "en": "goodness"
+      },
+      "definition": {
+        "ur": "کسی کے لیے اچھا چاہنا یا اچھا کرنا۔",
+        "en": "Wanting or doing good for someone."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم صبر کا ایک سبق سنیں گے۔ صبر یعنی مشکل وقت میں پرسکون رہنا۔ حضرت محمد ﷺ نے مشکل وقت میں بھی صبر کیا۔ غور سے سنیں، پھر آپ یہ کہانی اپنے مینٹور کو سنائیں گے۔",
+    "en": "Today we will hear a lesson about patience. Patience means staying calm in hard times. Prophet Muhammad (peace be upon him) was patient even in hard times. Listen carefully, then you will retell the story to your mentor."
+  },
+  "student_explanation": {
+    "ur": "حضرت محمد ﷺ ایک بار طائف نام کے شہر گئے۔ آپ ﷺ لوگوں کو اچھائی کی طرف بلانے گئے تھے۔ وہاں بہت سے لوگوں نے آپ ﷺ سے بُرا سلوک کیا۔ انہوں نے آپ ﷺ کو شہر سے نکال دیا۔ آپ ﷺ کو تکلیف ہوئی اور آپ ﷺ اداس ہوئے۔ پھر بھی آپ ﷺ نے ان کے لیے بددعا نہیں کی۔ آپ ﷺ نے امید رکھی کہ ان کی اولاد اچھائی اپنائے گی۔ یہ صبر تھا۔ ہم بھی مشکل وقت میں صبر کرتے ہیں۔",
+    "en": "Once, Prophet Muhammad (peace be upon him) went to a town called Taif. He went to invite people to goodness. Many people there treated him very unkindly. They sent him out of the town. He was hurt and sad. Still, he did not pray for harm to come to them. He hoped their children would one day choose goodness. That was patience. We can be patient in hard times too."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "اس کہانی کو تین حصوں میں کیسے سنائیں؟",
+        "en": "How can we retell this story in three parts?"
+      },
+      "steps": [
+        {
+          "ur": "شروع: آپ ﷺ لوگوں کو اچھائی کی طرف بلانے طائف گئے۔",
+          "en": "Beginning: he went to Taif to invite people to goodness."
+        },
+        {
+          "ur": "درمیان: لوگوں نے بُرا سلوک کیا اور آپ ﷺ اداس ہوئے۔",
+          "en": "Middle: people were unkind and he was sad."
+        },
+        {
+          "ur": "آخر: آپ ﷺ نے بددعا کے بجائے ان کے لیے اچھی امید رکھی۔",
+          "en": "End: instead of wishing them harm, he kept hope for them."
+        },
+        {
+          "ur": "سبق: مشکل میں بھی صبر اور دوسروں کی بھلائی چاہنا۔",
+          "en": "Lesson: be patient in hard times and still wish others well."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "کرکٹ میں عمران کی باری نہیں آئی اور وہ غصے میں ہے۔ وہ صبر کیسے کرے؟",
+        "en": "In a cricket game, Imran has not had his turn yet and he is angry. How can he be patient?"
+      },
+      "steps": [
+        {
+          "ur": "وہ گہری سانس لے کر پرسکون ہوتا ہے۔",
+          "en": "He takes a deep breath and calms down."
+        },
+        {
+          "ur": "وہ چیخنے کے بجائے نرمی سے پوچھتا ہے: میری باری کب آئے گی؟",
+          "en": "Instead of shouting, he asks gently: when is my turn?"
+        },
+        {
+          "ur": "وہ انتظار کرتا ہے اور دوسروں کو کھیلنے دیتا ہے۔",
+          "en": "He waits and lets the others play."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-patient-or-not",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کارڈ چھو کر بتائیں: یہ صبر ہے یا صبر نہیں؟",
+        "en": "Tap each card: is this patience or not patience?"
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: کیا اس میں پرسکون رہنا ہے؟",
+            "en": "Think: does this involve staying calm?"
+          }
+        }
+      ],
+      "options": [
+        {
+          "ur": "باری کا انتظار کرنا",
+          "en": "Waiting for your turn"
+        },
+        {
+          "ur": "غصے میں چیزیں پھینکنا",
+          "en": "Throwing things in anger"
+        },
+        {
+          "ur": "مشکل سبق بار بار پڑھنا",
+          "en": "Reading a hard lesson again and again"
+        },
+        {
+          "ur": "بیماری میں دوا آرام سے لینا",
+          "en": "Taking medicine calmly when ill"
+        },
+        {
+          "ur": "کھانا آنے سے پہلے شور مچانا",
+          "en": "Making a fuss before food arrives"
+        }
+      ],
+      "answer_key": {
+        "mode": "sort",
+        "groups": {
+          "patience": [
+            0,
+            2,
+            3
+          ],
+          "not_patience": [
+            1,
+            4
+          ]
+        }
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-meaning",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "صبر کا کیا مطلب ہے؟",
+        "en": "What does patience mean?"
+      },
+      "options": [
+        {
+          "ur": "مشکل میں پرسکون رہنا",
+          "en": "Staying calm in hard times"
+        },
+        {
+          "ur": "فوراً غصہ کرنا",
+          "en": "Getting angry straight away"
+        },
+        {
+          "ur": "کام چھوڑ دینا",
+          "en": "Giving up"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p2-why-taif",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "آپ ﷺ طائف کیوں گئے تھے؟",
+        "en": "Why did he go to Taif?"
+      },
+      "options": [
+        {
+          "ur": "سیر کرنے",
+          "en": "To go sightseeing"
+        },
+        {
+          "ur": "بازار سے سامان لینے",
+          "en": "To buy goods at the bazaar"
+        },
+        {
+          "ur": "لوگوں کو اچھائی کی طرف بلانے",
+          "en": "To invite people to goodness"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p3-no-harm",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "طائف کے لوگوں نے بُرا سلوک کیا، پھر بھی آپ ﷺ نے ان کے لیے بددعا نہیں کی۔",
+        "en": "The people of Taif were unkind, yet he did not pray for harm to come to them."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-lesson",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اس کہانی کا سبق کیا ہے؟",
+        "en": "What is the lesson of this story?"
+      },
+      "options": [
+        {
+          "ur": "جو بُرا کرے اس سے بدلہ لو",
+          "en": "Pay back anyone who is unkind"
+        },
+        {
+          "ur": "مشکل میں صبر کرو اور دوسروں کا بھلا چاہو",
+          "en": "Be patient in hard times and wish others well"
+        },
+        {
+          "ur": "کبھی کسی جگہ نہ جاؤ",
+          "en": "Never go anywhere"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    },
+    {
+      "id": "p5-daily",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "ثناء کا پہاڑا یاد نہیں ہو رہا۔ صبر والا قدم کون سا ہے؟",
+        "en": "Sana cannot learn her times table yet. Which step shows patience?"
+      },
+      "options": [
+        {
+          "ur": "کاپی پھاڑ دے",
+          "en": "Tear up the notebook"
+        },
+        {
+          "ur": "کہے: میں کبھی نہیں سیکھ سکتی",
+          "en": "Say: I can never learn this"
+        },
+        {
+          "ur": "تھوڑا آرام کر کے دوبارہ کوشش کرے",
+          "en": "Rest a little and try again"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    },
+    {
+      "id": "p6-patience-silence",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "صبر کا مطلب ہے کہ اگر کوئی ہمیں تکلیف دے تو کسی بڑے کو بھی نہ بتائیں۔",
+        "en": "Patience means that if someone hurts us, we should not tell any adult."
+      },
+      "explanation": {
+        "ur": "صبر کا مطلب پرسکون رہنا ہے۔ تکلیف ہو تو کسی بھروسے والے بڑے کو ضرور بتائیں۔",
+        "en": "Patience means staying calm. If someone hurts you, always tell an adult you trust."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-oral-retell",
+      "type": "short",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اپنے مینٹور کو طائف کی کہانی اپنے الفاظ میں سنائیں، اور بتائیں کہ صبر کہاں تھا۔",
+        "en": "Retell the story of Taif to your mentor in your own words, and say where the patience was."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Mentor-mediated oral item. Keep the retelling gentle; the child need not describe how he was mistreated. Gently correct added details; do not add new ones yourself.",
+      "rubric": {
+        "criteria": "oral retelling, mentor-assessed: sequence of the story and the lesson about patience",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "بچہ کہانی کا ایک حصہ بتاتا ہے، سبق ابھی واضح نہیں۔",
+              "en": "The child tells one part of the story; the lesson is not yet clear."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "بچہ کہانی ترتیب سے بتاتا ہے اور سبق کا نام لیتا ہے۔",
+              "en": "The child tells the story in order and names the lesson."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "بچہ کہانی ترتیب سے بتاتا ہے اور سبق کو اپنی زندگی کی ایک مثال سے جوڑتا ہے۔",
+              "en": "The child tells the story in order and links the lesson to an everyday example."
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-patient-moment",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج کسی ایک موقع پر صبر کریں، جیسے باری کا انتظار۔ گھر کے کسی بڑے کو بتائیں۔",
+        "en": "Today, be patient at one moment, like waiting your turn. Tell an elder at home."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Nothing to submit. Praise any effort."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: کیا اس میں پرسکون رہنا ہے؟",
+        "en": "Think: does this involve staying calm?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "یاد کریں: آپ ﷺ اداس ہوئے، پھر بھی ان کا بھلا چاہا۔",
+        "en": "Remember: he was sad, yet he still wished them well."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "صبر کا مطلب ہے کسی تکلیف کے بارے میں کسی کو نہ بتانا۔",
+        "en": "Patience means never telling anyone when we are hurt."
+      },
+      "correction": {
+        "ur": "صبر پرسکون رہنا ہے؛ تکلیف ہو تو کسی بھروسے والے بڑے کو بتاتے ہیں۔",
+        "en": "Patience is staying calm; if we are hurt, we tell an adult we trust."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "جو بُرا کرے، اس کا بُرا چاہنا ٹھیک ہے۔",
+        "en": "It is fine to wish harm on someone who is unkind."
+      },
+      "correction": {
+        "ur": "آپ ﷺ نے ایسے لوگوں کے لیے بھی بھلائی چاہی۔",
+        "en": "He wished good even for people who were unkind to him."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "low_score:story_sequence",
+      "remediation_ref": "ISL-G4-SIR-02"
+    },
+    {
+      "signal": "low_score:retelling_skill",
+      "remediation_ref": "ISL-G4-SIR-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "صبر یعنی مشکل میں پرسکون رہنا۔ طائف میں لوگوں نے بُرا سلوک کیا، پھر بھی آپ ﷺ نے ان کا بھلا چاہا۔ ہم بھی باری کے انتظار اور مشکل سبق میں صبر کرتے ہیں۔",
+    "en": "Patience means staying calm in hard times. In Taif people were unkind, yet he wished them well. We are patient when waiting our turn or learning something hard."
+  },
+  "summary": {
+    "ur": "ہم نے سیرت سے صبر کا سبق سیکھا۔",
+    "en": "We learned a lesson about patience from the seerah."
+  },
+  "parent_notes": {
+    "ur": "جب بچہ انتظار کرے یا مشکل کام پر دوبارہ کوشش کرے تو اس کے صبر کی تعریف کریں۔",
+    "en": "Praise your child's patience when they wait or try a hard task again."
+  },
+  "mentor_notes": {
+    "ur": "واقعہ نرم انداز میں سنائیں؛ تکلیف کی تفصیل میں نہ جائیں۔ زور دیں کہ صبر کا مطلب خاموشی سے تکلیف سہنا نہیں؛ کوئی بچہ تکلیف کا ذکر کرے تو فوراً انسانی سرپرست کو بتائیں۔",
+    "en": "Tell the account gently; do not dwell on how he was hurt. Stress that patience never means silently putting up with harm; if a child mentions being hurt, hand to a human safeguarding lead at once."
+  },
+  "accessibility_notes": {
+    "ur": "کسی تصویر میں حضرت محمد ﷺ، آپ ﷺ کے گھر والوں یا صحابہ کی شکل یا جسم نہ دکھایا جائے؛ صرف جگہیں اور چیزیں دکھائی جائیں۔ طائف کے باغ کا سادہ منظر اور اس کا متبادل متن ابھی بنانا ہے۔ کہانی کی اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ چھانٹنے والی سرگرمی کا متبادل: ہر کارڈ کے لیے 'صبر' یا 'صبر نہیں' کا بٹن چنیں۔ زبانی جائزہ تصویری کارڈوں یا اشاروں سے بھی ہو سکتا ہے۔",
+    "en": "No picture may show the Prophet (peace be upon him), his family or the companions, in face or body; show only places and objects. A simple garden scene near Taif and its alt text are still to be made. Urdu audio of the story is not yet recorded. Alternative to the sort activity: choose a 'patience' or 'not patience' button for each card. The oral check may also be done with picture cards or gestures."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "tell the Taif account gently in three parts, name patience and wishing others well, then practise with everyday waiting and hard-learning moments",
+    "questioning_strategy": "ask 'how did he feel?' then 'what did he do instead of getting angry?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "child seems upset by the story"
+    ],
+    "hint_policy": "graduated; two hints max; first ask a gentle guiding question, then narrow the choice; never give the answer first",
+    "example_policy": "no violent or frightening detail; everyday patience examples (cricket turn, times tables, illness); patience never means hiding harm",
+    "misconception_detectors": [
+      "thinks patience means not telling an adult about harm",
+      "thinks it is fine to wish harm on unkind people"
+    ],
+    "critical_thinking_prompts": [
+      "Why is it hard to wish good for someone who was unkind to you?"
+    ],
+    "personalization_rules": "if the child is upset by the story, pause, reassure them, and move to the everyday examples; tell the mentor",
+    "escalation_rules": [
+      "any sign of distress, sadness or worry -> stop gently and hand to a human mentor",
+      "the child mentions being hurt, unsafe or unhappy at home or elsewhere -> stop and hand to a human immediately",
+      "any question about religious rulings, differences between groups or schools, or a family's own practice -> say kindly that a family elder, teacher or scholar will answer it, and notify the mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher or a religious scholar",
+      "ask for personal information (name, address, family details, or whether the child or family prays or fasts)",
+      "quote, recite or translate any Qur'anic verse or hadith from memory, or write any du'a, adhan or recitation as Arabic text",
+      "give religious rulings (fatwa) or take a side between sects or fiqh schools",
+      "shame, scare or threaten a child, including about prayer, fasting, mistakes or punishment",
+      "speak disrespectfully about any faith, group or family",
+      "show or describe a picture of the Prophet (peace be upon him), other prophets or the companions",
+      "describe injuries or violence in the Taif account",
+      "add story details, dialogue or quotations that are not in the approved lesson text"
+    ]
+  },
+  "review_flags": [
+    "scholar (religious subject expert) review REQUIRED before any child sees this lesson: verify the gentle telling of the Taif account (purpose of the visit, his response, his hope for their descendants) is accurate and suitably sourced",
+    "scholar: the related narration about his hope for their descendants is described without a citation; add an approved reference or keep it general",
+    "child-safety reviewer: confirm the account is not frightening and that patience is never framed as hiding harm",
+    "illustration reviewer: no depiction of the Prophet (peace be upon him) or the companions"
+  ]
+}

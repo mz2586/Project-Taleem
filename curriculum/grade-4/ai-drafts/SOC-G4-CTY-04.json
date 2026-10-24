@@ -1,0 +1,495 @@
+{
+  "code": "SOC-G4-CTY-04",
+  "title": {
+    "ur": "اچھا پڑوسی، اچھا ساتھی",
+    "en": "A good member of the community"
+  },
+  "description": {
+    "ur": "بتائیں کہ برادری کا اچھا اور باادب فرد کیسے بنتے ہیں: مدد، باری، ادب اور سب کو ساتھ ملانا۔",
+    "en": "Explain how to be a good, respectful member of the community: helping, taking turns, good manners and including everyone."
+  },
+  "keywords": [
+    "community",
+    "respect",
+    "helping",
+    "manners",
+    "neighbours",
+    "including others"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "برادری",
+        "en": "community"
+      },
+      "definition": {
+        "ur": "وہ لوگ جو ایک جگہ رہتے، پڑھتے یا کام کرتے ہیں۔",
+        "en": "the people who live, learn or work in one place together."
+      }
+    },
+    {
+      "term": {
+        "ur": "پڑوسی",
+        "en": "neighbour"
+      },
+      "definition": {
+        "ur": "وہ لوگ جو ہمارے گھر کے قریب رہتے ہیں۔",
+        "en": "people who live near our home."
+      }
+    },
+    {
+      "term": {
+        "ur": "ادب",
+        "en": "good manners"
+      },
+      "definition": {
+        "ur": "دوسروں سے نرمی اور عزت سے بات اور برتاؤ کرنا۔",
+        "en": "speaking to and treating others gently and with respect."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "ہم سب ایک برادری میں رہتے ہیں۔ اس میں گھر والے، پڑوسی، دوست اور اساتذہ شامل ہیں۔ اچھا فرد دوسروں کا خیال رکھتا ہے۔ آج ہم دیکھیں گے کہ اچھے فرد کیا کرتے ہیں۔ پھر ہم کچھ کہانیاں حل کریں گے۔",
+    "en": "We all live in a community. It includes family, neighbours, friends and teachers. A good member cares about others. Today we will see what good members do. Then we will solve some short stories."
+  },
+  "student_explanation": {
+    "ur": "برادری میں بہت سے لوگ مل کر رہتے ہیں۔ اچھا فرد سب کو سلام کرتا ہے۔ وہ بڑوں سے ادب سے بات کرتا ہے۔ وہ چھوٹوں سے پیار کرتا ہے۔ وہ لائن میں اپنی باری کا انتظار کرتا ہے۔ وہ ضرورت مند کی مدد کرتا ہے۔ وہ کسی کو کھیل سے باہر نہیں نکالتا۔ معذوری والے دوست بھی ہمارے ساتھ کھیلتے ہیں۔ چھوٹے اچھے کام برادری کو خوش رکھتے ہیں۔",
+    "en": "Many people live together in a community. A good member greets everyone. They speak politely to elders. They are loving to younger children. They wait for their turn in a line. They help people who need it. They do not leave anyone out of a game. Friends with disabilities play with us too. Small kind acts keep a community happy."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "پڑوس کی بزرگ خالہ سبزی کا بھاری تھیلا اٹھائے آ رہی ہیں۔ عمر کیا کرے؟",
+        "en": "An elderly neighbour aunty is carrying a heavy bag of vegetables. What should Umar do?"
+      },
+      "steps": [
+        {
+          "ur": "دیکھیں: خالہ کو کس چیز کی ضرورت ہے؟ تھیلا بھاری ہے۔",
+          "en": "Notice: what does aunty need? The bag is heavy."
+        },
+        {
+          "ur": "عمر ادب سے پوچھے: 'خالہ، کیا میں مدد کروں؟'",
+          "en": "Umar asks politely: 'Aunty, may I help?'"
+        },
+        {
+          "ur": "اجازت ملے تو تھیلا دروازے تک پہنچا دے۔",
+          "en": "If she says yes, he carries the bag to her door."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "کرکٹ کے کھیل میں ایک نیا بچہ کھیلنا چاہتا ہے۔ ٹیم پوری ہے۔ اچھا ساتھی کیا کرے؟",
+        "en": "In a cricket game a new child wants to play. The teams are full. What does a good friend do?"
+      },
+      "steps": [
+        {
+          "ur": "سوچیں: اگر آپ باہر کھڑے ہوں تو کیسا لگے گا؟",
+          "en": "Think: how would you feel standing outside?"
+        },
+        {
+          "ur": "حل ڈھونڈیں: باری باری کھیلیں یا اسے اگلے اوور میں شامل کریں۔",
+          "en": "Find a fix: take turns, or add him from the next over."
+        },
+        {
+          "ur": "کوئی بھی باہر نہ رہے، یہ برادری کا اچھا اصول ہے۔",
+          "en": "Nobody is left out: that is a good community rule."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-good-member-sort",
+      "type": "interactive",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر کام کو 'اچھا فرد' یا 'یہ اچھا نہیں' میں رکھیں۔",
+        "en": "Sort each action into 'good member' or 'not good'."
+      },
+      "answer_key": {
+        "good_member": [
+          "Greeting a neighbour",
+          "Waiting for your turn at the water tap",
+          "Helping a classmate pick up dropped books"
+        ],
+        "not_good": [
+          "Pushing to the front of the line",
+          "Shouting at an elder",
+          "Laughing when someone falls"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سوچیں: اس کام سے دوسرا خوش ہوگا یا اداس؟",
+            "en": "Think: will this make the other person happy or sad?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "p6-match-acts",
+      "type": "matching",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "ہر صورت کو اچھے کام سے ملائیں۔",
+        "en": "Match each situation to the kind act."
+      },
+      "options": [
+        {
+          "ur": "کہیں: کوئی بات نہیں",
+          "en": "say: it's all right"
+        },
+        {
+          "ur": "شکریہ کہیں",
+          "en": "say thank you"
+        },
+        {
+          "ur": "اسے ساتھ بٹھائیں",
+          "en": "invite them to sit with you"
+        }
+      ],
+      "answer_key": {
+        "pairs": [
+          {
+            "left": {
+              "ur": "کوئی غلطی سے آپ سے ٹکرا گیا",
+              "en": "someone bumps into you by mistake"
+            },
+            "right": {
+              "ur": "کہیں: کوئی بات نہیں",
+              "en": "say: it's all right"
+            }
+          },
+          {
+            "left": {
+              "ur": "کسی نے آپ کی مدد کی",
+              "en": "someone helped you"
+            },
+            "right": {
+              "ur": "شکریہ کہیں",
+              "en": "say thank you"
+            }
+          },
+          {
+            "left": {
+              "ur": "نیا بچہ اکیلا بیٹھا ہے",
+              "en": "a new child is sitting alone"
+            },
+            "right": {
+              "ur": "اسے ساتھ بٹھائیں",
+              "en": "invite them to sit with you"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-queue",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "دکان پر لائن لگی ہے۔ آپ کیا کریں گے؟",
+        "en": "There is a line at the shop. What will you do?"
+      },
+      "options": [
+        {
+          "ur": "سب سے آگے گھس جائیں گے",
+          "en": "push to the front"
+        },
+        {
+          "ur": "اپنی باری کا انتظار کریں گے",
+          "en": "wait for my turn"
+        },
+        {
+          "ur": "شور مچائیں گے",
+          "en": "make a noise"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سب کے ساتھ برابر کیا ہے؟",
+            "en": "What is fair to everyone?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "باری کا انتظار سب کے ساتھ انصاف ہے۔",
+        "en": "Waiting your turn is fair to everyone."
+      }
+    },
+    {
+      "id": "p2-include",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "اچھا ساتھی کسی کو کھیل سے باہر نہیں نکالتا۔",
+        "en": "A good friend does not leave anyone out of a game."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p3-elder",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "دادا جان کچھ بتا رہے ہیں۔ اچھا طریقہ کون سا ہے؟",
+        "en": "Grandfather is telling you something. Which is the good way?"
+      },
+      "options": [
+        {
+          "ur": "دھیان سے سنیں",
+          "en": "listen carefully"
+        },
+        {
+          "ur": "بیچ میں بولیں",
+          "en": "interrupt him"
+        },
+        {
+          "ur": "منہ پھیر لیں",
+          "en": "turn away"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      }
+    },
+    {
+      "id": "p4-disability",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "وہیل چیئر والا دوست ہمارے کھیل میں شامل نہیں ہو سکتا۔",
+        "en": "A friend who uses a wheelchair cannot join our games."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "کیا ہم کھیل کو تھوڑا بدل کر سب کو شامل کر سکتے ہیں؟",
+            "en": "Could we change the game a little so everyone can join?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "ہم کھیل بدل کر سب کو شامل کر سکتے ہیں۔ ہر دوست برادری کا حصہ ہے۔",
+        "en": "We can adapt the game so everyone joins. Every friend is part of the community."
+      }
+    },
+    {
+      "id": "p5-fallen",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "کلاس میں کسی کی کتابیں گر گئیں۔ اچھا فرد کیا کرے گا؟",
+        "en": "Someone's books fell in class. What will a good member do?"
+      },
+      "options": [
+        {
+          "ur": "ہنسے گا",
+          "en": "laugh"
+        },
+        {
+          "ur": "کچھ نہیں کرے گا",
+          "en": "do nothing"
+        },
+        {
+          "ur": "اٹھانے میں مدد کرے گا",
+          "en": "help pick them up"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-two-needs",
+      "type": "mcq",
+      "competency": "analysis",
+      "stem": {
+        "ur": "پڑوسی کا بچہ بیمار ہے اور شور سے اسے تکلیف ہوتی ہے۔ آپ کھیل رہے ہیں۔ سب سے اچھا حل کون سا ہے؟",
+        "en": "A neighbour's child is ill and noise bothers them. You are playing. Which is the best solution?"
+      },
+      "options": [
+        {
+          "ur": "زور زور سے کھیلتے رہیں",
+          "en": "keep playing loudly"
+        },
+        {
+          "ur": "کھیل ہی چھوڑ دیں اور ناراض ہو جائیں",
+          "en": "stop playing and sulk"
+        },
+        {
+          "ur": "آہستہ آواز والا کھیل کھیلیں",
+          "en": "play a quieter game"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ایسا حل ڈھونڈیں جس میں دونوں کا خیال ہو۔",
+            "en": "Look for a fix that cares for both."
+          }
+        }
+      ]
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-kind-act",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "آج گھر میں یا گلی میں ایک اچھا کام کریں، جیسے سلام کرنا یا کسی کی مدد کرنا۔ کل اپنے مینٹر کو بتائیں کہ آپ نے کیا کیا۔ کسی کا نام بتانے کی ضرورت نہیں۔",
+        "en": "Today do one kind act at home or in your street, such as greeting someone or helping. Tomorrow tell your mentor what you did. You do not need to say anyone's name."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Accept any small kind act. Do not ask for names, addresses or family details."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "سوچیں: اس کام سے دوسرا شخص کیسا محسوس کرے گا؟",
+        "en": "Think: how will the other person feel after this?"
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اچھا فرد مدد کرتا ہے، باری لیتا ہے اور ادب سے بولتا ہے۔",
+        "en": "A good member helps, takes turns and speaks politely."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "اچھا فرد ہونے کا مطلب صرف اپنے دوستوں سے اچھا ہونا ہے۔",
+        "en": "Being a good member means being kind only to your own friends."
+      },
+      "correction": {
+        "ur": "اچھا فرد سب سے اچھا برتاؤ کرتا ہے، نئے لوگوں اور اجنبی بچوں سے بھی۔",
+        "en": "A good member is kind to everyone, including new people and children they do not know yet."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "بڑے کام ہی برادری کی مدد ہیں؛ چھوٹے کام سے فرق نہیں پڑتا۔",
+        "en": "Only big acts help the community; small acts make no difference."
+      },
+      "correction": {
+        "ur": "سلام، شکریہ اور باری لینا جیسے چھوٹے کام بھی برادری کو بہتر بناتے ہیں۔",
+        "en": "Small acts like greeting, saying thank you and taking turns also make a community better."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "two_wrong_in_a_row",
+      "remediation_ref": "SOC-G4-CTY-04"
+    },
+    {
+      "signal": "struggles_with_helper_roles",
+      "remediation_ref": "SOC-G4-CIV-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "اچھا فرد: سلام کرتا ہے، ادب سے بولتا ہے، باری کا انتظار کرتا ہے، مدد کرتا ہے، سب کو ساتھ ملاتا ہے۔",
+    "en": "A good member: greets, speaks politely, waits their turn, helps, and includes everyone."
+  },
+  "summary": {
+    "ur": "ہم نے سیکھا کہ چھوٹے اچھے کام ہمیں برادری کا اچھا فرد بناتے ہیں۔",
+    "en": "We learned that small kind acts make us good members of the community."
+  },
+  "parent_notes": {
+    "ur": "بچے کو کسی چھوٹے اچھے کام پر شاباش دیں، جیسے کسی بزرگ کو سلام کرنا یا چھوٹے بہن بھائی کی مدد کرنا۔",
+    "en": "Praise your child for small kind acts, such as greeting an elder or helping a younger sibling."
+  },
+  "mentor_notes": {
+    "ur": "مثالوں میں لڑکے اور لڑکیاں دونوں مددگار ہوں۔ معذوری کو ترس کی بجائے برابر شمولیت کے طور پر پیش کریں۔ اگر بچہ بتائے کہ اسے تنگ کیا جاتا ہے تو سبق روکیں اور مدد کریں۔",
+    "en": "Make both girls and boys the helpers in examples. Present disability as equal inclusion, not pity. If a child says they are being bullied, pause the lesson and support them."
+  },
+  "accessibility_notes": {
+    "ur": "کہانیوں کی تصاویر ابھی بنانی ہیں؛ ہر تصویر کا متبادل متن لوگوں اور ان کے کام کو بیان کرے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ گھسیٹنے والی سرگرمی کا متبادل: ہر کام کے لیے 'اچھا' یا 'اچھا نہیں' کا بٹن دبائیں۔",
+    "en": "Story pictures are still to be made; each alt text should describe the people and what they are doing. Urdu audio is not yet recorded. Alternative to the sorting activity: tap a 'good' or 'not good' button for each action."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "short everyday stories (street, shop line, playground, home), then ask what a good member would do and why",
+    "questioning_strategy": "ask 'how would the other person feel?' before 'what should you do?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "chooses an unkind action as 'good'"
+    ],
+    "hint_policy": "graduated; two hints max; first prompt feelings, then recall the list (greet, help, wait, include); never give the choice first",
+    "example_policy": "everyday Pakistani settings; girls and boys equally as helpers; include children and elders with disabilities as full members",
+    "misconception_detectors": [
+      "thinks kindness is only for friends",
+      "thinks small acts do not count",
+      "excludes a child with a disability"
+    ],
+    "critical_thinking_prompts": [
+      "Can you think of a way to change a game so that everyone can play?"
+    ],
+    "personalization_rules": "if the learner mentions being bullied, stop and escalate; otherwise repeat a story with a new setting",
+    "escalation_rules": [
+      "repeated confusion after remediation -> mentor",
+      "any sign of distress, fear or upset -> stop and hand to a human mentor",
+      "learner shares personal or family details -> do not store or repeat them; gently redirect and tell a mentor",
+      "learner says they are being bullied or hurt -> stop and hand to a human mentor immediately"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright before the learner tries",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, school, phone, family details or location)",
+      "express political, party or sectarian opinions",
+      "rank or compare provinces, regions, languages or communities as better or worse",
+      "ask the learner to name neighbours or family members"
+    ]
+  },
+  "review_flags": [
+    "child-safety: confirm the homework (report one kind act, no names) and the bullying escalation wording",
+    "language editor: confirm 'برادری' is the best Grade 4 word for 'community' (alternatives: معاشرہ، محلہ)"
+  ]
+}

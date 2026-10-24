@@ -1,0 +1,591 @@
+{
+  "code": "URD-G4-WR-04",
+  "title": {
+    "ur": "غیر رسمی خط اور رقعہ لکھنا",
+    "en": "Writing an informal letter or note"
+  },
+  "description": {
+    "ur": "گھر والوں یا دوستوں کو خط یا چھوٹا رقعہ درست حصوں اور دوستانہ انداز میں لکھنا۔",
+    "en": "Writing a letter or short note to family or friends with the right parts and a friendly tone."
+  },
+  "keywords": [
+    "informal letter",
+    "note",
+    "greeting",
+    "closing",
+    "letter parts",
+    "writing"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "خط",
+        "en": "letter"
+      },
+      "definition": {
+        "ur": "کسی کو لکھ کر بھیجی ہوئی بات۔",
+        "en": "a written message sent to someone."
+      }
+    },
+    {
+      "term": {
+        "ur": "القاب",
+        "en": "form of address"
+      },
+      "definition": {
+        "ur": "خط کے شروع میں پیار یا عزت سے پکارنا، جیسے 'پیاری خالہ جان'۔",
+        "en": "how we address someone at the start, like 'Dear Khala Jaan'."
+      }
+    },
+    {
+      "term": {
+        "ur": "اختتام",
+        "en": "closing"
+      },
+      "definition": {
+        "ur": "خط کا آخری حصہ جہاں ہم رخصت لیتے اور اپنا رشتہ لکھتے ہیں۔",
+        "en": "the last part, where we say goodbye and write how we are related."
+      }
+    },
+    {
+      "term": {
+        "ur": "رقعہ",
+        "en": "note"
+      },
+      "definition": {
+        "ur": "چھوٹا سا لکھا ہوا پیغام۔",
+        "en": "a short written message."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "خط ہم کسی ایسے پیارے کو لکھتے ہیں جو ہمارے پاس نہیں ہوتا۔ غیر رسمی خط گھر والوں اور دوستوں کو لکھا جاتا ہے۔ اس کے کچھ حصے ہوتے ہیں: تاریخ، القاب، سلام، اصل بات اور اختتام۔ آج ہم عائشہ کا خط پڑھیں گے جو اس نے اپنی خالہ کو لکھا۔ پھر ہم خود ایک خط لکھیں گے۔",
+    "en": "We write a letter to someone dear who is not with us. An informal letter is written to family and friends. It has some parts: date, form of address, greeting, the message and the closing. Today we will read Ayesha's letter to her aunt. Then we will write a letter ourselves."
+  },
+  "student_explanation": {
+    "ur": "غیر رسمی خط اپنوں کو لکھا جاتا ہے۔ سب سے اوپر شہر کا نام اور تاریخ لکھیں۔ پھر القاب لکھیں، جیسے 'پیاری خالہ جان'۔ پھر سلام لکھیں۔ اس کے بعد اصل بات لکھیں۔ اصل بات چھوٹے اور صاف جملوں میں ہو۔ آخر میں اختتام لکھیں، جیسے 'آپ کی پیاری بھانجی'۔ سب سے نیچے اپنا نام لکھیں۔ رقعہ خط سے چھوٹا ہوتا ہے، مگر اس میں بھی نام اور بات ہوتی ہے۔",
+    "en": "An informal letter is written to people close to us. At the very top, write the city name and the date. Then write the address, like 'Dear Khala Jaan'. Then write a greeting. After that, write the message. The message should be in short, clear sentences. At the end, write the closing, like 'Your loving niece'. At the bottom, write your name. A note is shorter than a letter, but it also has a name and a message."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "عائشہ کا خط پڑھیں اور اس کے حصے پہچانیں:\nحیدرآباد\n۱۲ مارچ\n\nپیاری خالہ جان،\nالسلام علیکم!\n\nآپ کا بھیجا ہوا رنگوں کا ڈبا مجھے مل گیا ہے۔ یہ بہت خوب صورت ہے۔ میں نے کل اس سے اپنے گاؤں کے کھیتوں کی تصویر بنائی۔ امی کو بھی تصویر بہت پسند آئی۔ تحفے کا بہت بہت شکریہ۔\n\nآپ کب ہم سے ملنے آئیں گی؟ جلدی آئیے گا۔\n\nآپ کی پیاری بھانجی\nعائشہ",
+        "en": "Read Ayesha's letter and find its parts:\nHyderabad\n12 March\n\nDear Khala Jaan (aunt),\nAssalamu alaikum!\n\nI have received the box of colours you sent. It is very beautiful. Yesterday I used it to paint the fields of my village. Ammi liked the picture very much too. Thank you so much for the gift.\n\nWhen will you come to visit us? Please come soon.\n\nYour loving niece,\nAyesha"
+      },
+      "steps": [
+        {
+          "ur": "سب سے اوپر: شہر 'حیدرآباد' اور تاریخ '۱۲ مارچ'۔",
+          "en": "At the top: the city 'Hyderabad' and the date '12 March'."
+        },
+        {
+          "ur": "القاب: 'پیاری خالہ جان،' اور سلام: 'السلام علیکم!'",
+          "en": "Address: 'Dear Khala Jaan,' and greeting: 'Assalamu alaikum!'"
+        },
+        {
+          "ur": "اصل بات: تحفہ ملا، تصویر بنائی، شکریہ، ملنے کی دعوت۔",
+          "en": "Message: the gift arrived, a picture was painted, thanks, an invitation to visit."
+        },
+        {
+          "ur": "اختتام: 'آپ کی پیاری بھانجی' اور نام 'عائشہ'۔",
+          "en": "Closing: 'Your loving niece' and the name 'Ayesha'."
+        }
+      ]
+    },
+    {
+      "prompt": {
+        "ur": "امی کے لیے رقعہ لکھیں کہ آپ پڑوس میں ثنا کے گھر سبق پڑھنے جا رہی ہیں۔",
+        "en": "Write a note to Ammi saying you are going to Sana's house next door to study."
+      },
+      "steps": [
+        {
+          "ur": "القاب: 'امی جان،'",
+          "en": "Address: 'Ammi Jaan,'"
+        },
+        {
+          "ur": "اصل بات: 'میں ثنا کے گھر سبق پڑھنے جا رہی ہوں۔'",
+          "en": "Message: 'I am going to Sana's house to study.'"
+        },
+        {
+          "ur": "وقت بتائیں: 'پانچ بجے تک واپس آ جاؤں گی۔'",
+          "en": "Give the time: 'I will be back by five.'"
+        },
+        {
+          "ur": "آخر میں نام: 'آپ کی بیٹی، نور'۔",
+          "en": "End with a name: 'Your daughter, Noor'."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-order-parts",
+      "type": "ordering",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "خط کے حصوں کو اوپر سے نیچے صحیح ترتیب میں رکھیں۔",
+        "en": "Put the parts of a letter in the right order from top to bottom."
+      },
+      "options": [
+        {
+          "ur": "اصل بات",
+          "en": "the message"
+        },
+        {
+          "ur": "شہر اور تاریخ",
+          "en": "city and date"
+        },
+        {
+          "ur": "اختتام اور نام",
+          "en": "closing and name"
+        },
+        {
+          "ur": "القاب اور سلام",
+          "en": "address and greeting"
+        }
+      ],
+      "answer_key": {
+        "order": [
+          1,
+          3,
+          0,
+          2
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "سب سے اوپر کیا لکھتے ہیں؟",
+            "en": "What do we write at the very top?"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a2-write-letter",
+      "type": "long",
+      "competency": "analysis",
+      "stem": {
+        "ur": "آپ ایک کہانی کے کردار 'بلال' ہیں۔ بلال کے دادا جان گاؤں میں رہتے ہیں۔ بلال کی طرف سے دادا جان کو خط لکھیں اور بتائیں کہ اسکول میں کرکٹ میچ کیسا رہا۔ خط کے سب حصے لکھیں۔ کسی کا اصل پتا یا فون نمبر نہ لکھیں۔",
+        "en": "You are a story character, 'Bilal'. Bilal's grandfather lives in the village. Write a letter from Bilal to Dada Jaan telling him how the school cricket match went. Include all the parts. Do not write any real address or phone number."
+      },
+      "answer_key": {
+        "sample_answer": "لاہور\n۵ اپریل\n\nپیارے دادا جان،\nالسلام علیکم!\n\nکل ہمارے اسکول میں کرکٹ میچ ہوا۔ ہماری ٹیم نے بہت اچھا کھیلا۔ میں نے دو چوکے لگائے۔ آخر میں ہم جیت گئے۔ مجھے آپ کی سکھائی ہوئی بات یاد تھی: گیند پر نظر رکھو۔\n\nآپ اپنا خیال رکھیے گا۔\n\nآپ کا پوتا\nبلال"
+      },
+      "rubric": {
+        "criteria": "informal letter: all parts present, friendly tone, clear message, correct sentences",
+        "max_score": 4,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "خط کے زیادہ تر حصے نہیں، یا بات سمجھ نہیں آتی۔",
+              "en": "Most parts of the letter are missing, or the message is unclear."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "القاب اور اصل بات ہے، مگر اختتام یا تاریخ نہیں۔",
+              "en": "Greeting and message are there, but the closing or date is missing."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "سب حصے ہیں اور بات واضح ہے؛ کچھ جملوں میں غلطیاں۔",
+              "en": "All parts are there and the message is clear; some sentence errors."
+            }
+          },
+          {
+            "level": 4,
+            "descriptor": {
+              "ur": "سب حصے صحیح ترتیب میں، دوستانہ انداز، واضح بات اور درست جملے۔",
+              "en": "All parts in the right order, friendly tone, clear message and correct sentences."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mark with the 4-level rubric. Accept any city name and date, any greeting (السلام علیکم، آداب، or another respectful greeting). Never require real personal details."
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-top",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "غیر رسمی خط میں سب سے اوپر کیا لکھتے ہیں؟",
+        "en": "What goes at the very top of an informal letter?"
+      },
+      "options": [
+        {
+          "ur": "اپنا نام",
+          "en": "your name"
+        },
+        {
+          "ur": "شہر اور تاریخ",
+          "en": "the city and the date"
+        },
+        {
+          "ur": "شکریہ",
+          "en": "thank you"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "عائشہ کے خط کا پہلا حصہ دیکھیں۔",
+            "en": "Look at the first part of Ayesha's letter."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "سب سے اوپر شہر کا نام اور تاریخ ہوتی ہے۔",
+        "en": "The city name and date go at the top."
+      }
+    },
+    {
+      "id": "p2-address",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "نانی کو خط لکھیں تو القاب کیا ہوگا؟",
+        "en": "Writing to Nani, what is the form of address?"
+      },
+      "options": [
+        {
+          "ur": "پیاری نانی جان،",
+          "en": "Dear Nani Jaan,"
+        },
+        {
+          "ur": "جناب منیجر صاحب،",
+          "en": "Dear Sir, Manager,"
+        },
+        {
+          "ur": "آپ کی نواسی",
+          "en": "Your granddaughter"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "القاب پیار سے پکارنا ہے۔",
+            "en": "The address calls the person warmly."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'پیاری نانی جان' پیار بھرا القاب ہے۔ 'آپ کی نواسی' اختتام ہے۔",
+        "en": "'Dear Nani Jaan' is a warm address. 'Your granddaughter' is a closing."
+      }
+    },
+    {
+      "id": "p3-closing",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "بھائی کو لکھے خط کا درست اختتام کون سا ہے؟",
+        "en": "Which is a good closing for a letter to your brother?"
+      },
+      "options": [
+        {
+          "ur": "پیارے بھائی جان،",
+          "en": "Dear Bhai Jaan,"
+        },
+        {
+          "ur": "السلام علیکم!",
+          "en": "Assalamu alaikum!"
+        },
+        {
+          "ur": "آپ کی چھوٹی بہن",
+          "en": "Your little sister"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "اختتام میں ہم اپنا رشتہ لکھتے ہیں۔",
+            "en": "In the closing we write how we are related."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "'آپ کی چھوٹی بہن' اختتام ہے؛ باقی دو شروع کے حصے ہیں۔",
+        "en": "'Your little sister' is a closing; the other two belong at the start."
+      }
+    },
+    {
+      "id": "p4-informal",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "غیر رسمی خط گھر والوں اور دوستوں کو لکھا جاتا ہے۔",
+        "en": "An informal letter is written to family and friends."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "دفتر یا اسکول کے پرنسپل کو لکھا خط رسمی ہوتا ہے۔",
+        "en": "A letter to an office or a principal is formal."
+      }
+    },
+    {
+      "id": "p5-note-name",
+      "type": "true_false",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "رقعہ چھوٹا ہوتا ہے، اس لیے اس میں لکھنے والے کا نام ضروری نہیں۔",
+        "en": "A note is short, so the writer's name is not needed."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "امی کو کیسے پتا چلے گا کہ رقعہ کس نے لکھا؟",
+            "en": "How will Ammi know who wrote the note?"
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "رقعے میں بھی نام لکھتے ہیں تاکہ پڑھنے والا جانے کس نے لکھا۔",
+        "en": "A note also has a name so the reader knows who wrote it."
+      }
+    },
+    {
+      "id": "p6-safe",
+      "type": "mcq",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "ایپ میں مشق کا خط لکھتے ہوئے کیا نہیں لکھنا چاہیے؟",
+        "en": "When writing a practice letter in the app, what should you not write?"
+      },
+      "options": [
+        {
+          "ur": "اپنے گھر کا اصل پتا اور فون نمبر",
+          "en": "your real home address and phone number"
+        },
+        {
+          "ur": "القاب اور سلام",
+          "en": "the address and greeting"
+        },
+        {
+          "ur": "اصل بات",
+          "en": "the message"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "explanation": {
+        "ur": "مشق کے خط میں شہر کا نام کافی ہے؛ اصل پتا یا فون نمبر کبھی نہ لکھیں۔",
+        "en": "A city name is enough in a practice letter; never write a real address or phone number."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-friend-letter",
+      "type": "long",
+      "competency": "analysis",
+      "stem": {
+        "ur": "کہانی کی کردار 'زینب' کی دوست ثنا دوسرے شہر چلی گئی ہے۔ زینب کی طرف سے ثنا کو خط لکھیں: اسکول کی ایک نئی بات بتائیں، ایک سوال پوچھیں اور ملنے کی خواہش لکھیں۔",
+        "en": "Zainab's friend Sana (story characters) has moved to another city. Write a letter from Zainab to Sana: tell one new thing about school, ask one question, and say you wish to meet."
+      },
+      "answer_key": {
+        "sample_answer": "کراچی\n۲ مئی\n\nپیاری ثنا،\nالسلام علیکم!\n\nتمہارے بغیر کلاس اداس لگتی ہے۔ اس ہفتے ہمارے اسکول میں درخت لگانے کا دن تھا۔ میں نے نیم کا پودا لگایا۔ تمہارا نیا اسکول کیسا ہے؟ چھٹیوں میں ضرور ملنے آنا۔\n\nتمہاری سہیلی\nزینب"
+      },
+      "rubric": {
+        "criteria": "informal letter: all parts present, friendly tone, clear message, correct sentences",
+        "max_score": 4,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "خط کے زیادہ تر حصے نہیں، یا بات سمجھ نہیں آتی۔",
+              "en": "Most parts of the letter are missing, or the message is unclear."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "القاب اور اصل بات ہے، مگر اختتام یا تاریخ نہیں۔",
+              "en": "Greeting and message are there, but the closing or date is missing."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "سب حصے ہیں اور بات واضح ہے؛ کچھ جملوں میں غلطیاں۔",
+              "en": "All parts are there and the message is clear; some sentence errors."
+            }
+          },
+          {
+            "level": 4,
+            "descriptor": {
+              "ur": "سب حصے صحیح ترتیب میں، دوستانہ انداز، واضح بات اور درست جملے۔",
+              "en": "All parts in the right order, friendly tone, clear message and correct sentences."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mark with the rubric; the letter must contain one news item, one question (ending in ؟) and a wish to meet. Fictional characters only."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-note-home",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں کسی کے لیے کاغذ پر ایک چھوٹا رقعہ لکھیں، جیسے 'امی جان، کھانے کا شکریہ۔' اس میں القاب، بات اور نام ہو۔",
+        "en": "At home, write a short note on paper for someone, like 'Ammi Jaan, thank you for the food.' Include an address, a message and a name."
+      },
+      "answer_key": {
+        "sample_answer": "امی جان، آج کی دال بہت مزے کی تھی۔ شکریہ! آپ کا بیٹا، حسن"
+      },
+      "mentor_review_guidance": "Paper note only; the family keeps it. Mentor may ask the child to describe it; no photo needed."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "خط کے پانچ حصے یاد کریں: تاریخ، القاب، سلام، اصل بات، اختتام۔",
+        "en": "Recall the five parts: date, address, greeting, message, closing."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "عائشہ کا خط دوبارہ دیکھیں اور اسی ترتیب سے لکھیں، مگر اپنی بات کے ساتھ۔",
+        "en": "Look at Ayesha's letter again and follow its order, with your own message."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "خط میں صرف اصل بات لکھنا کافی ہے؛ القاب اور اختتام ضروری نہیں۔",
+        "en": "Only the message matters; the address and closing are not needed."
+      },
+      "correction": {
+        "ur": "خط کے سب حصے مل کر اسے مکمل اور پیارا بناتے ہیں۔",
+        "en": "All the parts together make the letter complete and warm."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "القاب اور اختتام کو آپس میں ملا دینا (جیسے شروع میں 'آپ کی بھانجی' لکھنا)۔",
+        "en": "Mixing up the address and the closing (e.g. 'your niece' at the start)."
+      },
+      "correction": {
+        "ur": "القاب شروع میں پکارتا ہے؛ اختتام آخر میں رشتہ اور نام بتاتا ہے۔",
+        "en": "The address calls at the start; the closing gives relation and name at the end."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "misses_prerequisite:URD-G4-WR-03",
+      "remediation_ref": "URD-G4-WR-03"
+    },
+    {
+      "signal": "incomplete_sentences_in_message",
+      "remediation_ref": "URD-G4-WR-02"
+    }
+  ],
+  "revision_notes": {
+    "ur": "غیر رسمی خط: شہر اور تاریخ ← القاب ← سلام ← اصل بات ← اختتام اور نام۔ رقعہ: القاب، چھوٹی بات، نام۔ اصل پتا یا فون نمبر کبھی نہیں۔",
+    "en": "Informal letter: city and date -> address -> greeting -> message -> closing and name. Note: address, short message, name. Never a real address or phone number."
+  },
+  "summary": {
+    "ur": "ہم نے غیر رسمی خط اور رقعے کے حصے سیکھے اور دوستانہ خط لکھا۔",
+    "en": "We learned the parts of an informal letter and a note, and wrote a friendly letter."
+  },
+  "parent_notes": {
+    "ur": "بچے کے ساتھ کسی رشتہ دار کے لیے ایک چھوٹا سا شکریے کا رقعہ لکھیں۔ اگر ممکن ہو تو اگلی ملاقات پر اسے دے دیں۔",
+    "en": "Write a short thank-you note with your child for a relative. If possible, hand it over at the next visit."
+  },
+  "mentor_notes": {
+    "ur": "ایپ میں لکھے خطوط میں بچے کردار بن کر لکھیں؛ اگر کوئی بچہ اصل پتا، فون یا اسکول کا نام لکھ دے تو نرمی سے ہٹوا دیں۔ سلام کے مختلف انداز (السلام علیکم، آداب وغیرہ) قبول کریں۔ لمبے جواب روبرک سے جانچیں۔",
+    "en": "In the app, children write as story characters; if a child writes a real address, phone or school name, gently have it removed. Accept different greetings (السلام علیکم، آداب, etc.). Mark long answers with the rubric."
+  },
+  "accessibility_notes": {
+    "ur": "خط کے حصوں پر نشان لگا نمونہ خط (تصویر) ابھی بنانا ہے؛ متبادل متن ہر حصے کا نام اور مثال پڑھے۔ اردو آڈیو ابھی ریکارڈ نہیں ہوئی۔ ترتیب والی (گھسیٹنے کی) سرگرمی کا متبادل: ہر حصے کے لیے ۱ سے ۴ نمبر چنیں۔ جو بچہ لکھ نہیں سکتا وہ خط زبانی بولے؛ مینٹر لکھے اور روبرک سے جانچے۔",
+    "en": "A labelled model-letter picture is still to be made; its alt text should read each part's name and example. Urdu audio is not yet recorded. Alternative to the drag ordering activity: choose 1 to 4 for each part. A child who cannot write may dictate the letter; the mentor writes it and marks with the rubric."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "read the model letter, label its five parts, then write as a story character with a clear purpose (thanks, news, invitation)",
+    "questioning_strategy": "ask 'which part is this?' and 'who is the letter for, and why?'",
+    "slow_down_signals": [
+      "two wrong answers in a row",
+      "writes only the message",
+      "puts the closing at the start"
+    ],
+    "hint_policy": "graduated; two hints max; first list the five parts, then point to the model letter; never write the learner's letter",
+    "example_policy": "letters to family or friends (story characters), about gifts, school news, visits; no real names, addresses or phone numbers",
+    "misconception_detectors": [
+      "missing address or closing",
+      "address and closing swapped"
+    ],
+    "critical_thinking_prompts": [
+      "How would this letter change if you wrote it to your school principal?"
+    ],
+    "personalization_rules": "if the message sentences are incomplete, route to URD-G4-WR-02; if ideas are unordered, URD-G4-WR-03",
+    "escalation_rules": [
+      "any sign of distress, upset or a safety worry -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor",
+      "if a learner writes real personal details, remove them and tell the mentor",
+      "long answers (a2, challenge) are marked by a human mentor using the rubric"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, photos)",
+      "shame or rush a wrong answer",
+      "encourage the learner to send a letter through the app to a real person"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the order and Urdu names of letter parts (شہر/تاریخ، القاب، سلام، نفسِ مضمون/اصل بات، اختتام) and where the date sits in Grade 4 practice",
+    "inclusion: the model letter uses 'السلام علیکم'; the mentor note accepts other greetings — confirm that is the policy",
+    "safety: letters are written as story characters so no real personal details are collected; confirm"
+  ]
+}

@@ -1,0 +1,478 @@
+{
+  "code": "ENG-G4-RD-01",
+  "title": {
+    "ur": "آواز ملا کر انگریزی پڑھیں",
+    "en": "Sound It Out and Read Aloud"
+  },
+  "description": {
+    "ur": "بچہ آسان انگریزی الفاظ اور جملے آواز ملا کر صحیح صحیح بلند آواز سے پڑھتا ہے۔",
+    "en": "The learner reads short, decodable English words and sentences aloud accurately by blending sounds."
+  },
+  "keywords": [
+    "reading aloud",
+    "phonics",
+    "blending",
+    "decodable text",
+    "letter sounds",
+    "fluency"
+  ],
+  "vocabulary": [
+    {
+      "term": {
+        "ur": "آواز (sound)",
+        "en": "sound"
+      },
+      "definition": {
+        "ur": "ہر حرف کی ایک آواز ہوتی ہے، جیسے b کی آواز 'ب'۔",
+        "en": "Each letter makes a sound, like b says /b/."
+      }
+    },
+    {
+      "term": {
+        "ur": "آوازیں ملانا (blend)",
+        "en": "blend"
+      },
+      "definition": {
+        "ur": "آوازوں کو جوڑ کر لفظ بنانا: c-a-t = cat۔",
+        "en": "Join the sounds to make a word: c-a-t = cat."
+      }
+    },
+    {
+      "term": {
+        "ur": "جملہ (sentence)",
+        "en": "sentence"
+      },
+      "definition": {
+        "ur": "الفاظ کا گروہ جو پوری بات بتائے۔",
+        "en": "A group of words that tells a whole idea."
+      }
+    }
+  ],
+  "teacher_script": {
+    "ur": "آج ہم انگریزی بلند آواز سے پڑھیں گے۔ ہر حرف کی ایک آواز ہوتی ہے۔ ہم آوازیں ایک ایک کر کے بولیں گے، پھر انہیں ملائیں گے۔ جیسے b-a-g ملا کر bag بنتا ہے۔ آہستہ پڑھنا بالکل ٹھیک ہے۔ صحیح پڑھنا تیز پڑھنے سے زیادہ اہم ہے۔",
+    "en": "Today we will read English aloud. Every letter makes a sound. We say the sounds one by one, then we blend them. For example, b-a-g blends to make bag. Reading slowly is fine. Reading correctly matters more than reading fast."
+  },
+  "student_explanation": {
+    "ur": "انگریزی کے ہر حرف کی ایک آواز ہے۔ حرف کا نام اور آواز الگ ہیں۔ پہلے ہر آواز بولیں۔ پھر آوازوں کو جوڑیں۔ c-a-t ملا کر cat بنتا ہے۔ لفظ کا آخری حرف بھی ضرور پڑھیں۔ جملہ بائیں سے دائیں پڑھیں۔ فل اسٹاپ پر تھوڑا رکیں۔",
+    "en": "Every English letter makes a sound. A letter's name and its sound are different. First say each sound. Then join the sounds. c-a-t blends to make cat. Always read the last letter too. Read a sentence from left to right. Pause a little at the full stop."
+  },
+  "worked_examples": [
+    {
+      "prompt": {
+        "ur": "یہ جملہ پڑھیں: Zara has a red bag.",
+        "en": "Read this sentence: Zara has a red bag."
+      },
+      "steps": [
+        {
+          "ur": "پہلا لفظ نام ہے: Zara۔",
+          "en": "The first word is a name: Zara."
+        },
+        {
+          "ur": "h-a-s ملا کر has پڑھیں۔",
+          "en": "Blend h-a-s to read has."
+        },
+        {
+          "ur": "a اکیلا ایک چھوٹا لفظ ہے۔",
+          "en": "a on its own is a small word."
+        },
+        {
+          "ur": "r-e-d ملا کر red، اور b-a-g ملا کر bag۔",
+          "en": "Blend r-e-d to read red, and b-a-g to read bag."
+        },
+        {
+          "ur": "اب پورا جملہ ایک ساتھ پڑھیں اور آخر میں رکیں۔",
+          "en": "Now read the whole sentence together and stop at the end."
+        }
+      ]
+    }
+  ],
+  "interactive_activities": [
+    {
+      "id": "a1-blend-tiles",
+      "type": "interactive",
+      "competency": "application",
+      "stem": {
+        "ur": "حروف کو ترتیب سے رکھیں اور لفظ بنائیں: p ، e ، n",
+        "en": "Put the letter tiles in order to build the word: p, e, n"
+      },
+      "answer_key": {
+        "target_word": "pen",
+        "tile_order": [
+          "p",
+          "e",
+          "n"
+        ]
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلی آواز 'پ' ہے۔",
+            "en": "The first sound is /p/."
+          }
+        }
+      ]
+    },
+    {
+      "id": "p5-build-word",
+      "type": "fill_blank",
+      "competency": "application",
+      "stem": {
+        "ur": "آوازیں جوڑیں: s-u-n = ___",
+        "en": "Join the sounds: s-u-n = ___"
+      },
+      "answer_key": {
+        "answer": "sun"
+      },
+      "accepted_variants": [
+        "sun",
+        "Sun"
+      ],
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "پہلی آواز 'س' ہے۔",
+            "en": "The first sound is /s/."
+          }
+        }
+      ]
+    }
+  ],
+  "practice_questions": [
+    {
+      "id": "p1-blend-cup",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "یہ آوازیں ملائیں: c-u-p۔ کونسا لفظ بنا؟",
+        "en": "Blend these sounds: c-u-p. Which word do they make?"
+      },
+      "options": [
+        {
+          "ur": "cap",
+          "en": "cap"
+        },
+        {
+          "ur": "cup",
+          "en": "cup"
+        },
+        {
+          "ur": "cut",
+          "en": "cut"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "ہر آواز کو باری باری بولیں۔",
+            "en": "Say each sound in turn."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "c-u-p ملا کر cup بنتا ہے۔",
+        "en": "c-u-p blends to make cup."
+      }
+    },
+    {
+      "id": "p2-last-sound",
+      "type": "mcq",
+      "competency": "application",
+      "stem": {
+        "ur": "لفظ bus کی آخری آواز کونسی ہے؟",
+        "en": "What is the last sound in the word bus?"
+      },
+      "options": [
+        {
+          "ur": "s",
+          "en": "s"
+        },
+        {
+          "ur": "b",
+          "en": "b"
+        },
+        {
+          "ur": "u",
+          "en": "u"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 0
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ کو آخر تک آہستہ پڑھیں۔",
+            "en": "Read the word slowly to the very end."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "bus کے آخر میں s ہے۔",
+        "en": "bus ends with s."
+      }
+    },
+    {
+      "id": "p3-passage-colour",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "پڑھیں: Zara has a red bag. In the bag is a pen. بیگ کا رنگ کیا ہے؟",
+        "en": "Read: Zara has a red bag. In the bag is a pen. What colour is the bag?"
+      },
+      "options": [
+        {
+          "ur": "big",
+          "en": "big"
+        },
+        {
+          "ur": "pen",
+          "en": "pen"
+        },
+        {
+          "ur": "red",
+          "en": "red"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 2
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "لفظ bag سے پہلے والا لفظ دیکھیں۔",
+            "en": "Look at the word just before bag."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "جملہ کہتا ہے: a red bag۔",
+        "en": "The sentence says: a red bag."
+      }
+    },
+    {
+      "id": "p4-name-vs-sound",
+      "type": "true_false",
+      "competency": "knowledge",
+      "stem": {
+        "ur": "حرف m کا نام اور اس کی آواز بالکل ایک جیسے ہیں۔",
+        "en": "The letter m's name and its sound are exactly the same."
+      },
+      "options": [
+        {
+          "ur": "صحیح",
+          "en": "True"
+        },
+        {
+          "ur": "غلط",
+          "en": "False"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "explanation": {
+        "ur": "نام 'ایم' ہے، آواز صرف 'م' ہے۔",
+        "en": "Its name is 'em', but its sound is just /m/."
+      }
+    },
+    {
+      "id": "p6-rhyme",
+      "type": "mcq",
+      "competency": "comprehension",
+      "stem": {
+        "ur": "کونسا لفظ hat کا ہم آواز (rhyme) ہے؟",
+        "en": "Which word rhymes with hat?"
+      },
+      "options": [
+        {
+          "ur": "hit",
+          "en": "hit"
+        },
+        {
+          "ur": "mat",
+          "en": "mat"
+        },
+        {
+          "ur": "hen",
+          "en": "hen"
+        }
+      ],
+      "answer_key": {
+        "correct_option": 1
+      },
+      "hints": [
+        {
+          "trigger": "wrong",
+          "hint": {
+            "ur": "آخری حصہ -at سنیں۔",
+            "en": "Listen for the ending -at."
+          }
+        }
+      ],
+      "explanation": {
+        "ur": "hat اور mat دونوں -at پر ختم ہوتے ہیں۔",
+        "en": "hat and mat both end in -at."
+      }
+    }
+  ],
+  "challenge_problems": [
+    {
+      "id": "c1-read-aloud",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "یہ جملے اپنے مینٹر کو بلند آواز سے پڑھ کر سنائیں: Zara runs to the bus. The bus is hot. Zara sits and naps.",
+        "en": "Read these sentences aloud to your mentor: Zara runs to the bus. The bus is hot. Zara sits and naps."
+      },
+      "answer_key": {},
+      "rubric": {
+        "criteria": "accuracy of decoding when reading aloud",
+        "max_score": 3,
+        "levels": [
+          {
+            "level": 1,
+            "descriptor": {
+              "ur": "کئی الفاظ غلط یا چھوڑے؛ مدد سے پڑھا۔",
+              "en": "Many words wrong or skipped; read with help."
+            }
+          },
+          {
+            "level": 2,
+            "descriptor": {
+              "ur": "زیادہ تر الفاظ صحیح؛ ایک دو غلطیاں۔",
+              "en": "Most words correct; one or two errors."
+            }
+          },
+          {
+            "level": 3,
+            "descriptor": {
+              "ur": "تمام الفاظ صحیح اور فل اسٹاپ پر رکا۔",
+              "en": "Every word correct and paused at full stops."
+            }
+          }
+        ]
+      },
+      "mentor_review_guidance": "Mentor listens live; note each misread word. Do not read the sentences first."
+    }
+  ],
+  "homework": [
+    {
+      "id": "hw1-read-family",
+      "type": "short",
+      "competency": "application",
+      "stem": {
+        "ur": "گھر میں کسی بڑے کو یہ جملہ تین بار پڑھ کر سنائیں: The cat sat on a mat.",
+        "en": "Read this sentence aloud three times to an adult at home: The cat sat on a mat."
+      },
+      "answer_key": {},
+      "mentor_review_guidance": "Parent does not need English; they only listen and praise effort."
+    }
+  ],
+  "hints": [
+    {
+      "trigger": "first_wrong",
+      "hint": {
+        "ur": "لفظ کو ٹکڑوں میں توڑیں اور ہر آواز الگ بولیں۔",
+        "en": "Break the word into sounds and say each one."
+      }
+    },
+    {
+      "trigger": "second_wrong",
+      "hint": {
+        "ur": "اب آوازیں تیزی سے جوڑیں، جیسے m-a-p سے map۔",
+        "en": "Now join the sounds quickly, like m-a-p makes map."
+      }
+    }
+  ],
+  "common_misconceptions": [
+    {
+      "misconception": {
+        "ur": "پہلا حرف دیکھ کر پورا لفظ اندازے سے بول دینا۔",
+        "en": "Guessing the whole word from its first letter."
+      },
+      "correction": {
+        "ur": "ہر حرف کی آواز آخر تک پڑھیں، پھر جوڑیں۔",
+        "en": "Sound every letter to the end, then blend."
+      }
+    },
+    {
+      "misconception": {
+        "ur": "حرف کا نام بولنا، آواز نہیں (b کو 'بی' پڑھنا)۔",
+        "en": "Saying letter names instead of sounds (reading b as 'bee')."
+      },
+      "correction": {
+        "ur": "آواز بولیں: b کی آواز 'ب' ہے۔",
+        "en": "Say the sound: b says /b/."
+      }
+    }
+  ],
+  "adaptive_remediation": [
+    {
+      "signal": "two_or_more_misread_words",
+      "remediation_ref": "ENG-G4-RD-01"
+    }
+  ],
+  "revision_notes": {
+    "ur": "ہر حرف کی آواز بولیں، پھر جوڑیں۔ لفظ کا آخری حرف نہ چھوڑیں۔ فل اسٹاپ پر رکیں۔",
+    "en": "Say each letter's sound, then blend. Do not skip the last letter. Pause at a full stop."
+  },
+  "summary": {
+    "ur": "ہم نے آوازیں جوڑ کر انگریزی الفاظ اور جملے بلند آواز سے پڑھے۔",
+    "en": "We blended sounds to read English words and sentences aloud."
+  },
+  "parent_notes": {
+    "ur": "آپ کو انگریزی آنا ضروری نہیں۔ بس بچے کو روز ایک جملہ پڑھتے سنیں اور کوشش پر شاباش دیں۔",
+    "en": "You do not need to know English. Just listen to your child read one sentence a day and praise the effort."
+  },
+  "mentor_notes": {
+    "ur": "یہ پڑھنے کا سبق ہے: جملے بچے کو خود پڑھنے دیں، پہلے خود نہ پڑھیں۔ اندازے سے پڑھنے پر بچے کو لفظ کی ہر آواز کی طرف واپس لائیں۔",
+    "en": "This is a reading lesson: let the child read the sentences; do not read them first. When a child guesses, bring them back to each sound in the word."
+  },
+  "accessibility_notes": {
+    "ur": "پڑھنے کا متن آڈیو میں نہیں ہوگا کیونکہ بچے کا پڑھنا ہی جانچا جا رہا ہے۔ ہدایات اور حروف کی الگ الگ آوازوں کی اردو/انگریزی آڈیو ابھی ریکارڈ نہیں ہوئی۔ حروف کی ٹائلوں کی تصویر اور اس کا متبادل متن ابھی بنانا ہے۔ گھسیٹنے والی سرگرمی کا متبادل: ہر خانے کے لیے صحیح حرف چنیں۔ بلند آواز سے پڑھ نہ سکنے والا بچہ مینٹر کے ساتھ اشارے سے پڑھ سکتا ہے۔",
+    "en": "The reading text has no audio, because the child's own reading is being assessed. Urdu/English audio for instructions and for single letter sounds is not yet recorded. The letter-tile picture and its alt text are still to be made. Alternative to the drag activity: choose the right letter for each box. A child who cannot read aloud can read by pointing with the mentor."
+  },
+  "ai_teaching_object": {
+    "teaching_strategy": "model sound-by-sound blending, then whole word, then whole sentence; CVC words first",
+    "questioning_strategy": "ask 'what is the first sound? the next? the last?' before 'what is the word?'",
+    "slow_down_signals": [
+      "guesses words from the first letter",
+      "two wrong answers in a row",
+      "long silence before reading"
+    ],
+    "hint_policy": "graduated; two hints max; first segment the sounds, then prompt blending; never say the word first",
+    "example_policy": "decodable CVC words and short sentences in Pakistani contexts (bus, bag, cup, pen); original sentences only",
+    "misconception_detectors": [
+      "says letter names instead of sounds",
+      "drops the final sound",
+      "guesses from the first letter"
+    ],
+    "critical_thinking_prompts": [
+      "Why do hat and mat sound alike at the end?"
+    ],
+    "personalization_rules": "if a learner misreads two or more CVC words, repeat single-word blending before sentences",
+    "escalation_rules": [
+      "any sign of distress, upset or a worrying disclosure -> stop the lesson and hand to a human mentor",
+      "repeated confusion after remediation -> mentor"
+    ],
+    "forbidden_behaviours": [
+      "give the final answer outright",
+      "claim to be a human teacher",
+      "ask for personal information (name, address, phone, school, family details, photos)",
+      "read the reading passage aloud for the learner (reading is the assessed skill)"
+    ]
+  },
+  "review_flags": [
+    "subject expert: confirm the decodable word list suits Grade 4 learners new to English",
+    "check that the read-aloud challenge is assessed live by a mentor, as the spine's 'oral' assessment needs",
+    "language editor: confirm Urdu phonics wording (حرف کا نام بمقابلہ آواز) is clear to children"
+  ]
+}
