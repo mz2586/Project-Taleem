@@ -83,6 +83,15 @@ demo accounts see no one else. Demo lessons are **unreviewed AI drafts**, labell
 `[DEMO · unreviewed AI draft]`, and are not curriculum. Live real-browser check:
 `tests/a11y/live.demo.spec.ts`. Removal: `python -m taleem_core.tools.demo_cohort --erase`.
 
+**Verified 2026-10-25 on the live deployment** (real Chromium, `tests/a11y/live.demo.spec.ts`,
+2/2 PASS): the guardian signs in and sees the demo learner's progress (mastery, accuracy,
+achievements, explained next step, report cards, family settings); another child's page shows
+"not linked to your account" (API 403/404). The learner signs in with family code + PIN, sees
+Today with a recommended next step, progress (118 answers, 84% accuracy), DEMO-labelled homework
+with feedback states, three system-issued report cards and offline lesson downloads, and opens a
+live lesson that renders its interactive question. Production stays `TALEEM_ENV=production`; the
+generic fixture seeder still refuses production.
+
 ### 0.2 AI provider: recommendation (FD-03)
 
 Recommended: Anthropic Claude through a region-pinned deployment, configured as two tiers.
