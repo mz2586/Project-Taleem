@@ -1,7 +1,8 @@
 # Project Taleem — Global Product Scope
 
-**Status:** Binding product definition · **Adopted:** 2026-10-22 · **Revised:** 2026-10-22 (official
-global mandate: two pathways, positioning, business principles) · **Owner:** Engineering lead
+**Status:** Binding product definition · **Adopted:** 2026-10-22 · **Revised:** 2026-10-24
+(definitive mission: AI-led school, no hired teaching workforce) · **Owner:** Founder + Engineering
+lead
 
 This document defines *what* Project Taleem must be. It does not track status: implementation status,
 evidence, and the execution roadmap live in
@@ -9,24 +10,79 @@ evidence, and the execution roadmap live in
 authoritative status reference. Where the two disagree on scope, this document wins; where they
 disagree on status, the master scope wins (and must cite evidence).
 
-## Vision and mission
+## Definitive mission (authoritative, adopted 2026-10-24)
 
-Build Project Taleem into a global, AI-powered, offline-first education platform that can evolve
-into a comprehensive, teacher-supported online school through qualified education partners.
+**The AI is the teacher. The platform is the school. Education should be free for children who
+cannot afford it.**
 
-**Mission:** make high-quality, personalized education accessible to children worldwide regardless
-of language, country, household income, device capability, or internet reliability.
+Project Taleem is a global, AI-led, online-only school. It gives children who cannot afford formal
+education access to a complete, high-quality education. It is **not** a conventional teacher-led
+virtual school, it does **not** hire teachers to deliver lessons, and it is **not** merely an LMS
+for existing schools.
 
-## Two connected pathways
+**Definition of success.** A child can access Taleem, learn through AI instruction, complete
+meaningful educational activities, receive appropriate feedback, demonstrate mastery, keep their
+progress through unreliable connectivity, and follow a structured educational path, without paying
+for a private teacher or private schooling.
 
-| Pathway | What it is | Status of claim |
-| --- | --- | --- |
-| **Taleem Learn** — free core learning | Lessons, exercises, assessments, progress; personalized paths and mastery; curriculum-grounded AI tutoring with child-safety controls; downloadable offline content; family access and teacher support where available. | The R1–R2 product. |
-| **Taleem School** — structured, teacher-supported education | Teacher-led learning and assignments; class and school management; academic calendars, assessments, and reports; guardian communication; integration with authorized education partners and recognized qualifications **only through appropriate accreditation arrangements**. | R3–R4, partner-dependent. |
+### No hired teaching workforce
 
-**Self-directed learning in Taleem Learn is never represented — in the UI, reports, certificates,
-or marketing — as accredited schooling.** Any qualification pathway exists only through a named,
-authorized partner and is labelled as such.
+- AI is the primary instructional provider. Teacher hiring, teacher-delivered classes and
+  teacher-led instruction are never foundational requirements. No learner journey may depend on a
+  teacher existing.
+- Humans are still required where quality, safety and legitimacy demand it: **curriculum review
+  and subject-expert approval, safeguarding oversight, legal compliance, independent evaluation, and
+  accreditation.** These roles oversee the school; they do not teach in it.
+- Existing teacher and class tools (classes, assignments, marking) remain **optional** features
+  for a guardian, volunteer mentor or partner institution. Every capability they offer also has an
+  AI-led or system path that needs no teacher.
+
+### Quality is non-negotiable
+
+Taleem is a reliable educational system, not a chatbot labelled as a school. Curriculum content is
+grounded, properly sourced and reviewed as required. Assessments are validated. AI is evaluated for
+accuracy, pedagogical quality, age appropriateness and safety. Learner progress reflects evidence,
+not engagement metrics. Children's privacy, consent and authorization are enforced, with escalation
+procedures for safety concerns.
+
+### Recognized education
+
+The long-term goal is a complete, reliable, global AI-led school with a credible route to
+recognized qualifications. Accreditation and qualification pathways compatible with AI-led
+instruction are researched per jurisdiction. Where a jurisdiction requires conventional teacher-led
+teaching, that incompatibility is documented and alternatives (e.g. private-candidate examinations,
+partner-assessed credentials) are assessed. **The product vision is never silently changed to fit
+an unsuitable pathway, and no accreditation or qualification recognition is ever claimed before
+authorization is obtained.**
+
+## Required capabilities of the finished product
+
+1. Complete structured education: grade levels, subjects, curricula and learning objectives.
+2. An AI Teacher that explains lessons, answers questions, gives examples, provides hints,
+   identifies misconceptions and adapts instruction to each learner.
+3. Diagnostic assessments, exercises, homework, automated marking where reliable, examinations,
+   progress reports and academic records.
+4. A learning intelligence engine that tracks demonstrated mastery, recommends revision and
+   determines appropriate next learning steps.
+5. A complete student experience from enrolment and onboarding through lessons, assessment,
+   progression and completion.
+6. Secure parent or guardian access, consent, appropriate progress reporting and child-safety
+   controls.
+7. Offline-first learning, downloadable content, durable local progress and reliable
+   synchronization.
+8. Global curriculum and localization support: multiple languages, countries, education systems,
+   RTL/LTR interfaces.
+9. Accessibility for children with affordable devices, limited bandwidth and different learning
+   needs.
+10. A sustainable model that keeps core educational access free, especially for underserved
+    children, without selling children's data or targeted advertising to children.
+11. A credible path toward formally recognized education and qualifications, subject to the
+    appropriate jurisdiction, institutional authorization and examination requirements.
+
+The evidence-backed status of each lives in the master scope.
+
+**Self-directed learning is never represented, in the UI, reports, certificates or marketing, as
+accredited schooling** until a named, authorized pathway exists, and then it is labelled as such.
 
 **Pakistan is the launch market, not the product boundary.** Pakistan-specific facts — the National
 Curriculum (NCP) grade and subject roster, Urdu as primary language, Eastern-Arabic numerals,
@@ -66,7 +122,8 @@ curriculum facts are always distinguishable from generated explanations.
 - Evidence-based mastery estimates with confidence and provenance.
 - Adaptive next-step recommendations.
 - Spaced revision and retention checks.
-- Teacher-visible explanations of why a recommendation was made.
+- Explanations of why a recommendation was made, visible to the learner, the guardian and any
+  reviewer.
 - A single incorrect answer is never treated as definitive evidence of inability.
 
 ### D. Global curriculum and content
@@ -94,12 +151,14 @@ curriculum facts are always distinguishable from generated explanations.
 - Tests proving acknowledged work is never silently lost.
 - Shared local learning hubs only after core offline functionality is reliable.
 
-### F. Family and teacher experiences
+### F. Family experience and optional human oversight
 
 - Secure guardian identity, verified relationships, and consent.
 - Authorized child progress and activity views.
-- Teacher lesson planning, assignments, class insights, and remedial recommendations.
-- Teacher oversight of AI-generated educational material.
+- Optional tools for a guardian, volunteer mentor or partner institution (classes, assignments,
+  marking, insights). Every one has an AI-led or system path, so no learner depends on them.
+- Human review of AI-generated educational material before it reaches learners (curriculum
+  reviewers, not teachers).
 - No exposure of one learner's private data to another family or to unauthorized staff.
 
 ### G. Global organizational capabilities
@@ -136,13 +195,14 @@ never claimed as such. Differentiation must be demonstrated, with evidence, thro
 1. Reliable offline-first learning.
 2. Curriculum-aware personalization and measurable mastery.
 3. Global curriculum and localization infrastructure.
-4. Connected student, guardian, and teacher workflows.
-5. A credible pathway from free learning to partner-supported formal schooling.
+4. A complete AI-led school loop (teaching, assessment, homework, reports, progression) with no
+   hired teaching workforce.
+5. A credible pathway from free AI-led learning to recognized qualifications.
 
 ## Business-model principles
 
-- Free to start; sustained by optional family services, institutional subscriptions, school
-  contracts, government and NGO sponsorship, and education partnerships.
+- Core education is free for children who cannot afford it; sustained by philanthropy, government
+  and NGO sponsorship, institutional licensing, optional family services, and education partnerships.
 - Learner data is never sold; advertising is never targeted at children; unnecessary personal-data
   disclosure is never a condition of basic educational access.
 - AI inference and operating cost are tracked **per learner**, with quotas and funding mechanisms
@@ -156,7 +216,7 @@ approvals** are all satisfied. Engineering alone cannot close a release that nee
 | Release | Name | Must deliver |
 | --- | --- | --- |
 | **R1** | Reliable learning platform | Real identity, authorization, and guardian consent; complete student journeys; working curriculum delivery and assessments; guardian dashboard on real services; reliable offline persistence and sync; localization and curriculum-configuration foundations; an initial validated English/Urdu experience and explicitly defined curriculum packs; production deployment, monitoring, security, and recovery checks; end-to-end tests of real student and guardian workflows. |
-| **R2** | Personalized learning | Mastery model, diagnostics, adaptive paths, revision engine, curriculum-grounded AI tutor, safety evaluations, teacher interventions — validated with reproducible tests and controlled educational evaluation. |
+| **R2** | Personalized learning | Mastery model, diagnostics, adaptive paths, revision engine, curriculum-grounded AI tutor, safety evaluations, optional human interventions — validated with reproducible tests and controlled educational evaluation. |
 | **R3** | Global pilot readiness | Additional validated locales and curriculum packs; accessibility, regional privacy, security, reliability, performance, deployment operations, onboarding. Each regional launch carries documented human approval. |
 | **R4** | Education ecosystem | Expanded school administration, voice and richer interaction, community hubs, publisher and education-system integrations, additional age groups and vocational learning, broader partner-operated schooling — each independently scoped. |
 

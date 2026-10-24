@@ -4,11 +4,11 @@
 **Last updated:** 2026-10-24 · **Repository HEAD at last update:** `0369136`
 
 **Binding product definition:** [`docs/GLOBAL_PRODUCT_SCOPE.md`](docs/GLOBAL_PRODUCT_SCOPE.md)
-(adopted and revised 2026-10-22). That document says *what* the product must be — a global platform
-with Pakistan as a launch market, delivered as **Taleem Learn** (free core learning) and **Taleem
-School** (partner-supported, teacher-led schooling; never presented as accredited without an
-accreditation partner) — and defines Releases R1–R4 and the R1 acceptance condition. This document says *how much of it
-exists*, with evidence, and what is built next.
+(revised 2026-10-24 to the definitive mission in §0). That document says *what* the product must
+be: a global, **AI-led, online-only school with no hired teaching workforce**, free for children
+who cannot afford school, launching in Pakistan. It also defines Releases R1–R4 and the R1
+acceptance condition. This document says *how much of it exists*, with evidence, and what is
+built next.
 
 This is the **single high-level reference** for what Project Taleem is, what it will be when it is
 finished, and exactly how much of it exists today. It does not replace the detailed blueprint — the
@@ -21,6 +21,70 @@ Nothing here is marked complete because it was planned, designed, or reported co
 
 ---
 
+## 0. Definitive mission (authoritative since 2026-10-24)
+
+**The AI is the teacher. The platform is the school. Education should be free for children who
+cannot afford it.**
+
+Taleem is an AI-led, online-only school. It does not hire teachers to deliver lessons, and it is
+not a teacher-led virtual school or an LMS for existing schools. Humans are required only where
+quality, safety and legitimacy demand it: curriculum review and subject-expert approval,
+safeguarding oversight, legal compliance, independent evaluation, and accreditation. **No learner
+journey may depend on a teacher existing.** Classes, assignments and teacher marking stay as
+optional tools for a guardian, mentor or partner, and each one gets an AI-led or system path.
+**Success** means a child can learn through AI instruction, do meaningful activities, receive
+feedback, demonstrate mastery, keep progress offline, and follow a structured path without paying
+for a teacher or private school. No accreditation or qualification is claimed before authorization.
+Full text: [`docs/GLOBAL_PRODUCT_SCOPE.md`](docs/GLOBAL_PRODUCT_SCOPE.md).
+
+### 0.1 The eleven required capabilities: evidence-backed status (at `86efa54`)
+
+Statuses: `complete-and-verified` (source + tests + CI evidence) · `implemented-but-unverified` ·
+`in-progress` · `not-started` · `blocked-by-external-decision`. Unreviewed content is never
+counted as working curriculum.
+
+| # | Capability | Status | Evidence | What remains |
+| --- | --- | --- | --- | --- |
+| 1 | Structured education (grades, subjects, curricula, objectives) | in-progress | Curriculum packs + persisted hierarchy (`packs.py`, `pk-ncp.json`, `7d3a28a`); 139 Grade 4 objectives, each with a complete **AI first draft, unreviewed** (`0369136`, `3c3b35f`) | human review (external) + publication (0 published); grades other than 4: not-started |
+| 2 | AI Teacher (explain, answer, examples, hints, misconceptions, adapt) | implemented-but-unverified (deterministic); generative: blocked-by-external-decision | Curriculum-grounded deterministic teacher: paced explanation, worked examples, graduated hints, misconception detection and remediation, "explain another way", "why this next" (`domain/ai_teacher.py`, `4c8df7b`); generative tier wired behind gate, quota and safety gate, stub-evaluated (`3bcb6dc`) | FD-03 for a real model (recommendation in §0.2); answering a child's free-text questions needs the in-house distress classifier first |
+| 3 | Diagnostics, exercises, homework, automated marking, examinations, reports, records | in-progress | Diagnostic placement (`5524063`); five auto-marked interaction kinds in sessions, placement and offline sync (`b9664f8`); homework submission and marking (`140b25d`); immutable evidence ledger | Homework still needs a **teacher** to mark written work and to assign it, which contradicts §0: next cycle. Examinations not-started; report cards in progress; transcripts not-started |
+| 4 | Learning intelligence (mastery, revision, next steps) | complete-and-verified | BKT mastery, forgetting model, decision graph, spaced review, explainable recommendations with confidence (`contexts/learning/domain/*`, `test_learning_domain.py`, `test_explainable_recommendations.py`) | Psychometric validity work (doc 58) not-started |
+| 5 | Complete student journey (enrolment → completion) | in-progress | Guardian-led enrolment, consent, child sign-in, placement, lessons, activities, progress; browser journey in CI (`bcb431a`) | Progression across units and grades, completion and certificates not-started; journey on published content needs #4 |
+| 6 | Guardian access, consent, reporting, child safety | complete-and-verified (software); sign-off: blocked-by-external-decision | Identity + live per-request consent gate (`c8ab6f3`), guardian portal, export and erasure (`59ff51c`), concern reporting and triage (`e73a446`), child-safety content rule (`0369136`) | Report cards in progress; M-Gov / M-Safe sign-off |
+| 7 | Offline-first, durable progress, reliable sync | complete-and-verified (CI browser journey); real devices: implemented-but-unverified | Signed packages (signature mandatory, `7bc14ee`), IndexedDB progress, idempotent sync, offline answers of every interaction kind (`739b66b`), browser offline journey in CI | Real-device validation; homework submission is online only |
+| 8 | Global curriculum and localization | in-progress | Curriculum-independent model + packs (`6cba77e`), open BCP-47 locales, independent UI/instruction/region settings, RTL/LTR | Second pack and locale not-started (R3) |
+| 9 | Accessibility on affordable devices and low bandwidth | implemented-but-unverified | jsx-a11y strict, axe scan 0 violations in CI, tap-only interactions, Ed25519 fallback for older Android (`4b7e96a`), k6 performance evidence | external assistive-technology audit; real-device check |
+| 10 | Sustainable free model, no data selling or child ads | in-progress | Per-learner AI cost ledger and shared quotas (`d11695b`); principles in the binding scope | funding model and quota values (FD-07) |
+| 11 | Credible path to recognized qualifications | not-started | — | Per-jurisdiction research of AI-compatible pathways (in progress); never claimed before authorization |
+
+### 0.3 Acceptance journeys: pass/fail with evidence (at `86efa54`)
+
+A journey passes only with a traceable test. "Synthetic fixture" means the CI journey uses a
+generated test lesson, because **no real lesson is published**. "Mock" means a stub model.
+
+| # | Journey | Status | Evidence | Not yet proven |
+| --- | --- | --- | --- | --- |
+| 1 | New learner: guardian registers, consents, child signs in, starts a lesson | **PASS** (synthetic fixture) | CI `E2E journey (uvicorn + PostgreSQL)` (`tools/e2e_journey.py`); browser journey in the Accessibility workflow (`scripts/e2e-web/`) | On a published real lesson (blocked by review) |
+| 2 | AI-led lesson: grounded explanation, hint, answer, response | **PASS (deterministic teacher)** · **mock only (generative)** | Browser journey lesson with hint; `test_ai_teacher.py` grounding tests; generative golden set 33/33 unsafe refused **against a stub** (`3bcb6dc`) | Any real model: not run (FD-03) |
+| 3 | Assessment and remediation: scores by defined rules, wrong answers, retries, interruption, repeat submission | **PASS** (choose/fill/order/match/sort) | `test_item_interaction_runtime.py` (78), misconception remediation in `vertical_slice/runner.py`, idempotent sync replay in `test_sync_evidence.py` | Examinations (not built) |
+| 4 | Mastery and progress from real evidence | **PASS** | e2e server `total_attempts` 0 → 10 after sync (`bcb431a`); `test_learning_domain.py`; per-learner progress isolation (`23fcb63`) | Real learners |
+| 5 | Offline: download, work offline, restart, reconnect, sync without loss or duplicates | **PASS** (Chromium in CI) | Browser offline journey; `OFFLINE_TEST_PLAN.md` §7 guarantee map; mandatory package signatures (`7bc14ee`) | Real low-end Android device; homework offline (online only) |
+| 6 | Guardian sees own child only; revocation takes effect | **PASS** | `test_access_boundaries.py`, per-request consent gate (`c8ab6f3`), e2e withdraw → denied | Limited-literacy usability with real guardians |
+| 7 | Content and safety: only reviewed content publishes; unsafe content blocked; privacy regressions | **PASS** (software gates) | 5-stage review workflow + no self-approval (`test_curriculum_studio*`), child-safety content rule (`test_curriculum_child_safety.py`), AI output safety gate (stub) | Human reviews themselves (external) |
+| 8 | Deployment and recovery: migrations, health, auth, observability, backup | **PARTIAL** | Alembic up/down/up on PostgreSQL in CI; backup drill PASS on dev data; 16 alert rules promtool-checked | **No live environment** (blocker #11), no paging destination (#15) |
+
+### 0.2 AI provider: recommendation (FD-03)
+
+Recommended: Anthropic Claude through a region-pinned deployment, configured as two tiers.
+
+- **Explanation tier:** Claude Sonnet 5.5 (`claude-sonnet-5-5`), used only for lesson-grounded
+  explanations.
+- **Classification and routing tier:** Claude Haiku 5.5 (`claude-haiku-5-5`). It moves to the
+  in-region classifier when free-text input enters scope.
+
+Details, conditions and what the founder must still sign are in
+[`FD-03`](docs/decisions/FD-03-ai-provider-residency.md). The adapter stays inert until then.
+
 ## 1. Executive Summary
 
 **Project Taleem (تعلیم, "education") is a global, offline-first digital school, launching first
@@ -28,7 +92,7 @@ for children in Pakistan who cannot attend a physical one.** Pakistan-specific c
 and numeral rules are configuration of the launch market, not assumptions of the core (see
 [`docs/GLOBAL_PRODUCT_SCOPE.md`](docs/GLOBAL_PRODUCT_SCOPE.md) and §20.2 for where the code does not
 yet meet that rule). Not a content library and not a tutoring app: a structured school — a
-curriculum, a teacher, progression, assessment, and a report a parent can read — delivered on the
+curriculum, an AI teacher, progression, assessment, and a report a parent can read — delivered on the
 cheapest Android phone a family already owns, in Urdu, and working when the network does not.
 
 **The problem.** Pakistan has one of the largest out-of-school populations in the world. The
@@ -38,8 +102,9 @@ reliable connection, a shared language of instruction that is usually English, a
 to supervise. Each assumption excludes the children who need it most.
 
 **Who it serves.** Children from kindergarten through Grade 10; their guardians, who are often the
-only adult in the loop and may themselves have limited literacy; mentors and teachers where a human
-is available; and the curriculum authors and reviewers who make the content trustworthy.
+only adult in the loop and may themselves have limited literacy; and the curriculum authors,
+reviewers, safeguarding staff and evaluators who make the school trustworthy. Optional mentors or
+partner teachers may use the oversight tools, but no child depends on one.
 
 **Principles that constrain every technical decision in this repository:**
 
@@ -66,13 +131,14 @@ to admit a real child.**
 
 Specifically:
 
-- The **engineering artefact is of release-candidate quality**: 7 bounded contexts, 368 backend
-  tests at ~95.9% coverage, strict `mypy` clean across 136 source files, 5 migrations verified
-  reversible against PostgreSQL 16, 9 validated OpenAPI contracts with served-path parity
-  enforcement, a complete offline sync engine, 139 frontend tests, production asymmetric
-  authentication, and a real guardian/child sign-in journey with rotating refresh tokens.
-- The **product is not**. There are zero published lessons in any database, zero audio assets for an
-  audio-first product, no real AI in the AI Teacher, and no verified live deployment.
+- The **engineering artefact is of release-candidate quality** (at `86efa54`, 2026-10-24): 12
+  bounded contexts, backend **1155 passed / 29 PostgreSQL-gated** at 97% coverage, strict `mypy`
+  clean on 213 files, migrations `0001`–`0013` reversible on PostgreSQL in CI, validated OpenAPI
+  contracts, a complete offline sync engine, **690** web tests, production asymmetric
+  authentication, and real guardian/child sign-in.
+- The **product is not yet a school**. There are **zero published lessons**: all 139 Grade 4
+  lessons exist as **unreviewed AI drafts**. There are no audio assets, no real model in the AI
+  Teacher (FD-03), and no verified live deployment.
 - The **governance gates are not signed**. `GO_NO_GO_DECISION.md` records **NO-GO for Pilot 1 with
   real children** until M-Gov and M-Safe close. Nothing in this repository indicates that has
   changed. **No real child data may touch this system.**
@@ -874,7 +940,7 @@ Status vocabulary (adopted 2026-10-22, replacing the earlier colour key for this
 | Operations (health, metrics, kill switch, runbooks, simulator, CI, e2e, backup) | G | R1 | complete-and-verified | CI `e2e-journey` job; `make backup-drill` PASS (restore 0.66 s on dev Codespace data, [`BACKUP_RESTORE_RUNBOOK.md`](BACKUP_RESTORE_RUNBOOK.md)) | Alerting to a staffed destination; drill on production-sized data |
 | Production deployment | G | R1 | implemented-but-unverified | `vercel.json`, `api/index.py`, build-step migrations | Provision and verify a live environment with recorded health evidence |
 | Per-learner AI and operating cost tracking, quotas | B, G | R2 | complete-and-verified | Durable `learning.ai_usage_ledger` (alembic `0007`), quota shared across instances, fallback to the authored engine (`d11695b`, PG-gated tests) | Quota values — ⚫ FD-07; ledger retention period — ⚫ M-Gov |
-| Taleem School (classes, teacher-led assignments, calendars, partner accreditation) | H | R3–R4 | not-started | Product definition only | Pilot-minimum class/assignment model; accreditation is ⚫ partner-dependent |
+| Optional human-oversight tools and partner schooling (classes, assignments, calendars; accreditation) | H | R3–R4 | in-progress | Product definition only | Pilot-minimum class/assignment model; accreditation is ⚫ partner-dependent |
 | Future expansion (school admin, hubs, vocational, integrations, scholarships) | H | R4 | not-started | Tracked only | Independently scoped milestones |
 
 ### 20.1 Supported today — stated precisely
@@ -1097,7 +1163,7 @@ None of the following is resolved. Each is listed with what would resolve it.
 | 23 | ~~Core curriculum model hard-codes the Pakistan roster and Urdu-only gates~~ | Resolved | Curriculum packs, commit `6cba77e` |
 | 24 | ~~`next@14.2.35` has critical security advisories~~ | Resolved | Next 15.5.28 + React 19, production `npm audit` 0 (`72b6439`); dev-only `braces` chain via eslint-config-next has no upstream fix and never ships |
 | 25 | ~~A learner's unexpired access token survives consent withdrawal for up to 10 minutes~~ | Resolved | Per-request live learner gate on every learner surface (`c8ab6f3`); e2e 0 GAP |
-| 26 | **Taleem School has no accreditation partner** | ⚫ Owner / partnership | [`docs/TALEEM_SCHOOL_PARTNER_REQUIREMENTS.md`](docs/TALEEM_SCHOOL_PARTNER_REQUIREMENTS.md); does not block Taleem Learn |
+| 26 | **No recognized-qualification pathway or accreditation partner** | ⚫ Owner / partnership | [`docs/TALEEM_SCHOOL_PARTNER_REQUIREMENTS.md`](docs/TALEEM_SCHOOL_PARTNER_REQUIREMENTS.md); does not block Taleem Learn |
 
 ---
 
@@ -1147,7 +1213,7 @@ remaining GAP (blocker #25). `make backup-drill` PASS.
 **Hard R1 gates that engineering cannot close:** published, human-reviewed content with recorded
 audio (#4, #5); M-Gov and M-Safe (#1–#3); a live production environment (#11, hosting account
 owner); external pentest and accessibility audit (#12, #13); FD-14 for production keys (#16).
-Optional or later: generative AI (R2, FD-03), Taleem School (R3–R4, #26), voice input (R4).
+Optional or later: generative AI (R2, FD-03), a recognized-qualification pathway (R3–R4, #26), voice input (R4).
 
 ## Related Documents
 
@@ -1163,6 +1229,7 @@ Optional or later: generative AI (R2, FD-03), Taleem School (R3–R4, #26), voic
 
 | Date | Change | Author |
 | --- | --- | --- |
+| 2026-10-24 | **Definitive mission adopted** (§0): AI-led school, no hired teaching workforce; the eleven capabilities mapped with evidence; FD-03 recommendation; teacher-only paths flagged for AI-led replacement. | Founder + Engineering |
 | 2026-10-24 | Homework submission and teacher marking end to end (alembic `0013`; a rollback refuses rather than deleting safeguarding records); marked work feeds mastery; teacher-raised safeguarding concerns. | Engineering |
 | 2026-10-24 | Item interaction contract adopted and implemented end to end (Studio validation, Grade 4 drafts normalised, scorer, session/placement/sync APIs, offline packages, web player); 21 bespoke widgets remain. | Engineering |
 | 2026-10-24 | Child-safety content rule in the Studio validator; NB-01/NB-03 homework no longer asks for a house number or family ages. All 139 Grade 4 lessons given complete, labelled AI first drafts (`curriculum/grade-4/ai-drafts/`, importer `tools/curriculum_ai_drafts.py`); blocker #4 narrowed to human review and assets. | Engineering |
