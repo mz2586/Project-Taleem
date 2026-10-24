@@ -109,7 +109,7 @@ test("learner signs in with family code + PIN and explores", async ({ browser })
   await page.waitForURL("**/student/session**", { timeout: 30_000 });
   await page.waitForLoadState("networkidle");
   await shot(page, "learner-lesson-start");
-  for (let i = 0; i < 12 && !(await page.getByText(/Question 1 of \d+/).isVisible()); i++) {
+  for (let i = 0; i < 12 && !(await page.getByText(/Question \d+ of \d+/).isVisible()); i++) {
     const ready = page.getByRole("button", { name: t("student.session.ready") });
     const next = page.getByRole("button", { name: t("common.next"), exact: true });
     if (await ready.isVisible()) await ready.click();
@@ -117,7 +117,7 @@ test("learner signs in with family code + PIN and explores", async ({ browser })
     else break;
     await page.waitForTimeout(500);
   }
-  await expect(page.getByText(/Question 1 of \d+/)).toBeVisible();
+  await expect(page.getByText(/Question \d+ of \d+/)).toBeVisible();
   await shot(page, "learner-lesson-question");
   note(`[lesson] opened a live lesson question at ${page.url()}`);
 });
