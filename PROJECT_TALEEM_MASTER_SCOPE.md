@@ -1,7 +1,7 @@
 # Project Taleem — Master Product Scope & Roadmap
 
 **Status:** Living document — the single authoritative scope-status and execution reference ·
-**Last updated:** 2026-10-23 · **Repository HEAD at last update:** `e73a446`
+**Last updated:** 2026-10-24 · **Repository HEAD at last update:** `0369136`
 
 **Binding product definition:** [`docs/GLOBAL_PRODUCT_SCOPE.md`](docs/GLOBAL_PRODUCT_SCOPE.md)
 (adopted and revised 2026-10-22). That document says *what* the product must be — a global platform
@@ -854,7 +854,7 @@ Status vocabulary (adopted 2026-10-22, replacing the earlier colour key for this
 | Lesson player (paced steps, authored hints, evidence of help used) | A, B | R1 | complete-and-verified | `lib/student/lessonPlayer.ts`, 18 tests; `:teach` `hint_count` in `test_learning_api.py` | Visual/interactive blocks (Phase E) |
 | Curriculum domain — curriculum-independent model and packs | D | R1 | complete-and-verified | `curriculum_studio/domain/packs.py`, `packs/pk-ncp.json`; gates read rules from the lesson's pack; PK-NCP equivalence + synthetic second pack tests (`test_curriculum_packs*.py`); `GET /v1/studio/curriculum-packs` | Hierarchy persistence port and locale-generic draft API (in progress) |
 | Curriculum Studio (authoring, 9 gates, 5-stage review, publish, versioning, provenance) | D | R1 | implemented-but-unverified | Operator-provisioned staff accounts with passphrase sign-in, refresh, lockout and per-request suspension check (`03b98c0`, alembic `0010`); review UI signs in with them (`1f9f0cc`); per-person reviewer identity and self-approval blocked by subject; content API, PATCH with If-Match, version bodies, placement gate (`fb5c1ca`, `be332d9`) | The first real human review (needs real reviewers' accounts — an owner action) |
-| Curriculum content — published lessons | A, D | R1 | in-progress | 139 Grade 4 drafts placed in a persisted PK-NCP hierarchy (6 subjects, 37 chapters, 39 topics; `7d3a28a`); 36 with provisional authored content; **0 published** — [`INGESTION_REPORT.md`](curriculum/grade-4/INGESTION_REPORT.md) | Author remaining content; recorded audio; 5-stage **human** review; SLO text **blocked** on NCC/MoFEPT MoU |
+| Curriculum content — published lessons | A, D | R1 | in-progress | 139 Grade 4 drafts placed in a persisted PK-NCP hierarchy (6 subjects, 37 chapters, 39 topics; `7d3a28a`); 36 carry human-authored provisional content; **all 139 now carry a complete AI first draft** (`curriculum/grade-4/ai-drafts/`, tagged `ai-drafted`, human text always wins; each lesson is blocked only by the missing diagram, offline package and recorded audio, plus the human gates); **0 published**: [`INGESTION_REPORT.md`](curriculum/grade-4/INGESTION_REPORT.md) | 5-stage **human** review of every AI draft (322 review flags; scholar review for Islamiat); diagrams; recorded audio; offline packages; SLO text **blocked** on the NCC/MoFEPT MoU |
 | Assessments (blueprints, scoring, evidence, spaced review) | A, C | R1 | complete-and-verified | `test_sync_evidence.py`, `test_learning_domain.py` | Summative exams, free-text grading, report cards |
 | Learning intelligence (BKT mastery, forgetting, decision graph, misconceptions) | C | R2 | complete-and-verified | `contexts/learning/domain/*`, `test_learning_domain.py` | — (diagnostic placement and explainable recommendations: next row) |
 | Diagnostic placement + explainable recommendations (stable reason codes, confidence/uncertainty, evidence counts; teacher panel under live consent; guardian + student views, ur/en) | C | R2 | implemented-but-unverified | `domain/placement.py`, `domain/explain.py`, `GET/POST .../placement`, `GET /v1/school/classes/{id}/learners/{ref}`, `test_placement.py`, `test_explainable_recommendations.py`, `tools/placement_eval.py` (simulation only) | Real published content to place against (~0 lessons today); calibration of slip/guess and the 12-item cap on real learners — the evaluation is simulated, not a learning-outcome study |
@@ -870,7 +870,7 @@ Status vocabulary (adopted 2026-10-22, replacing the earlier colour key for this
 | Notifications delivery | F | R2 | in-progress | In-app read state only | Channels — SMS/email **blocked** on a cost decision |
 | Security (headers, CORS, validation, lockout, uniform errors, audit, dependency scanning) | G | R1 | complete-and-verified | 5 dedicated test modules + boundary audit; pip-audit clean; production npm audit 0 on Next 15.5.28 (`72b6439`); `security.yml` + dependabot | External pentest — **blocked** (commission, EV-04) |
 | Privacy (minimisation, pseudonymity, export, erasure, retention) | G | R1 | implemented-but-unverified | `contexts/privacy/*`: guardian export; two-step signed erasure across every schema with a metadata-introspection completeness gate (`59ff51c`); PG erasure enabled by migration `0009` (evidence delete only inside erasure; update still forbidden) (`f6105b7`); retention policy present but **all periods unset** | Retention periods, tombstone contents, DPIA, privacy notice — **blocked** on M-Gov |
-| Child safety (consent gates, kill switch, concern reporting, triage) | B, F, G | R1 | implemented-but-unverified | Consent-gated sign-in, refresh, sync and every learner request (`a815497`, `c8ab6f3`); concern reporting + safeguarding-lead triage queue, child-raised concerns invisible to guardians, works under kill switch and after consent withdrawal (`e73a446`, alembic `0012`) | Distress detection (no child free-text chat exists yet); approval, drill, SLA, referral channels — **blocked** on M-Safe / FD-04 / FD-06 |
+| Child safety (consent gates, kill switch, concern reporting, triage) | B, F, G | R1 | implemented-but-unverified | Consent-gated sign-in, refresh, sync and every learner request (`a815497`, `c8ab6f3`); concern reporting + safeguarding-lead triage queue, child-raised concerns invisible to guardians, works under kill switch and after consent withdrawal (`e73a446`, alembic `0012`); content rule: the Studio validator blocks any lesson whose learner-facing text asks for a home address, house/phone number or family ages (`domain/safety.py`, `test_curriculum_child_safety.py`; two Grade 4 homework tasks reworded) | Distress detection (no child free-text chat exists yet); approval, drill, SLA, referral channels — **blocked** on M-Safe / FD-04 / FD-06 |
 | Operations (health, metrics, kill switch, runbooks, simulator, CI, e2e, backup) | G | R1 | complete-and-verified | CI `e2e-journey` job; `make backup-drill` PASS (restore 0.66 s on dev Codespace data, [`BACKUP_RESTORE_RUNBOOK.md`](BACKUP_RESTORE_RUNBOOK.md)) | Alerting to a staffed destination; drill on production-sized data |
 | Production deployment | G | R1 | implemented-but-unverified | `vercel.json`, `api/index.py`, build-step migrations | Provision and verify a live environment with recorded health evidence |
 | Per-learner AI and operating cost tracking, quotas | B, G | R2 | complete-and-verified | Durable `learning.ai_usage_ledger` (alembic `0007`), quota shared across instances, fallback to the authored engine (`d11695b`, PG-gated tests) | Quota values — ⚫ FD-07; ledger retention period — ⚫ M-Gov |
@@ -1074,7 +1074,7 @@ None of the following is resolved. Each is listed with what would resolve it.
 | 1 | **M-Gov** — DPIA, consent model approval, mandatory-reporting policy, external safety review, residency | ⚫ Governance | DPO, legal, and founder sign-off |
 | 2 | **M-Safe** — safeguarding policy approval and a passed live drill | ⚫ Governance | Safeguarding lead; staffed on-call |
 | 3 | **Pilot 1 with real children is NO-GO** | ⚫ Governance | Blockers 1 and 2 |
-| 4 | **No published curriculum content** | 🟡 Engineering done, ⚫ content + human review | 139 drafts ingested, 36 with provisional authored content; publication needs authors, recorded audio, and the 5-stage human review |
+| 4 | **No published curriculum content** | 🟡 Engineering done, ⚫ content + human review | 139 drafts ingested; every one has a complete AI first draft and 36 also have human-authored content; publication needs human review of every draft, diagrams, recorded audio, and the 5-stage review |
 | 5 | **Zero audio assets for an audio-first product** | 🔴 Content | Phase E |
 | 6 | **AI Teacher has no real LLM** | ⚫ Blocked on FD-03 | Port wired, gated, evaluated against stub (`3bcb6dc`); provider stays inert until the six FD-03 approvals |
 | 7 | **FD-03** — LLM inference residency and zero-retention | ⚫ Founder + legal | Founder decision; [brief](docs/decisions/FD-03-ai-provider-residency.md) |
@@ -1103,6 +1103,22 @@ None of the following is resolved. Each is listed with what would resolve it.
 ## 24. Current Next Action
 
 ### Exact current development position
+
+**Content milestone (2026-10-24, `0369136`).** Every one of the 139 Grade 4 lessons now has a
+complete Urdu/English **AI first draft** (`curriculum/grade-4/ai-drafts/`). Each draft is blocked
+only by the missing diagram, offline package and recorded audio, plus the human gates. Verified on
+this Mac: backend **1018 passed**, 29 skipped (PostgreSQL-gated); ruff, black and strict mypy (212
+files) clean; ingest `--check` OK; markdownlint 0 errors. **These drafts are unreviewed and are not
+curriculum.** They are tagged `ai-drafted` and `content-status:ai-draft-pending-review`, no lesson
+has left `draft`, and **0** pass all 9 gates.
+
+Review required before any draft reaches a child: the 5-stage human review (subject expert,
+educational QA, accessibility, language, AI safety) of every lesson, working through the 322 review
+flags; **a scholar for all 16 Islamiat lessons** (scripture is placeholders only); **the safeguarding
+reviewer for 8 Ethics lessons**; fixes to the errors found in the human math document (the
+[reviewer guide](curriculum/grade-4/ai-drafts/README.md) lists them); diagrams with alt text;
+recorded Urdu audio; offline packages. The new child-safety content rule (`domain/safety.py`)
+blocks any lesson that asks for a home address, a house or phone number, or family ages.
 
 **Last integration cycle (2026-10-22).** Eleven agent commits integrated and pushed
 (`a815497`…`92423df`) on top of `db81df0`, `039a7c9`, `45ae1e8`, `347eb8e`. Evidence at `92423df`,
@@ -1146,6 +1162,7 @@ Optional or later: generative AI (R2, FD-03), Taleem School (R3–R4, #26), voic
 
 | Date | Change | Author |
 | --- | --- | --- |
+| 2026-10-24 | Child-safety content rule in the Studio validator; NB-01/NB-03 homework no longer asks for a house number or family ages. All 139 Grade 4 lessons given complete, labelled AI first drafts (`curriculum/grade-4/ai-drafts/`, importer `tools/curriculum_ai_drafts.py`); blocker #4 narrowed to human review and assets. | Engineering |
 | 2026-09-06 | Initial master scope and roadmap, authored against repository HEAD `23747f9`. | Engineering |
 | 2026-10-23 | Safeguarding concern reporting and triage (`e73a446`); diagnostic placement and explainable recommendations (`5524063`). | Engineering |
 | 2026-10-23 | Performance fixes (`d0cc01f`); cross-learner leak in progress counts fixed (`23fcb63`). | Engineering |

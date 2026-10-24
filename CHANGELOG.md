@@ -6,6 +6,21 @@ The local Git history is the official project history; each released version map
 
 ## [Unreleased]
 
+### Curriculum — AI first drafts for every Grade 4 lesson
+
+- `curriculum/grade-4/ai-drafts/`: one complete bilingual (Urdu/English) first draft per Grade 4
+  objective (139). Each has a teaching text, worked examples, 3+ auto-scored practice items,
+  activities, hints, misconceptions, remediation, notes and an AI-teaching object. A
+  [reviewer guide](curriculum/grade-4/ai-drafts/README.md) and 322 per-lesson review flags go
+  with them.
+- `tools/curriculum_ai_drafts.py`: the format, a strict parser and a validator CLI. Practice
+  questions must be option-based (the only type the runtime can score), drafts cannot carry asset
+  pointers, and remediation refs must exist.
+- The ingest imports drafts as a separate, labelled source. Human text always wins. Drafts fill
+  only empty fields and the missing language of one-language text fields, and each lesson they
+  touch is tagged `ai-drafted` and `content-status:ai-draft-pending-review` with per-field tags.
+  The report counts AI content separately and still records 0 lessons passing all gates.
+
 ### Production Blocker 1 — Asymmetric authentication (EdDSA / rotating JWKS)
 
 Replaces the HS256 walking-skeleton auth stub with the documented production token architecture
