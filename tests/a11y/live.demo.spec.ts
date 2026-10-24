@@ -118,8 +118,20 @@ test("learner signs in with family code + PIN and explores", async ({ browser })
     await page.waitForTimeout(500);
   }
   await shot(page, "learner-lesson-question");
-  expect(await group.isVisible()).toBe(true);
-  await group.getByRole("button").first().click();
+  const check = page.getByRole("button", { name: t("student.session.items.check") });
+  if (await group.isVisible()) {
+    await group.getByRole("button").first().click(); // a choose item: tap an option
+  } else {
+    // A sort/match item: tap each card, then the first group/right-hand item, until complete.
+    const groupLabel = page.getByRole("button", { name: /\b0$|\d+$/ }).first();
+    for (let i = 0; i < 10 && (await check.isDisabled()); i++) {
+      const card = page.locator("button[aria-pressed='false']").first();
+      if (!(await card.count())) break;
+      await card.click();
+      await groupLabel.click();
+    }
+    await check.click();
+  }
   await page.waitForLoadState("networkidle");
   await shot(page, "learner-lesson-answered");
   note(`[lesson] answered one question at ${page.url()}`);
