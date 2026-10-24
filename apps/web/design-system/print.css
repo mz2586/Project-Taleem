@@ -1,0 +1,49 @@
+/*
+ * Print — so a report card prints cleanly to paper or "Save as PDF" on A4.
+ *
+ * Anything marked `data-print="hide"` (portal headers, navigation, buttons, skip links) is left off
+ * the page. The app shells scroll inside a full-height column on screen; on paper that column must
+ * grow, or only the first screenful would print.
+ */
+@media print {
+  @page {
+    size: A4;
+    margin: 15mm 14mm;
+  }
+
+  [data-print="hide"],
+  .skip-link {
+    display: none !important;
+  }
+
+  html,
+  body,
+  [data-print-shell],
+  [data-print-shell] > main {
+    height: auto !important;
+    min-height: 0 !important;
+    max-width: none !important;
+    overflow: visible !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  [data-print-shell] > main {
+    padding: 0 !important;
+  }
+
+  /* Keep a subject's rows together, and never split a row across pages. */
+  [data-print="keep"] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Borders and text in black: printers do not reproduce the screen palette faithfully. */
+  [data-print-card],
+  [data-print-card] * {
+    color: #000 !important;
+    border-color: #000 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+}

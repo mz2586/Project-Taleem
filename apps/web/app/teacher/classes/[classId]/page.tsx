@@ -369,6 +369,20 @@ function ClassPage() {
             </div>
           </section>
 
+          <section style={sectionStyle} aria-labelledby="report-cards-title">
+            <h2 id="report-cards-title" style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>
+              {t("teacher.reportCards.title")}
+            </h2>
+            <p style={{ margin: 0 }}>{t("teacher.reportCards.linkIntro")}</p>
+            <div>
+              <ButtonLink
+                href={`/teacher/classes/${encodeURIComponent(classId)}/report-cards`}
+                variant="brand"
+                label={t("teacher.reportCards.open")}
+              />
+            </div>
+          </section>
+
           <AssignForm classId={classId} onAssigned={loadAssignments} />
         </>
       ) : null}

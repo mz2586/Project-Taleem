@@ -40,11 +40,12 @@ export function AppShell({
     // App-shell layout: a full-height column where only <main> scrolls and the bottom nav is the
     // last row. A sticky nav over scrolling content covered whatever control sat beneath it (axe
     // target-size caught "Why this next?" left with a 17px visible strip).
-    <div style={{ display: "flex", flexDirection: "column", height: "100dvh", maxWidth: 720, margin: "0 auto" }}>
+    <div data-print-shell="" style={{ display: "flex", flexDirection: "column", height: "100dvh", maxWidth: 720, margin: "0 auto" }}>
       <a href="#main" className="skip-link">
         {t("common.skipToContent")}
       </a>
       <header
+        data-print="hide"
         style={{
           display: "flex",
           alignItems: "center",

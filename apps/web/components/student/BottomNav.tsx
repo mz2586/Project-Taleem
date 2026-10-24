@@ -14,6 +14,7 @@ export function BottomNav({ band }: { band: GradeBand }) {
   const items = navItemsFor(band);
   return (
     <nav
+      data-print="hide"
       aria-label={t("student.nav.label")}
       style={{
         // The last row of the AppShell column (see AppShell): it never overlays the content.

@@ -83,6 +83,14 @@ export default function ProgressPage() {
           </section>
         ) : null}
       </div>
+
+      <Card>
+        <div style={{ display: "grid", gap: "var(--space-2)", justifyItems: "start" }}>
+          <h2 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{t("student.reportCards.title")}</h2>
+          <p style={{ margin: 0 }}>{t("student.reportCards.linkIntro")}</p>
+          <ButtonLink href="/student/report-cards" variant="primary" label={t("student.reportCards.link")} />
+        </div>
+      </Card>
     </AppShell>
   );
 }

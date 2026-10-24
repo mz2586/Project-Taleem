@@ -21,11 +21,12 @@ export function GuardianShell({ title, children }: { title: string; children: Re
   const { t } = useLocale();
   const pathname = usePathname();
   return (
-    <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh", maxWidth: 820, margin: "0 auto" }}>
+    <div data-print-shell="" style={{ display: "flex", flexDirection: "column", minHeight: "100vh", maxWidth: 820, margin: "0 auto" }}>
       <a href="#main" className="skip-link">
         {t("common.skipToContent")}
       </a>
       <header
+        data-print="hide"
         style={{
           display: "grid",
           gap: "var(--space-2)",

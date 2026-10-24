@@ -16,6 +16,9 @@ import type { ChildOverview } from "@/lib/guardian/types";
 import { contentAttrs } from "@/lib/i18n/content";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { recommendationViews } from "@/lib/learning/rationale";
+import { guardianReportApi } from "@/lib/reporting/api";
+import { feedBadge } from "@/lib/reporting/view";
+import { feed, type Feed } from "@/lib/reporting/wire";
 import { classifyLoadError, type LoadFailure } from "@/lib/student/journey";
 import { ApiError } from "@/lib/student/types";
 
@@ -69,6 +72,7 @@ function GuardianChildPage() {
   const [data, setData] = useState<ChildOverview | null>(null);
   const [name, setName] = useState<string | null>(null);
   const [status, setStatus] = useState<Status>("loading");
+  const [reports, setReports] = useState<Feed | null>(null);
 
   const load = useCallback(async () => {
     setStatus("loading");
@@ -77,6 +81,11 @@ function GuardianChildPage() {
       .me()
       .then((me) => setName(me.learners.find((l) => l.student_ref === ref)?.display_name ?? null))
       .catch(() => setName(null));
+    // The report-card feed only adds a "new report" badge; its failure hides the badge, nothing else.
+    guardianReportApi
+      .notifications(ref)
+      .then((wire) => setReports(feed(wire)))
+      .catch(() => setReports(null));
     try {
       setData(await guardianApi.child(ref));
       setStatus("ready");
@@ -95,12 +104,32 @@ function GuardianChildPage() {
   const model = status === "ready" && data ? childDetailModel({ locale }, data) : null;
   const explained = status === "ready" && data ? recommendationViews(data.recommendation_explanations) : [];
   const title = name ? t("guardian.child.title", { name }) : t("guardian.child.titleUnnamed");
+  const badge = feedBadge(reports, t);
 
   return (
     <GuardianShell title={title}>
       <div>
         <ButtonLink href="/guardian" variant="ghost" label={t("guardian.child.backToChildren")} />
       </div>
+      {status !== "denied" ? (
+        <Card>
+          <div style={{ display: "grid", gap: "var(--space-2)", justifyItems: "start" }}>
+            <h2 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{t("guardian.child.reportCards")}</h2>
+            {badge ? (
+              <p data-new-reports="" style={{ margin: 0, fontWeight: 700 }}>
+                <span aria-hidden="true">● </span>
+                {badge}
+              </p>
+            ) : null}
+            <p style={{ margin: 0 }}>{t("guardian.child.reportCardsIntro")}</p>
+            <ButtonLink
+              href={`/guardian/children/${encodeURIComponent(ref)}/report-cards`}
+              variant="primary"
+              label={t("guardian.child.reportCards")}
+            />
+          </div>
+        </Card>
+      ) : null}
       <div aria-live="polite" style={{ display: "grid", gap: "var(--space-4)" }}>
         {status === "loading" ? <Skeleton lines={6} label={t("guardian.child.loading")} /> : null}
         {status === "denied" ? <EmptyState title={t("guardian.child.deniedTitle")} body={t("guardian.child.deniedBody")} /> : null}
