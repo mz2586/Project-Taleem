@@ -24,6 +24,7 @@ from fastapi import Depends, FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, PlainTextResponse
 from pydantic import BaseModel, ConfigDict, Field
+from sqlalchemy import select
 from sqlalchemy.exc import OperationalError
 from sqlalchemy.orm.exc import StaleDataError
 
@@ -32,6 +33,7 @@ from .auth import pdp
 from .auth.dependencies import bearer_claims_from, require_owner_or
 from .auth.jwt_verifier import Claims
 from .auth.learner_gate import (
+    LEARNER_INACTIVE,
     IdentityLearnerGate,
     LearnerRefusedError,
     learner_permission_dependency,
@@ -59,6 +61,7 @@ from .contexts.identity.adapters.persistence.base import (
     create_identity_engine,
     create_identity_session_factory,
 )
+from .contexts.identity.adapters.persistence.models import LearnerRow
 from .contexts.identity.adapters.persistence.rate_limit_store import SqlRateLimitStore
 from .contexts.identity.adapters.persistence.uow import SqlIdentityUnitOfWork
 from .contexts.identity.adapters.rate_limit import Limiter, RateLimiter, SharedRateLimiter
@@ -97,6 +100,7 @@ from .contexts.learning.application.analytics import LearningAnalytics
 from .contexts.learning.application.knowledge_service import KnowledgeService
 from .contexts.learning.application.offline_service import OfflinePackageService
 from .contexts.learning.application.placement_service import PlacementService
+from .contexts.learning.application.report_records import LearnerRecordsService
 from .contexts.learning.application.session_service import SessionService
 from .contexts.learning.application.student_queries import StudentQueryService
 from .contexts.learning.application.sync_consumer import SyncEvidenceConsumer
@@ -114,6 +118,23 @@ from .contexts.ops.adapters.persistence.base import (
 from .contexts.ops.adapters.persistence.kill_switch_store import SqlKillSwitchState
 from .contexts.privacy.adapters.privacy_api import build_privacy_router
 from .contexts.privacy.adapters.wiring import build_privacy_service
+from .contexts.reporting.adapters.context_ports import (
+    CallableLearnerDirectory,
+    CallableLearningRecords,
+    CallablePublishedLessons,
+    CallableSchoolDirectory,
+)
+from .contexts.reporting.adapters.persistence.base import (
+    ReportingBase,
+    create_reporting_session_factory,
+    reporting_engine_sharing,
+)
+from .contexts.reporting.adapters.persistence.uow import SqlReportingUnitOfWork
+from .contexts.reporting.adapters.reporting_api import (
+    build_reporting_learner_router,
+    build_reporting_router,
+)
+from .contexts.reporting.application.service import ReportingService
 from .contexts.safeguarding.adapters.persistence.base import (
     SafeguardingBase,
     create_safeguarding_session_factory,
@@ -228,6 +249,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             {
                 "name": "guardian",
                 "description": "Guardian Portal — read-only view of linked children",
+            },
+            {
+                "name": "reporting",
+                "description": "Report cards: issued, immutable, derived snapshots",
             },
             {
                 "name": "identity",
@@ -745,12 +770,113 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         dependencies=staff_permitted,
     )
 
+    # ---- Report cards (REPORT_CARD_CONTRACT): immutable issued snapshots, derived at issue time
+    # from learning evidence + mastery events, school's marked homework and the published lesson
+    # versions — each reached through a reporting port wired here. Shares the identity pool.
+    reporting_engine = reporting_engine_sharing(identity_engine)
+    if reporting_engine.dialect.name == "sqlite":
+        ReportingBase.metadata.create_all(reporting_engine)
+    reporting_sf = create_reporting_session_factory(reporting_engine)
+    app.state.reporting_session_factory = reporting_sf
+    learner_records = LearnerRecordsService(learning_uow)
+
+    def _guardian_of(student_ref: str) -> str | None:
+        account = _learner_lookup(student_ref)
+        return str(account.guardian_ref) if account is not None else None
+
+    def _teacher_visibility(student_refs: list[str]) -> dict[str, dict[str, Any]]:
+        # The same live rules as _visible_to_teacher, with the reason a learner is hidden (a
+        # stable code for the issue's ``skipped`` list). One identity transaction, no cache.
+        with SqlIdentityUnitOfWork(identity_sf) as uow:
+            accounts = {ref: uow.learners.get(ref) for ref in student_refs}
+            states = {
+                ref: derive_state(ref, uow.consents.history(ref))
+                for ref, account in accounts.items()
+                if account is not None
+            }
+        gate = IdentityLearnerGate(
+            states.__getitem__, accounts.get, require_enrolled=settings.is_production
+        )
+        out: dict[str, dict[str, Any]] = {}
+        for ref, account in accounts.items():
+            if account is None:
+                out[ref] = {"display_name": None, "reason": "inactive"}
+                continue
+            refusal = gate.refusal(ref)
+            if refusal == LEARNER_INACTIVE:
+                reason: str | None = "inactive"
+            elif refusal is not None or not states[ref].allows(ConsentScope.PROGRESS_SHARING):
+                reason = "consent_withdrawn"
+            else:
+                reason = None
+            out[ref] = {"display_name": str(account.display_name), "reason": reason}
+        return out
+
+    def _learner_status(student_ref: str) -> dict[str, Any] | None:
+        account = _learner_lookup(student_ref)
+        if account is None:
+            return None
+        refusal = learner_gate.refusal(student_ref)
+        return {
+            "display_name": str(account.display_name),
+            "refusal": (
+                None
+                if refusal is None
+                else "inactive" if refusal == LEARNER_INACTIVE else "consent_withdrawn"
+            ),
+        }
+
+    reporting_service = ReportingService(
+        lambda: SqlReportingUnitOfWork(reporting_sf, time.time),
+        school=CallableSchoolDirectory(
+            lambda teacher_ref, class_id: school_service.reporting_roster(
+                teacher_ref=teacher_ref, class_id=class_id
+            ),
+            school_service.reporting_rosters,
+            school_service.marked_homework,
+        ),
+        learners=CallableLearnerDirectory(_guardian_of, _teacher_visibility, _learner_status),
+        records=CallableLearningRecords(learner_records.records),
+        lessons=CallablePublishedLessons(read_model.published_versions),
+        clock=time.time,
+    )
+    app.state.reporting_service = reporting_service
+
+    def _all_learner_refs() -> list[str]:
+        # The scheduler's roster (``python -m taleem_core.contexts.reporting.issue_due``): every
+        # learner account; eligibility (active + live learning consent) is checked per learner.
+        with identity_sf() as s:
+            return [
+                str(r)
+                for r in s.scalars(select(LearnerRow.student_ref).order_by(LearnerRow.student_ref))
+            ]
+
+    app.state.reporting_learner_refs = _all_learner_refs
+    # Issuing and previewing derive a whole class's cards: bounded per teacher (shared when a real
+    # database is configured, like every other limit).
+    reporting_limiter: Limiter = (
+        SharedRateLimiter("reporting.issue", 30, 60.0, time.time, rate_limit_store)
+        if rate_limit_store is not None
+        else RateLimiter(30, 60.0, time.time)
+    )
+    app.include_router(
+        build_reporting_router(
+            reporting_service, claims_dependency, issue_guard=reporting_limiter.check
+        )
+    )
+    # The learner's own cards: behind the same live learner gate as every learner surface.
+    app.include_router(
+        build_reporting_learner_router(reporting_service, claims_dependency),
+        dependencies=learner_permitted,
+    )
+
     # ---- Privacy: per-learner export, two-step erasure, retention dry-run (R1) ----
     privacy_service = build_privacy_service(
         identity_sf=identity_sf,
         learning_sf=learning_sf,
         school_sf=school_sf,
         safeguarding_sf=safeguarding_sf,
+        reporting_sf=reporting_sf,
         session_store=session_repo,
         sync_store=sync_store,
         ai_ledger=ai_cost_ledger,
@@ -807,6 +933,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         Module("privacy", "/v1/privacy", lambda: True),
         Module("school", "/v1/school", lambda: True),
         Module("safeguarding", "/v1/safeguarding", lambda: True),
+        Module("reporting", "/v1/reporting", lambda: True, events_published=("ReportCardIssued",)),
     ):
         # Idempotent across reloads/tests: re-registering the same module is a no-op.
         with contextlib.suppress(ValueError):

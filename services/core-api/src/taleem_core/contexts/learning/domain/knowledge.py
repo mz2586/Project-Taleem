@@ -45,6 +45,11 @@ class AssessmentEvidence:
     mastery_before: float
     mastery_after: float
     occurred_at: float
+    # The published lesson the attempt was answered against (REPORT_CARD_CONTRACT §1: a card
+    # cites the version the work was done on). ``""`` / ``None`` = not recorded (rows written
+    # before migration 0015, or an offline attempt whose package did not say which version).
+    lesson_id: str = ""
+    lesson_version: int | None = None
 
 
 @dataclass
@@ -200,6 +205,8 @@ class StudentKnowledge:
         prior_before: float,
         prior_after: float,
         now: float,
+        lesson_id: str = "",
+        lesson_version: int | None = None,
     ) -> AssessmentEvidence:
         """Append one diagnostic-placement answer to the evidence record.
 
@@ -222,6 +229,8 @@ class StudentKnowledge:
             mastery_before=prior_before,
             mastery_after=prior_after,
             occurred_at=now,
+            lesson_id=lesson_id,
+            lesson_version=lesson_version,
         )
         self.evidence.append(evidence)
         return evidence
@@ -252,6 +261,8 @@ class StudentKnowledge:
         estimator: MasteryEstimator,
         forgetting: ForgettingModel,
         now: float,
+        lesson_id: str = "",
+        lesson_version: int | None = None,
     ) -> AttemptResult:
         """Apply one scored attempt: update mastery, misconceptions, memory, state, and evidence.
 
@@ -304,6 +315,8 @@ class StudentKnowledge:
                 mastery_before=mastery_before.value,
                 mastery_after=obj.mastery.value,
                 occurred_at=now,
+                lesson_id=lesson_id,
+                lesson_version=lesson_version,
             )
         )
 

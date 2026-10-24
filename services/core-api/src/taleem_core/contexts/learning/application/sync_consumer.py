@@ -120,6 +120,10 @@ class SyncEvidenceConsumer:
         lesson = self._lesson_for(objective_code)
         if lesson is None:
             return Status.CONFLICT  # no published content to grade against
+        # The published version the device's package was built from (its manifest's
+        # ``lesson_version``), echoed back by the client. Absent, malformed, or naming another
+        # lesson: recorded as NULL, never replaced by the version published now.
+        lesson_version = _claimed_version(p, lesson.lesson_id)
         item = _gradable_item(lesson, item_ref)
         if item is None:
             # Either unknown, or a mentor-mediated summative item — never auto-graded by sync.
@@ -152,6 +156,8 @@ class SyncEvidenceConsumer:
                 estimator=self._estimator,
                 forgetting=self._forgetting,
                 now=now,
+                lesson_id=lesson.lesson_id,
+                lesson_version=lesson_version,
             )
             obj = knowledge.get(objective_code)
             next_review = obj.memory.next_review_at if obj else 0.0
@@ -210,6 +216,21 @@ def _parse_answer(payload: dict[str, object]) -> Answer | None:
         return Answer.from_payload(fields)
     except AnswerShapeError:
         return None
+
+
+def _claimed_version(payload: dict[str, object], lesson_id: str) -> int | None:
+    """The payload's ``lesson_version`` when it is a positive integer for this lesson, else None.
+
+    A payload that also names a ``lesson_id`` other than the lesson graded against is not a
+    version of this lesson, so no version is recorded for it.
+    """
+    claimed_id = payload.get("lesson_id")
+    if claimed_id is not None and str(claimed_id) != lesson_id:
+        return None
+    raw = payload.get("lesson_version")
+    if isinstance(raw, bool) or not isinstance(raw, int) or raw < 1:
+        return None
+    return raw
 
 
 def _as_int(value: object, default: int) -> int:

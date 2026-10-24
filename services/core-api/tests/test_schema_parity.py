@@ -22,10 +22,12 @@ import taleem_core.contexts.curriculum_studio.adapters.persistence.models  # noq
 import taleem_core.contexts.identity.adapters.persistence.models  # noqa: F401
 import taleem_core.contexts.learning.adapters.persistence.models  # noqa: F401
 import taleem_core.contexts.ops.adapters.persistence.models  # noqa: F401
+import taleem_core.contexts.reporting.adapters.persistence.models  # noqa: F401
 from taleem_core.contexts.curriculum_studio.adapters.persistence.base import Base
 from taleem_core.contexts.identity.adapters.persistence.base import IdentityBase
 from taleem_core.contexts.learning.adapters.persistence.base import LearningBase
 from taleem_core.contexts.ops.adapters.persistence.base import OpsBase
+from taleem_core.contexts.reporting.adapters.persistence.base import ReportingBase
 
 PG_URL = os.environ.get("CS_DATABASE_URL")
 _pg_only = pytest.mark.skipif(not PG_URL, reason="CS_DATABASE_URL not set (PostgreSQL required)")
@@ -57,7 +59,7 @@ def test_orm_matches_migration_columns() -> None:
     inspector = inspect(engine)
     mismatches: list[str] = []
 
-    for base in (Base, LearningBase, OpsBase, IdentityBase):
+    for base in (Base, LearningBase, OpsBase, IdentityBase, ReportingBase):
         for table in base.metadata.tables.values():
             schema = table.schema
             name = table.name

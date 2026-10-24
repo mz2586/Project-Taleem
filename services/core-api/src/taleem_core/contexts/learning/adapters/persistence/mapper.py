@@ -171,6 +171,8 @@ def evidence_column_values(ev: AssessmentEvidence) -> dict[str, Any]:
         "mastery_before": ev.mastery_before,
         "mastery_after": ev.mastery_after,
         "occurred_at": ev.occurred_at,
+        "lesson_id": ev.lesson_id or None,
+        "lesson_version": ev.lesson_version,
     }
 
 
@@ -189,6 +191,8 @@ def evidence_from_row(row: AssessmentEvidenceRow) -> AssessmentEvidence:
         mastery_before=row.mastery_before,
         mastery_after=row.mastery_after,
         occurred_at=row.occurred_at,
+        lesson_id=row.lesson_id or "",
+        lesson_version=row.lesson_version,
     )
 
 

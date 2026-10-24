@@ -113,11 +113,17 @@ class OfflinePackageManifest:
     created_at_ms: int
     signature: str = ""  # hex Ed25519 signature over signing_payload (empty = unsigned)
     signing_key_id: str = ""  # id of the key that produced `signature` (empty = unsigned)
+    # The lesson's published version number the package was built from. The device echoes it
+    # back as an ``attempt.submitted`` delta's ``lesson_version`` so the evidence records the
+    # version the work was done on (REPORT_CARD_CONTRACT §1). Descriptive, not signed: the
+    # signed ``version`` (content-hash prefix) still pins the content itself.
+    lesson_version: int | None = None
 
     def to_dict(self) -> dict[str, object]:
         return {
             "package_id": self.package_id,
             "lesson_id": self.lesson_id,
+            "lesson_version": self.lesson_version,
             "objective_code": self.objective_code,
             "version": self.version,
             "content_hash": self.content_hash,
@@ -166,6 +172,7 @@ def build_manifest(
         created_at_ms=now_ms,
         signature=signature,
         signing_key_id=key_id,
+        lesson_version=view.version,
     )
 
 

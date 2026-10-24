@@ -734,6 +734,60 @@ class SchoolService:
             sub = uow.submissions.get(teacher.organization_id, submission_id)
             return sub is not None and sub.student_ref == student_ref and sub.class_id in own
 
+    # ------------------------------------------------------------- reporting (read port)
+
+    def reporting_roster(self, *, teacher_ref: str, class_id: str) -> dict[str, Any]:
+        """The reporting context's view of a teacher's own class: its organization, its teacher's
+        name and its current members (REPORT_CARD_CONTRACT §2). Another teacher's class, another
+        organization's or an unknown one is a 404; a locked or suspended teacher a 403. Each
+        member's visibility is decided live by the caller, as everywhere else."""
+        with self._uow() as uow:
+            teacher = self._require_teacher(uow, teacher_ref)
+            classroom = self._require_own_class(uow, teacher, class_id)
+            return self._roster_view(uow, teacher, classroom)
+
+    def reporting_rosters(self, teacher_ref: str) -> list[dict[str, Any]]:
+        """``reporting_roster`` for every class the teacher owns."""
+        with self._uow() as uow:
+            teacher = self._require_teacher(uow, teacher_ref)
+            return [
+                self._roster_view(uow, teacher, c)
+                for c in uow.classrooms.for_teacher(teacher.organization_id, teacher.teacher_ref)
+            ]
+
+    def _roster_view(
+        self, uow: SchoolUnitOfWork, teacher: Teacher, classroom: Classroom
+    ) -> dict[str, Any]:
+        org = uow.organizations.get(teacher.organization_id)
+        members = uow.enrolments.for_class(teacher.organization_id, classroom.class_id)
+        return {
+            "class_id": classroom.class_id,
+            "organization_id": classroom.organization_id,
+            "class_name": classroom.name,
+            "organization_name": org.name if org else "",
+            "curriculum_pack_id": org.curriculum_pack_id if org else "",
+            "teacher_name": teacher.display_name,
+            "student_refs": [e.student_ref for e in members],
+        }
+
+    def marked_homework(self, student_ref: str) -> list[dict[str, Any]]:
+        """Every marked submission of one learner (refs, outcome and time only — never the text
+        or the feedback), for the report cards derived from it."""
+        with self._uow() as uow:
+            subs = uow.submissions.for_student(student_ref)
+        return [
+            {
+                "submission_id": s.submission_id,
+                "organization_id": s.organization_id,
+                "class_id": s.class_id,
+                "objective_code": s.objective_code,
+                "outcome": s.outcome.value,
+                "marked_at": s.marked_at,
+            }
+            for s in subs
+            if s.status is SubmissionStatus.MARKED and s.outcome is not None
+        ]
+
     def _teacher_submission(
         self, uow: SchoolUnitOfWork, teacher_ref: str, submission_id: str
     ) -> tuple[Teacher, Submission, str]:

@@ -24,6 +24,7 @@ from taleem_core.tools.e2e_journey import (
     PASS,
     Journey,
     Transcript,
+    report_card_problem,
     retry_after_seconds,
     seed_fixture_lesson,
     synthetic_client_ip,
@@ -31,6 +32,18 @@ from taleem_core.tools.e2e_journey import (
 )
 
 _FAST_KDF = 1_000
+REPORT_STEPS = (
+    "guardian asks Taleem for the child's report card (closed period)",
+    "guardian lists the child's report cards",
+    "guardian reads the report card (hash re-verified)",
+    "guardian acknowledges the report card",
+    "a second acknowledgement is refused (already seen)",
+    "the other guardian cannot list the first child's cards",
+    "the other guardian cannot read the first child's card",
+    "the other guardian cannot generate a card for the first child",
+    "child reads their own report cards",
+    "child's report-card read after withdrawal is refused",
+)
 
 
 def _client(*, fixture: bool = False) -> TestClient:
@@ -55,6 +68,9 @@ def test_empty_curriculum_branch_asserts_the_honest_nothing_to_learn_decision() 
     assert "child's refresh after withdrawal is refused" in passed
     assert "child's re-sign-in after withdrawal is refused" in passed
     assert "guardian reads the audit trail" in passed
+    # With nothing learned the card says so; every report step still passes.
+    for title in REPORT_STEPS:
+        assert title in passed, title
     assert transcript.verdict() == PASS
 
 
@@ -67,6 +83,14 @@ def test_fixture_branch_completes_the_synthetic_lesson() -> None:
     assert "child completes the lesson (session ends)" in passed
     assert any(t.startswith("child answers item") for t in passed)
     assert any("SYNTHETIC TEST FIXTURE" in n for n in transcript.notes)
+    # The student-to-guardian report journey, strict: every step passed.
+    for title in REPORT_STEPS:
+        assert title in passed, title
+    assert journey.answered > 0 and journey.learned is not None
+    assert journey.learned[1] == FIXTURE_LESSON_ID and journey.learned[2] == 1
+    issued = next(s for s in transcript.steps if s.title == REPORT_STEPS[0])
+    assert f"attempts={journey.answered} correct={journey.correct}" in issued.note
+    assert f"{FIXTURE_LESSON_ID}@v1 (evidence)" in issued.note
 
 
 def test_known_gaps_are_recorded_not_hidden_and_strict_mode_fails_them() -> None:
@@ -241,3 +265,37 @@ def test_seed_cli_seeds_a_sqlite_database(tmp_path: Path, monkeypatch: pytest.Mo
         lesson = next(x for x in uow.lessons.all() if x.lesson_id == FIXTURE_LESSON_ID)
         assert lesson.workflow.state.value == "published"
     engine.dispose()
+
+
+def _card(**objective: object) -> dict[str, object]:
+    obj = {
+        "objective_code": "OBJ",
+        "lesson_id": "L-1",
+        "lesson_version": 2,
+        "lesson_versions": [2],
+        "version_source": "evidence",
+        **objective,
+    }
+    return {
+        "hash_verified": True,
+        "derivation": "taleem.reporting.derive/2",
+        "has_evidence": True,
+        "totals": {"attempts": 3, "correct": 2},
+        "subjects": [{"objectives": [obj]}],
+    }
+
+
+def test_the_report_card_check_reconciles_totals_and_the_version_pin() -> None:
+    check = report_card_problem(answered=3, correct=2, learned=("OBJ", "L-1", 2))
+    assert check(_card()) is None
+    assert "do not reconcile" in str(check({**_card(), "totals": {"attempts": 3, "correct": 3}}))
+    assert "version pin" in str(check(_card(version_source="mixed")))
+    assert "version pin" in str(check(_card(lesson_version=None, lesson_versions=[1, 2])))
+    assert "derivation" in str(check({**_card(), "derivation": "taleem.reporting.derive/1"}))
+    assert "not verified" in str(check({**_card(), "hash_verified": False}))
+    unpackaged = report_card_problem(answered=3, correct=2, learned=("OBJ", "L-1", None))
+    assert "did not carry" in str(unpackaged(_card()))
+    empty = report_card_problem(answered=0, correct=0, learned=None)
+    assert "has_evidence false" in str(empty(_card()))
+    honest = {**_card(), "has_evidence": False, "totals": None, "notice": "no_evidence_in_period"}
+    assert empty(honest) is None

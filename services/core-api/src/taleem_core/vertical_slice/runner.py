@@ -312,6 +312,13 @@ def run_slice() -> dict[str, Any]:
     trace.add("Learning Analytics: progress summary", **summary.to_dict())
     session_service.end(session)
     trace.add("Session: ended", state=session.state.value, interactions=len(session.interactions))
+    # Every evidence row names the published lesson + version it was answered against.
+    recorded = knowledge_service.snapshot(STUDENT_REF)
+    evidence_lessons = sorted(
+        {(e.lesson_id, e.lesson_version) for e in (recorded.evidence if recorded else [])},
+        key=lambda pin: (pin[0], pin[1] or 0),
+    )
+    trace.add("Evidence: lesson version pins", pins=[f"{i}@v{v}" for i, v in evidence_lessons])
 
     return {
         "trace": trace,
@@ -320,6 +327,7 @@ def run_slice() -> dict[str, Any]:
         "mastered": mastered,
         "session_state": session.state.value,
         "final_decision": final_decision.kind.value,
+        "evidence_lessons": evidence_lessons,
     }
 
 

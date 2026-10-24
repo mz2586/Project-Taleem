@@ -87,7 +87,11 @@ class KnowledgeService:
         response_time_ms: int,
         context: InteractionContext,
         self_confidence: float | None,
+        lesson_id: str = "",
+        lesson_version: int | None = None,
     ) -> RecordOutcome:
+        """Record one auto-scored attempt. ``lesson_id`` / ``lesson_version`` name the published
+        lesson the item was answered against (recorded on the evidence; never guessed later)."""
         now = self._now()
 
         def _txn() -> tuple[AttemptResult, list[LearningEvent]]:
@@ -113,6 +117,8 @@ class KnowledgeService:
                     estimator=self._estimator,
                     forgetting=self._forgetting,
                     now=now,
+                    lesson_id=lesson_id,
+                    lesson_version=lesson_version,
                 )
                 obj = knowledge.get(objective_code)
                 next_review = obj.memory.next_review_at if obj else 0.0
@@ -150,6 +156,8 @@ class KnowledgeService:
         objective_code: str,
         item_ref: str,
         correct: bool,
+        lesson_id: str = "",
+        lesson_version: int | None = None,
     ) -> bool:
         """Record ONE human-graded result (a teacher's mark of a written item) as evidence.
 
@@ -183,6 +191,8 @@ class KnowledgeService:
                     estimator=self._estimator,
                     forgetting=self._forgetting,
                     now=now,
+                    lesson_id=lesson_id,
+                    lesson_version=lesson_version,
                 )
                 obj = knowledge.get(objective_code)
                 next_review = obj.memory.next_review_at if obj else 0.0

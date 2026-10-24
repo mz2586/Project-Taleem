@@ -1,0 +1,490 @@
+openapi: 3.1.0
+info:
+  title: Project Taleem — Report Cards API
+  version: 0.1.0
+  description: >-
+    Issued, immutable report cards (REPORT_CARD_CONTRACT.md; doc 29 §2-§3 and §5). Promotion
+    decisions are out of scope.
+
+
+    Properties this contract commits to:
+
+
+    * **Taleem issues; a teacher is optional.** The primary issuer is the system
+      (`issued_by: "system"`, `issued_by_name: "Taleem"`): the scheduler
+      (`python -m taleem_core.contexts.reporting.issue_due --period YYYY-MM`) and the guardian's
+      `…/report-cards:generate` issue a card for any learner with an active account and live
+      learning consent, whether or not they are in a class (`class_id` / `class_name` are then
+      null). At most one system card exists per learner per identical period (`409
+      REPORT_CARD_EXISTS`). A teacher may also issue cards for their own class; only a
+      teacher-issued card carries a `comment` (the one free-text field, at most 1000 chars).
+    * **Derived, never typed in.** Every figure is derived at issue time from records that already
+      exist: auto-scored assessment evidence (diagnostics and marked-homework evidence excluded),
+      marked homework (`met` / `not_yet`), and the mastery state as of `period_end` (`mastered`
+      once an `ObjectiveMastered` event happened before it; else `developing` if any practice or
+      marked homework happened before it; else `not_started`). Periods are epoch seconds,
+      `period_start` inclusive and `period_end` exclusive; `period_start < period_end` and
+      `period_end` must not be in the future.
+    * **Version pins (from the evidence).** Every objective cites the lesson versions its counted
+      evidence (the auto-scored attempts in the period plus the evidence of the homework marks
+      listed) recorded when the work was done, never the version published at issue time:
+      `lesson_versions` (every distinct recorded version, ascending), `lesson_version` (that
+      version when it is the only one and every counted row recorded it, else null), `lesson_id`
+      (the one lesson the rows name, else null, with `lesson_ids`), `version_source` (`evidence`
+      when every counted row carries a version, `unrecorded` when none does, `mixed` otherwise)
+      and `unversioned_evidence` (rows without one). An unrecorded part is said so, never filled
+      in. The card keeps its pin forever. Cards with `derivation: taleem.reporting.derive/1`
+      pinned the version published at issue time; they are returned unchanged and still verify.
+    * **No fake zeros.** A card with no evidence in the period says so: `has_evidence: false`,
+      `notice: "no_evidence_in_period"`, `totals: null`, `subjects: []`.
+    * **Immutable; supersede, never edit.** A correction is a new card with `supersedes` naming the
+      old one (a teacher path); the old card then reads `status: superseded` with `superseded_by`.
+      Naming a card that is already superseded is `409 ALREADY_SUPERSEDED`.
+    * **Hash.** `content_hash` is the SHA-256 (hex) of the canonical JSON of the stored body (keys
+      sorted, no insignificant whitespace, UTF-8). The hash covers every field of a card EXCEPT
+      the read-time metadata `superseded_by`, `status`, `acknowledged_at`, `content_hash` and
+      `hash_verified`. Every read re-verifies it (`hash_verified`).
+    * **Relationship-scoped.** A guardian reads only their own child's cards; a teacher only cards
+      of their own classes' learners they may currently see; a learner only their own (behind the
+      live consent gate, and halted by the kill switch). Anything else is `404`, never `403`.
+    * **Privacy.** Cards are C2 learning records: exported with the learner and erased with them.
+      Issue and acknowledgement are audited with refs only.
+  license:
+    name: Proprietary — license undecided; see repository LICENSE
+    identifier: LicenseRef-Proprietary
+servers:
+  - url: https://api.taleem.dev
+    description: Reference environment (placeholder; concrete host per FOUNDER_DECISIONS FD-02)
+tags:
+  - name: reporting
+    description: Report cards — issued, immutable, derived snapshots.
+paths:
+  /v1/reporting/children/{studentRef}/report-cards:generate:
+    post:
+      tags: [reporting]
+      operationId: generateReportCard
+      summary: Ask Taleem to issue the guardian's own child's card for a closed period
+      description: >-
+        System issuance (no class or teacher needed). Rate limited per guardian (`429`). Another
+        family's child: `404`. A learner without an active account or live learning consent:
+        `403 LEARNER_NOT_ELIGIBLE`. A system card already issued for this learner and identical
+        period: `409 REPORT_CARD_EXISTS`. An open or invalid period: `422`.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GenerateIn" }
+      responses:
+        "201":
+          description: Issued
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReportCard" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        "429": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/reporting/classes/{classId}/report-cards:preview:
+    post:
+      tags: [reporting]
+      operationId: previewReportCards
+      summary: Preview the cards a teacher would issue for their own class (stores nothing)
+      description: >-
+        The same planning as issuing — the same `skipped` reasons and supersedes checks — but no
+        card, audit row or outbox event is written. Preview cards have `card_id: null` and
+        `status: preview`. Another teacher's or organization's class: `404`. Rate limited.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: classId, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/IssueIn" }
+      responses:
+        "200":
+          description: The cards that would be issued
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/IssueResult" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        "429": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/reporting/classes/{classId}/report-cards:
+    post:
+      tags: [reporting]
+      operationId: issueReportCards
+      summary: Issue cards for learners in the teacher's own class (optional teacher path)
+      description: >-
+        Only learners currently in the class whom the teacher may see right now get a card;
+        everyone else is in `skipped` with a stable `reason`. A learner whose card for this class
+        and period already exists is skipped (`already_issued`, with its `card_id`) unless
+        `supersedes` names that card. Emits `ReportCardIssued` to the outbox; the guardian's
+        in-app notification is the card itself (see `…/notifications`).
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: classId, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/IssueIn" }
+      responses:
+        "201":
+          description: Issued
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/IssueResult" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        "429": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+    get:
+      tags: [reporting]
+      operationId: listClassReportCards
+      summary: Cards issued in the teacher's own class (learners they may see now), newest first
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: classId, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Report cards
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReportCardList" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/reporting/children/{studentRef}/report-cards:
+    get:
+      tags: [reporting]
+      operationId: listChildReportCards
+      summary: The guardian's own child's cards, newest first
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Report cards
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReportCardList" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/reporting/children/{studentRef}/notifications:
+    get:
+      tags: [reporting]
+      operationId: listReportCardNotifications
+      summary: The guardian's in-app notifications for one child's report cards
+      description: >-
+        One `report_card_issued` notification per current card (a superseded card's notice is
+        replaced by its correction's). `read` is the server-side acknowledgement.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Notifications
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/NotificationList" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/reporting/report-cards/{cardId}:
+    get:
+      tags: [reporting]
+      operationId: getReportCard
+      summary: One card (its guardian, or a teacher of its class)
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: cardId, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: The card, its hash re-verified
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReportCard" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/reporting/report-cards/{cardId}:acknowledge:
+    post:
+      tags: [reporting]
+      operationId: acknowledgeReportCard
+      summary: Record that the guardian has seen the card (once)
+      description: >-
+        A second acknowledgement is `409 ALREADY_ACKNOWLEDGED` (clients treat it as "already
+        seen"). Another family's card: `404`.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: cardId, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Acknowledged
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/Acknowledgement" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/reporting/learners/{studentRef}/report-cards:
+    get:
+      tags: [reporting]
+      operationId: listLearnerReportCards
+      summary: A learner's cards — the learner themself, or a teacher of their class
+      description: >-
+        A `student` token reads only its own cards and passes the live learner consent gate on
+        every request (`403 CONSENT_REQUIRED` / `LEARNER_INACTIVE`); the route is child-facing, so
+        an engaged kill switch answers `503`. A `teacher` token reads the learner's cards from the
+        teacher's own classes while the learner is visible to them (else `404`).
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Report cards
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ReportCardList" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "503": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  responses:
+    Problem:
+      description: RFC 9457 problem details
+      content:
+        application/problem+json:
+          schema: { $ref: "#/components/schemas/Problem" }
+  schemas:
+    Problem:
+      type: object
+      properties:
+        type: { type: string }
+        title: { type: string }
+        status: { type: integer }
+        code: { type: string }
+        detail: { type: string }
+        traceId: { type: string }
+    LocalizedText:
+      type: object
+      description: Locale map (ur / en).
+      additionalProperties: { type: string }
+    GenerateIn:
+      type: object
+      additionalProperties: false
+      required: [period_start, period_end]
+      properties:
+        period_start: { type: integer, minimum: 0, description: "Epoch seconds, inclusive" }
+        period_end: { type: integer, minimum: 1, description: "Epoch seconds, exclusive; not future" }
+    IssueIn:
+      type: object
+      additionalProperties: false
+      required: [period_start, period_end]
+      properties:
+        period_start: { type: integer, minimum: 0 }
+        period_end: { type: integer, minimum: 1 }
+        student_refs:
+          type: array
+          maxItems: 200
+          items: { type: string, minLength: 1, maxLength: 64 }
+          description: Omitted = every learner currently in the class.
+        comments:
+          type: object
+          description: "student_ref -> comment (at most 1000 characters after cleaning)"
+          additionalProperties: { type: string }
+        supersedes:
+          type: object
+          description: "student_ref -> card_id of this learner's card for this class and period"
+          additionalProperties: { type: string }
+    Skipped:
+      type: object
+      required: [student_ref, learner_display_name, reason]
+      properties:
+        student_ref: { type: string }
+        learner_display_name:
+          type: ["string", "null"]
+          description: Null for a learner the teacher may not see (a hidden learner's name is never shown).
+        reason:
+          type: string
+          enum: [consent_withdrawn, inactive, not_in_class, already_issued]
+        card_id:
+          type: string
+          description: For `already_issued` — the current card a correction must name.
+    IssueResult:
+      type: object
+      required: [class_id, period_start, period_end, report_cards, skipped]
+      properties:
+        class_id: { type: string }
+        period_start: { type: integer }
+        period_end: { type: integer }
+        stored: { type: boolean, const: false, description: "Preview only" }
+        report_cards:
+          type: array
+          items: { $ref: "#/components/schemas/ReportCard" }
+        skipped:
+          type: array
+          items: { $ref: "#/components/schemas/Skipped" }
+    Objective:
+      type: object
+      description: >-
+        One objective of a card. `lesson_ids`, `lesson_versions`, `version_source` and
+        `unversioned_evidence` are present on every `taleem.reporting.derive/2` card and absent
+        on `derive/1` cards (whose `lesson_id` / `lesson_version` are the issue-time published
+        pin).
+      required: [objective_code, title, mastery, attempts, correct, homework_met, homework_not_yet, lesson_id, lesson_version]
+      properties:
+        objective_code: { type: string }
+        title: { $ref: "#/components/schemas/LocalizedText" }
+        mastery: { type: string, enum: [mastered, developing, not_started] }
+        attempts: { type: integer, minimum: 0, description: "Auto-scored attempts in the period" }
+        correct: { type: integer, minimum: 0 }
+        homework_met: { type: integer, minimum: 0 }
+        homework_not_yet: { type: integer, minimum: 0 }
+        lesson_id:
+          type: ["string", "null"]
+          description: "The one lesson the counted evidence names; null when none or several"
+        lesson_version:
+          type: ["integer", "null"]
+          description: >-
+            The single version the work was done on, when unambiguous (one recorded version and
+            `version_source: evidence`); else null. Kept for clients that read one version.
+        lesson_ids:
+          type: array
+          items: { type: string }
+          description: "Every lesson id the counted evidence recorded, ascending"
+        lesson_versions:
+          type: array
+          items: { type: integer, minimum: 1 }
+          description: "Every distinct version the counted evidence recorded, ascending"
+        version_source:
+          type: string
+          enum: [evidence, mixed, unrecorded]
+          description: >-
+            `evidence`: every counted row recorded its version; `unrecorded`: none did (or no
+            counted row exists); `mixed`: some did. Never replaced by the current published pin.
+        unversioned_evidence:
+          type: integer
+          minimum: 0
+          description: "Counted evidence rows that recorded no version"
+    Subject:
+      type: object
+      required: [subject_key, subject_name, objectives]
+      properties:
+        subject_key: { type: string, description: "`other` for objectives with no published lesson" }
+        subject_name: { $ref: "#/components/schemas/LocalizedText" }
+        objectives:
+          type: array
+          items: { $ref: "#/components/schemas/Objective" }
+    Totals:
+      type: object
+      properties:
+        objectives: { type: integer }
+        objectives_mastered: { type: integer }
+        attempts: { type: integer }
+        correct: { type: integer }
+        homework_met: { type: integer }
+        homework_not_yet: { type: integer }
+    ReportCard:
+      type: object
+      description: >-
+        The stored, hashed body plus read-time metadata. Hash-covered: every field except
+        `superseded_by`, `status`, `acknowledged_at`, `content_hash` and `hash_verified`.
+      required: [card_id, student_ref, learner_display_name, class_id, class_name, period_start, period_end, issued_at, issued_by, issued_by_name, comment, supersedes, superseded_by, status, acknowledged_at, content_hash, hash_verified, curriculum_pack, has_evidence, subjects]
+      properties:
+        format: { type: string, const: "taleem.report-card/1" }
+        derivation:
+          type: string
+          enum: ["taleem.reporting.derive/2", "taleem.reporting.derive/1"]
+          description: "New cards: derive/2 (pins from the evidence). Stored derive/1 cards are returned unchanged."
+        card_id: { type: ["string", "null"], description: "Null only on a preview" }
+        student_ref: { type: string }
+        learner_display_name: { type: string }
+        class_id: { type: ["string", "null"], description: "Null on a system card" }
+        class_name: { type: ["string", "null"] }
+        organization_id: { type: ["string", "null"] }
+        organization_name: { type: ["string", "null"] }
+        curriculum_pack: { type: ["string", "null"] }
+        period_start: { type: integer }
+        period_end: { type: integer }
+        period_rule: { type: string, const: "start_inclusive_end_exclusive" }
+        issued_by: { type: string, description: "`system`, or the issuing teacher's ref" }
+        issued_by_name: { type: string, description: "`Taleem` for a system card" }
+        issued_at: { type: number }
+        supersedes: { type: ["string", "null"] }
+        comment: { type: ["string", "null"], description: "Teacher-issued cards only" }
+        has_evidence: { type: boolean }
+        notice: { type: ["string", "null"], enum: [no_evidence_in_period, null] }
+        totals:
+          oneOf:
+            - { $ref: "#/components/schemas/Totals" }
+            - { type: "null" }
+        subjects:
+          type: array
+          items: { $ref: "#/components/schemas/Subject" }
+        superseded_by: { type: ["string", "null"], description: "Read-time; not hashed" }
+        status: { type: string, enum: [issued, superseded, preview], description: "Read-time" }
+        acknowledged_at: { type: ["number", "null"], description: "Read-time; not hashed" }
+        content_hash: { type: string, pattern: "^[0-9a-f]{64}$" }
+        hash_verified: { type: boolean, description: "Re-verified on every read" }
+    ReportCardList:
+      type: object
+      required: [report_cards]
+      properties:
+        report_cards:
+          type: array
+          items: { $ref: "#/components/schemas/ReportCard" }
+    Acknowledgement:
+      type: object
+      required: [card_id, acknowledged_at]
+      properties:
+        card_id: { type: string }
+        acknowledged_at: { type: number }
+    Notification:
+      type: object
+      properties:
+        id: { type: string }
+        kind: { type: string, const: report_card_issued }
+        card_id: { type: string }
+        student_ref: { type: string }
+        class_id: { type: ["string", "null"], description: "Null for a system card" }
+        period_start: { type: integer }
+        period_end: { type: integer }
+        supersedes: { type: ["string", "null"] }
+        issued_at: { type: number }
+        read: { type: boolean }
+    NotificationList:
+      type: object
+      properties:
+        notifications:
+          type: array
+          items: { $ref: "#/components/schemas/Notification" }
+        unread: { type: integer }

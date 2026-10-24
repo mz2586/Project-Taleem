@@ -235,6 +235,15 @@ components:
           type: string
           enum: [diagnose, practice, teach, review, revise, remediate]
           default: practice
+        lesson_version:
+          type: integer
+          minimum: 1
+          description: >-
+            The published lesson version the device's package was built from (its manifest's
+            `lesson_version`), recorded on the evidence. Absent, malformed, or sent with a
+            `lesson_id` other than the lesson graded against: recorded as unknown (NULL), never
+            replaced by the version published now.
+        lesson_id: { type: string, description: "Optional: the package's lesson_id (see lesson_version)" }
     BatchIn:
       type: object
       properties:

@@ -120,6 +120,24 @@ def _school_rules() -> set[tuple[str, str, str]]:
     }
 
 
+def _reporting_rules() -> set[tuple[str, str, str]]:
+    """Report cards (contexts/reporting, REPORT_CARD_CONTRACT.md).
+
+    Relationship-scoped: the PDP answers only "may this role reach report cards at all". *Which*
+    cards is settled per request in the reporting service: a teacher previews, issues and reads
+    only in their own class, for learners they may currently see; a guardian reads and
+    acknowledges only their own child's cards; a learner reads only their own (ownership in the
+    route, behind the live consent gate). Operators, mentors and staff roles are denied by default.
+    """
+    return {
+        ("teacher", "issue", "reporting.report_card"),
+        ("teacher", "read", "reporting.report_card"),
+        ("guardian", "read", "reporting.report_card"),
+        ("guardian", "acknowledge", "reporting.report_card"),
+        ("student", "read", "reporting.own_report_card"),
+    }
+
+
 # Policy table: (role, action, resource) -> allow. Everything not listed is DENIED (fail closed).
 # Note: the Curriculum Studio *workflow* rules (correct stage role, no self-approval) are also
 # enforced in the domain service — the PDP is the coarse authZ gate, the domain is defence in depth.
@@ -137,6 +155,7 @@ _ALLOW: frozenset[tuple[str, str, str]] = frozenset(
         *_school_rules(),
         *_staff_rules(),
         *_safeguarding_rules(),
+        *_reporting_rules(),
     }
 )
 

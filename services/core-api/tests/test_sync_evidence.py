@@ -73,7 +73,11 @@ def _attempt_delta(
     client_event_id: str,
     evidence_id: str,
     client_seq: int,
+    lesson_version: object = None,
 ) -> dict[str, object]:
+    """``lesson_version``: the published version the device's package was built from (its
+    manifest's ``lesson_version``); left out of the payload when None (a pre-0015 client)."""
+    extra: dict[str, object] = {} if lesson_version is None else {"lesson_version": lesson_version}
     return {
         "clientEventId": client_event_id,
         "type": "attempt.submitted",
@@ -87,6 +91,7 @@ def _attempt_delta(
             "evidence_id": evidence_id,
             "session_id": "offline-sess-1",
             "context": "practice",
+            **extra,
         },
     }
 

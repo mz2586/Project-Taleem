@@ -66,7 +66,8 @@ ERASURE_EVENT_FIELDS: tuple[str, ...] = (
 # adapters; a class with no configured period is never purged.
 RETENTION_CLASSES: dict[str, str] = {
     "learning_records": (
-        "C2 learning records: knowledge, mastery, assessment evidence, homework submissions"
+        "C2 learning records: knowledge, mastery, assessment evidence, homework submissions, "
+        "report cards"
     ),
     "learning_events": "learning domain-event outbox",
     "security_audit": "identity audit trail (security/audit logs)",

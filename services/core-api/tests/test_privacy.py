@@ -37,6 +37,19 @@ from taleem_core.contexts.privacy.domain.policy import (
     RetainedSet,
     RetentionPolicy,
 )
+from taleem_core.contexts.reporting.adapters.persistence.base import ReportingBase
+from taleem_core.contexts.reporting.adapters.persistence.models import (
+    ReportCardAuditRow,
+    ReportCardOutboxRow,
+    ReportCardRow,
+)
+from taleem_core.contexts.reporting.domain.report_card import (
+    LearnerRecords,
+    Period,
+    ReportCard,
+    derive_body,
+    new_card_id,
+)
 from taleem_core.contexts.safeguarding.adapters.persistence.base import SafeguardingBase
 from taleem_core.contexts.safeguarding.adapters.persistence.models import (
     ConcernAuditRow,
@@ -70,6 +83,7 @@ _SCHEMAS: tuple[tuple[MetaData, str], ...] = (
     (OpsBase.metadata, "ops_session_factory"),
     (SchoolBase.metadata, "school_session_factory"),
     (SafeguardingBase.metadata, "safeguarding_session_factory"),
+    (ReportingBase.metadata, "reporting_session_factory"),
 )
 _CHILD_WORDS = "someone at home frightens me"
 
@@ -146,6 +160,62 @@ def _enrol_in_class(app: FastAPI, *refs: str) -> None:
                     at=1.0,
                 )
             )
+
+
+def _issue_report_card(app: FastAPI, ref: str) -> None:
+    """A system-issued report card (with its audit + outbox rows) for ``ref``."""
+    body = derive_body(
+        records=LearnerRecords(ref),
+        lessons={},
+        period=Period(1, 2),
+        context=None,
+        learner_display_name="Ayesha",
+        issued_by="system",
+        issued_by_name="Taleem",
+        issued_at=3.0,
+        card_id=new_card_id(),
+        supersedes=None,
+        comment=None,
+    )
+    card = ReportCard.issue(body)
+    with app.state.reporting_session_factory() as s, s.begin():
+        s.add(
+            ReportCardRow(
+                card_id=card.card_id,
+                student_ref=ref,
+                organization_id="",
+                class_id="",
+                period_start=1,
+                period_end=2,
+                body=card.body_json,
+                content_hash=card.content_hash,
+                issued_by="system",
+                issued_at=3.0,
+            )
+        )
+        s.add(
+            ReportCardAuditRow(
+                event_id=f"rpa_{card.card_id}"[:64],
+                action="report_card.issued",
+                actor_ref="system",
+                actor_role="system",
+                subject_ref=ref,
+                organization_id="",
+                class_id="",
+                card_id=card.card_id,
+                at=3.0,
+            )
+        )
+        s.add(
+            ReportCardOutboxRow(
+                id=f"rpo_{card.card_id}"[:64],
+                event_type="ReportCardIssued",
+                aggregate_id=card.card_id,
+                student_ref=ref,
+                payload={"card_id": card.card_id, "student_ref": ref},
+                occurred_at=3.0,
+            )
+        )
 
 
 def _family(client: TestClient, name: str) -> dict[str, Any]:
@@ -295,6 +365,7 @@ def _exercise(app: FastAPI, *, blocked: bool = False, safeguarding_kept: bool = 
     _activity(client, app, other)
     _enrol_in_class(app, fam["ref"], other["ref"])
     ref = fam["ref"]
+    _issue_report_card(app, ref)  # only the erased learner: a left-over card blocks downgrade
     before = _scan(app, ref)
     assert {
         "identity.learner_account",
@@ -308,6 +379,9 @@ def _exercise(app: FastAPI, *, blocked: bool = False, safeguarding_kept: bool = 
         "school.enrolment_audit",
         "safeguarding.concern",
         "safeguarding.concern_audit",
+        "reporting.report_card",
+        "reporting.report_card_audit",
+        "reporting.report_card_outbox",
     } <= set(before), before
     assert _memory_hits(app, ref)  # live session, sync entity, AI usage
 

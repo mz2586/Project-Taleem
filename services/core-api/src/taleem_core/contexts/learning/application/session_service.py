@@ -167,6 +167,8 @@ class SessionService:
             response_time_ms=0,
             context=context,
             self_confidence=self_confidence,
+            lesson_id=lesson.lesson_id,
+            lesson_version=lesson.version,
         )
         result = recorded.result
 

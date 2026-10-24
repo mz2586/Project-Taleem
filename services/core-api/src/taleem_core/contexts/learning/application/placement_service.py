@@ -162,6 +162,8 @@ class PlacementService:
                         f"a {item.kind} item is answered with {ANSWER_FIELD[item.kind]!r}",
                     )
                 outcome, hits = evaluate(item, given)
+                # The published lesson this diagnostic question was served from.
+                served = lessons.get(before.next_item.objective_code)
                 now = self._now()
                 if obs:  # strictly increasing, so the fold's order never depends on ties
                     now = max(now, obs[-1].at + 1e-3)
@@ -180,6 +182,8 @@ class PlacementService:
                     prior_before=after.priors_before[-1],
                     prior_after=after.priors_after[-1],
                     now=now,
+                    lesson_id=served.lesson_id if served else "",
+                    lesson_version=served.version if served else None,
                 )
                 self._seed(knowledge, after, placement_id, now)
                 events = [

@@ -73,6 +73,9 @@ class EvidenceRow:
     outcome: str
     context: str
     occurred_at: float
+    evidence_id: str = ""
+    lesson_id: str = ""  # "" / None: not recorded (rows before migration 0015)
+    lesson_version: int | None = None
 
 
 @dataclass(frozen=True)

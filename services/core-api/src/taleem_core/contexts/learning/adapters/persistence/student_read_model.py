@@ -60,6 +60,9 @@ class SqlAlchemyStudentReadModel:
                 outcome=r.outcome,
                 context=r.context,
                 occurred_at=r.occurred_at,
+                evidence_id=r.id,
+                lesson_id=r.lesson_id or "",
+                lesson_version=r.lesson_version,
             )
             for r in rows
         ]

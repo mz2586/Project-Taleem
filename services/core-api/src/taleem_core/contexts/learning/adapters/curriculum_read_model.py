@@ -13,7 +13,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session, sessionmaker
 
 from ...curriculum_studio.adapters.persistence import unit_of_work as cs_unit_of_work
-from ...curriculum_studio.adapters.persistence.models import LessonRow
+from ...curriculum_studio.adapters.persistence.models import LessonRow, SubjectRow
 from ...curriculum_studio.domain.assessment import HUMAN_GRADED, AssessmentItem, ItemType
 from ...curriculum_studio.domain.content import Locale
 from ...curriculum_studio.domain.interaction import interaction_kind
@@ -181,6 +181,45 @@ class CurriculumStudioReadModel:
                 )
         return out
 
+    def published_versions(self) -> list[dict[str, object]]:
+        """The published lesson of each objective code with its version pin (REPORT_CARD_CONTRACT
+        §1): ``{"objective_code", "lesson_id", "version", "curriculum_pack", "subject_key",
+        "subject_name", "title"}``. One entry per code — the first published lesson listing it,
+        the same one ``lesson_for`` teaches from. Titles only; no items or answers. The subject
+        name is the stored hierarchy's localized title (``{}`` when the subject is not stored)."""
+        out: list[dict[str, object]] = []
+        seen: set[str] = set()
+        with cs_unit_of_work(self._sf) as uow:
+            lessons = [x for x in uow.lessons.all() if x.workflow.state.value == "published"]
+        subject_names: dict[str, dict[str, str]] = {}
+        with self._sf() as session:
+            for key, titles in session.execute(
+                select(SubjectRow.subject_key, SubjectRow.titles).order_by(SubjectRow.id)
+            ):
+                if key not in subject_names and isinstance(titles, dict):
+                    subject_names[str(key)] = {
+                        str(k): v
+                        for k, v in titles.items()
+                        if isinstance(v, str) and v and not str(k).startswith("_")
+                    }
+        for lesson in lessons:
+            for code in lesson.learning_outcomes:
+                if code in seen:
+                    continue
+                seen.add(code)
+                out.append(
+                    {
+                        "objective_code": code,
+                        "lesson_id": lesson.lesson_id,
+                        "version": lesson.version,
+                        "curriculum_pack": lesson.metadata.curriculum_pack,
+                        "subject_key": lesson.metadata.subject_key,
+                        "subject_name": subject_names.get(lesson.metadata.subject_key, {}),
+                        "title": _bilingual(lesson.title),
+                    }
+                )
+        return out
+
     def published_graph(self) -> CurriculumGraph:
         """Build the decision-engine curriculum graph from currently-published lessons.
 
@@ -281,4 +320,5 @@ class CurriculumStudioReadModel:
             summative_mentor_mediated=lesson.assessment.mentor_mediated_summative,
             worked_example_steps_localized=tuple({k: v for k, v in b.items() if v} for b in kept),
             written_items=written,
+            version=lesson.version if lesson.version > 0 else None,
         )

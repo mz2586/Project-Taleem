@@ -109,6 +109,9 @@ class AssessmentEvidenceRow(LearningBase):
     mastery_before: Mapped[float] = mapped_column(Float, nullable=False)
     mastery_after: Mapped[float] = mapped_column(Float, nullable=False)
     occurred_at: Mapped[float] = mapped_column(Float, nullable=False)
+    # The published lesson answered against (migration 0015). NULL = not recorded: never guessed.
+    lesson_id: Mapped[str | None] = mapped_column(Text, nullable=True)
+    lesson_version: Mapped[int | None] = mapped_column(Integer, nullable=True)
 
 
 class LearningOutboxRow(LearningBase):

@@ -123,6 +123,12 @@ components:
       properties:
         package_id: { type: string, description: "Stable pointer, e.g. pkg/math-g4-intro-fractions" }
         lesson_id: { type: string }
+        lesson_version:
+          type: ["integer", "null"]
+          description: >-
+            The lesson's published version number this package was built from. Not signed (the
+            signed `version` pins the content). Send it back as an attempt.submitted payload's
+            `lesson_version` so the evidence records the version the work was done on.
         objective_code: { type: string }
         version: { type: string, description: "Short content_hash prefix; changes iff content changes" }
         content_hash: { type: string, description: "SHA-256 hex over the canonical offline content" }

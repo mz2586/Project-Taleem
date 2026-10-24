@@ -157,6 +157,10 @@ class LessonView:
     # Every written item of the lesson's homework, challenge problems and interactive activities,
     # in that order (HOMEWORK_AND_MARKING_CONTRACT §1). Marked by a teacher, never auto-scored.
     written_items: tuple[ItemView, ...] = ()
+    # The published version number of the lesson projected (Curriculum Studio's ``version``):
+    # every evidence path records it with ``lesson_id`` (REPORT_CARD_CONTRACT §1). ``None`` when
+    # the source does not know it. Not part of the offline content (its hash is unchanged).
+    version: int | None = None
 
     @property
     def practice_questions(self) -> tuple[ItemView, ...]:

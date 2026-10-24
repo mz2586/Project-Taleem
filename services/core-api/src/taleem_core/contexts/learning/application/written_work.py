@@ -59,11 +59,22 @@ class WrittenWorkService:
         item_ref: str,
         met: bool,
     ) -> bool:
-        """Record the mark as evidence (correct = ``met``). False when already recorded."""
+        """Record the mark as evidence (correct = ``met``). False when already recorded.
+
+        The evidence names the published lesson the written item belongs to, with its version,
+        as it stands when the teacher marks it. The item must still be in that lesson: if it is
+        not (the lesson was republished or rolled back without it, or unpublished), the lesson
+        the learner wrote for is unknown and the evidence records no lesson and no version rather
+        than guessing one.
+        """
+        lesson = self._curriculum.lesson_for(objective_code)
+        served = lesson is not None and lesson.written_item(item_ref) is not None
         return self._knowledge.record_human_graded(
             evidence_id=submission_id,
             student_ref=student_ref,
             objective_code=objective_code,
             item_ref=item_ref,
             correct=met,
+            lesson_id=lesson.lesson_id if lesson is not None and served else "",
+            lesson_version=lesson.version if lesson is not None and served else None,
         )

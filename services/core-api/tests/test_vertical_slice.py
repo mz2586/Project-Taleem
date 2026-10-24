@@ -43,3 +43,10 @@ def test_vertical_slice_trace_renders() -> None:
     assert "EXECUTION TRACE" in text
     assert "PUBLISHED immutable version" in text
     assert "objective MASTERED" in text
+
+
+def test_vertical_slice_evidence_names_the_published_lesson_and_version() -> None:
+    from taleem_core.vertical_slice.fractions_lesson import LESSON_KEY
+
+    # Published once through the real workflow: every attempt was answered against v1.
+    assert run_slice()["evidence_lessons"] == [(LESSON_KEY, 1)]

@@ -11,8 +11,17 @@ The journey:
     guardian grants consent → child taps their name on the roster and signs in with family code +
     PIN → refresh-token rotation → learning session (completes a published lesson, or — when no
     curriculum is published — asserts the honest "nothing to learn" decision) → guardian views
-    progress → guardian withdraws consent → the child's refresh, re-sign-in and next request are
-    refused → the guardian's audit trail holds every event.
+    progress → the student-to-guardian report journey (below) → guardian withdraws consent → the
+    child's refresh, re-sign-in, next request and report-card read are refused → the guardian's
+    audit trail holds every event.
+
+The report journey: the guardian asks Taleem for the child's report card for a closed period that
+covers the work just done (``…/report-cards:generate``), lists it and reads it. Its totals must
+reconcile with the answers just given, and its version pin must be the lesson version the child
+learned from (the fixture lesson's published version, ``version_source: "evidence"``); with no
+curriculum the card must say plainly that there is no evidence. The guardian acknowledges it
+(200), a second acknowledgement is a 409, a second synthetic family's guardian gets 404 for the
+first child's cards and card, and the child reads their own cards.
 
 Outcomes per step:
 
@@ -255,6 +264,7 @@ class Journey:
         echo: Callable[[str], None] | None = None,
         max_rate_limit_wait: float = MAX_RATE_LIMIT_WAIT_SECONDS,
         client_ip: str | None = None,
+        clock: Callable[[], float] = time.time,
     ) -> None:
         if expect not in {"auto", "empty", "content"}:
             raise ValueError(f"unknown expectation: {expect}")
@@ -266,6 +276,11 @@ class Journey:
         self.client_ip = client_ip
         self.transcript = Transcript()
         self.branch = "unknown"
+        self.clock = clock
+        # What the child did in ``_learning`` (the report card must reconcile with it).
+        self.answered = 0
+        self.correct = 0
+        self.learned: tuple[str, str, int | None] | None = None  # objective, lesson id, version
 
     # ------------------------------------------------------------------------------ plumbing
 
@@ -479,8 +494,10 @@ class Journey:
         child_refresh = str(rotated["refresh_token"])
         self.transcript.protect(child_token, child_refresh)
 
+        period_start = int(self.clock()) - 60  # before anything this new learner did
         self._learning(child_token, student_ref)
         self._guardian_views(guardian_token, child_token, student_ref)
+        self._report_journey(guardian_token, child_token, student_ref, period_start)
 
         self.step(
             "guardian withdraws consent (stop button)",
@@ -519,6 +536,14 @@ class Journey:
             # Learner tokens are consent-checked on every request: withdrawal is immediate.
             check=_problem_code("CONSENT_REQUIRED"),
         )
+        self.step(
+            "child's report-card read after withdrawal is refused",
+            "GET",
+            f"/v1/reporting/learners/{student_ref}/report-cards",
+            expect=403,
+            token=child_token,
+            check=_problem_code("CONSENT_REQUIRED"),
+        )
         audit = self.step(
             "guardian reads the audit trail",
             "GET",
@@ -540,6 +565,7 @@ class Journey:
             note=lambda b: f"{len(b.get('packages', []))} published",
         )
         published = packages.get("packages", [])
+        manifests = {str(p.get("objective_code")): p for p in published}
         fixture = any(p.get("lesson_id") == FIXTURE_LESSON_ID for p in published)
         has_content = bool(published)
         self.branch = "content" if has_content else "empty"
@@ -603,10 +629,17 @@ class Journey:
             check=lambda b: None if b.get("items") else "no practice items",
             note=lambda b: f"{len(b.get('items', []))} practice items",
         )
+        manifest = manifests.get(objective) or {}
+        version = manifest.get("lesson_version")
+        self.learned = (
+            objective,
+            str(manifest.get("lesson_id") or ""),
+            version if isinstance(version, int) else None,
+        )
         answers = fixture_answer_key()
         for item in taught["items"]:
             ref = str(item["item_ref"])
-            self.step(
+            answered = self.step(
                 f"child answers item {ref}",
                 "POST",
                 f"{base}:answer",
@@ -618,8 +651,15 @@ class Journey:
                     "option": answers.get(ref, 0),
                     "hints_used": 0,
                 },
+                check=lambda b: (
+                    None
+                    if b.get("outcome") in ("correct", "incorrect")
+                    else f"outcome {b.get('outcome')!r}"
+                ),
                 note=lambda b: f"outcome={b.get('outcome')} mastery={b.get('mastery')}",
             )
+            self.answered += 1
+            self.correct += answered.get("outcome") == "correct"
         self.step(
             "child completes the lesson (session ends)",
             "POST",
@@ -664,6 +704,218 @@ class Journey:
                 "identity enrolments, so a self-registered guardian cannot see progress"
             ),
         )
+
+    def _closed_period_end(self) -> int:
+        """A period end after everything recorded so far and not in the future (end exclusive):
+        the next whole second, waited out."""
+        end = int(self.clock()) + 1
+        self.sleep(max(0.0, end - self.clock()) + 0.05)
+        return end
+
+    def _report_journey(
+        self, guardian_token: str, child_token: str, student_ref: str, period_start: int
+    ) -> None:
+        period_end = self._closed_period_end()
+        period = {"period_start": period_start, "period_end": period_end}
+        expected = report_card_problem(
+            answered=self.answered, correct=self.correct, learned=self.learned
+        )
+        card = self.step(
+            "guardian asks Taleem for the child's report card (closed period)",
+            "POST",
+            f"/v1/reporting/children/{student_ref}/report-cards:generate",
+            expect=201,
+            token=guardian_token,
+            body=period,
+            check=lambda b: expected(b) or _card_is(b, student_ref, period),
+            note=lambda b: card_note(b),
+        )
+        card_id = str(card["card_id"])
+        self.step(
+            "guardian lists the child's report cards",
+            "GET",
+            f"/v1/reporting/children/{student_ref}/report-cards",
+            expect=200,
+            token=guardian_token,
+            check=_lists_card(card_id, card["content_hash"]),
+        )
+        self.step(
+            "guardian reads the report card (hash re-verified)",
+            "GET",
+            f"/v1/reporting/report-cards/{card_id}",
+            expect=200,
+            token=guardian_token,
+            check=lambda b: expected(b) or _same_card(b, card),
+        )
+        self.step(
+            "guardian acknowledges the report card",
+            "POST",
+            f"/v1/reporting/report-cards/{card_id}:acknowledge",
+            expect=200,
+            token=guardian_token,
+            check=lambda b: None if b.get("acknowledged_at") else "no acknowledged_at",
+        )
+        self.step(
+            "a second acknowledgement is refused (already seen)",
+            "POST",
+            f"/v1/reporting/report-cards/{card_id}:acknowledge",
+            expect=409,
+            token=guardian_token,
+            check=_problem_code("ALREADY_ACKNOWLEDGED"),
+        )
+
+        other_email = f"e2e-{uuid.uuid4().hex[:16]}@example.invalid"
+        other_passphrase = secrets.token_urlsafe(24)
+        self.transcript.protect(other_email, other_passphrase)
+        other = self.step(
+            "a second synthetic family's guardian registers",
+            "POST",
+            "/v1/identity/guardians",
+            expect=201,
+            body={
+                "email": other_email,
+                "passphrase": other_passphrase,
+                "displayName": "Synthetic Guardian Two",
+            },
+            check=lambda b: None if b.get("session", {}).get("access_token") else "no session",
+        )
+        other_token = str(other["session"]["access_token"])
+        self.transcript.protect(
+            other_token, str(other.get("refresh_token", "")), str(other["guardian"]["family_code"])
+        )
+        self.step(
+            "the other guardian cannot list the first child's cards",
+            "GET",
+            f"/v1/reporting/children/{student_ref}/report-cards",
+            expect=404,
+            token=other_token,
+        )
+        self.step(
+            "the other guardian cannot read the first child's card",
+            "GET",
+            f"/v1/reporting/report-cards/{card_id}",
+            expect=404,
+            token=other_token,
+        )
+        self.step(
+            "the other guardian cannot generate a card for the first child",
+            "POST",
+            f"/v1/reporting/children/{student_ref}/report-cards:generate",
+            expect=404,
+            token=other_token,
+            body={"period_start": period_start - 60, "period_end": period_end},
+        )
+        self.step(
+            "child reads their own report cards",
+            "GET",
+            f"/v1/reporting/learners/{student_ref}/report-cards",
+            expect=200,
+            token=child_token,
+            check=_lists_card(card_id, card["content_hash"]),
+        )
+
+
+def report_card_problem(
+    *, answered: int, correct: int, learned: tuple[str, str, int | None] | None
+) -> Callable[[Any], str | None]:
+    """A check that a report card reconciles with what the child just did.
+
+    With answers: one objective, the totals equal the answers given (attempts and correct), and
+    the objective's pin is the lesson version the child learned from, recorded on the evidence
+    (``lesson_version`` = ``lesson_versions[0]``, ``version_source: "evidence"``). With none: the
+    card says plainly there is no evidence (never zeros as results).
+    """
+
+    def check(body: Any) -> str | None:
+        if not isinstance(body, dict):
+            return "not a card"
+        if not body.get("hash_verified"):
+            return "content hash not verified"
+        if body.get("derivation") != "taleem.reporting.derive/2":
+            return f"derivation {body.get('derivation')!r}"
+        if answered == 0:
+            if body.get("has_evidence") is not False or body.get("totals") is not None:
+                return "a card with no work in the period must say so (has_evidence false)"
+            return (
+                None
+                if body.get("notice") == "no_evidence_in_period"
+                else f"notice {body.get('notice')!r}"
+            )
+        totals = body.get("totals") or {}
+        if (totals.get("attempts"), totals.get("correct")) != (answered, correct):
+            return (
+                f"totals {totals.get('attempts')}/{totals.get('correct')} do not reconcile with "
+                f"the {answered} answers given ({correct} correct)"
+            )
+        objectives = [o for s in body.get("subjects") or [] for o in s.get("objectives") or []]
+        if learned is None or len(objectives) != 1:
+            return f"expected one objective, got {len(objectives)}"
+        (obj,) = objectives
+        code, lesson_id, version = learned
+        if version is None:
+            return "the package did not carry the lesson's published version"
+        got = (
+            obj.get("objective_code"),
+            obj.get("lesson_id"),
+            obj.get("lesson_version"),
+            obj.get("lesson_versions"),
+            obj.get("version_source"),
+        )
+        want = (code, lesson_id, version, [version], "evidence")
+        return None if got == want else f"version pin {got} != {want}"
+
+    return check
+
+
+def card_note(body: Any) -> str:
+    if body.get("has_evidence") is False:
+        return f"no evidence in period ({body.get('notice')})"
+    totals = body.get("totals") or {}
+    pins = [
+        f"{o.get('lesson_id')}@v{o.get('lesson_version')} ({o.get('version_source')})"
+        for s in body.get("subjects") or []
+        for o in s.get("objectives") or []
+    ]
+    return (
+        f"attempts={totals.get('attempts')} correct={totals.get('correct')} "
+        f"pins={', '.join(pins) or 'none'}"
+    )
+
+
+def _card_is(body: Any, student_ref: str, period: dict[str, int]) -> str | None:
+    if body.get("student_ref") != student_ref:
+        return "the card names another learner"
+    if (body.get("period_start"), body.get("period_end")) != (
+        period["period_start"],
+        period["period_end"],
+    ):
+        return "the card covers another period"
+    if body.get("issued_by") != "system" or body.get("status") != "issued":
+        return f"issued_by={body.get('issued_by')!r} status={body.get('status')!r}"
+    return None
+
+
+def _same_card(body: Any, issued: dict[str, Any]) -> str | None:
+    if body.get("card_id") != issued.get("card_id"):
+        return "another card"
+    if body.get("content_hash") != issued.get("content_hash"):
+        return "the stored card differs from the one issued"
+    return None
+
+
+def _lists_card(card_id: str, chash: str) -> Callable[[Any], str | None]:
+    def check(body: Any) -> str | None:
+        cards = body.get("report_cards") if isinstance(body, dict) else None
+        if not isinstance(cards, list):
+            return "no report_cards list"
+        match = [c for c in cards if c.get("card_id") == card_id]
+        if not match:
+            return "the issued card is not listed"
+        if match[0].get("content_hash") != chash or not match[0].get("hash_verified"):
+            return "the listed card does not verify"
+        return None
+
+    return check
 
 
 def _problem_code(code: str) -> Callable[[Any], str | None]:
