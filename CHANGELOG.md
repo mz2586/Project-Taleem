@@ -6,12 +6,25 @@ The local Git history is the official project history; each released version map
 
 ## [Unreleased]
 
+### Learning — interaction runtime for fill, order, match and sort
+
+- [`ITEM_INTERACTION_CONTRACT.md`](docs/10-curriculum-studio/ITEM_INTERACTION_CONTRACT.md)
+  defines canonical answer keys, projection, answer bodies and scoring for choose, fill, order,
+  match and sort. The Studio validator blocks non-canonical keys. All 139 Grade 4 drafts are
+  normalised; 21 bespoke widgets remain unplayable and flagged.
+- The backend scores every kind (typed answers are normalised for Urdu digits, separators, case
+  and punctuation) in the session, placement and offline sync. Activities are played before
+  practice. Answer keys never reach a device. A body of the wrong shape gets 422 /
+  `ANSWER_KIND_MISMATCH`.
+- The web player has tap-only, screen-reader-labelled renderers for each kind in the lesson,
+  offline and placement flows, plus a skip for an unusable item.
+
 ### Curriculum — AI first drafts for every Grade 4 lesson
 
 - `curriculum/grade-4/ai-drafts/`: one complete bilingual (Urdu/English) first draft per Grade 4
   objective (139). Each has a teaching text, worked examples, 3+ auto-scored practice items,
   activities, hints, misconceptions, remediation, notes and an AI-teaching object. A
-  [reviewer guide](curriculum/grade-4/ai-drafts/README.md) and 322 per-lesson review flags go
+  [reviewer guide](curriculum/grade-4/ai-drafts/README.md) and 361 per-lesson review flags go
   with them.
 - `tools/curriculum_ai_drafts.py`: the format, a strict parser and a validator CLI. Practice
   questions must be option-based (the only type the runtime can score), drafts cannot carry asset
