@@ -3,6 +3,13 @@
 **Status:** Requirements draft · **Prepared:** 2026-10-22 · **Scope reference:**
 [`GLOBAL_PRODUCT_SCOPE.md`](GLOBAL_PRODUCT_SCOPE.md) § Two connected pathways
 
+**Superseded framing (2026-10-24).** The definitive mission makes Taleem an AI-led school with no
+hired teaching workforce. Partners here are certification, invigilation, attestation and
+safeguarding partners, not teaching partners. The class and assignment tools below are optional
+oversight features; every learner capability also has an AI-led path. Recommended qualification
+route: [`decisions/ACCREDITATION_PATHWAYS.md`](decisions/ACCREDITATION_PATHWAYS.md). The original
+text follows for history:
+
 Taleem School is the teacher-supported, structured pathway. It can lead to a recognized
 qualification **only through an authorized education partner**. This document states what such a
 partner must provide and what Taleem must build, so that a partner conversation has a concrete
@@ -22,7 +29,7 @@ is on file.
 | --- | --- | --- |
 | P-1 | Legal authority to award or recognize the qualification in the target jurisdiction | Taleem cannot self-accredit |
 | P-2 | Named curriculum and assessment standards, with the right to deliver them digitally | Maps onto a curriculum pack |
-| P-3 | Qualified teachers, or approval criteria for Taleem-provided teachers | Teacher-led learning |
+| P-3 | What the partner certifies, invigilates or attests (exam entry, practical-work certificates, admission attestation): **never teaching**. A route that requires teacher-led instruction is recorded as incompatible ([`ACCREDITATION_PATHWAYS.md`](decisions/ACCREDITATION_PATHWAYS.md)), not accommodated by hiring teachers | AI-led mission ([`GLOBAL_PRODUCT_SCOPE.md`](GLOBAL_PRODUCT_SCOPE.md)) |
 | P-4 | Assessment and invigilation rules for summative assessment (remote or in person) | Integrity of awards |
 | P-5 | Attendance and progression rules (what counts, and minimums) | FD-10 attendance semantics |
 | P-6 | Safeguarding standards and a designated safeguarding lead for its learners | M-Safe alignment |

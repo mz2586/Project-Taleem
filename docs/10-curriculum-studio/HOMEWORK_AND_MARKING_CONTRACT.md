@@ -71,9 +71,44 @@ includes them. Erasure deletes them, and the erasure completeness gate covers th
 Retention purge treats them like other learner work, and stays disabled until M-Gov sets the
 periods. No submission text is ever logged.
 
+## 6. The AI-led path: no teacher required (binding since 2026-10-24)
+
+The definitive mission ([`GLOBAL_PRODUCT_SCOPE.md`](../GLOBAL_PRODUCT_SCOPE.md)) forbids any
+learner journey that depends on a teacher. §2–§3 stay as an **optional** human path. This section is
+the primary path.
+
+- **Self-paced homework.** Every lesson the learner has studied (a live session or a synced offline
+  attempt on its objective) contributes its written items to the Homework screen. No assignment is
+  needed. A teacher assignment, where one exists, only adds a due date. The list endpoint returns
+  both, each item tagged `source: "self_paced" | "assignment"`.
+- **Automatic marking only where it is reliable.** A written item whose `answer_key.answer` (plus
+  `accepted_variants`) states an exact answer is marked on submit with the same `normalize` rule as
+  fill items (ITEM_INTERACTION_CONTRACT §4). The mark is `met` / `not_yet`, `reviewed_by = "auto"`,
+  and records one idempotent evidence. Nothing else is auto-marked.
+- **Open written answers** (no exact key: stories, explanations, letters) are **never** scored by a
+  rule or a model today. On submit the child gets `state: "submitted"` and
+  `marking: "self_check"`. If the author provided a `sample_answer` or `guidance`, the child may then
+  see it, labelled "compare your answer". No mastery evidence is recorded and the screen never says
+  "marked".
+- **AI marking (future, inert).** A rubric-marking port on the existing `LLMGateway` is defined and
+  tested against a stub. It is disabled until FD-03 is approved **and** an in-region distress
+  classifier screens the child's text first (FD-03 brief). It never runs on a teacher-free path
+  before then.
+- **Optional human marking.** If the learner is in a class, its teacher may still mark or return
+  submissions (§3), including open ones.
+- **Safety: nobody reading must not mean nobody protecting.** Every submitted text passes a
+  deterministic **disclosure screen**: an Urdu + English phrase list kept as configuration, not
+  code. A match raises a concern in the existing safeguarding triage queue (`source = system`,
+  referencing the submission). The child's screen never changes because of it; the child always
+  sees the existing "talk to a trusted adult / tell us" affordance. The screen only escalates to a
+  human. It never decides, replies or blocks. The phrase list ships as an engineering starter and
+  is marked **pending safeguarding-lead approval (M-Safe)**. With no teacher, `SHARING_REQUIRED`
+  does not apply to self-paced items, because no third party sees them.
+
 ## Change Log
 
 | Date | Change | Author |
 | --- | --- | --- |
+| 2026-10-24 | §6 AI-led path: self-paced homework, reliable auto-marking only, open answers self-check, AI marking inert until FD-03. | Engineering |
 | 2026-10-24 | Implementation notes: `SHARING_REQUIRED`, one row per item with `attempt`, the concern route. | Engineering |
 | 2026-10-24 | Contract adopted: written items, learner homework + submission, teacher marking, evidence, safeguarding hook, privacy. | Engineering |

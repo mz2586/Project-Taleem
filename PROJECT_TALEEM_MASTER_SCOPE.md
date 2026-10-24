@@ -55,7 +55,7 @@ counted as working curriculum.
 | 8 | Global curriculum and localization | in-progress | Curriculum-independent model + packs (`6cba77e`), open BCP-47 locales, independent UI/instruction/region settings, RTL/LTR | Second pack and locale not-started (R3) |
 | 9 | Accessibility on affordable devices and low bandwidth | implemented-but-unverified | jsx-a11y strict, axe scan 0 violations in CI, tap-only interactions, Ed25519 fallback for older Android (`4b7e96a`), k6 performance evidence | external assistive-technology audit; real-device check |
 | 10 | Sustainable free model, no data selling or child ads | in-progress | Per-learner AI cost ledger and shared quotas (`d11695b`); principles in the binding scope | funding model and quota values (FD-07) |
-| 11 | Credible path to recognized qualifications | not-started | — | Per-jurisdiction research of AI-compatible pathways (in progress); never claimed before authorization |
+| 11 | Credible path to recognized qualifications | in-progress (research); authorization: blocked-by-external-decision | [`ACCREDITATION_PATHWAYS.md`](docs/decisions/ACCREDITATION_PATHWAYS.md): 17 routes, 14 incompatibilities with alternatives, 25 sources (45 claims UNVERIFIED). Recommended: **private-candidate exams** (FBISE SSC default; Cambridge/Edexcel International GCSE optional). Boards certify the child, not how they were taught | No recognized KG–8 certificate found for children outside registered schools (UNVERIFIED); practical certificates, attestation and exam centres need partners; school registration (ICT-PEIRA) needs teachers, so it is **incompatible** and is not pursued by hiring teachers; 9 owner decisions |
 
 ### 0.3 Acceptance journeys: pass/fail with evidence (at `86efa54`)
 
