@@ -35,6 +35,10 @@ export interface ItemView {
   item_ref: string;
   prompt: Record<string, string>; // locale -> text
   options: string[];
+  /** Interaction kind (ITEM_INTERACTION_CONTRACT §2); absent means "choose" (servers before the contract). */
+  kind?: string;
+  /** match/sort: options[0..left_count-1] are the items/cards, the rest the matches/groups. */
+  left_count?: number;
   /** Authored graduated hints available via `:hint` (absent on servers that predate it). */
   hint_count?: number;
 }

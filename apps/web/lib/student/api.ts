@@ -25,6 +25,7 @@ import type {
   PackageManifest,
   SigningKey,
   SyncDelta,
+  AnswerBody,
 } from "../offline/types";
 
 // The access token comes from the session store, which keeps it fresh. The indirection remains so
@@ -91,13 +92,14 @@ export const learningApi = {
 
   answer: (
     sessionId: string,
+    // Exactly one answer field, per the item's kind (ITEM_INTERACTION_CONTRACT §3):
+    // {option} · {text} · {order} · {pairs}.
     body: {
       objective_code: string;
       item_ref: string;
-      option: number;
       hints_used?: number;
       self_confidence?: number | null;
-    },
+    } & AnswerBody,
   ) => authed(() => post<AnswerView>(`/v1/learning/sessions/${sessionId}:answer`, body)),
 
   // The next AUTHORED hint on the item's graduated ladder (never the answer).
@@ -122,7 +124,8 @@ export const learningApi = {
   placement: (studentRef: string) =>
     authed(() => req<PlacementWire>(`/v1/learning/students/${studentRef}/placement`)),
 
-  placementAnswer: (studentRef: string, body: { item_ref: string; option: number; response_time_ms?: number }) =>
+  // The same one-answer-field rule as `:answer`; a choose answer is still `{item_ref, option}`.
+  placementAnswer: (studentRef: string, body: { item_ref: string; response_time_ms?: number } & AnswerBody) =>
     authed(() => post<PlacementWire>(`/v1/learning/students/${studentRef}/placement:answer`, body)),
 };
 

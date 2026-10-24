@@ -35,6 +35,10 @@ export interface OfflineItem {
   prompt: Record<string, string>; // locale -> text
   options: string[];
   hints: string[];
+  /** Interaction kind (ITEM_INTERACTION_CONTRACT §2); absent means "choose" (older packages). */
+  kind?: string;
+  /** match/sort: options[0..left_count-1] are the items/cards, the rest the matches/groups. */
+  left_count?: number;
   // NOTE: no correct_option / option_misconceptions — answer keys never reach the device (6.2A).
 }
 
@@ -81,6 +85,8 @@ export interface LocalProgressEvent {
   kind: ProgressEventKind;
   item_ref?: string;
   selected_option?: number; // the child's choice (NOT graded on device)
+  /** A non-choose answer (fill/order/match/sort), as sent on sync. Choose answers keep `selected_option`. */
+  answer?: AnswerBody;
   created_at: number;
 }
 
@@ -111,12 +117,21 @@ export type DeltaType =
 
 export type SyncStatus = "applied" | "duplicate" | "ignored" | "conflict";
 
+// The answer field of an attempt (ITEM_INTERACTION_CONTRACT §3): exactly one per kind.
+//   choose {option} · fill {text} · order {order} · match/sort {pairs: [[left, right], ...]}
+export type AnswerBody =
+  | { option: number }
+  | { text: string }
+  | { order: number[] }
+  | { pairs: Array<[number, number]> };
+
 // An offline attempt payload (graded server-side on sync; NO answer key on the device).
-export interface AttemptPayload {
+export type AttemptPayload = AttemptEnvelope & AnswerBody;
+
+export interface AttemptEnvelope {
   student_ref: string;
   objective_code: string;
   item_ref: string;
-  option: number;
   evidence_id: string; // client uuid7 — the durable idempotency key
   session_id?: string;
   hints_used?: number;

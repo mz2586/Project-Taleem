@@ -13,6 +13,7 @@
 
 import { SUPPORTED_LOCALES, type Locale } from "../i18n/config";
 import type { MessageKey } from "../i18n/messages";
+import type { InteractiveItem } from "./itemAnswer";
 import { ApiError } from "./types";
 
 export type PlacementStatus = "unavailable" | "not_eligible" | "available" | "in_progress" | "completed";
@@ -22,6 +23,10 @@ export interface PlacementItemWire {
   objective_code: string;
   prompt: Record<string, string>;
   options: string[];
+  /** Interaction kind (ITEM_INTERACTION_CONTRACT §2); absent means "choose". */
+  kind?: string;
+  /** match/sort: options[0..left_count-1] are the items/cards, the rest the matches/groups. */
+  left_count?: number;
 }
 
 export interface PlacementObjectiveWire {
@@ -84,6 +89,11 @@ export interface PlacementQuestion {
   /** The prompt's own language (it may differ from the interface when only one is authored). */
   promptLocale: Locale | null;
   options: Array<{ index: number; label: string }>;
+  /**
+   * Present only when the item declares a `kind`: what ItemInteraction needs to render it. A choose
+   * item (the kind, or no kind at all) is answered by tapping `options`, exactly as before.
+   */
+  interaction?: InteractiveItem & { item_ref: string };
   /** 1-based number of this question. */
   number: number;
   max: number;
@@ -120,6 +130,16 @@ export function placementScreen(wire: PlacementWire, locale: Locale): PlacementS
       prompt: text,
       promptLocale,
       options: (item.options ?? []).map((label, index) => ({ index, label })),
+      ...(item.kind !== undefined
+        ? {
+            interaction: {
+              item_ref: item.item_ref,
+              options: item.options ?? [],
+              kind: item.kind,
+              ...(item.left_count !== undefined ? { left_count: item.left_count } : {}),
+            },
+          }
+        : {}),
       number: Math.min(wire.items_used + 1, Math.max(1, wire.max_items)),
       max: wire.max_items,
     },
@@ -132,11 +152,12 @@ export type PlacementFailure = "offline" | "error";
 
 export type AnswerState =
   | { status: "idle" }
-  | { status: "saving"; option: number }
+  // `option` is the tapped choice (for its spinner); null for a fill/order/match/sort answer.
+  | { status: "saving"; option: number | null }
   | { status: "failed"; error: PlacementFailure };
 
 export type AnswerAction =
-  | { type: "submit"; option: number }
+  | { type: "submit"; option: number | null }
   | { type: "saved" }
   | { type: "failed"; error: PlacementFailure }
   | { type: "reset" };

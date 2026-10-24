@@ -24,7 +24,7 @@ import { pickLocalized } from "../i18n/content";
 import type { CheckpointStore } from "../offline/checkpoint";
 import type { ProgressStore } from "../offline/progress";
 import type { SyncQueue } from "../offline/syncQueue";
-import type { OfflineContent, OfflineItem, SessionCheckpoint } from "../offline/types";
+import type { AnswerBody, OfflineContent, OfflineItem, SessionCheckpoint } from "../offline/types";
 import { INSTRUCTION_LOCALE_PREFERENCE } from "./journey";
 import {
   currentItem,
@@ -55,6 +55,9 @@ export function toTeachView(content: OfflineContent): TeachView {
     prompt: i.prompt,
     options: i.options,
     hint_count: i.hints.length,
+    // Only when the package says so: an older package's items stay exactly as they were (choose).
+    ...(i.kind !== undefined ? { kind: i.kind } : {}),
+    ...(i.left_count !== undefined ? { left_count: i.left_count } : {}),
   }));
   return { utterances: present, items };
 }
@@ -84,7 +87,9 @@ export type OfflineAction =
   | { type: "load"; content: OfflineContent; resumeAt?: number }
   | Extract<PlayerAction, { type: "nextStep" | "previousStep" | "ready" }>
   | { type: "hint" }
-  | { type: "saved" };
+  | { type: "saved" }
+  /** An item this phone cannot render was skipped: nothing saved, nothing queued. */
+  | { type: "skipped" };
 
 export const initialOfflineState: OfflinePlayerState = {
   player: initialPlayerState,
@@ -140,6 +145,12 @@ export function offlineReducer(state: OfflinePlayerState, action: OfflineAction)
       if (state.player.itemIndex + 1 >= total) return { ...state, savedCount, justSaved: true, done: true };
       return { ...state, savedCount, justSaved: true, player: playerReducer(state.player, { type: "nextItem" }) };
     }
+    case "skipped": {
+      if (state.player.phase !== "asking") return state;
+      const total = state.player.teach?.items.length ?? 0;
+      if (state.player.itemIndex + 1 >= total) return { ...state, justSaved: false, done: true };
+      return { ...state, justSaved: false, player: playerReducer(state.player, { type: "nextItem" }) };
+    }
   }
 }
 
@@ -176,24 +187,30 @@ export function createOfflineRunner(deps: RunnerDeps, studentRef: string) {
     async answer(input: {
       checkpoint: SessionCheckpoint;
       item: OfflineItem;
-      option: number;
+      /** The answer field for the item's kind (ITEM_INTERACTION_CONTRACT §3). */
+      answer?: AnswerBody;
+      /** Shorthand for a choose answer, `{option}` (kept for existing callers). */
+      option?: number;
       hintsUsed: number;
       responseTimeMs?: number;
     }): Promise<SessionCheckpoint> {
       const { checkpoint, item } = input;
+      const answer: AnswerBody = input.answer ?? { option: input.option ?? 0 };
+      // A choose answer is recorded exactly as before (`selected_option`); any other kind keeps its
+      // answer body on the event so reconcile can re-queue it verbatim.
       const event = await deps.progress.record({
         student_ref: studentRef,
         lesson_id: checkpoint.lesson_id,
         objective_code: item.objective_code,
         kind: "item_attempted",
         item_ref: item.item_ref,
-        selected_option: input.option,
+        ...("option" in answer ? { selected_option: answer.option } : { answer }),
       });
       await deps.queue.enqueueAttempt({
         student_ref: studentRef,
         objective_code: item.objective_code,
         item_ref: item.item_ref,
-        option: input.option,
+        ...answer,
         evidence_id: event.client_event_id,
         // Same correlation key reconcileAndResume uses for offline attempts.
         session_id: checkpoint.lesson_id,
@@ -202,6 +219,14 @@ export function createOfflineRunner(deps: RunnerDeps, studentRef: string) {
         context: "practice",
       });
       return deps.checkpoints.advance(checkpoint, item.item_ref);
+    },
+
+    /**
+     * Skip an item this phone cannot render: only the checkpoint moves (so a reload resumes after
+     * it). No progress event and no queued attempt — there is no answer to grade.
+     */
+    async skip(input: { checkpoint: SessionCheckpoint; item: OfflineItem }): Promise<SessionCheckpoint> {
+      return deps.checkpoints.advance(input.checkpoint, input.item.item_ref);
     },
 
     /** The lesson is finished: record it and drop the checkpoint, so the next open starts fresh. */

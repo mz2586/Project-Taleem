@@ -6,6 +6,7 @@
 import { useCallback, useEffect, useReducer, useState } from "react";
 
 import { AppShell } from "@/components/student/AppShell";
+import { ItemInteraction } from "@/components/student/ItemInteraction";
 import { ReadAloud } from "@/components/student/ReadAloud";
 import { Card, EmptyState, ErrorBanner, Skeleton } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
@@ -14,6 +15,7 @@ import { contentAttrs } from "@/lib/i18n/content";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { useLearner } from "@/lib/session/useLearner";
 import { learningApi } from "@/lib/student/api";
+import { itemKind, type AnswerBody } from "@/lib/student/itemAnswer";
 import { classifyLoadError, type LoadFailure } from "@/lib/student/journey";
 import {
   answerReducer,
@@ -27,7 +29,7 @@ import {
 
 export default function PlacementPage() {
   const { studentRef: ref, band } = useLearner();
-  const { t, locale } = useLocale();
+  const { t, locale, formatNumber } = useLocale();
   const [wire, setWire] = useState<PlacementWire | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | LoadFailure>("loading");
   const [answer, dispatch] = useReducer(answerReducer, initialAnswerState);
@@ -50,11 +52,12 @@ export default function PlacementPage() {
 
   const screen = wire ? placementScreen(wire, locale) : null;
 
-  async function choose(itemRef: string, option: number) {
+  // `body` is the contract answer field for the item's kind; a choose answer is `{option}`.
+  async function choose(itemRef: string, body: AnswerBody) {
     if (!ref || answer.status === "saving") return;
-    dispatch({ type: "submit", option });
+    dispatch({ type: "submit", option: "option" in body ? body.option : null });
     try {
-      setWire(await learningApi.placementAnswer(ref, { item_ref: itemRef, option }));
+      setWire(await learningApi.placementAnswer(ref, { item_ref: itemRef, ...body }));
       setAnswered((n) => n + 1);
       dispatch({ type: "saved" });
     } catch (e) {
@@ -100,19 +103,33 @@ export default function PlacementPage() {
                   lang={screen.question.promptLocale ?? undefined}
                 />
               </div>
-              <div role="group" aria-label={t("student.placement.answersLabel")} style={{ display: "grid", gap: "var(--space-2)" }}>
-                {screen.question.options.map((opt) => (
-                  <Button
-                    key={`${screen.question.itemRef}-${opt.index}`}
-                    variant="primary"
-                    label={opt.label}
-                    {...contentAttrs({ text: opt.label })}
-                    disabled={answer.status === "saving"}
-                    loading={answer.status === "saving" && answer.option === opt.index}
-                    onClick={() => void choose(screen.question.itemRef, opt.index)}
-                  />
-                ))}
-              </div>
+              {screen.question.interaction && itemKind(screen.question.interaction) !== "choose" ? (
+                // An unrenderable item has no skip of its own here: the "skip" link below leaves
+                // placement for Today, and the server picks the questions.
+                <ItemInteraction
+                  key={screen.question.itemRef}
+                  item={screen.question.interaction}
+                  t={t}
+                  formatNumber={formatNumber}
+                  disabled={answer.status === "saving"}
+                  submitLabel={t("student.session.items.save")}
+                  onSubmit={(body) => void choose(screen.question.itemRef, body)}
+                />
+              ) : (
+                <div role="group" aria-label={t("student.placement.answersLabel")} style={{ display: "grid", gap: "var(--space-2)" }}>
+                  {screen.question.options.map((opt) => (
+                    <Button
+                      key={`${screen.question.itemRef}-${opt.index}`}
+                      variant="primary"
+                      label={opt.label}
+                      {...contentAttrs({ text: opt.label })}
+                      disabled={answer.status === "saving"}
+                      loading={answer.status === "saving" && answer.option === opt.index}
+                      onClick={() => void choose(screen.question.itemRef, { option: opt.index })}
+                    />
+                  ))}
+                </div>
+              )}
               {answer.status === "saving" ? <p style={{ margin: 0 }}>{t("student.placement.saving")}</p> : null}
               {answer.status === "failed" ? <ErrorBanner message={t(PLACEMENT_FAILURE_COPY[answer.error])} /> : null}
               <div>

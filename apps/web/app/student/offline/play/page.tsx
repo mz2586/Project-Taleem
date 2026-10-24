@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo, useReducer, useRef, useState } from "react";
 
 import { AppShell } from "@/components/student/AppShell";
+import { ItemInteraction } from "@/components/student/ItemInteraction";
 import { ReadAloud } from "@/components/student/ReadAloud";
 import { Card, EmptyState, ErrorBanner, Skeleton } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
@@ -17,6 +18,7 @@ import { contentAttrs, pickLocalized } from "@/lib/i18n/content";
 import { useLocale } from "@/lib/i18n/useLocale";
 import type { SessionCheckpoint } from "@/lib/offline/types";
 import { useLearner } from "@/lib/session/useLearner";
+import { itemKind, type AnswerBody } from "@/lib/student/itemAnswer";
 import { INSTRUCTION_LOCALE_PREFERENCE } from "@/lib/student/journey";
 import { isLastStep, presentationSteps } from "@/lib/student/lessonPlayer";
 import { getOfflineClient } from "@/lib/student/offlineClient";
@@ -37,7 +39,7 @@ function OfflinePlayer() {
   const params = useSearchParams();
   const lessonId = params.get("lesson") ?? "";
   const { studentRef, band } = useLearner();
-  const { t } = useLocale();
+  const { t, formatNumber } = useLocale();
   const runner = useMemo<OfflineRunner | null>(() => {
     if (typeof window === "undefined" || !studentRef) return null;
     const client = getOfflineClient();
@@ -96,20 +98,34 @@ function OfflinePlayer() {
     shownAt.current = Date.now();
   }, [item?.item_ref]);
 
-  const choose = async (option: number) => {
+  // `answer` is the contract answer field for the item's kind; a choose answer is `{option}`.
+  const choose = async (answer: AnswerBody) => {
     if (!runner || !checkpoint.current || !item || saving) return;
     setSaving(true);
     try {
       checkpoint.current = await runner.answer({
         checkpoint: checkpoint.current,
         item,
-        option,
+        answer,
         hintsUsed: state.player.hints.length,
         responseTimeMs: Date.now() - shownAt.current,
       });
       dispatch({ type: "saved" });
       // Online: send now. Offline: the auto-drain sends it on reconnect.
       if (typeof navigator === "undefined" || navigator.onLine) void getOfflineClient().sync.drain().catch(() => undefined);
+    } catch {
+      setStatus("error");
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const skip = async () => {
+    if (!runner || !checkpoint.current || !item || saving) return;
+    setSaving(true);
+    try {
+      checkpoint.current = await runner.skip({ checkpoint: checkpoint.current, item });
+      dispatch({ type: "skipped" });
     } catch {
       setStatus("error");
     } finally {
@@ -224,11 +240,24 @@ function OfflinePlayer() {
                 <ReadAloud label={t("student.session.questionAudio")} text={prompt?.text} lang={prompt?.locale} />
               </div>
               <p style={{ margin: 0, fontSize: "var(--font-size-body-min)" }}>{t("student.offline.player.noKeyNote")}</p>
-              <div role="group" aria-label={t("student.session.answers")} style={{ display: "grid", gap: "var(--space-2)" }}>
-                {item.options.map((opt, i) => (
-                  <Button key={i} variant="primary" label={opt} {...contentAttrs({ text: opt })} disabled={saving} onClick={() => void choose(i)} />
-                ))}
-              </div>
+              {itemKind(item) === "choose" ? (
+                <div role="group" aria-label={t("student.session.answers")} style={{ display: "grid", gap: "var(--space-2)" }}>
+                  {item.options.map((opt, i) => (
+                    <Button key={i} variant="primary" label={opt} {...contentAttrs({ text: opt })} disabled={saving} onClick={() => void choose({ option: i })} />
+                  ))}
+                </div>
+              ) : (
+                <ItemInteraction
+                  key={item.item_ref}
+                  item={item}
+                  t={t}
+                  formatNumber={formatNumber}
+                  disabled={saving}
+                  submitLabel={t("student.session.items.save")}
+                  onSubmit={(body) => void choose(body)}
+                  onSkip={() => void skip()}
+                />
+              )}
               {state.player.hints.length > 0 ? (
                 <ol aria-label={t("student.session.hints")} style={{ margin: 0, paddingInlineStart: "var(--space-4)", display: "grid", gap: "var(--space-1)" }}>
                   {state.player.hints.map((h, i) => (

@@ -107,6 +107,15 @@ export function continueAfterFeedback(state: PlayerState): ContinueStep {
   return state.itemIndex + 1 < count ? "nextItem" : "plan";
 }
 
+/**
+ * Skipping an item this device cannot render (no answer is sent, so no evidence is recorded): the
+ * next item, or — after the last one — re-plan, as "Continue" does after a correct answer.
+ */
+export function skipItem(state: PlayerState): Exclude<ContinueStep, "retry"> {
+  const count = state.teach?.items.length ?? 0;
+  return state.itemIndex + 1 < count ? "nextItem" : "plan";
+}
+
 const freshItem = { hints: [] as string[], hintsExhausted: false, answer: null };
 
 export function playerReducer(state: PlayerState, action: PlayerAction): PlayerState {

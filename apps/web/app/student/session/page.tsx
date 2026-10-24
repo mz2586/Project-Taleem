@@ -11,6 +11,7 @@
 // lesson stays right-to-left inside an English interface and vice versa.
 import { useEffect, useId, useReducer, useRef, useState } from "react";
 
+import { ItemInteraction } from "@/components/student/ItemInteraction";
 import { ReadAloud } from "@/components/student/ReadAloud";
 import { Card, ErrorBanner, ProgressRing, Skeleton } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
@@ -53,9 +54,11 @@ import {
   initialPlayerState,
   isLastStep,
   nextHintLevel,
+  skipItem,
   playerReducer,
   presentationSteps,
 } from "@/lib/student/lessonPlayer";
+import { itemKind, type AnswerBody } from "@/lib/student/itemAnswer";
 import type { TodayView } from "@/lib/student/types";
 
 /**
@@ -155,7 +158,7 @@ function ExplainPanel({
 
 export default function SessionPage() {
   const { studentRef: ref, band } = useLearner();
-  const { t, formatPercent } = useLocale();
+  const { t, formatPercent, formatNumber } = useLocale();
   const started = useRef(false);
   const [state, dispatch] = useReducer(playerReducer, initialPlayerState);
   // How a session that ended without the normal celebration ended (null: still going, or finished).
@@ -266,13 +269,14 @@ export default function SessionPage() {
     }
   };
 
-  const submit = async (option: number) => {
+  // One contract answer field per kind; a choose answer is still exactly `{option}`.
+  const submit = async (answerBody: AnswerBody) => {
     if (!item) return;
     try {
       const a = await learningApi.answer(sessionId, {
         objective_code: objective,
         item_ref: item.item_ref,
-        option,
+        ...answerBody,
         hints_used: hintsUsed(state),
       });
       dispatch({ type: "answered", answer: a });
@@ -431,18 +435,37 @@ export default function SessionPage() {
                 </p>
                 <ReadAloud label={t("student.session.questionAudio")} text={prompt?.text} lang={prompt?.locale} />
               </div>
-              <div role="group" aria-label={t("student.session.answers")} style={{ display: "grid", gap: "var(--space-2)" }}>
-                {item.options.map((opt, i) => (
-                  <Button
-                    key={i}
-                    variant="primary"
-                    label={opt}
-                    {...contentAttrs({ text: opt })}
-                    disabled={phase === "feedback"}
-                    onClick={() => void submit(i)}
-                  />
-                ))}
-              </div>
+              {itemKind(item) === "choose" ? (
+                <div role="group" aria-label={t("student.session.answers")} style={{ display: "grid", gap: "var(--space-2)" }}>
+                  {item.options.map((opt, i) => (
+                    <Button
+                      key={i}
+                      variant="primary"
+                      label={opt}
+                      {...contentAttrs({ text: opt })}
+                      disabled={phase === "feedback"}
+                      onClick={() => void submit({ option: i })}
+                    />
+                  ))}
+                </div>
+              ) : (
+                // Keyed by item: a new item starts empty; a retry keeps the child's last answer to fix.
+                <ItemInteraction
+                  key={item.item_ref}
+                  item={item}
+                  t={t}
+                  formatNumber={formatNumber}
+                  disabled={phase === "feedback"}
+                  submitLabel={t("student.session.items.check")}
+                  onSubmit={(body) => void submit(body)}
+                  onSkip={() => {
+                    // No skip call exists in the session API: move on locally, re-planning after
+                    // the last item, exactly as "Continue" does.
+                    if (skipItem(state) === "plan") void plan(sessionId);
+                    else dispatch({ type: "nextItem" });
+                  }}
+                />
+              )}
               {hints.length > 0 ? (
                 <ol aria-label={t("student.session.hints")} style={{ margin: 0, paddingInlineStart: "var(--space-4)", display: "grid", gap: "var(--space-1)" }}>
                   {hints.map((h, i) => (

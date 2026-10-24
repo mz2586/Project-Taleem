@@ -8,7 +8,7 @@
 import { uuid7 } from "./ids";
 import type { KVStore } from "./kv";
 import { STORES } from "./kv";
-import type { LocalProgressEvent, ProgressEventKind } from "./types";
+import type { AnswerBody, LocalProgressEvent, ProgressEventKind } from "./types";
 
 function key(ev: LocalProgressEvent): string {
   return ev.client_event_id;
@@ -28,6 +28,7 @@ export class ProgressStore {
       kind: ProgressEventKind;
       item_ref?: string;
       selected_option?: number;
+      answer?: AnswerBody;
     },
     clientEventId: string = uuid7(this.now()),
   ): Promise<LocalProgressEvent> {
@@ -39,6 +40,7 @@ export class ProgressStore {
       kind: input.kind,
       ...(input.item_ref !== undefined ? { item_ref: input.item_ref } : {}),
       ...(input.selected_option !== undefined ? { selected_option: input.selected_option } : {}),
+      ...(input.answer !== undefined ? { answer: input.answer } : {}),
       created_at: this.now(),
     };
     await this.store.put<LocalProgressEvent>(STORES.progress, key(ev), ev);

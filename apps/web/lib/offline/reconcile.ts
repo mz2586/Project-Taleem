@@ -33,7 +33,9 @@ export async function reconcileAndResume(
   deps: ReconcileDeps,
 ): Promise<{ enqueued: number; drain: DrainSummary }> {
   const events = await deps.progress.forStudent(studentRef);
-  const attempts = events.filter((e) => e.kind === "item_attempted" && e.selected_option !== undefined);
+  const attempts = events.filter(
+    (e) => e.kind === "item_attempted" && (e.selected_option !== undefined || e.answer !== undefined),
+  );
 
   const queued = new Set((await deps.queue.all()).map((q) => String(q.payload["evidence_id"])));
 
@@ -45,7 +47,8 @@ export async function reconcileAndResume(
       student_ref: ev.student_ref,
       objective_code: ev.objective_code,
       item_ref: ev.item_ref ?? "",
-      option: ev.selected_option ?? 0,
+      // A choose answer is `selected_option`; any other kind stored its answer body verbatim.
+      ...(ev.answer ?? { option: ev.selected_option ?? 0 }),
       evidence_id: evidenceId,
       session_id: ev.lesson_id, // the offline session's lesson is its correlation key
       context: "practice",
