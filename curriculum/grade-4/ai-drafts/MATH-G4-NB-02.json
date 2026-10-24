@@ -77,13 +77,30 @@
         "en": "Drag each digit of 58,214 into its home on the place-value chart."
       },
       "answer_key": {
-        "placement": {
-          "ten_thousands": "5",
-          "thousands": "8",
-          "hundreds": "2",
-          "tens": "1",
-          "ones": "4"
-        }
+        "mode": "match",
+        "left_count": 5,
+        "pairs": [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            9
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            4,
+            5
+          ]
+        ]
       },
       "hints": [
         {
@@ -92,6 +109,48 @@
             "ur": "آخری ہندسہ اکائی کے گھر میں جاتا ہے۔",
             "en": "The last digit goes in the ones home."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "۵",
+          "en": "5"
+        },
+        {
+          "ur": "۸",
+          "en": "8"
+        },
+        {
+          "ur": "۲",
+          "en": "2"
+        },
+        {
+          "ur": "۱",
+          "en": "1"
+        },
+        {
+          "ur": "۴",
+          "en": "4"
+        },
+        {
+          "ur": "اکائی",
+          "en": "ones"
+        },
+        {
+          "ur": "سینکڑہ",
+          "en": "hundreds"
+        },
+        {
+          "ur": "دس ہزار",
+          "en": "ten thousands"
+        },
+        {
+          "ur": "دہائی",
+          "en": "tens"
+        },
+        {
+          "ur": "ہزار",
+          "en": "thousands"
         }
       ]
     },
@@ -364,7 +423,8 @@
   },
   "review_flags": [
     "subject expert: confirm Urdu place names (اکائی، دہائی، سو، ہزار، دس ہزار) match the NCP Grade 4 terms",
-    "language editor: confirm Urdu numerals are the house style for learner-facing Urdu text"
+    "language editor: confirm Urdu numerals are the house style for learner-facing Urdu text",
+    "Urdu terminology: the activity cards/labels added for the interaction contract were written by AI (some only existed in English in the old answer key); confirm the Urdu wording"
   ],
   "parent_notes": {
     "ur": "موتیوں یا ماچس کی تیلیوں سے دس دس کے گٹھے بنا کر عدد بنائیں۔",

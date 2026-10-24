@@ -140,21 +140,41 @@
         {
           "ur": "کھانا آنے سے پہلے شور مچانا",
           "en": "Making a fuss before food arrives"
+        },
+        {
+          "ur": "صبر",
+          "en": "patience"
+        },
+        {
+          "ur": "صبر نہیں",
+          "en": "not patience"
         }
       ],
       "answer_key": {
         "mode": "sort",
-        "groups": {
-          "patience": [
+        "left_count": 5,
+        "pairs": [
+          [
             0,
-            2,
-            3
+            5
           ],
-          "not_patience": [
+          [
             1,
-            4
+            6
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
           ]
-        }
+        ]
       }
     }
   ],

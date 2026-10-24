@@ -21,7 +21,7 @@ rules:
 
 ## Where to start
 
-1. Each file's `review_flags` lists the checks a reviewer should make first. There are 322
+1. Each file's `review_flags` lists the checks a reviewer should make first. There are 361
    flags in total.
 2. **Islamiat (16):** every lesson needs a scholar's review. The drafts contain no Qur'anic Arabic,
    verse translation, hadith wording or du'a text. Wherever scripture is needed there is a marked
@@ -54,10 +54,12 @@ The importer keeps human text exactly as written, so these need an author:
 
 ## Limits of the current product that affect these lessons
 
-- The learner runtime scores practice by the chosen option only. So `practice_questions` here are
-  all `mcq`/`true_false`. Fill-in-the-blank, matching, ordering and short-answer items are in
-  `interactive_activities`, which wait for the activity runtime (Phase E). Their `answer_key`
-  shapes (`answer`, `pairs`, `order`, `placement`) are proposals for that runtime.
+- Every auto-graded item follows
+  [`ITEM_INTERACTION_CONTRACT.md`](../../../docs/10-curriculum-studio/ITEM_INTERACTION_CONTRACT.md):
+  choose, fill, order, match or sort. `practice_questions` are all choose items. Activities use
+  the other kinds and are played before practice. 21 bespoke activities (clock hands,
+  place-value mats, arrays, shading) remain *widgets*: they are not played until a widget runtime
+  exists, and each one is flagged.
 - Listening lessons (URD-LS-01, ENG-LS-01, ENG-LS-02) have no audio. A mentor reads the script in
   `mentor_notes` aloud until a recording exists.
 - Writing and speaking work is marked by a mentor with the drafted rubrics. There is no

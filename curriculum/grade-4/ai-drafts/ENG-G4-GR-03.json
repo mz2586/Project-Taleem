@@ -48,17 +48,22 @@
         "en": "Sort each sentence into the present, past or future box: I walked to school. / I will help Ammi. / I drink milk every day."
       },
       "answer_key": {
-        "groups": {
-          "present": [
-            "I drink milk every day."
+        "mode": "sort",
+        "left_count": 3,
+        "pairs": [
+          [
+            0,
+            4
           ],
-          "past": [
-            "I walked to school."
+          [
+            1,
+            5
           ],
-          "future": [
-            "I will help Ammi."
+          [
+            2,
+            3
           ]
-        }
+        ]
       },
       "hints": [
         {
@@ -67,6 +72,32 @@
             "ur": "ہر جملے میں ed، will یا every day ڈھونڈیں۔",
             "en": "Look for ed, will or every day in each sentence."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "I walked to school.",
+          "en": "I walked to school."
+        },
+        {
+          "ur": "I will help Ammi.",
+          "en": "I will help Ammi."
+        },
+        {
+          "ur": "I drink milk every day.",
+          "en": "I drink milk every day."
+        },
+        {
+          "ur": "حال",
+          "en": "present"
+        },
+        {
+          "ur": "ماضی",
+          "en": "past"
+        },
+        {
+          "ur": "مستقبل",
+          "en": "future"
         }
       ]
     },

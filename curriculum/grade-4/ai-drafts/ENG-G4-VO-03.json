@@ -101,9 +101,21 @@
         "en": "Read: The glass was fragile, so mother wrapped it in a soft cloth. Tap the words that help explain fragile."
       },
       "answer_key": {
-        "clues": [
-          "glass",
-          "wrapped it in a soft cloth"
+        "mode": "sort",
+        "left_count": 3,
+        "pairs": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ]
         ]
       },
       "hints": [
@@ -113,6 +125,28 @@
             "ur": "ماں نے گلاس کو کپڑے میں کیوں لپیٹا؟",
             "en": "Why did mother wrap the glass in cloth?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "The glass",
+          "en": "The glass"
+        },
+        {
+          "ur": "mother",
+          "en": "mother"
+        },
+        {
+          "ur": "wrapped it in a soft cloth",
+          "en": "wrapped it in a soft cloth"
+        },
+        {
+          "ur": "fragile کا مطلب سمجھاتا ہے",
+          "en": "helps explain fragile"
+        },
+        {
+          "ur": "مطلب نہیں سمجھاتا",
+          "en": "does not explain it"
         }
       ]
     }
@@ -467,6 +501,7 @@
   },
   "review_flags": [
     "subject expert: confirm target words (fragile, chilly, enormous, famished, exhausted, damp) are a fair Grade 4 stretch",
-    "check 'ten kilometres' walking is a neutral, non-distressing context"
+    "check 'ten kilometres' walking is a neutral, non-distressing context",
+    "interaction contract: a1-tap-clue is now a sort of three phrases (The glass / mother / wrapped it in a soft cloth); confirm the cards"
   ]
 }

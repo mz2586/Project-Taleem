@@ -30,15 +30,25 @@
         "en": "Put each figure in the right box: line segment, ray or line. (a) a straight path between two dots; (b) starts at a dot and ends in an arrow; (c) arrows at both ends; (d) one edge of a table."
       },
       "answer_key": {
-        "line_segment": [
-          "a",
-          "d"
-        ],
-        "ray": [
-          "b"
-        ],
-        "line": [
-          "c"
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            4
+          ]
         ]
       },
       "hints": [
@@ -48,6 +58,36 @@
             "ur": "ہر شکل کے سرے گنیں: دو، ایک یا کوئی نہیں؟",
             "en": "Count each figure's endpoints: two, one or none?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "(الف) دو نقطوں کے بیچ سیدھی لکیر",
+          "en": "(a) a straight path between two dots"
+        },
+        {
+          "ur": "(ب) ایک نقطے سے شروع ہو کر تیر پر ختم",
+          "en": "(b) starts at a dot and ends in an arrow"
+        },
+        {
+          "ur": "(ج) دونوں طرف تیر",
+          "en": "(c) arrows at both ends"
+        },
+        {
+          "ur": "(د) میز کا ایک کنارہ",
+          "en": "(d) one edge of a table"
+        },
+        {
+          "ur": "خط پارہ",
+          "en": "line segment"
+        },
+        {
+          "ur": "شعاع",
+          "en": "ray"
+        },
+        {
+          "ur": "خط",
+          "en": "line"
         }
       ]
     },
@@ -60,37 +100,20 @@
         "en": "Match each name to its number of endpoints."
       },
       "answer_key": {
+        "left_count": 3,
         "pairs": [
-          {
-            "left": {
-              "ur": "خط پارہ",
-              "en": "line segment"
-            },
-            "right": {
-              "ur": "۲ سرے",
-              "en": "2 endpoints"
-            }
-          },
-          {
-            "left": {
-              "ur": "شعاع",
-              "en": "ray"
-            },
-            "right": {
-              "ur": "۱ سرا",
-              "en": "1 endpoint"
-            }
-          },
-          {
-            "left": {
-              "ur": "خط",
-              "en": "line"
-            },
-            "right": {
-              "ur": "کوئی سرا نہیں",
-              "en": "no endpoints"
-            }
-          }
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ]
         ]
       },
       "hints": [
@@ -100,6 +123,32 @@
             "ur": "تیر کا مطلب ہے: یہاں کوئی سرا نہیں۔",
             "en": "An arrow means: no endpoint here."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "خط پارہ",
+          "en": "line segment"
+        },
+        {
+          "ur": "شعاع",
+          "en": "ray"
+        },
+        {
+          "ur": "خط",
+          "en": "line"
+        },
+        {
+          "ur": "۱ سرا",
+          "en": "1 endpoint"
+        },
+        {
+          "ur": "کوئی سرا نہیں",
+          "en": "no endpoints"
+        },
+        {
+          "ur": "۲ سرے",
+          "en": "2 endpoints"
         }
       ]
     }

@@ -118,15 +118,33 @@
         "en": "Sort each sentence into the 'respectful' or 'not respectful' box."
       },
       "answer_key": {
-        "respectful": [
-          "Asking a friend to teach you a word in their language",
-          "Trying a new food politely",
-          "Saying a classmate's dress looks nice"
-        ],
-        "not_respectful": [
-          "Copying someone's accent to make others laugh",
-          "Saying one language is better than another",
-          "Refusing to sit with someone because they dress differently"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -136,6 +154,40 @@
             "ur": "سوچیں: اگر کوئی آپ کے ساتھ یہ کرے تو آپ کو کیسا لگے گا؟",
             "en": "Think: how would you feel if someone did this to you?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "دوست سے اس کی زبان کا کوئی لفظ سکھانے کو کہنا",
+          "en": "Asking a friend to teach you a word in their language"
+        },
+        {
+          "ur": "دوسروں کو ہنسانے کے لیے کسی کے لہجے کی نقل اتارنا",
+          "en": "Copying someone's accent to make others laugh"
+        },
+        {
+          "ur": "نیا کھانا ادب سے چکھنا",
+          "en": "Trying a new food politely"
+        },
+        {
+          "ur": "یہ کہنا کہ ایک زبان دوسری سے بہتر ہے",
+          "en": "Saying one language is better than another"
+        },
+        {
+          "ur": "ہم جماعت سے کہنا کہ اس کا لباس اچھا لگ رہا ہے",
+          "en": "Saying a classmate's dress looks nice"
+        },
+        {
+          "ur": "کسی کے الگ لباس کی وجہ سے اس کے ساتھ بیٹھنے سے انکار کرنا",
+          "en": "Refusing to sit with someone because they dress differently"
+        },
+        {
+          "ur": "احترام",
+          "en": "respectful"
+        },
+        {
+          "ur": "بے احترامی",
+          "en": "not respectful"
         }
       ]
     }
@@ -456,6 +508,7 @@
   "review_flags": [
     "child-safety + subject expert: check every language, dress and food example for balance across all regions and for stereotyping",
     "confirm the list of languages named (Punjabi, Sindhi, Pashto, Balochi, Saraiki, Brahui, Hindko, Shina) is acceptable and consider adding languages of Azad Jammu and Kashmir and Gilgit-Baltistan (e.g. Balti, Kashmiri)",
-    "worked example 2 uses sajji and biryani at a family gathering; check the food examples do not tie one dish to one group"
+    "worked example 2 uses sajji and biryani at a family gathering; check the food examples do not tie one dish to one group",
+    "Urdu terminology: the activity cards/labels added for the interaction contract were written by AI (some only existed in English in the old answer key); confirm the Urdu wording"
   ]
 }

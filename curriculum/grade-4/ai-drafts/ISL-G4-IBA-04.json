@@ -136,21 +136,41 @@
         {
           "ur": "کھلونا بھائی کے ساتھ بانٹنا",
           "en": "Sharing a toy with a brother"
+        },
+        {
+          "ur": "زبان سے شکر",
+          "en": "gratitude in words"
+        },
+        {
+          "ur": "عمل سے شکر",
+          "en": "gratitude in actions"
         }
       ],
       "answer_key": {
         "mode": "sort",
-        "groups": {
-          "words": [
+        "left_count": 5,
+        "pairs": [
+          [
             0,
-            3
+            5
           ],
-          "actions": [
+          [
             1,
+            6
+          ],
+          [
             2,
-            4
+            6
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
           ]
-        }
+        ]
       }
     }
   ],

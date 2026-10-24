@@ -115,14 +115,29 @@
         "en": "Sort each pair into 'synonym' or 'antonym': day–night, paani–aab (water), new–old, raasta–raah (path), far–near."
       },
       "answer_key": {
-        "synonym": [
-          "پانی–آب",
-          "راستہ–راہ"
-        ],
-        "antonym": [
-          "دن–رات",
-          "نیا–پرانا",
-          "دور–قریب"
+        "mode": "sort",
+        "left_count": 5,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ]
         ]
       },
       "hints": [
@@ -132,6 +147,36 @@
             "ur": "پوچھیں: کیا دونوں کا مطلب ایک ہے یا الٹ؟",
             "en": "Ask: do both mean the same, or the opposite?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "دن–رات",
+          "en": "day–night"
+        },
+        {
+          "ur": "پانی–آب",
+          "en": "paani–aab (water)"
+        },
+        {
+          "ur": "نیا–پرانا",
+          "en": "new–old"
+        },
+        {
+          "ur": "راستہ–راہ",
+          "en": "raasta–raah (path)"
+        },
+        {
+          "ur": "دور–قریب",
+          "en": "far–near"
+        },
+        {
+          "ur": "مترادف",
+          "en": "synonym"
+        },
+        {
+          "ur": "متضاد",
+          "en": "antonym"
         }
       ]
     },
@@ -144,6 +189,22 @@
         "en": "Match each word to its antonym: truth, high, joy, easy."
       },
       "options": [
+        {
+          "ur": "سچ",
+          "en": "truth"
+        },
+        {
+          "ur": "اونچا",
+          "en": "high"
+        },
+        {
+          "ur": "خوشی",
+          "en": "joy"
+        },
+        {
+          "ur": "آسان",
+          "en": "easy"
+        },
         {
           "ur": "جھوٹ",
           "en": "lie"
@@ -162,12 +223,25 @@
         }
       ],
       "answer_key": {
-        "pairs": {
-          "سچ": "جھوٹ",
-          "اونچا": "نیچا",
-          "خوشی": "غم",
-          "آسان": "مشکل"
-        }
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            5
+          ]
+        ]
       },
       "hints": [
         {

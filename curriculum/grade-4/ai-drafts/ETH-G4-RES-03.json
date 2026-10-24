@@ -114,20 +114,37 @@
         {
           "ur": "وہیل چیئر والے دوست سے پوچھنا کہ وہ کیا کھیلنا چاہتا ہے",
           "en": "Asking a friend in a wheelchair what he wants to play"
+        },
+        {
+          "ur": "فرق کا احترام",
+          "en": "respects difference"
+        },
+        {
+          "ur": "احترام نہیں",
+          "en": "does not respect"
         }
       ],
       "answer_key": {
-        "sort": {
-          "respects_difference": [
-            1,
-            3
-          ],
-          "does_not_respect": [
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
             0,
-            2
+            5
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            4
           ]
-        },
-        "mode": "tap a card, then tap its group (drag also works)"
+        ]
       },
       "hints": [
         {

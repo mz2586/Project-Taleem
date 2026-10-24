@@ -132,20 +132,37 @@
         {
           "ur": "بارش اور پانی کی نعمت پر خوش ہونا",
           "en": "Being glad for the blessing of rain and water"
+        },
+        {
+          "ur": "صفائی",
+          "en": "cleanliness"
+        },
+        {
+          "ur": "شکر",
+          "en": "thankfulness"
         }
       ],
       "answer_key": {
         "mode": "sort",
-        "groups": {
-          "cleanliness": [
+        "left_count": 4,
+        "pairs": [
+          [
             0,
-            2
+            4
           ],
-          "thankfulness": [
+          [
             1,
-            3
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
           ]
-        }
+        ]
       }
     }
   ],

@@ -127,15 +127,33 @@
         "en": "Sort these nouns into 'masculine' and 'feminine': boy, chair, school bag, roti, water, book."
       },
       "answer_key": {
-        "مذکر": [
-          "لڑکا",
-          "بستہ",
-          "پانی"
-        ],
-        "مؤنث": [
-          "کرسی",
-          "روٹی",
-          "کتاب"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -145,6 +163,40 @@
             "ur": "ہر لفظ کے ساتھ 'اچھا' یا 'اچھی' لگا کر بولیں۔",
             "en": "Say each word with 'achha' or 'achhi'."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "لڑکا",
+          "en": "boy"
+        },
+        {
+          "ur": "کرسی",
+          "en": "chair"
+        },
+        {
+          "ur": "بستہ",
+          "en": "school bag"
+        },
+        {
+          "ur": "روٹی",
+          "en": "roti"
+        },
+        {
+          "ur": "پانی",
+          "en": "water"
+        },
+        {
+          "ur": "کتاب",
+          "en": "book"
+        },
+        {
+          "ur": "مذکر",
+          "en": "masculine"
+        },
+        {
+          "ur": "مؤنث",
+          "en": "feminine"
         }
       ]
     },

@@ -119,12 +119,26 @@
         "en": "Label the mustard plant picture: root, stem, leaf, flower."
       },
       "answer_key": {
-        "labels": {
-          "bottom_under_soil": "root",
-          "upright_middle": "stem",
-          "flat_green": "leaf",
-          "yellow_top": "flower"
-        }
+        "mode": "match",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            4
+          ]
+        ]
       },
       "hints": [
         {
@@ -133,6 +147,40 @@
             "ur": "جو حصہ مٹی کے نیچے ہے، وہ جڑ ہے۔",
             "en": "The part under the soil is the root."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "مٹی کے نیچے والا حصہ",
+          "en": "the part under the soil"
+        },
+        {
+          "ur": "بیچ کا سیدھا کھڑا حصہ",
+          "en": "the upright middle part"
+        },
+        {
+          "ur": "چپٹے سبز حصے",
+          "en": "the flat green parts"
+        },
+        {
+          "ur": "اوپر والا پیلا حصہ",
+          "en": "the yellow part at the top"
+        },
+        {
+          "ur": "پھول",
+          "en": "flower"
+        },
+        {
+          "ur": "جڑ",
+          "en": "root"
+        },
+        {
+          "ur": "پتا",
+          "en": "leaf"
+        },
+        {
+          "ur": "تنا",
+          "en": "stem"
         }
       ]
     },
@@ -171,21 +219,21 @@
         }
       ],
       "answer_key": {
-        "left": [
-          0,
-          1,
-          2
-        ],
-        "right": [
-          3,
-          4,
-          5
-        ],
-        "pairs": {
-          "0": 4,
-          "1": 5,
-          "2": 3
-        }
+        "left_count": 3,
+        "pairs": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ]
+        ]
       }
     },
     {
@@ -518,6 +566,7 @@
   },
   "review_flags": [
     "subject expert: confirm the level is right — leaves make food from sunlight, air and water, with no mention of minerals or photosynthesis",
-    "subject expert: the potato-is-a-stem correction is accurate but may be too advanced; keep or drop"
+    "subject expert: the potato-is-a-stem correction is accurate but may be too advanced; keep or drop",
+    "Urdu terminology: the activity cards/labels added for the interaction contract were written by AI (some only existed in English in the old answer key); confirm the Urdu wording"
   ]
 }

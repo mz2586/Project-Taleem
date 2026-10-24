@@ -115,13 +115,25 @@
         "en": "Sort each into 'complete' or 'incomplete': 'at the end of the lane', 'The hen laid an egg.', 'the one with the blue book', 'We went to the park in the evening.'"
       },
       "answer_key": {
-        "مکمل": [
-          "مرغی نے انڈا دیا۔",
-          "ہم شام کو پارک گئے۔"
-        ],
-        "ادھورا": [
-          "گلی کے آخر میں",
-          "نیلی کتاب والا"
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            4
+          ]
         ]
       },
       "hints": [
@@ -131,6 +143,32 @@
             "ur": "ہر ٹکڑے میں فعل تلاش کریں۔",
             "en": "Look for a verb in each piece."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "گلی کے آخر میں",
+          "en": "at the end of the lane"
+        },
+        {
+          "ur": "مرغی نے انڈا دیا۔",
+          "en": "The hen laid an egg."
+        },
+        {
+          "ur": "نیلی کتاب والا",
+          "en": "the one with the blue book"
+        },
+        {
+          "ur": "ہم شام کو پارک گئے۔",
+          "en": "We went to the park in the evening."
+        },
+        {
+          "ur": "مکمل جملہ",
+          "en": "complete sentence"
+        },
+        {
+          "ur": "ادھورا",
+          "en": "incomplete"
         }
       ]
     },

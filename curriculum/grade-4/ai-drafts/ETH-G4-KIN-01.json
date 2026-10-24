@@ -93,20 +93,37 @@
         {
           "ur": "بلی کو پتھر مارنا",
           "en": "Throwing a stone at a cat"
+        },
+        {
+          "ur": "مہربانی",
+          "en": "kind"
+        },
+        {
+          "ur": "مہربانی نہیں",
+          "en": "not kind"
         }
       ],
       "answer_key": {
-        "sort": {
-          "kind": [
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
             0,
-            2
+            4
           ],
-          "not_kind": [
+          [
             1,
-            3
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
           ]
-        },
-        "mode": "tap a card, then tap its group (drag also works)"
+        ]
       },
       "hints": [
         {

@@ -132,20 +132,37 @@
         {
           "ur": "دکاندار کو زیادہ ملے پیسے واپس کرنا",
           "en": "Giving extra change back to the shopkeeper"
+        },
+        {
+          "ur": "سچا کام",
+          "en": "honest"
+        },
+        {
+          "ur": "سچا کام نہیں",
+          "en": "not honest"
         }
       ],
       "answer_key": {
         "mode": "sort",
-        "groups": {
-          "honest": [
+        "left_count": 4,
+        "pairs": [
+          [
             0,
-            2,
-            3
+            4
           ],
-          "not_honest": [
-            1
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
           ]
-        }
+        ]
       }
     },
     {

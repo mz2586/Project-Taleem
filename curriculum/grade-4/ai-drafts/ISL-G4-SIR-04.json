@@ -122,28 +122,28 @@
       ],
       "options": [
         {
-          "ur": "غلطی مان لینا",
-          "en": "Owning the mistake"
-        },
-        {
-          "ur": "نرمی سے معافی مانگنا",
-          "en": "Saying sorry gently"
-        },
-        {
           "ur": "دوسرا شخص معاف کر دیتا ہے",
           "en": "The other person forgives"
         },
         {
+          "ur": "غلطی مان لینا",
+          "en": "Owning the mistake"
+        },
+        {
           "ur": "مل کر دوبارہ دوستی سے رہنا",
           "en": "Being friends again together"
+        },
+        {
+          "ur": "نرمی سے معافی مانگنا",
+          "en": "Saying sorry gently"
         }
       ],
       "answer_key": {
         "order": [
-          0,
           1,
-          2,
-          3
+          3,
+          0,
+          2
         ]
       }
     }

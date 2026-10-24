@@ -98,16 +98,26 @@
         "en": "Sort each group of words into 'complete' or 'fragment': The sun shines. / A red ball. / We eat dinner. / Under the tree."
       },
       "answer_key": {
-        "groups": {
-          "complete": [
-            "The sun shines.",
-            "We eat dinner."
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            4
           ],
-          "fragment": [
-            "A red ball.",
-            "Under the tree."
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
           ]
-        }
+        ]
       },
       "hints": [
         {
@@ -116,6 +126,32 @@
             "ur": "ہر گروہ میں کام کرنے والا لفظ (فعل) ڈھونڈیں۔",
             "en": "Look for the doing word (verb) in each group."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "The sun shines.",
+          "en": "The sun shines."
+        },
+        {
+          "ur": "A red ball.",
+          "en": "A red ball."
+        },
+        {
+          "ur": "We eat dinner.",
+          "en": "We eat dinner."
+        },
+        {
+          "ur": "Under the tree.",
+          "en": "Under the tree."
+        },
+        {
+          "ur": "پورا",
+          "en": "complete"
+        },
+        {
+          "ur": "ادھورا",
+          "en": "fragment"
         }
       ]
     },
@@ -129,9 +165,9 @@
       },
       "answer_key": {
         "order": [
-          "Usman",
-          "sweeps",
-          "the floor."
+          2,
+          1,
+          0
         ]
       },
       "hints": [
@@ -141,6 +177,20 @@
             "ur": "کون؟ کیا کرتا ہے؟ کس چیز کو؟",
             "en": "Who? Does what? To what?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "the floor",
+          "en": "the floor"
+        },
+        {
+          "ur": "sweeps",
+          "en": "sweeps"
+        },
+        {
+          "ur": "Usman",
+          "en": "Usman"
         }
       ]
     },

@@ -108,10 +108,11 @@
         "en": "Order the sentences of a short talk: I like it because it is cool. / My favourite season is winter. / We drink hot tea in winter."
       },
       "answer_key": {
+        "mode": "order",
         "order": [
-          "My favourite season is winter.",
-          "We drink hot tea in winter.",
-          "I like it because it is cool."
+          1,
+          2,
+          0
         ]
       },
       "hints": [
@@ -121,6 +122,20 @@
             "ur": "موضوع والا جملہ پہلے آتا ہے۔",
             "en": "The topic sentence comes first."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "I like it because it is cool.",
+          "en": "I like it because it is cool."
+        },
+        {
+          "ur": "My favourite season is winter.",
+          "en": "My favourite season is winter."
+        },
+        {
+          "ur": "We drink hot tea in winter.",
+          "en": "We drink hot tea in winter."
         }
       ]
     },

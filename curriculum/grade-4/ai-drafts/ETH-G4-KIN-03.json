@@ -128,20 +128,37 @@
         {
           "ur": "سب سے کہنا «اس سے بات مت کرو»",
           "en": "Telling everyone \"don't talk to her\""
+        },
+        {
+          "ur": "شامل کرنا",
+          "en": "including"
+        },
+        {
+          "ur": "ستانا",
+          "en": "bullying"
         }
       ],
       "answer_key": {
-        "sort": {
-          "including": [
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
             0,
-            2
+            4
           ],
-          "bullying": [
+          [
             1,
-            3
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
           ]
-        },
-        "mode": "tap a card, then tap its group (drag also works)"
+        ]
       },
       "hints": [
         {

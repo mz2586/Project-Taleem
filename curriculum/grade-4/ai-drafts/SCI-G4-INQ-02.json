@@ -110,15 +110,33 @@
         "en": "Sort the buttons by number of holes: two holes or four holes. (red 2, blue 4, green 4, yellow 2, black 2, white 4)"
       },
       "answer_key": {
-        "two_holes": [
-          "red",
-          "yellow",
-          "black"
-        ],
-        "four_holes": [
-          "blue",
-          "green",
-          "white"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -128,6 +146,40 @@
             "ur": "رنگ کو بھول جاؤ؛ صرف سوراخ گنو۔",
             "en": "Forget the colour; count only the holes."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "سرخ بٹن (۲ سوراخ)",
+          "en": "red button (2 holes)"
+        },
+        {
+          "ur": "نیلا بٹن (۴ سوراخ)",
+          "en": "blue button (4 holes)"
+        },
+        {
+          "ur": "سبز بٹن (۴ سوراخ)",
+          "en": "green button (4 holes)"
+        },
+        {
+          "ur": "پیلا بٹن (۲ سوراخ)",
+          "en": "yellow button (2 holes)"
+        },
+        {
+          "ur": "کالا بٹن (۲ سوراخ)",
+          "en": "black button (2 holes)"
+        },
+        {
+          "ur": "سفید بٹن (۴ سوراخ)",
+          "en": "white button (4 holes)"
+        },
+        {
+          "ur": "دو سوراخ",
+          "en": "two holes"
+        },
+        {
+          "ur": "چار سوراخ",
+          "en": "four holes"
         }
       ]
     }
@@ -422,6 +474,7 @@
   },
   "review_flags": [
     "subject expert: short items accept many correct sorts — confirm mentor guidance is clear enough",
-    "language editor: confirm Urdu خصوصیت / ترتیب دینا / موازنہ are the house terms"
+    "language editor: confirm Urdu خصوصیت / ترتیب دینا / موازنہ are the house terms",
+    "interaction contract: a1-sort-buttons cards now state the hole count in text (no picture runtime yet), which makes the sort easy; replace with pictures when available"
   ]
 }

@@ -124,37 +124,20 @@
         "en": "Match each fraction to its name."
       },
       "answer_key": {
+        "left_count": 3,
         "pairs": [
-          {
-            "left": {
-              "ur": "۱/۵",
-              "en": "1/5"
-            },
-            "right": {
-              "ur": "ایک بٹا پانچ",
-              "en": "one fifth"
-            }
-          },
-          {
-            "left": {
-              "ur": "۳/۸",
-              "en": "3/8"
-            },
-            "right": {
-              "ur": "تین بٹا آٹھ",
-              "en": "three eighths"
-            }
-          },
-          {
-            "left": {
-              "ur": "۲/۳",
-              "en": "2/3"
-            },
-            "right": {
-              "ur": "دو بٹا تین",
-              "en": "two thirds"
-            }
-          }
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ]
         ]
       },
       "hints": [
@@ -164,6 +147,32 @@
             "ur": "پہلے اوپر کا نمبر پڑھیں، پھر نیچے کا۔",
             "en": "Read the top number first, then the bottom."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "۱/۵",
+          "en": "1/5"
+        },
+        {
+          "ur": "۳/۸",
+          "en": "3/8"
+        },
+        {
+          "ur": "۲/۳",
+          "en": "2/3"
+        },
+        {
+          "ur": "دو بٹا تین",
+          "en": "two thirds"
+        },
+        {
+          "ur": "ایک بٹا پانچ",
+          "en": "one fifth"
+        },
+        {
+          "ur": "تین بٹا آٹھ",
+          "en": "three eighths"
         }
       ]
     }
@@ -427,6 +436,7 @@
   "review_flags": [
     "subject expert: m-unequal-parts is a local id the doc suggests ('add locally if observed'); it is not yet in the §4 library",
     "language editor: confirm شمار کنندہ / نسب نما sit well beside FR-01's 'اوپر کا نمبر / نیچے کا نمبر', and the 'تین بٹا پانچ' reading style",
-    "subject expert: the human homework, hints and parent/teacher notes are English-only or Urdu-only in the doc; check the imported sides read well together"
+    "subject expert: the human homework, hints and parent/teacher notes are English-only or Urdu-only in the doc; check the imported sides read well together",
+    "interaction contract: activity a1-shade-two-thirds is a bespoke widget (shading parts of a bar); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

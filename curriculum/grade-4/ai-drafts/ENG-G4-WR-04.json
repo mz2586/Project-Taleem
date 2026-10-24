@@ -116,10 +116,11 @@
         "en": "Put the parts of the note in order: From, Ahmed / Dear Ali, / Please come to my house at 4 o'clock to play."
       },
       "answer_key": {
+        "mode": "order",
         "order": [
-          "Dear Ali,",
-          "Please come to my house at 4 o'clock to play.",
-          "From, Ahmed"
+          1,
+          2,
+          0
         ]
       },
       "hints": [
@@ -129,6 +130,20 @@
             "ur": "نوٹ Dear سے شروع ہوتا ہے۔",
             "en": "A note starts with Dear."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "From, Ahmed",
+          "en": "From, Ahmed"
+        },
+        {
+          "ur": "Dear Ali,",
+          "en": "Dear Ali,"
+        },
+        {
+          "ur": "Please come to my house at 4 o'clock to play.",
+          "en": "Please come to my house at 4 o'clock to play."
         }
       ]
     },

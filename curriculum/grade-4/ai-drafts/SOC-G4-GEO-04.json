@@ -109,17 +109,33 @@
         "en": "Match each picture card to the right place: 'northern mountains (winter)', 'plains (summer)', 'seaside'."
       },
       "answer_key": {
-        "northern_mountains_winter": [
-          "snow on roofs",
-          "thick woollen shawl"
-        ],
-        "plains_summer": [
-          "hand fan and shade under a tree",
-          "drinking extra water"
-        ],
-        "seaside": [
-          "sea breeze and damp air",
-          "fishing boats"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            8
+          ]
         ]
       },
       "hints": [
@@ -129,6 +145,44 @@
             "ur": "سوچیں: برف کہاں پڑتی ہے؟",
             "en": "Think: where does snow fall?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "چھتوں پر برف",
+          "en": "snow on roofs"
+        },
+        {
+          "ur": "ہاتھ کا پنکھا اور درخت کا سایہ",
+          "en": "hand fan and shade under a tree"
+        },
+        {
+          "ur": "سمندری ہوا اور نم ہوا",
+          "en": "sea breeze and damp air"
+        },
+        {
+          "ur": "موٹی اونی شال",
+          "en": "thick woollen shawl"
+        },
+        {
+          "ur": "زیادہ پانی پینا",
+          "en": "drinking extra water"
+        },
+        {
+          "ur": "مچھلی پکڑنے والی کشتیاں",
+          "en": "fishing boats"
+        },
+        {
+          "ur": "شمال کے پہاڑ (سردیاں)",
+          "en": "northern mountains (winter)"
+        },
+        {
+          "ur": "میدان (گرمیاں)",
+          "en": "plains (summer)"
+        },
+        {
+          "ur": "سمندر کا کنارہ",
+          "en": "seaside"
         }
       ]
     },
@@ -142,50 +196,45 @@
       },
       "options": [
         {
+          "ur": "شمال کے پہاڑ",
+          "en": "northern mountains"
+        },
+        {
+          "ur": "پنجاب اور سندھ کے میدان",
+          "en": "plains of Punjab and Sindh"
+        },
+        {
+          "ur": "سمندر کا کنارہ",
+          "en": "seaside"
+        },
+        {
+          "ur": "نم ہوا",
+          "en": "damp air"
+        },
+        {
           "ur": "سردیوں میں برف",
           "en": "snow in winter"
         },
         {
           "ur": "بہت گرم گرمیاں",
           "en": "very hot summers"
-        },
-        {
-          "ur": "نم ہوا",
-          "en": "damp air"
         }
       ],
       "answer_key": {
+        "left_count": 3,
         "pairs": [
-          {
-            "left": {
-              "ur": "شمال کے پہاڑ",
-              "en": "northern mountains"
-            },
-            "right": {
-              "ur": "سردیوں میں برف",
-              "en": "snow in winter"
-            }
-          },
-          {
-            "left": {
-              "ur": "پنجاب اور سندھ کے میدان",
-              "en": "plains of Punjab and Sindh"
-            },
-            "right": {
-              "ur": "بہت گرم گرمیاں",
-              "en": "very hot summers"
-            }
-          },
-          {
-            "left": {
-              "ur": "سمندر کا کنارہ",
-              "en": "seaside"
-            },
-            "right": {
-              "ur": "نم ہوا",
-              "en": "damp air"
-            }
-          }
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ]
         ]
       }
     }
@@ -503,6 +552,7 @@
   "review_flags": [
     "subject expert: confirm the regional weather generalisations (snowy northern winters, very hot summers on the Punjab and Sindh plains, damp coastal air, summer monsoon) are accurate and not over-simplified",
     "worked example 2 says 'June' is very hot on the plains; confirm or remove the month",
-    "consider adding a Balochistan example (e.g. cold winters in upland areas) for regional balance once verified"
+    "consider adding a Balochistan example (e.g. cold winters in upland areas) for regional balance once verified",
+    "Urdu terminology: the activity cards/labels added for the interaction contract were written by AI (some only existed in English in the old answer key); confirm the Urdu wording"
   ]
 }

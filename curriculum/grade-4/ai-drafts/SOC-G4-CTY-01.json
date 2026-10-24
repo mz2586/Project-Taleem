@@ -102,12 +102,26 @@
         "en": "On the flag picture, tap each part and match it to its name: green part, white stripe, crescent, star."
       },
       "answer_key": {
-        "labels": {
-          "green_field": "green part (larger, on the fly side)",
-          "white_stripe": "white stripe (next to the flagpole)",
-          "crescent": "white crescent on the green part",
-          "star": "white five-pointed star on the green part"
-        }
+        "mode": "match",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            4
+          ]
+        ]
       },
       "hints": [
         {
@@ -116,6 +130,40 @@
             "ur": "سفید پٹی ڈنڈے کے ساتھ ہوتی ہے۔",
             "en": "The white stripe is next to the flagpole."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "سبز حصہ",
+          "en": "green part"
+        },
+        {
+          "ur": "سفید پٹی",
+          "en": "white stripe"
+        },
+        {
+          "ur": "چاند",
+          "en": "crescent"
+        },
+        {
+          "ur": "ستارہ",
+          "en": "star"
+        },
+        {
+          "ur": "سبز حصے پر پانچ نوکوں والی شکل",
+          "en": "a shape with five points, on the green part"
+        },
+        {
+          "ur": "بڑا حصہ، ڈنڈے سے دور والی طرف",
+          "en": "the larger part, on the side away from the flagpole"
+        },
+        {
+          "ur": "سبز حصے پر پتلی خم دار چاند جیسی شکل",
+          "en": "a thin curved moon shape, on the green part"
+        },
+        {
+          "ur": "ڈنڈے کے ساتھ والی پٹی",
+          "en": "the strip next to the flagpole"
         }
       ]
     }
@@ -439,6 +487,7 @@
   "review_flags": [
     "subject expert: confirm the flag description (white stripe at the hoist, green field, white crescent and five-pointed star) and the Urdu part names",
     "anthem: lesson deliberately gives no lyrics, author or dates; confirm this is acceptable or add verified facts",
-    "language editor: confirm 'قومی ترانہ' and the vocabulary definitions read naturally for Grade 4"
+    "language editor: confirm 'قومی ترانہ' and the vocabulary definitions read naturally for Grade 4",
+    "interaction contract: a1-flag-parts (tap the flag picture) is now a text match of each part to where it is on the flag; AI-written descriptions, confirm; switch back to a picture widget when one exists"
   ]
 }

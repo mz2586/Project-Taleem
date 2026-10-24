@@ -49,20 +49,37 @@
         {
           "ur": "کھیل میں چپکے سے اپنے نمبر بڑھا لینا",
           "en": "Secretly adding extra points to your score in a game"
+        },
+        {
+          "ur": "بھروسا بنتا ہے",
+          "en": "builds trust"
+        },
+        {
+          "ur": "بھروسا ٹوٹتا ہے",
+          "en": "breaks trust"
         }
       ],
       "answer_key": {
-        "sort": {
-          "builds_trust": [
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
             0,
-            2
+            4
           ],
-          "breaks_trust": [
+          [
             1,
-            3
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
           ]
-        },
-        "mode": "tap a card, then tap its group (drag also works)"
+        ]
       },
       "hints": [
         {

@@ -99,12 +99,26 @@
         "en": "Drag the four direction names onto the compass rose. North is at the top."
       },
       "answer_key": {
-        "placement": {
-          "top": "north",
-          "bottom": "south",
-          "right": "east",
-          "left": "west"
-        }
+        "mode": "match",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ]
       },
       "hints": [
         {
@@ -113,6 +127,40 @@
             "ur": "شمال کے سامنے نیچے کون سی سمت ہوگی؟",
             "en": "What is opposite north, at the bottom?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "قطب نما کا اوپر والا سرا",
+          "en": "top of the compass rose"
+        },
+        {
+          "ur": "نیچے والا سرا",
+          "en": "bottom"
+        },
+        {
+          "ur": "دائیں والا سرا",
+          "en": "right"
+        },
+        {
+          "ur": "بائیں والا سرا",
+          "en": "left"
+        },
+        {
+          "ur": "مشرق",
+          "en": "east"
+        },
+        {
+          "ur": "مغرب",
+          "en": "west"
+        },
+        {
+          "ur": "شمال",
+          "en": "north"
+        },
+        {
+          "ur": "جنوب",
+          "en": "south"
         }
       ]
     },
@@ -420,6 +468,7 @@
   },
   "review_flags": [
     "subject expert: confirm the Urdu terms شمال، جنوب، مشرق، مغرب and 'قطب نما کا پھول' for compass rose",
-    "confirm the simplification 'the sun rises in the east' (roughly; it shifts with the seasons) is acceptable for Grade 4"
+    "confirm the simplification 'the sun rises in the east' (roughly; it shifts with the seasons) is acceptable for Grade 4",
+    "Urdu terminology: the activity cards/labels added for the interaction contract were written by AI (some only existed in English in the old answer key); confirm the Urdu wording"
   ]
 }

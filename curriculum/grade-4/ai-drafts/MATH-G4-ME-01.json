@@ -30,15 +30,33 @@
         "en": "Put each thing in the right box: 'measure in cm' or 'measure in m'. A pencil, an eraser, the length of a room, cloth for a shalwar kameez, a notebook, the street outside the house."
       },
       "answer_key": {
-        "cm": [
-          "pencil",
-          "eraser",
-          "notebook"
-        ],
-        "m": [
-          "room length",
-          "cloth for a shalwar kameez",
-          "street"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -48,6 +66,40 @@
             "ur": "کیا یہ چیز آپ کے ہاتھ میں آ جاتی ہے؟",
             "en": "Does this thing fit in your hand?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "پنسل",
+          "en": "a pencil"
+        },
+        {
+          "ur": "ربڑ",
+          "en": "an eraser"
+        },
+        {
+          "ur": "کمرے کی لمبائی",
+          "en": "the length of a room"
+        },
+        {
+          "ur": "شلوار قمیض کا کپڑا",
+          "en": "cloth for a shalwar kameez"
+        },
+        {
+          "ur": "کاپی",
+          "en": "a notebook"
+        },
+        {
+          "ur": "گھر کے سامنے والی گلی",
+          "en": "the street outside the house"
+        },
+        {
+          "ur": "سینٹی میٹر میں ناپیں",
+          "en": "measure in cm"
+        },
+        {
+          "ur": "میٹر میں ناپیں",
+          "en": "measure in m"
         }
       ]
     },

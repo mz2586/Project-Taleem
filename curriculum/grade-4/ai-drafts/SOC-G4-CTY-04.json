@@ -108,15 +108,33 @@
         "en": "Sort each action into 'good member' or 'not good'."
       },
       "answer_key": {
-        "good_member": [
-          "Greeting a neighbour",
-          "Waiting for your turn at the water tap",
-          "Helping a classmate pick up dropped books"
-        ],
-        "not_good": [
-          "Pushing to the front of the line",
-          "Shouting at an elder",
-          "Laughing when someone falls"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -126,6 +144,40 @@
             "ur": "سوچیں: اس کام سے دوسرا خوش ہوگا یا اداس؟",
             "en": "Think: will this make the other person happy or sad?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "پڑوسی کو سلام کرنا",
+          "en": "Greeting a neighbour"
+        },
+        {
+          "ur": "قطار میں دھکا دے کر آگے جانا",
+          "en": "Pushing to the front of the line"
+        },
+        {
+          "ur": "نلکے پر اپنی باری کا انتظار کرنا",
+          "en": "Waiting for your turn at the water tap"
+        },
+        {
+          "ur": "کسی بڑے پر چلانا",
+          "en": "Shouting at an elder"
+        },
+        {
+          "ur": "ہم جماعت کی گری ہوئی کتابیں اٹھانے میں مدد کرنا",
+          "en": "Helping a classmate pick up dropped books"
+        },
+        {
+          "ur": "کسی کے گرنے پر ہنسنا",
+          "en": "Laughing when someone falls"
+        },
+        {
+          "ur": "اچھا فرد",
+          "en": "good member"
+        },
+        {
+          "ur": "یہ اچھا نہیں",
+          "en": "not good"
         }
       ]
     },
@@ -139,50 +191,45 @@
       },
       "options": [
         {
+          "ur": "کوئی غلطی سے آپ سے ٹکرا گیا",
+          "en": "someone bumps into you by mistake"
+        },
+        {
+          "ur": "کسی نے آپ کی مدد کی",
+          "en": "someone helped you"
+        },
+        {
+          "ur": "نیا بچہ اکیلا بیٹھا ہے",
+          "en": "a new child is sitting alone"
+        },
+        {
+          "ur": "اسے ساتھ بٹھائیں",
+          "en": "invite them to sit with you"
+        },
+        {
           "ur": "کہیں: کوئی بات نہیں",
           "en": "say: it's all right"
         },
         {
           "ur": "شکریہ کہیں",
           "en": "say thank you"
-        },
-        {
-          "ur": "اسے ساتھ بٹھائیں",
-          "en": "invite them to sit with you"
         }
       ],
       "answer_key": {
+        "left_count": 3,
         "pairs": [
-          {
-            "left": {
-              "ur": "کوئی غلطی سے آپ سے ٹکرا گیا",
-              "en": "someone bumps into you by mistake"
-            },
-            "right": {
-              "ur": "کہیں: کوئی بات نہیں",
-              "en": "say: it's all right"
-            }
-          },
-          {
-            "left": {
-              "ur": "کسی نے آپ کی مدد کی",
-              "en": "someone helped you"
-            },
-            "right": {
-              "ur": "شکریہ کہیں",
-              "en": "say thank you"
-            }
-          },
-          {
-            "left": {
-              "ur": "نیا بچہ اکیلا بیٹھا ہے",
-              "en": "a new child is sitting alone"
-            },
-            "right": {
-              "ur": "اسے ساتھ بٹھائیں",
-              "en": "invite them to sit with you"
-            }
-          }
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ]
         ]
       }
     }
@@ -490,6 +537,7 @@
   },
   "review_flags": [
     "child-safety: confirm the homework (report one kind act, no names) and the bullying escalation wording",
-    "language editor: confirm 'برادری' is the best Grade 4 word for 'community' (alternatives: معاشرہ، محلہ)"
+    "language editor: confirm 'برادری' is the best Grade 4 word for 'community' (alternatives: معاشرہ، محلہ)",
+    "Urdu terminology: the activity cards/labels added for the interaction contract were written by AI (some only existed in English in the old answer key); confirm the Urdu wording"
   ]
 }

@@ -138,11 +138,22 @@
         "en": "Drag each number name onto its figures: six thousand forty-two, six thousand four hundred two, six thousand four hundred twenty. Figures: 6042, 6402, 6420."
       },
       "answer_key": {
-        "pairs": {
-          "six thousand forty-two": "6042",
-          "six thousand four hundred two": "6402",
-          "six thousand four hundred twenty": "6420"
-        }
+        "mode": "match",
+        "left_count": 3,
+        "pairs": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ]
+        ]
       },
       "hints": [
         {
@@ -151,6 +162,32 @@
             "ur": "ہر عدد میں دیکھیں کہ سو کے خانے میں کیا ہے۔",
             "en": "Look at what is in the hundreds place of each number."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "چھ ہزار بیالیس",
+          "en": "six thousand forty-two"
+        },
+        {
+          "ur": "چھ ہزار چار سو دو",
+          "en": "six thousand four hundred two"
+        },
+        {
+          "ur": "چھ ہزار چار سو بیس",
+          "en": "six thousand four hundred twenty"
+        },
+        {
+          "ur": "۶۴۲۰",
+          "en": "6420"
+        },
+        {
+          "ur": "۶۰۴۲",
+          "en": "6042"
+        },
+        {
+          "ur": "۶۴۰۲",
+          "en": "6402"
         }
       ]
     },

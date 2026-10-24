@@ -462,6 +462,7 @@
   },
   "review_flags": [
     "language editor: 'حقائق کے خاندان' for 'fact families' is a literal translation; confirm the term used in Pakistani classrooms",
-    "check the human worked example has no prompt; the draft's first worked example adds one"
+    "check the human worked example has no prompt; the draft's first worked example adds one",
+    "interaction contract: activity a1-share-15 is a bespoke widget (counters onto plates); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

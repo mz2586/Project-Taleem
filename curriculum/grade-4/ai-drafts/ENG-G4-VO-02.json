@@ -101,18 +101,34 @@
         "en": "Sort the pairs into two boxes, synonyms or antonyms: big–large, up–down, fast–quick, old–new, small–little, open–close"
       },
       "answer_key": {
-        "groups": {
-          "synonyms": [
-            "big–large",
-            "fast–quick",
-            "small–little"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
           ],
-          "antonyms": [
-            "up–down",
-            "old–new",
-            "open–close"
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
           ]
-        }
+        ]
       },
       "hints": [
         {
@@ -121,6 +137,40 @@
             "ur": "جوڑے کو جملے میں آزمائیں: مطلب وہی رہا یا الٹ گیا؟",
             "en": "Try the pair in a sentence: did the meaning stay or flip?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "big–large",
+          "en": "big–large"
+        },
+        {
+          "ur": "up–down",
+          "en": "up–down"
+        },
+        {
+          "ur": "fast–quick",
+          "en": "fast–quick"
+        },
+        {
+          "ur": "old–new",
+          "en": "old–new"
+        },
+        {
+          "ur": "small–little",
+          "en": "small–little"
+        },
+        {
+          "ur": "open–close",
+          "en": "open–close"
+        },
+        {
+          "ur": "ہم معنی",
+          "en": "synonyms"
+        },
+        {
+          "ur": "متضاد",
+          "en": "antonyms"
         }
       ]
     },
@@ -133,12 +183,25 @@
         "en": "Match each word to its antonym: hot, up, full, old"
       },
       "answer_key": {
-        "pairs": {
-          "hot": "cold",
-          "up": "down",
-          "full": "empty",
-          "old": "new"
-        }
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            4
+          ]
+        ]
       },
       "hints": [
         {
@@ -147,6 +210,40 @@
             "ur": "ہر لفظ کا الٹ سوچیں۔",
             "en": "Think of the opposite of each word."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "hot",
+          "en": "hot"
+        },
+        {
+          "ur": "up",
+          "en": "up"
+        },
+        {
+          "ur": "full",
+          "en": "full"
+        },
+        {
+          "ur": "old",
+          "en": "old"
+        },
+        {
+          "ur": "new",
+          "en": "new"
+        },
+        {
+          "ur": "empty",
+          "en": "empty"
+        },
+        {
+          "ur": "cold",
+          "en": "cold"
+        },
+        {
+          "ur": "down",
+          "en": "down"
         }
       ]
     },

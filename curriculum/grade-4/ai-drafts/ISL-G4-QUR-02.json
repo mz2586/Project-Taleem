@@ -118,28 +118,28 @@
       ],
       "options": [
         {
-          "ur": "ہاتھ صاف کرنا",
-          "en": "Cleaning hands"
-        },
-        {
-          "ur": "دونوں ہاتھوں سے آرام سے اٹھانا",
-          "en": "Lifting it gently with both hands"
-        },
-        {
           "ur": "رحل یا تکیے پر رکھ کر پڑھنا",
           "en": "Resting it on a rehal or cushion to read"
         },
         {
+          "ur": "ہاتھ صاف کرنا",
+          "en": "Cleaning hands"
+        },
+        {
           "ur": "بند کر کے اونچی جگہ واپس رکھنا",
           "en": "Closing it and putting it back high up"
+        },
+        {
+          "ur": "دونوں ہاتھوں سے آرام سے اٹھانا",
+          "en": "Lifting it gently with both hands"
         }
       ],
       "answer_key": {
         "order": [
-          0,
           1,
-          2,
-          3
+          3,
+          0,
+          2
         ]
       }
     }

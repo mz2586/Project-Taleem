@@ -482,6 +482,7 @@
   },
   "review_flags": [
     "subject expert: the missing placeholder zero has no library id; the draft tags it m-place-value-digit-equals-value (the doc's revision trigger); confirm or add a new id",
-    "subject expert: confirm the partial-product order (ones row first, then tens row) matches the standard method taught locally"
+    "subject expert: confirm the partial-product order (ones row first, then tens row) matches the standard method taught locally",
+    "interaction contract: activity a1-partial-rows is a bespoke widget (long-multiplication partial-product rows); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

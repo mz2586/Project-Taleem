@@ -118,28 +118,28 @@
       ],
       "options": [
         {
-          "ur": "آپ ﷺ مدینہ پہنچے",
-          "en": "He arrived in Madinah"
-        },
-        {
-          "ur": "مسلمانوں نے مل کر مسجد بنانا شروع کی",
-          "en": "The Muslims began building a masjid together"
-        },
-        {
           "ur": "آپ ﷺ نے بھی سب کے ساتھ اینٹیں اٹھائیں",
           "en": "He also carried bricks with everyone"
         },
         {
+          "ur": "آپ ﷺ مدینہ پہنچے",
+          "en": "He arrived in Madinah"
+        },
+        {
           "ur": "مل جل کر مسجد بن گئی",
           "en": "Working together, the masjid was built"
+        },
+        {
+          "ur": "مسلمانوں نے مل کر مسجد بنانا شروع کی",
+          "en": "The Muslims began building a masjid together"
         }
       ],
       "answer_key": {
         "order": [
-          0,
           1,
-          2,
-          3
+          3,
+          0,
+          2
         ]
       }
     }

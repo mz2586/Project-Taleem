@@ -102,11 +102,12 @@
         "en": "Drag the four long-division step cards into the right order: subtract, divide, bring down, multiply."
       },
       "answer_key": {
+        "mode": "order",
         "order": [
-          "divide",
-          "multiply",
-          "subtract",
-          "bring down"
+          1,
+          3,
+          0,
+          2
         ]
       },
       "hints": [
@@ -116,6 +117,24 @@
             "ur": "پہلے ہم دیکھتے ہیں مقسوم علیہ کتنی بار آتا ہے۔",
             "en": "First we see how many times the divisor fits."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "تفریق",
+          "en": "subtract"
+        },
+        {
+          "ur": "تقسیم",
+          "en": "divide"
+        },
+        {
+          "ur": "نیچے لائیں",
+          "en": "bring down"
+        },
+        {
+          "ur": "ضرب",
+          "en": "multiply"
         }
       ]
     },

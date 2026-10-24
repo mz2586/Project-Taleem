@@ -108,15 +108,33 @@
         "en": "Sort each rule into the 'safety rule' or 'fairness rule' box."
       },
       "answer_key": {
-        "safety": [
-          "Look both ways before crossing",
-          "Do not touch electric wires",
-          "Walk, do not run, on the stairs"
-        ],
-        "fairness": [
-          "Everyone gets a turn to bat",
-          "Raise your hand to speak in class",
-          "Share the swing in the park"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -126,6 +144,40 @@
             "ur": "سوچیں: یہ اصول چوٹ سے بچاتا ہے یا سب کو برابر موقع دیتا ہے؟",
             "en": "Think: does this rule stop people getting hurt, or give everyone an equal chance?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "سڑک پار کرنے سے پہلے دونوں طرف دیکھیں",
+          "en": "Look both ways before crossing"
+        },
+        {
+          "ur": "سب کو بیٹنگ کی باری ملے",
+          "en": "Everyone gets a turn to bat"
+        },
+        {
+          "ur": "بجلی کی تاروں کو ہاتھ نہ لگائیں",
+          "en": "Do not touch electric wires"
+        },
+        {
+          "ur": "کلاس میں بولنے کے لیے ہاتھ اٹھائیں",
+          "en": "Raise your hand to speak in class"
+        },
+        {
+          "ur": "سیڑھیوں پر دوڑیں نہیں، چل کر جائیں",
+          "en": "Walk, do not run, on the stairs"
+        },
+        {
+          "ur": "پارک میں جھولا باری باری لیں",
+          "en": "Share the swing in the park"
+        },
+        {
+          "ur": "حفاظت کا اصول",
+          "en": "safety rule"
+        },
+        {
+          "ur": "انصاف کا اصول",
+          "en": "fairness rule"
         }
       ]
     },
@@ -139,23 +191,23 @@
       },
       "options": [
         {
-          "ur": "زیبرا کراسنگ پر رکیں",
-          "en": "stop at the zebra crossing"
-        },
-        {
           "ur": "دائیں بائیں دیکھیں",
           "en": "look right and left"
         },
         {
           "ur": "سیدھا چل کر پار کریں",
           "en": "walk straight across"
+        },
+        {
+          "ur": "زیبرا کراسنگ پر رکیں",
+          "en": "stop at the zebra crossing"
         }
       ],
       "answer_key": {
         "order": [
-          "stop at the zebra crossing",
-          "look right and left",
-          "walk straight across"
+          2,
+          0,
+          1
         ]
       },
       "hints": [
@@ -467,6 +519,7 @@
   },
   "review_flags": [
     "child-safety + subject expert: confirm road-safety steps (stop, look both ways, cross at a zebra crossing, walk not run) and the advice for roads without crossings",
-    "draft deliberately avoids saying which side of the road traffic uses; add only if verified"
+    "draft deliberately avoids saying which side of the road traffic uses; add only if verified",
+    "Urdu terminology: the activity cards/labels added for the interaction contract were written by AI (some only existed in English in the old answer key); confirm the Urdu wording"
   ]
 }

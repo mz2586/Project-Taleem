@@ -109,15 +109,33 @@
         "en": "Put each thing in a box: source of light, or source of sound. Sun, drum, firefly, bell, torch, flute."
       },
       "answer_key": {
-        "light_source": [
-          "sun",
-          "firefly",
-          "torch"
-        ],
-        "sound_source": [
-          "drum",
-          "bell",
-          "flute"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -127,6 +145,40 @@
             "ur": "اس سے ہمیں کچھ دکھتا ہے یا سنائی دیتا ہے؟",
             "en": "Does it help us see, or help us hear?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "سورج",
+          "en": "Sun"
+        },
+        {
+          "ur": "ڈھول",
+          "en": "drum"
+        },
+        {
+          "ur": "جگنو",
+          "en": "firefly"
+        },
+        {
+          "ur": "گھنٹی",
+          "en": "bell"
+        },
+        {
+          "ur": "ٹارچ",
+          "en": "torch"
+        },
+        {
+          "ur": "بانسری",
+          "en": "flute"
+        },
+        {
+          "ur": "روشنی کا ذریعہ",
+          "en": "source of light"
+        },
+        {
+          "ur": "آواز کا ذریعہ",
+          "en": "source of sound"
         }
       ]
     }

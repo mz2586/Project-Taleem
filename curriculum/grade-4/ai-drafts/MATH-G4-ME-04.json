@@ -439,6 +439,7 @@
   "review_flags": [
     "language editor: 'ہفتہ' means both 'week' and 'Saturday'; check the days-ordering item and the vocabulary do not confuse learners",
     "language editor: confirm the Urdu time phrases سوا تین / ساڑھے چار and the Urdu digit clock format ۳:۱۵",
-    "subject expert: the signal name 'slow_counting_in_fives' is new; confirm it matches the decision engine's signal vocabulary"
+    "subject expert: the signal name 'slow_counting_in_fives' is new; confirm it matches the decision engine's signal vocabulary",
+    "interaction contract: activity a1-set-4-25 is a bespoke widget (clock hands); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

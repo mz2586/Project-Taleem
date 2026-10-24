@@ -71,7 +71,8 @@
         "en": "Two bars are the same length. One has 1/3 shaded, the other 1/6. Tap the bar with the bigger fraction."
       },
       "answer_key": {
-        "selected": "1/3"
+        "mode": "choose",
+        "correct_option": 0
       },
       "hints": [
         {
@@ -80,6 +81,16 @@
             "ur": "کس پٹی کے ٹکڑے زیادہ اور چھوٹے ہیں؟",
             "en": "Which bar has more, smaller pieces?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "وہ پٹی جس پر ۱/۳ رنگا ہے",
+          "en": "the bar with 1/3 shaded"
+        },
+        {
+          "ur": "وہ پٹی جس پر ۱/۶ رنگا ہے",
+          "en": "the bar with 1/6 shaded"
         }
       ]
     },

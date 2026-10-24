@@ -116,10 +116,11 @@
         "en": "Listen to the instruction and do it on the screen: 'Tap the cup. Then tap the spoon. Last, tap the plate.'"
       },
       "answer_key": {
-        "tap_sequence": [
-          "cup",
-          "spoon",
-          "plate"
+        "mode": "order",
+        "order": [
+          1,
+          2,
+          0
         ]
       },
       "hints": [
@@ -129,6 +130,20 @@
             "ur": "then اور last کو دھیان سے سنیں۔",
             "en": "Listen carefully for then and last."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "plate",
+          "en": "plate"
+        },
+        {
+          "ur": "cup",
+          "en": "cup"
+        },
+        {
+          "ur": "spoon",
+          "en": "spoon"
         }
       ]
     },
@@ -142,10 +157,10 @@
       },
       "answer_key": {
         "order": [
-          "wet your hands",
-          "rub them with soap",
-          "rinse them",
-          "dry your hands"
+          1,
+          3,
+          2,
+          0
         ]
       },
       "hints": [
@@ -155,6 +170,24 @@
             "ur": "صابن سے پہلے ہاتھ گیلے کرتے ہیں۔",
             "en": "We wet our hands before the soap."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "dry your hands",
+          "en": "dry your hands"
+        },
+        {
+          "ur": "wet your hands",
+          "en": "wet your hands"
+        },
+        {
+          "ur": "rinse them",
+          "en": "rinse them"
+        },
+        {
+          "ur": "rub them with soap",
+          "en": "rub them with soap"
         }
       ]
     },

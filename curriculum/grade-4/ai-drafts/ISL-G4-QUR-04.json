@@ -122,6 +122,22 @@
       },
       "options": [
         {
+          "ur": "امی نے کام کہا",
+          "en": "Mother asks for help"
+        },
+        {
+          "ur": "کوئی کسی پر ہنس رہا ہے",
+          "en": "Someone is laughing at another child"
+        },
+        {
+          "ur": "کھیل میں باری بانٹنی ہے",
+          "en": "Turns must be shared in a game"
+        },
+        {
+          "ur": "پڑوسی کو کھانے کی ضرورت ہے",
+          "en": "A neighbour needs food"
+        },
+        {
           "ur": "مدد کرنا",
           "en": "Helping those in need"
         },
@@ -139,30 +155,25 @@
         }
       ],
       "answer_key": {
-        "left": [
-          {
-            "ur": "امی نے کام کہا",
-            "en": "Mother asks for help"
-          },
-          {
-            "ur": "کوئی کسی پر ہنس رہا ہے",
-            "en": "Someone is laughing at another child"
-          },
-          {
-            "ur": "کھیل میں باری بانٹنی ہے",
-            "en": "Turns must be shared in a game"
-          },
-          {
-            "ur": "پڑوسی کو کھانے کی ضرورت ہے",
-            "en": "A neighbour needs food"
-          }
-        ],
-        "pairs": {
-          "0": 2,
-          "1": 3,
-          "2": 1,
-          "3": 0
-        }
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            4
+          ]
+        ]
       }
     }
   ],

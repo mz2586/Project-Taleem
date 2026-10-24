@@ -102,28 +102,28 @@
       ],
       "options": [
         {
-          "ur": "آپ ﷺ ہمیشہ سچ بولتے تھے",
-          "en": "He always told the truth"
-        },
-        {
-          "ur": "لوگ اپنی قیمتی چیزیں آپ ﷺ کے پاس رکھواتے تھے",
-          "en": "People left their precious things with him"
-        },
-        {
           "ur": "بات نہ ماننے والے بھی آپ ﷺ پر بھروسا کرتے تھے",
           "en": "Even those who did not accept his message trusted him"
         },
         {
+          "ur": "آپ ﷺ ہمیشہ سچ بولتے تھے",
+          "en": "He always told the truth"
+        },
+        {
           "ur": "مدینہ جاتے وقت آپ ﷺ نے سب امانتیں واپس کروائیں",
           "en": "When leaving for Madinah, he had every trust returned"
+        },
+        {
+          "ur": "لوگ اپنی قیمتی چیزیں آپ ﷺ کے پاس رکھواتے تھے",
+          "en": "People left their precious things with him"
         }
       ],
       "answer_key": {
         "order": [
-          0,
           1,
-          2,
-          3
+          3,
+          0,
+          2
         ]
       }
     }

@@ -115,13 +115,34 @@
         "en": "Passage 'Today':\nWhen Salma came home from school, the smell of biryani was coming from the kitchen. Ammi had spread a new sheet in the sitting room. Abbu kept looking at the clock and peeping towards the door. Just then the doorbell rang. Salma ran to it and said happily, \"Nani has come!\" Nani had a big bag in her hand.\n\nTap the parts that show a special guest was expected at home."
       },
       "answer_key": {
-        "tap_targets": [
-          "بریانی کی خوشبو",
-          "نئی چادر بچھائی ہوئی تھی",
-          "بار بار گھڑی دیکھ رہے تھے",
-          "دروازے کی طرف جھانک رہے تھے"
-        ],
-        "correct_state": "at least two of the four clue parts selected; no unrelated part selected"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
+        ]
       },
       "hints": [
         {
@@ -130,6 +151,40 @@
             "ur": "گھر والے کیا کیا تیاری کر رہے تھے؟",
             "en": "What were the family getting ready?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "سلمیٰ اسکول سے گھر آئی",
+          "en": "Salma came home from school"
+        },
+        {
+          "ur": "بریانی کی خوشبو",
+          "en": "the smell of biryani"
+        },
+        {
+          "ur": "نئی چادر بچھائی ہوئی تھی",
+          "en": "a new sheet had been spread"
+        },
+        {
+          "ur": "بار بار گھڑی دیکھ رہے تھے",
+          "en": "kept looking at the clock"
+        },
+        {
+          "ur": "دروازے کی طرف جھانک رہے تھے",
+          "en": "peeping towards the door"
+        },
+        {
+          "ur": "نانی کے ہاتھ میں ایک بڑا سا تھیلا تھا",
+          "en": "Nani had a big bag in her hand"
+        },
+        {
+          "ur": "بتاتا ہے کہ خاص مہمان آنے والا تھا",
+          "en": "shows a special guest was expected"
+        },
+        {
+          "ur": "یہ نہیں بتاتا",
+          "en": "does not show it"
         }
       ]
     },
@@ -510,6 +565,7 @@
   },
   "review_flags": [
     "mentor team: p6 and the challenge are open answers; confirm the 2-level rubric is enough",
-    "subject expert: check the passage is culturally natural across regions (biryani, بیٹھک, Nani's visit)"
+    "subject expert: check the passage is culturally natural across regions (biryani, بیٹھک, Nani's visit)",
+    "interaction contract: a1-tap-clues is now a sort and requires all four clue parts (the draft accepted any two); two non-clue cards were added from the passage, confirm"
   ]
 }

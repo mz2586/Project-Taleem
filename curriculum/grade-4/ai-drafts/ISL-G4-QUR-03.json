@@ -136,21 +136,41 @@
         {
           "ur": "آہستہ اور صاف پڑھنا",
           "en": "Reading slowly and clearly"
+        },
+        {
+          "ur": "تلاوت کی اچھی عادت",
+          "en": "good recitation habit"
+        },
+        {
+          "ur": "اچھی عادت نہیں",
+          "en": "not a good habit"
         }
       ],
       "answer_key": {
         "mode": "sort",
-        "groups": {
-          "good_habit": [
+        "left_count": 5,
+        "pairs": [
+          [
             0,
-            2,
-            4
+            5
           ],
-          "not_good_habit": [
+          [
             1,
-            3
+            6
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            5
           ]
-        }
+        ]
       }
     },
     {

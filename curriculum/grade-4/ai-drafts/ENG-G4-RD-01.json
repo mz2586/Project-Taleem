@@ -96,11 +96,11 @@
         "en": "Put the letter tiles in order to build the word: p, e, n"
       },
       "answer_key": {
-        "target_word": "pen",
-        "tile_order": [
-          "p",
-          "e",
-          "n"
+        "mode": "order",
+        "order": [
+          2,
+          0,
+          1
         ]
       },
       "hints": [
@@ -110,6 +110,20 @@
             "ur": "پہلی آواز 'پ' ہے۔",
             "en": "The first sound is /p/."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "e",
+          "en": "e"
+        },
+        {
+          "ur": "n",
+          "en": "n"
+        },
+        {
+          "ur": "p",
+          "en": "p"
         }
       ]
     },

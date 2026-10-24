@@ -109,15 +109,25 @@
         "en": "Put each fact in the right box: Sun, Moon or stars. 'The star closest to us', 'Goes round the Earth', 'Look small because they are very far away', 'Does not make its own light'."
       },
       "answer_key": {
-        "sun": [
-          "the star closest to us"
-        ],
-        "moon": [
-          "goes round the Earth",
-          "does not make its own light"
-        ],
-        "stars": [
-          "look small because they are very far away"
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            5
+          ]
         ]
       },
       "hints": [
@@ -127,6 +137,36 @@
             "ur": "کون سی چیز اپنی روشنی نہیں دیتی؟",
             "en": "Which one does not make its own light?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "ہم سے سب سے قریب ستارہ",
+          "en": "The star closest to us"
+        },
+        {
+          "ur": "زمین کے گرد چکر لگاتا ہے",
+          "en": "Goes round the Earth"
+        },
+        {
+          "ur": "بہت دور ہونے سے چھوٹے لگتے ہیں",
+          "en": "Look small because they are very far away"
+        },
+        {
+          "ur": "اپنی روشنی نہیں دیتا",
+          "en": "Does not make its own light"
+        },
+        {
+          "ur": "سورج",
+          "en": "Sun"
+        },
+        {
+          "ur": "چاند",
+          "en": "Moon"
+        },
+        {
+          "ur": "ستارے",
+          "en": "stars"
         }
       ]
     }

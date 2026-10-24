@@ -124,20 +124,37 @@
         {
           "ur": "دیوار پر لکیریں کھینچنا",
           "en": "Scribbling on a wall"
+        },
+        {
+          "ur": "خیال رکھنا",
+          "en": "caring"
+        },
+        {
+          "ur": "نقصان پہنچانا",
+          "en": "harming"
         }
       ],
       "answer_key": {
-        "sort": {
-          "caring": [
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
             0,
-            2
+            4
           ],
-          "harming": [
+          [
             1,
-            3
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
           ]
-        },
-        "mode": "tap a card, then tap its group (drag also works)"
+        ]
       },
       "hints": [
         {

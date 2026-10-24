@@ -108,13 +108,25 @@
         "en": "Drag each story into the \"add\" or \"subtract\" box. (a) Ahmed has 125 stamps and gets 40 more. (b) There were 300 rotis; 120 were eaten. (c) Shop A has 450 eggs, shop B has 380. How many more in shop A? (d) Two classes have 38 and 42 children. How many in all?"
       },
       "answer_key": {
-        "add": [
-          "a",
-          "d"
-        ],
-        "subtract": [
-          "b",
-          "c"
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            4
+          ]
         ]
       },
       "hints": [
@@ -124,6 +136,32 @@
             "ur": "ہر کہانی کی تصویر سوچیں: چیزیں ملتی ہیں یا کم ہوتی ہیں یا موازنہ ہوتا ہے؟",
             "en": "Picture each story: are things joined, taken away, or compared?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "(الف) احمد کے پاس ۱۲۵ ٹکٹ ہیں، اسے ۴۰ اور ملتے ہیں۔",
+          "en": "(a) Ahmed has 125 stamps and gets 40 more."
+        },
+        {
+          "ur": "(ب) ۳۰۰ روٹیاں تھیں، ۱۲۰ کھا لی گئیں۔",
+          "en": "(b) There were 300 rotis; 120 were eaten."
+        },
+        {
+          "ur": "(ج) دکان الف میں ۴۵۰ انڈے، دکان ب میں ۳۸۰۔ الف میں کتنے زیادہ؟",
+          "en": "(c) Shop A has 450 eggs, shop B has 380. How many more in shop A?"
+        },
+        {
+          "ur": "(د) دو جماعتوں میں ۳۸ اور ۴۲ بچے ہیں۔ کل کتنے؟",
+          "en": "(d) Two classes have 38 and 42 children. How many in all?"
+        },
+        {
+          "ur": "جمع",
+          "en": "add"
+        },
+        {
+          "ur": "تفریق",
+          "en": "subtract"
         }
       ]
     },

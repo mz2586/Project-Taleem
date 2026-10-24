@@ -124,20 +124,37 @@
         {
           "ur": "دوسرے کی بات کاٹ کر چلّانا",
           "en": "Shouting over the other person"
+        },
+        {
+          "ur": "ادب سے اختلاف",
+          "en": "polite disagreement"
+        },
+        {
+          "ur": "بے ادبی",
+          "en": "rude"
         }
       ],
       "answer_key": {
-        "sort": {
-          "polite": [
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
             0,
-            2
+            4
           ],
-          "rude": [
+          [
             1,
-            3
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
           ]
-        },
-        "mode": "tap a card, then tap its group (drag also works)"
+        ]
       },
       "hints": [
         {

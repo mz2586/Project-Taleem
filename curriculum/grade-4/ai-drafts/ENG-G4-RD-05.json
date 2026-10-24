@@ -111,9 +111,21 @@
         "en": "Read: The shopkeeper smiled. His shelves were empty. He counted a big pile of money. Tap the two phrases that show the shop had a good day."
       },
       "answer_key": {
-        "clues": [
-          "shelves were empty",
-          "a big pile of money"
+        "mode": "sort",
+        "left_count": 3,
+        "pairs": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            3
+          ]
         ]
       },
       "hints": [
@@ -123,6 +135,28 @@
             "ur": "کونسے الفاظ بتاتے ہیں کہ سامان بک گیا؟",
             "en": "Which words show that things were sold?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "The shopkeeper smiled.",
+          "en": "The shopkeeper smiled."
+        },
+        {
+          "ur": "His shelves were empty.",
+          "en": "His shelves were empty."
+        },
+        {
+          "ur": "He counted a big pile of money.",
+          "en": "He counted a big pile of money."
+        },
+        {
+          "ur": "بتاتا ہے کہ دکان کا دن اچھا گزرا",
+          "en": "shows the shop had a good day"
+        },
+        {
+          "ur": "ان دو اشاروں میں سے نہیں",
+          "en": "is not one of the two clues"
         }
       ]
     },
@@ -483,6 +517,7 @@
   },
   "review_flags": [
     "mentor-mediated: confirm the rubric levels for the short and long items fit mentor marking time",
-    "subject expert: confirm 'sat near the fire' in a winter context is acceptable and not a safety concern"
+    "subject expert: confirm 'sat near the fire' in a winter context is acceptable and not a safety concern",
+    "interaction contract: a1-tap-clues is now a sort (clue / not a clue); the key treats 'The shopkeeper smiled.' as not a clue, confirm that is intended"
   ]
 }

@@ -465,6 +465,7 @@
   "review_flags": [
     "check every price and change sum (30/50/20, 15/20/5, 40/100/60, 10×4=40, 5×3=15, 40+20>50) and that the Rs amounts are realistic for current prices",
     "Urdu math uses ۔ after '۵۰ − ۳۰ = ۲۰'; confirm numerals and the minus sign render correctly right-to-left",
-    "child-safety: confirm money examples stay neutral and do not shame learners without pocket money"
+    "child-safety: confirm money examples stay neutral and do not shame learners without pocket money",
+    "interaction contract: activity a1-shop-roleplay is a bespoke widget (coins and notes for change); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

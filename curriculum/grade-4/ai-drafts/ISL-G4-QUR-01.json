@@ -116,21 +116,41 @@
         {
           "ur": "اس کے اوپر دوسری چیزیں رکھنا",
           "en": "Putting other things on top of it"
+        },
+        {
+          "ur": "قرآن مجید کا ادب",
+          "en": "respect for the Qur'an"
+        },
+        {
+          "ur": "ادب نہیں",
+          "en": "not respect"
         }
       ],
       "answer_key": {
         "mode": "sort",
-        "groups": {
-          "respect": [
+        "left_count": 5,
+        "pairs": [
+          [
             0,
-            1,
-            3
+            5
           ],
-          "not_respect": [
+          [
+            1,
+            5
+          ],
+          [
             2,
-            4
+            6
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
           ]
-        }
+        ]
       }
     }
   ],

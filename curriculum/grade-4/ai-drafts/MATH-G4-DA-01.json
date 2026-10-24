@@ -353,6 +353,7 @@
   "review_flags": [
     "subject expert: the doc's worked example here is an English author specification, not a script; it needs a real bilingual worked example",
     "subject expert: the shared m-graph-scale-ignored correction imported from §4 talks about bar squares; for pictographs it should say 'read the key: how many one symbol stands for'",
-    "accessibility: the pictograph is described in words inside each stem; check stems are not too long for audio"
+    "accessibility: the pictograph is described in words inside each stem; check stems are not too long for audio",
+    "interaction contract: activity a1-place-symbols is a bespoke widget (pictograph symbol placing); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

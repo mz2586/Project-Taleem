@@ -81,11 +81,41 @@
         "en": "Tap the words that should start with a capital letter: yesterday zainab and i saw the river indus"
       },
       "answer_key": {
-        "capitalise": [
-          "yesterday",
-          "zainab",
-          "i",
-          "indus"
+        "mode": "sort",
+        "left_count": 8,
+        "pairs": [
+          [
+            0,
+            8
+          ],
+          [
+            1,
+            8
+          ],
+          [
+            2,
+            9
+          ],
+          [
+            3,
+            8
+          ],
+          [
+            4,
+            9
+          ],
+          [
+            5,
+            9
+          ],
+          [
+            6,
+            9
+          ],
+          [
+            7,
+            8
+          ]
         ]
       },
       "hints": [
@@ -95,6 +125,48 @@
             "ur": "جملے کا پہلا لفظ، نام اور I دیکھیں۔",
             "en": "Check the first word, the names and I."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "yesterday",
+          "en": "yesterday"
+        },
+        {
+          "ur": "zainab",
+          "en": "zainab"
+        },
+        {
+          "ur": "and",
+          "en": "and"
+        },
+        {
+          "ur": "i",
+          "en": "i"
+        },
+        {
+          "ur": "saw",
+          "en": "saw"
+        },
+        {
+          "ur": "the",
+          "en": "the"
+        },
+        {
+          "ur": "river",
+          "en": "river"
+        },
+        {
+          "ur": "indus",
+          "en": "indus"
+        },
+        {
+          "ur": "بڑے حرف (capital) سے شروع ہو",
+          "en": "starts with a capital letter"
+        },
+        {
+          "ur": "چھوٹے حرف سے ہی رہے",
+          "en": "stays a small letter"
         }
       ]
     },
@@ -384,6 +456,7 @@
     ]
   },
   "review_flags": [
-    "check 'the river indus' item: the answer key capitalises Indus only (not river); confirm house style for 'River Indus'"
+    "check 'the river indus' item: the answer key capitalises Indus only (not river); confirm house style for 'River Indus'",
+    "interaction contract: a1-tap-capitals is now a sort (needs a capital / stays small); the key keeps 'river' small in 'the river indus', confirm"
   ]
 }

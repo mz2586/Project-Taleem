@@ -449,6 +449,7 @@
   "review_flags": [
     "subject expert: 'a big piece of wood can float' — most dry wood floats; confirm no dense-wood exception is needed at Grade 4",
     "child-safety: home bowl test is water-only; confirm the 'away from anything electrical' line",
-    "mentor lead: the interactive activity's prediction step is unscored — confirm the player supports that"
+    "mentor lead: the interactive activity's prediction step is unscored — confirm the player supports that",
+    "interaction contract: activity a1-predict-sort is a bespoke widget (predict-then-check (the prediction must not be marked)); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

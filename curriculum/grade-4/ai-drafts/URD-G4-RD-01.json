@@ -111,13 +111,34 @@
         "en": "Story 'The Paper Boat':\nIt rained hard in the morning. Water collected in the lane. Ahmed made a paper boat. His sister Zainab set the boat on the water. The boat began to float slowly. Zainab said happily, \"Look! Our boat is moving!\" Ahmed asked, \"How far will it go?\"\n\nTap every mark in the story where you should pause."
       },
       "answer_key": {
-        "tap_targets": [
-          "every ۔ (full stop)",
-          "every : (colon)",
-          "every ! (exclamation)",
-          "every ؟ (question mark)"
-        ],
-        "correct_state": "all pause marks selected, no words selected"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            6
+          ]
+        ]
       },
       "hints": [
         {
@@ -126,6 +147,40 @@
             "ur": "جملوں کے آخر کو دیکھیں۔",
             "en": "Look at the ends of the sentences."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "۔",
+          "en": "۔"
+        },
+        {
+          "ur": "بارش",
+          "en": "baarish (rain)"
+        },
+        {
+          "ur": "!",
+          "en": "!"
+        },
+        {
+          "ur": ":",
+          "en": ":"
+        },
+        {
+          "ur": "کشتی",
+          "en": "kashti (boat)"
+        },
+        {
+          "ur": "؟",
+          "en": "؟"
+        },
+        {
+          "ur": "یہاں رکیں",
+          "en": "pause here"
+        },
+        {
+          "ur": "یہاں نہ رکیں",
+          "en": "do not pause"
         }
       ]
     },
@@ -488,6 +543,7 @@
   },
   "review_flags": [
     "subject expert: confirm punctuation names used here (ختمہ، سکتہ، سوالیہ نشان، ندائیہ نشان، رابطہ) match the Grade 4 school terms",
-    "mentor team: the oral part has no recording feature yet; confirm the live mentor check is workable"
+    "mentor team: the oral part has no recording feature yet; confirm the live mentor check is workable",
+    "interaction contract: a1-tap-pauses (tap marks in the passage) is now a sort of mark and word cards into 'pause here' / 'do not pause'; confirm, and use a text-tap widget later"
   ]
 }

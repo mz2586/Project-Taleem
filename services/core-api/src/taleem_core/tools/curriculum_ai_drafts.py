@@ -71,6 +71,7 @@ from ..contexts.curriculum_studio.domain.content import (
     VocabularyTerm,
     WorkedExample,
 )
+from ..contexts.curriculum_studio.domain.interaction import answer_key_errors
 from ..contexts.curriculum_studio.domain.lesson import RemediationRoute
 from .curriculum_spine import Objective, Spine
 
@@ -232,6 +233,9 @@ class _Reader:
                 else LocalizedText()
             ),
         )
+        key_errors = answer_key_errors(item)
+        if key_errors:
+            raise self.fail(where, "; ".join(key_errors) + " (ITEM_INTERACTION_CONTRACT.md)")
         if item.needs_rubric() and (rubric is None or not rubric.levels):
             raise self.fail(where, f"{kind.value} items need a rubric with levels")
         return item

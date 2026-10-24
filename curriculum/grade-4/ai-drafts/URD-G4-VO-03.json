@@ -137,29 +137,59 @@
       },
       "options": [
         {
-          "ur": "زمین کے اندر پودے کا حصہ",
-          "en": "the plant's part under the ground"
+          "ur": "جڑ",
+          "en": "root"
+        },
+        {
+          "ur": "نقشہ",
+          "en": "map"
+        },
+        {
+          "ur": "پیمائش",
+          "en": "measurement"
+        },
+        {
+          "ur": "صفائی",
+          "en": "cleanliness"
         },
         {
           "ur": "جگہ کی اوپر سے تصویر",
           "en": "a picture of a place from above"
         },
         {
-          "ur": "لمبائی یا وزن ناپنا",
-          "en": "finding length or weight"
-        },
-        {
           "ur": "گندگی سے پاک رکھنا",
           "en": "keeping free of dirt"
+        },
+        {
+          "ur": "زمین کے اندر پودے کا حصہ",
+          "en": "the plant's part under the ground"
+        },
+        {
+          "ur": "لمبائی یا وزن ناپنا",
+          "en": "finding length or weight"
         }
       ],
       "answer_key": {
-        "pairs": {
-          "جڑ": 0,
-          "نقشہ": 1,
-          "پیمائش": 2,
-          "صفائی": 3
-        }
+        "mode": "match",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            5
+          ]
+        ]
       },
       "hints": [
         {
@@ -181,24 +211,46 @@
       },
       "options": [
         {
+          "ur": "جڑ",
+          "en": "root"
+        },
+        {
+          "ur": "نقشہ",
+          "en": "map"
+        },
+        {
+          "ur": "پیمائش",
+          "en": "measurement"
+        },
+        {
+          "ur": "ریاضی",
+          "en": "maths"
+        },
+        {
           "ur": "سائنس",
           "en": "science"
         },
         {
           "ur": "معاشرتی علوم",
           "en": "social studies"
-        },
-        {
-          "ur": "ریاضی",
-          "en": "maths"
         }
       ],
       "answer_key": {
-        "pairs": {
-          "جڑ": "سائنس",
-          "نقشہ": "معاشرتی علوم",
-          "پیمائش": "ریاضی"
-        }
+        "left_count": 3,
+        "pairs": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ]
+        ]
       },
       "explanation": {
         "ur": "پودے سائنس میں، نقشے معاشرتی علوم میں اور ناپ ریاضی میں پڑھتے ہیں۔",

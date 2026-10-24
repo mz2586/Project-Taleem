@@ -33,8 +33,8 @@
         "en": "Passage 'The Sunday Bazaar':\nOn Sunday morning Noor went to the bazaar with her mother. The bazaar was very lively. Ammi bought two kilos of potatoes and one kilo of tomatoes from the vegetable seller. Noor asked for bananas. Ammi bought a dozen bananas. On the way back it suddenly started to rain. They both stood under a shop's awning. When the rain stopped, they reached home laughing.\n\nTap the sentence that tells how many bananas Ammi bought."
       },
       "answer_key": {
-        "tap_target": "امی نے ایک درجن کیلے خریدے۔",
-        "correct_state": "only that sentence selected"
+        "mode": "choose",
+        "correct_option": 4
       },
       "hints": [
         {
@@ -43,6 +43,40 @@
             "ur": "'کیلے' کا لفظ عبارت میں تلاش کریں۔",
             "en": "Look for the word 'bananas' in the passage."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "اتوار کی صبح نور اپنی امی کے ساتھ بازار گئی۔",
+          "en": "On Sunday morning Noor went to the bazaar with her mother."
+        },
+        {
+          "ur": "بازار میں بہت رونق تھی۔",
+          "en": "The bazaar was very lively."
+        },
+        {
+          "ur": "امی نے سبزی والے سے دو کلو آلو اور ایک کلو ٹماٹر لیے۔",
+          "en": "Ammi bought two kilos of potatoes and one kilo of tomatoes from the vegetable seller."
+        },
+        {
+          "ur": "نور نے کیلے لینے کو کہا۔",
+          "en": "Noor asked for bananas."
+        },
+        {
+          "ur": "امی نے ایک درجن کیلے خریدے۔",
+          "en": "Ammi bought a dozen bananas."
+        },
+        {
+          "ur": "واپسی پر اچانک بارش شروع ہو گئی۔",
+          "en": "On the way back it suddenly started to rain."
+        },
+        {
+          "ur": "دونوں ایک دکان کے چھجے کے نیچے کھڑی ہو گئیں۔",
+          "en": "They both stood under a shop's awning."
+        },
+        {
+          "ur": "بارش رکی تو وہ ہنستی ہوئی گھر پہنچیں۔",
+          "en": "When the rain stopped, they reached home laughing."
         }
       ]
     },

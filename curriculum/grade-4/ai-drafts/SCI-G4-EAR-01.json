@@ -90,7 +90,8 @@
         "en": "In the picture the Sun is on the left and the Earth on the right. Tap the half of the Earth that has day."
       },
       "answer_key": {
-        "tap": "left_half_facing_sun"
+        "mode": "choose",
+        "correct_option": 0
       },
       "hints": [
         {
@@ -99,6 +100,16 @@
             "ur": "دن اس طرف ہوتا ہے جہاں سورج کی روشنی پڑے۔",
             "en": "Day is on the side where sunlight falls."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "زمین کا بائیں والا آدھا حصہ",
+          "en": "the left half of the Earth"
+        },
+        {
+          "ur": "زمین کا دائیں والا آدھا حصہ",
+          "en": "the right half of the Earth"
         }
       ]
     }

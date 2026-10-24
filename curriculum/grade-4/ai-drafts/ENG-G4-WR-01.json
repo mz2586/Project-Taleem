@@ -91,20 +91,34 @@
         "en": "Sort each letter into the right box, tall, small or tail: h, a, g, t, e, y"
       },
       "answer_key": {
-        "groups": {
-          "tall": [
-            "h",
-            "t"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
           ],
-          "small": [
-            "a",
-            "e"
+          [
+            1,
+            7
           ],
-          "tail": [
-            "g",
-            "y"
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            8
           ]
-        }
+        ]
       },
       "hints": [
         {
@@ -113,6 +127,44 @@
             "ur": "حرف لکھ کر دیکھیں: کیا یہ اوپر یا نیچے جاتا ہے؟",
             "en": "Write the letter and see: does it go up or down?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "h",
+          "en": "h"
+        },
+        {
+          "ur": "a",
+          "en": "a"
+        },
+        {
+          "ur": "g",
+          "en": "g"
+        },
+        {
+          "ur": "t",
+          "en": "t"
+        },
+        {
+          "ur": "e",
+          "en": "e"
+        },
+        {
+          "ur": "y",
+          "en": "y"
+        },
+        {
+          "ur": "لمبا",
+          "en": "tall"
+        },
+        {
+          "ur": "چھوٹا",
+          "en": "small"
+        },
+        {
+          "ur": "دم والا",
+          "en": "tail"
         }
       ]
     },

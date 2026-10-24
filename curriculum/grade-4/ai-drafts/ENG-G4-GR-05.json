@@ -112,10 +112,11 @@
         "en": "Put the word cards in order: rice / cooks / my father"
       },
       "answer_key": {
+        "mode": "order",
         "order": [
-          "My father",
-          "cooks",
-          "rice."
+          2,
+          1,
+          0
         ]
       },
       "hints": [
@@ -125,6 +126,20 @@
             "ur": "پہلے سوچیں: کون کام کر رہا ہے؟",
             "en": "First think: who is doing the action?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "rice",
+          "en": "rice"
+        },
+        {
+          "ur": "cooks",
+          "en": "cooks"
+        },
+        {
+          "ur": "my father",
+          "en": "my father"
         }
       ]
     },
@@ -138,9 +153,9 @@
       },
       "answer_key": {
         "order": [
-          "Nida",
-          "writes",
-          "a letter."
+          2,
+          1,
+          0
         ]
       },
       "hints": [
@@ -150,6 +165,20 @@
             "ur": "کون؟ کیا کرتی ہے؟ کیا؟",
             "en": "Who? Does what? What?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "a letter",
+          "en": "a letter"
+        },
+        {
+          "ur": "writes",
+          "en": "writes"
+        },
+        {
+          "ur": "Nida",
+          "en": "Nida"
         }
       ]
     },

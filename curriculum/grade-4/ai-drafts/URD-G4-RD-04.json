@@ -133,6 +133,7 @@
         }
       ],
       "answer_key": {
+        "mode": "order",
         "order": [
           2,
           1,

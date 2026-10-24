@@ -149,64 +149,57 @@
       },
       "options": [
         {
-          "ur": "بہت اونچی زمین",
-          "en": "very high land"
+          "ur": "پہاڑ",
+          "en": "mountain"
         },
         {
-          "ur": "بہتا ہوا پانی",
-          "en": "flowing water"
+          "ur": "دریا",
+          "en": "river"
+        },
+        {
+          "ur": "میدان",
+          "en": "plain"
+        },
+        {
+          "ur": "صحرا",
+          "en": "desert"
         },
         {
           "ur": "ہموار زمین",
           "en": "flat land"
         },
         {
+          "ur": "بہت اونچی زمین",
+          "en": "very high land"
+        },
+        {
           "ur": "بہت خشک زمین",
           "en": "very dry land"
+        },
+        {
+          "ur": "بہتا ہوا پانی",
+          "en": "flowing water"
         }
       ],
       "answer_key": {
+        "left_count": 4,
         "pairs": [
-          {
-            "left": {
-              "ur": "پہاڑ",
-              "en": "mountain"
-            },
-            "right": {
-              "ur": "بہت اونچی زمین",
-              "en": "very high land"
-            }
-          },
-          {
-            "left": {
-              "ur": "دریا",
-              "en": "river"
-            },
-            "right": {
-              "ur": "بہتا ہوا پانی",
-              "en": "flowing water"
-            }
-          },
-          {
-            "left": {
-              "ur": "میدان",
-              "en": "plain"
-            },
-            "right": {
-              "ur": "ہموار زمین",
-              "en": "flat land"
-            }
-          },
-          {
-            "left": {
-              "ur": "صحرا",
-              "en": "desert"
-            },
-            "right": {
-              "ur": "بہت خشک زمین",
-              "en": "very dry land"
-            }
-          }
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            6
+          ]
         ]
       }
     }
@@ -513,6 +506,7 @@
   },
   "review_flags": [
     "subject expert: verify 'K2 is the world's second-highest peak, in the Karakoram' and 'the Indus is Pakistan's longest river' (both believed correct)",
-    "confirm that naming Himalaya, Karakoram and Hindu Kush is right for Grade 4 and the Urdu spellings (ہمالیہ، قراقرم، ہندوکش، بحیرۂ عرب)"
+    "confirm that naming Himalaya, Karakoram and Hindu Kush is right for Grade 4 and the Urdu spellings (ہمالیہ، قراقرم، ہندوکش، بحیرۂ عرب)",
+    "interaction contract: activity a1-feature-label is a bespoke widget (placing labels on a map); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

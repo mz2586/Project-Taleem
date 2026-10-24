@@ -89,12 +89,26 @@
         "en": "Match each helper to their tool: doctor, teacher, firefighter, farmer."
       },
       "answer_key": {
-        "pairs": {
-          "doctor": "stethoscope",
-          "teacher": "chalk and board",
-          "firefighter": "water hose",
-          "farmer": "plough or hoe"
-        }
+        "mode": "match",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ]
       },
       "hints": [
         {
@@ -103,6 +117,40 @@
             "ur": "سوچیں: یہ اوزار کس کام میں استعمال ہوتا ہے؟",
             "en": "Think: what job is this tool used for?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "ڈاکٹر",
+          "en": "doctor"
+        },
+        {
+          "ur": "استانی",
+          "en": "teacher"
+        },
+        {
+          "ur": "فائر فائٹر",
+          "en": "firefighter"
+        },
+        {
+          "ur": "کسان",
+          "en": "farmer"
+        },
+        {
+          "ur": "پانی کا پائپ",
+          "en": "water hose"
+        },
+        {
+          "ur": "ہل یا کدال",
+          "en": "plough or hoe"
+        },
+        {
+          "ur": "اسٹیتھوسکوپ",
+          "en": "stethoscope"
+        },
+        {
+          "ur": "چاک اور تختہ سیاہ",
+          "en": "chalk and board"
         }
       ]
     },
@@ -116,66 +164,59 @@
       },
       "options": [
         {
-          "ur": "بیماروں کا علاج",
-          "en": "treats people who are ill"
+          "ur": "ڈاکٹر",
+          "en": "doctor"
         },
         {
-          "ur": "آگ بجھانا",
-          "en": "puts out fires"
+          "ur": "فائر فائٹر",
+          "en": "firefighter"
+        },
+        {
+          "ur": "ڈاکیا",
+          "en": "postman"
+        },
+        {
+          "ur": "کسان",
+          "en": "farmer"
         },
         {
           "ur": "خط پہنچانا",
           "en": "delivers letters"
         },
         {
+          "ur": "بیماروں کا علاج",
+          "en": "treats people who are ill"
+        },
+        {
           "ur": "اناج اگانا",
           "en": "grows grain"
+        },
+        {
+          "ur": "آگ بجھانا",
+          "en": "puts out fires"
         }
       ],
       "answer_key": {
+        "left_count": 4,
         "pairs": [
-          {
-            "left": {
-              "ur": "ڈاکٹر",
-              "en": "doctor"
-            },
-            "right": {
-              "ur": "بیماروں کا علاج",
-              "en": "treats people who are ill"
-            }
-          },
-          {
-            "left": {
-              "ur": "فائر فائٹر",
-              "en": "firefighter"
-            },
-            "right": {
-              "ur": "آگ بجھانا",
-              "en": "puts out fires"
-            }
-          },
-          {
-            "left": {
-              "ur": "ڈاکیا",
-              "en": "postman"
-            },
-            "right": {
-              "ur": "خط پہنچانا",
-              "en": "delivers letters"
-            }
-          },
-          {
-            "left": {
-              "ur": "کسان",
-              "en": "farmer"
-            },
-            "right": {
-              "ur": "اناج اگانا",
-              "en": "grows grain"
-            }
-          }
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            6
+          ]
         ],
-        "misconception_on_wrong_pair": "m-helper-role-confusion"
+        "misconception": "m-helper-role-confusion"
       },
       "hints": [
         {
@@ -457,6 +498,7 @@
   },
   "review_flags": [
     "child-safety: confirm whether to add emergency numbers (e.g. 1122, 15) and which are valid nationally; draft deliberately gives none",
-    "confirm the helper list and Urdu job names (ڈاکیا، فائر فائٹر، صفائی کرنے والا) are the preferred Grade 4 terms"
+    "confirm the helper list and Urdu job names (ڈاکیا، فائر فائٹر، صفائی کرنے والا) are the preferred Grade 4 terms",
+    "Urdu terminology: the activity cards/labels added for the interaction contract were written by AI (some only existed in English in the old answer key); confirm the Urdu wording"
   ]
 }

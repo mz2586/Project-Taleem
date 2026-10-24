@@ -126,11 +126,11 @@
         }
       ],
       "answer_key": {
+        "mode": "order",
         "order": [
           1,
           0
-        ],
-        "correct_state": "تر + بوز"
+        ]
       },
       "hints": [
         {

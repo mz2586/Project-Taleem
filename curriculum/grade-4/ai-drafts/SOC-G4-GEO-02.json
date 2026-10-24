@@ -135,52 +135,47 @@
       },
       "options": [
         {
+          "ur": "درخت",
+          "en": "tree"
+        },
+        {
+          "ur": "نیلی لکیر",
+          "en": "blue line"
+        },
+        {
+          "ur": "H والا ڈبہ",
+          "en": "box with an H"
+        },
+        {
+          "ur": "ہسپتال",
+          "en": "hospital"
+        },
+        {
           "ur": "باغ",
           "en": "park"
         },
         {
           "ur": "دریا",
           "en": "river"
-        },
-        {
-          "ur": "ہسپتال",
-          "en": "hospital"
         }
       ],
       "answer_key": {
+        "left_count": 3,
         "pairs": [
-          {
-            "left": {
-              "ur": "درخت",
-              "en": "tree"
-            },
-            "right": {
-              "ur": "باغ",
-              "en": "park"
-            }
-          },
-          {
-            "left": {
-              "ur": "نیلی لکیر",
-              "en": "blue line"
-            },
-            "right": {
-              "ur": "دریا",
-              "en": "river"
-            }
-          },
-          {
-            "left": {
-              "ur": "H والا ڈبہ",
-              "en": "box with an H"
-            },
-            "right": {
-              "ur": "ہسپتال",
-              "en": "hospital"
-            }
-          }
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ]
         ],
-        "misconception_on_wrong_pair": "m-map-not-oriented"
+        "misconception": "m-map-not-oriented"
       },
       "hints": [
         {
@@ -510,6 +505,7 @@
   },
   "review_flags": [
     "language editor: confirm 'کلید' (vs 'علامات کی فہرست') is the Grade 4 term for map key",
-    "the example key uses an 'H' box for a hospital and a domed building for a mosque; confirm these symbols and that the illustrator draws them as described"
+    "the example key uses an 'H' box for a hospital and a domed building for a mosque; confirm these symbols and that the illustrator draws them as described",
+    "interaction contract: activity a1-key-match is a bespoke widget (tapping places on a map); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

@@ -109,7 +109,8 @@
         "en": "In the picture the Sun is on the left and a pole stands in the middle. Tap where the shadow will fall: left, right, or on top of the pole."
       },
       "answer_key": {
-        "tap": "right"
+        "mode": "choose",
+        "correct_option": 1
       },
       "hints": [
         {
@@ -118,6 +119,20 @@
             "ur": "سایہ روشنی کی طرف بنتا ہے یا اس کی مخالف طرف؟",
             "en": "Does the shadow form towards the light or away from it?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "بائیں",
+          "en": "left"
+        },
+        {
+          "ur": "دائیں",
+          "en": "right"
+        },
+        {
+          "ur": "کھمبے کے اوپر",
+          "en": "on top of the pole"
         }
       ]
     },

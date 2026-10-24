@@ -107,11 +107,12 @@
         "en": "Put the boat-making steps in order: folded it in half, took an old page, put the boat in the water, folded the corners"
       },
       "answer_key": {
+        "mode": "order",
         "order": [
-          "took an old page",
-          "folded it in half",
-          "folded the corners",
-          "put the boat in the water"
+          1,
+          0,
+          3,
+          2
         ]
       },
       "hints": [
@@ -121,6 +122,24 @@
             "ur": "عبارت میں First والا جملہ پہلے آتا ہے۔",
             "en": "In the passage the First sentence comes first."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "folded it in half",
+          "en": "folded it in half"
+        },
+        {
+          "ur": "took an old page",
+          "en": "took an old page"
+        },
+        {
+          "ur": "put the boat in the water",
+          "en": "put the boat in the water"
+        },
+        {
+          "ur": "folded the corners",
+          "en": "folded the corners"
         }
       ]
     },
@@ -134,10 +153,10 @@
       },
       "answer_key": {
         "order": [
-          "First",
-          "Next",
-          "Then",
-          "At last"
+          2,
+          3,
+          0,
+          1
         ]
       },
       "hints": [
@@ -147,6 +166,24 @@
             "ur": "کون سا لفظ شروع میں آتا ہے؟",
             "en": "Which word comes at the start?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "Then",
+          "en": "Then"
+        },
+        {
+          "ur": "At last",
+          "en": "At last"
+        },
+        {
+          "ur": "First",
+          "en": "First"
+        },
+        {
+          "ur": "Next",
+          "en": "Next"
         }
       ]
     }

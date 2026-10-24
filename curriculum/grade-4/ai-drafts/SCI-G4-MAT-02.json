@@ -109,17 +109,33 @@
         "en": "Put each thing in the right box: solid, liquid or gas. Brick, milk, air in a balloon, ice cube, cooking oil, air in a tyre."
       },
       "answer_key": {
-        "solid": [
-          "brick",
-          "ice cube"
-        ],
-        "liquid": [
-          "milk",
-          "cooking oil"
-        ],
-        "gas": [
-          "air in a balloon",
-          "air in a tyre"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            8
+          ]
         ]
       },
       "hints": [
@@ -129,6 +145,44 @@
             "ur": "کیا یہ اپنی شکل رکھتا ہے، بہتا ہے، یا پھیل کر جگہ بھرتا ہے؟",
             "en": "Does it keep its shape, flow, or spread to fill the space?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "اینٹ",
+          "en": "brick"
+        },
+        {
+          "ur": "دودھ",
+          "en": "milk"
+        },
+        {
+          "ur": "غبارے کی ہوا",
+          "en": "air in a balloon"
+        },
+        {
+          "ur": "برف کا ٹکڑا",
+          "en": "ice cube"
+        },
+        {
+          "ur": "کھانا پکانے کا تیل",
+          "en": "cooking oil"
+        },
+        {
+          "ur": "ٹائر کی ہوا",
+          "en": "air in a tyre"
+        },
+        {
+          "ur": "ٹھوس",
+          "en": "solid"
+        },
+        {
+          "ur": "مائع",
+          "en": "liquid"
+        },
+        {
+          "ur": "گیس",
+          "en": "gas"
         }
       ]
     }

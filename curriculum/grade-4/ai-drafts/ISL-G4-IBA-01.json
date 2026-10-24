@@ -98,33 +98,33 @@
       ],
       "options": [
         {
+          "ur": "مغرب",
+          "en": "Maghrib"
+        },
+        {
           "ur": "فجر",
           "en": "Fajr"
         },
         {
-          "ur": "ظہر",
-          "en": "Zuhr"
+          "ur": "عشاء",
+          "en": "Isha"
         },
         {
           "ur": "عصر",
           "en": "Asr"
         },
         {
-          "ur": "مغرب",
-          "en": "Maghrib"
-        },
-        {
-          "ur": "عشاء",
-          "en": "Isha"
+          "ur": "ظہر",
+          "en": "Zuhr"
         }
       ],
       "answer_key": {
         "order": [
-          0,
           1,
-          2,
+          4,
           3,
-          4
+          0,
+          2
         ]
       }
     }

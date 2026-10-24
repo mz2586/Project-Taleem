@@ -99,15 +99,33 @@
         "en": "Put each action in the right box: push or pull. Lifting a bucket from a well with a rope, sending a swing forward, opening a drawer, kicking a ball, reeling in a kite string, closing a drawer."
       },
       "answer_key": {
-        "push": [
-          "sending a swing forward",
-          "kicking a ball",
-          "closing a drawer"
-        ],
-        "pull": [
-          "lifting a bucket from a well with a rope",
-          "opening a drawer",
-          "reeling in a kite string"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            6
+          ]
         ]
       },
       "hints": [
@@ -117,6 +135,40 @@
             "ur": "چیز تمہاری طرف آ رہی ہے یا تم سے دور جا رہی ہے؟",
             "en": "Is the thing coming towards you, or going away from you?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "کنویں سے بالٹی نکالنا",
+          "en": "lifting a bucket from a well with a rope"
+        },
+        {
+          "ur": "جھولا آگے بھیجنا",
+          "en": "sending a swing forward"
+        },
+        {
+          "ur": "دراز کھولنا",
+          "en": "opening a drawer"
+        },
+        {
+          "ur": "گیند کو لات مارنا",
+          "en": "kicking a ball"
+        },
+        {
+          "ur": "پتنگ کی ڈور اپنی طرف لانا",
+          "en": "reeling in a kite string"
+        },
+        {
+          "ur": "بند دراز اندر کرنا",
+          "en": "closing a drawer"
+        },
+        {
+          "ur": "دھکا",
+          "en": "push"
+        },
+        {
+          "ur": "کھینچ",
+          "en": "pull"
         }
       ]
     }

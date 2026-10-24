@@ -108,12 +108,26 @@
         "en": "Pair each right card with its responsibility card."
       },
       "answer_key": {
-        "pairs": {
-          "right to education": "learn with care and look after books",
-          "right to health": "keep clean and eat sensibly",
-          "right to play": "let others play and share",
-          "right to speak": "listen when others speak"
-        }
+        "mode": "match",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ]
       },
       "hints": [
         {
@@ -122,6 +136,40 @@
             "ur": "سوچیں: یہ حق ٹھیک سے ملے، اس کے لیے میں خود کیا کروں؟",
             "en": "Think: what should I do myself so this right works well?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "تعلیم کا حق",
+          "en": "right to education"
+        },
+        {
+          "ur": "صحت کا حق",
+          "en": "right to health"
+        },
+        {
+          "ur": "کھیلنے کا حق",
+          "en": "right to play"
+        },
+        {
+          "ur": "بولنے کا حق",
+          "en": "right to speak"
+        },
+        {
+          "ur": "دوسروں کو کھیلنے دینا اور چیزیں بانٹنا",
+          "en": "let others play and share"
+        },
+        {
+          "ur": "دوسرے بولیں تو غور سے سننا",
+          "en": "listen when others speak"
+        },
+        {
+          "ur": "دل لگا کر پڑھنا اور کتابوں کا خیال رکھنا",
+          "en": "learn with care and look after books"
+        },
+        {
+          "ur": "صاف ستھرا رہنا اور سمجھ داری سے کھانا",
+          "en": "keep clean and eat sensibly"
         }
       ]
     },
@@ -135,52 +183,47 @@
       },
       "options": [
         {
+          "ur": "صحت کا حق",
+          "en": "right to health"
+        },
+        {
+          "ur": "کھیلنے کا حق",
+          "en": "right to play"
+        },
+        {
+          "ur": "حفاظت کا حق",
+          "en": "right to be safe"
+        },
+        {
+          "ur": "حفاظتی اصول ماننا",
+          "en": "follow safety rules"
+        },
+        {
           "ur": "صاف ستھرا رہنا",
           "en": "keep clean"
         },
         {
           "ur": "دوسروں کو کھیلنے دینا",
           "en": "let others play"
-        },
-        {
-          "ur": "حفاظتی اصول ماننا",
-          "en": "follow safety rules"
         }
       ],
       "answer_key": {
+        "left_count": 3,
         "pairs": [
-          {
-            "left": {
-              "ur": "صحت کا حق",
-              "en": "right to health"
-            },
-            "right": {
-              "ur": "صاف ستھرا رہنا",
-              "en": "keep clean"
-            }
-          },
-          {
-            "left": {
-              "ur": "کھیلنے کا حق",
-              "en": "right to play"
-            },
-            "right": {
-              "ur": "دوسروں کو کھیلنے دینا",
-              "en": "let others play"
-            }
-          },
-          {
-            "left": {
-              "ur": "حفاظت کا حق",
-              "en": "right to be safe"
-            },
-            "right": {
-              "ur": "حفاظتی اصول ماننا",
-              "en": "follow safety rules"
-            }
-          }
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ]
         ],
-        "misconception_on_wrong_pair": "m-rights-without-responsibility"
+        "misconception": "m-rights-without-responsibility"
       }
     }
   ],
@@ -497,6 +540,7 @@
   },
   "review_flags": [
     "child-safety: confirm the safeguarding escalation wording for a learner who discloses an unmet right",
-    "subject expert: confirm the right/responsibility pairs and that 'right to speak' is phrased suitably for Grade 4"
+    "subject expert: confirm the right/responsibility pairs and that 'right to speak' is phrased suitably for Grade 4",
+    "Urdu terminology: the activity cards/labels added for the interaction contract were written by AI (some only existed in English in the old answer key); confirm the Urdu wording"
   ]
 }

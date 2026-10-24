@@ -126,17 +126,33 @@
         "en": "Put each sentence in the right tense box: 'Ammi is making tea.' 'We flew a kite.' 'Dada Jaan will come tomorrow.' 'The cow eats grass.' 'The rain stopped.' 'I will write a letter.'"
       },
       "answer_key": {
-        "ماضی": [
-          "ہم نے پتنگ اڑائی۔",
-          "بارش رک گئی۔"
-        ],
-        "حال": [
-          "امی چائے بنا رہی ہیں۔",
-          "گائے گھاس کھاتی ہے۔"
-        ],
-        "مستقبل": [
-          "دادا جان کل آئیں گے۔",
-          "میں خط لکھوں گی۔"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            8
+          ]
         ]
       },
       "hints": [
@@ -146,6 +162,44 @@
             "ur": "ہر فعل کا آخری حصہ دیکھیں۔",
             "en": "Look at the last part of each verb."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "امی چائے بنا رہی ہیں۔",
+          "en": "Ammi is making tea."
+        },
+        {
+          "ur": "ہم نے پتنگ اڑائی۔",
+          "en": "We flew a kite."
+        },
+        {
+          "ur": "دادا جان کل آئیں گے۔",
+          "en": "Dada Jaan will come tomorrow."
+        },
+        {
+          "ur": "گائے گھاس کھاتی ہے۔",
+          "en": "The cow eats grass."
+        },
+        {
+          "ur": "بارش رک گئی۔",
+          "en": "The rain stopped."
+        },
+        {
+          "ur": "میں خط لکھوں گی۔",
+          "en": "I will write a letter."
+        },
+        {
+          "ur": "ماضی",
+          "en": "past"
+        },
+        {
+          "ur": "حال",
+          "en": "present"
+        },
+        {
+          "ur": "مستقبل",
+          "en": "future"
         }
       ]
     },

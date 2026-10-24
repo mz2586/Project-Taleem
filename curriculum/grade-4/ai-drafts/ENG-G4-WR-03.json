@@ -111,17 +111,25 @@
         "en": "Order the sentences to make a paragraph: It gives us shade. / We have a big neem tree in our yard. / I love our neem tree. / Birds sit on its branches."
       },
       "answer_key": {
-        "order": [
-          "We have a big neem tree in our yard.",
-          "It gives us shade.",
-          "Birds sit on its branches.",
-          "I love our neem tree."
-        ],
-        "accepted_alternative": [
-          "We have a big neem tree in our yard.",
-          "Birds sit on its branches.",
-          "It gives us shade.",
-          "I love our neem tree."
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            5
+          ]
         ]
       },
       "hints": [
@@ -131,6 +139,36 @@
             "ur": "کونسا جملہ موضوع بتاتا ہے؟ وہ سب سے پہلے۔",
             "en": "Which sentence names the topic? It goes first."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "It gives us shade.",
+          "en": "It gives us shade."
+        },
+        {
+          "ur": "We have a big neem tree in our yard.",
+          "en": "We have a big neem tree in our yard."
+        },
+        {
+          "ur": "I love our neem tree.",
+          "en": "I love our neem tree."
+        },
+        {
+          "ur": "Birds sit on its branches.",
+          "en": "Birds sit on its branches."
+        },
+        {
+          "ur": "پہلا جملہ",
+          "en": "first sentence"
+        },
+        {
+          "ur": "درمیانی جملہ",
+          "en": "middle sentence"
+        },
+        {
+          "ur": "آخری جملہ",
+          "en": "last sentence"
         }
       ]
     }
@@ -483,6 +521,7 @@
   "review_flags": [
     "mentor-mediated: confirm the 4-level rubric for c1 is usable by mentors in limited time",
     "check the paragraph-order activity accepts either order of the two middle detail sentences",
-    "inclusion: 'My Home' homework must not pressure children with insecure housing; reviewer may prefer a different topic"
+    "inclusion: 'My Home' homework must not pressure children with insecure housing; reviewer may prefer a different topic",
+    "interaction contract: a1-order-paragraph is now a sort into first / middle / last sentence, so both accepted middle orders score as correct; confirm the activity still reads well"
   ]
 }

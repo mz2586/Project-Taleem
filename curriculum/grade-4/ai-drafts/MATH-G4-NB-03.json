@@ -118,10 +118,11 @@
         "en": "Drag these cards into order from smallest to greatest: 38,205, 9,999, 38,052."
       },
       "answer_key": {
+        "mode": "order",
         "order": [
-          "9,999",
-          "38,052",
-          "38,205"
+          1,
+          2,
+          0
         ]
       },
       "hints": [
@@ -131,6 +132,20 @@
             "ur": "سب سے کم ہندسوں والا عدد کون سا ہے؟",
             "en": "Which number has the fewest digits?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "۳۸٬۲۰۵",
+          "en": "38,205"
+        },
+        {
+          "ur": "۹٬۹۹۹",
+          "en": "9,999"
+        },
+        {
+          "ur": "۳۸٬۰۵۲",
+          "en": "38,052"
         }
       ]
     },

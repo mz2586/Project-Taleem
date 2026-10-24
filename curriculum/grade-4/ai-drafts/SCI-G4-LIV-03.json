@@ -110,15 +110,25 @@
         "en": "Sort the needs: which are for plants only, animals only, or both? Water, air, making food from sunlight, getting food by eating others."
       },
       "answer_key": {
-        "both": [
-          "water",
-          "air"
-        ],
-        "plants_only": [
-          "making food from sunlight"
-        ],
-        "animals_only": [
-          "getting food by eating others"
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
+          ]
         ]
       },
       "hints": [
@@ -128,6 +138,36 @@
             "ur": "کیا کوئی جاندار پانی کے بغیر رہ سکتا ہے؟",
             "en": "Can any living thing live without water?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "پانی",
+          "en": "water"
+        },
+        {
+          "ur": "ہوا",
+          "en": "air"
+        },
+        {
+          "ur": "دھوپ سے خود خوراک بنانا",
+          "en": "making food from sunlight"
+        },
+        {
+          "ur": "دوسروں کو کھا کر خوراک لینا",
+          "en": "getting food by eating others"
+        },
+        {
+          "ur": "صرف پودے",
+          "en": "plants only"
+        },
+        {
+          "ur": "صرف جانور",
+          "en": "animals only"
+        },
+        {
+          "ur": "دونوں",
+          "en": "both"
         }
       ]
     }

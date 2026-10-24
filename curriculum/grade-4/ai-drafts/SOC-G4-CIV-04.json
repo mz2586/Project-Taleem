@@ -131,50 +131,45 @@
       },
       "options": [
         {
+          "ur": "کلاس روم",
+          "en": "classroom"
+        },
+        {
+          "ur": "پارک",
+          "en": "park"
+        },
+        {
+          "ur": "نہر",
+          "en": "canal"
+        },
+        {
+          "ur": "کچرا نہ پھینکنا",
+          "en": "do not throw rubbish"
+        },
+        {
           "ur": "کاغذ کے ٹکڑے اٹھانا",
           "en": "pick up paper scraps"
         },
         {
           "ur": "پودے نہ توڑنا",
           "en": "do not break plants"
-        },
-        {
-          "ur": "کچرا نہ پھینکنا",
-          "en": "do not throw rubbish"
         }
       ],
       "answer_key": {
+        "left_count": 3,
         "pairs": [
-          {
-            "left": {
-              "ur": "کلاس روم",
-              "en": "classroom"
-            },
-            "right": {
-              "ur": "کاغذ کے ٹکڑے اٹھانا",
-              "en": "pick up paper scraps"
-            }
-          },
-          {
-            "left": {
-              "ur": "پارک",
-              "en": "park"
-            },
-            "right": {
-              "ur": "پودے نہ توڑنا",
-              "en": "do not break plants"
-            }
-          },
-          {
-            "left": {
-              "ur": "نہر",
-              "en": "canal"
-            },
-            "right": {
-              "ur": "کچرا نہ پھینکنا",
-              "en": "do not throw rubbish"
-            }
-          }
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ]
         ]
       }
     }
@@ -436,6 +431,7 @@
   },
   "review_flags": [
     "child-safety: confirm the 'never pick up sharp or dirty things' wording in homework and challenge guidance",
-    "language editor: confirm 'سانجھی جگہ' is the best Grade 4 term for 'shared space' (alternative: مشترکہ جگہ)"
+    "language editor: confirm 'سانجھی جگہ' is the best Grade 4 term for 'shared space' (alternative: مشترکہ جگہ)",
+    "interaction contract: activity a1-clean-park is a bespoke widget (tapping litter in a picture); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

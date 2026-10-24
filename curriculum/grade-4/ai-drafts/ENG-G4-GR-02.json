@@ -108,18 +108,34 @@
         "en": "Sort each word into the 'a' box or the 'an' box: egg, cup, umbrella, goat, ink, rabbit"
       },
       "answer_key": {
-        "groups": {
-          "a": [
-            "cup",
-            "goat",
-            "rabbit"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            7
           ],
-          "an": [
-            "egg",
-            "umbrella",
-            "ink"
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            6
           ]
-        }
+        ]
       },
       "hints": [
         {
@@ -128,6 +144,40 @@
             "ur": "لفظ بلند آواز سے بولیں اور پہلی آواز سنیں۔",
             "en": "Say the word aloud and listen to its first sound."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "egg",
+          "en": "egg"
+        },
+        {
+          "ur": "cup",
+          "en": "cup"
+        },
+        {
+          "ur": "umbrella",
+          "en": "umbrella"
+        },
+        {
+          "ur": "goat",
+          "en": "goat"
+        },
+        {
+          "ur": "ink",
+          "en": "ink"
+        },
+        {
+          "ur": "rabbit",
+          "en": "rabbit"
+        },
+        {
+          "ur": "a",
+          "en": "a"
+        },
+        {
+          "ur": "an",
+          "en": "an"
         }
       ]
     },

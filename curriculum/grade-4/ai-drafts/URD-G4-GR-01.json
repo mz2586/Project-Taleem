@@ -112,15 +112,33 @@
         "en": "Sort these words into 'noun' and 'verb': parrot, sings, Karachi, sleeps, book, ran."
       },
       "answer_key": {
-        "اسم": [
-          "طوطا",
-          "کراچی",
-          "کتاب"
-        ],
-        "فعل": [
-          "گاتا ہے",
-          "سوتی ہے",
-          "دوڑا"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -131,17 +149,67 @@
             "en": "Ask: is it a name or an action?"
           }
         }
+      ],
+      "options": [
+        {
+          "ur": "طوطا",
+          "en": "parrot"
+        },
+        {
+          "ur": "گاتا ہے",
+          "en": "sings"
+        },
+        {
+          "ur": "کراچی",
+          "en": "Karachi"
+        },
+        {
+          "ur": "سوتی ہے",
+          "en": "sleeps"
+        },
+        {
+          "ur": "کتاب",
+          "en": "book"
+        },
+        {
+          "ur": "دوڑا",
+          "en": "ran"
+        },
+        {
+          "ur": "اسم",
+          "en": "noun"
+        },
+        {
+          "ur": "فعل",
+          "en": "verb"
+        }
       ]
     },
     {
       "id": "p5-match",
-      "type": "matching",
+      "type": "interactive",
       "competency": "knowledge",
       "stem": {
         "ur": "ہر لفظ کو 'اسم' یا 'فعل' سے ملائیں: پہاڑ، لکھتی ہے، گائے، ہنسا۔",
         "en": "Match each word to 'noun' or 'verb': mountain, writes, cow, laughed."
       },
       "options": [
+        {
+          "ur": "پہاڑ",
+          "en": "mountain"
+        },
+        {
+          "ur": "لکھتی ہے",
+          "en": "writes"
+        },
+        {
+          "ur": "گائے",
+          "en": "cow"
+        },
+        {
+          "ur": "ہنسا",
+          "en": "laughed"
+        },
         {
           "ur": "اسم",
           "en": "noun"
@@ -152,12 +220,26 @@
         }
       ],
       "answer_key": {
-        "pairs": {
-          "پہاڑ": "اسم",
-          "لکھتی ہے": "فعل",
-          "گائے": "اسم",
-          "ہنسا": "فعل"
-        }
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ]
       },
       "explanation": {
         "ur": "پہاڑ اور گائے نام ہیں؛ لکھتی ہے اور ہنسا کام ہیں۔",
@@ -474,6 +556,7 @@
   },
   "review_flags": [
     "subject expert: confirm definitions of اسم and فعل match Grade 4 school wording",
-    "subject expert: matching items use answer_key.pairs; confirm the player format"
+    "subject expert: matching items use answer_key.pairs; confirm the player format",
+    "interaction contract: p5-match pairs four words with only two answers (noun/verb), so it is now an interactive sort, not a matching item"
   ]
 }

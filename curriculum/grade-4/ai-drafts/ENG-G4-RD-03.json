@@ -115,7 +115,8 @@
         "en": "Read the passage: It rained in the morning. Hina and her brother Bilal stayed at home. Their grandmother made hot tea and parathas. After the rain, the sky was blue. Hina saw a rainbow over the field. Bilal ran outside to look at the ducks in a puddle. Tap the sentence that tells what Hina saw."
       },
       "answer_key": {
-        "correct_sentence": "Hina saw a rainbow over the field."
+        "mode": "choose",
+        "correct_option": 4
       },
       "hints": [
         {
@@ -124,6 +125,32 @@
             "ur": "لفظ saw والا جملہ ڈھونڈیں۔",
             "en": "Look for the sentence with the word saw."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "It rained in the morning.",
+          "en": "It rained in the morning."
+        },
+        {
+          "ur": "Hina and her brother Bilal stayed at home.",
+          "en": "Hina and her brother Bilal stayed at home."
+        },
+        {
+          "ur": "Their grandmother made hot tea and parathas.",
+          "en": "Their grandmother made hot tea and parathas."
+        },
+        {
+          "ur": "After the rain, the sky was blue.",
+          "en": "After the rain, the sky was blue."
+        },
+        {
+          "ur": "Hina saw a rainbow over the field.",
+          "en": "Hina saw a rainbow over the field."
+        },
+        {
+          "ur": "Bilal ran outside to look at the ducks in a puddle.",
+          "en": "Bilal ran outside to look at the ducks in a puddle."
         }
       ]
     },

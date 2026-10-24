@@ -94,20 +94,37 @@
         {
           "ur": "«پینسل دو!» چلا کر کہنا",
           "en": "Shouting \"Give me the pencil!\""
+        },
+        {
+          "ur": "اچھے آداب",
+          "en": "good manners"
+        },
+        {
+          "ur": "آداب نہیں",
+          "en": "not good manners"
         }
       ],
       "answer_key": {
-        "sort": {
-          "good_manners": [
-            1,
-            2
-          ],
-          "not_good_manners": [
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
             0,
-            3
+            5
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
           ]
-        },
-        "mode": "tap a card, then tap its group (drag also works)"
+        ]
       },
       "hints": [
         {

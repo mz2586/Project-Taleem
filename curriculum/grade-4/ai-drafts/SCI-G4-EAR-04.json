@@ -109,15 +109,33 @@
         "en": "Put each habit in a box: 'protects water and health' or 'harmful'. Washing hands with soap, throwing rubbish in a canal, covering the water pot, leaving the tap running, putting rubbish in the bin, letting water collect in an old tyre."
       },
       "answer_key": {
-        "protects": [
-          "washing hands with soap",
-          "covering the water pot",
-          "putting rubbish in the bin"
-        ],
-        "harmful": [
-          "throwing rubbish in a canal",
-          "leaving the tap running",
-          "letting water collect in an old tyre"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -127,6 +145,40 @@
             "ur": "سوچو: اس سے پانی صاف رہے گا اور جراثیم کم ہوں گے؟",
             "en": "Think: will this keep water clean and germs away?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "صابن سے ہاتھ دھونا",
+          "en": "washing hands with soap"
+        },
+        {
+          "ur": "نہر میں کچرا پھینکنا",
+          "en": "throwing rubbish in a canal"
+        },
+        {
+          "ur": "پانی کا برتن ڈھانپنا",
+          "en": "covering the water pot"
+        },
+        {
+          "ur": "نل کھلا چھوڑنا",
+          "en": "leaving the tap running"
+        },
+        {
+          "ur": "کچرا ڈبے میں ڈالنا",
+          "en": "putting rubbish in the bin"
+        },
+        {
+          "ur": "پرانے ٹائر میں پانی جمع رہنے دینا",
+          "en": "letting water collect in an old tyre"
+        },
+        {
+          "ur": "پانی اور صحت کی حفاظت",
+          "en": "protects water and health"
+        },
+        {
+          "ur": "نقصان دہ",
+          "en": "harmful"
         }
       ]
     }

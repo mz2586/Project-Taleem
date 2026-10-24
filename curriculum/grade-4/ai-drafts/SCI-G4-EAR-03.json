@@ -110,15 +110,33 @@
         "en": "Put each one in the right box: 'weather' (one day) or 'season' (many weeks). Strong wind this afternoon; winter; fog this morning; monsoon; cloudy today; summer."
       },
       "answer_key": {
-        "weather": [
-          "strong wind this afternoon",
-          "fog this morning",
-          "cloudy today"
-        ],
-        "season": [
-          "winter",
-          "monsoon",
-          "summer"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -128,6 +146,40 @@
             "ur": "پوچھو: یہ ایک دن کی بات ہے یا کئی ہفتوں کی؟",
             "en": "Ask: is it about one day, or many weeks?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "آج دوپہر تیز ہوا چلی",
+          "en": "strong wind this afternoon"
+        },
+        {
+          "ur": "سردیاں",
+          "en": "winter"
+        },
+        {
+          "ur": "صبح دھند تھی",
+          "en": "fog this morning"
+        },
+        {
+          "ur": "مون سون",
+          "en": "monsoon"
+        },
+        {
+          "ur": "آج بادل ہیں",
+          "en": "cloudy today"
+        },
+        {
+          "ur": "گرمیاں",
+          "en": "summer"
+        },
+        {
+          "ur": "موسم کا حال (ایک دن)",
+          "en": "weather (one day)"
+        },
+        {
+          "ur": "سال کا موسم (کئی ہفتے)",
+          "en": "season (many weeks)"
         }
       ]
     }

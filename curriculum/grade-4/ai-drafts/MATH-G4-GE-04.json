@@ -80,15 +80,33 @@
         "en": "A square has 6 lines drawn on it: one down the middle, one across the middle, two corner to corner, and two that are off-centre. Tap only the lines of symmetry."
       },
       "answer_key": {
-        "selected": [
-          "vertical middle",
-          "horizontal middle",
-          "diagonal 1",
-          "diagonal 2"
-        ],
-        "not_selected": [
-          "off-centre 1",
-          "off-centre 2"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            6
+          ]
         ]
       },
       "hints": [
@@ -98,6 +116,40 @@
             "ur": "ہر لکیر پر موڑنے کا سوچیں۔ کیا دونوں حصے برابر ہیں؟",
             "en": "Imagine folding on each line. Are the two halves the same?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "بیچ سے ہٹی ہوئی پہلی لکیر",
+          "en": "off-centre line 1"
+        },
+        {
+          "ur": "بیچ سے کھڑی لکیر",
+          "en": "the line down the middle"
+        },
+        {
+          "ur": "کونے سے کونے والی پہلی لکیر",
+          "en": "corner-to-corner line 1"
+        },
+        {
+          "ur": "بیچ سے ہٹی ہوئی دوسری لکیر",
+          "en": "off-centre line 2"
+        },
+        {
+          "ur": "بیچ سے لیٹی لکیر",
+          "en": "the line across the middle"
+        },
+        {
+          "ur": "کونے سے کونے والی دوسری لکیر",
+          "en": "corner-to-corner line 2"
+        },
+        {
+          "ur": "محورِ تناسب",
+          "en": "line of symmetry"
+        },
+        {
+          "ur": "محورِ تناسب نہیں",
+          "en": "not a line of symmetry"
         }
       ]
     },
@@ -419,6 +471,7 @@
   "review_flags": [
     "language editor: the spine title uses تناسب and the doc lists توازن/تناسب; Pakistani textbooks may use another term (e.g. تشاکل) — confirm the standard Urdu word",
     "subject expert: p3 uses the English capital letter F in an Urdu item; replace with an Urdu-friendly picture if preferred",
-    "subject expert: p5 says a circle has 'very many' lines of symmetry; confirm this is acceptable wording for Grade 4"
+    "subject expert: p5 says a circle has 'very many' lines of symmetry; confirm this is acceptable wording for Grade 4",
+    "Urdu terminology: the activity cards/labels added for the interaction contract were written by AI (some only existed in English in the old answer key); confirm the Urdu wording"
   ]
 }

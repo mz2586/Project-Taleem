@@ -485,6 +485,7 @@
   },
   "review_flags": [
     "terminology: the doc vocabulary uses باقی for 'difference', but DV-02 uses باقی for 'remainder'; فرق may be the clearer term for difference here",
-    "subject expert: confirm the borrow-across-zero wording (passing 1 from hundreds to tens to ones) matches classroom practice"
+    "subject expert: confirm the borrow-across-zero wording (passing 1 from hundreds to tens to ones) matches classroom practice",
+    "interaction contract: activity a1-borrow-across-zero is a bespoke widget (column-subtraction regrouping); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

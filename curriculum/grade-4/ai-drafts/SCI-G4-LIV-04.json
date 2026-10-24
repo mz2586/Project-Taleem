@@ -119,17 +119,33 @@
         "en": "Put each animal in its habitat box: camel, fish, frog, goat, river turtle, Indus river dolphin."
       },
       "answer_key": {
-        "land": [
-          "camel",
-          "goat"
-        ],
-        "water": [
-          "fish",
-          "Indus river dolphin"
-        ],
-        "land_and_water": [
-          "frog",
-          "river turtle"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            8
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -139,6 +155,44 @@
             "ur": "کیا یہ جانور پانی سے باہر بھی وقت گزارتا ہے؟",
             "en": "Does this animal also spend time out of the water?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "اونٹ",
+          "en": "camel"
+        },
+        {
+          "ur": "مچھلی",
+          "en": "fish"
+        },
+        {
+          "ur": "مینڈک",
+          "en": "frog"
+        },
+        {
+          "ur": "بکری",
+          "en": "goat"
+        },
+        {
+          "ur": "کچھوا (دریائی)",
+          "en": "river turtle"
+        },
+        {
+          "ur": "دریائے سندھ کی ڈولفن",
+          "en": "Indus river dolphin"
+        },
+        {
+          "ur": "خشکی",
+          "en": "land"
+        },
+        {
+          "ur": "پانی",
+          "en": "water"
+        },
+        {
+          "ur": "خشکی اور پانی",
+          "en": "land and water"
         }
       ]
     },
@@ -177,21 +231,21 @@
         }
       ],
       "answer_key": {
-        "left": [
-          0,
-          1,
-          2
-        ],
-        "right": [
-          3,
-          4,
-          5
-        ],
-        "pairs": {
-          "0": 4,
-          "1": 5,
-          "2": 3
-        }
+        "left_count": 3,
+        "pairs": [
+          [
+            0,
+            4
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            3
+          ]
+        ]
       },
       "explanation": {
         "ur": "چڑیا بیج بھی کھاتی ہے اور چھوٹے کیڑے بھی۔",

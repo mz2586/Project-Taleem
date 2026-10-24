@@ -89,15 +89,33 @@
         "en": "Put each thing in the right box: transparent or opaque. Window glass, brick, clear plastic box, wooden board, clear glass of water, clay pot."
       },
       "answer_key": {
-        "transparent": [
-          "window glass",
-          "clear plastic box",
-          "clear glass of water"
-        ],
-        "opaque": [
-          "brick",
-          "wooden board",
-          "clay pot"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -107,6 +125,40 @@
             "ur": "سوچو: کیا اس کے پیچھے رکھی چیز تمہیں دکھے گی؟",
             "en": "Think: could you see a thing placed behind it?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "کھڑکی کا شیشہ",
+          "en": "window glass"
+        },
+        {
+          "ur": "اینٹ",
+          "en": "brick"
+        },
+        {
+          "ur": "صاف پلاسٹک کا ڈبہ",
+          "en": "clear plastic box"
+        },
+        {
+          "ur": "لکڑی کا تختہ",
+          "en": "wooden board"
+        },
+        {
+          "ur": "پانی کا صاف گلاس",
+          "en": "clear glass of water"
+        },
+        {
+          "ur": "مٹی کا گھڑا",
+          "en": "clay pot"
+        },
+        {
+          "ur": "شفاف",
+          "en": "transparent"
+        },
+        {
+          "ur": "غیر شفاف",
+          "en": "opaque"
         }
       ]
     },
@@ -145,21 +197,21 @@
         }
       ],
       "answer_key": {
-        "left": [
-          0,
-          1,
-          2
-        ],
-        "right": [
-          3,
-          4,
-          5
-        ],
-        "pairs": {
-          "0": 5,
-          "1": 3,
-          "2": 4
-        }
+        "left_count": 3,
+        "pairs": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ]
       }
     }
   ],

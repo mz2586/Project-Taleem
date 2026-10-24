@@ -486,6 +486,7 @@
   },
   "review_flags": [
     "subject expert: carry terminology ہاتھ لے جانا vs لے جانا; confirm which form the steps should use",
-    "check the human worked example has no prompt; the draft's first worked example adds the prompt 2476 + 1385"
+    "check the human worked example has no prompt; the draft's first worked example adds the prompt 2476 + 1385",
+    "interaction contract: activity a1-place-carries is a bespoke widget (column-addition carry boxes); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

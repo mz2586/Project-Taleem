@@ -423,6 +423,7 @@
   },
   "review_flags": [
     "subject expert: the doc title says 'reading and drawing'; drawing is covered only by the build-a-bar activity — confirm that is enough",
-    "accessibility: the bar graph is described in words inside each stem; check stems are not too long for audio"
+    "accessibility: the bar graph is described in words inside each stem; check stems are not too long for audio",
+    "interaction contract: activity a1-draw-guava-bar is a bespoke widget (bar-graph building); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

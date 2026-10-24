@@ -175,6 +175,22 @@
       },
       "options": [
         {
+          "ur": "۔",
+          "en": "۔"
+        },
+        {
+          "ur": "،",
+          "en": "،"
+        },
+        {
+          "ur": "؟",
+          "en": "؟"
+        },
+        {
+          "ur": "!",
+          "en": "!"
+        },
+        {
           "ur": "سکتہ",
           "en": "comma"
         },
@@ -192,12 +208,25 @@
         }
       ],
       "answer_key": {
-        "pairs": {
-          "۔": "ختمہ",
-          "،": "سکتہ",
-          "؟": "سوالیہ نشان",
-          "!": "ندائیہ نشان"
-        }
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            7
+          ]
+        ]
       },
       "explanation": {
         "ur": "۔ ختمہ، ، سکتہ، ؟ سوالیہ نشان، ! ندائیہ نشان۔",
@@ -509,6 +538,7 @@
   },
   "review_flags": [
     "subject expert: confirm mark names ختمہ، سکتہ، سوالیہ نشان، ندائیہ نشان، واوین (and رابطہ for :) match Grade 4 school terms",
-    "subject expert: the activity's second gap accepts ! or ۔; confirm the answer key"
+    "subject expert: the activity's second gap accepts ! or ۔; confirm the answer key",
+    "interaction contract: activity a1-add-marks is a bespoke widget (punctuation gaps (gap 2 accepts two marks, which no canonical kind can express)); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

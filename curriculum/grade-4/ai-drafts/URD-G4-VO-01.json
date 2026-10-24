@@ -129,7 +129,7 @@
         }
       ],
       "answer_key": {
-        "tap_target": "ہر طرف لوگ ہی لوگ تھے",
+        "mode": "choose",
         "correct_option": 0
       },
       "hints": [
@@ -507,6 +507,7 @@
   },
   "review_flags": [
     "language editor: check the target words (گدلا، مدھم، موسلا دھار، نڈھال، ٹھٹھرنا، سنسان، ہجوم) are at a suitable Grade 4 level",
-    "subject expert: misconception tag m-guessing-not-reading is reused for meaning-from-memory guesses; confirm that use"
+    "subject expert: misconception tag m-guessing-not-reading is reused for meaning-from-memory guesses; confirm that use",
+    "interaction contract: a1-tap-clue now plays only the choose-the-meaning step; the tap-the-explaining-phrase step needs the future widget runtime"
   ]
 }

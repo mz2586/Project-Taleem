@@ -462,6 +462,7 @@
   },
   "review_flags": [
     "subject expert: the bus-fare item (Rs 35 × 28) needs 2-digit × 2-digit from ML-03; confirm this is fair at the 'developing' level",
-    "language editor: check that تندور / نان and درزی contexts read naturally for all regions"
+    "language editor: check that تندور / نان and درزی contexts read naturally for all regions",
+    "interaction contract: activity a1-chair-array is a bespoke widget (drawing an array of chairs); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

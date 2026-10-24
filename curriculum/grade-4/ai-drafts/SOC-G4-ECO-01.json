@@ -35,17 +35,35 @@
         "en": "Sort each item into the 'need' or 'want' box: water, roti, a toy, sweets, a winter sweater, a storybook."
       },
       "answer_key": {
-        "need": [
-          "water",
-          "roti",
-          "winter sweater"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ],
-        "want": [
-          "toy",
-          "sweets",
-          "storybook"
-        ],
-        "misconception_on_error": "m-want-labelled-need"
+        "misconception": "m-want-labelled-need"
       },
       "hints": [
         {
@@ -54,6 +72,40 @@
             "ur": "کیا اِس کے بغیر گزارہ ہو سکتا ہے؟",
             "en": "Can we manage without this?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "پانی",
+          "en": "water"
+        },
+        {
+          "ur": "روٹی",
+          "en": "roti"
+        },
+        {
+          "ur": "کھلونا",
+          "en": "a toy"
+        },
+        {
+          "ur": "مٹھائی",
+          "en": "sweets"
+        },
+        {
+          "ur": "سردیوں کا سویٹر",
+          "en": "a winter sweater"
+        },
+        {
+          "ur": "کہانیوں کی کتاب",
+          "en": "a storybook"
+        },
+        {
+          "ur": "ضرورت",
+          "en": "need"
+        },
+        {
+          "ur": "خواہش",
+          "en": "want"
         }
       ]
     }

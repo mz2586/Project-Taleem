@@ -35,15 +35,33 @@
         "en": "Put each thing in the right basket: living or non-living. Neem tree, goat, stone, chair, hen, car."
       },
       "answer_key": {
-        "living": [
-          "neem tree",
-          "goat",
-          "hen"
-        ],
-        "non_living": [
-          "stone",
-          "chair",
-          "car"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -53,6 +71,40 @@
             "ur": "ہر چیز سے پوچھو: کیا یہ بڑھتی ہے؟",
             "en": "Ask each thing: does it grow?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "نیم کا درخت",
+          "en": "neem tree"
+        },
+        {
+          "ur": "بکری",
+          "en": "goat"
+        },
+        {
+          "ur": "پتھر",
+          "en": "stone"
+        },
+        {
+          "ur": "کرسی",
+          "en": "chair"
+        },
+        {
+          "ur": "مرغی",
+          "en": "hen"
+        },
+        {
+          "ur": "گاڑی",
+          "en": "car"
+        },
+        {
+          "ur": "جاندار",
+          "en": "living"
+        },
+        {
+          "ur": "بے جان",
+          "en": "non-living"
         }
       ]
     }

@@ -490,6 +490,7 @@
   },
   "review_flags": [
     "subject expert: the doc reads 6 × 4 as 'six, four times' (6 + 6 + 6 + 6); the draft keeps that reading throughout; confirm it matches the Grade 3 convention learners bring",
-    "check the human worked example has no prompt; the draft's first worked example adds one"
+    "check the human worked example has no prompt; the draft's first worked example adds one",
+    "interaction contract: activity a1-build-array is a bespoke widget (drawing an array of counters); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

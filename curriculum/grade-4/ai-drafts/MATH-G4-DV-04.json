@@ -98,12 +98,21 @@
         "en": "Put each story in the \"add one more\" or \"leave the remainder\" box. (a) 29 people, 4 per rickshaw: how many rickshaws? (b) 29 sweets among 4 children: how many each? (c) 50 books, 6 per shelf: how many shelves are needed?"
       },
       "answer_key": {
-        "add_one_more": [
-          "a",
-          "c"
-        ],
-        "leave_remainder": [
-          "b"
+        "mode": "sort",
+        "left_count": 3,
+        "pairs": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ]
         ],
         "answers": {
           "a": 8,
@@ -118,6 +127,28 @@
             "ur": "سوچیں: کیا بچے ہوئے لوگ یا چیزیں بھی کہیں جانی ہیں؟",
             "en": "Think: do the leftover people or things still need a place?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "(الف) ۲۹ لوگ، ایک رکشے میں ۴: کتنے رکشے؟",
+          "en": "(a) 29 people, 4 per rickshaw: how many rickshaws?"
+        },
+        {
+          "ur": "(ب) ۲۹ ٹافیاں ۴ بچوں میں: ہر ایک کو کتنی؟",
+          "en": "(b) 29 sweets among 4 children: how many each?"
+        },
+        {
+          "ur": "(ج) ۵۰ کتابیں، ایک شیلف پر ۶: کتنی شیلفیں چاہییں؟",
+          "en": "(c) 50 books, 6 per shelf: how many shelves are needed?"
+        },
+        {
+          "ur": "ایک اور بڑھائیں",
+          "en": "add one more"
+        },
+        {
+          "ur": "باقی بچ جائے",
+          "en": "leave the remainder"
         }
       ]
     },

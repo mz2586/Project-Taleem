@@ -17,6 +17,7 @@ from dataclasses import dataclass, field
 from .audio import SYNTHETIC_FIXTURE_AUDIO, AudioAssetResolver
 from .content import Difficulty, LocalizedText
 from .hierarchy import EducationSystem, placement_errors
+from .interaction import lesson_answer_key_errors
 from .lesson import Lesson
 from .packs import CurriculumPack, InstructionRules, PackRegistry, default_pack, default_registry
 from .provenance import check_provenance
@@ -135,6 +136,22 @@ def _structural_findings(lesson: Lesson, ctx: _PackContext) -> list[Finding]:
     # Provenance gate.
     for msg in check_provenance(lesson.provenance):
         f.append(_blk(msg, "provenance"))
+    # Interaction contract: every auto-graded item's answer key has its kind's canonical shape.
+    items = [
+        (name, item)
+        for name in (
+            "interactive_activities",
+            "practice_questions",
+            "challenge_problems",
+            "homework",
+        )
+        for item in getattr(lesson, name)
+    ] + [
+        ("assessment", item)
+        for item in (*lesson.assessment.formative, *lesson.assessment.summative)
+    ]
+    for msg in lesson_answer_key_errors(items):
+        f.append(_blk(f"answer key: {msg}", "answer_key"))
     # Child safety: learner-facing text never asks for a home address, phone or family ages.
     for name, sentence in lesson_personal_detail_requests(lesson):
         f.append(

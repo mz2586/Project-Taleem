@@ -80,14 +80,29 @@
         "en": "Put each card in the right box: 'equal to 1/2' or 'not equal to 1/2'. Cards: 2/4, 3/6, 2/2, 4/8, 1/3."
       },
       "answer_key": {
-        "equal_to_half": [
-          "2/4",
-          "3/6",
-          "4/8"
-        ],
-        "not_equal_to_half": [
-          "2/2",
-          "1/3"
+        "mode": "sort",
+        "left_count": 5,
+        "pairs": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            5
+          ],
+          [
+            4,
+            6
+          ]
         ]
       },
       "hints": [
@@ -97,6 +112,36 @@
             "ur": "کیا اوپر کا نمبر نیچے کا بالکل آدھا ہے؟",
             "en": "Is the top number exactly half of the bottom number?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "۲/۴",
+          "en": "2/4"
+        },
+        {
+          "ur": "۳/۶",
+          "en": "3/6"
+        },
+        {
+          "ur": "۲/۲",
+          "en": "2/2"
+        },
+        {
+          "ur": "۴/۸",
+          "en": "4/8"
+        },
+        {
+          "ur": "۱/۳",
+          "en": "1/3"
+        },
+        {
+          "ur": "۱/۲ کے برابر",
+          "en": "equal to 1/2"
+        },
+        {
+          "ur": "۱/۲ کے برابر نہیں",
+          "en": "not equal to 1/2"
         }
       ]
     },

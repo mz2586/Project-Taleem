@@ -483,6 +483,7 @@
   },
   "review_flags": [
     "language editor: the doc's parent note ('if one costs ۳۷, four cost…?') is English with Urdu digits, so the importer treats it as the Urdu side; a real Urdu note is needed, e.g. 'اگر ایک چیز ۳۷ روپے کی ہو تو چار کتنے کی ہوں گی؟'",
-    "subject expert: the library's m-carry-forgotten correction talks about addition columns; a multiplication version of the correction may be clearer here"
+    "subject expert: the library's m-carry-forgotten correction talks about addition columns; a multiplication version of the correction may be clearer here",
+    "interaction contract: activity a1-carry-56x3 is a bespoke widget (column-multiplication carry boxes); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

@@ -128,20 +128,37 @@
         {
           "ur": "دادی کی بات کاٹ کر ٹی وی اونچا کرنا",
           "en": "Cutting Dadi off and turning the TV up"
+        },
+        {
+          "ur": "احترام",
+          "en": "respectful"
+        },
+        {
+          "ur": "احترام نہیں",
+          "en": "not respectful"
         }
       ],
       "answer_key": {
-        "sort": {
-          "respectful": [
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
             0,
-            2
+            4
           ],
-          "not_respectful": [
+          [
             1,
-            3
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
           ]
-        },
-        "mode": "tap a card, then tap its group (drag also works)"
+        ]
       },
       "hints": [
         {

@@ -123,11 +123,12 @@
         "en": "Put the butterfly cycle cards in order: caterpillar, butterfly, egg, pupa."
       },
       "answer_key": {
+        "mode": "order",
         "order": [
-          "egg",
-          "caterpillar",
-          "pupa",
-          "butterfly"
+          2,
+          0,
+          3,
+          1
         ]
       },
       "hints": [
@@ -137,6 +138,24 @@
             "ur": "پتے پر سب سے پہلے کیا ملتا ہے؟",
             "en": "What is found on the leaf first?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "سنڈی",
+          "en": "caterpillar"
+        },
+        {
+          "ur": "تتلی",
+          "en": "butterfly"
+        },
+        {
+          "ur": "انڈا",
+          "en": "egg"
+        },
+        {
+          "ur": "پیوپا",
+          "en": "pupa"
         }
       ]
     },

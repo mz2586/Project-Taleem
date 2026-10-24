@@ -102,12 +102,21 @@
         "en": "Put each card in the \"reasonable\" or \"not reasonable\" box. (a) 395 + 210 = 605 (b) 903 − 498 = 505 (c) 1510 + 2490 = 4000"
       },
       "answer_key": {
-        "reasonable": [
-          "a",
-          "c"
-        ],
-        "not_reasonable": [
-          "b"
+        "mode": "sort",
+        "left_count": 3,
+        "pairs": [
+          [
+            0,
+            3
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            3
+          ]
         ]
       },
       "hints": [
@@ -117,6 +126,28 @@
             "ur": "ہر ایک کا اندازہ گول عددوں سے لگائیں۔",
             "en": "Estimate each one with rounded numbers."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "(الف) ۳۹۵ + ۲۱۰ = ۶۰۵",
+          "en": "(a) 395 + 210 = 605"
+        },
+        {
+          "ur": "(ب) ۹۰۳ − ۴۹۸ = ۵۰۵",
+          "en": "(b) 903 − 498 = 505"
+        },
+        {
+          "ur": "(ج) ۱۵۱۰ + ۲۴۹۰ = ۴۰۰۰",
+          "en": "(c) 1510 + 2490 = 4000"
+        },
+        {
+          "ur": "معقول",
+          "en": "reasonable"
+        },
+        {
+          "ur": "معقول نہیں",
+          "en": "not reasonable"
         }
       ]
     },

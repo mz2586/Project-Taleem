@@ -87,20 +87,34 @@
         "en": "Sort the words into three boxes, noun, verb or adjective: mango, jump, sweet, teacher, write, green"
       },
       "answer_key": {
-        "groups": {
-          "noun": [
-            "mango",
-            "teacher"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
           ],
-          "verb": [
-            "jump",
-            "write"
+          [
+            1,
+            7
           ],
-          "adjective": [
-            "sweet",
-            "green"
+          [
+            2,
+            8
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            8
           ]
-        }
+        ]
       },
       "hints": [
         {
@@ -109,6 +123,44 @@
             "ur": "کیا آپ یہ کام کر سکتے ہیں؟ تو وہ فعل ہے۔",
             "en": "Can you do it as an action? Then it is a verb."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "mango",
+          "en": "mango"
+        },
+        {
+          "ur": "jump",
+          "en": "jump"
+        },
+        {
+          "ur": "sweet",
+          "en": "sweet"
+        },
+        {
+          "ur": "teacher",
+          "en": "teacher"
+        },
+        {
+          "ur": "write",
+          "en": "write"
+        },
+        {
+          "ur": "green",
+          "en": "green"
+        },
+        {
+          "ur": "اسم",
+          "en": "noun"
+        },
+        {
+          "ur": "فعل",
+          "en": "verb"
+        },
+        {
+          "ur": "صفت",
+          "en": "adjective"
         }
       ]
     },
@@ -121,11 +173,21 @@
         "en": "Match each word to its type: Lahore, clap, happy"
       },
       "answer_key": {
-        "pairs": {
-          "Lahore": "noun",
-          "clap": "verb",
-          "happy": "adjective"
-        }
+        "left_count": 3,
+        "pairs": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ]
+        ]
       },
       "hints": [
         {
@@ -134,6 +196,32 @@
             "ur": "نام، کام یا خوبی؟",
             "en": "A name, an action or a describing word?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "Lahore",
+          "en": "Lahore"
+        },
+        {
+          "ur": "clap",
+          "en": "clap"
+        },
+        {
+          "ur": "happy",
+          "en": "happy"
+        },
+        {
+          "ur": "فعل",
+          "en": "verb"
+        },
+        {
+          "ur": "صفت",
+          "en": "adjective"
+        },
+        {
+          "ur": "اسم",
+          "en": "noun"
         }
       ]
     }

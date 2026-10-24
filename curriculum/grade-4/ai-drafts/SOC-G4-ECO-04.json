@@ -136,64 +136,57 @@
       },
       "options": [
         {
-          "ur": "نل بند کرنا",
-          "en": "close the tap"
+          "ur": "پانی",
+          "en": "water"
         },
         {
-          "ur": "بتی بند کرنا",
-          "en": "switch off the light"
+          "ur": "بجلی",
+          "en": "electricity"
+        },
+        {
+          "ur": "کاغذ",
+          "en": "paper"
+        },
+        {
+          "ur": "کھانا",
+          "en": "food"
         },
         {
           "ur": "دونوں طرف لکھنا",
           "en": "write on both sides"
         },
         {
+          "ur": "نل بند کرنا",
+          "en": "close the tap"
+        },
+        {
           "ur": "تھوڑا تھوڑا لینا",
           "en": "take small helpings"
+        },
+        {
+          "ur": "بتی بند کرنا",
+          "en": "switch off the light"
         }
       ],
       "answer_key": {
+        "left_count": 4,
         "pairs": [
-          {
-            "left": {
-              "ur": "پانی",
-              "en": "water"
-            },
-            "right": {
-              "ur": "نل بند کرنا",
-              "en": "close the tap"
-            }
-          },
-          {
-            "left": {
-              "ur": "بجلی",
-              "en": "electricity"
-            },
-            "right": {
-              "ur": "بتی بند کرنا",
-              "en": "switch off the light"
-            }
-          },
-          {
-            "left": {
-              "ur": "کاغذ",
-              "en": "paper"
-            },
-            "right": {
-              "ur": "دونوں طرف لکھنا",
-              "en": "write on both sides"
-            }
-          },
-          {
-            "left": {
-              "ur": "کھانا",
-              "en": "food"
-            },
-            "right": {
-              "ur": "تھوڑا تھوڑا لینا",
-              "en": "take small helpings"
-            }
-          }
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            6
+          ]
         ]
       }
     }
@@ -497,6 +490,7 @@
   },
   "review_flags": [
     "child-safety: confirm examples do not assume piped water, electricity or fans at home; mentor note asks for hand-pump and matka alternatives",
-    "worked example 2 suggests sharing leftovers with neighbours; confirm this is appropriate in all communities"
+    "worked example 2 suggests sharing leftovers with neighbours; confirm this is appropriate in all communities",
+    "interaction contract: activity a1-spot-waste is a bespoke widget (finding hotspots in a picture); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

@@ -123,15 +123,44 @@
         {
           "ur": "مٹھیاں بند اور اونچی آواز",
           "en": "Clenched fists and a loud voice"
+        },
+        {
+          "ur": "خوش",
+          "en": "happy"
+        },
+        {
+          "ur": "غصے میں",
+          "en": "cross"
+        },
+        {
+          "ur": "اداس",
+          "en": "sad"
+        },
+        {
+          "ur": "ڈرا ہوا",
+          "en": "scared"
         }
       ],
       "answer_key": {
-        "pairs": {
-          "0": "sad / اداس",
-          "1": "happy / خوش",
-          "2": "scared / ڈرا ہوا",
-          "3": "cross / غصے میں"
-        }
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            4
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            5
+          ]
+        ]
       },
       "hints": [
         {

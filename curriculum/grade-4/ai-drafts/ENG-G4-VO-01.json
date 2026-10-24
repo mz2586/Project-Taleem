@@ -108,18 +108,34 @@
         "en": "Sort the words into two boxes, food or home: rice, bed, milk, door, bread, chair"
       },
       "answer_key": {
-        "groups": {
-          "food": [
-            "rice",
-            "milk",
-            "bread"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
           ],
-          "home": [
-            "bed",
-            "door",
-            "chair"
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
           ]
-        }
+        ]
       },
       "hints": [
         {
@@ -128,6 +144,40 @@
             "ur": "سوچیں: کیا یہ کھایا جا سکتا ہے؟",
             "en": "Think: can you eat it?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "rice",
+          "en": "rice"
+        },
+        {
+          "ur": "bed",
+          "en": "bed"
+        },
+        {
+          "ur": "milk",
+          "en": "milk"
+        },
+        {
+          "ur": "door",
+          "en": "door"
+        },
+        {
+          "ur": "bread",
+          "en": "bread"
+        },
+        {
+          "ur": "chair",
+          "en": "chair"
+        },
+        {
+          "ur": "کھانا",
+          "en": "food"
+        },
+        {
+          "ur": "گھر",
+          "en": "home"
         }
       ]
     },
@@ -140,12 +190,25 @@
         "en": "Match each English word to its meaning: milk, egg, door, bread"
       },
       "answer_key": {
-        "pairs": {
-          "milk": "دودھ",
-          "egg": "انڈا",
-          "door": "دروازہ",
-          "bread": "روٹی / ڈبل روٹی"
-        }
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
+          ]
+        ]
       },
       "hints": [
         {
@@ -154,6 +217,40 @@
             "ur": "جو لفظ پکا معلوم ہو، اس سے شروع کریں۔",
             "en": "Start with the word you are sure of."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "milk",
+          "en": "milk"
+        },
+        {
+          "ur": "egg",
+          "en": "egg"
+        },
+        {
+          "ur": "door",
+          "en": "door"
+        },
+        {
+          "ur": "bread",
+          "en": "bread"
+        },
+        {
+          "ur": "دروازہ",
+          "en": "دروازہ"
+        },
+        {
+          "ur": "روٹی / ڈبل روٹی",
+          "en": "روٹی / ڈبل روٹی"
+        },
+        {
+          "ur": "دودھ",
+          "en": "دودھ"
+        },
+        {
+          "ur": "انڈا",
+          "en": "انڈا"
         }
       ]
     },

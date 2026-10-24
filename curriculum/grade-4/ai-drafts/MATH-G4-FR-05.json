@@ -394,6 +394,7 @@
   },
   "review_flags": [
     "subject expert: p3 distractor 3/0 shows the subtract-the-bottoms error; confirm a zero denominator is acceptable as a distractor for Grade 4",
-    "subject expert: answers are left unsimplified (3/6, 4/10); confirm simplifying is out of scope"
+    "subject expert: answers are left unsimplified (3/6, 4/10); confirm simplifying is out of scope",
+    "interaction contract: activity a1-shade-and-add is a bespoke widget (shading parts of a bar); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

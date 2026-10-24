@@ -109,15 +109,33 @@
         "en": "Sort each card into 'goods' or 'service': the farmer's wheat, the carpenter's chair, the teacher's teaching, the barber's haircut, the potter's clay pot, the rickshaw driver's ride."
       },
       "answer_key": {
-        "goods": [
-          "farmer's wheat",
-          "carpenter's chair",
-          "potter's clay pot"
-        ],
-        "service": [
-          "teaching",
-          "haircut",
-          "rickshaw ride"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            6
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            7
+          ],
+          [
+            4,
+            6
+          ],
+          [
+            5,
+            7
+          ]
         ]
       },
       "hints": [
@@ -127,6 +145,40 @@
             "ur": "پوچھیں: کیا میں اسے ہاتھ میں پکڑ سکتا ہوں؟",
             "en": "Ask: can I hold it in my hand?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "کسان کی گندم",
+          "en": "the farmer's wheat"
+        },
+        {
+          "ur": "بڑھئی کی کرسی",
+          "en": "the carpenter's chair"
+        },
+        {
+          "ur": "استاد کا پڑھانا",
+          "en": "the teacher's teaching"
+        },
+        {
+          "ur": "حجام کا بال کاٹنا",
+          "en": "the barber's haircut"
+        },
+        {
+          "ur": "کمہار کا گھڑا",
+          "en": "the potter's clay pot"
+        },
+        {
+          "ur": "رکشے والے کا سفر کروانا",
+          "en": "the rickshaw driver's ride"
+        },
+        {
+          "ur": "اشیاء",
+          "en": "goods"
+        },
+        {
+          "ur": "خدمت",
+          "en": "service"
         }
       ]
     },
@@ -140,66 +192,59 @@
       },
       "options": [
         {
-          "ur": "گندم اور سبزیاں",
-          "en": "wheat and vegetables"
+          "ur": "کسان",
+          "en": "farmer"
         },
         {
-          "ur": "کپڑے سینا",
-          "en": "stitching clothes"
+          "ur": "درزی",
+          "en": "tailor"
+        },
+        {
+          "ur": "ڈاکٹر",
+          "en": "doctor"
+        },
+        {
+          "ur": "بڑھئی",
+          "en": "carpenter"
         },
         {
           "ur": "علاج",
           "en": "treatment"
         },
         {
+          "ur": "گندم اور سبزیاں",
+          "en": "wheat and vegetables"
+        },
+        {
           "ur": "لکڑی کا فرنیچر",
           "en": "wooden furniture"
+        },
+        {
+          "ur": "کپڑے سینا",
+          "en": "stitching clothes"
         }
       ],
       "answer_key": {
+        "left_count": 4,
         "pairs": [
-          {
-            "left": {
-              "ur": "کسان",
-              "en": "farmer"
-            },
-            "right": {
-              "ur": "گندم اور سبزیاں",
-              "en": "wheat and vegetables"
-            }
-          },
-          {
-            "left": {
-              "ur": "درزی",
-              "en": "tailor"
-            },
-            "right": {
-              "ur": "کپڑے سینا",
-              "en": "stitching clothes"
-            }
-          },
-          {
-            "left": {
-              "ur": "ڈاکٹر",
-              "en": "doctor"
-            },
-            "right": {
-              "ur": "علاج",
-              "en": "treatment"
-            }
-          },
-          {
-            "left": {
-              "ur": "بڑھئی",
-              "en": "carpenter"
-            },
-            "right": {
-              "ur": "لکڑی کا فرنیچر",
-              "en": "wooden furniture"
-            }
-          }
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            6
+          ]
         ],
-        "misconception_on_wrong_pair": "m-helper-role-confusion"
+        "misconception": "m-helper-role-confusion"
       },
       "hints": [
         {

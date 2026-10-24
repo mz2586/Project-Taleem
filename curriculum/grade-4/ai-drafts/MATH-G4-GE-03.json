@@ -53,10 +53,26 @@
         "en": "Tap the shape name for each object: a plate, a carrom board, a door, a square paper cut from corner to corner."
       },
       "answer_key": {
-        "plate": "circle",
-        "carrom board": "square",
-        "door": "rectangle",
-        "half of a square paper cut corner to corner": "triangle"
+        "mode": "match",
+        "left_count": 4,
+        "pairs": [
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            6
+          ],
+          [
+            3,
+            4
+          ]
+        ]
       },
       "hints": [
         {
@@ -65,6 +81,40 @@
             "ur": "ضلع گنیں۔ پھر دیکھیں کہ وہ برابر ہیں یا نہیں۔",
             "en": "Count the sides. Then check whether they are equal."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "پلیٹ",
+          "en": "a plate"
+        },
+        {
+          "ur": "کیرم بورڈ",
+          "en": "a carrom board"
+        },
+        {
+          "ur": "دروازہ",
+          "en": "a door"
+        },
+        {
+          "ur": "چوکور کاغذ کو کونے سے کونے تک کاٹ کر بنا ہوا ٹکڑا",
+          "en": "half of a square paper cut corner to corner"
+        },
+        {
+          "ur": "مثلث",
+          "en": "triangle"
+        },
+        {
+          "ur": "دائرہ",
+          "en": "circle"
+        },
+        {
+          "ur": "مستطیل",
+          "en": "rectangle"
+        },
+        {
+          "ur": "مربع",
+          "en": "square"
         }
       ]
     },
@@ -77,37 +127,20 @@
         "en": "Match each shape to its number of sides."
       },
       "answer_key": {
+        "left_count": 3,
         "pairs": [
-          {
-            "left": {
-              "ur": "مثلث",
-              "en": "triangle"
-            },
-            "right": {
-              "ur": "۳ ضلع",
-              "en": "3 sides"
-            }
-          },
-          {
-            "left": {
-              "ur": "مستطیل",
-              "en": "rectangle"
-            },
-            "right": {
-              "ur": "۴ ضلع",
-              "en": "4 sides"
-            }
-          },
-          {
-            "left": {
-              "ur": "دائرہ",
-              "en": "circle"
-            },
-            "right": {
-              "ur": "کوئی سیدھا ضلع نہیں",
-              "en": "no straight sides"
-            }
-          }
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            3
+          ],
+          [
+            2,
+            4
+          ]
         ]
       },
       "hints": [
@@ -117,6 +150,32 @@
             "ur": "ہر شکل کو ذہن میں بنائیں اور ضلع گنیں۔",
             "en": "Picture each shape and count its sides."
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "مثلث",
+          "en": "triangle"
+        },
+        {
+          "ur": "مستطیل",
+          "en": "rectangle"
+        },
+        {
+          "ur": "دائرہ",
+          "en": "circle"
+        },
+        {
+          "ur": "۴ ضلع",
+          "en": "4 sides"
+        },
+        {
+          "ur": "کوئی سیدھا ضلع نہیں",
+          "en": "no straight sides"
+        },
+        {
+          "ur": "۳ ضلع",
+          "en": "3 sides"
         }
       ]
     },

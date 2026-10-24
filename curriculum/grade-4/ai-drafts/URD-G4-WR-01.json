@@ -130,6 +130,7 @@
         }
       ],
       "answer_key": {
+        "mode": "choose",
         "correct_option": 1
       },
       "hints": [

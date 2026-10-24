@@ -136,21 +136,41 @@
         {
           "ur": "صاف کپڑے پہن کر جانا",
           "en": "Going in clean clothes"
+        },
+        {
+          "ur": "مسجد میں اچھا کام",
+          "en": "good manners in the masjid"
+        },
+        {
+          "ur": "اچھا کام نہیں",
+          "en": "not good manners"
         }
       ],
       "answer_key": {
         "mode": "sort",
-        "groups": {
-          "good_manners": [
+        "left_count": 5,
+        "pairs": [
+          [
             0,
-            2,
-            4
+            5
           ],
-          "not_good_manners": [
+          [
             1,
-            3
+            6
+          ],
+          [
+            2,
+            5
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            5
           ]
-        }
+        ]
       }
     }
   ],

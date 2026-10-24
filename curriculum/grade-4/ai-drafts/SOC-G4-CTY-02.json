@@ -138,64 +138,57 @@
       },
       "options": [
         {
-          "ur": "لاہور",
-          "en": "Lahore"
+          "ur": "پنجاب",
+          "en": "Punjab"
         },
         {
-          "ur": "کراچی",
-          "en": "Karachi"
+          "ur": "سندھ",
+          "en": "Sindh"
+        },
+        {
+          "ur": "خیبر پختونخوا",
+          "en": "Khyber Pakhtunkhwa"
+        },
+        {
+          "ur": "بلوچستان",
+          "en": "Balochistan"
         },
         {
           "ur": "پشاور",
           "en": "Peshawar"
         },
         {
+          "ur": "لاہور",
+          "en": "Lahore"
+        },
+        {
           "ur": "کوئٹہ",
           "en": "Quetta"
+        },
+        {
+          "ur": "کراچی",
+          "en": "Karachi"
         }
       ],
       "answer_key": {
+        "left_count": 4,
         "pairs": [
-          {
-            "left": {
-              "ur": "پنجاب",
-              "en": "Punjab"
-            },
-            "right": {
-              "ur": "لاہور",
-              "en": "Lahore"
-            }
-          },
-          {
-            "left": {
-              "ur": "سندھ",
-              "en": "Sindh"
-            },
-            "right": {
-              "ur": "کراچی",
-              "en": "Karachi"
-            }
-          },
-          {
-            "left": {
-              "ur": "خیبر پختونخوا",
-              "en": "Khyber Pakhtunkhwa"
-            },
-            "right": {
-              "ur": "پشاور",
-              "en": "Peshawar"
-            }
-          },
-          {
-            "left": {
-              "ur": "بلوچستان",
-              "en": "Balochistan"
-            },
-            "right": {
-              "ur": "کوئٹہ",
-              "en": "Quetta"
-            }
-          }
+          [
+            0,
+            5
+          ],
+          [
+            1,
+            7
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            6
+          ]
         ]
       },
       "hints": [
@@ -532,6 +525,7 @@
   "review_flags": [
     "subject expert + child-safety: confirm how Gilgit-Baltistan and Azad Jammu and Kashmir should be described for Grade 4 (draft calls them areas on our map with capitals Gilgit and Muzaffarabad, not provinces)",
     "confirm the province-direction descriptions in the map answer key match the map that will be drawn",
-    "confirm 'صدر مقام' vs 'دارالحکومت' usage matches the provincial textbook terms"
+    "confirm 'صدر مقام' vs 'دارالحکومت' usage matches the provincial textbook terms",
+    "interaction contract: activity a1-map-place is a bespoke widget (placing names on a map); it has no learner runtime yet, so it is not projected or scored until the future widget runtime exists"
   ]
 }

@@ -93,20 +93,37 @@
         {
           "ur": "ہوم ورک کسی اور سے کروانا",
           "en": "Getting someone else to do your homework"
+        },
+        {
+          "ur": "ذمہ داری",
+          "en": "responsible"
+        },
+        {
+          "ur": "ذمہ داری نہیں",
+          "en": "not responsible"
         }
       ],
       "answer_key": {
-        "sort": {
-          "responsible": [
+        "mode": "sort",
+        "left_count": 4,
+        "pairs": [
+          [
             0,
-            2
+            4
           ],
-          "not_responsible": [
+          [
             1,
-            3
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            5
           ]
-        },
-        "mode": "tap a card, then tap its group (drag also works)"
+        ]
       },
       "hints": [
         {

@@ -72,15 +72,33 @@
         "en": "Put each thing in the right box: 'measure in ml' or 'measure in l'. A bucket of water, a spoon of medicine, a water tank, a cup of tea, a water drum, a small juice box."
       },
       "answer_key": {
-        "ml": [
-          "spoon of medicine",
-          "cup of tea",
-          "small juice box"
-        ],
-        "l": [
-          "bucket of water",
-          "water tank",
-          "water drum"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            6
+          ]
         ]
       },
       "hints": [
@@ -90,6 +108,40 @@
             "ur": "کیا یہ تھوڑا سا پانی ہے یا بہت سارا؟",
             "en": "Is this a little liquid or a lot?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "پانی کی بالٹی",
+          "en": "a bucket of water"
+        },
+        {
+          "ur": "دوا کا چمچ",
+          "en": "a spoon of medicine"
+        },
+        {
+          "ur": "پانی کی ٹینکی",
+          "en": "a water tank"
+        },
+        {
+          "ur": "چائے کی پیالی",
+          "en": "a cup of tea"
+        },
+        {
+          "ur": "پانی کا ڈرم",
+          "en": "a water drum"
+        },
+        {
+          "ur": "جوس کا چھوٹا ڈبہ",
+          "en": "a small juice box"
+        },
+        {
+          "ur": "ملی لیٹر میں ناپیں",
+          "en": "measure in ml"
+        },
+        {
+          "ur": "لیٹر میں ناپیں",
+          "en": "measure in l"
         }
       ]
     },

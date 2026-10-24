@@ -98,8 +98,8 @@
         "en": "A number line from 80 to 90 shows 86. Tap the ten that 86 is closer to."
       },
       "answer_key": {
-        "tap": "90",
-        "rounded": 90
+        "mode": "choose",
+        "correct_option": 1
       },
       "hints": [
         {
@@ -108,6 +108,16 @@
             "ur": "۸۶ سے ۸۰ تک کتنے قدم ہیں؟ ۹۰ تک کتنے؟",
             "en": "How many steps from 86 to 80? And to 90?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "۸۰",
+          "en": "80"
+        },
+        {
+          "ur": "۹۰",
+          "en": "90"
         }
       ]
     },

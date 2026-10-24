@@ -132,20 +132,37 @@
         {
           "ur": "مہمان بزرگ کو جگہ دینا",
           "en": "Offering a seat to an elderly guest"
+        },
+        {
+          "ur": "ادب",
+          "en": "respectful"
+        },
+        {
+          "ur": "ادب نہیں",
+          "en": "not respectful"
         }
       ],
       "answer_key": {
         "mode": "sort",
-        "groups": {
-          "respectful": [
+        "left_count": 4,
+        "pairs": [
+          [
             0,
-            2,
-            3
+            4
           ],
-          "not_respectful": [
-            1
+          [
+            1,
+            5
+          ],
+          [
+            2,
+            4
+          ],
+          [
+            3,
+            4
           ]
-        }
+        ]
       }
     },
     {

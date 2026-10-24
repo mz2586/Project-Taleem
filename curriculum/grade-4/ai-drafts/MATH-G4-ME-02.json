@@ -72,15 +72,33 @@
         "en": "Put each thing in the right box: 'weigh in g' or 'weigh in kg'. A bag of flour, an egg, a sack of rice, a spoon of sugar, a watermelon, a pencil."
       },
       "answer_key": {
-        "g": [
-          "egg",
-          "spoon of sugar",
-          "pencil"
-        ],
-        "kg": [
-          "bag of flour",
-          "sack of rice",
-          "watermelon"
+        "mode": "sort",
+        "left_count": 6,
+        "pairs": [
+          [
+            0,
+            7
+          ],
+          [
+            1,
+            6
+          ],
+          [
+            2,
+            7
+          ],
+          [
+            3,
+            6
+          ],
+          [
+            4,
+            7
+          ],
+          [
+            5,
+            6
+          ]
         ]
       },
       "hints": [
@@ -90,6 +108,40 @@
             "ur": "کیا اسے ایک ہاتھ سے آرام سے اٹھا سکتے ہیں؟",
             "en": "Can you lift it easily with one hand?"
           }
+        }
+      ],
+      "options": [
+        {
+          "ur": "آٹے کا تھیلا",
+          "en": "a bag of flour"
+        },
+        {
+          "ur": "ایک انڈا",
+          "en": "an egg"
+        },
+        {
+          "ur": "چاول کی بوری",
+          "en": "a sack of rice"
+        },
+        {
+          "ur": "ایک چمچ چینی",
+          "en": "a spoon of sugar"
+        },
+        {
+          "ur": "تربوز",
+          "en": "a watermelon"
+        },
+        {
+          "ur": "ایک پنسل",
+          "en": "a pencil"
+        },
+        {
+          "ur": "گرام میں تولیں",
+          "en": "weigh in g"
+        },
+        {
+          "ur": "کلوگرام میں تولیں",
+          "en": "weigh in kg"
         }
       ]
     },
