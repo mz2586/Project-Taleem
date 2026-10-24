@@ -1,7 +1,7 @@
 # Project Taleem — Master Product Scope & Roadmap
 
 **Status:** Living document — the single authoritative scope-status and execution reference ·
-**Last updated:** 2026-10-24 · **Repository HEAD at last update:** `0369136`
+**Last updated:** 2026-10-25 · **Repository HEAD at last update:** `0369136`
 
 **Binding product definition:** [`docs/GLOBAL_PRODUCT_SCOPE.md`](docs/GLOBAL_PRODUCT_SCOPE.md)
 (revised 2026-10-24 to the definitive mission in §0). That document says *what* the product must
@@ -72,6 +72,16 @@ generated test lesson, because **no real lesson is published**. "Mock" means a s
 | 6 | Guardian sees own child only; revocation takes effect | **PASS** | `test_access_boundaries.py`, per-request consent gate (`c8ab6f3`), e2e withdraw → denied | Limited-literacy usability with real guardians |
 | 7 | Content and safety: only reviewed content publishes; unsafe content blocked; privacy regressions | **PASS** (software gates) | 5-stage review workflow + no self-approval (`test_curriculum_studio*`), child-safety content rule (`test_curriculum_child_safety.py`), AI output safety gate (stub) | Human reviews themselves (external) |
 | 8 | Deployment and recovery: migrations, health, auth, observability, backup | **PARTIAL** | Alembic up/down/up on PostgreSQL in CI; backup drill PASS on dev data; 16 alert rules promtool-checked | **No live environment** (blocker #11), no paging destination (#15) |
+
+### 0.4 Exploring the live application (demo cohort)
+
+The real deployment (`taleem-web-phi.vercel.app`, API `taleem-api.vercel.app`, `TALEEM_ENV=production`)
+can be explored through **designated synthetic demo accounts**
+([`DEMO_COHORT_CONTRACT.md`](docs/03-security-privacy/DEMO_COHORT_CONTRACT.md)). Demo accounts and
+`audience=demo` lessons are isolated in both directions: real learners never see demo content, and
+demo accounts see no one else. Demo lessons are **unreviewed AI drafts**, labelled
+`[DEMO · unreviewed AI draft]`, and are not curriculum. Live real-browser check:
+`tests/a11y/live.demo.spec.ts`. Removal: `python -m taleem_core.tools.demo_cohort --erase`.
 
 ### 0.2 AI provider: recommendation (FD-03)
 
@@ -1229,6 +1239,7 @@ Optional or later: generative AI (R2, FD-03), a recognized-qualification pathway
 
 | Date | Change | Author |
 | --- | --- | --- |
+| 2026-10-25 | Report cards complete-and-verified in software: system issuance, guardian generate, evidence-pinned lesson versions (alembic `0014`, `0015`); CI e2e student-to-guardian journey PASS on PostgreSQL (`65e7181`, `4ffe3aa`). In-app demo cohort for exploring the real deployment (`628fa0d`, alembic `0016`, DEMO_COHORT_CONTRACT). | Engineering |
 | 2026-10-24 | **Definitive mission adopted** (§0): AI-led school, no hired teaching workforce; the eleven capabilities mapped with evidence; FD-03 recommendation; teacher-only paths flagged for AI-led replacement. | Founder + Engineering |
 | 2026-10-24 | Homework submission and teacher marking end to end (alembic `0013`; a rollback refuses rather than deleting safeguarding records); marked work feeds mastery; teacher-raised safeguarding concerns. | Engineering |
 | 2026-10-24 | Item interaction contract adopted and implemented end to end (Studio validation, Grade 4 drafts normalised, scorer, session/placement/sync APIs, offline packages, web player); 21 bespoke widgets remain. | Engineering |
