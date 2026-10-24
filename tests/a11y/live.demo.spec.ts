@@ -123,12 +123,3 @@ test("learner signs in with family code + PIN and explores", async ({ browser })
   note(`[lesson] answered one question at ${page.url()}`);
   note(`[lesson] after answering: ${(await page.locator("main").first().innerText()).replace(/\s+/g, " ").slice(0, 300)}`);
 });
-  if (await start.count()) {
-    await start.first().click();
-    await page.waitForLoadState("networkidle");
-    await shot(page, "learner-lesson");
-    note(`[lesson] opened ${page.url()}`);
-  } else {
-    note("[lesson] Today offered no lesson to start");
-  }
-});
