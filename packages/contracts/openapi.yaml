@@ -206,13 +206,26 @@ components:
       description: >-
         Shape of an attempt.submitted delta's payload (Phase 6.2B). Carries the learner's answer for
         server-side grading; NO answer key is on the device. evidence_id is the durable idempotency
-        key (a client uuid7). No child PII — only the pseudonymous student_ref.
-      required: [student_ref, objective_code, item_ref, option, evidence_id]
+        key (a client uuid7). No child PII — only the pseudonymous student_ref. Exactly one answer
+        field by the item's kind (option | text | order | pairs); a missing, extra or mismatched
+        field is a conflict.
+      required: [student_ref, objective_code, item_ref, evidence_id]
       properties:
         student_ref: { type: string }
         objective_code: { type: string }
         item_ref: { type: string }
-        option: { type: integer, description: Chosen option index }
+        option: { type: integer, description: "choose: the chosen option index" }
+        text: { type: string, maxLength: 200, description: "fill: the typed answer" }
+        order:
+          type: array
+          maxItems: 64
+          items: { type: integer }
+          description: "order: option indices in the learner's order"
+        pairs:
+          type: array
+          maxItems: 64
+          description: "match / sort: [left, right] option-index pairs"
+          items: { type: array, minItems: 2, maxItems: 2, items: { type: integer } }
         evidence_id: { type: string, description: Client-generated uuid7 (durable idempotency key) }
         session_id: { type: string }
         hints_used: { type: integer, default: 0 }

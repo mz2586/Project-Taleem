@@ -229,7 +229,8 @@ def fixture_answer_key() -> dict[str, int]:
     from ..vertical_slice.fractions_lesson import build_fractions_lesson
 
     key: dict[str, int] = {}
-    for item in build_fractions_lesson().practice_questions:
+    lesson = build_fractions_lesson()  # activities are taught first, then practice
+    for item in [*lesson.interactive_activities, *lesson.practice_questions]:
         correct = dict(item.answer_key).get("correct_option", 0)
         key[item.item_id] = correct if isinstance(correct, int) else 0
     return key

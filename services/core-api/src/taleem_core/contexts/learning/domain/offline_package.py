@@ -6,10 +6,10 @@ and render fully offline. Design per OFFLINE_ARCHITECTURE.md §3 and OFFLINE_STO
 Two deliberate 6.2A properties:
 
   1. **No answer keys on the device.** The offline content ships the teaching + attempt surface
-     (title, explanation, worked steps, item prompts, options, authored hints) but NEVER
-     ``correct_option`` / ``option_misconceptions`` / corrections. Grading stays server-side
-     (Option A offline-lite; server-side grading arrives with sync in 6.2B). A device therefore
-     cannot reveal an answer offline — a safety property, not an omission.
+     (title, explanation, worked steps, item kind, prompts, options, ``left_count``, authored
+     hints) but NEVER an answer key (any of ``SECRET_ITEM_FIELDS``) or corrections. Grading stays
+     server-side (Option A offline-lite; server-side grading arrives with sync in 6.2B). A device
+     therefore cannot reveal an answer offline — a safety property, not an omission.
   2. **Content-hash versioning.** ``content_hash`` = SHA-256 over the canonical offline content;
      ``version`` is its short prefix. A change in content changes the hash → the client treats the
      cached package as stale (automatic cache versioning / invalidation). No Ed25519 signing here
@@ -30,10 +30,11 @@ VERSION_LEN = 12
 
 
 def _item_offline_dict(item: ItemView) -> dict[str, object]:
-    """Child-safe projection of an item: prompt, options, hints — NO answer key."""
+    """Child-safe projection of an item: kind, prompt, options, hints — NO answer key."""
     return {
         "item_ref": item.item_ref,
         "objective_code": item.objective_code,
+        **item.learner_fields(),
         "prompt": dict(item.prompt),
         "options": list(item.options),
         "hints": list(item.hints),

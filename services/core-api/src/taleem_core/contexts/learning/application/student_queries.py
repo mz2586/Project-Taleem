@@ -56,6 +56,7 @@ class StudentQueryService:
                     {
                         "item_ref": hw.item_ref,
                         "objective_code": hw.objective_code,
+                        **hw.learner_fields(),
                         "prompt": hw.prompt,
                         "status": "done" if hw.item_ref in done_items else "todo",
                         "est_minutes": _DEFAULT_EST_MINUTES,

@@ -180,6 +180,14 @@ components:
             properties:
               item_ref: { type: string }
               objective_code: { type: string }
+              kind:
+                type: string
+                enum: [choose, fill, order, match, sort]
+                description: Interaction kind (ITEM_INTERACTION_CONTRACT.md); how to show + answer the item.
+              left_count:
+                type: integer
+                minimum: 0
+                description: "match / sort: options[:left_count] are the left items (cards); 0 otherwise."
               prompt: { type: object, additionalProperties: { type: string } }
               status: { type: string, enum: [todo, done] }
               est_minutes: { type: integer }

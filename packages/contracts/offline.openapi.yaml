@@ -153,10 +153,18 @@ components:
           items: { $ref: "#/components/schemas/SigningKey" }
     OfflineItem:
       type: object
-      description: Child-safe item — prompt, options, authored hints. NO answer key.
+      description: Child-safe item — kind, prompt, options, left_count, authored hints. NO answer key.
       properties:
         item_ref: { type: string }
         objective_code: { type: string }
+        kind:
+          type: string
+          enum: [choose, fill, order, match, sort]
+          description: Interaction kind (ITEM_INTERACTION_CONTRACT.md); how to show + answer the item.
+        left_count:
+          type: integer
+          minimum: 0
+          description: "match / sort: options[:left_count] are the left items (cards); 0 otherwise."
         prompt:
           type: object
           additionalProperties: { type: string }
@@ -169,7 +177,9 @@ components:
           items: { type: string }
     OfflineContent:
       type: object
-      description: The renderable lesson document (no correct_option / option_misconceptions).
+      description: >-
+        The renderable lesson document. No answer key (correct_option, accepted_answers,
+        correct_order, correct_pairs, option_misconceptions, misconception).
       properties:
         lesson_id: { type: string }
         objective_code: { type: string }

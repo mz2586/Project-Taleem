@@ -32,7 +32,7 @@ from ..domain import placement as pl
 from ..domain.curriculum_view import ItemView, LessonView
 from ..domain.decision import CurriculumGraph
 from ..domain.knowledge import PriorProvenance, StudentKnowledge
-from ..domain.scorer import evaluate
+from ..domain.scorer import ANSWER_FIELD, Answer, answer_fits, evaluate
 from ..domain.values import InteractionContext, Outcome
 from .concurrency import ConcurrencyConflictError, retry_on_conflict
 from .ports import CurriculumReadModel
@@ -104,8 +104,18 @@ class PlacementService:
     # ----------------------------------------------------------------------------- writes
 
     def answer(
-        self, student_ref: str, *, item_ref: str, option: int, response_time_ms: int = 0
+        self,
+        student_ref: str,
+        *,
+        item_ref: str,
+        option: int | None = None,
+        answer: Answer | None = None,
+        response_time_ms: int = 0,
     ) -> dict[str, Any]:
+        """Answer the current question with ``answer`` (any kind) or ``option`` (choose)."""
+        if (answer is None) == (option is None):
+            raise ValueError("pass exactly one of option / answer")
+        given = answer if answer is not None else Answer(option=option)
         graph, lessons = self._content()
         items = _item_refs(graph, lessons)
 
@@ -144,7 +154,14 @@ class PlacementService:
                 item = _find_item(lessons, before.next_item)
                 if item is None:  # unpublished between the read and this write
                     raise conflict("the diagnostic question is no longer published")
-                outcome, hits = evaluate(item, option)
+                if not answer_fits(item, given):
+                    raise Problem(
+                        422,
+                        "ANSWER_KIND_MISMATCH",
+                        "Answer does not fit the item",
+                        f"a {item.kind} item is answered with {ANSWER_FIELD[item.kind]!r}",
+                    )
+                outcome, hits = evaluate(item, given)
                 now = self._now()
                 if obs:  # strictly increasing, so the fold's order never depends on ties
                     now = max(now, obs[-1].at + 1e-3)
@@ -265,6 +282,7 @@ class PlacementService:
                 {
                     "item_ref": item.item_ref,
                     "objective_code": item.objective_code,
+                    **item.learner_fields(),
                     "prompt": item.prompt,
                     "options": list(item.options),
                 }
@@ -298,7 +316,7 @@ def _diagnostic_items(lesson: LessonView) -> tuple[ItemView, ...]:
     seen: set[str] = set()
     out: list[ItemView] = []
     for item in (*lesson.assessment_formative, *lesson.practice_items):
-        if item.item_ref and item.item_ref not in seen and item.options:
+        if item.item_ref and item.item_ref not in seen and item.playable:
             seen.add(item.item_ref)
             out.append(item)
     return tuple(out)

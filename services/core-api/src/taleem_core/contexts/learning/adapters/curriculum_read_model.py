@@ -14,9 +14,11 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from ...curriculum_studio.adapters.persistence import unit_of_work as cs_unit_of_work
 from ...curriculum_studio.adapters.persistence.models import LessonRow
+from ...curriculum_studio.domain.assessment import AssessmentItem
 from ...curriculum_studio.domain.content import Locale
+from ...curriculum_studio.domain.interaction import interaction_kind
 from ...curriculum_studio.domain.lesson import Lesson
-from ..domain.curriculum_view import ItemView, LessonView
+from ..domain.curriculum_view import CHOOSE, FILL, MATCH, ORDER, SORT, ItemView, LessonView
 from ..domain.decision import CurriculumGraph, ObjectiveInfo
 
 
@@ -36,7 +38,34 @@ def _as_dict(value: object) -> dict[str, object]:
 
 
 def _as_int(value: object, default: int = 0) -> int:
-    return value if isinstance(value, int) else default
+    return value if isinstance(value, int) and not isinstance(value, bool) else default
+
+
+def _int_tuple(value: object) -> tuple[int, ...]:
+    if not isinstance(value, list):
+        return ()
+    ints = tuple(v for v in value if isinstance(v, int) and not isinstance(v, bool))
+    return ints if len(ints) == len(value) else ()
+
+
+def _pair_set(value: object) -> frozenset[tuple[int, int]]:
+    if not isinstance(value, list):
+        return frozenset()
+    pairs = [_int_tuple(p) for p in value]
+    if any(len(p) != 2 for p in pairs):
+        return frozenset()
+    return frozenset((p[0], p[1]) for p in pairs)
+
+
+def _kind(item: object) -> str:
+    """The item's interaction kind (contract §1); pre-contract items project as ``choose``."""
+    kind = interaction_kind(item) if isinstance(item, AssessmentItem) else None
+    return kind or CHOOSE
+
+
+def _playable_activities(activities: list[AssessmentItem]) -> list[AssessmentItem]:
+    """Activities the learner runtime can play + score; widgets / human-graded are skipped."""
+    return [a for a in activities if interaction_kind(a) is not None]
 
 
 class CurriculumStudioReadModel:
@@ -136,6 +165,13 @@ class CurriculumStudioReadModel:
         key = _as_dict(getattr(item, "answer_key", {}))
         for ref, text in _as_dict(key.get("corrections")).items():
             corrections[str(ref)] = str(text)
+        kind = _kind(item)
+        accepted: tuple[str, ...] = ()
+        if kind == FILL:
+            answer = key.get("answer")
+            variants = [str(v) for v in getattr(item, "accepted_variants", []) or []]
+            accepted = tuple(v for v in [str(answer) if answer else "", *variants] if v.strip())
+        misconception = key.get("misconception")
         return ItemView(
             item_ref=str(getattr(item, "item_id", "")),
             objective_code=objective_code,
@@ -146,6 +182,12 @@ class CurriculumStudioReadModel:
                 int(k): str(v) for k, v in _as_dict(key.get("option_misconceptions")).items()
             },
             hints=tuple(_text(h.hint) for h in getattr(item, "hints", [])),
+            kind=kind,
+            left_count=_as_int(key.get("left_count")) if kind in (MATCH, SORT) else 0,
+            accepted_answers=accepted,
+            correct_order=_int_tuple(key.get("order")) if kind == ORDER else (),
+            correct_pairs=_pair_set(key.get("pairs")) if kind in (MATCH, SORT) else frozenset(),
+            misconception=misconception if isinstance(misconception, str) else "",
         )
 
     def _project(self, lesson: Lesson, objective_code: str) -> LessonView:
@@ -158,9 +200,10 @@ class CurriculumStudioReadModel:
         kept = [b for b in bilingual_steps if b.get("en", "")]
 
         corrections: dict[str, str] = {}
-        practice = tuple(
-            self._item_view(i, objective_code, corrections) for i in lesson.practice_questions
-        )
+        # Playable activities first, then practice: one sequence (ITEM_INTERACTION_CONTRACT §2).
+        activities = _playable_activities(lesson.interactive_activities)
+        playable = [*activities, *lesson.practice_questions]
+        practice = tuple(self._item_view(i, objective_code, corrections) for i in playable)
         homework = tuple(self._item_view(i, objective_code, corrections) for i in lesson.homework)
         formative = tuple(
             self._item_view(i, objective_code, corrections) for i in lesson.assessment.formative
@@ -176,6 +219,7 @@ class CurriculumStudioReadModel:
             explanation=_bilingual(lesson.student_explanation),
             worked_example_steps=tuple(b["en"] for b in kept),
             practice_items=practice,
+            activity_count=len(activities),
             misconception_corrections=corrections,
             homework_items=homework,
             assessment_formative=formative,

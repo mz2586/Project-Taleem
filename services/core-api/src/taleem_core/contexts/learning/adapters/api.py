@@ -13,7 +13,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from fastapi import APIRouter, Depends, HTTPException
-from pydantic import BaseModel
+from pydantic import BaseModel, Field, model_validator
 
 from ....auth.dependencies import authorize, require_owner_or
 from ....auth.jwt_verifier import Claims
@@ -22,7 +22,16 @@ from ..application.analytics import LearningAnalytics
 from ..application.knowledge_service import KnowledgeService
 from ..application.ports import CurriculumReadModel
 from ..application.session_service import SessionService
+from ..domain.curriculum_view import ItemView
 from ..domain.decision import Decision, DecisionKind
+from ..domain.scorer import (
+    ANSWER_FIELD,
+    MAX_SEQUENCE,
+    MAX_TEXT_CHARS,
+    Answer,
+    AnswerShapeError,
+    answer_fits,
+)
 from ..domain.session import Session, SessionError, SessionState
 
 _STUDENT_ONLY: tuple[str, ...] = ()  # learners only; no privileged override for operating a session
@@ -37,12 +46,55 @@ class TeachIn(BaseModel):
     objective_code: str
 
 
-class AnswerIn(BaseModel):
+class AnswerFields(BaseModel):
+    """Exactly one answer field, by item kind (ITEM_INTERACTION_CONTRACT.md §3)."""
+
+    option: int | None = None
+    text: str | None = Field(default=None, max_length=MAX_TEXT_CHARS)
+    order: list[int] | None = Field(default=None, max_length=MAX_SEQUENCE)
+    pairs: list[tuple[int, int]] | None = Field(default=None, max_length=MAX_SEQUENCE)
+
+    @model_validator(mode="after")
+    def _exactly_one(self) -> AnswerFields:
+        self.answer()  # raises (-> 422) unless exactly one field is present
+        return self
+
+    def answer(self) -> Answer:
+        try:
+            return Answer.from_payload(
+                {"option": self.option, "text": self.text, "order": self.order, "pairs": self.pairs}
+            )
+        except AnswerShapeError as exc:
+            raise ValueError(str(exc)) from exc
+
+
+class AnswerIn(AnswerFields):
     objective_code: str
     item_ref: str
-    option: int
     hints_used: int = 0
     self_confidence: float | None = None
+
+
+def require_fitting_answer(item: ItemView, answer: Answer) -> None:
+    """422 when the answer's field does not fit the item's kind (e.g. ``text`` for choose)."""
+    if not answer_fits(item, answer):
+        raise Problem(
+            422,
+            "ANSWER_KIND_MISMATCH",
+            "Answer does not fit the item",
+            f"a {item.kind} item is answered with {ANSWER_FIELD.get(item.kind, '?')!r}",
+        )
+
+
+def learner_item(item: ItemView) -> dict[str, Any]:
+    """The learner-facing JSON of an item: display fields only, never the answer key."""
+    return {
+        "item_ref": item.item_ref,
+        **item.learner_fields(),
+        "prompt": item.prompt,
+        "options": list(item.options),
+        "hint_count": len(item.hints),
+    }
 
 
 class HintIn(BaseModel):
@@ -118,15 +170,7 @@ def build_learning_router(
         utterances, lesson = _guard_session(lambda: deps.session_service.teach(session, decision))
         return {
             "utterances": [{"kind": u.kind.value, "text": u.text} for u in utterances],
-            "items": [
-                {
-                    "item_ref": it.item_ref,
-                    "prompt": it.prompt,
-                    "options": list(it.options),
-                    "hint_count": len(it.hints),
-                }
-                for it in lesson.practice_items
-            ],
+            "items": [learner_item(it) for it in lesson.practice_items],
         }
 
     @router.post("/sessions/{session_id}:answer")
@@ -141,12 +185,14 @@ def build_learning_router(
         item = next((i for i in lesson.practice_items if i.item_ref == body.item_ref), None)
         if item is None:
             raise HTTPException(status_code=404, detail="item not found")
+        given = body.answer()
+        require_fitting_answer(item, given)
         turn = _guard_session(
             lambda: deps.session_service.submit_answer(
                 session,
                 lesson,
                 item,
-                answer_option=body.option,
+                answer=given,
                 decision_kind=DecisionKind.CONTINUE,
                 hints_used=body.hints_used,
                 self_confidence=body.self_confidence,

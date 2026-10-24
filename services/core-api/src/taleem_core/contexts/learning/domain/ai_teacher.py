@@ -158,7 +158,8 @@ def _title(lesson: LessonView, locale: str) -> Utterance:
 def _leading_question(lesson: LessonView, locale: str) -> Utterance | None:
     from .runtime import TurnKind
 
-    for item in lesson.practice_items:
+    # A practice question leads (an activity's prompt is an instruction, not a question).
+    for item in (*lesson.practice_questions, *lesson.practice_items):
         prompt = item.prompt.get(locale, item.prompt.get("en", ""))
         if prompt:
             return Utterance(TurnKind.ASK, prompt, locale)  # the question only — never the answer

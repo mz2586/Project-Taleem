@@ -35,7 +35,7 @@ from dataclasses import dataclass, field
 from enum import StrEnum
 
 from .ai_teacher import is_grounded
-from .curriculum_view import ItemView, LessonView
+from .curriculum_view import CHOOSE, FILL, ItemView, LessonView
 from .runtime import Utterance
 
 # The feature flag that turns the generative tier on (deny-by-default: unset means OFF).
@@ -545,7 +545,9 @@ class GateVerdict:
 
 
 def _answer_text(item: ItemView) -> str:
-    if not 0 <= item.correct_option < len(item.options):
+    if item.kind == FILL:  # a typed answer's canonical text is as secret as a correct option
+        return _normalize(item.accepted_answers[0]).strip() if item.accepted_answers else ""
+    if item.kind != CHOOSE or not 0 <= item.correct_option < len(item.options):
         return ""
     return _normalize(item.options[item.correct_option]).strip()
 

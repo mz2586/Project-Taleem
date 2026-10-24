@@ -30,7 +30,7 @@ from ...learning.domain.curriculum_view import ItemView, LessonView
 from ...learning.domain.events import LearningEvent
 from ...learning.domain.knowledge import AttemptResult, StudentKnowledge
 from ...learning.domain.protocols import ForgettingModel, MasteryEstimator
-from ...learning.domain.scorer import evaluate
+from ...learning.domain.scorer import Answer, AnswerShapeError, answer_fits, evaluate
 from ...learning.domain.values import InteractionContext, Outcome
 from ...sync.domain import DeltaType, Status, SyncDelta
 from ..adapters.persistence.uow import LearningUnitOfWork
@@ -103,15 +103,11 @@ class SyncEvidenceConsumer:
             student_ref = str(p["student_ref"])
             objective_code = str(p["objective_code"])
             item_ref = str(p["item_ref"])
-            option_raw = p["option"]
         except KeyError:
             return Status.CONFLICT  # malformed payload — surfaced, not dropped
-        if not isinstance(option_raw, (int, str)) or isinstance(option_raw, bool):
-            return Status.CONFLICT
-        try:
-            option = int(option_raw)
-        except ValueError:
-            return Status.CONFLICT
+        answer = _parse_answer(p)
+        if answer is None:
+            return Status.CONFLICT  # not exactly one well-typed answer field
 
         # Stable, client-generated idempotency key (falls back to the delta's clientEventId).
         evidence_id = str(p.get("evidence_id") or delta.client_event_id)
@@ -128,6 +124,8 @@ class SyncEvidenceConsumer:
         if item is None:
             # Either unknown, or a mentor-mediated summative item — never auto-graded by sync.
             return Status.IGNORED
+        if not answer_fits(item, answer):
+            return Status.CONFLICT  # the answer's shape does not fit the item's kind
 
         now = self._now()
         with self._uow() as uow:
@@ -138,7 +136,7 @@ class SyncEvidenceConsumer:
                 student_ref, (objective_code,)
             ) or StudentKnowledge(student_ref=student_ref)
 
-            outcome, misconception_hits = evaluate(item, option)
+            outcome, misconception_hits = evaluate(item, answer)
             knowledge.ensure_objective(objective_code, initial=self._estimator.initial())
             result = knowledge.apply_attempt(
                 evidence_id=evidence_id,
@@ -193,6 +191,24 @@ def _gradable_item(lesson: LessonView, item_ref: str) -> ItemView | None:
             if item.item_ref == item_ref:
                 return item
     return None
+
+
+def _parse_answer(payload: dict[str, object]) -> Answer | None:
+    """The delta's answer: exactly one of ``option`` | ``text`` | ``order`` | ``pairs``.
+
+    ``option`` may also arrive as a numeric string (pre-contract clients).
+    """
+    fields = dict(payload)
+    raw = fields.get("option")
+    if isinstance(raw, str):
+        try:
+            fields["option"] = int(raw)
+        except ValueError:
+            return None
+    try:
+        return Answer.from_payload(fields)
+    except AnswerShapeError:
+        return None
 
 
 def _as_int(value: object, default: int) -> int:

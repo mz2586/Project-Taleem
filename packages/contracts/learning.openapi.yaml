@@ -141,10 +141,25 @@ components:
   schemas:
     PlacementAnswerIn:
       type: object
-      required: [item_ref, option]
+      description: >-
+        The current question plus exactly one answer field, by the item's kind (option for choose,
+        text for fill, order for order, pairs for match / sort). A missing, extra or mismatched
+        field is a 422.
+      required: [item_ref]
       properties:
         item_ref: { type: string }
-        option: { type: integer, minimum: 0 }
+        option: { type: integer, minimum: 0, description: "choose: the chosen option index" }
+        text: { type: string, maxLength: 200, description: "fill: the typed answer" }
+        order:
+          type: array
+          maxItems: 64
+          items: { type: integer }
+          description: "order: option indices in the learner's order"
+        pairs:
+          type: array
+          maxItems: 64
+          description: "match / sort: [left, right] option-index pairs"
+          items: { type: array, minItems: 2, maxItems: 2, items: { type: integer } }
         response_time_ms: { type: integer, minimum: 0 }
     PlacementObjective:
       type: object
@@ -184,6 +199,14 @@ components:
           properties:
             item_ref: { type: string }
             objective_code: { type: string }
+            kind:
+              type: string
+              enum: [choose, fill, order, match, sort]
+              description: Interaction kind (ITEM_INTERACTION_CONTRACT.md); how to show + answer the item.
+            left_count:
+              type: integer
+              minimum: 0
+              description: "match / sort: options[:left_count] are the left items (cards); 0 otherwise."
             prompt: { type: object, additionalProperties: { type: string } }
             options: { type: array, items: { type: string } }
         objectives:
@@ -201,11 +224,25 @@ components:
         objective_code: { type: string }
     AnswerIn:
       type: object
-      required: [objective_code, item_ref, option]
+      description: >-
+        Exactly one answer field, by the item's kind (option for choose, text for fill, order for
+        order, pairs for match / sort). A missing, extra or mismatched field is a 422.
+      required: [objective_code, item_ref]
       properties:
         objective_code: { type: string }
         item_ref: { type: string }
-        option: { type: integer }
+        option: { type: integer, description: "choose: the chosen option index" }
+        text: { type: string, maxLength: 200, description: "fill: the typed answer" }
+        order:
+          type: array
+          maxItems: 64
+          items: { type: integer }
+          description: "order: option indices in the learner's order"
+        pairs:
+          type: array
+          maxItems: 64
+          description: "match / sort: [left, right] option-index pairs"
+          items: { type: array, minItems: 2, maxItems: 2, items: { type: integer } }
         hints_used: { type: integer, default: 0 }
         self_confidence: { type: ["number", "null"] }
     SessionView:
@@ -237,6 +274,14 @@ components:
             type: object
             properties:
               item_ref: { type: string }
+              kind:
+                type: string
+                enum: [choose, fill, order, match, sort]
+                description: Interaction kind (ITEM_INTERACTION_CONTRACT.md); how to show + answer the item.
+              left_count:
+                type: integer
+                minimum: 0
+                description: "match / sort: options[:left_count] are the left items (cards); 0 otherwise."
               prompt: { type: object, additionalProperties: { type: string } }
               options: { type: array, items: { type: string } }
               hint_count:

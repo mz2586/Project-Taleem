@@ -5,7 +5,8 @@
 
 Authenticated + authorized + IDOR-guarded exactly like the session and AI Teacher routers: the
 learner answers their own placement (no privileged override for operating it); a mentor may read
-it. The response never includes an item's answer key — only the prompt and options.
+it. The response never includes an item's answer key — only its kind, prompt, options and
+``left_count``.
 """
 
 from __future__ import annotations
@@ -14,19 +15,22 @@ from collections.abc import Callable
 from typing import Any
 
 from fastapi import APIRouter, Depends
-from pydantic import BaseModel, Field
+from pydantic import Field
 
 from ....auth.dependencies import authorize, require_owner_or
 from ....auth.jwt_verifier import Claims
 from ..application.placement_service import PlacementService
+from .api import AnswerFields
 
 _STUDENT_ONLY: tuple[str, ...] = ()
 _MENTOR = ("mentor",)
 
 
-class PlacementAnswerIn(BaseModel):
+class PlacementAnswerIn(AnswerFields):
+    """The current question's ``item_ref`` plus exactly one answer field (contract §3)."""
+
     item_ref: str = Field(min_length=1)
-    option: int = Field(ge=0)
+    option: int | None = Field(default=None, ge=0)
     response_time_ms: int = Field(default=0, ge=0)
 
 
@@ -50,7 +54,7 @@ def build_placement_router(
         return service.answer(
             student_ref,
             item_ref=body.item_ref,
-            option=body.option,
+            answer=body.answer(),
             response_time_ms=body.response_time_ms,
         )
 

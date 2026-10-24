@@ -26,7 +26,7 @@ from ...learning.domain.decision import (
 from ...learning.domain.events import LearningEvent
 from ...learning.domain.knowledge import AttemptResult, StudentKnowledge
 from ...learning.domain.runtime import TemplatedTeachingRuntime, Utterance
-from ...learning.domain.scorer import evaluate
+from ...learning.domain.scorer import Answer, evaluate
 from ...learning.domain.session import Interaction, Session, SessionState, Turn
 from ...learning.domain.values import InteractionContext
 from ..adapters.persistence.uow import LearningUnitOfWork
@@ -137,14 +137,23 @@ class SessionService:
         lesson: LessonView,
         item: ItemView,
         *,
-        answer_option: int,
+        answer: Answer | None = None,
+        answer_option: int | None = None,
         decision_kind: DecisionKind,
         hints_used: int,
         self_confidence: float | None,
     ) -> TurnResult:
-        """Score one answer, update knowledge, record the interaction (stays in INTERACTING)."""
+        """Score one answer, update knowledge, record the interaction (stays in INTERACTING).
+
+        ``answer`` is any kind's answer; ``answer_option`` (a chosen option index) is the
+        pre-contract shape, kept for choose items. Exactly one is given. Raises
+        ``AnswerKindMismatchError`` if the answer does not fit the item's kind.
+        """
+        if (answer is None) == (answer_option is None):
+            raise ValueError("pass exactly one of answer / answer_option")
+        given = answer if answer is not None else Answer(option=answer_option)
         now = self._now()
-        outcome, misconception_hits = evaluate(item, answer_option)
+        outcome, misconception_hits = evaluate(item, given)
         context = _CONTEXT_FOR.get(decision_kind, InteractionContext.PRACTICE)
 
         recorded: RecordOutcome = self._knowledge.record_attempt(
@@ -182,7 +191,7 @@ class SessionService:
                 objective_code=item.objective_code,
                 decision_kind=decision_kind.value,
                 turns=[
-                    Turn("student", "answer", str(answer_option), now),
+                    Turn("student", "answer", given.summary(), now),
                     *[Turn("tutor", u.kind.value, u.text, now) for u in feedback],
                 ],
                 outcome=outcome.value,
