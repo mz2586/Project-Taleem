@@ -6,7 +6,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from types import TracebackType
-from typing import Protocol
+from typing import Any, Protocol
 
 from ..domain.model import (
     Assignment,
@@ -14,6 +14,8 @@ from ..domain.model import (
     Enrolment,
     Organization,
     SchoolAuditEvent,
+    Submission,
+    SubmissionStatus,
     Teacher,
 )
 
@@ -58,6 +60,23 @@ class AssignmentRepository(Protocol):
     def for_class(self, organization_id: str, class_id: str) -> list[Assignment]: ...
 
 
+class SubmissionRepository(Protocol):
+    """Homework submissions. Reads are tenant-scoped except ``for_student`` (the learner's own
+    work, for the learner) and ``by_id`` (used only after a tenant check by the caller)."""
+
+    def add(self, submission: Submission) -> None: ...
+    def get(self, organization_id: str, submission_id: str) -> Submission | None: ...
+    def by_id(self, submission_id: str) -> Submission | None: ...
+    def find(self, assignment_id: str, item_ref: str, student_ref: str) -> Submission | None: ...
+    def for_student(self, student_ref: str) -> list[Submission]: ...
+    def for_class(
+        self, organization_id: str, class_id: str, status: SubmissionStatus
+    ) -> list[Submission]:
+        """One class's submissions in ``status``, oldest first."""
+
+    def save(self, submission: Submission) -> None: ...
+
+
 class SchoolUnitOfWork(Protocol):
     @property
     def organizations(self) -> OrganizationRepository: ...
@@ -69,6 +88,8 @@ class SchoolUnitOfWork(Protocol):
     def enrolments(self) -> EnrolmentRepository: ...
     @property
     def assignments(self) -> AssignmentRepository: ...
+    @property
+    def submissions(self) -> SubmissionRepository: ...
 
     def commit(self) -> None: ...
     def __enter__(self) -> SchoolUnitOfWork: ...
@@ -174,7 +195,77 @@ class PublishedCurriculum(Protocol):
     def catalog(self) -> list[PublishedLesson]: ...
 
 
+@dataclass(frozen=True)
+class WrittenItem:
+    """One written item of a published lesson (HOMEWORK_AND_MARKING_CONTRACT §1).
+
+    ``prompt``, ``hints`` and ``max_chars`` may be shown to the learner. ``rubric``,
+    ``sample_answer`` and ``guidance`` are marking aids for the teacher only: no learner response
+    ever carries them.
+    """
+
+    item_ref: str
+    prompt: dict[str, str]
+    hints: tuple[str, ...]
+    max_chars: int
+    rubric: dict[str, object] | None = None  # {"criteria", "max_score", "levels": [...]}
+    sample_answer: str | None = None
+    guidance: str | None = None
+
+    @property
+    def max_score(self) -> int | None:
+        """The rubric's scale, when marking takes a score; None = no rubric (no score)."""
+        if self.rubric is None:
+            return None
+        raw = self.rubric.get("max_score")
+        value = raw if isinstance(raw, int) and not isinstance(raw, bool) else 0
+        return value if value > 0 else None
+
+
+@dataclass(frozen=True)
+class WrittenLesson:
+    objective_code: str
+    title: dict[str, str]
+    items: tuple[WrittenItem, ...]
+
+    def item(self, item_ref: str) -> WrittenItem | None:
+        return next((i for i in self.items if i.item_ref == item_ref), None)
+
+
+class WrittenWork(Protocol):
+    """The learning context's written items and mastery evidence, through a port."""
+
+    def lesson(self, objective_code: str) -> WrittenLesson | None:
+        """The published lesson of ``objective_code`` with its written items, or None."""
+
+    def record_marked(
+        self,
+        *,
+        submission_id: str,
+        student_ref: str,
+        objective_code: str,
+        item_ref: str,
+        met: bool,
+    ) -> bool:
+        """Record ONE human-graded evidence for this submission. Idempotent by
+        ``submission_id``: returns False (and changes nothing) when it is already recorded."""
+
+
+class ConcernChannel(Protocol):
+    """The safeguarding context's raise path for a teacher (a receipt only comes back)."""
+
+    def raise_teacher_concern(
+        self,
+        *,
+        teacher_ref: str,
+        student_ref: str,
+        submission_id: str,
+        category: str,
+        text: str | None,
+    ) -> dict[str, Any]: ...
+
+
 class SchoolAuditLog(Protocol):
-    """Records changes to class membership (see SchoolAuditEvent)."""
+    """Records changes to class membership and homework (see SchoolAuditEvent)."""
 
     def record(self, event: SchoolAuditEvent) -> None: ...

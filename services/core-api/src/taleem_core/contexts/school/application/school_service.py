@@ -13,6 +13,10 @@ Rules that protect a child live here, so they hold however the service is called
    withdrawal hides the learner on the very next call; the enrolment is kept so a re-grant restores
    it without re-joining.
 4. **Uniform sign-in failure.** Unknown email, wrong passphrase, locked account: one error.
+5. **Homework is the child's own words** (HOMEWORK_AND_MARKING_CONTRACT). A learner sees only
+   their own submissions and never a marking aid (rubric, sample answer, guidance). A teacher sees
+   submissions only of learners in their own class whom they may currently see (rule 3). Every
+   submit, mark and return is audited with refs only — never the text or the feedback.
 """
 
 from __future__ import annotations
@@ -20,14 +24,19 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any
 
-from ....platform.errors import Problem, not_found, unauthorized, validation_error
+from ....platform.concurrency import ConcurrencyConflictError
+from ....platform.errors import Problem, conflict, not_found, unauthorized, validation_error
 from ..domain.model import (
     Assignment,
     Classroom,
     Enrolment,
     InvalidSchoolDataError,
+    MarkOutcome,
     Organization,
     SchoolAuditEvent,
+    Submission,
+    SubmissionConflictError,
+    SubmissionStatus,
     Teacher,
     TeacherStatus,
     assert_passphrase_policy,
@@ -36,6 +45,7 @@ from ..domain.model import (
     normalise_join_code,
 )
 from .ports import (
+    ConcernChannel,
     GuardianSharingConsent,
     LearnerDirectory,
     LearnerExplanationReader,
@@ -46,6 +56,9 @@ from .ports import (
     SecretHasher,
     TeacherSessions,
     TeacherTokenIssuer,
+    WrittenItem,
+    WrittenLesson,
+    WrittenWork,
 )
 
 UnitOfWorkFactory = Callable[[], SchoolUnitOfWork]
@@ -57,6 +70,16 @@ def _sign_in_failed() -> Problem:
 
 def _class_not_found() -> Problem:
     return not_found("class not found")
+
+
+def _submission_not_found() -> Problem:
+    return not_found("submission not found")
+
+
+def _submission_problem(exc: InvalidSchoolDataError) -> Problem:
+    if isinstance(exc, SubmissionConflictError):
+        return Problem(409, exc.code, "Submission cannot change this way", str(exc))
+    return validation_error(str(exc))
 
 
 class SchoolService:
@@ -74,6 +97,8 @@ class SchoolService:
         clock: Callable[[], float],
         sessions: TeacherSessions | None = None,
         explanations: LearnerExplanationReader | None = None,
+        written: WrittenWork | None = None,
+        concerns: ConcernChannel | None = None,
     ) -> None:
         self._uow = uow_factory
         self._hasher = hasher
@@ -86,6 +111,8 @@ class SchoolService:
         self._now = clock
         self._sessions = sessions
         self._explanations = explanations
+        self._written = written
+        self._concerns = concerns
         self._equalising_hash = hasher.equalising_hash()
 
     # ------------------------------------------------------------------ operator (system role)
@@ -472,6 +499,306 @@ class SchoolService:
             "learners": rows,
         }
 
+    # ------------------------------------------------------------------- homework (learner)
+
+    def learner_homework(self, student_ref: str) -> dict[str, Any]:
+        """Every assignment of every class the learner is in, with its written items and the
+        learner's latest submission state for each. Never a marking aid."""
+        with self._uow() as uow:
+            assignments: list[tuple[Assignment, Classroom]] = []
+            for e in uow.enrolments.for_student(student_ref):
+                classroom = uow.classrooms.get(e.organization_id, e.class_id)
+                if classroom is None:
+                    continue
+                for a in uow.assignments.for_class(e.organization_id, e.class_id):
+                    assignments.append((a, classroom))
+            mine = {
+                (s.assignment_id, s.item_ref): s for s in uow.submissions.for_student(student_ref)
+            }
+        lessons = self._lessons({a.objective_code for a, _ in assignments})
+        now = self._now()
+        out: list[dict[str, Any]] = []
+        for a, classroom in sorted(assignments, key=lambda x: (x[0].due_at, x[0].assignment_id)):
+            lesson = lessons.get(a.objective_code)
+            items = []
+            for item in lesson.items if lesson else ():
+                sub = mine.get((a.assignment_id, item.item_ref))
+                items.append(
+                    {
+                        **_learner_item_view(item),
+                        "state": sub.status.value if sub else "not_started",
+                        "submission": _learner_submission_view(sub) if sub else None,
+                    }
+                )
+            out.append(
+                {
+                    "assignment_id": a.assignment_id,
+                    "class_id": classroom.class_id,
+                    "class_name": classroom.name,
+                    "objective_code": a.objective_code,
+                    "lesson_title": dict(lesson.title) if lesson else {},
+                    "due_at": a.due_at,
+                    "overdue": now > a.due_at,
+                    "items": items,
+                }
+            )
+        return {"assignments": out}
+
+    def learner_submit(
+        self, *, student_ref: str, assignment_id: str, item_ref: str, text: str
+    ) -> dict[str, Any]:
+        """Submit (or resubmit, while ``submitted`` / ``returned``) a written answer."""
+        with self._uow() as uow:
+            assignment = self._learner_assignment(uow, student_ref, assignment_id)
+        lesson = self._lessons({assignment.objective_code}).get(assignment.objective_code)
+        item = lesson.item(item_ref) if lesson else None
+        if item is None:
+            raise not_found("item not found")  # not a written item of this assignment's lesson
+        if not self._learners.shares_with_teacher(student_ref):
+            # The answer goes to the class teacher; without progress_sharing nobody may read it.
+            raise Problem(
+                403,
+                "SHARING_REQUIRED",
+                "Forbidden",
+                "a grown-up must allow sharing work with the teacher first",
+            )
+        now = self._now()
+        try:
+            with self._uow() as uow:
+                existing = uow.submissions.find(assignment_id, item_ref, student_ref)
+                if existing is None:
+                    sub = Submission.start(
+                        assignment=assignment,
+                        item_ref=item_ref,
+                        student_ref=student_ref,
+                        text=text,
+                        max_chars=item.max_chars,
+                        max_score=item.max_score,
+                        now=now,
+                    )
+                    uow.submissions.add(sub)
+                else:
+                    sub = existing
+                    sub.resubmit(
+                        text=text, max_chars=item.max_chars, max_score=item.max_score, now=now
+                    )
+                    uow.submissions.save(sub)
+                uow.commit()
+        except InvalidSchoolDataError as exc:
+            raise _submission_problem(exc) from exc
+        except ConcurrencyConflictError as exc:  # two submissions raced: one wins
+            raise conflict("this answer was submitted at the same time; try again") from exc
+        self._record_submission("submission.submitted", student_ref, "student", sub)
+        return {
+            "assignment_id": sub.assignment_id,
+            "item_ref": sub.item_ref,
+            "state": sub.status.value,
+            "submission": _learner_submission_view(sub),
+        }
+
+    # -------------------------------------------------------------------- marking (teacher)
+
+    def class_submissions(
+        self, *, teacher_ref: str, class_id: str, status: str
+    ) -> list[dict[str, Any]]:
+        """The marking queue of the teacher's own class, oldest first. Only learners the teacher
+        may see right now (enrolled + live progress_sharing) appear."""
+        try:
+            wanted = SubmissionStatus(status)
+        except ValueError:
+            raise validation_error("status must be one of: submitted, returned, marked") from None
+        with self._uow() as uow:
+            teacher = self._require_teacher(uow, teacher_ref)
+            self._require_own_class(uow, teacher, class_id)
+            enrolled = {
+                e.student_ref for e in uow.enrolments.for_class(teacher.organization_id, class_id)
+            }
+            subs = [
+                s
+                for s in uow.submissions.for_class(teacher.organization_id, class_id, wanted)
+                if s.student_ref in enrolled
+            ]
+        names = self._learners.visible_to_teacher([s.student_ref for s in subs])
+        lessons = self._lessons({s.objective_code for s in subs if s.student_ref in names})
+        return [
+            _teacher_submission_view(s, names[s.student_ref], lessons.get(s.objective_code))
+            for s in subs
+            if s.student_ref in names
+        ]
+
+    def mark_submission(
+        self,
+        *,
+        teacher_ref: str,
+        submission_id: str,
+        outcome: str,
+        score: int | None,
+        feedback: str | None,
+    ) -> dict[str, Any]:
+        """Mark once (final), then record ONE mastery evidence for it (idempotent by
+        ``submission_id``). A mark attempt on an already-marked submission re-ensures that
+        evidence before answering 409, so a mark whose evidence write failed heals on retry."""
+        with self._uow() as uow:
+            teacher, sub, name = self._teacher_submission(uow, teacher_ref, submission_id)
+            if sub.status is SubmissionStatus.MARKED:
+                self._ensure_evidence(sub)
+            try:
+                sub.mark(
+                    outcome=outcome,
+                    score=score,
+                    feedback=feedback,
+                    teacher_ref=teacher.teacher_ref,
+                    now=self._now(),
+                )
+            except InvalidSchoolDataError as exc:
+                raise _submission_problem(exc) from exc
+            uow.submissions.save(sub)
+            uow.commit()
+        self._ensure_evidence(sub)
+        self._record_submission("submission.marked", teacher.teacher_ref, "teacher", sub)
+        lesson = self._lessons({sub.objective_code}).get(sub.objective_code)
+        return _teacher_submission_view(sub, name, lesson)
+
+    def return_submission(
+        self, *, teacher_ref: str, submission_id: str, feedback: str
+    ) -> dict[str, Any]:
+        """Ask the child to try again (feedback required). Records no evidence."""
+        with self._uow() as uow:
+            teacher, sub, name = self._teacher_submission(uow, teacher_ref, submission_id)
+            try:
+                sub.return_for_rework(
+                    feedback=feedback, teacher_ref=teacher.teacher_ref, now=self._now()
+                )
+            except InvalidSchoolDataError as exc:
+                raise _submission_problem(exc) from exc
+            uow.submissions.save(sub)
+            uow.commit()
+        self._record_submission("submission.returned", teacher.teacher_ref, "teacher", sub)
+        lesson = self._lessons({sub.objective_code}).get(sub.objective_code)
+        return _teacher_submission_view(sub, name, lesson)
+
+    def raise_concern_about_submission(
+        self, *, teacher_ref: str, submission_id: str, category: str, text: str | None
+    ) -> dict[str, Any]:
+        """ "Raise a safeguarding concern" from a queue row (HOMEWORK_AND_MARKING_CONTRACT §4).
+
+        The learner and the submission come from the stored submission, never from the client.
+        The scope is the teacher's own class and an enrolled learner — deliberately NOT the live
+        progress_sharing check, so the safety channel stays open. The submission is not changed
+        and nothing is shown to the child. Not audited here: safeguarding audits the raise."""
+        if self._concerns is None:
+            raise Problem(503, "CONCERNS_UNAVAILABLE", "Unavailable", "concerns are not wired")
+        with self._uow() as uow:
+            teacher = self._require_teacher(uow, teacher_ref)
+            sub = uow.submissions.get(teacher.organization_id, submission_id)
+            classroom = uow.classrooms.get(teacher.organization_id, sub.class_id) if sub else None
+            if (
+                sub is None
+                or classroom is None
+                or classroom.teacher_ref != teacher.teacher_ref
+                or uow.enrolments.get(teacher.organization_id, sub.class_id, sub.student_ref)
+                is None
+            ):
+                raise _submission_not_found()
+        return self._concerns.raise_teacher_concern(
+            teacher_ref=teacher.teacher_ref,
+            student_ref=sub.student_ref,
+            submission_id=sub.submission_id,
+            category=category,
+            text=text,
+        )
+
+    def teacher_may_raise_concern(
+        self, *, teacher_ref: str, student_ref: str, submission_id: str | None
+    ) -> bool:
+        """Safeguarding's scope check: an ACTIVE teacher, a learner enrolled in one of that
+        teacher's own classes, and (when given) a submission of that learner in one of them.
+
+        Deliberately independent of progress_sharing: a safety channel stays open even when the
+        guardian has stopped sharing progress."""
+        with self._uow() as uow:
+            teacher = uow.teachers.get(teacher_ref)
+            if teacher is None or not teacher.can_sign_in:
+                return False
+            own = {
+                c.class_id
+                for c in uow.classrooms.for_teacher(teacher.organization_id, teacher.teacher_ref)
+            }
+            if not any(
+                uow.enrolments.get(teacher.organization_id, class_id, student_ref)
+                for class_id in own
+            ):
+                return False
+            if submission_id is None:
+                return True
+            sub = uow.submissions.get(teacher.organization_id, submission_id)
+            return sub is not None and sub.student_ref == student_ref and sub.class_id in own
+
+    def _teacher_submission(
+        self, uow: SchoolUnitOfWork, teacher_ref: str, submission_id: str
+    ) -> tuple[Teacher, Submission, str]:
+        """A submission in the teacher's own class of a learner they may see now (else 404)."""
+        teacher = self._require_teacher(uow, teacher_ref)
+        sub = uow.submissions.get(teacher.organization_id, submission_id)
+        if sub is None:
+            raise _submission_not_found()
+        classroom = uow.classrooms.get(teacher.organization_id, sub.class_id)
+        if classroom is None or classroom.teacher_ref != teacher.teacher_ref:
+            raise _submission_not_found()
+        if uow.enrolments.get(teacher.organization_id, sub.class_id, sub.student_ref) is None:
+            raise _submission_not_found()
+        name = self._learners.visible_to_teacher([sub.student_ref]).get(sub.student_ref)
+        if name is None:
+            raise _submission_not_found()
+        return teacher, sub, name
+
+    def _ensure_evidence(self, sub: Submission) -> None:
+        if self._written is None or sub.outcome is None:
+            return
+        self._written.record_marked(
+            submission_id=sub.submission_id,
+            student_ref=sub.student_ref,
+            objective_code=sub.objective_code,
+            item_ref=sub.item_ref,
+            met=sub.outcome is MarkOutcome.MET,
+        )
+
+    def _learner_assignment(
+        self, uow: SchoolUnitOfWork, student_ref: str, assignment_id: str
+    ) -> Assignment:
+        for e in uow.enrolments.for_student(student_ref):
+            a = uow.assignments.get(e.organization_id, assignment_id)
+            if a is not None and a.class_id == e.class_id:
+                return a
+        raise not_found("assignment not found")
+
+    def _lessons(self, objective_codes: set[str]) -> dict[str, WrittenLesson]:
+        if self._written is None:
+            return {}
+        out: dict[str, WrittenLesson] = {}
+        for code in sorted(objective_codes):
+            lesson = self._written.lesson(code)
+            if lesson is not None:
+                out[code] = lesson
+        return out
+
+    def _record_submission(
+        self, action: str, actor_ref: str, actor_role: str, sub: Submission
+    ) -> None:
+        # Refs only: the submission id names the row; its text and feedback stay out of the log.
+        self._audit.record(
+            SchoolAuditEvent(
+                action=action,
+                actor_ref=actor_ref,
+                actor_role=actor_role,
+                subject_ref=sub.student_ref,
+                organization_id=sub.organization_id,
+                class_id=sub.class_id,
+                at=self._now(),
+                object_ref=sub.submission_id,
+            )
+        )
+
     # ------------------------------------------------------------------------------ helpers
 
     def _visible_names(self, enrolments: list[Enrolment]) -> dict[str, str]:
@@ -568,4 +895,67 @@ def _assignment_view(a: Assignment) -> dict[str, Any]:
         "due_at": a.due_at,
         "assigned_by": a.assigned_by,
         "created_at": a.created_at,
+    }
+
+
+def _learner_item_view(item: WrittenItem) -> dict[str, Any]:
+    """What a learner sees of a written item: prompt, hints, length cap. No marking aid."""
+    return {
+        "item_ref": item.item_ref,
+        "kind": "written",
+        "prompt": dict(item.prompt),
+        "hints": list(item.hints),
+        "max_chars": item.max_chars,
+    }
+
+
+def _learner_submission_view(s: Submission) -> dict[str, Any]:
+    """The learner's own submission. Feedback shows once the teacher returned or marked it."""
+    reviewed = s.status is not SubmissionStatus.SUBMITTED
+    marked = s.status is SubmissionStatus.MARKED
+    return {
+        "submission_id": s.submission_id,
+        "state": s.status.value,
+        "text": s.text,
+        "attempt": s.attempt,
+        "submitted_at": s.submitted_at,
+        "feedback": s.feedback if reviewed else None,
+        "returned_at": s.returned_at if s.status is SubmissionStatus.RETURNED else None,
+        "outcome": s.outcome.value if marked and s.outcome else None,
+        "score": s.score if marked else None,
+        "max_score": s.max_score if marked else None,
+        "marked_at": s.marked_at if marked else None,
+    }
+
+
+def _teacher_submission_view(
+    s: Submission, display_name: str, lesson: WrittenLesson | None
+) -> dict[str, Any]:
+    """One marking-queue row: the learner, the item with its marking aids, and the answer."""
+    item = lesson.item(s.item_ref) if lesson else None
+    return {
+        "submission_id": s.submission_id,
+        "student_ref": s.student_ref,
+        "learner_display_name": display_name,
+        "class_id": s.class_id,
+        "assignment_id": s.assignment_id,
+        "objective_code": s.objective_code,
+        "lesson_title": dict(lesson.title) if lesson else {},
+        "item_ref": s.item_ref,
+        "prompt": dict(item.prompt) if item else {},
+        "max_chars": item.max_chars if item else None,
+        "rubric": item.rubric if item else None,
+        "sample_answer": item.sample_answer if item else None,
+        "guidance": item.guidance if item else None,
+        "text": s.text,
+        "state": s.status.value,
+        "attempt": s.attempt,
+        "outcome": s.outcome.value if s.outcome else None,
+        "score": s.score,
+        "max_score": s.max_score,
+        "feedback": s.feedback or None,
+        "submitted_at": s.submitted_at,
+        "returned_at": s.returned_at,
+        "marked_at": s.marked_at,
+        "reviewed_by": s.reviewed_by,
     }

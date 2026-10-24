@@ -100,6 +100,7 @@ from .contexts.learning.application.placement_service import PlacementService
 from .contexts.learning.application.session_service import SessionService
 from .contexts.learning.application.student_queries import StudentQueryService
 from .contexts.learning.application.sync_consumer import SyncEvidenceConsumer
+from .contexts.learning.application.written_work import WrittenWorkService
 from .contexts.learning.domain.decision import DecisionConfig
 from .contexts.learning.domain.estimator import BKTEstimator
 from .contexts.learning.domain.forgetting import HalfLifeForgettingModel
@@ -131,6 +132,7 @@ from .contexts.school.adapters.context_ports import (
     CallableExplanationReader,
     CallablePublishedCurriculum,
     CallableSharingConsent,
+    CallableWrittenWork,
     IdentityLearnerDirectory,
     KnowledgeProgressReader,
 )
@@ -140,7 +142,7 @@ from .contexts.school.adapters.persistence.base import (
     school_engine_sharing,
 )
 from .contexts.school.adapters.persistence.uow import SqlSchoolUnitOfWork
-from .contexts.school.adapters.school_api import build_school_router
+from .contexts.school.adapters.school_api import build_school_learner_router, build_school_router
 from .contexts.school.application.school_service import SchoolService
 from .contexts.sync.domain import DeltaType, SyncDelta, SyncStore
 from .contexts.sync.service import DurableSyncCoordinator
@@ -533,6 +535,34 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         }
 
     app.state.school_audit = school_audit
+    # Homework + marking (HOMEWORK_AND_MARKING_CONTRACT): written items and the human-graded
+    # evidence come from the learning context, through the school's WrittenWork port.
+    written_work = WrittenWorkService(read_model, knowledge_service)
+
+    class _TeacherConcerns:
+        # "Raise a safeguarding concern" from a marking row. ``safeguarding_service`` and
+        # ``raise_limiter`` are built below; they resolve at call time. The same per-subject raise
+        # limit as /v1/safeguarding/concerns applies.
+        def raise_teacher_concern(
+            self,
+            *,
+            teacher_ref: str,
+            student_ref: str,
+            submission_id: str,
+            category: str,
+            text: str | None,
+        ) -> dict[str, Any]:
+            raise_limiter.check(f"teacher:{teacher_ref}")
+            return safeguarding_service.raise_by_teacher(
+                teacher_ref=teacher_ref,
+                student_ref=student_ref,
+                category=category,
+                text=text,
+                submission_id=submission_id,
+                screen="teacher/marking",
+                lesson_id=None,
+            )
+
     school_service = SchoolService(
         lambda: SqlSchoolUnitOfWork(school_sf),
         hasher=SecretHasher(iterations=settings.kdf_iterations),
@@ -561,6 +591,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         explanations=CallableExplanationReader(
             lambda ref: ai_teacher.explained_recommendations(ref)
         ),
+        written=CallableWrittenWork(written_work.written_lesson, written_work.record_marked),
+        concerns=_TeacherConcerns(),
     )
     # Teachers continue sessions through identity's rotating refresh tokens (rotation, replay
     # revokes the family, device binding, sign-out). The live check runs on every refresh.
@@ -572,6 +604,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     )
     app.include_router(
         build_school_router(school_service, claims_dependency, sign_in_guard=_school_sign_in_guard)
+    )
+    # The learner's homework: behind the same live learner gate as every learner surface.
+    app.include_router(
+        build_school_learner_router(school_service, claims_dependency),
+        dependencies=learner_permitted,
     )
 
     # ---- Durable offline sync (Phase 6.2B) ----
@@ -676,12 +713,22 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             account = _learner_lookup(student_ref)
             return str(account.guardian_ref) if account is not None else None
 
+    class _TeacherRoster:
+        # A teacher may raise a concern only about a learner in one of their own classes.
+        def may_raise_about(
+            self, *, teacher_ref: str, student_ref: str, submission_id: str | None
+        ) -> bool:
+            return school_service.teacher_may_raise_concern(
+                teacher_ref=teacher_ref, student_ref=student_ref, submission_id=submission_id
+            )
+
     safeguarding_service = SafeguardingService(
         lambda: SqlSafeguardingUnitOfWork(safeguarding_sf),
         _LearnerGuardians(),
         time.time,
         SlaPolicy.from_json(settings.safeguarding_ack_sla_json),
         require_enrolled=settings.is_production,
+        teachers=_TeacherRoster(),
     )
     app.state.safeguarding_service = safeguarding_service
     raise_limiter: Limiter = (

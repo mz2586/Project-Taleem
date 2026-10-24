@@ -1,7 +1,8 @@
 """School audit log adapters (implement ``SchoolAuditLog``).
 
-- ``SqlSchoolAuditLog`` — the deployed one: every class-membership change is a row in
-  ``school.enrolment_audit`` (alembic 0011_school_audit; on SQLite the ORM creates it). Refs only.
+- ``SqlSchoolAuditLog`` — the deployed one: every class-membership change and every homework
+  submit / mark / return is a row in ``school.enrolment_audit`` (alembic 0011_school_audit, plus
+  ``object_ref`` from 0013_homework; on SQLite the ORM creates it). Refs only — never answer text.
 - ``InMemorySchoolAuditLog`` — for unit tests of the service without a database.
 
 Both may also emit a structured log line carrying the action and the organization only — never a
@@ -49,6 +50,7 @@ class SqlSchoolAuditLog:
                     organization_id=event.organization_id,
                     class_id=event.class_id,
                     at=event.at,
+                    object_ref=event.object_ref,
                 )
             )
         _log(self._log, event)
@@ -67,6 +69,7 @@ class SqlSchoolAuditLog:
                     organization_id=r.organization_id,
                     class_id=r.class_id,
                     at=r.at,
+                    object_ref=r.object_ref,
                 )
                 for r in s.scalars(stmt)
             ]

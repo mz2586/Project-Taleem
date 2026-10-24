@@ -8,15 +8,26 @@ from __future__ import annotations
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
+from .....platform.concurrency import ConcurrencyConflictError
 from ...domain.model import (
     Assignment,
     Classroom,
     Enrolment,
+    MarkOutcome,
     Organization,
+    Submission,
+    SubmissionStatus,
     Teacher,
     TeacherStatus,
 )
-from .models import AssignmentRow, ClassroomRow, EnrolmentRow, OrganizationRow, TeacherRow
+from .models import (
+    AssignmentRow,
+    ClassroomRow,
+    EnrolmentRow,
+    OrganizationRow,
+    SubmissionRow,
+    TeacherRow,
+)
 
 
 class SqlOrganizationRepository:
@@ -268,3 +279,119 @@ class SqlAssignmentRepository:
             .order_by(AssignmentRow.created_at, AssignmentRow.assignment_id)
         )
         return [_assignment(r) for r in rows]
+
+
+def _submission(row: SubmissionRow) -> Submission:
+    return Submission(
+        submission_id=row.submission_id,
+        organization_id=row.organization_id,
+        class_id=row.class_id,
+        assignment_id=row.assignment_id,
+        objective_code=row.objective_code,
+        item_ref=row.item_ref,
+        student_ref=row.student_ref,
+        text=row.text,
+        status=SubmissionStatus(row.status),
+        submitted_at=row.submitted_at,
+        created_at=row.created_at,
+        attempt=row.attempt,
+        max_score=row.max_score,
+        outcome=MarkOutcome(row.outcome) if row.outcome else None,
+        score=row.score,
+        feedback=row.feedback,
+        returned_at=row.returned_at,
+        marked_at=row.marked_at,
+        reviewed_by=row.reviewed_by,
+        version=row.version,
+    )
+
+
+def _write(row: SubmissionRow, sub: Submission) -> None:
+    row.text = sub.text
+    row.status = sub.status.value
+    row.attempt = sub.attempt
+    row.max_score = sub.max_score
+    row.outcome = sub.outcome.value if sub.outcome else None
+    row.score = sub.score
+    row.feedback = sub.feedback
+    row.submitted_at = sub.submitted_at
+    row.returned_at = sub.returned_at
+    row.marked_at = sub.marked_at
+    row.reviewed_by = sub.reviewed_by
+
+
+class SqlSubmissionRepository:
+    """Every read is tenant-scoped, except ``for_student`` (the learner's own work)."""
+
+    def __init__(self, session: Session) -> None:
+        self._s = session
+
+    def add(self, submission: Submission) -> None:
+        row = SubmissionRow(
+            submission_id=submission.submission_id,
+            organization_id=submission.organization_id,
+            class_id=submission.class_id,
+            assignment_id=submission.assignment_id,
+            objective_code=submission.objective_code,
+            item_ref=submission.item_ref,
+            student_ref=submission.student_ref,
+            created_at=submission.created_at,
+        )
+        _write(row, submission)
+        self._s.add(row)
+
+    def get(self, organization_id: str, submission_id: str) -> Submission | None:
+        row = self._s.scalars(
+            select(SubmissionRow).where(
+                SubmissionRow.organization_id == organization_id,
+                SubmissionRow.submission_id == submission_id,
+            )
+        ).first()
+        return _submission(row) if row else None
+
+    def by_id(self, submission_id: str) -> Submission | None:
+        row = self._s.get(SubmissionRow, submission_id)
+        return _submission(row) if row else None
+
+    def find(self, assignment_id: str, item_ref: str, student_ref: str) -> Submission | None:
+        row = self._s.scalars(
+            select(SubmissionRow).where(
+                SubmissionRow.assignment_id == assignment_id,
+                SubmissionRow.item_ref == item_ref,
+                SubmissionRow.student_ref == student_ref,
+            )
+        ).first()
+        return _submission(row) if row else None
+
+    def for_student(self, student_ref: str) -> list[Submission]:
+        rows = self._s.scalars(
+            select(SubmissionRow)
+            .where(SubmissionRow.student_ref == student_ref)
+            .order_by(SubmissionRow.submitted_at, SubmissionRow.submission_id)
+        )
+        return [_submission(r) for r in rows]
+
+    def for_class(
+        self, organization_id: str, class_id: str, status: SubmissionStatus
+    ) -> list[Submission]:
+        rows = self._s.scalars(
+            select(SubmissionRow)
+            .where(
+                SubmissionRow.organization_id == organization_id,
+                SubmissionRow.class_id == class_id,
+                SubmissionRow.status == status.value,
+            )
+            .order_by(SubmissionRow.submitted_at, SubmissionRow.submission_id)
+        )
+        return [_submission(r) for r in rows]
+
+    def save(self, submission: Submission) -> None:
+        """Write the changed state. The row's ``version`` guards against a concurrent change: the
+        loser gets ``ConcurrencyConflictError`` here or at commit (HTTP 409)."""
+        row = self._s.get(SubmissionRow, submission.submission_id)
+        if row is None:
+            self.add(submission)
+            return
+        if row.version != submission.version:
+            raise ConcurrencyConflictError("submission changed since it was read")
+        _write(row, submission)

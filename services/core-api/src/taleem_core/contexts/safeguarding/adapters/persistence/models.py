@@ -1,8 +1,9 @@
 """ORM models for the safeguarding schema (see alembic 0012_safeguarding).
 
 - ``concern`` — one raised concern. Pseudonymous refs only (``subject_ref`` is the learner's
-  ``student_ref``; ``raised_by_ref`` is that learner or their guardian). ``free_text`` is the
-  raiser's own short words and is shown to a safeguarding lead and nobody else.
+  ``student_ref``; ``raised_by_ref`` is that learner, their guardian, or their class teacher).
+  ``free_text`` is the raiser's own short words and is shown to a safeguarding lead and nobody
+  else.
 - ``concern_note`` — a safeguarding lead's triage note.
 - ``concern_audit`` — append-only record of every action, by actor subject. ``detail`` carries
   statuses and enum values only, never free text or a note body.
@@ -38,6 +39,8 @@ class ConcernRow(SafeguardingBase):
     free_text: Mapped[str | None] = mapped_column(Text, nullable=True)
     context_screen: Mapped[str] = mapped_column(String(64), nullable=False, default="")
     context_lesson_id: Mapped[str | None] = mapped_column(String(128), nullable=True)
+    # A teacher's concern about a learner's homework names the submission (alembic 0013).
+    context_submission_id: Mapped[str | None] = mapped_column(String(64), nullable=True)
     status: Mapped[str] = mapped_column(String(16), nullable=False)
     outcome: Mapped[str | None] = mapped_column(String(32), nullable=True)
     created_at: Mapped[float] = mapped_column(Float, nullable=False)

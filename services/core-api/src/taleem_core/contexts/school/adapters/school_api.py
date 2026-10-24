@@ -7,6 +7,9 @@ Who may call what (deny-by-default PDP, then ownership in the service):
   progress of learners in those classes whose guardians share it. The acting teacher — and so the
   organization — always comes from the verified token, never from the request.
 - ``guardian``: join their own learner to a class with a class code (records consent).
+- ``teacher``: also the marking queue of their own classes, and mark / return a submission.
+- ``student``: their own homework list and submissions (``build_school_learner_router``, mounted
+  behind the live learner consent gate like every other learner surface).
 
 One route is public: teacher sign-in, which is rate limited and fails uniformly.
 """
@@ -16,13 +19,17 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any
 
-from fastapi import APIRouter, Depends, Request
+from fastapi import APIRouter, Depends, Query, Request
 from pydantic import BaseModel, ConfigDict, Field
 
-from ....auth.dependencies import authorize
+from ....auth.dependencies import authorize, require_owner_or
 from ....auth.jwt_verifier import Claims
 from ....platform.errors import not_found
 from ..application.school_service import SchoolService
+from ..domain.model import MAX_FEEDBACK
+
+# Edge bound on a submitted answer (the domain enforces the item's own cap after normalisation).
+_MAX_TEXT_EDGE = 8000
 
 
 class OrganizationIn(BaseModel):
@@ -62,6 +69,29 @@ class AssignmentIn(BaseModel):
     model_config = ConfigDict(populate_by_name=True)
     objective_code: str = Field(alias="objectiveCode", min_length=1, max_length=64)
     due_at: float = Field(alias="dueAt", gt=0)
+
+
+class SubmitIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    text: str = Field(max_length=_MAX_TEXT_EDGE)
+
+
+class MarkIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    outcome: str = Field(min_length=1, max_length=16)
+    score: int | None = None
+    feedback: str = Field(default="", max_length=MAX_FEEDBACK * 2)
+
+
+class ReturnIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    feedback: str = Field(min_length=1, max_length=MAX_FEEDBACK * 2)
+
+
+class SubmissionConcernIn(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    category: str = Field(min_length=1, max_length=32)
+    text: str | None = Field(default=None, max_length=1000)
 
 
 def build_school_router(
@@ -222,6 +252,91 @@ def build_school_router(
         authorize(claims, "read", "school.learner_progress")
         return service.learner_detail(
             teacher_ref=claims.sub, class_id=class_id, student_ref=student_ref
+        )
+
+    # ----------------------------------------------------------------- marking (teacher)
+
+    @router.get("/classes/{class_id}/submissions")
+    def class_submissions(
+        class_id: str,
+        status: str = Query(default="submitted", max_length=16),
+        claims: Claims = Depends(claims_dependency),
+    ) -> dict[str, Any]:
+        """The marking queue of the teacher's own class, oldest first (other schools: 404)."""
+        authorize(claims, "manage", "school.marking")
+        return {
+            "submissions": service.class_submissions(
+                teacher_ref=claims.sub, class_id=class_id, status=status
+            )
+        }
+
+    @router.post("/submissions/{submission_id}:mark")
+    def mark_submission(
+        submission_id: str, body: MarkIn, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "manage", "school.marking")
+        return service.mark_submission(
+            teacher_ref=claims.sub,
+            submission_id=submission_id,
+            outcome=body.outcome,
+            score=body.score,
+            feedback=body.feedback,
+        )
+
+    @router.post("/submissions/{submission_id}:return")
+    def return_submission(
+        submission_id: str, body: ReturnIn, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "manage", "school.marking")
+        return service.return_submission(
+            teacher_ref=claims.sub, submission_id=submission_id, feedback=body.feedback
+        )
+
+    @router.post("/submissions/{submission_id}:concern", status_code=201)
+    def submission_concern(
+        submission_id: str, body: SubmissionConcernIn, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        """Raise a safeguarding concern about the learner of this submission (source teacher).
+        The learner and submission come from the server; the response is a receipt only."""
+        authorize(claims, "raise", "safeguarding.concern")
+        authorize(claims, "manage", "school.marking")
+        return service.raise_concern_about_submission(
+            teacher_ref=claims.sub,
+            submission_id=submission_id,
+            category=body.category,
+            text=body.text,
+        )
+
+    return router
+
+
+def build_school_learner_router(
+    service: SchoolService, claims_dependency: Callable[..., Claims]
+) -> APIRouter:
+    """The learner's homework (HOMEWORK_AND_MARKING_CONTRACT §2). Mount it behind the live learner
+    permission gate: a withdrawn consent or a suspended account is a 403 on the next request."""
+    router = APIRouter(prefix="/v1/school", tags=["school"])
+
+    @router.get("/learners/{student_ref}/homework")
+    def learner_homework(
+        student_ref: str, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        authorize(claims, "operate", "school.homework")
+        require_owner_or(claims, student_ref, privileged_roles=())
+        return service.learner_homework(student_ref)
+
+    @router.post("/learners/{student_ref}/homework/{assignment_id}/items/{item_ref}:submit")
+    def learner_submit(
+        student_ref: str,
+        assignment_id: str,
+        item_ref: str,
+        body: SubmitIn,
+        claims: Claims = Depends(claims_dependency),
+    ) -> dict[str, Any]:
+        authorize(claims, "operate", "school.homework")
+        require_owner_or(claims, student_ref, privileged_roles=())
+        return service.learner_submit(
+            student_ref=student_ref, assignment_id=assignment_id, item_ref=item_ref, text=body.text
         )
 
     return router

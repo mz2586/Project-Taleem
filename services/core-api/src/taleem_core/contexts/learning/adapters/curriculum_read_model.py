@@ -14,11 +14,24 @@ from sqlalchemy.orm import Session, sessionmaker
 
 from ...curriculum_studio.adapters.persistence import unit_of_work as cs_unit_of_work
 from ...curriculum_studio.adapters.persistence.models import LessonRow
-from ...curriculum_studio.domain.assessment import AssessmentItem
+from ...curriculum_studio.domain.assessment import HUMAN_GRADED, AssessmentItem, ItemType
 from ...curriculum_studio.domain.content import Locale
 from ...curriculum_studio.domain.interaction import interaction_kind
 from ...curriculum_studio.domain.lesson import Lesson
-from ..domain.curriculum_view import CHOOSE, FILL, MATCH, ORDER, SORT, ItemView, LessonView
+from ..domain.curriculum_view import (
+    CHOOSE,
+    FILL,
+    LONG_MAX_CHARS,
+    MATCH,
+    ORDER,
+    SHORT_MAX_CHARS,
+    SORT,
+    WRITTEN,
+    ItemView,
+    LessonView,
+    RubricLevelView,
+    RubricView,
+)
 from ..domain.decision import CurriculumGraph, ObjectiveInfo
 
 
@@ -57,10 +70,36 @@ def _pair_set(value: object) -> frozenset[tuple[int, int]]:
     return frozenset((p[0], p[1]) for p in pairs)
 
 
+def _is_written(item: object) -> bool:
+    """A human-graded item: ``short`` / ``long`` / ``word_problem`` (HOMEWORK_AND_MARKING §1)."""
+    return isinstance(item, AssessmentItem) and item.type in HUMAN_GRADED
+
+
 def _kind(item: object) -> str:
     """The item's interaction kind (contract §1); pre-contract items project as ``choose``."""
+    if _is_written(item):
+        return WRITTEN
     kind = interaction_kind(item) if isinstance(item, AssessmentItem) else None
     return kind or CHOOSE
+
+
+def _rubric(item: object) -> RubricView | None:
+    rubric = getattr(item, "rubric", None)
+    if rubric is None:
+        return None
+    return RubricView(
+        criteria=str(getattr(rubric, "criteria", "") or ""),
+        max_score=max(0, _as_int(getattr(rubric, "max_score", 0))),
+        levels=tuple(
+            RubricLevelView(level=_as_int(lv.level), descriptor=_bilingual(lv.descriptor))
+            for lv in getattr(rubric, "levels", []) or []
+        ),
+    )
+
+
+def _key_text(key: dict[str, object], name: str) -> str:
+    value = key.get(name)
+    return value.strip() if isinstance(value, str) else ""
 
 
 def _playable_activities(activities: list[AssessmentItem]) -> list[AssessmentItem]:
@@ -172,6 +211,8 @@ class CurriculumStudioReadModel:
             variants = [str(v) for v in getattr(item, "accepted_variants", []) or []]
             accepted = tuple(v for v in [str(answer) if answer else "", *variants] if v.strip())
         misconception = key.get("misconception")
+        written = kind == WRITTEN
+        item_type = getattr(item, "type", None)
         return ItemView(
             item_ref=str(getattr(item, "item_id", "")),
             objective_code=objective_code,
@@ -188,6 +229,14 @@ class CurriculumStudioReadModel:
             correct_order=_int_tuple(key.get("order")) if kind == ORDER else (),
             correct_pairs=_pair_set(key.get("pairs")) if kind in (MATCH, SORT) else frozenset(),
             misconception=misconception if isinstance(misconception, str) else "",
+            max_chars=(
+                (SHORT_MAX_CHARS if item_type is ItemType.SHORT else LONG_MAX_CHARS)
+                if written
+                else 0
+            ),
+            rubric=_rubric(item) if written else None,
+            sample_answer=_key_text(key, "sample_answer") if written else "",
+            guidance=_key_text(key, "guidance") if written else "",
         )
 
     def _project(self, lesson: Lesson, objective_code: str) -> LessonView:
@@ -211,6 +260,11 @@ class CurriculumStudioReadModel:
         summative = tuple(
             self._item_view(i, objective_code, corrections) for i in lesson.assessment.summative
         )
+        # Written items (HOMEWORK_AND_MARKING_CONTRACT §1): homework, challenges, activities.
+        sources = [*lesson.homework, *lesson.challenge_problems, *lesson.interactive_activities]
+        written = tuple(
+            self._item_view(i, objective_code, corrections) for i in sources if _is_written(i)
+        )
 
         return LessonView(
             lesson_id=lesson.lesson_id,
@@ -226,4 +280,5 @@ class CurriculumStudioReadModel:
             assessment_summative=summative,
             summative_mentor_mediated=lesson.assessment.mentor_mediated_summative,
             worked_example_steps_localized=tuple({k: v for k, v in b.items() if v} for b in kept),
+            written_items=written,
         )

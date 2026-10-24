@@ -182,12 +182,15 @@ components:
               objective_code: { type: string }
               kind:
                 type: string
-                enum: [choose, fill, order, match, sort]
+                enum: [choose, fill, order, match, sort, written]
                 description: Interaction kind (ITEM_INTERACTION_CONTRACT.md); how to show + answer the item.
               left_count:
                 type: integer
                 minimum: 0
                 description: "match / sort: options[:left_count] are the left items (cards); 0 otherwise."
+              max_chars:
+                type: integer
+                description: Written items only — the answer's length cap (submitted via the school API).
               prompt: { type: object, additionalProperties: { type: string } }
               status: { type: string, enum: [todo, done] }
               est_minutes: { type: integer }

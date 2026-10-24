@@ -142,6 +142,63 @@ class KnowledgeService:
         )
         return RecordOutcome(result=result, events=events)
 
+    def record_human_graded(
+        self,
+        *,
+        evidence_id: str,
+        student_ref: str,
+        objective_code: str,
+        item_ref: str,
+        correct: bool,
+    ) -> bool:
+        """Record ONE human-graded result (a teacher's mark of a written item) as evidence.
+
+        Idempotent by ``evidence_id`` (the school context passes its ``submission_id``): the
+        evidence table is the ledger, probed inside the same transaction before any mastery change,
+        so a retry — or a concurrent duplicate that loses the optimistic-lock race and is retried —
+        records nothing and returns ``False``. Goes through the aggregate + outbox like every other
+        attempt; context ``practice`` (HOMEWORK_AND_MARKING_CONTRACT §3).
+        """
+        now = self._now()
+
+        def _txn() -> bool:
+            with self._uow() as uow:
+                if uow.knowledge.has_evidence(student_ref, evidence_id):
+                    return False
+                knowledge = uow.knowledge.get_for_objectives(
+                    student_ref, (objective_code,)
+                ) or StudentKnowledge(student_ref=student_ref)
+                knowledge.ensure_objective(objective_code, initial=self._estimator.initial())
+                result = knowledge.apply_attempt(
+                    evidence_id=evidence_id,
+                    objective_code=objective_code,
+                    item_ref=item_ref,
+                    session_id="",
+                    correct=correct,
+                    misconception_hits=(),
+                    hints_used=0,
+                    response_time_ms=0,
+                    context=InteractionContext.PRACTICE,
+                    self_confidence=None,
+                    estimator=self._estimator,
+                    forgetting=self._forgetting,
+                    now=now,
+                )
+                obj = knowledge.get(objective_code)
+                next_review = obj.memory.next_review_at if obj else 0.0
+                uow.knowledge.save(knowledge)
+                uow.events.publish(self._events_for(result, student_ref, "", next_review, now))
+                uow.commit()
+                return True
+
+        try:
+            recorded = retry_on_conflict(_txn)
+        except ConcurrencyConflictError as exc:
+            raise conflict(f"knowledge write conflict for {student_ref}") from exc
+        if recorded:
+            observability.record_event("taleem_learning_human_graded_total")
+        return recorded
+
     def _events_for(
         self,
         result: AttemptResult,

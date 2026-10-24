@@ -173,15 +173,17 @@ class Enrolment:
 
 @dataclass(frozen=True)
 class SchoolAuditEvent:
-    """Who changed a learner's class membership, and when. Refs only — no names."""
+    """Who changed a learner's class membership or homework, and when. Refs only — no names, and
+    never a word of a learner's answer or a teacher's feedback."""
 
-    action: str  # "enrolment.joined" | "enrolment.left"
+    action: str  # "enrolment.joined" | "enrolment.left" | "submission.submitted|marked|returned"
     actor_ref: str
     actor_role: str
     subject_ref: str  # the learner
     organization_id: str
     class_id: str
     at: float
+    object_ref: str = ""  # the submission_id, for submission.* actions
 
 
 @dataclass(frozen=True)
@@ -216,3 +218,159 @@ class Assignment:
             assigned_by=assigned_by,
             created_at=now,
         )
+
+
+# ------------------------------------------------------------------------ homework submissions
+# HOMEWORK_AND_MARKING_CONTRACT.md §2-§3. A learner's written answer to one item of an assignment.
+# One row per (assignment, item, learner): a resubmission replaces the text of the same row (its
+# ``attempt`` counts submissions), so the queue always shows the latest answer. Marked is final.
+
+SUBMISSION_PREFIX = "sub_"
+MAX_FEEDBACK = 1000
+_SUBMISSION_CONTROL = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")  # keeps \t \n \r
+
+
+class SubmissionStatus(StrEnum):
+    SUBMITTED = "submitted"  # waiting for the teacher
+    RETURNED = "returned"  # the teacher asked the child to try again (with feedback)
+    MARKED = "marked"  # final: outcome + feedback; recorded as mastery evidence
+
+
+class MarkOutcome(StrEnum):
+    MET = "met"
+    NOT_YET = "not_yet"
+
+
+class SubmissionConflictError(InvalidSchoolDataError):
+    """The submission's state does not allow this change (HTTP 409)."""
+
+    def __init__(self, message: str, *, code: str) -> None:
+        super().__init__(message)
+        self.code = code
+
+
+def _clean(raw: str) -> str:
+    return _SUBMISSION_CONTROL.sub("", unicodedata.normalize("NFC", raw)).strip()
+
+
+def clean_answer_text(raw: str, *, max_chars: int) -> str:
+    """A learner's answer: NFC, control characters removed, trimmed; 1..``max_chars`` chars."""
+    text = _clean(raw)
+    if not text:
+        raise InvalidSchoolDataError("the answer must not be empty")
+    if max_chars <= 0 or len(text) > max_chars:
+        raise InvalidSchoolDataError(f"the answer must be at most {max_chars} characters")
+    return text
+
+
+def clean_feedback(raw: str | None, *, required: bool) -> str:
+    text = _clean(raw or "")
+    if required and not text:
+        raise InvalidSchoolDataError("feedback is required")
+    if len(text) > MAX_FEEDBACK:
+        raise InvalidSchoolDataError(f"feedback must be at most {MAX_FEEDBACK} characters")
+    return text
+
+
+@dataclass
+class Submission:
+    submission_id: str
+    organization_id: str
+    class_id: str
+    assignment_id: str
+    objective_code: str
+    item_ref: str
+    student_ref: str
+    text: str
+    status: SubmissionStatus
+    submitted_at: float
+    created_at: float
+    attempt: int = 1
+    # The item's rubric scale when the answer was (last) submitted; None = no rubric (no score).
+    max_score: int | None = None
+    outcome: MarkOutcome | None = None
+    score: int | None = None
+    feedback: str = ""
+    returned_at: float | None = None
+    marked_at: float | None = None
+    reviewed_by: str | None = None  # the teacher who last returned or marked it
+    version: int = 1
+
+    @staticmethod
+    def start(
+        *,
+        assignment: Assignment,
+        item_ref: str,
+        student_ref: str,
+        text: str,
+        max_chars: int,
+        max_score: int | None,
+        now: float,
+    ) -> Submission:
+        return Submission(
+            submission_id=f"{SUBMISSION_PREFIX}{uuid7()}",
+            organization_id=assignment.organization_id,
+            class_id=assignment.class_id,
+            assignment_id=assignment.assignment_id,
+            objective_code=assignment.objective_code,
+            item_ref=item_ref,
+            student_ref=student_ref,
+            text=clean_answer_text(text, max_chars=max_chars),
+            status=SubmissionStatus.SUBMITTED,
+            submitted_at=now,
+            created_at=now,
+            max_score=max_score if max_score and max_score > 0 else None,
+        )
+
+    def resubmit(self, *, text: str, max_chars: int, max_score: int | None, now: float) -> None:
+        """Replace the answer while it is ``submitted`` or ``returned``; a marked one is final."""
+        if self.status is SubmissionStatus.MARKED:
+            raise SubmissionConflictError(
+                "this answer has been marked; it cannot be changed", code="SUBMISSION_MARKED"
+            )
+        self.text = clean_answer_text(text, max_chars=max_chars)
+        self.status = SubmissionStatus.SUBMITTED
+        self.submitted_at = now
+        self.attempt += 1
+        self.max_score = max_score if max_score and max_score > 0 else None
+
+    def mark(
+        self,
+        *,
+        outcome: str,
+        score: int | None,
+        feedback: str | None,
+        teacher_ref: str,
+        now: float,
+    ) -> None:
+        """Mark once (final). ``score`` is required exactly when the item has a rubric scale."""
+        if self.status is SubmissionStatus.MARKED:
+            raise SubmissionConflictError("this answer is already marked", code="SUBMISSION_MARKED")
+        try:
+            result = MarkOutcome(outcome)
+        except ValueError:
+            raise InvalidSchoolDataError("outcome must be one of: met, not_yet") from None
+        if self.max_score is None:
+            if score is not None:
+                raise InvalidSchoolDataError("this item has no rubric, so it takes no score")
+        elif score is None or isinstance(score, bool) or not 0 <= score <= self.max_score:
+            raise InvalidSchoolDataError(f"score must be a whole number from 0 to {self.max_score}")
+        self.feedback = clean_feedback(feedback, required=False)
+        self.outcome = result
+        self.score = score
+        self.status = SubmissionStatus.MARKED
+        self.marked_at = now
+        self.reviewed_by = teacher_ref
+
+    def return_for_rework(self, *, feedback: str, teacher_ref: str, now: float) -> None:
+        """Ask the child to try again. Only a ``submitted`` answer can be returned."""
+        if self.status is SubmissionStatus.MARKED:
+            raise SubmissionConflictError("this answer is already marked", code="SUBMISSION_MARKED")
+        if self.status is not SubmissionStatus.SUBMITTED:
+            raise SubmissionConflictError(
+                "this answer is already back with the learner", code="SUBMISSION_RETURNED"
+            )
+        self.feedback = clean_feedback(feedback, required=True)
+        self.status = SubmissionStatus.RETURNED
+        self.returned_at = now
+        self.reviewed_by = teacher_ref

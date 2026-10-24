@@ -401,6 +401,181 @@ paths:
         "403": { $ref: "#/components/responses/Problem" }
         "404": { $ref: "#/components/responses/Problem" }
         default: { $ref: "#/components/responses/Problem" }
+  /v1/school/learners/{studentRef}/homework:
+    get:
+      tags: [school]
+      operationId: getLearnerHomework
+      summary: The learner's homework — every assignment of their classes with its written items
+      description: >-
+        HOMEWORK_AND_MARKING_CONTRACT §2. A `student` token for its own `studentRef` only. Behind
+        the live learner consent gate: a withdrawn consent or suspended account is `403` on the
+        next request. Items carry the learner's latest submission state; never a rubric, sample
+        answer or guidance. Online only in this version.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+      responses:
+        "200":
+          description: Homework
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/LearnerHomework" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/learners/{studentRef}/homework/{assignmentId}/items/{itemRef}:submit:
+    post:
+      tags: [school]
+      operationId: submitHomeworkItem
+      summary: Submit (or resubmit) a written answer
+      description: >-
+        The text is trimmed, must not be empty and is capped at the item's `max_chars` (`422`).
+        Resubmitting is allowed while the state is `submitted` or `returned`; a `marked` answer is
+        final (`409 SUBMISSION_MARKED`). The item must be a written item of the assignment's
+        lesson and the assignment one of the learner's classes (`404`). `403 SHARING_REQUIRED`
+        when the guardian does not share progress with the teacher. Audited with refs only.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+        - { name: assignmentId, in: path, required: true, schema: { type: string } }
+        - { name: itemRef, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SubmitIn" }
+      responses:
+        "200":
+          description: Saved
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SubmitResult" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/classes/{classId}/submissions:
+    get:
+      tags: [school]
+      operationId: listClassSubmissions
+      summary: The marking queue of the teacher's own class (oldest first)
+      description: >-
+        Only learners the teacher may see right now (enrolled, live progress sharing). Each row
+        carries the item's marking aids for the teacher. Another school's class is `404`.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: classId, in: path, required: true, schema: { type: string } }
+        - name: status
+          in: query
+          required: false
+          schema: { type: string, enum: [submitted, returned, marked], default: submitted }
+      responses:
+        "200":
+          description: Queue
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  submissions:
+                    type: array
+                    items: { $ref: "#/components/schemas/TeacherSubmission" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/submissions/{submissionId}:mark:
+    post:
+      tags: [school]
+      operationId: markSubmission
+      summary: Mark a submission (final) and record one mastery evidence for it
+      description: >-
+        `score` is required when the item has a rubric and must be in `0..max_score`; without a
+        rubric it must be null (`422`). A submission is marked once (`409 SUBMISSION_MARKED`).
+        Records exactly one `AssessmentEvidence` (correct for `met`), idempotent by
+        `submission_id`. Not the teacher's class, or a learner they cannot see: `404`.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: submissionId, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/MarkIn" }
+      responses:
+        "200":
+          description: Marked
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/TeacherSubmission" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/submissions/{submissionId}:return:
+    post:
+      tags: [school]
+      operationId: returnSubmission
+      summary: Return a submission so the child can try again (feedback required)
+      description: >-
+        Only a `submitted` answer can be returned (`409 SUBMISSION_RETURNED` /
+        `409 SUBMISSION_MARKED` otherwise). Records no evidence.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: submissionId, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/ReturnIn" }
+      responses:
+        "200":
+          description: Returned
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/TeacherSubmission" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/submissions/{submissionId}:concern:
+    post:
+      tags: [school]
+      operationId: raiseSubmissionConcern
+      summary: Raise a safeguarding concern about the learner of this submission
+      description: >-
+        HOMEWORK_AND_MARKING_CONTRACT §4. Creates a concern in the safeguarding queue with
+        `source = teacher`, about the submission's learner and referencing the `submission_id` —
+        both taken from the server, never the client. Allowed for a submission in the teacher's
+        own class (`404` otherwise), even when progress sharing is off. Never changes the
+        submission; the child is never told. Returns a receipt only. Rate limited per teacher.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: submissionId, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SubmissionConcernIn" }
+      responses:
+        "201":
+          description: Recorded
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ConcernReceipt" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        "429": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
 components:
   securitySchemes:
     bearerAuth:
@@ -414,6 +589,146 @@ components:
         application/problem+json:
           schema: { $ref: "#/components/schemas/Problem" }
   schemas:
+    LocalizedText:
+      type: object
+      description: Locale map (ur / en).
+      additionalProperties: { type: string }
+    LearnerSubmission:
+      type: object
+      description: The learner's own submission. Feedback appears once returned or marked.
+      properties:
+        submission_id: { type: string }
+        state: { type: string, enum: [submitted, returned, marked] }
+        text: { type: string }
+        attempt: { type: integer, minimum: 1 }
+        submitted_at: { type: number }
+        feedback: { type: ["string", "null"] }
+        returned_at: { type: ["number", "null"] }
+        outcome: { type: ["string", "null"], enum: [met, not_yet, null] }
+        score: { type: ["integer", "null"] }
+        max_score: { type: ["integer", "null"] }
+        marked_at: { type: ["number", "null"] }
+    LearnerHomeworkItem:
+      type: object
+      description: A written item as the learner sees it. Never a rubric, sample answer or guidance.
+      properties:
+        item_ref: { type: string }
+        kind: { type: string, enum: [written] }
+        prompt: { $ref: "#/components/schemas/LocalizedText" }
+        hints: { type: array, items: { type: string } }
+        max_chars: { type: integer, description: "200 for short, 2000 otherwise" }
+        state: { type: string, enum: [not_started, submitted, returned, marked] }
+        submission:
+          oneOf:
+            - { $ref: "#/components/schemas/LearnerSubmission" }
+            - { type: "null" }
+    LearnerHomework:
+      type: object
+      properties:
+        assignments:
+          type: array
+          items:
+            type: object
+            properties:
+              assignment_id: { type: string }
+              class_id: { type: string }
+              class_name: { type: string }
+              objective_code: { type: string }
+              lesson_title: { $ref: "#/components/schemas/LocalizedText" }
+              due_at: { type: number }
+              overdue: { type: boolean }
+              items:
+                type: array
+                items: { $ref: "#/components/schemas/LearnerHomeworkItem" }
+    SubmitIn:
+      type: object
+      required: [text]
+      additionalProperties: false
+      properties:
+        text: { type: string, description: "Trimmed; 1..max_chars characters." }
+    SubmitResult:
+      type: object
+      properties:
+        assignment_id: { type: string }
+        item_ref: { type: string }
+        state: { type: string, enum: [submitted] }
+        submission: { $ref: "#/components/schemas/LearnerSubmission" }
+    Rubric:
+      type: object
+      description: Teacher-only marking rubric.
+      properties:
+        criteria: { type: string }
+        max_score: { type: integer, minimum: 0 }
+        levels:
+          type: array
+          items:
+            type: object
+            properties:
+              score: { type: integer }
+              label: { type: string, description: The level number (no separate label is authored). }
+              descriptor: { $ref: "#/components/schemas/LocalizedText" }
+    TeacherSubmission:
+      type: object
+      description: One marking-queue row (teacher only).
+      properties:
+        submission_id: { type: string }
+        student_ref: { type: string }
+        learner_display_name: { type: string }
+        class_id: { type: string }
+        assignment_id: { type: string }
+        objective_code: { type: string }
+        lesson_title: { $ref: "#/components/schemas/LocalizedText" }
+        item_ref: { type: string }
+        prompt: { $ref: "#/components/schemas/LocalizedText" }
+        max_chars: { type: ["integer", "null"] }
+        rubric:
+          oneOf:
+            - { $ref: "#/components/schemas/Rubric" }
+            - { type: "null" }
+        sample_answer: { type: ["string", "null"] }
+        guidance: { type: ["string", "null"] }
+        text: { type: string }
+        state: { type: string, enum: [submitted, returned, marked] }
+        attempt: { type: integer }
+        outcome: { type: ["string", "null"], enum: [met, not_yet, null] }
+        score: { type: ["integer", "null"] }
+        max_score: { type: ["integer", "null"] }
+        feedback: { type: ["string", "null"] }
+        submitted_at: { type: number }
+        returned_at: { type: ["number", "null"] }
+        marked_at: { type: ["number", "null"] }
+        reviewed_by: { type: ["string", "null"] }
+    MarkIn:
+      type: object
+      required: [outcome]
+      additionalProperties: false
+      properties:
+        outcome: { type: string, enum: [met, not_yet] }
+        score:
+          type: ["integer", "null"]
+          description: Required with a rubric (0..max_score); null without one.
+        feedback: { type: string, maxLength: 1000 }
+    ReturnIn:
+      type: object
+      required: [feedback]
+      additionalProperties: false
+      properties:
+        feedback: { type: string, minLength: 1, maxLength: 1000 }
+    SubmissionConcernIn:
+      type: object
+      required: [category]
+      additionalProperties: false
+      properties:
+        category:
+          type: string
+          enum: [felt_unsafe, very_sad, bullying, upsetting_lesson, other]
+        text: { type: ["string", "null"], maxLength: 500 }
+    ConcernReceipt:
+      type: object
+      properties:
+        received: { type: boolean }
+        raised_at: { type: number }
+        notice: { type: string }
     Problem:
       type: object
       properties:

@@ -46,14 +46,16 @@ def _staff_rules() -> set[tuple[str, str, str]]:
 def _safeguarding_rules() -> set[tuple[str, str, str]]:
     """Safeguarding concerns (contexts/safeguarding).
 
-    A child and a guardian may *raise* a concern; which learner a guardian may name, and that a
-    guardian lists only concerns they raised, are ownership rules the service settles against the
-    token subject. Only ``safeguarding_lead`` triages (reads the queue, free text, notes, audit).
-    No teacher, mentor, operator or other staff role is listed: they are denied by default.
+    A child, a guardian and a teacher may *raise* a concern; which learner a guardian or teacher
+    may name (their own child; a learner in one of their own classes), and that a guardian lists
+    only concerns they raised, are ownership rules the service settles against the token subject.
+    Only ``safeguarding_lead`` triages (reads the queue, free text, notes, audit). A teacher
+    raises and reads nothing back; mentors, operators and other staff roles are denied by default.
     """
     return {
         ("student", "raise", "safeguarding.concern"),
         ("guardian", "raise", "safeguarding.concern"),
+        ("teacher", "raise", "safeguarding.concern"),
         ("guardian", "read", "safeguarding.own_concern"),
         ("safeguarding_lead", "triage", "safeguarding.concern"),
     }
@@ -103,7 +105,8 @@ def _school_rules() -> set[tuple[str, str, str]]:
     ownership + consent question the school service settles per request: the teacher's own
     organization and classes, and only learners whose guardian currently shares progress. Operators
     create organizations and teacher accounts and nothing else — no operator rule reads a learner's
-    progress. A guardian may enrol their own learner (ownership re-checked against identity).
+    progress. A guardian may enrol their own learner (ownership re-checked against identity). A
+    learner reads and submits their own homework; a teacher marks it in their own classes.
     """
     return {
         ("system", "manage", "school.organization"),
@@ -111,7 +114,9 @@ def _school_rules() -> set[tuple[str, str, str]]:
         ("teacher", "manage", "school.class"),
         ("teacher", "manage", "school.assignment"),
         ("teacher", "read", "school.learner_progress"),
+        ("teacher", "manage", "school.marking"),  # marking queue, mark, return
         ("guardian", "manage", "school.enrolment"),
+        ("student", "operate", "school.homework"),  # their own homework (ownership in the route)
     }
 
 

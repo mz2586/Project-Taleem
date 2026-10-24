@@ -10,11 +10,15 @@ Visibility rules (each is enforced here, against the token subject, and pinned b
    therefore invisible to every guardian, *including* a guardian the concern may be about, without
    the system having to know who the concern is about. The guardian sees a coarse status
    (received / being looked at / closed): never triage notes, escalation, or outcome.
-3. **A safeguarding lead** (``safeguarding_lead``, an operator-provisioned staff account) is the
+3. **A teacher** raises a concern only about a learner in one of their own classes, optionally
+   naming the homework submission that prompted it (another school's learner, or one outside the
+   teacher's classes, is a 404). Like a child, the teacher gets a receipt only: no id, no list.
+   Raising never changes the submission and the child is never told.
+4. **A safeguarding lead** (``safeguarding_lead``, an operator-provisioned staff account) is the
    only role that reads the queue, a concern's free text, notes, or audit. Opening a concern's
    detail is itself audited (``concern.viewed``).
-4. **Nobody else** — teachers, mentors, other staff roles, operators — has any route here (the PDP
-   denies them). No teacher surface ever includes a concern.
+5. **Nobody else** — mentors, other staff roles, operators — has any route here (the PDP denies
+   them). No teacher surface ever includes a concern.
 
 Every action is audited in the same transaction as the change, naming the actor's token subject.
 Nothing in this service contacts anyone: an escalation records "external referral needed" for a
@@ -42,7 +46,7 @@ from ..domain.model import (
     Status,
     new_note,
 )
-from .ports import LearnerDirectory, SafeguardingUnitOfWork
+from .ports import LearnerDirectory, SafeguardingUnitOfWork, TeacherRoster
 
 LEAD_ROLE = "safeguarding_lead"
 QUEUE_LIMIT = 500
@@ -60,6 +64,11 @@ _GUARDIAN_STATUS: dict[Status, str] = {
 CHILD_RECEIPT_NOTICE = (
     "A trained grown-up at Taleem will read this. If you are in danger right now, tell a "
     "grown-up near you that you trust straight away."
+)
+# What a teacher is told. A receipt only; the lead decides what happens next.
+TEACHER_RECEIPT_NOTICE = (
+    "Your concern has been recorded for the safeguarding lead. Do not tell the child or their "
+    "family that a concern was raised, and follow your school's safeguarding procedure."
 )
 NOBODY_CONTACTED = "Recorded only. This software contacts nobody; a person must act (FD-04)."
 
@@ -112,8 +121,10 @@ class SafeguardingService:
         sla: SlaPolicy,
         *,
         require_enrolled: bool,
+        teachers: TeacherRoster | None = None,
     ) -> None:
         self._uow = uow_factory
+        self._teachers = teachers
         self._learners = learners
         self._now = clock
         self._sla = sla
@@ -174,6 +185,42 @@ class SafeguardingService:
         )
         return guardian_view(concern)
 
+    def raise_by_teacher(
+        self,
+        *,
+        teacher_ref: str,
+        student_ref: str,
+        category: str,
+        text: str | None,
+        submission_id: str | None,
+        screen: str | None,
+        lesson_id: str | None,
+    ) -> dict[str, Any]:
+        """A teacher's concern about a learner in one of their own classes (rule 3)."""
+        if (
+            self._teachers is None
+            or not student_ref
+            or not self._teachers.may_raise_about(
+                teacher_ref=teacher_ref, student_ref=student_ref, submission_id=submission_id
+            )
+        ):
+            raise not_found("learner not found")  # outside the teacher's classes: no disclosure
+        concern = self._create(
+            subject_ref=student_ref,
+            raised_by_ref=teacher_ref,
+            role=RaisedBy.TEACHER,
+            category=category,
+            text=text,
+            screen=screen,
+            lesson_id=lesson_id,
+            submission_id=submission_id,
+        )
+        return {
+            "received": True,
+            "raised_at": concern.created_at,
+            "notice": TEACHER_RECEIPT_NOTICE,
+        }
+
     def _create(
         self,
         *,
@@ -184,6 +231,7 @@ class SafeguardingService:
         text: str | None,
         screen: str | None,
         lesson_id: str | None,
+        submission_id: str | None = None,
     ) -> Concern:
         now = self._now()
         try:
@@ -196,6 +244,7 @@ class SafeguardingService:
                 screen=screen,
                 lesson_id=lesson_id,
                 now=now,
+                submission_id=submission_id,
             )
         except InvalidConcernError as exc:
             raise _invalid(exc) from exc
@@ -242,7 +291,11 @@ class SafeguardingService:
             "age_seconds": round(concern.age(now), 3),
             "overdue": concern.overdue(self._sla, now),
             "has_text": concern.free_text is not None,
-            "context": {"screen": concern.context_screen, "lesson_id": concern.context_lesson_id},
+            "context": {
+                "screen": concern.context_screen,
+                "lesson_id": concern.context_lesson_id,
+                "submission_id": concern.context_submission_id,
+            },
         }
 
     def queue(self, *, include_resolved: bool = False) -> dict[str, Any]:
@@ -273,7 +326,9 @@ class SafeguardingService:
                 # Doc 52 §4: a child's concern may be about their own household. The guardian was
                 # not told and cannot see it; do not contact them until they are ruled out.
                 "guardian_informed": False,
-                "household_caution": concern.raised_by_role is RaisedBy.STUDENT,
+                # A teacher's concern usually starts from the child's own words, so it carries the
+                # same caution as a child's report.
+                "household_caution": concern.raised_by_role in (RaisedBy.STUDENT, RaisedBy.TEACHER),
                 "notes": [_note_view(n) for n in uow.notes.for_concern(concern.concern_id)],
                 "audit": [_audit_view(a) for a in uow.audit.for_concern(concern.concern_id)],
                 "contacted": [],

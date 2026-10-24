@@ -35,6 +35,7 @@ def _to_domain(row: ConcernRow) -> Concern:
         free_text=row.free_text,
         context_screen=row.context_screen,
         context_lesson_id=row.context_lesson_id,
+        context_submission_id=row.context_submission_id,
         status=Status(row.status),
         created_at=row.created_at,
         acknowledged_at=row.acknowledged_at,
@@ -76,6 +77,7 @@ class SqlConcernRepository:
             free_text=concern.free_text,
             context_screen=concern.context_screen,
             context_lesson_id=concern.context_lesson_id,
+            context_submission_id=concern.context_submission_id,
             created_at=concern.created_at,
         )
         _apply(row, concern)

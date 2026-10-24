@@ -42,13 +42,18 @@ servers:
     description: Reference environment (placeholder; concrete host per FOUNDER_DECISIONS FD-02)
 tags:
   - name: safeguarding
-    description: Raise (child, guardian) and triage (safeguarding lead) safeguarding concerns.
+    description: Raise (child, guardian, teacher) and triage (safeguarding lead) safeguarding concerns.
 paths:
   /v1/safeguarding/concerns:
     post:
       tags: [safeguarding]
       operationId: raiseConcern
-      summary: Raise a concern (student about themselves, or guardian about their own learner)
+      summary: Raise a concern (student about themselves, guardian or teacher about a learner)
+      description: >-
+        A `teacher` raises only about a learner in one of their own classes (`404` otherwise),
+        optionally naming the homework `submissionId` that prompted it, and gets a receipt only.
+        The marking UI uses `POST /v1/school/submissions/{submissionId}:concern`, which fills in
+        the learner and submission from the server.
       security: [{ bearerAuth: [] }]
       requestBody:
         required: true
@@ -58,7 +63,8 @@ paths:
       responses:
         "201":
           description: >-
-            Recorded. A `student` gets a `ChildReceipt`; a `guardian` gets a `GuardianConcern`.
+            Recorded. A `student` or `teacher` gets a receipt (`ChildReceipt` shape); a `guardian`
+            gets a `GuardianConcern`.
           content:
             application/json:
               schema:
@@ -300,7 +306,13 @@ components:
           description: Optional. The child flow needs no typing at all.
         studentRef:
           type: string
-          description: Guardian only — which of their learners. A learner may omit it.
+          description: >-
+            Guardian — which of their learners; teacher — a learner in their own class. A learner
+            may omit it.
+        submissionId:
+          type: string
+          maxLength: 64
+          description: Teacher only — the homework submission that prompted the concern.
         context:
           type: object
           additionalProperties: false
@@ -342,7 +354,7 @@ components:
       properties:
         concern_id: { type: string }
         subject_ref: { type: string }
-        raised_by_role: { type: string, enum: [student, guardian] }
+        raised_by_role: { type: string, enum: [student, guardian, teacher] }
         category: { $ref: "#/components/schemas/Category" }
         priority: { $ref: "#/components/schemas/Priority" }
         status: { $ref: "#/components/schemas/Status" }
@@ -357,6 +369,9 @@ components:
           properties:
             screen: { type: string }
             lesson_id: { type: [string, "null"] }
+            submission_id:
+              type: [string, "null"]
+              description: A teacher's concern names the homework submission that prompted it.
     Queue:
       type: object
       required: [generated_at, sla, concerns]

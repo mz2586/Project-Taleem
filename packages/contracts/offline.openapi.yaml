@@ -159,12 +159,17 @@ components:
         objective_code: { type: string }
         kind:
           type: string
-          enum: [choose, fill, order, match, sort]
+          enum: [choose, fill, order, match, sort, written]
           description: Interaction kind (ITEM_INTERACTION_CONTRACT.md); how to show + answer the item.
         left_count:
           type: integer
           minimum: 0
           description: "match / sort: options[:left_count] are the left items (cards); 0 otherwise."
+        max_chars:
+          type: integer
+          description: >-
+            Written items only (HOMEWORK_AND_MARKING_CONTRACT.md): the answer's length cap. A
+            written item is answered online through the school homework API, never offline.
         prompt:
           type: object
           additionalProperties: { type: string }

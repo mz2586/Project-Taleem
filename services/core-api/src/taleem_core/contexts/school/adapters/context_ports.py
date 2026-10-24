@@ -9,7 +9,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any
 
-from ..application.ports import ObjectiveProgress, PublishedLesson
+from ..application.ports import ObjectiveProgress, PublishedLesson, WrittenItem, WrittenLesson
 
 
 class IdentityLearnerDirectory:
@@ -162,3 +162,68 @@ class CallablePublishedCurriculum:
             )
             for row in self._catalog()
         ]
+
+
+def _text_or_none(value: object) -> str | None:
+    return value if isinstance(value, str) and value.strip() else None
+
+
+class CallableWrittenWork:
+    """``WrittenWork`` over the learning context's written-work service.
+
+    ``written_lesson(code)`` returns learning's JSON-shaped view (``{"objective_code", "title",
+    "items": [{"item_ref", "prompt", "hints", "max_chars", "rubric", "sample_answer",
+    "guidance"}]}``) or None; ``record_marked(...)`` records the evidence and returns whether it
+    was new. Duck-typed: no learning module is imported.
+    """
+
+    def __init__(
+        self,
+        written_lesson: Callable[[str], dict[str, Any] | None],
+        record_marked: Callable[..., bool],
+    ) -> None:
+        self._lesson = written_lesson
+        self._record = record_marked
+
+    def lesson(self, objective_code: str) -> WrittenLesson | None:
+        view = self._lesson(objective_code)
+        if view is None:
+            return None
+        items: list[WrittenItem] = []
+        for raw in view.get("items") or []:
+            rubric = raw.get("rubric")
+            items.append(
+                WrittenItem(
+                    item_ref=str(raw["item_ref"]),
+                    prompt={str(k): str(v) for k, v in dict(raw.get("prompt") or {}).items()},
+                    hints=tuple(str(h) for h in raw.get("hints") or ()),
+                    max_chars=int(raw.get("max_chars") or 0),
+                    rubric=dict(rubric) if isinstance(rubric, dict) else None,
+                    sample_answer=_text_or_none(raw.get("sample_answer")),
+                    guidance=_text_or_none(raw.get("guidance")),
+                )
+            )
+        return WrittenLesson(
+            objective_code=str(view.get("objective_code") or objective_code),
+            title={str(k): str(v) for k, v in dict(view.get("title") or {}).items() if v},
+            items=tuple(items),
+        )
+
+    def record_marked(
+        self,
+        *,
+        submission_id: str,
+        student_ref: str,
+        objective_code: str,
+        item_ref: str,
+        met: bool,
+    ) -> bool:
+        return bool(
+            self._record(
+                submission_id=submission_id,
+                student_ref=student_ref,
+                objective_code=objective_code,
+                item_ref=item_ref,
+                met=met,
+            )
+        )

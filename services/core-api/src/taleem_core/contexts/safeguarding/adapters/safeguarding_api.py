@@ -1,6 +1,7 @@
 """FastAPI router for safeguarding concerns (``/v1/safeguarding``).
 
-- ``POST /concerns`` — a ``student`` (about themselves) or a ``guardian`` (about their own learner)
+- ``POST /concerns`` — a ``student`` (about themselves), a ``guardian`` (about their own learner)
+  or a ``teacher`` (about a learner in their own class, optionally naming a ``submissionId``)
   raises a concern. Not behind the learner consent gate, and not on the kill switch's child-facing
   list: it is a safety channel and stays open when learning is halted (pinned by a test).
 - ``GET /my-concerns`` — a guardian's own raised concerns, coarse status only.
@@ -42,9 +43,11 @@ class RaiseConcernIn(BaseModel):
     # Bounded at the edge as well as in the domain (which counts characters after normalisation).
     text: str | None = Field(default=None, max_length=MAX_FREE_TEXT * 2)
     context: ConcernContextIn | None = None
-    # Guardian only: which of their learners. A learner token may omit it or repeat its own
-    # subject; naming anyone else is refused.
+    # Guardian / teacher: which learner. A learner token may omit it or repeat its own subject;
+    # naming anyone else is refused.
     student_ref: str | None = Field(default=None, alias="studentRef", max_length=64)
+    # Teacher only: the homework submission that prompted the concern.
+    submission_id: str | None = Field(default=None, alias="submissionId", max_length=64)
 
 
 class NoteIn(BaseModel):
@@ -81,6 +84,18 @@ def build_safeguarding_router(
         authorize(claims, "raise", "safeguarding.concern")
         raise_limiter.check(f"{claims.role}:{claims.sub}")
         context = body.context or ConcernContextIn()
+        if claims.role == "teacher":
+            return service.raise_by_teacher(
+                teacher_ref=claims.sub,
+                student_ref=body.student_ref or "",
+                category=body.category,
+                text=body.text,
+                submission_id=body.submission_id or None,
+                screen=context.screen,
+                lesson_id=context.lesson_id,
+            )
+        if body.submission_id:
+            raise forbidden("only a teacher's concern names a submission")
         if claims.role == "student":
             if body.student_ref not in (None, "", claims.sub):
                 raise forbidden("a learner raises a concern about themselves")

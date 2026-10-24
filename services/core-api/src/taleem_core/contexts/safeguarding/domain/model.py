@@ -1,8 +1,9 @@
 """Safeguarding concern aggregate and its rules (pure stdlib).
 
-A concern is raised by a child (``student``) about themselves, or by a guardian about one of their
-own learners. It holds pseudonymous refs only — never a name copied from identity. It then moves
-through a small, closed lifecycle that a safeguarding lead drives:
+A concern is raised by a child (``student``) about themselves, by a guardian about one of their
+own learners, or by a teacher about a learner in one of their own classes (optionally naming the
+homework submission that prompted it). It holds pseudonymous refs only — never a name copied from
+identity. It then moves through a small, closed lifecycle that a safeguarding lead drives:
 
     open ──acknowledge──▶ acknowledged ──escalate──▶ escalated ──resolve──▶ resolved
       └────────────escalate──────────────▲   └─────────────resolve─────────────▲
@@ -82,6 +83,7 @@ CATEGORY_PRIORITY: dict[Category, Priority] = {
 class RaisedBy(StrEnum):
     STUDENT = "student"
     GUARDIAN = "guardian"
+    TEACHER = "teacher"  # about a learner in one of their own classes (HOMEWORK_AND_MARKING §4)
 
 
 class Status(StrEnum):
@@ -228,6 +230,7 @@ class Concern:
     context_lesson_id: str | None
     status: Status
     created_at: float
+    context_submission_id: str | None = None  # a teacher's concern about a homework answer
     acknowledged_at: float | None = None
     acknowledged_by: str | None = None
     escalated_at: float | None = None
@@ -248,11 +251,16 @@ class Concern:
         screen: str | None,
         lesson_id: str | None,
         now: float,
+        submission_id: str | None = None,
     ) -> Concern:
         cat = parse_category(category)
         if raised_by_role is RaisedBy.STUDENT and subject_ref != raised_by_ref:
             # A child raises a concern about themselves; they cannot name another learner.
             raise InvalidConcernError("a learner raises a concern about themselves")
+        if submission_id is not None and raised_by_role is not RaisedBy.TEACHER:
+            raise InvalidConcernError(
+                "only a teacher's concern names a submission", field="submissionId"
+            )
         return Concern(
             concern_id=f"{CONCERN_REF_PREFIX}{uuid7()}",
             subject_ref=assert_ref(subject_ref, field_name="studentRef"),
@@ -265,6 +273,11 @@ class Concern:
             context_lesson_id=clean_lesson_id(lesson_id),
             status=Status.OPEN,
             created_at=now,
+            context_submission_id=(
+                assert_ref(submission_id, field_name="submissionId")
+                if submission_id is not None
+                else None
+            ),
         )
 
     @property

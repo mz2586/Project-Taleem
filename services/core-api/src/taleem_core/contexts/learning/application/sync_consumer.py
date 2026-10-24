@@ -184,12 +184,13 @@ class SyncEvidenceConsumer:
 
 
 def _gradable_item(lesson: LessonView, item_ref: str) -> ItemView | None:
-    """Find an auto-gradable item by ref. Summative is excluded (mentor-mediated, never auto)."""
+    """Find an auto-gradable item by ref. Summative is excluded (mentor-mediated, never auto), and
+    so is a written item (a teacher marks it; HOMEWORK_AND_MARKING_CONTRACT §1)."""
     pools = (lesson.practice_items, lesson.homework_items, lesson.assessment_formative)
     for pool in pools:
         for item in pool:
             if item.item_ref == item_ref:
-                return item
+                return None if item.written else item
     return None
 
 

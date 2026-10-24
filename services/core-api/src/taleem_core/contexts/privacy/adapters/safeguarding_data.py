@@ -2,11 +2,11 @@
 
 **Export** is requested by the guardian, so it follows the safeguarding visibility rule rather than
 "everything about the learner": it contains the concerns *that guardian raised* about the learner
-(their own words and a coarse status). Concerns the learner raised are **withheld** — the concern
-may be about the guardian — and so are triage notes and the audit trail. The withheld notice is the
-same text whether or not any such record exists, so the export never reveals that a child spoke up
-(doc 52 §4, "guardian data-export is safeguarding-checked"). Whether a child may obtain their own
-safeguarding records some other way is an M-Gov question.
+(their own words and a coarse status). Concerns the learner or a teacher raised are **withheld** —
+the concern may be about the guardian — and so are triage notes and the audit trail. The withheld
+notice is the same text whether or not any such record exists, so the export never reveals that a
+child spoke up (doc 52 §4, "guardian data-export is safeguarding-checked"). Whether a child may
+obtain their own safeguarding records some other way is an M-Gov question.
 
 **Erasure** follows the retained set's explicit ``safeguarding_concerns`` entry (PENDING M-Gov):
 
@@ -33,8 +33,8 @@ from ..domain.policy import RetainedSet
 from ._rows import affected, mentions, text_contains
 
 WITHHELD_NOTICE = (
-    "Safeguarding records raised by the learner, and every triage note and audit entry, are "
-    "withheld from a guardian's export (safeguarding exemption; PENDING M-Gov)."
+    "Safeguarding records raised by the learner or by a teacher, and every triage note and audit "
+    "entry, are withheld from a guardian's export (safeguarding exemption; PENDING M-Gov)."
 )
 
 _GUARDIAN_STATUS = {

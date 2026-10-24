@@ -64,3 +64,14 @@ class LearnerDirectory(Protocol):
     def guardian_of(self, student_ref: str) -> str | None:
         """The guardian responsible for this learner, or ``None`` if there is no such learner."""
         ...
+
+
+class TeacherRoster(Protocol):
+    """The school facts a teacher's concern needs (the school context, through a port)."""
+
+    def may_raise_about(
+        self, *, teacher_ref: str, student_ref: str, submission_id: str | None
+    ) -> bool:
+        """True only for an active teacher and a learner enrolled in one of that teacher's own
+        classes; a named submission must be that learner's, in one of those classes."""
+        ...

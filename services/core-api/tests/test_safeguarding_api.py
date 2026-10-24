@@ -247,11 +247,17 @@ def test_only_a_safeguarding_lead_reaches_the_queue_or_free_text(client: TestCli
             response = client.request(method, path, headers=headers)
             assert response.status_code == 403, (role, path, response.status_code)
             assert _CHILD_WORDS not in response.text
-    for role in ("teacher", "mentor", "system", "safety_officer"):
+    for role in ("mentor", "system", "safety_officer"):
         raised = client.post(
             "/v1/safeguarding/concerns", json={"category": "other"}, headers=denied[role]
         )
         assert raised.status_code == 403, role
+    # A teacher may raise only about a learner in their own class (test_homework_api.py); a token
+    # with no teacher account, naming nobody, is not found.
+    raised = client.post(
+        "/v1/safeguarding/concerns", json={"category": "other"}, headers=denied["teacher"]
+    )
+    assert raised.status_code == 404
     assert client.get("/v1/safeguarding/queue").status_code == 401
     # A guardian has no route to the lead's views either way.
     assert client.get("/v1/safeguarding/my-concerns", headers=lead["auth"]).status_code == 403
@@ -574,7 +580,7 @@ def test_database_checks_refuse_invented_states() -> None:
             {"category": "made_up"},
             {"priority": "T0"},
             {"status": "deleted"},
-            {"role": "teacher"},
+            {"role": "mentor"},
             {"status": "resolved"},  # resolved needs an outcome
             {"outcome": "support_given"},  # an outcome needs resolved
             {"text": "x" * 501},

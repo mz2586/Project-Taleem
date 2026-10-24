@@ -6,7 +6,7 @@ Every child table repeats ``organization_id`` so a tenant-scoped query never dep
 
 from __future__ import annotations
 
-from sqlalchemy import Float, ForeignKey, Index, Integer, String
+from sqlalchemy import Float, ForeignKey, Index, Integer, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import SCHOOL_SCHEMA, SchoolBase
@@ -128,3 +128,55 @@ class SchoolAuditRow(SchoolBase):
     organization_id: Mapped[str] = mapped_column(String(64), nullable=False)
     class_id: Mapped[str] = mapped_column(String(64), nullable=False)
     at: Mapped[float] = mapped_column(Float, nullable=False)
+    # The submission_id for submission.* actions (alembic 0013); '' for enrolment actions.
+    object_ref: Mapped[str] = mapped_column(String(64), nullable=False, default="")
+
+
+class SubmissionRow(SchoolBase):
+    """A learner's written answer to one item of an assignment (see alembic 0013_homework).
+
+    Child data: the ``text`` is the child's own words. Pseudonymous ``student_ref`` only. One row
+    per (assignment, item, learner); ``version`` is the optimistic lock (two teachers marking at
+    once: one gets a 409). The privacy context exports and erases these rows with the learner.
+    """
+
+    __tablename__ = "submission"
+    __table_args__ = (
+        UniqueConstraint(
+            "assignment_id", "item_ref", "student_ref", name="uq_submission_item_learner"
+        ),
+        Index("ix_submission_org_class_status", "organization_id", "class_id", "status"),
+        Index("ix_submission_student", "student_ref"),
+        {"schema": SCHOOL_SCHEMA},
+    )
+
+    submission_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    organization_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    class_id: Mapped[str] = mapped_column(
+        String(64),
+        ForeignKey(f"{SCHOOL_SCHEMA}.classroom.class_id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    assignment_id: Mapped[str] = mapped_column(
+        String(64),
+        ForeignKey(f"{SCHOOL_SCHEMA}.assignment.assignment_id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    objective_code: Mapped[str] = mapped_column(String(64), nullable=False)
+    item_ref: Mapped[str] = mapped_column(String(128), nullable=False)
+    student_ref: Mapped[str] = mapped_column(String(64), nullable=False)
+    text: Mapped[str] = mapped_column(Text, nullable=False)
+    status: Mapped[str] = mapped_column(String(16), nullable=False)
+    attempt: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    max_score: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    outcome: Mapped[str | None] = mapped_column(String(16), nullable=True)
+    score: Mapped[int | None] = mapped_column(Integer, nullable=True)
+    feedback: Mapped[str] = mapped_column(Text, nullable=False, default="")
+    submitted_at: Mapped[float] = mapped_column(Float, nullable=False)
+    created_at: Mapped[float] = mapped_column(Float, nullable=False)
+    returned_at: Mapped[float | None] = mapped_column(Float, nullable=True)
+    marked_at: Mapped[float | None] = mapped_column(Float, nullable=True)
+    reviewed_by: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+
+    __mapper_args__ = {"version_id_col": version}

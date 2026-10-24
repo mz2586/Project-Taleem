@@ -201,7 +201,7 @@ components:
             objective_code: { type: string }
             kind:
               type: string
-              enum: [choose, fill, order, match, sort]
+              enum: [choose, fill, order, match, sort, written]
               description: Interaction kind (ITEM_INTERACTION_CONTRACT.md); how to show + answer the item.
             left_count:
               type: integer
@@ -276,7 +276,7 @@ components:
               item_ref: { type: string }
               kind:
                 type: string
-                enum: [choose, fill, order, match, sort]
+                enum: [choose, fill, order, match, sort, written]
                 description: Interaction kind (ITEM_INTERACTION_CONTRACT.md); how to show + answer the item.
               left_count:
                 type: integer
