@@ -100,16 +100,16 @@ test("learner signs in with family code + PIN and explores", async ({ browser })
   ] as const) {
     await visit(page, path, name);
   }
-  // Start a lesson from Today, step through it and answer one question.
+  // Start a lesson from Today: it must open and render a real question (any interaction kind).
+  // Answer submission per kind is covered by test_item_interaction_runtime.py and the CI journey.
   await page.goto("/student/today");
-  // The control's accessible name includes its "▶" icon, so match the label text, link or button.
+  // The control's accessible name includes its "▶" icon, so match the label text.
   const label = new RegExp(`(^|\\s)${t("student.today.start")}$`);
   await page.getByRole("link", { name: label }).or(page.getByRole("button", { name: label })).first().click();
   await page.waitForURL("**/student/session**", { timeout: 30_000 });
   await page.waitForLoadState("networkidle");
   await shot(page, "learner-lesson-start");
-  const group = page.getByRole("group", { name: t("student.session.answers") });
-  for (let i = 0; i < 12 && !(await group.isVisible()); i++) {
+  for (let i = 0; i < 12 && !(await page.getByText(/Question 1 of \d+/).isVisible()); i++) {
     const ready = page.getByRole("button", { name: t("student.session.ready") });
     const next = page.getByRole("button", { name: t("common.next"), exact: true });
     if (await ready.isVisible()) await ready.click();
@@ -117,30 +117,7 @@ test("learner signs in with family code + PIN and explores", async ({ browser })
     else break;
     await page.waitForTimeout(500);
   }
-  await shot(page, "learner-lesson-question");
-  // The lesson renders a real question (any interaction kind). Answer submission per kind is
-  // covered by test_item_interaction_runtime.py and the CI browser journey.
   await expect(page.getByText(/Question 1 of \d+/)).toBeVisible();
-  await expect(page.getByRole("button", { name: t("student.session.items.check") }).or(
-    page.getByRole("group", { name: t("student.session.answers") }),
-  ).first()).toBeVisible();
+  await shot(page, "learner-lesson-question");
   note(`[lesson] opened a live lesson question at ${page.url()}`);
-});
-  if (await group.isVisible()) {
-    await group.getByRole("button").first().click(); // a choose item: tap an option
-  } else {
-    // A sort/match item: tap each card, then the first group/right-hand item, until complete.
-    const groupLabel = page.getByRole("button", { name: /\b0$|\d+$/ }).first();
-    for (let i = 0; i < 10 && (await check.isDisabled()); i++) {
-      const card = page.locator("button[aria-pressed='false']").first();
-      if (!(await card.count())) break;
-      await card.click();
-      await groupLabel.click();
-    }
-    await check.click();
-  }
-  await page.waitForLoadState("networkidle");
-  await shot(page, "learner-lesson-answered");
-  note(`[lesson] answered one question at ${page.url()}`);
-  note(`[lesson] after answering: ${(await page.locator("main").first().innerText()).replace(/\s+/g, " ").slice(0, 300)}`);
 });
