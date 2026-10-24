@@ -51,6 +51,9 @@ class Metadata:
     # key; "" = not placed. Hashed only when set, so unplaced lessons keep their hashes.
     chapter_key: str = ""
     topic_key: str = ""
+    # Who may be shown the lesson (DEMO_COHORT_CONTRACT §3): "" = everyone; "demo" = only the
+    # designated synthetic demo accounts. Hashed only when set, so existing hashes do not change.
+    audience: str = ""
 
 
 @dataclass
@@ -114,7 +117,7 @@ class Lesson:
         # is content and is hashed.
         meta = payload.get("metadata", {})
         meta.pop("author_subject", None)
-        for key in ("chapter_key", "topic_key"):
+        for key in ("chapter_key", "topic_key", "audience"):
             if not meta.get(key):
                 meta.pop(key, None)
         if meta.get("curriculum_pack") == DEFAULT_PACK_ID:

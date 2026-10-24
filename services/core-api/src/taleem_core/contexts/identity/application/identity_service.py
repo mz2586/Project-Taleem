@@ -21,6 +21,7 @@ from collections.abc import Callable
 from dataclasses import dataclass
 from typing import Any
 
+from ....platform.cohort import COHORTS
 from ....platform.correlation import get_correlation_id
 from ....platform.errors import Problem, forbidden, not_found, unauthorized, validation_error
 from ..domain import credentials
@@ -307,7 +308,7 @@ class IdentityService:
 
         now = self._now()
         with self._uow() as uow:
-            self._require_guardian(uow, guardian_ref)
+            guardian = self._require_guardian(uow, guardian_ref)
             siblings = uow.learners.for_guardian(guardian_ref)
             if any(s.roster_key == roster_key(name) for s in siblings):
                 # Two children in one family cannot share a display name: the name *is* the child's
@@ -327,6 +328,7 @@ class IdentityService:
                     grade_level=grade_level,
                     locale=locale,
                     now=now,
+                    cohort=guardian.cohort,  # a learner's cohort is its guardian's
                 )
             except InvalidAccountError as exc:
                 raise _invalid_from(exc) from exc
@@ -741,6 +743,7 @@ class IdentityService:
                 now=now,
                 ttl_seconds=LEARNER_TOKEN_TTL_SECONDS,
                 device_id=device_id or None,
+                cohort=learner.cohort,
             )
             return {
                 "learner": _learner_view(learner, state),
@@ -823,6 +826,7 @@ class IdentityService:
                     now=now,
                     ttl_seconds=LEARNER_TOKEN_TTL_SECONDS,
                     device_id=record.device_id or None,
+                    cohort=learner.cohort,
                 )
                 payload: dict[str, Any] = {
                     "learner": _learner_view(learner, state),
@@ -902,6 +906,47 @@ class IdentityService:
             uow.commit()
             return {"signed_out": True}
 
+    # ---------------------------------------------------------------------------- demo cohort
+
+    def assign_family_cohort(self, *, guardian_ref: str, cohort: str) -> int:
+        """Set the cohort of a guardian and all their learners (DEMO_COHORT_CONTRACT §2).
+
+        **Not exposed by any HTTP route**: the only caller is the demo seeder
+        (``tools/demo_cohort.py``). Returns the number of accounts changed (0 = already set).
+        """
+        if cohort not in COHORTS:
+            raise ValueError(f"unknown cohort {cohort!r}")
+        with self._uow() as uow:
+            if uow.guardians.get(guardian_ref) is None:
+                raise not_found("guardian account not found")
+            changed = uow.guardians.set_family_cohort(guardian_ref, cohort)
+            if changed:
+                uow.audit.append(
+                    AuditEvent.record(
+                        action=AuditAction.COHORT_ASSIGNED,
+                        actor_ref="system:demo-seed",
+                        actor_role="system",
+                        subject_ref=guardian_ref,
+                        now=self._now(),
+                        correlation_id=get_correlation_id() or "",
+                        detail={"cohort": cohort, "accounts": changed},
+                    )
+                )
+            uow.commit()
+        return changed
+
+    def guardian_cohort(self, guardian_ref: str) -> str:
+        """The guardian account's cohort ("" when there is no such account)."""
+        with self._uow() as uow:
+            account = uow.guardians.get(guardian_ref)
+        return account.cohort if account is not None else ""
+
+    def learner_cohort(self, student_ref: str) -> str:
+        """The learner account's cohort ("" when there is no such account)."""
+        with self._uow() as uow:
+            account = uow.learners.get(student_ref)
+        return account.cohort if account is not None else ""
+
     # ------------------------------------------------------------------------------------ audit
 
     def audit_trail(self, *, guardian_ref: str, limit: int = 100) -> list[dict[str, Any]]:
@@ -919,6 +964,7 @@ class IdentityService:
             role="guardian",
             now=now,
             ttl_seconds=GUARDIAN_TOKEN_TTL_SECONDS,
+            cohort=account.cohort,
         )
 
     def _mint_refresh(

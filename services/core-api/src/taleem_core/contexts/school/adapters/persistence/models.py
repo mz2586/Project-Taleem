@@ -43,6 +43,8 @@ class TeacherRow(SchoolBase):
     status: Mapped[str] = mapped_column(String(16), nullable=False, default="active")
     failed_attempts: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     created_at: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
+    # "" (real) / "demo" (alembic 0016, DEMO_COHORT_CONTRACT).
+    cohort: Mapped[str] = mapped_column(String(16), nullable=False, default="", server_default="")
 
 
 class ClassroomRow(SchoolBase):

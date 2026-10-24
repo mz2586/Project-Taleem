@@ -14,6 +14,7 @@ import { buttonStyle } from "../../design-system/Button";
 import { useLocale } from "../../lib/i18n/useLocale";
 import { helpHref } from "../../lib/safeguarding/context";
 import type { GradeBand } from "../../lib/student/config";
+import { DemoAccountBadge } from "../session/DemoAccountBadge";
 import { BottomNav } from "./BottomNav";
 import { SyncStatusBadge } from "./SyncStatusBadge";
 
@@ -58,6 +59,7 @@ export function AppShell({
       >
         <h1 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{title}</h1>
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "var(--space-2)" }}>
+          <DemoAccountBadge />
           <SyncStatusBadge />
           <Link
             href={help}

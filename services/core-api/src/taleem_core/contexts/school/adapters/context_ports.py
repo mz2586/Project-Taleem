@@ -41,6 +41,11 @@ class IdentityLearnerDirectory:
     def may_learn(self, student_ref: str) -> bool:
         return self._lookup(student_ref) is not None and self._refusal(student_ref) is None
 
+    def cohort_of(self, student_ref: str) -> str:
+        """The learner account's cohort (``""`` real / ``"demo"``; ``""`` when unknown)."""
+        learner = self._lookup(student_ref)
+        return str(getattr(learner, "cohort", "") or "") if learner is not None else ""
+
     def shares_with_teacher(self, student_ref: str) -> bool:
         return self.may_learn(student_ref) and self._sharing(student_ref)
 

@@ -87,6 +87,11 @@ export const en = {
     },
     appName: "Taleem",
     skipToContent: "Skip to content",
+    // Shown in the learner and guardian shells for the synthetic demo accounts only.
+    demoAccount: {
+      label: "Demo account",
+      hint: "A synthetic demo account: sample data and unreviewed AI-drafted lessons, not a real child.",
+    },
     loading: "Loading…",
     tryAgain: "Try again",
     retry: "Retry",

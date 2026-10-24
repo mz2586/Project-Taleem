@@ -12,6 +12,7 @@ from __future__ import annotations
 from sqlalchemy import select
 from sqlalchemy.orm import Session, sessionmaker
 
+from ....platform.cohort import REAL, current_reader_cohort, visible_to
 from ...curriculum_studio.adapters.persistence import unit_of_work as cs_unit_of_work
 from ...curriculum_studio.adapters.persistence.models import LessonRow, SubjectRow
 from ...curriculum_studio.domain.assessment import HUMAN_GRADED, AssessmentItem, ItemType
@@ -107,6 +108,31 @@ def _playable_activities(activities: list[AssessmentItem]) -> list[AssessmentIte
     return [a for a in activities if interaction_kind(a) is not None]
 
 
+def _visible_published(lessons: list[Lesson]) -> list[Lesson]:
+    """The published lessons the current reader may see (DEMO_COHORT_CONTRACT §3).
+
+    Every read of this model goes through here: a lesson whose ``metadata.audience`` is ``demo``
+    is visible only to a reader whose **account** is in the demo cohort
+    (``platform.cohort.current_reader_cohort``; unknown reader = real = never demo)."""
+    cohort = current_reader_cohort()
+    return [
+        lesson
+        for lesson in lessons
+        if lesson.workflow.state.value == "published"
+        and visible_to(lesson.metadata.audience, cohort)
+    ]
+
+
+def _preferred(lessons: list[Lesson]) -> list[Lesson]:
+    """``_visible_published``, with a demo reader's own-cohort lessons first (stable), so where a
+    demo and a real lesson teach the same objective a demo reader is taught the demo one."""
+    visible = _visible_published(lessons)
+    cohort = current_reader_cohort()
+    if cohort == REAL:
+        return visible
+    return sorted(visible, key=lambda lesson: lesson.metadata.audience != cohort)
+
+
 class CurriculumStudioReadModel:
     """Reads published lessons from the Curriculum Studio store. Implements CurriculumReadModel."""
 
@@ -115,11 +141,8 @@ class CurriculumStudioReadModel:
 
     def lesson_for(self, objective_code: str) -> LessonView | None:
         with cs_unit_of_work(self._sf) as uow:
-            for lesson in uow.lessons.all():
-                if (
-                    lesson.workflow.state.value == "published"
-                    and objective_code in lesson.learning_outcomes
-                ):
+            for lesson in _preferred(uow.lessons.all()):
+                if objective_code in lesson.learning_outcomes:
                     return self._project(lesson, objective_code)
         return None
 
@@ -127,7 +150,7 @@ class CurriculumStudioReadModel:
         """Project every published lesson once (homework/assessment/recommendation queries)."""
         out: list[LessonView] = []
         with cs_unit_of_work(self._sf) as uow:
-            lessons = [x for x in uow.lessons.all() if x.workflow.state.value == "published"]
+            lessons = _visible_published(uow.lessons.all())
         for lesson in lessons:
             code = lesson.learning_outcomes[0] if lesson.learning_outcomes else ""
             out.append(self._project(lesson, code))
@@ -142,6 +165,7 @@ class CurriculumStudioReadModel:
         studio content hash and the published version number. Consumers key caches of derived
         content on it, so a changed lesson is never served from a stale entry.
         """
+        cohort = current_reader_cohort()
         with self._sf() as session:
             rows = session.execute(
                 select(
@@ -151,13 +175,16 @@ class CurriculumStudioReadModel:
                     LessonRow.updated_at,
                     LessonRow.content_hash,
                     LessonRow.current_version_no,
+                    # The audience, read from the body without loading it (DEMO_COHORT_CONTRACT).
+                    LessonRow.body["metadata"]["audience"].as_string(),
                 )
                 .where(LessonRow.deleted_at.is_(None), LessonRow.state == "published")
                 .order_by(LessonRow.updated_at.desc())
             )
             return [
                 (str(key), "|".join(str(part) for part in (row_id, lock, updated, chash, ver)))
-                for key, row_id, lock, updated, chash, ver in rows
+                for key, row_id, lock, updated, chash, ver, audience in rows
+                if visible_to(audience or "", cohort)
             ]
 
     def published_catalog(self) -> list[dict[str, object]]:
@@ -168,7 +195,7 @@ class CurriculumStudioReadModel:
         """
         out: list[dict[str, object]] = []
         with cs_unit_of_work(self._sf) as uow:
-            lessons = [x for x in uow.lessons.all() if x.workflow.state.value == "published"]
+            lessons = _visible_published(uow.lessons.all())
         for lesson in lessons:
             for code in lesson.learning_outcomes:
                 out.append(
@@ -190,7 +217,7 @@ class CurriculumStudioReadModel:
         out: list[dict[str, object]] = []
         seen: set[str] = set()
         with cs_unit_of_work(self._sf) as uow:
-            lessons = [x for x in uow.lessons.all() if x.workflow.state.value == "published"]
+            lessons = _preferred(uow.lessons.all())
         subject_names: dict[str, dict[str, str]] = {}
         with self._sf() as session:
             for key, titles in session.execute(
@@ -229,7 +256,7 @@ class CurriculumStudioReadModel:
         infos: list[ObjectiveInfo] = []
         seen: set[str] = set()
         with cs_unit_of_work(self._sf) as uow:
-            lessons = [x for x in uow.lessons.all() if x.workflow.state.value == "published"]
+            lessons = _preferred(uow.lessons.all())
         for seq, lesson in enumerate(lessons):
             for code in lesson.learning_outcomes:
                 if code not in seen:

@@ -20,6 +20,7 @@ from collections.abc import Callable, Iterable, Sequence
 from datetime import UTC, datetime
 from typing import Any, Protocol
 
+from ...platform.cohort import REAL, reading_as
 from ...platform.errors import Problem
 
 
@@ -41,12 +42,23 @@ def month_period(value: str) -> tuple[int, int]:
     return int(start.timestamp()), int(end)
 
 
-def issue_due(service: _Issuer, learners: Iterable[str], start: int, end: int) -> dict[str, Any]:
+def issue_due(
+    service: _Issuer,
+    learners: Iterable[str],
+    start: int,
+    end: int,
+    cohort_of: Callable[[str], str] | None = None,
+) -> dict[str, Any]:
+    """Issue each learner's card. ``cohort_of`` (the learner account's cohort) makes each card
+    derive from the lessons that learner can see (DEMO_COHORT_CONTRACT §3); without it every card
+    is derived as the real cohort."""
     issued: list[str] = []
     existing = not_eligible = 0
     for ref in learners:
         try:
-            issued.append(str(service.issue_for_learner(ref, start, end)["card_id"]))
+            with reading_as(cohort_of(ref) if cohort_of is not None else REAL):
+                card = service.issue_for_learner(ref, start, end)
+            issued.append(str(card["card_id"]))
         except Problem as exc:
             if exc.status == 409:
                 existing += 1
@@ -91,7 +103,11 @@ def main(
     app = app_factory()
     try:
         summary = issue_due(
-            app.state.reporting_service, app.state.reporting_learner_refs(), start, end
+            app.state.reporting_service,
+            app.state.reporting_learner_refs(),
+            start,
+            end,
+            cohort_of=getattr(app.state, "learner_cohort", None),
         )
     except Problem as exc:  # an invalid period (422): report it, exit non-zero
         out(json.dumps({"error": exc.code, "detail": exc.detail}))

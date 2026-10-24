@@ -24,6 +24,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any
 
+from ....platform.cohort import COHORTS
 from ....platform.concurrency import ConcurrencyConflictError
 from ....platform.errors import Problem, conflict, not_found, unauthorized, validation_error
 from ..domain.model import (
@@ -168,6 +169,26 @@ class SchoolService:
             uow.teachers.add(teacher)
             uow.commit()
         return _teacher_view(teacher)
+
+    # ------------------------------------------------------------- demo cohort (no HTTP route)
+
+    def assign_teacher_cohort(self, *, teacher_ref: str, cohort: str) -> bool:
+        """Set a teacher's cohort (DEMO_COHORT_CONTRACT). **Not exposed by any HTTP route**: the
+        only caller is the demo seeder (``tools/demo_cohort.py``). True if it changed."""
+        if cohort not in COHORTS:
+            raise ValueError(f"unknown cohort {cohort!r}")
+        with self._uow() as uow:
+            if uow.teachers.get(teacher_ref) is None:
+                raise not_found("teacher not found")
+            changed = uow.teachers.set_cohort(teacher_ref, cohort)
+            uow.commit()
+        return changed
+
+    def teacher_cohort(self, teacher_ref: str) -> str:
+        """The teacher account's cohort ("" when there is no such account)."""
+        with self._uow() as uow:
+            teacher = uow.teachers.get(teacher_ref)
+        return teacher.cohort if teacher is not None else ""
 
     # ----------------------------------------------------------------------- teacher sign-in
 
@@ -341,6 +362,11 @@ class SchoolService:
         with self._uow() as uow:
             classroom = uow.classrooms.by_join_code(code)
             if classroom is None:
+                raise _class_not_found()
+            # Two-way cohort isolation (DEMO_COHORT_CONTRACT §1): a demo learner never joins a real
+            # class and a real learner never joins a demo one. Answered exactly like a wrong code.
+            teacher = uow.teachers.get(classroom.teacher_ref)
+            if teacher is None or teacher.cohort != self._learner_cohort(student_ref):
                 raise _class_not_found()
             existing = uow.enrolments.get(
                 classroom.organization_id, classroom.class_id, student_ref
@@ -864,6 +890,10 @@ class SchoolService:
         """The enrolments the teacher may see right now, in order, with display names."""
         names = self._visible_names(enrolments)
         return [(e, names[e.student_ref]) for e in enrolments if e.student_ref in names]
+
+    def _learner_cohort(self, student_ref: str) -> str:
+        cohort_of = getattr(self._learners, "cohort_of", None)
+        return str(cohort_of(student_ref)) if callable(cohort_of) else ""
 
     def _require_teacher(self, uow: SchoolUnitOfWork, teacher_ref: str) -> Teacher:
         teacher = uow.teachers.get(teacher_ref)

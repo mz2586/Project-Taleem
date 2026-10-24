@@ -265,6 +265,16 @@ class CurriculumStudioService:
         self._commit()
         return lesson
 
+    def archive(
+        self, lesson_id: str, actor_role: str, note: str = "", actor_subject: str = ""
+    ) -> Lesson:
+        """Unpublish a published lesson (published -> archived). Its versions are kept."""
+        lesson = self.get(lesson_id)
+        self._transition(lesson, ReviewAction.ARCHIVE, actor_role, note, actor_subject)
+        self._repo.save(lesson)
+        self._commit()
+        return lesson
+
     # ---- helpers ----
     def _validate(self, lesson: Lesson) -> validation.ValidationResult:
         return validation.validate(

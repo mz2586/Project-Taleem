@@ -51,6 +51,8 @@ class AuditAction(StrEnum):
     # Written by the privacy context as the erasure tombstone (subject is the tombstone ref, never
     # the erased learner's ref); declared here so any reader of the audit log can parse it.
     LEARNER_ERASED = "privacy.learner_erased"
+    # The demo seeder flagged a family as the synthetic demo cohort (DEMO_COHORT_CONTRACT §2).
+    COHORT_ASSIGNED = "account.cohort_assigned"
 
 
 # Actions a guardian must be able to see for their own family without an operator in the loop:

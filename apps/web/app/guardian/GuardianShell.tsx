@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
+import { DemoAccountBadge } from "@/components/session/DemoAccountBadge";
 import { Button } from "@/design-system/Button";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { sessionStore } from "@/lib/session/store";
@@ -36,7 +37,10 @@ export function GuardianShell({ title, children }: { title: string; children: Re
       >
         <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "var(--space-2)" }}>
           <h1 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{title}</h1>
-          <LanguagePicker />
+          <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "var(--space-2)" }}>
+            <DemoAccountBadge />
+            <LanguagePicker />
+          </div>
         </div>
         <nav aria-label={t("guardian.shell.navLabel")}>
           <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexWrap: "wrap", gap: "var(--space-2)", alignItems: "center" }}>

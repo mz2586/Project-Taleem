@@ -14,7 +14,12 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-from .audio import SYNTHETIC_FIXTURE_AUDIO, AudioAssetResolver
+from .audio import (
+    DEMO_PLACEHOLDER_PREFIX,
+    SYNTHETIC_FIXTURE_AUDIO,
+    AudioAssetResolver,
+    resolver_for_audience,
+)
 from .content import Difficulty, LocalizedText
 from .hierarchy import EducationSystem, placement_errors
 from .interaction import lesson_answer_key_errors
@@ -89,8 +94,42 @@ def _resolve(lesson: Lesson, registry: PackRegistry) -> _PackContext:
     return _PackContext(pack, pack.rules_for(lesson.metadata.instructional_locales))
 
 
+# Lesson audiences (DEMO_COHORT_CONTRACT §3): "" = everyone, "demo" = the demo cohort only.
+AUDIENCES: tuple[str, ...] = ("", "demo")
+
+
+def _placeholder_refs(value: object, path: str = "") -> list[str]:
+    """Every field path holding a ``demo-placeholder/`` string anywhere in the lesson document."""
+    if isinstance(value, str):
+        return [path or "lesson"] if value.strip().startswith(DEMO_PLACEHOLDER_PREFIX) else []
+    if isinstance(value, dict):
+        return [
+            hit for k, v in value.items() for hit in _placeholder_refs(v, f"{path}.{k}".lstrip("."))
+        ]
+    if isinstance(value, (list, tuple)):
+        return [hit for i, v in enumerate(value) for hit in _placeholder_refs(v, f"{path}[{i}]")]
+    return []
+
+
+def _audience_findings(lesson: Lesson) -> list[Finding]:
+    """An audience outside the vocabulary, and demo placeholders on a lesson not for the demo."""
+    audience = lesson.metadata.audience
+    if audience not in AUDIENCES:
+        return [_blk(f"unknown audience {audience!r} (allowed: '' or 'demo')", "metadata")]
+    if audience == "demo":
+        return []
+    return [
+        _blk(
+            f"{where} is a {DEMO_PLACEHOLDER_PREFIX} ref: placeholders are allowed only on a "
+            "lesson whose audience is 'demo'",
+            where.split(".")[0].split("[")[0],
+        )
+        for where in _placeholder_refs(lesson.to_dict())
+    ]
+
+
 def _structural_findings(lesson: Lesson, ctx: _PackContext) -> list[Finding]:
-    f: list[Finding] = []
+    f: list[Finding] = _audience_findings(lesson)
     if ctx.rules is None:
         f.append(_blk(ctx.unresolved(), "metadata"))
 
@@ -228,6 +267,10 @@ def _accessibility_gate(
     for i, mv in enumerate(lesson.visual_concepts):
         if not any(v.strip() for v in mv.alt_text.text.values()):
             f.append(_blk(f"visual concept {i} missing alt text", "visual_concepts"))
+        if lesson.metadata.audience != "demo" and mv.media_id.strip().startswith(
+            DEMO_PLACEHOLDER_PREFIX
+        ):
+            f.append(_blk(f"visual concept {i} is a demo placeholder", "visual_concepts"))
     if ctx.pack is None or ctx.rules is None:
         f.append(_blk(ctx.unresolved(), "student_explanation"))
     else:
@@ -278,6 +321,10 @@ def _performance_gate(lesson: Lesson) -> GateResult:
     f: list[Finding] = []
     if not lesson.offline_package.strip():
         f.append(_blk("offline package required for performance/offline budget"))
+    elif lesson.metadata.audience != "demo" and lesson.offline_package.strip().startswith(
+        DEMO_PLACEHOLDER_PREFIX
+    ):
+        f.append(_blk("offline package is a demo placeholder (allowed on demo lessons only)"))
     return _gate(Gate.PERFORMANCE, f)
 
 
@@ -294,10 +341,14 @@ def validate(
 
     ``audio_assets`` resolves recorded-audio refs. Without one, only the synthetic dev/test
     fixture refs resolve (``audio.SYNTHETIC_FIXTURE_AUDIO``); production wiring passes the media
-    registry resolver.
+    registry resolver. ``demo-placeholder/`` refs resolve only for a lesson whose audience is
+    ``demo`` and never for any other lesson (DEMO_COHORT_CONTRACT §3), in every environment.
     """
     ctx = _resolve(lesson, registry if registry is not None else default_registry())
-    audio = audio_assets if audio_assets is not None else SYNTHETIC_FIXTURE_AUDIO
+    audio = resolver_for_audience(
+        lesson.metadata.audience,
+        audio_assets if audio_assets is not None else SYNTHETIC_FIXTURE_AUDIO,
+    )
     return ValidationResult(
         structural=_structural_findings(lesson, ctx),
         gate_results=[

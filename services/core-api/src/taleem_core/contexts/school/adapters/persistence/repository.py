@@ -70,6 +70,7 @@ def _teacher(row: TeacherRow) -> Teacher:
         status=TeacherStatus(row.status),
         failed_attempts=row.failed_attempts,
         created_at=row.created_at,
+        cohort=row.cohort or "",
     )
 
 
@@ -88,6 +89,7 @@ class SqlTeacherRepository:
                 status=teacher.status.value,
                 failed_attempts=teacher.failed_attempts,
                 created_at=teacher.created_at,
+                cohort=teacher.cohort,
             )
         )
 
@@ -108,6 +110,15 @@ class SqlTeacherRepository:
         row.passphrase_hash = teacher.passphrase_hash
         row.status = teacher.status.value
         row.failed_attempts = teacher.failed_attempts
+        # ``cohort`` is deliberately not written here: only ``set_cohort`` changes it.
+
+    def set_cohort(self, teacher_ref: str, cohort: str) -> bool:
+        """Set a teacher's cohort (the demo seeder's non-HTTP path). True if it changed."""
+        row = self._s.get(TeacherRow, teacher_ref)
+        if row is None or row.cohort == cohort:
+            return False
+        row.cohort = cohort
+        return True
 
 
 def _classroom(row: ClassroomRow) -> Classroom:

@@ -113,6 +113,9 @@ class Teacher:
     status: TeacherStatus = TeacherStatus.ACTIVE
     failed_attempts: int = 0
     created_at: float = 0.0
+    # "" (real) or "demo" (DEMO_COHORT_CONTRACT). Set only by the demo seeder through
+    # ``SchoolService.assign_teacher_cohort``; no HTTP route sets it.
+    cohort: str = ""
 
     @staticmethod
     def create(

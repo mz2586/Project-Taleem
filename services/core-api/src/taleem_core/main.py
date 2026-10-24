@@ -169,6 +169,7 @@ from .contexts.sync.domain import DeltaType, SyncDelta, SyncStore
 from .contexts.sync.service import DurableSyncCoordinator
 from .platform import correlation
 from .platform import observability as obs
+from .platform.cohort import REAL, install_reader, reset_reader
 from .platform.concurrency import ConcurrencyConflictError
 from .platform.config import Settings, load_settings
 from .platform.errors import Problem, conflict, forbidden
@@ -509,8 +510,14 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         )
 
     def _teacher_access(teacher_ref: str, now: float) -> IssuedToken:
+        # ``school_service`` is built below; resolved at call time. The cohort claim is for display
+        # only (DEMO_COHORT_CONTRACT §2); the server reads the cohort from the account.
         return token_issuer.issue(
-            subject=teacher_ref, role="teacher", now=now, ttl_seconds=GUARDIAN_TOKEN_TTL_SECONDS
+            subject=teacher_ref,
+            role="teacher",
+            now=now,
+            ttl_seconds=GUARDIAN_TOKEN_TTL_SECONDS,
+            cohort=school_service.teacher_cohort(teacher_ref),
         )
 
     def _issue_teacher_token(*, teacher_ref: str, now: float) -> dict[str, object]:
@@ -852,6 +859,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             ]
 
     app.state.reporting_learner_refs = _all_learner_refs
+    # The scheduler derives each learner's card as that learner reads (their cohort's lessons).
+    app.state.learner_cohort = identity_service.learner_cohort
     # Issuing and previewing derive a whole class's cards: bounded per teacher (shared when a real
     # database is configured, like every other limit).
     reporting_limiter: Limiter = (
@@ -938,6 +947,32 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         # Idempotent across reloads/tests: re-registering the same module is a no-op.
         with contextlib.suppress(ValueError):
             reg.register(module)
+
+    # ---- Reader cohort (DEMO_COHORT_CONTRACT §3) ----
+    # Every published-curriculum read is filtered by the reader's cohort. Per request a LAZY
+    # resolver is installed: only when a read needs it does it verify the bearer token and read the
+    # cohort from the ACCOUNT (learner / guardian / teacher) — never from the token's informational
+    # ``cohort`` claim. No token, a bad token, any other role or any failure = the real cohort.
+    def _reader_cohort(authorization: str) -> str:
+        if not authorization.lower().startswith("bearer "):
+            return REAL
+        claims = auth.verifier.verify(authorization.split(" ", 1)[1])
+        if claims.role == "student":
+            return identity_service.learner_cohort(claims.sub)
+        if claims.role == "guardian":
+            return identity_service.guardian_cohort(claims.sub)
+        if claims.role == "teacher":
+            return school_service.teacher_cohort(claims.sub)
+        return REAL
+
+    @app.middleware("http")
+    async def reader_cohort(request: Request, call_next: Any) -> Any:
+        header = request.headers.get("authorization", "")
+        token = install_reader(lambda: _reader_cohort(header))
+        try:
+            return await call_next(request)
+        finally:
+            reset_reader(token)
 
     @app.middleware("http")
     async def observability(request: Request, call_next: Any) -> Any:

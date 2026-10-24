@@ -34,6 +34,7 @@ def _to_guardian(row: GuardianRow) -> GuardianAccount:
         failed_attempts=row.failed_attempts,
         created_at=row.created_at,
         version=row.version,
+        cohort=row.cohort or "",
     )
 
 
@@ -51,6 +52,7 @@ def _to_learner(row: LearnerRow) -> LearnerAccount:
         created_at=row.created_at,
         version=row.version,
         known_devices=list(row.known_devices or []),
+        cohort=row.cohort or "",
     )
 
 
@@ -123,6 +125,7 @@ class SqlGuardianRepository:
                 status=account.status.value,
                 failed_attempts=account.failed_attempts,
                 created_at=account.created_at,
+                cohort=account.cohort,
             )
         )
 
@@ -154,6 +157,47 @@ class SqlGuardianRepository:
         row.locale = account.locale
         row.status = account.status.value
         row.failed_attempts = account.failed_attempts
+        # ``cohort`` is deliberately not written here: only ``set_family_cohort`` changes it.
+
+    def set_family_cohort(self, guardian_ref: str, cohort: str) -> int:
+        """Set the cohort of a guardian and every learner of theirs; returns the rows changed.
+
+        Used only by ``IdentityService.assign_family_cohort`` (the demo seeder's non-HTTP path)."""
+        changed = 0
+        guardian = self._session.get(GuardianRow, guardian_ref)
+        if guardian is None:
+            return 0
+        if guardian.cohort != cohort:
+            guardian.cohort = cohort
+            changed += 1
+        for learner in self._session.scalars(
+            select(LearnerRow).where(LearnerRow.guardian_ref == guardian_ref)
+        ):
+            if learner.cohort != cohort:
+                learner.cohort = cohort
+                changed += 1
+        return changed
+
+    def in_cohort(self, cohort: str) -> list[GuardianAccount]:
+        """Every guardian of ``cohort`` (the demo seeder's ``--erase``)."""
+        rows = self._session.scalars(
+            select(GuardianRow).where(GuardianRow.cohort == cohort).order_by(GuardianRow.email)
+        ).all()
+        return [_to_guardian(row) for row in rows]
+
+    def delete(self, guardian_ref: str) -> bool:
+        """Remove a guardian account that has no learners left (``--erase``, after each learner
+        went through the privacy erasure path). Refuses while a learner row remains."""
+        row = self._session.get(GuardianRow, guardian_ref)
+        if row is None:
+            return False
+        left = self._session.scalars(
+            select(LearnerRow.student_ref).where(LearnerRow.guardian_ref == guardian_ref)
+        ).first()
+        if left is not None:
+            raise ValueError("guardian still has learner accounts; erase them first")
+        self._session.delete(row)
+        return True
 
 
 class SqlLearnerRepository:
@@ -175,6 +219,7 @@ class SqlLearnerRepository:
                 failed_attempts=account.failed_attempts,
                 created_at=account.created_at,
                 known_devices=list(account.known_devices),
+                cohort=account.cohort,
             )
         )
 

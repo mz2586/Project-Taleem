@@ -69,6 +69,7 @@ class TokenIssuer:
         ttl_seconds: int,
         aal: int = 1,
         device_id: str | None = None,
+        cohort: str = "",
     ) -> IssuedToken:
         issued_at = int(now)
         expires_at = issued_at + ttl_seconds
@@ -86,6 +87,11 @@ class TokenIssuer:
         }
         if device_id:
             claims["device_id"] = device_id
+        if cohort:
+            # Informational only (DEMO_COHORT_CONTRACT §2): lets the UI show a "Demo account"
+            # badge. Authorization never reads it — the verifier does not even parse it; the
+            # server reads a reader's cohort from the account.
+            claims["cohort"] = cohort
         if self.signer is not None:
             token = sign_eddsa(claims, self.signer)
         elif self.hs256_secret:

@@ -130,6 +130,9 @@ class GuardianAccount:
     failed_attempts: int = 0
     created_at: float = 0.0
     version: int = 1
+    # "" (real) or "demo" (DEMO_COHORT_CONTRACT §2). Set only by the demo seeder through
+    # ``IdentityService.assign_family_cohort``; no HTTP route can set, clear or change it.
+    cohort: str = ""
 
     @staticmethod
     def create(
@@ -177,6 +180,9 @@ class LearnerAccount:
     failed_attempts: int = 0
     created_at: float = 0.0
     version: int = 1
+    # The guardian's cohort, inherited at enrolment and changed only with the guardian's
+    # (``IdentityService.assign_family_cohort``). Never set from a request.
+    cohort: str = ""
     # Devices this learner has signed in from, newest first. Used to show a guardian where their
     # child is learning and to bind offline packages; never a tracking identifier (opaque, client
     # generated, and rotatable by clearing site data).
@@ -193,6 +199,7 @@ class LearnerAccount:
         locale: str = "ur",
         now: float = 0.0,
         student_ref: str | None = None,
+        cohort: str = "",
     ) -> LearnerAccount:
         if grade_band not in GRADE_BANDS:
             raise InvalidAccountError(
@@ -217,6 +224,7 @@ class LearnerAccount:
             grade_level=grade_level,
             locale=locale,
             created_at=now,
+            cohort=cohort,
         )
 
     @property

@@ -42,6 +42,8 @@ class GuardianRow(IdentityBase):
     failed_attempts: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     created_at: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    # "" (real) / "demo" (alembic 0016, DEMO_COHORT_CONTRACT §2).
+    cohort: Mapped[str] = mapped_column(String(16), nullable=False, default="", server_default="")
 
     __mapper_args__ = {"version_id_col": version}
 
@@ -73,6 +75,8 @@ class LearnerRow(IdentityBase):
     created_at: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
     known_devices: Mapped[list[Any]] = mapped_column(JsonType, nullable=False, default=list)
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    # The guardian's cohort (alembic 0016).
+    cohort: Mapped[str] = mapped_column(String(16), nullable=False, default="", server_default="")
 
     __mapper_args__ = {"version_id_col": version}
 

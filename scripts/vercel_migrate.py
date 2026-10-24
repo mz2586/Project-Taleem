@@ -70,20 +70,21 @@ def main() -> int:
 
 
 def _seed_demo_fixture() -> int:
-    """Opt-in demo content: publish the clearly labelled SYNTHETIC fixture lesson.
+    """Opt-in: seed the in-app DEMO COHORT (docs/03-security-privacy/DEMO_COHORT_CONTRACT.md).
 
-    Runs only when ``TALEEM_DEMO_SEED=1`` is set on the deployment, and the seeder itself refuses
-    when ``TALEEM_ENV=production``, so a production database never receives synthetic content.
-    Idempotent (an existing fixture is left alone). A refusal fails the build loudly rather than
-    silently skipping, so it is never mistaken for "seeded".
+    Runs only when ``TALEEM_DEMO_SEED=1`` is set on the deployment, in any environment — production
+    included — because the seeder (``taleem_core.tools.demo_cohort``) writes only demo-cohort
+    accounts (the reserved ``example.org`` demo families), ``audience = "demo"`` lessons that no
+    real reader can see, and those accounts' records. It relaxes no safeguard; the generic fixture
+    seeder (``e2e_journey``) still refuses production. Idempotent, prints counts only. A refusal
+    fails the build loudly rather than silently skipping, so it is never mistaken for "seeded".
     """
     if os.environ.get("TALEEM_DEMO_SEED", "").strip() != "1":
         return 0
-    from taleem_core.tools.e2e_journey import _seed_from_environment
+    from taleem_core.tools.demo_cohort import seed_from_environment
 
-    print("[demo-seed] TALEEM_DEMO_SEED=1: publishing the synthetic fixture lesson")
-    return _seed_from_environment()
-
+    print("[demo-seed] TALEEM_DEMO_SEED=1: seeding the demo cohort (demo-only accounts + content)")
+    return seed_from_environment()
 
 if __name__ == "__main__":
     raise SystemExit(main())
