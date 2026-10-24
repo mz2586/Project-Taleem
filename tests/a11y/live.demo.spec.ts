@@ -102,7 +102,9 @@ test("learner signs in with family code + PIN and explores", async ({ browser })
   }
   // Start a lesson from Today, step through it and answer one question.
   await page.goto("/student/today");
-  await page.getByRole("button", { name: t("student.today.start"), exact: true }).first().click();
+  // The control's accessible name includes its "▶" icon, so match the label text, link or button.
+  const label = new RegExp(`(^|\\s)${t("student.today.start")}$`);
+  await page.getByRole("link", { name: label }).or(page.getByRole("button", { name: label })).first().click();
   await page.waitForURL("**/student/session**", { timeout: 30_000 });
   await page.waitForLoadState("networkidle");
   await shot(page, "learner-lesson-start");
