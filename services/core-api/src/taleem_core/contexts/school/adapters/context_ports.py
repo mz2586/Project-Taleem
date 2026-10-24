@@ -177,18 +177,26 @@ class CallableWrittenWork:
     """``WrittenWork`` over the learning context's written-work service.
 
     ``written_lesson(code)`` returns learning's JSON-shaped view (``{"objective_code", "title",
-    "items": [{"item_ref", "prompt", "hints", "max_chars", "rubric", "sample_answer",
-    "guidance"}]}``) or None; ``record_marked(...)`` records the evidence and returns whether it
-    was new. Duck-typed: no learning module is imported.
+    "items": [{"item_ref", "prompt", "hints", "max_chars", "auto_markable", "rubric",
+    "sample_answer", "guidance"}]}``) or None; ``record_marked(...)`` records the evidence and
+    returns whether it was new; ``check_answer(code, item_ref, text)`` auto-marks an exact-key
+    item (None otherwise); ``studied_objectives(ref)`` lists the lessons a learner studied.
+    Duck-typed: no learning module is imported.
     """
 
     def __init__(
         self,
         written_lesson: Callable[[str], dict[str, Any] | None],
         record_marked: Callable[..., bool],
+        check_answer: Callable[[str, str, str], bool | None] | None = None,
+        studied_objectives: Callable[[str], list[str]] | None = None,
     ) -> None:
         self._lesson = written_lesson
         self._record = record_marked
+        # Optional: without a checker nothing is auto-marked; without the studied reader there
+        # is no self-paced homework (HOMEWORK_AND_MARKING_CONTRACT §6).
+        self._check = check_answer
+        self._studied = studied_objectives
 
     def lesson(self, objective_code: str) -> WrittenLesson | None:
         view = self._lesson(objective_code)
@@ -206,6 +214,7 @@ class CallableWrittenWork:
                     rubric=dict(rubric) if isinstance(rubric, dict) else None,
                     sample_answer=_text_or_none(raw.get("sample_answer")),
                     guidance=_text_or_none(raw.get("guidance")),
+                    auto_markable=self._check is not None and raw.get("auto_markable") is True,
                 )
             )
         return WrittenLesson(
@@ -232,3 +241,14 @@ class CallableWrittenWork:
                 met=met,
             )
         )
+
+    def check_answer(self, objective_code: str, item_ref: str, text: str) -> bool | None:
+        if self._check is None:
+            return None
+        verdict = self._check(objective_code, item_ref, text)
+        return None if verdict is None else bool(verdict)
+
+    def studied_objectives(self, student_ref: str) -> list[str]:
+        if self._studied is None:
+            return []
+        return [str(code) for code in self._studied(student_ref)]

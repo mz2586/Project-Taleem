@@ -8,8 +8,9 @@ Who may call what (deny-by-default PDP, then ownership in the service):
   organization — always comes from the verified token, never from the request.
 - ``guardian``: join their own learner to a class with a class code (records consent).
 - ``teacher``: also the marking queue of their own classes, and mark / return a submission.
-- ``student``: their own homework list and submissions (``build_school_learner_router``, mounted
-  behind the live learner consent gate like every other learner surface).
+- ``student``: their own homework list and submissions — assigned and self-paced
+  (``build_school_learner_router``, mounted behind the live learner consent gate like every other
+  learner surface).
 
 One route is public: teacher sign-in, which is rate limited and fails uniformly.
 """
@@ -337,6 +338,27 @@ def build_school_learner_router(
         require_owner_or(claims, student_ref, privileged_roles=())
         return service.learner_submit(
             student_ref=student_ref, assignment_id=assignment_id, item_ref=item_ref, text=body.text
+        )
+
+    @router.post(
+        "/learners/{student_ref}/homework/self-paced/{objective_code}/items/{item_ref}:submit"
+    )
+    def learner_submit_self_paced(
+        student_ref: str,
+        objective_code: str,
+        item_ref: str,
+        body: SubmitIn,
+        claims: Claims = Depends(claims_dependency),
+    ) -> dict[str, Any]:
+        """A written answer to a lesson the learner studied (HOMEWORK_AND_MARKING_CONTRACT §6):
+        no assignment, no class, no teacher; ``progress_sharing`` does not apply."""
+        authorize(claims, "operate", "school.homework")
+        require_owner_or(claims, student_ref, privileged_roles=())
+        return service.learner_submit_self_paced(
+            student_ref=student_ref,
+            objective_code=objective_code,
+            item_ref=item_ref,
+            text=body.text,
         )
 
     return router

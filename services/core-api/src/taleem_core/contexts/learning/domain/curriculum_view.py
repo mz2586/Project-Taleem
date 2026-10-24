@@ -88,7 +88,8 @@ class ItemView:
     hints: tuple[str, ...] = ()  # graduated hint ladder (authored)
     kind: str = CHOOSE
     left_count: int = 0  # match/sort: options[:left_count] are the left items / cards
-    accepted_answers: tuple[str, ...] = ()  # fill: canonical answer first, then variants
+    # fill (and a written item with an exact key): canonical answer first, then variants
+    accepted_answers: tuple[str, ...] = ()
     correct_order: tuple[int, ...] = ()  # order: option indices in the correct order
     correct_pairs: frozenset[tuple[int, int]] = frozenset()  # match/sort: (left, right)
     misconception: str = ""  # misconception any wrong answer implies (after option_misconceptions)
@@ -102,6 +103,13 @@ class ItemView:
     @property
     def written(self) -> bool:
         return self.kind == WRITTEN
+
+    @property
+    def auto_markable(self) -> bool:
+        """A written item whose author stated an exact answer: marked on submit with the fill
+        ``normalize`` rule (HOMEWORK_AND_MARKING_CONTRACT §6). Every other written item is open
+        and never scored by a rule or a model."""
+        return self.kind == WRITTEN and any(a.strip() for a in self.accepted_answers)
 
     @property
     def playable(self) -> bool:

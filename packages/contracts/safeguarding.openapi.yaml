@@ -354,7 +354,10 @@ components:
       properties:
         concern_id: { type: string }
         subject_ref: { type: string }
-        raised_by_role: { type: string, enum: [student, guardian, teacher] }
+        raised_by_role:
+          type: string
+          enum: [student, guardian, teacher, system]
+          description: "`system`: raised by the homework disclosure screen (it names the submission)."
         category: { $ref: "#/components/schemas/Category" }
         priority: { $ref: "#/components/schemas/Priority" }
         status: { $ref: "#/components/schemas/Status" }

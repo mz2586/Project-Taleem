@@ -84,6 +84,15 @@ class RaisedBy(StrEnum):
     STUDENT = "student"
     GUARDIAN = "guardian"
     TEACHER = "teacher"  # about a learner in one of their own classes (HOMEWORK_AND_MARKING §4)
+    # The deterministic homework disclosure screen (HOMEWORK_AND_MARKING §6): escalates a
+    # submission whose text matched the phrase list to a human. It never decides or replies.
+    SYSTEM = "system"
+
+
+# Who "raised" a system concern: the screen itself (a ref, never a person).
+SYSTEM_RAISER_REF = "disclosure_screen"
+# Roles whose concern may name the homework submission that prompted it.
+SUBMISSION_RAISERS: frozenset[RaisedBy] = frozenset({RaisedBy.TEACHER, RaisedBy.SYSTEM})
 
 
 class Status(StrEnum):
@@ -230,7 +239,7 @@ class Concern:
     context_lesson_id: str | None
     status: Status
     created_at: float
-    context_submission_id: str | None = None  # a teacher's concern about a homework answer
+    context_submission_id: str | None = None  # a teacher's / system concern about homework
     acknowledged_at: float | None = None
     acknowledged_by: str | None = None
     escalated_at: float | None = None
@@ -257,10 +266,13 @@ class Concern:
         if raised_by_role is RaisedBy.STUDENT and subject_ref != raised_by_ref:
             # A child raises a concern about themselves; they cannot name another learner.
             raise InvalidConcernError("a learner raises a concern about themselves")
-        if submission_id is not None and raised_by_role is not RaisedBy.TEACHER:
+        if submission_id is not None and raised_by_role not in SUBMISSION_RAISERS:
             raise InvalidConcernError(
-                "only a teacher's concern names a submission", field="submissionId"
+                "only a teacher's or the system's concern names a submission",
+                field="submissionId",
             )
+        if raised_by_role is RaisedBy.SYSTEM and submission_id is None:
+            raise InvalidConcernError("a system concern names its submission", field="submissionId")
         return Concern(
             concern_id=f"{CONCERN_REF_PREFIX}{uuid7()}",
             subject_ref=assert_ref(subject_ref, field_name="studentRef"),

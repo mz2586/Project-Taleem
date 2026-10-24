@@ -24,8 +24,12 @@ from sqlalchemy.orm.attributes import flag_modified
 
 from .....platform.ids import uuid7
 from ...domain.knowledge import StudentKnowledge
+from ...domain.values import InteractionContext
 from . import mapper
 from .models import AssessmentEvidenceRow, ObjectiveMasteryRow, StudentKnowledgeRow
+
+# The school context's submission ids (``sub_…``) are the evidence ids of homework marks.
+HOMEWORK_EVIDENCE_PREFIX = "sub_"
 
 
 class SqlAlchemyStudentKnowledgeRepository:
@@ -92,6 +96,23 @@ class SqlAlchemyStudentKnowledgeRepository:
             )
         ).first()
         return found is not None
+
+    def studied_objectives(self, student_ref: str) -> list[str]:
+        """Objectives the learner has studied, most recently first: any evidence from a live
+        session or a synced offline attempt. Placement (``diagnostic``) evidence and the evidence
+        of a homework mark (its id is the school's ``sub_…`` submission id) do not count."""
+        latest = func.max(AssessmentEvidenceRow.occurred_at)
+        rows = self._session.execute(
+            select(AssessmentEvidenceRow.objective_code, latest)
+            .where(
+                AssessmentEvidenceRow.student_ref == student_ref,
+                AssessmentEvidenceRow.context != InteractionContext.DIAGNOSTIC.value,
+                ~AssessmentEvidenceRow.id.startswith(HOMEWORK_EVIDENCE_PREFIX, autoescape=True),
+            )
+            .group_by(AssessmentEvidenceRow.objective_code)
+            .order_by(latest.desc(), AssessmentEvidenceRow.objective_code)
+        )
+        return [str(code) for code, _ in rows]
 
     def objective_progress(
         self, student_refs: Iterable[str], objective_code: str, *, since: float

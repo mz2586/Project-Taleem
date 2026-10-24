@@ -272,7 +272,9 @@ class CurriculumStudioReadModel:
             corrections[str(ref)] = str(text)
         kind = _kind(item)
         accepted: tuple[str, ...] = ()
-        if kind == FILL:
+        # A fill item's key, and a written item's exact key when the author states one
+        # (HOMEWORK_AND_MARKING_CONTRACT §6: only such a written item is auto-marked).
+        if kind in (FILL, WRITTEN):
             answer = key.get("answer")
             variants = [str(v) for v in getattr(item, "accepted_variants", []) or []]
             accepted = tuple(v for v in [str(answer) if answer else "", *variants] if v.strip())

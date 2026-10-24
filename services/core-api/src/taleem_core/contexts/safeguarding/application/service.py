@@ -19,6 +19,9 @@ Visibility rules (each is enforced here, against the token subject, and pinned b
    detail is itself audited (``concern.viewed``).
 5. **Nobody else** — mentors, other staff roles, operators — has any route here (the PDP denies
    them). No teacher surface ever includes a concern.
+6. **The system** (the homework disclosure screen) raises a concern only from a phrase-list match
+   on a submitted answer, about that answer's learner, naming the submission — at most one per
+   submission. It is invisible to every guardian and teacher; only the lead sees it.
 
 Every action is audited in the same transaction as the change, naming the actor's token subject.
 Nothing in this service contacts anyone: an escalation records "external referral needed" for a
@@ -33,8 +36,10 @@ from typing import Any
 
 from ....platform import observability
 from ....platform.errors import Problem, forbidden, not_found, validation_error
+from ..domain.disclosure import PhraseList, default_phrase_list, strongest_category
 from ..domain.model import (
     OPEN_STATUSES,
+    SYSTEM_RAISER_REF,
     Action,
     AuditEntry,
     Concern,
@@ -122,6 +127,7 @@ class SafeguardingService:
         *,
         require_enrolled: bool,
         teachers: TeacherRoster | None = None,
+        phrases: PhraseList | None = None,
     ) -> None:
         self._uow = uow_factory
         self._teachers = teachers
@@ -129,6 +135,7 @@ class SafeguardingService:
         self._now = clock
         self._sla = sla
         self._require_enrolled = require_enrolled
+        self._phrases = phrases if phrases is not None else default_phrase_list()
 
     @property
     def sla(self) -> SlaPolicy:
@@ -220,6 +227,45 @@ class SafeguardingService:
             "raised_at": concern.created_at,
             "notice": TEACHER_RECEIPT_NOTICE,
         }
+
+    def screen_submission(self, *, student_ref: str, submission_id: str, text: str) -> bool:
+        """The homework disclosure screen (HOMEWORK_AND_MARKING_CONTRACT §6, rule 6).
+
+        On a phrase-list match, raise ONE concern (``source = system``) about the learner that
+        references the submission — idempotent by ``submission_id`` (a resubmission or a retry
+        never adds a second). The concern's text is a fixed note naming the matched list entries,
+        never the child's words. Returns whether a system concern exists for this submission now.
+        Nothing is returned to, or changed for, the child; nothing is logged but counts."""
+        with self._uow() as uow:
+            if uow.concerns.system_concern_for(submission_id) is not None:
+                return True
+        matched = self._phrases.matches(text)
+        if not matched:
+            return False
+        ids = ", ".join(p.phrase_id for p in matched)[:200]
+        note = (
+            f"Raised automatically by the homework disclosure screen (starter phrase list, "
+            f"pending M-Safe approval). Matched entries: {ids}. Read homework submission "
+            f"{submission_id}. The child was not told."
+        )
+        try:
+            self._create(
+                subject_ref=student_ref,
+                raised_by_ref=SYSTEM_RAISER_REF,
+                role=RaisedBy.SYSTEM,
+                category=strongest_category(matched).value,
+                text=note,
+                screen="learner/homework",
+                lesson_id=None,
+                submission_id=submission_id,
+            )
+        except Exception:
+            # A concurrent screen of the same submission won the unique index: one concern.
+            with self._uow() as uow:
+                if uow.concerns.system_concern_for(submission_id) is not None:
+                    return True
+            raise
+        return True
 
     def _create(
         self,

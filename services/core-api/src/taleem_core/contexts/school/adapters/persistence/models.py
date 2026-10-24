@@ -7,6 +7,7 @@ Every child table repeats ``organization_id`` so a tenant-scoped query never dep
 from __future__ import annotations
 
 from sqlalchemy import Float, ForeignKey, Index, Integer, String, Text, UniqueConstraint
+from sqlalchemy import text as sql_text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import SCHOOL_SCHEMA, SchoolBase
@@ -135,11 +136,14 @@ class SchoolAuditRow(SchoolBase):
 
 
 class SubmissionRow(SchoolBase):
-    """A learner's written answer to one item of an assignment (see alembic 0013_homework).
+    """A learner's written answer to one written item (alembic 0013_homework, 0017_self_paced).
 
-    Child data: the ``text`` is the child's own words. Pseudonymous ``student_ref`` only. One row
-    per (assignment, item, learner); ``version`` is the optimistic lock (two teachers marking at
-    once: one gets a 409). The privacy context exports and erases these rows with the learner.
+    Child data: the ``text`` is the child's own words. Pseudonymous ``student_ref`` only.
+    ``source`` is ``assignment`` (one row per (assignment, item, learner)) or ``self_paced`` (a
+    lesson the learner studied, no class: ``assignment_id`` / ``class_id`` NULL, organization
+    ``''``, one row per (objective, item, learner) — a partial unique index). ``version`` is the
+    optimistic lock (two teachers marking at once: one gets a 409). The privacy context exports
+    and erases these rows with the learner.
     """
 
     __tablename__ = "submission"
@@ -149,20 +153,34 @@ class SubmissionRow(SchoolBase):
         ),
         Index("ix_submission_org_class_status", "organization_id", "class_id", "status"),
         Index("ix_submission_student", "student_ref"),
+        Index(
+            "uq_submission_self_paced",
+            "objective_code",
+            "item_ref",
+            "student_ref",
+            unique=True,
+            sqlite_where=sql_text("source = 'self_paced'"),
+            postgresql_where=sql_text("source = 'self_paced'"),
+        ),
         {"schema": SCHOOL_SCHEMA},
     )
 
     submission_id: Mapped[str] = mapped_column(String(64), primary_key=True)
     organization_id: Mapped[str] = mapped_column(String(64), nullable=False)
-    class_id: Mapped[str] = mapped_column(
+    # NULL for a self-paced submission (alembic 0017).
+    class_id: Mapped[str | None] = mapped_column(
         String(64),
         ForeignKey(f"{SCHOOL_SCHEMA}.classroom.class_id", ondelete="CASCADE"),
-        nullable=False,
+        nullable=True,
     )
-    assignment_id: Mapped[str] = mapped_column(
+    assignment_id: Mapped[str | None] = mapped_column(
         String(64),
         ForeignKey(f"{SCHOOL_SCHEMA}.assignment.assignment_id", ondelete="CASCADE"),
-        nullable=False,
+        nullable=True,
+    )
+    # "assignment" | "self_paced" (HOMEWORK_AND_MARKING_CONTRACT §6; alembic 0017).
+    source: Mapped[str] = mapped_column(
+        String(16), nullable=False, default="assignment", server_default="assignment"
     )
     objective_code: Mapped[str] = mapped_column(String(64), nullable=False)
     item_ref: Mapped[str] = mapped_column(String(128), nullable=False)

@@ -595,6 +595,14 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 lesson_id=None,
             )
 
+    class _DisclosureScreen:
+        # Every submitted homework text passes the safeguarding disclosure screen (contract §6).
+        # ``safeguarding_service`` is built below; it resolves at call time.
+        def screen_submission(self, *, student_ref: str, submission_id: str, text: str) -> bool:
+            return safeguarding_service.screen_submission(
+                student_ref=student_ref, submission_id=submission_id, text=text
+            )
+
     school_service = SchoolService(
         lambda: SqlSchoolUnitOfWork(school_sf),
         hasher=SecretHasher(iterations=settings.kdf_iterations),
@@ -623,9 +631,20 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         explanations=CallableExplanationReader(
             lambda ref: ai_teacher.explained_recommendations(ref)
         ),
-        written=CallableWrittenWork(written_work.written_lesson, written_work.record_marked),
+        written=CallableWrittenWork(
+            written_work.written_lesson,
+            written_work.record_marked,
+            check_answer=written_work.check_answer,
+            studied_objectives=written_work.studied_objectives,
+        ),
         concerns=_TeacherConcerns(),
+        disclosures=_DisclosureScreen(),
     )
+    # AI rubric marking of open answers (HOMEWORK_AND_MARKING_CONTRACT §6) is deliberately NOT
+    # wired: FD-03 and an in-region distress classifier come first. The port lives in
+    # ``contexts/learning/application/written_marker.py``; no submission path reaches it.
+    app.state.written_marker = None
+    app.state.school_service = school_service
     # Teachers continue sessions through identity's rotating refresh tokens (rotation, replay
     # revokes the family, device binding, sign-out). The live check runs on every refresh.
     identity_service.register_session_subject(

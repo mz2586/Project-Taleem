@@ -222,8 +222,9 @@ def auto_scored_attempts(records: LearnerRecords, period: Period) -> list[Eviden
         e
         for e in records.evidence
         if e.context != DIAGNOSTIC_CONTEXT
-        and e.evidence_id not in marked
-        and period.contains(e.occurred_at)
+        # A homework mark's evidence: the submission id, or ``{submission_id}:{attempt}`` for an
+        # automatic retry (HOMEWORK_AND_MARKING_CONTRACT §6). Counted as homework, not here.
+        and e.evidence_id.split(":", 1)[0] not in marked and period.contains(e.occurred_at)
     ]
 
 

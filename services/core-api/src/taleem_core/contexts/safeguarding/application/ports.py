@@ -21,6 +21,10 @@ class ConcernRepository(Protocol):
 
     def raised_by(self, raised_by_ref: str, limit: int) -> list[Concern]: ...
 
+    def system_concern_for(self, submission_id: str) -> Concern | None:
+        """The disclosure screen's concern about this homework submission, if one was raised."""
+        ...
+
     def open_counts(self) -> dict[Priority, list[float]]:
         """Creation times of every concern still ``open`` (unacknowledged), per priority."""
         ...

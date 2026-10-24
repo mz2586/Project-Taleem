@@ -114,6 +114,15 @@ class SqlConcernRepository:
         )
         return [_to_domain(r) for r in self._s.scalars(stmt)]
 
+    def system_concern_for(self, submission_id: str) -> Concern | None:
+        row = self._s.scalars(
+            select(ConcernRow).where(
+                ConcernRow.context_submission_id == submission_id,
+                ConcernRow.raised_by_role == RaisedBy.SYSTEM.value,
+            )
+        ).first()
+        return _to_domain(row) if row is not None else None
+
     def open_counts(self) -> dict[Priority, list[float]]:
         stmt = select(ConcernRow.priority, ConcernRow.created_at).where(
             ConcernRow.status == Status.OPEN.value

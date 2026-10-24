@@ -532,10 +532,16 @@ def test_demo_learner_is_taught_a_demo_lesson_and_has_history(world: World) -> N
     assert "mastered" in states and len(states) > 1  # mastered and still-developing lessons
     homework = c.get(f"/v1/school/learners/{ref}/homework", headers=h)
     assert homework.status_code == 200, homework.text
-    states_hw = sorted(i["state"] for a in homework.json()["assignments"] for i in a["items"][:1])
+    entries = homework.json()["assignments"]
+    assigned = [a for a in entries if a["source"] == "assignment"]
+    states_hw = sorted(i["state"] for a in assigned for i in a["items"][:1])
     assert states_hw == sorted(
         ["marked", "marked", "marked", "returned", "submitted", "not_started"]
     )
+    # Studied lessons no class assigned are self-paced homework (HOMEWORK_AND_MARKING §6).
+    self_paced = [a for a in entries if a["source"] == "self_paced"]
+    assert all(a["due_at"] is None and a["assignment_id"] is None for a in self_paced)
+    assert not {a["objective_code"] for a in self_paced} & {a["objective_code"] for a in assigned}
 
 
 def test_demo_guardian_sees_only_their_own_learner_and_report_cards(world: World) -> None:

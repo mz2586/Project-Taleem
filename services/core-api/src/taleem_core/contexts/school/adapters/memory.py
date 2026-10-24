@@ -13,13 +13,19 @@ from ....platform.concurrency import ConcurrencyConflictError
 from ..domain.model import Submission, SubmissionStatus
 
 
+def _key(row: Submission) -> tuple[object, ...]:
+    # One row per (assignment, item, learner); a self-paced row per (objective, item, learner).
+    if row.self_paced:
+        return ("self_paced", row.objective_code, row.item_ref, row.student_ref)
+    return ("assignment", row.assignment_id, row.item_ref, row.student_ref)
+
+
 class InMemorySubmissionRepository:
     def __init__(self) -> None:
         self._rows: dict[str, Submission] = {}
 
     def add(self, submission: Submission) -> None:
-        key = (submission.assignment_id, submission.item_ref, submission.student_ref)
-        if any((r.assignment_id, r.item_ref, r.student_ref) == key for r in self._rows.values()):
+        if any(_key(r) == _key(submission) for r in self._rows.values()):
             raise ConcurrencyConflictError("a submission for this item already exists")
         self._rows[submission.submission_id] = dataclasses.replace(submission)
 
@@ -35,11 +41,15 @@ class InMemorySubmissionRepository:
 
     def find(self, assignment_id: str, item_ref: str, student_ref: str) -> Submission | None:
         for row in self._rows.values():
-            if (row.assignment_id, row.item_ref, row.student_ref) == (
-                assignment_id,
-                item_ref,
-                student_ref,
-            ):
+            if _key(row) == ("assignment", assignment_id, item_ref, student_ref):
+                return dataclasses.replace(row)
+        return None
+
+    def find_self_paced(
+        self, objective_code: str, item_ref: str, student_ref: str
+    ) -> Submission | None:
+        for row in self._rows.values():
+            if _key(row) == ("self_paced", objective_code, item_ref, student_ref):
                 return dataclasses.replace(row)
         return None
 

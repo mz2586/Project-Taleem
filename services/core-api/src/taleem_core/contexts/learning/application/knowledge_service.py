@@ -67,6 +67,11 @@ class KnowledgeService:
         with self._uow() as uow:
             return uow.knowledge.get(student_ref, include_evidence=include_evidence)
 
+    def studied_objectives(self, student_ref: str) -> list[str]:
+        """Objectives the learner studied (live session or synced offline attempt), newest first."""
+        with self._uow() as uow:
+            return uow.knowledge.studied_objectives(student_ref)
+
     def objective_progress(
         self, student_refs: list[str], objective_code: str, *, since: float
     ) -> dict[str, dict[str, object]]:

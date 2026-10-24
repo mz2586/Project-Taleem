@@ -16,6 +16,7 @@ from ...domain.model import (
     MarkOutcome,
     Organization,
     Submission,
+    SubmissionSource,
     SubmissionStatus,
     Teacher,
     TeacherStatus,
@@ -314,6 +315,7 @@ def _submission(row: SubmissionRow) -> Submission:
         marked_at=row.marked_at,
         reviewed_by=row.reviewed_by,
         version=row.version,
+        source=SubmissionSource(row.source),
     )
 
 
@@ -347,6 +349,7 @@ class SqlSubmissionRepository:
             item_ref=submission.item_ref,
             student_ref=submission.student_ref,
             created_at=submission.created_at,
+            source=submission.source.value,
         )
         _write(row, submission)
         self._s.add(row)
@@ -368,6 +371,19 @@ class SqlSubmissionRepository:
         row = self._s.scalars(
             select(SubmissionRow).where(
                 SubmissionRow.assignment_id == assignment_id,
+                SubmissionRow.item_ref == item_ref,
+                SubmissionRow.student_ref == student_ref,
+            )
+        ).first()
+        return _submission(row) if row else None
+
+    def find_self_paced(
+        self, objective_code: str, item_ref: str, student_ref: str
+    ) -> Submission | None:
+        row = self._s.scalars(
+            select(SubmissionRow).where(
+                SubmissionRow.source == SubmissionSource.SELF_PACED.value,
+                SubmissionRow.objective_code == objective_code,
                 SubmissionRow.item_ref == item_ref,
                 SubmissionRow.student_ref == student_ref,
             )

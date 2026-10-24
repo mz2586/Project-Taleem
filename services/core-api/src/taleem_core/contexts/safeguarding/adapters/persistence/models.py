@@ -16,6 +16,7 @@ from __future__ import annotations
 from typing import Any
 
 from sqlalchemy import Float, ForeignKey, Index, Integer, String, Text
+from sqlalchemy import text as sql_text
 from sqlalchemy.orm import Mapped, mapped_column
 
 from .base import SAFEGUARDING_SCHEMA, JsonType, SafeguardingBase
@@ -27,6 +28,14 @@ class ConcernRow(SafeguardingBase):
         Index("ix_concern_status_priority", "status", "priority", "created_at"),
         Index("ix_concern_subject", "subject_ref"),
         Index("ix_concern_raised_by", "raised_by_ref"),
+        # One disclosure-screen concern per homework submission (alembic 0017).
+        Index(
+            "uq_concern_system_submission",
+            "context_submission_id",
+            unique=True,
+            sqlite_where=sql_text("raised_by_role = 'system'"),
+            postgresql_where=sql_text("raised_by_role = 'system'"),
+        ),
         {"schema": SAFEGUARDING_SCHEMA},
     )
 

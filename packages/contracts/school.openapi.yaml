@@ -405,12 +405,18 @@ paths:
     get:
       tags: [school]
       operationId: getLearnerHomework
-      summary: The learner's homework — every assignment of their classes with its written items
+      summary: The learner's homework — assigned and self-paced written items
       description: >-
-        HOMEWORK_AND_MARKING_CONTRACT §2. A `student` token for its own `studentRef` only. Behind
-        the live learner consent gate: a withdrawn consent or suspended account is `403` on the
-        next request. Items carry the learner's latest submission state; never a rubric, sample
-        answer or guidance. Online only in this version.
+        HOMEWORK_AND_MARKING_CONTRACT §2 + §6. A `student` token for its own `studentRef` only.
+        Behind the live learner consent gate: a withdrawn consent or suspended account is `403` on
+        the next request. Entries (and their items) are tagged `source`: `assignment` (every
+        assignment of the learner's classes, with `due_at`) or `self_paced` (every lesson the
+        learner has studied — a live session or a synced offline attempt — that no class of
+        theirs assigned; no class, no due date). When a lesson is both, the assignment wins. Every
+        lesson is read through the reader-cohort filter. Items carry `marking` (`auto` = exact
+        key, marked on submit; `self_check` = open answer, never scored), the latest submission
+        state and `can_retry`. Never a rubric or an answer key; the author's sample answer /
+        guidance only as `compare`, after an open answer was submitted. Online only.
       security: [{ bearerAuth: [] }]
       parameters:
         - { name: studentRef, in: path, required: true, schema: { type: string } }
@@ -430,14 +436,52 @@ paths:
       summary: Submit (or resubmit) a written answer
       description: >-
         The text is trimmed, must not be empty and is capped at the item's `max_chars` (`422`).
-        Resubmitting is allowed while the state is `submitted` or `returned`; a `marked` answer is
-        final (`409 SUBMISSION_MARKED`). The item must be a written item of the assignment's
-        lesson and the assignment one of the learner's classes (`404`). `403 SHARING_REQUIRED`
-        when the guardian does not share progress with the teacher. Audited with refs only.
+        Resubmitting is allowed while the state is `submitted` or `returned`, or after an
+        automatic `not_yet` (`can_retry`: a new attempt on the same row, with its own evidence);
+        any other `marked` answer is final (`409 SUBMISSION_MARKED`). An item with an exact key is
+        marked on submit (`state: marked`, `reviewed_by: auto`, one mastery evidence per attempt);
+        an open answer stays `submitted` with `marking: self_check`. The item must be a written
+        item of the assignment's lesson and the assignment one of the learner's classes (`404`).
+        `403 SHARING_REQUIRED` when the guardian does not share progress with the teacher. Every
+        text passes the disclosure screen (a match raises a system safeguarding concern; the
+        response never changes). Audited with refs only.
       security: [{ bearerAuth: [] }]
       parameters:
         - { name: studentRef, in: path, required: true, schema: { type: string } }
         - { name: assignmentId, in: path, required: true, schema: { type: string } }
+        - { name: itemRef, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/SubmitIn" }
+      responses:
+        "200":
+          description: Saved
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/SubmitResult" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        "409": { $ref: "#/components/responses/Problem" }
+        "422": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
+  /v1/school/learners/{studentRef}/homework/self-paced/{objectiveCode}/items/{itemRef}:submit:
+    post:
+      tags: [school]
+      operationId: submitSelfPacedHomeworkItem
+      summary: Submit (or resubmit) a written answer to a lesson the learner studied
+      description: >-
+        HOMEWORK_AND_MARKING_CONTRACT §6. No assignment, class or teacher: nobody else reads the
+        answer, so `SHARING_REQUIRED` does not apply. A lesson the learner has not studied, or
+        that is unpublished or outside the reader's cohort, is `404`; a lesson a class of theirs
+        has assigned is `409 LESSON_ASSIGNED` (answer it in the assignment). Same text, marking,
+        retry, disclosure-screen and audit rules as the assignment route.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+        - { name: objectiveCode, in: path, required: true, schema: { type: string } }
         - { name: itemRef, in: path, required: true, schema: { type: string } }
       requestBody:
         required: true
@@ -608,19 +652,53 @@ components:
         score: { type: ["integer", "null"] }
         max_score: { type: ["integer", "null"] }
         marked_at: { type: ["number", "null"] }
+        reviewed_by:
+          type: ["string", "null"]
+          enum: [auto, null]
+          description: "`auto` for an automatic mark; null otherwise (a teacher is never named)."
+        can_retry:
+          type: boolean
+          description: True after an automatic `not_yet` — the learner may try again.
+    HomeworkSource:
+      type: string
+      enum: [assignment, self_paced]
+    HomeworkMarking:
+      type: string
+      enum: [auto, self_check]
+      description: >-
+        `auto`: the author stated an exact answer; marked on submit with the fill `normalize`
+        rule. `self_check`: an open answer; never scored by a rule or a model.
+    CompareYourAnswer:
+      type: object
+      description: >-
+        The author's sample answer and/or guidance for an open (`self_check`) item, shown only
+        after the learner submitted, for "compare your answer". Never a score.
+      properties:
+        label: { type: string, enum: [compare_your_answer] }
+        sample_answer: { type: ["string", "null"] }
+        guidance: { type: ["string", "null"] }
     LearnerHomeworkItem:
       type: object
-      description: A written item as the learner sees it. Never a rubric, sample answer or guidance.
+      description: >-
+        A written item as the learner sees it. Never a rubric or an answer key; the sample answer
+        or guidance only as `compare`, after submitting an open answer.
       properties:
         item_ref: { type: string }
         kind: { type: string, enum: [written] }
         prompt: { $ref: "#/components/schemas/LocalizedText" }
         hints: { type: array, items: { type: string } }
         max_chars: { type: integer, description: "200 for short, 2000 otherwise" }
+        source: { $ref: "#/components/schemas/HomeworkSource" }
+        marking: { $ref: "#/components/schemas/HomeworkMarking" }
         state: { type: string, enum: [not_started, submitted, returned, marked] }
+        can_retry: { type: boolean }
         submission:
           oneOf:
             - { $ref: "#/components/schemas/LearnerSubmission" }
+            - { type: "null" }
+        compare:
+          oneOf:
+            - { $ref: "#/components/schemas/CompareYourAnswer" }
             - { type: "null" }
     LearnerHomework:
       type: object
@@ -629,13 +707,15 @@ components:
           type: array
           items:
             type: object
+            description: An assignment, or (`source = self_paced`) a lesson the learner studied.
             properties:
-              assignment_id: { type: string }
-              class_id: { type: string }
-              class_name: { type: string }
+              source: { $ref: "#/components/schemas/HomeworkSource" }
+              assignment_id: { type: ["string", "null"] }
+              class_id: { type: ["string", "null"] }
+              class_name: { type: ["string", "null"] }
               objective_code: { type: string }
               lesson_title: { $ref: "#/components/schemas/LocalizedText" }
-              due_at: { type: number }
+              due_at: { type: ["number", "null"], description: "null for self-paced" }
               overdue: { type: boolean }
               items:
                 type: array
@@ -649,10 +729,18 @@ components:
     SubmitResult:
       type: object
       properties:
-        assignment_id: { type: string }
+        source: { $ref: "#/components/schemas/HomeworkSource" }
+        assignment_id: { type: ["string", "null"] }
+        objective_code: { type: string }
         item_ref: { type: string }
-        state: { type: string, enum: [submitted] }
+        marking: { $ref: "#/components/schemas/HomeworkMarking" }
+        state: { type: string, enum: [submitted, marked] }
+        can_retry: { type: boolean }
         submission: { $ref: "#/components/schemas/LearnerSubmission" }
+        compare:
+          oneOf:
+            - { $ref: "#/components/schemas/CompareYourAnswer" }
+            - { type: "null" }
     Rubric:
       type: object
       description: Teacher-only marking rubric.

@@ -244,6 +244,23 @@ class MarkOutcome(StrEnum):
     NOT_YET = "not_yet"
 
 
+class SubmissionSource(StrEnum):
+    """Where a written item came from (HOMEWORK_AND_MARKING_CONTRACT §6)."""
+
+    ASSIGNMENT = "assignment"  # a teacher assigned the lesson to the learner's class
+    SELF_PACED = "self_paced"  # the learner studied the lesson; no class, no teacher, no due date
+
+
+class Marking(StrEnum):
+    """How a written item is marked (contract §6)."""
+
+    AUTO = "auto"  # an exact answer key: marked on submit with the fill ``normalize`` rule
+    SELF_CHECK = "self_check"  # open answer: never scored; the child compares with the sample
+
+
+AUTO_REVIEWER = "auto"  # ``reviewed_by`` of an automatically marked submission
+
+
 class SubmissionConflictError(InvalidSchoolDataError):
     """The submission's state does not allow this change (HTTP 409)."""
 
@@ -278,9 +295,9 @@ def clean_feedback(raw: str | None, *, required: bool) -> str:
 @dataclass
 class Submission:
     submission_id: str
-    organization_id: str
-    class_id: str
-    assignment_id: str
+    organization_id: str  # "" for a self-paced submission (no school is involved)
+    class_id: str | None  # None for a self-paced submission
+    assignment_id: str | None  # None for a self-paced submission
     objective_code: str
     item_ref: str
     student_ref: str
@@ -296,8 +313,33 @@ class Submission:
     feedback: str = ""
     returned_at: float | None = None
     marked_at: float | None = None
-    reviewed_by: str | None = None  # the teacher who last returned or marked it
+    reviewed_by: str | None = None  # the teacher who last returned or marked it; "auto"
     version: int = 1
+    source: SubmissionSource = SubmissionSource.ASSIGNMENT
+
+    @property
+    def self_paced(self) -> bool:
+        return self.source is SubmissionSource.SELF_PACED
+
+    @property
+    def auto_marked(self) -> bool:
+        return self.status is SubmissionStatus.MARKED and self.reviewed_by == AUTO_REVIEWER
+
+    @property
+    def can_retry(self) -> bool:
+        """An automatic ``not_yet`` is not final: the learner may try again (a new attempt on the
+        same row). An automatic ``met`` and every teacher's mark are final."""
+        return self.auto_marked and self.outcome is MarkOutcome.NOT_YET
+
+    @property
+    def evidence_id(self) -> str:
+        """The id of this submission's mastery evidence. A teacher's mark: the submission id (one
+        per submission). An automatic mark: one per attempt — the submission id for the first,
+        ``{submission_id}:{attempt}`` after — so a retry adds evidence and a replay of the same
+        attempt never does."""
+        if self.auto_marked and self.attempt > 1:
+            return f"{self.submission_id}:{self.attempt}"
+        return self.submission_id
 
     @staticmethod
     def start(
@@ -325,12 +367,61 @@ class Submission:
             max_score=max_score if max_score and max_score > 0 else None,
         )
 
-    def resubmit(self, *, text: str, max_chars: int, max_score: int | None, now: float) -> None:
-        """Replace the answer while it is ``submitted`` or ``returned``; a marked one is final."""
+    @staticmethod
+    def start_self_paced(
+        *,
+        objective_code: str,
+        item_ref: str,
+        student_ref: str,
+        text: str,
+        max_chars: int,
+        max_score: int | None,
+        now: float,
+    ) -> Submission:
+        """A learner's answer to a written item of a lesson they studied (contract §6): no
+        assignment, no class, no organization. Keyed by (objective, item, learner)."""
+        if not _OBJECTIVE.match(objective_code):
+            raise InvalidSchoolDataError("objective code is not valid")
+        return Submission(
+            submission_id=f"{SUBMISSION_PREFIX}{uuid7()}",
+            organization_id="",
+            class_id=None,
+            assignment_id=None,
+            objective_code=objective_code,
+            item_ref=item_ref,
+            student_ref=student_ref,
+            text=clean_answer_text(text, max_chars=max_chars),
+            status=SubmissionStatus.SUBMITTED,
+            submitted_at=now,
+            created_at=now,
+            max_score=max_score if max_score and max_score > 0 else None,
+            source=SubmissionSource.SELF_PACED,
+        )
+
+    def auto_mark(self, *, met: bool, now: float) -> None:
+        """Mark an exact-key answer on submit (contract §6): ``met`` / ``not_yet``, no score, no
+        feedback, ``reviewed_by = "auto"``. Final, like a teacher's mark."""
         if self.status is SubmissionStatus.MARKED:
-            raise SubmissionConflictError(
-                "this answer has been marked; it cannot be changed", code="SUBMISSION_MARKED"
-            )
+            raise SubmissionConflictError("this answer is already marked", code="SUBMISSION_MARKED")
+        self.outcome = MarkOutcome.MET if met else MarkOutcome.NOT_YET
+        self.score = None
+        self.feedback = ""
+        self.status = SubmissionStatus.MARKED
+        self.marked_at = now
+        self.reviewed_by = AUTO_REVIEWER
+
+    def resubmit(self, *, text: str, max_chars: int, max_score: int | None, now: float) -> None:
+        """Replace the answer while it is ``submitted`` or ``returned``, or after an automatic
+        ``not_yet`` (a retry). Any other marked answer is final."""
+        if self.status is SubmissionStatus.MARKED:
+            if not self.can_retry:
+                raise SubmissionConflictError(
+                    "this answer has been marked; it cannot be changed", code="SUBMISSION_MARKED"
+                )
+            self.outcome = None
+            self.score = None
+            self.marked_at = None
+            self.reviewed_by = None
         self.text = clean_answer_text(text, max_chars=max_chars)
         self.status = SubmissionStatus.SUBMITTED
         self.submitted_at = now

@@ -69,6 +69,11 @@ class SubmissionRepository(Protocol):
     def get(self, organization_id: str, submission_id: str) -> Submission | None: ...
     def by_id(self, submission_id: str) -> Submission | None: ...
     def find(self, assignment_id: str, item_ref: str, student_ref: str) -> Submission | None: ...
+    def find_self_paced(
+        self, objective_code: str, item_ref: str, student_ref: str
+    ) -> Submission | None:
+        """The learner's self-paced submission for one item of one lesson (contract §6)."""
+
     def for_student(self, student_ref: str) -> list[Submission]: ...
     def for_class(
         self, organization_id: str, class_id: str, status: SubmissionStatus
@@ -201,8 +206,10 @@ class WrittenItem:
     """One written item of a published lesson (HOMEWORK_AND_MARKING_CONTRACT §1).
 
     ``prompt``, ``hints`` and ``max_chars`` may be shown to the learner. ``rubric``,
-    ``sample_answer`` and ``guidance`` are marking aids for the teacher only: no learner response
-    ever carries them.
+    ``sample_answer`` and ``guidance`` are marking aids: the rubric is for a teacher only; the
+    sample answer or guidance is shown to the learner only AFTER they submitted an open
+    (``self_check``) answer, labelled "compare your answer" (contract §6). ``auto_markable`` says
+    the item has an exact answer key (the key itself never leaves the learning context).
     """
 
     item_ref: str
@@ -212,6 +219,12 @@ class WrittenItem:
     rubric: dict[str, object] | None = None  # {"criteria", "max_score", "levels": [...]}
     sample_answer: str | None = None
     guidance: str | None = None
+    auto_markable: bool = False
+
+    @property
+    def marking(self) -> str:
+        """``auto`` (exact key, marked on submit) or ``self_check`` (open answer, never scored)."""
+        return "auto" if self.auto_markable else "self_check"
 
     @property
     def max_score(self) -> int | None:
@@ -251,6 +264,15 @@ class WrittenWork(Protocol):
         """Record ONE human-graded evidence for this submission. Idempotent by
         ``submission_id``: returns False (and changes nothing) when it is already recorded."""
 
+    def check_answer(self, objective_code: str, item_ref: str, text: str) -> bool | None:
+        """Auto-mark: True / False when the item's exact key (``answer`` + ``accepted_variants``,
+        compared with the fill ``normalize`` rule) decides it; None when the item has no exact
+        key (an open answer — never scored) or is not a written item of the published lesson."""
+
+    def studied_objectives(self, student_ref: str) -> list[str]:
+        """Objectives the learner has studied — a live session or a synced offline attempt
+        (placement and homework evidence do not count) — most recent first."""
+
 
 class ConcernChannel(Protocol):
     """The safeguarding context's raise path for a teacher (a receipt only comes back)."""
@@ -264,6 +286,16 @@ class ConcernChannel(Protocol):
         category: str,
         text: str | None,
     ) -> dict[str, Any]: ...
+
+
+class DisclosureScreen(Protocol):
+    """The safeguarding context's deterministic disclosure screen (contract §6).
+
+    Screens a submitted answer; on a match raises ONE system concern referencing the submission
+    (idempotent by ``submission_id``). Returns whether a concern exists for it now. Never blocks,
+    never replies, never changes what the child sees."""
+
+    def screen_submission(self, *, student_ref: str, submission_id: str, text: str) -> bool: ...
 
 
 class SchoolAuditLog(Protocol):

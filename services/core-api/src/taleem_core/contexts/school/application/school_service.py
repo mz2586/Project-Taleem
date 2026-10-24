@@ -24,10 +24,12 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any
 
+from ....platform import observability
 from ....platform.cohort import COHORTS
 from ....platform.concurrency import ConcurrencyConflictError
 from ....platform.errors import Problem, conflict, not_found, unauthorized, validation_error
 from ..domain.model import (
+    AUTO_REVIEWER,
     Assignment,
     Classroom,
     Enrolment,
@@ -37,6 +39,7 @@ from ..domain.model import (
     SchoolAuditEvent,
     Submission,
     SubmissionConflictError,
+    SubmissionSource,
     SubmissionStatus,
     Teacher,
     TeacherStatus,
@@ -47,6 +50,7 @@ from ..domain.model import (
 )
 from .ports import (
     ConcernChannel,
+    DisclosureScreen,
     GuardianSharingConsent,
     LearnerDirectory,
     LearnerExplanationReader,
@@ -100,6 +104,7 @@ class SchoolService:
         explanations: LearnerExplanationReader | None = None,
         written: WrittenWork | None = None,
         concerns: ConcernChannel | None = None,
+        disclosures: DisclosureScreen | None = None,
     ) -> None:
         self._uow = uow_factory
         self._hasher = hasher
@@ -114,6 +119,7 @@ class SchoolService:
         self._explanations = explanations
         self._written = written
         self._concerns = concerns
+        self._disclosures = disclosures
         self._equalising_hash = hasher.equalising_hash()
 
     # ------------------------------------------------------------------ operator (system role)
@@ -528,8 +534,18 @@ class SchoolService:
     # ------------------------------------------------------------------- homework (learner)
 
     def learner_homework(self, student_ref: str) -> dict[str, Any]:
-        """Every assignment of every class the learner is in, with its written items and the
-        learner's latest submission state for each. Never a marking aid."""
+        """The learner's Homework screen (HOMEWORK_AND_MARKING_CONTRACT §2 + §6).
+
+        Two sources, each entry and item tagged ``source``:
+
+        - ``assignment``: every assignment of every class the learner is in (with its due date);
+        - ``self_paced``: every lesson the learner has studied (a live session or a synced offline
+          attempt on its objective) that no class of theirs has assigned. No due date. When the
+          same lesson is also assigned, the assignment wins (it keeps the due date).
+
+        Each item carries its marking mode and the learner's latest submission state. Never the
+        rubric or an answer key; the sample answer / guidance only after an open answer was
+        submitted, as ``compare``. Lessons are read through the cohort-filtered read model."""
         with self._uow() as uow:
             assignments: list[tuple[Assignment, Classroom]] = []
             for e in uow.enrolments.for_student(student_ref):
@@ -538,26 +554,31 @@ class SchoolService:
                     continue
                 for a in uow.assignments.for_class(e.organization_id, e.class_id):
                     assignments.append((a, classroom))
-            mine = {
-                (s.assignment_id, s.item_ref): s for s in uow.submissions.for_student(student_ref)
-            }
-        lessons = self._lessons({a.objective_code for a, _ in assignments})
+            subs = uow.submissions.for_student(student_ref)
+        mine = {(s.assignment_id, s.item_ref): s for s in subs if not s.self_paced}
+        mine_self = {(s.objective_code, s.item_ref): s for s in subs if s.self_paced}
+        assigned = {a.objective_code for a, _ in assignments}
+        self_paced = [
+            code
+            for code in dict.fromkeys(
+                [*self._studied(student_ref), *(s.objective_code for s in subs if s.self_paced)]
+            )
+            if code not in assigned
+        ]
+        lessons = self._lessons(assigned | set(self_paced))
         now = self._now()
         out: list[dict[str, Any]] = []
         for a, classroom in sorted(assignments, key=lambda x: (x[0].due_at, x[0].assignment_id)):
             lesson = lessons.get(a.objective_code)
-            items = []
-            for item in lesson.items if lesson else ():
-                sub = mine.get((a.assignment_id, item.item_ref))
-                items.append(
-                    {
-                        **_learner_item_view(item),
-                        "state": sub.status.value if sub else "not_started",
-                        "submission": _learner_submission_view(sub) if sub else None,
-                    }
+            items = [
+                _learner_homework_item(
+                    item, SubmissionSource.ASSIGNMENT, mine.get((a.assignment_id, item.item_ref))
                 )
+                for item in (lesson.items if lesson else ())
+            ]
             out.append(
                 {
+                    "source": SubmissionSource.ASSIGNMENT.value,
                     "assignment_id": a.assignment_id,
                     "class_id": classroom.class_id,
                     "class_name": classroom.name,
@@ -568,12 +589,37 @@ class SchoolService:
                     "items": items,
                 }
             )
+        for code in self_paced:
+            lesson = lessons.get(code)
+            if lesson is None or not lesson.items:
+                continue  # unpublished, another cohort's, or no written items: nothing to do
+            out.append(
+                {
+                    "source": SubmissionSource.SELF_PACED.value,
+                    "assignment_id": None,
+                    "class_id": None,
+                    "class_name": None,
+                    "objective_code": code,
+                    "lesson_title": dict(lesson.title),
+                    "due_at": None,
+                    "overdue": False,
+                    "items": [
+                        _learner_homework_item(
+                            item,
+                            SubmissionSource.SELF_PACED,
+                            mine_self.get((code, item.item_ref)),
+                        )
+                        for item in lesson.items
+                    ],
+                }
+            )
         return {"assignments": out}
 
     def learner_submit(
         self, *, student_ref: str, assignment_id: str, item_ref: str, text: str
     ) -> dict[str, Any]:
-        """Submit (or resubmit, while ``submitted`` / ``returned``) a written answer."""
+        """Submit (or resubmit, while ``submitted`` / ``returned``) a written answer to an item
+        of an assignment. The class teacher may read it, so ``progress_sharing`` is required."""
         with self._uow() as uow:
             assignment = self._learner_assignment(uow, student_ref, assignment_id)
         lesson = self._lessons({assignment.objective_code}).get(assignment.objective_code)
@@ -588,39 +634,134 @@ class SchoolService:
                 "Forbidden",
                 "a grown-up must allow sharing work with the teacher first",
             )
+
+        def find(uow: SchoolUnitOfWork) -> Submission | None:
+            return uow.submissions.find(assignment_id, item_ref, student_ref)
+
+        def start(now: float) -> Submission:
+            return Submission.start(
+                assignment=assignment,
+                item_ref=item_ref,
+                student_ref=student_ref,
+                text=text,
+                max_chars=item.max_chars,
+                max_score=item.max_score,
+                now=now,
+            )
+
+        sub = self._store_answer(item, text, find=find, start=start)
+        return _learner_submit_view(sub, item)
+
+    def learner_submit_self_paced(
+        self, *, student_ref: str, objective_code: str, item_ref: str, text: str
+    ) -> dict[str, Any]:
+        """Submit (or resubmit) a written answer to an item of a lesson the learner studied, with
+        no assignment and no teacher (contract §6). Nobody else reads it, so ``progress_sharing``
+        does not apply. A lesson the learner has not studied — or one a class of theirs has
+        assigned (answer it there) — is refused."""
+        with self._uow() as uow:
+            assigned = any(
+                a.objective_code == objective_code
+                for e in uow.enrolments.for_student(student_ref)
+                for a in uow.assignments.for_class(e.organization_id, e.class_id)
+            )
+            existing = uow.submissions.find_self_paced(objective_code, item_ref, student_ref)
+        if existing is None and objective_code not in self._studied(student_ref):
+            raise not_found("lesson not found")  # not studied yet: nothing to answer
+        if assigned and existing is None:
+            raise Problem(
+                409,
+                "LESSON_ASSIGNED",
+                "Lesson is assigned",
+                "this lesson is assigned to your class; answer it in the assignment",
+            )
+        lesson = self._lessons({objective_code}).get(objective_code)
+        item = lesson.item(item_ref) if lesson else None
+        if item is None:
+            raise not_found("item not found")  # unpublished, another cohort's, or not written
+
+        def find(uow: SchoolUnitOfWork) -> Submission | None:
+            return uow.submissions.find_self_paced(objective_code, item_ref, student_ref)
+
+        def start(now: float) -> Submission:
+            return Submission.start_self_paced(
+                objective_code=objective_code,
+                item_ref=item_ref,
+                student_ref=student_ref,
+                text=text,
+                max_chars=item.max_chars,
+                max_score=item.max_score,
+                now=now,
+            )
+
+        sub = self._store_answer(item, text, find=find, start=start)
+        return _learner_submit_view(sub, item)
+
+    def _store_answer(
+        self,
+        item: WrittenItem,
+        text: str,
+        *,
+        find: Callable[[SchoolUnitOfWork], Submission | None],
+        start: Callable[[float], Submission],
+    ) -> Submission:
+        """Create or resubmit the answer, auto-mark it when its key is exact, then record the
+        evidence (idempotent), the audit (refs only) and the disclosure screen (never blocks)."""
         now = self._now()
+        existing: Submission | None = None
         try:
             with self._uow() as uow:
-                existing = uow.submissions.find(assignment_id, item_ref, student_ref)
+                existing = find(uow)
                 if existing is None:
-                    sub = Submission.start(
-                        assignment=assignment,
-                        item_ref=item_ref,
-                        student_ref=student_ref,
-                        text=text,
-                        max_chars=item.max_chars,
-                        max_score=item.max_score,
-                        now=now,
-                    )
-                    uow.submissions.add(sub)
+                    sub = start(now)
                 else:
                     sub = existing
                     sub.resubmit(
                         text=text, max_chars=item.max_chars, max_score=item.max_score, now=now
                     )
+                verdict = (
+                    self._written.check_answer(sub.objective_code, sub.item_ref, sub.text)
+                    if self._written is not None and item.auto_markable
+                    else None
+                )
+                if verdict is not None:
+                    sub.auto_mark(met=verdict, now=now)
+                if existing is None:
+                    uow.submissions.add(sub)
+                else:
                     uow.submissions.save(sub)
                 uow.commit()
         except InvalidSchoolDataError as exc:
+            if existing is not None and existing.auto_marked:
+                # A final automatic mark: re-ensure its evidence (heals a failed evidence write).
+                self._ensure_evidence(existing)
             raise _submission_problem(exc) from exc
         except ConcurrencyConflictError as exc:  # two submissions raced: one wins
             raise conflict("this answer was submitted at the same time; try again") from exc
-        self._record_submission("submission.submitted", student_ref, "student", sub)
-        return {
-            "assignment_id": sub.assignment_id,
-            "item_ref": sub.item_ref,
-            "state": sub.status.value,
-            "submission": _learner_submission_view(sub),
-        }
+        self._record_submission("submission.submitted", sub.student_ref, "student", sub)
+        if sub.status is SubmissionStatus.MARKED:
+            self._ensure_evidence(sub)
+            self._record_submission("submission.marked", AUTO_REVIEWER, "system", sub)
+        self._screen(sub)
+        return sub
+
+    def _screen(self, sub: Submission) -> None:
+        """The disclosure screen (contract §6). It only escalates to a human: a failure here is
+        logged (refs only) and never changes or blocks the child's submission."""
+        if self._disclosures is None:
+            return
+        try:
+            self._disclosures.screen_submission(
+                student_ref=sub.student_ref, submission_id=sub.submission_id, text=sub.text
+            )
+        except Exception:  # noqa: BLE001 - the child's answer is saved; the screen must not fail it
+            observability.log_event("disclosure_screen_failed", submission_id=sub.submission_id)
+            observability.record_event("taleem_disclosure_screen_failures_total")
+
+    def _studied(self, student_ref: str) -> list[str]:
+        if self._written is None:
+            return []
+        return list(self._written.studied_objectives(student_ref))
 
     # -------------------------------------------------------------------- marking (teacher)
 
@@ -717,9 +858,14 @@ class SchoolService:
         with self._uow() as uow:
             teacher = self._require_teacher(uow, teacher_ref)
             sub = uow.submissions.get(teacher.organization_id, submission_id)
-            classroom = uow.classrooms.get(teacher.organization_id, sub.class_id) if sub else None
+            classroom = (
+                uow.classrooms.get(teacher.organization_id, sub.class_id)
+                if sub is not None and sub.class_id is not None
+                else None
+            )
             if (
                 sub is None
+                or sub.class_id is None
                 or classroom is None
                 or classroom.teacher_ref != teacher.teacher_ref
                 or uow.enrolments.get(teacher.organization_id, sub.class_id, sub.student_ref)
@@ -805,7 +951,8 @@ class SchoolService:
             {
                 "submission_id": s.submission_id,
                 "organization_id": s.organization_id,
-                "class_id": s.class_id,
+                "class_id": s.class_id or "",
+                "source": s.source.value,
                 "objective_code": s.objective_code,
                 "outcome": s.outcome.value,
                 "marked_at": s.marked_at,
@@ -820,7 +967,7 @@ class SchoolService:
         """A submission in the teacher's own class of a learner they may see now (else 404)."""
         teacher = self._require_teacher(uow, teacher_ref)
         sub = uow.submissions.get(teacher.organization_id, submission_id)
-        if sub is None:
+        if sub is None or sub.class_id is None:  # a self-paced answer has no teacher
             raise _submission_not_found()
         classroom = uow.classrooms.get(teacher.organization_id, sub.class_id)
         if classroom is None or classroom.teacher_ref != teacher.teacher_ref:
@@ -836,7 +983,7 @@ class SchoolService:
         if self._written is None or sub.outcome is None:
             return
         self._written.record_marked(
-            submission_id=sub.submission_id,
+            submission_id=sub.evidence_id,
             student_ref=sub.student_ref,
             objective_code=sub.objective_code,
             item_ref=sub.item_ref,
@@ -873,7 +1020,7 @@ class SchoolService:
                 actor_role=actor_role,
                 subject_ref=sub.student_ref,
                 organization_id=sub.organization_id,
-                class_id=sub.class_id,
+                class_id=sub.class_id or "",
                 at=self._now(),
                 object_ref=sub.submission_id,
             )
@@ -993,6 +1140,50 @@ def _learner_item_view(item: WrittenItem) -> dict[str, Any]:
     }
 
 
+COMPARE_LABEL = "compare_your_answer"
+
+
+def _compare_view(item: WrittenItem, sub: Submission | None) -> dict[str, Any] | None:
+    """The author's sample answer / guidance for an open (``self_check``) item, shown to the
+    learner only once they have submitted, labelled "compare your answer" (contract §6). None
+    before submission, for an exact-key item, and when the author provided neither."""
+    if sub is None or item.auto_markable or not (item.sample_answer or item.guidance):
+        return None
+    return {
+        "label": COMPARE_LABEL,
+        "sample_answer": item.sample_answer,
+        "guidance": item.guidance,
+    }
+
+
+def _learner_homework_item(
+    item: WrittenItem, source: SubmissionSource, sub: Submission | None
+) -> dict[str, Any]:
+    return {
+        **_learner_item_view(item),
+        "source": source.value,
+        "marking": item.marking,
+        "state": sub.status.value if sub else "not_started",
+        "can_retry": sub.can_retry if sub else False,
+        "submission": _learner_submission_view(sub) if sub else None,
+        "compare": _compare_view(item, sub),
+    }
+
+
+def _learner_submit_view(sub: Submission, item: WrittenItem) -> dict[str, Any]:
+    return {
+        "source": sub.source.value,
+        "assignment_id": sub.assignment_id,
+        "objective_code": sub.objective_code,
+        "item_ref": sub.item_ref,
+        "marking": item.marking,
+        "state": sub.status.value,
+        "can_retry": sub.can_retry,
+        "submission": _learner_submission_view(sub),
+        "compare": _compare_view(item, sub),
+    }
+
+
 def _learner_submission_view(s: Submission) -> dict[str, Any]:
     """The learner's own submission. Feedback shows once the teacher returned or marked it."""
     reviewed = s.status is not SubmissionStatus.SUBMITTED
@@ -1009,6 +1200,8 @@ def _learner_submission_view(s: Submission) -> dict[str, Any]:
         "score": s.score if marked else None,
         "max_score": s.max_score if marked else None,
         "marked_at": s.marked_at if marked else None,
+        "reviewed_by": AUTO_REVIEWER if s.auto_marked else None,
+        "can_retry": s.can_retry,
     }
 
 
