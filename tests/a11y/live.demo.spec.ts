@@ -118,7 +118,14 @@ test("learner signs in with family code + PIN and explores", async ({ browser })
     await page.waitForTimeout(500);
   }
   await shot(page, "learner-lesson-question");
-  const check = page.getByRole("button", { name: t("student.session.items.check") });
+  // The lesson renders a real question (any interaction kind). Answer submission per kind is
+  // covered by test_item_interaction_runtime.py and the CI browser journey.
+  await expect(page.getByText(/Question 1 of \d+/)).toBeVisible();
+  await expect(page.getByRole("button", { name: t("student.session.items.check") }).or(
+    page.getByRole("group", { name: t("student.session.answers") }),
+  ).first()).toBeVisible();
+  note(`[lesson] opened a live lesson question at ${page.url()}`);
+});
   if (await group.isVisible()) {
     await group.getByRole("button").first().click(); // a choose item: tap an option
   } else {
