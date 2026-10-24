@@ -6,6 +6,19 @@ The local Git history is the official project history; each released version map
 
 ## [Unreleased]
 
+### School — homework submission and teacher marking
+
+- [`HOMEWORK_AND_MARKING_CONTRACT.md`](docs/10-curriculum-studio/HOMEWORK_AND_MARKING_CONTRACT.md):
+  written items (`short`, `long`, `word_problem`) from assigned lessons are listed on the child's
+  Homework screen and submitted online. Teachers mark them (met / not yet, rubric score, feedback)
+  or return them. Each mark records one idempotent mastery evidence.
+- Child safety and privacy: submit is refused while the guardian has stopped sharing progress
+  (`SHARING_REQUIRED`). Teachers can raise a safeguarding concern from a submission. Rubrics and
+  sample answers never reach learners. Submissions are exported and erased with the learner.
+  Saved text is wiped from the phone on sign-out, on loss of consent and on withdrawal.
+- Alembic `0013_homework`: `school.submission`, audit object refs, teacher-raised concerns. The
+  downgrade refuses while teacher-raised concerns exist, so it never deletes safeguarding records.
+
 ### Learning — interaction runtime for fill, order, match and sort
 
 - [`ITEM_INTERACTION_CONTRACT.md`](docs/10-curriculum-studio/ITEM_INTERACTION_CONTRACT.md)
