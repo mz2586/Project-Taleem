@@ -66,7 +66,23 @@ def main() -> int:
     command.upgrade(cfg, "head")
     command.current(cfg)
     print("[migrate] done")
-    return 0
+    return _seed_demo_fixture()
+
+
+def _seed_demo_fixture() -> int:
+    """Opt-in demo content: publish the clearly labelled SYNTHETIC fixture lesson.
+
+    Runs only when ``TALEEM_DEMO_SEED=1`` is set on the deployment, and the seeder itself refuses
+    when ``TALEEM_ENV=production``, so a production database never receives synthetic content.
+    Idempotent (an existing fixture is left alone). A refusal fails the build loudly rather than
+    silently skipping, so it is never mistaken for "seeded".
+    """
+    if os.environ.get("TALEEM_DEMO_SEED", "").strip() != "1":
+        return 0
+    from taleem_core.tools.e2e_journey import _seed_from_environment
+
+    print("[demo-seed] TALEEM_DEMO_SEED=1: publishing the synthetic fixture lesson")
+    return _seed_from_environment()
 
 
 if __name__ == "__main__":
