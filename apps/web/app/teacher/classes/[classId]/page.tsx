@@ -12,6 +12,7 @@ import { RecommendationList } from "@/components/RecommendationList";
 import { RequireSession } from "@/components/RequireSession";
 import { Skeleton } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
+import { ButtonLink } from "@/design-system/ButtonLink";
 import { formatDate, isoDateTime } from "@/lib/guardian/format";
 import type { MessageKey } from "@/lib/i18n/messages";
 import { useLocale } from "@/lib/i18n/useLocale";
@@ -351,6 +352,20 @@ function ClassPage() {
               ) : null}
               {!assignmentsFailed && !assignments ? <Skeleton lines={2} label={t("teacher.assignments.loading")} /> : null}
               {assignments ? <AssignmentList classId={classId} assignments={assignments} /> : null}
+            </div>
+          </section>
+
+          <section style={sectionStyle} aria-labelledby="marking-title">
+            <h2 id="marking-title" style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>
+              {t("teacher.marking.title")}
+            </h2>
+            <p style={{ margin: 0 }}>{t("teacher.marking.linkIntro")}</p>
+            <div>
+              <ButtonLink
+                href={`/teacher/classes/${encodeURIComponent(classId)}/marking`}
+                variant="brand"
+                label={t("teacher.marking.open")}
+              />
             </div>
           </section>
 

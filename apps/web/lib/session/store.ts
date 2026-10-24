@@ -19,6 +19,7 @@
 // does not assume. The mitigations are the ones that matter for a child: a ten-minute access token,
 // device-bound refresh, rotation with theft detection, and a sign-out that revokes server-side.
 
+import { clearHomeworkDrafts } from "../homework/drafts";
 import { ApiError } from "../student/types";
 import { deviceId } from "./device";
 import { publicIdentityApi } from "./identityApi";
@@ -89,6 +90,14 @@ function isExpired(session: StoredSession, nowSeconds: number): boolean {
   return session.expiresAt - EXPIRY_MARGIN_SECONDS <= nowSeconds;
 }
 
+/** Learner-gate refusals that end a child's access (lib/student/journey.ts classifyLoadError). */
+const LEARNER_DENIED = new Set(["CONSENT_REQUIRED", "LEARNER_INACTIVE"]);
+
+/** Remove a learner session's kept homework drafts (only learner sessions own any). */
+function forgetLearnerDrafts(session: StoredSession | null): void {
+  if (session?.role === "student" && session.subject) clearHomeworkDrafts(session.subject);
+}
+
 export const sessionStore = {
   /** The session as last known, without touching the network. */
   peek(): StoredSession | null {
@@ -109,6 +118,9 @@ export const sessionStore = {
 
   /** Forget the session locally. Does not call the server — see `signOut`. */
   clear(): void {
+    // A child's kept homework text must not outlive their session on a shared family phone. This
+    // runs for sign-out and for a terminal refresh failure (revoked, consent withdrawn, theft).
+    forgetLearnerDrafts(sessionStore.peek());
     hydrated = true;
     write(null);
   },
@@ -197,6 +209,11 @@ export async function withSession<T>(call: () => Promise<T>): Promise<T> {
   try {
     return await call();
   } catch (error) {
+    // The per-request learner gate said no (consent withdrawn, account paused): the session may
+    // still be held, but the child's kept homework text goes now.
+    if (error instanceof ApiError && error.status === 403 && LEARNER_DENIED.has(String(error.problem.code ?? ""))) {
+      forgetLearnerDrafts(sessionStore.peek());
+    }
     if (!(error instanceof ApiError) || error.status !== 401) throw error;
     const refreshed = await sessionStore.refresh();
     if (!refreshed) throw error;

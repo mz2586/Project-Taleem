@@ -9,6 +9,7 @@
 // token's lifetime gets a refreshed token instead of a spurious "offline" or "signed out".
 
 import { createApiClient, type TokenProvider } from "../apiClient";
+import { clearHomeworkDrafts } from "../homework/drafts";
 import { createGuardianIdentityApi, publicIdentityApi } from "../session/identityApi";
 import { currentAccessToken, withSession } from "../session/store";
 import type { AuditEvent } from "../session/types";
@@ -45,8 +46,15 @@ export const familyApi = {
   consent: (studentRef: string) => withSession(() => identity.consent(studentRef)),
   grantConsent: (body: Parameters<IdentityApi["grantConsent"]>[0]) =>
     withSession(() => identity.grantConsent(body)),
-  withdrawConsent: (body: Parameters<IdentityApi["withdrawConsent"]>[0]) =>
-    withSession(() => identity.withdrawConsent(body)),
+  /**
+   * Any withdrawal also removes that child's kept homework drafts from this phone (a shared family
+   * device): the child's text must not outlive the permission it was written under.
+   */
+  withdrawConsent: async (body: Parameters<IdentityApi["withdrawConsent"]>[0]) => {
+    const state = await withSession(() => identity.withdrawConsent(body));
+    clearHomeworkDrafts(body.studentRef);
+    return state;
+  },
   audit: (limit: number) =>
     withSession(() => client.get<{ events: AuditEvent[] }>(`/v1/identity/audit?limit=${encodeURIComponent(limit)}`)),
   /**
