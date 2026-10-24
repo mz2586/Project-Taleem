@@ -110,8 +110,9 @@ def test_downgrade_refuses_while_a_card_exists_and_cards_are_immutable() -> None
 
         with pytest.raises(DBAPIError, match="immutable"), engine.begin() as conn:
             conn.execute(
-                text("UPDATE reporting.report_card SET body = '{\"x\":1}' WHERE card_id = :id"),
-                {"id": card_id},
+                # The JSON goes in as a bind value: a literal ``:1`` would be parsed as a parameter.
+                text("UPDATE reporting.report_card SET body = :body WHERE card_id = :id"),
+                {"id": card_id, "body": '{"x": 1}'},
             )
         with engine.begin() as conn:  # the one acknowledgement is admitted…
             conn.execute(
