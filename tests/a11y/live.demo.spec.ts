@@ -100,9 +100,29 @@ test("learner signs in with family code + PIN and explores", async ({ browser })
   ] as const) {
     await visit(page, path, name);
   }
-  // Open a lesson from Today when one is offered.
+  // Start a lesson from Today, step through it and answer one question.
   await page.goto("/student/today");
-  const start = page.getByRole("link", { name: t("student.today.start"), exact: true });
+  await page.getByRole("button", { name: t("student.today.start"), exact: true }).first().click();
+  await page.waitForURL("**/student/session**", { timeout: 30_000 });
+  await page.waitForLoadState("networkidle");
+  await shot(page, "learner-lesson-start");
+  const group = page.getByRole("group", { name: t("student.session.answers") });
+  for (let i = 0; i < 12 && !(await group.isVisible()); i++) {
+    const ready = page.getByRole("button", { name: t("student.session.ready") });
+    const next = page.getByRole("button", { name: t("common.next"), exact: true });
+    if (await ready.isVisible()) await ready.click();
+    else if (await next.isVisible()) await next.click();
+    else break;
+    await page.waitForTimeout(500);
+  }
+  await shot(page, "learner-lesson-question");
+  expect(await group.isVisible()).toBe(true);
+  await group.getByRole("button").first().click();
+  await page.waitForLoadState("networkidle");
+  await shot(page, "learner-lesson-answered");
+  note(`[lesson] answered one question at ${page.url()}`);
+  note(`[lesson] after answering: ${(await page.locator("main").first().innerText()).replace(/\s+/g, " ").slice(0, 300)}`);
+});
   if (await start.count()) {
     await start.first().click();
     await page.waitForLoadState("networkidle");
