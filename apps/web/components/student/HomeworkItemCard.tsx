@@ -1,11 +1,13 @@
 "use client";
-// One written homework item (HOMEWORK_AND_MARKING_CONTRACT.md §2): the prompt (with read-aloud), its
-// state in symbol + words, the teacher's note, and — while the item is open — a labelled answer box
-// with a visible character counter and a Send button whose reason for being disabled sits beside it.
+// One written homework item (HOMEWORK_AND_MARKING_CONTRACT.md §2, §6): the prompt (with read-aloud),
+// its state in symbol + words, the marker's note, and — while the item is open — a labelled answer
+// box with a visible character counter and a Send button whose reason for being disabled sits beside it.
 //
-// Honesty rules: "Sent" is shown only after the server accepted the answer. Offline, Send is
+// Honesty rules: "Sent" / "Saved" is shown only after the server accepted the answer. Offline, Send is
 // disabled with the reason, and what the child types is kept on this phone (lib/homework/drafts.ts);
-// it is never queued or claimed as sent. A marked answer is read-only.
+// it is never queued or claimed as sent. A marked answer is read-only. §6: a self-paced item never
+// uses teacher wording; "Checked by Taleem" only when the server says `reviewed_by: "auto"`; a
+// self-check answer is "saved", never "marked", and its comparison appears only after it was sent.
 // The rules are pure and unit-tested in lib/homework/student.ts.
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 
@@ -15,8 +17,11 @@ import type { Translator } from "@/lib/i18n/translate";
 import type { DraftStore } from "@/lib/homework/drafts";
 import {
   afterSent,
+  compareView,
   initialText,
+  itemCopy,
   isOpen,
+  sendLabelKey,
   sendHomework,
   sendOutcomeKey,
   stateBadge,
@@ -40,6 +45,8 @@ export interface HomeworkItemCardProps {
   send: (body: SubmitBody) => Promise<LearnerSubmissionWire | undefined>;
   /** Called after an accepted send, with the item's new state (the parent owns the list). */
   onSent: (item: HomeworkItemView) => void;
+  /** Locale order for the self-check comparison text the server returns on submit. */
+  contentPreference?: readonly string[];
 }
 
 const box = {
@@ -64,7 +71,18 @@ const textareaStyle = {
   resize: "vertical" as const,
 };
 
-export function HomeworkItemCard({ item, position, t, formatNumber, online, draftKey, drafts, send, onSent }: HomeworkItemCardProps) {
+export function HomeworkItemCard({
+  item,
+  position,
+  t,
+  formatNumber,
+  online,
+  draftKey,
+  drafts,
+  send,
+  onSent,
+  contentPreference,
+}: HomeworkItemCardProps) {
   const id = useId();
   // The server render and first client render start from the sent text; a kept draft is read after
   // mount (storage does not exist on the server), so both renders match.
@@ -80,9 +98,11 @@ export function HomeworkItemCard({ item, position, t, formatNumber, online, draf
     if (draft) setText(initialText(itemRef.current, draft));
   }, [draftKey, drafts]);
 
-  const open = isOpen(item.state);
+  const open = isOpen(item.state, item.canRetry);
   const badge = stateBadge(item);
-  const gate = submitGate({ text, maxChars: item.maxChars, state: item.state, sending, online });
+  const copy = itemCopy(item);
+  const compare = compareView(item);
+  const gate = submitGate({ text, maxChars: item.maxChars, state: item.state, sending, online, canRetry: item.canRetry, finalReason: copy.final });
   const prompt = item.prompt;
   const promptAttrs = prompt ? contentAttrs({ locale: prompt.locale || null, text: prompt.text }) : null;
 
@@ -91,6 +111,7 @@ export function HomeworkItemCard({ item, position, t, formatNumber, online, draf
   const hintId = `${id}-hint`;
   const counterId = `${id}-count`;
   const reasonId = `${id}-reason`;
+  const compareId = `${id}-compare`;
 
   function change(value: string) {
     setText(value);
@@ -103,12 +124,12 @@ export function HomeworkItemCard({ item, position, t, formatNumber, online, draf
     event.preventDefault();
     if (!gate.canSend) return;
     setSending(true);
-    const result = await sendHomework({ online, text, maxChars: item.maxChars, state: item.state, draftKey, drafts, send });
+    const result = await sendHomework({ online, text, maxChars: item.maxChars, state: item.state, canRetry: item.canRetry, draftKey, drafts, send });
     setSending(false);
     setOutcome(result);
     if (result.kind === "sent") {
       setText(result.text);
-      onSent(afterSent(item, result));
+      onSent(afterSent(item, result, contentPreference));
     }
     // The result line is where the child's attention belongs next (Send may now be disabled).
     requestAnimationFrame(() => statusRef.current?.focus());
@@ -151,17 +172,32 @@ export function HomeworkItemCard({ item, position, t, formatNumber, online, draf
 
       {badge.note ? (
         <div style={{ display: "grid", gap: "var(--space-1)", paddingInlineStart: "var(--space-3)", borderInlineStart: "4px solid var(--color-action-primary)" }}>
-          <strong>{t("student.homework.teacherNote")}</strong>
+          <strong>{t(badge.noteKey)}</strong>
           <p dir="auto" style={{ margin: 0, whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>
             {badge.note}
           </p>
         </div>
       ) : null}
 
+      {compare ? (
+        <section
+          aria-labelledby={compareId}
+          data-compare=""
+          style={{ display: "grid", gap: "var(--space-2)", padding: "var(--space-3)", borderRadius: "var(--radius-md)", border: "2px dashed var(--color-focus-ring)" }}
+        >
+          <h4 id={compareId} style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>
+            {t("student.homework.compare.title")}
+          </h4>
+          <p style={{ margin: 0, fontSize: "var(--font-size-body-min)" }}>{t("student.homework.compare.notMarked")}</p>
+          {compare.sample ? <CompareText label={t("student.homework.compare.sample")} text={compare.sample} /> : null}
+          {compare.guidance ? <CompareText label={t("student.homework.compare.guidance")} text={compare.guidance} /> : null}
+        </section>
+      ) : null}
+
       {!open ? (
         item.sentText ? (
           <div style={{ display: "grid", gap: "var(--space-1)" }}>
-            <strong>{t("student.homework.whatYouSent")}</strong>
+            <strong>{t(item.source === "self_paced" ? "student.homework.whatYouWrote" : "student.homework.whatYouSent")}</strong>
             <p dir="auto" style={{ margin: 0, whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>
               {item.sentText}
             </p>
@@ -195,13 +231,13 @@ export function HomeworkItemCard({ item, position, t, formatNumber, online, draf
             {t("student.homework.counter", { count: formatNumber(gate.count), max: formatNumber(item.maxChars) })}
           </p>
           {item.state === "submitted" || item.state === "returned" ? (
-            <p style={{ margin: 0, fontSize: "var(--font-size-body-min)" }}>{t("student.homework.resendNote")}</p>
+            <p style={{ margin: 0, fontSize: "var(--font-size-body-min)" }}>{t(copy.resendNote)}</p>
           ) : null}
           <div style={{ display: "flex", flexWrap: "wrap", gap: "var(--space-2)", alignItems: "center" }}>
             <Button
               type="submit"
               variant="brand"
-              label={t(item.state === "not_started" ? "student.homework.send" : "student.homework.sendAgain")}
+              label={t(sendLabelKey(item, copy))}
               loading={sending}
               disabled={!gate.canSend}
               aria-describedby={gate.reason ? reasonId : undefined}
@@ -216,8 +252,20 @@ export function HomeworkItemCard({ item, position, t, formatNumber, online, draf
       )}
 
       <p ref={statusRef} tabIndex={-1} role="status" aria-live="polite" data-outcome={outcome?.kind} style={{ margin: 0 }}>
-        {outcome ? t(sendOutcomeKey(outcome)) : ""}
+        {outcome ? t(sendOutcomeKey(outcome, item)) : ""}
       </p>
     </article>
+  );
+}
+
+function CompareText({ label, text }: { label: string; text: { text: string; locale: string } }) {
+  const attrs = contentAttrs({ locale: text.locale || null, text: text.text });
+  return (
+    <div style={{ display: "grid", gap: "var(--space-1)" }}>
+      <strong>{label}</strong>
+      <p lang={attrs.lang} dir={attrs.dir} style={{ margin: 0, whiteSpace: "pre-wrap", overflowWrap: "anywhere" }}>
+        {text.text}
+      </p>
+    </div>
   );
 }

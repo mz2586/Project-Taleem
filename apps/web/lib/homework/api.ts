@@ -25,6 +25,9 @@ export const HOMEWORK_PATHS = {
   learnerHomework: (studentRef: string) => `/v1/school/learners/${seg(studentRef)}/homework`,
   submit: (studentRef: string, assignmentId: string, itemRef: string) =>
     `/v1/school/learners/${seg(studentRef)}/homework/${seg(assignmentId)}/items/${seg(itemRef)}:submit`,
+  // §6: practice from the learner's own lessons has no assignment; it is addressed by objective.
+  submitSelfPaced: (studentRef: string, objectiveCode: string, itemRef: string) =>
+    `/v1/school/learners/${seg(studentRef)}/homework/self-paced/${seg(objectiveCode)}/items/${seg(itemRef)}:submit`,
   queue: (classId: string, status: QueueStatus) =>
     `/v1/school/classes/${seg(classId)}/submissions?status=${seg(status)}`,
   mark: (submissionId: string) => `/v1/school/submissions/${seg(submissionId)}:mark`,
@@ -34,12 +37,23 @@ export const HOMEWORK_PATHS = {
   concern: (submissionId: string) => `/v1/school/submissions/${seg(submissionId)}:concern`,
 } as const;
 
+/** Where an item is sent: an assignment (§2) or the learner's own lesson practice (§6). */
+export type SubmitTarget =
+  | { source: "assignment"; assignmentId: string }
+  | { source: "self_paced"; objectiveCode: string };
+
+export function submitPath(studentRef: string, target: SubmitTarget, itemRef: string): string {
+  return target.source === "self_paced"
+    ? HOMEWORK_PATHS.submitSelfPaced(studentRef, target.objectiveCode, itemRef)
+    : HOMEWORK_PATHS.submit(studentRef, target.assignmentId, itemRef);
+}
+
 /** Learner side (§2). Online only: the page never calls `submit` while offline. */
 export const homeworkApi = {
   list: (studentRef: string) => withSession(() => client.get<LearnerHomeworkWire>(HOMEWORK_PATHS.learnerHomework(studentRef))),
-  submit: (studentRef: string, assignmentId: string, itemRef: string, body: SubmitBody) =>
+  submit: (studentRef: string, target: SubmitTarget, itemRef: string, body: SubmitBody) =>
     withSession(() =>
-      client.post<LearnerSubmissionWire | undefined>(HOMEWORK_PATHS.submit(studentRef, assignmentId, itemRef), body),
+      client.post<LearnerSubmissionWire | undefined>(submitPath(studentRef, target, itemRef), body),
     ),
 };
 

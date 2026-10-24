@@ -32,6 +32,11 @@ function renderItem(over: Partial<HomeworkItemView> = {}, opts: { locale?: Local
     sentText: null,
     feedback: null,
     outcome: null,
+    source: "assignment",
+    marking: null,
+    reviewedBy: null,
+    compare: null,
+    canRetry: false,
     ...over,
   };
   const html = renderToStaticMarkup(

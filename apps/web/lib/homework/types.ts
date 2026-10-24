@@ -7,6 +7,24 @@
 export type SubmissionState = "not_started" | "submitted" | "returned" | "marked";
 export type MarkOutcome = "met" | "not_yet";
 
+/**
+ * §6 (the AI-led path). `self_paced`: the item comes from a lesson the learner studied — no teacher,
+ * no due date, maybe no class. `assignment`: a teacher set it (it adds a due date).
+ */
+export type HomeworkSource = "self_paced" | "assignment";
+/**
+ * §6. `auto`: an exact answer key, marked on submit (met / not_yet, `reviewed_by: "auto"`).
+ * `self_check`: an open answer — never scored; the child may compare it with a sample afterwards.
+ * `teacher`: a class teacher may mark it (§3).
+ */
+export type HomeworkMarking = "auto" | "self_check" | "teacher";
+
+/** §6: shown to the child only after a self-check submission. Either part may be missing. */
+export interface CompareWire {
+  sample_answer?: LocalizedWire | null;
+  guidance?: LocalizedWire | null;
+}
+
 /** Authored text: a `{locale: text}` map (curriculum) or a single string. */
 export type LocalizedWire = string | Record<string, string>;
 
@@ -24,6 +42,14 @@ export interface LearnerSubmissionWire {
   submitted_at?: number | null;
   marked_at?: number | null;
   returned_at?: number | null;
+  /** §6: "auto" when Taleem's exact-answer rule marked it; otherwise a teacher (any other value). */
+  reviewed_by?: string | null;
+  /** §6: may also arrive on the submission rather than the item. */
+  marking?: HomeworkMarking | null;
+  /** §6: self-check only, after submission. */
+  compare?: CompareWire | null;
+  /** §6: true after an auto-marked `not_yet` — the child may try again. Missing ⇒ false. */
+  can_retry?: boolean | null;
 }
 
 export interface HomeworkItemWire {
@@ -39,6 +65,14 @@ export interface HomeworkItemWire {
   /** The latest state, either flat on the item or inside `submission`. */
   state?: SubmissionState;
   submission?: LearnerSubmissionWire | null;
+  /** §6. Missing: inherited from the assignment, else inferred (a due date ⇒ assignment). */
+  source?: HomeworkSource | null;
+  /** §6. Missing: unknown (treated as a human may mark it — never claimed as auto). */
+  marking?: HomeworkMarking | null;
+  /** §6: tolerated on the item too; still shown only after submission. */
+  compare?: CompareWire | null;
+  /** §6: true after an auto-marked `not_yet` — the child may try again. Missing ⇒ false. */
+  can_retry?: boolean | null;
 }
 
 export interface HomeworkAssignmentWire {
@@ -47,7 +81,10 @@ export interface HomeworkAssignmentWire {
   class_name?: string;
   objective_code: string;
   lesson_title?: LocalizedWire | null;
-  due_at: number;
+  /** Assignments only; self-paced entries have none (§6). */
+  due_at?: number | null;
+  /** §6: a whole entry may be tagged; an item's own tag wins. */
+  source?: HomeworkSource | null;
   items: HomeworkItemWire[];
 }
 

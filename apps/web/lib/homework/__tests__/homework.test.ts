@@ -58,6 +58,11 @@ const item = (over: Partial<HomeworkItemView> = {}): HomeworkItemView => ({
   sentText: null,
   feedback: null,
   outcome: null,
+  source: "assignment",
+  marking: null,
+  reviewedBy: null,
+  compare: null,
+  canRetry: false,
   ...over,
 });
 

@@ -1,8 +1,9 @@
 "use client";
-// Homework (HOMEWORK_AND_MARKING_CONTRACT.md §2): every assignment of every class the child is in,
-// with its written items. The child writes an answer and sends it to the teacher; the teacher's note
-// and mark come back here. With no homework the screen keeps its honest empty state and routes back
-// to guided learning. Sending is online only: offline the screen says so plainly, keeps what the
+// Homework (HOMEWORK_AND_MARKING_CONTRACT.md §6, the AI-led path; §2 the optional class path). First
+// "From your lessons": the written practice of every lesson the child has studied — no teacher needed.
+// Then, only if the child is in a class with assignments, "From your class". Exact-answer items are
+// checked by Taleem on the spot; open answers are saved (never "marked") and may be compared with an
+// example. With nothing yet the screen says practice appears after a lesson and routes to Today. Sending is online only: offline the screen says so plainly, keeps what the
 // child typed on this phone, and never claims anything was sent. View model: lib/homework/student.ts.
 import { useCallback, useEffect, useMemo, useState } from "react";
 
@@ -14,7 +15,13 @@ import { ButtonLink } from "@/design-system/ButtonLink";
 import { formatDate, isoDateTime } from "@/lib/guardian/format";
 import { homeworkApi } from "@/lib/homework/api";
 import { draftKey, localDrafts } from "@/lib/homework/drafts";
-import { homeworkView, type HomeworkAssignmentView, type HomeworkItemView } from "@/lib/homework/student";
+import {
+  homeworkGroups,
+  homeworkView,
+  replaceItem as replaceInList,
+  type HomeworkAssignmentView,
+  type HomeworkItemView,
+} from "@/lib/homework/student";
 import { contentAttrs } from "@/lib/i18n/content";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { watchConnectivity } from "@/lib/offline";
@@ -23,7 +30,7 @@ import { classifyLoadError, INSTRUCTION_LOCALE_PREFERENCE, type LoadFailure as F
 
 export default function HomeworkPage() {
   const { studentRef: ref, band } = useLearner();
-  const { t, locale, formatNumber } = useLocale();
+  const { t, locale } = useLocale();
   const [assignments, setAssignments] = useState<HomeworkAssignmentView[] | null>(null);
   const [status, setStatus] = useState<"loading" | "ready" | Failure>("loading");
   const [online, setOnline] = useState(true);
@@ -48,18 +55,11 @@ export default function HomeworkPage() {
   }, [load]);
 
   const replaceItem = useCallback((next: HomeworkItemView) => {
-    setAssignments((list) =>
-      list
-        ? list.map((a) =>
-            a.assignmentId !== next.assignmentId
-              ? a
-              : { ...a, items: a.items.map((i) => (i.itemRef === next.itemRef ? next : i)) },
-          )
-        : list,
-    );
+    setAssignments((list) => (list ? replaceInList(list, next) : list));
   }, []);
 
-  const empty = status === "ready" && (assignments?.length ?? 0) === 0;
+  const groups = useMemo(() => homeworkGroups(assignments ?? []), [assignments]);
+  const empty = status === "ready" && groups.length === 0;
 
   return (
     <AppShell title={t("student.homework.title")} band={band}>
@@ -83,7 +83,7 @@ export default function HomeworkPage() {
         ) : null}
       </div>
 
-      {status === "ready" && assignments && assignments.length > 0 ? (
+      {status === "ready" && groups.length > 0 ? (
         <div style={{ display: "grid", gap: "var(--space-4)" }}>
           <p style={{ margin: 0 }}>{t("student.homework.intro")}</p>
           {!online ? (
@@ -100,55 +100,92 @@ export default function HomeworkPage() {
               {t("student.homework.offlineNotice")}
             </p>
           ) : null}
-          {assignments.map((a) => {
-            const titleAttrs = a.title ? contentAttrs({ locale: a.title.locale || null, text: a.title.text }) : null;
-            const headingId = `hw-${a.assignmentId}`;
+          {groups.map((group) => {
+            const groupId = `hw-group-${group.source}`;
             return (
-              <section key={a.assignmentId} aria-labelledby={headingId} style={{ display: "grid", gap: "var(--space-3)" }}>
+              <section key={group.source} aria-labelledby={groupId} data-group={group.source} style={{ display: "grid", gap: "var(--space-4)" }}>
                 <header style={{ display: "grid", gap: "var(--space-1)" }}>
-                  <h2 id={headingId} style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>
-                    {a.title && titleAttrs ? (
-                      <span lang={titleAttrs.lang} dir={titleAttrs.dir}>
-                        {a.title.text}
-                      </span>
-                    ) : (
-                      <>
-                        {t("student.homework.lessonLabel")}:{" "}
-                        <bdi dir="ltr" style={{ fontFamily: "var(--font-latin)" }}>
-                          {a.objectiveCode}
-                        </bdi>
-                      </>
-                    )}
+                  <h2 id={groupId} style={{ margin: 0 }}>
+                    {t(group.headingKey)}
                   </h2>
-                  <time dateTime={isoDateTime(a.dueAt)}>{t("student.homework.due", { date: formatDate(a.dueAt, locale) })}</time>
-                  {a.className ? (
-                    <span style={{ fontSize: "var(--font-size-body-min)" }}>
-                      {t("student.homework.classLabel")}: <bdi>{a.className}</bdi>
-                    </span>
-                  ) : null}
+                  <p style={{ margin: 0, fontSize: "var(--font-size-body-min)" }}>{t(group.introKey)}</p>
                 </header>
-                {a.items.map((item, index) => {
-                  const key = draftKey(ref, a.assignmentId, item.itemRef);
-                  return (
-                    <HomeworkItemCard
-                      key={item.itemRef}
-                      item={item}
-                      position={index + 1}
-                      t={t}
-                      formatNumber={(n) => formatNumber(n)}
-                      online={online}
-                      draftKey={key}
-                      drafts={localDrafts}
-                      send={(body) => homeworkApi.submit(ref, a.assignmentId, item.itemRef, body)}
-                      onSent={replaceItem}
-                    />
-                  );
-                })}
+                {group.entries.map((a) => (
+                  <EntrySection key={`${a.source}-${a.assignmentId}`} entry={a} studentRef={ref} online={online} onSent={replaceItem} />
+                ))}
               </section>
             );
           })}
         </div>
       ) : null}
     </AppShell>
+  );
+}
+
+function EntrySection({
+  entry: a,
+  studentRef: ref,
+  online,
+  onSent,
+}: {
+  entry: HomeworkAssignmentView;
+  studentRef: string;
+  online: boolean;
+  onSent: (item: HomeworkItemView) => void;
+}) {
+  const { t, locale, formatNumber } = useLocale();
+  const titleAttrs = a.title ? contentAttrs({ locale: a.title.locale || null, text: a.title.text }) : null;
+  const headingId = `hw-${a.source}-${a.assignmentId}`;
+  return (
+    <section aria-labelledby={headingId} style={{ display: "grid", gap: "var(--space-3)" }}>
+      <header style={{ display: "grid", gap: "var(--space-1)" }}>
+        <h3 id={headingId} style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>
+          {a.title && titleAttrs ? (
+            <span lang={titleAttrs.lang} dir={titleAttrs.dir}>
+              {a.title.text}
+            </span>
+          ) : (
+            <>
+              {t("student.homework.lessonLabel")}:{" "}
+              <bdi dir="ltr" style={{ fontFamily: "var(--font-latin)" }}>
+                {a.objectiveCode}
+              </bdi>
+            </>
+          )}
+        </h3>
+        {a.dueAt !== null ? (
+          <time dateTime={isoDateTime(a.dueAt)}>{t("student.homework.due", { date: formatDate(a.dueAt, locale) })}</time>
+        ) : null}
+        {a.className ? (
+          <span style={{ fontSize: "var(--font-size-body-min)" }}>
+            {t("student.homework.classLabel")}: <bdi>{a.className}</bdi>
+          </span>
+        ) : null}
+      </header>
+      {a.items.map((item, index) => (
+        <HomeworkItemCard
+          key={item.itemRef}
+          item={item}
+          position={index + 1}
+          t={t}
+          formatNumber={(n) => formatNumber(n)}
+          online={online}
+          draftKey={draftKey(ref, a.assignmentId || `self-paced:${a.objectiveCode}`, item.itemRef)}
+          drafts={localDrafts}
+          send={(body) =>
+            homeworkApi.submit(
+              ref,
+              a.source === "self_paced" || !a.assignmentId
+                ? { source: "self_paced", objectiveCode: a.objectiveCode }
+                : { source: "assignment", assignmentId: a.assignmentId },
+              item.itemRef,
+              body,
+            )
+          }
+          onSent={onSent}
+          contentPreference={INSTRUCTION_LOCALE_PREFERENCE}
+        />
+      ))}
+    </section>
   );
 }
