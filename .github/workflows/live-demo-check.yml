@@ -1,0 +1,48 @@
+name: Live demo check
+
+# Manual: signs in to the DEPLOYED application with the synthetic demo-cohort accounts
+# (docs/03-security-privacy/DEMO_COHORT_CONTRACT.md) in a real Chromium, walks the learner and
+# guardian screens, probes isolation, and uploads screenshots + findings. Read-only apart from the
+# sign-ins themselves. Credentials come from repository secrets, never from the repository.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  live-demo:
+    name: Demo accounts on the live site (real browser)
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install a11y package (Playwright)
+        working-directory: tests/a11y
+        run: npm ci --no-audit --no-fund
+      - name: Install Chromium
+        working-directory: tests/a11y
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Walk the live site as the demo guardian and learner
+        working-directory: tests/a11y
+        env:
+          LIVE_WEB_URL: https://taleem-web-phi.vercel.app
+          LIVE_API_URL: https://taleem-api.vercel.app
+          LIVE_OUT: ${{ github.workspace }}/live-demo-results
+          DEMO_GUARDIAN_EMAIL: ${{ secrets.DEMO_GUARDIAN_EMAIL }}
+          DEMO_GUARDIAN_PASSPHRASE: ${{ secrets.DEMO_GUARDIAN_PASSPHRASE }}
+          DEMO_FAMILY_CODE: ${{ secrets.DEMO_FAMILY_CODE }}
+          DEMO_LEARNER_NAME: ${{ secrets.DEMO_LEARNER_NAME }}
+          DEMO_LEARNER_PIN: ${{ secrets.DEMO_LEARNER_PIN }}
+          DEMO_STUDENT_REF: ${{ secrets.DEMO_STUDENT_REF }}
+        run: npx --no-install playwright test -c playwright.live.config.ts
+      - name: Upload screenshots + findings
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-demo-evidence
+          path: live-demo-results/
+          if-no-files-found: warn
