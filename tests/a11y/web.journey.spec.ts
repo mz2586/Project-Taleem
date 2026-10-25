@@ -270,8 +270,14 @@ async function guardianJoinsAndEnrols(browser: Browser, locale: Locale, learnerN
   await page.locator("#passphrase").fill(randomBytes(18).toString("base64url"));
   await shot(page, `${locale}-join-filled`);
   await tap(page.getByRole("button", { name: t(locale, "auth.join.submit") }));
+  // Registration now shows the one-time recovery codes first: the guardian confirms they saved
+  // them before moving on (docs/03-security-privacy/11-authentication-strategy.md §9).
+  await expect(page.getByRole("heading", { name: t(locale, "guardian.recovery.title") })).toBeVisible();
+  await shot(page, `${locale}-join-recovery-codes`);
+  await page.getByLabel(t(locale, "guardian.recovery.ack")).check();
+  await tap(page.getByRole("button", { name: t(locale, "guardian.recovery.continue") }));
   await page.waitForURL("**/guardian/family");
-  note(`${step}: registered through /join, landed on /guardian/family`);
+  note(`${step}: registered through /join, saved recovery codes, landed on /guardian/family`);
 
   const codeCard = page.locator('section[aria-labelledby="family-code-title"]');
   await expect(codeCard.getByRole("heading", { name: t(locale, "guardian.family.codeTitle") })).toBeVisible();
