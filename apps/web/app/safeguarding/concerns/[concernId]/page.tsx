@@ -1,7 +1,8 @@
 "use client";
 // One concern: the raiser's own words, where it came from, the household caution for a concern a
 // child raised, notes, and the audit trail — and the actions its status allows. Opening this page is
-// itself audited server-side (concern.viewed). "External referral needed" records a decision for a
+// itself audited server-side (concern.viewed). A concern that names a homework submission offers
+// "What the child wrote", loaded only when the lead asks (each read audited: concern.context_viewed). "External referral needed" records a decision for a
 // person to act on; this software contacts nobody (FD-04).
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -15,6 +16,7 @@ import { leadApi } from "@/lib/safeguarding/api";
 import { categoryOption } from "@/lib/safeguarding/categories";
 import {
   actionErrorKey,
+  hasFlaggedWork,
   ageLabel,
   allowedActions,
   outcomeKey,
@@ -24,6 +26,8 @@ import {
   type ConcernDetailWire,
   type Outcome,
 } from "@/lib/safeguarding/triage";
+
+import { FlaggedWork } from "./FlaggedWork";
 
 const box = {
   border: "1px solid var(--color-focus-ring)",
@@ -190,6 +194,10 @@ export default function ConcernDetailPage() {
           <p style={{ margin: 0 }}>{t("safeguarding.console.detail.noWords")}</p>
         )}
       </section>
+
+      {hasFlaggedWork(concern) ? (
+        <FlaggedWork concernId={concern.concern_id} t={t} locale={locale} read={leadApi.context} />
+      ) : null}
 
       <p style={{ margin: 0 }}>{t("safeguarding.console.detail.contactedNobody")}</p>
 

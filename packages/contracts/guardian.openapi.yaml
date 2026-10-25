@@ -198,6 +198,14 @@ components:
         achievement_history:
           type: array
           items: { $ref: "#/components/schemas/GuardianAchievement" }
+        objective_titles:
+          type: object
+          description: >-
+            Lesson title by locale (`ur`, `en`) for each objective code, for the lessons visible to
+            the reader's cohort. Show these in place of objective codes.
+          additionalProperties:
+            type: object
+            additionalProperties: { type: string }
     GuardianNotification:
       type: object
       description: >-

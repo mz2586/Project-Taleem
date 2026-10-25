@@ -38,7 +38,7 @@ function Section({ title, children }: { title: string; children: ReactNode }) {
 
 /** Curriculum codes and server text: marked with their own lang/dir, isolated from the interface. */
 function Foreign({ value }: { value: ForeignText }) {
-  const attrs = contentAttrs({ text: value.text });
+  const attrs = contentAttrs({ locale: value.locale ?? null, text: value.text });
   return (
     <bdi {...attrs} style={{ fontFamily: attrs.dir === "ltr" ? "var(--font-latin)" : undefined }}>
       {value.text}
@@ -211,8 +211,8 @@ function GuardianChildPage() {
                 <p style={{ margin: 0 }}>{t("guardian.child.knowledgeEmpty")}</p>
               ) : (
                 <ul style={{ margin: 0, paddingInlineStart: "var(--space-4)", display: "grid", gap: "var(--space-1)" }}>
-                  {model.knowledge.map((k) => (
-                    <li key={k.objective.text}>
+                  {model.knowledge.map((k, i) => (
+                    <li key={i}>
                       <Foreign value={k.objective} />: {k.value}
                     </li>
                   ))}

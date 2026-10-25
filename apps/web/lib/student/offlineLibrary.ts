@@ -61,7 +61,7 @@ export type EntryStatus =
 export interface LibraryEntry {
   lessonId: string;
   objectiveCode: string;
-  /** The lesson title, when the content is on the device; null before download. */
+  /** The lesson title (installed content, else the package index); null when neither has one. */
   title: { text: string; locale: string } | null;
   bytes: number;
   status: EntryStatus;
@@ -105,11 +105,15 @@ export function libraryModel(input: {
     else if (dl.kind === "failed") status = { kind: "failed", reason: dl.reason, installed: !!rec };
     else if (rec) status = { kind: "installed", updateAvailable: !!manifest && manifest.content_hash !== rec.content_hash };
     else status = { kind: "available" };
-    const title = input.titles[lessonId];
+    // The installed (signed, verified) content's title first; else the index's title, so a lesson
+    // is named before it is downloaded.
+    const title =
+      pickLocalized(input.titles[lessonId], INSTRUCTION_LOCALE_PREFERENCE) ??
+      pickLocalized(manifest?.title, INSTRUCTION_LOCALE_PREFERENCE);
     entries.push({
       lessonId,
       objectiveCode,
-      title: title ? pickLocalized(title, INSTRUCTION_LOCALE_PREFERENCE) : null,
+      title,
       bytes,
       status,
     });

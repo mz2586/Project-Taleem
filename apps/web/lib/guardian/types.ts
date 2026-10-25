@@ -71,6 +71,8 @@ export interface ChildOverview {
   intervention_notifications: Array<{ id: string; type: string; message: string }>;
   offline_sync_status: SyncStatus;
   achievement_history: Array<{ id: string; name: string; description: string; earned_at: number }>;
+  /** Additive: lesson title by locale per objective code (cohort-filtered) — shown instead of codes. */
+  objective_titles?: Record<string, Record<string, string>>;
   /** Additive: why each next step was recommended (stable reason codes; see lib/learning/rationale.ts). */
   recommendation_explanations?: ExplainedRecommendationWire[];
 }

@@ -259,3 +259,15 @@ def test_offline_packages_over_postgres() -> None:
     command.upgrade(cfg, "head")
 
     _exercise(create_app(Settings(database_url=PG_URL or "")))
+
+
+def test_manifest_carries_the_bilingual_title_outside_the_signature() -> None:
+    # The library names a lesson before download; the title is descriptive, not signed, and the
+    # content hash (which already hashes the same title inside the content) is unchanged by it.
+    signer = Ed25519PackageSigner(DEFAULT_OFFLINE_SIGNING_SEED, "k")
+    m = build_manifest(_view(), now_ms=1, signer=signer)
+    assert m.to_dict()["title"] == {"ur": "کسر", "en": "Fractions"}
+    assert m.content_hash == content_hash(lesson_offline_content(_view()))
+    assert lesson_offline_content(_view())["title"] == m.to_dict()["title"]
+    payload = signing_payload(m.package_id, m.version, m.content_hash)
+    assert ed25519.verify(bytes.fromhex(m.signature), payload, bytes.fromhex(signer.public_key_hex))

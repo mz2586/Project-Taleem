@@ -12,7 +12,7 @@ import { ApiError } from "../student/types";
 import type { Category } from "./categories";
 import type { RaisePayload } from "./childFlow";
 import { leadSession, refreshLead } from "./session";
-import type { ConcernDetailWire, GuardianConcernWire, Outcome, QueueWire } from "./triage";
+import type { ConcernContextWire, ConcernDetailWire, GuardianConcernWire, Outcome, QueueWire } from "./triage";
 
 const learnerOrGuardian = createApiClient(API_BASE, () => currentAccessToken());
 
@@ -57,6 +57,8 @@ export const leadApi = {
   queue: (includeResolved: boolean) =>
     asLead(() => lead.get<QueueWire>(`/v1/safeguarding/queue${includeResolved ? "?includeResolved=true" : ""}`)),
   detail: (id: string) => asLead(() => lead.get<ConcernDetailWire>(concernPath(id))),
+  /** What the child wrote (on demand only: every call is an audited read). */
+  context: (id: string) => asLead(() => lead.get<ConcernContextWire>(`${concernPath(id)}/context`)),
   acknowledge: (id: string) => asLead(() => lead.post<ConcernDetailWire>(`${concernPath(id)}:acknowledge`)),
   addNote: (id: string, body: string) =>
     asLead(() => lead.post<ConcernDetailWire>(`${concernPath(id)}/notes`, { body })),

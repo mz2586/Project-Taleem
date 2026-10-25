@@ -117,6 +117,9 @@ class Action(StrEnum):
 
     RAISED = "concern.raised"
     VIEWED = "concern.viewed"
+    # The lead read the flagged homework text behind a concern. The audit names the submission,
+    # never a word of its text.
+    CONTEXT_VIEWED = "concern.context_viewed"
     ACKNOWLEDGED = "concern.acknowledged"
     NOTE_ADDED = "concern.note_added"
     ESCALATED = "concern.escalated"

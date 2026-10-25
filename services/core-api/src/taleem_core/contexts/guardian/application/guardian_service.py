@@ -229,7 +229,17 @@ class GuardianService:
                 localizable_achievement(a)
                 for a in self._q.achievements(student_ref)["achievements"]
             ],
+            # Additive: ``{objective_code: {locale: title}}`` so every code above is shown as the
+            # lesson's title. Cohort-filtered by the learning read model (the reader's account).
+            "objective_titles": self._objective_titles(),
         }
+
+    def _objective_titles(self) -> dict[str, dict[str, str]]:
+        titles = getattr(self._q, "objective_titles", None)
+        if not callable(titles):  # a query surface that predates titles
+            return {}
+        result = titles()
+        return dict(result) if isinstance(result, dict) else {}
 
     # -- derivations ---------------------------------------------------------------------------
     def _interventions(self, student_ref: str, notifs: dict[str, Any]) -> list[dict[str, Any]]:

@@ -13,6 +13,8 @@ export interface PackageManifest {
   package_id: string;
   lesson_id: string;
   objective_code: string;
+  /** The lesson title by locale — descriptive, not signed (the signed content carries it too). */
+  title?: Record<string, string>;
   version: string; // short content_hash prefix — changes iff content changes
   content_hash: string; // SHA-256 hex over the canonical offline content
   assets: PackageAsset[];

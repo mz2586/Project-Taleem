@@ -20,7 +20,7 @@ export interface SlaWire {
 export interface ConcernSummaryWire {
   concern_id: string;
   subject_ref: string;
-  raised_by_role: "student" | "guardian";
+  raised_by_role: "student" | "guardian" | "teacher" | "system";
   category: Category;
   priority: Priority;
   status: Status;
@@ -28,7 +28,7 @@ export interface ConcernSummaryWire {
   age_seconds: number;
   overdue: boolean | null;
   has_text: boolean;
-  context: { screen: string; lesson_id: string | null };
+  context: { screen: string; lesson_id: string | null; submission_id?: string | null };
 }
 
 export interface QueueWire {
@@ -199,4 +199,78 @@ export function actionErrorKey(error: unknown): MessageKey {
   if (status === 409) return "safeguarding.console.detail.conflict";
   if (status === 403) return "safeguarding.console.denied";
   return "safeguarding.console.detail.refused";
+}
+
+// ------------------------------------------------------------- the flagged homework behind a concern
+
+export interface MatchedPhraseWire {
+  phrase_id: string;
+  lang: string;
+  category: Category;
+  phrase: string;
+}
+
+/** GET /v1/safeguarding/concerns/{id}/context — safeguarding lead only; every read is audited. */
+export interface ConcernContextWire {
+  concern_id: string;
+  submission: {
+    submission_id: string;
+    source: "assignment" | "self_paced";
+    objective_code: string;
+    item_ref: string;
+    text: string;
+    attempt: number;
+    submitted_at: number;
+    item_prompt: Record<string, string>;
+    lesson_title: Record<string, string>;
+  };
+  matched_phrases: MatchedPhraseWire[];
+  resubmitted_since_raised: boolean;
+  read_recorded: boolean;
+  notice?: string;
+}
+
+export interface FlaggedWorkView {
+  text: string;
+  lessonTitle: string | null;
+  prompt: string | null;
+  submittedAt: number;
+  attempt: number;
+  matched: { id: string; phrase: string; lang: string }[];
+  resubmitted: boolean;
+}
+
+/** The concern names a homework submission, so there is flagged work the lead may open. */
+export function hasFlaggedWork(concern: Pick<ConcernSummaryWire, "context">): boolean {
+  return typeof concern.context.submission_id === "string" && concern.context.submission_id !== "";
+}
+
+/** A localised string map in the reader's locale, else Urdu, else English, else any; null if empty. */
+export function pickLocalised(map: Record<string, string> | null | undefined, locale: string): string | null {
+  if (!map) return null;
+  for (const key of [locale, "ur", "en"]) {
+    const v = map[key];
+    if (typeof v === "string" && v.trim()) return v;
+  }
+  const any = Object.values(map).find((v) => typeof v === "string" && v.trim());
+  return any ?? null;
+}
+
+export function flaggedWorkView(wire: ConcernContextWire, locale: string): FlaggedWorkView {
+  return {
+    text: wire.submission.text,
+    lessonTitle: pickLocalised(wire.submission.lesson_title, locale),
+    prompt: pickLocalised(wire.submission.item_prompt, locale),
+    submittedAt: wire.submission.submitted_at,
+    attempt: wire.submission.attempt,
+    matched: wire.matched_phrases.map((m) => ({ id: m.phrase_id, phrase: m.phrase, lang: m.lang })),
+    resubmitted: wire.resubmitted_since_raised,
+  };
+}
+
+/** A failed read: 404 means there is no answer to read (none named, or erased). */
+export function flaggedWorkErrorKey(error: unknown): MessageKey {
+  const status = (error as { status?: unknown } | null)?.status;
+  if (status === 404) return "safeguarding.console.detail.flagged.gone";
+  return actionErrorKey(error);
 }

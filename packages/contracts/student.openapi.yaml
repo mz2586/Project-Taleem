@@ -163,6 +163,12 @@ components:
           properties:
             objective_code: { type: ["string", "null"] }
             reason: { type: string }
+            title:
+              description: The next lesson's title by locale (`ur`, `en`); null when none.
+              oneOf:
+                - type: object
+                  additionalProperties: { type: string }
+                - type: "null"
         mastery_summary:
           type: object
           properties:
@@ -170,6 +176,15 @@ components:
             in_progress: { type: integer }
             total: { type: integer }
         revision_due_count: { type: integer }
+        objective_titles:
+          type: object
+          description: >-
+            The learner-facing lesson title (by locale) of each objective this learner has a state
+            for, and of the next one. Only lessons visible to the reader's cohort. Show these, not
+            objective codes.
+          additionalProperties:
+            type: object
+            additionalProperties: { type: string }
     HomeworkView:
       type: object
       properties:

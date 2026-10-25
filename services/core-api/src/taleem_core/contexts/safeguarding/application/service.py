@@ -23,6 +23,12 @@ Visibility rules (each is enforced here, against the token subject, and pinned b
    on a submitted answer, about that answer's learner, naming the submission — at most one per
    submission. It is invisible to every guardian and teacher; only the lead sees it.
 
+7. **The flagged work** behind a concern that names a homework submission (the child's text, the
+   item prompt, the lesson title and the phrase-list entries it matches) is read only by a
+   ``safeguarding_lead``, on demand, and every read is audited (``concern.context_viewed``: who,
+   when, which concern and submission, never the text). It reads through the school context
+   regardless of consent or the kill switch: safeguarding must be able to act.
+
 Every action is audited in the same transaction as the change, naming the actor's token subject.
 Nothing in this service contacts anyone: an escalation records "external referral needed" for a
 human to act on under a policy that does not exist yet (FD-04). Logs and metrics carry priority and
@@ -51,7 +57,7 @@ from ..domain.model import (
     Status,
     new_note,
 )
-from .ports import LearnerDirectory, SafeguardingUnitOfWork, TeacherRoster
+from .ports import LearnerDirectory, SafeguardingUnitOfWork, SubmissionReader, TeacherRoster
 
 LEAD_ROLE = "safeguarding_lead"
 QUEUE_LIMIT = 500
@@ -74,6 +80,10 @@ CHILD_RECEIPT_NOTICE = (
 TEACHER_RECEIPT_NOTICE = (
     "Your concern has been recorded for the safeguarding lead. Do not tell the child or their "
     "family that a concern was raised, and follow your school's safeguarding procedure."
+)
+CONTEXT_READ_NOTICE = (
+    "This read was recorded in the safeguarding audit trail (who, when, which concern). "
+    "The text is what the child last submitted for this item."
 )
 NOBODY_CONTACTED = "Recorded only. This software contacts nobody; a person must act (FD-04)."
 
@@ -128,8 +138,10 @@ class SafeguardingService:
         require_enrolled: bool,
         teachers: TeacherRoster | None = None,
         phrases: PhraseList | None = None,
+        submissions: SubmissionReader | None = None,
     ) -> None:
         self._uow = uow_factory
+        self._submissions = submissions
         self._teachers = teachers
         self._learners = learners
         self._now = clock
@@ -416,6 +428,62 @@ class SafeguardingService:
             self._record(uow, concern, Action.VIEWED, actor_ref, now)
             uow.commit()
             return self._detail(uow, concern, now)
+
+    def context(self, *, actor_ref: str, concern_id: str) -> dict[str, Any]:
+        """The flagged homework behind a concern, for the lead (rule 7). A concern that names no
+        submission, or whose submission is gone (erased) or is not its subject's, is a 404 and
+        nothing is audited; every successful read is audited before the text is returned."""
+        now = self._now()
+        with self._uow() as uow:
+            concern = self._load(uow, concern_id)
+        submission_id = concern.context_submission_id
+        sub = (
+            self._submissions.submission_for_safeguarding(
+                submission_id=submission_id, student_ref=concern.subject_ref
+            )
+            if submission_id and self._submissions is not None
+            else None
+        )
+        if sub is None:
+            raise not_found("this concern has no homework submission to read")
+        matched = self._phrases.matches(str(sub.get("text") or ""))
+        with self._uow() as uow:
+            self._record(
+                uow,
+                concern,
+                Action.CONTEXT_VIEWED,
+                actor_ref,
+                now,
+                submission_id=str(submission_id),
+            )
+            uow.commit()
+        return {
+            "concern_id": concern.concern_id,
+            "submission": {
+                "submission_id": sub["submission_id"],
+                "source": sub["source"],
+                "objective_code": sub["objective_code"],
+                "item_ref": sub["item_ref"],
+                "text": sub["text"],
+                "attempt": sub["attempt"],
+                "submitted_at": sub["submitted_at"],
+                "item_prompt": dict(sub.get("item_prompt") or {}),
+                "lesson_title": dict(sub.get("lesson_title") or {}),
+            },
+            "matched_phrases": [
+                {
+                    "phrase_id": p.phrase_id,
+                    "lang": p.lang,
+                    "category": p.category.value,
+                    "phrase": p.phrase,
+                }
+                for p in matched
+            ],
+            # The screen raises once per submission; a later resubmission replaces the text.
+            "resubmitted_since_raised": float(sub["submitted_at"]) > concern.created_at,
+            "read_recorded": True,
+            "notice": CONTEXT_READ_NOTICE,
+        }
 
     def acknowledge(self, *, actor_ref: str, concern_id: str) -> dict[str, Any]:
         now = self._now()

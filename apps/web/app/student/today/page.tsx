@@ -10,17 +10,19 @@ import { useCallback, useEffect, useState } from "react";
 import { AppShell } from "@/components/student/AppShell";
 import { LoadFailure } from "@/components/student/LoadFailure";
 import { ReadAloud } from "@/components/student/ReadAloud";
-import { Card, EmptyState, ProgressRing, Skeleton, StateBadge } from "@/components/student/ui";
+import { ObjectiveName } from "@/components/student/ObjectiveName";
+import { TodayIdeas } from "@/components/student/TodayIdeas";
+import { Card, EmptyState, ProgressRing, Skeleton } from "@/components/student/ui";
 import { ButtonLink } from "@/design-system/ButtonLink";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { useLearner } from "@/lib/session/useLearner";
 import { aiTeacherApi, learningApi } from "@/lib/student/api";
 import { whyNextModel, type WhyNextModel } from "@/lib/student/aiTeacher";
+import { objectiveName, type ObjectiveTitles } from "@/lib/student/objectiveName";
 import { placementEntry, type PlacementEntry } from "@/lib/student/placement";
 import {
   classifyLoadError,
   emptyKnowledge,
-  masteryStateKey,
   orOnNotFound,
   TODAY_EMPTY_COPY,
   todayModel,
@@ -32,7 +34,7 @@ import {
  * "Why this next?" — the AI Teacher's plan in plain words (lib/student/aiTeacher.ts `whyNextModel`).
  * Loaded only when opened: a native disclosure, so it is keyboard- and screen-reader-operable.
  */
-function WhyNext({ studentRef }: { studentRef: string }) {
+function WhyNext({ studentRef, titles }: { studentRef: string; titles: ObjectiveTitles }) {
   const { t, locale } = useLocale();
   const [open, setOpen] = useState(false);
   const [model, setModel] = useState<WhyNextModel | null>(null);
@@ -76,7 +78,7 @@ function WhyNext({ studentRef }: { studentRef: string }) {
                 {model.objective ? (
                   <>
                     {" · "}
-                    <bdi dir="auto">{model.objective}</bdi>
+                    <ObjectiveName name={objectiveName(model.objective, titles)} />
                   </>
                 ) : null}
               </p>
@@ -187,7 +189,7 @@ export default function TodayPage() {
               </Card>
             ) : null}
 
-            {model.canStart && ref ? <WhyNext studentRef={ref} /> : null}
+            {model.canStart && ref ? <WhyNext studentRef={ref} titles={model.titles} /> : null}
 
             {model.kind === "learning" ? (
               <>
@@ -205,18 +207,7 @@ export default function TodayPage() {
                     ) : null}
                   </div>
                 </section>
-                {model.objectives.length > 0 ? (
-                  <section aria-label={t("student.today.ideasLabel")} style={{ display: "grid", gap: "var(--space-2)" }}>
-                    {model.objectives.slice(0, 8).map(([code, o]) => (
-                      <Card key={code}>
-                        <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-2)" }}>
-                          <span dir="auto">{code}</span>
-                          <StateBadge state={o.state} label={t(masteryStateKey(o.state))} />
-                        </div>
-                      </Card>
-                    ))}
-                  </section>
-                ) : null}
+                <TodayIdeas objectives={model.objectives} titles={model.titles} label={t("student.today.ideasLabel")} t={t} />
               </>
             ) : (
               <EmptyState title={t(TODAY_EMPTY_COPY[model.kind].title)} body={t(TODAY_EMPTY_COPY[model.kind].body)} />

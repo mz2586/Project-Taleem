@@ -780,6 +780,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         SlaPolicy.from_json(settings.safeguarding_ack_sla_json),
         require_enrolled=settings.is_production,
         teachers=_TeacherRoster(),
+        submissions=school_service,
     )
     app.state.safeguarding_service = safeguarding_service
     raise_limiter: Limiter = (

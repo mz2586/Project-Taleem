@@ -50,6 +50,18 @@ class PublishedLessonFingerprints(Protocol):
     def published_fingerprints(self) -> list[tuple[str, str]]: ...
 
 
+@runtime_checkable
+class PublishedTitles(Protocol):
+    """Optional companion to ``CurriculumReadModel``: the learner-facing lesson title per objective.
+
+    ``{objective_code: {locale: text}}`` for the lessons the current reader may see (the same
+    cohort filtering and preference as ``lesson_for``: the title is the lesson that code teaches).
+    Titles only — no items, answers or other content.
+    """
+
+    def published_titles(self) -> dict[str, dict[str, str]]: ...
+
+
 # --- read-model row DTOs for the student query surface (derived; no new child-data tables) ---
 
 

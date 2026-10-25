@@ -16,6 +16,7 @@ import type { Locale } from "../i18n/config";
 import { formatPercent, type DigitStyle } from "../i18n/format";
 import type { MessageKey } from "../i18n/messages";
 import { translate } from "../i18n/translate";
+import { objectiveName } from "../student/objectiveName";
 import { formatDate } from "./format";
 import type { ChildOverview, ChildSummary, Streak } from "./types";
 
@@ -112,6 +113,8 @@ export interface ForeignText {
   text: string;
   /** True when this is content (a code, a server sentence) to be marked with its own lang/dir. */
   content: true;
+  /** The authored locale, when the text is a lesson title (drives lang/dir). */
+  locale?: string;
 }
 
 export interface DetailItem {
@@ -181,6 +184,13 @@ interface Assessment {
 }
 
 export function childDetailModel(ctx: FormatContext, data: ChildOverview): ChildDetailModel {
+  // An objective is named by its lesson title (the guardian's language first), never its code;
+  // the code is the fallback only when the server sent no title.
+  const titlePreference = [ctx.locale, "ur", "en"];
+  const objective = (codeText: string): ForeignText => {
+    const name = objectiveName(codeText, data.objective_titles, titlePreference);
+    return name.kind === "title" ? { text: name.text, content: true, locale: name.locale } : code(codeText);
+  };
   const p = data.progress_overview;
   const hasProgress = (p?.total_attempts ?? 0) > 0;
 
@@ -206,7 +216,7 @@ export function childDetailModel(ctx: FormatContext, data: ChildOverview): Child
     hasProgress && nextKey
       ? {
           text: t(ctx, nextKey),
-          ...(plan.next_action?.objective_code ? { extra: code(plan.next_action.objective_code) } : {}),
+          ...(plan.next_action?.objective_code ? { extra: objective(plan.next_action.objective_code) } : {}),
         }
       : null;
 
@@ -214,7 +224,7 @@ export function childDetailModel(ctx: FormatContext, data: ChildOverview): Child
     text: t(ctx, a.type === "summative" ? "guardian.child.assessment.summative" : "guardian.child.assessment.formative", {
       count: a.item_count ?? 0,
     }),
-    ...(a.objective_code ? { extra: code(a.objective_code) } : {}),
+    ...(a.objective_code ? { extra: objective(a.objective_code) } : {}),
   }));
 
   return {
@@ -234,8 +244,8 @@ export function childDetailModel(ctx: FormatContext, data: ChildOverview): Child
       stale: !!sync?.is_stale,
       lastSync: lastSync ? t(ctx, "guardian.sync.lastSync", { date: lastSync }) : null,
     },
-    knowledge: Object.entries(data.knowledge_growth ?? {}).map(([objective, ratio]) => ({
-      objective: code(objective),
+    knowledge: Object.entries(data.knowledge_growth ?? {}).map(([codeText, ratio]) => ({
+      objective: objective(codeText),
       value: pct(ctx, ratio),
       ratio,
     })),
@@ -245,7 +255,7 @@ export function childDetailModel(ctx: FormatContext, data: ChildOverview): Child
     }),
     recommendations: (data.recommendations ?? []).map((r) => ({
       text: t(ctx, RECOMMENDATION_KEYS[r.reason] ?? "guardian.child.recommendation.other"),
-      extra: code(r.objective_code),
+      extra: objective(r.objective_code),
     })),
     nextStep,
     timeline: (data.learning_timeline ?? []).map((s) => ({
@@ -258,7 +268,7 @@ export function childDetailModel(ctx: FormatContext, data: ChildOverview): Child
     assessments,
     achievements: (data.achievement_history ?? []).map((a) => {
       if (a.id.startsWith("mastery-")) {
-        return { text: t(ctx, "guardian.child.achievement.mastered"), extra: code(a.id.slice("mastery-".length)) };
+        return { text: t(ctx, "guardian.child.achievement.mastered"), extra: objective(a.id.slice("mastery-".length)) };
       }
       if (a.id.startsWith("cleared-")) return { text: t(ctx, "guardian.child.achievement.cleared") };
       return { text: t(ctx, "guardian.child.achievement.other"), extra: code(a.name) };

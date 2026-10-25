@@ -6,6 +6,8 @@
   list: it is a safety channel and stays open when learning is halted (pinned by a test).
 - ``GET /my-concerns`` — a guardian's own raised concerns, coarse status only.
 - ``GET /queue``, ``GET /concerns/{id}`` and the triage actions — ``safeguarding_lead`` only.
+- ``GET /concerns/{id}/context`` — the flagged homework behind a concern (the child's text, item
+  prompt, lesson title, matched phrase entries); ``safeguarding_lead`` only, every read audited.
 
 The router is mounted behind the staff gate, so a suspended lead's live token stops working on its
 next request. Raising is rate limited per subject, generously: a flood must not bury real reports,
@@ -133,6 +135,10 @@ def build_safeguarding_router(
     @router.get("/concerns/{concern_id}")
     def detail(concern_id: str, claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
         return service.detail(actor_ref=_lead(claims), concern_id=concern_id)
+
+    @router.get("/concerns/{concern_id}/context")
+    def context(concern_id: str, claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
+        return service.context(actor_ref=_lead(claims), concern_id=concern_id)
 
     @router.post("/concerns/{concern_id}:acknowledge")
     def acknowledge(concern_id: str, claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:

@@ -50,6 +50,7 @@ class Phrase:
     lang: str
     category: Category
     normalised: str
+    phrase: str = ""  # the list entry as written (shown only to the safeguarding lead)
 
 
 @dataclass(frozen=True)
@@ -96,6 +97,7 @@ def parse_phrase_list(data: object) -> PhraseList:
                 lang=str(entry.get("lang", "")),
                 category=parse_category(str(entry.get("category", ""))),
                 normalised=normalised,
+                phrase=str(entry.get("phrase", "")),
             )
         )
     return PhraseList(header=header, phrases=tuple(phrases))

@@ -86,6 +86,8 @@ export interface TodayModel {
   /** 0..1, or null before any question has been answered (an accuracy of "0%" would be a lie). */
   accuracy: number | null;
   objectives: [string, ObjectiveKnowledge][];
+  /** Lesson title by locale per objective code — show these, never the codes. */
+  titles: Record<string, Record<string, string>>;
 }
 
 const REVIEW_STATES = new Set(["needs_review", "at_risk"]);
@@ -122,7 +124,15 @@ export function todayModel(input: {
     masteryValue: total > 0 ? mastered / total : 0,
     accuracy: progress && progress.total_attempts > 0 ? progress.accuracy : null,
     objectives,
+    titles: todayTitles(input.today),
   };
+}
+
+function todayTitles(today: TodayView | null): Record<string, Record<string, string>> {
+  const titles: Record<string, Record<string, string>> = { ...(today?.objective_titles ?? {}) };
+  const next = today?.next_action;
+  if (next?.objective_code && next.title && !titles[next.objective_code]) titles[next.objective_code] = next.title;
+  return titles;
 }
 
 export const TODAY_EMPTY_COPY: Record<

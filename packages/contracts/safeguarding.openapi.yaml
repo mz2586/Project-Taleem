@@ -136,6 +136,31 @@ paths:
         "403": { $ref: "#/components/responses/Problem" }
         "404": { $ref: "#/components/responses/Problem" }
         default: { $ref: "#/components/responses/Problem" }
+  /v1/safeguarding/concerns/{concernId}/context:
+    get:
+      tags: [safeguarding]
+      operationId: concernContext
+      summary: The flagged homework behind a concern (safeguarding lead only; every read audited)
+      description: >-
+        For a concern that names a homework submission (a disclosure-screen or teacher concern),
+        what the child wrote, the item prompt, the lesson title, when it was submitted and the
+        phrase-list entries the text matches now. Each read appends a `concern.context_viewed`
+        audit row (reader, time, concern, submission id; never the text). Available with the kill
+        switch engaged and after the learner's consent is withdrawn. A concern with no submission,
+        or whose submission was erased, is a 404 and nothing is audited.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { $ref: "#/components/parameters/ConcernId" }
+      responses:
+        "200":
+          description: The flagged work
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/ConcernContext" }
+        "401": { $ref: "#/components/responses/Problem" }
+        "403": { $ref: "#/components/responses/Problem" }
+        "404": { $ref: "#/components/responses/Problem" }
+        default: { $ref: "#/components/responses/Problem" }
   /v1/safeguarding/concerns/{concernId}:acknowledge:
     post:
       tags: [safeguarding]
@@ -384,6 +409,40 @@ components:
         concerns:
           type: array
           items: { $ref: "#/components/schemas/ConcernSummary" }
+    ConcernContext:
+      type: object
+      required: [concern_id, submission, matched_phrases, resubmitted_since_raised, read_recorded]
+      properties:
+        concern_id: { type: string }
+        submission:
+          type: object
+          required: [submission_id, text, submitted_at]
+          properties:
+            submission_id: { type: string }
+            source: { type: string, enum: [assignment, self_paced] }
+            objective_code: { type: string }
+            item_ref: { type: string }
+            text: { type: string, description: What the child last submitted for this item. }
+            attempt: { type: integer, minimum: 1 }
+            submitted_at: { type: number }
+            item_prompt: { type: object, additionalProperties: { type: string } }
+            lesson_title: { type: object, additionalProperties: { type: string } }
+        matched_phrases:
+          type: array
+          items:
+            type: object
+            properties:
+              phrase_id: { type: string }
+              lang: { type: string }
+              category: { $ref: "#/components/schemas/Category" }
+              phrase: { type: string }
+        resubmitted_since_raised:
+          type: boolean
+          description: >-
+            True when the child resubmitted after the concern was raised: the text shown is the
+            latest version, not necessarily the one that was flagged.
+        read_recorded: { type: boolean, const: true }
+        notice: { type: string }
     ConcernDetail:
       allOf:
         - { $ref: "#/components/schemas/ConcernSummary" }

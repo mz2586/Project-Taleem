@@ -164,3 +164,35 @@ def test_student_apis_over_postgres() -> None:
     command.upgrade(cfg, "head")
 
     _exercise(create_app(Settings(database_url=PG_URL or "")))
+
+
+def test_objective_titles_fall_back_to_published_lessons() -> None:
+    """A read model without ``published_titles`` still names objectives (first lesson wins)."""
+    from taleem_core.contexts.learning.application.student_queries import StudentQueryService
+    from taleem_core.contexts.learning.domain.curriculum_view import LessonView
+
+    def view(lesson_id: str, code: str, en: str) -> LessonView:
+        return LessonView(
+            lesson_id=lesson_id,
+            objective_code=code,
+            title={"ur": f"ur-{en}", "en": en},
+            explanation={},
+            worked_example_steps=(),
+            practice_items=(),
+        )
+
+    class _Curriculum:
+        def lesson_for(self, objective_code: str) -> None:
+            return None
+
+        def published_lessons(self) -> list[LessonView]:
+            return [view("a", "X-1", "Honesty"), view("b", "X-1", "Other"), view("c", "Y-2", "Kin")]
+
+        def published_graph(self) -> object:
+            raise AssertionError("not needed")
+
+    svc = StudentQueryService(lambda: None, _Curriculum(), lambda: 0.0)  # type: ignore[arg-type,return-value]
+    assert svc.objective_titles() == {
+        "X-1": {"ur": "ur-Honesty", "en": "Honesty"},
+        "Y-2": {"ur": "ur-Kin", "en": "Kin"},
+    }

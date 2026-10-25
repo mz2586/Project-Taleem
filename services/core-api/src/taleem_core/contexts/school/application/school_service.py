@@ -25,7 +25,7 @@ from collections.abc import Callable
 from typing import Any
 
 from ....platform import observability
-from ....platform.cohort import COHORTS
+from ....platform.cohort import COHORTS, reading_as
 from ....platform.concurrency import ConcurrencyConflictError
 from ....platform.errors import Problem, conflict, not_found, unauthorized, validation_error
 from ..domain.model import (
@@ -905,6 +905,36 @@ class SchoolService:
                 return True
             sub = uow.submissions.get(teacher.organization_id, submission_id)
             return sub is not None and sub.student_ref == student_ref and sub.class_id in own
+
+    def submission_for_safeguarding(
+        self, *, submission_id: str, student_ref: str
+    ) -> dict[str, Any] | None:
+        """Safeguarding's read of one homework submission, for the lead's concern context.
+
+        The caller (the safeguarding service) has already authorised a ``safeguarding_lead`` and
+        resolved the concern; this returns the submission only when it belongs to ``student_ref``
+        (the concern's subject), else None. Deliberately independent of progress_sharing, the
+        learner gate and consent: a safeguarding lead must be able to act on a withdrawn learner.
+        The lesson is read as the learner's own cohort, so a demo learner's lesson resolves too.
+        Nothing is audited here; the safeguarding audit records the read (never the text)."""
+        with self._uow() as uow:
+            sub = uow.submissions.by_id(submission_id)
+        if sub is None or sub.student_ref != student_ref:
+            return None
+        with reading_as(self._learner_cohort(student_ref)):
+            lesson = self._lessons({sub.objective_code}).get(sub.objective_code)
+        item = lesson.item(sub.item_ref) if lesson is not None else None
+        return {
+            "submission_id": sub.submission_id,
+            "source": sub.source.value,
+            "objective_code": sub.objective_code,
+            "item_ref": sub.item_ref,
+            "text": sub.text,
+            "attempt": sub.attempt,
+            "submitted_at": sub.submitted_at,
+            "lesson_title": dict(lesson.title) if lesson is not None else {},
+            "item_prompt": dict(item.prompt) if item is not None else {},
+        }
 
     # ------------------------------------------------------------- reporting (read port)
 

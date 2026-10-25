@@ -164,3 +164,23 @@ describe("childDetailModel", () => {
     expect(model.sync).toMatchObject({ stale: true, lastSync: null });
   });
 });
+
+describe("childDetailModel — lesson titles", () => {
+  const titles = { "G4.N.1": { ur: "کسریں", en: "Fractions" }, "G4.N.2": { ur: "", en: "Decimals" } };
+
+  it("names every objective by its lesson title, in the guardian's language first", () => {
+    const model = childDetailModel(EN, overview({ objective_titles: titles }));
+    expect(model.knowledge[0]?.objective).toEqual({ text: "Fractions", content: true, locale: "en" });
+    expect(model.nextStep?.extra).toEqual({ text: "Fractions", content: true, locale: "en" });
+    expect(model.recommendations[0]?.extra).toEqual({ text: "Decimals", content: true, locale: "en" });
+    expect(model.assessments[0]?.extra?.text).toBe("Fractions");
+    expect(model.achievements[0]?.extra?.text).toBe("Fractions");
+    const ur = childDetailModel(UR, overview({ objective_titles: titles }));
+    expect(ur.knowledge[0]?.objective).toEqual({ text: "کسریں", content: true, locale: "ur" });
+    expect(JSON.stringify(ur)).not.toContain("G4.N.1");
+  });
+
+  it("falls back to the code only for a server that sends no titles", () => {
+    expect(childDetailModel(EN, overview()).knowledge[0]?.objective).toEqual({ text: "G4.N.1", content: true });
+  });
+});

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from types import TracebackType
-from typing import Protocol
+from typing import Any, Protocol
 
 from ..domain.model import AuditEntry, Concern, Note, Priority, Status
 
@@ -78,4 +78,16 @@ class TeacherRoster(Protocol):
     ) -> bool:
         """True only for an active teacher and a learner enrolled in one of that teacher's own
         classes; a named submission must be that learner's, in one of those classes."""
+        ...
+
+
+class SubmissionReader(Protocol):
+    """The homework submission behind a concern (the school context, through a port)."""
+
+    def submission_for_safeguarding(
+        self, *, submission_id: str, student_ref: str
+    ) -> dict[str, Any] | None:
+        """``{"submission_id", "source", "objective_code", "item_ref", "text", "attempt",
+        "submitted_at", "lesson_title", "item_prompt"}`` for this learner's submission, or None
+        (unknown, erased, or another learner's). Independent of consent and progress sharing."""
         ...

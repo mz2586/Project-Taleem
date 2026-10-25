@@ -208,6 +208,20 @@ class CurriculumStudioReadModel:
                 )
         return out
 
+    def published_titles(self) -> dict[str, dict[str, str]]:
+        """``{objective_code: {"ur", "en"}}`` — the title of the lesson each code is taught from.
+
+        Same choke point and order as ``lesson_for`` (``_preferred``): a real reader never gets a
+        demo title, and a demo reader gets the demo lesson's title where both teach a code."""
+        out: dict[str, dict[str, str]] = {}
+        with cs_unit_of_work(self._sf) as uow:
+            lessons = _preferred(uow.lessons.all())
+        for lesson in lessons:
+            title = _bilingual(lesson.title)
+            for code in lesson.learning_outcomes:
+                out.setdefault(code, title)
+        return out
+
     def published_versions(self) -> list[dict[str, object]]:
         """The published lesson of each objective code with its version pin (REPORT_CARD_CONTRACT
         §1): ``{"objective_code", "lesson_id", "version", "curriculum_pack", "subject_key",

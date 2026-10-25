@@ -109,6 +109,7 @@ the primary path.
 
 | Date | Change | Author |
 | --- | --- | --- |
+| 2026-10-25 | Safeguarding lead reads the flagged work: `GET /v1/safeguarding/concerns/{id}/context` (`safeguarding_lead` only; submission text, item prompt, lesson title, `submitted_at`, matched phrase entries, `resubmitted_since_raised`); every read audited as `concern.context_viewed` without the text; works under the kill switch and after consent withdrawal; console "What the child wrote" loads on demand. | Engineering |
 | 2026-10-25 | §6 implemented: self-paced list + `POST …/homework/self-paced/{objectiveCode}/items/{itemRef}:submit` (`409 LESSON_ASSIGNED` when a class assigned it); `source`, `marking`, `can_retry`, `compare` fields; an automatic `not_yet` may be retried (one evidence per attempt, `{submission_id}:{attempt}`), an automatic `met` and any teacher mark are final; disclosure screen list in `contexts/safeguarding/disclosure_phrases.json`; migration `0017_self_paced_homework`. Self-paced answers are not shown to teachers. | Engineering |
 | 2026-10-24 | §6 AI-led path: self-paced homework, reliable auto-marking only, open answers self-check, AI marking inert until FD-03. | Engineering |
 | 2026-10-24 | Implementation notes: `SHARING_REQUIRED`, one row per item with `attempt`, the concern route. | Engineering |

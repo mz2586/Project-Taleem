@@ -696,3 +696,64 @@ def test_erase_removes_the_demo_cohort_and_nothing_real(world: World, tmp_path: 
         finally:
             studio_engine.dispose()
     assert ids == {FIXTURE_LESSON_ID}
+
+
+# --------------------------------------------------------------------------------- lesson titles
+
+
+def test_real_learner_read_models_carry_real_titles_never_demo(world: World) -> None:
+    c, h, ref = world.client, world.real.learner, world.real.student_ref
+    today = c.get(f"/v1/learning/students/{ref}/today", headers=h)
+    assert today.status_code == 200, today.text
+    body = today.json()
+    _no_demo(today.text)
+    title = body["next_action"]["title"]
+    assert body["next_action"]["objective_code"] == REAL_OBJECTIVE
+    assert title and title["en"] and title["ur"]  # bilingual
+    assert body["objective_titles"].get(REAL_OBJECTIVE, title) == title
+    recs = c.get(f"/v1/learning/students/{ref}/recommendations", headers=h).json()
+    assert all(r["title"] for r in recs["recommendations"])
+    index = c.get("/v1/offline/packages", headers=h).json()["packages"]
+    fixture = next(p for p in index if p["lesson_id"] == FIXTURE_LESSON_ID)
+    assert fixture["title"]["en"] and fixture["title"]["ur"]
+    assert not any("[DEMO" in v for p in index for v in p["title"].values())
+    overview = c.get(f"/v1/guardian/children/{ref}", headers=world.real.guardian)
+    assert overview.status_code == 200, overview.text
+    titles = overview.json()["objective_titles"]
+    assert REAL_OBJECTIVE in titles and not set(titles) & DEMO_CODES
+
+
+def test_demo_learner_read_models_carry_the_demo_titles(world: World) -> None:
+    c = world.client
+    g, learner = _demo_learner(world)
+    h, ref = _h(learner["session"]["access_token"]), str(learner["learner"]["student_ref"])
+    body = c.get(f"/v1/learning/students/{ref}/today", headers=h).json()
+    titles = body["objective_titles"]
+    studied = {s.objective for s in ds.SESSIONS}
+    assert studied <= set(titles)  # every objective the learner has a state for is named
+    for code in studied:
+        assert titles[code]["en"].startswith(ds.DEMO_TITLE_PREFIX)
+        assert titles[code]["ur"].startswith(ds.DEMO_TITLE_PREFIX)
+    index = c.get("/v1/offline/packages", headers=h).json()["packages"]
+    demo = [p for p in index if p["lesson_id"].startswith(ds.DEMO_LESSON_PREFIX)]
+    assert demo and all(p["title"]["en"].startswith(ds.DEMO_TITLE_PREFIX) for p in demo)
+    gh = _h(g["session"]["access_token"])
+    overview = c.get(f"/v1/guardian/children/{ref}", headers=gh).json()
+    assert overview["objective_titles"][next(iter(studied))]["en"].startswith(ds.DEMO_TITLE_PREFIX)
+
+
+def test_published_titles_choke_point_matches_cohort(world: World) -> None:
+    engine = create_db_engine(world.url)
+    try:
+        model = CurriculumStudioReadModel(create_session_factory(engine))
+        code = ds.DEMO_OBJECTIVES[0]
+        with reading_as(REAL):
+            real = model.published_titles()
+        with reading_as(DEMO):
+            demo = model.published_titles()
+        assert REAL_OBJECTIVE in real and code not in real
+        assert not any("[DEMO" in v for t in real.values() for v in t.values())
+        assert demo[code]["en"].startswith(ds.DEMO_TITLE_PREFIX)
+        assert model.published_titles() == real  # outside a request the reader is real
+    finally:
+        engine.dispose()

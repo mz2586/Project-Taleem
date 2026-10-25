@@ -84,9 +84,12 @@ export interface KnowledgeView {
 // "complete" with a null objective when nothing is left to recommend — which, with a zero total, is
 // what a learner sees while no lesson has been published.
 export interface TodayView {
-  next_action: { objective_code: string | null; reason: string };
+  /** `title`: the next lesson's title by locale (absent on older servers). */
+  next_action: { objective_code: string | null; reason: string; title?: Record<string, string> | null };
   mastery_summary: { mastered: number; in_progress: number; total: number };
   revision_due_count: number;
+  /** Lesson title by locale for each objective the learner has a state for (cohort-filtered). */
+  objective_titles?: Record<string, Record<string, string>>;
 }
 
 export interface ProgressView {

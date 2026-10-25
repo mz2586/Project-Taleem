@@ -130,6 +130,13 @@ components:
             signed `version` pins the content). Send it back as an attempt.submitted payload's
             `lesson_version` so the evidence records the version the work was done on.
         objective_code: { type: string }
+        title:
+          type: object
+          additionalProperties: { type: string }
+          description: >-
+            The lesson's title by locale (`ur`, `en`), so a library names a lesson before it is
+            downloaded. Not signed and not part of `content_hash`; the installed content carries
+            the same title inside the signed, hashed content.
         version: { type: string, description: "Short content_hash prefix; changes iff content changes" }
         content_hash: { type: string, description: "SHA-256 hex over the canonical offline content" }
         assets:

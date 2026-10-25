@@ -118,6 +118,11 @@ class OfflinePackageManifest:
     # version the work was done on (REPORT_CARD_CONTRACT §1). Descriptive, not signed: the
     # signed ``version`` (content-hash prefix) still pins the content itself.
     lesson_version: int | None = None
+    # The lesson's bilingual title ``{locale: text}``, so a library can name a lesson before it is
+    # downloaded (a child sees a title, never an objective code). Descriptive, not signed: the
+    # same title is inside the signed, hashed content, which is what the device renders once it
+    # is installed; the signing payload and the content hash are unchanged by this field.
+    title: tuple[tuple[str, str], ...] = ()
 
     def to_dict(self) -> dict[str, object]:
         return {
@@ -125,6 +130,7 @@ class OfflinePackageManifest:
             "lesson_id": self.lesson_id,
             "lesson_version": self.lesson_version,
             "objective_code": self.objective_code,
+            "title": dict(self.title),
             "version": self.version,
             "content_hash": self.content_hash,
             "assets": [a.to_dict() for a in self.assets],
@@ -173,6 +179,7 @@ def build_manifest(
         signature=signature,
         signing_key_id=key_id,
         lesson_version=view.version,
+        title=tuple(sorted((str(k), str(v)) for k, v in view.title.items())),
     )
 
 
