@@ -272,7 +272,7 @@ async function guardianJoinsAndEnrols(browser: Browser, locale: Locale, learnerN
   await tap(page.getByRole("button", { name: t(locale, "auth.join.submit") }));
   // Registration now shows the one-time recovery codes first: the guardian confirms they saved
   // them before moving on (docs/03-security-privacy/11-authentication-strategy.md §9).
-  await expect(page.getByRole("heading", { name: t(locale, "guardian.recovery.title") })).toBeVisible();
+  await expect(page.getByRole("heading", { name: t(locale, "guardian.recovery.title") }).first()).toBeVisible();
   await shot(page, `${locale}-join-recovery-codes`);
   await page.getByLabel(t(locale, "guardian.recovery.ack")).check();
   await tap(page.getByRole("button", { name: t(locale, "guardian.recovery.continue") }));
