@@ -259,6 +259,12 @@ export const en = {
       error: "Something went wrong. Let's go back and try again.",
       escalatedTitle: "We're getting someone to help you.",
       escalatedBody: "It's okay to take a break. A mentor will check in with you.",
+      chosen: {
+        title: "You chose this lesson",
+        body: "When you finish, your AI teacher will suggest what to learn next.",
+        hintIntro: "This lesson builds on ideas you haven't finished yet. You can still try it — these may help first:",
+        unavailable: "That lesson isn't ready right now, so your AI teacher picked one for you.",
+      },
       items: {
         check: "Check my answer",
         save: "Save my answer",
@@ -353,7 +359,7 @@ export const en = {
       whatYouSent: "What you sent",
       teacherNote: "Your teacher says:",
       offlineNotice:
-        "No internet right now, so answers cannot be sent. What you write stays on this phone. Send it when you are connected.",
+        "No internet right now. You can still press Send: your answer is saved on this phone and will send by itself when you are connected.",
       state: {
         notStarted: "Not started",
         sent: "Sent to your teacher",
@@ -370,8 +376,19 @@ export const en = {
         offline: "No internet: this cannot be sent now. Your writing is kept on this phone.",
         empty: "Write your answer first.",
         tooLong: "Your answer is too long. Please make it shorter.",
+        offlineQueue: "No internet: Send saves your answer on this phone. It will send when you are online.",
+      },
+      sync: {
+        held: "Saved on this phone. It will send when your grown-up allows it.",
+        superseded:
+          "A newer answer to this question was already saved, so this one was not sent. Your writing is still here.",
+        assigned:
+          "Your class has this lesson now, so this was not sent here. Your writing is still here — answer it in your class homework.",
+        gone: "This homework is no longer available, so your answer was not sent. Your writing is still here.",
+        tryAgain: "This could not be sent just now. Your writing is still here. Press Send to try again.",
       },
       result: {
+        queued: "Saved on this phone — will send when online.",
         sent: "Sent to your teacher.",
         saved: "Saved. This answer was not marked.",
         savedCompare: "Saved. This answer was not marked. Compare it with the example below.",

@@ -616,10 +616,21 @@ class SchoolService:
         return {"assignments": out}
 
     def learner_submit(
-        self, *, student_ref: str, assignment_id: str, item_ref: str, text: str
+        self,
+        *,
+        student_ref: str,
+        assignment_id: str,
+        item_ref: str,
+        text: str,
+        client_key: str | None = None,
+        expected_attempt: int | None = None,
     ) -> dict[str, Any]:
         """Submit (or resubmit, while ``submitted`` / ``returned``) a written answer to an item
-        of an assignment. The class teacher may read it, so ``progress_sharing`` is required."""
+        of an assignment. The class teacher may read it, so ``progress_sharing`` is required.
+
+        ``client_key`` / ``expected_attempt`` are set only by offline sync (``homework.submitted``):
+        the device's key for this answer, and the attempt number the child was making. Online
+        callers leave both None."""
         with self._uow() as uow:
             assignment = self._learner_assignment(uow, student_ref, assignment_id)
         lesson = self._lessons({assignment.objective_code}).get(assignment.objective_code)
@@ -647,18 +658,34 @@ class SchoolService:
                 max_chars=item.max_chars,
                 max_score=item.max_score,
                 now=now,
+                client_key=client_key,
             )
 
-        sub = self._store_answer(item, text, find=find, start=start)
+        sub = self._store_answer(
+            item,
+            text,
+            find=find,
+            start=start,
+            client_key=client_key,
+            expected_attempt=expected_attempt,
+        )
         return _learner_submit_view(sub, item)
 
     def learner_submit_self_paced(
-        self, *, student_ref: str, objective_code: str, item_ref: str, text: str
+        self,
+        *,
+        student_ref: str,
+        objective_code: str,
+        item_ref: str,
+        text: str,
+        client_key: str | None = None,
+        expected_attempt: int | None = None,
     ) -> dict[str, Any]:
         """Submit (or resubmit) a written answer to an item of a lesson the learner studied, with
         no assignment and no teacher (contract §6). Nobody else reads it, so ``progress_sharing``
         does not apply. A lesson the learner has not studied — or one a class of theirs has
-        assigned (answer it there) — is refused."""
+        assigned (answer it there) — is refused. ``client_key`` / ``expected_attempt``: as for
+        ``learner_submit`` (offline sync only)."""
         with self._uow() as uow:
             assigned = any(
                 a.objective_code == objective_code
@@ -692,9 +719,46 @@ class SchoolService:
                 max_chars=item.max_chars,
                 max_score=item.max_score,
                 now=now,
+                client_key=client_key,
             )
 
-        sub = self._store_answer(item, text, find=find, start=start)
+        sub = self._store_answer(
+            item,
+            text,
+            find=find,
+            start=start,
+            client_key=client_key,
+            expected_attempt=expected_attempt,
+        )
+        return _learner_submit_view(sub, item)
+
+    def synced_submission(
+        self,
+        *,
+        student_ref: str,
+        item_ref: str,
+        client_key: str,
+        assignment_id: str | None = None,
+        objective_code: str | None = None,
+    ) -> dict[str, Any] | None:
+        """The learner's submission view when the answer stored for this item is the one the device
+        sent under ``client_key`` (offline sync replay), else None. Changes nothing.
+
+        Asked before any other rule: an answer that was already applied stays a duplicate even if
+        the lesson was unpublished or the answer was marked since."""
+        with self._uow() as uow:
+            if assignment_id is not None:
+                sub = uow.submissions.find(assignment_id, item_ref, student_ref)
+            elif objective_code is not None:
+                sub = uow.submissions.find_self_paced(objective_code, item_ref, student_ref)
+            else:
+                return None
+        if sub is None or sub.student_ref != student_ref or sub.client_key != client_key:
+            return None
+        lesson = self._lessons({sub.objective_code}).get(sub.objective_code)
+        item = lesson.item(item_ref) if lesson else None
+        if item is None:
+            return _learner_submit_view_without_item(sub)
         return _learner_submit_view(sub, item)
 
     def _store_answer(
@@ -704,9 +768,15 @@ class SchoolService:
         *,
         find: Callable[[SchoolUnitOfWork], Submission | None],
         start: Callable[[float], Submission],
+        client_key: str | None = None,
+        expected_attempt: int | None = None,
     ) -> Submission:
         """Create or resubmit the answer, auto-mark it when its key is exact, then record the
-        evidence (idempotent), the audit (refs only) and the disclosure screen (never blocks)."""
+        evidence (idempotent), the audit (refs only) and the disclosure screen (never blocks).
+
+        ``expected_attempt`` (offline sync): the attempt the child was making. When the server
+        already holds that attempt or a later one — the child answered again elsewhere — the
+        older offline answer is refused (``SUBMISSION_SUPERSEDED``), never written over it."""
         now = self._now()
         existing: Submission | None = None
         try:
@@ -716,8 +786,24 @@ class SchoolService:
                     sub = start(now)
                 else:
                     sub = existing
+                    still_open = (
+                        existing.status is not SubmissionStatus.MARKED or existing.can_retry
+                    )
+                    if (
+                        expected_attempt is not None
+                        and still_open
+                        and existing.attempt >= expected_attempt
+                    ):
+                        raise SubmissionConflictError(
+                            "a newer answer to this item is already saved",
+                            code="SUBMISSION_SUPERSEDED",
+                        )
                     sub.resubmit(
-                        text=text, max_chars=item.max_chars, max_score=item.max_score, now=now
+                        text=text,
+                        max_chars=item.max_chars,
+                        max_score=item.max_score,
+                        now=now,
+                        client_key=client_key,
                     )
                 verdict = (
                     self._written.check_answer(sub.objective_code, sub.item_ref, sub.text)
@@ -1217,6 +1303,22 @@ def _learner_submit_view(sub: Submission, item: WrittenItem) -> dict[str, Any]:
         "can_retry": sub.can_retry,
         "submission": _learner_submission_view(sub),
         "compare": _compare_view(item, sub),
+    }
+
+
+def _learner_submit_view_without_item(sub: Submission) -> dict[str, Any]:
+    """The submit view when the item is no longer published (an offline-sync replay): the
+    learner's own submission only — no marking mode and no comparison text can be named."""
+    return {
+        "source": sub.source.value,
+        "assignment_id": sub.assignment_id,
+        "objective_code": sub.objective_code,
+        "item_ref": sub.item_ref,
+        "marking": None,
+        "state": sub.status.value,
+        "can_retry": sub.can_retry,
+        "submission": _learner_submission_view(sub),
+        "compare": None,
     }
 
 

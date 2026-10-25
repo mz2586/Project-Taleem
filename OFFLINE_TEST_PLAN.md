@@ -275,7 +275,25 @@ lib/student`. Server tests: `cd services/core-api && .venv/bin/pytest -q tests/t
   preference deltas live in the server's process-local policy store, and an `ignored` attempt
   (e.g. summative, mentor-mediated) is received but not recorded.
 - **Server-confirmed** — an `attempt.submitted` acknowledged `applied` or `duplicate`: its
-  `AssessmentEvidence` row was committed before the response.
+  `AssessmentEvidence` row was committed before the response. Likewise a `homework.submitted`
+  acknowledged `applied` / `duplicate`: its `school.submission` row was committed.
+
+### 7.3a Offline homework submission (`homework.submitted`, OFFLINE_SYNC_SPEC §1a)
+
+- **Backend** (`services/core-api/tests/test_homework_offline_sync.py`): an offline open answer gets
+  exactly the online submit view (self-check + compare); an exact key is checked by Taleem with one
+  evidence; a replay (same id, and a fresh id with the same `submission_key` — a restart) is a
+  duplicate with no second attempt, audit row, evidence or disclosure concern; marked-final,
+  superseded, not-available (unstudied / unknown item / unknown assignment / another cohort's
+  lesson), `LESSON_ASSIGNED`, `SHARING_REQUIRED` and malformed payloads are conflicts with a reason,
+  and a conflict is not remembered (the same answer applies once the cause is fixed); withdrawn
+  consent rejects the whole batch; only the learner may send their own homework.
+- **Web** (`apps/web/lib/homework/__tests__/offlineSync.test.ts`, node, no jsdom): offline Send and a
+  dropped connection queue the answer ("Saved on this phone — will send when online"); the queue
+  survives a reload; one answer per item; the drain records the server result without the text and
+  the item renders it; conflicts show a gentle reason and keep the draft; a consent refusal holds
+  it; drafts are wiped only after confirmation and only if unchanged; wipes and purges remove the
+  queued copies and results.
 
 ### 7.4 Open items
 

@@ -14,7 +14,8 @@
 //   server_confirmed  The server acknowledged the item AND it is a durable server record: an
 //                     `attempt.submitted` answered `applied` or `duplicate` — the AssessmentEvidence
 //                     row was committed (or already existed, keyed by evidence_id) before the
-//                     response was sent.
+//                     response was sent — or a `homework.submitted` answered `applied` /
+//                     `duplicate` (the submission row was committed, keyed by submission_key).
 //
 // Pure functions only — no storage, no React — so the model is unit-tested directly and
 // `useSyncStatus` is a thin adapter over it. The bounded ack ledger that lets the UI keep showing
@@ -51,7 +52,12 @@ export function queuedItemStatus(d: QueuedDelta): ItemStatus {
 
 // Is a server acknowledgement a DURABLE server record? (see the module comment)
 export function isDurableAck(type: AckRecord["type"], status: SyncStatus): boolean {
-  return type === "attempt.submitted" && (status === "applied" || status === "duplicate");
+  // A homework answer `applied` / `duplicate` is a committed submission row (the same row an online
+  // submit writes), so it is server-confirmed exactly like an attempt's evidence.
+  return (
+    (type === "attempt.submitted" || type === "homework.submitted") &&
+    (status === "applied" || status === "duplicate")
+  );
 }
 
 // Status of an item the server acknowledged (its local queue copy has been released).

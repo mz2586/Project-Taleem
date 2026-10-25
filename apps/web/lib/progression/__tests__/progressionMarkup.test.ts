@@ -136,7 +136,7 @@ describe("CheckResultPanel", () => {
     expect(html).toContain(view.score);
     expect(html).toContain(ctx.t("progression.result.notYetTitle"));
     expect(html).toContain(ctx.t("progression.result.objectiveLine", { correct: 2, total: 5 }));
-    expect(html).toContain('href="/student/session"');
+    expect(html).toContain('href="/student/session?lesson=A"');
     expect(html).toContain(ctx.t("progression.check.claim"));
     if (locale === "en") expect(text(html).toLowerCase()).not.toMatch(/\bfail(ed)?\b/);
     noCertificateClaim(html);

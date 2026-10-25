@@ -510,4 +510,5 @@ class CurriculumStudioReadModel:
             worked_example_steps_localized=tuple({k: v for k, v in b.items() if v} for b in kept),
             written_items=written,
             version=lesson.version if lesson.version > 0 else None,
+            prerequisites=tuple(lesson.prerequisites),
         )

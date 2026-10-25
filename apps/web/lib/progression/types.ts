@@ -108,6 +108,8 @@ export interface ObjectiveResultWire {
 export interface RemediationWire {
   objective_code?: string | null;
   title?: LocalizedWire | null;
+  /** The lesson teaching it; the link opens it by objective code (lib/student/chosenLesson.ts). */
+  lesson_id?: string | null;
 }
 
 export interface FinishWire {

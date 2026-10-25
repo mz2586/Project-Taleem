@@ -1,6 +1,8 @@
 // Types for the Learning Intelligence API (packages/contracts/learning.openapi.yaml).
 // Governance-safe: the student portal operates on pseudonymous synthetic learners only.
 
+import type { LearnerChoiceWire } from "./chosenLesson";
+
 export type DecisionKind =
   | "diagnose"
   | "teach"
@@ -52,6 +54,10 @@ export interface HintView {
 export interface TeachView {
   utterances: Utterance[];
   items: ItemView[];
+  /** Who chose the lesson (older servers omit it: the engine). */
+  chosen_by?: "engine" | "learner";
+  /** Set when the learner chose the lesson (`learner_chosen`): see lib/student/chosenLesson.ts. */
+  choice?: LearnerChoiceWire | null;
 }
 
 export interface AnswerView {

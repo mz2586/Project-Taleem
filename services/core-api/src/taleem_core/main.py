@@ -30,7 +30,7 @@ from sqlalchemy.orm.exc import StaleDataError
 
 from . import __version__
 from .auth import pdp
-from .auth.dependencies import bearer_claims_from, require_owner_or
+from .auth.dependencies import authorize, bearer_claims_from, require_owner_or
 from .auth.jwt_verifier import Claims
 from .auth.learner_gate import (
     LEARNER_INACTIVE,
@@ -169,6 +169,7 @@ from .contexts.school.adapters.persistence.base import (
 )
 from .contexts.school.adapters.persistence.uow import SqlSchoolUnitOfWork
 from .contexts.school.adapters.school_api import build_school_learner_router, build_school_router
+from .contexts.school.application.homework_sync import HomeworkSyncConsumer
 from .contexts.school.application.school_service import SchoolService
 from .contexts.sync.domain import DeltaType, SyncDelta, SyncStore
 from .contexts.sync.service import DurableSyncCoordinator
@@ -467,6 +468,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     app.include_router(
         build_learning_router(learning_deps, claims_dependency), dependencies=learner_permitted
     )
+    app.state.session_service = session_service  # tests read a session's recorded rationale
 
     # ---- Diagnostic placement (R2): seeds priors for a learner with no history ----
     placement_service = PlacementService(
@@ -693,7 +695,11 @@ def create_app(settings: Settings | None = None) -> FastAPI:
 
     # The same learner gate: every learner a batch writes for (a student caller, and each attempt's
     # student_ref — which also covers operator tokens) is re-checked before anything is applied.
-    sync_coordinator = DurableSyncCoordinator(sync_store, sync_consumer, learner_gate)
+    # homework.submitted deltas (a written answer sent while offline) are applied by the SAME
+    # school service as the online submit routes (HOMEWORK_AND_MARKING_CONTRACT §2, §6).
+    sync_coordinator = DurableSyncCoordinator(
+        sync_store, sync_consumer, learner_gate, homework=HomeworkSyncConsumer(school_service)
+    )
 
     # ---- AI Teacher (Phase 8): templated, curriculum-grounded, explainable ----
     # Phase D generative tier: OFF unless the `ai_teacher.generative_rephrase` flag is enabled, and
@@ -1221,6 +1227,14 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                 if not owner:
                     raise Problem(422, "MISSING_STUDENT_REF", "attempt missing student_ref", "")
                 require_owner_or(claims, owner, privileged_roles=("system",))
+            elif d.type is DeltaType.HOMEWORK_SUBMITTED:
+                # Exactly the online submit's guard: the learner's own homework, nobody else's —
+                # not even an operator (a child's words are sent only by that child).
+                owner = str(d.payload.get("student_ref", ""))
+                if not owner:
+                    raise Problem(422, "MISSING_STUDENT_REF", "homework missing student_ref", "")
+                authorize(claims, "operate", "school.homework")
+                require_owner_or(claims, owner, privileged_roles=())
         acting_learner = claims.sub if claims.role == "student" else None
         try:
             results, cursor = sync_coordinator.apply_batch(deltas, acting_learner=acting_learner)
@@ -1238,6 +1252,10 @@ def create_app(settings: Settings | None = None) -> FastAPI:
                     "clientEventId": r.client_event_id,
                     "status": r.status.value,
                     "version": r.server_version,
+                    # Only when present (older clients ignore them): why nothing was applied,
+                    # and the server's answer the device shows (homework: the submit view).
+                    **({"reason": r.reason} if r.reason else {}),
+                    **({"result": r.result} if r.result is not None else {}),
                 }
                 for r in results
             ],

@@ -12,13 +12,16 @@
 //   with the teacher's note, or marked (met / not yet) with feedback.
 // - Send is enabled only for a non-empty answer within `max_chars`, while not already sending, while
 //   online, and while the item is still open (a marked answer is final — the server answers 409).
-// - Offline, the text is kept on the phone and NOTHING is sent; the outcome says so. A network
-//   failure during the send is treated the same way. Success is claimed only on a server 2xx.
+// - Offline, Send QUEUES the answer for offline sync when the page provides a queue (the outcome
+//   says "Saved on this phone — will send when online"); without one the text is only kept. A network
+//   failure during the send is treated the same way. "Sent" / "Checked" is claimed only on a server
+//   answer: an online 2xx, or a sync result (lib/homework/offlineQueue.ts).
 
 import type { LocalizedText } from "../i18n/content";
 import type { MessageKey } from "../i18n/messages";
 import { ApiError } from "../student/types";
 import type { DraftStore } from "./drafts";
+import { conflictKey, type HomeworkSyncView } from "./offlineQueue";
 import type {
   HomeworkAssignmentWire,
   HomeworkItemWire,
@@ -56,6 +59,8 @@ export interface HomeworkItemView {
   compare: CompareText | null;
   /** §6: the server allows another try after an auto-marked `not_yet` (never after `met`). */
   canRetry: boolean;
+  /** The server's attempt count for this item (0 / absent = never submitted); offline sync sends it + 1. */
+  attempt?: number;
 }
 
 export interface HomeworkAssignmentView {
@@ -119,7 +124,12 @@ function itemView(
     reviewedBy: reviewedByOf(state, s?.reviewed_by, marking),
     compare: compareText(s?.compare ?? item.compare, preference),
     canRetry: canRetryOf(s?.can_retry ?? item.can_retry, state, outcome),
+    attempt: attemptOf(s?.attempt, s ? 1 : 0),
   };
+}
+
+function attemptOf(value: unknown, fallback: number): number {
+  return typeof value === "number" && Number.isInteger(value) && value >= 0 ? value : fallback;
 }
 
 /** One wire entry → one view per source present (an entry's items may in principle be mixed). */
@@ -249,7 +259,7 @@ export function stateBadge(item: BadgeInput): StateBadgeView {
 }
 
 /** Teacher wording is used only for a teacher's assignment, or where a teacher actually marked it. */
-function involvesTeacher(item: Partial<Pick<HomeworkItemView, "source" | "reviewedBy">>): boolean {
+export function involvesTeacher(item: Partial<Pick<HomeworkItemView, "source" | "reviewedBy">>): boolean {
   if (item.reviewedBy === "auto") return false;
   if (item.reviewedBy === "teacher") return true;
   return item.source !== "self_paced";
@@ -309,6 +319,8 @@ export interface SubmitGate {
   over: boolean;
   /** Why Send is disabled, shown beside it (null while it is enabled or a send is in flight). */
   reason: MessageKey | null;
+  /** A note beside an enabled Send (offline with a queue: "it will be saved on this phone"). */
+  note?: MessageKey;
 }
 
 export function submitGate(input: {
@@ -320,17 +332,22 @@ export function submitGate(input: {
   canRetry?: boolean;
   /** The "final" reason to show (teacher-marked vs checked by Taleem); defaults to the teacher's. */
   finalReason?: MessageKey;
+  /** Offline Send can queue the answer for offline sync (the page wired a queue). */
+  canQueue?: boolean;
 }): SubmitGate {
   const count = charCount(input.text);
   const over = count > input.maxChars;
+  const reachable = input.online || input.canQueue === true;
   let reason: MessageKey | null = null;
   if (!isOpen(input.state, input.canRetry)) reason = input.finalReason ?? "student.homework.reason.final";
   else if (input.sending) reason = null;
-  else if (!input.online) reason = "student.homework.reason.offline";
+  else if (!reachable) reason = "student.homework.reason.offline";
   else if (count === 0) reason = "student.homework.reason.empty";
   else if (over) reason = "student.homework.reason.tooLong";
-  const canSend = isOpen(input.state, input.canRetry) && !input.sending && input.online && count > 0 && !over;
-  return { canSend, count, over, reason };
+  const canSend = isOpen(input.state, input.canRetry) && !input.sending && reachable && count > 0 && !over;
+  const gate: SubmitGate = { canSend, count, over, reason };
+  if (canSend && !input.online) gate.note = "student.homework.reason.offlineQueue";
+  return gate;
 }
 
 /** The request body, or null when the text cannot be sent. */
@@ -347,6 +364,8 @@ export type SendOutcome =
   | { kind: "sent"; submission: LearnerSubmissionWire | null; text: string }
   /** Not sent: no connection. The text is (or could not be) kept on the phone. */
   | { kind: "offline"; kept: boolean }
+  /** No connection: the answer is queued on this phone and will be sent by offline sync. */
+  | { kind: "queued"; text: string }
   | { kind: "invalid" }
   | { kind: "final" }
   | { kind: "not-found" }
@@ -365,12 +384,23 @@ export async function sendHomework(input: {
   draftKey: string;
   drafts: DraftStore;
   send: (body: SubmitBody) => Promise<LearnerSubmissionWire | undefined>;
+  /** Queue the answer for offline sync (no connection). Absent: offline only keeps the text. */
+  queue?: (body: SubmitBody) => Promise<void>;
 }): Promise<SendOutcome> {
   if (!isOpen(input.state, input.canRetry)) return { kind: "final" };
-  // Keep the writing first, whatever happens next.
+  // Keep the writing first, whatever happens next. The draft stays until the server confirms it.
   const kept = input.drafts.write(input.draftKey, input.text);
-  if (!input.online) return { kind: "offline", kept };
   const body = submitBody(input.text, input.maxChars);
+  const enqueue = async (): Promise<SendOutcome> => {
+    if (!input.queue || !body) return { kind: "offline", kept };
+    try {
+      await input.queue(body);
+      return { kind: "queued", text: body.text };
+    } catch {
+      return { kind: "offline", kept }; // the phone could not queue it: say only what is true
+    }
+  };
+  if (!input.online) return body || !input.queue ? enqueue() : { kind: "invalid" };
   if (!body) return { kind: "invalid" };
   try {
     const submission = await input.send(body);
@@ -378,7 +408,7 @@ export async function sendHomework(input: {
     return { kind: "sent", submission: submission && typeof submission === "object" ? submission : null, text: body.text };
   } catch (error) {
     if (!(error instanceof ApiError)) return { kind: "error" };
-    if (error.status === 0) return { kind: "offline", kept };
+    if (error.status === 0) return enqueue(); // the connection dropped: queue it like offline
     if (error.status === 401) return { kind: "signed-out" };
     if (error.status === 403 && error.problem.code === "SHARING_REQUIRED") return { kind: "sharing", kept };
     if (error.status === 403) return { kind: "consent" };
@@ -404,6 +434,8 @@ export function sendOutcomeKey(outcome: SendOutcome, after?: HomeworkItemView): 
       return "student.homework.result.sent";
     case "offline":
       return outcome.kept ? "student.homework.result.offlineKept" : "student.homework.result.offlineNotKept";
+    case "queued":
+      return "student.homework.result.queued";
     case "invalid":
       return "student.homework.result.invalid";
     case "final":
@@ -449,7 +481,27 @@ export function afterSent(
     reviewedBy: reviewedByOf(finalState, s?.reviewed_by, marking),
     compare: compareText(s?.compare, preference) ?? item.compare,
     canRetry: canRetryOf(s?.can_retry, finalState, finalState === "marked" ? result : null),
+    attempt: attemptOf(s?.attempt, (item.attempt ?? 0) + 1),
   };
+}
+
+/**
+ * The status line for an answer that went through offline sync (null: nothing to say). A queued
+ * answer is only "saved on this phone"; a confirmed one shows the server's own result; a conflict
+ * a gentle reason (the writing is still on the phone).
+ */
+export function syncMessageKey(sync: HomeworkSyncView | null, item: HomeworkItemView): MessageKey | null {
+  if (!sync) return null;
+  switch (sync.kind) {
+    case "queued":
+      return sync.held ? "student.homework.sync.held" : "student.homework.result.queued";
+    case "confirmed": {
+      const sent = { kind: "sent" as const, submission: sync.submission, text: item.sentText ?? "" };
+      return sendOutcomeKey(sent, afterSent(item, sent));
+    }
+    case "conflict":
+      return conflictKey(sync.reason, involvesTeacher(item));
+  }
 }
 
 /** The Send label: a first try (or a fresh try after "not yet") reads as the first action. */

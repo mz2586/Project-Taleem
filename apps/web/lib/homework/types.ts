@@ -42,6 +42,8 @@ export interface LearnerSubmissionWire {
   submitted_at?: number | null;
   marked_at?: number | null;
   returned_at?: number | null;
+  /** How many times this item was submitted (1 for the first answer). */
+  attempt?: number | null;
   /** §6: "auto" when Taleem's exact-answer rule marked it; otherwise a teacher (any other value). */
   reviewed_by?: string | null;
   /** §6: may also arrive on the submission rather than the item. */

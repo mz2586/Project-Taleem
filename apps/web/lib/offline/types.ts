@@ -115,7 +115,8 @@ export type DeltaType =
   | "progress.updated"
   | "lesson.completed"
   | "attempt.submitted"
-  | "preference.set";
+  | "preference.set"
+  | "homework.submitted";
 
 export type SyncStatus = "applied" | "duplicate" | "ignored" | "conflict";
 
@@ -140,6 +141,23 @@ export interface AttemptEnvelope {
   response_time_ms?: number;
   self_confidence?: number | null;
   context?: string;
+}
+
+// A written homework answer the child sent while offline (OFFLINE_SYNC_SPEC.md `homework.submitted`;
+// HOMEWORK_AND_MARKING_CONTRACT §2). Applied on the server by the same school service as the
+// online submit. `submission_key` is the durable idempotency key (a client uuid7); `attempt` is the
+// attempt the child was making (the server's last attempt + 1), so an older answer never overwrites
+// a newer one; `submitted_at` is the device clock — informational only, never used for ordering.
+export interface HomeworkPayload {
+  student_ref: string;
+  source: "self_paced" | "assignment";
+  assignment_id?: string;
+  objective_code?: string;
+  item_ref: string;
+  text: string;
+  submission_key: string;
+  attempt: number;
+  submitted_at: number;
 }
 
 export interface SyncDelta {
@@ -189,6 +207,10 @@ export interface ItemResult {
   clientEventId: string;
   status: SyncStatus;
   version: number;
+  // Why nothing was applied (a stable server code, e.g. SUBMISSION_MARKED). Optional.
+  reason?: string;
+  // The server's answer the device shows (homework: the learner's submission view). Optional.
+  result?: Record<string, unknown>;
 }
 
 export interface BatchResult {

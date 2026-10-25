@@ -197,6 +197,9 @@ class SubmissionRow(SchoolBase):
     returned_at: Mapped[float | None] = mapped_column(Float, nullable=True)
     marked_at: Mapped[float | None] = mapped_column(Float, nullable=True)
     reviewed_by: Mapped[str | None] = mapped_column(String(64), nullable=True)
+    # The device's submission key when the stored answer arrived through offline sync (alembic
+    # 0020_homework_client_key); NULL for an online submit. Makes a sync replay a duplicate.
+    client_key: Mapped[str | None] = mapped_column(String(64), nullable=True)
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
 
     __mapper_args__ = {"version_id_col": version}

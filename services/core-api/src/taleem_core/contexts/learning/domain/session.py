@@ -66,6 +66,11 @@ class Turn:
     at: float
 
 
+# Who chose what is taught: the decision engine, or the learner (a lesson picked from the path).
+CHOSEN_BY_ENGINE = "engine"
+CHOSEN_BY_LEARNER = "learner"
+
+
 @dataclass
 class Interaction:
     interaction_id: str
@@ -75,6 +80,19 @@ class Interaction:
     outcome: str | None = None
     evidence_id: str | None = None
     occurred_at: float = 0.0
+    chosen_by: str = CHOSEN_BY_ENGINE
+
+
+@dataclass(frozen=True)
+class DecisionRecord:
+    """One "what next" decision in the session, with its rationale and who made it — so the
+    session's "why" stays honest ("You chose this lesson" vs the AI teacher's pick)."""
+
+    kind: str
+    objective_code: str | None
+    chosen_by: str
+    rationale: tuple[str, ...] = ()
+    at: float = 0.0
 
 
 @dataclass
@@ -86,6 +104,9 @@ class Session:
     ended_at: float | None = None
     correlation_id: str = ""
     interactions: list[Interaction] = field(default_factory=list)
+    decisions: list[DecisionRecord] = field(default_factory=list)
+    # The objective the learner chose and is being taught (None: the engine's pick).
+    learner_chosen_objective: str | None = None
     lock_version: int = 1
 
     def transition_to(self, to: SessionState) -> None:
@@ -113,3 +134,9 @@ class Session:
 
     def add_interaction(self, interaction: Interaction) -> None:
         self.interactions.append(interaction)
+
+    def record_decision(self, record: DecisionRecord) -> None:
+        self.decisions.append(record)
+        self.learner_chosen_objective = (
+            record.objective_code if record.chosen_by == CHOSEN_BY_LEARNER else None
+        )

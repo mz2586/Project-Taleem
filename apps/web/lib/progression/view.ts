@@ -10,6 +10,7 @@ import type { Locale } from "../i18n/config";
 import type { LocalizedText } from "../i18n/content";
 import type { MessageKey } from "../i18n/messages";
 import type { Translator } from "../i18n/translate";
+import { lessonHref } from "../student/chosenLesson";
 import { ApiError } from "../student/types";
 import type { LessonState, UnitState } from "./types";
 import type { AcademicRecord, CheckResult, CheckSummary, LessonView, RecordSitting, UnitView } from "./wire";
@@ -154,6 +155,7 @@ export interface ResultView {
   retake: string | null;
 }
 
+/** The plain session (the AI teacher picks); a remediation link with a code opens that lesson. */
 export const REMEDIATION_HREF = "/student/session";
 
 export function resultView(result: CheckResult, ctx: ViewContext, retake: Pick<CheckSummary, "canRetake" | "retakeAfter"> | null = null): ResultView {
@@ -176,7 +178,7 @@ export function resultView(result: CheckResult, ctx: ViewContext, retake: Pick<C
     remediation: result.remediation.map((r) => ({
       code: r.code,
       title: titleOr(r.title, untitled(r.code)),
-      href: REMEDIATION_HREF,
+      href: lessonHref(r.code),
       action: t("progression.result.practise"),
     })),
     retake: passed ? null : retakeRule(retake ?? { canRetake: null, retakeAfter: result.retakeAfter }, ctx),

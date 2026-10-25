@@ -11,9 +11,18 @@
 //   - when a learner session is adopted, that learner's permission-HELD deltas are released for one
 //     more attempt (consent re-granted / learner reinstated) — bounded by session changes, never a
 //     hot loop.
+//
+// Homework sent offline (`homework.submitted`, lib/homework/offlineQueue.ts):
+//   - a homework draft is wiped only once the server confirmed that answer (`applied` /
+//     `duplicate`), and only if the draft still holds exactly the text that was sent;
+//   - whenever a learner's drafts are wiped (sign-out, consent withdrawal, the learner gate's
+//     refusal — lib/homework/drafts.ts `clearHomeworkDrafts`), their queued homework answers and
+//     results go too: the child's words never outlive the permission they were written under.
 
-import { createOfflineClient } from "../offline";
-import type { OfflineClient } from "../offline";
+import { draftKeyOfDelta, shouldWipeDraft } from "../homework/offlineQueue";
+import { localDrafts, onHomeworkDraftsCleared } from "../homework/drafts";
+import { createOfflineClient, ownerOf } from "../offline";
+import type { ItemResult, OfflineClient, QueuedDelta } from "../offline";
 import { sessionStore, withSession } from "../session/store";
 import type { StoredSession } from "../session/store";
 import { offlineApi, syncApi } from "./api";
@@ -38,6 +47,7 @@ export function getOfflineClient(): OfflineClient {
       },
       refreshSession: async () => (await sessionStore.refresh()) !== null,
       currentLearner: () => learnerOf(sessionStore.peek()),
+      onSettled: async (settled) => wipeConfirmedDrafts(settled),
     });
     let lastLearner = learnerOf(sessionStore.peek());
     sessionStore.subscribe((session) => {
@@ -49,3 +59,35 @@ export function getOfflineClient(): OfflineClient {
   }
   return singleton;
 }
+
+/** After a sync: wipe the draft of each homework answer the server confirmed (unchanged drafts only). */
+export function wipeConfirmedDrafts(settled: ReadonlyArray<{ delta: QueuedDelta; result: ItemResult }>): void {
+  for (const { delta, result } of settled) {
+    if (delta.type !== "homework.submitted") continue;
+    if (result.status !== "applied" && result.status !== "duplicate") continue;
+    const key = draftKeyOfDelta(delta);
+    if (key && shouldWipeDraft(localDrafts.read(key), delta.payload["text"])) localDrafts.clear(key);
+  }
+}
+
+/** Remove queued homework answers (one learner's, or everyone's) and their results from this phone. */
+export async function forgetQueuedHomework(client: OfflineClient, studentRef: string | undefined): Promise<void> {
+  if (studentRef) {
+    await client.sync.forgetHomework(studentRef);
+    return;
+  }
+  const owners = new Set<string>();
+  for (const d of await client.sync.queue.all()) {
+    const owner = d.type === "homework.submitted" ? ownerOf(d) : null;
+    if (owner) owners.add(owner);
+  }
+  for (const r of await client.sync.homework.all()) if (r.studentRef) owners.add(r.studentRef);
+  for (const owner of owners) await client.sync.forgetHomework(owner);
+}
+
+// Registered when this module loads (every learner screen and the guardian API load it), so a wipe
+// reaches the queued copies in IndexedDB. Without IndexedDB nothing can have been queued.
+onHomeworkDraftsCleared((studentRef) => {
+  if (typeof indexedDB === "undefined") return;
+  void forgetQueuedHomework(getOfflineClient(), studentRef).catch(() => undefined);
+});

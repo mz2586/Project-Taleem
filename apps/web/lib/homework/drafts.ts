@@ -1,10 +1,15 @@
-// What a child has typed for a homework item, kept on this phone until it is sent.
+// What a child has typed for a homework item, kept on this phone until the server has it.
 //
-// Homework is online-only (contract §2): nothing is queued or sent later on its own. What the phone
-// does keep is the TEXT, so a child who loses the connection mid-answer does not lose their writing
-// and can press Send once connected. It is per learner and per item, lives in localStorage, and is
-// removed once the server accepts the submission. Unavailable storage (private mode, quota, SSR)
-// means "nothing kept" — never a crash, and never a claim that anything was saved or sent.
+// The phone keeps the TEXT, so a child who loses the connection mid-answer does not lose their
+// writing. Pressing Send with no connection queues the answer for offline sync (lib/homework/
+// offlineQueue.ts); the draft stays until the server confirms it (online 2xx, or a sync result
+// `applied` / `duplicate`) — a conflict keeps it. It is per learner and per item, lives in
+// localStorage. Unavailable storage (private mode, quota, SSR) means "nothing kept" — never a
+// crash, and never a claim that anything was saved or sent.
+//
+// `clearHomeworkDrafts` is THE wipe point for a learner's homework text on this phone (sign-out,
+// consent withdrawal, the learner gate's refusal). Listeners registered with
+// `onHomeworkDraftsCleared` run with it, so the queued copies in IndexedDB go too.
 
 export interface DraftStore {
   read(key: string): string | null;
@@ -56,8 +61,24 @@ export const localDrafts: DraftStore = {
   },
 };
 
+type ClearListener = (studentRef: string | undefined) => void;
+const clearListeners = new Set<ClearListener>();
+
+/** Run `listener` whenever drafts are cleared (for one learner, or `undefined` = everyone). */
+export function onHomeworkDraftsCleared(listener: ClearListener): () => void {
+  clearListeners.add(listener);
+  return () => clearListeners.delete(listener);
+}
+
 /** Remove every kept homework draft for one learner (or for everyone on this phone). */
 export function clearHomeworkDrafts(studentRef?: string): void {
+  for (const listener of clearListeners) {
+    try {
+      listener(studentRef);
+    } catch {
+      /* a listener must never stop the wipe */
+    }
+  }
   const s = storage();
   if (!s) return;
   const prefix = studentRef ? `${PREFIX}:${studentRef}:` : `${PREFIX}:`;

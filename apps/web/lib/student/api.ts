@@ -83,10 +83,12 @@ export const learningApi = {
   next: (sessionId: string) =>
     authed(() => post<DecisionView>(`/v1/learning/sessions/${sessionId}:next`)),
 
-  teach: (sessionId: string, objectiveCode: string) =>
+  // `learnerChosen`: the child picked this lesson (lib/student/chosenLesson.ts), not the engine.
+  teach: (sessionId: string, objectiveCode: string, options: { learnerChosen?: boolean } = {}) =>
     authed(() =>
       post<TeachView>(`/v1/learning/sessions/${sessionId}:teach`, {
         objective_code: objectiveCode,
+        ...(options.learnerChosen ? { learner_chosen: true } : {}),
       }),
     ),
 

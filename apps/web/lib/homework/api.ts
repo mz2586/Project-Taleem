@@ -8,9 +8,9 @@ import { createApiClient } from "../apiClient";
 import { API_BASE } from "../session/config";
 import { currentAccessToken, withSession } from "../session/store";
 import type { ConcernBody } from "./teacher";
+import { flattenSubmitView } from "./wire";
 import type {
   LearnerHomeworkWire,
-  LearnerSubmissionWire,
   MarkBody,
   QueueStatus,
   ReturnBody,
@@ -48,13 +48,16 @@ export function submitPath(studentRef: string, target: SubmitTarget, itemRef: st
     : HOMEWORK_PATHS.submit(studentRef, target.assignmentId, itemRef);
 }
 
-/** Learner side (§2). Online only: the page never calls `submit` while offline. */
+/**
+ * Learner side (§2). `submit` is the online send; with no connection the page queues the answer for
+ * offline sync instead (lib/homework/offlineQueue.ts). The nested submit view is flattened here.
+ */
 export const homeworkApi = {
   list: (studentRef: string) => withSession(() => client.get<LearnerHomeworkWire>(HOMEWORK_PATHS.learnerHomework(studentRef))),
-  submit: (studentRef: string, target: SubmitTarget, itemRef: string, body: SubmitBody) =>
-    withSession(() =>
-      client.post<LearnerSubmissionWire | undefined>(submitPath(studentRef, target, itemRef), body),
-    ),
+  submit: async (studentRef: string, target: SubmitTarget, itemRef: string, body: SubmitBody) =>
+    flattenSubmitView(
+      await withSession(() => client.post<unknown>(submitPath(studentRef, target, itemRef), body)),
+    ) ?? undefined,
 };
 
 /** Teacher side (§3, §4). */

@@ -18,13 +18,17 @@ durable learning evidence/outbox path** (gap **G3**) and add the **client-side**
 
 From `contexts/sync/domain.py`:
 
-- **`DeltaType`** — `progress.updated`, `lesson.completed`, `attempt.submitted`, `preference.set`.
+- **`DeltaType`** — `progress.updated`, `lesson.completed`, `attempt.submitted`, `preference.set`,
+  and (since 2026-10-25) `homework.submitted` — see §1a.
 - **`SyncDelta(client_event_id, type, entity_key, payload, client_seq)`** — `client_event_id` is a
   `uuid7` idempotency key (`platform/ids.py`); `client_seq` is a **Lamport** sequence, **not wall-clock**
   (audit AR-H-28).
 - **`apply_batch`** orders by `(client_seq, client_event_id)`, dedupes on seen `client_event_id`, and
   returns per-item **`ItemResult(client_event_id, status, server_version)`** where **`Status`** ∈
-  `applied | duplicate | ignored | conflict`.
+  `applied | duplicate | ignored | conflict`, plus two optional fields: **`reason`** (a stable code
+  saying why nothing was applied) and **`result`** (the server's answer the device shows — for
+  `homework.submitted`, the learner's submit view). Both are omitted when empty; older clients
+  ignore them.
 - **Server version** (`server_cursor` / `version`) is **server-incremented** — the clock-skew fix.
 - **Conflict rules (already coded + tested):** progress = monotonic max (never regress);
   `lesson.completed` = idempotent set; `attempt.submitted` = append-only union (dedupe on `attempt_id`);
@@ -45,6 +49,8 @@ The batch envelope (from `docs/02-architecture/10-api-design.md §6`): `POST /v1
 | `lesson.completed` | a finished lesson/objective | derived from evidence + outbox events | idempotent set union |
 | `preference.set` | client-only prefs (e.g. locale, notification read-state) | **no new child-data table** — device-local; server-order-wins if ever server-side | LWW by server order, never client clock |
 
+| `homework.submitted` | a written homework answer the child pressed Send on while offline (§1a) | **`school.submission`** through the **same** `SchoolService` submit path as the online routes | one row per item; idempotent by the client `submission_key` (durable, on the row); an older attempt never overwrites a newer one |
+
 **The key correctness argument.** `attempt.submitted` carries exactly the fields of an
 `AssessmentEvidence` row (`evidence_id`, `student_ref`, `objective_code`, `item_ref`, `session_id`,
 `outcome`, `misconception_hits`, `hints_used`, `response_time_ms`, `occurred_at`). Because evidence is
@@ -54,6 +60,51 @@ stored_ids`) and mastery is **re-derived** by the pure decision engine, syncing 
 never authoritative on the client — the server recomputes them. This is the "evidence is append-only
 and never conflicts; derived state recomputed server-side; mirrors the platform's outbox/idempotent-
 consumer design" property from `STUDENT_PORTAL_ARCHITECTURE.md §4`.
+
+### 1a. `homework.submitted` — written homework sent offline (HOMEWORK_AND_MARKING_CONTRACT §2)
+
+A child with no connection presses Send on a written item. The web app queues the answer in the
+durable IndexedDB queue (`SyncQueue.enqueueHomework`) and says only **"Saved on this phone — will
+send when online"**; the existing sync badge counts it as saved on this device.
+
+**Payload** (`HomeworkPayload`; the `entityKey` is
+`student:{student_ref}|homework:{assignment:{id} | self_paced:{objective}}|item:{item_ref}`):
+
+| Field | Meaning |
+| --- | --- |
+| `student_ref` | the learner (must equal the token subject — not even an operator may send it) |
+| `source` | `self_paced` (with `objective_code`) or `assignment` (with `assignment_id`) |
+| `item_ref`, `text` | the written item and the child's answer (cleaned and capped exactly as online) |
+| `submission_key` | client uuid7 — the **durable idempotency key** (also the `clientEventId`) |
+| `attempt` | the attempt the child was making (the server's last `attempt` + 1) |
+| `submitted_at` | the device clock — informational only, never used for ordering or stored |
+
+**Server.** `DurableSyncCoordinator` routes the delta to the school `HomeworkSyncConsumer`, which
+calls `SchoolService.learner_submit` / `learner_submit_self_paced` — the methods behind the online
+routes — so auto-marking (one idempotent evidence), `self_check` with the "compare your answer"
+view, the disclosure screen, cohort-filtered lesson reads, `LESSON_ASSIGNED` and
+`SHARING_REQUIRED` behave identically. The live learner consent gate covers the delta's
+`student_ref` (withdrawn ⇒ the whole batch is 403 and nothing is applied, as for attempts).
+
+- **Idempotency:** the submission row stores the `submission_key` of the answer it holds (alembic
+  `0020_homework_client_key`). A replay — same `clientEventId`, or a fresh one after a restart —
+  answers `duplicate` with the current view and changes nothing: no second attempt, disclosure
+  screen, audit row or evidence.
+- **Conflicts** (never silently dropped, never remembered as seen, so the same answer can be
+  re-sent): `SUBMISSION_MARKED` (marked and final), `SUBMISSION_SUPERSEDED` (the server already
+  holds this attempt or a later one), `NOT_AVAILABLE` (lesson no longer published / assigned /
+  studied, or the item is gone), `LESSON_ASSIGNED`, `SHARING_REQUIRED`, `INVALID` (empty / too
+  long / malformed payload), `BUSY` (a concurrent write of the same item).
+
+**Client.** The drain records each homework answer's server result in a bounded per-item ledger
+(`HomeworkResultLedger`, no child text) before releasing the queue copy. The item then shows the
+server's own result — "Checked by Taleem", "Saved — compare your answer", "Sent to your teacher" —
+and the list is re-read; a conflict shows a gentle reason and keeps the writing. `applied` /
+`duplicate` homework is **server-confirmed** in the status model. The draft is wiped only after
+server confirmation, and only if it still holds the sent text. Sign-out, a consent withdrawal on
+this phone and the learner gate's refusal wipe the drafts **and** the queued homework copies and
+results (the existing draft-wipe rules); a server purge clears them with the rest of the learner's
+C2 data. A newer Send for the same item replaces the queued one (one answer per item travels).
 
 ---
 

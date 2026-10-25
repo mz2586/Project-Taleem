@@ -21,7 +21,7 @@ from ....platform.errors import Problem
 from ..application.analytics import LearningAnalytics
 from ..application.knowledge_service import KnowledgeService
 from ..application.ports import CurriculumReadModel
-from ..application.session_service import SessionService
+from ..application.session_service import LearnerChoice, SessionService
 from ..domain.curriculum_view import ItemView
 from ..domain.decision import Decision, DecisionKind
 from ..domain.scorer import (
@@ -32,7 +32,13 @@ from ..domain.scorer import (
     AnswerShapeError,
     answer_fits,
 )
-from ..domain.session import Session, SessionError, SessionState
+from ..domain.session import (
+    CHOSEN_BY_ENGINE,
+    CHOSEN_BY_LEARNER,
+    Session,
+    SessionError,
+    SessionState,
+)
 
 _STUDENT_ONLY: tuple[str, ...] = ()  # learners only; no privileged override for operating a session
 _MENTOR = ("mentor",)
@@ -44,6 +50,10 @@ class StartSessionIn(BaseModel):
 
 class TeachIn(BaseModel):
     objective_code: str
+    # True: the learner chose this lesson (a lesson row on the path, a unit-check remediation
+    # link), not the engine. Allowed for any published lesson visible to the learner's cohort; the
+    # session's rationale records the choice and the engine's own recommendation beside it.
+    learner_chosen: bool = False
 
 
 class AnswerFields(BaseModel):
@@ -94,6 +104,21 @@ def learner_item(item: ItemView) -> dict[str, Any]:
         "prompt": item.prompt,
         "options": list(item.options),
         "hint_count": len(item.hints),
+    }
+
+
+def choice_json(choice: LearnerChoice) -> dict[str, Any]:
+    """A learner-chosen lesson, honestly explained: who chose it, what the AI teacher would have
+    picked, and any prerequisites not yet met (a gentle hint; the choice is never blocked)."""
+    rec = choice.recommended
+    unmet = [{"objective_code": h.objective_code, "title": h.title} for h in choice.unmet]
+    return {
+        "objective_code": choice.decision.objective_code,
+        "chosen_by": CHOSEN_BY_LEARNER,
+        "rationale": [r.note for r in choice.decision.rationale],
+        "reasons": [x.to_dict() for r in choice.decision.rationale for x in r.reasons],
+        "recommended": {"decision": rec.kind.value, "objective_code": rec.objective_code},
+        "prerequisite_hint": {"unmet": unmet} if unmet else None,
     }
 
 
@@ -163,14 +188,26 @@ def build_learning_router(
     ) -> dict[str, Any]:
         authorize(claims, "operate", "learning.session")
         session = _session_or_404(session_id, claims)
-        # No published lesson for this objective -> 404 (like :answer / :hint), never a 500.
-        if deps.curriculum.lesson_for(body.objective_code) is None:
-            raise HTTPException(status_code=404, detail="lesson not found")
-        decision = Decision(kind=DecisionKind.TEACH, objective_code=body.objective_code)
+        # No published lesson for this objective visible to this reader (unknown, unpublished or
+        # another cohort's) -> 404 (like :answer / :hint), never a 500.
+        choice: LearnerChoice | None = None
+        if body.learner_chosen:
+            choice = _guard_session(
+                lambda: deps.session_service.choose(session, body.objective_code)
+            )
+            if choice is None:
+                raise HTTPException(status_code=404, detail="lesson not found")
+            decision = choice.decision
+        else:
+            if deps.curriculum.lesson_for(body.objective_code) is None:
+                raise HTTPException(status_code=404, detail="lesson not found")
+            decision = Decision(kind=DecisionKind.TEACH, objective_code=body.objective_code)
         utterances, lesson = _guard_session(lambda: deps.session_service.teach(session, decision))
         return {
             "utterances": [{"kind": u.kind.value, "text": u.text} for u in utterances],
             "items": [learner_item(it) for it in lesson.practice_items],
+            "chosen_by": CHOSEN_BY_LEARNER if choice is not None else CHOSEN_BY_ENGINE,
+            "choice": choice_json(choice) if choice is not None else None,
         }
 
     @router.post("/sessions/{session_id}:answer")

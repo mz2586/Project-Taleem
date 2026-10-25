@@ -19,8 +19,10 @@ tags:
   - name: sync
     description: >-
       Offline sync (Phase 6.2B). attempt.submitted deltas durably record AssessmentEvidence
-      (idempotent by client-generated evidence_id); progress / lesson.completed / preference keep
-      the in-memory conflict policy (monotonic max / idempotent set / server-order-wins).
+      (idempotent by client-generated evidence_id); homework.submitted deltas are applied by the
+      school service exactly as the online homework submit (idempotent by the client
+      submission_key); progress / lesson.completed / preference keep the in-memory conflict policy
+      (monotonic max / idempotent set / server-order-wins).
   - name: skeleton
     description: Authentication and authorization seam demonstration.
 paths:
@@ -107,9 +109,16 @@ paths:
         published lesson and durably recorded as AssessmentEvidence via LearningUnitOfWork, keyed on
         a client-generated evidence_id so a replay (even after a server restart) is a DUPLICATE.
         A summative item is never auto-graded by sync (mentor-mediated). See AttemptPayload.
+        A homework.submitted delta (a written homework answer sent while offline) is applied by the
+        same school service as POST /v1/school/learners/{student_ref}/homework/…:submit — the same
+        auto-marking, self-check and compare view, disclosure screen, cohort filtering and
+        SHARING_REQUIRED — and is idempotent by its submission_key (a replay is a DUPLICATE with
+        the current view). A refusal is a per-item conflict with a reason; it is not remembered, so
+        the same answer can be re-sent. See HomeworkPayload and ItemResult.reason / result.
         Authenticated (bearer JWT) and IDOR-guarded: an attempt.submitted delta's student_ref must
         match the token subject (a privileged operator may sync any) — a learner cannot forge
-        assessment evidence for another child. Consent-gated: every learner the batch writes for
+        assessment evidence for another child. A homework.submitted delta's student_ref must match
+        the token subject, with no operator exception (as on the online submit route). Consent-gated: every learner the batch writes for
         (each attempt's student_ref, and the caller when it is a learner) is re-checked against
         live identity state on every batch; a learner without current learning_data consent
         (CONSENT_REQUIRED) or whose account is not active (LEARNER_INACTIVE) rejects the WHOLE
@@ -136,8 +145,9 @@ paths:
               schema: { $ref: "#/components/schemas/Problem" }
         "403":
           description: >-
-            Forbidden — attempt targets another learner (FORBIDDEN), or the learner lacks live
-            consent (CONSENT_REQUIRED) or is not active (LEARNER_INACTIVE). Nothing is applied.
+            Forbidden — an attempt or homework answer targets another learner (FORBIDDEN), or the
+            learner lacks live consent (CONSENT_REQUIRED) or is not active (LEARNER_INACTIVE).
+            Nothing is applied.
           content:
             application/problem+json:
               schema: { $ref: "#/components/schemas/Problem" }
@@ -197,9 +207,16 @@ components:
         clientEventId: { type: string, maxLength: 128 }
         type:
           type: string
-          enum: [progress.updated, lesson.completed, attempt.submitted, preference.set]
+          enum: [progress.updated, lesson.completed, attempt.submitted, preference.set, homework.submitted]
         entityKey: { type: string, maxLength: 256 }
-        payload: { type: object, additionalProperties: true }
+        payload:
+          description: >-
+            By type: attempt.submitted → AttemptPayload; homework.submitted → HomeworkPayload; any
+            other type → a free-form object (progress / completion / preference).
+          anyOf:
+            - $ref: "#/components/schemas/AttemptPayload"
+            - $ref: "#/components/schemas/HomeworkPayload"
+            - { type: object, additionalProperties: true }
         clientSeq: { type: integer, default: 0 }
     AttemptPayload:
       type: object
@@ -244,6 +261,42 @@ components:
             `lesson_id` other than the lesson graded against: recorded as unknown (NULL), never
             replaced by the version published now.
         lesson_id: { type: string, description: "Optional: the package's lesson_id (see lesson_version)" }
+    HomeworkPayload:
+      type: object
+      description: >-
+        Shape of a homework.submitted delta's payload (OFFLINE_SYNC_SPEC §1a;
+        HOMEWORK_AND_MARKING_CONTRACT §2). A written homework answer the child sent while offline,
+        applied by the same school service as the online submit. No child PII beyond the
+        pseudonymous student_ref and the child's own answer text. A malformed payload is a
+        conflict with reason INVALID.
+      required: [student_ref, source, item_ref, text, submission_key]
+      properties:
+        student_ref: { type: string, description: Must equal the token subject }
+        source: { type: string, enum: [self_paced, assignment] }
+        assignment_id: { type: string, description: "Required when source = assignment" }
+        objective_code: { type: string, description: "Required when source = self_paced" }
+        item_ref: { type: string }
+        text:
+          type: string
+          description: >-
+            The child's answer; trimmed and capped at the item's max_chars (200 short, 2000
+            otherwise) exactly as online.
+        submission_key:
+          type: string
+          maxLength: 64
+          description: >-
+            Client-generated uuid7 — the durable idempotency key (stored on the submission row).
+            Falls back to clientEventId when absent.
+        attempt:
+          type: integer
+          minimum: 1
+          description: >-
+            The attempt the child was making (the server's last attempt + 1). When the server
+            already holds this attempt or a later one the delta is a conflict
+            (SUBMISSION_SUPERSEDED); an older offline answer never overwrites a newer one.
+        submitted_at:
+          type: number
+          description: Device clock (ms). Informational only; never used for ordering or stored.
     BatchIn:
       type: object
       properties:
@@ -266,6 +319,20 @@ components:
                 type: string
                 enum: [applied, duplicate, ignored, conflict]
               version: { type: integer }
+              reason:
+                type: string
+                description: >-
+                  Present when nothing was applied and the server names why. homework.submitted:
+                  SUBMISSION_MARKED, SUBMISSION_SUPERSEDED, NOT_AVAILABLE, LESSON_ASSIGNED,
+                  SHARING_REQUIRED, INVALID, BUSY, HOMEWORK_UNAVAILABLE.
+              result:
+                type: object
+                additionalProperties: true
+                description: >-
+                  Present when the device must show the server's answer. homework.submitted
+                  (applied / duplicate): the learner's submit view, the same body the online submit
+                  returns (source, assignment_id, objective_code, item_ref, marking, state,
+                  can_retry, submission, compare). Never a rubric or an answer key.
     Problem:
       type: object
       description: RFC 9457 Problem Details

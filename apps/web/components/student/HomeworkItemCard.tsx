@@ -3,9 +3,11 @@
 // its state in symbol + words, the marker's note, and — while the item is open — a labelled answer
 // box with a visible character counter and a Send button whose reason for being disabled sits beside it.
 //
-// Honesty rules: "Sent" / "Saved" is shown only after the server accepted the answer. Offline, Send is
-// disabled with the reason, and what the child types is kept on this phone (lib/homework/drafts.ts);
-// it is never queued or claimed as sent. A marked answer is read-only. §6: a self-paced item never
+// Honesty rules: "Sent" / "Saved" is shown only after the server accepted the answer. Offline, Send
+// queues the answer for offline sync (when the page passes `queue`) and says only "Saved on this
+// phone — will send when online"; `sync` then shows the server's own result once it arrives, or a
+// gentle conflict message. What the child types is kept on this phone (lib/homework/drafts.ts) until
+// the server confirms it. A marked answer is read-only. §6: a self-paced item never
 // uses teacher wording; "Checked by Taleem" only when the server says `reviewed_by: "auto"`; a
 // self-check answer is "saved", never "marked", and its comparison appears only after it was sent.
 // The rules are pure and unit-tested in lib/homework/student.ts.
@@ -15,6 +17,7 @@ import { Button } from "@/design-system/Button";
 import { contentAttrs } from "@/lib/i18n/content";
 import type { Translator } from "@/lib/i18n/translate";
 import type { DraftStore } from "@/lib/homework/drafts";
+import type { HomeworkSyncView } from "@/lib/homework/offlineQueue";
 import {
   afterSent,
   compareView,
@@ -26,6 +29,7 @@ import {
   sendOutcomeKey,
   stateBadge,
   submitGate,
+  syncMessageKey,
   type HomeworkItemView,
   type SendOutcome,
 } from "@/lib/homework/student";
@@ -47,6 +51,10 @@ export interface HomeworkItemCardProps {
   onSent: (item: HomeworkItemView) => void;
   /** Locale order for the self-check comparison text the server returns on submit. */
   contentPreference?: readonly string[];
+  /** Queue the answer for offline sync when there is no connection (absent: offline only keeps it). */
+  queue?: (body: SubmitBody) => Promise<void>;
+  /** Where this item's offline answer stands (queued / confirmed / conflict), from the sync queue. */
+  sync?: HomeworkSyncView | null;
 }
 
 const box = {
@@ -82,6 +90,8 @@ export function HomeworkItemCard({
   send,
   onSent,
   contentPreference,
+  queue,
+  sync = null,
 }: HomeworkItemCardProps) {
   const id = useId();
   // The server render and first client render start from the sent text; a kept draft is read after
@@ -98,11 +108,29 @@ export function HomeworkItemCard({
     if (draft) setText(initialText(itemRef.current, draft));
   }, [draftKey, drafts]);
 
+  // A new sync answer (sent / checked / conflict) replaces the last local message. "Saved on this
+  // phone" stays while the answer waits; a result or conflict hides once the child types again.
+  const syncId = sync ? `${sync.kind}:${sync.clientEventId}` : null;
+  const [dismissedSync, setDismissedSync] = useState<string | null>(null);
+  useEffect(() => {
+    if (syncId && !syncId.startsWith("queued:")) setOutcome(null);
+  }, [syncId]);
+  const syncKey = sync && (sync.kind === "queued" || syncId !== dismissedSync) ? syncMessageKey(sync, item) : null;
+
   const open = isOpen(item.state, item.canRetry);
   const badge = stateBadge(item);
   const copy = itemCopy(item);
   const compare = compareView(item);
-  const gate = submitGate({ text, maxChars: item.maxChars, state: item.state, sending, online, canRetry: item.canRetry, finalReason: copy.final });
+  const gate = submitGate({
+    text,
+    maxChars: item.maxChars,
+    state: item.state,
+    sending,
+    online,
+    canRetry: item.canRetry,
+    finalReason: copy.final,
+    canQueue: queue !== undefined,
+  });
   const prompt = item.prompt;
   const promptAttrs = prompt ? contentAttrs({ locale: prompt.locale || null, text: prompt.text }) : null;
 
@@ -116,6 +144,7 @@ export function HomeworkItemCard({
   function change(value: string) {
     setText(value);
     setOutcome(null);
+    setDismissedSync(syncId);
     // Kept as typed, so a dropped connection never loses the child's writing.
     drafts.write(draftKey, value);
   }
@@ -124,7 +153,17 @@ export function HomeworkItemCard({
     event.preventDefault();
     if (!gate.canSend) return;
     setSending(true);
-    const result = await sendHomework({ online, text, maxChars: item.maxChars, state: item.state, canRetry: item.canRetry, draftKey, drafts, send });
+    const result = await sendHomework({
+      online,
+      text,
+      maxChars: item.maxChars,
+      state: item.state,
+      canRetry: item.canRetry,
+      draftKey,
+      drafts,
+      send,
+      ...(queue ? { queue } : {}),
+    });
     setSending(false);
     setOutcome(result);
     if (result.kind === "sent") {
@@ -248,11 +287,24 @@ export function HomeworkItemCard({
               {t(gate.reason)}
             </p>
           ) : null}
+          {gate.note ? (
+            <p data-note="offline-queue" style={{ margin: 0, fontSize: "var(--font-size-body-min)" }}>
+              {t(gate.note)}
+            </p>
+          ) : null}
         </form>
       )}
 
-      <p ref={statusRef} tabIndex={-1} role="status" aria-live="polite" data-outcome={outcome?.kind} style={{ margin: 0 }}>
-        {outcome ? t(sendOutcomeKey(outcome, item)) : ""}
+      <p
+        ref={statusRef}
+        tabIndex={-1}
+        role="status"
+        aria-live="polite"
+        data-outcome={outcome?.kind}
+        data-sync={!outcome && syncKey ? sync?.kind : undefined}
+        style={{ margin: 0 }}
+      >
+        {outcome ? t(sendOutcomeKey(outcome, item)) : syncKey ? t(syncKey) : ""}
       </p>
     </article>
   );

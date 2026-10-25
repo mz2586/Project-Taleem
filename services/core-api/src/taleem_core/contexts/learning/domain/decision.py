@@ -124,6 +124,47 @@ def _placed_secure(knowledge: StudentKnowledge, code: str) -> bool:
     return obj is not None and obj.placed_secure
 
 
+def unmet_prerequisites(
+    knowledge: StudentKnowledge, prerequisites: tuple[str, ...]
+) -> tuple[str, ...]:
+    """The prerequisites not yet met (neither mastered nor placed secure), in the given order."""
+    return tuple(
+        p for p in prerequisites if not (_mastered(knowledge, p) or _placed_secure(knowledge, p))
+    )
+
+
+LEARNER_CHOICE_RULE = "learner_choice"
+
+
+def learner_choice(
+    objective_code: str,
+    *,
+    unmet: tuple[str, ...] = (),
+    recommended: Decision | None = None,
+) -> Decision:
+    """A TEACH decision for a lesson the LEARNER chose (not the engine), with an honest rationale.
+
+    The engine's own recommendation is recorded beside it (it still recommends, it never blocks a
+    choice); unmet prerequisites become ``prerequisite_gap`` reasons — a hint, not a gate.
+    """
+    notes = ["You chose this lesson"]
+    if recommended is not None and recommended.objective_code not in (None, objective_code):
+        notes.append(
+            f"the AI teacher suggested {recommended.kind.value} {recommended.objective_code}"
+        )
+    if unmet:
+        notes.append(f"prerequisites not yet met: {', '.join(unmet)}")
+    step = RationaleStep(
+        rule_id=LEARNER_CHOICE_RULE,
+        note="; ".join(notes),
+        reasons=tuple(
+            Reason.of(ReasonCode.PREREQUISITE_GAP, objective=objective_code, prereq=p)
+            for p in unmet
+        ),
+    )
+    return Decision(kind=DecisionKind.TEACH, objective_code=objective_code, rationale=(step,))
+
+
 _DAY_S = 86_400.0
 
 

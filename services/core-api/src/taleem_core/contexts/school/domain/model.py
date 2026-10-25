@@ -316,6 +316,9 @@ class Submission:
     reviewed_by: str | None = None  # the teacher who last returned or marked it; "auto"
     version: int = 1
     source: SubmissionSource = SubmissionSource.ASSIGNMENT
+    # The device's key for the answer now stored, when it arrived through offline sync (alembic
+    # 0020); None for an online submit. A replay of the same key is a duplicate, never a resubmit.
+    client_key: str | None = None
 
     @property
     def self_paced(self) -> bool:
@@ -351,6 +354,7 @@ class Submission:
         max_chars: int,
         max_score: int | None,
         now: float,
+        client_key: str | None = None,
     ) -> Submission:
         return Submission(
             submission_id=f"{SUBMISSION_PREFIX}{uuid7()}",
@@ -365,6 +369,7 @@ class Submission:
             submitted_at=now,
             created_at=now,
             max_score=max_score if max_score and max_score > 0 else None,
+            client_key=client_key,
         )
 
     @staticmethod
@@ -377,6 +382,7 @@ class Submission:
         max_chars: int,
         max_score: int | None,
         now: float,
+        client_key: str | None = None,
     ) -> Submission:
         """A learner's answer to a written item of a lesson they studied (contract §6): no
         assignment, no class, no organization. Keyed by (objective, item, learner)."""
@@ -396,6 +402,7 @@ class Submission:
             created_at=now,
             max_score=max_score if max_score and max_score > 0 else None,
             source=SubmissionSource.SELF_PACED,
+            client_key=client_key,
         )
 
     def auto_mark(self, *, met: bool, now: float) -> None:
@@ -410,7 +417,15 @@ class Submission:
         self.marked_at = now
         self.reviewed_by = AUTO_REVIEWER
 
-    def resubmit(self, *, text: str, max_chars: int, max_score: int | None, now: float) -> None:
+    def resubmit(
+        self,
+        *,
+        text: str,
+        max_chars: int,
+        max_score: int | None,
+        now: float,
+        client_key: str | None = None,
+    ) -> None:
         """Replace the answer while it is ``submitted`` or ``returned``, or after an automatic
         ``not_yet`` (a retry). Any other marked answer is final."""
         if self.status is SubmissionStatus.MARKED:
@@ -427,6 +442,7 @@ class Submission:
         self.submitted_at = now
         self.attempt += 1
         self.max_score = max_score if max_score and max_score > 0 else None
+        self.client_key = client_key
 
     def mark(
         self,

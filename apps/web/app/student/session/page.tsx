@@ -9,7 +9,10 @@
 // Two languages meet on this screen and are kept apart: the chrome (buttons, progress, messages) is
 // in the interface locale; every piece of lesson content carries its own `lang`/`dir`, so an Urdu
 // lesson stays right-to-left inside an English interface and vice versa.
-import { useEffect, useId, useReducer, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useId, useMemo, useReducer, useRef, useState } from "react";
+
+import { ChosenLessonNotice } from "@/components/student/ChosenLessonNotice";
 
 import { ItemInteraction } from "@/components/student/ItemInteraction";
 import { ReadAloud } from "@/components/student/ReadAloud";
@@ -59,6 +62,7 @@ import {
   presentationSteps,
 } from "@/lib/student/lessonPlayer";
 import { itemKind, type AnswerBody } from "@/lib/student/itemAnswer";
+import { CHOICE_COPY, choiceNotice, readChosenLesson, type ChoiceNoticeView } from "@/lib/student/chosenLesson";
 import type { TodayView } from "@/lib/student/types";
 
 /**
@@ -156,9 +160,33 @@ function ExplainPanel({
   );
 }
 
+/**
+ * `/student/session` — the AI teacher picks the next lesson. `/student/session?lesson=<objective>`
+ * opens the lesson the child chose (a lesson row on Learn, a "practise this" link after a unit
+ * check); the AI teacher picks again after it. Keyed by the chosen lesson, so following another
+ * lesson link from this page starts that lesson afresh.
+ */
 export default function SessionPage() {
+  return (
+    <Suspense fallback={null}>
+      <SessionFromParams />
+    </Suspense>
+  );
+}
+
+function SessionFromParams() {
+  const chosenLesson = readChosenLesson(useSearchParams());
+  return <SessionPlayer key={chosenLesson ?? ""} chosenLesson={chosenLesson} />;
+}
+
+function SessionPlayer({ chosenLesson }: { chosenLesson: string | null }) {
   const { studentRef: ref, band } = useLearner();
-  const { t, formatPercent, formatNumber } = useLocale();
+  const { t, locale, formatPercent, formatNumber } = useLocale();
+  const preference = useMemo(() => [locale, ...INSTRUCTION_LOCALE_PREFERENCE], [locale]);
+  // "You chose this lesson" (+ any gentle prerequisite hint) while the chosen lesson is on screen;
+  // `chosenMissing`: the chosen lesson was not found, so the AI teacher picked instead.
+  const [choice, setChoice] = useState<ChoiceNoticeView | null>(null);
+  const [chosenMissing, setChosenMissing] = useState(false);
   const started = useRef(false);
   const [state, dispatch] = useReducer(playerReducer, initialPlayerState);
   // How a session that ended without the normal celebration ended (null: still going, or finished).
@@ -199,6 +227,10 @@ export default function SessionPage() {
   };
 
   const plan = async (id: string) => {
+    // The AI teacher picks from here on: a chosen lesson's notice no longer applies (nor, once a
+    // lesson has been taught, the "that lesson wasn't ready" line).
+    setChoice(null);
+    if (state.teach !== null) setChosenMissing(false);
     dispatch({ type: "planning" });
     try {
       const decision = await learningApi.next(id);
@@ -235,6 +267,18 @@ export default function SessionPage() {
       try {
         const s = await learningApi.startSession(ref);
         dispatch({ type: "started", sessionId: s.session_id });
+        if (chosenLesson) {
+          try {
+            const lesson = await learningApi.teach(s.session_id, chosenLesson, { learnerChosen: true });
+            dispatch({ type: "taught", objective: chosenLesson, teach: lesson });
+            setChoice(choiceNotice(lesson.choice, t, preference));
+            return;
+          } catch (e) {
+            // Not found (unpublished, or not for this learner): say so gently; the AI teacher picks.
+            if (!teachFailureEnding(e)) throw e;
+            setChosenMissing(true);
+          }
+        }
         await plan(s.session_id);
       } catch (e) {
         fail(e);
@@ -391,6 +435,13 @@ export default function SessionPage() {
             </div>
           </Card>
         ) : null}
+
+        {chosenMissing && (phase === "presenting" || phase === "asking") ? (
+          <p data-chosen-missing="" style={{ margin: 0 }}>
+            {t(CHOICE_COPY.unavailable)}
+          </p>
+        ) : null}
+        {choice && (phase === "presenting" || phase === "asking" || phase === "feedback") ? <ChosenLessonNotice notice={choice} /> : null}
 
         {phase === "presenting" && steps[step] ? (
           <section aria-label={t("student.session.lessonLabel")} style={{ display: "grid", gap: "var(--space-3)" }}>

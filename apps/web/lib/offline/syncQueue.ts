@@ -12,7 +12,7 @@
 import { uuid7 } from "./ids";
 import type { KVStore } from "./kv";
 import { STORES } from "./kv";
-import type { AttemptPayload, QueuedDelta, SyncDelta } from "./types";
+import type { AttemptPayload, HomeworkPayload, QueuedDelta, SyncDelta } from "./types";
 
 const SEQ_KEY = "client_seq";
 const DEFAULT_MAX_ATTEMPTS = 8;
@@ -58,6 +58,37 @@ export class SyncQueue {
       entityKey: `student:${payload.student_ref}|item:${payload.item_ref}`,
       payload: payload as unknown as Record<string, unknown>,
     });
+  }
+
+  // Enqueue a homework answer sent while offline. One answer per item travels: a newer Send for the
+  // same item replaces the older queued one (the server keeps one row per item anyway, and the
+  // newest text is what the child meant). The submission_key doubles as the clientEventId.
+  async enqueueHomework(payload: HomeworkPayload): Promise<QueuedDelta> {
+    const entityKey = homeworkEntityKey(payload);
+    for (const d of await this.all()) {
+      if (d.type === "homework.submitted" && d.entityKey === entityKey) {
+        await this.store.delete(STORES.evidenceQueue, d.clientEventId);
+      }
+    }
+    return this.enqueue({
+      clientEventId: payload.submission_key,
+      type: "homework.submitted",
+      entityKey,
+      payload: payload as unknown as Record<string, unknown>,
+    });
+  }
+
+  // Remove every queued homework answer of one learner (sign-out / consent withdrawal on this
+  // phone: the child's words must not outlive the permission they were written under).
+  async removeHomework(studentRef: string): Promise<number> {
+    let removed = 0;
+    for (const d of await this.all()) {
+      if (d.type === "homework.submitted" && ownerOf(d) === studentRef) {
+        await this.store.delete(STORES.evidenceQueue, d.clientEventId);
+        removed++;
+      }
+    }
+    return removed;
   }
 
   async all(): Promise<QueuedDelta[]> {
@@ -190,4 +221,12 @@ export function ownerOf(d: Pick<SyncDelta, "payload" | "entityKey">): string | n
   if (typeof ref === "string" && ref) return ref;
   const m = /^student:([^|]+)(\||$)/.exec(d.entityKey);
   return m?.[1] ?? null;
+}
+
+// The queue/ledger key of one homework item: the learner, where it came from, and the item.
+export function homeworkEntityKey(
+  p: Pick<HomeworkPayload, "student_ref" | "source" | "assignment_id" | "objective_code" | "item_ref">,
+): string {
+  const target = p.source === "assignment" ? `assignment:${p.assignment_id ?? ""}` : `self_paced:${p.objective_code ?? ""}`;
+  return `student:${p.student_ref}|homework:${target}|item:${p.item_ref}`;
 }

@@ -316,6 +316,7 @@ def _submission(row: SubmissionRow) -> Submission:
         reviewed_by=row.reviewed_by,
         version=row.version,
         source=SubmissionSource(row.source),
+        client_key=row.client_key,
     )
 
 
@@ -331,6 +332,7 @@ def _write(row: SubmissionRow, sub: Submission) -> None:
     row.returned_at = sub.returned_at
     row.marked_at = sub.marked_at
     row.reviewed_by = sub.reviewed_by
+    row.client_key = sub.client_key
 
 
 class SqlSubmissionRepository:

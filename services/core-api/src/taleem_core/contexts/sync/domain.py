@@ -7,6 +7,8 @@ Conflict policy (docs/33 §6, remediated per audit AR-H-28):
   - lesson completion: idempotent set (once completed, stays completed).
   - assessment attempt: append-only, merge by UNION (no attempt is ever overwritten/lost).
   - preference: server version wins (server-receive order as tiebreaker).
+  - homework submission: applied by the school service exactly as an online submit (routed by the
+    coordinator to a durable sink, never by this engine); idempotent by the client submission key.
 Idempotency: replaying a delta with a seen clientEventId is a no-op → replaying a queue twice
 yields identical server state (04-NFR OFFL-02).
 """
@@ -32,6 +34,7 @@ class DeltaType(StrEnum):
     LESSON_COMPLETED = "lesson.completed"
     ATTEMPT_SUBMITTED = "attempt.submitted"
     PREFERENCE = "preference.set"
+    HOMEWORK_SUBMITTED = "homework.submitted"
 
 
 class Status(StrEnum):
@@ -55,6 +58,11 @@ class ItemResult:
     client_event_id: str
     status: Status
     server_version: int
+    # Why a delta was not applied (a stable code, e.g. ``SUBMISSION_MARKED``), when there is one.
+    reason: str | None = None
+    # The server's answer for a delta whose effect the device must show (homework: the learner's
+    # submission view, exactly as the online submit returns it). Never an answer key.
+    result: dict[str, object] | None = None
 
 
 @dataclass

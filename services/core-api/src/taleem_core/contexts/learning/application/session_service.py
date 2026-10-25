@@ -20,14 +20,25 @@ from ...learning.domain.decision import (
     Decision,
     DecisionConfig,
     DecisionKind,
+    learner_choice,
     post_interaction,
     select_next,
+    unmet_prerequisites,
 )
 from ...learning.domain.events import LearningEvent
 from ...learning.domain.knowledge import AttemptResult, StudentKnowledge
 from ...learning.domain.runtime import TemplatedTeachingRuntime, Utterance
 from ...learning.domain.scorer import Answer, evaluate
-from ...learning.domain.session import Interaction, Session, SessionState, Turn
+from ...learning.domain.session import (
+    CHOSEN_BY_ENGINE,
+    CHOSEN_BY_LEARNER,
+    DecisionRecord,
+    Interaction,
+    Session,
+    SessionError,
+    SessionState,
+    Turn,
+)
 from ...learning.domain.values import InteractionContext
 from ..adapters.persistence.uow import LearningUnitOfWork
 from .knowledge_service import KnowledgeService, RecordOutcome
@@ -50,6 +61,26 @@ class TurnResult:
     feedback: list[Utterance]
     post_decision: Decision
     events: list[LearningEvent] = field(default_factory=list)
+
+
+@dataclass(frozen=True)
+class PrerequisiteHint:
+    """An unmet prerequisite of a learner-chosen lesson, with the title of the lesson that teaches
+    it (``None`` when no lesson for it is visible to this reader)."""
+
+    objective_code: str
+    title: dict[str, str] | None
+
+
+@dataclass(frozen=True)
+class LearnerChoice:
+    """A lesson the learner chose: the recorded decision, the lesson, what the engine would have
+    recommended instead, and any prerequisites not yet met (a gentle hint, never a block)."""
+
+    decision: Decision
+    lesson: LessonView
+    recommended: Decision
+    unmet: tuple[PrerequisiteHint, ...]
 
 
 class SessionService:
@@ -107,7 +138,17 @@ class SessionService:
             session.student_ref, include_evidence=False
         ) or StudentKnowledge(student_ref=session.student_ref)
         graph = self._graph_source() if callable(self._graph_source) else self._graph_source
-        decision = select_next(knowledge, graph, self._config, self._now(), safety_flag=safety_flag)
+        now = self._now()
+        decision = select_next(knowledge, graph, self._config, now, safety_flag=safety_flag)
+        session.record_decision(
+            DecisionRecord(
+                kind=decision.kind.value,
+                objective_code=decision.objective_code,
+                chosen_by=CHOSEN_BY_ENGINE,
+                rationale=tuple(r.note for r in decision.rationale),
+                at=now,
+            )
+        )
         if decision.kind in _CONTEXT_FOR:
             session.transition_to(SessionState.TEACHING)
             self._sessions.save(session)
@@ -115,6 +156,42 @@ class SessionService:
             session.escalate()
             self._sessions.save(session)
         return decision
+
+    def choose(self, session: Session, objective_code: str) -> LearnerChoice | None:
+        """Plan a lesson the LEARNER chose (a lesson row / a remediation link) instead of the
+        engine's pick. ``None`` when no published lesson for it is visible to this reader (the
+        read model's cohort filter applies: a cross-cohort or unpublished lesson is not found).
+
+        The engine still recommends — its pick is returned and recorded in the rationale — but it
+        never blocks the choice. Unmet prerequisites are returned as a hint, not a gate.
+        """
+        lesson = self._curriculum.lesson_for(objective_code)
+        if lesson is None:
+            return None
+        if session.state in (SessionState.PLANNING, SessionState.RECORDING):
+            session.transition_to(SessionState.TEACHING)
+        elif session.state is not SessionState.TEACHING:
+            raise SessionError(f"cannot choose a lesson from {session.state}")
+        now = self._now()
+        knowledge = self._knowledge.snapshot(
+            session.student_ref, include_evidence=False
+        ) or StudentKnowledge(student_ref=session.student_ref)
+        graph = self._graph_source() if callable(self._graph_source) else self._graph_source
+        recommended = select_next(knowledge, graph, self._config, now)
+        unmet = unmet_prerequisites(knowledge, lesson.prerequisites)
+        decision = learner_choice(objective_code, unmet=unmet, recommended=recommended)
+        session.record_decision(
+            DecisionRecord(
+                kind=decision.kind.value,
+                objective_code=objective_code,
+                chosen_by=CHOSEN_BY_LEARNER,
+                rationale=tuple(r.note for r in decision.rationale),
+                at=now,
+            )
+        )
+        self._sessions.save(session)
+        hints = tuple(PrerequisiteHint(code, self._title_of(code)) for code in unmet)
+        return LearnerChoice(decision=decision, lesson=lesson, recommended=recommended, unmet=hints)
 
     def teach(self, session: Session, decision: Decision) -> tuple[list[Utterance], LessonView]:
         lesson = self._curriculum.lesson_for(decision.objective_code or "")
@@ -199,6 +276,11 @@ class SessionService:
                 outcome=outcome.value,
                 evidence_id=result.evidence_id,
                 occurred_at=now,
+                chosen_by=(
+                    CHOSEN_BY_LEARNER
+                    if session.learner_chosen_objective == item.objective_code
+                    else CHOSEN_BY_ENGINE
+                ),
             )
         )
         self._sessions.save(session)
@@ -230,6 +312,13 @@ class SessionService:
         return session
 
     # -- internals ------------------------------------------------------------------------
+
+    def _title_of(self, objective_code: str) -> dict[str, str] | None:
+        lesson = self._curriculum.lesson_for(objective_code)
+        if lesson is None:
+            return None
+        title = {k: v for k, v in lesson.title.items() if v}
+        return title or None
 
     def _emit(self, events: Sequence[LearningEvent]) -> None:
         with self._uow() as uow:

@@ -169,6 +169,9 @@ class LessonView:
     # every evidence path records it with ``lesson_id`` (REPORT_CARD_CONTRACT §1). ``None`` when
     # the source does not know it. Not part of the offline content (its hash is unchanged).
     version: int | None = None
+    # The lesson's prerequisite SLO codes as authored (a hint for a learner-chosen lesson; the
+    # engine's graph does not read them yet). Not part of the offline content.
+    prerequisites: tuple[str, ...] = ()
 
     @property
     def practice_questions(self) -> tuple[ItemView, ...]:

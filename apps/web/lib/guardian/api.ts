@@ -10,6 +10,8 @@
 
 import { createApiClient, type TokenProvider } from "../apiClient";
 import { clearHomeworkDrafts } from "../homework/drafts";
+// Side effect: a withdrawal's draft wipe also removes that child's queued offline homework.
+import "../student/offlineClient";
 import { createGuardianIdentityApi, publicIdentityApi } from "../session/identityApi";
 import { currentAccessToken, withSession } from "../session/store";
 import type { AuditEvent } from "../session/types";

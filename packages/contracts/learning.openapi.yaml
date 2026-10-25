@@ -43,6 +43,14 @@ paths:
       tags: [learning]
       operationId: teach
       summary: Deliver the approved lesson for an objective (templated runtime)
+      description: >-
+        The objective is the decision engine's pick (after :next), or — with `learner_chosen` — a
+        lesson the learner chose (a lesson row on the path, a unit-check remediation link). A
+        learner-chosen lesson may be any published lesson visible to the learner's cohort
+        (DEMO_COHORT_CONTRACT.md §3); an unknown, unpublished or other-cohort lesson is a 404. The
+        session's rationale records the choice ("You chose this lesson") beside the engine's own
+        recommendation, which never blocks it; unmet prerequisites come back as a
+        `prerequisite_hint`, not a refusal. Choosing in the middle of a lesson is a 409.
       security: [{ bearerAuth: [] }]
       parameters: [{ name: sessionId, in: path, required: true, schema: { type: string } }]
       requestBody:
@@ -51,6 +59,7 @@ paths:
       responses:
         "200": { description: Lesson delivery, content: { application/json: { schema: { $ref: "#/components/schemas/TeachView" } } } }
         "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "409": { description: Session state conflict, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
   /v1/learning/sessions/{sessionId}:answer:
     post:
@@ -337,6 +346,56 @@ components:
       required: [objective_code]
       properties:
         objective_code: { type: string }
+        learner_chosen:
+          type: boolean
+          default: false
+          description: True when the learner chose this lesson rather than the decision engine.
+    LearnerChoice:
+      type: object
+      description: A learner-chosen lesson, honestly explained.
+      required: [objective_code, chosen_by, rationale, reasons, recommended, prerequisite_hint]
+      properties:
+        objective_code: { type: string }
+        chosen_by: { type: string, enum: [learner] }
+        rationale:
+          type: array
+          items: { type: string }
+          description: The engine's English trace; starts with "You chose this lesson".
+        reasons:
+          type: array
+          description: Structured reasons (`prerequisite_gap` per unmet prerequisite).
+          items:
+            type: object
+            properties:
+              code: { type: string }
+              params: { type: object, additionalProperties: { type: ["string", "number"] } }
+        recommended:
+          type: object
+          description: What the AI teacher would have picked (advisory; it never blocks a choice).
+          properties:
+            decision:
+              type: string
+              enum: [diagnose, teach, continue, review, remediate, advance, revise, escalate, rest, complete]
+            objective_code: { type: ["string", "null"] }
+        prerequisite_hint:
+          description: Prerequisites not yet met (neither mastered nor placed secure); null when none.
+          oneOf:
+            - type: "null"
+            - type: object
+              required: [unmet]
+              properties:
+                unmet:
+                  type: array
+                  items:
+                    type: object
+                    required: [objective_code, title]
+                    properties:
+                      objective_code: { type: string }
+                      title:
+                        description: The title of the lesson teaching it ({ur, en}); null when none is visible.
+                        oneOf:
+                          - type: "null"
+                          - { type: object, additionalProperties: { type: string } }
     AnswerIn:
       type: object
       description: >-
@@ -376,6 +435,15 @@ components:
     TeachView:
       type: object
       properties:
+        chosen_by:
+          type: string
+          enum: [engine, learner]
+          description: Who chose this lesson — the decision engine, or the learner.
+        choice:
+          description: Set when the learner chose the lesson (`learner_chosen`); null otherwise.
+          oneOf:
+            - type: "null"
+            - { $ref: "#/components/schemas/LearnerChoice" }
         utterances:
           type: array
           items:

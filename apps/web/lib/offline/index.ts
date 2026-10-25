@@ -24,8 +24,18 @@ import type { DownloadEvents } from "./packages";
 import { SyncClient } from "./syncClient";
 import { SyncQueue } from "./syncQueue";
 import { AckLedger } from "./syncStatus";
+import { HomeworkResultLedger } from "./homeworkResults";
 import type { PurgeResult } from "./purge";
-import type { BatchResult, DrainSummary, OfflinePackage, SigningKey, StorageEstimate, SyncDelta } from "./types";
+import type {
+  BatchResult,
+  DrainSummary,
+  ItemResult,
+  OfflinePackage,
+  QueuedDelta,
+  SigningKey,
+  StorageEstimate,
+  SyncDelta,
+} from "./types";
 
 export * from "./types";
 export { STORES } from "./kv";
@@ -39,7 +49,9 @@ export {
 } from "./keys";
 export type { KeyMerge, KeyPinningDiagnostic } from "./keys";
 export { watchConnectivity, currentlyOnline, makeProbe } from "./connectivity";
-export { SyncQueue, ownerOf } from "./syncQueue";
+export { SyncQueue, homeworkEntityKey, ownerOf } from "./syncQueue";
+export { HomeworkResultLedger, HOMEWORK_RESULTS_LIMIT, withoutText } from "./homeworkResults";
+export type { HomeworkResultRecord } from "./homeworkResults";
 export { SyncClient, backoffMs, classifyFailure, LEARNER_LEVEL_REFUSALS } from "./syncClient";
 export {
   AckLedger,
@@ -64,6 +76,10 @@ export interface OfflineSync {
   client: SyncClient;
   diagnostics: SyncDiagnosticsStore;
   acks: AckLedger;
+  /** What the server said about each homework answer sent through sync (no child text). */
+  homework: HomeworkResultLedger;
+  /** Remove one learner's queued homework answers and their results (sign-out / withdrawal). */
+  forgetHomework: (studentRef: string) => Promise<void>;
   drain: () => Promise<DrainSummary>;
   reconcile: (studentRef: string) => Promise<{ enqueued: number; drain: DrainSummary }>;
   startAutoDrain: () => () => void;
@@ -114,6 +130,9 @@ export interface CreateClientOptions {
   refreshSession?: () => Promise<boolean>;
   // The signed-in learner whose token carries the batch (null = none; nothing is sent).
   currentLearner?: () => string | null;
+  // Told about every answered delta before its queue copy is released (after the homework
+  // results are recorded), e.g. to wipe a homework draft once the server confirmed it.
+  onSettled?: (settled: Array<{ delta: QueuedDelta; result: ItemResult }>) => Promise<void>;
 }
 
 export interface DownloadConfig {
@@ -191,6 +210,7 @@ export function createOfflineClient(opts: CreateClientOptions): OfflineClient {
 
   const queue = new SyncQueue(store, now);
   const acks = new AckLedger(store);
+  const homework = new HomeworkResultLedger(store);
   const client = new SyncClient({
     queue,
     store,
@@ -200,10 +220,15 @@ export function createOfflineClient(opts: CreateClientOptions): OfflineClient {
     postBatch: opts.postBatch,
     ...(opts.refreshSession ? { refreshSession: opts.refreshSession } : {}),
     ...(opts.currentLearner ? { currentLearner: opts.currentLearner } : {}),
+    onSettled: async (settled) => {
+      await homework.record(settled, now());
+      await opts.onSettled?.(settled);
+    },
     onPurge: async (refs) => {
       for (const ref of refs) {
         await purge.purgeStudent(ref);
         await acks.forget(ref);
+        await homework.forget(ref);
       }
     },
   });
@@ -214,6 +239,11 @@ export function createOfflineClient(opts: CreateClientOptions): OfflineClient {
     client,
     diagnostics,
     acks,
+    homework,
+    forgetHomework: async (studentRef: string) => {
+      await queue.removeHomework(studentRef);
+      await homework.forget(studentRef);
+    },
     drain,
     reconcile: (studentRef: string) =>
       reconcileAndResume(studentRef, { progress, checkpoints, queue, drain }),
@@ -228,7 +258,11 @@ export function createOfflineClient(opts: CreateClientOptions): OfflineClient {
     reads,
     sync,
     purge,
-    purgeStudent: (studentRef: string) => purge.purgeStudent(studentRef),
+    purgeStudent: async (studentRef: string) => {
+      const result = await purge.purgeStudent(studentRef);
+      await homework.forget(studentRef);
+      return result;
+    },
     requestPersistentStorage,
     watchConnectivity: (l: ConnectivityListener) => watchConnectivity(l),
     keyPinning,

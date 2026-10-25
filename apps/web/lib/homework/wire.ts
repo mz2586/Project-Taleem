@@ -8,6 +8,7 @@ import type {
   HomeworkItemWire,
   HomeworkMarking,
   HomeworkSource,
+  LearnerSubmissionWire,
   LocalizedWire,
   SubmissionRowWire,
   SubmissionState,
@@ -61,4 +62,26 @@ export function compareText(value: CompareWire | null | undefined, preference: r
   const sample = localized(value.sample_answer, preference);
   const guidance = localized(value.guidance, preference);
   return sample || guidance ? { sample, guidance } : null;
+}
+
+/**
+ * The submit response (`POST …:submit`, and a sync `homework.submitted` result) as ONE submission.
+ * The server nests the submission (`{state, marking, compare, can_retry, submission: {...}}`); the
+ * view models read a flat `LearnerSubmissionWire`. Item-level fields fill only what the nested
+ * submission leaves out. An already-flat or non-object value is returned as it is (or null).
+ */
+export function flattenSubmitView(value: unknown): LearnerSubmissionWire | null {
+  if (!value || typeof value !== "object") return null;
+  const view = value as Record<string, unknown>;
+  const nested = view["submission"];
+  if (!nested || typeof nested !== "object") return view as unknown as LearnerSubmissionWire;
+  const sub = nested as Record<string, unknown>;
+  const pick = (key: string) => (sub[key] !== undefined && sub[key] !== null ? sub[key] : view[key]);
+  return {
+    ...(sub as unknown as LearnerSubmissionWire),
+    state: (pick("state") as SubmissionState | undefined) ?? "submitted",
+    marking: (pick("marking") as HomeworkMarking | null | undefined) ?? null,
+    compare: (pick("compare") as CompareWire | null | undefined) ?? null,
+    can_retry: (pick("can_retry") as boolean | null | undefined) ?? null,
+  };
 }

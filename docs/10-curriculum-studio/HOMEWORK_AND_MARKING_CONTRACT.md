@@ -34,8 +34,17 @@ answer or guidance.
   sharing, so a child's writing never reaches a teacher who may not see it. The app keeps the text
   on the phone and says why it was not sent. There is one submission row per (assignment, item,
   learner); a resubmission replaces its text and increments `attempt`.
-- Online only in this version. The web app says so when offline and never pretends a submission
-  was saved.
+- **Offline submission.** With no connection, Send queues the answer on the phone and the app says
+  only "Saved on this phone — will send when online". When the phone is online again the answer
+  is sent as a `homework.submitted` delta through `POST /v1/sync/batch`
+  ([OFFLINE_SYNC_SPEC.md](../../OFFLINE_SYNC_SPEC.md) §1a) and applied by the same submit path as
+  this route: every rule in this section and in §6 (auto-marking, self-check and compare, the
+  disclosure screen, cohort filtering, the consent gate, `SHARING_REQUIRED`) applies identically. A
+  replay is idempotent by the device's submission key. A refusal is a per-item `conflict` with a
+  reason (`SUBMISSION_MARKED`, `SUBMISSION_SUPERSEDED`, `NOT_AVAILABLE`, `LESSON_ASSIGNED`,
+  `SHARING_REQUIRED`, `INVALID`, `BUSY`), shown to the child gently, with the text kept on the
+  phone. The draft is removed only after the server confirms the answer. The app never claims an
+  answer was sent, saved or checked before the server said so.
 
 ## 3. Teacher marking
 
@@ -109,6 +118,7 @@ the primary path.
 
 | Date | Change | Author |
 | --- | --- | --- |
+| 2026-10-25 | §2 offline submission: Send without a connection queues the answer; it syncs as `homework.submitted` (OFFLINE_SYNC_SPEC §1a) through the same `SchoolService` submit path, idempotent by the client submission key (`school.submission.client_key`, migration `0020_homework_client_key`), refusals are per-item conflicts with a reason. Replaces "Online only in this version". | Engineering |
 | 2026-10-25 | Flagged evidence is immutable: a concern raised from a submission (disclosure screen or teacher `:concern`) stores a snapshot in `safeguarding.concern_evidence` (migration `0018_concern_evidence`: text, attempt, `submitted_at`, item, objective, sha256; one per concern; a trigger refuses UPDATE/DELETE/TRUNCATE outside the privacy erasure flag). The context read returns `flagged` (always the text that was flagged) and `current` (only when the latest text differs); the console shows the flagged text first. Withheld from guardian exports; erasure follows the safeguarding retained set (kept with the pseudonymised concern by default, deleted in `erase` mode). Concerns raised before 0018 have no snapshot and say so. | Engineering |
 | 2026-10-25 | Safeguarding lead reads the flagged work: `GET /v1/safeguarding/concerns/{id}/context` (`safeguarding_lead` only; submission text, item prompt, lesson title, `submitted_at`, matched phrase entries, `resubmitted_since_raised`); every read audited as `concern.context_viewed` without the text; works under the kill switch and after consent withdrawal; console "What the child wrote" loads on demand. | Engineering |
 | 2026-10-25 | §6 implemented: self-paced list + `POST …/homework/self-paced/{objectiveCode}/items/{itemRef}:submit` (`409 LESSON_ASSIGNED` when a class assigned it); `source`, `marking`, `can_retry`, `compare` fields; an automatic `not_yet` may be retried (one evidence per attempt, `{submission_id}:{attempt}`), an automatic `met` and any teacher mark are final; disclosure screen list in `contexts/safeguarding/disclosure_phrases.json`; migration `0017_self_paced_homework`. Self-paced answers are not shown to teachers. | Engineering |

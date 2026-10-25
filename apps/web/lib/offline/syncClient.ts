@@ -28,7 +28,7 @@ import type { KVStore } from "./kv";
 import { STORES } from "./kv";
 import { ownerOf } from "./syncQueue";
 import type { AckLedger } from "./syncStatus";
-import type { AckRecord, BatchResult, DrainSummary, QueuedDelta, SyncBlock, SyncDelta } from "./types";
+import type { AckRecord, BatchResult, DrainSummary, ItemResult, QueuedDelta, SyncBlock, SyncDelta } from "./types";
 
 const CURSOR_KEY = "sync_cursor";
 const DEFAULT_BATCH = 50;
@@ -57,6 +57,10 @@ export interface SyncClientDeps {
   // The learner whose token will carry the batch. When provided, only that learner's deltas (plus
   // device-level ones) are sent; null means no learner is signed in, so nothing is sent.
   currentLearner?: () => string | null;
+  // Told about every answered item (applied / duplicate / ignored / conflict) BEFORE its queue copy
+  // is released, so a caller can keep what the server said (e.g. a homework result) and act on it
+  // (wipe a draft only once the server confirmed it). A failing hook never breaks the drain.
+  onSettled?: (settled: Array<{ delta: QueuedDelta; result: ItemResult }>) => Promise<void>;
   now?: () => number;
 }
 
@@ -191,13 +195,28 @@ export class SyncClient {
     const now = (this.deps.now ?? Date.now)();
     const acked: AckRecord[] = [];
     const answered = new Set<string>();
+    const settled: Array<{ delta: QueuedDelta; result: ItemResult }> = [];
     for (const r of result.results) {
       const d = sent.get(r.clientEventId);
       if (!d || answered.has(r.clientEventId)) continue; // not ours / repeated — ignore safely
       answered.add(r.clientEventId);
+      settled.push({ delta: d, result: r });
+    }
+    if (settled.length > 0 && this.deps.onSettled) {
+      try {
+        await this.deps.onSettled(settled);
+      } catch {
+        // The server's answer still settles the queue; only the caller's bookkeeping missed it.
+      }
+    }
+    for (const { delta: d, result: r } of settled) {
       if (r.status === "conflict") {
         summary.conflict++;
-        await this.deps.queue.deadLetter(r.clientEventId, "server reported conflict");
+        // Kept on the device with the server's reason (never silently deleted).
+        await this.deps.queue.deadLetter(
+          r.clientEventId,
+          r.reason ? `conflict: ${r.reason}` : "server reported conflict",
+        );
         continue;
       }
       if (r.status === "applied") summary.applied++;

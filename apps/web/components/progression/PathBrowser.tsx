@@ -3,7 +3,10 @@
 // needed), open when the child is working in it. Every state is a shape plus words; "Practice done"
 // and "Mastered" never look or read the same. A "Unit check" entry appears only when the server says
 // the unit's check is available.
+import Link from "next/link";
+
 import { ButtonLink } from "@/design-system/ButtonLink";
+import { lessonHref } from "@/lib/student/chosenLesson";
 import type { PathView, UnitView } from "@/lib/progression/wire";
 import {
   checkEntry,
@@ -129,7 +132,10 @@ function UnitBlock({ unit, ctx, stored }: { unit: UnitView; ctx: ViewContext; st
         <ol aria-label={t("progression.path.lessonsLabel")} style={{ margin: 0, paddingInlineStart: "var(--space-4)", display: "grid", gap: "var(--space-2)" }}>
           {unit.lessons.map((lesson) => (
             <li key={lesson.lessonId} data-lesson-state={lesson.state} style={{ display: "grid", gap: "var(--space-1)" }}>
-              <LocalText value={lessonTitle(lesson, t)} />
+              {/* The child may open any lesson; the AI teacher still suggests, never blocks. */}
+              <Link href={lessonHref(lesson.objectiveCode)} data-lesson-link="">
+                <LocalText value={lessonTitle(lesson, t)} />
+              </Link>
               <span>
                 <StateMark badge={lessonBadge(lesson.state, t)} />
               </span>

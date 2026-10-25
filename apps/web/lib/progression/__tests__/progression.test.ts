@@ -258,7 +258,7 @@ describe("finish view", () => {
     expect(v.breakdown.map((b) => b.line)).toEqual(["5 of 5 right", "1 of 5 right"]);
     expect(v.breakdown[0]!.allRight).toBe(true);
     expect(v.remediation).toEqual([
-      { code: "M4.F.2", title: { text: "Quarters", locale: "en" }, href: "/student/session", action: "Practise with my AI teacher" },
+      { code: "M4.F.2", title: { text: "Quarters", locale: "en" }, href: "/student/session?lesson=M4.F.2", action: "Practise with my AI teacher" },
     ]);
     expect(v.retake).toBe("You can try again after you practise the ideas you missed, or after 24 hours.");
     expect(v.claim).toBe("Taleem unit check — not a certificate");
