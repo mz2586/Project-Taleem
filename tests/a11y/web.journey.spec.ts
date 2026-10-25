@@ -97,6 +97,12 @@ function note(line: string): void {
  */
 let currentStep = "";
 const reportedCovered = new Set<string>();
+/** Enabled right now: a control that vanished (the lesson just ended) reads as not enabled
+ * instead of Playwright waiting indefinitely for it to reappear. */
+async function enabledNow(target: Locator): Promise<boolean> {
+  return target.isEnabled({ timeout: 1_000 }).catch(() => false);
+}
+
 async function tap(target: Locator): Promise<void> {
   await target.evaluate((el) => el.scrollIntoView({ block: "center", inline: "center", behavior: "instant" }));
   // Let any smooth scrolling settle before deciding the control is covered.
@@ -352,7 +358,7 @@ async function childSignsInAndLearns(browser: Browser, locale: Locale, family: F
     if (await cont.isVisible()) await tap(cont);
     else if (await again.isVisible()) await tap(again);
     else if (await ready.isVisible()) await tap(ready);
-    else if ((await next.isVisible()) && (await next.isEnabled())) await tap(next);
+    else if ((await next.isVisible()) && (await enabledNow(next))) await tap(next);
     else if (await group.isVisible()) {
       if (!hintUsed && (await hint.isVisible())) {
         await tap(hint);
@@ -485,10 +491,10 @@ async function offlineLesson(child: Page, context: BrowserContext): Promise<void
     const group = child.getByRole("group", { name: t(locale, "student.session.answers") });
     if (await startAgain.isVisible()) await tap(startAgain);
     else if (await ready.isVisible()) await tap(ready);
-    else if ((await next.isVisible()) && (await next.isEnabled())) await tap(next);
+    else if ((await next.isVisible()) && (await enabledNow(next))) await tap(next);
     else if (await group.isVisible()) {
       const option = group.getByRole("button").first();
-      if ((await option.isVisible()) && (await option.isEnabled())) {
+      if ((await option.isVisible()) && (await enabledNow(option))) {
         await tap(option);
         answered += 1;
       } else await child.waitForTimeout(300);
