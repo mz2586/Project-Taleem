@@ -124,8 +124,31 @@ fails **closed**, and every failure serves the authored response unchanged — r
    A provider refusal, truncation, timeout or error serves the authored response; billed calls
    still count against the quota.
 8. **Output safety gate** — any one violation refuses the output:
-   - *grounding*: numbers (digits, Urdu digits, number words, fractions) not in the grounding; low
-     content-word overlap; comparison/universality words ("always", "bigger") not in the grounding;
+   - *grounding*: numbers (digits, Urdu digits, number words, fractions — now including fraction
+     words such as "third", "three quarters", "دو تہائی") not in the grounding; low content-word
+     overlap; comparison/universality words ("always", "bigger") not in the grounding;
+   - *semantic consistency* (grounding dimension; deterministic, provider-independent, no model
+     involved). The lexical rules above let a misstatement built only from grounded words through;
+     these compare the output's meaning-bearing structure with the passages it rephrases:
+     - `false_arithmetic` — every statement relating numbers (equations "2 + 3 = 5", "half of 8 is
+       4", "دو جمع تین پانچ ہے"; equalities "1/2 is the same as 2/4", "… کے برابر ہے"; comparisons
+       "3/4 is bigger than 2/3", "۳/۴، ۲/۳ سے بڑا ہے", with "not"/"نہیں") is evaluated exactly with
+       `fractions.Fraction`; a false one is refused unless the same tokens are authored verbatim;
+     - `unverified_numeric_claim` — a relation between numbers the parser cannot read exactly
+       ("1/4 has a bigger bottom number than 1/2", "2 of 4 is 1/2", division by zero) is refused
+       unless authored verbatim: never assumed true;
+     - `polarity_mismatch` — each output sentence's negations (not/never/n't/نہیں/نہ) and the
+       ordered directions of its comparison words (bigger/smaller, more/less, greater/fewer,
+       بڑا/چھوٹا, زیادہ/کم) must equal those of a passage sentence it aligns with (or two merged);
+       a negation or comparison with no aligned passage is refused. Comparisons already proven by
+       exact arithmetic are exempt, so "1/2 is bigger than 1/4" may restate "1/4 is smaller than
+       1/2";
+     - `recombined_clause` — a word only one passage sentence uses ties a clause to that sentence;
+       a clause may join whole sentences (or a whole sentence with part of one other) but may not
+       splice parts of two ("the top number shows the total" — the former numerator/denominator
+       role-swap gap);
+     - `misplaced_number` — each clause's numbers must come from the passage sentence(s) it
+       rephrases, not from elsewhere in the grounding ("You eat four parts").
    - *answer leak*: answer-revealing phrasing, or an item's correct option appearing more than in the
      grounding (released only after that item's hint ladder is exhausted, which `:explain` never
      asserts because hint state is client-reported);
@@ -143,8 +166,16 @@ text and no learner identifier.
 
 **Known limits — why this is not yet safe for children.**
 
-- The gate is lexical. A misstatement composed only of grounded words (e.g. swapping numerator and
-  denominator roles) **passes**; a semantic grounding check is required.
+- The semantic-consistency rules are structural pattern checks, not understanding. They catch false
+  arithmetic, flipped negation or comparison direction, spliced sentences and moved numbers, but a
+  misstatement that keeps one sentence's frame and swaps a word inside it ("Each part is a whole"),
+  negates by prefix ("unequal"), elides a subject across "and" ("The top number counts the parts
+  and shows the total"), or uses Urdu "ایک" as an article while changing the count **still
+  passes** (each is a reported known gap, [AI_TEACHER_EVALUATION.md](AI_TEACHER_EVALUATION.md) §8).
+  Number statements the parser does not recognise as claims at all ("3 out of 4 parts is 4/3"
+  with a noun in between) fall back to the number-provenance rules only. Being fail-closed, the
+  rules also refuse some safe rephrases (splicing parts of two passage sentences into one clause,
+  reordering mixed comparison directions); the authored text is served instead.
 - Its evaluation is against scripted stub outputs only
   ([AI_TEACHER_EVALUATION.md](AI_TEACHER_EVALUATION.md) §8), not a real model.
 - Not implemented: distress detection, transcript retention and human review of AI turns, a set

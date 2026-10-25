@@ -594,9 +594,12 @@ def _golden_replier(lesson: LessonView) -> Handler:
     outputs: dict[str, str] = {}
     for case in ev.GOLDEN_CASES:
         if case.expect == "accept":
-            outputs[_prompt(lesson, case.style, case.locale, case.grade_band).render()] = (
-                case.output
+            # The case's own turn (an explanation, a correction, a question) decides the prompt.
+            utterances = ev.case_utterances(lesson, case)
+            prompt = gate.build_prompt(
+                lesson, utterances, locale=case.locale, grade_band=case.grade_band
             )
+            outputs[prompt.render()] = case.output
 
     def handler(request: httpx2.Request) -> httpx2.Response:
         prompt = json.loads(request.content)["messages"][0]["content"][0]["text"]

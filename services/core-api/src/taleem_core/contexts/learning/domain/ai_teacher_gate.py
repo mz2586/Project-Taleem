@@ -15,6 +15,13 @@ Rules (each violation carries a ``GateRule``; the evaluation harness scores them
   most content words must come from the grounding (``ungrounded_content``); comparison and
   universality words ("always", "bigger"...) must already occur there (``ungrounded_claim``);
   output must not be empty.
+- semantic consistency (grounding dimension) — a misstatement built only from grounded words passes
+  the lexical rules, so: every statement relating numbers must be exactly true (``Fraction``) or
+  authored verbatim (``false_arithmetic``; unreadable relations: ``unverified_numeric_claim``);
+  each sentence's negations and comparison directions must match a passage sentence it rephrases
+  (``polarity_mismatch``); a clause may not splice parts of two passage sentences
+  (``recombined_clause``); a clause's numbers must come from the sentence it rephrases
+  (``misplaced_number``).
 - answer leak — no item's correct option may appear more often than it already does in the
   grounding, and no answer-revealing phrasing ("the answer is…") — unless that item's hint ladder is
   exhausted (``AnswerContext``).
@@ -33,6 +40,7 @@ import re
 from collections import Counter
 from dataclasses import dataclass, field
 from enum import StrEnum
+from fractions import Fraction
 
 from .ai_teacher import is_grounded
 from .curriculum_view import CHOOSE, FILL, ItemView, LessonView
@@ -276,6 +284,23 @@ _NUMBER_WORDS: dict[str, str] = {
     "halves": "1/2",
     "quarter": "1/4",
     "quarters": "1/4",
+    # Fraction words: without these "you eat a third" would carry a number the check never saw.
+    "third": "1/3",
+    "thirds": "1/3",
+    "fourth": "1/4",
+    "fourths": "1/4",
+    "fifth": "1/5",
+    "fifths": "1/5",
+    "sixth": "1/6",
+    "sixths": "1/6",
+    "seventh": "1/7",
+    "sevenths": "1/7",
+    "eighth": "1/8",
+    "eighths": "1/8",
+    "ninth": "1/9",
+    "ninths": "1/9",
+    "tenth": "1/10",
+    "tenths": "1/10",
     "twice": "2",
     "double": "2",
     "dozen": "12",
@@ -292,15 +317,35 @@ _NUMBER_WORDS: dict[str, str] = {
     "دس": "10",
     "گیارہ": "11",
     "بارہ": "12",
+    "تیرہ": "13",
+    "چودہ": "14",
+    "پندرہ": "15",
+    "سولہ": "16",
+    "سترہ": "17",
+    "اٹھارہ": "18",
+    "انیس": "19",
     "بیس": "20",
+    "تیس": "30",
+    "چالیس": "40",
+    "پچاس": "50",
+    "ساٹھ": "60",
+    "نوے": "90",
+    # (اسی "80" is left out on purpose: it is far more often "this very" — اسی طرح.)
     "سو": "100",
     "ہزار": "1000",
     "آدھا": "1/2",
     "آدھی": "1/2",
     "آدھے": "1/2",
     "چوتھائی": "1/4",
+    "تہائی": "1/3",
+    "ڈیڑھ": "3/2",
+    "ڈھائی": "5/2",
 }
 _FRACTION_JOINERS = frozenset({"over", "بٹا"})
+# Unit-fraction words a count may scale: "three quarters" is 3/4, "دو تہائی" is 2/3.
+_FRACTION_WORDS = frozenset(
+    w for w, v in _NUMBER_WORDS.items() if v.startswith("1/") and w not in ("آدھا", "آدھی", "آدھے")
+)
 
 
 def _words(text: str) -> frozenset[str]:
@@ -375,6 +420,14 @@ def numeric_tokens(text: str, *, expand_fractions: bool = False) -> list[str]:
             and "/" not in value
         ):
             tokens.append(f"{value}/{values[i + 2]}")
+        if (
+            i + 1 < len(words)
+            and words[i + 1] in _FRACTION_WORDS
+            and "/" not in value
+            and value not in ("0", "1")
+        ):
+            # "three quarters" carries 3/4 as well as 3 and 1/4 (each must be grounded).
+            tokens.append(f"{value}/{_NUMBER_WORDS[words[i + 1]].split('/')[1]}")
     return tokens
 
 
@@ -417,6 +470,11 @@ class GateRule(StrEnum):
     UNGROUNDED_NUMBER = "ungrounded_number"
     UNGROUNDED_CONTENT = "ungrounded_content"
     UNGROUNDED_CLAIM = "ungrounded_claim"
+    FALSE_ARITHMETIC = "false_arithmetic"
+    UNVERIFIED_NUMERIC_CLAIM = "unverified_numeric_claim"
+    POLARITY_MISMATCH = "polarity_mismatch"
+    MISPLACED_NUMBER = "misplaced_number"
+    RECOMBINED_CLAUSE = "recombined_clause"
     ANSWER_LEAK = "answer_leak"
     TOO_LONG = "too_long"
     SENTENCE_TOO_LONG = "sentence_too_long"
@@ -443,6 +501,11 @@ RULE_DIMENSION: dict[GateRule, Dimension] = {
     GateRule.UNGROUNDED_NUMBER: Dimension.GROUNDING,
     GateRule.UNGROUNDED_CONTENT: Dimension.GROUNDING,
     GateRule.UNGROUNDED_CLAIM: Dimension.GROUNDING,
+    GateRule.FALSE_ARITHMETIC: Dimension.GROUNDING,
+    GateRule.UNVERIFIED_NUMERIC_CLAIM: Dimension.GROUNDING,
+    GateRule.POLARITY_MISMATCH: Dimension.GROUNDING,
+    GateRule.MISPLACED_NUMBER: Dimension.GROUNDING,
+    GateRule.RECOMBINED_CLAUSE: Dimension.GROUNDING,
     GateRule.ANSWER_LEAK: Dimension.ANSWER_LEAK,
     GateRule.TOO_LONG: Dimension.AGE,
     GateRule.SENTENCE_TOO_LONG: Dimension.AGE,
@@ -726,6 +789,703 @@ def _ungrounded_match(patterns: tuple[re.Pattern[str], ...], text: str, groundin
     return any(not grounded(m.group(0).lower()) for p in patterns for m in p.finditer(text))
 
 
+# ============================================================================ semantic consistency
+#
+# The rules above are lexical, so a misstatement built only from grounded words passes them. The
+# checks below compare the structure that carries meaning with the passages being rephrased:
+# arithmetic and comparisons between numbers (exact, with ``Fraction``), negation and comparison
+# direction, which numbers sit in which sentence, and which passage sentence a clause's words come
+# from. They are deterministic and provider-independent, and every doubt is a refusal.
+
+# Sentence split that keeps decimals ("0.5") whole.
+_CLAIM_SPLIT = re.compile(r"(?:(?<!\d)\.|\.(?!\d)|[!?۔؟\n])+")
+_CLAIM_TOKEN = re.compile(
+    r"\d+(?:[.,/]\d+)*|[^\W\d_]+(?:'[^\W\d_]+)?|[=+×÷*≠≥≤<>−,،]|(?<=\s)[-/](?=\s)|(?<=\d)-(?=\d)"
+)
+_CONJUNCTIONS = _words("and so but then because while or اور تو لیکن پھر کیونکہ یا")
+_CLAUSE_SPLIT = re.compile(r"[;:]|\b(?:" + "|".join(sorted(_CONJUNCTIONS)) + r")\b")
+
+_COPULAS = _words("is are was were")
+_NEG_COPULAS = _words("isn't aren't wasn't weren't")
+_NEGATORS = _words("not never no cannot nor neither none nothing nobody نہیں نہ مت")
+# Comparison direction (+1 "greater", -1 "smaller"): the polarity rule uses all of these; the
+# arithmetic rule evaluates the comparatives among them ("bigger than", "سے بڑا").
+_MORE_WORDS = _words(
+    "bigger biggest larger largest greater greatest more most higher highest taller tallest longer "
+    "longest heavier heaviest بڑا بڑی بڑے زیادہ"
+)
+_LESS_WORDS = _words(
+    "smaller smallest less least fewer fewest lower lowest shorter shortest lighter lightest "
+    "چھوٹا چھوٹی چھوٹے کم"
+)
+_COMPARATIVES = _words(
+    "bigger larger greater more higher taller longer heavier smaller less fewer lower shorter "
+    "lighter بڑا بڑی بڑے زیادہ چھوٹا چھوٹی چھوٹے کم"
+)
+# Words that express a relation rather than a topic. They never decide which passage a sentence
+# rephrases — otherwise swapping "bigger" for "smaller" would also change the alignment.
+_RELATION_WORDS = (
+    _MORE_WORDS
+    | _LESS_WORDS
+    | _NEGATORS
+    | _words("equal same plus minus time multiplied divided than برابر جمع منفی ضرب تقسیم")
+)
+_OP_SYMBOLS = {"+": "+", "-": "-", "−": "-", "×": "*", "*": "*", "÷": "/", "/": "/"}
+_OP_WORDS = {
+    "plus": "+",
+    "minus": "-",
+    "times": "*",
+    "x": "*",
+    "جمع": "+",
+    "منفی": "-",
+    "ضرب": "*",
+    "تقسیم": "/",
+}
+_EQ_WORDS = _words("= equals makes make gives give")
+_MULTIPLIER_WORDS = {
+    "hundred": 100,
+    "thousand": 1000,
+    "million": 1_000_000,
+    "سو": 100,
+    "ہزار": 1000,
+}
+_INTENSIFIERS = _words("much a lot little bit even far way still")
+_ARTICLES = _words("a an the")
+_UR_POSSESSIVES = _words("کا کی کے")
+_UR_COPULAS = _words("ہے ہیں تھا تھی تھے")
+# A word that can glue a number to its neighbour ("1 of 4", "one over four", "چار میں سے تین").
+_JOINER_WORDS = _words("of and out by over بٹا میں")
+
+
+def _numeral_value(token: str) -> Fraction | None:
+    """Exact value of a numeral, or None if it cannot be read unambiguously ("1,5", "1/0")."""
+    if re.fullmatch(r"\d+", token):
+        return Fraction(int(token))
+    if re.fullmatch(r"\d+/\d+", token):
+        num, den = token.split("/")
+        return Fraction(int(num), int(den)) if int(den) else None
+    if re.fullmatch(r"\d+\.\d+", token):
+        return Fraction(token)
+    if re.fullmatch(r"\d{1,3}(?:,\d{3})+", token):
+        return Fraction(int(token.replace(",", "")))
+    return None
+
+
+@dataclass(frozen=True)
+class _Tok:
+    """One unit of a sentence for claim parsing: a number, an operator, a relation word, ..."""
+
+    kind: str  # num | op | eq | eqpost | cop | cmp | than | neg | se | twice | comma | word
+    raw: tuple[str, ...]  # the normalized source tokens (verbatim matching uses these)
+    value: Fraction | None = None  # num (None: a numeral that cannot be read exactly)
+    op: str = ""  # op: + - * /
+    sign: int = 0  # cmp: +1 greater, -1 smaller, 0 a relation the checker does not evaluate
+    neg: bool = False  # eq / cop: negated ("is not", "isn't")
+    spelled: bool = False  # num: written as a word ("twenty", "چار")
+    unit: bool = False  # num: a unit-fraction word a count may scale ("quarter")
+    implicit_than: bool = False  # cmp: a symbol (">", "<") that needs no "than"
+
+    @property
+    def head(self) -> str:
+        return self.raw[0] if self.raw else ""
+
+
+_NOTHING = _Tok("word", ())
+
+
+def _int_value(tok: _Tok) -> Fraction | None:
+    """The token's value if it is a whole number, else None."""
+    if tok.kind == "num" and tok.value is not None and tok.value.denominator == 1:
+        return tok.value
+    return None
+
+
+def _base_tokens(sentence: str) -> list[_Tok]:
+    raw = _CLAIM_TOKEN.findall(_normalize(sentence).replace("’", "'"))
+    toks: list[_Tok] = []
+    i = 0
+    while i < len(raw):
+        r = raw[i]
+        nxt = raw[i + 1] if i + 1 < len(raw) else ""
+        step = 1
+        if r[0].isdigit():
+            toks.append(_Tok("num", (r,), value=_numeral_value(r)))
+        elif r in ("twice", "double"):
+            toks.append(_Tok("twice", (r,)))
+        elif r in _NUMBER_WORDS:
+            value = Fraction(_NUMBER_WORDS[r])
+            toks.append(_Tok("num", (r,), value=value, spelled=True, unit=r in _FRACTION_WORDS))
+        elif r in _OP_SYMBOLS:
+            toks.append(_Tok("op", (r,), op=_OP_SYMBOLS[r]))
+        elif r in _OP_WORDS:
+            toks.append(_Tok("op", (r,), op=_OP_WORDS[r]))
+        elif r in ("multiplied", "divided") and nxt == "by":
+            toks.append(_Tok("op", (r, nxt), op="*" if r == "multiplied" else "/"))
+            step = 2
+        elif r in (">", "<", "≥", "≤"):
+            sign = {">": 1, "<": -1}.get(r, 0)
+            toks.append(_Tok("cmp", (r,), sign=sign, implicit_than=True))
+        elif r == "≠":
+            toks.append(_Tok("eq", (r,), neg=True))
+        elif r in _EQ_WORDS:
+            toks.append(_Tok("eq", (r,)))
+        elif r == "equal" and nxt == "to":
+            toks.append(_Tok("eq", (r, nxt)))
+            step = 2
+        elif r in _COPULAS or r in _NEG_COPULAS:
+            neg = r in _NEG_COPULAS
+            j = i + 1
+            if j < len(raw) and raw[j] == "not":
+                neg, j = True, j + 1
+            if raw[j : j + 2] == ["equal", "to"]:
+                toks.append(_Tok("eq", tuple(raw[i : j + 2]), neg=neg))
+                j += 2
+            elif raw[j : j + 3] == ["the", "same", "as"]:
+                toks.append(_Tok("eq", tuple(raw[i : j + 3]), neg=neg))
+                j += 3
+            else:
+                toks.append(_Tok("cop", tuple(raw[i:j]), neg=neg))
+            step = j - i
+        elif r in _COMPARATIVES:
+            toks.append(_Tok("cmp", (r,), sign=1 if r in _MORE_WORDS else -1))
+        elif r == "than":
+            toks.append(_Tok("than", (r,)))
+        elif r in _NEGATORS or r.endswith("n't"):
+            toks.append(_Tok("neg", (r,)))
+        elif r in (",", "،"):
+            toks.append(_Tok("comma", (r,)))  # a comma keeps "2, and half of 8" apart
+        elif r == "سے":
+            toks.append(_Tok("se", (r,)))
+        elif r == "برابر":
+            after_possessive = bool(toks) and toks[-1].head in _UR_POSSESSIVES
+            toks.append(_Tok("eqpost" if after_possessive else "eq", (r,)))
+        else:
+            toks.append(_Tok("word", (r,)))
+        i += step
+    return toks
+
+
+def _merged(parts: list[_Tok], value: Fraction | None) -> _Tok:
+    return _Tok("num", tuple(r for p in parts for r in p.raw), value=value)
+
+
+def _ratio(num: Fraction, den: Fraction) -> Fraction | None:
+    return num / den if den else None
+
+
+def _combine_numbers(toks: list[_Tok]) -> list[_Tok]:
+    """Read multi-token quantities as one number: "twenty five", "one over four", "3 out of 4",
+    "three quarters", "چار میں سے تین" (3/4), "one and a half", "ساڑھے تین", "twice 3"; and a
+    fraction "of" a number ("half of 8", "آٹھ کا آدھا") as a product."""
+    out: list[_Tok] = []
+    i, n = 0, len(toks)
+
+    def at(j: int) -> _Tok:
+        return toks[j] if j < n else _NOTHING
+
+    while i < n:
+        t = toks[i]
+        if t.kind == "twice":
+            skip = 1 if at(i + 1).raw == ("of",) and at(i + 2).kind == "num" else 0
+            if at(i + 1 + skip).kind == "num":
+                out += [_merged([t, *toks[i + 1 : i + 1 + skip]], Fraction(2))]
+                out.append(_Tok("op", (), op="*"))
+                i += 1 + skip
+                continue
+            t = _Tok("num", t.raw, value=Fraction(2), spelled=True)
+        if t.head == "ساڑھے" and (v := _int_value(at(i + 1))) is not None:
+            t, i = _merged([t, at(i + 1)], v + Fraction(1, 2)), i + 1
+        a = _int_value(t)
+        if a is None:
+            out.append(t)
+            i += 1
+            continue
+        b = _int_value(at(i + 1))
+        if t.spelled and b is not None and at(i + 1).spelled:
+            if a in range(20, 100, 10) and 1 <= b <= 9:  # "twenty five", "twenty-five"
+                t, i = _merged([t, at(i + 1)], a + b), i + 1
+            elif at(i + 1).head in _MULTIPLIER_WORDS:  # "three hundred"
+                t, i = _merged([t, at(i + 1)], a * _MULTIPLIER_WORDS[at(i + 1).head]), i + 1
+        a = _int_value(t) or Fraction(0)
+        nxt = at(i + 1)
+        if nxt.head in ("over", "بٹا") and (d := _int_value(at(i + 2))) is not None:
+            t, i = _merged(toks[i : i + 3], _ratio(a, d)), i + 2  # "one over four"
+        elif (
+            nxt.raw == ("out",)
+            and at(i + 2).raw == ("of",)
+            and (d := _int_value(at(i + 3))) is not None
+        ):
+            t, i = _merged(toks[i : i + 4], _ratio(a, d)), i + 3  # "3 out of 4"
+        elif (
+            nxt.raw == ("میں",)
+            and at(i + 2).kind == "se"
+            and (m := _int_value(at(i + 3))) is not None
+        ):
+            t, i = _merged(toks[i : i + 4], _ratio(m, a)), i + 3  # "چار میں سے تین" = 3/4
+        elif nxt.kind == "num" and nxt.unit and not t.unit and nxt.value is not None:
+            t, i = _merged([t, nxt], a * nxt.value), i + 1  # "three quarters", "دو تہائی"
+        elif nxt.raw == ("and",):  # "one and a half"
+            j = i + 3 if at(i + 2).head in ("a", "an") else n
+            frac = at(j)
+            if frac.kind == "num" and frac.unit and frac.value is not None:
+                t, i = _merged(toks[i : j + 1], a + frac.value), j
+        out.append(t)
+        i += 1
+    for k in range(1, len(out) - 1):
+        left, mid, right = out[k - 1], out[k], out[k + 1]
+        if left.kind != "num" or right.kind != "num" or mid.kind != "word":
+            continue
+        if mid.raw == ("of",) and left.value is not None and left.value.denominator != 1:
+            out[k] = _Tok("op", mid.raw, op="*")  # "half of 8", "1/4 of 12"
+        elif (
+            mid.head in _UR_POSSESSIVES and right.value is not None and right.value.denominator != 1
+        ):
+            out[k] = _Tok("op", mid.raw, op="*")  # "آٹھ کا آدھا" (half of eight)
+    return out
+
+
+def _expr_end(toks: list[_Tok], start: int) -> int:
+    end = start
+    while end + 2 < len(toks) and toks[end + 1].kind == "op" and toks[end + 2].kind == "num":
+        end += 2
+    return end
+
+
+def _expr_start(toks: list[_Tok], end: int) -> int:
+    start = end
+    while start >= 2 and toks[start - 1].kind == "op" and toks[start - 2].kind == "num":
+        start -= 2
+    return start
+
+
+def _evaluate(expr: list[_Tok]) -> Fraction | None:
+    """Exact value of ``num (op num)*`` with the usual precedence; None if it cannot be computed."""
+    values = [t.value for t in expr[::2]]
+    ops = [t.op for t in expr[1::2]]
+    first = values[0]
+    if first is None:
+        return None
+    terms: list[Fraction] = [first]
+    signs: list[str] = []
+    for op, v in zip(ops, values[1:], strict=True):
+        if v is None:
+            return None
+        if op == "*":
+            terms[-1] *= v
+        elif op == "/":
+            if v == 0:
+                return None
+            terms[-1] /= v
+        else:
+            signs.append(op)
+            terms.append(v)
+    total = terms[0]
+    for op, v in zip(signs, terms[1:], strict=True):
+        total = total + v if op == "+" else total - v
+    return total
+
+
+def _relation(left: Fraction | None, right: Fraction | None, sign: int | None) -> bool | None:
+    """sign None: equality; +1: left > right; -1: left < right; 0: not evaluated."""
+    if left is None or right is None or sign == 0:
+        return None
+    if sign is None:
+        return left == right
+    return left > right if sign > 0 else left < right
+
+
+def _dangling(toks: list[_Tok], index: int, step: int, lo: int, hi: int) -> bool:
+    """True if the number at ``index`` may continue (towards ``step``) into a quantity the parser
+    did not read — e.g. "one and a quarter", "2 of 4": the claim is then unverifiable."""
+    j = index + step
+    if not lo <= j < hi:
+        return False
+    if toks[j].kind in ("num", "op", "twice"):
+        return True
+    return toks[j].head in _JOINER_WORDS and lo <= j + step < hi and toks[j + step].kind == "num"
+
+
+@dataclass(frozen=True)
+class NumericClaim:
+    """A statement relating numbers ("2 + 3 = 5", "3/4 is bigger than 2/3", "۳/۴ ... سے بڑا")."""
+
+    tokens: tuple[str, ...]  # the claim's normalized source tokens
+    holds: bool | None  # True: exactly true; False: false; None: a relation that cannot be read
+
+    @property
+    def text(self) -> str:
+        return " ".join(self.tokens)
+
+
+class _ClaimFinder:
+    """Finds the numeric claims in one sentence (see ``numeric_claims``)."""
+
+    def __init__(self, toks: list[_Tok]) -> None:
+        self.toks = toks
+        self.found: dict[tuple[int, int], bool | None] = {}
+        # A claim never reaches across a conjunction ("and", "so", "اور"...).
+        self.clause: list[tuple[int, int]] = []
+        lo = 0
+        for k, t in enumerate(toks):
+            if t.kind == "word" and t.head in _CONJUNCTIONS:
+                self.clause.extend([(lo, k)] * (k - lo) + [(k, k)])
+                lo = k + 1
+        self.clause.extend([(lo, len(toks))] * (len(toks) - lo))
+
+    def nums(self, lo: int, hi: int) -> list[int]:
+        return [m for m in range(lo, hi) if self.toks[m].kind == "num"]
+
+    def judge(
+        self, a: tuple[int, int], b: tuple[int, int], end: int, sign: int | None, neg: bool
+    ) -> None:
+        left = _evaluate(self.toks[a[0] : a[1] + 1])
+        right = _evaluate(self.toks[b[0] : b[1] + 1])
+        holds = _relation(left, right, sign)
+        self.found[(a[0], end)] = None if holds is None else holds != neg
+
+    def unverified(self, start: int, end: int) -> None:
+        self.found[(start, end)] = None
+
+    def run(self) -> list[NumericClaim]:
+        for k, t in enumerate(self.toks):
+            lo, hi = self.clause[k]
+            if t.kind in ("eq", "cop") and lo < k < hi - 1:
+                self.equation(k, lo, hi)
+            elif t.kind == "cmp" and (t.implicit_than or t.head.isascii()):
+                self.english_comparison(k, lo, hi)
+            elif t.kind == "se" and k + 1 < hi and self.toks[k + 1].kind == "cmp":
+                self.urdu_comparison(k, lo, hi)
+            elif t.kind == "eqpost" or (t.head in _UR_COPULAS and k > lo):
+                self.urdu_equation(k, lo, hi)
+        return [
+            NumericClaim(tuple(r for tok in self.toks[s : e + 1] for r in tok.raw), holds)
+            for (s, e), holds in sorted(self.found.items())
+        ]
+
+    def equation(self, k: int, lo: int, hi: int) -> None:
+        """Equations and equalities: "2 + 3 = 5", "half of 8 is 4", "1/2 is the same as 2/4"."""
+        toks = self.toks
+        j = k + 1 + (toks[k + 1].head in ("a", "an"))
+        if toks[k - 1].kind != "num" or j >= hi or toks[j].kind != "num":
+            return
+        a = (_expr_start(toks, k - 1), k - 1)
+        b = (j, _expr_end(toks, j))
+        if _dangling(toks, a[0], -1, lo, hi) or _dangling(toks, b[1], 1, lo, hi):
+            self.unverified(a[0], b[1])
+        else:
+            self.judge(a, b, b[1], None, toks[k].neg)
+
+    def english_comparison(self, k: int, lo: int, hi: int) -> None:
+        """English comparisons: "3/4 is bigger than 2/3", "1/4 of a cake is not more than 1/2 of a
+        cake", "3 > 2"."""
+        toks = self.toks
+        left = self.nums(lo, k)
+        if toks[k].implicit_than:
+            j = k + 1
+        elif k + 1 < hi and toks[k + 1].kind == "than":
+            j = k + 2
+        else:
+            than = next((m for m in range(k + 1, hi) if toks[m].kind == "than"), None)
+            if than is not None and left and self.nums(than, hi):
+                self.unverified(left[0], hi - 1)  # e.g. "1/4 has a bigger bottom number than 1/2"
+            return
+        while j < hi and toks[j].head in _ARTICLES and toks[j].kind == "word":
+            j += 1
+        if not left:
+            return  # one-sided ("this is bigger than 1/4"): there are no two numbers to relate
+        if j >= hi or toks[j].kind != "num":
+            if self.nums(k, hi):
+                self.unverified(left[0], hi - 1)
+            return
+        i, neg = k - 1, False
+        while i >= lo and (
+            toks[i].kind in ("neg", "cop")
+            or (toks[i].kind == "word" and toks[i].head in _INTENSIFIERS)
+        ):
+            neg ^= toks[i].kind == "neg" or toks[i].neg
+            i -= 1
+        a = (_expr_start(toks, left[-1]), left[-1])
+        b = (j, _expr_end(toks, j))
+        # Words between the left number and the comparison ("of the cake") must recur after the
+        # right number, so both sides measure the same thing; otherwise the claim is unreadable.
+        filler = toks[a[1] + 1 : i + 1]
+        after = toks[b[1] + 1 : b[1] + 1 + len(filler)]
+        same = all(f.kind == "word" for f in filler) and [
+            tuple(map(_stem, f.raw)) for f in filler
+        ] == [tuple(map(_stem, f.raw)) for f in after]
+        end = b[1] + len(filler)
+        if not same or _dangling(toks, a[0], -1, lo, hi) or _dangling(toks, end, 1, lo, hi):
+            self.unverified(a[0], min(max(end, b[1]), hi - 1))
+        else:
+            self.judge(a, b, end, toks[k].sign, neg)
+
+    def left_operand(self, b_start: int, lo: int) -> int | None:
+        """Urdu puts both operands first ("A، B سے بڑا"): the end of A, just before B."""
+        p = b_start - 1
+        if p >= lo and self.toks[p].kind == "comma":
+            p -= 1
+        return p if p >= lo and self.toks[p].kind == "num" else None
+
+    def urdu_comparison(self, k: int, lo: int, hi: int) -> None:
+        """Urdu comparisons: "۳/۴، ۲/۳ سے بڑا ہے" (3/4 is bigger than 2/3), negated with نہیں."""
+        toks = self.toks
+        c = k + 1
+        while c + 1 < hi and toks[c + 1].kind == "cmp":
+            c += 1  # "سے زیادہ بڑا": the last comparative carries the direction
+        neg = any(toks[m].kind == "neg" for m in range(c + 1, hi))
+        before = self.nums(lo, k)
+        if not before:
+            return
+        if toks[k - 1].kind != "num":
+            self.unverified(before[0], c)
+            return
+        b = (_expr_start(toks, k - 1), k - 1)
+        a_end = self.left_operand(b[0], lo)
+        if a_end is None:
+            if self.nums(lo, b[0]):
+                self.unverified(before[0], c)
+            return  # one-sided ("یہ ایک بٹا چار سے بڑا ہے")
+        a = (_expr_start(toks, a_end), a_end)
+        if _dangling(toks, a[0], -1, lo, hi):
+            self.unverified(a[0], c)
+        else:
+            self.judge(a, b, c, toks[c].sign, neg)
+
+    def urdu_equation(self, k: int, lo: int, hi: int) -> None:
+        """Urdu equalities: "ایک بٹا دو، دو بٹا چار کے برابر ہے"; "دو جمع تین پانچ ہے"."""
+        toks = self.toks
+        post = toks[k].kind == "eqpost"
+        j, neg = (k - 2, False) if post else (k - 1, False)
+        if post:
+            neg = any(toks[m].kind == "neg" for m in range(k + 1, hi))
+        elif j >= lo and toks[j].kind == "neg":
+            neg, j = True, j - 1
+        if j < lo or toks[j].kind != "num":
+            if post and self.nums(lo, k):
+                self.unverified(self.nums(lo, k)[0], k)
+            return
+        b = (_expr_start(toks, j), j)
+        a_end = self.left_operand(b[0], lo)
+        if a_end is None:
+            if post and self.nums(lo, b[0]):
+                self.unverified(self.nums(lo, b[0])[0], k)
+            return  # "یہ ایک بٹا چار ہے": a number is named, nothing is related to it
+        a = (_expr_start(toks, a_end), a_end)
+        if _dangling(toks, a[0], -1, lo, hi):
+            self.unverified(a[0], k)
+        else:
+            self.judge(a, b, k, None, neg)
+
+
+def _claim_sentences(text: str) -> list[str]:
+    return [s for s in (p.strip() for p in _CLAIM_SPLIT.split(text)) if s]
+
+
+def numeric_claims(text: str) -> list[NumericClaim]:
+    """Every statement in ``text`` that relates numbers, judged by exact arithmetic.
+
+    Covers equations ("2 + 3 = 5", "half of 8 is 4", "دو جمع تین پانچ ہے"), equalities ("1/2 is
+    the same as 2/4", "... کے برابر ہے") and comparisons ("3/4 is bigger than 2/3", "۳/۴، ۲/۳ سے
+    بڑا ہے"), with negation. A relation the parser cannot read exactly has ``holds=None``.
+    """
+    claims: list[NumericClaim] = []
+    for sentence in _claim_sentences(text):
+        claims.extend(_claims_and_residue(sentence)[0])
+    return claims
+
+
+def _claims_and_residue(sentence: str) -> tuple[list[NumericClaim], str]:
+    """The sentence's numeric claims, and its text with every *proven-true* claim removed.
+
+    A comparison proven by exact arithmetic needs no polarity check ("1/2 is bigger than 1/4"
+    may restate "1/4 is smaller than 1/2"); everything else in the sentence still gets one.
+    """
+    toks = _combine_numbers(_base_tokens(sentence))
+    finder = _ClaimFinder(toks)
+    claims = finder.run()
+    proven = [span for span, holds in finder.found.items() if holds]
+    residue = " ".join(
+        r
+        for k, tok in enumerate(toks)
+        if not any(lo <= k <= hi for lo, hi in proven)
+        for r in tok.raw
+    )
+    return claims, residue
+
+
+def polarity(text: str) -> tuple[int, tuple[int, ...]]:
+    """(number of negations, comparison directions in order) — e.g. "not bigger" → (1, (1,))."""
+    words = _WORD.findall(_normalize(text).replace("’", "'"))
+    negations = sum(1 for w in words if w in _NEGATORS or w.endswith("n't"))
+    directions = tuple(
+        1 if w in _MORE_WORDS else -1 for w in words if w in _MORE_WORDS or w in _LESS_WORDS
+    )
+    return negations, directions
+
+
+def _key_words(text: str) -> frozenset[str]:
+    return frozenset(w for w in content_words(text) if w not in _RELATION_WORDS)
+
+
+@dataclass(frozen=True)
+class _GroundSentence:
+    words: frozenset[str]
+    numbers: frozenset[str]  # fractions expanded, as for the grounding-wide number check
+    polarity: tuple[int, tuple[int, ...]]
+
+
+def _ground_sentences(passages: tuple[str, ...]) -> list[_GroundSentence]:
+    seen: set[str] = set()
+    out: list[_GroundSentence] = []
+    for passage in passages:
+        for sentence in _claim_sentences(passage):
+            norm = " ".join(_normalize(sentence).split())
+            if norm in seen:
+                continue
+            seen.add(norm)
+            out.append(
+                _GroundSentence(
+                    _key_words(sentence),
+                    frozenset(numeric_tokens(sentence, expand_fractions=True)),
+                    polarity(_claims_and_residue(sentence)[1]),
+                )
+            )
+    return out
+
+
+def _aligned(
+    key: frozenset[str], numbers: frozenset[str], ground: list[_GroundSentence]
+) -> list[_GroundSentence]:
+    """The grounding sentences an output sentence plausibly rephrases: they share at least two of
+    its topic words (all of them if it has fewer), or — with no topic words — its numbers."""
+    if key:
+        need = min(2, len(key))
+        return [g for g in ground if len(key & g.words) >= need]
+    if numbers:
+        need = min(2, len(numbers))
+        return [g for g in ground if len(numbers & g.numbers) >= need]
+    return []
+
+
+def _contains_verbatim(claim: NumericClaim, grounding_claim_tokens: list[tuple[str, ...]]) -> bool:
+    needle = "\x1f" + "\x1f".join(claim.tokens) + "\x1f"
+    return any(needle in "\x1f" + "\x1f".join(g) + "\x1f" for g in grounding_claim_tokens)
+
+
+def _check_consistency(passages: tuple[str, ...], output: str) -> list[GateViolation]:
+    found: list[GateViolation] = []
+    ground = _ground_sentences(passages)
+    vocab = frozenset(w for g in ground for w in g.words)
+    where: Counter[str] = Counter(w for g in ground for w in g.words)
+    home = {w: i for i, g in enumerate(ground) for w in g.words if where[w] == 1}
+
+    # 1. Arithmetic and comparisons between numbers: exactly true, or authored verbatim.
+    grounding_tokens = [
+        tuple(r for tok in _base_tokens(s) for r in tok.raw)
+        for p in passages
+        for s in _claim_sentences(p)
+    ]
+    false_claims = unread_claims = 0
+    for claim in numeric_claims(output):
+        if claim.holds or _contains_verbatim(claim, grounding_tokens):
+            continue
+        if claim.holds is None:
+            unread_claims += 1
+        else:
+            false_claims += 1
+    if false_claims:
+        found.append(
+            GateViolation(GateRule.FALSE_ARITHMETIC, f"{false_claims} false numeric claim(s)")
+        )
+    if unread_claims:
+        found.append(
+            GateViolation(
+                GateRule.UNVERIFIED_NUMERIC_CLAIM,
+                f"{unread_claims} numeric claim(s) not verifiable",
+            )
+        )
+
+    flipped = recombined = misplaced = 0
+    for sentence in _claim_sentences(output):
+        # 2. Polarity: negations and comparison directions match a passage sentence it rephrases
+        #    (or two, merged into one sentence, in either order).
+        sig = polarity(_claims_and_residue(sentence)[1])
+        aligned = _aligned(
+            _key_words(sentence) & vocab, frozenset(numeric_tokens(sentence)), ground
+        )
+        if aligned:
+            sigs = {g.polarity for g in aligned}
+            sigs |= {
+                (a.polarity[0] + b.polarity[0], a.polarity[1] + b.polarity[1])
+                for a in aligned
+                for b in aligned
+                if a is not b
+            }
+            flipped += sig not in sigs
+        elif sig != (0, ()):
+            flipped += 1  # a negation or comparison with no passage to check it against
+        for clause in _CLAUSE_SPLIT.split(sentence):
+            # 3. Recombination: words that only one passage sentence uses tie a clause to that
+            #    sentence. A clause tied to several may join whole sentences (a title run into the
+            #    next line) but may not splice parts of two: "the top number shows the total".
+            key = _key_words(clause) & vocab
+            homes = {home[w] for w in key if w in home}
+            partial = [h for h in homes if not ground[h].words <= key]
+            if len(homes) > 1 and len(partial) > 1:
+                recombined += 1
+                continue
+            # 4. Number provenance per clause: its numbers belong to the sentence it rephrases.
+            numbers = set(numeric_tokens(clause))
+            if not numbers or not key:
+                continue
+            if homes:
+                sources = [ground[h] for h in homes]
+            else:
+                sources = _aligned(key, frozenset(), ground) or [g for g in ground if key & g.words]
+            allowed = {n for g in sources for n in g.numbers}
+            misplaced += bool(numbers - allowed)
+    if flipped:
+        found.append(
+            GateViolation(
+                GateRule.POLARITY_MISMATCH,
+                f"{flipped} sentence(s) differ in negation or comparison direction",
+            )
+        )
+    if recombined:
+        found.append(
+            GateViolation(
+                GateRule.RECOMBINED_CLAUSE, f"{recombined} clause(s) recombine separate passages"
+            )
+        )
+    if misplaced:
+        found.append(
+            GateViolation(
+                GateRule.MISPLACED_NUMBER,
+                f"{misplaced} clause(s) with a number from another passage",
+            )
+        )
+    return found
+
+
+_SENTENCE_PIECES = re.compile(r"[^.!?۔؟\n]+[.!?۔؟]*")
+
+
+def _sentence_key(sentence: str) -> str:
+    return " ".join(_normalize(sentence).split()).strip(" .!?۔؟")
+
+
+def _unauthored_sentences(norm_output: str, passages: tuple[str, ...]) -> str:
+    """The output's sentences that are not an exact copy of a passage sentence, joined."""
+    authored = {
+        _sentence_key(m.group(0)) for text in passages for m in _SENTENCE_PIECES.finditer(text)
+    }
+    return " ".join(
+        m.group(0)
+        for m in _SENTENCE_PIECES.finditer(norm_output)
+        if _sentence_key(m.group(0)) not in authored
+    )
+
+
 def unverifiable(detail: str) -> GateVerdict:
     """The verdict when grounding cannot be checked at all: refuse (serve the authored text)."""
     return GateVerdict(accepted=False, violations=(GateViolation(GateRule.UNVERIFIABLE, detail),))
@@ -778,6 +1538,9 @@ def gate(
                 GateRule.UNGROUNDED_CLAIM, f"{len(claims)} claim word(s) not in grounding"
             )
         )
+    # Semantic consistency: arithmetic, polarity, recombination, per-sentence number provenance.
+    if text:
+        violations.extend(_check_consistency(prompt.texts, text))
 
     # -- answer leak -----------------------------------------------------------------------
     violations.extend(_check_answer_leak(lesson, text, grounding, ctx))
@@ -813,9 +1576,14 @@ def gate(
         violations.append(GateViolation(GateRule.URL, "link or domain"))
     if any(p.search(norm) for p in _CONTACT_PATTERNS):
         violations.append(GateViolation(GateRule.CONTACT_INFO, "contact detail or handle"))
-    if any(p.search(norm) for p in _PERSONAL_DATA_PATTERNS):
+    # The harm-word lists below would also refuse the curriculum's own safety teaching ("Some
+    # secrets are good…", "Never write your address…"). A sentence the output repeats exactly from
+    # a passage is the authored text itself, so only the other sentences are checked. A reworded
+    # sentence gets no exemption: it is refused and the child sees the authored text.
+    unauthored = _unauthored_sentences(norm, prompt.texts)
+    if any(p.search(unauthored) for p in _PERSONAL_DATA_PATTERNS):
         violations.append(GateViolation(GateRule.PERSONAL_DATA_REQUEST, "asks for personal data"))
-    if any(p.search(norm) for p in _DISALLOWED_PATTERNS):
+    if any(p.search(unauthored) for p in _DISALLOWED_PATTERNS):
         violations.append(GateViolation(GateRule.DISALLOWED_CONTENT, "disallowed content"))
     elif _ungrounded_match(_GROUNDED_ONLY_PATTERNS, norm, grounding):
         violations.append(GateViolation(GateRule.DISALLOWED_CONTENT, "ungrounded sensitive topic"))

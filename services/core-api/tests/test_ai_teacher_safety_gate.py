@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import dataclasses
 import json
+import re
 from pathlib import Path
 
 import pytest
@@ -240,6 +241,225 @@ def test_output_with_no_grounding_is_unverifiable_and_refused(lesson: LessonView
 
 def test_every_rule_maps_to_a_dimension() -> None:
     assert set(g.RULE_DIMENSION) == set(g.GateRule)
+
+
+# ---------------------------------------------------------------- semantic consistency
+#
+# A misstatement built only from grounded words passes every lexical rule above. These pin the
+# semantic-consistency rules: false_arithmetic, unverified_numeric_claim, polarity_mismatch,
+# recombined_clause, misplaced_number (all in the grounding dimension).
+
+
+def _grounded(lesson: LessonView, *texts: str, locale: str = "en") -> g.GroundedPrompt:
+    """A prompt over arbitrary authored passages (the rules are independent of the lesson)."""
+    passages = tuple(g.GroundingPassage(f"lesson.test[{i}]", t) for i, t in enumerate(texts))
+    return g.GroundedPrompt(lesson.lesson_id, lesson.objective_code, locale, "senior", passages)
+
+
+def _semantic_rules(
+    lesson: LessonView, grounding: tuple[str, ...], output: str, locale: str = "en"
+) -> tuple[str, ...]:
+    return g.gate(lesson, _grounded(lesson, *grounding, locale=locale), output).rules
+
+
+_SEMANTIC = {
+    "false_arithmetic",
+    "unverified_numeric_claim",
+    "polarity_mismatch",
+    "recombined_clause",
+    "misplaced_number",
+}
+
+
+@pytest.mark.parametrize(
+    ("text", "holds"),
+    [
+        ("3/4 is bigger than 2/3", True),
+        ("2/3 is bigger than 3/4", False),
+        ("1/4 is not bigger than 1/2", True),
+        ("1/4 is smaller than 1/2", True),
+        ("5 is fewer than 3", False),
+        ("2 + 3 = 5", True),
+        ("2 + 3 = 6", False),
+        ("2 + 3 x 4 = 14", True),
+        ("half of 8 is 4", True),
+        ("half of 8 is 3", False),
+        ("a quarter of 12 is 3", True),
+        ("three quarters is more than a half", True),
+        ("one and a half is smaller than one", False),
+        ("twenty five is less than twenty", False),
+        ("1/2 is the same as 2/4", True),
+        ("0.5 is equal to 1/2", True),
+        ("1/2 isn't 2/4", False),
+        ("1/4 of the cake is bigger than 1/2 of the cake", False),
+        ("3 > 2", True),
+        ("3 < 2", False),
+        # Urdu, with Eastern-Arabic digits and the Urdu comparison words
+        ("۳/۴، ۲/۳ سے بڑا ہے", True),
+        ("۲/۳، ۳/۴ سے بڑا ہے", False),
+        ("۲/۳، ۳/۴ سے بڑا نہیں ہے", True),
+        ("ایک بٹا چار، ایک بٹا دو سے چھوٹی ہے", True),
+        ("پانچ، تین سے کم ہے", False),
+        ("تین، دو سے زیادہ ہے", True),
+        ("دو جمع تین پانچ ہے", True),
+        ("دو جمع تین چھ ہے", False),
+        ("آٹھ کا آدھا چار ہے", True),
+        ("ایک بٹا دو، دو بٹا چار کے برابر ہے", True),
+        ("ایک بٹا دو، ایک بٹا چار کے برابر ہے", False),
+        # Relations the parser cannot read exactly are unverifiable, never assumed true.
+        ("1/4 has a bigger bottom number than 1/2", None),
+        ("2 of 4 is 1/2", None),
+        ("1/0 is 1", None),
+    ],
+)
+def test_numeric_claims_are_judged_by_exact_arithmetic(text: str, holds: bool | None) -> None:
+    claims = g.numeric_claims(text)
+    assert [c.holds for c in claims] == [holds], [(c.text, c.holds) for c in claims]
+
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "This is one over four, and we write it as 1/4.",
+        "Cut a cake into four equal parts. You eat one part.",
+        "Which fraction is bigger: 1/2 or 1/4?",
+        "ایک کیک کو چار برابر حصوں میں کاٹیں۔ یہ ایک بٹا چار ہے۔",
+    ],
+)
+def test_naming_a_number_is_not_a_claim(text: str) -> None:
+    assert g.numeric_claims(text) == []
+
+
+def test_false_arithmetic_from_grounded_numbers_is_refused(lesson: LessonView) -> None:
+    grounding = ("Half of 8 is 4.", "A quarter of 8 is 2.")
+    # Every number is grounded, so only exact arithmetic can see that this is false.
+    assert "false_arithmetic" in _semantic_rules(lesson, grounding, "Half of 8 is 2.")
+    true_restatement = "A quarter of 8 is 2, and half of 8 is 4."
+    assert g.gate(lesson, _grounded(lesson, *grounding), true_restatement).accepted
+
+
+def test_urdu_false_arithmetic_is_refused(lesson: LessonView) -> None:
+    grounding = ("آٹھ کا آدھا چار ہے۔", "آٹھ کی چوتھائی دو ہے۔")
+    assert "false_arithmetic" in _semantic_rules(lesson, grounding, "آٹھ کا آدھا دو ہے۔", "ur")
+    ok = g.gate(lesson, _grounded(lesson, *grounding, locale="ur"), "آٹھ کی چوتھائی دو ہے۔")
+    assert ok.accepted, ok.violations
+    # Eastern-Arabic digits and the Urdu comparison word: 2/3 is not bigger than 3/4.
+    digits = ("۳/۴، ۲/۳ سے بڑا ہے۔",)
+    assert "false_arithmetic" in _semantic_rules(lesson, digits, "۲/۳، ۳/۴ سے بڑا ہے۔", "ur")
+
+
+def test_a_claim_authored_verbatim_is_not_refused_but_a_variant_is(lesson: LessonView) -> None:
+    grounding = ("1/4 has a bigger bottom number than 1/2.",)
+    verbatim = _semantic_rules(lesson, grounding, "1/4 has a bigger bottom number than 1/2.")
+    assert not set(verbatim) & _SEMANTIC, verbatim
+    variant = "1/2 has a bigger bottom number than 1/4."
+    assert "unverified_numeric_claim" in _semantic_rules(lesson, grounding, variant)
+
+
+@pytest.mark.parametrize(
+    ("grounding", "output", "locale"),
+    [
+        ("Each part is a fraction.", "Each part is not a fraction.", "en"),
+        ("A whole is not a fraction.", "A whole is a fraction.", "en"),
+        ("Equal parts never have different sizes.", "Equal parts have different sizes.", "en"),
+        (
+            "A bigger bottom number means more, smaller pieces.",
+            "A smaller bottom number means more, bigger pieces.",  # same words, swapped
+            "en",
+        ),
+        (
+            "A bigger bottom number means more, smaller pieces.",
+            "A bigger bottom number means less, smaller pieces.",
+            "en",
+        ),
+        (
+            "Greater numbers have more tens. Fewer tens make a smaller number.",
+            "Greater numbers have fewer tens.",
+            "en",
+        ),
+        ("ہر حصہ ایک کسر ہے۔", "ہر حصہ ایک کسر نہیں ہے۔", "ur"),
+        ("زیادہ ٹکڑے مطلب چھوٹے ٹکڑے۔", "زیادہ ٹکڑے مطلب بڑے ٹکڑے۔", "ur"),
+        ("زیادہ ٹکڑے مطلب چھوٹے ٹکڑے۔", "کم ٹکڑے مطلب چھوٹے ٹکڑے۔", "ur"),
+        ("بڑا نمبر مطلب چھوٹے ٹکڑے۔", "چھوٹا نمبر مطلب بڑے ٹکڑے۔", "ur"),
+    ],
+)
+def test_polarity_flips_are_refused(
+    lesson: LessonView, grounding: str, output: str, locale: str
+) -> None:
+    assert "polarity_mismatch" in _semantic_rules(lesson, (grounding,), output, locale)
+
+
+@pytest.mark.parametrize(
+    ("grounding", "output", "locale"),
+    [
+        # Reworded, comparison directions kept in order.
+        (
+            ("A bigger bottom number means more, smaller pieces.",),
+            "When the bottom number is bigger, there are more, smaller pieces.",
+            "en",
+        ),
+        # Two authored sentences merged into one.
+        (
+            ("Each part is a fraction.", "A whole is not a fraction."),
+            "Each part is a fraction, but a whole is not a fraction.",
+            "en",
+        ),
+        # A comparison proven by exact arithmetic may swap its operands and its direction.
+        (("So 1/4 is smaller than 1/2.",), "So 1/2 is bigger than 1/4.", "en"),
+        (("ہر حصہ ایک کسر ہے۔",), "ہر ایک حصہ ایک کسر ہے۔", "ur"),
+    ],
+)
+def test_polarity_preserving_rephrases_pass(
+    lesson: LessonView, grounding: tuple[str, ...], output: str, locale: str
+) -> None:
+    rules = _semantic_rules(lesson, grounding, output, locale)
+    assert not set(rules) & _SEMANTIC, rules
+
+
+def test_a_negation_with_nothing_to_check_it_against_is_refused(lesson: LessonView) -> None:
+    rules = _semantic_rules(lesson, ("Each part is a fraction.",), "Do not cut the cake.")
+    assert "polarity_mismatch" in rules
+
+
+def test_recombining_two_passage_sentences_in_one_clause_is_refused(lesson: LessonView) -> None:
+    # The former known gap: numerator and denominator roles swapped using only grounded words.
+    swap = "The top number shows the total. The bottom number counts the parts."
+    assert "recombined_clause" in _rules(lesson, swap)
+    urdu_swap = "اوپر کا نمبر کل حصے بتاتا ہے۔ نیچے کا نمبر حصے گنتا ہے۔"
+    assert "recombined_clause" in _rules(lesson, urdu_swap, locale="ur")
+    # Whole sentences may still be joined — with "and", or run together without punctuation.
+    joined = "The top number counts the parts and the bottom number shows the total."
+    assert g.gate(lesson, _prompt(lesson, ait.ExplanationStyle.DIRECT), joined).accepted
+    run_on = "Introduction to Fractions We split a whole into equal parts."
+    assert g.gate(lesson, _prompt(lesson, ait.ExplanationStyle.DIRECT), run_on).accepted
+
+
+def test_a_number_moved_to_another_sentence_is_refused(lesson: LessonView) -> None:
+    # "four" is grounded (the cake has four parts) but not in the sentence about what you eat.
+    moved = "Cut a cake into four equal parts. You eat four parts."
+    assert "misplaced_number" in _rules(lesson, moved, style="worked_example_led")
+    urdu = "ایک کیک کو چار برابر حصوں میں کاٹیں۔ چار حصہ کھایا۔"
+    assert "misplaced_number" in _rules(lesson, urdu, style="worked_example_led", locale="ur")
+    kept = "Cut a cake into four equal parts. You eat one part."
+    assert "misplaced_number" not in _rules(lesson, kept, style="worked_example_led")
+
+
+def test_fraction_words_are_numbers_too(lesson: LessonView) -> None:
+    # Without these, "a third" would carry a number the provenance check never saw.
+    assert "ungrounded_number" in _rules(lesson, "You eat a third of the cake.")
+    assert set(g.numeric_tokens("three quarters")) == {"3", "1/4", "3/4"}
+    assert set(g.numeric_tokens("دو تہائی")) == {"2", "1/3", "2/3"}
+
+
+def test_semantic_rule_details_never_echo_the_output(lesson: LessonView) -> None:
+    grounding = ("Half of 8 is 4.", "Each part is a fraction.")
+    output = "Half of 8 is 3. Each part is not a fraction."
+    verdict = g.gate(lesson, _grounded(lesson, *grounding), output)
+    assert {"false_arithmetic", "polarity_mismatch"} <= set(verdict.rules)
+    for v in verdict.violations:
+        if v.rule.value in _SEMANTIC:  # a count and a rule-level description only
+            assert re.fullmatch(r"\d+ [a-z ()-]+", v.detail), v.detail
+            assert not {"half", "part", "fraction"} & set(v.detail.split())
 
 
 # ---------------------------------------------------------------- golden set (evaluation harness)
