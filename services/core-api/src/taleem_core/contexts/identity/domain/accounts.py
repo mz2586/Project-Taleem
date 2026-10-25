@@ -130,6 +130,9 @@ class GuardianAccount:
     failed_attempts: int = 0
     created_at: float = 0.0
     version: int = 1
+    # Wrong recovery-code attempts (domain/recovery.py). Its own counter, so passphrase guesses
+    # never use up the recovery path a guardian who forgot their passphrase needs (alembic 0021).
+    recovery_failed_attempts: int = 0
     # "" (real) or "demo" (DEMO_COHORT_CONTRACT §2). Set only by the demo seeder through
     # ``IdentityService.assign_family_cohort``; no HTTP route can set, clear or change it.
     cohort: str = ""

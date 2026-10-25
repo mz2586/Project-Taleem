@@ -124,11 +124,27 @@ class Settings:
             "TALEEM_CLIENT_IP_HEADER", "x-real-ip" if os.environ.get("VERCEL") == "1" else ""
         )
     )
-    # AI Teacher generative tier provider slot (Phase D). "" => inert (refuses every call);
-    # "stub" => the deterministic offline stub (dev/test only, refused in production); any other
-    # value names a provider but is STILL inert — no network adapter exists until FD-03 is decided.
+    # AI Teacher generative tier provider slot (Phase D). "" => no generative tier at all;
+    # "stub" => the deterministic offline stub (dev/test only, refused in production);
+    # "anthropic" => the FD-03 Claude adapter (ports/llm_anthropic.py), built ONLY when every FD-03
+    # approval setting below is present (production refuses to boot on a partial set; elsewhere the
+    # app stays on the deterministic engine); any other value names a provider but is inert.
     # The tier itself is off unless the `ai_teacher.generative_rephrase` flag is enabled.
     ai_provider: str = field(default_factory=lambda: _get("TALEEM_AI_PROVIDER", ""))
+    # FD-03 approval settings for TALEEM_AI_PROVIDER=anthropic. Unset in every environment until the
+    # founder records the six FD-03 approvals (docs/decisions/FD-03-ai-provider-residency.md).
+    # A dedicated key variable: the SDK's ANTHROPIC_API_KEY / profile discovery is never used.
+    ai_anthropic_api_key: str = field(
+        default_factory=lambda: _get("TALEEM_AI_ANTHROPIC_API_KEY", ""), repr=False
+    )
+    ai_inference_geo: str = field(default_factory=lambda: _get("TALEEM_AI_INFERENCE_GEO", ""))
+    ai_zdr_confirmed: str = field(default_factory=lambda: _get("TALEEM_AI_ZDR_CONFIRMED", ""))
+    ai_fd03_approval_ref: str = field(
+        default_factory=lambda: _get("TALEEM_AI_FD03_APPROVAL_REF", "")
+    )
+    ai_timeout_seconds: float = field(
+        default_factory=lambda: float(_get_int("TALEEM_AI_TIMEOUT_SECONDS", 15))
+    )
     # Per-learner, per-UTC-day inference quota for the generative tier (free-tier sustainability).
     # Exhaustion serves the templated authored engine — never an error. Real values await FD-07.
     ai_learner_daily_calls: int = field(
@@ -136,6 +152,11 @@ class Settings:
     )
     ai_learner_daily_tokens: int = field(
         default_factory=lambda: _get_int("TALEEM_AI_LEARNER_DAILY_TOKENS", 20_000)
+    )
+    # Per-learner, per-UTC-day cost cap in micro-USD (the FD-07 envelope). 0 => no cost cap; a real
+    # provider in production requires a positive value.
+    ai_learner_daily_cost_micros: int = field(
+        default_factory=lambda: _get_int("TALEEM_AI_LEARNER_DAILY_COST_MICROS", 0)
     )
     # Safeguarding "acknowledge within" thresholds, JSON {"T1": seconds, ...}. UNSET by default and
     # deliberately so: the SLA is an owner decision (FD-06); no number is invented here.
@@ -224,6 +245,16 @@ def _assert_production_safe(settings: Settings) -> None:
         problems.append("TALEEM_OFFLINE_SIGNING_SEED is the built-in default (forgeable packages)")
     if settings.ai_provider.strip().lower() == "stub":
         problems.append("TALEEM_AI_PROVIDER=stub (a scripted test gateway; never for children)")
+    if settings.ai_provider.strip().lower() == "anthropic":
+        # FD-03: a real provider in production needs every approval setting — never a partial set.
+        from ..ports.llm_anthropic import settings_problems
+
+        problems.extend(f"TALEEM_AI_PROVIDER=anthropic: {p}" for p in settings_problems(settings))
+        if settings.ai_learner_daily_cost_micros <= 0:
+            problems.append(
+                "TALEEM_AI_PROVIDER=anthropic: TALEEM_AI_LEARNER_DAILY_COST_MICROS is unset "
+                "(the FD-07 per-learner cost envelope)"
+            )
     if problems:
         raise InsecureConfigurationError(
             "refusing to start in production with insecure defaults: " + "; ".join(problems)

@@ -1,12 +1,14 @@
 "use client";
 // Family settings — the guardian's control room. Every identity capability a guardian has is here:
 // the family code, enrolling a child, consent per scope (grant, change, withdraw — confirmed first),
-// the consent history, joining a teacher's class (shares progress), PIN reset / unlock, and the
+// the consent history, joining a teacher's class (shares progress), PIN reset / unlock, the
+// guardian's own recovery codes (how many are left; make a new set, shown once), and the
 // family audit trail. The consent form is
 // ./ConsentForm.tsx; the rules behind every control are in lib/guardian/* and unit-tested.
 import { useCallback, useEffect, useId, useMemo, useState } from "react";
 
 import { FormError, FormNotice, PinField, TextField } from "@/components/form";
+import { RecoveryCodesPanel } from "@/components/guardian/RecoveryCodesPanel";
 import { RequireSession } from "@/components/RequireSession";
 import { Skeleton } from "@/components/student/ui";
 import { Button } from "@/design-system/Button";
@@ -18,11 +20,19 @@ import { identityErrorKey } from "@/lib/guardian/errors";
 import { formatDateTime, formatList, isoDateTime } from "@/lib/guardian/format";
 import { GRADE_LEVELS, gradeBandFor, gradeOption, nameProblem, pinProblem, sanitizePin } from "@/lib/guardian/learners";
 import { scopeCopy } from "@/lib/guardian/consent";
+import { recoveryStatusView } from "@/lib/guardian/recovery";
 import { LOCALE_META, SUPPORTED_LOCALES, isSupportedLocale, type Locale } from "@/lib/i18n/config";
 import type { MessageKey } from "@/lib/i18n/messages";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { classifyLoadError, type LoadFailure } from "@/lib/student/journey";
-import type { AuditEvent, ConsentStateWithHistory, GuardianProfile, Learner, PolicyDescriptor } from "@/lib/session/types";
+import type {
+  AuditEvent,
+  ConsentStateWithHistory,
+  GuardianProfile,
+  Learner,
+  PolicyDescriptor,
+  RecoveryStatus,
+} from "@/lib/session/types";
 
 import { GuardianLoadFailure } from "../GuardianLoadFailure";
 import { GuardianShell } from "../GuardianShell";
@@ -74,6 +84,98 @@ function FamilyCodeCard({ code }: { code: string }) {
       >
         {code}
       </strong>
+    </section>
+  );
+}
+
+function RecoverySection({
+  status,
+  email,
+  onChanged,
+}: {
+  status: RecoveryStatus | undefined;
+  email: string;
+  onChanged: (status: RecoveryStatus) => void;
+}) {
+  const { t, locale } = useLocale();
+  const [passphrase, setPassphrase] = useState("");
+  const [fieldError, setFieldError] = useState<MessageKey | null>(null);
+  const [error, setError] = useState<MessageKey | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [fresh, setFresh] = useState<{ codes: string[]; at: number } | null>(null);
+  const view = recoveryStatusView(status);
+
+  async function submit(event: React.FormEvent) {
+    event.preventDefault();
+    setError(null);
+    if (!passphrase) {
+      setFieldError("guardian.recovery.passphraseEmpty");
+      return;
+    }
+    setFieldError(null);
+    setBusy(true);
+    try {
+      const issued = await familyApi.regenerateRecoveryCodes(passphrase);
+      setPassphrase("");
+      setFresh({ codes: issued.recovery_codes, at: issued.recovery.generated_at ?? Date.now() / 1000 });
+      onChanged(issued.recovery);
+    } catch (e) {
+      setError(identityErrorKey(e, "recovery-codes"));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <section id="recovery" style={sectionStyle} aria-labelledby="recovery-title">
+      <h2 id="recovery-title" style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>
+        {t("guardian.recovery.title")}
+      </h2>
+      <p style={{ margin: 0 }}>{t("guardian.recovery.intro")}</p>
+      {fresh ? (
+        <RecoveryCodesPanel
+          codes={fresh.codes}
+          t={t}
+          email={email}
+          madeAt={formatDateTime(fresh.at, locale)}
+          doneLabel={t("guardian.recovery.done")}
+          // Leaving the panel drops the only copy this page holds.
+          onDone={() => setFresh(null)}
+        />
+      ) : (
+        <>
+          <p style={{ margin: 0, color: view.tone === "ok" ? undefined : "var(--color-danger)" }}>
+            {view.tone === "ok" ? null : <span aria-hidden="true">⚠ </span>}
+            {t(view.key, view.params)}
+          </p>
+          {status?.last_used_at ? (
+            <p style={{ margin: 0, fontSize: "var(--font-size-body-min)" }}>
+              {t("guardian.recovery.lastUsed", { date: formatDateTime(status.last_used_at, locale) })}
+            </p>
+          ) : null}
+          <form onSubmit={submit} noValidate style={{ display: "grid", gap: "var(--space-2)" }}>
+            <div aria-live="polite">{error ? <FormError message={t(error)} /> : null}</div>
+            <TextField
+              id="recovery-passphrase"
+              label={t("guardian.recovery.passphrase")}
+              hint={t("guardian.recovery.makeNewHint")}
+              error={fieldError ? t(fieldError) : undefined}
+              type="password"
+              value={passphrase}
+              onChange={(e) => setPassphrase(e.target.value)}
+              autoComplete="current-password"
+            />
+            <div>
+              <Button
+                type="submit"
+                variant={view.tone === "ok" ? "ghost" : "brand"}
+                label={t("guardian.recovery.makeNew")}
+                loading={busy}
+              />
+            </div>
+          </form>
+        </>
+      )}
     </section>
   );
 }
@@ -514,6 +616,12 @@ function FamilyPage() {
       {profile ? (
         <>
           <FamilyCodeCard code={profile.guardian.family_code} />
+
+          <RecoverySection
+            status={profile.recovery}
+            email={profile.guardian.email}
+            onChanged={(recovery) => setProfile((prev) => (prev ? { ...prev, recovery } : prev))}
+          />
 
           <section style={{ display: "grid", gap: "var(--space-3)" }} aria-labelledby="learners-title">
             <h2 id="learners-title" style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>

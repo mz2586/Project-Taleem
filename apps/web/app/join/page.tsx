@@ -7,6 +7,9 @@
 //
 // The account is created in the language the guardian is reading this screen in, so the portal
 // stays in that language on their other devices.
+//
+// Then the recovery codes: the server returns them in the registration response and never again,
+// so they are shown here, before the guardian moves on, with copy/print and an "I saved them" tick.
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -14,8 +17,10 @@ import { useState } from "react";
 
 import { LanguagePicker } from "@/app/guardian/LanguagePicker";
 import { AuthShell, FormError, TextField } from "@/components/form";
+import { RecoveryCodesPanel } from "@/components/guardian/RecoveryCodesPanel";
 import { Button } from "@/design-system/Button";
 import { identityErrorKey } from "@/lib/guardian/errors";
+import { formatDateTime } from "@/lib/guardian/format";
 import type { MessageKey } from "@/lib/i18n/messages";
 import { useLocale } from "@/lib/i18n/useLocale";
 import { publicIdentityApi } from "@/lib/session/identityApi";
@@ -24,6 +29,7 @@ import { sessionStore } from "@/lib/session/store";
 export default function JoinPage() {
   const router = useRouter();
   const { t, locale } = useLocale();
+  const [codes, setCodes] = useState<{ codes: string[]; email: string; at: number } | null>(null);
   const [displayName, setDisplayName] = useState("");
   const [email, setEmail] = useState("");
   const [passphrase, setPassphrase] = useState("");
@@ -37,12 +43,36 @@ export default function JoinPage() {
     try {
       const envelope = await publicIdentityApi.registerGuardian({ email, passphrase, displayName, locale });
       sessionStore.adopt(envelope);
-      router.replace("/guardian/family");
+      if (envelope.recovery_codes?.length) {
+        setCodes({
+          codes: envelope.recovery_codes,
+          email: envelope.guardian?.email ?? email,
+          at: envelope.recovery?.generated_at ?? Date.now() / 1000,
+        });
+        setPassphrase("");
+      } else {
+        router.replace("/guardian/family");
+      }
     } catch (e) {
       setError(identityErrorKey(e, "register"));
     } finally {
       setBusy(false);
     }
+  }
+
+  if (codes) {
+    return (
+      <AuthShell title={t("guardian.recovery.title")} subtitle={t("auth.join.codesIntro")}>
+        <RecoveryCodesPanel
+          codes={codes.codes}
+          t={t}
+          email={codes.email}
+          madeAt={formatDateTime(codes.at, locale)}
+          doneLabel={t("guardian.recovery.continue")}
+          onDone={() => router.replace("/guardian/family")}
+        />
+      </AuthShell>
+    );
   }
 
   return (

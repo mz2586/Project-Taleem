@@ -9,15 +9,24 @@ that issues an UPDATE or DELETE against either table.
 
 from __future__ import annotations
 
-from sqlalchemy import select
+from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
 
 from ...domain.accounts import AccountStatus, GuardianAccount, LearnerAccount, roster_key
 from ...domain.audit import AuditAction, AuditEvent
 from ...domain.consent import ConsentAction, ConsentEvidence, ConsentRecord, ConsentScope
+from ...domain.recovery import RecoveryCode
 from ...domain.sessions import RefreshToken
 from ...domain.staff import StaffAccount
-from .models import AuditRow, ConsentRow, GuardianRow, LearnerRow, RefreshTokenRow, StaffRow
+from .models import (
+    AuditRow,
+    ConsentRow,
+    GuardianRow,
+    LearnerRow,
+    RecoveryCodeRow,
+    RefreshTokenRow,
+    StaffRow,
+)
 
 # ------------------------------------------------------------------------------------- mapping
 
@@ -34,6 +43,7 @@ def _to_guardian(row: GuardianRow) -> GuardianAccount:
         failed_attempts=row.failed_attempts,
         created_at=row.created_at,
         version=row.version,
+        recovery_failed_attempts=row.recovery_failed_attempts or 0,
         cohort=row.cohort or "",
     )
 
@@ -124,6 +134,7 @@ class SqlGuardianRepository:
                 locale=account.locale,
                 status=account.status.value,
                 failed_attempts=account.failed_attempts,
+                recovery_failed_attempts=account.recovery_failed_attempts,
                 created_at=account.created_at,
                 cohort=account.cohort,
             )
@@ -157,6 +168,7 @@ class SqlGuardianRepository:
         row.locale = account.locale
         row.status = account.status.value
         row.failed_attempts = account.failed_attempts
+        row.recovery_failed_attempts = account.recovery_failed_attempts
         # ``cohort`` is deliberately not written here: only ``set_family_cohort`` changes it.
 
     def set_family_cohort(self, guardian_ref: str, cohort: str) -> int:
@@ -196,6 +208,10 @@ class SqlGuardianRepository:
         ).first()
         if left is not None:
             raise ValueError("guardian still has learner accounts; erase them first")
+        # Explicit as well as ``ON DELETE CASCADE``: SQLite does not enforce foreign keys here.
+        self._session.execute(
+            delete(RecoveryCodeRow).where(RecoveryCodeRow.guardian_ref == guardian_ref)
+        )
         self._session.delete(row)
         return True
 
@@ -395,6 +411,63 @@ class SqlRefreshTokenRepository:
         for row in rows:
             row.revoked_at = now
         return len(rows)
+
+
+def _to_recovery(row: RecoveryCodeRow) -> RecoveryCode:
+    return RecoveryCode(
+        code_id=row.code_id,
+        guardian_ref=row.guardian_ref,
+        code_hash=row.code_hash,
+        created_at=row.created_at,
+        consumed_at=row.consumed_at,
+    )
+
+
+class SqlRecoveryCodeRepository:
+    """A guardian's current recovery-code set. Replacing it deletes the previous rows."""
+
+    def __init__(self, session: Session) -> None:
+        self._session = session
+
+    def replace_for(self, guardian_ref: str, codes: list[RecoveryCode]) -> int:
+        """Delete the current set and store ``codes``; returns how many old codes were deleted.
+
+        The DELETE autoflushes first, so a guardian row added in this same transaction (at
+        registration) is inserted before the codes that reference it.
+        """
+        result = self._session.execute(
+            delete(RecoveryCodeRow).where(RecoveryCodeRow.guardian_ref == guardian_ref)
+        )
+        for code in codes:
+            self._session.add(
+                RecoveryCodeRow(
+                    code_id=code.code_id,
+                    guardian_ref=code.guardian_ref,
+                    code_hash=code.code_hash,
+                    created_at=code.created_at,
+                    consumed_at=code.consumed_at,
+                )
+            )
+        return int(getattr(result, "rowcount", 0) or 0)
+
+    def for_guardian(self, guardian_ref: str) -> list[RecoveryCode]:
+        rows = self._session.scalars(
+            select(RecoveryCodeRow)
+            .where(RecoveryCodeRow.guardian_ref == guardian_ref)
+            .order_by(RecoveryCodeRow.created_at, RecoveryCodeRow.code_id)
+        ).all()
+        return [_to_recovery(row) for row in rows]
+
+    def save(self, code: RecoveryCode) -> None:
+        row = self._session.get(RecoveryCodeRow, code.code_id)
+        if row is not None:
+            row.consumed_at = code.consumed_at
+
+    def delete_for(self, guardian_ref: str) -> int:
+        result = self._session.execute(
+            delete(RecoveryCodeRow).where(RecoveryCodeRow.guardian_ref == guardian_ref)
+        )
+        return int(getattr(result, "rowcount", 0) or 0)
 
 
 def _to_staff(row: StaffRow) -> StaffAccount:

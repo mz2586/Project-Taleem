@@ -24,6 +24,7 @@ from ....auth.dependencies import authorize
 from ....auth.jwt_verifier import Claims
 from ....platform.errors import Problem, forbidden
 from ..application.identity_service import IdentityService
+from ..domain.accounts import InvalidAccountError, normalise_email
 from ..domain.consent import CURRENT_POLICY_VERSION, ConsentEvidence, ConsentScope
 from .rate_limit import Limiter, RateLimiter, RateLimitStore, SharedRateLimiter
 
@@ -33,6 +34,13 @@ SIGN_IN_LIMIT = 10
 SIGN_IN_WINDOW_SECONDS = 60.0
 ROSTER_LIMIT = 20
 ROSTER_WINDOW_SECONDS = 60.0
+# Passphrase recovery with a one-time code. Per client, like sign-in but tighter; and per account
+# (keyed by the normalised email, digested before storage), so a distributed guesser gets no more
+# tries at one family than a single client would. The durable recovery lockout sits underneath.
+RECOVER_LIMIT = 5
+RECOVER_WINDOW_SECONDS = 60.0
+RECOVER_ACCOUNT_LIMIT = 5
+RECOVER_ACCOUNT_WINDOW_SECONDS = 900.0
 
 
 # Request-size bounds below are deliberately looser than the domain rules they sit in front of, so
@@ -54,6 +62,19 @@ class GuardianRegisterIn(BaseModel):
 class GuardianSignInIn(BaseModel):
     email: str = Field(min_length=3, max_length=254)
     passphrase: str = Field(min_length=1, max_length=256)
+
+
+class GuardianRecoverIn(BaseModel):
+    """Email + one recovery code + the new passphrase. Never logged; the code is never echoed."""
+
+    model_config = ConfigDict(populate_by_name=True)
+    email: str = Field(min_length=1, max_length=320)
+    code: str = Field(min_length=1, max_length=64)
+    new_passphrase: str = Field(alias="newPassphrase", max_length=_PASSPHRASE_BOUND)
+
+
+class RecoveryCodesIn(BaseModel):
+    passphrase: str = Field(min_length=1, max_length=_PASSPHRASE_BOUND)
 
 
 class LearnerCreateIn(BaseModel):
@@ -181,6 +202,10 @@ def build_identity_router(
 
     sign_in_limiter = _limiter("identity.sign_in", SIGN_IN_LIMIT, SIGN_IN_WINDOW_SECONDS)
     roster_limiter = _limiter("identity.roster", ROSTER_LIMIT, ROSTER_WINDOW_SECONDS)
+    recover_limiter = _limiter("identity.recover", RECOVER_LIMIT, RECOVER_WINDOW_SECONDS)
+    recover_account_limiter = _limiter(
+        "identity.recover_account", RECOVER_ACCOUNT_LIMIT, RECOVER_ACCOUNT_WINDOW_SECONDS
+    )
     ip_header = client_ip_header.strip().lower()
 
     def _client_key(request: Request) -> str:
@@ -189,6 +214,12 @@ def build_identity_router(
             if forwarded:
                 return forwarded[:64]
         return request.client.host if request.client else "unknown"
+
+    def _account_key(email: str) -> str:
+        try:
+            return normalise_email(email)
+        except InvalidAccountError:
+            return email.strip().lower()[:254]
 
     # ------------------------------------------------------------------ public (token-issuing)
 
@@ -206,6 +237,19 @@ def build_identity_router(
     def sign_in_guardian(body: GuardianSignInIn, request: Request) -> dict[str, Any]:
         sign_in_limiter.check(_client_key(request))
         return service.sign_in_guardian(email=body.email, passphrase=body.passphrase)
+
+    @router.post("/guardians:recover")
+    def recover_guardian(body: GuardianRecoverIn, request: Request) -> dict[str, Any]:
+        """Forgot passphrase: one recovery code sets a new one (no email involved).
+
+        Every failure is the sign-in ``401``. Limited per client and per account before any KDF
+        work is done.
+        """
+        recover_limiter.check(_client_key(request))
+        recover_account_limiter.check(_account_key(body.email))
+        return service.recover_guardian(
+            email=body.email, code=body.code, new_passphrase=body.new_passphrase
+        )
 
     @router.post("/learners:roster")
     def learner_roster(body: RosterIn, request: Request) -> dict[str, Any]:
@@ -249,6 +293,18 @@ def build_identity_router(
     def me(claims: Claims = Depends(claims_dependency)) -> dict[str, Any]:
         authorize(claims, "read", "identity.self")
         return service.guardian_profile(_guardian_ref(claims))
+
+    @router.post("/guardians/me/recovery-codes")
+    def regenerate_recovery_codes(
+        body: RecoveryCodesIn, request: Request, claims: Claims = Depends(claims_dependency)
+    ) -> dict[str, Any]:
+        """A new set of recovery codes, shown once; the previous set stops working."""
+        authorize(claims, "manage", "identity.self")
+        guardian_ref = _guardian_ref(claims)
+        sign_in_limiter.check(_client_key(request))
+        return service.regenerate_recovery_codes(
+            guardian_ref=guardian_ref, passphrase=body.passphrase
+        )
 
     @router.post("/learners", status_code=201)
     def enrol_learner(

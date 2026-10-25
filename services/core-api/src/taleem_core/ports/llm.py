@@ -9,9 +9,9 @@ This module ships ONLY offline, deterministic, **NON-production** implementation
 - ``StubLLMProvider`` — the original placeholder (returns a fixed stub marker).
 - ``StubLLMGateway`` — a scripted, deterministic gateway for tests and the evaluation harness.
 
-The only "real provider" shape in the tree is ``ports/llm_inert.py``, which refuses every call: no
-network transport exists in this build. Connecting a real provider is blocked on FOUNDER_DECISIONS
-**FD-03** (inference residency + zero-retention). Neither stub may be used with real children.
+Real-provider shapes: ``ports/llm_inert.py`` refuses every call, and ``ports/llm_anthropic.py`` is
+the FD-03 Claude adapter, which refuses to construct unless every FD-03 approval setting is present
+(none is set in any environment). Neither stub may be used with real children.
 
 Every call is accounted: ``LLMResponse`` carries prompt/completion token counts and a cost in
 micro-units, and a ``CostMeter`` records one ``UsageRecord`` per call, attributed to the
@@ -40,6 +40,15 @@ class LLMRequest:
     tier: Tier
     grounding: tuple[str, ...] = ()  # RAG context: the only passages the model may rephrase
     max_output_tokens: int = 256
+    # The learner's selected option for the current item (FD-03 "sent" list), or "". A real
+    # adapter sends it only if it is one of ``selected_option_choices`` (the item's authored
+    # options, used in-process to verify it is not free text; the choices themselves are not sent).
+    selected_option: str = ""
+    selected_option_choices: tuple[str, ...] = ()
+    # Values that must never leave our infrastructure (e.g. the learner's pseudonymous ref). Used
+    # in-process by a real adapter's minimisation guard to refuse a request carrying any of them;
+    # never transmitted.
+    never_send: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -68,7 +77,16 @@ LLMProvider = LLMGateway
 
 
 class ProviderUnavailableError(RuntimeError):
-    """Raised by an adapter that cannot (or may not) serve a call; callers use templates."""
+    """Raised by an adapter that cannot (or may not) serve a call; callers use templates.
+
+    ``billed`` carries the accounting for a call the provider DID serve and charge for but whose
+    output is unusable (a refusal, a truncated reply), so the caller can still record its cost and
+    count it against the learner's quota. ``None`` when nothing was billed.
+    """
+
+    def __init__(self, message: str = "", *, billed: LLMResponse | None = None) -> None:
+        super().__init__(message)
+        self.billed = billed
 
 
 # ---------------------------------------------------------------------------- cost accounting

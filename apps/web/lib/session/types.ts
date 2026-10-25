@@ -64,10 +64,25 @@ export interface Guardian {
   created_at: number;
 }
 
+/** The guardian's recovery codes as the server reports them: counts and times, never a code. */
+export interface RecoveryStatus {
+  total: number;
+  remaining: number;
+  generated_at: number | null;
+  last_used_at: number | null;
+}
+
 export interface GuardianProfile {
   guardian: Guardian;
   learners: Learner[];
   policy_version: string;
+  recovery?: RecoveryStatus;
+}
+
+/** A fresh set of recovery codes — in the one response that created them, never again. */
+export interface RecoveryCodesIssued {
+  recovery_codes: string[];
+  recovery: RecoveryStatus;
 }
 
 export interface RosterEntry {
@@ -103,4 +118,7 @@ export interface SessionEnvelope {
   learner?: Learner;
   guardian?: Guardian;
   consent?: ConsentState;
+  /** Registration only: the first recovery codes, shown once. */
+  recovery_codes?: string[];
+  recovery?: RecoveryStatus;
 }

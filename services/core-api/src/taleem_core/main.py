@@ -193,6 +193,7 @@ from .ports.llm import (
     LLMGateway,
     StubLLMGateway,
 )
+from .ports.llm_anthropic import ANTHROPIC_PROVIDER, AnthropicNotApprovedError, anthropic_gateway
 from .ports.llm_inert import InertProviderGateway
 
 
@@ -705,7 +706,8 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     # Phase D generative tier: OFF unless the `ai_teacher.generative_rephrase` flag is enabled, and
     # then only per request under live `ai_teaching` consent, a disengaged kill switch, and the
     # learner's inference quota. Per FD-03 no provider is configured anywhere, so by default no
-    # generative tier is wired at all; a named provider is inert (refuses every call).
+    # generative tier is wired at all; the Claude adapter needs every FD-03 approval setting, and
+    # any other named provider is inert (refuses every call).
     flags = StaticFlagProvider(settings.enabled_flags())
     app.state.flags = flags
     # Per-learner usage ledger: shared in PostgreSQL (quotas hold across instances); process-local
@@ -720,6 +722,21 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     ai_gateway: LLMGateway | None = None
     if provider.lower() == "stub":
         ai_gateway = StubLLMGateway()
+    elif provider.lower() == ANTHROPIC_PROVIDER:
+        # FD-03 Claude adapter: built only with every approval setting present. Otherwise the AI
+        # Teacher stays on the deterministic engine (production already refused a partial set in
+        # load_settings; a directly-constructed production Settings fails closed here too).
+        try:
+            ai_gateway = anthropic_gateway(settings)
+        except AnthropicNotApprovedError as exc:
+            if settings.is_production:
+                raise
+            log.warn(
+                "ai_provider_not_approved",
+                event="ai_provider_not_approved",
+                outcome="deterministic_engine",
+                count=len(exc.problems),
+            )
     elif provider:
         ai_gateway = InertProviderGateway(provider)
     app.state.ai_gateway = ai_gateway
@@ -738,6 +755,7 @@ def create_app(settings: Settings | None = None) -> FastAPI:
             quota=LearnerQuota(
                 max_calls=settings.ai_learner_daily_calls,
                 max_tokens=settings.ai_learner_daily_tokens,
+                max_cost_micros=settings.ai_learner_daily_cost_micros or None,
             ),
         )
         if ai_gateway is not None

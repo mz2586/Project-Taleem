@@ -45,6 +45,8 @@ export const familyApi = {
   enrolLearner: (body: Parameters<IdentityApi["enrolLearner"]>[0]) =>
     withSession(() => identity.enrolLearner(body)),
   resetPin: (studentRef: string, pin: string) => withSession(() => identity.resetPin(studentRef, pin)),
+  regenerateRecoveryCodes: (passphrase: string) =>
+    withSession(() => identity.regenerateRecoveryCodes(passphrase)),
   consent: (studentRef: string) => withSession(() => identity.consent(studentRef)),
   grantConsent: (body: Parameters<IdentityApi["grantConsent"]>[0]) =>
     withSession(() => identity.grantConsent(body)),

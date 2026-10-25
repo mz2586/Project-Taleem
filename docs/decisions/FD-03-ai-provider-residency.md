@@ -88,3 +88,47 @@ answer key exists, and otherwise wait for review.
 
 Until all six are recorded, the provider adapter stays inert. It refuses to construct without
 explicit configuration, and that configuration is not set in any environment.
+
+### Switching it on once approved: configuration only
+
+The Claude adapter is built and tested (`services/core-api/src/taleem_core/ports/llm_anthropic.py`,
+`tests/test_ai_teacher_anthropic_adapter.py`). No code change is needed after approval. Set these in
+the target environment's secret store, never in the repository:
+
+| Setting | Value | Why |
+| --- | --- | --- |
+| `TALEEM_AI_PROVIDER` | `anthropic` | Selects the Claude adapter. |
+| `TALEEM_AI_ANTHROPIC_API_KEY` | the workspace API key | A dedicated variable. The SDK's own `ANTHROPIC_API_KEY`, profile and federation discovery are never used, so a key already on a machine cannot switch this on. |
+| `TALEEM_AI_INFERENCE_GEO` | `us` | Explicit residency pin (first-party API `inference_geo`, billed at a premium). `global` is refused because it is not a pin. Supporting another geography is a reviewed code change (`ALLOWED_INFERENCE_GEOS`). If FD-02 picks Bedrock or Vertex instead, that needs a separate adapter. |
+| `TALEEM_AI_ZDR_CONFIRMED` | `true` | The founder's attestation that the zero-retention / no-training addendum (item 2) covers `claude-sonnet-5-5` and `claude-haiku-5-5`. |
+| `TALEEM_AI_FD03_APPROVAL_REF` | the approval record id, e.g. `FD-03/2026-11-01` | Ties the running configuration to the recorded approval of all six items. 3 to 64 characters from `A-Z a-z 0-9 . _ : / -`. |
+| `TALEEM_AI_LEARNER_DAILY_COST_MICROS` | the FD-07 envelope, in micro-USD per learner per UTC day | Required in production with this provider (item 5). |
+| `TALEEM_AI_LEARNER_DAILY_CALLS` / `_TOKENS` | FD-07 values | Existing per-learner quotas (defaults 20 calls / 20,000 tokens). |
+| `TALEEM_AI_TIMEOUT_SECONDS` | optional, default `15` | Per-call timeout; one retry, then the authored response. |
+| `TALEEM_ENABLED_FLAGS` | add `ai_teacher.generative_rephrase` | The tier stays off until this flag is on. It can be rolled out per learner. |
+
+Behaviour:
+
+- **Partial configuration fails closed.** In production the app refuses to boot if
+  `TALEEM_AI_PROVIDER=anthropic` is set without every setting above. In other environments it logs
+  `ai_provider_not_approved` and stays on the deterministic engine.
+- **Models.** Explanations use `claude-sonnet-5-5` with thinking off (`between_tools`) and effort
+  `medium`. `claude-haiku-5-5` is reserved for the classification tier, which has no call site yet.
+  The server-side refusal `fallbacks` parameter is deliberately not used, because it would run the
+  request on a model this approval does not cover. A refusal serves the authored response instead.
+- **Sent.** Only the grounded rephrase prompt (fixed instructions plus published `LessonView`
+  passages), an authored selected option when one is supplied, and a fresh random request id
+  (`metadata.user_id`). The adapter checks this itself before sending. Child free text,
+  identifiers, family codes, contact details, and the learner's ref are refused.
+- **Prompt caching.** The system prompt and the lesson prompt carry `cache_control`, so learners on
+  the same lesson share the cached prefix. Prompts shorter than the model's minimum cacheable
+  length are not cached; the request is otherwise the same.
+- **Cost.** The adapter records each call's cost in the usage ledger from the response `usage`
+  tokens. That includes refused or truncated calls, because they are billed. The list prices and
+  the `us` residency multiplier (1.1×) are constants in the adapter: **check them against the
+  pricing page at approval.**
+- **Item 6 evidence.** With the settings above present, run
+  `python -m taleem_core.tools.ai_teacher_eval --provider anthropic --json fd03-golden.json` from
+  `services/core-api`. It refuses (exit 2, nothing sent) without the configuration. The thresholds
+  are in [`AI_TEACHER_EVALUATION.md` §9](../../AI_TEACHER_EVALUATION.md). The accepted outputs in
+  the JSON need human transcript review before the flag is enabled for children.

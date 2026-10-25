@@ -96,7 +96,8 @@ knows when to stop and call a human.
 ## 9. The generative tier's controls (Phase D — implemented, not serving children)
 
 Code: `application/ai_teacher_service.py` (wiring), `domain/ai_teacher_gate.py` (prompt + gate),
-`ports/llm.py` + `ports/llm_inert.py` (gateway, stub, inert adapter, ledger, quota). Every control
+`ports/llm.py` + `ports/llm_inert.py` + `ports/llm_anthropic.py` (gateway, stub, inert adapter,
+FD-03 Claude adapter, ledger, quota). Every control
 fails **closed**, and every failure serves the authored response unchanged — refuse, never soften.
 
 **Order of checks on each `:explain` request**
@@ -115,7 +116,13 @@ fails **closed**, and every failure serves the authored response unchanged — r
    grounding can be established, the model is not called (`unverifiable`).
 7. **Provider** — none is connected. With no provider configured (every environment) no generative
    tier is composed; a named provider is `InertProviderGateway`, which has no transport and refuses
-   every call; the test stub is refused in production.
+   every call; the test stub is refused in production. The FD-03 Claude adapter
+   (`ports/llm_anthropic.py`) refuses to construct unless every FD-03 approval setting is present
+   (production refuses to boot on a partial set), and re-checks minimisation itself before sending:
+   only the grounded rephrase template built from `LessonView` passages, plus an authored selected
+   option, may leave; child free text, identifiers, family codes and contact details are refused.
+   A provider refusal, truncation, timeout or error serves the authored response; billed calls
+   still count against the quota.
 8. **Output safety gate** — any one violation refuses the output:
    - *grounding*: numbers (digits, Urdu digits, number words, fractions) not in the grounding; low
      content-word overlap; comparison/universality words ("always", "bigger") not in the grounding;

@@ -42,6 +42,10 @@ class GuardianRow(IdentityBase):
     failed_attempts: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     created_at: Mapped[float] = mapped_column(Float, nullable=False, default=0.0)
     version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+    # Wrong recovery-code attempts, separate from ``failed_attempts`` (alembic 0021).
+    recovery_failed_attempts: Mapped[int] = mapped_column(
+        Integer, nullable=False, default=0, server_default="0"
+    )
     # "" (real) / "demo" (alembic 0016, DEMO_COHORT_CONTRACT §2).
     cohort: Mapped[str] = mapped_column(String(16), nullable=False, default="", server_default="")
 
@@ -122,6 +126,30 @@ class RefreshTokenRow(IdentityBase):
     expires_at: Mapped[float] = mapped_column(Float, nullable=False)
     consumed_at: Mapped[float | None] = mapped_column(Float, nullable=True)
     revoked_at: Mapped[float | None] = mapped_column(Float, nullable=True)
+
+
+class RecoveryCodeRow(IdentityBase):
+    """One guardian recovery code (alembic 0021): a PBKDF2 digest, never the code.
+
+    Rows of a superseded set are deleted, not flagged, so an old sheet cannot match anything. A row
+    goes with its guardian (``ON DELETE CASCADE``, and explicitly in ``SqlGuardianRepository``).
+    """
+
+    __tablename__ = "guardian_recovery_code"
+    __table_args__ = (
+        Index("ix_recovery_code_guardian", "guardian_ref"),
+        {"schema": IDENTITY_SCHEMA},
+    )
+
+    code_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    guardian_ref: Mapped[str] = mapped_column(
+        String(64),
+        ForeignKey(f"{IDENTITY_SCHEMA}.guardian_account.guardian_ref", ondelete="CASCADE"),
+        nullable=False,
+    )
+    code_hash: Mapped[str] = mapped_column(Text, nullable=False)
+    created_at: Mapped[float] = mapped_column(Float, nullable=False)
+    consumed_at: Mapped[float | None] = mapped_column(Float, nullable=True)
 
 
 class RateLimitBucketRow(IdentityBase):

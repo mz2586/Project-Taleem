@@ -22,6 +22,10 @@ dependencies = [
     "sqlalchemy>=2.0",
     "alembic>=1.13",
     "psycopg[binary]>=3.1",
+    # Official Anthropic SDK for the FD-03 AI Teacher adapter (ports/llm_anthropic.py). Imported
+    # lazily and only when every approval setting is present; inert in every environment today.
+    # It brings httpx2 + opentelemetry-api (API only, no SDK/exporter) transitively.
+    "anthropic>=2.3",
 ]
 
 [project.optional-dependencies]

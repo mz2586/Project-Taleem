@@ -15,6 +15,7 @@ import type {
   GuardianProfile,
   Learner,
   PolicyDescriptor,
+  RecoveryCodesIssued,
   RosterEntry,
   SessionEnvelope,
 } from "./types";
@@ -31,6 +32,10 @@ export const publicIdentityApi = {
 
   signInGuardian: (body: { email: string; passphrase: string }) =>
     anonymous.post<SessionEnvelope>("/v1/identity/guardians:signin", body),
+
+  // Forgot passphrase: one recovery code + a new passphrase. Every failure is the sign-in 401.
+  recoverGuardian: (body: { email: string; code: string; newPassphrase: string }) =>
+    anonymous.post<SessionEnvelope>("/v1/identity/guardians:recover", body),
 
   // POST, not GET: the family code is a shared secret and must not reach a URL, a proxy log, or a
   // browser history entry.
@@ -57,6 +62,11 @@ export function createGuardianIdentityApi(getToken: TokenProvider) {
   const client = createApiClient(API_BASE, getToken);
   return {
     me: () => client.get<GuardianProfile>("/v1/identity/me"),
+
+    // A wrong passphrase is a 403 PASSPHRASE_INCORRECT, not a 401, so the session wrapper never
+    // refreshes and resubmits it.
+    regenerateRecoveryCodes: (passphrase: string) =>
+      client.post<RecoveryCodesIssued>("/v1/identity/guardians/me/recovery-codes", { passphrase }),
 
     listLearners: () => client.get<{ learners: Learner[] }>("/v1/identity/learners"),
 

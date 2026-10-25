@@ -82,6 +82,8 @@ def _identity_rules() -> set[tuple[str, str, str]]:
     """
     return {
         ("guardian", "read", "identity.self"),
+        # Their own credentials: regenerating recovery codes (current passphrase also required).
+        ("guardian", "manage", "identity.self"),
         ("guardian", "manage", "identity.learner"),
         ("guardian", "manage", "identity.consent"),
         ("guardian", "read", "identity.audit"),

@@ -23,6 +23,11 @@ class AuditAction(StrEnum):
     GUARDIAN_SIGNED_IN = "guardian.signed_in"
     GUARDIAN_SIGN_IN_FAILED = "guardian.sign_in_failed"
     GUARDIAN_LOCKED = "guardian.locked"
+    # Recovery codes (domain/recovery.py). Detail carries counts only — never a code or a digest.
+    GUARDIAN_RECOVERY_CODES_GENERATED = "guardian.recovery_codes_generated"
+    GUARDIAN_RECOVERED = "guardian.recovered"
+    GUARDIAN_RECOVERY_FAILED = "guardian.recovery_failed"
+    GUARDIAN_RECOVERY_LOCKED = "guardian.recovery_locked"
     LEARNER_CREATED = "learner.created"
     LEARNER_SIGNED_IN = "learner.signed_in"
     LEARNER_SIGN_IN_FAILED = "learner.sign_in_failed"

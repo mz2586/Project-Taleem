@@ -43,6 +43,11 @@ export default function GuardianSignInPage() {
       footer={
         <div style={{ display: "grid", gap: "var(--space-3)" }}>
           <p style={{ margin: 0 }}>
+            <Link href="/guardian/recover" style={{ color: "var(--color-action-primary)" }}>
+              {t("auth.guardianSignIn.forgot")}
+            </Link>
+          </p>
+          <p style={{ margin: 0 }}>
             {t("auth.guardianSignIn.noAccount")}{" "}
             <Link href="/join" style={{ color: "var(--color-action-primary)" }}>
               {t("auth.guardianSignIn.createOne")}

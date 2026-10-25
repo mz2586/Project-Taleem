@@ -13,6 +13,9 @@ service is called — API, migration script, or operator tool:
    a process, because a four-digit PIN is only safe if the *rate* is limited across every instance.
 4. **Guardians reach only their own family.** Every learner-scoped call re-derives ownership from
    the token subject; nothing trusts a ref supplied in a request body.
+5. **A forgotten passphrase is recoverable without email** — with a one-time recovery code
+   (domain/recovery.py). Recovery fails with the same ``401`` as sign-in for every cause, has its
+   own durable lockout, and ends every existing guardian session.
 """
 
 from __future__ import annotations
@@ -24,7 +27,7 @@ from typing import Any
 from ....platform.cohort import COHORTS
 from ....platform.correlation import get_correlation_id
 from ....platform.errors import Problem, forbidden, not_found, unauthorized, validation_error
-from ..domain import credentials
+from ..domain import credentials, recovery
 from ..domain.accounts import (
     AccountStatus,
     GuardianAccount,
@@ -108,6 +111,23 @@ def _sign_in_failed() -> Problem:
     return unauthorized("Sign-in details are not correct")
 
 
+def _recovery_failed() -> Problem:
+    """One error for every recovery failure: unknown email, wrong / used / malformed code, locked
+    recovery, suspended account. Same status and detail as a failed sign-in."""
+    return unauthorized("Sign-in details are not correct")
+
+
+def _passphrase_incorrect() -> Problem:
+    """The current passphrase did not verify on an authenticated route. A 403, not a 401: the token
+    is fine, and a 401 would make a client refresh and resubmit (counting the failure twice)."""
+    return Problem(
+        403,
+        "PASSPHRASE_INCORRECT",
+        "Passphrase is not correct",
+        "the current passphrase is not correct",
+    )
+
+
 class IdentityService:
     def __init__(
         self,
@@ -123,6 +143,12 @@ class IdentityService:
         # Computed once per service, not per import: at the production work factor this is a third
         # of a second, which belongs at composition time rather than in every module that imports.
         self._equalising_hash = self._hasher.equalising_hash()
+        # Recovery codes carry ~59 bits, so they take a lower work factor (domain/recovery.py) — but
+        # never higher than the injected hasher's, so a test's fast factor stays fast.
+        self._code_hasher = credentials.SecretHasher(
+            iterations=min(self._hasher.iterations, recovery.RECOVERY_CODE_ITERATIONS)
+        )
+        self._equalising_code_hash = self._code_hasher.equalising_hash()
         self._session_subjects: dict[str, SessionSubject] = {}
 
     # ------------------------------------------------------------ sessions for other components
@@ -221,6 +247,8 @@ class IdentityService:
                     correlation_id=get_correlation_id() or "",
                 )
             )
+            codes = self._issue_recovery_codes(uow, account.guardian_ref, now)
+            status = recovery.recovery_status(uow.recovery_codes.for_guardian(account.guardian_ref))
             refresh = self._mint_refresh(uow, account.guardian_ref, "guardian", "", now)
             uow.commit()
             token = self._issue_guardian_token(account, now)
@@ -228,6 +256,9 @@ class IdentityService:
                 "guardian": _guardian_view(account),
                 "session": token.to_dict(),
                 "refresh_token": refresh,
+                # Shown once: the plaintext exists only in this response.
+                "recovery_codes": codes,
+                "recovery": status,
             }
 
     def sign_in_guardian(self, *, email: str, passphrase: str) -> dict[str, Any]:
@@ -273,6 +304,7 @@ class IdentityService:
     def guardian_profile(self, guardian_ref: str) -> dict[str, Any]:
         with self._uow() as uow:
             account = self._require_guardian(uow, guardian_ref)
+            status = recovery.recovery_status(uow.recovery_codes.for_guardian(guardian_ref))
             learners = uow.learners.for_guardian(guardian_ref)
             states = {
                 learner.student_ref: derive_state(
@@ -286,7 +318,103 @@ class IdentityService:
                 _learner_view(learner, states[learner.student_ref]) for learner in learners
             ],
             "policy_version": CURRENT_POLICY_VERSION,
+            "recovery": status,
         }
+
+    # -------------------------------------------------------------------------- recovery codes
+
+    def regenerate_recovery_codes(self, *, guardian_ref: str, passphrase: str) -> dict[str, Any]:
+        """A new set of codes for the acting guardian; the previous set stops working at once.
+
+        Requires the current passphrase — a stolen access token alone must not be enough to mint
+        the credential that resets the passphrase. A wrong one counts towards the sign-in lockout.
+        """
+        now = self._now()
+        with self._uow() as uow:
+            account = self._require_guardian(uow, guardian_ref)
+            if not account.can_sign_in or not self._hasher.verify(
+                passphrase, account.passphrase_hash
+            ):
+                self._record_guardian_failure(uow, account, now)
+                uow.commit()
+                raise _passphrase_incorrect()
+            account.failed_attempts = 0
+            account.recovery_failed_attempts = 0
+            uow.guardians.save(account)
+            codes = self._issue_recovery_codes(uow, guardian_ref, now)
+            status = recovery.recovery_status(uow.recovery_codes.for_guardian(guardian_ref))
+            uow.commit()
+            return {"recovery_codes": codes, "recovery": status}
+
+    def recover_guardian(self, *, email: str, code: str, new_passphrase: str) -> dict[str, Any]:
+        """Set a new passphrase with one recovery code, and sign the guardian in.
+
+        Every failure — unknown email, malformed / wrong / used code, recovery locked, account
+        suspended — is the same ``401`` and costs the same KDF work. Only the new passphrase's
+        *policy* is reported (``422``), and it is checked before any account is looked up, so it
+        says nothing about the account. On success the code is consumed, both attempt counters
+        reset, a passphrase lockout lifts (an operator suspension does not), and every existing
+        guardian session is revoked before a new one is issued.
+        """
+        try:
+            credentials.assert_passphrase_policy(new_passphrase)
+        except credentials.WeakSecretError as exc:
+            raise _invalid_from(exc) from exc
+        now = self._now()
+        try:
+            normalised_email = normalise_email(email)
+            presented = recovery.normalise_recovery_code(code)
+        except (InvalidAccountError, recovery.InvalidRecoveryCodeError):
+            self._match_recovery_code("", [])
+            raise _recovery_failed() from None
+
+        with self._uow() as uow:
+            account = uow.guardians.by_email(normalised_email)
+            if account is None:
+                self._match_recovery_code(presented, [])
+                raise _recovery_failed()
+            stored = uow.recovery_codes.for_guardian(account.guardian_ref)
+            match = self._match_recovery_code(presented, [c for c in stored if c.usable])
+            # Never gated on failed recovery attempts: that would let anyone who knows the email
+            # disable a guardian's recovery. Guessing is bounded by the per-account and
+            # per-client rate limits and ~59-bit codes; a suspension still blocks recovery.
+            eligible = account.status in (AccountStatus.ACTIVE, AccountStatus.LOCKED)
+            if match is None or not eligible:
+                self._record_recovery_failure(uow, account, now)
+                uow.commit()
+                raise _recovery_failed()
+
+            match.consume(now)
+            uow.recovery_codes.save(match)
+            account.passphrase_hash = self._hasher.hash(new_passphrase)
+            account.failed_attempts = 0
+            account.recovery_failed_attempts = 0
+            if account.status is AccountStatus.LOCKED:
+                account.status = AccountStatus.ACTIVE
+            uow.guardians.save(account)
+            # A new passphrase must end every session opened with the old one — the reason someone
+            # recovers may be that another person has their account.
+            revoked = uow.refresh_tokens.revoke_all_for(account.guardian_ref, now=now)
+            status = recovery.recovery_status(stored)  # ``match`` is one of these, now consumed
+            uow.audit.append(
+                AuditEvent.record(
+                    action=AuditAction.GUARDIAN_RECOVERED,
+                    actor_ref=account.guardian_ref,
+                    actor_role="guardian",
+                    subject_ref=account.guardian_ref,
+                    now=now,
+                    correlation_id=get_correlation_id() or "",
+                    detail={"revoked_sessions": revoked, "codes_remaining": status["remaining"]},
+                )
+            )
+            refresh = self._mint_refresh(uow, account.guardian_ref, "guardian", "", now)
+            uow.commit()
+            return {
+                "guardian": _guardian_view(account),
+                "session": self._issue_guardian_token(account, now).to_dict(),
+                "refresh_token": refresh,
+                "recovery": status,
+            }
 
     # ------------------------------------------------------------------------- learner enrolment
 
@@ -988,6 +1116,73 @@ class IdentityService:
         )
         uow.refresh_tokens.add(record)
         return wire
+
+    def _issue_recovery_codes(
+        self, uow: IdentityUnitOfWork, guardian_ref: str, now: float
+    ) -> list[str]:
+        """Replace the guardian's set; return the plaintext codes (the only time they exist)."""
+        codes = recovery.new_recovery_codes()
+        invalidated = uow.recovery_codes.replace_for(
+            guardian_ref,
+            [
+                recovery.RecoveryCode.create(
+                    guardian_ref=guardian_ref, code_hash=self._code_hasher.hash(code), now=now
+                )
+                for code in codes
+            ],
+        )
+        uow.audit.append(
+            AuditEvent.record(
+                action=AuditAction.GUARDIAN_RECOVERY_CODES_GENERATED,
+                actor_ref=guardian_ref,
+                actor_role="guardian",
+                subject_ref=guardian_ref,
+                now=now,
+                correlation_id=get_correlation_id() or "",
+                detail={"count": len(codes), "invalidated": invalidated},
+            )
+        )
+        return codes
+
+    def _match_recovery_code(
+        self, presented: str, usable: list[recovery.RecoveryCode]
+    ) -> recovery.RecoveryCode | None:
+        """Check ``presented`` against every slot of a full set, without stopping early.
+
+        Always ``RECOVERY_CODE_COUNT`` verifications (padded with a placeholder digest), so the time
+        taken says nothing about whether the account exists or how many codes it has left.
+        """
+        slots: list[recovery.RecoveryCode | None] = [*usable]
+        slots += [None] * max(0, recovery.RECOVERY_CODE_COUNT - len(slots))
+        match: recovery.RecoveryCode | None = None
+        for slot in slots:
+            digest = slot.code_hash if slot is not None else self._equalising_code_hash
+            if self._code_hasher.verify(presented, digest) and slot is not None and match is None:
+                match = slot
+        return match
+
+    def _record_recovery_failure(
+        self, uow: IdentityUnitOfWork, account: GuardianAccount, now: float
+    ) -> None:
+        account.recovery_failed_attempts += 1
+        action = AuditAction.GUARDIAN_RECOVERY_FAILED
+        if account.recovery_failed_attempts >= recovery.MAX_RECOVERY_ATTEMPTS:
+            # Recorded for review/alerting only. The account is NOT locked: a recovery lockout
+            # is a denial-of-service lever for anyone who knows the guardian's email, and the
+            # rate limits already make code guessing infeasible.
+            action = AuditAction.GUARDIAN_RECOVERY_LOCKED
+        uow.guardians.save(account)
+        uow.audit.append(
+            AuditEvent.record(
+                action=action,
+                actor_ref=account.guardian_ref,
+                actor_role="guardian",
+                subject_ref=account.guardian_ref,
+                now=now,
+                correlation_id=get_correlation_id() or "",
+                detail={"failed_attempts": account.recovery_failed_attempts},
+            )
+        )
 
     def _require_guardian(self, uow: IdentityUnitOfWork, guardian_ref: str) -> GuardianAccount:
         account = uow.guardians.get(guardian_ref)

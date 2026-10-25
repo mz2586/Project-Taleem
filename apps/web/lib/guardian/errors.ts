@@ -17,7 +17,9 @@ export type IdentityAction =
   | "enrol"
   | "pin-reset"
   | "consent"
-  | "load";
+  | "load"
+  | "recover"
+  | "recovery-codes";
 
 const VALIDATION_DETAILS: Array<[RegExp, MessageKey]> = [
   [/already exists in your family/i, "auth.errors.duplicateName"],
@@ -61,6 +63,15 @@ export function identityErrorKey(error: unknown, action: IdentityAction): Messag
       break;
     case "roster":
       if (error.status === 503) return "auth.errors.paused";
+      break;
+    case "recover":
+      // Unknown email, wrong / used code, locked recovery: the server says one thing, and so do we.
+      if (error.status === 401) return "auth.errors.recoveryFailed";
+      break;
+    case "recovery-codes":
+      if (error.problem.code === "PASSPHRASE_INCORRECT") return "auth.errors.passphraseIncorrect";
+      if (error.status === 401) return "auth.errors.signedOut";
+      if (error.status === 403) return "auth.errors.notGuardian";
       break;
     case "enrol":
     case "pin-reset":

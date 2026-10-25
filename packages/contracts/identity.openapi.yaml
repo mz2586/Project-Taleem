@@ -114,6 +114,93 @@ paths:
           content:
             application/problem+json:
               schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/guardians:recover:
+    post:
+      tags: [identity]
+      operationId: recoverGuardian
+      summary: Set a new passphrase with a one-time recovery code
+      security: []  # public: the guardian has forgotten the credential that would get a token
+      description: >-
+        Public; no email is involved. Consumes one recovery code, sets the new passphrase (passphrase
+        policy enforced), lifts a passphrase lockout (never an operator suspension), revokes every
+        existing guardian session, and returns a new session. Every failure — unknown email,
+        malformed, wrong or already-used code, recovery locked after repeated wrong codes, suspended
+        account — is the same `401` with the same detail as a failed sign-in, and takes comparable
+        time. Rate limited per client and per account. Audited as `guardian.recovered` /
+        `guardian.recovery_failed` / `guardian.recovery_locked`; no code ever appears in the audit.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/GuardianRecovery" }
+      responses:
+        "200":
+          description: Passphrase changed; every older session revoked; a new session issued
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/GuardianRecovered" }
+        "401":
+          description: Recovery details are not correct (uniform for every cause)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "422":
+          description: The new passphrase fails the policy (PASSPHRASE_*); says nothing about the account
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/ValidationProblem" }
+        "429":
+          description: Rate limited (per client or per account)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+  /v1/identity/guardians/me/recovery-codes:
+    post:
+      tags: [identity]
+      operationId: regenerateRecoveryCodes
+      summary: Make a new set of recovery codes (shown once)
+      security: [{ bearerAuth: [] }]
+      description: >-
+        Requires the current passphrase; a wrong one counts towards the sign-in lockout and is a
+        `403 PASSPHRASE_INCORRECT` (not a `401`, so a client does not refresh and resubmit). The
+        previous set stops working at once. The codes are in this response only — the server
+        keeps PBKDF2 digests. Audited as `guardian.recovery_codes_generated` (counts only).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/RecoveryCodesRequest" }
+      responses:
+        "200":
+          description: The new codes, once
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/RecoveryCodesIssued" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Not a guardian token, account suspended, or PASSPHRASE_INCORRECT
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "429":
+          description: Rate limited
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
   /v1/identity/learners:roster:
     post:
       tags: [identity]
@@ -1083,6 +1170,53 @@ components:
         guardian: { $ref: "#/components/schemas/Guardian" }
         session: { $ref: "#/components/schemas/Session" }
         refresh_token: { $ref: "#/components/schemas/RefreshTokenValue" }
+        recovery_codes:
+          description: >-
+            Registration only: the guardian's first recovery codes, shown once. Absent from a
+            sign-in response.
+          $ref: "#/components/schemas/RecoveryCodeList"
+        recovery: { $ref: "#/components/schemas/RecoveryStatus" }
+    RecoveryCodeList:
+      type: array
+      minItems: 8
+      maxItems: 8
+      description: >-
+        Eight single-use codes, `XXXX-XXXX-XXXX` from the family-code alphabet (about 59 bits
+        each). Plaintext exists only in the response that created them; only PBKDF2 digests are
+        stored. Input is accepted in lower case and without dashes or spaces.
+      items: { type: string, pattern: "^[A-Z2-9]{4}-[A-Z2-9]{4}-[A-Z2-9]{4}$" }
+    RecoveryStatus:
+      type: object
+      description: Counts and times only — never a code or a digest.
+      properties:
+        total: { type: integer, description: Codes in the current set }
+        remaining: { type: integer, description: Unused codes in the current set }
+        generated_at: { type: [number, "null"] }
+        last_used_at: { type: [number, "null"] }
+    GuardianRecovery:
+      type: object
+      required: [email, code, newPassphrase]
+      properties:
+        email: { type: string, maxLength: 320 }
+        code: { type: string, maxLength: 64, description: One recovery code }
+        newPassphrase: { type: string, minLength: 10, maxLength: 256 }
+    GuardianRecovered:
+      type: object
+      properties:
+        guardian: { $ref: "#/components/schemas/Guardian" }
+        session: { $ref: "#/components/schemas/Session" }
+        refresh_token: { $ref: "#/components/schemas/RefreshTokenValue" }
+        recovery: { $ref: "#/components/schemas/RecoveryStatus" }
+    RecoveryCodesRequest:
+      type: object
+      required: [passphrase]
+      properties:
+        passphrase: { type: string, description: The current passphrase }
+    RecoveryCodesIssued:
+      type: object
+      properties:
+        recovery_codes: { $ref: "#/components/schemas/RecoveryCodeList" }
+        recovery: { $ref: "#/components/schemas/RecoveryStatus" }
     GuardianProfile:
       type: object
       properties:
@@ -1091,6 +1225,7 @@ components:
           type: array
           items: { $ref: "#/components/schemas/Learner" }
         policy_version: { type: string }
+        recovery: { $ref: "#/components/schemas/RecoveryStatus" }
     LearnerEnrolment:
       type: object
       required: [displayName, pin]
@@ -1297,7 +1432,9 @@ components:
           description: >-
             e.g. `guardian.registered`, `learner.created`, `consent.granted`, `consent.withdrawn`,
             `learner.signed_in`, `learner.sign_in_failed`,
-            `learner.sign_in_denied_no_consent`, `learner.locked`, `learner.pin_reset`.
+            `learner.sign_in_denied_no_consent`, `learner.locked`, `learner.pin_reset`,
+            `guardian.recovery_codes_generated`, `guardian.recovered`,
+            `guardian.recovery_failed`, `guardian.recovery_locked`.
         actor_ref: { type: string }
         actor_role: { type: string }
         subject_ref: { type: string }

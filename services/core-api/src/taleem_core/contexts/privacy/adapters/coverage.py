@@ -32,6 +32,11 @@ EXEMPT_TABLES: dict[str, str] = {
     "identity.guardian_account": (
         "the guardian is a separate data subject; erasing a learner leaves the adult account"
     ),
+    "identity.guardian_recovery_code": (
+        "the guardian's own recovery codes (adult credential, separate data subject): PBKDF2 "
+        "digests only, never a learner ref; the guardian sees counts/timestamps only (/me); "
+        "deleted with the guardian account (FK cascade) and superseded sets are deleted"
+    ),
     "identity.rate_limit_bucket": (
         "short-lived window counters keyed by a SHA-256 digest (a client network identifier, or a "
         "rate-limited subject such as a safeguarding raiser); no ref in clear; purged by window"

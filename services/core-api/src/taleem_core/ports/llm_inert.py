@@ -11,8 +11,10 @@ no network transport. Consistent with docs/decisions/FD-03-ai-provider-residency
 
 Connecting a real provider requires all six approvals listed in the FD-03 brief (provider + region
 and transfer basis, zero-retention/no-training addendum, DPIA, external red-team of the gate, the
-per-learner cost envelope (FD-07), and golden-set results on the chosen model) plus a new adapter
-reviewed under AI_TEACHER_SAFETY_MODEL.md — none of which this commit contains.
+per-learner cost envelope (FD-07), and golden-set results on the chosen model). The adapter for
+the recommended provider is ``ports/llm_anthropic.py`` (``TALEEM_AI_PROVIDER=anthropic``), which
+refuses to construct until those approvals are recorded in configuration; any other provider name
+still lands here.
 """
 
 from __future__ import annotations

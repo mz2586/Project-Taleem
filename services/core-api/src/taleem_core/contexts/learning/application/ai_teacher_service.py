@@ -18,8 +18,9 @@ explanation. It runs only when ALL of these hold, checked in this order on every
 The rephrase is built only from LessonView fields, checked by the safety gate, and on any failure
 (refusal, provider error) the authored response is served unchanged. Generated text is returned in a
 separate ``generation`` block marked ``generated: true`` / ``verified: false`` with its provenance
-and a notice key the client must display — never mixed into the verified ``utterances``. No real
-provider exists in this build (FD-03); see ``ports/llm_inert.py``.
+and a notice key the client must display — never mixed into the verified ``utterances``. The only
+real provider adapter (``ports/llm_anthropic.py``) refuses to construct until every FD-03 approval
+setting is present; until then a named provider is inert (``ports/llm_inert.py``).
 """
 
 from __future__ import annotations
@@ -39,6 +40,7 @@ from ....ports.llm import (
     LearnerUsageLedger,
     LLMGateway,
     LLMRequest,
+    ProviderUnavailableError,
     Tier,
     UsageRecord,
     route_tier,
@@ -166,12 +168,25 @@ def run_rephrase(
     if not prompt.passages:
         verdict = gate.unverifiable("no grounding passages")
         return RephraseOutcome("refused", "", prompt, verdict, gateway.name, tier, None)
-    request = LLMRequest(prompt=prompt.render(), tier=tier, grounding=prompt.texts)
+    request = LLMRequest(
+        prompt=prompt.render(),
+        tier=tier,
+        grounding=prompt.texts,
+        # In-process only: a real adapter refuses any request carrying the learner's ref.
+        never_send=(learner_ref,) if learner_ref else (),
+    )
     try:
         response = gateway.complete(request)
     except Exception as exc:  # any provider failure degrades to authored content
+        billed = exc.billed if isinstance(exc, ProviderUnavailableError) else None
+        spent: UsageRecord | None = None
+        if billed is not None:
+            # The provider served and charged for the call (e.g. it refused, or the reply was cut
+            # off): the cost is real and counts against the quota, but no output is used.
+            spent = usage_of(billed, REPHRASE_PURPOSE, learner_ref=learner_ref, recorded_at=now)
+            cost_meter.record(spent)
         return RephraseOutcome(
-            "unavailable", "", prompt, None, gateway.name, tier, None, type(exc).__name__
+            "unavailable", "", prompt, None, gateway.name, tier, spent, type(exc).__name__
         )
     usage = usage_of(response, REPHRASE_PURPOSE, learner_ref=learner_ref, recorded_at=now)
     cost_meter.record(usage)

@@ -16,6 +16,10 @@ const ACTION_KEYS: Record<string, MessageKey> = {
   "guardian.signed_in": "guardian.audit.actions.guardian_signed_in",
   "guardian.sign_in_failed": "guardian.audit.actions.guardian_sign_in_failed",
   "guardian.locked": "guardian.audit.actions.guardian_locked",
+  "guardian.recovery_codes_generated": "guardian.audit.actions.guardian_recovery_codes_generated",
+  "guardian.recovered": "guardian.audit.actions.guardian_recovered",
+  "guardian.recovery_failed": "guardian.audit.actions.guardian_recovery_failed",
+  "guardian.recovery_locked": "guardian.audit.actions.guardian_recovery_locked",
   "learner.created": "guardian.audit.actions.learner_created",
   "learner.signed_in": "guardian.audit.actions.learner_signed_in",
   "learner.sign_in_failed": "guardian.audit.actions.learner_sign_in_failed",
@@ -36,6 +40,10 @@ const ACTION_KEYS: Record<string, MessageKey> = {
 const WARNING_ACTIONS = new Set([
   "guardian.sign_in_failed",
   "guardian.locked",
+  // A passphrase reset with a code is worth noticing: if it was not you, someone has your sheet.
+  "guardian.recovered",
+  "guardian.recovery_failed",
+  "guardian.recovery_locked",
   "learner.sign_in_failed",
   "learner.sign_in_denied_no_consent",
   "learner.locked",
