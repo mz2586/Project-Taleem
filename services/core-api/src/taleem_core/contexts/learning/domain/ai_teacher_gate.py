@@ -471,6 +471,12 @@ _CONTACT_PATTERNS = (
         r"\b(?:whatsapp|instagram|facebook|tiktok|snapchat|telegram|discord|youtube|signal)\b",
         re.I,
     ),
+    # Red-team (§8): an invitation to private contact needs no address or platform name.
+    re.compile(r"\b(?:message|text|dm|call|email|e-mail|contact|ping|add|phone)\s+me\b", re.I),
+    re.compile(
+        r"\b(?:واٹس\s*ایپ|واٹس\s*اپ|فیس\s*بک|انسٹاگرام|ٹک\s*ٹاک|یوٹیوب|سنیپ\s*چیٹ|ٹیلیگرام|ای\s*میل)\b"
+    ),
+    re.compile(r"\b(?:رابطہ|میسج|کال)\s+کر\w*|\bمجھے\s+(?:میسج|کال|فون)\b"),
 )
 _PERSONAL_DATA_PATTERNS = (
     re.compile(
@@ -486,6 +492,28 @@ _PERSONAL_DATA_PATTERNS = (
     re.compile(
         r"\b(?:آپ\s+کا\s+نام|تمہارا\s+نام|کہاں\s+رہتے|اپنا\s+(?:نمبر|پتہ|فون)|تصویر\s+بھیج|خفیہ|راز)\b"
     ),
+    # Red-team (§8): where the child is, who they are, and secrecy/grooming (refused outright).
+    re.compile(
+        r"\b(?:which|what)\s+(?:school|class|grade|city|town|village|area|street)\b|"
+        r"\bdo\s+you\s+live\b|\bwhere\s+(?:is|are)\s+your\b|"
+        r"\byour\s+(?:house|city|town|village|street|class|grade|family|father|mother|brother|"
+        r"sister|grandparents?|uncle|aunt)\b|"
+        r"\b(?:picture|photo|selfie|video)\s+of\s+(?:yourself|you)\b",
+        re.I,
+    ),
+    re.compile(
+        r"\b(?:don't|do\s+not|never)\s+tell\b|\bsecrets?\b|\bbetween\s+(?:us|you\s+and\s+me)\b|"
+        r"\btrust\s+(?:me|only)\b|\bonly\s+me\b|\b(?:special|best|secret)\s+friends?\b|"
+        r"\b(?:delete|erase|hide)\s+(?:this|the|our)\s+(?:chat|messages?|conversation)\b",
+        re.I,
+    ),
+    re.compile(
+        r"\b(?:کس|کون\s+سے|کون\s+سی)\s+(?:سکول|اسکول|شہر|جماعت|کلاس|گاؤں)\b|"
+        r"(?:آپ\s+کی|تمہاری)\s+عمر\b|\bفون\s+نمبر\b|\bتصویر\s+(?:بھیج|دکھا)\w*|"
+        r"\b(?:اپنے|اپنی)\s+(?:امی|ابو|ابا|اماں|والدین|گھر|تصویر)\b|"
+        r"(?:آپ\s+کے|آپ\s+کی|تمہارے|تمہاری)\s+(?:والد|والدہ|ابو|امی|بھائی|بہن)\b"
+    ),
+    re.compile(r"\b(?:مت|نہ)\s+بتا\w*|\bبھروسہ\b|\b(?:خاص|پکا|پکی)\s+(?:دوست|سہیلی)\b"),
 )
 _DISALLOWED_PATTERNS = (
     # Impersonating a human, or leaking/echoing instructions.
@@ -502,13 +530,76 @@ _DISALLOWED_PATTERNS = (
         re.I,
     ),
     re.compile(r"\b(?:بیوقوف|احمق|قتل|بندوق|چاقو|شراب|سگریٹ|جوا|خودکشی|موت)\b"),
+    # Red-team (§8). Persona: claiming to be a teacher/human/machine, or naming a model vendor.
+    re.compile(
+        r"\bi\s*(?:am|'m)\s+(?:not\s+)?(?:a\s+|an\s+|your\s+)?(?:real\s+|human\s+|actual\s+)?"
+        r"(?:human|person|man|woman|teacher|robot|computer|machine|ai|assistant|chatbot|bot)\b|"
+        r"\b(?:claude|anthropic|openai|chatgpt|gpt|gemini|llm)\b",
+        re.I,
+    ),
+    re.compile(
+        r"\bمیں\s+(?:\S+\s+){0,3}?(?:استاد|استانی|ٹیچر|انسان|مشین|روبوٹ|کمپیوٹر|ماڈل)"
+        r"\s+(?:نہیں\s+)?ہوں\b|\b(?:لینگویج|لسانی)\s+ماڈل\b|\bمصنوعی\s+ذہانت\b"
+    ),
+    # Injection echo: role markers, passage markers, chat tokens, JSON braces, markdown.
+    re.compile(
+        r"^\s*(?:system|assistant|user|human|ai)\s*:|\[\d+\]|<\||\|>|[{}]|\*\*|__|^\s{0,3}#{1,6}\s|"
+        r"\bhere(?:'s|\s+is|\s+are)\s+(?:the|a|an|your)\s+(?:\w+\s+)?"
+        r"(?:rephras\w*|version|text|passages?|rewrite|explanation)\b",
+        re.I | re.M,
+    ),
+    # Self-harm, violence, medicine/dosage, adult themes: never in a rephrase for a child.
+    re.compile(
+        r"\b(?:hurt|harm|injure|kill)\s+(?:yourself|your\s*self|others?|someone)\b|"
+        r"\bself[-\s]?harm\b|\b(?:punch\w*|kick\w*|slap\w*|stab\w*|shoot\w*|fight\w*|hit)\b|"
+        r"\b(?:medicines?|medication|pills?|tablets?|dose|dosage|syrup|injection|paracetamol|"
+        r"panadol|poison\w*|bleach)\b|"
+        r"\b(?:girlfriend|boyfriend|kiss\w*|naked|nude|dating|sexual\w*|porn\w*)\b",
+        re.I,
+    ),
+    re.compile(
+        r"\bاپنے\s+آپ\s+کو\s+(?:نقصان|تکلیف|چوٹ|مار)\w*|\b(?:دوائی|دوا|گولی|گولیاں|انجکشن|زہر)\b|"
+        r"\b(?:مارو|ماریں|مارنا|پیٹو|لڑو|لڑائی)\b"
+    ),
+    # Shaming, threats of failure, and guilt ("I'll be sad if you leave").
+    re.compile(
+        r"\byou(?:'re|\s+are)\s+(?:so\s+|very\s+|really\s+)?(?:slow|lazy|bad|silly|weak)\b|"
+        r"\b(?:useless|worthless|hopeless|pathetic|loser|shame\w*|disappoint\w*|fail\w*|baby)\b|"
+        r"\bi(?:'ll|\s+will)\s+be\s+(?:so\s+|very\s+)?(?:sad|upset|angry|hurt|lonely)\b|"
+        r"\bleave\s+me\b",
+        re.I,
+    ),
+    re.compile(r"\b(?:فیل|ناکام\w*|شرم|سست|نکما|نکمی|نکمے|اداس)\b"),
+)
+# Red-team (§8): topics and prompt vocabulary with no place in a rephrase UNLESS the authored
+# lesson itself uses them (a future civics or Islamiyat lesson may). Refused when ungrounded.
+_GROUNDED_ONLY_PATTERNS = (
+    re.compile(
+        r"\b(?:religions?|religious|god|church|mosque|temple|pray\w*|politic\w*|party|vote\w*|"
+        r"elections?|government|minister|president|army|passages?|instructions?|rephras\w*|"
+        r"prompts?)\b",
+        re.I,
+    ),
+    re.compile(r"\b(?:مذہب|مذہبی|سیاسی|سیاست|ووٹ|الیکشن|حکومت|ہدایات|نظر\s+انداز)\b"),
 )
 _ANSWER_PHRASING = (
     re.compile(r"\b(?:the\s+)?(?:correct\s+|right\s+)?answer\s*(?:is|was|=|:)", re.I),
     re.compile(r"\b(?:correct|right)\s+(?:option|choice)\b", re.I),
     re.compile(r"\b(?:choose|pick|select|tick)\s+option\b|\boption\s+[a-d1-9]\b", re.I),
     re.compile(r"جواب\s+ہے|صحیح\s+جواب|درست\s+جواب"),
+    # Red-team (§8): pointing at an option by position, and Urdu "the answer ... is".
+    re.compile(
+        r"\b(?:first|second|third|fourth|last|top|bottom|1st|2nd|3rd)\s+"
+        r"(?:option|choice|answer|button)\b|\boption\s+(?:one|two|three|four)\b",
+        re.I,
+    ),
+    re.compile(
+        r"\bجواب\s+(?:\S+\s+){0,4}?ہے\b|"
+        r"\b(?:پہلا|پہلی|دوسرا|دوسری|تیسرا|تیسری|آخری)\s+(?:آپشن|جواب|انتخاب|والا)\b"
+    ),
 )
+# A statement after a question that carries an item's answer reveals it (red-team, §8).
+_SENTENCE_KEEP = re.compile(r"[^.!?۔؟\n]+[.!?۔؟\n]*")
 
 
 @dataclass(frozen=True)
@@ -563,6 +654,17 @@ def _unlocked_item(lesson: LessonView, ctx: AnswerContext) -> ItemView | None:
     return None
 
 
+def _statements_after_question(output: str) -> str:
+    """The non-question sentences that follow a question (where a reveal would sit)."""
+    asked, out = False, []
+    for sentence in _SENTENCE_KEEP.findall(output):
+        if "?" in sentence or "؟" in sentence:
+            asked = True
+        elif asked:
+            out.append(sentence)
+    return " ".join(out)
+
+
 def _check_answer_leak(
     lesson: LessonView, output: str, grounding: str, ctx: AnswerContext
 ) -> list[GateViolation]:
@@ -576,6 +678,8 @@ def _check_answer_leak(
     out_norm, ground_norm = _normalize(output), _normalize(grounding)
     out_nums = Counter(numeric_tokens(output))
     ground_nums = Counter(numeric_tokens(grounding))
+    after_q = _normalize(_statements_after_question(output))
+    after_q_nums = set(numeric_tokens(after_q))
     for _, pool in _item_pools(lesson):
         for item in pool:
             answer = _answer_text(item)
@@ -586,6 +690,10 @@ def _check_answer_leak(
                 leaked = out_nums[answer_nums[0]] > ground_nums[answer_nums[0]]
             else:
                 leaked = _count_phrase(answer, out_norm) > _count_phrase(answer, ground_norm)
+            if len(answer_nums) == 1 and _NUMERAL.fullmatch(answer):
+                leaked = leaked or answer_nums[0] in after_q_nums
+            else:
+                leaked = leaked or _count_phrase(answer, after_q) > 0
             if leaked:
                 found.append(
                     GateViolation(
@@ -593,6 +701,29 @@ def _check_answer_leak(
                     )
                 )
     return found
+
+
+# Red-team (§8): within a script that matches, words of another language. Refused unless the
+# grounding uses them (Urdu worked steps are grounded on the English step too).
+_FOREIGN_LETTERS: dict[str, tuple[re.Pattern[str], ...]] = {
+    "ur": (re.compile(r"[A-Za-z]{2,}"), re.compile("[\u0643\u064a\u0629\u0649]")),
+    "en": (re.compile("[\u00c0-\u024f]"),),
+}
+# A letter of any script other than Latin and Arabic (e.g. Devanagari) is foreign in every locale;
+# the script-ratio check above counts only Latin and Arabic letters, so it cannot see them.
+_OTHER_SCRIPT = re.compile(
+    r"[^\W\d_A-Za-z\u00c0-\u024f\u0600-\u06ff\u0750-\u077f\ufb50-\ufdff\ufe70-\ufeff]"
+)
+
+
+def _ungrounded_match(patterns: tuple[re.Pattern[str], ...], text: str, grounding: str) -> bool:
+    """True if a pattern matches text that the grounding itself never uses."""
+    ground_norm = _normalize(grounding)
+
+    def grounded(hit: str) -> bool:
+        return hit in ground_norm if len(hit) == 1 else _count_phrase(hit, ground_norm) > 0
+
+    return any(not grounded(m.group(0).lower()) for p in patterns for m in p.finditer(text))
 
 
 def unverifiable(detail: str) -> GateVerdict:
@@ -686,6 +817,8 @@ def gate(
         violations.append(GateViolation(GateRule.PERSONAL_DATA_REQUEST, "asks for personal data"))
     if any(p.search(norm) for p in _DISALLOWED_PATTERNS):
         violations.append(GateViolation(GateRule.DISALLOWED_CONTENT, "disallowed content"))
+    elif _ungrounded_match(_GROUNDED_ONLY_PATTERNS, norm, grounding):
+        violations.append(GateViolation(GateRule.DISALLOWED_CONTENT, "ungrounded sensitive topic"))
 
     # -- locale ----------------------------------------------------------------------------
     script = _LOCALES.get(prompt.locale, ("", ""))[0]
@@ -696,6 +829,12 @@ def gate(
     elif (script == "arabic" and arabic < 0.6) or (script == "latin" and latin < 0.95):
         violations.append(
             GateViolation(GateRule.WRONG_LOCALE, f"script does not match {prompt.locale}")
+        )
+    elif _ungrounded_match(
+        (_OTHER_SCRIPT, *_FOREIGN_LETTERS.get(prompt.locale, ())), text, grounding
+    ):
+        violations.append(
+            GateViolation(GateRule.WRONG_LOCALE, f"foreign-language text for {prompt.locale}")
         )
 
     return GateVerdict(accepted=not violations, violations=tuple(violations), metrics=metrics)

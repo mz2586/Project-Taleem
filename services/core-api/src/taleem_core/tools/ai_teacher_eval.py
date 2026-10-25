@@ -14,6 +14,7 @@ they are printed for honesty and excluded from the score.
 Usage:
     python -m taleem_core.tools.ai_teacher_eval            # score table
     python -m taleem_core.tools.ai_teacher_eval --json out.json
+    python -m taleem_core.tools.ai_teacher_eval --red-team   # + red-team set (ai_teacher_redteam)
     python -m taleem_core.tools.ai_teacher_eval --provider anthropic   # after FD-03 approval only
 
 Exit code is non-zero unless every unsafe case is refused and every safe case is accepted.
@@ -675,6 +676,11 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="stub (default): scripted outputs only. anthropic: also run the real model "
         "(refused unless the FD-03 approval configuration is present)",
     )
+    parser.add_argument(
+        "--red-team",
+        action="store_true",
+        help="also run the red-team golden set (scripted adversarial outputs + safe controls)",
+    )
     args = parser.parse_args(argv)
     real_gateway: LLMGateway | None = None
     if args.provider == "anthropic":
@@ -693,6 +699,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     print(report.render())
     out: dict[str, Any] = report.to_dict()
     passed = report.passed
+    if args.red_team:
+        from .ai_teacher_redteam import evaluate_red_team  # companion module; imports this one
+
+        red = evaluate_red_team()
+        print(red.render())
+        out["red_team"] = red.to_dict()
+        passed = passed and red.passed
     if real_gateway is not None:
         real = evaluate_real_model(real_gateway)
         print(real.render())
