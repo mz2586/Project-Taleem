@@ -140,11 +140,24 @@ they are ruled out ([52 §4](./52-safeguarding-crisis-protocol.md)).
 
 ## 3. Privacy: export and erasure
 
-The `contexts/privacy` completeness gate covers all three tables (`safeguarding.concern`,
-`.concern_note`, `.concern_audit`) through `adapters/safeguarding_data.py`.
+The `contexts/privacy` completeness gate covers all four tables (`safeguarding.concern`,
+`.concern_note`, `.concern_evidence`, `.concern_audit`) through `adapters/safeguarding_data.py`.
+
+**Evidence snapshots** (`safeguarding.concern_evidence`, migration `0018_concern_evidence`): a
+concern raised from a homework submission (the disclosure screen, or a teacher's `:concern` from a
+marking row) stores, in the same transaction, the flagged text, its attempt, `submitted_at`,
+`item_ref`, `objective_code`, the SHA-256 of the text and `created_at` — one row per concern. A
+resubmission changes the submission, never the snapshot, so the lead's context read always shows
+what was flagged (`flagged`), plus the latest text only when it differs (`current`). On PostgreSQL
+a trigger refuses UPDATE, DELETE and TRUNCATE except inside the privacy erasure's transaction
+(`taleem.privacy_erasure`). Only `safeguarding_lead` reads it, on demand and audited; no teacher
+queue, guardian or learner view, report, export, log line or audit row carries its text (or hash).
+Concerns raised before 0018 have no snapshot; the API and console say so rather than presenting the
+latest text as the flagged one.
 
 - **Export** (requested by the guardian): it contains the concerns that guardian raised about the
-  learner. Concerns the learner raised, and every triage note and audit row, are **withheld** under
+  learner. Concerns the learner, a teacher or the screen raised, and every triage note, evidence
+  snapshot and audit row, are **withheld** under
   a safeguarding exemption, **PENDING M-Gov**. How a child might get their own safeguarding records
   is an open question for M-Gov.
 - **Erasure** (requested by the guardian) follows an **explicit retained-set entry**,
@@ -156,7 +169,10 @@ The `contexts/privacy` completeness gate covers all three tables (`safeguarding.
     default: the person requesting erasure is the guardian, and a child's concern may be about that
     guardian. Deleting the child's report at the guardian's request could destroy the record of a
     disclosure.
-  - `erase`: the concerns, their notes and their audit rows are deleted.
+    Evidence snapshots are kept with their concern (they carry no learner ref; a ref written inside
+    the flagged text is replaced and its SHA-256 recomputed for the stored text). This mirrors the
+    concern's own free text, which is kept too; it is the same PENDING M-Gov decision.
+  - `erase`: the concerns, their evidence snapshots, their notes and their audit rows are deleted.
 
   Either way the verification sweep finds no row naming the learner. The data is never kept
   silently.
@@ -182,4 +198,5 @@ The `contexts/privacy` completeness gate covers all three tables (`safeguarding.
 
 | Date | Change | Author |
 | --- | --- | --- |
+| 2026-10-25 | Immutable evidence snapshots for concerns raised from a submission (`safeguarding.concern_evidence`, 0018); context read returns `flagged` + `current`; export withholds them; erasure follows the safeguarding retained set. | Engineering |
 | 2026-10-23 | Initial implementation record: raise (child, guardian), triage console, visibility rules, audit, SLA unset by default, alerts, privacy coverage. Workflow not approved or staffed. | Engineering |

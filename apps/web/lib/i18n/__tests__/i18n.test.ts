@@ -61,9 +61,9 @@ describe("catalog parity", () => {
     }
   });
 
-  it("reserves extensible namespaces, including guardian, auth, teacher, studio and safeguarding", () => {
+  it("reserves extensible namespaces, including guardian, auth, teacher, studio, safeguarding and progression", () => {
     for (const locale of SUPPORTED_LOCALES) {
-      expect(Object.keys(CATALOGS[locale])).toEqual(["common", "home", "student", "guardian", "auth", "teacher", "studio", "safeguarding"]);
+      expect(Object.keys(CATALOGS[locale])).toEqual(["common", "home", "student", "guardian", "auth", "teacher", "studio", "safeguarding", "progression"]);
     }
   });
 });

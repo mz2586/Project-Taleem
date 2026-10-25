@@ -89,6 +89,10 @@ from .contexts.learning.adapters.persistence.base import (
 )
 from .contexts.learning.adapters.persistence.uow import LearningUnitOfWork
 from .contexts.learning.adapters.placement_api import build_placement_router
+from .contexts.learning.adapters.progression_api import (
+    ProgressionApiDeps,
+    build_progression_router,
+)
 from .contexts.learning.adapters.student_api import build_student_router
 from .contexts.learning.application.ai_teacher_service import (
     SAFETY_LOG_ALLOW,
@@ -100,6 +104,7 @@ from .contexts.learning.application.analytics import LearningAnalytics
 from .contexts.learning.application.knowledge_service import KnowledgeService
 from .contexts.learning.application.offline_service import OfflinePackageService
 from .contexts.learning.application.placement_service import PlacementService
+from .contexts.learning.application.progression_service import ProgressionService
 from .contexts.learning.application.report_records import LearnerRecordsService
 from .contexts.learning.application.session_service import SessionService
 from .contexts.learning.application.student_queries import StudentQueryService
@@ -598,9 +603,25 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     class _DisclosureScreen:
         # Every submitted homework text passes the safeguarding disclosure screen (contract §6).
         # ``safeguarding_service`` is built below; it resolves at call time.
-        def screen_submission(self, *, student_ref: str, submission_id: str, text: str) -> bool:
+        def screen_submission(
+            self,
+            *,
+            student_ref: str,
+            submission_id: str,
+            text: str,
+            attempt: int,
+            submitted_at: float,
+            item_ref: str,
+            objective_code: str,
+        ) -> bool:
             return safeguarding_service.screen_submission(
-                student_ref=student_ref, submission_id=submission_id, text=text
+                student_ref=student_ref,
+                submission_id=submission_id,
+                text=text,
+                attempt=attempt,
+                submitted_at=submitted_at,
+                item_ref=item_ref,
+                objective_code=objective_code,
             )
 
     school_service = SchoolService(
@@ -896,6 +917,49 @@ def create_app(settings: Settings | None = None) -> FastAPI:
     # The learner's own cards: behind the same live learner gate as every learner surface.
     app.include_router(
         build_reporting_learner_router(reporting_service, claims_dependency),
+        dependencies=learner_permitted,
+    )
+
+    # ---- Path, unit checks and the academic record (PROGRESSION_AND_EXAMINATION_CONTRACT) ----
+    # The learner's grade comes from their enrolment; the path is the published curriculum the
+    # reader may see (cohort-filtered read model). Sittings live in the learning schema (0019).
+    def _grade_of(student_ref: str) -> int | None:
+        account = _learner_lookup(student_ref)
+        return int(account.grade_level) if account is not None else None
+
+    progression_service = ProgressionService(
+        learning_uow, read_model, knowledge_service, _grade_of, time.time
+    )
+    app.state.progression_service = progression_service
+
+    def _teacher_sees(teacher_ref: str, student_ref: str) -> bool:
+        # In one of the teacher's own classes AND visible now (the same live rules as reporting).
+        try:
+            rosters = school_service.reporting_rosters(teacher_ref)
+        except Problem:
+            return False
+        if not any(student_ref in (r.get("student_refs") or ()) for r in rosters):
+            return False
+        seen = _teacher_visibility([student_ref]).get(student_ref)
+        return seen is not None and seen.get("reason") is None
+
+    def _record_cards(role: str, actor_ref: str, student_ref: str) -> list[dict[str, Any]]:
+        if role == "teacher":
+            return reporting_service.learner_cards_for_teacher(
+                teacher_ref=actor_ref, student_ref=student_ref
+            )
+        return reporting_service.learner_cards(student_ref)
+
+    app.include_router(
+        build_progression_router(
+            ProgressionApiDeps(
+                service=progression_service,
+                guardian_of=_guardian_of,
+                teacher_sees=_teacher_sees,
+                report_cards=_record_cards,
+            ),
+            claims_dependency,
+        ),
         dependencies=learner_permitted,
     )
 

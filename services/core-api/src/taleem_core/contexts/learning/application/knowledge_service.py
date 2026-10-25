@@ -97,19 +97,14 @@ class KnowledgeService:
     ) -> RecordOutcome:
         """Record one auto-scored attempt. ``lesson_id`` / ``lesson_version`` name the published
         lesson the item was answered against (recorded on the evidence; never guessed later)."""
-        now = self._now()
 
-        def _txn() -> tuple[AttemptResult, list[LearningEvent]]:
+        def _txn() -> RecordOutcome:
             # A full read-modify-write in its own transaction so a retry re-reads the latest
             # committed version (evidence_id is minted per attempt — a retry is a fresh row).
             with self._uow() as uow:
-                # Root + this objective only: the attempt never reads past evidence.
-                knowledge = uow.knowledge.get_for_objectives(
-                    student_ref, (objective_code,)
-                ) or StudentKnowledge(student_ref=student_ref)
-                knowledge.ensure_objective(objective_code, initial=self._estimator.initial())
-                result = knowledge.apply_attempt(
-                    evidence_id=uuid7(),
+                outcome = self.record_attempt_in(
+                    uow,
+                    student_ref=student_ref,
                     objective_code=objective_code,
                     item_ref=item_ref,
                     session_id=session_id,
@@ -119,26 +114,72 @@ class KnowledgeService:
                     response_time_ms=response_time_ms,
                     context=context,
                     self_confidence=self_confidence,
-                    estimator=self._estimator,
-                    forgetting=self._forgetting,
-                    now=now,
                     lesson_id=lesson_id,
                     lesson_version=lesson_version,
                 )
-                obj = knowledge.get(objective_code)
-                next_review = obj.memory.next_review_at if obj else 0.0
-                events = self._events_for(result, student_ref, session_id, next_review, now)
-                uow.knowledge.save(knowledge)
-                uow.events.publish(events)
                 uow.commit()
-                return result, events
+                return outcome
 
         try:
-            result, events = retry_on_conflict(_txn)
+            recorded = retry_on_conflict(_txn)
         except ConcurrencyConflictError as exc:
             raise conflict(f"knowledge write conflict for {student_ref}") from exc
+        self.observe(student_ref, recorded.result)
+        return recorded
 
-        # Observability (CTO H9): domain telemetry for the learning write path.
+    def record_attempt_in(
+        self,
+        uow: LearningUnitOfWork,
+        *,
+        student_ref: str,
+        objective_code: str,
+        item_ref: str,
+        session_id: str,
+        correct: bool,
+        misconception_hits: tuple[str, ...],
+        hints_used: int,
+        response_time_ms: int,
+        context: InteractionContext,
+        self_confidence: float | None,
+        lesson_id: str = "",
+        lesson_version: int | None = None,
+    ) -> RecordOutcome:
+        """Apply one auto-scored attempt inside the caller's unit of work (the caller commits and
+        retries on conflict, then calls ``observe``). Updates the aggregate, appends the evidence
+        and publishes the events to the outbox — atomically with whatever else the caller writes
+        (a unit-check sitting records its answer in the same transaction)."""
+        now = self._now()
+        # Root + this objective only: the attempt never reads past evidence.
+        knowledge = uow.knowledge.get_for_objectives(
+            student_ref, (objective_code,)
+        ) or StudentKnowledge(student_ref=student_ref)
+        knowledge.ensure_objective(objective_code, initial=self._estimator.initial())
+        result = knowledge.apply_attempt(
+            evidence_id=uuid7(),
+            objective_code=objective_code,
+            item_ref=item_ref,
+            session_id=session_id,
+            correct=correct,
+            misconception_hits=misconception_hits,
+            hints_used=hints_used,
+            response_time_ms=response_time_ms,
+            context=context,
+            self_confidence=self_confidence,
+            estimator=self._estimator,
+            forgetting=self._forgetting,
+            now=now,
+            lesson_id=lesson_id,
+            lesson_version=lesson_version,
+        )
+        obj = knowledge.get(objective_code)
+        next_review = obj.memory.next_review_at if obj else 0.0
+        events = self._events_for(result, student_ref, session_id, next_review, now)
+        uow.knowledge.save(knowledge)
+        uow.events.publish(events)
+        return RecordOutcome(result=result, events=events)
+
+    def observe(self, student_ref: str, result: AttemptResult) -> None:
+        """Domain telemetry for one committed attempt (CTO H9)."""
         observability.record_event("taleem_learning_attempts_total", outcome=result.outcome.value)
         if result.newly_mastered:
             observability.record_event("taleem_objectives_mastered_total")
@@ -147,11 +188,10 @@ class KnowledgeService:
         observability.log_event(
             "attempt_recorded",
             student_ref=student_ref,
-            objective=objective_code,
+            objective=result.objective_code,
             outcome=result.outcome.value,
             mastered=result.newly_mastered,
         )
-        return RecordOutcome(result=result, events=events)
 
     def record_human_graded(
         self,

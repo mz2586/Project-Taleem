@@ -17,8 +17,10 @@ from ...curriculum_studio.adapters.persistence import unit_of_work as cs_unit_of
 from ...curriculum_studio.adapters.persistence.models import LessonRow, SubjectRow
 from ...curriculum_studio.domain.assessment import HUMAN_GRADED, AssessmentItem, ItemType
 from ...curriculum_studio.domain.content import Locale
+from ...curriculum_studio.domain.hierarchy import Chapter, EducationSystem
 from ...curriculum_studio.domain.interaction import interaction_kind
 from ...curriculum_studio.domain.lesson import Lesson
+from ...curriculum_studio.domain.packs import DEFAULT_PACK_ID, default_registry
 from ..domain.curriculum_view import (
     CHOOSE,
     FILL,
@@ -34,6 +36,15 @@ from ..domain.curriculum_view import (
     RubricView,
 )
 from ..domain.decision import CurriculumGraph, ObjectiveInfo
+from ..domain.progression import (
+    UNPLACED_TITLE,
+    UNPLACED_UNIT_KEY,
+    GradePath,
+    PathLesson,
+    PathSubject,
+    PathUnit,
+    UnitCheckSettings,
+)
 
 
 def _text(localized: object, prefer: str = "en") -> str:
@@ -131,6 +142,21 @@ def _preferred(lessons: list[Lesson]) -> list[Lesson]:
     if cohort == REAL:
         return visible
     return sorted(visible, key=lambda lesson: lesson.metadata.audience != cohort)
+
+
+def _grade_structure(
+    system: EducationSystem | None, grade_key: str
+) -> tuple[dict[str, list[Chapter]], dict[str, dict[str, str]]]:
+    """The stored hierarchy's chapters and subject titles for one grade (empty when none)."""
+    chapters: dict[str, list[Chapter]] = {}
+    titles: dict[str, dict[str, str]] = {}
+    grade = next((g for g in system.grades if g.key == grade_key), None) if system else None
+    for subject in grade.subjects if grade is not None else []:
+        chapters[subject.key] = list(subject.chapters)
+        title = {k: v for k, v in _bilingual(subject.title).items() if v}
+        if title:
+            titles[subject.key] = title
+    return chapters, titles
 
 
 class CurriculumStudioReadModel:
@@ -232,17 +258,7 @@ class CurriculumStudioReadModel:
         seen: set[str] = set()
         with cs_unit_of_work(self._sf) as uow:
             lessons = _preferred(uow.lessons.all())
-        subject_names: dict[str, dict[str, str]] = {}
-        with self._sf() as session:
-            for key, titles in session.execute(
-                select(SubjectRow.subject_key, SubjectRow.titles).order_by(SubjectRow.id)
-            ):
-                if key not in subject_names and isinstance(titles, dict):
-                    subject_names[str(key)] = {
-                        str(k): v
-                        for k, v in titles.items()
-                        if isinstance(v, str) and v and not str(k).startswith("_")
-                    }
+        subject_names = self._subject_names()
         for lesson in lessons:
             for code in lesson.learning_outcomes:
                 if code in seen:
@@ -260,6 +276,136 @@ class CurriculumStudioReadModel:
                     }
                 )
         return out
+
+    def _subject_names(self) -> dict[str, dict[str, str]]:
+        """``{subject_key: {locale: name}}`` from the stored subject rows (top-level titles)."""
+        subject_names: dict[str, dict[str, str]] = {}
+        with self._sf() as session:
+            for key, titles in session.execute(
+                select(SubjectRow.subject_key, SubjectRow.titles).order_by(SubjectRow.id)
+            ):
+                if key not in subject_names and isinstance(titles, dict):
+                    subject_names[str(key)] = {
+                        str(k): v
+                        for k, v in titles.items()
+                        if isinstance(v, str) and v and not str(k).startswith("_")
+                    }
+        return subject_names
+
+    def lesson_view(self, lesson_id: str) -> LessonView | None:
+        """One published lesson the current reader may see, projected (None otherwise)."""
+        with cs_unit_of_work(self._sf) as uow:
+            lesson = uow.lessons.get(lesson_id)
+        if lesson is None or not _visible_published([lesson]):
+            return None
+        code = lesson.learning_outcomes[0] if lesson.learning_outcomes else ""
+        return self._project(lesson, code)
+
+    def grade_path(self, grade_key: str, pack_id: str = DEFAULT_PACK_ID) -> GradePath:
+        """The published path of one grade (PROGRESSION_AND_EXAMINATION_CONTRACT §1).
+
+        Subjects → units (the stored hierarchy's chapters) → lessons (published, visible to the
+        current reader, placed by ``metadata.chapter_key``). A unit with no visible lesson is not
+        on the path — so a real reader never sees a unit made only of demo lessons. A subject's
+        lessons placed in no stored chapter form one last unit. Where two visible lessons teach
+        the same objectives, only the one ``lesson_for`` teaches is listed (same preference)."""
+        with cs_unit_of_work(self._sf) as uow:
+            lessons = [
+                lesson
+                for lesson in _preferred(uow.lessons.all())
+                if lesson.metadata.grade_key == grade_key
+                and lesson.metadata.curriculum_pack == pack_id
+            ]
+            system = uow.hierarchy.get(pack_id)
+        pack = default_registry().get(pack_id)
+        settings = (
+            UnitCheckSettings(pack.unit_check_items, pack.unit_check_pass_percent)
+            if pack is not None
+            else UnitCheckSettings()
+        )
+        # One lesson per objective, in ``lesson_for`` preference order.
+        seen: set[str] = set()
+        kept: list[Lesson] = []
+        for lesson in lessons:
+            if not lesson.learning_outcomes or set(lesson.learning_outcomes) <= seen:
+                continue
+            seen.update(lesson.learning_outcomes)
+            kept.append(lesson)
+        chapters_by_subject, subject_titles = _grade_structure(system, grade_key)
+        stored_names = self._subject_names()
+        roster = pack.subjects_for(grade_key) if pack is not None else ()
+        subject_keys = list(
+            dict.fromkeys(
+                [*chapters_by_subject, *roster, *(lesson.metadata.subject_key for lesson in kept)]
+            )
+        )
+        subjects: list[PathSubject] = []
+        for subject_key in subject_keys:
+            own = [lesson for lesson in kept if lesson.metadata.subject_key == subject_key]
+            if not own:
+                continue
+            chapters = chapters_by_subject.get(subject_key, [])
+            units: list[PathUnit] = []
+            placed: set[str] = set()
+            for chapter in chapters:
+                members = [lesson for lesson in own if lesson.metadata.chapter_key == chapter.key]
+                if not members:
+                    continue
+                placed.update(lesson.lesson_id for lesson in members)
+                topic_order = {t.key: i for i, t in enumerate(chapter.topics)}
+                members.sort(
+                    key=lambda lesson, order=topic_order: (  # type: ignore[misc]
+                        order.get(lesson.metadata.topic_key, len(order)),
+                        lesson.learning_outcomes[0],
+                        lesson.lesson_id,
+                    )
+                )
+                units.append(
+                    self._unit(pack_id, grade_key, subject_key, chapter.key, chapter, members)
+                )
+            rest = sorted(
+                (lesson for lesson in own if lesson.lesson_id not in placed),
+                key=lambda lesson: (lesson.learning_outcomes[0], lesson.lesson_id),
+            )
+            if rest:
+                units.append(
+                    self._unit(pack_id, grade_key, subject_key, UNPLACED_UNIT_KEY, None, rest)
+                )
+            title = (
+                subject_titles.get(subject_key)
+                or stored_names.get(subject_key)
+                or {"en": subject_key, "ur": subject_key}
+            )
+            subjects.append(PathSubject(key=subject_key, title=title, units=tuple(units)))
+        return GradePath(
+            pack_id=pack_id, grade_key=grade_key, subjects=tuple(subjects), settings=settings
+        )
+
+    def _unit(
+        self,
+        pack_id: str,
+        grade_key: str,
+        subject_key: str,
+        key: str,
+        chapter: Chapter | None,
+        lessons: list[Lesson],
+    ) -> PathUnit:
+        title = _bilingual(chapter.title) if chapter is not None else dict(UNPLACED_TITLE)
+        return PathUnit(
+            unit_id=f"{pack_id}/{grade_key}/{subject_key}/{key}",
+            key=key,
+            subject_key=subject_key,
+            title=title,
+            lessons=tuple(
+                PathLesson(
+                    lesson_id=lesson.lesson_id,
+                    title=_bilingual(lesson.title),
+                    objective_codes=tuple(lesson.learning_outcomes),
+                    view=self._project(lesson, lesson.learning_outcomes[0]),
+                )
+                for lesson in lessons
+            ),
+        )
 
     def published_graph(self) -> CurriculumGraph:
         """Build the decision-engine curriculum graph from currently-published lessons.

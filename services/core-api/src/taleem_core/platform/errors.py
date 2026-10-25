@@ -22,6 +22,8 @@ class Problem(Exception):
     detail: str = ""
     type: str = "about:blank"
     errors: list[dict[str, str]] = field(default_factory=list)
+    # RFC 9457 extension members (top-level, e.g. ``retake_after``); never override the core ones.
+    extensions: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self, instance: str | None = None) -> dict[str, Any]:
         body: dict[str, Any] = {
@@ -36,6 +38,8 @@ class Problem(Exception):
             body["instance"] = instance
         if self.errors:
             body["errors"] = self.errors
+        for key, value in self.extensions.items():
+            body.setdefault(key, value)
         trace = get_correlation_id()
         if trace:
             body["traceId"] = trace

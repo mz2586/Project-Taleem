@@ -1,4 +1,5 @@
-"""Learning store: knowledge, mastery, evidence, outbox events, AI usage, live sessions.
+"""Learning store: knowledge, mastery, evidence, outbox events, AI usage, unit-check sittings,
+live sessions.
 
 Durable rows come from the learning context's ORM models; live tutoring sessions (interactions and
 turns) are in-process state held by its ``InMemorySessionRepository``, so they are erased there.
@@ -18,6 +19,7 @@ from ...learning.adapters.persistence.models import (
     LearningOutboxRow,
     ObjectiveMasteryRow,
     StudentKnowledgeRow,
+    UnitCheckSittingRow,
 )
 from ..domain.policy import RetainedSet
 from ._rows import affected, jsonable, mentions, row_dict, text_contains
@@ -52,6 +54,7 @@ class LearningLearnerData:
             f"{_S}.assessment_evidence",
             f"{_S}.learning_outbox",
             f"{_S}.ai_usage_ledger",
+            f"{_S}.unit_check_sitting",
             "memory:learning.sessions",
         )
 
@@ -102,6 +105,16 @@ class LearningLearnerData:
                         .order_by(AIUsageRow.recorded_at)
                     ).all()
                 ],
+                # Unit-check sittings (C2): the paper (refs only), the learner's answers and
+                # outcomes, and the score (PROGRESSION_AND_EXAMINATION_CONTRACT §4).
+                "unit_check_sittings": [
+                    row_dict(r)
+                    for r in s.scalars(
+                        select(UnitCheckSittingRow)
+                        .where(UnitCheckSittingRow.student_ref == student_ref)
+                        .order_by(UnitCheckSittingRow.started_at)
+                    ).all()
+                ],
                 "live_sessions": [
                     jsonable(sess) for _sid, sess in self._live_sessions(student_ref)
                 ],
@@ -128,6 +141,7 @@ class LearningLearnerData:
                     )
                     or 0
                 ),
+                "unit_check_sitting": self._count(s, UnitCheckSittingRow, student_ref),
                 "sessions": len(self._live_sessions(student_ref)),
             }
 
@@ -140,7 +154,13 @@ class LearningLearnerData:
         if column is None:
             return None
         with self._sf() as s:
-            return int(s.scalar(select(func.count()).where(column < cutoff)) or 0)
+            count = int(s.scalar(select(func.count()).where(column < cutoff)) or 0)
+            if data_class == "learning_records":  # unit-check sittings are C2 learning records
+                count += int(
+                    s.scalar(select(func.count()).where(UnitCheckSittingRow.started_at < cutoff))
+                    or 0
+                )
+            return count
 
     def blockers(self) -> list[str]:
         with self._sf() as s:
@@ -176,6 +196,9 @@ class LearningLearnerData:
                 )
             )
             usage = s.execute(delete(AIUsageRow).where(AIUsageRow.learner_ref == student_ref))
+            sittings = s.execute(
+                delete(UnitCheckSittingRow).where(UnitCheckSittingRow.student_ref == student_ref)
+            )
             events = self._outbox(s, student_ref)
             for row in events:
                 s.delete(row)
@@ -189,5 +212,6 @@ class LearningLearnerData:
             "assessment_evidence": affected(evidence),
             "learning_outbox": len(events),
             "ai_usage_ledger": affected(usage),
+            "unit_check_sitting": affected(sittings),
             "sessions": len(live),
         }

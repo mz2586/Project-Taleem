@@ -508,10 +508,16 @@ def test_export_and_erasure_cover_self_paced_work_and_system_concerns(s: S) -> N
     ref = s.fam.student_ref
     export = s.client.get(f"/v1/privacy/learners/{ref}/export", headers=s.fam.guardian)
     assert export.status_code == 200, export.text
-    rows = {r["submission_id"]: r for r in export.json()["sections"]["school"]["submissions"]}
-    assert set(rows) == {sid, auto}
-    assert rows[sid]["source"] == "self_paced" and rows[sid]["assignment_id"] is None
+    school = export.json()["sections"]["school"]
+    rows = {r["submission_id"]: r for r in school["submissions"]}
+    # The flagged answer (a disclosure) is withheld from the guardian, who may be the person the
+    # child wrote about; the ordinary answer is exported. The notice is constant either way.
+    assert set(rows) == {auto}
+    assert "uncle" not in export.text
+    assert school["withheld"]
+    assert rows[auto]["source"] == "self_paced" and rows[auto]["assignment_id"] is None
     assert rows[auto]["reviewed_by"] == "auto"
+    assert sid not in export.text
     req = s.client.post(f"/v1/privacy/learners/{ref}/erasure-requests", headers=s.fam.guardian)
     assert req.status_code == 202, req.text
     done = s.client.post(

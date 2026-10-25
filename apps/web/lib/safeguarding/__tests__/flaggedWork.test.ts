@@ -19,6 +19,7 @@ import {
 } from "../triage";
 
 const WORDS = "My uncle hits me when nobody is home.";
+const LATER = "Ammi cut the roti into 4 parts";
 
 function wire(over: Partial<ConcernContextWire> = {}): ConcernContextWire {
   return {
@@ -28,18 +29,33 @@ function wire(over: Partial<ConcernContextWire> = {}): ConcernContextWire {
       source: "self_paced",
       objective_code: "M4.FR.01",
       item_ref: "hw-short",
+      item_prompt: { ur: "اپنے گھر کے بارے میں لکھیں", en: "Write about your home" },
+      lesson_title: { ur: "کسور", en: "Fractions" },
+      available: true,
+    },
+    flagged: {
       text: WORDS,
       attempt: 1,
       submitted_at: 1_760_000_000,
-      item_prompt: { ur: "اپنے گھر کے بارے میں لکھیں", en: "Write about your home" },
-      lesson_title: { ur: "کسور", en: "Fractions" },
+      item_ref: "hw-short",
+      objective_code: "M4.FR.01",
+      text_sha256: "a".repeat(64),
+      intact: true,
+      captured_at: 1_760_000_001,
     },
+    current: null,
     matched_phrases: [{ phrase_id: "en-01", lang: "en", category: "felt_unsafe", phrase: "hits me" }],
     resubmitted_since_raised: false,
+    snapshot: true,
     read_recorded: true,
     ...over,
   };
 }
+
+const changed = (): Partial<ConcernContextWire> => ({
+  resubmitted_since_raised: true,
+  current: { text: LATER, attempt: 2, submitted_at: 1_760_000_500, matched_phrases: [] },
+});
 
 const never = () => Promise.reject(new Error("must not be called while rendering"));
 
@@ -63,14 +79,34 @@ describe("flagged work view-model", () => {
   it("arranges the wire without changing the child's words", () => {
     const v = flaggedWorkView(wire(), "en");
     expect(v).toEqual({
-      text: WORDS,
+      flagged: {
+        text: WORDS,
+        submittedAt: 1_760_000_000,
+        attempt: 1,
+        intact: true,
+        matched: [{ id: "en-01", phrase: "hits me", lang: "en" }],
+      },
+      current: null,
       lessonTitle: "Fractions",
       prompt: "Write about your home",
-      submittedAt: 1_760_000_000,
-      attempt: 1,
-      matched: [{ id: "en-01", phrase: "hits me", lang: "en" }],
       resubmitted: false,
     });
+  });
+
+  it("keeps the flagged text and adds the current one only when it changed", () => {
+    const v = flaggedWorkView(wire(changed()), "en");
+    expect(v.flagged?.text).toBe(WORDS);
+    expect(v.current).toEqual({ text: LATER, submittedAt: 1_760_000_500, attempt: 2, matched: [] });
+    expect(v.resubmitted).toBe(true);
+  });
+
+  it("has no flagged text for a concern raised before snapshots existed", () => {
+    const v = flaggedWorkView(
+      wire({ snapshot: false, flagged: null, current: { text: WORDS, attempt: 1, submitted_at: 1, matched_phrases: [] } }),
+      "en",
+    );
+    expect(v.flagged).toBeNull();
+    expect(v.current?.text).toBe(WORDS);
   });
 
   it("maps a 404 to 'nothing to read' and other failures to the console errors", () => {
@@ -83,6 +119,7 @@ describe("flagged work view-model", () => {
     const keys = [
       "heading", "intro", "recorded", "show", "loading", "lesson", "prompt", "submittedAt", "attempt",
       "answer", "matched", "noMatch", "resubmitted", "readRecorded", "unknown", "gone",
+      "flaggedAnswer", "currentAnswer", "resubmittedSame", "noSnapshot", "notIntact",
     ] as const;
     for (const locale of SUPPORTED_LOCALES) {
       for (const k of keys) {
@@ -126,16 +163,48 @@ describe("FlaggedWork markup", () => {
     expect(html).not.toContain(t("safeguarding.console.detail.flagged.resubmitted"));
   });
 
-  it("warns when the child changed the answer after it was flagged, and says when nothing matches now", () => {
+  it("shows the flagged text first, labelled, then the changed current text", () => {
     const t = createTranslator("en");
-    const view = flaggedWorkView(
-      wire({ resubmitted_since_raised: true, matched_phrases: [], submission: { ...wire().submission, item_prompt: {}, attempt: 2 } }),
-      "en",
-    );
+    const view = flaggedWorkView(wire({ ...changed(), submission: { ...wire().submission, item_prompt: {} } }), "en");
     const html = renderToStaticMarkup(createElement(FlaggedWorkBody, { view, t, locale: "en" }));
+    const flaggedAt = html.indexOf(t("safeguarding.console.detail.flagged.flaggedAnswer"));
+    const wordsAt = html.indexOf(WORDS);
+    const currentAt = html.indexOf(t("safeguarding.console.detail.flagged.currentAnswer"));
+    const laterAt = html.indexOf(LATER);
+    expect(flaggedAt).toBeGreaterThan(-1);
+    expect(flaggedAt).toBeLessThan(wordsAt);
+    expect(wordsAt).toBeLessThan(currentAt);
+    expect(currentAt).toBeLessThan(laterAt);
     expect(html).toContain(t("safeguarding.console.detail.flagged.resubmitted"));
-    expect(html).toContain(t("safeguarding.console.detail.flagged.noMatch"));
+    expect(html).toContain(t("safeguarding.console.detail.flagged.noMatch")); // the current one
     expect(html).toContain(t("safeguarding.console.detail.flagged.unknown"));
     expect(html).toContain(t("safeguarding.console.detail.flagged.attempt", { n: 2 }));
+  });
+
+  it("shows no current copy when the text did not change", () => {
+    const t = createTranslator("en");
+    const html = renderToStaticMarkup(createElement(FlaggedWorkBody, { view: flaggedWorkView(wire(), "en"), t, locale: "en" }));
+    expect(html).not.toContain(t("safeguarding.console.detail.flagged.currentAnswer"));
+    expect(html.split(WORDS).length - 1).toBe(1);
+    const same = renderToStaticMarkup(
+      createElement(FlaggedWorkBody, { view: flaggedWorkView(wire({ resubmitted_since_raised: true }), "en"), t, locale: "en" }),
+    );
+    expect(same).toContain(t("safeguarding.console.detail.flagged.resubmittedSame"));
+  });
+
+  it("says when no snapshot exists, and warns when the fingerprint does not match", () => {
+    const t = createTranslator("ur");
+    const legacy = flaggedWorkView(
+      wire({ snapshot: false, flagged: null, current: { text: WORDS, attempt: 1, submitted_at: 1, matched_phrases: [] } }),
+      "ur",
+    );
+    const html = renderToStaticMarkup(createElement(FlaggedWorkBody, { view: legacy, t, locale: "ur" }));
+    expect(html).toContain(t("safeguarding.console.detail.flagged.noSnapshot"));
+    expect(html).not.toContain(t("safeguarding.console.detail.flagged.flaggedAnswer"));
+    expect(html).toContain(WORDS);
+    const base = wire();
+    const broken = flaggedWorkView(wire({ flagged: { ...base.flagged!, intact: false } }), "ur");
+    const warned = renderToStaticMarkup(createElement(FlaggedWorkBody, { view: broken, t, locale: "ur" }));
+    expect(warned).toContain(t("safeguarding.console.detail.flagged.notIntact"));
   });
 });

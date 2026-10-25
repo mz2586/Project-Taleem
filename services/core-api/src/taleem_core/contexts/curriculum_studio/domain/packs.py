@@ -32,6 +32,11 @@ DEFAULT_PACK_ID = "PK-NCP"
 PACK_SCHEMA_VERSION = 1
 
 TEXT_DIRECTIONS = frozenset({"ltr", "rtl"})
+# Unit-check (end-of-unit examination) defaults (PROGRESSION_AND_EXAMINATION_CONTRACT §2). A pack
+# may override both in an optional ``unit_check`` object.
+DEFAULT_UNIT_CHECK_ITEMS = 10
+DEFAULT_UNIT_CHECK_PASS_PERCENT = 70
+MAX_UNIT_CHECK_ITEMS = 50
 NUMERAL_SYSTEMS = frozenset({"western", "eastern"})  # platform/i18n.NumeralSystem values
 
 _PACKS_PACKAGE = "taleem_core.contexts.curriculum_studio.packs"
@@ -97,6 +102,9 @@ class CurriculumPack:
     instructional_locales: Mapping[Locale, InstructionRules]
     readability: Mapping[Locale, ReadabilityLimits]
     default_numeral_system: str
+    # Unit checks: the paper's length and the pass mark (percent of items correct).
+    unit_check_items: int = DEFAULT_UNIT_CHECK_ITEMS
+    unit_check_pass_percent: int = DEFAULT_UNIT_CHECK_PASS_PERCENT
 
     # ---- roster ----
     def subjects_for(self, grade_key: str) -> tuple[str, ...]:
@@ -360,6 +368,8 @@ def parse_pack(data: Any, source: str = "<pack>") -> CurriculumPack:
     if numerals not in NUMERAL_SYSTEMS:
         raise PackError(f"{src}: default_numeral_system must be one of {sorted(NUMERAL_SYSTEMS)}")
 
+    check_items, check_pass = _unit_check(data.get("unit_check"), src)
+
     return CurriculumPack(
         pack_id=pack_id,
         version=version,
@@ -373,7 +383,29 @@ def parse_pack(data: Any, source: str = "<pack>") -> CurriculumPack:
         instructional_locales=instructional,
         readability=readability,
         default_numeral_system=numerals,
+        unit_check_items=check_items,
+        unit_check_pass_percent=check_pass,
     )
+
+
+def _unit_check(value: Any, src: str) -> tuple[int, int]:
+    """The optional ``unit_check`` settings: ``{"items": 1..50, "pass_mark_percent": 1..100}``."""
+    if value is None:
+        return DEFAULT_UNIT_CHECK_ITEMS, DEFAULT_UNIT_CHECK_PASS_PERCENT
+    if not isinstance(value, dict):
+        raise PackError(f"{src}: unit_check must be an object")
+    unknown = sorted(set(value) - {"items", "pass_mark_percent"})
+    if unknown:
+        raise PackError(f"{src}: unit_check has unknown field(s) {unknown}")
+    items = value.get("items", DEFAULT_UNIT_CHECK_ITEMS)
+    passing = value.get("pass_mark_percent", DEFAULT_UNIT_CHECK_PASS_PERCENT)
+    _positive_int(items, "unit_check.items", src)
+    _positive_int(passing, "unit_check.pass_mark_percent", src)
+    if items > MAX_UNIT_CHECK_ITEMS:
+        raise PackError(f"{src}: unit_check.items must be at most {MAX_UNIT_CHECK_ITEMS}")
+    if passing > 100:
+        raise PackError(f"{src}: unit_check.pass_mark_percent must be at most 100")
+    return int(items), int(passing)
 
 
 def load_pack_file(path: Path) -> CurriculumPack:

@@ -18,6 +18,7 @@ from ...application.concurrency import ConcurrencyConflictError
 from ...domain.events import LearningEvent
 from .models import LearningOutboxRow
 from .repository import SqlAlchemyStudentKnowledgeRepository
+from .sittings import SqlAlchemySittingRepository
 
 
 class _OutboxPublisher:
@@ -47,6 +48,7 @@ class LearningUnitOfWork:
         self._session = self._session_factory()
         self.knowledge = SqlAlchemyStudentKnowledgeRepository(self._session)
         self.events = _OutboxPublisher(self._session)
+        self.sittings = SqlAlchemySittingRepository(self._session)
         return self
 
     def __exit__(

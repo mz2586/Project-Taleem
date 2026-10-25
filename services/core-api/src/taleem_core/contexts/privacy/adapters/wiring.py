@@ -13,7 +13,7 @@ from .identity_data import IdentityLearnerData
 from .learning_data import LearningLearnerData
 from .memory_data import AiUsageLearnerData, GuardianViewData, SyncLearnerData
 from .reporting_data import ReportingLearnerData
-from .safeguarding_data import SafeguardingLearnerData
+from .safeguarding_data import SafeguardingLearnerData, flagged_submission_ids
 from .school_data import SchoolLearnerData
 
 
@@ -35,7 +35,7 @@ def build_privacy_service(
         IdentityLearnerData(identity_sf),
         [
             LearningLearnerData(learning_sf, session_store),
-            SchoolLearnerData(school_sf),
+            SchoolLearnerData(school_sf, flagged_submission_ids(safeguarding_sf)),
             SafeguardingLearnerData(safeguarding_sf),
             ReportingLearnerData(reporting_sf),
             SyncLearnerData(sync_store),

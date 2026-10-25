@@ -24,6 +24,7 @@ overdue.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 import unicodedata
@@ -355,6 +356,63 @@ class Concern:
         if threshold is None:
             return None
         return self.status is Status.OPEN and self.age(now) > threshold
+
+
+@dataclass(frozen=True)
+class ConcernEvidence:
+    """The immutable snapshot of the homework answer a concern was raised from (alembic 0018).
+
+    Captured in the same transaction as the concern, once per concern, and never rewritten: a
+    resubmission changes the submission, never this. ``text_sha256`` is the hex SHA-256 of the
+    UTF-8 ``text`` so the record can be checked for tampering. Only a ``safeguarding_lead`` ever
+    reads it; no log line or audit row carries a word of it.
+    """
+
+    concern_id: str
+    submission_id: str
+    text: str
+    attempt: int
+    submitted_at: float
+    item_ref: str
+    objective_code: str
+    text_sha256: str
+    created_at: float
+
+    @staticmethod
+    def capture(
+        *,
+        concern_id: str,
+        submission_id: str,
+        text: str,
+        attempt: int,
+        submitted_at: float,
+        item_ref: str,
+        objective_code: str,
+        now: float,
+    ) -> ConcernEvidence:
+        if not text:
+            raise InvalidConcernError("evidence needs the flagged text", field="text")
+        if isinstance(attempt, bool) or int(attempt) < 1:
+            raise InvalidConcernError("evidence attempt must be at least 1", field="attempt")
+        return ConcernEvidence(
+            concern_id=concern_id,
+            submission_id=assert_ref(submission_id, field_name="submissionId"),
+            text=text,
+            attempt=int(attempt),
+            submitted_at=float(submitted_at),
+            item_ref=item_ref,
+            objective_code=objective_code,
+            text_sha256=text_digest(text),
+            created_at=now,
+        )
+
+    @property
+    def intact(self) -> bool:
+        return text_digest(self.text) == self.text_sha256
+
+
+def text_digest(text: str) -> str:
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
 
 def new_note(*, concern_id: str, author_ref: str, body: str, now: float) -> Note:

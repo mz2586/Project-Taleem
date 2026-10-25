@@ -752,7 +752,13 @@ class SchoolService:
             return
         try:
             self._disclosures.screen_submission(
-                student_ref=sub.student_ref, submission_id=sub.submission_id, text=sub.text
+                student_ref=sub.student_ref,
+                submission_id=sub.submission_id,
+                text=sub.text,
+                attempt=sub.attempt,
+                submitted_at=sub.submitted_at,
+                item_ref=sub.item_ref,
+                objective_code=sub.objective_code,
             )
         except Exception:  # noqa: BLE001 - the child's answer is saved; the screen must not fail it
             observability.log_event("disclosure_screen_failed", submission_id=sub.submission_id)

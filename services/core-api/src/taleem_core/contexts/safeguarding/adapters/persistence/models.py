@@ -5,6 +5,9 @@
   ``free_text`` is the raiser's own short words and is shown to a safeguarding lead and nobody
   else.
 - ``concern_note`` — a safeguarding lead's triage note.
+- ``concern_evidence`` — the immutable snapshot of the homework text a concern was raised from
+  (alembic 0018): one row per concern, never updated or deleted outside the privacy erasure (a
+  PostgreSQL trigger enforces it). Shown to a safeguarding lead and nobody else.
 - ``concern_audit`` — append-only record of every action, by actor subject. ``detail`` carries
   statuses and enum values only, never free text or a note body.
 
@@ -99,3 +102,28 @@ class ConcernAuditRow(SafeguardingBase):
     actor_role: Mapped[str] = mapped_column(String(32), nullable=False)
     at: Mapped[float] = mapped_column(Float, nullable=False)
     detail: Mapped[dict[str, Any]] = mapped_column(JsonType, nullable=False, default=dict)
+
+
+class ConcernEvidenceRow(SafeguardingBase):
+    __tablename__ = "concern_evidence"
+    __table_args__ = (
+        Index("ix_concern_evidence_submission", "submission_id"),
+        {"schema": SAFEGUARDING_SCHEMA},
+    )
+
+    # The primary key is the concern: one snapshot per concern, ever (idempotent capture). No
+    # cascade: deleting a concern that still has evidence fails, so only the privacy erasure,
+    # which deletes the evidence first and explicitly, can remove it.
+    concern_id: Mapped[str] = mapped_column(
+        String(64),
+        ForeignKey(f"{SAFEGUARDING_SCHEMA}.concern.concern_id"),
+        primary_key=True,
+    )
+    submission_id: Mapped[str] = mapped_column(String(64), nullable=False)
+    text: Mapped[str] = mapped_column(Text, nullable=False)
+    attempt: Mapped[int] = mapped_column(Integer, nullable=False)
+    submitted_at: Mapped[float] = mapped_column(Float, nullable=False)
+    item_ref: Mapped[str] = mapped_column(String(128), nullable=False)
+    objective_code: Mapped[str] = mapped_column(String(128), nullable=False)
+    text_sha256: Mapped[str] = mapped_column(String(64), nullable=False)
+    created_at: Mapped[float] = mapped_column(Float, nullable=False)

@@ -49,6 +49,7 @@ from ..domain.model import (
     Action,
     AuditEntry,
     Concern,
+    ConcernEvidence,
     InvalidConcernError,
     Note,
     Priority,
@@ -83,8 +84,14 @@ TEACHER_RECEIPT_NOTICE = (
 )
 CONTEXT_READ_NOTICE = (
     "This read was recorded in the safeguarding audit trail (who, when, which concern). "
-    "The text is what the child last submitted for this item."
+    "'flagged' is the text exactly as it was when the concern was raised; 'current' appears only "
+    "when the child's latest answer differs from it."
 )
+NO_SNAPSHOT_NOTICE = (
+    "No snapshot was kept for this concern (it was raised before snapshots existed). The text "
+    "shown is what the child last submitted, which may not be what prompted the concern."
+)
+_EVIDENCE_KEYS = ("text", "attempt", "submitted_at", "item_ref", "objective_code")
 NOBODY_CONTACTED = "Recorded only. This software contacts nobody; a person must act (FD-04)."
 
 
@@ -233,6 +240,8 @@ class SafeguardingService:
             screen=screen,
             lesson_id=lesson_id,
             submission_id=submission_id,
+            # The answer as the teacher saw it when raising: a later resubmission cannot erase it.
+            evidence=self._current(submission_id, student_ref) if submission_id else None,
         )
         return {
             "received": True,
@@ -240,14 +249,29 @@ class SafeguardingService:
             "notice": TEACHER_RECEIPT_NOTICE,
         }
 
-    def screen_submission(self, *, student_ref: str, submission_id: str, text: str) -> bool:
+    def screen_submission(
+        self,
+        *,
+        student_ref: str,
+        submission_id: str,
+        text: str,
+        attempt: int | None = None,
+        submitted_at: float | None = None,
+        item_ref: str | None = None,
+        objective_code: str | None = None,
+    ) -> bool:
         """The homework disclosure screen (HOMEWORK_AND_MARKING_CONTRACT §6, rule 6).
 
         On a phrase-list match, raise ONE concern (``source = system``) about the learner that
         references the submission — idempotent by ``submission_id`` (a resubmission or a retry
         never adds a second). The concern's text is a fixed note naming the matched list entries,
         never the child's words. Returns whether a system concern exists for this submission now.
-        Nothing is returned to, or changed for, the child; nothing is logged but counts."""
+        Nothing is returned to, or changed for, the child; nothing is logged but counts.
+
+        The screened ``text`` (with its attempt, time, item and objective, as the school context
+        passes them) is stored as the concern's immutable evidence in the same transaction, so a
+        later resubmission can never replace what the lead reads as flagged. Missing metadata is
+        read from the submission; the text is always the one that matched."""
         with self._uow() as uow:
             if uow.concerns.system_concern_for(submission_id) is not None:
                 return True
@@ -260,6 +284,16 @@ class SafeguardingService:
             f"pending M-Safe approval). Matched entries: {ids}. Read homework submission "
             f"{submission_id}. The child was not told."
         )
+        given: dict[str, Any] = {
+            "text": text,
+            "attempt": attempt,
+            "submitted_at": submitted_at,
+            "item_ref": item_ref,
+            "objective_code": objective_code,
+        }
+        if any(v is None for v in given.values()):
+            stored = self._current(submission_id, student_ref) or {}
+            given = {k: (stored.get(k) if v is None else v) for k, v in given.items()}
         try:
             self._create(
                 subject_ref=student_ref,
@@ -270,6 +304,7 @@ class SafeguardingService:
                 screen="learner/homework",
                 lesson_id=None,
                 submission_id=submission_id,
+                evidence=given,
             )
         except Exception:
             # A concurrent screen of the same submission won the unique index: one concern.
@@ -290,6 +325,7 @@ class SafeguardingService:
         screen: str | None,
         lesson_id: str | None,
         submission_id: str | None = None,
+        evidence: dict[str, Any] | None = None,
     ) -> Concern:
         now = self._now()
         try:
@@ -306,8 +342,13 @@ class SafeguardingService:
             )
         except InvalidConcernError as exc:
             raise _invalid(exc) from exc
+        snapshot = self._snapshot(concern, evidence, now)
         with self._uow() as uow:
             uow.concerns.add(concern)
+            if snapshot is not None:
+                # Same transaction as the concern: a concern from a submission never exists
+                # without the text that prompted it (and the PK keeps it to one per concern).
+                uow.evidence.add(snapshot)
             uow.audit.append(
                 AuditEntry.record(
                     concern_id=concern.concern_id,
@@ -329,6 +370,37 @@ class SafeguardingService:
             "safeguarding_concern_raised", priority=concern.priority.value, raised_by=role.value
         )
         return concern
+
+    @staticmethod
+    def _snapshot(
+        concern: Concern, evidence: dict[str, Any] | None, now: float
+    ) -> ConcernEvidence | None:
+        """The evidence row for a concern raised from a submission, or None. An incomplete source
+        never blocks the concern itself: raising must always succeed."""
+        if concern.context_submission_id is None or not evidence:
+            return None
+        if any(evidence.get(k) is None for k in _EVIDENCE_KEYS):
+            return None
+        try:
+            return ConcernEvidence.capture(
+                concern_id=concern.concern_id,
+                submission_id=concern.context_submission_id,
+                text=str(evidence["text"]),
+                attempt=int(evidence["attempt"]),
+                submitted_at=float(evidence["submitted_at"]),
+                item_ref=str(evidence["item_ref"]),
+                objective_code=str(evidence["objective_code"]),
+                now=now,
+            )
+        except (InvalidConcernError, TypeError, ValueError):
+            return None
+
+    def _current(self, submission_id: str, student_ref: str) -> dict[str, Any] | None:
+        if self._submissions is None:
+            return None
+        return self._submissions.submission_for_safeguarding(
+            submission_id=submission_id, student_ref=student_ref
+        )
 
     def guardian_concerns(self, guardian_ref: str) -> list[dict[str, Any]]:
         with self._uow() as uow:
@@ -429,24 +501,36 @@ class SafeguardingService:
             uow.commit()
             return self._detail(uow, concern, now)
 
+    def _phrases_in(self, text: str) -> list[dict[str, Any]]:
+        return [
+            {
+                "phrase_id": p.phrase_id,
+                "lang": p.lang,
+                "category": p.category.value,
+                "phrase": p.phrase,
+            }
+            for p in self._phrases.matches(text)
+        ]
+
     def context(self, *, actor_ref: str, concern_id: str) -> dict[str, Any]:
-        """The flagged homework behind a concern, for the lead (rule 7). A concern that names no
-        submission, or whose submission is gone (erased) or is not its subject's, is a 404 and
-        nothing is audited; every successful read is audited before the text is returned."""
+        """The flagged homework behind a concern, for the lead (rule 7).
+
+        ``flagged`` is the immutable snapshot captured when the concern was raised (alembic 0018):
+        always the text that prompted it, even after a resubmission or after the submission itself
+        was erased. ``current`` is the child's latest answer, present only when its text differs.
+        A concern that names no submission, or one with no snapshot whose submission is gone (or
+        is not its subject's), is a 404 and nothing is audited; every successful read is audited
+        before any text is returned, and the audit names the submission, never a word of text."""
         now = self._now()
         with self._uow() as uow:
             concern = self._load(uow, concern_id)
+            snapshot = uow.evidence.for_concern(concern.concern_id)
         submission_id = concern.context_submission_id
-        sub = (
-            self._submissions.submission_for_safeguarding(
-                submission_id=submission_id, student_ref=concern.subject_ref
-            )
-            if submission_id and self._submissions is not None
-            else None
-        )
-        if sub is None:
+        if not submission_id:
             raise not_found("this concern has no homework submission to read")
-        matched = self._phrases.matches(str(sub.get("text") or ""))
+        sub = self._current(submission_id, concern.subject_ref)
+        if sub is None and snapshot is None:
+            raise not_found("this concern has no homework submission to read")
         with self._uow() as uow:
             self._record(
                 uow,
@@ -457,32 +541,65 @@ class SafeguardingService:
                 submission_id=str(submission_id),
             )
             uow.commit()
+        latest: dict[str, Any] | None = (
+            {
+                "text": str(sub["text"]),
+                "attempt": int(sub["attempt"]),
+                "submitted_at": float(sub["submitted_at"]),
+            }
+            if sub is not None
+            else None
+        )
+        flagged: dict[str, Any] | None = None
+        current: dict[str, Any] | None = None
+        matched: list[dict[str, Any]] = []
+        resubmitted = False
+        if snapshot is not None:
+            flagged = {
+                "text": snapshot.text,
+                "attempt": snapshot.attempt,
+                "submitted_at": snapshot.submitted_at,
+                "item_ref": snapshot.item_ref,
+                "objective_code": snapshot.objective_code,
+                "text_sha256": snapshot.text_sha256,
+                "intact": snapshot.intact,
+                "captured_at": snapshot.created_at,
+            }
+            matched = self._phrases_in(snapshot.text)
+            resubmitted = latest is not None and bool(
+                latest["attempt"] != snapshot.attempt
+                or latest["submitted_at"] != snapshot.submitted_at
+                or latest["text"] != snapshot.text
+            )
+            if latest is not None and latest["text"] != snapshot.text:
+                current = {**latest, "matched_phrases": self._phrases_in(latest["text"])}
+        elif latest is not None:
+            # Raised before snapshots existed: only the latest answer can be shown, and it says so.
+            current = {**latest, "matched_phrases": self._phrases_in(latest["text"])}
+            matched = current["matched_phrases"]
+            resubmitted = bool(latest["submitted_at"] > concern.created_at)
+        about: dict[str, Any] = sub if sub is not None else {}
         return {
             "concern_id": concern.concern_id,
             "submission": {
-                "submission_id": sub["submission_id"],
-                "source": sub["source"],
-                "objective_code": sub["objective_code"],
-                "item_ref": sub["item_ref"],
-                "text": sub["text"],
-                "attempt": sub["attempt"],
-                "submitted_at": sub["submitted_at"],
-                "item_prompt": dict(sub.get("item_prompt") or {}),
-                "lesson_title": dict(sub.get("lesson_title") or {}),
+                "submission_id": submission_id,
+                "source": about.get("source"),
+                "objective_code": (
+                    snapshot.objective_code if snapshot else about.get("objective_code")
+                ),
+                "item_ref": snapshot.item_ref if snapshot else about.get("item_ref"),
+                "item_prompt": dict(about.get("item_prompt") or {}),
+                "lesson_title": dict(about.get("lesson_title") or {}),
+                # False once the submission itself is gone (erased): the snapshot still stands.
+                "available": sub is not None,
             },
-            "matched_phrases": [
-                {
-                    "phrase_id": p.phrase_id,
-                    "lang": p.lang,
-                    "category": p.category.value,
-                    "phrase": p.phrase,
-                }
-                for p in matched
-            ],
-            # The screen raises once per submission; a later resubmission replaces the text.
-            "resubmitted_since_raised": float(sub["submitted_at"]) > concern.created_at,
+            "flagged": flagged,
+            "current": current,
+            "matched_phrases": matched,
+            "resubmitted_since_raised": resubmitted,
+            "snapshot": snapshot is not None,
             "read_recorded": True,
-            "notice": CONTEXT_READ_NOTICE,
+            "notice": CONTEXT_READ_NOTICE if snapshot is not None else NO_SNAPSHOT_NOTICE,
         }
 
     def acknowledge(self, *, actor_ref: str, concern_id: str) -> dict[str, Any]:

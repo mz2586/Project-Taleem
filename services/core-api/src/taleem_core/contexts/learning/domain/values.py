@@ -44,6 +44,8 @@ class InteractionContext(StrEnum):
     SPACED_REVIEW = "spaced_review"
     REMEDIATION = "remediation"
     FORMATIVE = "formative"
+    # An answer in a unit check (PROGRESSION_AND_EXAMINATION_CONTRACT §2): examination evidence.
+    SUMMATIVE = "summative"
 
 
 @dataclass(frozen=True)

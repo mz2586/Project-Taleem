@@ -10,13 +10,19 @@ from types import TracebackType
 
 from sqlalchemy.orm import Session, sessionmaker
 
-from .repository import SqlAuditRepository, SqlConcernRepository, SqlNoteRepository
+from .repository import (
+    SqlAuditRepository,
+    SqlConcernRepository,
+    SqlEvidenceRepository,
+    SqlNoteRepository,
+)
 
 
 class SqlSafeguardingUnitOfWork:
     concerns: SqlConcernRepository
     notes: SqlNoteRepository
     audit: SqlAuditRepository
+    evidence: SqlEvidenceRepository
 
     def __init__(self, session_factory: sessionmaker[Session]) -> None:
         self._session_factory = session_factory
@@ -27,6 +33,7 @@ class SqlSafeguardingUnitOfWork:
         self.concerns = SqlConcernRepository(self._session)
         self.notes = SqlNoteRepository(self._session)
         self.audit = SqlAuditRepository(self._session)
+        self.evidence = SqlEvidenceRepository(self._session)
         return self
 
     def __exit__(

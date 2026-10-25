@@ -131,6 +131,121 @@ paths:
         "200": { description: Placement after the answer, content: { application/json: { schema: { $ref: "#/components/schemas/PlacementView" } } } }
         "409": { description: Not the current question / nothing to answer, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
         default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/students/{studentRef}/path:
+    get:
+      tags: [learning]
+      operationId: getLearningPath
+      summary: The learner's path — subjects, units and lessons with states and the next step
+      description: >-
+        PROGRESSION_AND_EXAMINATION_CONTRACT §1. Derived from the stored hierarchy, the published
+        lessons visible to the reader's cohort, evidence and the student model. `completed`
+        (practice finished) and `demonstrated` (mastered) are distinct.
+      security: [{ bearerAuth: [] }]
+      parameters: [{ name: studentRef, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Path, content: { application/json: { schema: { $ref: "#/components/schemas/LearningPath" } } } }
+        "403": { description: Not the learner, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/students/{studentRef}/units/{unitKey}/checks:
+    post:
+      tags: [learning]
+      operationId: startUnitCheck
+      summary: Start a unit check (201), or resume the open sitting (200)
+      description: >-
+        Assembled on the server from the unit's published auto-scored items, balanced across its
+        objectives, avoiding items seen in the last 7 days when the pool allows. Online only.
+        409 UNIT_NOT_READY until every lesson is practised; 429 RETAKE_NOT_YET (with
+        `retake_after`) until remediation on the missed objectives or 24 hours.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+        - { name: unitKey, in: path, required: true, description: "The path's unit_key (e.g. math.u1)", schema: { type: string } }
+      responses:
+        "201": { description: Sitting started, content: { application/json: { schema: { $ref: "#/components/schemas/UnitCheckSitting" } } } }
+        "200": { description: Open sitting resumed, content: { application/json: { schema: { $ref: "#/components/schemas/UnitCheckSitting" } } } }
+        "403": { description: Not the learner, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "404": { description: No such unit on the path, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "409": { description: Unit not ready, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "429": { description: Retake not yet allowed, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/students/{studentRef}/units/{unitKey}/checks/{sittingId}:
+    get:
+      tags: [learning]
+      operationId: getUnitCheckSitting
+      summary: Resume a sitting (its next unanswered item); a finished one returns its result
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+        - { name: unitKey, in: path, required: true, description: "The path's unit_key (e.g. math.u1)", schema: { type: string } }
+        - { name: sittingId, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Sitting, content: { application/json: { schema: { $ref: "#/components/schemas/UnitCheckSitting" } } } }
+        "410": { description: Sitting expired (incomplete), content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/students/{studentRef}/units/{unitKey}/checks/{sittingId}:answer:
+    post:
+      tags: [learning]
+      operationId: answerUnitCheckItem
+      summary: Answer one item (scored on the server; once per sitting, idempotent)
+      description: >-
+        The response never reveals whether the answer was right. A repeated answer to the same
+        item changes nothing (`duplicate: true`). 422 when the answer does not fit the item kind.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+        - { name: unitKey, in: path, required: true, description: "The path's unit_key (e.g. math.u1)", schema: { type: string } }
+        - { name: sittingId, in: path, required: true, schema: { type: string } }
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/UnitCheckAnswerIn" } } }
+      responses:
+        "200": { description: Answer accepted, content: { application/json: { schema: { $ref: "#/components/schemas/UnitCheckAnswerView" } } } }
+        "410": { description: Sitting expired (incomplete), content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "422": { description: Answer does not fit the item, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/students/{studentRef}/units/{unitKey}/checks/{sittingId}:finish:
+    post:
+      tags: [learning]
+      operationId: finishUnitCheck
+      summary: Score the sitting (every item answered); idempotent once finished
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - { name: studentRef, in: path, required: true, schema: { type: string } }
+        - { name: unitKey, in: path, required: true, description: "The path's unit_key (e.g. math.u1)", schema: { type: string } }
+        - { name: sittingId, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Result, content: { application/json: { schema: { $ref: "#/components/schemas/UnitCheckResult" } } } }
+        "409": { description: Items unanswered, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "410": { description: Sitting expired (incomplete), content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/learning/students/{studentRef}/record:
+    get:
+      tags: [learning]
+      operationId: getAcademicRecord
+      summary: The academic record — the learner themself, or a teacher of their own class
+      security: [{ bearerAuth: [] }]
+      parameters: [{ name: studentRef, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Record, content: { application/json: { schema: { $ref: "#/components/schemas/AcademicRecord" } } } }
+        "403": { description: Not permitted, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+  /v1/guardian/children/{studentRef}/record:
+    get:
+      tags: [learning]
+      operationId: getChildAcademicRecord
+      summary: The academic record of the guardian's own child
+      security: [{ bearerAuth: [] }]
+      parameters: [{ name: studentRef, in: path, required: true, schema: { type: string } }]
+      responses:
+        "200": { description: Record, content: { application/json: { schema: { $ref: "#/components/schemas/AcademicRecord" } } } }
+        "403": { description: Not permitted, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        "404": { description: Not found, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
+        default: { description: Error, content: { application/problem+json: { schema: { $ref: "#/components/schemas/Problem" } } } }
 components:
   securitySchemes:
     bearerAuth:
@@ -328,6 +443,226 @@ components:
         reviews_scheduled: { type: integer }
         events_by_type: { type: object, additionalProperties: { type: integer } }
         objective_mastery: { type: object, additionalProperties: { type: number } }
+    Bilingual:
+      type: object
+      additionalProperties: { type: string }
+      description: "Localized text by locale tag ({ur, en})."
+    UnitCheckItem:
+      type: object
+      description: An item as the learner sees it — display fields only; never an answer key or hints.
+      properties:
+        item_ref: { type: string }
+        kind: { type: string, enum: [choose, fill, order, match, sort] }
+        prompt: { $ref: "#/components/schemas/Bilingual" }
+        options: { type: array, items: { type: string } }
+        left_count: { type: integer, minimum: 0 }
+        position: { type: integer, minimum: 1 }
+        total: { type: integer, minimum: 1 }
+    PathLesson:
+      type: object
+      properties:
+        lesson_id: { type: string }
+        objective_code: { type: string }
+        title: { $ref: "#/components/schemas/Bilingual" }
+        state: { type: string, enum: [not_started, in_progress, practised, mastered] }
+        completed: { type: boolean, description: Practice finished }
+        demonstrated: { type: boolean, description: Every objective mastered in the student model }
+    PathUnitCheck:
+      type: object
+      properties:
+        available: { type: boolean }
+        best_score: { type: ["number", "null"] }
+        passed: { type: boolean }
+        last_sitting_id: { type: ["string", "null"] }
+        open_sitting_id: { type: ["string", "null"] }
+        can_retake: { type: boolean }
+        retake_after: { type: ["number", "null"] }
+        item_count: { type: integer }
+        pass_mark: { type: integer }
+    PathUnit:
+      type: object
+      properties:
+        unit_key: { type: string }
+        unit_id: { type: string }
+        title: { $ref: "#/components/schemas/Bilingual" }
+        state: { type: string, enum: [not_started, in_progress, ready_for_check, completed] }
+        lessons: { type: array, items: { $ref: "#/components/schemas/PathLesson" } }
+        check: { $ref: "#/components/schemas/PathUnitCheck" }
+    NextStep:
+      type: ["object", "null"]
+      properties:
+        kind: { type: string, enum: [lesson, unit_check] }
+        unit_key: { type: string }
+        title: { $ref: "#/components/schemas/Bilingual" }
+        lesson_id: { type: string }
+        objective_code: { type: string }
+        sitting_id: { type: ["string", "null"] }
+        reason: { type: string, enum: [practice, remediation] }
+    LearningPath:
+      type: object
+      properties:
+        student_ref: { type: string }
+        grade: { type: ["integer", "string"], description: The enrolment grade level (KG is 0) }
+        grade_key: { type: string }
+        grade_state: { type: string, enum: [not_started, in_progress, completed] }
+        label: { type: string, description: "Always \"Taleem unit check\"" }
+        notice: { type: string }
+        online_only: { type: boolean }
+        subjects:
+          type: array
+          items:
+            type: object
+            properties:
+              subject_key: { type: string }
+              title: { $ref: "#/components/schemas/Bilingual" }
+              units: { type: array, items: { $ref: "#/components/schemas/PathUnit" } }
+        next_step: { $ref: "#/components/schemas/NextStep" }
+        derived_at: { type: number }
+    UnitCheckSitting:
+      type: object
+      properties:
+        sitting_id: { type: string }
+        unit_key: { type: string }
+        unit_title: { $ref: "#/components/schemas/Bilingual" }
+        label: { type: string }
+        status: { type: string, enum: [in_progress, passed, failed, incomplete] }
+        started_at: { type: number }
+        expires_at: { type: number }
+        total: { type: integer }
+        answered: { type: integer }
+        resumed: { type: boolean }
+        item:
+          oneOf:
+            - { $ref: "#/components/schemas/UnitCheckItem" }
+            - { type: "null" }
+    UnitCheckAnswerIn:
+      type: object
+      description: The item plus exactly one answer field, by the item's kind.
+      required: [item_ref]
+      properties:
+        item_ref: { type: string }
+        option: { type: integer }
+        text: { type: string, maxLength: 200 }
+        order: { type: array, maxItems: 64, items: { type: integer } }
+        pairs:
+          type: array
+          maxItems: 64
+          items: { type: array, minItems: 2, maxItems: 2, items: { type: integer } }
+        response_time_ms: { type: integer, minimum: 0 }
+    UnitCheckAnswerView:
+      type: object
+      properties:
+        sitting_id: { type: string }
+        accepted: { type: boolean }
+        duplicate: { type: boolean }
+        answered: { type: integer }
+        total: { type: integer }
+        next_item:
+          oneOf:
+            - { $ref: "#/components/schemas/UnitCheckItem" }
+            - { type: "null" }
+    ObjectiveScore:
+      type: object
+      properties:
+        objective_code: { type: string }
+        title: { $ref: "#/components/schemas/Bilingual" }
+        correct: { type: integer }
+        total: { type: integer }
+        percent: { type: number }
+        met: { type: boolean }
+    UnitCheckResult:
+      type: object
+      properties:
+        sitting_id: { type: string }
+        unit_key: { type: string }
+        label: { type: string }
+        status: { type: string, enum: [passed, failed] }
+        finished_at: { type: number }
+        score_percent: { type: number }
+        passed: { type: boolean }
+        pass_mark: { type: integer }
+        correct: { type: integer }
+        total: { type: integer }
+        per_objective: { type: array, items: { $ref: "#/components/schemas/ObjectiveScore" } }
+        misconceptions: { type: array, items: { type: string } }
+        remediation:
+          type: array
+          items:
+            type: object
+            properties:
+              objective_code: { type: string }
+              title: { $ref: "#/components/schemas/Bilingual" }
+              lesson_id: { type: ["string", "null"] }
+        can_retake: { type: boolean }
+        retake_after: { type: ["number", "null"] }
+    AcademicRecord:
+      type: object
+      description: Every figure derives from stored sittings and evidence. Unit checks are not certification.
+      properties:
+        student_ref: { type: string }
+        grade: { type: ["integer", "string"] }
+        grade_key: { type: string }
+        grade_state: { type: string, enum: [not_started, in_progress, completed] }
+        grade_completion:
+          type: ["object", "null"]
+          properties:
+            grade: { type: ["integer", "string"] }
+            grade_key: { type: string }
+            completed_at: { type: number }
+            accredited: { type: boolean, enum: [false] }
+            label: { $ref: "#/components/schemas/Bilingual" }
+        subjects:
+          type: array
+          items:
+            type: object
+            properties:
+              subject_key: { type: string }
+              title: { $ref: "#/components/schemas/Bilingual" }
+              units:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    unit_key: { type: string }
+                    title: { $ref: "#/components/schemas/Bilingual" }
+                    state: { type: string, enum: [not_started, in_progress, ready_for_check, completed] }
+                    best_score: { type: ["number", "null"] }
+                    sittings: { type: array, items: { type: string } }
+        sittings:
+          type: array
+          items:
+            type: object
+            properties:
+              sitting_id: { type: string }
+              unit_key: { type: string }
+              unit_title: { $ref: "#/components/schemas/Bilingual" }
+              started_at: { type: number }
+              finished_at: { type: ["number", "null"] }
+              state: { type: string, enum: [finished, incomplete] }
+              score_percent: { type: ["number", "null"] }
+              passed: { type: ["boolean", "null"] }
+              pass_mark: { type: integer }
+              per_objective: { type: array, items: { $ref: "#/components/schemas/ObjectiveScore" } }
+        lessons_mastered:
+          type: array
+          items:
+            type: object
+            properties:
+              objective_code: { type: string }
+              title: { $ref: "#/components/schemas/Bilingual" }
+              lesson_id: { type: string }
+        report_cards:
+          type: array
+          items:
+            type: object
+            properties:
+              card_id: { type: string }
+              period_start: { type: number }
+              period_end: { type: number }
+              issued_at: { type: number }
+              href: { type: string }
+        notice: { type: string }
+        derived_at: { type: number }
     Problem:
       type: object
       description: RFC 9457 Problem Details
@@ -337,3 +672,6 @@ components:
         status: { type: integer }
         detail: { type: string }
         instance: { type: string }
+        code: { type: string }
+        retake_after: { type: ["number", "null"], description: "RETAKE_NOT_YET: when a retake opens without remediation" }
+        remediation_due: { type: array, items: { type: string }, description: "RETAKE_NOT_YET: objectives still to remediate" }

@@ -5,7 +5,7 @@ from __future__ import annotations
 from types import TracebackType
 from typing import Any, Protocol
 
-from ..domain.model import AuditEntry, Concern, Note, Priority, Status
+from ..domain.model import AuditEntry, Concern, ConcernEvidence, Note, Priority, Status
 
 
 class ConcernRepository(Protocol):
@@ -36,6 +36,14 @@ class NoteRepository(Protocol):
     def for_concern(self, concern_id: str) -> list[Note]: ...
 
 
+class EvidenceRepository(Protocol):
+    """Immutable snapshots of the flagged homework text, at most one per concern (alembic 0018)."""
+
+    def add(self, evidence: ConcernEvidence) -> None: ...
+
+    def for_concern(self, concern_id: str) -> ConcernEvidence | None: ...
+
+
 class AuditRepository(Protocol):
     def append(self, entry: AuditEntry) -> None: ...
 
@@ -49,6 +57,8 @@ class SafeguardingUnitOfWork(Protocol):
     def notes(self) -> NoteRepository: ...
     @property
     def audit(self) -> AuditRepository: ...
+    @property
+    def evidence(self) -> EvidenceRepository: ...
 
     def __enter__(self) -> SafeguardingUnitOfWork: ...
 

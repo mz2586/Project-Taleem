@@ -293,9 +293,21 @@ class DisclosureScreen(Protocol):
 
     Screens a submitted answer; on a match raises ONE system concern referencing the submission
     (idempotent by ``submission_id``). Returns whether a concern exists for it now. Never blocks,
-    never replies, never changes what the child sees."""
+    never replies, never changes what the child sees. The attempt, time, item and objective of
+    the screened text travel with it: on a match the safeguarding context stores them, with the
+    text, as the concern's immutable evidence (alembic 0018)."""
 
-    def screen_submission(self, *, student_ref: str, submission_id: str, text: str) -> bool: ...
+    def screen_submission(
+        self,
+        *,
+        student_ref: str,
+        submission_id: str,
+        text: str,
+        attempt: int,
+        submitted_at: float,
+        item_ref: str,
+        objective_code: str,
+    ) -> bool: ...
 
 
 class SchoolAuditLog(Protocol):

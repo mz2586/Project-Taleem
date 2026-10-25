@@ -130,6 +130,21 @@ function GuardianChildPage() {
           </div>
         </Card>
       ) : null}
+      {status !== "denied" ? (
+        <Card>
+          <div style={{ display: "grid", gap: "var(--space-2)", justifyItems: "start" }}>
+            <h2 style={{ margin: 0, fontSize: "var(--font-size-body-min-urdu)" }}>{t("progression.record.open")}</h2>
+            <p style={{ margin: 0 }}>
+              {name ? t("progression.record.openIntro", { name }) : t("progression.record.openIntroUnnamed")}
+            </p>
+            <ButtonLink
+              href={`/guardian/children/${encodeURIComponent(ref)}/record`}
+              variant="primary"
+              label={t("progression.record.open")}
+            />
+          </div>
+        </Card>
+      ) : null}
       <div aria-live="polite" style={{ display: "grid", gap: "var(--space-4)" }}>
         {status === "loading" ? <Skeleton lines={6} label={t("guardian.child.loading")} /> : null}
         {status === "denied" ? <EmptyState title={t("guardian.child.deniedTitle")} body={t("guardian.child.deniedBody")} /> : null}

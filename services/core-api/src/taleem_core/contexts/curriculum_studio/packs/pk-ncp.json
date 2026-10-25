@@ -63,5 +63,6 @@
       },
       "default_max_words": 20
     }
-  }
+  },
+  "unit_check": { "items": 10, "pass_mark_percent": 70 }
 }

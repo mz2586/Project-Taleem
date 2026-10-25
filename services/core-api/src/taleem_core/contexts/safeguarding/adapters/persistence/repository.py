@@ -9,13 +9,14 @@ from ...domain.model import (
     AuditEntry,
     Category,
     Concern,
+    ConcernEvidence,
     Note,
     Outcome,
     Priority,
     RaisedBy,
     Status,
 )
-from .models import ConcernAuditRow, ConcernNoteRow, ConcernRow
+from .models import ConcernAuditRow, ConcernEvidenceRow, ConcernNoteRow, ConcernRow
 
 _PRIORITY_RANK = case(
     {Priority.T1.value: 1, Priority.T2.value: 2, Priority.T3.value: 3},
@@ -158,6 +159,44 @@ class SqlNoteRepository:
             Note(r.note_id, r.concern_id, r.author_ref, r.body, r.created_at)
             for r in self._s.scalars(stmt)
         ]
+
+
+class SqlEvidenceRepository:
+    """Insert and read only: there is deliberately no update or delete here (alembic 0018)."""
+
+    def __init__(self, session: Session) -> None:
+        self._s = session
+
+    def add(self, evidence: ConcernEvidence) -> None:
+        self._s.add(
+            ConcernEvidenceRow(
+                concern_id=evidence.concern_id,
+                submission_id=evidence.submission_id,
+                text=evidence.text,
+                attempt=evidence.attempt,
+                submitted_at=evidence.submitted_at,
+                item_ref=evidence.item_ref,
+                objective_code=evidence.objective_code,
+                text_sha256=evidence.text_sha256,
+                created_at=evidence.created_at,
+            )
+        )
+
+    def for_concern(self, concern_id: str) -> ConcernEvidence | None:
+        row = self._s.get(ConcernEvidenceRow, concern_id)
+        if row is None:
+            return None
+        return ConcernEvidence(
+            concern_id=row.concern_id,
+            submission_id=row.submission_id,
+            text=row.text,
+            attempt=row.attempt,
+            submitted_at=row.submitted_at,
+            item_ref=row.item_ref,
+            objective_code=row.objective_code,
+            text_sha256=row.text_sha256,
+            created_at=row.created_at,
+        )
 
 
 class SqlAuditRepository:

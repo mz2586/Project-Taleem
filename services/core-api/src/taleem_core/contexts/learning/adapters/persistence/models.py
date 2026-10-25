@@ -1,8 +1,9 @@
 """ORM models for the learning-context durable data (LEARNING_DOMAIN_MODEL §9).
 
 Tables: student_knowledge (aggregate root), objective_mastery (owned), assessment_evidence
-(immutable, append-only — the system of record), learning_outbox (transactional events), and
-ai_usage_ledger (per-learner AI inference usage for quotas; counts only).
+(immutable, append-only — the system of record), learning_outbox (transactional events),
+ai_usage_ledger (per-learner AI inference usage for quotas; counts only) and unit_check_sitting
+(end-of-unit examination sittings, migration 0019).
 Value objects with no query need (memory/confidence/pace/threshold/misconceptions) are stored as
 JSON on the objective row; queryable facets (mastery_value, state, next_review_at) are columns.
 """
@@ -14,6 +15,7 @@ from typing import Any
 
 from sqlalchemy import (
     BigInteger,
+    CheckConstraint,
     DateTime,
     Float,
     ForeignKey,
@@ -23,6 +25,7 @@ from sqlalchemy import (
     Text,
     UniqueConstraint,
     func,
+    text,
 )
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -158,3 +161,56 @@ class AIUsageRow(LearningBase):
     completion_tokens: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     cost_micros: Mapped[int] = mapped_column(BigInteger, nullable=False, default=0)
     recorded_at: Mapped[float] = mapped_column(Float, nullable=False)
+
+
+# The sitting statuses (``domain.progression.SittingStatus``; migration 0019's CHECK).
+SITTING_STATUSES: tuple[str, ...] = ("in_progress", "passed", "failed", "incomplete")
+_STATUS_IN = ", ".join(f"'{v}'" for v in SITTING_STATUSES)
+
+
+class UnitCheckSittingRow(LearningBase):
+    """One unit-check sitting (PROGRESSION_AND_EXAMINATION_CONTRACT §2; migration 0019).
+
+    A C2 learning record keyed by the pseudonymous ``student_ref``. ``items`` is the paper (item
+    and lesson references only — never an answer key); ``answers`` maps an item ref to the
+    learner's answer and its server-side outcome; ``result`` is the score once finished. At most
+    one ``in_progress`` sitting per learner and unit (partial unique index). Optimistic-locked.
+    """
+
+    __tablename__ = "unit_check_sitting"
+    __table_args__ = (
+        CheckConstraint(f"status IN ({_STATUS_IN})", name="ck_sitting_status"),
+        CheckConstraint("pass_percent BETWEEN 1 AND 100", name="ck_sitting_pass_percent"),
+        CheckConstraint("expires_at > started_at", name="ck_sitting_window"),
+        CheckConstraint("substr(sitting_id, 1, 4) = 'ucs_'", name="ck_sitting_ref"),
+        Index("ix_sitting_student", "student_ref", "started_at"),
+        Index("ix_sitting_unit", "student_ref", "unit_id"),
+        Index(
+            "uq_sitting_in_progress",
+            "student_ref",
+            "unit_id",
+            unique=True,
+            postgresql_where=text("status = 'in_progress'"),
+            sqlite_where=text("status = 'in_progress'"),
+        ),
+        {"schema": LEARNING_SCHEMA},
+    )
+
+    sitting_id: Mapped[str] = mapped_column(String(64), primary_key=True)
+    student_ref: Mapped[str] = mapped_column(String(64), nullable=False)
+    pack_id: Mapped[str] = mapped_column(String(32), nullable=False)
+    grade_key: Mapped[str] = mapped_column(String(16), nullable=False)
+    subject_key: Mapped[str] = mapped_column(String(64), nullable=False)
+    unit_id: Mapped[str] = mapped_column(String(255), nullable=False)
+    unit_title: Mapped[dict[str, Any]] = mapped_column(_JSON, nullable=False, default=dict)
+    status: Mapped[str] = mapped_column(String(16), nullable=False)
+    items: Mapped[list[Any]] = mapped_column(_JSON, nullable=False, default=list)
+    answers: Mapped[dict[str, Any]] = mapped_column(_JSON, nullable=False, default=dict)
+    pass_percent: Mapped[int] = mapped_column(Integer, nullable=False)
+    started_at: Mapped[float] = mapped_column(Float, nullable=False)
+    expires_at: Mapped[float] = mapped_column(Float, nullable=False)
+    finished_at: Mapped[float | None] = mapped_column(Float, nullable=True)
+    result: Mapped[dict[str, Any] | None] = mapped_column(_JSON, nullable=True)
+    lock_version: Mapped[int] = mapped_column(Integer, nullable=False, default=1)
+
+    __mapper_args__ = {"version_id_col": lock_version}

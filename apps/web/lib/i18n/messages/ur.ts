@@ -1,5 +1,6 @@
 // Urdu interface catalog — the launch locale. Typed as `Messages`, so a key missing here (or a key
 // that does not exist in `en`) is a compile error, not a blank button on a child's phone.
+import { progressionUr } from "./progression";
 import type { Messages } from "./types";
 
 export const ur: Messages = {
@@ -381,7 +382,7 @@ export const ur: Messages = {
       title: "سیکھیں",
       emptyTitle: "رہنمائی کے ساتھ سیکھنا شروع کرنے کا بہترین طریقہ ہے",
       emptyBody:
-        "\"آج\" پر \"شروع کریں\" دبائیں اور آپ کا اے آئی استاد صحیح اگلا سبق چنے گا۔ مضامین دیکھنے کی سہولت جلد آ رہی ہے۔",
+        "\"آج\" پر \"شروع کریں\" دبائیں اور آپ کا اے آئی استاد صحیح اگلا سبق چنے گا۔",
     },
     progress: {
       title: "پیش رفت",
@@ -1741,9 +1742,14 @@ export const ur: Messages = {
           submittedAt: "جمع کرایا گیا",
           attempt: "کوشش {n}",
           answer: "ان کا جواب",
+          flaggedAnswer: "نشان زدہ جواب: بالکل ویسا جیسا تشویش درج ہوتے وقت تھا",
+          currentAnswer: "تازہ ترین جواب: تشویش درج ہونے کے بعد بدلا گیا",
           matched: "فہرست کے وہ جملے جو اس جواب سے ملتے ہیں",
-          noMatch: "موجودہ جواب فہرست کے کسی جملے سے نہیں ملتا۔",
-          resubmitted: "تشویش درج ہونے کے بعد بچے نے یہ جواب بدل دیا۔ یہ تازہ ترین ورژن ہے، ضروری نہیں کہ وہی ہو جس پر نشان لگا تھا۔",
+          noMatch: "یہ جواب فہرست کے کسی جملے سے نہیں ملتا۔",
+          resubmitted: "تشویش درج ہونے کے بعد بچے نے یہ جواب بدل دیا۔ اوپر نشان زدہ جواب بالکل ویسا ہی محفوظ ہے؛ تازہ ترین ورژن اس کے نیچے دکھایا گیا ہے۔",
+          resubmittedSame: "تشویش درج ہونے کے بعد بچے نے وہی الفاظ دوبارہ جمع کرائے۔",
+          noSnapshot: "یہ تشویش درج ہوتے وقت کوئی نقل محفوظ نہیں کی گئی (یہ ثبوت کی نقول سے پہلے کی ہے)۔ یہ بچے کا تازہ ترین جواب ہے، ضروری نہیں کہ وہی ہو جس پر نشان لگا تھا۔",
+          notIntact: "انتباہ: محفوظ شدہ نشان زدہ متن اب اپنے فنگر پرنٹ سے مطابقت نہیں رکھتا۔ سسٹم آپریٹر کو اطلاع دیں۔",
           readRecorded: "یہ پڑھنا درج کر لیا گیا۔",
           unknown: "دستیاب نہیں",
           gone: "اس تشویش کے لیے پڑھنے کو کوئی ہوم ورک جواب نہیں (ممکن ہے اسے مٹا دیا گیا ہو)۔",
@@ -1751,4 +1757,5 @@ export const ur: Messages = {
       },
     },
   },
+  progression: progressionUr,
 };

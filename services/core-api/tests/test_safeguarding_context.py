@@ -73,12 +73,13 @@ def test_the_lead_reads_what_the_child_wrote_and_each_read_is_audited_without_te
     r = _context(s, lead, concern_id)
     assert r.status_code == 200, r.text
     body = r.json()
-    sub = body["submission"]
+    sub, flagged = body["submission"], body["flagged"]
     assert body["concern_id"] == concern_id and sub["submission_id"] == sid
-    assert sub["text"] == _WORDS and sub["source"] == "self_paced"
-    assert sub["item_ref"] == "hw-short" and sub["attempt"] == 1
-    assert isinstance(sub["submitted_at"], float)
-    assert sub["item_prompt"] and sub["lesson_title"]
+    assert flagged["text"] == _WORDS and sub["source"] == "self_paced"
+    assert flagged["item_ref"] == sub["item_ref"] == "hw-short" and flagged["attempt"] == 1
+    assert isinstance(flagged["submitted_at"], float) and flagged["intact"] is True
+    assert sub["item_prompt"] and sub["lesson_title"] and sub["available"] is True
+    assert body["current"] is None and body["snapshot"] is True  # unchanged since it was flagged
     ids = {m["phrase_id"]: m for m in body["matched_phrases"]}
     assert ids["en-01"]["phrase"] == "hits me" and ids["en-01"]["category"] == "felt_unsafe"
     assert body["resubmitted_since_raised"] is False and body["read_recorded"] is True
@@ -137,21 +138,28 @@ def test_unknown_and_contextless_concerns_are_not_found_and_not_audited(s: S) ->
     assert "concern.context_viewed" not in actions
 
 
-def test_a_concern_whose_submission_is_another_learners_is_not_found(s: S) -> None:
+def test_a_concern_whose_submission_is_another_learners_shows_only_its_snapshot(s: S) -> None:
     concern_id, _ = _flag(s)
     with s.app.state.safeguarding_session_factory() as session, session.begin():
         row = session.get(ConcernRow, concern_id)
         assert row is not None
         row.subject_ref = "stu_someone_else"
-    assert _context(s, _lead(s.client), concern_id).status_code == 404
+    # The live submission is not this subject's, so nothing current is read; the snapshot taken
+    # when the concern was raised (bound to it then) is still the evidence.
+    body = _context(s, _lead(s.client), concern_id).json()
+    assert body["flagged"]["text"] == _WORDS and body["current"] is None
+    assert body["submission"]["available"] is False and body["submission"]["item_prompt"] == {}
 
 
-def test_a_resubmission_is_flagged_and_matching_is_recomputed(s: S) -> None:
+def test_a_resubmission_keeps_the_flagged_text_and_shows_the_current_one(s: S) -> None:
     concern_id, _ = _flag(s)
     assert _submit(s, "hw-short", "Ammi cut the roti into 4 parts").status_code == 200
     body = _context(s, _lead(s.client), concern_id).json()
-    assert body["submission"]["attempt"] == 2
-    assert body["resubmitted_since_raised"] is True and body["matched_phrases"] == []
+    assert body["flagged"]["text"] == _WORDS and body["flagged"]["attempt"] == 1
+    assert body["current"]["text"] == "Ammi cut the roti into 4 parts"
+    assert body["current"]["attempt"] == 2 and body["current"]["matched_phrases"] == []
+    assert body["resubmitted_since_raised"] is True
+    assert "en-01" in [m["phrase_id"] for m in body["matched_phrases"]]
 
 
 def test_the_lead_reads_the_context_with_the_kill_switch_engaged(s: S) -> None:
@@ -162,7 +170,7 @@ def test_the_lead_reads_the_context_with_the_kill_switch_engaged(s: S) -> None:
     )
     assert engaged.status_code == 200
     r = _context(s, _lead(s.client), concern_id)
-    assert r.status_code == 200 and r.json()["submission"]["text"] == _WORDS
+    assert r.status_code == 200 and r.json()["flagged"]["text"] == _WORDS
 
 
 def test_the_lead_reads_the_context_after_consent_is_withdrawn(s: S) -> None:
@@ -174,4 +182,4 @@ def test_the_lead_reads_the_context_after_consent_is_withdrawn(s: S) -> None:
     )
     assert withdrawn.status_code == 200, withdrawn.text
     r = _context(s, _lead(s.client), concern_id)
-    assert r.status_code == 200 and r.json()["submission"]["text"] == _WORDS
+    assert r.status_code == 200 and r.json()["flagged"]["text"] == _WORDS

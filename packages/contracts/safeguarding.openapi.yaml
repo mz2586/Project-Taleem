@@ -142,12 +142,16 @@ paths:
       operationId: concernContext
       summary: The flagged homework behind a concern (safeguarding lead only; every read audited)
       description: >-
-        For a concern that names a homework submission (a disclosure-screen or teacher concern),
-        what the child wrote, the item prompt, the lesson title, when it was submitted and the
-        phrase-list entries the text matches now. Each read appends a `concern.context_viewed`
-        audit row (reader, time, concern, submission id; never the text). Available with the kill
-        switch engaged and after the learner's consent is withdrawn. A concern with no submission,
-        or whose submission was erased, is a 404 and nothing is audited.
+        For a concern that names a homework submission (a disclosure-screen or teacher concern):
+        `flagged` is the immutable snapshot of the text that prompted the concern, captured with it
+        (`safeguarding.concern_evidence`, alembic 0018) and never changed by a resubmission;
+        `current` is the child's latest answer, present only when its text differs. Also the item
+        prompt, the lesson title and the phrase-list entries the flagged text matches. Each read
+        appends a `concern.context_viewed` audit row (reader, time, concern, submission id; never
+        the text). Available with the kill switch engaged, after the learner's consent is
+        withdrawn, and (from the snapshot) after the submission itself was erased. A concern with
+        no submission, or with no snapshot (raised before 0018) whose submission is gone, is a
+        404 and nothing is audited.
       security: [{ bearerAuth: [] }]
       parameters:
         - { $ref: "#/components/parameters/ConcernId" }
@@ -411,38 +415,79 @@ components:
           items: { $ref: "#/components/schemas/ConcernSummary" }
     ConcernContext:
       type: object
-      required: [concern_id, submission, matched_phrases, resubmitted_since_raised, read_recorded]
+      required:
+        [concern_id, submission, flagged, current, matched_phrases, resubmitted_since_raised, snapshot, read_recorded]
       properties:
         concern_id: { type: string }
         submission:
           type: object
-          required: [submission_id, text, submitted_at]
+          required: [submission_id, available]
           properties:
             submission_id: { type: string }
-            source: { type: string, enum: [assignment, self_paced] }
-            objective_code: { type: string }
-            item_ref: { type: string }
-            text: { type: string, description: What the child last submitted for this item. }
-            attempt: { type: integer, minimum: 1 }
-            submitted_at: { type: number }
+            source:
+              oneOf:
+                - { type: string, enum: [assignment, self_paced] }
+                - { type: "null" }
+            objective_code: { type: [string, "null"] }
+            item_ref: { type: [string, "null"] }
             item_prompt: { type: object, additionalProperties: { type: string } }
             lesson_title: { type: object, additionalProperties: { type: string } }
+            available:
+              type: boolean
+              description: False once the submission itself is gone (erased); the snapshot stands.
+        flagged:
+          description: >-
+            The text exactly as it was when the concern was raised (immutable). Null only for a
+            concern raised before snapshots existed (see `snapshot` and `notice`).
+          oneOf:
+            - { $ref: "#/components/schemas/FlaggedEvidence" }
+            - { type: "null" }
+        current:
+          description: >-
+            The child's latest answer, present only when its text differs from `flagged` (always
+            present when there is no snapshot).
+          oneOf:
+            - { $ref: "#/components/schemas/CurrentAnswer" }
+            - { type: "null" }
         matched_phrases:
+          description: Phrase-list entries the flagged text matches (the latest text, without a snapshot).
           type: array
-          items:
-            type: object
-            properties:
-              phrase_id: { type: string }
-              lang: { type: string }
-              category: { $ref: "#/components/schemas/Category" }
-              phrase: { type: string }
+          items: { $ref: "#/components/schemas/MatchedPhrase" }
         resubmitted_since_raised:
           type: boolean
-          description: >-
-            True when the child resubmitted after the concern was raised: the text shown is the
-            latest version, not necessarily the one that was flagged.
+          description: True when the child resubmitted after the concern was raised.
+        snapshot: { type: boolean, description: Whether an evidence snapshot exists for this concern. }
         read_recorded: { type: boolean, const: true }
         notice: { type: string }
+    MatchedPhrase:
+      type: object
+      properties:
+        phrase_id: { type: string }
+        lang: { type: string }
+        category: { $ref: "#/components/schemas/Category" }
+        phrase: { type: string }
+    FlaggedEvidence:
+      type: object
+      required: [text, attempt, submitted_at, item_ref, objective_code, text_sha256, intact, captured_at]
+      properties:
+        text: { type: string }
+        attempt: { type: integer, minimum: 1 }
+        submitted_at: { type: number }
+        item_ref: { type: string }
+        objective_code: { type: string }
+        text_sha256: { type: string, pattern: "^[0-9a-f]{64}$" }
+        intact: { type: boolean, description: The stored text still matches `text_sha256`. }
+        captured_at: { type: number }
+    CurrentAnswer:
+      type: object
+      required: [text, attempt, submitted_at, matched_phrases]
+      properties:
+        text: { type: string }
+        attempt: { type: integer, minimum: 1 }
+        submitted_at: { type: number }
+        matched_phrases:
+          type: array
+          items: { $ref: "#/components/schemas/MatchedPhrase" }
     ConcernDetail:
       allOf:
         - { $ref: "#/components/schemas/ConcernSummary" }

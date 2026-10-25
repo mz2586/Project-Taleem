@@ -14,6 +14,7 @@ from ..domain.curriculum_view import LessonView
 from ..domain.decision import CurriculumGraph
 from ..domain.events import LearningEvent
 from ..domain.knowledge import StudentKnowledge
+from ..domain.progression import GradePath
 from ..domain.session import Session
 
 
@@ -60,6 +61,16 @@ class PublishedTitles(Protocol):
     """
 
     def published_titles(self) -> dict[str, dict[str, str]]: ...
+
+
+@runtime_checkable
+class ProgressionCurriculum(Protocol):
+    """The published path of a grade and single-lesson lookups (PROGRESSION_AND_EXAMINATION
+    _CONTRACT §1). Cohort-filtered exactly like ``lesson_for``: a real reader never receives a
+    demo lesson, so never a unit made only of demo lessons."""
+
+    def grade_path(self, grade_key: str) -> GradePath: ...
+    def lesson_view(self, lesson_id: str) -> LessonView | None: ...
 
 
 # --- read-model row DTOs for the student query surface (derived; no new child-data tables) ---

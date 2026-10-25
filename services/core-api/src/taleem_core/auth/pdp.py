@@ -95,6 +95,13 @@ def _learning_rules() -> set[tuple[str, str, str]]:
         ("student", "read", "learning.knowledge"),
         ("mentor", "read", "learning.knowledge"),
         ("mentor", "read", "learning.session"),
+        # Unit checks + the academic record (PROGRESSION_AND_EXAMINATION_CONTRACT). Which learner
+        # is a relationship question settled per request: a learner only their own; a guardian
+        # only their own child; a teacher only a visible learner in one of their own classes.
+        ("student", "operate", "learning.unit_check"),
+        ("student", "read", "learning.record"),
+        ("guardian", "read", "learning.record"),
+        ("teacher", "read", "learning.record"),
     }
 
 

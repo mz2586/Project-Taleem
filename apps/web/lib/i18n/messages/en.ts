@@ -3,11 +3,14 @@
 //
 // Namespaces: `common` (shared chrome), `home` (landing), `student`, `guardian` (the guardian
 // portal), `auth` (sign-in and registration for learners and guardians), `teacher` (the teacher
-// support portal, plus the guardian's "join a class" copy), `studio`, and `safeguarding` (the child's
-// "Tell a grown-up" flow, the guardian's concern form, and the safeguarding console).
+// support portal, plus the guardian's "join a class" copy), `studio`, `safeguarding` (the child's
+// "Tell a grown-up" flow, the guardian's concern form, and the safeguarding console), and
+// `progression` (the path, unit checks and the academic record — ./progression.ts).
 //
 // Placeholders are `{name}`. Numeric values passed to `t()` are formatted for the locale, so never
 // pre-format a number into a string before interpolating it.
+
+import { progressionEn } from "./progression";
 
 export const en = {
   common: {
@@ -391,7 +394,7 @@ export const en = {
       title: "Learn",
       emptyTitle: "Guided learning is the best way to start",
       emptyBody:
-        "Tap Start on Today and your AI teacher will pick the right next lesson. Browsing subjects is coming soon.",
+        "Tap Start on Today and your AI teacher will pick the right next lesson.",
     },
     progress: {
       title: "Progress",
@@ -1763,9 +1766,14 @@ export const en = {
           submittedAt: "Submitted",
           attempt: "Attempt {n}",
           answer: "Their answer",
+          flaggedAnswer: "Flagged answer: exactly as it was when the concern was raised",
+          currentAnswer: "Latest answer: changed since the concern was raised",
           matched: "Phrase-list entries this answer matches",
-          noMatch: "The current answer matches no phrase-list entry.",
-          resubmitted: "The child changed this answer after the concern was raised. This is the latest version, not necessarily the one that was flagged.",
+          noMatch: "This answer matches no phrase-list entry.",
+          resubmitted: "The child changed this answer after the concern was raised. The flagged answer above is kept exactly as it was; the latest version is shown below it.",
+          resubmittedSame: "The child resubmitted after the concern was raised, with the same words.",
+          noSnapshot: "No copy was kept when this concern was raised (it predates evidence snapshots). This is the child's latest answer, which may not be the one that was flagged.",
+          notIntact: "Warning: the stored flagged text no longer matches its fingerprint. Report this to the system operator.",
           readRecorded: "This read was recorded.",
           unknown: "Not available",
           gone: "There is no homework answer to read for this concern (it may have been erased).",
@@ -1773,4 +1781,5 @@ export const en = {
       },
     },
   },
+  progression: progressionEn,
 };

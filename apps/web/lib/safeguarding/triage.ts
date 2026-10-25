@@ -210,33 +210,61 @@ export interface MatchedPhraseWire {
   phrase: string;
 }
 
-/** GET /v1/safeguarding/concerns/{id}/context — safeguarding lead only; every read is audited. */
+export interface FlaggedEvidenceWire {
+  text: string;
+  attempt: number;
+  submitted_at: number;
+  item_ref: string;
+  objective_code: string;
+  text_sha256: string;
+  intact: boolean;
+  captured_at: number;
+}
+
+export interface CurrentAnswerWire {
+  text: string;
+  attempt: number;
+  submitted_at: number;
+  matched_phrases: MatchedPhraseWire[];
+}
+
+/** GET /v1/safeguarding/concerns/{id}/context — safeguarding lead only; every read is audited.
+ * `flagged` is the immutable snapshot taken when the concern was raised; `current` is the latest
+ * answer, sent only when its text differs (or when no snapshot exists). */
 export interface ConcernContextWire {
   concern_id: string;
   submission: {
     submission_id: string;
-    source: "assignment" | "self_paced";
-    objective_code: string;
-    item_ref: string;
-    text: string;
-    attempt: number;
-    submitted_at: number;
+    source: "assignment" | "self_paced" | null;
+    objective_code: string | null;
+    item_ref: string | null;
     item_prompt: Record<string, string>;
     lesson_title: Record<string, string>;
+    available: boolean;
   };
+  flagged: FlaggedEvidenceWire | null;
+  current: CurrentAnswerWire | null;
   matched_phrases: MatchedPhraseWire[];
   resubmitted_since_raised: boolean;
+  snapshot: boolean;
   read_recorded: boolean;
   notice?: string;
 }
 
-export interface FlaggedWorkView {
+export interface AnswerView {
   text: string;
-  lessonTitle: string | null;
-  prompt: string | null;
   submittedAt: number;
   attempt: number;
   matched: { id: string; phrase: string; lang: string }[];
+}
+
+export interface FlaggedWorkView {
+  /** The text exactly as flagged; null only for a concern raised before snapshots existed. */
+  flagged: (AnswerView & { intact: boolean }) | null;
+  /** The latest answer, only when it differs from the flagged one (or there is no snapshot). */
+  current: AnswerView | null;
+  lessonTitle: string | null;
+  prompt: string | null;
   resubmitted: boolean;
 }
 
@@ -256,14 +284,26 @@ export function pickLocalised(map: Record<string, string> | null | undefined, lo
   return any ?? null;
 }
 
+function matchedView(list: MatchedPhraseWire[]): AnswerView["matched"] {
+  return list.map((m) => ({ id: m.phrase_id, phrase: m.phrase, lang: m.lang }));
+}
+
 export function flaggedWorkView(wire: ConcernContextWire, locale: string): FlaggedWorkView {
+  const f = wire.snapshot ? wire.flagged : null;
   return {
-    text: wire.submission.text,
+    flagged: f
+      ? { text: f.text, submittedAt: f.submitted_at, attempt: f.attempt, intact: f.intact, matched: matchedView(wire.matched_phrases) }
+      : null,
+    current: wire.current
+      ? {
+          text: wire.current.text,
+          submittedAt: wire.current.submitted_at,
+          attempt: wire.current.attempt,
+          matched: matchedView(wire.current.matched_phrases),
+        }
+      : null,
     lessonTitle: pickLocalised(wire.submission.lesson_title, locale),
     prompt: pickLocalised(wire.submission.item_prompt, locale),
-    submittedAt: wire.submission.submitted_at,
-    attempt: wire.submission.attempt,
-    matched: wire.matched_phrases.map((m) => ({ id: m.phrase_id, phrase: m.phrase, lang: m.lang })),
     resubmitted: wire.resubmitted_since_raised,
   };
 }
