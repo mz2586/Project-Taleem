@@ -80,9 +80,11 @@ EFFORT: Literal["medium"] = "medium"
 _APPROVAL_REF = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._:/-]{2,63}$")
 
 # List prices, USD per million tokens (== micro-USD per token): input, output, 5-minute cache
-# write, cache read. Verify against the pricing page when FD-03 is approved.
+# write, cache read. Checked against platform.claude.com/docs/en/about-claude/pricing on
+# 2026-10-25 (Sonnet 5.5 cache hits are 0.05x input); re-check when FD-03 is approved. Haiku 5.5
+# costs 5x above 100K-token prompts; the gateway's prompts are a few hundred tokens.
 _PRICES: dict[str, tuple[Decimal, Decimal, Decimal, Decimal]] = {
-    EXPLANATION_MODEL: (Decimal("2.00"), Decimal("10.00"), Decimal("2.50"), Decimal("0.20")),
+    EXPLANATION_MODEL: (Decimal("2.00"), Decimal("10.00"), Decimal("2.50"), Decimal("0.10")),
     CLASSIFICATION_MODEL: (Decimal("0.10"), Decimal("0.50"), Decimal("0.125"), Decimal("0.01")),
 }
 # Data-residency premium per pinned geography (``inference_geo``); verify at approval.

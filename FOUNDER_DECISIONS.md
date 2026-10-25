@@ -65,7 +65,8 @@ every decision marked **Required by: Phase 1.5** to be closed before build.
 - **Recommendation.** (b) for distress classification + the holding response in-region; (a) for the rest, under a technically-enforced zero-retention contract; never forward pre-classified-C4 text out of region.
 - **Consequences.** Determines the AI provider contract, cost (FD-07), and whether the residency posture (FD-02) holds. Blocks the production AI path (already excluded from Track C).
 - **Required by.** **Phase 1.5.** — **Decision:** _____
-- **Full decision brief (2026-10-22):** [`docs/decisions/FD-03-ai-provider-residency.md`](docs/decisions/FD-03-ai-provider-residency.md) — options compared on residency, retention, safety, Urdu quality, cost, and operations; the six approvals required before any learner-derived text is transmitted.
+- **Update 2026-10-25 (official sources re-read).** No provider processes inside Pakistan, and none offers a current mid-tier model in-region in South Asia or the Gulf, so option (a) "near Pakistan" is not available as written. Google's terms forbid services likely to be used by under-18s. **Recommended:** Anthropic first-party API, `claude-sonnet-5-5`, `inference_geo: "us"` workspace, organisation ZDR, no Batch/Files/code execution; envelope $0.10 per learner per day (about $0.58 per month at typical use). Approval items 1–6 are listed in brief §7.
+- **Full decision brief (rewritten 2026-10-25):** [`docs/decisions/FD-03-ai-provider-residency.md`](docs/decisions/FD-03-ai-provider-residency.md): what needs a model, the measured payload, a three-provider comparison with sources, per-learner cost scenarios, privacy and child-safety implications, the exact approvals, and the work that continues meanwhile.
 
 ## FD-04 · Mandatory-reporting / external-referral policy
 

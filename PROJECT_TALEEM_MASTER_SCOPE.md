@@ -92,17 +92,34 @@ with feedback states, three system-issued report cards and offline lesson downlo
 live lesson that renders its interactive question. Production stays `TALEEM_ENV=production`; the
 generic fixture seeder still refuses production.
 
-### 0.2 AI provider: recommendation (FD-03)
+### 0.2 AI provider: recommendation (FD-03, re-verified 2026-10-25)
 
-Recommended: Anthropic Claude through a region-pinned deployment, configured as two tiers.
+**Status: blocked-by-external-decision. The real AI Teacher is not operational.** No provider is
+configured in any environment, and children receive the deterministic teacher.
 
-- **Explanation tier:** Claude Sonnet 5.5 (`claude-sonnet-5-5`), used only for lesson-grounded
-  explanations.
-- **Classification and routing tier:** Claude Haiku 5.5 (`claude-haiku-5-5`). It moves to the
-  in-region classifier when free-text input enters scope.
+Recommended, for one capability only (rephrasing published lesson text): **Anthropic first-party API,
+`claude-sonnet-5-5`, a workspace pinned to `inference_geo: "us"`, organisation Zero Data Retention, and
+no Batch, Files or code execution.**
 
-Details, conditions and what the founder must still sign are in
-[`FD-03`](docs/decisions/FD-03-ai-provider-residency.md). The adapter stays inert until then.
+- **Why.** Anthropic's terms permit products for minors, with safeguards Taleem already largely meets.
+  Google's terms forbid under-18 services. OpenAI is equivalent on price, but would need a new
+  adapter and gives no residency gain.
+- **Residency.** No provider processes inside Pakistan or in-region in South Asia or the Gulf for a
+  current mid-tier model. The choice is a named jurisdiction (US) or "anywhere".
+- **Cost.** About $0.0048 per call. That is $0.19 / $0.58 / $1.94 per learner per month at light /
+  typical / heavy use, capped by a recommended $0.10 per learner per day.
+- **Still to sign.** Six approval items:
+  1. the provider;
+  2. written ZDR, model coverage and acceptance of ages 6–12, from Anthropic;
+  3. transfer basis, DPIA and public child-privacy statement;
+  4. the cost envelope;
+  5. an external red team;
+  6. the real-model golden set plus transcript review.
+- **Separate decision.** Child free text stays out of scope until an in-house distress classifier
+  exists (FD-04).
+
+Full brief: [`FD-03`](docs/decisions/FD-03-ai-provider-residency.md). The adapter stays inert until
+`TALEEM_AI_FD03_APPROVAL_REF` names the recorded approval.
 
 ## 1. Executive Summary
 
@@ -1248,6 +1265,7 @@ Optional or later: generative AI (R2, FD-03), a recognized-qualification pathway
 
 | Date | Change | Author |
 | --- | --- | --- |
+| 2026-10-25 | FD-03 re-researched against official provider terms and pricing: Google excluded (under-18 prohibition), no in-region option near Pakistan, Anthropic first-party `us` + ZDR recommended, per-learner cost scenarios and exact approval list; Sonnet 5.5 cache-read price corrected in the adapter. | Engineering |
 | 2026-10-25 | Learner-chosen lessons from the path and remediation; homework offline through sync (alembic `0020`, `7cc2a20`, CI green). Guardian recovery codes without email, wrong codes never lock the account (alembic `0021`); real Claude adapter for the AI Teacher, inert until FD-03 is approved (switching on is configuration only) (`9a6af92`). | Engineering |
 | 2026-10-25 | Production cycle: teacher-free homework (self-paced practice, exact-key auto-marking with retry, open answers compare-your-answer, disclosure screen; alembic `0017`, `6f763e4`); lesson titles instead of codes and safeguarding-lead access to flagged work (`21556a5`); immutable flagged-work snapshot (alembic `0018`) and disclosures withheld from the guardian export, with their audit events; unit checks, progression and academic record (alembic `0019`, `ec67b01`). CI green on all jobs incl. PostgreSQL migrations and the browser journey (`ce5c906`). | Engineering |
 | 2026-10-25 | Report cards complete-and-verified in software: system issuance, guardian generate, evidence-pinned lesson versions (alembic `0014`, `0015`); CI e2e student-to-guardian journey PASS on PostgreSQL (`65e7181`, `4ffe3aa`). In-app demo cohort for exploring the real deployment (`628fa0d`, alembic `0016`, DEMO_COHORT_CONTRACT). | Engineering |

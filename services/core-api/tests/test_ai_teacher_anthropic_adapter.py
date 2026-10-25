@@ -396,7 +396,7 @@ def test_cost_is_computed_from_usage_tokens_with_the_residency_premium() -> None
             cache_read_tokens=1_000,
             inference_geo="us",
         )
-        == 220
+        == 110  # cache hits on Sonnet 5.5 are 0.05x input: $0.10 / MTok, x1.1 for "us"
     )
     assert (
         la.cost_micros(
