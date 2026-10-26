@@ -43,8 +43,8 @@ jobs:
       PERF_OUT_DIR: ${{ github.workspace }}/perf-evidence
       PERF_ENFORCE: ${{ inputs.enforce && '1' || '0' }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Install core-api
@@ -60,7 +60,7 @@ jobs:
       - name: Remove synthetic credentials before upload
         if: always()
         run: rm -f "$PERF_OUT_DIR/seed.json"
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: perf-${{ inputs.profile }}
