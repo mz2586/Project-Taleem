@@ -375,7 +375,7 @@ components:
           properties:
             decision:
               type: string
-              enum: [diagnose, teach, continue, review, remediate, advance, revise, escalate, rest, complete]
+              enum: [diagnose, teach, continue, review, remediate, step_back, advance, revise, escalate, rest, complete]
             objective_code: { type: ["string", "null"] }
         prerequisite_hint:
           description: Prerequisites not yet met (neither mastered nor placed secure); null when none.
@@ -429,7 +429,7 @@ components:
       properties:
         decision:
           type: string
-          enum: [diagnose, teach, continue, review, remediate, advance, revise, escalate, rest, complete]
+          enum: [diagnose, teach, continue, review, remediate, step_back, advance, revise, escalate, rest, complete]
         objective_code: { type: ["string", "null"] }
         rationale: { type: array, items: { type: string } }
     TeachView:

@@ -152,6 +152,16 @@ describe("evidence and progression", () => {
     expect(currentItem(playerReducer(s, { type: "retry" }))?.item_ref).toBe("p1");
   });
 
+  it("re-plans when the AI teacher steps back after repeated misses (no mentor hand-off)", () => {
+    const s = run(
+      taught,
+      { type: "ready" },
+      { type: "answered", answer: { ...answer("incorrect", 0.1), post_decision: "step_back" } },
+    );
+    expect(continueAfterFeedback(s)).toBe("plan");
+    expect(s.phase).not.toBe("escalated");
+  });
+
   it("treats a partial answer as a retry, not a pass", () => {
     const s = run(taught, { type: "ready" }, { type: "answered", answer: answer("partial") });
     expect(continueAfterFeedback(s)).toBe("retry");

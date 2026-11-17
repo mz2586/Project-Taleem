@@ -27,6 +27,7 @@ const SERVER_CODES = [
   "placed_above",
   "retention_at_risk",
   "repeated_failure",
+  "stepping_back",
   "mastery_reached",
   "all_mastered",
 ];
@@ -42,6 +43,7 @@ const SAMPLE: Record<string, ReasonWire["params"]> = {
   placed_above: { count: 2 },
   retention_at_risk: { objective: "G4.N.1", mastery: 0.55 },
   repeated_failure: { objective: "G4.N.1", consecutive_failures: 4 },
+  stepping_back: { objective: "G4.N.4", prerequisite: "G4.N.3" },
   mastery_reached: { objective: "G4.N.1", mastery: 0.9, threshold: 0.85 },
 };
 
@@ -163,5 +165,20 @@ describe("recommendationView", () => {
   it("bounds the list and tolerates a missing one", () => {
     expect(recommendationViews(Array.from({ length: 9 }, () => rec))).toHaveLength(6);
     expect(recommendationViews(undefined)).toEqual([]);
+  });
+});
+
+describe("no mentor promises (AI-led school)", () => {
+  it("never tells a child or adult that a mentor will help when the learner struggles", () => {
+    for (const locale of SUPPORTED_LOCALES) {
+      for (const code of ["repeated_failure", "stepping_back"] as const) {
+        for (const audience of ["student", "adult"] as const) {
+          const text = render(locale, { code, params: SAMPLE[code] }, audience);
+          expect(text.toLowerCase()).not.toContain("mentor");
+          expect(text).not.toContain("رہنما");
+        }
+      }
+    }
+    expect(render("en", { code: "stepping_back", params: SAMPLE.stepping_back }, "adult")).toContain("G4.N.3");
   });
 });

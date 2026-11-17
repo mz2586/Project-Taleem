@@ -166,6 +166,7 @@ export const TEACHABLE_DECISIONS: ReadonlySet<string> = new Set([
   "continue",
   "review",
   "remediate",
+  "step_back",
   "diagnose",
 ]);
 

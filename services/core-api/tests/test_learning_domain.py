@@ -17,6 +17,7 @@ from taleem_core.contexts.learning.domain.decision import (
     ObjectiveInfo,
     post_interaction,
     select_next,
+    step_back_target,
 )
 from taleem_core.contexts.learning.domain.estimator import BKTEstimator, BKTParams
 from taleem_core.contexts.learning.domain.forgetting import HalfLifeForgettingModel
@@ -322,7 +323,7 @@ def _result(**over: object) -> AttemptResult:
     return AttemptResult(**base)  # type: ignore[arg-type]
 
 
-def test_post_interaction_advance_continue_remediate_escalate_revise() -> None:
+def test_post_interaction_advance_continue_remediate_step_back_revise() -> None:
     obj = ObjectiveMastery(OBJ)
     assert post_interaction(obj, _result(newly_mastered=True), CFG).kind is DecisionKind.ADVANCE
     assert post_interaction(obj, _result(), CFG).kind is DecisionKind.CONTINUE
@@ -332,7 +333,7 @@ def test_post_interaction_advance_continue_remediate_escalate_revise() -> None:
     obj2.consecutive_failures = 4
     assert (
         post_interaction(obj2, _result(outcome=Outcome.INCORRECT), CFG).kind
-        is DecisionKind.ESCALATE
+        is DecisionKind.STEP_BACK  # AI-led recovery; ESCALATE is reserved for safety signals
     )
     obj3 = ObjectiveMastery(OBJ)
     _apply_conf(obj3)
@@ -373,3 +374,86 @@ def test_misconception_recurrence_stays_active_and_counted() -> None:
     assert record.is_active  # no longer a dead state
     assert obj.has_confirmed_misconception()  # blocks mastery again
     assert "m1" in result.confirmed_misconceptions  # surfaced for remediation + events
+
+
+# --------------------------------------------------------------------------- struggle recovery
+
+
+def _struggle_graph() -> CurriculumGraph:
+    return _graph(
+        ObjectiveInfo("A", "LA", (), 0),
+        ObjectiveInfo("P", "LP", ("A",), 1),
+        ObjectiveInfo("B", "LB", ("A", "P"), 2),
+    )
+
+
+def _place_secure(k: StudentKnowledge, code: str) -> None:
+    from taleem_core.contexts.learning.domain.knowledge import PriorProvenance
+
+    k.ensure_objective(code).provenance = PriorProvenance(
+        source="diagnostic", placement_id="pl1", status="secure", value=0.9, uncertainty=0.2
+    )
+
+
+def _struggling_on_b(k: StudentKnowledge) -> None:
+    b = k.ensure_objective("B")
+    b.state = MasteryState.IN_PROGRESS
+    b.consecutive_failures = CFG.max_consecutive_failures
+
+
+def test_struggle_steps_back_to_a_prerequisite_only_placed_secure() -> None:
+    k = StudentKnowledge("s1")
+    a = k.ensure_objective("A")
+    a.state = MasteryState.MASTERED
+    _place_secure(k, "P")  # the diagnostic put the learner above P; they never practised it
+    _struggling_on_b(k)
+    d = select_next(k, _struggle_graph(), CFG, 10.0)
+    assert d.kind is DecisionKind.STEP_BACK and d.objective_code == "P"
+    assert d.lesson_ref == "LP"
+    (reason,) = d.rationale[0].reasons
+    assert reason.to_dict() == {
+        "code": "stepping_back",
+        "params": {"objective": "B", "prerequisite": "P"},
+    }
+
+
+def test_struggle_picks_the_shakiest_prerequisite() -> None:
+    k = StudentKnowledge("s1")
+    for code, value in (("A", 0.7), ("P", 0.4)):
+        o = k.ensure_objective(code)
+        o.state = MasteryState.NEEDS_REVIEW
+        o.mastery = Mastery(value=value, uncertainty=0.2)
+    _struggling_on_b(k)
+    # Reviews are capped out so the step-back rule (not spacing) decides.
+    d = select_next(k, _struggle_graph(), CFG, 10.0, reviews_done_today=CFG.daily_review_cap)
+    assert d.kind is DecisionKind.STEP_BACK and d.objective_code == "P"
+
+
+def test_struggle_with_mastered_prerequisites_continues_the_objective() -> None:
+    k = StudentKnowledge("s1")
+    for code in ("A", "P"):
+        k.ensure_objective(code).state = MasteryState.MASTERED
+    _struggling_on_b(k)
+    d = select_next(k, _struggle_graph(), CFG, 10.0)
+    # No shaky foundation: the AI teacher re-teaches B itself (never a mentor hand-off).
+    assert d.kind is DecisionKind.CONTINUE and d.objective_code == "B"
+
+
+def test_struggle_ignores_prerequisites_outside_the_published_graph() -> None:
+    k = StudentKnowledge("s1")
+    k.ensure_objective("A").state = MasteryState.MASTERED
+    k.ensure_objective("P").state = MasteryState.MASTERED
+    _struggling_on_b(k)
+    graph = _graph(ObjectiveInfo("A", "LA", (), 0), ObjectiveInfo("B", "LB", ("A", "X"), 2))
+    assert step_back_target(k, graph, "B") is None
+    assert step_back_target(k, graph, "missing") is None
+
+
+def test_no_step_back_below_the_failure_threshold() -> None:
+    k = StudentKnowledge("s1")
+    k.ensure_objective("A").state = MasteryState.MASTERED
+    _place_secure(k, "P")
+    _struggling_on_b(k)
+    k.get("B").consecutive_failures = CFG.max_consecutive_failures - 1  # type: ignore[union-attr]
+    d = select_next(k, _struggle_graph(), CFG, 10.0)
+    assert d.kind is not DecisionKind.STEP_BACK

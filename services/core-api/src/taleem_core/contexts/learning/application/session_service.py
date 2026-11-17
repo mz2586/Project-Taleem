@@ -50,6 +50,8 @@ _CONTEXT_FOR: dict[DecisionKind, InteractionContext] = {
     DecisionKind.REVIEW: InteractionContext.SPACED_REVIEW,
     DecisionKind.REMEDIATE: InteractionContext.REMEDIATION,
     DecisionKind.DIAGNOSE: InteractionContext.DIAGNOSTIC,
+    # Struggle recovery: practising the prerequisite (or re-teaching) is remediation.
+    DecisionKind.STEP_BACK: InteractionContext.REMEDIATION,
 }
 
 
@@ -140,6 +142,11 @@ class SessionService:
         graph = self._graph_source() if callable(self._graph_source) else self._graph_source
         now = self._now()
         decision = select_next(knowledge, graph, self._config, now, safety_flag=safety_flag)
+        # Re-planning mid-lesson (after the last item, or the AI teacher stepping back after
+        # repeated failure): close out the current objective first, so the lifecycle loops
+        # RECORDING -> TEACHING instead of rejecting INTERACTING -> TEACHING.
+        if session.state is SessionState.INTERACTING:
+            self.complete_objective(session)
         session.record_decision(
             DecisionRecord(
                 kind=decision.kind.value,

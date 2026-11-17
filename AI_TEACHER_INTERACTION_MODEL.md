@@ -53,8 +53,11 @@ The AI Teacher walks a learner through an objective item by item, reusing the se
 
 1. Explain (chosen style) → 2. Ask an item → 3. On a wrong answer, deliver the **authored misconception
    correction** + offer the next **graduated hint** → 4. Re-ask a parallel item → 5. On repeated
-   failure after H3, **escalate to a mentor**. The teacher never states the answer before H3 and never
-   reveals the correct option.
+   failure after help, the AI teacher **steps back** (`step_back`): it practises the shakiest
+   prerequisite first, or, when every prerequisite is mastered, teaches the objective again from the
+   start. No human is needed (2026-11-17; before then this step handed off to a mentor, which most
+   children do not have). The teacher never states the answer before H3 and never reveals the
+   correct option.
 
 ---
 
@@ -96,10 +99,12 @@ Reuses the session/answer path and the templated runtime:
 
 - **Confidence indicator** — `low`/`medium`/`high`, calibrated from the BKT **uncertainty** + evidence
   count. Low by default (little evidence) — the teacher is honest about what it doesn't yet know.
-- **Escalation** — the teacher hands off to a human when the decision engine requests it or after
-  repeated failures post-help; the response carries `escalate` + `escalate_reason`. In the supervised
-  pilot the mentor is present; offline, the escalation is queued (see
-  [AI_TEACHER_OFFLINE.md](AI_TEACHER_OFFLINE.md)).
+- **Escalation** — the decision engine's `escalate` is reserved for a safety or wellbeing signal,
+  where a person must act. Academic struggle is handled by the AI teacher (`step_back`, §3). The
+  explanation response still carries `escalate` + `escalate_reason` after repeated failures, as a
+  signal for an optional mentor or guardian view and to keep a struggling child on authored text
+  (no generative rephrase); no learner journey waits on it. Offline handling: see
+  [AI_TEACHER_OFFLINE.md](AI_TEACHER_OFFLINE.md).
 
 ---
 

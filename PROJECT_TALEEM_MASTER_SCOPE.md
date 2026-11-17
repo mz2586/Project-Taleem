@@ -573,6 +573,7 @@ Design references: [`AI_TEACHER_ARCHITECTURE.md`](AI_TEACHER_ARCHITECTURE.md),
 | --- | --- |
 | Curriculum-grounded generation (retrieval limited to published lessons) | 🔴 |
 | Lesson-aware tutoring turns | 🟡 (templated today) |
+| Struggle recovery without a human | 🟢 (deterministic): repeated failure steps back to the shakiest prerequisite or re-teaches; never a mentor hand-off (`step_back`, `test_struggle_recovery.py`) |
 | Student-context-aware explanation (mastery, errors, grade band) | 🟢 (deterministic) |
 | Adaptive re-explanation in a different style | 🟢 (deterministic, fixed template set) |
 | Free-form learner questions | 🟡 (answered from the lesson by retrieval; typed questions flag-gated pending M-Safe) |

@@ -22,7 +22,10 @@ class DecisionKind(StrEnum):
     REMEDIATE = "remediate"  # clear a confirmed misconception
     ADVANCE = "advance"  # objective mastered — move on
     REVISE = "revise"  # objective decayed — needs review scheduling
-    ESCALATE = "escalate"  # hand off to a mentor / safeguarding
+    ESCALATE = "escalate"  # safety/wellbeing signal only — a person must act (never for struggle)
+    # Repeated failure after help: the AI teacher steps back — to a shaky prerequisite when one
+    # exists, else a fresh re-teach of the same objective. No human is needed (AI-led school).
+    STEP_BACK = "step_back"
     REST = "rest"  # stop (wellbeing / nothing due)
     COMPLETE = "complete"  # all eligible objectives mastered
 
@@ -47,6 +50,7 @@ class ReasonCode(StrEnum):
     PLACED_ABOVE = "placed_above"  # {count}: objectives skipped because placement put them secure
     RETENTION_AT_RISK = "retention_at_risk"  # {objective, mastery}
     REPEATED_FAILURE = "repeated_failure"  # {objective, consecutive_failures}
+    STEPPING_BACK = "stepping_back"  # {objective, prerequisite}: practise the foundation first
     MASTERY_REACHED = "mastery_reached"  # {objective, mastery, threshold}
     ALL_MASTERED = "all_mastered"  # {}
 
@@ -122,6 +126,32 @@ def _prereqs_met(knowledge: StudentKnowledge, info: ObjectiveInfo) -> bool:
 def _placed_secure(knowledge: StudentKnowledge, code: str) -> bool:
     obj = knowledge.get(code)
     return obj is not None and obj.placed_secure
+
+
+def _struggling(knowledge: StudentKnowledge, code: str, config: DecisionConfig) -> bool:
+    obj = knowledge.get(code)
+    return obj is not None and obj.consecutive_failures >= config.max_consecutive_failures
+
+
+def step_back_target(
+    knowledge: StudentKnowledge, curriculum: CurriculumGraph, objective_code: str
+) -> str | None:
+    """The prerequisite to step back to when a learner keeps failing ``objective_code``.
+
+    A prerequisite in the curriculum that is not genuinely mastered: only placed secure by the
+    diagnostic, decayed (needs review / at risk), still in progress, or not started (a lesson the
+    learner chose early). Lowest mastery first, then authored order. None when every prerequisite
+    is mastered (the AI teacher then re-teaches the objective itself)."""
+    info = curriculum.by_code(objective_code)
+    if info is None:
+        return None
+    candidates: list[tuple[float, int, str]] = []
+    for i, code in enumerate(info.prerequisites):
+        if curriculum.by_code(code) is None or _mastered(knowledge, code):
+            continue
+        obj = knowledge.get(code)
+        candidates.append((obj.mastery.value if obj is not None else 0.0, i, code))
+    return min(candidates)[2] if candidates else None
 
 
 def unmet_prerequisites(
@@ -299,6 +329,35 @@ def select_next(
                 ),
             )
 
+    # 3b. Struggle recovery (AI-led, no mentor needed): an objective failed repeatedly after help
+    #     sends the learner back to its shakiest prerequisite. Without one, step 4 continues the
+    #     objective and the client re-teaches it from the start.
+    for info in sorted(curriculum.objectives, key=lambda o: o.sequence):
+        if not _struggling(knowledge, info.objective_code, config):
+            continue
+        target = step_back_target(knowledge, curriculum, info.objective_code)
+        if target is None:
+            continue
+        tinfo = curriculum.by_code(target)
+        return Decision(
+            kind=DecisionKind.STEP_BACK,
+            objective_code=target,
+            lesson_ref=tinfo.lesson_ref if tinfo else None,
+            rationale=(
+                RationaleStep(
+                    "struggle_recovery",
+                    f"{info.objective_code} failed repeatedly; step back to {target}",
+                    (
+                        Reason.of(
+                            ReasonCode.STEPPING_BACK,
+                            objective=info.objective_code,
+                            prerequisite=target,
+                        ),
+                    ),
+                ),
+            ),
+        )
+
     # 4. Eligible new/continuing learning (prerequisites mastered), by curriculum sequence.
     #    A diagnostic placement that put the learner above an objective counts like mastery here
     #    (only while they have not practised it); learners without a placement are unaffected.
@@ -390,12 +449,12 @@ def post_interaction(
         )
     if obj.consecutive_failures >= config.max_consecutive_failures:
         return Decision(
-            kind=DecisionKind.ESCALATE,
+            kind=DecisionKind.STEP_BACK,
             objective_code=obj.objective_code,
             rationale=(
                 RationaleStep(
                     "struggle",
-                    "repeated failure → mentor",
+                    "repeated failure → AI teacher steps back (re-plan)",
                     (
                         Reason.of(
                             ReasonCode.REPEATED_FAILURE,

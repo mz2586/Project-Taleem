@@ -100,8 +100,12 @@ export function hintsUsed(state: PlayerState): number {
 
 export type ContinueStep = "retry" | "nextItem" | "plan";
 
-/** What "Continue" does after feedback: retry on a miss, else the next item, else re-plan. */
+/** What "Continue" does after feedback: retry on a miss (re-plan once the AI teacher steps back),
+ *  else the next item, else re-plan. */
 export function continueAfterFeedback(state: PlayerState): ContinueStep {
+  // Repeated misses after help: the AI teacher steps back (an earlier idea, or this one taught
+  // again from the start). Re-plan instead of retrying the same item yet again.
+  if (state.answer && state.answer.outcome !== "correct" && state.answer.post_decision === "step_back") return "plan";
   if (!state.answer || state.answer.outcome !== "correct") return "retry";
   const count = state.teach?.items.length ?? 0;
   return state.itemIndex + 1 < count ? "nextItem" : "plan";

@@ -69,6 +69,7 @@ export const REASON_CODES = [
   "placed_above",
   "retention_at_risk",
   "repeated_failure",
+  "stepping_back",
   "mastery_reached",
   "all_mastered",
 ] as const;
@@ -171,6 +172,8 @@ export function reasonLine(reason: ReasonWire, audience: Audience): ReasonLine {
       return { key: "common.rationale.adult.retention_at_risk", params: { objective, mastery: pct(num(p, "mastery")) } };
     case "repeated_failure":
       return { key: "common.rationale.adult.repeated_failure", params: { objective, count: num(p, "consecutive_failures") } };
+    case "stepping_back":
+      return { key: "common.rationale.adult.stepping_back", params: { objective, prereq: str(p, "prerequisite") } };
   }
 }
 

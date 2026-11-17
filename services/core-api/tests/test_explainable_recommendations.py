@@ -60,6 +60,7 @@ STABLE_CODES = {
     "placed_above",
     "retention_at_risk",
     "repeated_failure",
+    "stepping_back",  # AI-led struggle recovery (2026-11-17), mirrored in ai-teacher.openapi.yaml
     "mastery_reached",
     "all_mastered",
 }

@@ -19,6 +19,21 @@ The local Git history is the official project history; each released version map
 - Web: Today's **Review now** opens the due idea most at risk of being forgotten (a retention
   check through the normal lesson session, so it records evidence like any lesson).
 
+### Changed — AI-led struggle recovery, no mentor hand-off (2026-11-17)
+
+- A learner who keeps failing after help is no longer "escalated to a mentor" (which most children
+  do not have). The engine returns `step_back`: practise the shakiest prerequisite first (an
+  objective the diagnostic only placed as secure, a decayed one, or one not yet learned), or, with
+  none, the AI teacher teaches the objective again from the start. `escalate` now means a
+  safety/wellbeing signal only. New reason code `stepping_back {objective, prerequisite}`.
+- Child- and adult-facing copy no longer promises a mentor ("A mentor will check in with you").
+
+### Fixed — re-planning mid-lesson (2026-11-17)
+
+- `:next` after answering mid-lesson returned 500 (`illegal session transition: interacting ->
+  teaching`). Re-planning now closes out the current objective first. The web player re-plans after
+  the last item, so a child moving on to their next lesson in the same session hit this.
+
 ### Security
 
 - `opentelemetry-api` 1.45.1 → 1.45.2 (CVE-2026-126360, ReDoS in `traceparent` extraction).

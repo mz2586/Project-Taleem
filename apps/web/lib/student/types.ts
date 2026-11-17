@@ -9,6 +9,7 @@ export type DecisionKind =
   | "continue"
   | "review"
   | "remediate"
+  | "step_back"
   | "advance"
   | "revise"
   | "escalate"

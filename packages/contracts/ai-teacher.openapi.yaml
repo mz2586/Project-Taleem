@@ -377,7 +377,7 @@ components:
         {objective, mastery, threshold}; prerequisite_gap {objective, prereq}; diagnostic_placement
         {objective, status, correct, incorrect, prior, uncertainty, inferred_from?}; placed_above
         {count}; retention_at_risk {objective, mastery}; repeated_failure {objective,
-        consecutive_failures}; mastery_reached {objective, mastery, threshold}; all_mastered {}.
+        consecutive_failures}; stepping_back {objective, prerequisite}; mastery_reached {objective, mastery, threshold}; all_mastered {}.
       required: [code, params]
       properties:
         code:
@@ -394,6 +394,7 @@ components:
             - placed_above
             - retention_at_risk
             - repeated_failure
+            - stepping_back
             - mastery_reached
             - all_mastered
         params:
