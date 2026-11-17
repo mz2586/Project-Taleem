@@ -17,6 +17,7 @@ import type {
 } from "./types";
 import { ApiError } from "./types";
 import type { AdaptivePlanWire, CapabilitiesWire, ExplainStyle, ExplanationWire } from "./aiTeacher";
+import type { AskAnswerWire, AskIntent } from "./askTeacher";
 import type { PlacementWire } from "./placement";
 import { currentAccessToken, withSession } from "../session/store";
 import type {
@@ -138,6 +139,12 @@ export const aiTeacherApi = {
     sessionId: string,
     body: { objective_code: string; style?: ExplainStyle | null; grade_band?: string; locale?: string },
   ) => authed(() => post<ExplanationWire>(`/v1/learning/sessions/${sessionId}:explain`, body)),
+
+  // "Ask your teacher": answered by quoting the published lesson (lib/student/askTeacher.ts).
+  ask: (
+    sessionId: string,
+    body: { objective_code: string; intent: AskIntent; question?: string; locale?: string },
+  ) => authed(() => post<AskAnswerWire>(`/v1/learning/sessions/${sessionId}:ask`, body)),
 
   plan: (studentRef: string) =>
     authed(() => req<AdaptivePlanWire>(`/v1/learning/students/${studentRef}/ai-teacher/plan`)),

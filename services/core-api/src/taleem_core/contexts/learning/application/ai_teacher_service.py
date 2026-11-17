@@ -49,6 +49,7 @@ from ....ports.llm import (
 from ...learning.domain import ai_teacher as ait
 from ...learning.domain import ai_teacher_gate as gate
 from ...learning.domain import explain as xp
+from ...learning.domain import lesson_qa as qa
 from ...learning.domain.curriculum_view import LessonView
 from ...learning.domain.decision import CurriculumGraph, DecisionConfig
 from ...learning.domain.knowledge import StudentKnowledge
@@ -59,6 +60,28 @@ from .ports import CurriculumReadModel
 from .session_service import SessionService
 
 _GraphSource = CurriculumGraph | Callable[[], CurriculumGraph]
+
+# Ask the teacher (lesson_qa). Typed questions are child free text: OFF unless this flag is on, and
+# then only with a disclosure screen wired and live ``ai_teaching`` consent. Tap intents (example,
+# common mistake, recap) carry no free text and are always available.
+ASK_FREE_TEXT_FLAG = "ai_teacher.ask_free_text"
+ASK_NOTICE_KEY = "ai_teacher.ask.quoted_from_lesson"
+ASK_NOT_IN_LESSON_KEY = "ai_teacher.ask.not_in_lesson"
+# Served when the disclosure screen matches. The child-facing words are a client string pending
+# clinician review (crisis protocol doc 52 §3); the server never echoes or answers the text.
+ASK_HOLDING_KEY = "ai_teacher.ask.holding"
+
+# (student_ref, ask_id, text, objective_code) -> True when a safeguarding concern was raised.
+DisclosureScreen = Callable[[str, str, str, str], bool]
+
+
+class AskRefusedError(Exception):
+    """A typed question was refused before it was read (flag off, no screen, or no consent)."""
+
+    def __init__(self, code: str) -> None:
+        super().__init__(code)
+        self.code = code
+
 
 REPHRASE_PURPOSE = "ai_teacher.rephrase"
 # The client must show this notice with any generated text: an AI rephrase, not verified fact.
@@ -256,7 +279,13 @@ class AITeacherService:
         clock: Callable[[], float],
         *,
         generative: GenerativeTier | None = None,
+        flags: FlagProvider | None = None,
+        disclosure_screen: DisclosureScreen | None = None,
+        ai_teaching_consent: Callable[[str], bool] | None = None,
     ) -> None:
+        self._flags = flags
+        self._screen = disclosure_screen
+        self._ai_consent = ai_teaching_consent
         self._sessions = sessions
         self._knowledge = knowledge_service
         self._curriculum = curriculum
@@ -330,6 +359,97 @@ class AITeacherService:
         )
         if generation is not None:
             result["generation"] = generation
+        return result
+
+    # ------------------------------------------------------------------------ ask the teacher
+
+    def free_text_enabled(self, student_ref: str) -> bool:
+        """Whether this learner may type a question now (flag + screen + live consent)."""
+        flags, consent = self._flags, self._ai_consent
+        if flags is None or self._screen is None or consent is None:
+            return False
+        if not _fail_closed(lambda: flags.is_enabled(ASK_FREE_TEXT_FLAG), default=False):
+            return False
+        return _fail_closed(lambda: consent(student_ref), default=False)
+
+    def ask(
+        self,
+        student_ref: str,
+        objective_code: str,
+        *,
+        intent: str,
+        ask_id: str,
+        question: str | None = None,
+        locale: str = "ur",
+    ) -> dict[str, Any] | None:
+        """Answer a learner's question from the published lesson only (quoted, never generated).
+
+        Returns None if the objective has no published lesson (404). A typed question is screened
+        for safeguarding disclosures first; on a match the fixed holding response is returned and
+        nothing from the lesson is shown. No question text is stored or logged here (a flagged
+        question is kept only as the concern's evidence, by the safeguarding context).
+        """
+        try:
+            kind = qa.AskIntent(intent)
+        except ValueError:
+            raise AskRefusedError("UNKNOWN_INTENT") from None
+        if kind is qa.AskIntent.QUESTION:
+            text = (question or "").strip()
+            if not text:
+                raise AskRefusedError("QUESTION_REQUIRED")
+            if len(text) > qa.QUESTION_MAX_CHARS:
+                raise AskRefusedError("QUESTION_TOO_LONG")
+            if not self.free_text_enabled(student_ref):
+                raise AskRefusedError("FREE_TEXT_DISABLED")
+        lesson = self._curriculum.lesson_for(objective_code)
+        if lesson is None:
+            return None
+
+        if kind is qa.AskIntent.QUESTION:
+            screen = self._screen
+            if screen is None:  # free_text_enabled() checked it; fail closed regardless
+                raise AskRefusedError("FREE_TEXT_DISABLED")
+            if screen(student_ref, ask_id, text, objective_code):
+                registry().inc("taleem_ai_teacher_ask_total", outcome=qa.AskOutcome.HOLDING.value)
+                return {
+                    "ask_id": ask_id,
+                    "objective_code": objective_code,
+                    "intent": kind.value,
+                    "outcome": qa.AskOutcome.HOLDING.value,
+                    "answer": [],
+                    "matched_terms": [],
+                    "message_key": ASK_HOLDING_KEY,
+                    "grounded": True,
+                    "generative": False,
+                    "follow_up": [],
+                    "free_text_enabled": True,
+                }
+            answer = qa.answer_question(lesson, text, locale)
+        else:
+            answer = qa.answer_intent(lesson, kind, locale)
+
+        # Defence in depth: a quote that is not verbatim authored text, or that is an answer key,
+        # is never served.
+        if answer.passages and (
+            not qa.is_grounded_excerpt(lesson, answer) or qa.reveals_answer_key(lesson, answer)
+        ):
+            answer = qa.AskAnswer(kind, qa.AskOutcome.NOT_IN_LESSON)
+        registry().inc("taleem_ai_teacher_ask_total", outcome=answer.outcome.value)
+        result: dict[str, Any] = {"ask_id": ask_id, "objective_code": objective_code}
+        result.update(answer.to_dict())
+        result.update(
+            {
+                "message_key": (
+                    ASK_NOTICE_KEY
+                    if answer.outcome is qa.AskOutcome.ANSWERED
+                    else ASK_NOT_IN_LESSON_KEY
+                ),
+                "grounded": True,
+                "generative": False,
+                "follow_up": [i.value for i in qa.TAP_INTENTS if i is not kind],
+                "free_text_enabled": self.free_text_enabled(student_ref),
+            }
+        )
         return result
 
     # ------------------------------------------------------------------------ generative tier

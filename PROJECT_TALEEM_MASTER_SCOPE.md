@@ -46,9 +46,9 @@ counted as working curriculum.
 | # | Capability | Status | Evidence | What remains |
 | --- | --- | --- | --- | --- |
 | 1 | Structured education (grades, subjects, curricula, objectives) | in-progress | Curriculum packs + persisted hierarchy (`packs.py`, `pk-ncp.json`, `7d3a28a`); 139 Grade 4 objectives, each with a complete **AI first draft, unreviewed** (`0369136`, `3c3b35f`) | human review (external) + publication (0 published); grades other than 4: not-started |
-| 2 | AI Teacher (explain, answer, examples, hints, misconceptions, adapt) | implemented-but-unverified (deterministic); generative: blocked-by-external-decision | Curriculum-grounded deterministic teacher: paced explanation, worked examples, graduated hints, misconception detection and remediation, "explain another way", "why this next" (`domain/ai_teacher.py`, `4c8df7b`); generative tier wired behind gate, quota and safety gate, stub-evaluated (`3bcb6dc`); real Anthropic adapter built and tested against a mock transport, refuses to construct without provider + key + inference_geo + ZDR attestation + FD-03 approval ref, data-minimisation guard blocks child free text and identifiers (`9a6af92`) | FD-03 for a real model (recommendation in §0.2); answering a child's free-text questions needs the in-house distress classifier first |
+| 2 | AI Teacher (explain, answer, examples, hints, misconceptions, adapt) | implemented-but-unverified (deterministic); generative: blocked-by-external-decision | Curriculum-grounded deterministic teacher: paced explanation, worked examples, graduated hints, misconception detection and remediation, "explain another way", "why this next" (`domain/ai_teacher.py`, `4c8df7b`); generative tier wired behind gate, quota and safety gate, stub-evaluated (`3bcb6dc`); real Anthropic adapter built and tested against a mock transport, refuses to construct without provider + key + inference_geo + ZDR attestation + FD-03 approval ref, data-minimisation guard blocks child free text and identifiers (`9a6af92`); **ask the teacher** (2026-11-17): tap questions (example, common mistake, recap) and typed questions answered by quoting the published lesson verbatim, never item prompts, hints or answer keys, with an honest "not in this lesson" (`domain/lesson_qa.py`, `POST …/sessions/{id}:ask`, `test_ai_teacher_ask.py` 19 tests, web panel + `askTeacher.test.ts` 9 tests). Typed questions pass the homework disclosure screen first and are off unless `ai_teacher.ask_free_text` is on, with live `ai_teaching` consent | FD-03 for a real model (recommendation in §0.2); typed questions in production need M-Safe approval of the phrase list and the holding message (crisis protocol §3) |
 | 3 | Diagnostics, exercises, homework, automated marking, examinations, reports, records | complete-and-verified (software) | Diagnostic placement (`5524063`); five auto-marked interaction kinds (`b9664f8`); **teacher-free homework**: practice from every studied lesson, exact-key auto-marking with retry, open answers saved for compare-your-answer and never shown as marked (`6f763e4`); **unit checks** (resumable sittings, rule-based scoring, per-objective breakdown, remediation, retakes) and the **academic record** (`ec67b01`); system-issued report cards with evidence-pinned versions (`65e7181`); CI incl. PostgreSQL + browser journey green (`ce5c906`) | AI rubric marking of open answers: blocked-by-external-decision (FD-03 + in-region distress classifier); proctored, promotion-bearing examinations: not-started (accreditation path) |
-| 4 | Learning intelligence (mastery, revision, next steps) | complete-and-verified | BKT mastery, forgetting model, decision graph, spaced review, explainable recommendations with confidence (`contexts/learning/domain/*`, `test_learning_domain.py`, `test_explainable_recommendations.py`) | Psychometric validity work (doc 58) not-started |
+| 4 | Learning intelligence (mastery, revision, next steps) | complete-and-verified | BKT mastery, forgetting model, decision graph, spaced review, explainable recommendations with confidence (`contexts/learning/domain/*`, `test_learning_domain.py`, `test_explainable_recommendations.py`); Today offers **Review now**, a retention check that opens the due idea most at risk of being forgotten (`firstDueReview`, `journey.test.ts`, 2026-11-17) | Psychometric validity work (doc 58) not-started |
 | 5 | Complete student journey (enrolment → completion) | in-progress | Enrolment, consent, sign-in, placement, lessons, activities, homework, unit checks, Subjects → Units → Lessons path with completed vs mastered kept distinct, grade completion labelled not accredited (`ec67b01`); browser journey in CI | Opening a specific lesson from the path and remediation (in progress); journey on published, reviewed content needs human review |
 | 6 | Guardian access, consent, reporting, child safety | complete-and-verified (software); sign-off: blocked-by-external-decision | Live per-request consent gate (`c8ab6f3`), export and erasure (`59ff51c`), concern reporting and triage (`e73a446`), child-safety content rule (`0369136`), disclosure screen on submitted text (`6f763e4`), lead-only audited access to flagged work with an immutable snapshot; disclosures and their audit trail withheld from the guardian export behind a constant notice (`ec67b01`) | M-Gov / M-Safe sign-off; the disclosure phrase list awaits safeguarding-lead approval |
 | 7 | Offline-first, durable progress, reliable sync | complete-and-verified (CI browser journey); real devices: implemented-but-unverified | Signed packages (signature mandatory, `7bc14ee`), IndexedDB progress, idempotent sync, offline answers of every interaction kind (`739b66b`), browser offline journey in CI | Real-device validation; homework submission is online only |
@@ -529,30 +529,36 @@ original-authored-and-aligned only, which is workable but slower.
 
 ## 8. AI Teacher
 
-### 8.1 Current state — a deterministic engine, and it says so
+### 8.1 Current state (reconciled 2026-11-17)
 
-**There is no language model anywhere in the running system.** This must not be overstated in any
-investor, partner, or user-facing material.
+**No language model teaches any child today.** No provider is configured in any environment
+(FD-03 open), so every learner gets the deterministic, curriculum-grounded teacher. This must not
+be overstated in any investor, partner, or user-facing material.
 
-What exists:
+What runs for learners:
 
-- A **templated teaching runtime** (`domain/runtime.py`) that composes utterances from published
-  lesson content using fixed templates in Urdu and English.
-- An **explainable decision layer** (`domain/ai_teacher.py`) selecting explanation style from the
-  learner's attempt count, mastery estimate, and recent errors, and emitting a confidence annotation
-  plus an escalation flag after three consecutive failures.
-- A **curriculum grounding boundary**: the engine can only speak about a `LessonView` that is
-  currently published. An objective with no published lesson returns `404`, not an invention.
-- Endpoints: `POST /v1/learning/sessions/{id}:teach`, `:hint`, `:explain`;
+- A **templated teaching runtime** (`domain/runtime.py`) and an **explainable decision layer**
+  (`domain/ai_teacher.py`): four explanation styles, graduated authored hints, misconception
+  remediation, confidence annotation, escalation after three consecutive failures.
+- **Ask the teacher** (`domain/lesson_qa.py`): tap questions and, where enabled, typed questions,
+  answered by quoting the published lesson verbatim (in-house retrieval, not a model). It never
+  quotes item prompts, hints or answer keys, and says "not in this lesson" rather than invent.
+- A **curriculum grounding boundary**: everything the teacher says comes from a published
+  `LessonView`. An objective with no published lesson returns `404`.
+- Endpoints: `POST /v1/learning/sessions/{id}:teach`, `:hint`, `:explain`, `:ask`;
   `GET /v1/learning/students/{ref}/ai-teacher/plan` and `/capabilities`.
 
-What exists but is **not connected**:
+What is built but switched off:
 
-- `ports/llm.py` defines the `LLMProvider` port, `LLMRequest`/`LLMResponse`, a four-tier model
-  routing policy (`light`, `standard`, `deep`, `safety`) where safety never yields to cost, and a
-  `StubLLMProvider` documented as "deterministic, offline, **NON-production**".
-- **The port is referenced only by `tests/test_ports.py`.** It is not wired into
-  `AITeacherService` or into `main.py`. The abstraction is proven to compile; it teaches nobody.
+- The **generative tier** (`application/ai_teacher_service.py`): rephrases published lesson text
+  only, behind the `ai_teacher.generative_rephrase` flag, the kill switch, live `ai_teaching`
+  consent, a per-learner quota and cost ledger, and the semantic safety gate
+  (`domain/ai_teacher_gate.py`, red-team golden set).
+- The **Claude adapter** (`ports/llm_anthropic.py`): refuses to construct without every FD-03
+  approval setting.
+- **Typed questions** to ask the teacher: off unless `ai_teacher.ask_free_text` is on. They pass
+  the homework disclosure screen first; a match raises a safeguarding concern with the question as
+  immutable evidence and serves a fixed holding message whose wording awaits clinician review.
 
 Design references: [`AI_TEACHER_ARCHITECTURE.md`](AI_TEACHER_ARCHITECTURE.md),
 [`AI_TEACHER_INTERACTION_MODEL.md`](AI_TEACHER_INTERACTION_MODEL.md),
@@ -569,7 +575,7 @@ Design references: [`AI_TEACHER_ARCHITECTURE.md`](AI_TEACHER_ARCHITECTURE.md),
 | Lesson-aware tutoring turns | 🟡 (templated today) |
 | Student-context-aware explanation (mastery, errors, grade band) | 🟢 (deterministic) |
 | Adaptive re-explanation in a different style | 🟢 (deterministic, fixed template set) |
-| Free-form learner questions | 🔴 |
+| Free-form learner questions | 🟡 (answered from the lesson by retrieval; typed questions flag-gated pending M-Safe) |
 | Assessment assistance and worked solutions | 🔴 |
 | Learning recommendations | 🟢 (analytics-driven, not generated) |
 
@@ -579,12 +585,12 @@ Design references: [`AI_TEACHER_ARCHITECTURE.md`](AI_TEACHER_ARCHITECTURE.md),
 | --- | --- | --- |
 | Curriculum grounding boundary | 🟢 | Enforced structurally today |
 | No unsafe advice / age-appropriate output | 🟡 | Trivially true for fixed templates; **unproven for any generative path** |
-| Hallucination controls | 🔴 | Not applicable today; required before any model is connected |
-| Distress detection and escalation to a human | 🔴 | Tier routing policy exists (`route_tier` sends distress-adjacent turns to the strongest tier); **no detector and no human queue exist** |
+| Hallucination controls | 🟡 | Generative output: semantic safety gate + red-team golden set, stub-evaluated only. Ask the teacher: verbatim quotes, checked against authored text before serving |
+| Distress detection and escalation to a human | 🟡 | Starter disclosure phrase list (Urdu + English) screens homework and typed questions, raising a concern into the lead-only triage queue. Phrase list, holding message and staffing await M-Safe / FD-06; no trained classifier |
 | Transcript retention and review | 🔴 | Not implemented |
 | Guardian visibility of AI activity | 🟡 | Guardian Portal exposes `ai_teacher_activity` derived from the deterministic engine |
 | Per-feature guardian consent for AI teaching | 🟢 | `ConsentScope.AI_TEACHING` is separable and withdrawable |
-| Auditability of AI turns | 🔴 | Not implemented |
+| Auditability of AI turns | 🟡 | One structured, text-free safety event per generative decision; ask-the-teacher outcome counters. No per-turn store (by design, no child text kept) |
 | Kill switch halts child-facing AI traffic | 🟢 | `/v1/learning/sessions` is child-facing |
 
 ### 8.4 AI architecture — the intended shape

@@ -259,6 +259,7 @@ class SafeguardingService:
         submitted_at: float | None = None,
         item_ref: str | None = None,
         objective_code: str | None = None,
+        screen: str = "learner/homework",
     ) -> bool:
         """The homework disclosure screen (HOMEWORK_AND_MARKING_CONTRACT §6, rule 6).
 
@@ -279,9 +280,18 @@ class SafeguardingService:
         if not matched:
             return False
         ids = ", ".join(p.phrase_id for p in matched)[:200]
+        asked = screen == "learner/ask"
+        label, where = (
+            ("ask-the-teacher", "lesson question")
+            if asked
+            else (
+                "homework",
+                "homework submission",
+            )
+        )
         note = (
-            f"Raised automatically by the homework disclosure screen (starter phrase list, "
-            f"pending M-Safe approval). Matched entries: {ids}. Read homework submission "
+            f"Raised automatically by the {label} disclosure screen (starter phrase list, "
+            f"pending M-Safe approval). Matched entries: {ids}. Read {where} "
             f"{submission_id}. The child was not told."
         )
         given: dict[str, Any] = {
@@ -301,7 +311,7 @@ class SafeguardingService:
                 role=RaisedBy.SYSTEM,
                 category=strongest_category(matched).value,
                 text=note,
-                screen="learner/homework",
+                screen=screen,
                 lesson_id=None,
                 submission_id=submission_id,
                 evidence=given,

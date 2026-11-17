@@ -64,6 +64,62 @@ paths:
           content:
             application/problem+json:
               schema: { $ref: "#/components/schemas/Problem" }
+  /v1/learning/sessions/{sessionId}:ask:
+    post:
+      tags: [ai-teacher]
+      operationId: aiTeacherAsk
+      summary: Ask the teacher — answered by quoting the published lesson, or "not in this lesson"
+      description: >-
+        Tap intents (`example`, `common_mistake`, `recap`) carry no free text and are always
+        available. A typed `question` is child free text: refused with 403 FREE_TEXT_DISABLED
+        unless the `ai_teacher.ask_free_text` flag is on, a disclosure screen is wired and the
+        learner's guardian has live `ai_teaching` consent. A typed question is screened for
+        safeguarding disclosures before it is read; on a match the response is `outcome: holding`
+        with no lesson text. Answers are verbatim authored passages (never generated, never an
+        item prompt, hint or answer key). No question text is stored except as a flagged concern's
+        evidence.
+      security: [{ bearerAuth: [] }]
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: { $ref: "#/components/schemas/AskIn" }
+      responses:
+        "200":
+          description: Answer, honest non-answer, or holding response
+          content:
+            application/json:
+              schema: { $ref: "#/components/schemas/AskAnswer" }
+        "401":
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "403":
+          description: Forbidden (IDOR guard) or FREE_TEXT_DISABLED
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "404":
+          description: Session or published lesson not found
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        "422":
+          description: UNKNOWN_INTENT, QUESTION_REQUIRED or QUESTION_TOO_LONG
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
+        default:
+          description: Error
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
   /v1/learning/students/{studentRef}/ai-teacher/plan:
     get:
       tags: [ai-teacher]
@@ -135,6 +191,59 @@ components:
           enum: [early, middle, senior]
           default: middle
         locale: { type: string, default: ur }
+    AskIn:
+      type: object
+      additionalProperties: false
+      required: [objective_code, intent]
+      properties:
+        objective_code: { type: string, minLength: 1, maxLength: 64 }
+        intent: { type: string, enum: [question, example, common_mistake, recap] }
+        question: { type: [string, "null"], maxLength: 300 }
+        locale: { type: string, default: ur, maxLength: 35 }
+    AskPassage:
+      type: object
+      required: [text, source, locale]
+      properties:
+        text: { type: string, description: Verbatim authored lesson text }
+        source:
+          type: string
+          description: explanation#N, worked_example#N or correction:<ref>
+        locale: { type: string }
+    AskAnswer:
+      type: object
+      required:
+        - ask_id
+        - objective_code
+        - intent
+        - outcome
+        - answer
+        - matched_terms
+        - message_key
+        - grounded
+        - generative
+        - follow_up
+        - free_text_enabled
+      properties:
+        ask_id: { type: string }
+        objective_code: { type: string }
+        intent: { type: string, enum: [question, example, common_mistake, recap] }
+        outcome: { type: string, enum: [answered, not_in_lesson, holding] }
+        answer:
+          type: array
+          items: { $ref: "#/components/schemas/AskPassage" }
+        matched_terms: { type: array, items: { type: string } }
+        message_key:
+          type: string
+          enum:
+            - ai_teacher.ask.quoted_from_lesson
+            - ai_teacher.ask.not_in_lesson
+            - ai_teacher.ask.holding
+        grounded: { type: boolean, const: true }
+        generative: { type: boolean, const: false }
+        follow_up:
+          type: array
+          items: { type: string, enum: [example, common_mistake, recap] }
+        free_text_enabled: { type: boolean }
     Utterance:
       type: object
       properties:

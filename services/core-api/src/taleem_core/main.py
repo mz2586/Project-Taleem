@@ -770,6 +770,24 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         DecisionConfig(),
         time.time,
         generative=generative,
+        flags=flags,
+        # Ask the teacher: a typed question passes the SAME disclosure screen as homework before
+        # it is read (``safeguarding_service`` is built below; the lambda resolves at call time).
+        disclosure_screen=lambda student_ref, ask_id, text, objective_code: (
+            safeguarding_service.screen_submission(
+                student_ref=student_ref,
+                submission_id=ask_id,
+                text=text,
+                attempt=1,
+                submitted_at=time.time(),
+                item_ref="",
+                objective_code=objective_code,
+                screen="learner/ask",
+            )
+        ),
+        ai_teaching_consent=lambda ref: identity_service.consent_state_for(ref).allows(
+            ConsentScope.AI_TEACHING
+        ),
     )
     # Router-level wiring: the AI teacher router itself is untouched (owned elsewhere).
     app.include_router(

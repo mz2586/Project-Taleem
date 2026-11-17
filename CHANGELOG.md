@@ -6,6 +6,23 @@ The local Git history is the official project history; each released version map
 
 ## [Unreleased]
 
+### Added — ask the teacher (2026-11-17)
+
+- `POST /v1/learning/sessions/{id}:ask`: a learner asks a question and the teacher answers by
+  quoting the published lesson verbatim (explanation sentences, worked-example steps, misconception
+  corrections), or says it is not in this lesson. Never item prompts, hints or answer keys.
+  Tap questions (example, common mistake, recap) are always available. Typed questions are off
+  unless `ai_teacher.ask_free_text` is on, a disclosure screen is wired and `ai_teaching` consent
+  is live. They are screened first, and a match raises a safeguarding concern and serves a fixed
+  holding message.
+- Web: "Ask your teacher" panel on the lesson screen, Urdu and English.
+- Web: Today's **Review now** opens the due idea most at risk of being forgotten (a retention
+  check through the normal lesson session, so it records evidence like any lesson).
+
+### Security
+
+- `opentelemetry-api` 1.45.1 → 1.45.2 (CVE-2026-126360, ReDoS in `traceparent` extraction).
+
 ### School — homework submission and teacher marking
 
 - [`HOMEWORK_AND_MARKING_CONTRACT.md`](docs/10-curriculum-studio/HOMEWORK_AND_MARKING_CONTRACT.md):

@@ -12,6 +12,7 @@
 import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useId, useMemo, useReducer, useRef, useState } from "react";
 
+import { AskTeacherPanel } from "@/components/student/AskTeacherPanel";
 import { ChosenLessonNotice } from "@/components/student/ChosenLessonNotice";
 
 import { ItemInteraction } from "@/components/student/ItemInteraction";
@@ -37,6 +38,7 @@ import {
   type ExplainContext,
   type ExplainState,
 } from "@/lib/student/aiTeacher";
+import { askReducer, classifyAskError, initialAskState, type AskIntent } from "@/lib/student/askTeacher";
 import { watchConnectivity } from "@/lib/offline";
 import { formatList } from "@/lib/guardian/format";
 import { helpHref } from "@/lib/safeguarding/context";
@@ -194,6 +196,8 @@ function SessionPlayer({ chosenLesson }: { chosenLesson: string | null }) {
   const { phase, sessionId, objective, teach, step, itemIndex, hints, answer, mastery, summary } = state;
   // "Explain it another way": its own reducer, so the lesson player is unchanged.
   const [explain, dispatchExplain] = useReducer(explainReducer, initialExplainState);
+  // "Ask your teacher": answers quoted from the lesson (lib/student/askTeacher.ts).
+  const [ask, dispatchAsk] = useReducer(askReducer, initialAskState);
   const [capabilities, setCapabilities] = useState<CapabilitiesWire | null>(null);
   const [online, setOnline] = useState(true);
 
@@ -375,6 +379,34 @@ function SessionPlayer({ chosenLesson }: { chosenLesson: string | null }) {
     );
   };
 
+  const requestAsk = async (intent: AskIntent, question?: string) => {
+    if (!objective || !sessionId) return;
+    dispatchAsk({ type: "request", intent });
+    try {
+      const wire = await aiTeacherApi.ask(sessionId, {
+        objective_code: objective,
+        intent,
+        ...(question ? { question } : {}),
+        // The lesson's content language, never the interface language.
+        ...(lessonLocale ? { locale: lessonLocale } : {}),
+      });
+      dispatchAsk({ type: "loaded", wire });
+    } catch (e) {
+      dispatchAsk({ type: "failed", error: classifyAskError(e) });
+    }
+  };
+
+  const askPanel = (
+    <AskTeacherPanel
+      state={ask}
+      online={online}
+      onOpen={() => dispatchAsk({ type: "open" })}
+      onIntent={(intent) => void requestAsk(intent)}
+      onQuestion={(q) => void requestAsk("question", q)}
+      onClose={() => dispatchAsk({ type: "close" })}
+    />
+  );
+
   const onContinue = () => {
     const next = continueAfterFeedback(state);
     if (next === "plan") void plan(sessionId);
@@ -473,6 +505,7 @@ function SessionPlayer({ chosenLesson }: { chosenLesson: string | null }) {
               )}
             </div>
             {explainControls("presenting")}
+            {askPanel}
           </section>
         ) : null}
 
@@ -562,6 +595,7 @@ function SessionPlayer({ chosenLesson }: { chosenLesson: string | null }) {
         ) : null}
 
         {phase === "feedback" && answer && answer.outcome !== "correct" ? explainControls("feedback") : null}
+        {phase === "feedback" ? askPanel : null}
 
         {phase === "complete" ? (
           <Card>

@@ -223,6 +223,7 @@ export const en = {
       masteredOf: "Ideas mastered: {mastered} of {total}",
       reviewsDue: "To review today: {count}",
       noReviews: "No reviews due — great!",
+      reviewNow: "Review now",
       accuracy: "Accuracy so far: {value}",
       ideasLabel: "Your ideas",
       firstTitle: "Your journey starts here",
@@ -531,6 +532,30 @@ export const en = {
         offline: "No internet. Try again when you are online.",
         unavailable: "This lesson has no other explanation right now.",
         error: "Something went wrong. Please try again.",
+      },
+    },
+    // "Ask your teacher": answers are quoted from the checked lesson, never made up. The holding
+    // text is a placeholder pending clinician review (crisis protocol doc 52 §3); it is reachable
+    // only where typed questions are switched on, which they are not in production.
+    askTeacher: {
+      open: "Ask your teacher",
+      title: "Ask your teacher",
+      intro: "Pick a question. Your teacher answers from this lesson.",
+      loading: "Your teacher is looking in the lesson…",
+      fromLesson: "From your lesson:",
+      notInLesson: "That is not in this lesson. Try another question, or ask a grown-up you trust.",
+      holding:
+        "Thank you for telling me. You are not in trouble. If you feel unsafe, please talk to a grown-up you trust. You can also get help here.",
+      getHelp: "Get help",
+      typeLabel: "Or type your question",
+      typeHint: "Up to {max} letters. Do not write your name or where you live.",
+      send: "Ask",
+      typingOff: "Typing questions is not open yet. Pick a question instead.",
+      invalid: "Please write a shorter question.",
+      intent: {
+        example: "Show me an example",
+        common_mistake: "What do children often get wrong?",
+        recap: "Tell me the main idea again",
       },
     },
     // Lessons on this phone (offline library + offline player). No answer key is on the phone, so

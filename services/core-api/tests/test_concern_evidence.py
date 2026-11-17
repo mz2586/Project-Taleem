@@ -383,3 +383,40 @@ def test_pseudonymisation_rewrites_a_ref_inside_the_snapshot_and_rehashes(s: S) 
 
 def test_the_completeness_gate_knows_the_table(s: S) -> None:
     assert "safeguarding.concern_evidence" in s.app.state.privacy_service.covered_tables()
+
+
+def test_a_flagged_lesson_question_reaches_the_lead_with_its_words(s: S) -> None:
+    # Ask the teacher (`:ask`) screens a typed question with the same phrase list; the concern
+    # names the ask screen and keeps the question as its immutable evidence.
+    svc = s.app.state.safeguarding_service
+    assert svc.screen_submission(
+        student_ref=s.fam.student_ref,
+        submission_id="ask_0123456789abcdef",
+        text=_WORDS,
+        attempt=1,
+        submitted_at=1.0,
+        item_ref="",
+        objective_code="MATH-G4-FR-01",
+        screen="learner/ask",
+    )
+    with s.app.state.safeguarding_session_factory() as session:
+        (concern,) = session.scalars(
+            select(ConcernRow).where(ConcernRow.context_submission_id == "ask_0123456789abcdef")
+        )
+    assert concern.context_screen == "learner/ask"
+    (row,) = _evidence_rows(s.app)
+    assert row["text"] == _WORDS and row["submission_id"] == "ask_0123456789abcdef"
+    body = _context(s.client, _lead(s.client)["auth"], str(concern.concern_id))
+    assert body.status_code == 200, body.text
+    assert body.json()["flagged"]["text"] == _WORDS
+    # An ordinary question raises nothing.
+    assert not svc.screen_submission(
+        student_ref=s.fam.student_ref,
+        submission_id="ask_ordinary",
+        text="what does the bottom number show",
+        attempt=1,
+        submitted_at=1.0,
+        item_ref="",
+        objective_code="MATH-G4-FR-01",
+        screen="learner/ask",
+    )

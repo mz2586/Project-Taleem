@@ -18,6 +18,7 @@ import { useLocale } from "@/lib/i18n/useLocale";
 import { useLearner } from "@/lib/session/useLearner";
 import { aiTeacherApi, learningApi } from "@/lib/student/api";
 import { whyNextModel, type WhyNextModel } from "@/lib/student/aiTeacher";
+import { lessonHref } from "@/lib/student/chosenLesson";
 import { objectiveName, type ObjectiveTitles } from "@/lib/student/objectiveName";
 import { placementEntry, type PlacementEntry } from "@/lib/student/placement";
 import {
@@ -207,6 +208,17 @@ export default function TodayPage() {
                     ) : null}
                   </div>
                 </section>
+                {model.reviewFirst ? (
+                  // A retention check: practise the idea most at risk of being forgotten.
+                  <div>
+                    <ButtonLink
+                      href={lessonHref(model.reviewFirst)}
+                      variant="ghost"
+                      label={t("student.today.reviewNow")}
+                      icon={<span aria-hidden="true">🔁</span>}
+                    />
+                  </div>
+                ) : null}
                 <TodayIdeas objectives={model.objectives} titles={model.titles} label={t("student.today.ideasLabel")} t={t} />
               </>
             ) : (

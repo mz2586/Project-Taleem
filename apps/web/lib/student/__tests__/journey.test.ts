@@ -13,6 +13,7 @@ import {
   teachFailureEnding,
   TODAY_EMPTY_COPY,
   todayModel,
+  firstDueReview,
   type SessionEnding,
 } from "../journey";
 import { ApiError, type DecisionView, type KnowledgeView, type ProgressView, type TodayView } from "../types";
@@ -211,5 +212,24 @@ describe("labels", () => {
     const g = gradeLabel(4)!;
     expect(translate("en", g.key, g.params)).toBe("Grade 4");
     expect(gradeLabel(undefined)).toBeNull();
+  });
+});
+
+describe("firstDueReview (retention check)", () => {
+  const o = (state: string, mastery: number) => ({ mastery, uncertainty: 0.1, state });
+  it("opens the idea most at risk first", () => {
+    expect(
+      firstDueReview([
+        ["A", o("needs_review", 0.2)],
+        ["B", o("at_risk", 0.6)],
+        ["C", o("at_risk", 0.4)],
+        ["D", o("mastered", 0.1)],
+      ]),
+    ).toBe("C");
+    expect(firstDueReview([["Z", o("needs_review", 0.5)], ["Y", o("needs_review", 0.5)]])).toBe("Y");
+  });
+  it("is null when nothing is due", () => {
+    expect(firstDueReview([["A", o("mastered", 0.9)], ["B", o("in_progress", 0.3)]])).toBeNull();
+    expect(firstDueReview([])).toBeNull();
   });
 });

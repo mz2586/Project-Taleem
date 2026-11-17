@@ -81,6 +81,8 @@ export interface TodayModel {
   mastered: number;
   total: number;
   dueCount: number;
+  /** The due review to practise first (lowest mastery, at risk before needs review), or null. */
+  reviewFirst: string | null;
   /** 0..1, for the mastery ring. */
   masteryValue: number;
   /** 0..1, or null before any question has been answered (an accuracy of "0%" would be a lie). */
@@ -91,6 +93,16 @@ export interface TodayModel {
 }
 
 const REVIEW_STATES = new Set(["needs_review", "at_risk"]);
+
+/** The due review a retention check should open first: at risk before needs review, then the
+ *  lowest mastery, then the code (stable). Null when nothing is due. */
+export function firstDueReview(objectives: [string, ObjectiveKnowledge][]): string | null {
+  const rank = (state: string) => (state === "at_risk" ? 0 : 1);
+  const due = objectives
+    .filter(([, o]) => REVIEW_STATES.has(o.state))
+    .sort(([ac, a], [bc, b]) => rank(a.state) - rank(b.state) || a.mastery - b.mastery || (ac < bc ? -1 : ac > bc ? 1 : 0));
+  return due[0]?.[0] ?? null;
+}
 
 export function todayModel(input: {
   today: TodayView | null;
@@ -104,6 +116,7 @@ export function todayModel(input: {
     : (input.today?.mastery_summary.mastered ?? 0);
   const dueFromKnowledge = objectives.filter(([, o]) => REVIEW_STATES.has(o.state)).length;
   const dueCount = Math.max(dueFromKnowledge, input.today?.revision_due_count ?? 0);
+  const reviewFirst = firstDueReview(objectives);
 
   let kind: TodayKind;
   if (input.today?.next_action.reason === "complete") {
@@ -121,6 +134,7 @@ export function todayModel(input: {
     mastered,
     total,
     dueCount,
+    reviewFirst,
     masteryValue: total > 0 ? mastered / total : 0,
     accuracy: progress && progress.total_attempts > 0 ? progress.accuracy : null,
     objectives,
