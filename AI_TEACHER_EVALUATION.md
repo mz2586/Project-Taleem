@@ -367,7 +367,7 @@ and human-in-the-loop transcript review.
 sends every **safe** golden context (style × locale × age band) to the real Claude adapter, through
 the same production path (`build_prompt` → adapter → ledger → `gate`). It refuses to run, exit 2
 and nothing sent, unless the FD-03 approval configuration is present (see the FD-03 brief,
-"Switching it on once approved"). Only published lesson text is sent. The harness holds no learner
+§9.1 "Secure provider integration"). Only published lesson text is sent. The harness holds no learner
 data.
 
 | Threshold | Value | Source |
