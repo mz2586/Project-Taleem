@@ -54,6 +54,7 @@ _ASK_REFUSAL_STATUS = {
     "QUESTION_REQUIRED": 422,
     "QUESTION_TOO_LONG": 422,
     "FREE_TEXT_DISABLED": 403,
+    "SCREEN_UNAVAILABLE": 503,  # the disclosure screen failed: not answered, try again
 }
 
 

@@ -31,13 +31,14 @@ class ConcernRow(SafeguardingBase):
         Index("ix_concern_status_priority", "status", "priority", "created_at"),
         Index("ix_concern_subject", "subject_ref"),
         Index("ix_concern_raised_by", "raised_by_ref"),
-        # One disclosure-screen concern per homework submission (alembic 0017).
+        # One OPEN disclosure-screen concern per submission (alembic 0017, narrowed in 0022: a
+        # resolved concern no longer stops a later, different disclosure from raising a new one).
         Index(
-            "uq_concern_system_submission",
+            "uq_concern_system_submission_open",
             "context_submission_id",
             unique=True,
-            sqlite_where=sql_text("raised_by_role = 'system'"),
-            postgresql_where=sql_text("raised_by_role = 'system'"),
+            sqlite_where=sql_text("raised_by_role = 'system' AND status <> 'resolved'"),
+            postgresql_where=sql_text("raised_by_role = 'system' AND status <> 'resolved'"),
         ),
         {"schema": SAFEGUARDING_SCHEMA},
     )

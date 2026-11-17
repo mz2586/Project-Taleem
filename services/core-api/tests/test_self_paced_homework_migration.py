@@ -65,7 +65,7 @@ def test_the_migration_matches_the_orm_and_the_domain() -> None:
     sub_idx = {i.name: i for i in SubmissionRow.__table__.indexes}  # type: ignore[attr-defined]
     assert sub_idx["uq_submission_self_paced"].unique
     concern_idx = {i.name: i for i in ConcernRow.__table__.indexes}  # type: ignore[attr-defined]
-    assert concern_idx["uq_concern_system_submission"].unique
+    assert concern_idx["uq_concern_system_submission_open"].unique  # narrowed in 0022
     up = " ".join(module.UPGRADE_STATEMENTS)  # type: ignore[attr-defined]
     down = " ".join(module.DOWNGRADE_STATEMENTS)  # type: ignore[attr-defined]
     for name in ("uq_submission_self_paced", "uq_concern_system_submission"):

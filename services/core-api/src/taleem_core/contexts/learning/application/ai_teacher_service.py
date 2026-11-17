@@ -401,15 +401,19 @@ class AITeacherService:
                 raise AskRefusedError("QUESTION_TOO_LONG")
             if not self.free_text_enabled(student_ref):
                 raise AskRefusedError("FREE_TEXT_DISABLED")
-        lesson = self._curriculum.lesson_for(objective_code)
-        if lesson is None:
-            return None
-
+        # A typed question is screened BEFORE anything else reads it, even for an objective with
+        # no published lesson. If the screen cannot run, the question is not answered: the child
+        # is asked to try again (503), so a disclosure is never silently dropped.
         if kind is qa.AskIntent.QUESTION:
             screen = self._screen
             if screen is None:  # free_text_enabled() checked it; fail closed regardless
                 raise AskRefusedError("FREE_TEXT_DISABLED")
-            if screen(student_ref, ask_id, text, objective_code):
+            try:
+                flagged = screen(student_ref, ask_id, text, objective_code)
+            except Exception:
+                registry().inc("taleem_disclosure_screen_failures_total", screen="learner/ask")
+                raise AskRefusedError("SCREEN_UNAVAILABLE") from None
+            if flagged:
                 registry().inc("taleem_ai_teacher_ask_total", outcome=qa.AskOutcome.HOLDING.value)
                 return {
                     "ask_id": ask_id,
@@ -424,6 +428,12 @@ class AITeacherService:
                     "follow_up": [],
                     "free_text_enabled": True,
                 }
+
+        lesson = self._curriculum.lesson_for(objective_code)
+        if lesson is None:
+            return None
+
+        if kind is qa.AskIntent.QUESTION:
             answer = qa.answer_question(lesson, text, locale)
         else:
             answer = qa.answer_intent(lesson, kind, locale)

@@ -420,3 +420,36 @@ def test_a_flagged_lesson_question_reaches_the_lead_with_its_words(s: S) -> None
         objective_code="MATH-G4-FR-01",
         screen="learner/ask",
     )
+
+
+_OTHER_WORDS = "I am scared to go home after school."
+
+
+def _system_concerns(app: FastAPI, sid: str) -> list[ConcernRow]:
+    with app.state.safeguarding_session_factory() as session:
+        return list(
+            session.scalars(
+                select(ConcernRow)
+                .where(ConcernRow.context_submission_id == sid)
+                .order_by(ConcernRow.created_at)
+            )
+        )
+
+
+def test_a_new_disclosure_after_the_concern_is_resolved_raises_a_new_concern(s: S) -> None:
+    concern_id, sid = _flag(s)
+    svc = s.app.state.safeguarding_service
+    # While the first concern is open a resubmission adds nothing (the lead sees the newer text).
+    assert _submit(s, "hw-short", _OTHER_WORDS).status_code == 200
+    assert len(_system_concerns(s.app, sid)) == 1
+    svc.resolve(actor_ref="sg_lead", concern_id=concern_id, outcome="no_further_action", note=None)
+    # The same words a reviewer already judged do not re-alert...
+    assert _submit(s, "hw-short", _WORDS).status_code == 200
+    assert len(_system_concerns(s.app, sid)) == 1
+    # ...but different matching words on a later attempt do: a new concern with its own snapshot.
+    assert _submit(s, "hw-short", _OTHER_WORDS).status_code == 200
+    rows = _system_concerns(s.app, sid)
+    assert len(rows) == 2 and rows[0].status == "resolved" and rows[1].status == "open"
+    snapshots = {r["concern_id"]: r["text"] for r in _evidence_rows(s.app)}
+    assert snapshots[str(rows[1].concern_id)] == _OTHER_WORDS
+    assert snapshots[concern_id] == _WORDS  # the first snapshot is untouched

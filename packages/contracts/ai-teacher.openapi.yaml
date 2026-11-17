@@ -110,6 +110,11 @@ paths:
           content:
             application/problem+json:
               schema: { $ref: "#/components/schemas/Problem" }
+        "503":
+          description: SCREEN_UNAVAILABLE — the safeguarding disclosure screen could not run; the question was not answered (try again)
+          content:
+            application/problem+json:
+              schema: { $ref: "#/components/schemas/Problem" }
         "422":
           description: UNKNOWN_INTENT, QUESTION_REQUIRED or QUESTION_TOO_LONG
           content:

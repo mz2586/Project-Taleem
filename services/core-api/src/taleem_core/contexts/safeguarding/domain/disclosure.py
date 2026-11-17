@@ -7,7 +7,8 @@ the service raises one concern in the safeguarding triage queue. The screen neve
 replies to the child, and never blocks or changes the submission.
 
 Matching: NFKC; case folded; Arabic-script diacritics and tatweel removed; Arabic letter variants
-folded to their Urdu forms (ي→ی, ى→ی, ك→ک); apostrophes dropped; every other non-letter/digit
+folded to their Urdu forms (ي→ی, ى→ی, ك→ک, and every heh — Arabic ه, Urdu ھ and ہ — to ہ, so
+Urdu typed on an Arabic keyboard still matches); apostrophes dropped; every other non-letter/digit
 becomes a space; whitespace collapsed. A phrase matches when its normalised form occurs in the
 normalised text as whole words. No fuzzy match, no model, no score.
 
@@ -28,7 +29,9 @@ PHRASES_PATH = Path(__file__).resolve().parents[1] / "disclosure_phrases.json"
 STARTER_HEADER = "STARTER LIST — pending safeguarding-lead approval (M-Safe)"
 
 _DIACRITICS = set(range(0x064B, 0x0660)) | {0x0670, 0x0640, 0x06EA, 0x06ED}
-_FOLD = str.maketrans({"ي": "ی", "ى": "ی", "ك": "ک"})
+# Heh: an Arabic keyboard types ه (U+0647) for both Urdu ہ (U+06C1) and ھ (U+06BE). Folding all
+# three to ہ only ever adds matches (it is applied to phrases and text alike).
+_FOLD = str.maketrans({"ي": "ی", "ى": "ی", "ك": "ک", "ه": "ہ", "ھ": "ہ"})
 _APOSTROPHES = {"'", "’", "‘", "`", "ʼ"}
 
 

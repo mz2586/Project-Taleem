@@ -264,9 +264,12 @@ class SafeguardingService:
         """The homework disclosure screen (HOMEWORK_AND_MARKING_CONTRACT §6, rule 6).
 
         On a phrase-list match, raise ONE concern (``source = system``) about the learner that
-        references the submission — idempotent by ``submission_id`` (a resubmission or a retry
-        never adds a second). The concern's text is a fixed note naming the matched list entries,
-        never the child's words. Returns whether a system concern exists for this submission now.
+        references the submission. At most one is OPEN per submission (a retry or a resubmission
+        while it is open adds nothing; the lead sees the newer text beside the snapshot). Once it
+        is resolved, a later attempt with different matching words raises a new concern; the
+        exact words already judged do not. The concern's text is a fixed note naming the matched
+        list entries, never the child's words. Returns whether an open system concern exists for
+        this submission now.
         Nothing is returned to, or changed for, the child; nothing is logged but counts.
 
         The screened ``text`` (with its attempt, time, item and objective, as the school context
@@ -274,10 +277,19 @@ class SafeguardingService:
         later resubmission can never replace what the lead reads as flagged. Missing metadata is
         read from the submission; the text is always the one that matched."""
         with self._uow() as uow:
-            if uow.concerns.system_concern_for(submission_id) is not None:
+            earlier = uow.concerns.system_concerns_for(submission_id)
+            if any(c.status is not Status.RESOLVED for c in earlier):
+                # Still open: the lead's context read already shows any newer text beside the
+                # flagged snapshot (``resubmitted_since_raised``).
                 return True
+            # Closed concerns: the exact words a reviewer already judged do not re-alert.
+            judged = {
+                ev.text
+                for c in earlier
+                if (ev := uow.evidence.for_concern(c.concern_id)) is not None
+            }
         matched = self._phrases.matches(text)
-        if not matched:
+        if not matched or text in judged:
             return False
         ids = ", ".join(p.phrase_id for p in matched)[:200]
         asked = screen == "learner/ask"
@@ -317,7 +329,7 @@ class SafeguardingService:
                 evidence=given,
             )
         except Exception:
-            # A concurrent screen of the same submission won the unique index: one concern.
+            # A concurrent screen of the same submission won the unique index: one open concern.
             with self._uow() as uow:
                 if uow.concerns.system_concern_for(submission_id) is not None:
                     return True

@@ -34,6 +34,18 @@ The local Git history is the official project history; each released version map
   teaching`). Re-planning now closes out the current objective first. The web player re-plans after
   the last item, so a child moving on to their next lesson in the same session hit this.
 
+### Fixed — disclosure screening gaps (2026-11-17, from the safeguarding review pack)
+
+- A homework resubmission was never screened into a new concern once any system concern existed
+  for that submission, even after a lead resolved it. Alembic 0022 narrows the unique index to one
+  *open* system concern per submission; a later attempt with different matching words raises a new
+  concern, while the exact words already judged do not.
+- Ask the teacher: a failed disclosure screen no longer surfaces as a 500 with nothing recorded; the
+  question is not answered, the child is asked to try again (503 `SCREEN_UNAVAILABLE`) and the
+  failure is counted. A typed question is screened before the lesson lookup, so one about an
+  unpublished lesson is screened too.
+- Urdu typed on an Arabic keyboard (`ه` for `ہ`/`ھ`) now matches the Urdu phrase list.
+
 ### Security
 
 - `opentelemetry-api` 1.45.1 → 1.45.2 (CVE-2026-126360, ReDoS in `traceparent` extraction).

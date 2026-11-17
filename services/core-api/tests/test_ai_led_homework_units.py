@@ -113,7 +113,9 @@ def test_the_phrase_list_is_data_marked_as_a_starter_pending_m_safe() -> None:
 def test_normalise_folds_case_punctuation_diacritics_and_letter_variants() -> None:
     assert normalise("  He HITS   me!!! ") == "he hits me"
     assert normalise("Don't tell anyone.") == "dont tell anyone"
-    assert normalise("مُجھے مارتا ہے۔") == "مجھے مارتا ہے"
+    assert (
+        normalise("مُجھے مارتا ہے۔") == "مجہے مارتا ہے"
+    )  # every heh folds to ہ (Arabic keyboards)
     assert normalise("مرنا چاہتي ہوں") == normalise("مرنا چاہتی ہوں")  # Arabic yeh → Urdu yeh
 
 
@@ -252,3 +254,17 @@ def test_the_stub_marker_is_scripted_and_records_calls() -> None:
     stub = StubWrittenWorkMarker(lambda p, r, t: MarkProposal(met=False, score=0, rationale=t))
     assert stub.propose(prompt="P", rubric=RUBRIC, text="T") == MarkProposal(False, 0, "T")
     assert stub.calls == [("P", RUBRIC, "T")]
+
+
+def test_urdu_typed_on_an_arabic_keyboard_still_matches() -> None:
+    from taleem_core.contexts.safeguarding.domain.disclosure import default_phrase_list, normalise
+
+    phrases = default_phrase_list()
+    # ه (Arabic heh) for both ہ and ھ, as an Arabic keyboard types them.
+    arabic_keyboard = "وہ مجهے مارتا هے"
+    urdu_keyboard = "وہ مجھے مارتا ہے"
+    assert normalise(arabic_keyboard) == normalise(urdu_keyboard)
+    assert [p.phrase_id for p in phrases.matches(arabic_keyboard)] == [
+        p.phrase_id for p in phrases.matches(urdu_keyboard)
+    ]
+    assert phrases.matches(arabic_keyboard)

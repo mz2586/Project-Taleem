@@ -22,7 +22,11 @@ class ConcernRepository(Protocol):
     def raised_by(self, raised_by_ref: str, limit: int) -> list[Concern]: ...
 
     def system_concern_for(self, submission_id: str) -> Concern | None:
-        """The disclosure screen's concern about this homework submission, if one was raised."""
+        """The disclosure screen's still-open concern about this submission, if any."""
+        ...
+
+    def system_concerns_for(self, submission_id: str) -> list[Concern]:
+        """Every disclosure-screen concern about this submission, newest first (open or closed)."""
         ...
 
     def open_counts(self) -> dict[Priority, list[float]]:

@@ -250,9 +250,24 @@ def test_disclosure_returns_holding_response_and_no_lesson_text() -> None:
     assert out["answer"] == [] and out["follow_up"] == []
 
 
-def test_screen_failure_never_answers() -> None:
-    with pytest.raises(RuntimeError):
+def test_screen_failure_never_answers_and_asks_to_try_again() -> None:
+    with pytest.raises(AskRefusedError) as err:
         _ask(_service(screen=_Screen(raises=True)), question="bottom number")
+    assert err.value.code == "SCREEN_UNAVAILABLE"
+
+
+def test_a_question_is_screened_even_without_a_published_lesson() -> None:
+    screen = _Screen(match=True)
+    svc = _service(screen=screen)
+    out = svc.ask("stu-1", "NO-SUCH", intent="question", ask_id="a2", question="help me")
+    assert screen.calls and out is not None and out["outcome"] == "holding"
+    # Not flagged and no lesson: the honest 404 after screening.
+    calm = _Screen()
+    assert (
+        _service(screen=calm).ask("s", "NO-SUCH", intent="question", ask_id="a3", question="x")
+        is None
+    )
+    assert calm.calls
 
 
 def test_tap_intent_needs_no_free_text_gates() -> None:

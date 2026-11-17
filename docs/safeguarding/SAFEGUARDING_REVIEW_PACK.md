@@ -71,8 +71,9 @@ Both the child's text and each phrase are first put into the same plain form
 
 1. Unicode NFKC normalisation (this also turns Arabic "presentation form" letters into ordinary ones).
 2. Lower-case (case folding), so `HITS ME` and `hits me` are the same.
-3. Three Arabic letters are changed to their Urdu forms: `ي` and `ى` become `ی`; `ك` becomes `ک`.
-   **No other letters are changed** (see §2.7 on `ه` / `ہ` / `ھ`).
+3. Arabic letters are changed to their Urdu forms: `ي` and `ى` become `ی`; `ك` becomes `ک`; and
+   every heh (Arabic `ه`, Urdu `ھ` and `ہ`) becomes `ہ`, so Urdu typed on an Arabic keyboard
+   matches (added 2026-11-17). No other letters are changed.
 4. Arabic-script vowel marks (zabar, zer, pesh, shadd, tanween and similar), the superscript alif and
    the tatweel (stretching line) are removed.
 5. Apostrophes are removed, so `don't` becomes `dont`.
@@ -93,7 +94,7 @@ to each other, in the same order**. Examples (all checked by running the code):
 | `میں خود کو مار دوں گا` | Yes, `ur-11` | `مار` stands as its own word |
 | `میں خود کو مارنا چاہتا ہوں` | **No** | `مارنا` is one word, not `مار` |
 | `میں گھر جانے سے ڈرتا ہوں` | **No** | `ڈرتا` is one word, not `ڈر` |
-| `وہ مجهے مارتا هے` (Arabic `ه`) | **No** | `ه` is not changed to `ھ` or `ہ` |
+| `وہ مجهے مارتا هے` (Arabic `ه`) | Yes, `ur-01` | every heh is folded to `ہ` (since 2026-11-17) |
 | `khud kushi` | **No** | the list has `khudkushi` as one word |
 | `mai marna chahta hun` | **No** | the list has `hoon`, not `hun` |
 
@@ -141,8 +142,8 @@ a list change.
 6. **Nobody outside the platform is contacted.** No guardian, teacher, school, helpline, police or
    agency is told. External referral routes do not exist (FD-04).
 
-At most **one** system concern is ever created per homework submission or per typed question. See
-§2.7, item 1, for why this matters on resubmission.
+At most **one open** system concern exists per homework submission or typed question at a time.
+See §2.7, item 1, for what happens on resubmission after a concern is resolved.
 
 ### 2.5 Who sees it, what the child sees, what is stored
 
@@ -188,14 +189,14 @@ rarely use the exact words on a list. Specifically:
 - **Roman Urdu spelling varies widely.** `hoon` / `hun` / `hu` / `hn`, `marna` / `maarna`, `mujhe` /
   `mujhay` / `mjhe`, `khudkushi` / `khud kushi` / `khudkhushi`. Only one spelling of each is listed.
 - **Urdu spelling and keyboards.** Joined or split words (`خودکشی` / `خود کشی`), and letters typed
-  from Arabic or Persian keyboards. `ي`, `ى` and `ك` are folded; the Arabic `ه` (U+0647) is **not**
-  folded to `ہ` (U+06C1) or `ھ` (U+06BE), so `مجهے` does not match `مجھے`.
+  from Arabic or Persian keyboards. `ي`, `ى`, `ك` and every heh (`ه`, `ھ`, `ہ`) are folded, so
+  `مجهے` matches `مجھے` (heh folding added 2026-11-17). Split and joined words are not.
 - **Child spelling.** `tuches`, `hitts`, `sucide`, `dont tel`. None are listed.
 - **Other languages.** There are no Punjabi, Sindhi, Pashto, Saraiki or Balochi entries.
 - **Indirect disclosure.** "My uncle comes to my room at night", "I have a secret friend online",
   drawings, hints, or a story about "a friend". A list cannot catch these.
-- **Typed questions on a lesson that is not published** are refused before the screen runs, so
-  they are never screened (low risk: the child cannot reach the ask panel without a lesson).
+- **Typed questions on a lesson that is not published** are now screened first (fixed
+  2026-11-17); before, they were refused before the screen ran.
 
 **False alarms (false positives).** The screen cannot tell who is speaking or why:
 
@@ -210,13 +211,15 @@ increases false alarms; a short list misses more. That balance is the reviewer's
 
 **Engineering observations for the reviewer** (not decided here; see the cover report):
 
-1. A homework resubmission is **not screened as new**: once a system concern exists for a
-   submission, later attempts of the same submission never create another concern or alert, even if
-   the first concern was resolved as a false alarm and the new text is a real disclosure. The lead
-   sees the newer text only if they open that concern's context.
-2. If the safeguarding database write fails during a typed question, the child sees a generic
-   error and no concern is created. For homework, a failed screen is counted as a metric and the
-   child's answer is still saved; it is **not** retried.
+1. **Fixed 2026-11-17 (alembic 0022).** A homework resubmission used to be never screened as new
+   once any system concern existed for the submission. Now at most one concern is *open* per
+   submission: while it is open, the lead sees newer text beside the snapshot; once it is resolved,
+   a later attempt with different matching words raises a new concern. The exact words a reviewer
+   already closed do not re-alert. Reviewer question: is that last rule right?
+2. **Partly fixed 2026-11-17.** If the screen fails during a typed question, the question is no
+   longer answered: the child gets "something went wrong, try again" (HTTP 503) and the failure is
+   counted, so a disclosure is not silently dropped if they retry. For homework, a failed screen is
+   still only counted (the child's answer is saved) and is **not** retried.
 3. The lead's console labels flagged text as "the homework answer" even when it came from a typed
    question. The concern note and screen field (`learner/ask`) do say "lesson question".
 
@@ -264,21 +267,21 @@ Source: `disclosure_phrases.json`, version 1, status `pending_m_safe_approval`.
 | `en-19` | `very_sad` | T1 | English | better off dead | `better off dead` |
 | `en-20` | `bullying` | T2 | English | bullies me | `bullies me` |
 | `en-21` | `bullying` | T2 | English | bullying me | `bullying me` |
-| `ur-01` | `felt_unsafe` | T1 | Urdu (script) | مجھے مارتا ہے | `مجھے مارتا ہے` |
-| `ur-02` | `felt_unsafe` | T1 | Urdu (script) | مجھے مارتی ہے | `مجھے مارتی ہے` |
-| `ur-03` | `felt_unsafe` | T1 | Urdu (script) | مجھے مارتے ہیں | `مجھے مارتے ہیں` |
-| `ur-04` | `felt_unsafe` | T1 | Urdu (script) | مجھے چھوتا ہے | `مجھے چھوتا ہے` |
+| `ur-01` | `felt_unsafe` | T1 | Urdu (script) | مجھے مارتا ہے | `مجہے مارتا ہے` |
+| `ur-02` | `felt_unsafe` | T1 | Urdu (script) | مجھے مارتی ہے | `مجہے مارتی ہے` |
+| `ur-03` | `felt_unsafe` | T1 | Urdu (script) | مجھے مارتے ہیں | `مجہے مارتے ہیں` |
+| `ur-04` | `felt_unsafe` | T1 | Urdu (script) | مجھے چھوتا ہے | `مجہے چہوتا ہے` |
 | `ur-05` | `felt_unsafe` | T1 | Urdu (script) | کسی کو مت بتانا | `کسی کو مت بتانا` |
 | `ur-06` | `felt_unsafe` | T1 | Urdu (script) | کسی کو نہ بتانا | `کسی کو نہ بتانا` |
-| `ur-07` | `felt_unsafe` | T1 | Urdu (script) | گھر جانے سے ڈر | `گھر جانے سے ڈر` |
+| `ur-07` | `felt_unsafe` | T1 | Urdu (script) | گھر جانے سے ڈر | `گہر جانے سے ڈر` |
 | `ur-08` | `very_sad` | T1 | Urdu (script) | مرنا چاہتا ہوں | `مرنا چاہتا ہوں` |
 | `ur-09` | `very_sad` | T1 | Urdu (script) | مرنا چاہتی ہوں | `مرنا چاہتی ہوں` |
 | `ur-10` | `very_sad` | T1 | Urdu (script) | خودکشی | `خودکشی` |
 | `ur-11` | `very_sad` | T1 | Urdu (script) | خود کو مار | `خود کو مار` |
 | `ur-12` | `very_sad` | T1 | Urdu (script) | خود کو نقصان | `خود کو نقصان` |
-| `ur-13` | `very_sad` | T1 | Urdu (script) | کوئی مجھ سے پیار نہیں کرتا | `کوئی مجھ سے پیار نہیں کرتا` |
-| `ur-14` | `bullying` | T2 | Urdu (script) | مجھے تنگ کرتے ہیں | `مجھے تنگ کرتے ہیں` |
-| `ur-15` | `bullying` | T2 | Urdu (script) | مجھے تنگ کرتا ہے | `مجھے تنگ کرتا ہے` |
+| `ur-13` | `very_sad` | T1 | Urdu (script) | کوئی مجھ سے پیار نہیں کرتا | `کوئی مجہ سے پیار نہیں کرتا` |
+| `ur-14` | `bullying` | T2 | Urdu (script) | مجھے تنگ کرتے ہیں | `مجہے تنگ کرتے ہیں` |
+| `ur-15` | `bullying` | T2 | Urdu (script) | مجھے تنگ کرتا ہے | `مجہے تنگ کرتا ہے` |
 | `rur-01` | `felt_unsafe` | T1 | Roman Urdu | mujhe marta hai | `mujhe marta hai` |
 | `rur-02` | `felt_unsafe` | T1 | Roman Urdu | mujhe marti hai | `mujhe marti hai` |
 | `rur-03` | `felt_unsafe` | T1 | Roman Urdu | kisi ko mat batana | `kisi ko mat batana` |
