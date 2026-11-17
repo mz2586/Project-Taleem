@@ -21,6 +21,9 @@ rules:
 
 ## Where to start
 
+The review tracker, the review order and the per-role checklists are in [`../review/`](../review/)
+([REVIEW_PLAN.md](../review/REVIEW_PLAN.md)). The tracker is generated from these files.
+
 1. Each file's `review_flags` lists the checks a reviewer should make first. There are 361
    flags in total.
 2. **Islamiat (16):** every lesson needs a scholar's review. The drafts contain no Qur'anic Arabic,
