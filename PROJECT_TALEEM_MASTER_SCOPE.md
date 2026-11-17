@@ -739,6 +739,8 @@ records **NOT READY** for the Pilot 0 dry run. Nothing in the repository shows e
 See also [`docs/03-security-privacy/`](docs/03-security-privacy/) and
 [`INCIDENT_RESPONSE.md`](INCIDENT_RESPONSE.md).
 
+Phrase list and child holding messages, for qualified sign-off (not approved): [`docs/safeguarding/SAFEGUARDING_REVIEW_PACK.md`](docs/safeguarding/SAFEGUARDING_REVIEW_PACK.md).
+
 ---
 
 ## 12. Offline-First Learning
