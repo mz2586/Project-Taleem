@@ -1,15 +1,14 @@
-#!/usr/bin/env python3
 """Render the live disclosure phrase list as a Markdown table for the safeguarding review pack.
 
 Reads ``services/core-api/src/taleem_core/contexts/safeguarding/disclosure_phrases.json`` and
 normalises each phrase with the SAME ``normalise()`` the screen uses (imported from the service
 code, not re-implemented), so the "compared as" column is exactly what the matcher looks for.
 
-Usage (from the repository root, stdlib only):
+Usage (from services/core-api, stdlib only):
 
-    python3 tools/safeguarding_phrase_table.py           # print the table and counts
-    python3 tools/safeguarding_phrase_table.py --write   # refresh the table in the review pack
-    python3 tools/safeguarding_phrase_table.py --check   # exit 1 if the pack's table is stale
+    python -m taleem_core.tools.safeguarding_phrase_table           # print the table and counts
+    python -m taleem_core.tools.safeguarding_phrase_table --write   # refresh the review pack table
+    python -m taleem_core.tools.safeguarding_phrase_table --check   # exit 1 if the table is stale
 
 The table in docs/safeguarding/SAFEGUARDING_REVIEW_PACK.md sits between the markers
 ``<!-- phrase-table:start -->`` and ``<!-- phrase-table:end -->``. Read-only with respect to the
@@ -24,18 +23,14 @@ import sys
 from collections import Counter
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-SRC = ROOT / "services" / "core-api" / "src"
-PHRASES = SRC / "taleem_core" / "contexts" / "safeguarding" / "disclosure_phrases.json"
+from ..contexts.safeguarding.domain.disclosure import normalise
+from ..contexts.safeguarding.domain.model import CATEGORY_PRIORITY, Category
+
+PKG = Path(__file__).resolve().parents[1]  # src/taleem_core
+ROOT = PKG.parents[3]  # repository root
+PHRASES = PKG / "contexts" / "safeguarding" / "disclosure_phrases.json"
 PACK = ROOT / "docs" / "safeguarding" / "SAFEGUARDING_REVIEW_PACK.md"
 START, END = "<!-- phrase-table:start -->", "<!-- phrase-table:end -->"
-
-sys.path.insert(0, str(SRC))
-from taleem_core.contexts.safeguarding.domain.disclosure import normalise  # noqa: E402
-from taleem_core.contexts.safeguarding.domain.model import (  # noqa: E402
-    CATEGORY_PRIORITY,
-    Category,
-)
 
 LANG = {"en": "English", "ur": "Urdu (script)", "ur-Latn": "Roman Urdu"}
 
@@ -43,7 +38,8 @@ LANG = {"en": "English", "ur": "Urdu (script)", "ur-Latn": "Roman Urdu"}
 def render() -> str:
     data = json.loads(PHRASES.read_text(encoding="utf-8"))
     rows = [
-        "| ID | Category | Tier | Language | Phrase (exact, from the JSON) | Compared as (normalised; must appear as whole words, in order) |",
+        "| ID | Category | Tier | Language | Phrase (exact, from the JSON) "
+        "| Compared as (normalised; must appear as whole words, in order) |",
         "| --- | --- | --- | --- | --- | --- |",
     ]
     by_cat: Counter[tuple[str, str]] = Counter()
@@ -53,7 +49,8 @@ def render() -> str:
         lang = LANG.get(p["lang"], p["lang"])
         by_cat[(cat, lang)] += 1
         rows.append(
-            f"| `{p['id']}` | `{cat}` | {tier} | {lang} | {p['phrase']} | `{normalise(p['phrase'])}` |"
+            f"| `{p['id']}` | `{cat}` | {tier} | {lang} | {p['phrase']} "
+            f"| `{normalise(p['phrase'])}` |"
         )
     langs = sorted({lang for _, lang in by_cat})
     cats = sorted({c for c, _ in by_cat}, key=lambda c: list(Category).index(Category(c)))

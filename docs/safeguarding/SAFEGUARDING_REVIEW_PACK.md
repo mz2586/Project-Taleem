@@ -223,7 +223,7 @@ increases false alarms; a short list misses more. That balance is the reviewer's
 ## 3. The complete current phrase list
 
 Generated from `services/core-api/src/taleem_core/contexts/safeguarding/disclosure_phrases.json`
-by `tools/safeguarding_phrase_table.py`. Phrases are reproduced exactly; the last column is the
+by `taleem_core.tools.safeguarding_phrase_table`. Phrases are reproduced exactly; the last column is the
 normalised form produced by the live `normalise()` function, which is what the matcher compares.
 
 **Matching rule (every entry):** after normalisation (§2.2), the entry matches when its compared
@@ -233,8 +233,8 @@ applies to any entry.
 To regenerate after the list changes (from the repository root, Python 3.11+, standard library only):
 
 ```sh
-python3 tools/safeguarding_phrase_table.py --write   # refresh the table below
-python3 tools/safeguarding_phrase_table.py --check   # exit 1 if this table is out of date
+python -m taleem_core.tools.safeguarding_phrase_table --write   # in services/core-api
+python -m taleem_core.tools.safeguarding_phrase_table --check   # exit 1 if stale
 ```
 
 <!-- phrase-table:start -->
@@ -738,7 +738,7 @@ that links to this signed pack.
 
 | # | Item | Approve / Amend / Reject | Engineering change unlocked by approval |
 | --- | --- | --- | --- |
-| S1 | Live phrase list as marked in §6.2 | | Replace the `phrases` array in `services/core-api/src/taleem_core/contexts/safeguarding/disclosure_phrases.json` with the approved entries; bump `version`; set `status` and `_header` to name this sign-off (reviewer, date). Update the fixed concern note in `contexts/safeguarding/application/service.py` (it says "starter phrase list, pending M-Safe approval"), `STARTER_HEADER` in `domain/disclosure.py`, and the tests that assert them (`test_ai_led_homework_units.py`, and `test_self_paced_homework.py` / `test_safeguarding_context.py` if `en-01` or `ur-01` change). Regenerate §3 with `tools/safeguarding_phrase_table.py --write`. |
+| S1 | Live phrase list as marked in §6.2 | | Replace the `phrases` array in `services/core-api/src/taleem_core/contexts/safeguarding/disclosure_phrases.json` with the approved entries; bump `version`; set `status` and `_header` to name this sign-off (reviewer, date). Update the fixed concern note in `contexts/safeguarding/application/service.py` (it says "starter phrase list, pending M-Safe approval"), `STARTER_HEADER` in `domain/disclosure.py`, and the tests that assert them (`test_ai_led_homework_units.py`, and `test_self_paced_homework.py` / `test_safeguarding_context.py` if `en-01` or `ur-01` change). Regenerate §3 with `python -m taleem_core.tools.safeguarding_phrase_table --write`. |
 | S2 | PROPOSED additions in §4.2 to §4.8, as marked in each table, with categories decided under Q4 | | Add the accepted entries to the same file with permanent IDs, in the same pull request as S1, with one match test per new entry. A new category (Q4) is a separate code change and needs its tier approved here. |
 | S3 | Q6 spelling tolerance (fold `ه`, split/joined words, Roman vowels) | | Change `normalise()` in `domain/disclosure.py` only after the reviewer has seen the before/after test cases engineering will supply. Not unlocked by this signature alone. |
 | S4 | Holding message: H-1, H-2, or amended text (§5.1) | | Replace `student.askTeacher.holding` in `apps/web/lib/i18n/messages/en.ts` and `ur.ts` with the approved text, word for word. |

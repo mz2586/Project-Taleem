@@ -92,7 +92,7 @@ with feedback states, three system-issued report cards and offline lesson downlo
 live lesson that renders its interactive question. Production stays `TALEEM_ENV=production`; the
 generic fixture seeder still refuses production.
 
-### 0.2 AI provider: recommendation (FD-03, re-verified 2026-10-25)
+### 0.2 AI provider: recommendation (FD-03, re-verified 2026-11-17, unchanged)
 
 **Status: blocked-by-external-decision. The real AI Teacher is not operational.** No provider is
 configured in any environment, and children receive the deterministic teacher.
