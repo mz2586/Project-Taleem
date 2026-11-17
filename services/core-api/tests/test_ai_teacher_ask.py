@@ -359,3 +359,63 @@ def test_ask_endpoint_over_sqlite() -> None:
         url, json={"objective_code": OBJECTIVE_CODE, "intent": "recap"}, headers=_auth("someone")
     )
     assert other.status_code in (403, 404)
+
+
+# ---------------------------------------------------------------- vocabulary
+
+
+def _with_vocab() -> LessonView:
+    from dataclasses import replace
+
+    return replace(
+        _lesson(),
+        vocabulary=(
+            (
+                {"en": "denominator", "ur": "نسب نما"},
+                {"en": "The bottom number of a fraction.", "ur": "کسر کا نیچے والا نمبر۔"},
+            ),
+            ({"en": "  "}, {"en": "ignored: no term"}),
+        ),
+    )
+
+
+def test_what_does_a_word_mean_is_answered_from_the_vocabulary() -> None:
+    lesson = _with_vocab()
+    ans = qa.answer_question(lesson, "What does denominator mean?", "en")
+    assert ans.outcome is qa.AskOutcome.ANSWERED
+    assert ans.passages[0].text == "denominator: The bottom number of a fraction."
+    assert ans.passages[0].source == "vocabulary#0"
+    assert qa.is_grounded_excerpt(lesson, ans)
+    ur = qa.answer_question(lesson, "نسب نما کیا ہے؟", "ur")
+    assert ur.passages[0].text == "نسب نما: کسر کا نیچے والا نمبر۔"
+    # A spliced term/definition pair that was never authored together is not grounded.
+    spliced = qa.AskAnswer(
+        qa.AskIntent.QUESTION,
+        qa.AskOutcome.ANSWERED,
+        (qa.Passage("denominator: The top number counts the parts.", "vocabulary#0", "en"),),
+    )
+    assert not qa.is_grounded_excerpt(lesson, spliced)
+
+
+def test_vocabulary_reaches_the_lesson_view() -> None:
+    from taleem_core.contexts.curriculum_studio.domain.content import VocabularyTerm
+    from taleem_core.contexts.learning.adapters.curriculum_read_model import (
+        CurriculumStudioReadModel,
+    )
+    from taleem_core.vertical_slice.fractions_lesson import _loc
+
+    lesson = build_fractions_lesson()
+    lesson.vocabulary = [
+        VocabularyTerm(
+            term=_loc("نسب نما", "denominator"),
+            definition=_loc("نیچے کا نمبر۔", "The bottom number."),
+        ),
+        VocabularyTerm(term=_loc("", ""), definition=_loc("x", "x")),  # no term: dropped
+    ]
+    view = CurriculumStudioReadModel(None)._project(lesson, OBJECTIVE_CODE)  # type: ignore[arg-type]
+    assert view.vocabulary == (
+        (
+            {"ur": "نسب نما", "en": "denominator"},
+            {"ur": "نیچے کا نمبر۔", "en": "The bottom number."},
+        ),
+    )

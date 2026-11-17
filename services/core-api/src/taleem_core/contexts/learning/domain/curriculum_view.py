@@ -172,6 +172,9 @@ class LessonView:
     # The lesson's prerequisite SLO codes as authored (a hint for a learner-chosen lesson; the
     # engine's graph does not read them yet). Not part of the offline content.
     prerequisites: tuple[str, ...] = ()
+    # The lesson's authored vocabulary: (term, definition), each locale -> text. Learner-visible
+    # teaching content that "ask the teacher" may quote. Not part of the offline content.
+    vocabulary: tuple[tuple[dict[str, str], dict[str, str]], ...] = ()
 
     @property
     def practice_questions(self) -> tuple[ItemView, ...]:

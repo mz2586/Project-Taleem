@@ -38,7 +38,7 @@ permissions:
 jobs:
   axe:
     name: axe WCAG 2.2 A/AA (ur + en, signed in)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # Playwright (pinned) has no Chromium build for ubuntu-latest (26.04) yet
     services:
       postgres:
         image: postgres:16
@@ -87,7 +87,7 @@ jobs:
 
   browser-journey:
     name: Browser journey through the real UI (ur + en, offline, withdrawal)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # Playwright (pinned) has no Chromium build for ubuntu-latest (26.04) yet
     services:
       postgres:
         image: postgres:16

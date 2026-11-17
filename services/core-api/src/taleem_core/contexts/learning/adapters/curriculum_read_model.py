@@ -511,4 +511,9 @@ class CurriculumStudioReadModel:
             written_items=written,
             version=lesson.version if lesson.version > 0 else None,
             prerequisites=tuple(lesson.prerequisites),
+            vocabulary=tuple(
+                (_bilingual(v.term), _bilingual(v.definition))
+                for v in lesson.vocabulary
+                if any(_bilingual(v.term).values()) and any(_bilingual(v.definition).values())
+            ),
         )

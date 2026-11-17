@@ -144,7 +144,8 @@ def _pick(localized: dict[str, str], locale: str) -> tuple[str, str]:
 def corpus(lesson: LessonView, locale: str) -> tuple[Passage, ...]:
     """Every passage an answer may quote, in the learner's locale where authored.
 
-    Explanation sentences, worked-example steps and misconception corrections. Never item
+    Explanation sentences, worked-example steps, vocabulary definitions and misconception
+    corrections. Never item
     prompts, hints, options or any answer-key field.
     """
     out: list[Passage] = []
@@ -152,6 +153,13 @@ def corpus(lesson: LessonView, locale: str) -> tuple[Passage, ...]:
     for i, sentence in enumerate(sentences(explanation)):
         out.append(Passage(sentence, f"explanation#{i}", exp_loc))
     out.extend(_worked_steps(lesson, locale))
+    for i, (term, definition) in enumerate(lesson.vocabulary):
+        word, loc = _pick(term, locale)
+        # The definition in the same locale as the term where authored, so a quote never mixes.
+        meaning = definition.get(loc, "") or _pick(definition, loc)[0]
+        if word.strip() and meaning.strip():
+            # Quoted as "<term>: <definition>", an authored pair (checked by is_grounded_excerpt).
+            out.append(Passage(f"{word.strip()}: {meaning.strip()}", f"vocabulary#{i}", loc))
     for ref in sorted(lesson.misconception_corrections):
         text = lesson.misconception_corrections[ref].strip()
         if text:
@@ -230,7 +238,14 @@ def is_grounded_excerpt(lesson: LessonView, answer: AskAnswer) -> bool:
         *(t for step in lesson.worked_example_steps_localized for t in step.values()),
         *lesson.misconception_corrections.values(),
     ]
-    return all(any(p.text in a for a in authored) for p in answer.passages)
+    vocab = {
+        f"{t.strip()}: {d.strip()}"
+        for term, definition in lesson.vocabulary
+        for t in term.values()
+        for d in definition.values()
+        if t.strip() and d.strip()
+    }
+    return all(p.text in vocab or any(p.text in a for a in authored) for p in answer.passages)
 
 
 def reveals_answer_key(lesson: LessonView, answer: AskAnswer) -> bool:

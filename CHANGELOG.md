@@ -9,7 +9,7 @@ The local Git history is the official project history; each released version map
 ### Added — ask the teacher (2026-11-17)
 
 - `POST /v1/learning/sessions/{id}:ask`: a learner asks a question and the teacher answers by
-  quoting the published lesson verbatim (explanation sentences, worked-example steps, misconception
+  quoting the published lesson verbatim (explanation sentences, worked-example steps, vocabulary, misconception
   corrections), or says it is not in this lesson. Never item prompts, hints or answer keys.
   Tap questions (example, common mistake, recap) are always available. Typed questions are off
   unless `ai_teacher.ask_free_text` is on, a disclosure screen is wired and `ai_teaching` consent

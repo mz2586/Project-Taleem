@@ -207,7 +207,7 @@ components:
         text: { type: string, description: Verbatim authored lesson text }
         source:
           type: string
-          description: explanation#N, worked_example#N or correction:<ref>
+          description: explanation#N, worked_example#N, vocabulary#N or correction:<ref>
         locale: { type: string }
     AskAnswer:
       type: object

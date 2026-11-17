@@ -13,7 +13,7 @@ permissions:
 jobs:
   live-demo:
     name: Demo accounts on the live site (real browser)
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04  # Playwright (pinned) has no Chromium build for ubuntu-latest (26.04) yet
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
